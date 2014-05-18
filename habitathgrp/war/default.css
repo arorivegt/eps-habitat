@@ -1,0 +1,164 @@
+/** Add css rules here for your application. */
+
+
+/** Example rules used by the template application (remove for your app) */
+
+html {
+	min-height: 100%;
+}
+body {
+	background-color: #C0C0C0;
+	color: #000;
+	font-family: "Varela Round", Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+}
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 400px 0px 70px;
+  text-align: center;
+}
+.sendButton {background: #a9db80; /* Old browsers */
+background: -moz-linear-gradient(top, #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* IE10+ */
+background: linear-gradient(to bottom, #a9db80 0%,#96c56f 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 20px;
+	color: White;
+	font-size: 18px;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.dialogVPanel {
+	color: darkturquoise;
+	margin: 5px;
+	font-stretch: wider;
+	font-variant: normal;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	vertical-align: baseline;
+	letter-spacing: 2px;
+	text-align: center;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+.login_css {
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	background:white
+}
+.gwt-TextBox {
+	color: gray;
+	font-size: 18px;
+	opacity:0.6	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 20px;
+	background-color: #eee;
+	color: #777;
+	padding: 4px 10px;
+	width: 328px;
+}
+.gwt-PasswordTextBox {
+	color: gray;
+	font-size: 18px;
+	opacity:0.6
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 20px;
+	
+	background-color: #eee;
+	color: #777;
+	padding: 4px 10px;
+	width: 328px;
+}
+.gwt-Label {
+background: #a9db80; /* Old browsers */
+background: -moz-linear-gradient(top, #a9db80 0%, #96c56f 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9db80), color-stop(100%,#96c56f)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #a9db80 0%,#96c56f 100%); /* IE10+ */
+background: linear-gradient(to bottom, #a9db80 0%,#96c56f 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9db80', endColorstr='#96c56f',GradientType=0 ); /* IE6-9 */
+	-webkit-border-radius: 20px 50px 0 0;
+	-moz-border-radius: 20px 20px 0 0;
+	border-radius: 20px 25px 0 0;
+	color: #fff;
+	font-size: 28px;
+	padding: 30px 26px;
+}
+ 
+.opcion1 {
+	
+	text-indent: 40px;
+	font-size: 15px;
+	background-repeat: repeat;
+}
+ 
+.panelNorth {
+color: White;
+	padding-top: 4px;
+	padding-left: 0px;
+	border: thin solid Black;
+	font-weight: bold;
+	background-color: #3F4C6B;
+}
+.gwt-StackLayoutPanel {
+	color: White;
+	padding-top: 4px;
+	padding-left: 0px;
+	border: thin solid Black;
+	font-weight: bold;
+	background-color: #3F4C6B;
+
+}
+.lauyout {
+	background-repeat: repeat;
+	background-image: url(./images/fondo.jpg);
+}
+input {
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
+}
+.gwt-Tree {
+	color: Black;
+	padding-top: 4px;
+	padding-left: 0px;
+	border: thin solid Black;
+	font-size: 10px;
+	font-weight: normal;
+	background-color: lightblue;
+}
+.Panel_principal {
+}
+.Panel_Central {
+	border-top: double;
+}
+.Panel_principal-new {
+}
+.gwt-Image {
+}

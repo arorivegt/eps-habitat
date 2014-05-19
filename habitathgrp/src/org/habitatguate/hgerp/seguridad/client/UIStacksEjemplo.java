@@ -14,9 +14,9 @@ public class UIStacksEjemplo extends ResizeComposite {
    @UiField(provided = true)
    final Tree arbol1 = new Tree();
    {
-     arbol1.addItem("Opción 1");
-     arbol1.addItem("Opción 2");
-     arbol1.addItem("Opción 3");
+//     arbol1.addItem("Opción 1");
+ //    arbol1.addItem("Opción 2");
+  //   arbol1.addItem("Opción 3");
    }
    
    @UiField
@@ -25,24 +25,24 @@ public class UIStacksEjemplo extends ResizeComposite {
    @UiField(provided = true)
    final Tree arbol3 = new Tree();
    {
-     arbol3.addItem("Opción 7");
-     arbol3.addItem("Opción 8");
-     arbol3.addItem("Opción 9");
+  //   arbol3.addItem("Opción 7");
+  //   arbol3.addItem("Opción 8");
+  //   arbol3.addItem("Opción 9");
    }
    
    @UiField(provided = true)
    final Tree arbol4 = new Tree();
    {
-	  arbol4.addItem("Opción 1");
-	  arbol4.addItem("Opción 2");
-	  arbol4.addItem("Opción 3");
+//	  arbol4.addItem("Opción 1");
+//	  arbol4.addItem("Opción 2");
+//	  arbol4.addItem("Opción 3");
 	}
    
    public UIStacksEjemplo() {
      initWidget(uiBinder.createAndBindUi(this));
-     arbol2.addItem("Opción 4");
-     arbol2.addItem("Opción 5");
-     arbol2.addItem("Opción 6");
+ //    arbol2.addItem("Opción 4");
+ //    arbol2.addItem("Opción 5");
+ //    arbol2.addItem("Opción 6");
    }
    
    

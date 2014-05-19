@@ -26,7 +26,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Index implements EntryPoint {
-		final TextBox user =new TextBox();
+	
+	final TextBox user =new TextBox();
 	final PasswordTextBox pass =new PasswordTextBox();
 	final Button sendButton = new Button("Send");
 	private final LoginServiceAsync loginService = GWT
@@ -118,6 +119,7 @@ public class Index implements EntryPoint {
 		
 		MyHandler handler = new MyHandler();
 	    RootPanel rootPanel = RootPanel.get();
+	    rootPanel.setStyleName("body");
 	    
 	    // Create a table to layout the form options
 	    FlexTable layout = new FlexTable();

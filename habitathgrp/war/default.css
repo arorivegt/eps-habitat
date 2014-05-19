@@ -3,9 +3,6 @@
 
 /** Example rules used by the template application (remove for your app) */
 
-html {
-	min-height: 100%;
-}
 body {
 	background-color: #C0C0C0;
 	color: #000;
@@ -20,15 +17,16 @@ h1 {
   margin: 400px 0px 70px;
   text-align: center;
 }
-.sendButton {background: #a9db80; /* Old browsers */
-
+.sendButton {
+  background: #a9db80; /* Old browsers */
   color: #ffffff;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   background: #3a4d9c;
   background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
   background: -moz-linear-gradient(#3a4d9c, #2c3b77);
   background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;-webkit-border-radius: 3px;
+  border-color: transparent;
+  -webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 20px;
 	color: White;
@@ -37,20 +35,14 @@ h1 {
 
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
-  width: 400px;
-}
-
-.dialogVPanel {
-	color: darkturquoise;
-	margin: 5px;
-	font-stretch: wider;
-	font-variant: normal;
-	font-size: 16px;
-	font-style: normal;
-	font-weight: bold;
-	vertical-align: baseline;
-	letter-spacing: 2px;
-	text-align: center;
+  width: 300px;
+    color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: #3a4d9c;
+  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
+  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
+  background: linear-gradient(#3a4d9c, #2c3b77);
+  border-color: transparent;
 }
 
 .serverResponseLabelError {
@@ -64,7 +56,7 @@ h1 {
 .login_css {
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
-	background:white
+		background-color: white
 }
 .gwt-TextBox {
 	color: gray;
@@ -107,12 +99,6 @@ h1 {
 	padding: 30px 26px;
 }
  
-.opcion1 {
-	
-	text-indent: 40px;
-	font-size: 15px;
-	background-repeat: repeat;
-}
  
 .panelNorth {
 color: White;
@@ -134,10 +120,6 @@ color: White;
 	background-color: #3F4C6B;
 
 }
-.lauyout {
-	background-repeat: repeat;
-	background-image: url(./images/fondo.jpg);
-}
 input {
 	border: none;
 	font-family: inherit;
@@ -145,22 +127,4 @@ input {
 	font-weight: inherit;
 	line-height: inherit;
 	-webkit-appearance: none;
-}
-.gwt-Tree {
-	color: Black;
-	padding-top: 4px;
-	padding-left: 0px;
-	border: thin solid Black;
-	font-size: 10px;
-	font-weight: normal;
-	background-color: lightblue;
-}
-.Panel_principal {
-}
-.Panel_Central {
-	border-top: double;
-}
-.Panel_principal-new {
-}
-.gwt-Image {
 }

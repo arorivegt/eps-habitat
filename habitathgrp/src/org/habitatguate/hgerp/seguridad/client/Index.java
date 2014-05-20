@@ -149,7 +149,7 @@ public class Index implements EntryPoint {
 	    	    
 	    // Add some standard form options
 	    	    	    
-	    Label lblNewLabel = new Label("Login");
+	    Label lblNewLabel = new Label("Inicio");
 	    layout.setWidget(0, 0, lblNewLabel);
 	    lblNewLabel.setSize("380", "100%");
 	    	    	    
@@ -186,7 +186,7 @@ public class Index implements EntryPoint {
 	    layout.getCellFormatter().setVerticalAlignment(3, 1, HasVerticalAlignment.ALIGN_MIDDLE);
 	    	    	    
 	    final Button sendButton = new Button("Send");
-	    sendButton.setText("Sign In");
+	    sendButton.setText("Iniciar sesion");
 	    sendButton.setStyleName("sendButton");
 	    sendButton.addClickHandler(handler);
 	    	    	    	    

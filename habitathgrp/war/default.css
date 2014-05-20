@@ -4,11 +4,7 @@
 /** Example rules used by the template application (remove for your app) */
 
 body {
-	background-color: #C0C0C0;
-	color: #000;
-	font-family: "Varela Round", Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	line-height: 1.5em;
+	background-color: white;
 }
 h1 {
   font-size: 2em;
@@ -54,9 +50,9 @@ h1 {
   margin: 15px 6px 6px;
 }
 .login_css {
+	background-color: lightsteelblue;
 	-webkit-border-radius: 40px;
 	-moz-border-radius: 40px;
-		background-color: white
 }
 .gwt-TextBox {
 	color: gray;

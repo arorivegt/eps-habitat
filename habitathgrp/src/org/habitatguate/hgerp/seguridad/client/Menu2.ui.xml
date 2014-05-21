@@ -131,11 +131,11 @@
 	<g:HTMLPanel>
 	<div id='cssmenu'>
 <ul>
-<li class='has-sub'><a href='#'><span><g:Label ui:field="label" styleName="gwt-Label-new">RRHH</g:Label></span></a>
+<li class='has-sub'><a href='#'><span><g:Label ui:field="RRHH" styleName="gwt-Label-new">RRHH</g:Label></span></a>
       <ul>
-         <li class='has-sub'><a href='#'><span><g:Label ui:field="label2" styleName="gwt-Label-new">Producto 1</g:Label></span></a>
+         <li class='has-sub'><a href='#'><span><g:Label ui:field="producto1" styleName="gwt-Label-new">Producto 1</g:Label></span></a>
          </li>
-         <li class='has-sub'><a href='#'><span>Product 2</span></a>
+         <li class='has-sub'><a href='#'><span><g:Label ui:field="producto2" styleName="gwt-Label-new">Product 2</g:Label></span></a>
          </li>
       </ul>
    </li>
@@ -163,7 +163,7 @@
          </li>
       </ul>
    </li>
-   <li class='has-sub'><a href='#'><span>Finanzas</span></a>
+   <li class='has-sub'><a href='#'><span>Seguridad</span></a>
       <ul>
          <li class='has-sub'><a href='#'><span>Product 1</span></a>
          </li>

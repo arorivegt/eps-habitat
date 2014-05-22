@@ -108,12 +108,16 @@ color: White;
   border-color: transparent;
 }
 .gwt-StackLayoutPanel {
-	color: White;
-	padding-top: 4px;
-	padding-left: 0px;
-	border: thin solid Black;
-	font-weight: bold;
-	background-color: #3F4C6B;
+color: White;
+
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: #3a4d9c;
+  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
+  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
+  background: linear-gradient(#3a4d9c, #2c3b77);
+  border-color: transparent;
+}
 
 }
 input {
@@ -123,4 +127,18 @@ input {
 	font-weight: inherit;
 	line-height: inherit;
 	-webkit-appearance: none;
+}
+.gwt-Tree {
+	color: Black;
+	background-color: powderblue;
+}
+.gwt-StackLayoutPanel-new {
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: #3a4d9c;
+  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
+  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
+  background: linear-gradient(#3a4d9c, #2c3b77);
+  border-color: transparent;
+color: White; /* IE6-9 */
 }

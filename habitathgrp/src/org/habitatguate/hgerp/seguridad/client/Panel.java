@@ -30,17 +30,17 @@ public class Panel extends Composite {
 	     
 	     AbsolutePanel absolutePanel = new AbsolutePanel();
 	     absolutePanel.setStyleName("html-west");
-	     splitLayoutPanel.addWest(absolutePanel, 352.0);
+	     splitLayoutPanel.addWest(absolutePanel, 124.0);
 	     absolutePanel.setSize("100%", "100%");
 	     
-	     Menu2 menu2 = new Menu2();
+	     UIStacksEjemplo menu2 = new UIStacksEjemplo();
 	     absolutePanel.add(menu2, 0, 0);
-	     menu2.setSize("293px", "407px");
+	     menu2.setSize("124px", "648px");
 	     
-	     HTMLPanel panel_2 = new HTMLPanel("AQUI VAMOS A RENDERIZAR LOS FORMULARIOS");
-	     absolutePanel.add(panel_2, 164, 10);
+	     HTMLPanel panel_2 = new HTMLPanel("");
+	     splitLayoutPanel.add(panel_2);
 	     panel_2.setStyleName("Panel_principal");
-	     panel_2.setSize("420px", "538px");
+	     panel_2.setSize("760px", "638px");
 		setStyleName("Panel_principal");
 		setSize("1343px", "734px");
 	}

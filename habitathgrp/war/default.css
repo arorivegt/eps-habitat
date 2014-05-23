@@ -50,9 +50,6 @@ h1 {
   margin: 15px 6px 6px;
 }
 .login_css {
-	background-color: lightsteelblue;
-	-webkit-border-radius: 40px;
-	-moz-border-radius: 40px;
 }
 .gwt-TextBox {
 	color: gray;
@@ -61,10 +58,18 @@ h1 {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 20px;
-	background-color: #eee;
+	
+	background: #eee;
 	color: #777;
 	padding: 4px 10px;
 	width: 328px;
+	
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
 }
 .gwt-PasswordTextBox {
 	color: gray;
@@ -78,21 +83,28 @@ h1 {
 	color: #777;
 	padding: 4px 10px;
 	width: 328px;
+	
+	border: none;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
 }
 .gwt-Label {
-
+  background: #a9db80; /* Old browsers */
   color: #ffffff;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
   background: #3a4d9c;
   background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
   background: -moz-linear-gradient(#3a4d9c, #2c3b77);
   background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;-webkit-border-radius: 20px 50px 0 0;
-	-moz-border-radius: 20px 20px 0 0;
-	border-radius: 20px 25px 0 0;
+  border-color: transparent;
+	border-radius: 20px 20px 0 0;
 	color: #fff;
 	font-size: 28px;
-	padding: 30px 26px;
+	padding: 20px 26px;
+	margin-right: 14px;
 }
  
  
@@ -141,4 +153,20 @@ input {
   background: linear-gradient(#3a4d9c, #2c3b77);
   border-color: transparent;
 color: White; /* IE6-9 */
+}
+.scrollPanel {
+	background-color: lightsteelblue;
+}
+.body-new {
+
+	background-color: lightsteelblue;
+	border-radius: 0 0 20px 20px;
+	padding: 10px 10px;
+	border-radius: 20px 20px 20 20;
+}
+.gwt-Label-new {
+
+	background: lightsteelblue;
+	border-radius: 0 0 20px 20px;
+	padding: 20px 26px;
 }

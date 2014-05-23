@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.AbsolutePanel;
 
 public class Index implements EntryPoint {
 	
@@ -120,13 +121,25 @@ public class Index implements EntryPoint {
 		MyHandler handler = new MyHandler();
 	    RootPanel rootPanel = RootPanel.get();
 	    rootPanel.setStyleName("body");
+		
+	    // Add some standard form options
+			    
+	    Label lblNewLabel = new Label("Inicio");
+	    rootPanel.add(lblNewLabel, 508, 72);
+	    lblNewLabel.setSize("346px", "30px");
 	    
-	    // Create a table to layout the form options
-	    FlexTable layout = new FlexTable();
-	    layout.setCellSpacing(4);
-	    layout.setCellPadding(4);
-	    rootPanel.add(layout, 512, 90);
-	    layout.setStyleName("login_css");
+	    Label lblNewLabel_1 = new Label("");
+	    lblNewLabel_1.setStyleName("gwt-Label-new");
+	    rootPanel.add(lblNewLabel_1, 508, 135);
+	    lblNewLabel_1.setSize("346px", "175px");
+	    	    
+	    final Button sendButton_1 = new Button("Send");
+	    rootPanel.add(sendButton_1, 545, 286);
+	    sendButton_1.setText("Iniciar sesion");
+	    sendButton_1.setStyleName("sendButton");
+	    sendButton_1.addClickHandler(handler);
+	    sendButton_1.setSize("341px", "44px");
+	    rootPanel.add(pass, 545, 226);
 	    pass.addFocusHandler(new FocusHandler() {
 	    	public void onFocus(FocusEvent event) {
 	    		if (pass.getText().equals("password"))
@@ -143,62 +156,38 @@ public class Index implements EntryPoint {
 	    		}
 	    	}
 	    });
+	    
+	    	    pass.setText("password");
+	    	    pass.setSize("321px", "36px");
+	    	    rootPanel.add(user, 545, 161);
+	    	    user.addBlurHandler(new BlurHandler() {
+	    	    	public void onBlur(BlurEvent event) {
 
-	    pass.setText("password");
-	    pass.setStyleName("gwt-TextBox");
+	    	    		if (user.getText().equals(""))
+	    	    		{
+	    	    			user.setText("Usuario");
+	    	    		}
+	    	    	}
+	    	    });
+	    	    user.addFocusHandler(new FocusHandler() {
+	    	    	public void onFocus(FocusEvent event) {
+	    	    		if (user.getText().equals("Usuario"))
+	    	    		{
+	    	    			user.setText("");
+	    	    		}
+	    	    				
+	    	    	}
+	    	    });
+	    	    user.setText("Usuario");
+	    	    user.setSize("321px", "36px");
 	    	    
-	    // Add some standard form options
-	    	    	    
-	    Label lblNewLabel = new Label("Inicio");
-	    layout.setWidget(0, 0, lblNewLabel);
-	    lblNewLabel.setSize("380", "100%");
-	    	    	    
-	    Image image = new Image("images/mailicon.png");
-	    layout.setWidget(1, 0, image);
-	    user.addBlurHandler(new BlurHandler() {
-	    	public void onBlur(BlurEvent event) {
-
-	    		if (user.getText().equals(""))
-	    		{
-	    			user.setText("Usuario");
-	    		}
-	    	}
-	    });
-	    user.addFocusHandler(new FocusHandler() {
-	    	public void onFocus(FocusEvent event) {
-	    		if (user.getText().equals("Usuario"))
-	    		{
-	    			user.setText("");
-	    		}
-	    				
-	    	}
-	    });
-	    user.setText("Usuario");
-	    layout.setWidget(1, 1,user );
-	    user.setSize("321px", "36px");
-	    	    	    
-	    Image image_1 = new Image("images/passicon.png");
-	    layout.setWidget(2, 0, image_1);
-	    layout.setWidget(2, 1, pass);
-	    pass.setSize("321px", "36px");
-	    layout.getCellFormatter().setStyleName(3, 1, "h1");
-	    layout.setSize("395px", "192px");
-	    layout.getCellFormatter().setVerticalAlignment(3, 1, HasVerticalAlignment.ALIGN_MIDDLE);
-	    	    	    
-	    final Button sendButton = new Button("Send");
-	    sendButton.setText("Iniciar sesion");
-	    sendButton.setStyleName("sendButton");
-	    sendButton.addClickHandler(handler);
-	    	    	    	    
-	    layout.setWidget(3, 1, sendButton);
-		sendButton.setSize("341px", "44px");
-		layout.getCellFormatter().setVerticalAlignment(1, 1, HasVerticalAlignment.ALIGN_MIDDLE);
-		layout.getCellFormatter().setVerticalAlignment(2, 1, HasVerticalAlignment.ALIGN_MIDDLE);
-		layout.getCellFormatter().setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_LEFT);
-		layout.getCellFormatter().setHorizontalAlignment(3, 0, HasHorizontalAlignment.ALIGN_LEFT);
-		layout.getCellFormatter().setHorizontalAlignment(1, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		layout.getCellFormatter().setHorizontalAlignment(2, 0, HasHorizontalAlignment.ALIGN_RIGHT);
-		layout.getFlexCellFormatter().setColSpan(0, 0, 2);
+	    	    Image image = new Image("images/mailicon.png");
+	    	    rootPanel.add(image, 522, 175);
+	    	    image.setSize("16px", "10px");
+	    	    
+	    	    Image image_1 = new Image("images/passicon.png");
+	    	    rootPanel.add(image_1, 522, 236);
+	    	    image_1.setSize("9px", "17px");
 	    //RootPanel.get().add(dialogBox);
 	    
 

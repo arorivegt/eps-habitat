@@ -37,11 +37,13 @@ public class Panel extends Composite {
 	     absolutePanel.add(menu2, 0, 0);
 	     menu2.setSize("124px", "648px");
 	     
-	     HTMLPanel panel_2 = new HTMLPanel("");
-	     splitLayoutPanel.add(panel_2);
-	     panel_2.setStyleName("Panel_principal");
-	     panel_2.setSize("760px", "638px");
-		setStyleName("Panel_principal");
-		setSize("1343px", "734px");
+	     AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+	     splitLayoutPanel.add(absolutePanel_1);
+		 setStyleName("Panel_principal");
+		 setSize("1343px", "734px");
+		 
+		 Empleados empleado = new Empleados();
+		 absolutePanel_1.add(empleado, 0, 0);
+		 empleado.setSize("1187px", "648px");
 	}
 }

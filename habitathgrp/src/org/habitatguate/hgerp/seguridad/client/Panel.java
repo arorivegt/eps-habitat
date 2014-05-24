@@ -26,7 +26,7 @@ public class Panel extends Composite {
 	     HTMLPanel panel_1 = new HTMLPanel("");
 	     panel_1.setStyleName("Panel_Central");
 	     splitLayoutPanel.addSouth(panel_1, 27.0);
-	     panel_1.setSize("100%", "20px");
+	     panel_1.setSize("1200px", "20px");
 	     
 	     AbsolutePanel absolutePanel = new AbsolutePanel();
 	     absolutePanel.setStyleName("html-west");

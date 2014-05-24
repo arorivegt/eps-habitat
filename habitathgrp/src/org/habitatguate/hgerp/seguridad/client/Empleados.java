@@ -20,12 +20,12 @@ public class Empleados extends Composite {
 		
 		TabPanel tabPanel = new TabPanel();
 		initWidget(tabPanel);
-		tabPanel.setSize("760px", "638px");
+		tabPanel.setSize("827px", "638px");
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel, "New tab", false);
-		scrollPanel.setSize("755px", "541px");
+		scrollPanel.setSize("1200px", "541px");
 		// TODO Auto-generated constructor stub
 	}
 

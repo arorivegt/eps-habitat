@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.rrhh.client;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.TabPanel;

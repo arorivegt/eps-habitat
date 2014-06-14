@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.rrhh.client.Empleados;
+
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;

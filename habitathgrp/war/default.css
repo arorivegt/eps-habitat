@@ -131,6 +131,11 @@ color: White;
   border-color: transparent;
 }
 
+.gwt-Label-new {
+
+        background: lightsteelblue;
+        border-radius: 0 0 20px 20px;
+        padding: 20px 26px;
 }
 input {
 	border: none;
@@ -164,9 +169,73 @@ color: White; /* IE6-9 */
 	padding: 10px 10px;
 	border-radius: 20px 20px 20 20;
 }
-.gwt-Label-new {
-
-	background: lightsteelblue;
-	border-radius: 0 0 20px 20px;
-	padding: 20px 26px;
+.gwt-TabPanel {
+  margin-top: 4px;
 }
+
+.gwt-TabPanelBottom {
+background: #a9db80; /* Old browsers */
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: #3a4d9c;
+  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
+  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
+  background: linear-gradient(#3a4d9c, #2c3b77);
+  border-color: transparent;
+  -webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 20px;
+	color: White;
+	font-size: 18px;
+}
+
+.gwt-TabBar {
+  padding-top: 2px;
+  border-bottom: 4px solid #878787;
+  background-color: #fff;
+}
+
+.gwt-TabBarItem {
+	margin-right: 2px;
+	padding: 4px;
+	border-bottom: 2px solid white;
+	background-color: #e8e8e8;
+	cursor: pointer;
+}
+
+.gwt-TabBarItem-selected {
+background: #a9db80; /* Old browsers */
+  color: #ffffff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: #3a4d9c;
+  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
+  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
+  background: linear-gradient(#3a4d9c, #2c3b77);
+  border-color: transparent;
+	color: White;
+	font-size: 18px;
+}
+.label {
+	color: Black;
+	font-size: 10px;
+}
+.gwt-TextBox2 {
+	color: black;
+	font-size: 8px;
+	opacity:0.6	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 20px;
+	
+	background: #eee;
+	padding: 4px 10px;
+	width: 328px;
+	
+	border: none;
+	font-family: inherit;
+	font-size: 10;
+	font-weight: inherit;
+	line-height: inherit;
+	-webkit-appearance: none;
+}
+  

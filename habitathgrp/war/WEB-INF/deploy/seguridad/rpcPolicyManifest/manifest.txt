@@ -1,3 +1,2 @@
 # Module seguridad
 # RPC service class, partial path of RPC policy file
-org.habitatguate.hgerp.seguridad.client.api.LoginService, AA869416413D84F4BCE8C8DBEF20F86C.gwt.rpc

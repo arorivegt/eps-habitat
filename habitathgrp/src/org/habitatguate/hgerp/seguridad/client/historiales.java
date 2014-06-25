@@ -7,12 +7,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class academico extends Composite  {
+public class historiales extends Composite  {
 
 	 private FlexTable flextable;
 		private VerticalPanel panel = new VerticalPanel();
 		
-	    public academico() {
+	    public historiales() {
 
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
@@ -32,6 +32,6 @@ public class academico extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_historial());
 	    }
 }

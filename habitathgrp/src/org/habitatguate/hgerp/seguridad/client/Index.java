@@ -24,8 +24,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Index implements EntryPoint {
         
-        final TextBox user =new TextBox();
-        final PasswordTextBox pass =new PasswordTextBox();
+        final TextBox txtuser =new TextBox();
+        final PasswordTextBox txtpass =new PasswordTextBox();
         final Button sendButton = new Button("Send");
         private final LoginServiceAsync loginService = GWT
                         .create(LoginService.class);
@@ -65,8 +65,8 @@ public class Index implements EntryPoint {
                         {
                                 // First, we validate the input.
                                 final Button sendButton = new Button("Send");   
-                                String usertxt = user.getText();
-                                String passtxt= pass.getText();
+                                String usertxt = txtuser.getText();
+                                String passtxt= txtpass.getText();
                                 // Then, we send the input to the server.
                                 sendButton.setEnabled(false);
                                                 
@@ -129,53 +129,53 @@ public class Index implements EntryPoint {
             rootPanel.add(lblNewLabel_1, 508, 135);
             lblNewLabel_1.setSize("346px", "175px");
                     
-            final Button sendButton_1 = new Button("Send");
-            rootPanel.add(sendButton_1, 545, 286);
-            sendButton_1.setText("Iniciar sesion");
-            sendButton_1.setStyleName("sendButton");
-            sendButton_1.addClickHandler(handler);
-            sendButton_1.setSize("341px", "44px");
-            rootPanel.add(pass, 545, 226);
-            pass.addFocusHandler(new FocusHandler() {
+            final Button btnIniciar = new Button("Send");
+            rootPanel.add(btnIniciar, 545, 286);
+            btnIniciar.setText("Iniciar sesion");
+            btnIniciar.setStyleName("sendButton");
+            btnIniciar.addClickHandler(handler);
+            btnIniciar.setSize("341px", "44px");
+            rootPanel.add(txtpass, 545, 226);
+            txtpass.addFocusHandler(new FocusHandler() {
                 public void onFocus(FocusEvent event) {
-                        if (pass.getText().equals("password"))
+                        if (txtpass.getText().equals("password"))
                         {
-                                pass.setText("");
+                                txtpass.setText("");
                         }
                 }
             });
-            pass.addBlurHandler(new BlurHandler() {
+            txtpass.addBlurHandler(new BlurHandler() {
                 public void onBlur(BlurEvent event) {
-                        if (pass.getText().equals(""))
+                        if (txtpass.getText().equals(""))
                         {
-                                pass.setText("password");
+                                txtpass.setText("password");
                         }
                 }
             });
             
-                    pass.setText("password");
-                    pass.setSize("321px", "36px");
-                    rootPanel.add(user, 545, 161);
-                    user.addBlurHandler(new BlurHandler() {
+                    txtpass.setText("password");
+                    txtpass.setSize("321px", "36px");
+                    rootPanel.add(txtuser, 545, 161);
+                    txtuser.addBlurHandler(new BlurHandler() {
                         public void onBlur(BlurEvent event) {
 
-                                if (user.getText().equals(""))
+                                if (txtuser.getText().equals(""))
                                 {
-                                        user.setText("Usuario");
+                                        txtuser.setText("Usuario");
                                 }
                         }
                     });
-                    user.addFocusHandler(new FocusHandler() {
+                    txtuser.addFocusHandler(new FocusHandler() {
                         public void onFocus(FocusEvent event) {
-                                if (user.getText().equals("Usuario"))
+                                if (txtuser.getText().equals("Usuario"))
                                 {
-                                        user.setText("");
+                                        txtuser.setText("");
                                 }
                                                 
                         }
                     });
-                    user.setText("Usuario");
-                    user.setSize("321px", "36px");
+                    txtuser.setText("Usuario");
+                    txtuser.setSize("321px", "36px");
                     
                     Image image = new Image("images/mailicon.png");
                     rootPanel.add(image, 522, 175);

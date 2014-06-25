@@ -28,17 +28,17 @@ public class familiares extends Composite  {
         
         grid = new Grid(1, 3);
         panel.add(grid);
-        Button Agregar_pariente = new Button("Agregar hijo(a)");
-        grid.setWidget(0, 0, Agregar_pariente);
+        Button btnAgregar_pariente = new Button("Agregar hijo(a)");
+        grid.setWidget(0, 0, btnAgregar_pariente);
         
-        Agregar_pariente.setStyleName("gwt-PasswordTextBox");
-        Agregar_pariente.addClickHandler(new ClickHandler() {
+        btnAgregar_pariente.setStyleName("gwt-PasswordTextBox");
+        btnAgregar_pariente.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
         		agregarFormulario("hijo(a)");
         	}
         });
         
-        Agregar_pariente.setWidth("246px");
+        btnAgregar_pariente.setWidth("246px");
         
         btnAgregarHermanoa = new Button("Agregar hermano(a)");
         grid.setWidget(0, 2, btnAgregarHermanoa);

@@ -32,6 +32,9 @@ public class puestos extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_puestos());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_puestos(this));
+	    }
+	    public void EliminarFormulario(formulario_puestos fa){
+	        flextable.remove(fa);
 	    }
 }

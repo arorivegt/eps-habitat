@@ -32,6 +32,10 @@ public class academico extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this));
 	    }
+	    public void EliminarFormulario(formulario_academico fa){
+	        flextable.remove(fa);
+	    }
+	    
 }

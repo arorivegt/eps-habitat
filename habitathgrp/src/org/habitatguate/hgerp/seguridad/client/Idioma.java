@@ -32,6 +32,9 @@ public class Idioma extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_idiomas());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_idiomas(this));
+	    }
+	    public void EliminarFormulario(formulario_idiomas fa){
+	        flextable.remove(fa);
 	    }
 }

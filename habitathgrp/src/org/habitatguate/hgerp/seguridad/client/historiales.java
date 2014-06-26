@@ -32,6 +32,9 @@ public class historiales extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_historial());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_historial(this));
+	    }
+	    public void EliminarFormulario(formulario_historial fa){
+	        flextable.remove(fa);
 	    }
 }

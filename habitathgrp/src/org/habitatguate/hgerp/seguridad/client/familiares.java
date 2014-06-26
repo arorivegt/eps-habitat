@@ -53,7 +53,9 @@ public class familiares extends Composite  {
 	}
     
     private void agregarFormulario(String pariente){
-        flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente));  	
+        flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente,this));  	
     }
-
+    public void EliminarFormulario(formulario_familia fa){
+        flextable.remove(fa);
+    }
 }

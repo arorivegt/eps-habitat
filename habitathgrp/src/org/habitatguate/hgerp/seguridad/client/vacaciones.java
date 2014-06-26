@@ -7,15 +7,15 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class referencia_laboral extends Composite  {
+public class vacaciones extends Composite  {
 
 	 private FlexTable flextable;
 		private VerticalPanel panel = new VerticalPanel();
 		
-	    public referencia_laboral() {
+	    public vacaciones() {
 
 	        initWidget(panel);
-	        panel.setSize("761px", "79px");
+	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
 	        Button btnAgregar = new Button("Agregar");
@@ -32,9 +32,9 @@ public class referencia_laboral extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_laboral(this));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_vacaciones(this));
 	    }
-	    public void EliminarFormulario(formulario_referencia_laboral fa){
+	    public void EliminarFormulario(formulario_vacaciones fa){
 	        flextable.remove(fa);
 	    }
 }

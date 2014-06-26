@@ -5,24 +5,23 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class formulario_historial extends Composite {
+public class formulario_vacaciones extends Composite {
 
-	private historiales a;
-	private int id_historial =0;
-	public formulario_historial(historiales a) {
+	private vacaciones a;
+	private int id_vacaciones =0;
+	public formulario_vacaciones(vacaciones a) {
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("534px", "140px");
 		
-		Label lblNivelAcademico = new Label("Fecha");
+		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");
 		absolutePanel.add(lblNivelAcademico, 10, 10);
 		lblNivelAcademico.setSize("192px", "13px");
@@ -31,7 +30,7 @@ public class formulario_historial extends Composite {
 		btnActualizar.setText("Actualizar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
 		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 378, 41);
+		absolutePanel.add(btnActualizar, 377, 42);
 		btnActualizar.setSize("157px", "20px");
 		
 		Button btnEliminar = new Button("Send");
@@ -43,7 +42,7 @@ public class formulario_historial extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
 		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 378, 83);
+		absolutePanel.add(btnEliminar, 377, 78);
 		btnEliminar.setSize("157px", "20px");
 		
 		Label lblMotivo = new Label("Descripcion");
@@ -51,34 +50,31 @@ public class formulario_historial extends Composite {
 		absolutePanel.add(lblMotivo, 10, 56);
 		lblMotivo.setSize("192px", "13px");
 		
-		Label lblLoRecomienda = new Label("Tipo ");
+		Label lblLoRecomienda = new Label("Fecha Final");
 		lblLoRecomienda.setStyleName("label");
-		absolutePanel.add(lblLoRecomienda, 173, 10);
+		absolutePanel.add(lblLoRecomienda, 183, 10);
 		lblLoRecomienda.setSize("103px", "13px");
 		
-		ListBox listTipo = new ListBox();
-		listTipo.addItem("permisos");
-		listTipo.addItem("ausencias");
-		listTipo.addItem("aciertos ");
-		listTipo.addItem("llamadas de atención");
-		listTipo.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTipo, 173, 29);
-		listTipo.setSize("157px", "19px");
+		TextArea txtMotivo_Retiro = new TextArea();
+		txtMotivo_Retiro.getElement().setAttribute("maxlength", "1000");
+		txtMotivo_Retiro.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtMotivo_Retiro, 10, 71);
+		txtMotivo_Retiro.setSize("317px", "61px");
 		
-		TextArea txtDescripcion = new TextArea();
-		txtDescripcion.getElement().setAttribute("maxlength", "1000");
-		txtDescripcion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDescripcion, 10, 71);
-		txtDescripcion.setSize("317px", "61px");
-		
-		DateBox dateFecha = new DateBox();
-		dateFecha.setFormat(new DateBox.DefaultFormat 
+		DateBox dateFecha1 = new DateBox();
+		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
-		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 10, 29);
-		dateFecha.setSize("123px", "11px");
+		dateFecha1.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFecha1, 10, 29);
+		dateFecha1.setSize("124px", "11px");
+		
+		DateBox dateFecha2 = new DateBox();
+		dateFecha2.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha2.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFecha2, 183, 30);
+		dateFecha2.setSize("137px", "11px");
 	}
-	
 	private void EliminarFormulario(){
         a.EliminarFormulario(this);
     }

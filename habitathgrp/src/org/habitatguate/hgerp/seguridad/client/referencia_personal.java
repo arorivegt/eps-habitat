@@ -32,6 +32,9 @@ public class referencia_personal extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_personal());
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_personal(this));
+	    }
+	    public void EliminarFormulario(formulario_referencia_personal fa){
+	        flextable.remove(fa);
 	    }
 }

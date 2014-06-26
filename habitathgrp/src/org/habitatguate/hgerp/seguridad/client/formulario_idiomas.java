@@ -5,10 +5,15 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formulario_idiomas extends Composite {
 
-	public formulario_idiomas() {
+	private Idioma a;
+	private int id_Idioma_empleadp =0;
+	public formulario_idiomas(Idioma a) {
+		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -28,22 +33,20 @@ public class formulario_idiomas extends Composite {
 		btnActualizar.setText("Actualizar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
 		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 416, 29);
+		absolutePanel.add(btnActualizar, 280, 28);
 		btnActualizar.setSize("157px", "20px");
 		
 		Button btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				EliminarFormulario();
+			}
+		});
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
 		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 585, 29);
+		absolutePanel.add(btnEliminar, 449, 28);
 		btnEliminar.setSize("157px", "20px");
-		
-		Button btnGuardar = new Button("Send");
-		btnGuardar.setText("Guardar");
-		btnGuardar.setStylePrimaryName("gwt-TextBox2");
-		btnGuardar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnGuardar, 253, 29);
-		btnGuardar.setSize("157px", "20px");
 		
 		ListBox listIdioma = new ListBox();
 		listIdioma.addItem("Ingles");
@@ -62,5 +65,8 @@ public class formulario_idiomas extends Composite {
 		absolutePanel.add(listNIvel, 160, 29);
 		listNIvel.setSize("87px", "19px");
 	}
+	private void EliminarFormulario(){
+        a.EliminarFormulario(this);
+    }
 
 }

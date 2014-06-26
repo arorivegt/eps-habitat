@@ -1,19 +1,25 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formulario_academico extends Composite {
-
-	public formulario_academico() {
+	
+	private academico a;
+	private int id_historial_academico =0;
+	public formulario_academico(academico a) {
+		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "50px");
+		absolutePanel.setSize("738px", "50px");
 		
 		Label lblNivelAcademico = new Label("Nivel Academico");
 		lblNivelAcademico.setStyleName("label");
@@ -25,18 +31,6 @@ public class formulario_academico extends Composite {
 		absolutePanel.add(lblTitulodiploma, 190, 10);
 		lblTitulodiploma.setSize("192px", "13px");
 		
-		TextBox txtfecha_inicia = new TextBox();
-		txtfecha_inicia.setStylePrimaryName("gwt-TextBox2");
-		txtfecha_inicia.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtfecha_inicia, 555, 29);
-		txtfecha_inicia.setSize("45px", "11px");
-		
-		TextBox txtfecha_final = new TextBox();
-		txtfecha_final.setStylePrimaryName("gwt-TextBox2");
-		txtfecha_final.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtfecha_final, 647, 29);
-		txtfecha_final.setSize("45px", "11px");
-		
 		Label lblParentesco = new Label("Establecimiento");
 		lblParentesco.setStyleName("label");
 		absolutePanel.add(lblParentesco, 374, 10);
@@ -46,22 +40,20 @@ public class formulario_academico extends Composite {
 		btnActualizar.setText("Actualizar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
 		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 190, 63);
+		absolutePanel.add(btnActualizar, 78, 60);
 		btnActualizar.setSize("157px", "20px");
 		
 		Button btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				EliminarFormulario();
+			}
+		});
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
 		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 374, 63);
+		absolutePanel.add(btnEliminar, 262, 60);
 		btnEliminar.setSize("157px", "20px");
-		
-		Button btnGuardar = new Button("Send");
-		btnGuardar.setText("Guardar");
-		btnGuardar.setStylePrimaryName("gwt-TextBox2");
-		btnGuardar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnGuardar, 10, 63);
-		btnGuardar.setSize("157px", "20px");
 		
 		ListBox listNIvel_Academico = new ListBox();
 		listNIvel_Academico.addItem("primaria");
@@ -104,6 +96,22 @@ public class formulario_academico extends Composite {
 		lblAl.setStyleName("label");
 		absolutePanel.add(lblAl, 626, 35);
 		lblAl.setSize("38px", "13px");
+		
+		DateBox dateInicio = new DateBox();
+		dateInicio.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateInicio.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateInicio, 550, 29);
+		dateInicio.setSize("50px", "11px");
+		
+		DateBox dateFinal = new DateBox();
+		dateFinal.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFinal.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFinal, 645, 29);
+		dateFinal.setSize("50px", "11px");
 	}
-
+	private void EliminarFormulario(){
+        a.EliminarFormulario(this);
+    }
 }

@@ -1,10 +1,13 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.user.client.ui.DoubleBox;
 
 public class formulario_prueba_periodo_dos extends Composite {
 
@@ -254,12 +257,8 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblPunteoTotal, 473, 552);
 		lblPunteoTotal.setSize("75px", "13px");
 		
-		TextBox textBox = new TextBox();
-		textBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox, 567, 552);
-		textBox.setSize("117px", "11px");
-		
 		TextBox textBox_1 = new TextBox();
+		textBox_1.setMaxLength(500);
 		textBox_1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(textBox_1, 93, 611);
 		textBox_1.setSize("117px", "11px");
@@ -274,12 +273,8 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblFecha, 283, 611);
 		lblFecha.setSize("75px", "13px");
 		
-		TextBox textBox_2 = new TextBox();
-		textBox_2.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_2, 329, 611);
-		textBox_2.setSize("117px", "11px");
-		
 		TextBox textBox_3 = new TextBox();
+		textBox_3.setMaxLength(200);
 		textBox_3.setStyleName("gwt-TextBox2");
 		absolutePanel.add(textBox_3, 567, 611);
 		textBox_3.setSize("117px", "11px");
@@ -288,6 +283,18 @@ public class formulario_prueba_periodo_dos extends Composite {
 		lblAprobo.setStyleName("label");
 		absolutePanel.add(lblAprobo, 521, 611);
 		lblAprobo.setSize("75px", "13px");
+		
+		DateBox dateFecha = new DateBox();
+		dateFecha.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFecha, 323, 611);
+		dateFecha.setSize("117px", "11px");
+		
+		DoubleBox txtPunteoTotal = new DoubleBox();
+		txtPunteoTotal.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtPunteoTotal, 567, 552);
+		txtPunteoTotal.setSize("117px", "11px");
 	}
 
 }

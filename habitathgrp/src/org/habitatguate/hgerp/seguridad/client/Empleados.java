@@ -107,5 +107,13 @@ public class Empleados extends Composite {
 		scrollPanel_11.setSize("1200px", "480px");
 		vacaciones v = new vacaciones();
 		scrollPanel_11.setWidget(v);
+		
+		
+		ScrollPanel panelparmInv = new ScrollPanel();
+		panelparmInv.setAlwaysShowScrollBars(true);
+		tabPanel.add(panelparmInv, "Parametros Inventarios", true);
+		panelparmInv.setSize("1200px", "480px");
+		ParametroInv pV = new ParametroInv();
+		scrollPanel_11.setWidget(pV);
 	}
 }

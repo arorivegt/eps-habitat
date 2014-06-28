@@ -12,6 +12,9 @@ public class Formulario_ParametroInv extends Composite{
 	public Formulario_ParametroInv(){
         initWidget(panel);
         panel.setSize("761px", "381px");
+        panel.setSize("761px", "85px");
+        
+        
 	}
 }
 

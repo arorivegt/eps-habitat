@@ -114,6 +114,6 @@ public class Empleados extends Composite {
 		tabPanel.add(panelparmInv, "Parametros Inventarios", true);
 		panelparmInv.setSize("1200px", "480px");
 		ParametroInv pV = new ParametroInv();
-		scrollPanel_11.setWidget(pV);
+		panelparmInv.setWidget(pV);
 	}
 }

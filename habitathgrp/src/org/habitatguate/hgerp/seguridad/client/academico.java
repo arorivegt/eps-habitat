@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;

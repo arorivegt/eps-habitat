@@ -1,12 +1,22 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+
+
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+
+import sun.security.jgss.LoginConfigImpl;
 
 public class familiares extends Composite  {
 
@@ -14,6 +24,8 @@ public class familiares extends Composite  {
 	private VerticalPanel panel = new VerticalPanel();
 	private Button btnAgregarHermanoa;
 	private Grid grid;
+    private final SqlServiceAsync loginService = GWT
+            .create(SqlService.class);
 	
     public familiares() {
 
@@ -48,12 +60,28 @@ public class familiares extends Composite  {
         btnAgregarHermanoa.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
         		agregarFormulario("hermano(a)");
+
+                loginService.Insertar("nelson","nelson", new AsyncCallback<String[]>() 
+                {
+                		
+                        public void onFailure(Throwable caught) 
+                        {
+
+                        }
+                        
+                        public void onSuccess(String result[])
+                        {
+                                //si la autentificacion es correcta limpia y contruye el menu
+                                                                  
+                        }
+                 });
         	}
         });
 	}
     
     private void agregarFormulario(String pariente){
-        flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente,this));  	
+        flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente,this));
+
     }
     public void EliminarFormulario(formulario_familia fa){
         flextable.remove(fa);

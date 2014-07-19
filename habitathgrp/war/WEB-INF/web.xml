@@ -16,6 +16,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <url-pattern>/seguridad/login</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>SqlServlet</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.SqlServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SqlServlet</servlet-name>
+    <url-pattern>/seguridad/Insertar</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

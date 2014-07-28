@@ -9,13 +9,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class seg_familia implements Serializable {
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long id_familia;
+	private Key id_familia;
 	
 	@Persistent
 	private String primer_nombre;
@@ -46,11 +48,7 @@ public class seg_familia implements Serializable {
 	}
 
 	public Long getId_familia() {
-		return id_familia;
-	}
-
-	public void setId_familia(Long id_familia) {
-		this.id_familia = id_familia;
+		return id_familia.getId();
 	}
 
 	public String getPrimer_nombre() {

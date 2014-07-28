@@ -27,14 +27,13 @@ public class Index implements EntryPoint {
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
         final Button sendButton = new Button("Send");
-        private final LoginServiceAsync loginService = GWT
-                        .create(LoginService.class);
+        private final LoginServiceAsync loginService = GWT.create(LoginService.class);
         
         @Override
         public void onModuleLoad() 
         {
             
-            final DialogBox dialogBox = new DialogBox();
+             final DialogBox dialogBox = new DialogBox();
                 dialogBox.setText("Autenticacion");
                 dialogBox.setAnimationEnabled(true);
                 final Button closeButton = new Button("cerrar");

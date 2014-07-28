@@ -1,7 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-import org.habitatguate.hgerp.seguridad.client.Empleados;
-
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -11,15 +9,14 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 public class Panel extends Composite {
 
         public Panel() {
+         SplitLayoutPanel splitLayoutPanel = new SplitLayoutPanel();
+         initWidget(splitLayoutPanel);
+         splitLayoutPanel.setSize("100%", "800px");
                 
-                SplitLayoutPanel splitLayoutPanel = new SplitLayoutPanel();
-                initWidget(splitLayoutPanel);
-                splitLayoutPanel.setSize("100%", "800px");
-                
-                 HTMLPanel panel = new HTMLPanel("");
-             panel.setStyleName("panelNorth");
-             splitLayoutPanel.addNorth(panel, 43.0);
-             panel.setSize("100%", "100%");
+         HTMLPanel panel = new HTMLPanel("");
+         panel.setStyleName("panelNorth");
+         splitLayoutPanel.addNorth(panel, 43.0);
+         panel.setSize("100%", "100%");
              
              Image image = new Image("images/imagenempresa.png");
              panel.add(image);
@@ -44,8 +41,9 @@ public class Panel extends Composite {
                  setStyleName("Panel_principal");
                  setSize("1343px", "734px");
                  
-                 Empleados empleado = new Empleados();
-                 absolutePanel_1.add(empleado, 0, 0);
-                 empleado.setSize("1187px", "648px");
+                 Buscador_Empleados buscador = new Buscador_Empleados(); 
+                 //Empleado_tab empleado = new Empleado_tab();
+                 absolutePanel_1.add(buscador, 0, 0);
+                 //empleado.setSize("1187px", "648px");
         }
 }

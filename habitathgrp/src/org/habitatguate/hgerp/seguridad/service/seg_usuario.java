@@ -1,7 +1,6 @@
 package org.habitatguate.hgerp.seguridad.service;
 
 
-import java.io.Serializable;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -10,7 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_usuario implements Serializable {
+public class seg_usuario{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private Long id;
@@ -25,8 +24,6 @@ public class seg_usuario implements Serializable {
 		super();
 		this.user=user2;
 		this.password=password2;
-		String a="";
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getUser() {

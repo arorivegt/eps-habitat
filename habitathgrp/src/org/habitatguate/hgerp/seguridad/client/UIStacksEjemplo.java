@@ -14,8 +14,8 @@ public class UIStacksEjemplo extends ResizeComposite {
    @UiField(provided = true)
    final Tree arbol1 = new Tree();
    {
-     arbol1.addItem("Opción 1");
-     arbol1.addItem("Opción 2");
+     arbol1.addItem("Usuarios");
+     arbol1.addItem("Reportes");
      arbol1.addItem("Opción 3");
    }
    

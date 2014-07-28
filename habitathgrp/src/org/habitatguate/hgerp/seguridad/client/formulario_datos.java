@@ -1,25 +1,38 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formulario_datos extends Composite {
 
-	public formulario_datos() {
-		
+	private Long id_empleado = 0L;
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	private String depto_municipio_uno="";
+	private String depto_municipio_dos="";
+	private Empleados empleado;
+	
+	public formulario_datos(Empleados e) {
+		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("938px", "1043px");
-		
+		absolutePanel.setSize("890px", "1055px");
 		Label lblNoDeAfiliacin = new Label("No. De Afiliación al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
 		absolutePanel.add(lblNoDeAfiliacin, 42, 10);
@@ -34,7 +47,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_2, 595, 10);
 		label_2.setSize("192px", "19px");
 		
-		ListBox listEstadoCivil = new ListBox();
+		final ListBox listEstadoCivil = new ListBox();
 		listEstadoCivil.addItem("Soltero/a");
 		listEstadoCivil.addItem("Casado/a");
 		listEstadoCivil.addItem("Divorciado/a");
@@ -44,7 +57,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(listEstadoCivil, 324, 28);
 		listEstadoCivil.setSize("247px", "27px");
 		
-		ListBox listSexo = new ListBox();
+		final ListBox listSexo = new ListBox();
 		listSexo.addItem("femenino");
 		listSexo.addItem("masculino");
 		listSexo.setStyleName("gwt-TextBox2");
@@ -66,25 +79,26 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_5, 597, 70);
 		label_5.setSize("192px", "19px");
 		
-		TextBox txtPrimerApellido = new TextBox();
+		final TextBox txtPrimerApellido = new TextBox();
 		txtPrimerApellido.setMaxLength(50);
 		txtPrimerApellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimerApellido, 43, 88);
 		txtPrimerApellido.setSize("227px", "19px");
 		
-		TextBox txtSegundoApellido = new TextBox();
+		final TextBox txtSegundoApellido = new TextBox();
 		txtSegundoApellido.setMaxLength(50);
 		txtSegundoApellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtSegundoApellido, 324, 88);
 		txtSegundoApellido.setSize("227px", "19px");
 		
-		TextBox txtApellidoCasada = new TextBox();
+		final TextBox txtApellidoCasada = new TextBox();
 		txtApellidoCasada.setMaxLength(50);
 		txtApellidoCasada.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtApellidoCasada, 596, 88);
 		txtApellidoCasada.setSize("227px", "19px");
 		
-		IntegerBox txtNo_iggs = new IntegerBox();
+		final IntegerBox txtNo_iggs = new IntegerBox();
+		txtNo_iggs.setText("0");
 		txtNo_iggs.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNo_iggs, 43, 28);
 		txtNo_iggs.setSize("227px", "19px");
@@ -94,13 +108,13 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_6, 42, 131);
 		label_6.setSize("192px", "19px");
 		
-		TextBox txtPrimerNombre = new TextBox();
+		final TextBox txtPrimerNombre = new TextBox();
 		txtPrimerNombre.setMaxLength(50);
 		txtPrimerNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimerNombre, 43, 149);
 		txtPrimerNombre.setSize("227px", "19px");
 		
-		TextBox txtSegundoNombre = new TextBox();
+		final TextBox txtSegundoNombre = new TextBox();
 		txtSegundoNombre.setMaxLength(50);
 		txtSegundoNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtSegundoNombre, 324, 149);
@@ -116,7 +130,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_8, 595, 131);
 		label_8.setSize("192px", "19px");
 		
-		ListBox listPais = new ListBox();
+		final ListBox listPais = new ListBox();
 		listPais.addItem("Guatemala");
 		listPais.addItem("Costa Rica");
 		listPais.addItem("Portugal");
@@ -129,7 +143,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_9, 42, 199);
 		label_9.setSize("192px", "19px");
 		
-		ListBox listTipoEmpleado = new ListBox();
+		final ListBox listTipoEmpleado = new ListBox();
 		listTipoEmpleado.addItem("sin ivs");
 		listTipoEmpleado.addItem("con ivs");
 		listTipoEmpleado.setStyleName("gwt-TextBox2");
@@ -141,7 +155,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_10, 323, 199);
 		label_10.setSize("192px", "19px");
 		
-		ListBox listNoDependientes = new ListBox();
+		final ListBox listNoDependientes = new ListBox();
 		listNoDependientes.addItem("0");
 		listNoDependientes.addItem("1");
 		listNoDependientes.addItem("2");
@@ -195,10 +209,10 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_15, 39, 325);
 		label_15.setSize("178px", "19px");
 		
-		TextBox textBox_9 = new TextBox();
-		textBox_9.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_9, 321, 343);
-		textBox_9.setSize("227px", "19px");
+		final TextBox txtTipoPasaporte = new TextBox();
+		txtTipoPasaporte.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTipoPasaporte, 321, 343);
+		txtTipoPasaporte.setSize("227px", "19px");
 		
 		Label label_16 = new Label("Tipo Pasaporte");
 		label_16.setStyleName("label");
@@ -210,25 +224,19 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_17, 592, 325);
 		label_17.setSize("192px", "19px");
 		
-		TextBox textBox_10 = new TextBox();
-		textBox_10.setMaxLength(500);
-		textBox_10.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_10, 594, 343);
-		textBox_10.setSize("227px", "19px");
-		
 		Label lblCedulaExtendidamunicipio = new Label("Cedula extendida-Municipio");
 		lblCedulaExtendidamunicipio.setStyleName("label");
 		absolutePanel.add(lblCedulaExtendidamunicipio, 42, 389);
 		lblCedulaExtendidamunicipio.setSize("192px", "19px");
 		
-		ListBox listCedulaMunicipio = new ListBox();
+		final ListBox listCedulaMunicipio = new ListBox();
 		listCedulaMunicipio.addItem("mixco");
 		listCedulaMunicipio.addItem("antigua guatemala");
 		listCedulaMunicipio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listCedulaMunicipio, 42, 414);
 		listCedulaMunicipio.setSize("248px", "27px");
 		
-		TextBox txtDireccion = new TextBox();
+		final TextBox txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
 		txtDireccion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDireccion, 44, 486);
@@ -239,7 +247,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_20, 42, 463);
 		label_20.setSize("192px", "19px");
 		
-		ListBox listDireccionMunicipio = new ListBox();
+		final ListBox listDireccionMunicipio = new ListBox();
 		listDireccionMunicipio.addItem("mixco");
 		listDireccionMunicipio.addItem("antigua guatemala");
 		listDireccionMunicipio.setStyleName("gwt-TextBox2");
@@ -256,7 +264,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_22, 42, 538);
 		label_22.setSize("192px", "19px");
 		
-		TextBox txtCorreoElectronico = new TextBox();
+		final TextBox txtCorreoElectronico = new TextBox();
 		txtCorreoElectronico.setMaxLength(200);
 		txtCorreoElectronico.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtCorreoElectronico, 44, 558);
@@ -286,7 +294,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_26, 595, 610);
 		label_26.setSize("192px", "19px");
 		
-		ListBox listTipoLicencia = new ListBox();
+		final ListBox listTipoLicencia = new ListBox();
 		listTipoLicencia.addItem("A");
 		listTipoLicencia.addItem("B");
 		listTipoLicencia.addItem("C");
@@ -305,26 +313,19 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_28, 323, 389);
 		label_28.setSize("192px", "19px");
 		
-		DateBox dateAnnioNacimiento = new DateBox();
+		final DateBox dateAnnioNacimiento = new DateBox();
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateAnnioNacimiento.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateAnnioNacimiento, 323, 414);
 		dateAnnioNacimiento.setSize("228px", "18px");
 		
-		Button btnActualizar = new Button("Send");
-		btnActualizar.setText("Actualizar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox");
-		btnActualizar.setStyleName("gwt-TextBox");
-		absolutePanel.add(btnActualizar, 325, 1029);
-		btnActualizar.setSize("280px", "44px");
-		
 		Label lblFechaIngreso = new Label("Fecha Ingreso");
 		lblFechaIngreso.setStyleName("label");
 		absolutePanel.add(lblFechaIngreso, 595, 720);
 		lblFechaIngreso.setSize("192px", "19px");
 		
-		TextBox txtOcupacion = new TextBox();
+		final TextBox txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(50);
 		txtOcupacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtOcupacion, 321, 740);
@@ -335,7 +336,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblOcupacion, 323, 720);
 		lblOcupacion.setSize("192px", "19px");
 		
-		TextBox txtCentroTrabajo = new TextBox();
+		final TextBox txtCentroTrabajo = new TextBox();
 		txtCentroTrabajo.setMaxLength(50);
 		txtCentroTrabajo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtCentroTrabajo, 44, 740);
@@ -351,7 +352,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblD, 42, 681);
 		lblD.setSize("449px", "19px");
 		
-		TextBox txt_CodigoOcupacion = new TextBox();
+		final TextBox txt_CodigoOcupacion = new TextBox();
 		txt_CodigoOcupacion.setMaxLength(50);
 		txt_CodigoOcupacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txt_CodigoOcupacion, 44, 802);
@@ -362,7 +363,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblCodigoOcupacion, 42, 782);
 		lblCodigoOcupacion.setSize("192px", "19px");
 		
-		TextBox txtProfesion = new TextBox();
+		final TextBox txtProfesion = new TextBox();
 		txtProfesion.setMaxLength(50);
 		txtProfesion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtProfesion, 321, 802);
@@ -373,7 +374,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblProfesion, 323, 782);
 		lblProfesion.setSize("192px", "19px");
 		
-		TextBox txtTipoPlanilla = new TextBox();
+		final TextBox txtTipoPlanilla = new TextBox();
 		txtTipoPlanilla.setMaxLength(50);
 		txtTipoPlanilla.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTipoPlanilla, 596, 802);
@@ -399,14 +400,14 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblSalarioBase, 42, 849);
 		lblSalarioBase.setSize("192px", "19px");
 		
-		DateBox dateFecha_Ingreso = new DateBox();
-		dateFecha_Ingreso.setFormat(new DateBox.DefaultFormat 
+		final DateBox dateFechaIngreso = new DateBox();
+		dateFechaIngreso.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
-		dateFecha_Ingreso.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha_Ingreso, 595, 739);
-		dateFecha_Ingreso.setSize("228px", "18px");
+		dateFechaIngreso.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFechaIngreso, 595, 739);
+		dateFechaIngreso.setSize("228px", "18px");
 		
-		ListBox listLicencia = new ListBox();
+		final ListBox listLicencia = new ListBox();
 		listLicencia.addItem("Si");
 		listLicencia.addItem("No");
 		listLicencia.setStyleName("gwt-TextBox2");
@@ -420,55 +421,132 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(listBox_9, 42, 343);
 		listBox_9.setSize("248px", "27px");
 		
-		IntegerBox txtNit = new IntegerBox();
-		txtNit.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNit, 323, 217);
-		txtNit.setSize("227px", "19px");
-		
-		IntegerBox txtRegistro = new IntegerBox();
+		final IntegerBox txtRegistro = new IntegerBox();
+		txtRegistro.setText("0");
 		txtRegistro.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtRegistro, 323, 280);
 		txtRegistro.setSize("227px", "19px");
 		
-		TextBox txtNoOrden = new TextBox();
+		final TextBox txtNoOrden = new TextBox();
 		txtNoOrden.setStyleName("gwt-TextBox2");
 		txtNoOrden.setMaxLength(50);
 		absolutePanel.add(txtNoOrden, 42, 287);
 		txtNoOrden.setSize("227px", "19px");
 		
-		IntegerBox txtDPI = new IntegerBox();
+		final IntegerBox txtDPI = new IntegerBox();
+		txtDPI.setText("0");
 		txtDPI.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDPI, 595, 280);
 		txtDPI.setSize("227px", "19px");
 		
-		IntegerBox txtTelefonoCasa = new IntegerBox();
+		
+		final IntegerBox txtTelefonoCasa = new IntegerBox();
+		txtTelefonoCasa.setText("0");
 		txtTelefonoCasa.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoCasa, 324, 558);
 		txtTelefonoCasa.setSize("227px", "19px");
 		
-		IntegerBox txtTelefonoCelular = new IntegerBox();
+		final IntegerBox txtTelefonoCelular = new IntegerBox();
+		txtTelefonoCelular.setText("0");
 		txtTelefonoCelular.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoCelular, 596, 558);
 		txtTelefonoCelular.setSize("227px", "19px");
 		
-		IntegerBox txtNoLicencia = new IntegerBox();
+		final IntegerBox txtNoLicencia = new IntegerBox();
+		txtNoLicencia.setText("0");
 		txtNoLicencia.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNoLicencia, 596, 635);
 		txtNoLicencia.setSize("227px", "19px");
 		
-		IntegerBox txtSalarioBase = new IntegerBox();
+		Button btnActualizar = new Button("Send");
+		btnActualizar.setText("Guardar");
+		btnActualizar.setStylePrimaryName("gwt-TextBox");
+		btnActualizar.setStyleName("gwt-TextBox");
+		absolutePanel.add(btnActualizar, 375, 992);
+		btnActualizar.setSize("280px", "44px");
+		
+		final TextBox txtNit = new TextBox();
+		txtNit.setStyleName("gwt-TextBox2");
+		txtNit.setMaxLength(50);
+		absolutePanel.add(txtNit, 324, 217);
+		txtNit.setSize("227px", "19px");
+		
+		final IntegerBox txtNoPasaporte = new IntegerBox();
+		txtNoPasaporte.setText("0");
+		txtNoPasaporte.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNoPasaporte, 596, 343);
+		txtNoPasaporte.setSize("227px", "19px");
+		
+		final TextBox txtSalarioBase = new TextBox();
+		txtSalarioBase.setText("0");
 		txtSalarioBase.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtSalarioBase, 43, 874);
+		txtSalarioBase.setMaxLength(50);
+		absolutePanel.add(txtSalarioBase, 42, 878);
 		txtSalarioBase.setSize("227px", "19px");
 		
-		IntegerBox txtBonificacion = new IntegerBox();
+		final TextBox txtBonificacion = new TextBox();
+		txtBonificacion.setText("0");
 		txtBonificacion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtBonificacion, 323, 874);
+		txtBonificacion.setMaxLength(50);
+		absolutePanel.add(txtBonificacion, 323, 879);
 		txtBonificacion.setSize("227px", "19px");
 		
-		IntegerBox txtTotal = new IntegerBox();
+		final TextBox txtTotal = new TextBox();
+		txtTotal.setText("0");
 		txtTotal.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTotal, 595, 874);
+		txtTotal.setMaxLength(50);
+		absolutePanel.add(txtTotal, 596, 879);
 		txtTotal.setSize("227px", "19px");
+		
+		btnActualizar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				
+				if(id_empleado == 0){
+					if(txtNo_iggs.getValue().equals(null)) {txtNo_iggs.setValue(0);}
+					if(txtRegistro.getValue().equals(null)) {txtRegistro.setValue(0);}
+					if(txtDPI.getValue().equals(null)) {txtDPI.setValue(0);}
+					if(txtNoPasaporte.getValue().equals(null)) {txtNoPasaporte.setValue(0);}
+					if(txtTelefonoCasa.getValue().equals(null)) {txtTelefonoCasa.setValue(0);}
+					if(txtTelefonoCelular.getValue().equals(null)) {txtTelefonoCelular.setValue(0);}
+					if(txtNoLicencia.getValue().equals(null)) {txtNoLicencia.setValue(0);}
+					if(txtSalarioBase.getValue().equals(null)) {txtSalarioBase.setValue("0");}
+					if(txtBonificacion.getValue().equals(null)) {txtBonificacion.setValue("0");}
+					if(txtTotal.getValue().equals(null)) {txtTotal.setValue("0");}
+					
+					loginService.Insertar_Emppleado(txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
+							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listTipoEmpleado.getItemText(listTipoEmpleado.getSelectedIndex()), 
+							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),Integer.parseInt(listNoDependientes.getItemText(listPais.getSelectedIndex())),
+							txtNoOrden.getText(), txtRegistro.getValue(), txtDPI.getValue(), txtTipoPasaporte.getText(), txtNoPasaporte.getValue(), 
+							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getValue(), 
+							txtTelefonoCelular.getValue(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
+							txtNoLicencia.getValue(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
+							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
+							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), new AsyncCallback<Long>() 
+	                        {
+	                            public void onFailure(Throwable caught) 
+	                            {
+	                                Window.alert("Error  al Guardar Datos");
+	                            }
+
+								@Override
+	                            public void onSuccess(Long result)
+	                            {
+
+	                            	id_empleado = result;
+	                            	empleado.id_empleado = result;
+	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! "+id_empleado);
+	                            }
+
+	                     });
+				}else{
+					
+					///actualizar empleado
+					
+				}
+				
+			}
+		});
 	}
+
 }

@@ -13,6 +13,7 @@ import com.google.gwt.user.client.ui.TabPanel;
  */
 public class Empleados extends Composite {
 
+	public Long id_empleado = 0L;
 	public Empleados() {
 		
 		TabPanel tabPanel = new TabPanel();
@@ -23,14 +24,14 @@ public class Empleados extends Composite {
 		scrollPanel.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel, "Datos",true);
 		scrollPanel.setSize("1200px", "480px");
-		formulario_datos fd = new formulario_datos();
+		formulario_datos fd = new formulario_datos(this);
 		scrollPanel.setWidget(fd);
 		
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_1, "Familia",true);
 		scrollPanel_1.setSize("1200px", "489px");
-		familiares f = new familiares();
+		familiares f = new familiares(this);
 		scrollPanel_1.setWidget(f);
 
 		
@@ -107,13 +108,6 @@ public class Empleados extends Composite {
 		scrollPanel_11.setSize("1200px", "480px");
 		vacaciones v = new vacaciones();
 		scrollPanel_11.setWidget(v);
-		
-		
-		ScrollPanel panelparmInv = new ScrollPanel();
-		panelparmInv.setAlwaysShowScrollBars(true);
-		tabPanel.add(panelparmInv, "Parametros Inventarios", true);
-		panelparmInv.setSize("1200px", "480px");
-		ParametroInv pV = new ParametroInv();
-		panelparmInv.setWidget(pV);
-	}
+	}	
+
 }

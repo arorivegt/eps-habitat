@@ -26,4 +26,7 @@ public interface LoginServiceAsync {
 	void Insertar_Familiar(Long id_empleado,String primer_nombre, String segundo_nombre,
 			String primer_apellido, String segundo_apellido, int edad, String ocupacion,String parentesco, 
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_Academico(Long id_empleado,String primer_nombre, String segundo_nombre,
+			String primer_apellido, String segundo_apellido, int edad, String ocupacion,String parentesco, 
+			AsyncCallback<Long> callback) throws IllegalArgumentException;
 }

@@ -14,9 +14,11 @@ import com.google.gwt.user.client.ui.TabPanel;
 public class Empleados extends Composite {
 
 	public Long id_empleado = 0L;
+	private TabPanel tabPanel;
+	
 	public Empleados() {
 		
-		TabPanel tabPanel = new TabPanel();
+		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
 		
@@ -27,6 +29,10 @@ public class Empleados extends Composite {
 		formulario_datos fd = new formulario_datos(this);
 		scrollPanel.setWidget(fd);
 		
+		
+	}	
+	
+	public void Nuevas_Pestañas(){
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_1, "Familia",true);
@@ -39,7 +45,7 @@ public class Empleados extends Composite {
 		scrollPanel_2.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_2, "Academico", true);
 		scrollPanel_2.setSize("1200px", "480px");
-		academico a = new academico();
+		academico a = new academico(this);
 		scrollPanel_2.setWidget(a);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
@@ -61,7 +67,6 @@ public class Empleados extends Composite {
 		scrollPanel_4.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
 		scrollPanel_4.setSize("1200px", "480px");
-		// TODO Auto-generated constructor stub
 		setStyleName("");
 		Idioma i = new Idioma();
 		scrollPanel_4.setWidget(i);
@@ -108,6 +113,6 @@ public class Empleados extends Composite {
 		scrollPanel_11.setSize("1200px", "480px");
 		vacaciones v = new vacaciones();
 		scrollPanel_11.setWidget(v);
-	}	
+	}
 
 }

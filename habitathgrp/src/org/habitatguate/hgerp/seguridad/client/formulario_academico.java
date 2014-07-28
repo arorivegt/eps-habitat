@@ -1,5 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -7,15 +10,20 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formulario_academico extends Composite {
 	
 	private academico a;
-	private int id_historial_academico =0;
-	public formulario_academico(academico a) {
-		this.a = a;
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	private Long id_historial_academico = 0L;
+	private Empleados empleado;
+	
+	public formulario_academico(academico a,Empleados e) {
+
+		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);

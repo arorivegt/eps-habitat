@@ -18,6 +18,8 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class formulario_datos extends Composite {
 
@@ -226,21 +228,37 @@ public class formulario_datos extends Composite {
 		
 		Label lblCedulaExtendidamunicipio = new Label("Cedula extendida-Municipio");
 		lblCedulaExtendidamunicipio.setStyleName("label");
-		absolutePanel.add(lblCedulaExtendidamunicipio, 42, 389);
+		absolutePanel.add(lblCedulaExtendidamunicipio, 323, 396);
 		lblCedulaExtendidamunicipio.setSize("192px", "19px");
 		
 		final ListBox listCedulaMunicipio = new ListBox();
-		listCedulaMunicipio.addItem("mixco");
-		listCedulaMunicipio.addItem("antigua guatemala");
+		listCedulaMunicipio.addItem("Tucurú");
+		listCedulaMunicipio.addItem("Tactic");
+		listCedulaMunicipio.addItem("Tamahú");
+		listCedulaMunicipio.addItem("Senahú");
+		listCedulaMunicipio.addItem("Santa María Cahabón");
+		listCedulaMunicipio.addItem("Santa Cruz Verapaz");
+		listCedulaMunicipio.addItem("San Pedro Carchá");
+		listCedulaMunicipio.addItem("San Juan Chamelco");
+		listCedulaMunicipio.addItem("San Cristóbal Verapaz");
+		listCedulaMunicipio.addItem("Raxruhá");
+		listCedulaMunicipio.addItem("Panzós");
+		listCedulaMunicipio.addItem("Lanquín");
+		listCedulaMunicipio.addItem("La Tinta");
+		listCedulaMunicipio.addItem("Fray Bartolomé de las Casas");
+		listCedulaMunicipio.addItem("Cobán");
+		listCedulaMunicipio.addItem("Chisec");
+		listCedulaMunicipio.addItem("Chahal");
+		listCedulaMunicipio.setSelectedIndex(0);
 		listCedulaMunicipio.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listCedulaMunicipio, 42, 414);
+		absolutePanel.add(listCedulaMunicipio, 323, 421);
 		listCedulaMunicipio.setSize("248px", "27px");
 		
 		final TextBox txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
 		txtDireccion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDireccion, 44, 486);
-		txtDireccion.setSize("507px", "19px");
+		txtDireccion.setSize("227px", "19px");
 		
 		Label label_20 = new Label("DIreccion Actual");
 		label_20.setStyleName("label");
@@ -248,8 +266,24 @@ public class formulario_datos extends Composite {
 		label_20.setSize("192px", "19px");
 		
 		final ListBox listDireccionMunicipio = new ListBox();
-		listDireccionMunicipio.addItem("mixco");
-		listDireccionMunicipio.addItem("antigua guatemala");
+		listDireccionMunicipio.addItem("Chahal");
+		listDireccionMunicipio.addItem("Chisec");
+		listDireccionMunicipio.addItem("Cobán");
+		listDireccionMunicipio.addItem("Fray Bartolomé de las Casas");
+		listDireccionMunicipio.addItem("La Tinta");
+		listDireccionMunicipio.addItem("Lanquín");
+		listDireccionMunicipio.addItem("Panzós");
+		listDireccionMunicipio.addItem("Raxruhá");
+		listDireccionMunicipio.addItem("San Cristóbal Verapaz");
+		listDireccionMunicipio.addItem("San Juan Chamelco");
+		listDireccionMunicipio.addItem("San Pedro Carchá");
+		listDireccionMunicipio.addItem("Santa Cruz Verapaz");
+		listDireccionMunicipio.addItem("Santa María Cahabón");
+		listDireccionMunicipio.addItem("Senahú");
+		listDireccionMunicipio.addItem("Tamahú");
+		listDireccionMunicipio.addItem("Tactic");
+		listDireccionMunicipio.addItem("Tucurú");
+		listDireccionMunicipio.setSelectedIndex(0);
 		listDireccionMunicipio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listDireccionMunicipio, 595, 486);
 		listDireccionMunicipio.setSize("248px", "27px");
@@ -310,14 +344,14 @@ public class formulario_datos extends Composite {
 		
 		Label label_28 = new Label("Año de Nacimiento");
 		label_28.setStyleName("label");
-		absolutePanel.add(label_28, 323, 389);
+		absolutePanel.add(label_28, 595, 389);
 		label_28.setSize("192px", "19px");
 		
 		final DateBox dateAnnioNacimiento = new DateBox();
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateAnnioNacimiento.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateAnnioNacimiento, 323, 414);
+		absolutePanel.add(dateAnnioNacimiento, 595, 414);
 		dateAnnioNacimiento.setSize("228px", "18px");
 		
 		Label lblFechaIngreso = new Label("Fecha Ingreso");
@@ -498,6 +532,90 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtTotal, 596, 879);
 		txtTotal.setSize("227px", "19px");
 		
+		final ListBox listCedulaDepartamento = new ListBox();
+		listCedulaDepartamento.addItem("Alta Verapaz");
+		listCedulaDepartamento.addItem("Baja Verapaz");
+		listCedulaDepartamento.addItem("Chimaltenango");
+		listCedulaDepartamento.addItem("Chiquimula");
+		listCedulaDepartamento.addItem("El Progreso");
+		listCedulaDepartamento.addItem("Escuintla");
+		listCedulaDepartamento.addItem("Guatemala");
+		listCedulaDepartamento.addItem("Huehuetenango");
+		listCedulaDepartamento.addItem("Izabal");
+		listCedulaDepartamento.addItem("Jalapa");
+		listCedulaDepartamento.addItem("Jutiapa");
+		listCedulaDepartamento.addItem("Petén");
+		listCedulaDepartamento.addItem("Quezaltenango");
+		listCedulaDepartamento.addItem("Quiché");
+		listCedulaDepartamento.addItem("Retalhuleu");
+		listCedulaDepartamento.addItem("Sacatepéquez");
+		listCedulaDepartamento.addItem("San Marcos");
+		listCedulaDepartamento.addItem("Santa Rosa");
+		listCedulaDepartamento.addItem("Sololá");
+		listCedulaDepartamento.addItem("Suchitepéquez");
+		listCedulaDepartamento.addItem("Totonicapán");
+		listCedulaDepartamento.addItem("Zacapa");
+		listCedulaDepartamento.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				listCedulaMunicipio.clear();
+				listCedulaMunicipio.setSelectedIndex(1);
+		        String[] numerosComoArray = Depto_Municipio(listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex())).split(",");
+		        for (int i = 0; i < numerosComoArray.length; i++) {
+		        	listCedulaMunicipio.addItem(numerosComoArray[i]);
+		        }
+			}		
+		});
+		listCedulaDepartamento.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listCedulaDepartamento, 42, 421);
+		listCedulaDepartamento.setSize("248px", "27px");
+		
+		Label lblCedulaExtendidadepartamento = new Label("Cedula extendida-Departamento");
+		lblCedulaExtendidadepartamento.setStyleName("label");
+		absolutePanel.add(lblCedulaExtendidadepartamento, 42, 396);
+		lblCedulaExtendidadepartamento.setSize("192px", "19px");
+		
+		final ListBox listDireccionDepartamento = new ListBox();
+		listDireccionDepartamento.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				listDireccionMunicipio.clear();
+				listDireccionMunicipio.setSelectedIndex(1);
+		        String[] numerosComoArray = Depto_Municipio(listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex())).split(",");
+		        for (int i = 0; i < numerosComoArray.length; i++) {
+		        	listDireccionMunicipio.addItem(numerosComoArray[i]);
+		        }
+			}
+		});
+		listDireccionDepartamento.addItem("Alta Verapaz");
+		listDireccionDepartamento.addItem("Baja Verapaz");
+		listDireccionDepartamento.addItem("Chimaltenango");
+		listDireccionDepartamento.addItem("Chiquimula");
+		listDireccionDepartamento.addItem("El Progreso");
+		listDireccionDepartamento.addItem("Escuintla");
+		listDireccionDepartamento.addItem("Guatemala");
+		listDireccionDepartamento.addItem("Huehuetenango");
+		listDireccionDepartamento.addItem("Izabal");
+		listDireccionDepartamento.addItem("Jalapa");
+		listDireccionDepartamento.addItem("Jutiapa");
+		listDireccionDepartamento.addItem("Petén");
+		listDireccionDepartamento.addItem("Quezaltenango");
+		listDireccionDepartamento.addItem("Quiché");
+		listDireccionDepartamento.addItem("Retalhuleu");
+		listDireccionDepartamento.addItem("Sacatepéquez");
+		listDireccionDepartamento.addItem("San Marcos");
+		listDireccionDepartamento.addItem("Santa Rosa");
+		listDireccionDepartamento.addItem("Sololá");
+		listDireccionDepartamento.addItem("Suchitepéquez");
+		listDireccionDepartamento.addItem("Totonicapán");
+		listDireccionDepartamento.addItem("Zacapa");
+		listDireccionDepartamento.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listDireccionDepartamento, 323, 488);
+		listDireccionDepartamento.setSize("248px", "27px");
+		
+		Label label = new Label("Cedula extendida-Departamento");
+		label.setStyleName("label");
+		absolutePanel.add(label, 323, 463);
+		label.setSize("192px", "19px");
+		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -512,6 +630,8 @@ public class formulario_datos extends Composite {
 					if(txtSalarioBase.getValue().equals(null)) {txtSalarioBase.setValue("0");}
 					if(txtBonificacion.getValue().equals(null)) {txtBonificacion.setValue("0");}
 					if(txtTotal.getValue().equals(null)) {txtTotal.setValue("0");}
+					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
+					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
 					
 					loginService.Insertar_Emppleado(txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
@@ -535,6 +655,7 @@ public class formulario_datos extends Composite {
 
 	                            	id_empleado = result;
 	                            	empleado.id_empleado = result;
+	                            	empleado.Nuevas_Pestañas();
 	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! "+id_empleado);
 	                            }
 
@@ -547,6 +668,395 @@ public class formulario_datos extends Composite {
 				
 			}
 		});
+	}
+	
+	private String Depto_Municipio(String Departamento){
+		String valor = "";
+		if(Departamento.equals("Alta Verapaz")){
+			valor = valor + "," + "Chahal";
+			valor = valor + "," + "Chisec";
+			valor = valor + "," + "Cobán";
+			valor = valor + "," + "Fray Bartolomé de las Casas";
+			valor = valor + "," + "La Tinta";
+			valor = valor + "," + "Lanquín";
+			valor = valor + "," + "Panzós";
+			valor = valor + "," + "Raxruhá";
+			valor = valor + "," + "San Cristóbal Verapaz";
+			valor = valor + "," + "San Juan Chamelco";
+			valor = valor + "," + "San Pedro Carchá";
+			valor = valor + "," + "Santa Cruz Verapaz";
+			valor = valor + "," + "Santa María Cahabón";
+			valor = valor + "," + "Senahú";
+			valor = valor + "," + "Tamahú";
+			valor = valor + "," + "Tactic";
+			valor = valor + "," + "Tucurú";
+			
+		}else if(Departamento.equals("Baja Verapaz")){
+			valor = valor + "," + "Cubulco";
+			valor = valor + "," + "Granados";
+			valor = valor + "," + "Purulhá";
+			valor = valor + "," + "Rabinal";
+			valor = valor + "," + "Salamá";
+			valor = valor + "," + "San Jerónimo";
+			valor = valor + "," + "San Miguel Chicaj";
+			valor = valor + "," + "Santa Cruz el Chol";
+			
+		}else if(Departamento.equals("Chimaltenango")){
+			valor = valor + "," + "Acatenango";
+			valor = valor + "," + "Chimaltenango";
+			valor = valor + "," + "El Tejar";
+			valor = valor + "," + "Parramos";
+			valor = valor + "," + "Patzicía";
+			valor = valor + "," + "Patzún";
+			valor = valor + "," + "Pochuta";
+			valor = valor + "," + "San Andrés Itzapa";
+			valor = valor + "," + "San José Poaquíl";
+			valor = valor + "," + "San Juan Comalapa";
+			valor = valor + "," + "San Martín Jilotepeque";
+			valor = valor + "," + "Santa Apolonia";
+			valor = valor + "," + "Santa Cruz Balanyá";
+			valor = valor + "," + "Tecpán";
+			valor = valor + "," + "Yepocapa";
+			valor = valor + "," + "Zaragoza";
+			
+		}else if(Departamento.equals("Chiquimula")){
+			
+			valor = valor + "," + "Camotán";
+			valor = valor + "," + "Chiquimula";
+			valor = valor + "," + "Concepción Las Minas";
+			valor = valor + "," + "Esquipulas";
+			valor = valor + "," + "Ipala";
+			valor = valor + "," + "Jocotán";
+			valor = valor + "," + "Olopa";
+			valor = valor + "," + "Quezaltepeque";
+			valor = valor + "," + "San Jacinto";
+			valor = valor + "," + "San José la Arada";
+			valor = valor + "," + "San Juan Ermita";
+			
+		}else if(Departamento.equals("El Progreso")){
+			valor = valor + "," + "El Jícaro";
+			valor = valor + "," + "Guastatoya";
+			valor = valor + "," + "Morazán";
+			valor = valor + "," + "San Agustín Acasaguastlán";
+			valor = valor + "," + "San Antonio La Paz";
+			valor = valor + "," + "San Cristóbal Acasaguastlán";
+			valor = valor + "," + "Sanarate";
+			valor = valor + "," + "Sansare";
+			
+		}else if(Departamento.equals("Escuintla")){			
+			valor = valor + "," + "Escuintla";
+			valor = valor + "," + "Guanagazapa";
+			valor = valor + "," + "Iztapa";
+			valor = valor + "," + "La Democracia";
+			valor = valor + "," + "La Gomera";
+			valor = valor + "," + "Masagua";
+			valor = valor + "," + "Nueva Concepción";
+			valor = valor + "," + "Palín";
+			valor = valor + "," + "San José";
+			valor = valor + "," + "San Vicente Pacaya";
+			valor = valor + "," + "Santa Lucía Cotzumalguapa";
+			valor = valor + "," + "Siquinalá";
+			valor = valor + "," + "Tiquisate";
+			
+		}else if(Departamento.equals("Guatemala")){	
+			valor = valor + "," + "Amatitlán";
+			valor = valor + "," + "Chinautla";
+			valor = valor + "," + "Chuarrancho";
+			valor = valor + "," + "Ciudad de Guatemala";
+			valor = valor + "," + "Fraijanes";
+			valor = valor + "," + "Mixco";
+			valor = valor + "," + "Palencia";
+			valor = valor + "," + "San José del Golfo";
+			valor = valor + "," + "San José Pinula";
+			valor = valor + "," + "San Juan Sacatepéquez";
+			valor = valor + "," + "San Miguel Petapa";
+			valor = valor + "," + "San Pedro Ayampuc";
+			valor = valor + "," + "San Pedro Sacatepéquez";
+			valor = valor + "," + "San Raymundo";
+			valor = valor + "," + "Santa Catarina Pinula";
+			valor = valor + "," + "Villa Canales";
+			valor = valor + "," + "Villa Nueva";
+			
+		}else if(Departamento.equals("Huehuetenango")){
+			valor = valor + "," + "Aguacatán";
+			valor = valor + "," + "Chiantla";
+			valor = valor + "," + "Colotenango";
+			valor = valor + "," + "Concepción Huista";
+			valor = valor + "," + "Cuilco";
+			valor = valor + "," + "Huehuetenango";
+			valor = valor + "," + "Jacaltenango";
+			valor = valor + "," + "La Democracia";
+			valor = valor + "," + "La Libertad";
+			valor = valor + "," + "Malacatancito";
+			valor = valor + "," + "Nentón";
+			valor = valor + "," + "San Antonio Huista";
+			valor = valor + "," + "San Gaspar Ixchil";
+			valor = valor + "," + "San Ildefonso Ixtahuacán";
+			valor = valor + "," + "San Juan Atitán";
+			valor = valor + "," + "San Juan Ixcoy";
+			valor = valor + "," + "San Mateo Ixtatán";
+			valor = valor + "," + "San Miguel Acatán";
+			valor = valor + "," + "San Pedro Nécta";
+			valor = valor + "," + "San Pedro Soloma";
+			valor = valor + "," + "San Rafael La Independencia";
+			valor = valor + "," + "San Rafael Pétzal";
+			valor = valor + "," + "San Sebastián Coatán";
+			valor = valor + "," + "San Sebastián Huehuetenango";
+			valor = valor + "," + "Santa Ana Huista";
+			valor = valor + "," + "Santa Bárbara";
+			valor = valor + "," + "Santa Cruz Barillas";
+			valor = valor + "," + "Santa Eulalia";
+			valor = valor + "," + "Santiago Chimaltenango";
+			valor = valor + "," + "Tectitán";
+			valor = valor + "," + " Santos Cuchumatán";
+			valor = valor + "," + "Unión Cantinil";
+			
+		}else if(Departamento.equals("Izabal")){
+			valor = valor + "," + "El Estor";
+			valor = valor + "," + "Livingston";
+			valor = valor + "," + "Los Amates";
+			valor = valor + "," + "Morales";
+			valor = valor + "," + "Puerto Barrios";
+			
+		}else if(Departamento.equals("Jalapa")){
+			valor = valor + "," + "Jalapa";
+			valor = valor + "," + "Mataquescuintla";
+			valor = valor + "," + "Monjas";
+			valor = valor + "," + "San Carlos Alzatate";
+			valor = valor + "," + "San Luis Jilotepeque";
+			valor = valor + "," + "San Manuel Chaparrón";
+			valor = valor + "," + "San Pedro Pinula";
+			
+		}else if(Departamento.equals("Jutiapa")){
+			valor = valor + "," + "Agua Blanca";
+			valor = valor + "," + "Asunción Mita";
+			valor = valor + "," + "Atescatempa";
+			valor = valor + "," + "Comapa";
+			valor = valor + "," + "Conguaco";
+			valor = valor + "," + "El Adelanto";
+			valor = valor + "," + "El Progreso";
+			valor = valor + "," + "Jalpatagua";
+			valor = valor + "," + "Jerez";
+			valor = valor + "," + "Jutiapa";
+			valor = valor + "," + "Moyuta";
+			valor = valor + "," + "Pasaco";
+			valor = valor + "," + "Quesada";
+			valor = valor + "," + "San José Acatempa";
+			valor = valor + "," + "Santa Catarina Mita";
+			valor = valor + "," + "Yupiltepeque";
+			valor = valor + "," + "Zapotitlán";
+			
+		}else if(Departamento.equals("Petén")){
+			valor = valor + "," + "Dolores";
+			valor = valor + "," + "El Chal";
+			valor = valor + "," + "Flores";
+			valor = valor + "," + "La Libertad";
+			valor = valor + "," + "Las Cruces";
+			valor = valor + "," + "Melchor de Mencos";
+			valor = valor + "," + "Poptún";
+			valor = valor + "," + "San Andrés";
+			valor = valor + "," + "San Benito";
+			valor = valor + "," + "San Francisco";
+			valor = valor + "," + "San José";
+			valor = valor + "," + "San Luis";
+			valor = valor + "," + "Santa Ana";
+			valor = valor + "," + "Sayaxché";
+			
+		}else if(Departamento.equals("Quezaltenango")){
+			valor = valor + "," + "Almolonga";
+			valor = valor + "," + "Cabricán";
+			valor = valor + "," + "Cajolá";
+			valor = valor + "," + "Cantel";
+			valor = valor + "," + "Coatepeque";
+			valor = valor + "," + "Colomba Costa Cuca";
+			valor = valor + "," + "Concepción Chiquirichapa";
+			valor = valor + "," + "El Palmar";
+			valor = valor + "," + "Flores Costa Cuca";
+			valor = valor + "," + "Génova";
+			valor = valor + "," + "Huitán";
+			valor = valor + "," + "La Esperanza";
+			valor = valor + "," + "Olintepeque";
+			valor = valor + "," + "Palestina de Los Altos";
+			valor = valor + "," + "Quetzaltenango";
+			valor = valor + "," + "Salcajá";
+			valor = valor + "," + "San Carlos Sija";
+			valor = valor + "," + "San Francisco La Unión";
+			valor = valor + "," + "San Juan Ostuncalco";
+			valor = valor + "," + "San Martín Sacatepéquez";
+			valor = valor + "," + "San Mateo";
+			valor = valor + "," + "San Miguel Sigüilá";
+			valor = valor + "," + "Sibilia";
+			valor = valor + "," + "Zunil";
+			
+		}else if(Departamento.equals("Quiché")){
+			valor = valor + "," + "Canillá";
+			valor = valor + "," + "Chajul";
+			valor = valor + "," + "Chicamán";
+			valor = valor + "," + "Chiché";
+			valor = valor + "," + "Chichicastenango";
+			valor = valor + "," + "Chinique";
+			valor = valor + "," + "Cunén";
+			valor = valor + "," + "Ixcán";
+			valor = valor + "," + "Joyabaj";
+			valor = valor + "," + "Nebaj";
+			valor = valor + "," + "Pachalum";
+			valor = valor + "," + "Patzité";
+			valor = valor + "," + "Sacapulas";
+			valor = valor + "," + "San Andrés Sajcabajá";
+			valor = valor + "," + "San Antonio Ilotenango";
+			valor = valor + "," + "San Bartolomé Jocotenango";
+			valor = valor + "," + "San Juan Cotzal";
+			valor = valor + "," + "San Pedro Jocopilas";
+			valor = valor + "," + "Santa Cruz del Quiché";
+			valor = valor + "," + "Uspantán";
+			valor = valor + "," + "Zacualpa";
+			
+		}else if(Departamento.equals("Retalhuleu")){
+			valor = valor + "," + "Champerico";
+			valor = valor + "," + "El Asintal";
+			valor = valor + "," + "Nuevo San Carlos";
+			valor = valor + "," + "Retalhuleu";
+			valor = valor + "," + "San Andrés Villa Seca";
+			valor = valor + "," + "San Felipe";
+			valor = valor + "," + "San Martín Zapotitlán";
+			valor = valor + "," + "San Sebastián";
+			valor = valor + "," + "Santa Cruz Muluá";
+			
+		}else if(Departamento.equals("Sacatepéquez")){
+			valor = valor + "," + "Alotenango";
+			valor = valor + "," + "Ciudad Vieja";
+			valor = valor + "," + "Jocotenango";
+			valor = valor + "," + "La Antigua Guatemala";
+			valor = valor + "," + "Magdalena Milpas Altas";
+			valor = valor + "," + "Pastores";
+			valor = valor + "," + "San Antonio Aguas Calientes";
+			valor = valor + "," + "San Bartolomé Milpas Altas";
+			valor = valor + "," + "San Lucas Sacatepéquez";
+			valor = valor + "," + "San Miguel Dueñas";
+			valor = valor + "," + "Santa Catarina Barahona";
+			valor = valor + "," + "Santa Lucía Milpas Altas";
+			valor = valor + "," + "Santa María de Jesús";
+			valor = valor + "," + "Santiago Sacatepéquez";
+			valor = valor + "," + "Santo Domingo Xenacoj";
+			valor = valor + "," + "Sumpango";;
+			
+		}else if(Departamento.equals("San Marcos")){
+			valor = valor + "," + "Ayutla";
+			valor = valor + "," + "Catarina";
+			valor = valor + "," + "Comitancillo";
+			valor = valor + "," + "Concepción Tutuapa";
+			valor = valor + "," + "El Quetzal";
+			valor = valor + "," + "El Tumbador";
+			valor = valor + "," + "Esquipulas Palo Gordo";
+			valor = valor + "," + "Ixchiguán";
+			valor = valor + "," + "La Blanca";
+			valor = valor + "," + "La Reforma";
+			valor = valor + "," + "Malacatán";
+			valor = valor + "," + "Nuevo Progreso";
+			valor = valor + "," + "Ocós";
+			valor = valor + "," + "Pajapita";
+			valor = valor + "," + "Río Blanco";
+			valor = valor + "," + "San Antonio Sacatepéquez";
+			valor = valor + "," + "San Cristóbal Cucho";
+			valor = valor + "," + "San José El Rodeo";
+			valor = valor + "," + "San José Ojetenam";
+			valor = valor + "," + "San Lorenzo";
+			valor = valor + "," + "San Marcos";
+			valor = valor + "," + "San Miguel Ixtahuacán";
+			valor = valor + "," + "San Pablo";
+			valor = valor + "," + "San Pedro Sacatepéquez";
+			valor = valor + "," + "San Rafael Pie de la Cuesta";
+			valor = valor + "," + "Sibinal";
+			valor = valor + "," + "Sipacapa";
+			valor = valor + "," + "Tacaná";
+			valor = valor + "," + "Tajumulco";
+			valor = valor + "," + "Tejutla";
+			
+		}else if(Departamento.equals("Santa Rosa")){
+			valor = valor + "," + "Barberena";
+			valor = valor + "," + "Casillas";
+			valor = valor + "," + "Chiquimulilla";
+			valor = valor + "," + "Cuilapa";
+			valor = valor + "," + "Guazacapán";
+			valor = valor + "," + "Nueva Santa Rosa";
+			valor = valor + "," + "Oratorio";
+			valor = valor + "," + "Pueblo Nuevo Viñas";
+			valor = valor + "," + "San Juan Tecuaco";
+			valor = valor + "," + "San Rafael las Flores";
+			valor = valor + "," + "Santa Cruz Naranjo";
+			valor = valor + "," + "Santa María Ixhuatán";
+			valor = valor + "," + "Santa Rosa de Lima";
+			valor = valor + "," + "Taxisco";
+			
+		}else if(Departamento.equals("Sololá")){
+			valor = valor + "," + "Concepción";
+			valor = valor + "," + "Nahualá";
+			valor = valor + "," + "Panajachel";
+			valor = valor + "," + "San Andrés Semetabaj";
+			valor = valor + "," + "San Antonio Palopó";
+			valor = valor + "," + "San José Chacayá";
+			valor = valor + "," + "San Juan La Laguna";
+			valor = valor + "," + "San Lucas Tolimán";
+			valor = valor + "," + "San Marcos La Laguna";
+			valor = valor + "," + "San Pablo La Laguna";
+			valor = valor + "," + "San Pedro La Laguna";
+			valor = valor + "," + "Santa Catarina Ixtahuacán";
+			valor = valor + "," + "Santa Catarina Palopó";
+			valor = valor + "," + "Santa Clara La Laguna";
+			valor = valor + "," + "Santa Cruz La Laguna";
+			valor = valor + "," + "Santa Lucía Utatlán";
+			valor = valor + "," + "Santa María Visitación";
+			valor = valor + "," + "Santiago Atitlán";
+			valor = valor + "," + "Sololá";
+			
+		}else if(Departamento.equals("Suchitepéquez")){
+			valor = valor + "," + "Chicacao";
+			valor = valor + "," + "Cuyotenango";
+			valor = valor + "," + "Mazatenango";
+			valor = valor + "," + "Patulul";
+			valor = valor + "," + "Pueblo Nuevo";
+			valor = valor + "," + "Río Bravo";
+			valor = valor + "," + "Samayac";
+			valor = valor + "," + "San Antonio Suchitepéquez";
+			valor = valor + "," + "San Bernardino";
+			valor = valor + "," + "San Francisco Zapotitlán";
+			valor = valor + "," + "San Gabriel";
+			valor = valor + "," + "San José El Idolo";
+			valor = valor + "," + "San José La Maquina";
+			valor = valor + "," + "San Juan Bautista";
+			valor = valor + "," + "San Lorenzo";
+			valor = valor + "," + "San Miguel Panán";
+			valor = valor + "," + "San Pablo Jocopilas";
+			valor = valor + "," + "Santa Bárbara";
+			valor = valor + "," + "Santo Domingo Suchitepéquez";
+			valor = valor + "," + "Santo Tomás La Unión";
+			valor = valor + "," + "Zunilito";
+			
+		}else if(Departamento.equals("Totonicapán")){
+			valor = valor + "," + "Momostenango";
+			valor = valor + "," + "San Andrés Xecul";
+			valor = valor + "," + "San Bartolo";
+			valor = valor + "," + "San Cristóbal Totonicapán";
+			valor = valor + "," + "San Francisco El Alto";
+			valor = valor + "," + "Santa Lucía La Reforma";
+			valor = valor + "," + "Santa María Chiquimula";
+			valor = valor + "," + "Totonicapán";
+			
+		}else if(Departamento.equals("Zacapa")){
+			valor = valor + "," + "Cabañas";
+			valor = valor + "," + "Estanzuela";
+			valor = valor + "," + "Gualán";
+			valor = valor + "," + "Huité";
+			valor = valor + "," + "La Unión";
+			valor = valor + "," + "Río Hondo";
+			valor = valor + "," + "San Diego";
+			valor = valor + "," + "San Jorge";
+			valor = valor + "," + "Teculután";
+			valor = valor + "," + "Usumatlán";
+			valor = valor + "," + "Zacapa";
+			
+		}
+		return valor;
 	}
 
 }

@@ -133,7 +133,7 @@ public class formulario_familia  extends Composite  {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				
+				if(id_familia == 0) {
 					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
 							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
 							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), new AsyncCallback<Long>(){
@@ -150,6 +150,7 @@ public class formulario_familia  extends Composite  {
 	                            }
 
 	                     });
+				}
 					
 			}
 		});

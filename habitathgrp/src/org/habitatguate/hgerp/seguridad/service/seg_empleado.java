@@ -2,7 +2,6 @@ package org.habitatguate.hgerp.seguridad.service;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -109,31 +108,39 @@ public class seg_empleado implements Serializable {
 
 	//aqui vienen todas los objetos con los que se relaciona
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_vacaciones> vacaciones;
 
-	@Persistent(mappedBy = "empleado")
-	private List <seg_familia> familia = new ArrayList<seg_familia>();
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
+	private List <seg_familia> familia;
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_historial_academico> historial_academico;
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_referencia_laboral> referencia_laboral;
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
 	private List <seg_entrevista> entrevista;
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_puesto> puestos;
 
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_idioma> idiomas;
 	
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_referencia_personal> referencia_personal;
 	
-	@Persistent(mappedBy = "empleado")
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
 	private List <seg_test> test;
 	
 	//datos del patrono
@@ -369,8 +376,8 @@ public class seg_empleado implements Serializable {
 		return familia;
 	}
 
-	public void setFamilia(seg_familia familia) {
-		this.familia.add(familia);
+	public void setFamilia(List<seg_familia> familia) {
+		this.familia = familia;
 	}
 
 	public List<seg_historial_academico> getHistorial_academico() {

@@ -11,10 +11,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 public class academico extends Composite  {
 
 	 private FlexTable flextable;
-		private VerticalPanel panel = new VerticalPanel();
+	 private Empleados empleado;
+     private VerticalPanel panel = new VerticalPanel();
 		
-	    public academico() {
+	    public academico(Empleados e) {
 
+			this.empleado = e;
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();
@@ -33,7 +35,7 @@ public class academico extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this,empleado));
 	    }
 	    public void EliminarFormulario(formulario_academico fa){
 	        flextable.remove(fa);

@@ -1,16 +1,13 @@
 package org.habitatguate.hgerp.seguridad.service;
 
 import java.util.Date;
-import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.util.PMF;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query; 
 
 
 @SuppressWarnings("serial")
@@ -60,48 +57,49 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             float bonificacion) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+		
 		seg_empleado e = new seg_empleado();
-        e.setAfiliacion_igss(intafiliacion_igss);
-    e.setEstado_civil(estado_civil);
-    e.setSexo(sexo);
-    e.setPrimer_apellido(primer_apellido);
-    e.setSegundo_apellido(segundo_apellido);
-    e.setApellido_casada(apellido_casada);
-    e.setPrimer_nombre(primer_nombre);
-    e.setSegundo_nombre(segundo_nombre);
-    e.setTipo_empleado(tipo_empleado);
-    e.setPais(pais);
-    e.setNit(nit);
-    e.setNo_Dependientes(no_Dependientes);
-    e.setNo_orden(no_orden);
-    e.setNo_registro(no_registro);
-    e.setCui(cui);
-    e.setTipo_pasaporte(tipo_pasaporte);
-    e.setNo_pasaporte(no_pasaporte);
-    e.setDepto_municipio_cedula(depto_municipio_cedula);
-    e.setDireccion_actual(direccion_actual);
-    e.setDepto_municipio_residencia(depto_municipio_residencia);
-    e.setEmail(email);
-    e.setTelefono(telefono);
-    e.setCelular(celular);
-    e.setFecha_ingreso(fecha_ingreso);
-    e.setTipo_licencia(tipo_licencia);
-    e.setNo_licencia(no_licencia);
-    e.setCentro_trabajo(centro_trabajo);
-    e.setOcupacion(ocupacion);
-    e.setFecha_ingreso(fecha_ingreso);
-    e.setCodigo_ingreso(codigo_ingreso);
-    e.setProfesion(profesion);
-    e.setTipo_planilla(tipo_planilla);
-    e.setSalario_base(salario_base);
-    e.setTotal(total);
-    e.setBonificacion(bonificacion);
-    
-		 try{
-			 gestorPersistencia.makePersistent(e);  
+           e.setAfiliacion_igss(intafiliacion_igss);
+           e.setEstado_civil(estado_civil);
+           e.setSexo(sexo);
+           e.setPrimer_apellido(primer_apellido);
+           e.setSegundo_apellido(segundo_apellido);
+           e.setApellido_casada(apellido_casada);
+           e.setPrimer_nombre(primer_nombre);
+           e.setSegundo_nombre(segundo_nombre);
+           e.setTipo_empleado(tipo_empleado);
+           e.setPais(pais);
+           e.setNit(nit);
+           e.setNo_Dependientes(no_Dependientes);
+           e.setNo_orden(no_orden);
+           e.setNo_registro(no_registro);
+           e.setCui(cui);
+           e.setTipo_pasaporte(tipo_pasaporte);
+           e.setNo_pasaporte(no_pasaporte);
+           e.setDepto_municipio_cedula(depto_municipio_cedula);
+           e.setDireccion_actual(direccion_actual);
+           e.setDepto_municipio_residencia(depto_municipio_residencia);
+           e.setEmail(email);
+           e.setTelefono(telefono);
+           e.setCelular(celular);
+           e.setFecha_ingreso(fecha_ingreso);
+           e.setTipo_licencia(tipo_licencia);
+           e.setNo_licencia(no_licencia);
+           e.setCentro_trabajo(centro_trabajo);
+           e.setOcupacion(ocupacion);
+           e.setFecha_ingreso(fecha_ingreso);
+           e.setCodigo_ingreso(codigo_ingreso);
+           e.setProfesion(profesion);
+           e.setTipo_planilla(tipo_planilla);
+           e.setSalario_base(salario_base);
+           e.setTotal(total);
+           e.setBonificacion(bonificacion);
+		 try{ 
+			 gestorPersistencia.makePersistent(e); 
 		 }finally {  
 			 gestorPersistencia.close();  
-		 } 
+		 }
+		 
 		 
 		return e.getId_empleado().getId();
 	}
@@ -111,17 +109,36 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			String segundo_nombre, String primer_apellido,
 			String segundo_apellido, int edad, String ocupacion, String parentesco)
 			throws IllegalArgumentException {
+		
+		 final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		 Long valor = 0L;
+		 try{
+			 final seg_empleado e = Persistencia.getObjectById(seg_empleado.class, id_empleado); 
+			 seg_familia f = new seg_familia();
+	      		f.setPrimer_nombre(primer_nombre);
+	      		f.setSegundo_nombre(segundo_nombre);
+	      		f.setPrimer_apellido(primer_apellido);
+	      		f.setSegundo_apellido(segundo_apellido);
+	      		f.setEdad(edad);
+	      		f.setOcupacion(ocupacion);
+	      		f.setParentesco(parentesco);	      		
+	      		e.getFamilia().add(f);
+			 	valor = f.getId_familia();
+			 }finally {  
+				 Persistencia.close();  
+			 }
+		return valor ;
+	}
 
-		   /* seg_familia f = new seg_familia();
-			    f.setPrimer_nombre(primer_nombre);
-			 	f.setSegundo_nombre(segundo_nombre);
-			 	f.setPrimer_apellido(primer_apellido);
-			 	f.setSegundo_apellido(segundo_apellido);
-			 	f.setEdad(2);
-			 	f.setOcupacion(ocupacion);
-			 	f.setParentesco("parentesco");
-			 	e.setFamilia(f);*/
-		return   0L;
+
+
+	@Override
+	public Long Insertar_Academico(Long id_empleado, String primer_nombre,
+			String segundo_nombre, String primer_apellido,
+			String segundo_apellido, int edad, String ocupacion,
+			String parentesco) throws IllegalArgumentException {
+		// TODO Auto-generated method stub
+		return 0L;
 	}
 	
 }

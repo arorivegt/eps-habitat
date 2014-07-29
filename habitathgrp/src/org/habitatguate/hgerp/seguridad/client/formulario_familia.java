@@ -136,7 +136,8 @@ public class formulario_familia  extends Composite  {
 				if(id_familia == 0) {
 					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
 							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
-							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), new AsyncCallback<Long>(){
+							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
+							new AsyncCallback<Long>(){
 	                            public void onFailure(Throwable caught) 
 	                            {
 	                                Window.alert("Error  al Guardar Datos"+caught);
@@ -150,6 +151,8 @@ public class formulario_familia  extends Composite  {
 	                            }
 
 	                     });
+				}else{
+					//actualizacion
 				}
 					
 			}

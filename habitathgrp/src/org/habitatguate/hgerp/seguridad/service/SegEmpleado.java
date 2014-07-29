@@ -15,7 +15,7 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_empleado implements Serializable {
+public class SegEmpleado implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -102,7 +102,7 @@ public class seg_empleado implements Serializable {
 	
 	
 
-	public seg_empleado() {
+	public SegEmpleado() {
 		super();
 	}
 
@@ -110,38 +110,38 @@ public class seg_empleado implements Serializable {
 
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_vacaciones> vacaciones;
+	private List <SegVacaciones> vacaciones;
 
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_familia> familia;
+	private List <SegFamilia> familia;
 
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_historial_academico> historial_academico;
+	private List <SegHistorialAcademico> historial_academico;
 
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_referencia_laboral> referencia_laboral;
+	private List <SegReferenciaLaboral> referencia_laboral;
 
 	//@Persistent(mappedBy = "empleado")
-	private List <seg_entrevista> entrevista;
-
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
-	private List <seg_puesto> puestos;
+	private List <SegEntrevista> entrevista;
 
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_idioma> idiomas;
+	private List <SegPuesto> puestos;
+
+	//@Persistent(mappedBy = "empleado")
+	@Persistent
+	private List <SegIdioma> idiomas;
 	
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_referencia_personal> referencia_personal;
+	private List <SegReferenciaPersonal> referencia_personal;
 	
 	//@Persistent(mappedBy = "empleado")
 	@Persistent
-	private List <seg_test> test;
+	private List <SegTest> test;
 	
 	//datos del patrono
 	@Persistent
@@ -364,78 +364,78 @@ public class seg_empleado implements Serializable {
 		this.pais = pais;
 	}
 
-	public List<seg_vacaciones> getVacaciones() {
+	public List<SegVacaciones> getVacaciones() {
 		return vacaciones;
 	}
 
-	public void setVacaciones(List<seg_vacaciones> vacaciones) {
+	public void setVacaciones(List<SegVacaciones> vacaciones) {
 		this.vacaciones = vacaciones;
 	}
 
-	public List<seg_familia> getFamilia() {
+	public List<SegFamilia> getFamilia() {
 		return familia;
 	}
 
-	public void setFamilia(List<seg_familia> familia) {
+	public void setFamilia(List<SegFamilia> familia) {
 		this.familia = familia;
 	}
 
-	public List<seg_historial_academico> getHistorial_academico() {
+	public List<SegHistorialAcademico> getHistorial_academico() {
 		return historial_academico;
 	}
 
 	public void setHistorial_academico(
-			List<seg_historial_academico> historial_academico) {
+			List<SegHistorialAcademico> historial_academico) {
 		this.historial_academico = historial_academico;
 	}
 
-	public List<seg_referencia_laboral> getReferencia_laboral() {
+	public List<SegReferenciaLaboral> getReferencia_laboral() {
 		return referencia_laboral;
 	}
 
 	public void setReferencia_laboral(
-			List<seg_referencia_laboral> referencia_laboral) {
+			List<SegReferenciaLaboral> referencia_laboral) {
 		this.referencia_laboral = referencia_laboral;
 	}
 
-	public List<seg_entrevista> getEntrevista() {
+	public List<SegEntrevista> getEntrevista() {
 		return entrevista;
 	}
 
-	public void setEntrevista(List<seg_entrevista> entrevista) {
+	public void setEntrevista(List<SegEntrevista> entrevista) {
 		this.entrevista = entrevista;
 	}
 
-	public List<seg_puesto> getPuestos() {
+	public List<SegPuesto> getPuestos() {
 		return puestos;
 	}
 
-	public void setPuestos(List<seg_puesto> puestos) {
+	public void setPuestos(List<SegPuesto> puestos) {
 		this.puestos = puestos;
 	}
 
-	public List<seg_idioma> getIdiomas() {
+	public List<SegIdioma> getIdiomas() {
 		return idiomas;
 	}
 
-	public void setIdiomas(List<seg_idioma> idiomas) {
+	public void setIdiomas(List<SegIdioma> idiomas) {
 		this.idiomas = idiomas;
 	}
 
-	public List<seg_referencia_personal> getReferencia_personal() {
+	public List<SegReferenciaPersonal> getReferencia_personal() {
 		return referencia_personal;
 	}
 
 	public void setReferencia_personal(
-			List<seg_referencia_personal> referencia_personal) {
+			List<SegReferenciaPersonal> referencia_personal) {
 		this.referencia_personal = referencia_personal;
 	}
 
-	public List<seg_test> getTest() {
+	public List<SegTest> getTest() {
 		return test;
 	}
 
-	public void setTest(List<seg_test> test) {
+	public void setTest(List<SegTest> test) {
 		this.test = test;
 	}
 

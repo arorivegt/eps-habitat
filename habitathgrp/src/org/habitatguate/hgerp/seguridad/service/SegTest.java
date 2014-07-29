@@ -12,7 +12,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_test implements Serializable {
+public class SegTest implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -58,9 +58,9 @@ public class seg_test implements Serializable {
     private String tipo_test;
 
 	@Persistent
-    private seg_empleado empleado;
+    private SegEmpleado empleado;
 
-	public seg_test() {
+	public SegTest() {
 		super();
 	}
 
@@ -176,11 +176,11 @@ public class seg_test implements Serializable {
 		this.tipo_test = tipo_test;
 	}
 
-	public seg_empleado getEmpleado() {
+	public SegEmpleado getEmpleado() {
 		return empleado;
 	}
 
-	public void setEmpleado(seg_empleado empleado) {
+	public void setEmpleado(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}	
 	

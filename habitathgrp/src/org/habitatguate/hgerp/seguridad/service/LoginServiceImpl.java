@@ -8,6 +8,7 @@ import org.habitatguate.hgerp.util.PMF;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.annotations.Persistent;
 
 
 @SuppressWarnings("serial")
@@ -17,7 +18,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && password!=null){
-					seg_usuario e = new seg_usuario("Alfred", "Smith");
+					SegUsuario e = new SegUsuario("Alfred", "Smith");
 			try {  
 			    gestorPersistencia.makePersistent(e);  
 			} finally {  
@@ -58,7 +59,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		
-		seg_empleado e = new seg_empleado();
+		SegEmpleado e = new SegEmpleado();
            e.setAfiliacion_igss(intafiliacion_igss);
            e.setEstado_civil(estado_civil);
            e.setSexo(sexo);
@@ -113,8 +114,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		 final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		 Long valor = 0L;
 		 try{
-			 final seg_empleado e = Persistencia.getObjectById(seg_empleado.class, id_empleado); 
-			 seg_familia f = new seg_familia();
+			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegFamilia f = new SegFamilia();
 	      		f.setPrimer_nombre(primer_nombre);
 	      		f.setSegundo_nombre(segundo_nombre);
 	      		f.setPrimer_apellido(primer_apellido);
@@ -133,12 +134,25 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 
 	@Override
-	public Long Insertar_Academico(Long id_empleado, String primer_nombre,
-			String segundo_nombre, String primer_apellido,
-			String segundo_apellido, int edad, String ocupacion,
-			String parentesco) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
-		return 0L;
+	public Long Insertar_Academico(Long id_empleado, Date fecha1, Date fecha2,
+			String nivel_academico, String establecimiento, String titulo) throws IllegalArgumentException {
+		
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		 Long valor = 0L;
+		 try{
+			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegHistorialAcademico a = new SegHistorialAcademico();
+			 	a.setEstablecimiento(establecimiento);
+			 	a.setFecha1(fecha1);
+			 	a.setFecha2(fecha2);
+			 	a.setNivel_academico(nivel_academico);
+			 	a.setTitulo(titulo);
+	      	 	e.getHistorial_academico().add(a);
+			 	valor = a.getId_historial_academico();
+			 }finally {  
+				 Persistencia.close();  
+			 }
+		return valor ;
 	}
 	
 }

@@ -12,7 +12,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_historial implements Serializable {
+public class SegHistorial implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -28,9 +28,9 @@ public class seg_historial implements Serializable {
     private int tipo_historial;
 	
 	@Persistent
-    private seg_empleado empleados;
+    private SegEmpleado empleados;
 
-	public seg_historial() {
+	public SegHistorial() {
 		super();
 	}
 
@@ -66,11 +66,11 @@ public class seg_historial implements Serializable {
 		this.tipo_historial = tipo_historial;
 	}
 
-	public seg_empleado getEmpleados() {
+	public SegEmpleado getEmpleados() {
 		return empleados;
 	}
 
-	public void setEmpleados(seg_empleado empleados) {
+	public void setEmpleados(SegEmpleado empleados) {
 		this.empleados = empleados;
 	}
 	

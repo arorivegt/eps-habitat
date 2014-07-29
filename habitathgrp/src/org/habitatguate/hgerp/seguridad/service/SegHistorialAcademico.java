@@ -10,13 +10,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_historial_academico implements Serializable {
+public class SegHistorialAcademico implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_historial_academico;
+    private Key id_historial_academico;
 	
 	@Persistent
     private Date fecha1;
@@ -34,18 +36,14 @@ public class seg_historial_academico implements Serializable {
     private String titulo;
 	
 	@Persistent
-    private seg_empleado empleado;
+    private SegEmpleado empleado;
 
-	public seg_historial_academico() {
+	public SegHistorialAcademico() {
 		super();
 	}
 
 	public Long getId_historial_academico() {
-		return id_historial_academico;
-	}
-
-	public void setId_historial_academico(Long id_historial_academico) {
-		this.id_historial_academico = id_historial_academico;
+		return id_historial_academico.getId();
 	}
 
 	public Date getFecha1() {
@@ -88,11 +86,11 @@ public class seg_historial_academico implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public seg_empleado getEmpleados() {
+	public SegEmpleado getEmpleados() {
 		return empleado;
 	}
 
-	public void setEmpleados(seg_empleado empleado) {
+	public void setEmpleados(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}
 

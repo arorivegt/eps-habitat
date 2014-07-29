@@ -2,7 +2,6 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
 
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -28,8 +27,7 @@ public interface LoginService extends RemoteService {
 	Long Insertar_Familiar(Long id_empleado,String primer_nombre, String segundo_nombre,
 			String primer_apellido, String segundo_apellido, int edad, String ocupacion,
 			String parentesco)throws IllegalArgumentException;
-	Long Insertar_Academico(Long id_empleado,String primer_nombre, String segundo_nombre,
-			String primer_apellido, String segundo_apellido, int edad, String ocupacion,
-			String parentesco)throws IllegalArgumentException;
+	Long Insertar_Academico(Long id_empleado, Date fecha1, Date fecha2,
+			String nivel_academico, String establecimiento, String titulo)throws IllegalArgumentException;
 }
 

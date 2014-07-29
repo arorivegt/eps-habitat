@@ -17,7 +17,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			System.out.println("GUARDANDO USUARIO");
 			
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			seg_usuario usuario=new seg_usuario("Prueba Nelson","Password Nelson");
+			SegUsuario usuario=new SegUsuario("Prueba Nelson","Password Nelson");
 			try{
 				gestorPersistencia.makePersistent(usuario);
 				System.out.println("USUARIO GUARDADO CORRECTAMENTE");

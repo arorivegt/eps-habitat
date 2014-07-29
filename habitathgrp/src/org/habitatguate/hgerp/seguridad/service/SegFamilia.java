@@ -13,7 +13,7 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_familia implements Serializable {
+public class SegFamilia implements Serializable {
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -41,9 +41,9 @@ public class seg_familia implements Serializable {
 	private String parentesco;
 	
 	@Persistent
-    private seg_empleado empleado;
+    private SegEmpleado empleado;
 
-	public seg_familia() {
+	public SegFamilia() {
 		super();
 	}
 
@@ -107,11 +107,11 @@ public class seg_familia implements Serializable {
 		this.parentesco = parentesco;
 	}
 
-	public seg_empleado getEmpleado() {
+	public SegEmpleado getEmpleado() {
 		return empleado;
 	}
 
-	public void setEmpleado(seg_empleado empleado) {
+	public void setEmpleado(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}
 

@@ -1,10 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-import javax.jdo.PersistenceManager;
-
-import org.habitatguate.hgerp.seguridad.service.seg_usuario;
-import org.habitatguate.hgerp.util.PMF;
-
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;

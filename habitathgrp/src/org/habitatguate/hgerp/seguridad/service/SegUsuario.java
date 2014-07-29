@@ -9,7 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_usuario{
+public class SegUsuario{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private Long id;
@@ -20,7 +20,7 @@ public class seg_usuario{
 	
 
 	
-	public seg_usuario(String user2, String password2) {
+	public SegUsuario(String user2, String password2) {
 		super();
 		this.user=user2;
 		this.password=password2;

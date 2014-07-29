@@ -12,7 +12,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_referencia_laboral implements Serializable {
+public class SegReferenciaLaboral implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -49,9 +49,9 @@ public class seg_referencia_laboral implements Serializable {
     private String recomiendo;
 	
 	@Persistent
-    private seg_empleado empleado;
+    private SegEmpleado empleado;
 
-	public seg_referencia_laboral() {
+	public SegReferenciaLaboral() {
 		super();
 	}
 
@@ -143,11 +143,11 @@ public class seg_referencia_laboral implements Serializable {
 		this.recomiendo = recomiendo;
 	}
 
-	public seg_empleado getEmpleado() {
+	public SegEmpleado getEmpleado() {
 		return empleado;
 	}
 
-	public void setEmpleado(seg_empleado empleado) {
+	public void setEmpleado(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}    
     

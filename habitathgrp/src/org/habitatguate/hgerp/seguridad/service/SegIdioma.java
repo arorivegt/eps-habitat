@@ -11,7 +11,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seg_idioma implements Serializable {
+public class SegIdioma implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -24,9 +24,9 @@ public class seg_idioma implements Serializable {
     private String idioma;   
 	
 	@Persistent
-    private seg_empleado empleado;
+    private SegEmpleado empleado;
 
-	public seg_idioma() {
+	public SegIdioma() {
 		super();
 	}
 
@@ -54,11 +54,11 @@ public class seg_idioma implements Serializable {
 		this.idioma = idioma;
 	}
 
-	public seg_empleado getEmpleados() {
+	public SegEmpleado getEmpleados() {
 		return empleado;
 	}
 
-	public void setEmpleados(seg_empleado empleado) {
+	public void setEmpleados(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}
 	

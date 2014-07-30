@@ -9,7 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class seqParametro {
+public class segParametro {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private Long idParametro;
@@ -23,7 +23,7 @@ public class seqParametro {
 	private int codDos;
 	
 	
-	public seqParametro(String nomParametro, int codContable, int codUno, int codDos){
+	public segParametro(String nomParametro, int codContable, int codUno, int codDos){
 		super();
 		this.nomParametro = nomParametro;
 		this.codContable = codContable;

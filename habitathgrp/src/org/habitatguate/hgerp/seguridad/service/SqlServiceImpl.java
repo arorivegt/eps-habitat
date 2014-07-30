@@ -17,7 +17,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			System.out.println("GUARDANDO PARAMETRO");
 			
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			seqParametro nuevo = new seqParametro("Primero", 1010101, 1, 2);
+			segParametro nuevo = new segParametro("Primero", 1010101, 1, 2);
 			try{
 				gestorPersistencia.makePersistent(nuevo);
 				System.out.println("PARAMETRO GUARDADO CORRECTAMENTE");

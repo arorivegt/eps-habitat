@@ -14,28 +14,15 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 	public String[] Insertar(String user,String password) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(user!=null && password!=null){
-			System.out.println("GUARDANDO USUARIO");
+			System.out.println("GUARDANDO PARAMETRO");
 			
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			SegUsuario usuario=new SegUsuario("Prueba Nelson","Password Nelson");
+			seqParametro nuevo = new seqParametro("Primero", 1010101, 1, 2);
 			try{
-				gestorPersistencia.makePersistent(usuario);
-				System.out.println("USUARIO GUARDADO CORRECTAMENTE");
+				gestorPersistencia.makePersistent(nuevo);
+				System.out.println("PARAMETRO GUARDADO CORRECTAMENTE");
 			}finally{
 				gestorPersistencia.close();
-			}
-			
-			
-			
-			if(user.compareTo("developer")==0 & password.compareTo("dev")==0){
-				String[] menu=new String[6];
-				menu[0]="Planificacion";
-				menu[1]="RRHH";
-				menu[2]="Soluciones";
-				menu[3]="Finanzas";
-				menu[4]="Configuracion";
-				menu[5]="Seguridad";
-				return menu;
 			}
 		}
 		

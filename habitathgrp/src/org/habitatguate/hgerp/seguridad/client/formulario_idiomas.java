@@ -1,18 +1,30 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.TextBox;
 
 public class formulario_idiomas extends Composite {
 
 	private Idioma a;
-	private int id_Idioma_empleadp =0;
-	public formulario_idiomas(Idioma a) {
+	private Long id_idioma = 0L;
+	private Empleados empleado;
+	private boolean bandera = true;
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	public formulario_idiomas(Idioma a,Empleados e) {
+
+		this.empleado = e;
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -29,12 +41,6 @@ public class formulario_idiomas extends Composite {
 		absolutePanel.add(lblTitulodiploma, 160, 10);
 		lblTitulodiploma.setSize("192px", "13px");
 		
-		Button btnActualizar = new Button("Send");
-		btnActualizar.setText("Actualizar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 280, 28);
-		btnActualizar.setSize("157px", "20px");
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -45,28 +51,70 @@ public class formulario_idiomas extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
 		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 449, 28);
+		absolutePanel.add(btnEliminar, 527, 29);
 		btnEliminar.setSize("157px", "20px");
 		
-		ListBox listIdioma = new ListBox();
-		listIdioma.addItem("Ingles");
-		listIdioma.addItem("Aleman");
-		listIdioma.addItem("Frances");
-		listIdioma.addItem("otro");
-		listIdioma.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listIdioma, 10, 29);
-		listIdioma.setSize("137px", "19px");
+		final ListBox listNivel = new ListBox();
+		listNivel.addItem("Avanzado");
+		listNivel.addItem("Intermedio");
+		listNivel.addItem("Principiante");
+		listNivel.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listNivel, 188, 29);
+		listNivel.setSize("140px", "19px");
 		
-		ListBox listNIvel = new ListBox();
-		listNIvel.addItem("Avanzado");
-		listNIvel.addItem("Intermedio");
-		listNIvel.addItem("Principiante");
-		listNIvel.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listNIvel, 160, 29);
-		listNIvel.setSize("87px", "19px");
+		final TextBox txtIdioma = new TextBox();
+		txtIdioma.setStyleName("gwt-TextBox2");
+		txtIdioma.setMaxLength(100);
+		absolutePanel.add(txtIdioma, 10, 29);
+		txtIdioma.setSize("137px", "11px");
+		
+
+		Button btnActualizar = new Button("Send");
+		btnActualizar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				if(bandera) {
+					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getItemText(listNivel.getSelectedIndex()), 
+							txtIdioma.getText(), new AsyncCallback<Long>(){
+                        public void onFailure(Throwable caught) 
+                        {
+                            Window.alert("Error  al Guardar Datos"+caught);
+                        }
+
+						@Override
+                        public void onSuccess(Long result)
+                        {
+							id_idioma = result;
+							bandera = false;
+                        	Window.alert("Datos Guardados exitosamente!!! "+id_idioma);
+                        }
+						});
+				}else{
+					loginService.Actualizar_Idioma(empleado.id_empleado,id_idioma, listNivel.getItemText(listNivel.getSelectedIndex()), 
+							txtIdioma.getText(), new AsyncCallback<Long>(){
+                        public void onFailure(Throwable caught) 
+                        {
+                            Window.alert("Error  al Actualizar Datos"+caught);
+                        }
+
+						@Override
+                        public void onSuccess(Long result)
+                        {
+							bandera = false;
+                        	Window.alert("Datos Actualizar exitosamente!!! "+id_idioma);
+                        }
+						});
+				}
+			}
+		});
+		btnActualizar.setText("Guardar");
+		btnActualizar.setStylePrimaryName("gwt-TextBox2");
+		btnActualizar.setStyleName("gwt-TextBox2");
+		absolutePanel.add(btnActualizar, 358, 29);
+		btnActualizar.setSize("157px", "20px");
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this);
+        a.EliminarFormulario(this,empleado.id_empleado,id_idioma);
     }
 
 }

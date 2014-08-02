@@ -10,13 +10,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegVacaciones implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_vacaciones;
+    private Key id_vacaciones;
 	
 	@Persistent
     private Date fecha1;	
@@ -29,20 +31,14 @@ public class SegVacaciones implements Serializable {
 	
 	@Persistent
     private SegEmpleado empleado;
-
+	
 	public SegVacaciones() {
 		super();
 	}
     
 	public Long getId_vacaciones() {
-		return id_vacaciones;
+		return id_vacaciones.getId();
 	}
-
-
-	public void setId_vacaciones(Long id_vacaciones) {
-		this.id_vacaciones = id_vacaciones;
-	}
-
 
 	public Date getFecha1() {
 		return fecha1;

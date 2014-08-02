@@ -1,19 +1,28 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
 public class referencia_laboral extends Composite  {
 
 	 private FlexTable flextable;
-		private VerticalPanel panel = new VerticalPanel();
+	 private Empleados empleado;
+     private VerticalPanel panel = new VerticalPanel();
+     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 		
-	    public referencia_laboral() {
+	    public referencia_laboral(Empleados e) {
 
+			this.empleado = e;
 	        initWidget(panel);
 	        panel.setSize("761px", "79px");
 	        flextable = new FlexTable();
@@ -32,9 +41,23 @@ public class referencia_laboral extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_laboral(this));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_laboral(this,empleado));
 	    }
-	    public void EliminarFormulario(formulario_referencia_laboral fa){
-	        flextable.remove(fa);
+	    public void EliminarFormulario(final formulario_referencia_laboral fa, final Long id_empledo, final Long id){
+
+			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                    Window.alert("Error al ELiminar"+caught);
+                }
+
+				@Override
+                public void onSuccess(Long result)
+                {
+                	Window.alert("Eliminado exitosamente!!! "+id);
+        	        flextable.remove(fa);
+                }
+
+         });
 	    }
 }

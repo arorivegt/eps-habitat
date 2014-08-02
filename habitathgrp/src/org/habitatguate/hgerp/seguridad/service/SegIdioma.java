@@ -9,13 +9,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegIdioma implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_idioma;
+    private Key id_idioma;
 	
 	@Persistent
     private String nivel;
@@ -31,11 +33,7 @@ public class SegIdioma implements Serializable {
 	}
 
 	public Long getId_idioma() {
-		return id_idioma;
-	}
-
-	public void setId_idioma(Long id_idioma) {
-		this.id_idioma = id_idioma;
+		return id_idioma.getId();
 	}
 
 	public String getNivel() {

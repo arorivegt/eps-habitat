@@ -95,12 +95,13 @@ public class SegEmpleado implements Serializable {
 
 	//con IVS, sin IVS
 	@Persistent    
-    private String tipo_empleado;
+    private String ConIVS;
+	
+	@Persistent    
+    private String SinIVS;
 	
 	@Persistent    
     private String pais;
-	
-	
 
 	public SegEmpleado() {
 		super();
@@ -108,39 +109,34 @@ public class SegEmpleado implements Serializable {
 
 	//aqui vienen todas los objetos con los que se relaciona
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegVacaciones> vacaciones;
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegFamilia> familia;
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegHistorialAcademico> historial_academico;
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegReferenciaLaboral> referencia_laboral;
 
-	//@Persistent(mappedBy = "empleado")
+	@Persistent(mappedBy = "empleado")
 	private List <SegEntrevista> entrevista;
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegPuesto> puestos;
 
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegIdioma> idiomas;
 	
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
 	private List <SegReferenciaPersonal> referencia_personal;
 	
-	//@Persistent(mappedBy = "empleado")
-	@Persistent
+	@Persistent(mappedBy = "empleado")
+	private List <SegHistorial> Historial;
+
+	@Persistent(mappedBy = "empleado")
 	private List <SegTest> test;
 	
 	//datos del patrono
@@ -348,14 +344,6 @@ public class SegEmpleado implements Serializable {
 		this.no_licencia = no_licencia;
 	}
 
-	public String getTipo_empleado() {
-		return tipo_empleado;
-	}
-
-	public void setTipo_empleado(String tipo_empleado) {
-		this.tipo_empleado = tipo_empleado;
-	}
-
 	public String getPais() {
 		return pais;
 	}
@@ -533,5 +521,30 @@ public class SegEmpleado implements Serializable {
 
 	public void setDepto_municipio_residencia(String depto_municipio_residencia) {
 		this.depto_municipio_residencia = depto_municipio_residencia;
+	}
+
+	public List<SegHistorial> getHistorial() {
+		return Historial;
+	}
+
+	public void setHistorial(List<SegHistorial> historial) {
+		Historial = historial;
+	}
+	
+
+	public String getConIVS() {
+		return ConIVS;
+	}
+
+	public void setConIVS(String conIVS) {
+		ConIVS = conIVS;
+	}
+
+	public String getSinIVS() {
+		return SinIVS;
+	}
+
+	public void setSinIVS(String sinIVS) {
+		SinIVS = sinIVS;
 	}
 }

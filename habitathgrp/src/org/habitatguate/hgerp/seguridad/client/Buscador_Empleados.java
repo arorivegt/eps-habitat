@@ -1,38 +1,29 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Grid;
 
 public class Buscador_Empleados extends Composite  {
-	
-	private DockLayoutPanel dockLayoutPanel = new DockLayoutPanel(Unit.EM);
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 
     
 	public Buscador_Empleados() {
-
-		initWidget(dockLayoutPanel);
-		dockLayoutPanel.setSize("1500px", "800px");
-
+		
+		final Grid grid = new Grid(2, 1);
+		initWidget(grid);
+		grid.setWidth("1178px");
+		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
+		grid.setWidget(0, 0, absolutePanel);
+		absolutePanel.setSize("1130px", "20px");
 		absolutePanel.setStyleName("gwt-Label-new");
-		dockLayoutPanel.addNorth(absolutePanel, 6.2);
-		absolutePanel.setSize("1000px", "20px");
 		
 		Label label = new Label("Primer Apellido");
 		label.setStyleName("label");
@@ -79,23 +70,17 @@ public class Buscador_Empleados extends Composite  {
 		label_3.setStyleName("label");
 		absolutePanel.add(label_3, 500, 15);
 		label_3.setSize("157px", "13px");
-
-        
+		
 		Image image = new Image("images/ico-lupa.png");
-		image.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-
-				Window.alert("buscador");
-			}
-		});
 		absolutePanel.add(image, 639, 10);
 		image.setSize("103px", "55px");
 		
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-		        Empleados e = new Empleados();
-				dockLayoutPanel.add(e);
+				grid.clearCell(1, 0);
+				Empleados e = new Empleados();
+				grid.setWidget(1, 0,e);
 		        e.setSize("1187px", "648px");
 			}
 		});
@@ -104,6 +89,10 @@ public class Buscador_Empleados extends Composite  {
 		button.setStyleName("gwt-TextBox2");
 		absolutePanel.add(button, 730, 29);
 		button.setSize("157px", "20px");
+		
+		SimplePanel simplePanel = new SimplePanel();
+		grid.setWidget(1, 0, simplePanel);
+		simplePanel.setSize("1184px", "716px");
 		
 		// TODO Auto-generated constructor stub
 	}

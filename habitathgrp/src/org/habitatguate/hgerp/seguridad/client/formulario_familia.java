@@ -13,11 +13,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 
 public class formulario_familia  extends Composite  {
 
 	private familiares a;
+	private boolean bandera = true;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private Long id_familia = 0L;
 	private Empleados empleado;
@@ -122,6 +125,22 @@ public class formulario_familia  extends Composite  {
 		txtParentesco.setText(pariente);
 
 		final TextBox txtEdad = new TextBox();
+		txtEdad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
+				else if(txtEdad.getText().equals(null)) {txtEdad.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtEdad.getText());
+					}catch(Exception e){
+						Window.alert("Edad no valido");
+						txtEdad.setText("0");
+					}
+				}
+
+				
+			}
+		});
 		txtEdad.setText("0");
 		txtEdad.setStylePrimaryName("gwt-TextBox2");
 		txtEdad.setStyleName("gwt-TextBox2");
@@ -133,7 +152,7 @@ public class formulario_familia  extends Composite  {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				if(id_familia == 0) {
+				if(bandera) {
 					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
 							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
 							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
@@ -147,12 +166,29 @@ public class formulario_familia  extends Composite  {
 	                            public void onSuccess(Long result)
 	                            {
 									id_familia = result;
+									bandera = false;
 	                            	Window.alert("Datos Guardados exitosamente!!! "+id_familia);
 	                            }
 
 	                     });
 				}else{
-					//actualizacion
+					loginService.Actualizar_Familiar(empleado.id_empleado,id_familia, txtPrimer_nombre.getText(), 
+							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
+							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
+							new AsyncCallback<Long>(){
+	                            public void onFailure(Throwable caught) 
+	                            {
+	                                Window.alert("Error  al Actualizar Datos"+caught);
+	                            }
+
+								@Override
+	                            public void onSuccess(Long result)
+	                            {
+									bandera = false;
+	                            	Window.alert("Datos Actualizados exitosamente!!! "+id_familia);
+	                            }
+
+	                     });
 				}
 					
 			}
@@ -165,7 +201,7 @@ public class formulario_familia  extends Composite  {
 		
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this);
+        a.EliminarFormulario(this,empleado.id_empleado, id_familia);
     }
 
 }

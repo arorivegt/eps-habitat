@@ -1,6 +1,12 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
@@ -8,10 +14,20 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formulario_prueba_periodo_dos extends Composite {
 
-	public formulario_prueba_periodo_dos() {
+	 	private Empleados empleado;
+		private boolean bandera = true;
+	    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+		private Long id_prueba = 0L;
+		
+	public formulario_prueba_periodo_dos(Empleados e) {
+
+		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -22,7 +38,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblNivelAcademico, 115, 10);
 		lblNivelAcademico.setSize("456px", "13px");
 		
-		ListBox listPregunta1 = new ListBox();
+		final ListBox listPregunta1 = new ListBox();
 		listPregunta1.addItem("0");
 		listPregunta1.addItem("1");
 		listPregunta1.addItem("2");
@@ -68,7 +84,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblLaInformacinQue, 37, 327);
 		lblLaInformacinQue.setSize("511px", "13px");
 		
-		ListBox listPregunta2 = new ListBox();
+		final ListBox listPregunta2 = new ListBox();
 		listPregunta2.addItem("0");
 		listPregunta2.addItem("1");
 		listPregunta2.addItem("2");
@@ -89,7 +105,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblTieneClarosLos, 37, 352);
 		lblTieneClarosLos.setSize("524px", "13px");
 		
-		ListBox listPregunta3 = new ListBox();
+		final ListBox listPregunta3 = new ListBox();
 		listPregunta3.addItem("0");
 		listPregunta3.addItem("1");
 		listPregunta3.addItem("2");
@@ -110,7 +126,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblLosResultadosQue, 37, 377);
 		lblLosResultadosQue.setSize("293px", "13px");
 		
-		ListBox listPregunta4 = new ListBox();
+		final ListBox listPregunta4 = new ListBox();
 		listPregunta4.addItem("0");
 		listPregunta4.addItem("1");
 		listPregunta4.addItem("2");
@@ -131,7 +147,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblProporcionaUnClima, 37, 405);
 		lblProporcionaUnClima.setSize("511px", "13px");
 		
-		ListBox listPregunta5 = new ListBox();
+		final ListBox listPregunta5 = new ListBox();
 		listPregunta5.addItem("0");
 		listPregunta5.addItem("1");
 		listPregunta5.addItem("2");
@@ -152,7 +168,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblSuDisposicinDe, 37, 430);
 		lblSuDisposicinDe.setSize("511px", "13px");
 		
-		ListBox listPregunta6 = new ListBox();
+		final ListBox listPregunta6 = new ListBox();
 		listPregunta6.addItem("0");
 		listPregunta6.addItem("1");
 		listPregunta6.addItem("2");
@@ -188,7 +204,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblTieneClarasSus, 37, 455);
 		lblTieneClarasSus.setSize("511px", "13px");
 		
-		ListBox listPregunta10 = new ListBox();
+		final ListBox listPregunta10 = new ListBox();
 		listPregunta10.addItem("0");
 		listPregunta10.addItem("1");
 		listPregunta10.addItem("2");
@@ -204,7 +220,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(listPregunta10, 567, 527);
 		listPregunta10.setSize("137px", "19px");
 		
-		ListBox listPregunta9 = new ListBox();
+		final ListBox listPregunta9 = new ListBox();
 		listPregunta9.addItem("0");
 		listPregunta9.addItem("1");
 		listPregunta9.addItem("2");
@@ -220,7 +236,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(listPregunta9, 567, 499);
 		listPregunta9.setSize("137px", "19px");
 		
-		ListBox listPregunta8 = new ListBox();
+		final ListBox listPregunta8 = new ListBox();
 		listPregunta8.addItem("0");
 		listPregunta8.addItem("1");
 		listPregunta8.addItem("2");
@@ -236,7 +252,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(listPregunta8, 567, 474);
 		listPregunta8.setSize("137px", "19px");
 		
-		ListBox listPregunta7 = new ListBox();
+		final ListBox listPregunta7 = new ListBox();
 		listPregunta7.addItem("0");
 		listPregunta7.addItem("1");
 		listPregunta7.addItem("2");
@@ -257,11 +273,11 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblPunteoTotal, 473, 552);
 		lblPunteoTotal.setSize("75px", "13px");
 		
-		TextBox textBox_1 = new TextBox();
-		textBox_1.setMaxLength(500);
-		textBox_1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_1, 93, 611);
-		textBox_1.setSize("117px", "11px");
+		final TextBox txtEvaluador = new TextBox();
+		txtEvaluador.setMaxLength(500);
+		txtEvaluador.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEvaluador, 93, 611);
+		txtEvaluador.setSize("117px", "11px");
 		
 		Label lblEvaluador = new Label("Evaluador");
 		lblEvaluador.setStyleName("label");
@@ -273,7 +289,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblFecha, 283, 611);
 		lblFecha.setSize("75px", "13px");
 		
-		TextBox textBox_3 = new TextBox();
+		final TextBox textBox_3 = new TextBox();
 		textBox_3.setMaxLength(200);
 		textBox_3.setStyleName("gwt-TextBox2");
 		absolutePanel.add(textBox_3, 567, 611);
@@ -284,17 +300,72 @@ public class formulario_prueba_periodo_dos extends Composite {
 		absolutePanel.add(lblAprobo, 521, 611);
 		lblAprobo.setSize("75px", "13px");
 		
-		DateBox dateFecha = new DateBox();
+		final DateBox dateFecha = new DateBox();
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 323, 611);
 		dateFecha.setSize("117px", "11px");
 		
-		DoubleBox txtPunteoTotal = new DoubleBox();
+		final DoubleBox txtPunteoTotal = new DoubleBox();
 		txtPunteoTotal.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPunteoTotal, 567, 552);
 		txtPunteoTotal.setSize("117px", "11px");
+		
+		Button btnGuardar = new Button("Send");
+		btnGuardar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				if(bandera) {
+					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
+							Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
+							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
+							Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
+							Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
+							txtEvaluador.getText(), "2", new AsyncCallback<Long>(){
+                        public void onFailure(Throwable caught) 
+                        {
+                            Window.alert("Error  al Guardar Datos"+caught);
+                        }
+
+						@Override
+                        public void onSuccess(Long result)
+                        {
+							id_prueba= result;
+							bandera = false;
+                        	Window.alert("Datos Guardados exitosamente!!! "+id_prueba);
+                        }
+
+                 });
+		}else{
+			loginService.Actualizar_Test(empleado.id_empleado,id_prueba, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+					Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
+					Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
+					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
+					Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
+					Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
+					txtEvaluador.getText(), "2", new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                    Window.alert("Error  al Actualizar Datos"+caught);
+                }
+
+				@Override
+                public void onSuccess(Long result)
+                {
+					bandera = false;
+                	Window.alert("Datos Actualizados exitosamente!!! "+id_prueba);
+                }
+
+         });
+		}
+			}
+		});
+		btnGuardar.setText("Guardar");
+		btnGuardar.setStylePrimaryName("gwt-TextBox2");
+		btnGuardar.setStyleName("gwt-TextBox2");
+		absolutePanel.add(btnGuardar, 283, 734);
+		btnGuardar.setSize("198px", "32px");
 	}
 
 }

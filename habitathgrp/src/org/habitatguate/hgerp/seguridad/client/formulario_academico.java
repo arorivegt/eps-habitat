@@ -20,10 +20,10 @@ import com.google.gwt.user.client.ui.TextBox;
 public class formulario_academico extends Composite {
 	
 	private academico a;
+	private boolean bandera = true;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private Long id_historial_academico = 0L;
 	private Empleados empleado;
-	
 	public formulario_academico(academico a,Empleados e) {
 
 		this.empleado = e;
@@ -51,7 +51,7 @@ public class formulario_academico extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+					EliminarFormulario();
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -61,13 +61,14 @@ public class formulario_academico extends Composite {
 		btnEliminar.setSize("157px", "20px");
 		
 		final ListBox listNIvel_Academico = new ListBox();
-		listNIvel_Academico.addItem("primaria");
-		listNIvel_Academico.addItem("basicos");
-		listNIvel_Academico.addItem("diversificado");
-		listNIvel_Academico.addItem("universidad");
-		listNIvel_Academico.addItem("maestria");
-		listNIvel_Academico.addItem("Diploma");
-		listNIvel_Academico.addItem("otro");
+		listNIvel_Academico.addItem("Primaria");
+		listNIvel_Academico.addItem("Basicos");
+		listNIvel_Academico.addItem("Diversificado");
+		listNIvel_Academico.addItem("Universidad");
+		listNIvel_Academico.addItem("Maestria");
+		listNIvel_Academico.addItem("Diplomado");
+		listNIvel_Academico.addItem("Titulo");
+		listNIvel_Academico.addItem("Otro");
 		listNIvel_Academico.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listNIvel_Academico, 10, 29);
 		listNIvel_Academico.setSize("157px", "20px");
@@ -119,7 +120,7 @@ public class formulario_academico extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-				if(id_historial_academico  == 0) {
+				if(bandera) {
 					loginService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
 							listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
 							txtTitulo.getText(), new AsyncCallback<Long>(){
@@ -132,12 +133,28 @@ public class formulario_academico extends Composite {
                         public void onSuccess(Long result)
                         {
 							id_historial_academico = result;
+							bandera = false;
                         	Window.alert("Datos Guardados exitosamente!!! "+id_historial_academico);
                         }
 
                  });
 		}else{
-			//actualizacion
+			loginService.Actualizar_Academico(empleado.id_empleado,id_historial_academico, dateInicio.getValue(), dateFinal.getValue(), 
+					listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
+					txtTitulo.getText(), new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                    Window.alert("Error al Actualizar Datos"+caught);
+                }
+
+				@Override
+                public void onSuccess(Long result)
+                {
+					bandera = false;
+                	Window.alert("Datos Actualizados exitosamente!!! "+id_historial_academico);
+                }
+
+         });
 		}
 				
 			}
@@ -150,6 +167,6 @@ public class formulario_academico extends Composite {
 		
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this);
+	        a.EliminarFormulario(this,empleado.id_empleado,id_historial_academico);
     }
 }

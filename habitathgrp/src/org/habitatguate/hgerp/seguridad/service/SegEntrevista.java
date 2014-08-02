@@ -10,13 +10,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegEntrevista implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_entrevista;
+    private Key id_entrevista;
 	
 	@Persistent
     private Date fecha_entrevista;
@@ -26,7 +28,7 @@ public class SegEntrevista implements Serializable {
 	
 	@Persistent
     private String por_que_trabajas_aqui;
-	
+
 	@Persistent
     private String como_se_describe;  
 	
@@ -46,7 +48,7 @@ public class SegEntrevista implements Serializable {
     private boolean flexibilidad_horario;
 	
 	@Persistent
-    private boolean pretencion_salarial_minimo;  
+    private float pretencion_salarial_minimo;  
 	
 	@Persistent
     private boolean antecedentes_penales;
@@ -86,6 +88,12 @@ public class SegEntrevista implements Serializable {
 	
 	@Persistent
     private boolean alquila;
+	
+	@Persistent
+    private float pago_alquiler;
+
+	@Persistent
+    private String Otros_Ingresos;
 
 	@Persistent
     private SegEmpleado empleado;
@@ -95,15 +103,19 @@ public class SegEntrevista implements Serializable {
 	}
 
 	public Long getId_entrevista() {
-		return id_entrevista;
-	}
-
-	public void setId_entrevista(Long id_entrevista) {
-		this.id_entrevista = id_entrevista;
+		return id_entrevista.getId();
 	}
 
 	public Date getFecha_entrevista() {
 		return fecha_entrevista;
+	}
+
+	public float getPago_alquiler() {
+		return pago_alquiler;
+	}
+
+	public void setPago_alquiler(float pago_alquiler) {
+		this.pago_alquiler = pago_alquiler;
 	}
 
 	public void setFecha_entrevista(Date fecha_entrevista) {
@@ -174,11 +186,11 @@ public class SegEntrevista implements Serializable {
 		this.flexibilidad_horario = flexibilidad_horario;
 	}
 
-	public boolean isPretencion_salarial_minimo() {
+	public float isPretencion_salarial_minimo() {
 		return pretencion_salarial_minimo;
 	}
 
-	public void setPretencion_salarial_minimo(boolean pretencion_salarial_minimo) {
+	public void setPretencion_salarial_minimo(float pretencion_salarial_minimo) {
 		this.pretencion_salarial_minimo = pretencion_salarial_minimo;
 	}
 
@@ -292,6 +304,14 @@ public class SegEntrevista implements Serializable {
 
 	public void setEmpleados(SegEmpleado empleado) {
 		this.empleado = empleado;
+	}
+	
+	public String getOtros_Ingresos() {
+		return Otros_Ingresos;
+	}
+
+	public void setOtros_Ingresos(String otros_Ingresos) {
+		Otros_Ingresos = otros_Ingresos;
 	}
 
 	

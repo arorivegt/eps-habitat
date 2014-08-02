@@ -52,7 +52,7 @@ public class Empleados extends Composite {
 		scrollPanel_3.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_3, "Referencia Laboral", true);
 		scrollPanel_3.setSize("1200px", "480px");
-		referencia_laboral rl = new referencia_laboral();
+		referencia_laboral rl = new referencia_laboral(this);///
 		scrollPanel_3.setWidget(rl);
 		rl.setHeight("236px");
 		
@@ -60,7 +60,7 @@ public class Empleados extends Composite {
 		scrollPanel_5.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_5, "Referencia Personal", true);
 		scrollPanel_5.setSize("1200px", "480px");
-		referencia_personal rp = new referencia_personal();
+		referencia_personal rp = new referencia_personal(this);///
 		scrollPanel_5.setWidget(rp);
 		
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
@@ -68,50 +68,49 @@ public class Empleados extends Composite {
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
 		scrollPanel_4.setSize("1200px", "480px");
 		setStyleName("");
-		Idioma i = new Idioma();
+		Idioma i = new Idioma(this);///
 		scrollPanel_4.setWidget(i);
 		
 		ScrollPanel scrollPanel_6 = new ScrollPanel();
 		scrollPanel_6.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_6, "Evaluacion", true);
 		scrollPanel_6.setSize("1200px", "480px");
-		formulario_prueba_periodo fpp = new formulario_prueba_periodo();
+		formulario_prueba_periodo fpp = new formulario_prueba_periodo(this);//
 		scrollPanel_6.setWidget(fpp);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_7, "Desempeño", true);
 		scrollPanel_7.setSize("1200px", "480px");
-		formulario_prueba_periodo_dos fppd = new formulario_prueba_periodo_dos();
+		formulario_prueba_periodo_dos fppd = new formulario_prueba_periodo_dos(this);//
 		scrollPanel_7.setWidget(fppd);
 		
 		ScrollPanel scrollPanel_8 = new ScrollPanel();
 		scrollPanel_8.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_8, "Puestos ", true);
 		scrollPanel_8.setSize("1200px", "480px");
-		puestos p = new puestos();
+		puestos p = new puestos(this);///
 		scrollPanel_8.setWidget(p);
 		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("1200px", "480px");
-		formulario_entrevista fe = new formulario_entrevista();
+		formulario_entrevista fe = new formulario_entrevista(this);///
 		scrollPanel_9.setWidget(fe);
 		
 		ScrollPanel scrollPanel_10 = new ScrollPanel();
 		scrollPanel_10.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_10, "Historial", true);
 		scrollPanel_10.setSize("1200px", "480px");
-		
-		historiales h = new historiales();
+		historiales h = new historiales(this);///
 		scrollPanel_10.setWidget(h);
-		
+
 		ScrollPanel scrollPanel_11 = new ScrollPanel();
 		scrollPanel_11.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_11, "vacaciones", true);
 		scrollPanel_11.setSize("1200px", "480px");
-		vacaciones v = new vacaciones();
+		vacaciones v = new vacaciones(this);///
 		scrollPanel_11.setWidget(v);
 	}
 

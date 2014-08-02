@@ -10,13 +10,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegReferenciaLaboral implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_referencia_laboral;
+    private Key id_referencia_laboral;
 	
 	@Persistent
     private String nombre_referencia;
@@ -51,16 +53,13 @@ public class SegReferenciaLaboral implements Serializable {
 	@Persistent
     private SegEmpleado empleado;
 
+
 	public SegReferenciaLaboral() {
 		super();
 	}
 
 	public Long getId_referencia_laboral() {
-		return id_referencia_laboral;
-	}
-
-	public void setId_referencia_laboral(Long id_referencia_laboral) {
-		this.id_referencia_laboral = id_referencia_laboral;
+		return id_referencia_laboral.getId();
 	}
 
 	public String getNombre_referencia() {

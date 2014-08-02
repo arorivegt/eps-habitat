@@ -10,13 +10,15 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegTest implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Long id_test;
+    private Key id_test;
 	
 	@Persistent
     private int pregunta1;
@@ -65,11 +67,7 @@ public class SegTest implements Serializable {
 	}
 
 	public Long getId_test() {
-		return id_test;
-	}
-
-	public void setId_test(Long id_test) {
-		this.id_test = id_test;
+		return id_test.getId();
 	}
 
 	public int getPregunta1() {

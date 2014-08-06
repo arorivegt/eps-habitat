@@ -40,11 +40,11 @@ public class UIStacksEjemplo extends ResizeComposite {
    
    public UIStacksEjemplo() {
      initWidget(uiBinder.createAndBindUi(this));
-     arbol2.addItem("Opción 4");
+     arbol2.addItem("<a href=\"/seguridad/Insertar\">Parametro</a>");
      arbol2.addItem("Opción 5");
      arbol2.addItem("Opción 6");
    }
-   
+
    
    interface UiStackEjemploUiBinder extends UiBinder<Widget, UIStacksEjemplo> {
    }

@@ -11,13 +11,13 @@ import javax.jdo.PersistenceManager;
 @SuppressWarnings("serial")
 public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 
-	public String[] Insertar(String user,String password) throws IllegalArgumentException {
+	public String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
-		if(user!=null && password!=null){
+		if(nomParam!=null){
 			System.out.println("GUARDANDO PARAMETRO");
 			
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			segParametro nuevo = new segParametro("Primero", 1010101, 1, 2);
+			segParametro nuevo = new segParametro(nomParam, codContable, codUno, codDos);
 			try{
 				gestorPersistencia.makePersistent(nuevo);
 				System.out.println("PARAMETRO GUARDADO CORRECTAMENTE");

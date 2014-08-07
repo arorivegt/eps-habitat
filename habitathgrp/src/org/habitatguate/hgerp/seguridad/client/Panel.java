@@ -41,8 +41,8 @@ public class Panel extends Composite {
                  setStyleName("Panel_principal");
                  setSize("1343px", "734px");
                  
-                 Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv(); 
-                 //Buscador_Empleados buscador = new Buscador_Empleados();
+                 //Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv(); 
+                 Buscador_Empleados buscador = new Buscador_Empleados();
                  //Empleado_tab empleado = new Empleado_tab();
                  absolutePanel_1.add(buscador, 0, 0);
                  //empleado.setSize("1187px", "648px");

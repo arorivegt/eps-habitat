@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -20,23 +22,65 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_datos extends Composite {
 
+	private Empleados empleado;
 	private Long id_empleado = 0L;
 	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
-	private Empleados empleado;
-	
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    
+    private ListBox listEstadoCivil;
+    private ListBox listSexo;
+    private TextBox txtPrimerApellido;
+    private TextBox txtSegundoApellido ;
+    private TextBox txtApellidoCasada ;
+    private IntegerBox txtNo_iggs;
+    private TextBox txtPrimerNombre;
+    private TextBox txtSegundoNombre ;
+    private ListBox listPais;
+    private ListBox listNoDependientes ;
+    private TextBox txtTipoPasaporte ;
+    private ListBox listCedulaMunicipio;
+    private TextBox txtDireccion ;
+    private ListBox listDireccionMunicipio;
+    private TextBox txtCorreoElectronico;
+    private ListBox listTipoLicencia;
+    private DateBox dateAnnioNacimiento;
+    private TextBox txtOcupacion ;
+    private TextBox txtCentroTrabajo;
+    private TextBox txt_CodigoOcupacion;
+    private TextBox txtProfesion;
+    private TextBox txtTipoPlanilla ;
+    private ListBox listLicencia ;
+    private DateBox dateFechaIngreso;
+    private IntegerBox txtRegistro ;
+    private TextBox txtNoOrden ;
+    private IntegerBox txtDPI;
+    private IntegerBox txtTelefonoCasa;
+    private IntegerBox txtTelefonoCelular ;
+    private IntegerBox txtNoLicencia;
+    private TextBox txtNit ;
+    private IntegerBox txtNoPasaporte;
+    private TextBox txtSalarioBase ;
+    private TextBox txtBonificacion ;
+    private TextBox txtTotal ;
+    private ListBox listCedulaDepartamento ;
+    private ListBox listDireccionDepartamento ;
+    private TextBox txtConIVS ;
+    private TextBox txtSinIVS ;
+    
 	public formulario_datos(Empleados e) {
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("890px", "1055px");
-		Label lblNoDeAfiliacin = new Label("No. De Afiliación al IGSS");
+		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
 		absolutePanel.add(lblNoDeAfiliacin, 42, 10);
 		
@@ -50,7 +94,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_2, 595, 10);
 		label_2.setSize("192px", "19px");
 		
-		final ListBox listEstadoCivil = new ListBox();
+		listEstadoCivil = new ListBox();
 		listEstadoCivil.addItem("Soltero/a");
 		listEstadoCivil.addItem("Casado/a");
 		listEstadoCivil.addItem("Divorciado/a");
@@ -60,7 +104,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(listEstadoCivil, 324, 28);
 		listEstadoCivil.setSize("247px", "27px");
 		
-		final ListBox listSexo = new ListBox();
+		listSexo = new ListBox();
 		listSexo.addItem("femenino");
 		listSexo.addItem("masculino");
 		listSexo.setStyleName("gwt-TextBox2");
@@ -82,25 +126,25 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_5, 597, 70);
 		label_5.setSize("192px", "19px");
 		
-		final TextBox txtPrimerApellido = new TextBox();
+		txtPrimerApellido = new TextBox();
 		txtPrimerApellido.setMaxLength(50);
 		txtPrimerApellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimerApellido, 43, 88);
 		txtPrimerApellido.setSize("227px", "19px");
 		
-		final TextBox txtSegundoApellido = new TextBox();
+		txtSegundoApellido = new TextBox();
 		txtSegundoApellido.setMaxLength(50);
 		txtSegundoApellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtSegundoApellido, 324, 88);
 		txtSegundoApellido.setSize("227px", "19px");
 		
-		final TextBox txtApellidoCasada = new TextBox();
+		txtApellidoCasada = new TextBox();
 		txtApellidoCasada.setMaxLength(50);
 		txtApellidoCasada.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtApellidoCasada, 596, 88);
 		txtApellidoCasada.setSize("227px", "19px");
 		
-		final IntegerBox txtNo_iggs = new IntegerBox();
+		txtNo_iggs = new IntegerBox();
 		txtNo_iggs.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtNo_iggs.getText().equals("")) {txtNo_iggs.setText("0");}
@@ -115,6 +159,7 @@ public class formulario_datos extends Composite {
 				}
 			}
 		});
+		
 		txtNo_iggs.setText("0");
 		txtNo_iggs.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNo_iggs, 43, 28);
@@ -125,19 +170,19 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_6, 42, 131);
 		label_6.setSize("192px", "19px");
 		
-		final TextBox txtPrimerNombre = new TextBox();
+		txtPrimerNombre = new TextBox();
 		txtPrimerNombre.setMaxLength(50);
 		txtPrimerNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimerNombre, 43, 149);
 		txtPrimerNombre.setSize("227px", "19px");
 		
-		final TextBox txtSegundoNombre = new TextBox();
+		txtSegundoNombre = new TextBox();
 		txtSegundoNombre.setMaxLength(50);
 		txtSegundoNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtSegundoNombre, 324, 149);
 		txtSegundoNombre.setSize("227px", "19px");
 		
-		Label label_7 = new Label("2do y Demás Nombres");
+		Label label_7 = new Label("2do y Demas Nombres");
 		label_7.setStyleName("label");
 		absolutePanel.add(label_7, 323, 131);
 		label_7.setSize("192px", "19px");
@@ -147,8 +192,8 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_8, 595, 131);
 		label_8.setSize("192px", "19px");
 		
-		final ListBox listPais = new ListBox();
-		listPais.addItem("Afganistán");
+		listPais = new ListBox();
+		listPais.addItem("Afganistan");
 		listPais.addItem("Albania");
 		listPais.addItem("Alemania");
 		listPais.addItem("Andorra");
@@ -160,29 +205,29 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Armenia");
 		listPais.addItem("Australia");
 		listPais.addItem("Austria");
-		listPais.addItem("Azerbaiyán");
+		listPais.addItem("Azerbaiyan");
 		listPais.addItem("Bahamas");
-		listPais.addItem("Bangladés");
+		listPais.addItem("Banglades");
 		listPais.addItem("Barbados");
-		listPais.addItem("Baréin");
-		listPais.addItem("Bélgica");
+		listPais.addItem("Barein");
+		listPais.addItem("Belgica");
 		listPais.addItem("Belice");
-		listPais.addItem("Benín");
+		listPais.addItem("Benin");
 		listPais.addItem("Bielorrusia");
 		listPais.addItem("Birmania");
 		listPais.addItem("Bolivia");
 		listPais.addItem("Bosnia y Herzegovina");
 		listPais.addItem("Botsuana");
 		listPais.addItem("Brasil");
-		listPais.addItem("Brunéi");
+		listPais.addItem("Brunei");
 		listPais.addItem("Bulgaria");
 		listPais.addItem("Burkina Faso");
 		listPais.addItem("Burundi");
-		listPais.addItem("Bután");
+		listPais.addItem("Butan");
 		listPais.addItem("Cabo Verde");
 		listPais.addItem("Camboya");
-		listPais.addItem("Camerún");
-		listPais.addItem("Canadá");
+		listPais.addItem("Camerun");
+		listPais.addItem("Canada");
 		listPais.addItem("Catar");
 		listPais.addItem("Chad");
 		listPais.addItem("Chile");
@@ -202,19 +247,19 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Ecuador");
 		listPais.addItem("Egipto");
 		listPais.addItem("El Salvador");
-		listPais.addItem("Emiratos Árabes Unidos");
+		listPais.addItem("Emiratos arabes Unidos");
 		listPais.addItem("Eritrea");
 		listPais.addItem("Eslovaquia");
 		listPais.addItem("Eslovenia");
 		listPais.addItem("España");
 		listPais.addItem("Estados Unidos");
 		listPais.addItem("Estonia");
-		listPais.addItem("Etiopía");
+		listPais.addItem("Etiopia");
 		listPais.addItem("Filipinas");
 		listPais.addItem("Finlandia");
 		listPais.addItem("Fiyi");
 		listPais.addItem("Francia");
-		listPais.addItem("Gabón");
+		listPais.addItem("Gabon");
 		listPais.addItem("Gambia");
 		listPais.addItem("Georgia");
 		listPais.addItem("Ghana");
@@ -224,32 +269,32 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Guyana");
 		listPais.addItem("Guinea");
 		listPais.addItem("Guinea ecuatorial");
-		listPais.addItem("Guinea-Bisáu");
-		listPais.addItem("Haití");
+		listPais.addItem("Guinea-Bisau");
+		listPais.addItem("Haiti");
 		listPais.addItem("Honduras");
-		listPais.addItem("Hungría");
+		listPais.addItem("Hungria");
 		listPais.addItem("India");
 		listPais.addItem("Indonesia");
 		listPais.addItem("Irak");
-		listPais.addItem("Irán");
+		listPais.addItem("Iran");
 		listPais.addItem("Irlanda");
 		listPais.addItem("Islandia");
 		listPais.addItem("Islas Marshall");
-		listPais.addItem("Islas Salomón");
+		listPais.addItem("Islas Salomon");
 		listPais.addItem("Israel");
 		listPais.addItem("Italia");
 		listPais.addItem("Jamaica");
-		listPais.addItem("Japón");
+		listPais.addItem("Japon");
 		listPais.addItem("Jordania");
-		listPais.addItem("Kazajistán");
+		listPais.addItem("Kazajistan");
 		listPais.addItem("Kenia");
-		listPais.addItem("Kirguistán");
+		listPais.addItem("Kirguistan");
 		listPais.addItem("Kiribati");
 		listPais.addItem("Kuwait");
 		listPais.addItem("Laos");
 		listPais.addItem("Lesoto");
 		listPais.addItem("Letonia");
-		listPais.addItem("Líbano");
+		listPais.addItem("Libano");
 		listPais.addItem("Liberia");
 		listPais.addItem("Libia");
 		listPais.addItem("Liechtenstein");
@@ -259,15 +304,15 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Malasia");
 		listPais.addItem("Malaui");
 		listPais.addItem("Maldivas");
-		listPais.addItem("Malí");
+		listPais.addItem("Mali");
 		listPais.addItem("Malta");
 		listPais.addItem("Marruecos");
 		listPais.addItem("Mauricio");
 		listPais.addItem("Mauritania");
-		listPais.addItem("México");
+		listPais.addItem("Mexico");
 		listPais.addItem("Micronesia");
 		listPais.addItem("Moldavia");
-		listPais.addItem("Mónaco");
+		listPais.addItem("Monaco");
 		listPais.addItem("Mongolia");
 		listPais.addItem("Montenegro");
 		listPais.addItem("Mozambique");
@@ -275,37 +320,37 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Nauru");
 		listPais.addItem("Nepal");
 		listPais.addItem("Nicaragua");
-		listPais.addItem("Níger");
+		listPais.addItem("Niger");
 		listPais.addItem("Nigeria");
 		listPais.addItem("Noruega");
 		listPais.addItem("Nueva Zelanda");
-		listPais.addItem("Omán");
-		listPais.addItem("Países Bajos");
-		listPais.addItem("Pakistán");
+		listPais.addItem("Oman");
+		listPais.addItem("Paises Bajos");
+		listPais.addItem("Pakistan");
 		listPais.addItem("Palaos");
-		listPais.addItem("Panamá");
-		listPais.addItem("Papúa Nueva Guinea");
+		listPais.addItem("Panama");
+		listPais.addItem("Papua Nueva Guinea");
 		listPais.addItem("Paraguay");
-		listPais.addItem("Perú");
+		listPais.addItem("Peru");
 		listPais.addItem("Polonia");
 		listPais.addItem("Portugal");
 		listPais.addItem("Reino Unido");
-		listPais.addItem("República Centroafricana");
-		listPais.addItem("República Checa");
-		listPais.addItem("República de Macedonia");
-		listPais.addItem("República del Congo");
-		listPais.addItem("República Democrática del Congo");
-		listPais.addItem("República Dominicana");
-		listPais.addItem("República Sudafricana");
+		listPais.addItem("Republica Centroafricana");
+		listPais.addItem("Republica Checa");
+		listPais.addItem("Republica de Macedonia");
+		listPais.addItem("Republica del Congo");
+		listPais.addItem("Republica Democratica del Congo");
+		listPais.addItem("Republica Dominicana");
+		listPais.addItem("Republica Sudafricana");
 		listPais.addItem("Ruanda");
-		listPais.addItem("Rumanía");
+		listPais.addItem("Rumania");
 		listPais.addItem("Rusia");
 		listPais.addItem("Samoa");
-		listPais.addItem("San Cristóbal y Nieves");
+		listPais.addItem("San Cristobal y Nieves");
 		listPais.addItem("San Marino");
 		listPais.addItem("San Vicente y las Granadinas");
-		listPais.addItem("Santa Lucía");
-		listPais.addItem("Santo Tomé y Príncipe");
+		listPais.addItem("Santa Lucia");
+		listPais.addItem("Santo Tome y Principe");
 		listPais.addItem("Senegal");
 		listPais.addItem("Serbia");
 		listPais.addItem("Seychelles");
@@ -315,26 +360,26 @@ public class formulario_datos extends Composite {
 		listPais.addItem("Somalia");
 		listPais.addItem("Sri Lanka");
 		listPais.addItem("Suazilandia");
-		listPais.addItem("Sudán");
-		listPais.addItem("Sudán del Sur");
+		listPais.addItem("Sudan");
+		listPais.addItem("Sudan del Sur");
 		listPais.addItem("Suecia");
 		listPais.addItem("Suiza");
 		listPais.addItem("Surinam");
 		listPais.addItem("Tailandia");
 		listPais.addItem("Tanzania");
-		listPais.addItem("Tayikistán");
+		listPais.addItem("Tayikistan");
 		listPais.addItem("Timor Oriental");
 		listPais.addItem("Togo");
 		listPais.addItem("Tonga");
 		listPais.addItem("Trinidad y Tobago");
-		listPais.addItem("Túnez");
-		listPais.addItem("Turkmenistán");
-		listPais.addItem("Turquía");
+		listPais.addItem("Tunez");
+		listPais.addItem("Turkmenistan");
+		listPais.addItem("Turquia");
 		listPais.addItem("Tuvalu");
 		listPais.addItem("Ucrania");
 		listPais.addItem("Uganda");
 		listPais.addItem("Uruguay");
-		listPais.addItem("Uzbekistán");
+		listPais.addItem("Uzbekistan");
 		listPais.addItem("Vanuatu");
 		listPais.addItem("Venezuela");
 		listPais.addItem("Vietnam");
@@ -356,7 +401,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_10, 323, 199);
 		label_10.setSize("192px", "19px");
 		
-		final ListBox listNoDependientes = new ListBox();
+		listNoDependientes = new ListBox();
 		listNoDependientes.addItem("0");
 		listNoDependientes.addItem("1");
 		listNoDependientes.addItem("2");
@@ -402,15 +447,12 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_14, 596, 262);
 		label_14.setSize("247px", "19px");
 		
-		SimpleCheckBox simpleCheckBox = new SimpleCheckBox();
-		absolutePanel.add(simpleCheckBox, 41, 442);
-		
 		Label label_15 = new Label("Pasaporte");
 		label_15.setStyleName("label");
 		absolutePanel.add(label_15, 39, 325);
 		label_15.setSize("178px", "19px");
 		
-		final TextBox txtTipoPasaporte = new TextBox();
+		txtTipoPasaporte = new TextBox();
 		txtTipoPasaporte.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTipoPasaporte, 321, 343);
 		txtTipoPasaporte.setSize("227px", "19px");
@@ -430,29 +472,29 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblCedulaExtendidamunicipio, 323, 396);
 		lblCedulaExtendidamunicipio.setSize("192px", "19px");
 		
-		final ListBox listCedulaMunicipio = new ListBox();
+		listCedulaMunicipio = new ListBox();
 		listCedulaMunicipio.addItem("Chahal");
 		listCedulaMunicipio.addItem("Chisec");
-		listCedulaMunicipio.addItem("Cobán");
-		listCedulaMunicipio.addItem("Fray Bartolomé de las Casas");
+		listCedulaMunicipio.addItem("Coban");
+		listCedulaMunicipio.addItem("Fray Bartolome de las Casas");
 		listCedulaMunicipio.addItem("La Tinta");
-		listCedulaMunicipio.addItem("Lanquín");
-		listCedulaMunicipio.addItem("Panzós");
-		listCedulaMunicipio.addItem("Raxruhá");
-		listCedulaMunicipio.addItem("San Cristóbal Verapaz");
+		listCedulaMunicipio.addItem("Lanquin");
+		listCedulaMunicipio.addItem("Panzos");
+		listCedulaMunicipio.addItem("Raxruha");
+		listCedulaMunicipio.addItem("San Cristobal Verapaz");
 		listCedulaMunicipio.addItem("San Juan Chamelco");
-		listCedulaMunicipio.addItem("San Pedro Carchá");
+		listCedulaMunicipio.addItem("San Pedro Carcha");
 		listCedulaMunicipio.addItem("Santa Cruz Verapaz");
-		listCedulaMunicipio.addItem("Santa María Cahabón");
-		listCedulaMunicipio.addItem("Senahú");
-		listCedulaMunicipio.addItem("Tamahú");
+		listCedulaMunicipio.addItem("Santa Maria Cahabon");
+		listCedulaMunicipio.addItem("Senahu");
+		listCedulaMunicipio.addItem("Tamahu");
 		listCedulaMunicipio.addItem("Tactic");
-		listCedulaMunicipio.addItem("Tucurú");
+		listCedulaMunicipio.addItem("Tucuru");
 		listCedulaMunicipio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listCedulaMunicipio, 323, 421);
 		listCedulaMunicipio.setSize("248px", "27px");
 		
-		final TextBox txtDireccion = new TextBox();
+		txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
 		txtDireccion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDireccion, 44, 486);
@@ -463,22 +505,22 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_20, 42, 463);
 		label_20.setSize("192px", "19px");
 		
-		final ListBox listDireccionMunicipio = new ListBox();
-		listDireccionMunicipio.addItem("Tucurú");
+		listDireccionMunicipio = new ListBox();
+		listDireccionMunicipio.addItem("Tucuru");
 		listDireccionMunicipio.addItem("Tactic");
-		listDireccionMunicipio.addItem("Tamahú");
-		listDireccionMunicipio.addItem("Senahú");
-		listDireccionMunicipio.addItem("Santa María Cahabón");
+		listDireccionMunicipio.addItem("Tamahu");
+		listDireccionMunicipio.addItem("Senahu");
+		listDireccionMunicipio.addItem("Santa Maria Cahabon");
 		listDireccionMunicipio.addItem("Santa Cruz Verapaz");
-		listDireccionMunicipio.addItem("San Pedro Carchá");
+		listDireccionMunicipio.addItem("San Pedro Carcha");
 		listDireccionMunicipio.addItem("San Juan Chamelco");
-		listDireccionMunicipio.addItem("San Cristóbal Verapaz");
-		listDireccionMunicipio.addItem("Raxruhá");
-		listDireccionMunicipio.addItem("Panzós");
-		listDireccionMunicipio.addItem("Lanquín");
+		listDireccionMunicipio.addItem("San Cristobal Verapaz");
+		listDireccionMunicipio.addItem("Raxruha");
+		listDireccionMunicipio.addItem("Panzos");
+		listDireccionMunicipio.addItem("Lanquin");
 		listDireccionMunicipio.addItem("La Tinta");
-		listDireccionMunicipio.addItem("Fray Bartolomé de las Casas");
-		listDireccionMunicipio.addItem("Cobán");
+		listDireccionMunicipio.addItem("Fray Bartolome de las Casas");
+		listDireccionMunicipio.addItem("Coban");
 		listDireccionMunicipio.addItem("Chisec");
 		listDireccionMunicipio.addItem("Chahal");
 		listDireccionMunicipio.setStyleName("gwt-TextBox2");
@@ -495,7 +537,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_22, 42, 538);
 		label_22.setSize("192px", "19px");
 		
-		final TextBox txtCorreoElectronico = new TextBox();
+		txtCorreoElectronico = new TextBox();
 		txtCorreoElectronico.setMaxLength(200);
 		txtCorreoElectronico.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtCorreoElectronico, 44, 558);
@@ -525,7 +567,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_26, 595, 610);
 		label_26.setSize("192px", "19px");
 		
-		final ListBox listTipoLicencia = new ListBox();
+		listTipoLicencia = new ListBox();
 		listTipoLicencia.addItem("A");
 		listTipoLicencia.addItem("B");
 		listTipoLicencia.addItem("C");
@@ -544,7 +586,22 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label_28, 595, 389);
 		label_28.setSize("192px", "19px");
 		
-		final DateBox dateAnnioNacimiento = new DateBox();
+		dateAnnioNacimiento = new DateBox();
+		dateAnnioNacimiento.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateAnnioNacimiento.getValue().equals(null)) {dateAnnioNacimiento.setValue(new Date(1407518124684L));}
+				else if(dateAnnioNacimiento.getValue().equals("")) {dateAnnioNacimiento.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateAnnioNacimiento.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateAnnioNacimiento.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateAnnioNacimiento.setValue(new Date(1407518707105L));
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateAnnioNacimiento.setStyleName("gwt-TextBox2");
@@ -556,7 +613,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblFechaIngreso, 595, 720);
 		lblFechaIngreso.setSize("192px", "19px");
 		
-		final TextBox txtOcupacion = new TextBox();
+		txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(50);
 		txtOcupacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtOcupacion, 321, 740);
@@ -567,7 +624,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblOcupacion, 323, 720);
 		lblOcupacion.setSize("192px", "19px");
 		
-		final TextBox txtCentroTrabajo = new TextBox();
+		txtCentroTrabajo = new TextBox();
 		txtCentroTrabajo.setMaxLength(50);
 		txtCentroTrabajo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtCentroTrabajo, 44, 740);
@@ -583,7 +640,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblD, 42, 681);
 		lblD.setSize("449px", "19px");
 		
-		final TextBox txt_CodigoOcupacion = new TextBox();
+		txt_CodigoOcupacion = new TextBox();
 		txt_CodigoOcupacion.setMaxLength(50);
 		txt_CodigoOcupacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txt_CodigoOcupacion, 44, 802);
@@ -594,7 +651,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblCodigoOcupacion, 42, 782);
 		lblCodigoOcupacion.setSize("192px", "19px");
 		
-		final TextBox txtProfesion = new TextBox();
+		txtProfesion = new TextBox();
 		txtProfesion.setMaxLength(50);
 		txtProfesion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtProfesion, 321, 802);
@@ -605,7 +662,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblProfesion, 323, 782);
 		lblProfesion.setSize("192px", "19px");
 		
-		final TextBox txtTipoPlanilla = new TextBox();
+		txtTipoPlanilla = new TextBox();
 		txtTipoPlanilla.setMaxLength(50);
 		txtTipoPlanilla.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTipoPlanilla, 596, 802);
@@ -631,14 +688,29 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblSalarioBase, 42, 849);
 		lblSalarioBase.setSize("192px", "19px");
 		
-		final DateBox dateFechaIngreso = new DateBox();
+		dateFechaIngreso = new DateBox();
+		dateFechaIngreso.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFechaIngreso.getValue().equals(null)) {dateFechaIngreso.setValue(new Date(1407518124684L));}
+				else if(dateFechaIngreso.getValue().equals("")) {dateFechaIngreso.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFechaIngreso.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFechaIngreso.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFechaIngreso.setValue(new Date(1407518751219L));
 		dateFechaIngreso.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateFechaIngreso.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFechaIngreso, 595, 739);
 		dateFechaIngreso.setSize("228px", "18px");
 		
-		final ListBox listLicencia = new ListBox();
+		listLicencia = new ListBox();
 		listLicencia.addItem("Si");
 		listLicencia.addItem("No");
 		listLicencia.setStyleName("gwt-TextBox2");
@@ -652,7 +724,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(listBox_9, 42, 343);
 		listBox_9.setSize("248px", "27px");
 		
-		final IntegerBox txtRegistro = new IntegerBox();
+		txtRegistro = new IntegerBox();
 		txtRegistro.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtRegistro.getText().equals("")) {txtRegistro.setText("0");}
@@ -672,13 +744,13 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtRegistro, 323, 280);
 		txtRegistro.setSize("227px", "19px");
 		
-		final TextBox txtNoOrden = new TextBox();
+		txtNoOrden = new TextBox();
 		txtNoOrden.setStyleName("gwt-TextBox2");
 		txtNoOrden.setMaxLength(50);
 		absolutePanel.add(txtNoOrden, 42, 287);
 		txtNoOrden.setSize("227px", "19px");
 		
-		final IntegerBox txtDPI = new IntegerBox();
+		txtDPI = new IntegerBox();
 		txtDPI.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
@@ -699,7 +771,7 @@ public class formulario_datos extends Composite {
 		txtDPI.setSize("227px", "19px");
 		
 		
-		final IntegerBox txtTelefonoCasa = new IntegerBox();
+		txtTelefonoCasa = new IntegerBox();
 		txtTelefonoCasa.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoCasa.getText().equals("")) {txtTelefonoCasa.setText("0");}
@@ -719,7 +791,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtTelefonoCasa, 324, 558);
 		txtTelefonoCasa.setSize("227px", "19px");
 		
-		final IntegerBox txtTelefonoCelular = new IntegerBox();
+		txtTelefonoCelular = new IntegerBox();
 		txtTelefonoCelular.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoCelular.getText().equals("")) {txtTelefonoCelular.setText("0");}
@@ -739,7 +811,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtTelefonoCelular, 596, 558);
 		txtTelefonoCelular.setSize("227px", "19px");
 		
-		final IntegerBox txtNoLicencia = new IntegerBox();
+		txtNoLicencia = new IntegerBox();
 		txtNoLicencia.setText("0");
 		txtNoLicencia.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNoLicencia, 596, 635);
@@ -752,19 +824,19 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(btnActualizar, 375, 992);
 		btnActualizar.setSize("280px", "44px");
 		
-		final TextBox txtNit = new TextBox();
+		txtNit = new TextBox();
 		txtNit.setStyleName("gwt-TextBox2");
 		txtNit.setMaxLength(50);
 		absolutePanel.add(txtNit, 324, 217);
 		txtNit.setSize("227px", "19px");
 		
-		final IntegerBox txtNoPasaporte = new IntegerBox();
+		txtNoPasaporte = new IntegerBox();
 		txtNoPasaporte.setText("0");
 		txtNoPasaporte.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNoPasaporte, 596, 343);
 		txtNoPasaporte.setSize("227px", "19px");
 		
-		final TextBox txtSalarioBase = new TextBox();
+		txtSalarioBase = new TextBox();
 		txtSalarioBase.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtSalarioBase.getText().equals("")) {txtSalarioBase.setText("0");}
@@ -785,7 +857,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtSalarioBase, 42, 878);
 		txtSalarioBase.setSize("227px", "19px");
 		
-		final TextBox txtBonificacion = new TextBox();
+		txtBonificacion = new TextBox();
 		txtBonificacion.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtBonificacion.getText().equals("")) {txtBonificacion.setText("0");}
@@ -806,7 +878,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtBonificacion, 323, 879);
 		txtBonificacion.setSize("227px", "19px");
 		
-		final TextBox txtTotal = new TextBox();
+		txtTotal = new TextBox();
 		txtTotal.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTotal.getText().equals("")) {txtTotal.setText("0");}
@@ -827,7 +899,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(txtTotal, 596, 879);
 		txtTotal.setSize("227px", "19px");
 		
-		final ListBox listCedulaDepartamento = new ListBox();
+		listCedulaDepartamento = new ListBox();
 		listCedulaDepartamento.addItem("Alta Verapaz");
 		listCedulaDepartamento.addItem("Baja Verapaz");
 		listCedulaDepartamento.addItem("Chimaltenango");
@@ -839,16 +911,16 @@ public class formulario_datos extends Composite {
 		listCedulaDepartamento.addItem("Izabal");
 		listCedulaDepartamento.addItem("Jalapa");
 		listCedulaDepartamento.addItem("Jutiapa");
-		listCedulaDepartamento.addItem("Petén");
+		listCedulaDepartamento.addItem("Peten");
 		listCedulaDepartamento.addItem("Quezaltenango");
-		listCedulaDepartamento.addItem("Quiché");
+		listCedulaDepartamento.addItem("Quiche");
 		listCedulaDepartamento.addItem("Retalhuleu");
-		listCedulaDepartamento.addItem("Sacatepéquez");
+		listCedulaDepartamento.addItem("Sacatepequez");
 		listCedulaDepartamento.addItem("San Marcos");
 		listCedulaDepartamento.addItem("Santa Rosa");
-		listCedulaDepartamento.addItem("Sololá");
-		listCedulaDepartamento.addItem("Suchitepéquez");
-		listCedulaDepartamento.addItem("Totonicapán");
+		listCedulaDepartamento.addItem("Solola");
+		listCedulaDepartamento.addItem("Suchitepequez");
+		listCedulaDepartamento.addItem("Totonicapan");
 		listCedulaDepartamento.addItem("Zacapa");
 		listCedulaDepartamento.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -857,6 +929,7 @@ public class formulario_datos extends Composite {
 		        for (int i = 0; i < numerosComoArray.length; i++) {
 		        	listCedulaMunicipio.addItem(numerosComoArray[i]);
 		        }
+		        listCedulaMunicipio.setVisibleItemCount(1);
 			}		
 		});
 		listCedulaDepartamento.setStyleName("gwt-TextBox2");
@@ -868,7 +941,7 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(lblCedulaExtendidadepartamento, 42, 396);
 		lblCedulaExtendidadepartamento.setSize("192px", "19px");
 		
-		final ListBox listDireccionDepartamento = new ListBox();
+		listDireccionDepartamento = new ListBox();
 		listDireccionDepartamento.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				listDireccionMunicipio.clear();
@@ -876,6 +949,8 @@ public class formulario_datos extends Composite {
 		        for (int i = 0; i < numerosComoArray.length; i++) {
 		        	listDireccionMunicipio.addItem(numerosComoArray[i]);
 		        }
+
+		        listDireccionMunicipio.setVisibleItemCount(1);
 			}
 		});
 		listDireccionDepartamento.addItem("Alta Verapaz");
@@ -889,16 +964,16 @@ public class formulario_datos extends Composite {
 		listDireccionDepartamento.addItem("Izabal");
 		listDireccionDepartamento.addItem("Jalapa");
 		listDireccionDepartamento.addItem("Jutiapa");
-		listDireccionDepartamento.addItem("Petén");
+		listDireccionDepartamento.addItem("Peten");
 		listDireccionDepartamento.addItem("Quezaltenango");
-		listDireccionDepartamento.addItem("Quiché");
+		listDireccionDepartamento.addItem("Quiche");
 		listDireccionDepartamento.addItem("Retalhuleu");
-		listDireccionDepartamento.addItem("Sacatepéquez");
+		listDireccionDepartamento.addItem("Sacatepequez");
 		listDireccionDepartamento.addItem("San Marcos");
 		listDireccionDepartamento.addItem("Santa Rosa");
-		listDireccionDepartamento.addItem("Sololá");
-		listDireccionDepartamento.addItem("Suchitepéquez");
-		listDireccionDepartamento.addItem("Totonicapán");
+		listDireccionDepartamento.addItem("Solola");
+		listDireccionDepartamento.addItem("Suchitepequez");
+		listDireccionDepartamento.addItem("Totonicapan");
 		listDireccionDepartamento.addItem("Zacapa");
 		listDireccionDepartamento.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listDireccionDepartamento, 323, 488);
@@ -909,14 +984,14 @@ public class formulario_datos extends Composite {
 		absolutePanel.add(label, 323, 463);
 		label.setSize("192px", "19px");
 		
-		final TextBox txtConIVS = new TextBox();
+		txtConIVS = new TextBox();
 		txtConIVS.setText("0");
 		txtConIVS.setStyleName("gwt-TextBox2");
 		txtConIVS.setMaxLength(50);
 		absolutePanel.add(txtConIVS, 43, 217);
 		txtConIVS.setSize("101px", "19px");
 		
-		final TextBox txtSinIVS = new TextBox();
+		txtSinIVS = new TextBox();
 		txtSinIVS.setText("0");
 		txtSinIVS.setStyleName("gwt-TextBox2");
 		txtSinIVS.setMaxLength(50);
@@ -939,7 +1014,7 @@ public class formulario_datos extends Composite {
 				if(bandera){
 					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
 					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
-					
+					System.out.println("pais en: "+listPais.getSelectedIndex());
 					loginService.Insertar_Emppleado(txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), txtConIVS.getText(), txtSinIVS.getText(), 
@@ -969,18 +1044,9 @@ public class formulario_datos extends Composite {
 
 	                     });
 				}else{
-					if(txtNo_iggs.getValue().equals(null)) {txtNo_iggs.setValue(0);}
-					if(txtRegistro.getValue().equals(null)) {txtRegistro.setValue(0);}
-					if(txtDPI.getValue().equals(null)) {txtDPI.setValue(0);}
-					if(txtNoPasaporte.getValue().equals(null)) {txtNoPasaporte.setValue(0);}
-					if(txtTelefonoCasa.getValue().equals(null)) {txtTelefonoCasa.setValue(0);}
-					if(txtTelefonoCelular.getValue().equals(null)) {txtTelefonoCelular.setValue(0);}
-					if(txtNoLicencia.getValue().equals(null)) {txtNoLicencia.setValue(0);}
-					if(txtSalarioBase.getValue().equals(null)) {txtSalarioBase.setValue("0");}
-					if(txtBonificacion.getValue().equals(null)) {txtBonificacion.setValue("0");}
-					if(txtTotal.getValue().equals(null)) {txtTotal.setValue("0");}
 					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
 					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
+
 					
 					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
@@ -1019,29 +1085,29 @@ public class formulario_datos extends Composite {
 		if(Departamento.equals("Alta Verapaz")){
 			valor = valor + "," + "Chahal";
 			valor = valor + "," + "Chisec";
-			valor = valor + "," + "Cobán";
-			valor = valor + "," + "Fray Bartolomé de las Casas";
+			valor = valor + "," + "Coban";
+			valor = valor + "," + "Fray Bartolome de las Casas";
 			valor = valor + "," + "La Tinta";
-			valor = valor + "," + "Lanquín";
-			valor = valor + "," + "Panzós";
-			valor = valor + "," + "Raxruhá";
-			valor = valor + "," + "San Cristóbal Verapaz";
+			valor = valor + "," + "Lanquin";
+			valor = valor + "," + "Panzos";
+			valor = valor + "," + "Raxruha";
+			valor = valor + "," + "San Cristobal Verapaz";
 			valor = valor + "," + "San Juan Chamelco";
-			valor = valor + "," + "San Pedro Carchá";
+			valor = valor + "," + "San Pedro Carcha";
 			valor = valor + "," + "Santa Cruz Verapaz";
-			valor = valor + "," + "Santa María Cahabón";
-			valor = valor + "," + "Senahú";
-			valor = valor + "," + "Tamahú";
+			valor = valor + "," + "Santa Maria Cahabon";
+			valor = valor + "," + "Senahu";
+			valor = valor + "," + "Tamahu";
 			valor = valor + "," + "Tactic";
-			valor = valor + "," + "Tucurú";
+			valor = valor + "," + "Tucuru";
 			
 		}else if(Departamento.equals("Baja Verapaz")){
 			valor = valor + "," + "Cubulco";
 			valor = valor + "," + "Granados";
-			valor = valor + "," + "Purulhá";
+			valor = valor + "," + "Purulha";
 			valor = valor + "," + "Rabinal";
-			valor = valor + "," + "Salamá";
-			valor = valor + "," + "San Jerónimo";
+			valor = valor + "," + "Salama";
+			valor = valor + "," + "San Jeronimo";
 			valor = valor + "," + "San Miguel Chicaj";
 			valor = valor + "," + "Santa Cruz el Chol";
 			
@@ -1050,40 +1116,40 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Chimaltenango";
 			valor = valor + "," + "El Tejar";
 			valor = valor + "," + "Parramos";
-			valor = valor + "," + "Patzicía";
-			valor = valor + "," + "Patzún";
+			valor = valor + "," + "Patzicia";
+			valor = valor + "," + "Patzun";
 			valor = valor + "," + "Pochuta";
-			valor = valor + "," + "San Andrés Itzapa";
-			valor = valor + "," + "San José Poaquíl";
+			valor = valor + "," + "San Andres Itzapa";
+			valor = valor + "," + "San Jose Poaquil";
 			valor = valor + "," + "San Juan Comalapa";
-			valor = valor + "," + "San Martín Jilotepeque";
+			valor = valor + "," + "San Martin Jilotepeque";
 			valor = valor + "," + "Santa Apolonia";
-			valor = valor + "," + "Santa Cruz Balanyá";
-			valor = valor + "," + "Tecpán";
+			valor = valor + "," + "Santa Cruz Balanya";
+			valor = valor + "," + "Tecpan";
 			valor = valor + "," + "Yepocapa";
 			valor = valor + "," + "Zaragoza";
 			
 		}else if(Departamento.equals("Chiquimula")){
 			
-			valor = valor + "," + "Camotán";
+			valor = valor + "," + "Camotan";
 			valor = valor + "," + "Chiquimula";
-			valor = valor + "," + "Concepción Las Minas";
+			valor = valor + "," + "Concepcion Las Minas";
 			valor = valor + "," + "Esquipulas";
 			valor = valor + "," + "Ipala";
-			valor = valor + "," + "Jocotán";
+			valor = valor + "," + "Jocotan";
 			valor = valor + "," + "Olopa";
 			valor = valor + "," + "Quezaltepeque";
 			valor = valor + "," + "San Jacinto";
-			valor = valor + "," + "San José la Arada";
+			valor = valor + "," + "San Jose la Arada";
 			valor = valor + "," + "San Juan Ermita";
 			
 		}else if(Departamento.equals("El Progreso")){
-			valor = valor + "," + "El Jícaro";
+			valor = valor + "," + "El Jicaro";
 			valor = valor + "," + "Guastatoya";
-			valor = valor + "," + "Morazán";
-			valor = valor + "," + "San Agustín Acasaguastlán";
+			valor = valor + "," + "Morazan";
+			valor = valor + "," + "San Agustin Acasaguastlan";
 			valor = valor + "," + "San Antonio La Paz";
-			valor = valor + "," + "San Cristóbal Acasaguastlán";
+			valor = valor + "," + "San Cristobal Acasaguastlan";
 			valor = valor + "," + "Sanarate";
 			valor = valor + "," + "Sansare";
 			
@@ -1094,66 +1160,66 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "La Democracia";
 			valor = valor + "," + "La Gomera";
 			valor = valor + "," + "Masagua";
-			valor = valor + "," + "Nueva Concepción";
-			valor = valor + "," + "Palín";
-			valor = valor + "," + "San José";
+			valor = valor + "," + "Nueva Concepcion";
+			valor = valor + "," + "Palin";
+			valor = valor + "," + "San Jose";
 			valor = valor + "," + "San Vicente Pacaya";
-			valor = valor + "," + "Santa Lucía Cotzumalguapa";
-			valor = valor + "," + "Siquinalá";
+			valor = valor + "," + "Santa Lucia Cotzumalguapa";
+			valor = valor + "," + "Siquinala";
 			valor = valor + "," + "Tiquisate";
 			
 		}else if(Departamento.equals("Guatemala")){	
-			valor = valor + "," + "Amatitlán";
+			valor = valor + "," + "Amatitlan";
 			valor = valor + "," + "Chinautla";
 			valor = valor + "," + "Chuarrancho";
 			valor = valor + "," + "Ciudad de Guatemala";
 			valor = valor + "," + "Fraijanes";
 			valor = valor + "," + "Mixco";
 			valor = valor + "," + "Palencia";
-			valor = valor + "," + "San José del Golfo";
-			valor = valor + "," + "San José Pinula";
-			valor = valor + "," + "San Juan Sacatepéquez";
+			valor = valor + "," + "San Jose del Golfo";
+			valor = valor + "," + "San Jose Pinula";
+			valor = valor + "," + "San Juan Sacatepequez";
 			valor = valor + "," + "San Miguel Petapa";
 			valor = valor + "," + "San Pedro Ayampuc";
-			valor = valor + "," + "San Pedro Sacatepéquez";
+			valor = valor + "," + "San Pedro Sacatepequez";
 			valor = valor + "," + "San Raymundo";
 			valor = valor + "," + "Santa Catarina Pinula";
 			valor = valor + "," + "Villa Canales";
 			valor = valor + "," + "Villa Nueva";
 			
 		}else if(Departamento.equals("Huehuetenango")){
-			valor = valor + "," + "Aguacatán";
+			valor = valor + "," + "Aguacatan";
 			valor = valor + "," + "Chiantla";
 			valor = valor + "," + "Colotenango";
-			valor = valor + "," + "Concepción Huista";
+			valor = valor + "," + "Concepcion Huista";
 			valor = valor + "," + "Cuilco";
 			valor = valor + "," + "Huehuetenango";
 			valor = valor + "," + "Jacaltenango";
 			valor = valor + "," + "La Democracia";
 			valor = valor + "," + "La Libertad";
 			valor = valor + "," + "Malacatancito";
-			valor = valor + "," + "Nentón";
+			valor = valor + "," + "Nenton";
 			valor = valor + "," + "San Antonio Huista";
 			valor = valor + "," + "San Gaspar Ixchil";
-			valor = valor + "," + "San Ildefonso Ixtahuacán";
-			valor = valor + "," + "San Juan Atitán";
+			valor = valor + "," + "San Ildefonso Ixtahuacan";
+			valor = valor + "," + "San Juan Atitan";
 			valor = valor + "," + "San Juan Ixcoy";
-			valor = valor + "," + "San Mateo Ixtatán";
-			valor = valor + "," + "San Miguel Acatán";
-			valor = valor + "," + "San Pedro Nécta";
+			valor = valor + "," + "San Mateo Ixtatan";
+			valor = valor + "," + "San Miguel Acatan";
+			valor = valor + "," + "San Pedro Necta";
 			valor = valor + "," + "San Pedro Soloma";
 			valor = valor + "," + "San Rafael La Independencia";
-			valor = valor + "," + "San Rafael Pétzal";
-			valor = valor + "," + "San Sebastián Coatán";
-			valor = valor + "," + "San Sebastián Huehuetenango";
+			valor = valor + "," + "San Rafael Petzal";
+			valor = valor + "," + "San Sebastian Coatan";
+			valor = valor + "," + "San Sebastian Huehuetenango";
 			valor = valor + "," + "Santa Ana Huista";
-			valor = valor + "," + "Santa Bárbara";
+			valor = valor + "," + "Santa Barbara";
 			valor = valor + "," + "Santa Cruz Barillas";
 			valor = valor + "," + "Santa Eulalia";
 			valor = valor + "," + "Santiago Chimaltenango";
-			valor = valor + "," + "Tectitán";
-			valor = valor + "," + " Santos Cuchumatán";
-			valor = valor + "," + "Unión Cantinil";
+			valor = valor + "," + "Tectitan";
+			valor = valor + "," + " Santos Cuchumatan";
+			valor = valor + "," + "Union Cantinil";
 			
 		}else if(Departamento.equals("Izabal")){
 			valor = valor + "," + "El Estor";
@@ -1168,12 +1234,12 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Monjas";
 			valor = valor + "," + "San Carlos Alzatate";
 			valor = valor + "," + "San Luis Jilotepeque";
-			valor = valor + "," + "San Manuel Chaparrón";
+			valor = valor + "," + "San Manuel Chaparron";
 			valor = valor + "," + "San Pedro Pinula";
 			
 		}else if(Departamento.equals("Jutiapa")){
 			valor = valor + "," + "Agua Blanca";
-			valor = valor + "," + "Asunción Mita";
+			valor = valor + "," + "Asuncion Mita";
 			valor = valor + "," + "Atescatempa";
 			valor = valor + "," + "Comapa";
 			valor = valor + "," + "Conguaco";
@@ -1185,74 +1251,74 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Moyuta";
 			valor = valor + "," + "Pasaco";
 			valor = valor + "," + "Quesada";
-			valor = valor + "," + "San José Acatempa";
+			valor = valor + "," + "San Jose Acatempa";
 			valor = valor + "," + "Santa Catarina Mita";
 			valor = valor + "," + "Yupiltepeque";
-			valor = valor + "," + "Zapotitlán";
+			valor = valor + "," + "Zapotitlan";
 			
-		}else if(Departamento.equals("Petén")){
+		}else if(Departamento.equals("Peten")){
 			valor = valor + "," + "Dolores";
 			valor = valor + "," + "El Chal";
 			valor = valor + "," + "Flores";
 			valor = valor + "," + "La Libertad";
 			valor = valor + "," + "Las Cruces";
 			valor = valor + "," + "Melchor de Mencos";
-			valor = valor + "," + "Poptún";
-			valor = valor + "," + "San Andrés";
+			valor = valor + "," + "Poptun";
+			valor = valor + "," + "San Andres";
 			valor = valor + "," + "San Benito";
 			valor = valor + "," + "San Francisco";
-			valor = valor + "," + "San José";
+			valor = valor + "," + "San Jose";
 			valor = valor + "," + "San Luis";
 			valor = valor + "," + "Santa Ana";
-			valor = valor + "," + "Sayaxché";
+			valor = valor + "," + "Sayaxche";
 			
 		}else if(Departamento.equals("Quezaltenango")){
 			valor = valor + "," + "Almolonga";
-			valor = valor + "," + "Cabricán";
-			valor = valor + "," + "Cajolá";
+			valor = valor + "," + "Cabrican";
+			valor = valor + "," + "Cajola";
 			valor = valor + "," + "Cantel";
 			valor = valor + "," + "Coatepeque";
 			valor = valor + "," + "Colomba Costa Cuca";
-			valor = valor + "," + "Concepción Chiquirichapa";
+			valor = valor + "," + "Concepcion Chiquirichapa";
 			valor = valor + "," + "El Palmar";
 			valor = valor + "," + "Flores Costa Cuca";
-			valor = valor + "," + "Génova";
-			valor = valor + "," + "Huitán";
+			valor = valor + "," + "Genova";
+			valor = valor + "," + "Huitan";
 			valor = valor + "," + "La Esperanza";
 			valor = valor + "," + "Olintepeque";
 			valor = valor + "," + "Palestina de Los Altos";
 			valor = valor + "," + "Quetzaltenango";
-			valor = valor + "," + "Salcajá";
+			valor = valor + "," + "Salcaja";
 			valor = valor + "," + "San Carlos Sija";
-			valor = valor + "," + "San Francisco La Unión";
+			valor = valor + "," + "San Francisco La Union";
 			valor = valor + "," + "San Juan Ostuncalco";
-			valor = valor + "," + "San Martín Sacatepéquez";
+			valor = valor + "," + "San Martin Sacatepequez";
 			valor = valor + "," + "San Mateo";
-			valor = valor + "," + "San Miguel Sigüilá";
+			valor = valor + "," + "San Miguel Sigüila";
 			valor = valor + "," + "Sibilia";
 			valor = valor + "," + "Zunil";
 			
-		}else if(Departamento.equals("Quiché")){
-			valor = valor + "," + "Canillá";
+		}else if(Departamento.equals("Quiche")){
+			valor = valor + "," + "Canilla";
 			valor = valor + "," + "Chajul";
-			valor = valor + "," + "Chicamán";
-			valor = valor + "," + "Chiché";
+			valor = valor + "," + "Chicaman";
+			valor = valor + "," + "Chiche";
 			valor = valor + "," + "Chichicastenango";
 			valor = valor + "," + "Chinique";
-			valor = valor + "," + "Cunén";
-			valor = valor + "," + "Ixcán";
+			valor = valor + "," + "Cunen";
+			valor = valor + "," + "Ixcan";
 			valor = valor + "," + "Joyabaj";
 			valor = valor + "," + "Nebaj";
 			valor = valor + "," + "Pachalum";
-			valor = valor + "," + "Patzité";
+			valor = valor + "," + "Patzite";
 			valor = valor + "," + "Sacapulas";
-			valor = valor + "," + "San Andrés Sajcabajá";
+			valor = valor + "," + "San Andres Sajcabaja";
 			valor = valor + "," + "San Antonio Ilotenango";
-			valor = valor + "," + "San Bartolomé Jocotenango";
+			valor = valor + "," + "San Bartolome Jocotenango";
 			valor = valor + "," + "San Juan Cotzal";
 			valor = valor + "," + "San Pedro Jocopilas";
-			valor = valor + "," + "Santa Cruz del Quiché";
-			valor = valor + "," + "Uspantán";
+			valor = valor + "," + "Santa Cruz del Quiche";
+			valor = valor + "," + "Uspantan";
 			valor = valor + "," + "Zacualpa";
 			
 		}else if(Departamento.equals("Retalhuleu")){
@@ -1260,13 +1326,13 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "El Asintal";
 			valor = valor + "," + "Nuevo San Carlos";
 			valor = valor + "," + "Retalhuleu";
-			valor = valor + "," + "San Andrés Villa Seca";
+			valor = valor + "," + "San Andres Villa Seca";
 			valor = valor + "," + "San Felipe";
-			valor = valor + "," + "San Martín Zapotitlán";
-			valor = valor + "," + "San Sebastián";
-			valor = valor + "," + "Santa Cruz Muluá";
+			valor = valor + "," + "San Martin Zapotitlan";
+			valor = valor + "," + "San Sebastian";
+			valor = valor + "," + "Santa Cruz Mulua";
 			
-		}else if(Departamento.equals("Sacatepéquez")){
+		}else if(Departamento.equals("Sacatepequez")){
 			valor = valor + "," + "Alotenango";
 			valor = valor + "," + "Ciudad Vieja";
 			valor = valor + "," + "Jocotenango";
@@ -1274,13 +1340,13 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Magdalena Milpas Altas";
 			valor = valor + "," + "Pastores";
 			valor = valor + "," + "San Antonio Aguas Calientes";
-			valor = valor + "," + "San Bartolomé Milpas Altas";
-			valor = valor + "," + "San Lucas Sacatepéquez";
+			valor = valor + "," + "San Bartolome Milpas Altas";
+			valor = valor + "," + "San Lucas Sacatepequez";
 			valor = valor + "," + "San Miguel Dueñas";
 			valor = valor + "," + "Santa Catarina Barahona";
-			valor = valor + "," + "Santa Lucía Milpas Altas";
-			valor = valor + "," + "Santa María de Jesús";
-			valor = valor + "," + "Santiago Sacatepéquez";
+			valor = valor + "," + "Santa Lucia Milpas Altas";
+			valor = valor + "," + "Santa Maria de Jesus";
+			valor = valor + "," + "Santiago Sacatepequez";
 			valor = valor + "," + "Santo Domingo Xenacoj";
 			valor = valor + "," + "Sumpango";;
 			
@@ -1288,31 +1354,31 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Ayutla";
 			valor = valor + "," + "Catarina";
 			valor = valor + "," + "Comitancillo";
-			valor = valor + "," + "Concepción Tutuapa";
+			valor = valor + "," + "Concepcion Tutuapa";
 			valor = valor + "," + "El Quetzal";
 			valor = valor + "," + "El Tumbador";
 			valor = valor + "," + "Esquipulas Palo Gordo";
-			valor = valor + "," + "Ixchiguán";
+			valor = valor + "," + "Ixchiguan";
 			valor = valor + "," + "La Blanca";
 			valor = valor + "," + "La Reforma";
-			valor = valor + "," + "Malacatán";
+			valor = valor + "," + "Malacatan";
 			valor = valor + "," + "Nuevo Progreso";
-			valor = valor + "," + "Ocós";
+			valor = valor + "," + "Ocos";
 			valor = valor + "," + "Pajapita";
-			valor = valor + "," + "Río Blanco";
-			valor = valor + "," + "San Antonio Sacatepéquez";
-			valor = valor + "," + "San Cristóbal Cucho";
-			valor = valor + "," + "San José El Rodeo";
-			valor = valor + "," + "San José Ojetenam";
+			valor = valor + "," + "Rio Blanco";
+			valor = valor + "," + "San Antonio Sacatepequez";
+			valor = valor + "," + "San Cristobal Cucho";
+			valor = valor + "," + "San Jose El Rodeo";
+			valor = valor + "," + "San Jose Ojetenam";
 			valor = valor + "," + "San Lorenzo";
 			valor = valor + "," + "San Marcos";
-			valor = valor + "," + "San Miguel Ixtahuacán";
+			valor = valor + "," + "San Miguel Ixtahuacan";
 			valor = valor + "," + "San Pablo";
-			valor = valor + "," + "San Pedro Sacatepéquez";
+			valor = valor + "," + "San Pedro Sacatepequez";
 			valor = valor + "," + "San Rafael Pie de la Cuesta";
 			valor = valor + "," + "Sibinal";
 			valor = valor + "," + "Sipacapa";
-			valor = valor + "," + "Tacaná";
+			valor = valor + "," + "Tacana";
 			valor = valor + "," + "Tajumulco";
 			valor = valor + "," + "Tejutla";
 			
@@ -1321,86 +1387,173 @@ public class formulario_datos extends Composite {
 			valor = valor + "," + "Casillas";
 			valor = valor + "," + "Chiquimulilla";
 			valor = valor + "," + "Cuilapa";
-			valor = valor + "," + "Guazacapán";
+			valor = valor + "," + "Guazacapan";
 			valor = valor + "," + "Nueva Santa Rosa";
 			valor = valor + "," + "Oratorio";
 			valor = valor + "," + "Pueblo Nuevo Viñas";
 			valor = valor + "," + "San Juan Tecuaco";
 			valor = valor + "," + "San Rafael las Flores";
 			valor = valor + "," + "Santa Cruz Naranjo";
-			valor = valor + "," + "Santa María Ixhuatán";
+			valor = valor + "," + "Santa Maria Ixhuatan";
 			valor = valor + "," + "Santa Rosa de Lima";
 			valor = valor + "," + "Taxisco";
 			
-		}else if(Departamento.equals("Sololá")){
-			valor = valor + "," + "Concepción";
-			valor = valor + "," + "Nahualá";
+		}else if(Departamento.equals("Solola")){
+			valor = valor + "," + "Concepcion";
+			valor = valor + "," + "Nahuala";
 			valor = valor + "," + "Panajachel";
-			valor = valor + "," + "San Andrés Semetabaj";
-			valor = valor + "," + "San Antonio Palopó";
-			valor = valor + "," + "San José Chacayá";
+			valor = valor + "," + "San Andres Semetabaj";
+			valor = valor + "," + "San Antonio Palopo";
+			valor = valor + "," + "San Jose Chacaya";
 			valor = valor + "," + "San Juan La Laguna";
-			valor = valor + "," + "San Lucas Tolimán";
+			valor = valor + "," + "San Lucas Toliman";
 			valor = valor + "," + "San Marcos La Laguna";
 			valor = valor + "," + "San Pablo La Laguna";
 			valor = valor + "," + "San Pedro La Laguna";
-			valor = valor + "," + "Santa Catarina Ixtahuacán";
-			valor = valor + "," + "Santa Catarina Palopó";
+			valor = valor + "," + "Santa Catarina Ixtahuacan";
+			valor = valor + "," + "Santa Catarina Palopo";
 			valor = valor + "," + "Santa Clara La Laguna";
 			valor = valor + "," + "Santa Cruz La Laguna";
-			valor = valor + "," + "Santa Lucía Utatlán";
-			valor = valor + "," + "Santa María Visitación";
-			valor = valor + "," + "Santiago Atitlán";
-			valor = valor + "," + "Sololá";
+			valor = valor + "," + "Santa Lucia Utatlan";
+			valor = valor + "," + "Santa Maria Visitacion";
+			valor = valor + "," + "Santiago Atitlan";
+			valor = valor + "," + "Solola";
 			
-		}else if(Departamento.equals("Suchitepéquez")){
+		}else if(Departamento.equals("Suchitepequez")){
 			valor = valor + "," + "Chicacao";
 			valor = valor + "," + "Cuyotenango";
 			valor = valor + "," + "Mazatenango";
 			valor = valor + "," + "Patulul";
 			valor = valor + "," + "Pueblo Nuevo";
-			valor = valor + "," + "Río Bravo";
+			valor = valor + "," + "Rio Bravo";
 			valor = valor + "," + "Samayac";
-			valor = valor + "," + "San Antonio Suchitepéquez";
+			valor = valor + "," + "San Antonio Suchitepequez";
 			valor = valor + "," + "San Bernardino";
-			valor = valor + "," + "San Francisco Zapotitlán";
+			valor = valor + "," + "San Francisco Zapotitlan";
 			valor = valor + "," + "San Gabriel";
-			valor = valor + "," + "San José El Idolo";
-			valor = valor + "," + "San José La Maquina";
+			valor = valor + "," + "San Jose El Idolo";
+			valor = valor + "," + "San Jose La Maquina";
 			valor = valor + "," + "San Juan Bautista";
 			valor = valor + "," + "San Lorenzo";
-			valor = valor + "," + "San Miguel Panán";
+			valor = valor + "," + "San Miguel Panan";
 			valor = valor + "," + "San Pablo Jocopilas";
-			valor = valor + "," + "Santa Bárbara";
-			valor = valor + "," + "Santo Domingo Suchitepéquez";
-			valor = valor + "," + "Santo Tomás La Unión";
+			valor = valor + "," + "Santa Barbara";
+			valor = valor + "," + "Santo Domingo Suchitepequez";
+			valor = valor + "," + "Santo Tomas La Union";
 			valor = valor + "," + "Zunilito";
 			
-		}else if(Departamento.equals("Totonicapán")){
+		}else if(Departamento.equals("Totonicapan")){
 			valor = valor + "," + "Momostenango";
-			valor = valor + "," + "San Andrés Xecul";
+			valor = valor + "," + "San Andres Xecul";
 			valor = valor + "," + "San Bartolo";
-			valor = valor + "," + "San Cristóbal Totonicapán";
+			valor = valor + "," + "San Cristobal Totonicapan";
 			valor = valor + "," + "San Francisco El Alto";
-			valor = valor + "," + "Santa Lucía La Reforma";
-			valor = valor + "," + "Santa María Chiquimula";
-			valor = valor + "," + "Totonicapán";
+			valor = valor + "," + "Santa Lucia La Reforma";
+			valor = valor + "," + "Santa Maria Chiquimula";
+			valor = valor + "," + "Totonicapan";
 			
 		}else if(Departamento.equals("Zacapa")){
 			valor = valor + "," + "Cabañas";
 			valor = valor + "," + "Estanzuela";
-			valor = valor + "," + "Gualán";
-			valor = valor + "," + "Huité";
-			valor = valor + "," + "La Unión";
-			valor = valor + "," + "Río Hondo";
+			valor = valor + "," + "Gualan";
+			valor = valor + "," + "Huite";
+			valor = valor + "," + "La Union";
+			valor = valor + "," + "Rio Hondo";
 			valor = valor + "," + "San Diego";
 			valor = valor + "," + "San Jorge";
-			valor = valor + "," + "Teculután";
-			valor = valor + "," + "Usumatlán";
+			valor = valor + "," + "Teculutan";
+			valor = valor + "," + "Usumatlan";
 			valor = valor + "," + "Zacapa";
 			
 		}
 		return valor;
+	}
+	
+	public void LlenarDatos(Long id,String listEstadoCivil,String listSexo,String txtPrimerApellido,
+		    String txtSegundoApellido , String txtApellidoCasada ,String txtNo_iggs, String txtPrimerNombre,
+		    String txtSegundoNombre ,String listPais,String listNoDependientes , String txtTipoPasaporte ,
+		    String listCedulaMunicipio,String txtDireccion , String listDireccionMunicipio, String txtCorreoElectronico,
+		    String listTipoLicencia, Long dateAnnioNacimiento,String txtOcupacion , String txtCentroTrabajo,
+		    String txt_CodigoOcupacion, String txtProfesion,String txtTipoPlanilla, Long dateFechaIngreso,
+		    String txtRegistro , String txtNoOrden , String txtDPI,String txtTelefonoCasa, String txtTelefonoCelular ,
+		    String txtNoLicencia, String txtNit, String txtNoPasaporte,String txtSalarioBase ,String txtBonificacion ,
+		    String txtTotal, String listCedulaDepartamento , String listDireccionDepartamento ,String txtConIVS ,
+		    String txtSinIVS )
+	{
+		this.id_empleado = id;
+		this.bandera = false;
+		this.txtNo_iggs.setText(txtNo_iggs);
+        boolean bandera = true;
+        for(int i=0; i < this.listEstadoCivil.getItemCount() && bandera; i++){
+            bandera = !this.listEstadoCivil.getItemText(i).equals(listEstadoCivil);
+            this.listEstadoCivil.setSelectedIndex(i);
+        }   
+
+        bandera = true;
+        for(int i=0; i < this.listSexo.getItemCount() && bandera; i++){
+            bandera = !this.listSexo.getItemText(i).equals(listSexo);
+            this.listSexo.setSelectedIndex(i);
+        }   
+		this.txtPrimerApellido.setText(txtPrimerApellido);
+		this.txtSegundoApellido.setText(txtSegundoApellido);
+		this.txtApellidoCasada.setText(txtApellidoCasada);
+		this.txtPrimerNombre.setText(txtPrimerNombre);
+		this.txtSegundoNombre.setText(txtSegundoNombre);
+		this.txtConIVS.setText(txtConIVS);
+		this.txtSinIVS.setText(txtSinIVS);
+        bandera = true;
+        for(int i=0; i < this.listPais.getItemCount() && bandera; i++){
+           bandera = this.listPais.getItemText(i).equals(listPais);
+           this.listPais.setSelectedIndex(i);
+        }   
+		this.txtNit.setText(txtNit);
+        bandera = true;
+        for(int i=0; i < this.listNoDependientes.getItemCount() && bandera; i++){
+            bandera = this.listNoDependientes.getItemText(i).equals(listNoDependientes);
+            this.listNoDependientes.setSelectedIndex(i);
+        }   
+		this.txtNoOrden.setText(txtNoOrden);
+		this.txtRegistro.setText(txtRegistro);
+		this.txtDPI.setText(txtDPI);
+		this.txtTipoPasaporte.setText(txtTipoPasaporte);
+		this.txtNoPasaporte.setText(txtNoPasaporte);
+		this.txtDireccion.setText(txtDireccion);
+		this.txtCorreoElectronico.setText(txtCorreoElectronico);
+		this.txtTelefonoCasa.setText(txtTelefonoCasa);
+		this.txtTelefonoCelular.setText(txtTelefonoCelular);
+		//SimpleDateFormat formatter = new SimpleDateFormat("dow mon dd HH:mm:ss zzz yyyy");
+		//Date date = formatter.parse(dateAnnioNacimiento);
+		
+		this.dateAnnioNacimiento.setValue(new Date(dateAnnioNacimiento));
+        bandera = true;
+        for(int i=0; i < this.listTipoLicencia.getItemCount() && bandera; i++){
+            bandera = this.listTipoLicencia.getItemText(i).equals(listTipoLicencia);
+            this.listTipoLicencia.setSelectedIndex(i);
+        }   
+		this.txtNoLicencia.setText(txtNoLicencia);
+		this.txtCentroTrabajo.setText(txtCentroTrabajo);
+		this.txtOcupacion.setText(txtOcupacion);
+		//Date date2 = formatter.parse(dateFechaIngreso);
+		this.dateFechaIngreso.setValue(new Date(dateFechaIngreso));
+		this.txt_CodigoOcupacion.setText(txt_CodigoOcupacion);
+		this.txtProfesion.setText(txtProfesion);
+		this.txtTipoPlanilla.setText(txtTipoPlanilla);
+		this.txtSalarioBase.setText(txtSalarioBase);
+		this.txtTotal.setText(txtTotal);
+		this.txtBonificacion.setText(txtBonificacion);
+        bandera = true;
+        for(int i=0; i < this.listCedulaMunicipio.getItemCount() && bandera; i++){
+            bandera = this.listCedulaMunicipio.getItemText(i).equals(listCedulaMunicipio);
+            this.listCedulaMunicipio.setSelectedIndex(i);
+        }   
+
+        bandera = true;
+        for(int i=0; i < this.listDireccionMunicipio.getItemCount() && bandera; i++){
+            bandera = this.listDireccionMunicipio.getItemText(i).equals(listDireccionMunicipio);
+            this.listDireccionMunicipio.setSelectedIndex(i);
+        }   
+				  
+		
 	}
 
 }

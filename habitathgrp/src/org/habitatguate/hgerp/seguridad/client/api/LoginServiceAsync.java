@@ -2,6 +2,9 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 
 import java.util.Date;
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.AuxEmpleado;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -55,7 +58,8 @@ public interface LoginServiceAsync {
 			boolean carta_recomendacion_personal, boolean vive_con_familia,
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
-			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos, AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos, float amortizacion,
+			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Historial(Long id_empleado,Date fecha, String descripcion, 
 			String tipo_historial, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
@@ -105,7 +109,8 @@ public interface LoginServiceAsync {
 				boolean carta_recomendacion_personal, boolean vive_con_familia,
 				boolean casa_propia, String entrevisto, String enfermedades,
 				float aporte_casa, boolean tiene_deudas, int no_dependientes,
-				String empresa_credito, boolean alquila,float pago_alquiler, String Otros_Ingresos,AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String empresa_credito, boolean alquila,float pago_alquiler, String Otros_Ingresos,float amortizacion,
+				AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Historial(Long id_empleado,Long id,Date fecha, String descripcion, 
 				String tipo_historial, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, String descripcionl, 
@@ -135,6 +140,14 @@ public interface LoginServiceAsync {
 					AsyncCallback<Long> callback) throws IllegalArgumentException;
 	    void Eliminar_Vacaciones(Long id_empleado,Long id, 
 					AsyncCallback<Long> callback) throws IllegalArgumentException;
+	    
+
+	    ///querys
+	    void Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
+				String primer_apellido, String segundo_apellido,AsyncCallback<List<AuxEmpleado>> callback) throws IllegalArgumentException;
+	    
+	    void Empleado_Registrado(Long id_empleado,
+	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
 		
 
 	

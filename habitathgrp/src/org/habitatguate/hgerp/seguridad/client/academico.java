@@ -1,9 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-
+import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -43,6 +42,17 @@ public class academico extends Composite  {
 	    
 	    private void agregarFormulario(){
 	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this,empleado));
+	    }
+	    
+	    public void agregarFormulario_lleno(List<AuxHistorialAcademico> results){
+	    	if (!results.isEmpty()) {
+	    		
+			    for ( AuxHistorialAcademico n2 : results) {
+			    	formulario_academico fa = new formulario_academico(this,empleado);
+			    	fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico());
+			        flextable.setWidget(flextable.getRowCount(), 0,fa );
+			    }
+	    	}	    
 	    }
 	    public void EliminarFormulario(final formulario_academico fa, final Long id_empledo, final Long id){
 

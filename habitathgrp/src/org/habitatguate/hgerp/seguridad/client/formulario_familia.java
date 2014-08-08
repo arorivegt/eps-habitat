@@ -20,10 +20,18 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 public class formulario_familia  extends Composite  {
 
 	private familiares a;
+	private Empleados empleado;
+	private Long id_familia = 0L;
 	private boolean bandera = true;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-	private Long id_familia = 0L;
-	private Empleados empleado;
+	
+	private TextBox txtPrimer_apellido ;
+	private TextBox txtSegundo_apellidp;
+	private TextBox txtPrimer_nombre;
+	private TextBox txtSegundo_nombre;
+	private TextBox txtOcupacion;
+	private TextBox txtParentesco;
+	private TextBox txtEdad ;
 	
 	public formulario_familia(String pariente, familiares a,Empleados e) {
 
@@ -44,13 +52,13 @@ public class formulario_familia  extends Composite  {
 		absolutePanel.add(label_4, 190, 10);
 		label_4.setSize("192px", "13px");
 		
-		final TextBox txtPrimer_apellido = new TextBox();
+		txtPrimer_apellido = new TextBox();
 		txtPrimer_apellido.setMaxLength(100);
 		txtPrimer_apellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimer_apellido, 10, 29);
 		txtPrimer_apellido.setSize("137px", "11px");
 		
-		final TextBox txtSegundo_apellidp = new TextBox();
+		txtSegundo_apellidp = new TextBox();
 		txtSegundo_apellidp.setMaxLength(100);
 		txtSegundo_apellidp.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtSegundo_apellidp, 190, 29);
@@ -61,14 +69,14 @@ public class formulario_familia  extends Composite  {
 		absolutePanel.add(label_6, 10, 54);
 		label_6.setSize("157px", "19px");
 		
-		final TextBox txtPrimer_nombre = new TextBox();
+		txtPrimer_nombre = new TextBox();
 		txtPrimer_nombre.setMaxLength(100);
 		txtPrimer_nombre.setStylePrimaryName("gwt-TextBox2");
 		txtPrimer_nombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimer_nombre, 10, 68);
 		txtPrimer_nombre.setSize("137px", "11px");
 		
-		final TextBox txtSegundo_nombre = new TextBox();
+		txtSegundo_nombre = new TextBox();
 		txtSegundo_nombre.setMaxLength(100);
 		txtSegundo_nombre.setStylePrimaryName("gwt-TextBox2");
 		txtSegundo_nombre.setStyleName("gwt-TextBox2");
@@ -85,7 +93,7 @@ public class formulario_familia  extends Composite  {
 		absolutePanel.add(lblParentesco, 374, 10);
 		lblParentesco.setSize("192px", "13px");
 		
-		final TextBox txtOcupacion = new TextBox();
+		txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(100);
 		txtOcupacion.setStylePrimaryName("gwt-TextBox2");
 		txtOcupacion.setStyleName("gwt-TextBox2");
@@ -102,7 +110,11 @@ public class formulario_familia  extends Composite  {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -116,7 +128,7 @@ public class formulario_familia  extends Composite  {
 		absolutePanel.add(lblEdad, 567, 49);
 		lblEdad.setSize("76px", "13px");
 		
-		final TextBox txtParentesco = new TextBox();
+		txtParentesco = new TextBox();
 		txtParentesco.setStylePrimaryName("gwt-TextBox2");
 		txtParentesco.setStyleName("gwt-TextBox2");
 		txtParentesco.setEnabled(false);
@@ -124,7 +136,7 @@ public class formulario_familia  extends Composite  {
 		txtParentesco.setSize("137px", "11px");
 		txtParentesco.setText(pariente);
 
-		final TextBox txtEdad = new TextBox();
+		txtEdad = new TextBox();
 		txtEdad.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
@@ -153,6 +165,7 @@ public class formulario_familia  extends Composite  {
 			public void onClick(ClickEvent event) {
 
 				if(bandera) {
+					System.out.println(empleado.id_empleado);
 					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
 							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
 							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
@@ -203,5 +216,25 @@ public class formulario_familia  extends Composite  {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado, id_familia);
     }
+	
+	public void LlenarDatos(Long id,String txtPrimer_apellido ,
+			String txtSegundo_apellidp,
+			String txtPrimer_nombre,
+			String txtSegundo_nombre,
+			String txtOcupacion,
+			String txtParentesco,
+			String txtEdad )
+	{
+		this.id_familia = id;
+		this.bandera = false;
+		this.txtPrimer_apellido.setText(txtPrimer_apellido);
+		this.txtSegundo_apellidp.setText(txtSegundo_apellidp);
+		this.txtPrimer_nombre.setText(txtPrimer_nombre);
+		this.txtSegundo_nombre.setText(txtSegundo_nombre);
+		this.txtOcupacion.setText(txtOcupacion);
+		this.txtEdad.setText(txtEdad);
+	}
+	
+	
 
 }

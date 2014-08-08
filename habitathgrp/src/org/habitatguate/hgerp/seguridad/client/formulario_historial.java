@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -16,14 +18,21 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_historial extends Composite {
 
 	private historiales a;
-	private Long id_historial = 0L;
 	private Empleados empleado;
 	private boolean bandera = true;
+	private Long id_historial = 0L;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    
+    private ListBox listTipo ;
+    private DateBox dateFecha ;
+    private TextArea txtDescripcion ;
+    
 	public formulario_historial(historiales a,Empleados e) {
 
 		this.empleado = e;
@@ -41,7 +50,12 @@ public class formulario_historial extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -60,7 +74,7 @@ public class formulario_historial extends Composite {
 		absolutePanel.add(lblLoRecomienda, 173, 10);
 		lblLoRecomienda.setSize("103px", "13px");
 		
-		final ListBox listTipo = new ListBox();
+		listTipo = new ListBox();
 		listTipo.addItem("permisos");
 		listTipo.addItem("ausencias");
 		listTipo.addItem("aciertos ");
@@ -69,13 +83,28 @@ public class formulario_historial extends Composite {
 		absolutePanel.add(listTipo, 173, 29);
 		listTipo.setSize("157px", "19px");
 		
-		final TextArea txtDescripcion = new TextArea();
+		txtDescripcion = new TextArea();
 		//txtDescripcion.getElement().setAttribute("maxlength", "1000");
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 71);
 		txtDescripcion.setSize("317px", "61px");
 		
-		final DateBox dateFecha = new DateBox();
+		dateFecha = new DateBox();
+		dateFecha.setValue(new Date(1407518904795L));
+		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
+				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
@@ -130,4 +159,19 @@ public class formulario_historial extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_historial);
     }
+	
+	public void LlenarDatos(Long id,String listTipo , Long dateFecha ,
+		     				 String txtDescripcion)
+	{
+		this.id_historial = id;
+		this.bandera = false;
+		boolean bandera = true;
+		for(int i=0; i < this.listTipo.getItemCount() && bandera; i++){
+			bandera = !this.listTipo.getItemText(i).equals(listTipo);
+		    this.listTipo.setSelectedIndex(i);
+		}
+		this.dateFecha.setValue(new Date(dateFecha));
+		this.txtDescripcion.setText(txtDescripcion);
+	}
+	
 }

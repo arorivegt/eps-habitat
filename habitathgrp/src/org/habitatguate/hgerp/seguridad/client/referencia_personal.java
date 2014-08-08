@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -44,6 +46,19 @@ public class referencia_personal extends Composite  {
 	    private void agregarFormulario(){
 	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_personal(this,empleado));
 	    }
+	    
+	    public void agregarFormulario_lleno(List<AuxReferenciaPersonal> results){
+	    	if (!results.isEmpty()) {
+	    		
+			    for ( AuxReferenciaPersonal n2 : results) {
+			    	formulario_referencia_personal fa = new  formulario_referencia_personal(this,empleado);
+			    	fa.LlenarDatos( n2.getId_referencia_personal(), n2.getNombre_referencia(), n2.getPuesto_candidato(), n2.getRelacion(),
+			    					n2.getActitudes_cualidades(), ""+n2.getTelefono());
+			        flextable.setWidget(flextable.getRowCount(), 0,fa );
+			    }
+	    	}	    
+	    }
+	    
 	    public void EliminarFormulario(final formulario_referencia_personal fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Referencia_Personal(id_empledo, id, new AsyncCallback<Long>(){

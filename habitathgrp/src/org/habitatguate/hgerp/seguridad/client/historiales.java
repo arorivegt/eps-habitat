@@ -1,8 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -17,8 +17,8 @@ public class historiales extends Composite  {
 
 	 private FlexTable flextable;
 	 private Empleados empleado;
-		private VerticalPanel panel = new VerticalPanel();
-	     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	 private VerticalPanel panel = new VerticalPanel();
+	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 		
 	    public historiales(Empleados e) {
 
@@ -43,6 +43,18 @@ public class historiales extends Composite  {
 	    private void agregarFormulario(){
 	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_historial(this,empleado));
 	    }
+	    
+	    public void agregarFormulario_lleno(List<AuxHistorial> results){
+	    	if (!results.isEmpty()) {
+	    		
+			    for ( AuxHistorial n2 : results) {
+			    	formulario_historial fa = new  formulario_historial(this,empleado);
+			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
+			        flextable.setWidget(flextable.getRowCount(), 0,fa );
+			    }
+	    	}	    
+	    }
+	    
 	    public void EliminarFormulario(final formulario_historial fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Historial(id_empledo, id, new AsyncCallback<Long>(){

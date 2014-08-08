@@ -78,7 +78,7 @@ public class SegPuesto implements Serializable {
 		this.salario = salario;
 	}
 
-	public boolean isActivo() {
+	public boolean getActivo() {
 		return activo;
 	}
 

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -15,14 +17,21 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_vacaciones extends Composite {
 
 	private vacaciones a;
-	private Long id_vacaciones = 0L;
 	private Empleados empleado;
+	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    
+    private TextArea txtDescripcion;
+    private DateBox dateFecha1;
+    private DateBox dateFecha2;
+    
 	public formulario_vacaciones(vacaciones a,Empleados e) {
 
 		this.empleado = e;
@@ -40,7 +49,12 @@ public class formulario_vacaciones extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -59,20 +73,50 @@ public class formulario_vacaciones extends Composite {
 		absolutePanel.add(lblLoRecomienda, 183, 10);
 		lblLoRecomienda.setSize("103px", "13px");
 		
-		final TextArea txtDescripcion = new TextArea();
+		txtDescripcion = new TextArea();
 		txtDescripcion.getElement().setAttribute("maxlength", "1000");
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 71);
 		txtDescripcion.setSize("317px", "61px");
 		
-		final DateBox dateFecha1 = new DateBox();
+		dateFecha1 = new DateBox();
+		dateFecha1.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha1.getValue().equals(null)) {dateFecha1.setValue(new Date(1407518124684L));}
+				else if(dateFecha1.getValue().equals("")) {dateFecha1.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha1.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha1.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFecha1.setValue(new Date(1407519270283L));
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha1, 10, 29);
 		dateFecha1.setSize("124px", "11px");
 		
-		final DateBox dateFecha2 = new DateBox();
+		dateFecha2 = new DateBox();
+		dateFecha2.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha2.getValue().equals(null)) {dateFecha2.setValue(new Date(1407518124684L));}
+				else if(dateFecha2.getValue().equals("")) {dateFecha2.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha2.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha2.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFecha2.setValue(new Date(1407519274369L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.setStyleName("gwt-TextBox2");
@@ -126,4 +170,15 @@ public class formulario_vacaciones extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_vacaciones);
     }
+	
+	public void LlenarDatos(Long id, String txtDescripcion,
+		    Long dateFecha1,
+		    Long dateFecha2)
+	{
+		this.id_vacaciones = id;
+		this.bandera = false;
+		this.txtDescripcion.setText(txtDescripcion);
+		this.dateFecha1.setValue(new Date(dateFecha1));
+		this.dateFecha2.setValue(new Date(dateFecha2));
+	}
 }

@@ -1,8 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -43,6 +43,20 @@ public class referencia_laboral extends Composite  {
 	    private void agregarFormulario(){
 	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_referencia_laboral(this,empleado));
 	    }
+	    
+	    public void agregarFormulario_lleno(List<AuxReferenciaLaboral> results){
+	    	if (!results.isEmpty()) {
+	    		
+			    for ( AuxReferenciaLaboral n2 : results) {
+			    	formulario_referencia_laboral fa = new  formulario_referencia_laboral(this,empleado);
+			    	fa.LlenarDatos(n2.getId_referencia_laboral(),n2.getNombre_referencia(), n2.getEmpresa_referencia(), n2.getRecomiendo(),
+			    				   n2.getMotivo_retiro(),n2.getActitudes_cualidades(), ""+n2.getTelefono(),
+			    				   n2.getFecha1(), n2.getFecha2(), ""+n2.getSalario_final(), n2.getPuesto_candidato());
+			        flextable.setWidget(flextable.getRowCount(), 0,fa );
+			    }
+	    	}	    
+	    }
+	    
 	    public void EliminarFormulario(final formulario_referencia_laboral fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){

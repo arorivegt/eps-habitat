@@ -1,7 +1,20 @@
 package org.habitatguate.hgerp.seguridad.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.AuxEntrevista;
+import org.habitatguate.hgerp.seguridad.client.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.AuxIdioma;
+import org.habitatguate.hgerp.seguridad.client.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.AuxReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.client.AuxReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.client.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -10,6 +23,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 
 @SuppressWarnings("serial")
@@ -69,23 +83,24 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			 e.setAfiliacion_igss(intafiliacion_igss);
 	         e.setEstado_civil(estado_civil);
 	         e.setSexo(sexo);
-	         e.setPrimer_apellido(primer_apellido);
-	         e.setSegundo_apellido(segundo_apellido);
-	         e.setApellido_casada(apellido_casada);
-	         e.setPrimer_nombre(primer_nombre);
-	         e.setSegundo_nombre(segundo_nombre);
+	         e.setPrimer_apellido(primer_apellido.toUpperCase());
+	         e.setSegundo_apellido(segundo_apellido.toUpperCase());
+	         e.setApellido_casada(apellido_casada.toUpperCase());
+	         e.setPrimer_nombre(primer_nombre.toUpperCase());
+	         e.setSegundo_nombre(segundo_nombre.toUpperCase());
 	         e.setConIVS(ConIVS);
 	         e.setSinIVS(SinIVS);
 	         e.setPais(pais);
 	         e.setNit(nit);
+	         e.setFecha_nacimiento(fecha_nacimiento);
 	         e.setNo_Dependientes(no_Dependientes);
-	         e.setNo_orden(no_orden);
+	         e.setNo_orden(no_orden.toUpperCase());
 	         e.setNo_registro(no_registro);
 	         e.setCui(cui);
 	         e.setTipo_pasaporte(tipo_pasaporte);
 	         e.setNo_pasaporte(no_pasaporte);
 	         e.setDepto_municipio_cedula(depto_municipio_cedula);
-	         e.setDireccion_actual(direccion_actual);
+	         e.setDireccion_actual(direccion_actual.toUpperCase());
 	         e.setDepto_municipio_residencia(depto_municipio_residencia);
 	         e.setEmail(email);
 	         e.setTelefono(telefono);
@@ -93,17 +108,17 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setFecha_ingreso(fecha_ingreso);
 	         e.setTipo_licencia(tipo_licencia);
 	         e.setNo_licencia(no_licencia);
-	         e.setCentro_trabajo(centro_trabajo);
-	         e.setOcupacion(ocupacion);
+	         e.setCentro_trabajo(centro_trabajo.toUpperCase());
+	         e.setOcupacion(ocupacion.toUpperCase());
 	         e.setFecha_ingreso(fecha_ingreso);
-	         e.setCodigo_ingreso(codigo_ingreso);
-	         e.setProfesion(profesion);
-	         e.setTipo_planilla(tipo_planilla);
+	         e.setCodigo_ingreso(codigo_ingreso.toUpperCase());
+	         e.setProfesion(profesion.toUpperCase());
+	         e.setTipo_planilla(tipo_planilla.toUpperCase());
 	         e.setSalario_base(salario_base);
 	         e.setTotal(total);
 	         e.setBonificacion(bonificacion);
 	         gestorPersistencia.makePersistent(e); 
-	         valor = e.getId_empleado().getId();
+	         valor = e.getId_empleado();
 	         
 	     }finally {  
 			 gestorPersistencia.close();  
@@ -126,12 +141,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegFamilia f = new  SegFamilia();
-				 	f.setPrimer_nombre(primer_nombre);
-				 	f.setSegundo_nombre(segundo_nombre);
-				 	f.setPrimer_apellido(primer_apellido);
-				 	f.setSegundo_apellido(segundo_apellido);
+				 	f.setPrimer_nombre(primer_nombre.toUpperCase());
+				 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
+				 	f.setPrimer_apellido(primer_apellido.toUpperCase());
+				 	f.setSegundo_apellido(segundo_apellido.toUpperCase());
 				 	f.setEdad(edad);
-				 	f.setOcupacion(ocupacion);
+				 	f.setOcupacion(ocupacion.toUpperCase());
 				 	f.setParentesco(parentesco);
 		      	 	f.setEmpleado(e);
 		      	 	e.getFamilia().add(f);
@@ -153,11 +168,11 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		 try { 
 			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 			 SegHistorialAcademico a = new SegHistorialAcademico();
-			 	a.setEstablecimiento(establecimiento);
+			 	a.setEstablecimiento(establecimiento.toUpperCase());
 			 	a.setFecha1(fecha1);
 			 	a.setFecha2(fecha2);
 			 	a.setNivel_academico(nivel_academico);
-			 	a.setTitulo(titulo);
+			 	a.setTitulo(titulo.toUpperCase());
 	      	 	a.setEmpleados(e);
 	      	 	e.getHistorial_academico().add(a);
 			 	valor = a.getId_historial_academico();
@@ -180,15 +195,15 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		 try { 
 			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 			 SegReferenciaLaboral rl = new  SegReferenciaLaboral();
-			 	rl.setNombre_referencia(nombre_referencia);
+			 	rl.setNombre_referencia(nombre_referencia.toUpperCase());
 			 	rl.setTelefono(telefono);
-			 	rl.setPuesto_candidato(puesto_candidato);
-			 	rl.setEmpresa_referencia(empresa_referencia);
+			 	rl.setPuesto_candidato(puesto_candidato.toUpperCase());
+			 	rl.setEmpresa_referencia(empresa_referencia.toUpperCase());
 			 	rl.setFecha1(fecha1);
 			 	rl.setFecha2(fecha2);
-			 	rl.setMotivo_retiro(motivo_retiro);
+			 	rl.setMotivo_retiro(motivo_retiro.toUpperCase());
 			 	rl.setSalario_final(salario_final);
-			 	rl.setActitudes_cualidades(actitudes_cualidades);
+			 	rl.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
 			 	rl.setRecomiendo(recomiendo);
 	      	 	rl.setEmpleado(e);
 	      	 	e.getReferencia_laboral().add(rl);
@@ -210,11 +225,11 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			 try { 
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegReferenciaPersonal rp = new  SegReferenciaPersonal();
-				 	rp.setNombre_referencia(nombre_referencia);
+				 	rp.setNombre_referencia(nombre_referencia.toUpperCase());
 				 	rp.setTelefono(telefono);
-				 	rp.setPuesto_candidato(puesto_candidato);
-				 	rp.setRelacion(relacion);
-				 	rp.setActitudes_cualidades(actitudes_cualidades);
+				 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
+				 	rp.setRelacion(relacion.toUpperCase());
+				 	rp.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
 		      	 	rp.setEmpleados(e);
 		      	 	e.getReferencia_personal().add(rp);
 				 	valor = rp.getId_referencia_personal();
@@ -234,7 +249,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegIdioma i = new  SegIdioma();
 				 	i.setNivel(nivel);
-				 	i.setIdioma(idioma);
+				 	i.setIdioma(idioma.toUpperCase());
 		      	 	i.setEmpleados(e);
 		      	 	e.getIdiomas().add(i);
 				 	valor = i.getId_idioma();
@@ -266,7 +281,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	t.setPregunta9(pregunta9);
 				 	t.setPregunta10(pregunta10);
 				 	t.setFecha_test(fecha_test);
-				 	t.setEvaluador(evaluador);
+				 	t.setEvaluador(evaluador.toUpperCase());
 				 	t.setTipo_test(tipo_test);
 		      	 	t.setEmpleado(e);
 		      	 	e.getTest().add(t);
@@ -288,8 +303,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegPuesto p = new  SegPuesto();
 				 	p.setFecha_puesto(fecha_puesto);
-				 	p.setNombre_puesto(nombre_puesto);
-				 	p.setFunciones(funciones);
+				 	p.setNombre_puesto(nombre_puesto.toUpperCase());
+				 	p.setFunciones(funciones.toUpperCase());
 				 	p.setSalario(salario);
 				 	p.setActivo(activo);
 		      	 	p.setEmpleado(e);
@@ -312,7 +327,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			boolean carta_recomendacion_personal, boolean vive_con_familia,
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
-			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos)
+			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos,float amortizacion)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -320,6 +335,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			 try { 
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegEntrevista l = new  SegEntrevista();
+				 	l.setAmortizacion(amortizacion);
 				 	l.setFecha_entrevista(fecha_entrevista);
 				 	l.setQue_conoces(que_conoces);
 				 	l.setPor_que_trabajas_aqui(por_que_trabajas_aqui);
@@ -344,9 +360,9 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	l.setEmpresa_credito(empresa_credito);
 				 	l.setAlquila(alquila);
 				 	l.setOtros_Ingresos(Otros_Ingresos);
-		      	 	l.setEmpleados(e);
+		      	 	l.setEmpleado(e);;
 		      	 	e.getEntrevista().add(l);
-				 	valor = l.getId_entrevista();
+				 	valor = l.getId_entrevista().getId();
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -364,7 +380,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 				 SegHistorial h = new  SegHistorial();
 				 	h.setFecha(fecha);
-				 	h.setDescripcion(descripcion);
+				 	h.setDescripcion(descripcion.toUpperCase());
 				 	h.setTipo_historial(tipo_historial);
 		      	 	h.setEmpleados(e);
 		      	 	e.getHistorial().add(h);
@@ -386,7 +402,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 SegVacaciones v = new  SegVacaciones();
 				 	v.setFecha1(fecha1);
 				 	v.setFecha2(fecha2);
-				 	v.setDescripcion(descripcionl);
+				 	v.setDescripcion(descripcionl.toUpperCase());
 		      	 	v.setEmpleado(e);
 		      	 	e.getVacaciones().add(v);
 				 	valor = v.getId_vacaciones();
@@ -412,51 +428,51 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		            String tipo_planilla, float salario_base, float total,
 		            float bonificacion) throws IllegalArgumentException {
 				
+
+
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
-				
-					 try { 
-						 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id); 
-				
-		           e.setAfiliacion_igss(intafiliacion_igss);
-		           e.setEstado_civil(estado_civil);
-		           e.setSexo(sexo);
-		           e.setPrimer_apellido(primer_apellido);
-		           e.setSegundo_apellido(segundo_apellido);
-		           e.setApellido_casada(apellido_casada);
-		           e.setPrimer_nombre(primer_nombre);
-		           e.setSegundo_nombre(segundo_nombre);
-		           e.setConIVS(ConIVS);
-		           e.setSinIVS(SinIVS);
-		           e.setPais(pais);
-		           e.setNit(nit);
-		           e.setNo_Dependientes(no_Dependientes);
-		           e.setNo_orden(no_orden);
-		           e.setNo_registro(no_registro);
-		           e.setCui(cui);
-		           e.setTipo_pasaporte(tipo_pasaporte);
-		           e.setNo_pasaporte(no_pasaporte);
-		           e.setDepto_municipio_cedula(depto_municipio_cedula);
-		           e.setDireccion_actual(direccion_actual);
-		           e.setDepto_municipio_residencia(depto_municipio_residencia);
-		           e.setEmail(email);
-		           e.setTelefono(telefono);
-		           e.setCelular(celular);
-		           e.setFecha_ingreso(fecha_ingreso);
-		           e.setTipo_licencia(tipo_licencia);
-		           e.setNo_licencia(no_licencia);
-		           e.setCentro_trabajo(centro_trabajo);
-		           e.setOcupacion(ocupacion);
-		           e.setFecha_ingreso(fecha_ingreso);
-		           e.setCodigo_ingreso(codigo_ingreso);
-		           e.setProfesion(profesion);
-		           e.setTipo_planilla(tipo_planilla);
-		           e.setSalario_base(salario_base);
-		           e.setTotal(total);
-		           e.setBonificacion(bonificacion);
+					 try {  
+							 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id); 
+							 e.setAfiliacion_igss(intafiliacion_igss);
+					         e.setEstado_civil(estado_civil);
+					         e.setSexo(sexo);
+					         e.setPrimer_apellido(primer_apellido.toUpperCase());
+					         e.setSegundo_apellido(segundo_apellido.toUpperCase());
+					         e.setApellido_casada(apellido_casada.toUpperCase());
+					         e.setPrimer_nombre(primer_nombre.toUpperCase());
+					         e.setSegundo_nombre(segundo_nombre.toUpperCase());
+					         e.setConIVS(ConIVS);
+					         e.setSinIVS(SinIVS);
+					         e.setPais(pais);
+					         e.setNit(nit);
+					         e.setFecha_nacimiento(fecha_nacimiento);
+					         e.setNo_Dependientes(no_Dependientes);
+					         e.setNo_orden(no_orden.toUpperCase());
+					         e.setNo_registro(no_registro);
+					         e.setCui(cui);
+					         e.setTipo_pasaporte(tipo_pasaporte);
+					         e.setNo_pasaporte(no_pasaporte);
+					         e.setDepto_municipio_cedula(depto_municipio_cedula);
+					         e.setDireccion_actual(direccion_actual.toUpperCase());
+					         e.setDepto_municipio_residencia(depto_municipio_residencia);
+					         e.setEmail(email);
+					         e.setTelefono(telefono);
+					         e.setCelular(celular);
+					         e.setFecha_ingreso(fecha_ingreso);
+					         e.setTipo_licencia(tipo_licencia);
+					         e.setNo_licencia(no_licencia);
+					         e.setCentro_trabajo(centro_trabajo.toUpperCase());
+					         e.setOcupacion(ocupacion.toUpperCase());
+					         e.setFecha_ingreso(fecha_ingreso);
+					         e.setCodigo_ingreso(codigo_ingreso.toUpperCase());
+					         e.setProfesion(profesion.toUpperCase());
+					         e.setTipo_planilla(tipo_planilla.toUpperCase());
+					         e.setSalario_base(salario_base);
+					         e.setTotal(total);
+					         e.setBonificacion(bonificacion);
 				 }finally {  
 					 Persistencia.close();  
 				 }
-				 
 				 
 				return id;
 			}
@@ -476,12 +492,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .addChild(SegFamilia.class.getSimpleName(), id)
 							        .getKey();
 						 SegFamilia f = Persistencia.getObjectById(SegFamilia.class, k);
-						 	f.setPrimer_nombre(primer_nombre);
-						 	f.setSegundo_nombre(segundo_nombre);
-						 	f.setPrimer_apellido(primer_apellido);
-						 	f.setSegundo_apellido(segundo_apellido);
+						 	f.setPrimer_nombre(primer_nombre.toUpperCase());
+						 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
+						 	f.setPrimer_apellido(primer_apellido.toUpperCase());
+						 	f.setSegundo_apellido(segundo_apellido.toUpperCase());
 						 	f.setEdad(edad);
-						 	f.setOcupacion(ocupacion);
+						 	f.setOcupacion(ocupacion.toUpperCase());
 						 	f.setParentesco(parentesco);
 						 	valor =f.getId_familia();
 					  } finally {
@@ -503,7 +519,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						        .addChild(SegHistorialAcademico.class.getSimpleName(), id)
 						        .getKey();
 					 final SegHistorialAcademico a = Persistencia.getObjectById(SegHistorialAcademico.class, k); 
-					 	a.setEstablecimiento(establecimiento);
+					 	a.setEstablecimiento(establecimiento.toUpperCase());
 					 	a.setFecha1(fecha1);
 					 	a.setFecha2(fecha2);
 					 	a.setNivel_academico(nivel_academico);
@@ -531,15 +547,15 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						        .addChild(SegReferenciaLaboral.class.getSimpleName(), id)
 						        .getKey();
 					 final SegReferenciaLaboral rl = Persistencia.getObjectById(SegReferenciaLaboral.class, k); 
-					 	rl.setNombre_referencia(nombre_referencia);
+					 	rl.setNombre_referencia(nombre_referencia.toUpperCase());
 					 	rl.setTelefono(telefono);
-					 	rl.setPuesto_candidato(puesto_candidato);
-					 	rl.setEmpresa_referencia(empresa_referencia);
+					 	rl.setPuesto_candidato(puesto_candidato.toUpperCase());
+					 	rl.setEmpresa_referencia(empresa_referencia.toUpperCase());
 					 	rl.setFecha1(fecha1);
 					 	rl.setFecha2(fecha2);
-					 	rl.setMotivo_retiro(motivo_retiro);
+					 	rl.setMotivo_retiro(motivo_retiro.toUpperCase());
 					 	rl.setSalario_final(salario_final);
-					 	rl.setActitudes_cualidades(actitudes_cualidades);
+					 	rl.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
 					 	rl.setRecomiendo(recomiendo);
 					 	valor = rl.getId_referencia_laboral();
 					 }finally {  
@@ -562,11 +578,11 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .addChild(SegReferenciaPersonal.class.getSimpleName(), id)
 							        .getKey();
 						 SegReferenciaPersonal rp = Persistencia.getObjectById(SegReferenciaPersonal.class, k); 
-						 	rp.setNombre_referencia(nombre_referencia);
+						 	rp.setNombre_referencia(nombre_referencia.toUpperCase());
 						 	rp.setTelefono(telefono);
-						 	rp.setPuesto_candidato(puesto_candidato);
+						 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
 						 	rp.setRelacion(relacion);
-						 	rp.setActitudes_cualidades(actitudes_cualidades);
+						 	rp.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
 						 	valor = rp.getId_referencia_personal();
 						 }finally {  
 							 Persistencia.close();  
@@ -587,7 +603,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .getKey();
 						 final SegIdioma i = Persistencia.getObjectById(SegIdioma.class, k); 
 						 	i.setNivel(nivel);
-						 	i.setIdioma(idioma);
+						 	i.setIdioma(idioma.toUpperCase());
 						 	valor = i.getId_idioma();
 						 }finally {  
 							 Persistencia.close();  
@@ -620,7 +636,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 	t.setPregunta9(pregunta9);
 						 	t.setPregunta10(pregunta10);
 						 	t.setFecha_test(fecha_test);
-						 	t.setEvaluador(evaluador);
+						 	t.setEvaluador(evaluador.toUpperCase());
 						 	valor =t.getId_test();
 						 }finally {  
 							 Persistencia.close();  
@@ -642,8 +658,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .getKey();
 						 final SegPuesto p = Persistencia.getObjectById(SegPuesto.class, k);
 						 	p.setFecha_puesto(fecha_puesto);
-						 	p.setNombre_puesto(nombre_puesto);
-						 	p.setFunciones(funciones);
+						 	p.setNombre_puesto(nombre_puesto.toUpperCase());
+						 	p.setFunciones(funciones.toUpperCase());
 						 	p.setSalario(salario);
 						 	p.setActivo(activo);
 						 	valor =p.getId_puesto();
@@ -664,7 +680,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					boolean carta_recomendacion_personal, boolean vive_con_familia,
 					boolean casa_propia, String entrevisto, String enfermedades,
 					float aporte_casa, boolean tiene_deudas, int no_dependientes,
-					String empresa_credito, boolean alquila,float pago_alquiler,String otros_ingresos)
+					String empresa_credito, boolean alquila,float pago_alquiler,String otros_ingresos,float amortizacion)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -675,6 +691,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .addChild(SegEntrevista.class.getSimpleName(), id)
 							        .getKey();
 						 final SegEntrevista l = Persistencia.getObjectById(SegEntrevista.class, k); 
+
+						 	l.setAmortizacion(amortizacion);
 						 	l.setFecha_entrevista(fecha_entrevista);
 						 	l.setQue_conoces(que_conoces);
 						 	l.setPor_que_trabajas_aqui(por_que_trabajas_aqui);
@@ -699,7 +717,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 	l.setEmpresa_credito(empresa_credito);
 						 	l.setAlquila(alquila);
 						 	l.setOtros_Ingresos(otros_ingresos);
-						 	valor = l.getId_entrevista();
+						 	valor = l.getId_entrevista().getId();
 						 }finally {  
 							 Persistencia.close();  
 						 }
@@ -720,7 +738,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							        .getKey();
 						 final SegHistorial  h = Persistencia.getObjectById(SegHistorial.class, k);
 						 	h.setFecha(fecha);
-						 	h.setDescripcion(descripcion);
+						 	h.setDescripcion(descripcion.toUpperCase());
 						 	h.setTipo_historial(tipo_historial);
 						 	valor = h.getId_historial();
 						 }finally {  
@@ -743,7 +761,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 final SegVacaciones v = Persistencia.getObjectById(SegVacaciones.class, k); 
 						 	v.setFecha1(fecha1);
 						 	v.setFecha2(fecha2);
-						 	v.setDescripcion(descripcionl);
+						 	v.setDescripcion(descripcionl.toUpperCase());
 						 	valor = v.getId_vacaciones();
 						 }finally {  
 							 Persistencia.close();  
@@ -883,6 +901,271 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             }
             
 
+            @Override
+			public List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
+					String primer_apellido, String segundo_apellido)throws IllegalArgumentException {
+				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
+				
+				Query q = pm.newQuery(SegEmpleado.class);
+				List<SegEmpleado> results = (List<SegEmpleado>) q.execute();
+				if (!results.isEmpty()) {
+				    for (SegEmpleado p : results) {
+				    	if((primer_nombre.toUpperCase().equals(p.getPrimer_nombre()) 
+				    	|| segundo_nombre.toUpperCase().equals(p.getSegundo_nombre())
+				    	|| primer_apellido.toUpperCase().equals(p.getPrimer_apellido())
+				    	|| segundo_apellido.toUpperCase().equals(p.getSegundo_apellido())) && tipo =='1')
+				    	{
+				    		AuxEmpleado nuevo = new AuxEmpleado();
+				    		nuevo.setId_empleado(p.getId_empleado());
+				    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
+				    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
+				    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
+				    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
+				    		valor.add(nuevo);
+				    	}
+				    	if(tipo == '2'){
+				    		AuxEmpleado nuevo = new AuxEmpleado();
+			    		nuevo.setId_empleado(p.getId_empleado());
+			    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
+			    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
+			    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
+			    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
+			    		valor.add(nuevo);
+				    		
+				    	}
+				    }
+				  } 
+				
+				return valor;
+			}
+
+			@Override
+			public AuxEmpleado Empleado_Registrado(Long id_empleado)
+					throws IllegalArgumentException {
+				
+				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+				AuxEmpleado nuevo = new AuxEmpleado();
+				 try { 
+					 final SegEmpleado p = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+					
+				    	nuevo.setApellido_casada(p.getApellido_casada());
+				    	nuevo.setBonificacion(p.getBonificacion());
+				    	nuevo.setCelular(p.getCelular());
+				    	nuevo.setCentro_trabajo(p.getCentro_trabajo());
+				    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
+				    	nuevo.setConIVS(p.getConIVS());
+				    	nuevo.setCui(p.getCui());
+				    	nuevo.setDepto_municipio_cedula(p.getDepto_municipio_cedula());
+				    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
+				    	nuevo.setDireccion_actual(p.getDireccion_actual());
+				    	nuevo.setEmail(p.getEmail());
+				    	
+				    	List<SegEntrevista> results0 = p.getEntrevista();
+				    	if (!results0.isEmpty()) {
+						    for (SegEntrevista n0 : results0) {
+						    	AuxEntrevista l = new AuxEntrevista();
+						    	l.setId_entrevista(n0.getId_entrevista().getId());
+						    	l.setFecha_entrevista(n0.getFecha_entrevista().getTime());
+							 	l.setQue_conoces(n0.getQue_conoces());
+							 	l.setPor_que_trabajas_aqui(n0.getPor_que_trabajas_aqui());
+							 	l.setComo_se_describe(n0.getComo_se_describe());
+							 	l.setTrabajar_por_presion(n0.getTrabajar_por_presion());
+							 	l.setMetas(n0.getMetas());
+							 	l.setDisponibilidad_inmediata(n0.getDisponibilidad_inmediata());
+							 	l.setDisposicion_a_viajar(n0.getDisposicion_a_viajar());
+							 	l.setFlexibilidad_horario(n0.getFlexibilidad_horario());
+							 	l.setPretencion_salarial_minimo(n0.getPretencion_salarial_minimo());
+							 	l.setAntecedentes_penales(n0.getAntecedentes_penales());
+							 	l.setAntecedentes_policiacos(n0.getAntecedentes_policiacos());
+							 	l.setCarta_recomendacion_laboral(n0.getCarta_recomendacion_laboral());
+							 	l.setCarta_recomendacion_personal(n0.getCarta_recomendacion_personal());
+							 	l.setVive_con_familia(n0.getVive_con_familia());
+							 	l.setCasa_propia(n0.getCasa_propia());
+							 	l.setEntrevisto(n0.getEntrevisto());
+							 	l.setEnfermedades(n0.getEnfermedades());
+							 	l.setAporte_casa(n0.getAporte_casa());
+							 	l.setTiene_deudas(n0.getTiene_deudas());
+							 	l.setNo_dependientes(n0.getNo_dependientes());
+							 	l.setEmpresa_credito(n0.getEmpresa_credito());
+							 	l.setAlquila(n0.getAlquila());
+							 	l.setOtros_Ingresos(n0.getOtros_Ingresos());
+							 	l.setAmortizacion(n0.getAmortizacion());
+							 	nuevo.getEntrevista().add(l);
+						    }
+				    	}
+				    	nuevo.setEstado_civil(p.getEstado_civil());
+				    	
+				    	List<SegFamilia> results = p.getFamilia();
+				    	if (!results.isEmpty()) {
+						    for (SegFamilia n : results) {
+						    	AuxFamilia f = new AuxFamilia();
+						    	f.setId_familia(n.getId_familia());
+							 	f.setPrimer_nombre(n.getPrimer_nombre());
+							 	f.setSegundo_nombre(n.getSegundo_nombre());
+							 	f.setPrimer_apellido(n.getPrimer_apellido());
+							 	f.setSegundo_apellido(n.getSegundo_apellido());
+							 	f.setEdad(n.getEdad());
+							 	f.setOcupacion(n.getOcupacion());
+							 	f.setParentesco(n.getParentesco());
+							 	nuevo.getFamilia().add(f);
+						    }
+				    	}
+						    
+				    	nuevo.setFecha_ingreso(p.getFecha_ingreso().getTime());
+				    	nuevo.setFecha_nacimiento(p.getFecha_nacimiento().getTime());
+				    	
+				    	List< SegHistorialAcademico> results2 = p.getHistorial_academico();
+				    	if (!results2.isEmpty()) {
+						    for ( SegHistorialAcademico n2 : results2) {
+
+						    	AuxHistorialAcademico a = new AuxHistorialAcademico();
+						    	a.setId_historial_academico(n2.getId_historial_academico());
+						    	a.setEstablecimiento(n2.getEstablecimiento());
+							 	a.setFecha1(n2.getFecha1().getTime());
+							 	a.setFecha2(n2.getFecha2().getTime());
+							 	a.setNivel_academico(n2.getNivel_academico());
+							 	a.setTitulo(n2.getTitulo());
+							 	nuevo.getHistorial_academico().add(a);
+						    }
+				    	}
+				    	
+				    	List< SegHistorial> results3 = p.getHistorial();
+				    	if (!results3.isEmpty()) {
+						    for ( SegHistorial n3 : results3) {
+
+						    	AuxHistorial h = new AuxHistorial();
+						    	h.setId_historial(n3.getId_historial());
+						    	h.setFecha(n3.getFecha().getTime());
+							 	h.setDescripcion(n3.getDescripcion());
+							 	h.setTipo_historial(n3.getTipo_historial());
+							 	nuevo.getHistorial().add(h);
+						    }
+				    	}
+				    	nuevo.setId_empleado(p.getId_empleado());
+				    	
+				    	List<SegIdioma> results4 = p.getIdiomas();
+				    	if (!results4.isEmpty()) {
+						    for (SegIdioma n4 : results4) {
+
+						    	AuxIdioma i = new AuxIdioma();
+						    	i.setId_idioma(n4.getId_idioma());
+							 	i.setNivel(n4.getNivel());
+							 	i.setIdioma(n4.getIdioma());
+							 	nuevo.getIdiomas().add(i);
+						    }
+				    	}
+				    	nuevo.setNit(p.getNit());
+				    	nuevo.setNo_Dependientes(p.getNo_Dependientes());
+				    	nuevo.setNo_licencia(p.getNo_licencia());
+				    	nuevo.setNo_orden(p.getNo_orden());
+				    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
+				    	nuevo.setNo_registro(p.getNo_registro());
+				    	nuevo.setOcupacion(p.getOcupacion());
+				    	nuevo.setPais(p.getPais());
+				    	nuevo.setPrimer_apellido(p.getPrimer_apellido());
+				    	nuevo.setPrimer_nombre(p.getPrimer_nombre());
+				    	nuevo.setProfesion(p.getProfesion());
+				    	
+				    	List<SegPuesto> results5 = p.getPuestos();
+				    	if (!results5.isEmpty()) {
+						    for (SegPuesto n5 : results5) {
+
+						    	AuxPuesto pp = new AuxPuesto();
+						    	pp.setId_puesto(n5.getId_puesto());
+						    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
+							 	pp.setNombre_puesto(n5.getNombre_puesto());
+							 	pp.setFunciones(n5.getFunciones());
+							 	pp.setSalario(n5.getSalario());
+							 	pp.setActivo(n5.getActivo());
+							 	nuevo.getPuestos().add(pp);
+						    }
+				    	}
+				    	
+				    	List<SegReferenciaPersonal> results6 = p.getReferencia_personal();
+				    	if (!results6.isEmpty()) {
+						    for (SegReferenciaPersonal n6 : results6) {
+
+						    	AuxReferenciaPersonal rp = new AuxReferenciaPersonal();
+						    	rp.setId_referencia_personal(n6.getId_referencia_personal());
+						    	rp.setNombre_referencia(n6.getNombre_referencia());
+							 	rp.setTelefono(n6.getTelefono());
+							 	rp.setPuesto_candidato(n6.getPuesto_candidato());
+							 	rp.setRelacion(n6.getRelacion());
+							 	rp.setActitudes_cualidades(n6.getActitudes_cualidades());
+							 	nuevo.getReferencia_personal().add(rp);
+						    }
+				    	}
+				    	
+				    	List<SegReferenciaLaboral> results7 = p.getReferencia_laboral();
+				    	if (!results7.isEmpty()) {
+						    for (SegReferenciaLaboral n7 : results7) {
+
+						    	AuxReferenciaLaboral rl = new AuxReferenciaLaboral();
+						    	rl.setId_referencia_laboral(n7.getId_referencia_laboral());
+						    	rl.setNombre_referencia(n7.getNombre_referencia());
+							 	rl.setTelefono(n7.getTelefono());
+							 	rl.setPuesto_candidato(n7.getPuesto_candidato());
+							 	rl.setEmpresa_referencia(n7.getEmpresa_referencia());
+							 	rl.setFecha1(n7.getFecha1().getTime());
+							 	rl.setFecha2(n7.getFecha2().getTime());
+							 	rl.setMotivo_retiro(n7.getMotivo_retiro());
+							 	rl.setSalario_final(n7.getSalario_final());
+							 	rl.setActitudes_cualidades(n7.getActitudes_cualidades());
+							 	rl.setRecomiendo(n7.getRecomiendo());
+							 	nuevo.getReferencia_laboral().add(rl);
+						    }
+				    	}
+				    	nuevo.setSalario_base(p.getSalario_base());
+				    	nuevo.setSegundo_apellido(p.getSegundo_apellido());
+				    	nuevo.setSegundo_nombre(p.getSegundo_nombre());
+				    	nuevo.setSexo(p.getSexo());
+				    	nuevo.setSinIVS(p.getSinIVS());
+				    	nuevo.setTelefono(p.getTelefono());
+				    	
+				    	List<SegTest> results8 = p.getTest();
+				    	if (!results8.isEmpty()) {
+						    for (SegTest n8 : results8) {
+
+						    	AuxTest t= new AuxTest();
+						    	t.setId_test(n8.getId_test());
+						    	t.setPregunta1(n8.getPregunta1());
+							 	t.setPregunt2(n8.getPregunt2());
+							 	t.setPregunta3(n8.getPregunta3());
+							 	t.setPregunta4(n8.getPregunta4());
+							 	t.setPregunta5(n8.getPregunta5());
+							 	t.setPregunta6(n8.getPregunta6());
+							 	t.setPregunta7(n8.getPregunta7());
+							 	t.setPregunta8(n8.getPregunta8());
+							 	t.setPregunta9(n8.getPregunta9());
+							 	t.setPregunta10(n8.getPregunta10());
+							 	t.setFecha_test(n8.getFecha_test().getTime());
+							 	nuevo.getTest().add(t);
+						    }
+				    	}
+				    	nuevo.setTipo_licencia(p.getTipo_licencia());
+				    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
+				    	nuevo.setTipo_planilla(p.getTipo_planilla());
+				    	nuevo.setTotal(p.getTotal());
+				    	
+				    	List<SegVacaciones> results9 = p.getVacaciones();
+				    	if (!results9.isEmpty()) {
+						    for (SegVacaciones n9 : results9) {
+
+						    	AuxVacaciones v= new AuxVacaciones();
+						    	v.setId_vacaciones(n9.getId_vacaciones());
+						    	v.setFecha1(n9.getFecha1().getTime());
+							 	v.setFecha2(n9.getFecha2().getTime());
+							 	v.setDescripcion(n9.getDescripcion());
+							 	nuevo.getVacaciones().add(v);
+						    }
+				    	}
+			 }finally {  
+				 Persistencia.close();  
+			 }
+
+			return nuevo;
+			}
 
 
 		

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -16,12 +18,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 
 public class familiares extends Composite  {
 
-    private FlexTable flextable;
-	private VerticalPanel panel = new VerticalPanel();
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-	private Button btnAgregarHermanoa;
 	private Grid grid;
 	private Empleados empleado;
+    private FlexTable flextable;
+	private Button btnAgregarHermanoa;
+	private VerticalPanel panel = new VerticalPanel();
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	
     public familiares(Empleados e) {
 
@@ -64,6 +66,19 @@ public class familiares extends Composite  {
     private void agregarFormulario(String pariente){
         flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente,this,empleado));  	
     }
+    
+    public void agregarFormulario_lleno(List<AuxFamilia> results){
+    	if (!results.isEmpty()) {
+    		
+		    for ( AuxFamilia n2 : results) {
+		    	 formulario_familia fa = new  formulario_familia(n2.getParentesco(),this,empleado);
+		    	  fa.LlenarDatos(n2.getId_familia(),n2.getPrimer_apellido(),n2.getSegundo_apellido(),n2.getPrimer_nombre(),
+		    					 n2.getSegundo_nombre(),n2.getOcupacion(),n2.getParentesco(),""+n2.getEdad());
+		        flextable.setWidget(flextable.getRowCount(), 0,fa );
+		    }
+    	}	    
+    }
+    
     public void EliminarFormulario(final formulario_familia fa, final Long id_empledo, final Long id){
 
 		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
@@ -81,4 +96,8 @@ public class familiares extends Composite  {
 
      });
     }
+    
+ 
+    
+    
 }

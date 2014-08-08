@@ -1,6 +1,9 @@
 package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.AuxEmpleado;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -53,7 +56,7 @@ public interface LoginService extends RemoteService {
 			boolean carta_recomendacion_personal, boolean vive_con_familia,
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
-			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos)throws IllegalArgumentException;
+			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos,float amortizacion)throws IllegalArgumentException;
 	Long Insertar_Historial(Long id_empleado,Date fecha, String descripcion, 
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
@@ -102,7 +105,7 @@ public interface LoginService extends RemoteService {
 			boolean carta_recomendacion_personal, boolean vive_con_familia,
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
-			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos)throws IllegalArgumentException;
+			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos,float amortizacion)throws IllegalArgumentException;
 	Long Actualizar_Historial(Long id_empleado,Long id,Date fecha, String descripcion, 
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, 
@@ -120,6 +123,16 @@ public interface LoginService extends RemoteService {
     Long Eliminar_Entrevista(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Historial(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Vacaciones(Long id_empleado,Long id)throws IllegalArgumentException;
+    
+
+
+    ///querys
+    List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
+			String primer_apellido, String segundo_apellido) throws IllegalArgumentException;
+    
+
+    ///querys
+    AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
 
 }
 

@@ -2,7 +2,6 @@ package org.habitatguate.hgerp.seguridad.client;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -21,10 +20,17 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 public class formulario_referencia_personal extends Composite {
 
 	private Empleados empleado;
-	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private referencia_personal a;
+	private boolean bandera = true;
 	private Long id_referencia_personal = 0L;
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	
+	private TextBox txtNombre;
+	private TextBox txtPuestoCandidato;
+	private TextBox txtRelacion;
+	private TextArea txtActitudes;
+	private IntegerBox txtTelefono;
+	
 	
 	public formulario_referencia_personal(referencia_personal a,Empleados e) {
 
@@ -53,7 +59,12 @@ public class formulario_referencia_personal extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -62,14 +73,14 @@ public class formulario_referencia_personal extends Composite {
 		absolutePanel.add(btnEliminar, 255, 160);
 		btnEliminar.setSize("157px", "20px");
 		
-		final TextBox txtNombre = new TextBox();
+		txtNombre = new TextBox();
 		txtNombre.setMaxLength(200);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombre, 10, 29);
 		txtNombre.setSize("137px", "11px");
 		
-		final TextBox txtPuestoCandidato = new TextBox();
+		txtPuestoCandidato = new TextBox();
 		txtPuestoCandidato.setMaxLength(200);
 		txtPuestoCandidato.setStylePrimaryName("gwt-TextBox2");
 		txtPuestoCandidato.setStyleName("gwt-TextBox2");
@@ -81,14 +92,14 @@ public class formulario_referencia_personal extends Composite {
 		absolutePanel.add(lblEmpresa, 10, 54);
 		lblEmpresa.setSize("192px", "13px");
 		
-		final TextBox txtRelacion = new TextBox();
+		txtRelacion = new TextBox();
 		txtRelacion.setMaxLength(100);
 		txtRelacion.setStylePrimaryName("gwt-TextBox2");
 		txtRelacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtRelacion, 10, 73);
 		txtRelacion.setSize("137px", "11px");
 		
-		final TextArea txtActitudes = new TextArea();
+		txtActitudes = new TextArea();
 		txtActitudes.getElement().setAttribute("maxlength", "500");
 		txtActitudes.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtActitudes, 190, 73);
@@ -99,7 +110,7 @@ public class formulario_referencia_personal extends Composite {
 		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 190, 54);
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
-		final IntegerBox txtTelefono = new IntegerBox();
+		txtTelefono = new IntegerBox();
 		txtTelefono.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefono.getText().equals("")) {txtTelefono.setText("0");}
@@ -169,4 +180,19 @@ public class formulario_referencia_personal extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_referencia_personal);
     }
+	
+	public void LlenarDatos(Long id, String txtNombre,
+			 String txtPuestoCandidato,
+			 String txtRelacion,
+			 String txtActitudes,
+			 String txtTelefono)
+	{
+		this.id_referencia_personal = id;
+		this.bandera = false;
+		this.txtNombre.setText(txtNombre);;
+		this.txtPuestoCandidato.setText(txtPuestoCandidato);
+		this.txtRelacion.setText(txtRelacion);
+		this.txtActitudes.setText(txtActitudes);
+		this.txtTelefono.setText(txtTelefono);
+	}
 }

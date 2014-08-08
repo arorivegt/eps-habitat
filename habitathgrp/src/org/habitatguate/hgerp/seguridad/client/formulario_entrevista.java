@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -20,15 +22,46 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_entrevista extends Composite {
 
 	 private Empleados empleado;
 	 private boolean bandera = true;
-	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
      private Long id_entrevista = 0L;
+	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	
-    public formulario_entrevista(Empleados e) {
+	 private TextArea txtQueConoces;
+	 private TextArea txtPorque_Trabajar ;
+	 private TextArea txtComoDescribe ;
+	 private TextArea txtMetas;
+	 private ListBox listA;
+	 private ListBox listB ;
+	 private ListBox listC ;
+	 private ListBox listE ;
+	 private ListBox listF ;
+	 private ListBox listG ;
+	 private ListBox listH ;
+	 private ListBox listI ;
+	 private ListBox listJ;
+	 private TextArea txtEnfermedades;
+	 private TextArea txtPresion;
+	 private TextBox txtNombreEmpresa ;
+	 private ListBox listDeudas ;
+	 private ListBox listNoDependientes ;
+	 private ListBox listAlquila ;
+	 private TextArea txtOtrosIngresos ;
+	 private TextBox txtEntrevisto;
+	 private DateBox dateFecha ;
+	 private DoubleBox txtAporteCasa;
+	 private DoubleBox txtAmortizacion ;
+	 private DoubleBox txtPagoMensual ;
+	 private DoubleBox txtPretencionSalarial;
+	 
+   
+
+	public formulario_entrevista(Empleados e) {
 
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -41,7 +74,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblNivelAcademico, 115, 10);
 		lblNivelAcademico.setSize("456px", "13px");
 		
-		final TextArea txtQueConoces = new TextArea();
+		txtQueConoces = new TextArea();
 		//txtQueConoces.getElement().setAttribute("maxlength", "500");
 		txtQueConoces.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtQueConoces, 10, 48);
@@ -52,7 +85,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblQueConoce, 10, 29);
 		lblQueConoce.setSize("338px", "13px");
 		
-		final TextArea txtPorque_Trabajar = new TextArea();
+		txtPorque_Trabajar = new TextArea();
 		//txtPorque_Trabajar.getElement().setAttribute("maxlength", "500");
 		txtPorque_Trabajar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPorque_Trabajar, 379, 48);
@@ -63,7 +96,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblPorQu, 379, 29);
 		lblPorQu.setSize("338px", "13px");
 		
-		final TextArea txtComoDescribe = new TextArea();
+		txtComoDescribe = new TextArea();
 		//txtComoDescribe.getElement().setAttribute("maxlength", "500");
 		txtComoDescribe.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtComoDescribe, 10, 157);
@@ -74,7 +107,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblCmoSe, 10, 138);
 		lblCmoSe.setSize("338px", "13px");
 		
-		final TextArea txtPresion = new TextArea();
+		txtPresion = new TextArea();
 		//txtPresion.getElement().setAttribute("maxlength", "500");
 		txtPresion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPresion, 379, 157);
@@ -85,7 +118,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblpuedesTrabajar, 379, 138);
 		lblpuedesTrabajar.setSize("338px", "13px");
 		
-		final TextArea txtMetas = new TextArea();
+		txtMetas = new TextArea();
 		//txtMetas.getElement().setAttribute("maxlength", "1000");
 		txtMetas.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtMetas, 10, 263);
@@ -101,7 +134,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblATieneDisponibilidad, 37, 427);
 		lblATieneDisponibilidad.setSize("293px", "13px");
 		
-		final ListBox listA = new ListBox();
+		listA = new ListBox();
 		listA.addItem("Si");
 		listA.addItem("No");
 		listA.setStyleName("gwt-TextBox2");
@@ -113,7 +146,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblBTieneDisposicin, 37, 452);
 		lblBTieneDisposicin.setSize("511px", "13px");
 		
-		final ListBox listB = new ListBox();
+		listB = new ListBox();
 		listB.addItem("Si");
 		listB.addItem("No");
 		listB.setStyleName("gwt-TextBox2");
@@ -125,7 +158,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblCTieneFlexibilidad, 37, 477);
 		lblCTieneFlexibilidad.setSize("524px", "13px");
 		
-		final ListBox listC = new ListBox();
+		listC = new ListBox();
 		listC.addItem("Si");
 		listC.addItem("No");
 		listC.setStyleName("gwt-TextBox2");
@@ -152,28 +185,28 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblHCartasDe, 37, 577);
 		lblHCartasDe.setSize("511px", "13px");
 		
-		final ListBox listE = new ListBox();
+		listE = new ListBox();
 		listE.addItem("Si");
 		listE.addItem("No");
 		listE.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listE, 567, 496);
 		listE.setSize("137px", "19px");
 		
-		final ListBox listF = new ListBox();
+		listF = new ListBox();
 		listF.addItem("Si");
 		listF.addItem("No");
 		listF.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listF, 567, 521);
 		listF.setSize("137px", "19px");
 		
-		final ListBox listG = new ListBox();
+		listG = new ListBox();
 		listG.addItem("Si");
 		listG.addItem("No");
 		listG.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listG, 567, 546);
 		listG.setSize("137px", "19px");
 		
-		final ListBox listH = new ListBox();
+		listH = new ListBox();
 		listH.addItem("Si");
 		listH.addItem("No");
 		listH.setStyleName("gwt-TextBox2");
@@ -185,7 +218,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblEnfermedades, 10, 654);
 		lblEnfermedades.setSize("338px", "13px");
 		
-		final TextArea txtEnfermedades = new TextArea();
+		txtEnfermedades = new TextArea();
 		txtEnfermedades.getElement().setAttribute("maxlength", "500");
 		txtEnfermedades.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEnfermedades, 10, 673);
@@ -196,7 +229,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblI, 37, 602);
 		lblI.setSize("511px", "13px");
 		
-		final ListBox listI = new ListBox();
+		listI = new ListBox();
 		listI.addItem("Si");
 		listI.addItem("No");
 		listI.setStyleName("gwt-TextBox2");
@@ -208,7 +241,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblAporteCasa, 20, 787);
 		lblAporteCasa.setSize("75px", "13px");
 		
-		final ListBox listDeudas = new ListBox();
+		listDeudas = new ListBox();
 		listDeudas.addItem("Si");
 		listDeudas.addItem("No");
 		listDeudas.setStyleName("gwt-TextBox2");
@@ -230,13 +263,13 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblNombreDeLa, 488, 787);
 		lblNombreDeLa.setSize("229px", "13px");
 		
-		final TextBox txtNombreEmpresa = new TextBox();
+		txtNombreEmpresa = new TextBox();
 		txtNombreEmpresa.setMaxLength(200);
 		txtNombreEmpresa.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreEmpresa, 488, 812);
 		txtNombreEmpresa.setSize("209px", "11px");
 		
-		final ListBox listNoDependientes = new ListBox();
+		listNoDependientes = new ListBox();
 		listNoDependientes.addItem("0");
 		listNoDependientes.addItem("1");
 		listNoDependientes.addItem("2");
@@ -278,7 +311,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblPagoMensual, 485, 837);
 		lblPagoMensual.setSize("137px", "13px");
 		
-		final ListBox listAlquila = new ListBox();
+		listAlquila = new ListBox();
 		listAlquila.addItem("Si");
 		listAlquila.addItem("No");
 		listAlquila.setStyleName("gwt-TextBox2");
@@ -290,7 +323,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblAlquila, 330, 837);
 		lblAlquila.setSize("81px", "13px");
 		
-		final ListBox listJ = new ListBox();
+		listJ = new ListBox();
 		listJ.addItem("Si");
 		listJ.addItem("No");
 		listJ.setStyleName("gwt-TextBox2");
@@ -312,13 +345,13 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblOtrosIngresos, 10, 939);
 		lblOtrosIngresos.setSize("338px", "13px");
 		
-		final TextArea txtOtrosIngresos = new TextArea();
+		txtOtrosIngresos = new TextArea();
 		//txtOtrosIngresos.getElement().setAttribute("maxlength", "500");
 		txtOtrosIngresos.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtOtrosIngresos, 10, 958);
 		txtOtrosIngresos.setSize("687px", "100px");
 		
-		final TextBox txtEntrevisto = new TextBox();
+		txtEntrevisto = new TextBox();
 		txtEntrevisto.setMaxLength(500);
 		txtEntrevisto.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEntrevisto, 175, 906);
@@ -329,14 +362,29 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(lblEntrevisto, 175, 887);
 		lblEntrevisto.setSize("137px", "13px");
 		
-		final DateBox dateFecha = new DateBox();
+		dateFecha = new DateBox();
+		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
+				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFecha.setValue(new Date(1407518819070L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 175, 862);
 		dateFecha.setSize("117px", "11px");
 		
-		final DoubleBox txtAporteCasa = new DoubleBox();
+		txtAporteCasa = new DoubleBox();
 		txtAporteCasa.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtAporteCasa.getText().equals("")) {txtAporteCasa.setText("0");}
@@ -356,7 +404,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(txtAporteCasa, 20, 812);
 		txtAporteCasa.setSize("117px", "11px");
 		
-		final DoubleBox txtAmortizacion = new DoubleBox();
+		txtAmortizacion = new DoubleBox();
 		txtAmortizacion.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtAmortizacion.getText().equals("")) {txtAmortizacion.setText("0");}
@@ -376,7 +424,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(txtAmortizacion, 330, 812);
 		txtAmortizacion.setSize("117px", "11px");
 		
-		final DoubleBox txtPagoMensual = new DoubleBox();
+		txtPagoMensual = new DoubleBox();
 		txtPagoMensual.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtPagoMensual.getText().equals("")) {txtPagoMensual.setText("0");}
@@ -396,7 +444,7 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(txtPagoMensual, 485, 862);
 		txtPagoMensual.setSize("117px", "11px");
 		
-		final DoubleBox txtPretencionSalarial = new DoubleBox();
+		txtPretencionSalarial = new DoubleBox();
 		txtPretencionSalarial.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtPretencionSalarial.getText().equals("")) {txtPretencionSalarial.setText("0");}
@@ -430,8 +478,8 @@ public class formulario_entrevista extends Composite {
                             listJ.getItemText(listJ.getSelectedIndex()).equals("Si"), txtEntrevisto.getText(), txtEnfermedades.getText(),  
                             Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
                             Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getText(),  
-                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtAmortizacion.getText()),
-			                txtOtrosIngresos.getTitle(), new AsyncCallback<Long>(){
+                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
+			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                             Window.alert("Error  al Guardar Datos"+caught);
@@ -457,8 +505,8 @@ public class formulario_entrevista extends Composite {
 	                            listJ.getItemText(listJ.getSelectedIndex()).equals("Si"), txtEntrevisto.getText(), txtEnfermedades.getText(),  
 	                            Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
 	                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getText(),  
-	                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtAmortizacion.getText()),
-				                txtOtrosIngresos.getTitle(),new AsyncCallback<Long>(){
+	                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
+				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
 	                        {
 	                            Window.alert("Error  al Actualizar Datos"+caught);
@@ -481,4 +529,97 @@ public class formulario_entrevista extends Composite {
 		absolutePanel.add(button, 290, 1088);
 		button.setSize("198px", "32px");
 	}
+	
+	public void LlenarDatos(Long id, String txtQueConoces,
+			String txtPorque_Trabajar, String txtComoDescribe,
+			String txtMetas, String listA, String listB, String listC,
+			String listE, String listF, String listG, String listH,
+			String listI, String listJ, String txtEnfermedades,
+			String txtPresion, String txtNombreEmpresa, String listDeudas,
+			String listNoDependientes, String listAlquila,
+			String txtOtrosIngresos, String txtEntrevisto,
+			Long dateFecha, String txtAporteCasa,
+			String txtAmortizacion, String txtPagoMensual,
+			String txtPretencionSalarial) {
+
+		this.id_entrevista = id;
+		this.bandera = false;
+		this.txtQueConoces.setText( txtQueConoces);
+		this.txtPorque_Trabajar.setText( txtPorque_Trabajar);
+		this.txtComoDescribe.setText( txtComoDescribe);
+		this.txtMetas.setText( txtMetas);
+		this.txtEnfermedades.setText(txtEnfermedades);
+		this.txtPresion.setText(txtPresion);
+		this.txtNombreEmpresa.setText(txtNombreEmpresa);
+		this.txtOtrosIngresos.setText(txtOtrosIngresos);
+		this.txtEntrevisto.setText(txtEntrevisto);
+		this.dateFecha.setValue(new Date(dateFecha));
+		this.txtAporteCasa.setText(txtAporteCasa);
+		this.txtAmortizacion.setText(txtAmortizacion);
+		this.txtPagoMensual.setText(txtPagoMensual);
+		this.txtPretencionSalarial.setText(txtPretencionSalarial);
+		boolean bandera = true;
+	    for(int i=0; i < this.listA .getItemCount() && bandera; i++){
+	    	bandera = !this.listA .getItemText(i).equals(listA );
+	    	this.listA .setSelectedIndex(i);
+	    }
+	    bandera = true;
+	    for(int i=0; i < this.listB.getItemCount() && bandera; i++){
+	        bandera = !this.listB.getItemText(i).equals(listB);
+	        this.listB.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listC.getItemCount() && bandera; i++){
+	        bandera = !this.listC.getItemText(i).equals(listC);
+	        this.listC.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listE.getItemCount() && bandera; i++){
+	        bandera = !this.listE.getItemText(i).equals(listE);
+	        this.listE.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listF.getItemCount() && bandera; i++){
+	        bandera = !this.listF.getItemText(i).equals(listF);
+	        this.listF.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listG.getItemCount() && bandera; i++){
+	        bandera = !this.listG.getItemText(i).equals(listG);
+	        this.listG.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listH.getItemCount() && bandera; i++){
+	        bandera = !this.listH.getItemText(i).equals(listH);
+	        this.listH.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listI.getItemCount() && bandera; i++){
+	        bandera = !this.listI.getItemText(i).equals(listI);
+	        this.listI.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listJ.getItemCount() && bandera; i++){
+	        bandera = !this.listJ.getItemText(i).equals(listJ);
+	        this.listJ.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listDeudas.getItemCount() && bandera; i++){
+	        bandera = !this.listDeudas.getItemText(i).equals(listDeudas);
+	        this.listDeudas.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listNoDependientes.getItemCount() && bandera; i++){
+	        bandera = !this.listNoDependientes.getItemText(i).equals(listNoDependientes);
+	        this.listNoDependientes.setSelectedIndex(i);
+	    }   
+	    bandera = true;
+	    for(int i=0; i < this.listAlquila.getItemCount() && bandera; i++){
+	        bandera = !this.listAlquila.getItemText(i).equals(listAlquila);
+	        this.listAlquila.setSelectedIndex(i);
+	    }   
+	    
+			
+			
+		}
 }

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -17,15 +19,32 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_prueba_periodo extends Composite {
 
 	 	private Empleados empleado;
+		private Long id_prueba = 0L;
 		private boolean bandera = true;
 	    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-		private Long id_prueba = 0L;
 		
-	 
+	    private ListBox listPregunta1;
+		private ListBox listPregunta2;
+		private ListBox listPregunta3;
+		private ListBox listPregunta4;
+		private ListBox listPregunta5;
+		private ListBox listPregunta6;
+
+		private ListBox listPregunta7;
+		private ListBox listPregunta8;
+		private ListBox listPregunta9;
+		private ListBox listPregunta10;
+		private TextBox txtEvaluador;
+		private TextBox txtAprobo;
+		private DoubleBox txtPunteoTotal;
+		private DateBox dateFecha ;
+		
 	public formulario_prueba_periodo(Empleados e) {
 
 		this.empleado = e;
@@ -39,7 +58,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblNivelAcademico, 115, 10);
 		lblNivelAcademico.setSize("456px", "13px");
 		
-		final ListBox listPregunta1 = new ListBox();
+		listPregunta1 = new ListBox();
 		listPregunta1.addItem("0");
 		listPregunta1.addItem("1");
 		listPregunta1.addItem("2");
@@ -85,7 +104,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblLaInformacinQue, 37, 327);
 		lblLaInformacinQue.setSize("511px", "13px");
 		
-		final ListBox listPregunta2 = new ListBox();
+		listPregunta2 = new ListBox();
 		listPregunta2.addItem("0");
 		listPregunta2.addItem("1");
 		listPregunta2.addItem("2");
@@ -106,7 +125,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblTieneClarosLos, 37, 352);
 		lblTieneClarosLos.setSize("524px", "13px");
 		
-		final ListBox listPregunta3 = new ListBox();
+		listPregunta3 = new ListBox();
 		listPregunta3.addItem("0");
 		listPregunta3.addItem("1");
 		listPregunta3.addItem("2");
@@ -127,7 +146,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblLosResultadosQue, 37, 377);
 		lblLosResultadosQue.setSize("293px", "13px");
 		
-		final ListBox listPregunta4 = new ListBox();
+		 listPregunta4 = new ListBox();
 		listPregunta4.addItem("0");
 		listPregunta4.addItem("1");
 		listPregunta4.addItem("2");
@@ -148,7 +167,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblProporcionaUnClima, 37, 405);
 		lblProporcionaUnClima.setSize("511px", "13px");
 		
-		final ListBox listPregunta5 = new ListBox();
+		listPregunta5 = new ListBox();
 		listPregunta5.addItem("0");
 		listPregunta5.addItem("1");
 		listPregunta5.addItem("2");
@@ -169,7 +188,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblSuDisposicinDe, 37, 430);
 		lblSuDisposicinDe.setSize("511px", "13px");
 		
-		final ListBox listPregunta6 = new ListBox();
+		listPregunta6 = new ListBox();
 		listPregunta6.addItem("0");
 		listPregunta6.addItem("1");
 		listPregunta6.addItem("2");
@@ -205,7 +224,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblTieneClarasSus, 37, 455);
 		lblTieneClarasSus.setSize("511px", "13px");
 		
-		final ListBox listPregunta10 = new ListBox();
+		listPregunta10 = new ListBox();
 		listPregunta10.addItem("0");
 		listPregunta10.addItem("1");
 		listPregunta10.addItem("2");
@@ -221,7 +240,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(listPregunta10, 567, 527);
 		listPregunta10.setSize("137px", "19px");
 		
-		final ListBox listPregunta9 = new ListBox();
+		listPregunta9 = new ListBox();
 		listPregunta9.addItem("0");
 		listPregunta9.addItem("1");
 		listPregunta9.addItem("2");
@@ -237,7 +256,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(listPregunta9, 567, 499);
 		listPregunta9.setSize("137px", "19px");
 		
-		final ListBox listPregunta8 = new ListBox();
+		listPregunta8 = new ListBox();
 		listPregunta8.addItem("0");
 		listPregunta8.addItem("1");
 		listPregunta8.addItem("2");
@@ -253,7 +272,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(listPregunta8, 567, 474);
 		listPregunta8.setSize("137px", "19px");
 		
-		final ListBox listPregunta7 = new ListBox();
+		listPregunta7 = new ListBox();
 		listPregunta7.addItem("0");
 		listPregunta7.addItem("1");
 		listPregunta7.addItem("2");
@@ -274,7 +293,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblPunteoTotal, 473, 552);
 		lblPunteoTotal.setSize("75px", "13px");
 		
-		final TextBox txtEvaluador = new TextBox();
+		txtEvaluador = new TextBox();
 		txtEvaluador.setMaxLength(500);
 		txtEvaluador.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEvaluador, 93, 611);
@@ -290,7 +309,7 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblFecha, 283, 611);
 		lblFecha.setSize("75px", "13px");
 		
-		final TextBox txtAprobo = new TextBox();
+		txtAprobo = new TextBox();
 		txtAprobo.setMaxLength(200);
 		txtAprobo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtAprobo, 567, 611);
@@ -301,12 +320,27 @@ public class formulario_prueba_periodo extends Composite {
 		absolutePanel.add(lblAprobo, 521, 611);
 		lblAprobo.setSize("75px", "13px");
 		
-		final DoubleBox txtPunteoTotal = new DoubleBox();
+		txtPunteoTotal = new DoubleBox();
 		txtPunteoTotal.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPunteoTotal, 567, 552);
 		txtPunteoTotal.setSize("117px", "11px");
 		
-		final DateBox dateFecha = new DateBox();
+		dateFecha = new DateBox();
+		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
+				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFecha.setValue(new Date(1407518999395L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
@@ -368,6 +402,69 @@ public class formulario_prueba_periodo extends Composite {
 		btnGuardar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(btnGuardar, 269, 720);
 		btnGuardar.setSize("198px", "32px");
+	}
+	
+	public  void LlenarDatos(Long id, String listPregunta1,
+			String listPregunta2, String listPregunta3,
+			String listPregunta4, String listPregunta5,
+			String listPregunta6, String listPregunta7,
+			String listPregunta8, String listPregunta9,
+			String listPregunta10, String txtEvaluador, Long dateFecha) {
+
+		this.id_prueba = id;
+		this.bandera = false;
+		boolean bandera = true;
+		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
+			this.listPregunta1.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta2.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta2.getItemText(i).equals(listPregunta2);
+			this.listPregunta2.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta3.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta3.getItemText(i).equals(listPregunta3);
+			this.listPregunta3.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta4.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta4.getItemText(i).equals(listPregunta4);
+			this.listPregunta4.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta5.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta5.getItemText(i).equals(listPregunta5);
+			this.listPregunta5.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta6.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta6.getItemText(i).equals(listPregunta6);
+			this.listPregunta6.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta7.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta7.getItemText(i).equals(listPregunta7);
+			this.listPregunta7.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta8.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta8.getItemText(i).equals(listPregunta8);
+			this.listPregunta8.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta9.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta9.getItemText(i).equals(listPregunta9);
+			this.listPregunta9.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listPregunta10.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta10.getItemText(i).equals(listPregunta10);
+			this.listPregunta10.setSelectedIndex(i);
+		}
+		this.txtEvaluador.setText(txtEvaluador);
+		this.dateFecha.setValue(new Date(dateFecha));
 	}
 
 }

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
@@ -20,14 +22,27 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_referencia_laboral extends Composite {
 
 	private Empleados empleado;
-	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 	private referencia_laboral a;
+	private boolean bandera = true;
 	private Long id_referencia_laboral = 0L;
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	
+	private TextBox txtNombre;
+	private TextBox txtEmpresa;
+	private ListBox listRecomienda;
+	private TextArea txtMotivoRetiro;
+	private TextArea txtActitudes;
+	private IntegerBox txtTelefono;
+	private DateBox dateFecha1;
+	private DateBox dateFecha2;
+	private TextBox txtSalarioFinal;
+	private TextBox txtPuestoCandidato;
 	
 	public formulario_referencia_laboral(referencia_laboral a,Empleados e) {
 
@@ -57,7 +72,12 @@ public class formulario_referencia_laboral extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -71,14 +91,14 @@ public class formulario_referencia_laboral extends Composite {
 		absolutePanel.add(lblAos, 584, 10);
 		lblAos.setSize("103px", "13px");
 		
-		final TextBox txtNombre = new TextBox();
+		txtNombre = new TextBox();
 		txtNombre.setMaxLength(200);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombre, 10, 29);
 		txtNombre.setSize("137px", "11px");
 		
-		final TextBox txtPuestoCandidato = new TextBox();
+		txtPuestoCandidato = new TextBox();
 		txtPuestoCandidato.setMaxLength(200);
 		txtPuestoCandidato.setStylePrimaryName("gwt-TextBox2");
 		txtPuestoCandidato.setStyleName("gwt-TextBox2");
@@ -90,7 +110,7 @@ public class formulario_referencia_laboral extends Composite {
 		absolutePanel.add(lblEmpresa, 10, 54);
 		lblEmpresa.setSize("192px", "13px");
 		
-		final TextBox txtEmpresa = new TextBox();
+		txtEmpresa = new TextBox();
 		txtEmpresa.setMaxLength(100);
 		txtEmpresa.setStylePrimaryName("gwt-TextBox2");
 		txtEmpresa.setStyleName("gwt-TextBox2");
@@ -112,20 +132,20 @@ public class formulario_referencia_laboral extends Composite {
 		absolutePanel.add(lblLoRecomienda, 374, 54);
 		lblLoRecomienda.setSize("103px", "13px");
 		
-		final ListBox listRecomienda = new ListBox();
+		listRecomienda = new ListBox();
 		listRecomienda.addItem("Si");
 		listRecomienda.addItem("No");
 		listRecomienda.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listRecomienda, 374, 73);
 		listRecomienda.setSize("157px", "19px");
 		
-		final TextArea txtMotivoRetiro = new TextArea();
+		txtMotivoRetiro = new TextArea();
 		txtMotivoRetiro.getElement().setAttribute("maxlength", "500");
 		txtMotivoRetiro.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtMotivoRetiro, 10, 122);
 		txtMotivoRetiro.setSize("317px", "61px");
 		
-		final TextArea txtActitudes = new TextArea();
+		txtActitudes = new TextArea();
 		txtActitudes.getElement().setAttribute("maxlength", "500");
 		txtActitudes.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtActitudes, 374, 126);
@@ -136,7 +156,7 @@ public class formulario_referencia_laboral extends Composite {
 		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 374, 107);
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
-		final IntegerBox txtTelefono = new IntegerBox();
+		txtTelefono = new IntegerBox();
 		txtTelefono.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefono.getText().equals("")) {txtTelefono.setText("0");}
@@ -159,26 +179,57 @@ public class formulario_referencia_laboral extends Composite {
 		absolutePanel.add(txtTelefono, 190, 29);
 		txtTelefono.setSize("137px", "11px");
 		
-		final DateBox dateFecha1 = new DateBox();
+		dateFecha1 = new DateBox();
+		dateFecha1.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha1.getValue().equals(null)) {dateFecha1.setValue(new Date(1407518124684L));}
+				else if(dateFecha1.getValue().equals("")) {dateFecha1.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha1.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha1.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+			
+		});
+		dateFecha1.setValue(new Date(1407519069711L));
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha1, 548, 29);
-		dateFecha1.setSize("50px", "11px");
+		absolutePanel.add(dateFecha1, 537, 29);
+		dateFecha1.setSize("75px", "11px");
 		 
-		final DateBox dateFecha2 = new DateBox();
+		dateFecha2 = new DateBox();
+		dateFecha2.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				if(dateFecha2.getValue().equals(null)) {dateFecha2.setValue(new Date(1407518124684L));}
+				else if(dateFecha2.getValue().equals("")) {dateFecha2.setValue(new Date(1407518124684L));}
+				else{
+					try{
+						new Date(dateFecha2.getValue().getTime());
+					}catch(Exception e){
+						Window.alert("Fecha No valida");
+						dateFecha2.setValue(new Date(1407518124684L));
+					}
+				}
+			}
+		});
+		dateFecha2.setValue(new Date(1407519076388L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha2, 643, 29);
-		dateFecha2.setSize("50px", "11px");
+		absolutePanel.add(dateFecha2, 649, 29);
+		dateFecha2.setSize("73px", "11px");
 		
 		Label label = new Label("al");
 		label.setStyleName("label");
-		absolutePanel.add(label, 624, 35);
+		absolutePanel.add(label, 635, 29);
 		label.setSize("38px", "13px");
 		
-		final TextBox txtSalarioFinal = new TextBox();
+		txtSalarioFinal = new TextBox();
 		txtSalarioFinal.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtSalarioFinal.getText().equals("")) {txtSalarioFinal.setText("0");}
@@ -251,4 +302,33 @@ public class formulario_referencia_laboral extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_referencia_laboral);
     }
+	
+	public void LlenarDatos(Long id,  String txtNombre,
+			 String txtEmpresa,
+			 String listRecomienda,
+			 String txtMotivoRetiro,
+			 String txtActitudes,
+			 String txtTelefono,
+			 Long dateFecha1,
+			 Long dateFecha2,
+			 String txtSalarioFinal,
+			 String txtPuestoCandidato)
+	{
+		this.id_referencia_laboral = id;
+		this.bandera = false;
+		this.txtNombre.setText(txtNombre);
+		this.txtEmpresa.setText(txtEmpresa);
+		boolean bandera = true;
+		for(int i=0; i < this.listRecomienda.getItemCount() && bandera; i++){
+			bandera = !this.listRecomienda.getItemText(i).endsWith(listRecomienda);
+		    this.listRecomienda.setSelectedIndex(i);
+		}
+		this.txtMotivoRetiro.setText(txtMotivoRetiro);;
+		this.txtActitudes.setText(txtActitudes);
+		this.txtTelefono.setText(txtTelefono);
+		this.dateFecha1.setValue(new Date(dateFecha1));
+		this.dateFecha2.setValue(new Date(dateFecha2));
+		this.txtSalarioFinal.setText(txtSalarioFinal);
+		this.txtPuestoCandidato.setText(txtPuestoCandidato);
+	}
 }

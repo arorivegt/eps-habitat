@@ -18,10 +18,14 @@ import com.google.gwt.user.client.ui.TextBox;
 public class formulario_idiomas extends Composite {
 
 	private Idioma a;
-	private Long id_idioma = 0L;
 	private Empleados empleado;
+	private Long id_idioma = 0L;
 	private boolean bandera = true;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    
+    private ListBox listNivel;
+    private TextBox txtIdioma;
+    
 	public formulario_idiomas(Idioma a,Empleados e) {
 
 		this.empleado = e;
@@ -45,7 +49,12 @@ public class formulario_idiomas extends Composite {
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				EliminarFormulario();
+
+				if(bandera){
+					Window.alert("No se a guardado los datos");
+				}else{
+					EliminarFormulario();
+				}
 			}
 		});
 		btnEliminar.setText("Eliminar");
@@ -54,7 +63,7 @@ public class formulario_idiomas extends Composite {
 		absolutePanel.add(btnEliminar, 527, 29);
 		btnEliminar.setSize("157px", "20px");
 		
-		final ListBox listNivel = new ListBox();
+		listNivel = new ListBox();
 		listNivel.addItem("Avanzado");
 		listNivel.addItem("Intermedio");
 		listNivel.addItem("Principiante");
@@ -62,7 +71,7 @@ public class formulario_idiomas extends Composite {
 		absolutePanel.add(listNivel, 188, 29);
 		listNivel.setSize("140px", "19px");
 		
-		final TextBox txtIdioma = new TextBox();
+		txtIdioma = new TextBox();
 		txtIdioma.setStyleName("gwt-TextBox2");
 		txtIdioma.setMaxLength(100);
 		absolutePanel.add(txtIdioma, 10, 29);
@@ -116,5 +125,18 @@ public class formulario_idiomas extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_idioma);
     }
+	
+	public void LlenarDatos(Long id, String listNivel, String txtIdioma)
+	{
+		this.id_idioma = id;
+		this.bandera = false;
+		this.txtIdioma.setText(txtIdioma);
+		boolean bandera = true;
+		for(int i=0; i < this.listNivel.getItemCount() && bandera; i++){
+			bandera = !this.listNivel.getItemText(i).equals(listNivel);
+		    this.listNivel.setSelectedIndex(i);
+		}
+		
+	}
 
 }

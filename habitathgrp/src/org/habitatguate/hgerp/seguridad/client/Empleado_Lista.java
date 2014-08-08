@@ -1,0 +1,63 @@
+package org.habitatguate.hgerp.seguridad.client;
+
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.ScrollPanel;
+
+public class Empleado_Lista extends Composite {
+	
+    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private FlexTable flexTable ;
+    private Empleado_Lista a;
+	public Empleado_Lista() {
+		this.a =this;
+		VerticalPanel verticalPanel = new VerticalPanel();
+		initWidget(verticalPanel);
+		verticalPanel.setSize("761px", "85px");
+		
+		ScrollPanel scrollPanel = new ScrollPanel();
+		verticalPanel.add(scrollPanel);
+		scrollPanel.setHeight("462px");
+		
+		flexTable = new FlexTable();
+		scrollPanel.setWidget(flexTable);
+		flexTable.setSize("100%", "490px");
+	}
+	
+    public void agregarFormulario(final char tipo, final Buscador_Empleados b, final String primer_nombre, String segundo_nombre, 
+			String primer_apellido, String segundo_apellido){
+    	System.out.println("tipo "+tipo);
+    	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
+						primer_apellido, segundo_apellido,new AsyncCallback<List<AuxEmpleado>>(){
+            public void onFailure(Throwable caught) 
+            {
+                Window.alert("No hay resultados "+caught);
+            }
+
+			@Override
+            public void onSuccess( List<AuxEmpleado> result)
+            {
+				for(AuxEmpleado p : result) {
+			        flexTable.setWidget(flexTable.getRowCount(), 0, new Empleado_Item(b,a,p.getId_empleado(),p.getPrimer_nombre(),
+			        		p.getSegundo_nombre(),p.getPrimer_apellido(),p.getSegundo_apellido()));
+				}
+            }
+
+     });
+    }
+    
+    public void EliminarFormulario(final Empleado_Item a){
+    	flexTable.remove(a);
+    }
+    
+
+}

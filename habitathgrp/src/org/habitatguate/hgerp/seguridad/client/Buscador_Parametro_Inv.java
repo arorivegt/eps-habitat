@@ -1,15 +1,19 @@
 package org.habitatguate.hgerp.seguridad.client;
+import java.util.Iterator;
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
-import com.google.gwt.core.client.GWT;
+import org.habitatguate.hgerp.seguridad.service.segParametro;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
-
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
@@ -19,7 +23,6 @@ import com.google.gwt.user.client.ui.Button;
 
 public class Buscador_Parametro_Inv extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-    		
     
 	public Buscador_Parametro_Inv(){
 
@@ -85,21 +88,41 @@ public class Buscador_Parametro_Inv extends Composite {
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
+			/*loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
 					new AsyncCallback<String[]>(){
                 public void onFailure(Throwable caught) 
                 {
-                    Window.alert("Error  al Actualizar Datos"+caught);
+                    Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
                 }
 
 				@Override
                 public void onSuccess(String[] result)
                 {
 
-                	Window.alert("Datos Actualizados exitosamente!!!");
+                	Window.alert("Datos Almacenados Correctamente");
+                	textBox.setText("");
+                	textBox_1.setText("");
+                	textBox_2.setText("");
+                	textBox_3.setText("");
                 }
 
-         });
+         });*/
+			loginService.ConsultaTodosParam(new AsyncCallback<List<segParametro>>() {
+				
+				@Override
+				public void onSuccess(List<segParametro> result) {
+					Iterator<segParametro> iter = result.iterator();
+					while (iter.hasNext())
+					  System.out.println(iter.next().getNomParametro());	
+					
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {
+					System.out.println(caught);
+					
+				}
+			});
 		}
 	});		
 
@@ -117,7 +140,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	TablasEntryPoint e = new TablasEntryPoint();
 	grid.setWidget(1, 0,e);
 	e.setSize("1187px", "648px");
-   
+    
    
 }
 		

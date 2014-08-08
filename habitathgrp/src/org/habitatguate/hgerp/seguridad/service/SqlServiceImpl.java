@@ -1,12 +1,15 @@
 package org.habitatguate.hgerp.seguridad.service;
 
 
+import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 @SuppressWarnings("serial")
 public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
@@ -28,5 +31,16 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		
 		return null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<segParametro> ConsultaTodosParam(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(segParametro.class); 
+		List<segParametro> execute = (List<segParametro>)query.execute("Google App Engine");
+		return execute;
+	}
+
+
+	
 	
 }

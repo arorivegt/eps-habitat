@@ -937,7 +937,6 @@ public class formulario_datos extends Composite {
 	                            public void onSuccess(Long result)
 	                            {
 	                            	bandera = false;
-	                            	empleado.Nuevas_Pestañas();
 	                                Window.alert("Datos Actualizados exitosamente!!! "+id_empleado);
 	                            }
 

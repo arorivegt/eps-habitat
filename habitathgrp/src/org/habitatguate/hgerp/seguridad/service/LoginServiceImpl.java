@@ -59,16 +59,16 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	}
 
 	@Override
-	public Long Insertar_Emppleado(int intafiliacion_igss,
+	public Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
-            String pais, String nit,int no_Dependientes,String no_orden, int no_registro, int cui,
-            String tipo_pasaporte, int no_pasaporte,
+            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
+            String tipo_pasaporte, String no_pasaporte,
             String depto_municipio_cedula, String direccion_actual,
-            String depto_municipio_residencia, String email, int telefono,
-            int celular, Date fecha_nacimiento, String tipo_licencia,
-            int no_licencia, String centro_trabajo, String ocupacion,
+            String depto_municipio_residencia, String email, String telefono,
+            String celular, Date fecha_nacimiento, String tipo_licencia,
+            String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion) throws IllegalArgumentException {
@@ -80,7 +80,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		 try { 
 			  
 			 SegEmpleado e = new SegEmpleado();
-			 e.setAfiliacion_igss(intafiliacion_igss);
+			 e.setAfiliacion_igss(afiliacion_igss);
 	         e.setEstado_civil(estado_civil);
 	         e.setSexo(sexo);
 	         e.setPrimer_apellido(primer_apellido.toUpperCase());
@@ -93,7 +93,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setPais(pais);
 	         e.setNit(nit);
 	         e.setFecha_nacimiento(fecha_nacimiento);
-	         e.setNo_Dependientes(no_Dependientes);
+	         e.setNo_Dependientes(No_Dependientes);
 	         e.setNo_orden(no_orden.toUpperCase());
 	         e.setNo_registro(no_registro);
 	         e.setCui(cui);
@@ -184,7 +184,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 	@Override
 	public Long Insertar_Referencia_Laboral(Long id_empleado,
-			String nombre_referencia, int telefono, String puesto_candidato,
+			String nombre_referencia, String telefono, String puesto_candidato,
 			String empresa_referencia, Date fecha1, Date fecha2,
 			String motivo_retiro, float salario_final,
 			String actitudes_cualidades, String recomiendo)
@@ -216,7 +216,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 	@Override
 	public Long Insertar_Referencia_Personal(Long id_empleado,
-			String nombre_referencia, int telefono, String puesto_candidato,
+			String nombre_referencia, String telefono, String puesto_candidato,
 			String relacion, String actitudes_cualidades)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
@@ -414,16 +414,16 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	
 	///metodos para Actualizar en las diferentes entidades
 			@Override
-			public Long Actualizar_Emppleado(Long id,int intafiliacion_igss,
+			public Long Actualizar_Emppleado(Long id,String afiliacion_igss,
 		            String estado_civil, String sexo, String primer_apellido,
 		            String segundo_apellido, String apellido_casada,
 		            String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
-		            String pais, String nit,int no_Dependientes,String no_orden, int no_registro, int cui,
-		            String tipo_pasaporte, int no_pasaporte,
+		            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
+		            String tipo_pasaporte, String no_pasaporte,
 		            String depto_municipio_cedula, String direccion_actual,
-		            String depto_municipio_residencia, String email, int telefono,
-		            int celular, Date fecha_nacimiento, String tipo_licencia,
-		            int no_licencia, String centro_trabajo, String ocupacion,
+		            String depto_municipio_residencia, String email, String telefono,
+		            String celular, Date fecha_nacimiento, String tipo_licencia,
+		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
 		            String tipo_planilla, float salario_base, float total,
 		            float bonificacion) throws IllegalArgumentException {
@@ -433,7 +433,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 					 try {  
 							 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id); 
-							 e.setAfiliacion_igss(intafiliacion_igss);
+							 e.setAfiliacion_igss(afiliacion_igss);
 					         e.setEstado_civil(estado_civil);
 					         e.setSexo(sexo);
 					         e.setPrimer_apellido(primer_apellido.toUpperCase());
@@ -446,7 +446,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					         e.setPais(pais);
 					         e.setNit(nit);
 					         e.setFecha_nacimiento(fecha_nacimiento);
-					         e.setNo_Dependientes(no_Dependientes);
+					         e.setNo_Dependientes(No_Dependientes);
 					         e.setNo_orden(no_orden.toUpperCase());
 					         e.setNo_registro(no_registro);
 					         e.setCui(cui);
@@ -533,7 +533,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 			@Override
 			public Long Actualizar_Referencia_Laboral(Long id_empleado,Long id,
-					String nombre_referencia, int telefono, String puesto_candidato,
+					String nombre_referencia, String telefono, String puesto_candidato,
 					String empresa_referencia, Date fecha1, Date fecha2,
 					String motivo_retiro, float salario_final,
 					String actitudes_cualidades, String recomiendo)
@@ -566,7 +566,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 			@Override
 			public Long Actualizar_Referencia_Personal(Long id_empleado,Long id,
-					String nombre_referencia, int telefono, String puesto_candidato,
+					String nombre_referencia, String telefono, String puesto_candidato,
 					String relacion, String actitudes_cualidades)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;

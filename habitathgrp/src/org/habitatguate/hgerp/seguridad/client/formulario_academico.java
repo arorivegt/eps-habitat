@@ -18,9 +18,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-
 public class formulario_academico extends Composite {
 	
 	private academico a;
@@ -100,21 +97,6 @@ public class formulario_academico extends Composite {
 		lblAl.setSize("23px", "13px");
 		
 		dateInicio = new DateBox();
-		dateInicio.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateInicio.getValue().equals(null)) {dateInicio.setValue(new Date(1407518124684L));}
-				else if(dateInicio.getValue().equals("")) {dateInicio.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateInicio.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateInicio.setValue(new Date(1407518124684L));
-					}
-				}
-			
-			}
-		});
 		dateInicio.setValue(new Date(1407518124684L));
 		dateInicio.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -123,20 +105,6 @@ public class formulario_academico extends Composite {
 		dateInicio.setSize("73px", "11px");
 		
 		dateFinal = new DateBox();
-		dateFinal.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFinal.getValue().equals(null)) {dateFinal.setValue(new Date(1407518124684L));}
-				else if(dateFinal.getValue().equals("")) {dateFinal.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFinal.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFinal.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFinal.setValue(new Date(1407518566816L));
 		dateFinal.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -166,6 +134,19 @@ public class formulario_academico extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				//validar fechas, si el datebox no esta vacio
+					try{
+						new Date(dateFinal.getValue().getTime());
+					}catch(Exception e){
+						dateFinal.setValue(new Date(1407518124684L));
+					}
+				
+					try{
+						new Date(dateInicio.getValue().getTime());
+					}catch(Exception e){
+						dateInicio.setValue(new Date(1407518124684L));
+					}
+				
 				
 				if(bandera) {
 					loginService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
@@ -228,8 +209,11 @@ public class formulario_academico extends Composite {
 		this.txtTitulo.setText(txtTitulo);
 		this.txtEstablecimiento.setText(txtEstablecimiento);
 		boolean bandera = true;
+		//Window.alert("lista: "+this.listNIvel_Academico.getItemCount());
 		for(int i=0; i < this.listNIvel_Academico.getItemCount() && bandera; i++){
+
 			bandera = !this.listNIvel_Academico.getItemText(i).equals(listNIvel_Academico);
+			//Window.alert("lista: "+bandera + " i:"+ i);
 		    this.listNIvel_Academico.setSelectedIndex(i);
 		}
 		

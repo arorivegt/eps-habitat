@@ -15,16 +15,16 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface LoginService extends RemoteService {
 	//metodos para insertar en la base de datos
 	String[] login(String user,String password) throws IllegalArgumentException;
-	Long Insertar_Emppleado(int intafiliacion_igss,
+	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
-            String pais, String nit,int No_Dependientes,String no_orden, int no_registro, int cui,
-            String tipo_pasaporte, int no_pasaporte,
+            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
+            String tipo_pasaporte, String no_pasaporte,
             String depto_municipio_cedula, String direccion_actual,
-            String depto_municipio_residencia, String email, int telefono,
-            int celular, Date fecha_nacimiento, String tipo_licencia,
-            int no_licencia, String centro_trabajo, String ocupacion,
+            String depto_municipio_residencia, String email, String telefono,
+            String celular, Date fecha_nacimiento, String tipo_licencia,
+            String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion)  throws IllegalArgumentException;
@@ -33,11 +33,11 @@ public interface LoginService extends RemoteService {
 			String parentesco)throws IllegalArgumentException;
 	Long Insertar_Academico(Long id_empleado, Date fecha1, Date fecha2,
 			String nivel_academico, String establecimiento, String titulo)throws IllegalArgumentException;
-	Long Insertar_Referencia_Laboral(Long id_empleado,String nombre_referencia, int telefono, 
+	Long Insertar_Referencia_Laboral(Long id_empleado,String nombre_referencia, String telefono, 
 			String puesto_candidato,String empresa_referencia, Date fecha1, 
 			Date fecha2,String motivo_retiro, float salario_final, String actitudes_cualidades,
 			String recomiendo)throws IllegalArgumentException;
-	Long Insertar_Referencia_Personal(Long id_empleado,String nombre_referencia, int telefono, 
+	Long Insertar_Referencia_Personal(Long id_empleado,String nombre_referencia, String telefono, 
 			String puesto_candidato, String relacion, String actitudes_cualidades)throws IllegalArgumentException;
 	Long Insertar_Idioma(Long id_empleado, String nivel, String idioma)throws IllegalArgumentException;
 	Long Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
@@ -64,16 +64,16 @@ public interface LoginService extends RemoteService {
 	
 
 	//metodos para Actualizar en la base de datos
-	Long Actualizar_Emppleado(Long id, int intafiliacion_igss,
+	Long Actualizar_Emppleado(Long id, String Stringafiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
-            String pais, String nit,int No_Dependientes,String no_orden, int no_registro, int cui,
-            String tipo_pasaporte, int no_pasaporte,
+            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
+            String tipo_pasaporte, String no_pasaporte,
             String depto_municipio_cedula, String direccion_actual,
-            String depto_municipio_residencia, String email, int telefono,
-            int celular, Date fecha_nacimiento, String tipo_licencia,
-            int no_licencia, String centro_trabajo, String ocupacion,
+            String depto_municipio_residencia, String email, String telefono,
+            String celular, Date fecha_nacimiento, String tipo_licencia,
+            String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion)  throws IllegalArgumentException;
@@ -82,11 +82,11 @@ public interface LoginService extends RemoteService {
 			String parentesco)throws IllegalArgumentException;
 	Long Actualizar_Academico(Long id_empleado,Long id, Date fecha1, Date fecha2,
 			String nivel_academico, String establecimiento, String titulo)throws IllegalArgumentException;
-	Long Actualizar_Referencia_Laboral(Long id_empleado,Long id,String nombre_referencia, int telefono, 
+	Long Actualizar_Referencia_Laboral(Long id_empleado,Long id,String nombre_referencia, String telefono, 
 			String puesto_candidato,String empresa_referencia, Date fecha1, 
 			Date fecha2,String motivo_retiro, float salario_final, String actitudes_cualidades,
 			String recomiendo)throws IllegalArgumentException;
-	Long Actualizar_Referencia_Personal(Long id_empleado,Long id,String nombre_referencia, int telefono, 
+	Long Actualizar_Referencia_Personal(Long id_empleado,Long id,String nombre_referencia, String telefono, 
 			String puesto_candidato, String relacion, String actitudes_cualidades)throws IllegalArgumentException;
 	Long Actualizar_Idioma(Long id_empleado,Long id, String nivel, String idioma)throws IllegalArgumentException;
 	Long Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3, int pregunta4,

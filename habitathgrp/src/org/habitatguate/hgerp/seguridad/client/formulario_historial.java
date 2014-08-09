@@ -1,10 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 import java.util.Date;
-
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -18,8 +16,6 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_historial extends Composite {
 
@@ -91,20 +87,6 @@ public class formulario_historial extends Composite {
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407518904795L));
-		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
-				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFecha.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFecha.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
@@ -114,7 +96,12 @@ public class formulario_historial extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
+				try{
+					new Date(dateFecha.getValue().getTime());
+				}catch(Exception e){
+					dateFecha.setValue(new Date(1407518124684L));
+				}
+			
 				if(bandera) {
 					loginService.Insertar_Historial(empleado.id_empleado, dateFecha.getValue(),txtDescripcion.getText(), 
 							listTipo.getItemText(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){

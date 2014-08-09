@@ -24,7 +24,7 @@ public class SegReferenciaLaboral implements Serializable {
     private String nombre_referencia;
 	
 	@Persistent
-    private int telefono;
+    private String telefono;
 	
 	@Persistent
     private String puesto_candidato;
@@ -70,11 +70,11 @@ public class SegReferenciaLaboral implements Serializable {
 		this.nombre_referencia = nombre_referencia;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

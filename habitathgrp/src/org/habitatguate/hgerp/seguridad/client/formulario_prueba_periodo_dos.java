@@ -1,10 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 import java.util.Date;
-
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
@@ -19,9 +17,6 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-
 public class formulario_prueba_periodo_dos extends Composite {
 
 	 	private Empleados empleado;
@@ -320,20 +315,6 @@ public class formulario_prueba_periodo_dos extends Composite {
 		lblAprobo.setSize("75px", "13px");
 		
 		dateFecha = new DateBox();
-		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
-				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFecha.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFecha.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFecha.setValue(new Date(1407518962255L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -349,6 +330,12 @@ public class formulario_prueba_periodo_dos extends Composite {
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				try{
+					new Date(dateFecha.getValue().getTime());
+				}catch(Exception e){
+					dateFecha.setValue(new Date(1407518124684L));
+				}
+			
 				if(bandera) {
 					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 

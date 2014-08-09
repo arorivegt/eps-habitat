@@ -14,8 +14,6 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class formulario_referencia_personal extends Composite {
 
@@ -111,22 +109,6 @@ public class formulario_referencia_personal extends Composite {
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
 		txtTelefono = new IntegerBox();
-		txtTelefono.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefono.getText().equals("")) {txtTelefono.setText("0");}
-				else if(txtTelefono.getText().equals(null)) {txtTelefono.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefono.getText());
-					}catch(Exception e){
-						Window.alert("Telefono no valido");
-						txtTelefono.setText("0");
-					}
-				}	
-
-
-			}
-		});
 		txtTelefono.setText("0");
 		txtTelefono.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefono, 190, 29);
@@ -137,7 +119,7 @@ public class formulario_referencia_personal extends Composite {
 			public void onClick(ClickEvent event) {
 
 				if(bandera) {
-					loginService.Insertar_Referencia_Personal(empleado.id_empleado, txtNombre.getText(), txtTelefono.getValue(), 
+					loginService.Insertar_Referencia_Personal(empleado.id_empleado, txtNombre.getText(), txtTelefono.getText(), 
 							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -153,7 +135,7 @@ public class formulario_referencia_personal extends Composite {
                         }
 						});
 				}else{
-					loginService.Actualizar_Referencia_Personal(empleado.id_empleado,id_referencia_personal, txtNombre.getText(), txtTelefono.getValue(), 
+					loginService.Actualizar_Referencia_Personal(empleado.id_empleado,id_referencia_personal, txtNombre.getText(), txtTelefono.getText(), 
 							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {

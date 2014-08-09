@@ -1,10 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 import java.util.Date;
-
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -22,8 +20,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_datos extends Composite {
 
@@ -145,20 +141,6 @@ public class formulario_datos extends Composite {
 		txtApellidoCasada.setSize("227px", "19px");
 		
 		txtNo_iggs = new IntegerBox();
-		txtNo_iggs.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtNo_iggs.getText().equals("")) {txtNo_iggs.setText("0");}
-				else if(txtNo_iggs.getText().equals(null)) {txtNo_iggs.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtNo_iggs.getText());
-					}catch(Exception e){
-						Window.alert("No igss no valido");
-						txtNo_iggs.setText("0");
-					}
-				}
-			}
-		});
 		
 		txtNo_iggs.setText("0");
 		txtNo_iggs.setStyleName("gwt-TextBox2");
@@ -587,20 +569,6 @@ public class formulario_datos extends Composite {
 		label_28.setSize("192px", "19px");
 		
 		dateAnnioNacimiento = new DateBox();
-		dateAnnioNacimiento.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateAnnioNacimiento.getValue().equals(null)) {dateAnnioNacimiento.setValue(new Date(1407518124684L));}
-				else if(dateAnnioNacimiento.getValue().equals("")) {dateAnnioNacimiento.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateAnnioNacimiento.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateAnnioNacimiento.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateAnnioNacimiento.setValue(new Date(1407518707105L));
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -689,20 +657,6 @@ public class formulario_datos extends Composite {
 		lblSalarioBase.setSize("192px", "19px");
 		
 		dateFechaIngreso = new DateBox();
-		dateFechaIngreso.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFechaIngreso.getValue().equals(null)) {dateFechaIngreso.setValue(new Date(1407518124684L));}
-				else if(dateFechaIngreso.getValue().equals("")) {dateFechaIngreso.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFechaIngreso.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFechaIngreso.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFechaIngreso.setValue(new Date(1407518751219L));
 		dateFechaIngreso.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -725,20 +679,6 @@ public class formulario_datos extends Composite {
 		listBox_9.setSize("248px", "27px");
 		
 		txtRegistro = new IntegerBox();
-		txtRegistro.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtRegistro.getText().equals("")) {txtRegistro.setText("0");}
-				else if(txtRegistro.getText().equals(null)) {txtRegistro.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtRegistro.getText());
-					}catch(Exception e){
-						Window.alert("No Registro no valido");
-						txtRegistro.setText("0");
-					}
-				}
-			}
-		});
 		txtRegistro.setText("0");
 		txtRegistro.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtRegistro, 323, 280);
@@ -751,20 +691,6 @@ public class formulario_datos extends Composite {
 		txtNoOrden.setSize("227px", "19px");
 		
 		txtDPI = new IntegerBox();
-		txtDPI.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
-				else if(txtDPI.getText().equals(null)) {txtDPI.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtDPI.getText());
-					}catch(Exception e){
-						Window.alert("DPI no valido");
-						txtDPI.setText("0");
-					}
-				}
-			}
-		});
 		txtDPI.setText("0");
 		txtDPI.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDPI, 595, 280);
@@ -772,40 +698,12 @@ public class formulario_datos extends Composite {
 		
 		
 		txtTelefonoCasa = new IntegerBox();
-		txtTelefonoCasa.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoCasa.getText().equals("")) {txtTelefonoCasa.setText("0");}
-				else if(txtTelefonoCasa.getText().equals(null)) {txtTelefonoCasa.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoCasa.getText());
-					}catch(Exception e){
-						Window.alert("No Telefono no valido");
-						txtTelefonoCasa.setText("0");
-					}
-				}
-			}
-		});
 		txtTelefonoCasa.setText("0");
 		txtTelefonoCasa.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoCasa, 324, 558);
 		txtTelefonoCasa.setSize("227px", "19px");
 		
 		txtTelefonoCelular = new IntegerBox();
-		txtTelefonoCelular.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoCelular.getText().equals("")) {txtTelefonoCelular.setText("0");}
-				else if(txtTelefonoCelular.getText().equals(null)) {txtTelefonoCelular.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoCelular.getText());
-					}catch(Exception e){
-						Window.alert("No Celular no valido");
-						txtTelefonoCelular.setText("0");
-					}
-				}
-			}
-		});
 		txtTelefonoCelular.setText("0");
 		txtTelefonoCelular.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoCelular, 596, 558);
@@ -837,20 +735,6 @@ public class formulario_datos extends Composite {
 		txtNoPasaporte.setSize("227px", "19px");
 		
 		txtSalarioBase = new TextBox();
-		txtSalarioBase.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtSalarioBase.getText().equals("")) {txtSalarioBase.setText("0");}
-				else if(txtSalarioBase.getText().equals(null)) {txtSalarioBase.setText("0");}
-				else{
-					try{
-						Float.parseFloat(txtSalarioBase.getText());
-					}catch(Exception e){
-						Window.alert("Salario no valido");
-						txtSalarioBase.setText("0.0");
-					}
-				}
-			}
-		});
 		txtSalarioBase.setText("0.0");
 		txtSalarioBase.setStyleName("gwt-TextBox2");
 		txtSalarioBase.setMaxLength(50);
@@ -858,20 +742,6 @@ public class formulario_datos extends Composite {
 		txtSalarioBase.setSize("227px", "19px");
 		
 		txtBonificacion = new TextBox();
-		txtBonificacion.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtBonificacion.getText().equals("")) {txtBonificacion.setText("0");}
-				else if(txtBonificacion.getText().equals(null)) {txtBonificacion.setText("0");}
-				else{
-					try{
-						Float.parseFloat(txtBonificacion.getText());
-					}catch(Exception e){
-						Window.alert("Bonificacion no valido");
-						txtBonificacion.setText("0.0");
-					}
-				}
-			}
-		});
 		txtBonificacion.setText("0.0");
 		txtBonificacion.setStyleName("gwt-TextBox2");
 		txtBonificacion.setMaxLength(50);
@@ -879,20 +749,6 @@ public class formulario_datos extends Composite {
 		txtBonificacion.setSize("227px", "19px");
 		
 		txtTotal = new TextBox();
-		txtTotal.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTotal.getText().equals("")) {txtTotal.setText("0");}
-				else if(txtTotal.getText().equals(null)) {txtTotal.setText("0");}
-				else{
-					try{
-						Float.parseFloat(txtTotal.getText());
-					}catch(Exception e){
-						Window.alert("Total no valido");
-						txtTotal.setText("0.0");
-					}
-				}
-			}
-		});
 		txtTotal.setText("0.0");
 		txtTotal.setStyleName("gwt-TextBox2");
 		txtTotal.setMaxLength(50);
@@ -1011,18 +867,30 @@ public class formulario_datos extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
+				try{
+					new Date(dateAnnioNacimiento.getValue().getTime());
+				}catch(Exception e){
+					dateAnnioNacimiento.setValue(new Date(1407518124684L));
+				}
+			
+				try{
+					new Date(dateFechaIngreso.getValue().getTime());
+				}catch(Exception e){
+					dateFechaIngreso.setValue(new Date(1407518124684L));
+				}
+			
 				if(bandera){
 					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
 					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
 					System.out.println("pais en: "+listPais.getSelectedIndex());
-					loginService.Insertar_Emppleado(txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
+					loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), txtConIVS.getText(), txtSinIVS.getText(), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),Integer.parseInt(listNoDependientes.getItemText(listPais.getSelectedIndex())),
-							txtNoOrden.getText(), txtRegistro.getValue(), txtDPI.getValue(), txtTipoPasaporte.getText(), txtNoPasaporte.getValue(), 
-							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getValue(), 
-							txtTelefonoCelular.getValue(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
-							txtNoLicencia.getValue(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
+							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listPais.getSelectedIndex()),
+							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
+							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), new AsyncCallback<Long>() 
 	                        {
@@ -1048,14 +916,14 @@ public class formulario_datos extends Composite {
 					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
 
 					
-					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getValue(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
+					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), txtConIVS.getText(), txtSinIVS.getText(), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),Integer.parseInt(listNoDependientes.getItemText(listPais.getSelectedIndex())),
-							txtNoOrden.getText(), txtRegistro.getValue(), txtDPI.getValue(), txtTipoPasaporte.getText(), txtNoPasaporte.getValue(), 
-							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getValue(), 
-							txtTelefonoCelular.getValue(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
-							txtNoLicencia.getValue(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
+							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listPais.getSelectedIndex()),
+							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
+							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), new AsyncCallback<Long>() 
 	                        {

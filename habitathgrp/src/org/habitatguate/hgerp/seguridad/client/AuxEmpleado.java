@@ -10,7 +10,7 @@ public class AuxEmpleado implements IsSerializable{
     private Long id_empleado;
 	
 	
-    private int afiliacion_igss;
+    private String afiliacion_igss;
 	
 	
     private String estado_civil;   
@@ -40,16 +40,16 @@ public class AuxEmpleado implements IsSerializable{
     private String no_orden ;
     
 	 
-    private int no_registro;
+    private String no_registro;
     
 	 
-    private int cui;
+    private String cui;
     
 	 
     private String tipo_pasaporte;
     
 	 
-    private int no_pasaporte;
+    private String no_pasaporte;
     
 	 
     private String depto_municipio_cedula;
@@ -64,10 +64,10 @@ public class AuxEmpleado implements IsSerializable{
     private String email;
     
 	 
-    private int telefono;
+    private String telefono;
     
 	 
-    private int celular;
+    private String celular;
     
 	 
     private Long fecha_nacimiento;
@@ -76,10 +76,10 @@ public class AuxEmpleado implements IsSerializable{
     private String tipo_licencia;
 	
 	 
-    private int No_Dependientes;
+    private String No_Dependientes;
 
 	 
-    private int no_licencia;
+    private String no_licencia;
 	 
     private String ConIVS;
 	
@@ -163,12 +163,12 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getAfiliacion_igss() {
+	public String getAfiliacion_igss() {
 		return afiliacion_igss;
 	}
 
 
-	public void setAfiliacion_igss(int afiliacion_igss) {
+	public void setAfiliacion_igss(String afiliacion_igss) {
 		this.afiliacion_igss = afiliacion_igss;
 	}
 
@@ -263,22 +263,22 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getNo_registro() {
+	public String getNo_registro() {
 		return no_registro;
 	}
 
 
-	public void setNo_registro(int no_registro) {
+	public void setNo_registro(String no_registro) {
 		this.no_registro = no_registro;
 	}
 
 
-	public int getCui() {
+	public String getCui() {
 		return cui;
 	}
 
 
-	public void setCui(int cui) {
+	public void setCui(String cui) {
 		this.cui = cui;
 	}
 
@@ -293,12 +293,12 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getNo_pasaporte() {
+	public String getNo_pasaporte() {
 		return no_pasaporte;
 	}
 
 
-	public void setNo_pasaporte(int no_pasaporte) {
+	public void setNo_pasaporte(String no_pasaporte) {
 		this.no_pasaporte = no_pasaporte;
 	}
 
@@ -343,22 +343,22 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
 
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 
 
-	public void setCelular(int celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 
@@ -383,22 +383,22 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getNo_Dependientes() {
+	public String getNo_Dependientes() {
 		return No_Dependientes;
 	}
 
 
-	public void setNo_Dependientes(int no_Dependientes) {
+	public void setNo_Dependientes(String no_Dependientes) {
 		No_Dependientes = no_Dependientes;
 	}
 
 
-	public int getNo_licencia() {
+	public String getNo_licencia() {
 		return no_licencia;
 	}
 
 
-	public void setNo_licencia(int no_licencia) {
+	public void setNo_licencia(String no_licencia) {
 		this.no_licencia = no_licencia;
 	}
 

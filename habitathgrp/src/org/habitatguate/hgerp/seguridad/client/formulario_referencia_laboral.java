@@ -22,8 +22,6 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_referencia_laboral extends Composite {
 
@@ -157,44 +155,12 @@ public class formulario_referencia_laboral extends Composite {
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
 		txtTelefono = new IntegerBox();
-		txtTelefono.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefono.getText().equals("")) {txtTelefono.setText("0");}
-				else if(txtTelefono.getText().equals(null)) {txtTelefono.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefono.getText());
-					}catch(Exception e){
-						Window.alert("Telefono  no valido");
-						txtTelefono.setText("0");
-					}
-				}	
-
-
-				
-			}
-		});
 		txtTelefono.setText("0");
 		txtTelefono.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefono, 190, 29);
 		txtTelefono.setSize("137px", "11px");
 		
 		dateFecha1 = new DateBox();
-		dateFecha1.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFecha1.getValue().equals(null)) {dateFecha1.setValue(new Date(1407518124684L));}
-				else if(dateFecha1.getValue().equals("")) {dateFecha1.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFecha1.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFecha1.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-			
-		});
 		dateFecha1.setValue(new Date(1407519069711L));
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -203,20 +169,6 @@ public class formulario_referencia_laboral extends Composite {
 		dateFecha1.setSize("75px", "11px");
 		 
 		dateFecha2 = new DateBox();
-		dateFecha2.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFecha2.getValue().equals(null)) {dateFecha2.setValue(new Date(1407518124684L));}
-				else if(dateFecha2.getValue().equals("")) {dateFecha2.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFecha2.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFecha2.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFecha2.setValue(new Date(1407519076388L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -254,9 +206,19 @@ public class formulario_referencia_laboral extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
+				try{
+					new Date(dateFecha1.getValue().getTime());
+				}catch(Exception e){
+					dateFecha1.setValue(new Date(1407518124684L));
+				}
+				try{
+					new Date(dateFecha2.getValue().getTime());
+				}catch(Exception e){
+					dateFecha2.setValue(new Date(1407518124684L));
+				}
+			
 				if(bandera) {
-					loginService.Insertar_Referencia_Laboral(empleado.id_empleado, txtNombre.getText(), txtTelefono.getValue(), 
+					loginService.Insertar_Referencia_Laboral(empleado.id_empleado, txtNombre.getText(), txtTelefono.getText(), 
 							txtPuestoCandidato.getText(), txtEmpresa.getText(), dateFecha1.getValue(), dateFecha2.getValue(), 
 							txtMotivoRetiro.getText() , Float.parseFloat(txtSalarioFinal.getText()), txtActitudes.getText(), 
 							listRecomienda.getItemText(listRecomienda.getSelectedIndex()), new AsyncCallback<Long>(){
@@ -274,7 +236,7 @@ public class formulario_referencia_laboral extends Composite {
                         }
 						});
 				}else{
-					loginService.Actualizar_Referencia_Laboral(empleado.id_empleado,id_referencia_laboral, txtNombre.getText(), txtTelefono.getValue(), 
+					loginService.Actualizar_Referencia_Laboral(empleado.id_empleado,id_referencia_laboral, txtNombre.getText(), txtTelefono.getText(), 
 							txtPuestoCandidato.getText(), txtEmpresa.getText(), dateFecha1.getValue(), dateFecha2.getValue(), 
 							txtMotivoRetiro.getText() , Float.parseFloat(txtSalarioFinal.getText()), txtActitudes.getText(), 
 							listRecomienda.getItemText(listRecomienda.getSelectedIndex()), new AsyncCallback<Long>(){

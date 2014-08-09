@@ -9,7 +9,7 @@ public class AuxReferenciaPersonal implements IsSerializable{
     private String nombre_referencia;
 	
 	
-    private int telefono;
+    private String telefono;
 	
 	
     private String puesto_candidato;
@@ -41,11 +41,11 @@ public class AuxReferenciaPersonal implements IsSerializable{
 		this.nombre_referencia = nombre_referencia;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 

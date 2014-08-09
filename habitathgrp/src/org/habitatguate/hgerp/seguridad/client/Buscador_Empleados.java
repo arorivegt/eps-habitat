@@ -174,7 +174,12 @@ public class Buscador_Empleados extends Composite  {
         		try{
         			e.setI(result.getIdiomas());
         		}catch(Exception e){
-        			
+
+        		}
+        		try{
+        			e.setP(result.getPuestos());
+        		}catch(Exception e){
+
         		}
         		try{
         			e.setRL(result.getReferencia_laboral());

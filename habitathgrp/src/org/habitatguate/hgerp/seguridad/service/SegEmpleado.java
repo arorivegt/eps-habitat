@@ -22,7 +22,7 @@ public class SegEmpleado implements Serializable {
     private Key id_empleado;
 	
 	@Persistent
-    private int afiliacion_igss;
+    private String afiliacion_igss;
 	
 	@Persistent
     private String estado_civil;   
@@ -52,16 +52,16 @@ public class SegEmpleado implements Serializable {
     private String no_orden ;
     
 	@Persistent    
-    private int no_registro;
+    private String no_registro;
     
 	@Persistent    
-    private int cui;
+    private String cui;
     
 	@Persistent    
     private String tipo_pasaporte;
     
 	@Persistent    
-    private int no_pasaporte;
+    private String no_pasaporte;
     
 	@Persistent 
     private String depto_municipio_cedula;
@@ -76,10 +76,10 @@ public class SegEmpleado implements Serializable {
     private String email;
     
 	@Persistent    
-    private int telefono;
+    private String telefono;
     
 	@Persistent    
-    private int celular;
+    private String celular;
     
 	@Persistent    
     private Date fecha_nacimiento;
@@ -88,10 +88,10 @@ public class SegEmpleado implements Serializable {
     private String tipo_licencia;
 	
 	@Persistent    
-    private int No_Dependientes;
+    private String No_Dependientes;
 
 	@Persistent    
-    private int no_licencia;
+    private String no_licencia;
 
 	//con IVS, sin IVS
 	@Persistent    
@@ -171,11 +171,11 @@ public class SegEmpleado implements Serializable {
 		return id_empleado.getId();
 	}
 
-	public int getAfiliacion_igss() {
+	public String getAfiliacion_igss() {
 		return afiliacion_igss;
 	}
 
-	public void setAfiliacion_igss(int afiliacion_igss) {
+	public void setAfiliacion_igss(String afiliacion_igss) {
 		this.afiliacion_igss = afiliacion_igss;
 	}
 
@@ -251,19 +251,19 @@ public class SegEmpleado implements Serializable {
 		this.no_orden = no_orden;
 	}
 
-	public int getNo_registro() {
+	public String getNo_registro() {
 		return no_registro;
 	}
 
-	public void setNo_registro(int no_registro) {
+	public void setNo_registro(String no_registro) {
 		this.no_registro = no_registro;
 	}
 
-	public int getCui() {
+	public String getCui() {
 		return cui;
 	}
 
-	public void setCui(int cui) {
+	public void setCui(String cui) {
 		this.cui = cui;
 	}
 
@@ -275,11 +275,11 @@ public class SegEmpleado implements Serializable {
 		this.tipo_pasaporte = tipo_pasaporte;
 	}
 
-	public int getNo_pasaporte() {
+	public String getNo_pasaporte() {
 		return no_pasaporte;
 	}
 
-	public void setNo_pasaporte(int no_pasaporte) {
+	public void setNo_pasaporte(String no_pasaporte) {
 		this.no_pasaporte = no_pasaporte;
 	}
 
@@ -300,19 +300,19 @@ public class SegEmpleado implements Serializable {
 		this.email = email;
 	}
 
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	public int getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 
-	public void setCelular(int celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 
@@ -332,11 +332,11 @@ public class SegEmpleado implements Serializable {
 		this.tipo_licencia = tipo_licencia;
 	}
 
-	public int getNo_licencia() {
+	public String getNo_licencia() {
 		return no_licencia;
 	}
 
-	public void setNo_licencia(int no_licencia) {
+	public void setNo_licencia(String no_licencia) {
 		this.no_licencia = no_licencia;
 	}
 
@@ -495,11 +495,11 @@ public class SegEmpleado implements Serializable {
 		this.bonificacion = bonificacion;
 	}    
 	
-	public int getNo_Dependientes() {
+	public String getNo_Dependientes() {
 		return No_Dependientes;
 	}
 
-	public void setNo_Dependientes(int no_Dependientes) {
+	public void setNo_Dependientes(String no_Dependientes) {
 		No_Dependientes = no_Dependientes;
 	}
 

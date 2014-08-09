@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -16,21 +15,22 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 public class Empleado_Lista extends Composite {
 	
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-    private FlexTable flexTable ;
     private Empleado_Lista a;
+    private FlexTable flexTable;
 	public Empleado_Lista() {
 		this.a =this;
-		VerticalPanel verticalPanel = new VerticalPanel();
-		initWidget(verticalPanel);
-		verticalPanel.setSize("761px", "85px");
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
-		verticalPanel.add(scrollPanel);
-		scrollPanel.setHeight("462px");
+		initWidget(scrollPanel);
+		scrollPanel.setSize("1184px", "716px");
+		
+		VerticalPanel verticalPanel = new VerticalPanel();
+		scrollPanel.setWidget(verticalPanel);
+		verticalPanel.setSize("1184px", "739px");
 		
 		flexTable = new FlexTable();
-		scrollPanel.setWidget(flexTable);
-		flexTable.setSize("100%", "490px");
+		verticalPanel.add(flexTable);
+		flexTable.setSize("100%", "80px");
 	}
 	
     public void agregarFormulario(final char tipo, final Buscador_Empleados b, final String primer_nombre, String segundo_nombre, 

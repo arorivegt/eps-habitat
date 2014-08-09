@@ -1,10 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 import java.util.Date;
-
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -21,8 +19,6 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 
 public class formulario_puestos extends Composite {
 
@@ -92,20 +88,6 @@ public class formulario_puestos extends Composite {
 		lblActivo.setSize("192px", "13px");
 		
 		dateFecha = new DateBox();
-		dateFecha.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				if(dateFecha.getValue().equals(null)) {dateFecha.setValue(new Date(1407518124684L));}
-				else if(dateFecha.getValue().equals("")) {dateFecha.setValue(new Date(1407518124684L));}
-				else{
-					try{
-						new Date(dateFecha.getValue().getTime());
-					}catch(Exception e){
-						Window.alert("Fecha No valida");
-						dateFecha.setValue(new Date(1407518124684L));
-					}
-				}
-			}
-		});
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -154,7 +136,12 @@ public class formulario_puestos extends Composite {
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
+				try{
+					new Date(dateFecha.getValue().getTime());
+				}catch(Exception e){
+					dateFecha.setValue(new Date(1407518124684L));
+				}
+			
 				if(bandera) {					
 					loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), txtPuesto.getText(), 
 							txtFunciones.getText(), Float.parseFloat(txtSalario.getText()), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si")

@@ -35,7 +35,7 @@ public class formulario_vacaciones extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("534px", "140px");
+		absolutePanel.setSize("534px", "105px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");

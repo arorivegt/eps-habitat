@@ -41,7 +41,7 @@ public class formulario_puestos extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "130px");
+		absolutePanel.setSize("700px", "110px");
 		
 		Label lblNivelAcademico = new Label("Puesto");
 		lblNivelAcademico.setStyleName("label");

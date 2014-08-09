@@ -69,7 +69,7 @@ public class formulario_idiomas extends Composite {
 		listNivel.addItem("Principiante");
 		listNivel.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listNivel, 188, 29);
-		listNivel.setSize("140px", "19px");
+		listNivel.setSize("140px", "22px");
 		
 		txtIdioma = new TextBox();
 		txtIdioma.setStyleName("gwt-TextBox2");

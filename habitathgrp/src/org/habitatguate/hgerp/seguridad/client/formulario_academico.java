@@ -39,7 +39,7 @@ public class formulario_academico extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("738px", "55px");
+		absolutePanel.setSize("738px", "40px");
 		
 		Label lblNivelAcademico = new Label("Nivel Academico");
 		lblNivelAcademico.setStyleName("label");
@@ -70,7 +70,7 @@ public class formulario_academico extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
 		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 196, 61);
+		absolutePanel.add(btnEliminar, 296, 55);
 		btnEliminar.setSize("157px", "20px");
 		
 		listNIvel_Academico = new ListBox();
@@ -123,13 +123,6 @@ public class formulario_academico extends Composite {
 		txtEstablecimiento.setMaxLength(100);
 		absolutePanel.add(txtEstablecimiento, 369, 29);
 		txtEstablecimiento.setSize("137px", "11px");
-		
-		Button btnImprimir = new Button("Send");
-		btnImprimir.setText("Imprimir");
-		btnImprimir.setStylePrimaryName("gwt-TextBox2");
-		btnImprimir.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnImprimir, 369, 61);
-		btnImprimir.setSize("157px", "20px");
 		
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -190,7 +183,7 @@ public class formulario_academico extends Composite {
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
 		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 10, 61);
+		absolutePanel.add(btnActualizar, 110, 55);
 		btnActualizar.setSize("157px", "20px");
 		
 	}

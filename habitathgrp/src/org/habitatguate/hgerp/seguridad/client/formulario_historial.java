@@ -36,7 +36,7 @@ public class formulario_historial extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("534px", "140px");
+		absolutePanel.setSize("534px", "105px");
 		
 		Label lblNivelAcademico = new Label("Fecha");
 		lblNivelAcademico.setStyleName("label");
@@ -77,7 +77,7 @@ public class formulario_historial extends Composite {
 		listTipo.addItem("llamadas de atención");
 		listTipo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipo, 173, 29);
-		listTipo.setSize("157px", "19px");
+		listTipo.setSize("157px", "22px");
 		
 		txtDescripcion = new TextArea();
 		//txtDescripcion.getElement().setAttribute("maxlength", "1000");

@@ -147,7 +147,17 @@ input {
 }
 .gwt-Tree {
 	color: Black;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
 	background-color: powderblue;
+}
+.gwt-Tree .gwt-TreeItem-selected {
+  background: #ebeff9;
+}
+.gwt-TreeItem .gwt-RadioButton input,
+.gwt-TreeItem .gwt-CheckBox input {
+  margin-left: 0px;
 }
 .gwt-StackLayoutPanel-new {
   color: #ffffff;
@@ -351,5 +361,6 @@ background: #a9db80; /* Old browsers */
 .gwt-CheckBox-disabled {
    color:green;
 }
-. {
+item_arbol {
+	background-color: lightblue;
 } 

@@ -26,6 +26,7 @@ public class UIStacksEjemplo extends ResizeComposite {
  	@UiHandler("label_1")
  	void onLabel_1Click(ClickEvent event) {
  		Buscador_Empleados buscador = new Buscador_Empleados();
+ 		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(buscador, 0, 0);
  	}
  	@UiHandler("label_2")

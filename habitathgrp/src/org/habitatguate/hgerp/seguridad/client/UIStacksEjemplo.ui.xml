@@ -5,9 +5,9 @@
            <g:header size='2'>RRHH</g:header>
            <g:Tree>
            	<g:Label styleName="" text="Empleados" ui:field="label_1"/>
-           	<g:Label styleName="" text="Informe Ministerio Trabajo" ui:field="label_2"/>
-           	<g:Label styleName="" text="Informe Indenmizaciones y mas" ui:field="label_3"/>
-           	<g:Label styleName="" text="Informe Empleados" ui:field="label_4"/>
+           	<g:Label styleName="" text="Informe Ministerio" ui:field="label_2"/>
+           	<g:Label styleName="" text="Prestaciones" ui:field="label_3"/>
+           	<g:Label styleName="" text="Informe  Empleados" ui:field="label_4"/>
            </g:Tree>
          </g:stack>
          <g:stack>

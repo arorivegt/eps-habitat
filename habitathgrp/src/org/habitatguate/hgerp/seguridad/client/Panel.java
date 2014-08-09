@@ -35,7 +35,7 @@ public class Panel extends Composite {
              
              UIStacksEjemplo menu2 = new UIStacksEjemplo(this);
              absolutePanel.add(menu2, 0, 0);
-             menu2.setSize("124px", "648px");
+             menu2.setSize("124px", "388px");
              
              absolutePanel_1 = new AbsolutePanel();
              splitLayoutPanel.add(absolutePanel_1);

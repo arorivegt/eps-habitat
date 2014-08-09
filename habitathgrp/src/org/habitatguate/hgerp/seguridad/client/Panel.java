@@ -8,7 +8,8 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 
 public class Panel extends Composite {
 
-        public Panel() {
+	private AbsolutePanel absolutePanel_1;
+		public Panel() {
          SplitLayoutPanel splitLayoutPanel = new SplitLayoutPanel();
          initWidget(splitLayoutPanel);
          splitLayoutPanel.setSize("100%", "800px");
@@ -32,19 +33,24 @@ public class Panel extends Composite {
              splitLayoutPanel.addWest(absolutePanel, 124.0);
              absolutePanel.setSize("100%", "100%");
              
-             UIStacksEjemplo menu2 = new UIStacksEjemplo();
+             UIStacksEjemplo menu2 = new UIStacksEjemplo(this);
              absolutePanel.add(menu2, 0, 0);
              menu2.setSize("124px", "648px");
              
-             AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+             absolutePanel_1 = new AbsolutePanel();
              splitLayoutPanel.add(absolutePanel_1);
                  setStyleName("Panel_principal");
                  setSize("1343px", "734px");
                  
                  //Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv(); 
-                 Buscador_Empleados buscador = new Buscador_Empleados();
+               //  Buscador_Empleados buscador = new Buscador_Empleados();
                  //Empleado_tab empleado = new Empleado_tab();
-                 absolutePanel_1.add(buscador, 0, 0);
+                // absolutePanel_1.add(buscador, 0, 0);
                  //empleado.setSize("1187px", "648px");
         }
+		
+
+        public AbsolutePanel getAbsolutePanel_1() {
+		return absolutePanel_1;
+	}
 }

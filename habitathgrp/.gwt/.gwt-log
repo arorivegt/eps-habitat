@@ -38635,3 +38635,1981 @@ Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
       Compiling...
          Compilation completed in 0,02 seconds
       Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   20% complete (ETR: 17 seconds)
+   20% complete (ETR: 17 seconds)
+   20% complete (ETR: 17 seconds)
+   30% complete (ETR: 16 seconds)
+   40% complete (ETR: 12 seconds)
+   50% complete (ETR: 8 seconds)
+   60% complete (ETR: 6 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 14,81 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,51 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608786734.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608786734.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608786734_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608788315.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608788315.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608788315_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608795057.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608795057.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608795057_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608797912.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608797912.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608797912_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608803913.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608803913.Template
+         Generating method body for html1()
+         Generating method body for html2()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608803913_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608805921.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608805921.Template
+         Generating method body for html1()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608805921_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608884973.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608884973.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608884973_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608885075.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608885075.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608885075_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.Panel
+Invalid units found: 1
+Compiling...
+   Compilation completed in 0,01 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+      [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Checking rule <generate-with class='com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator'/>
+      [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+         [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+      [ERROR] Unable to find type 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'
+         [ERROR] Hint: Previous compiler errors may have made this type unavailable
+         [ERROR] Hint: Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2766 cached/archived units.  Used 2766 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+      [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Checking rule <generate-with class='com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator'/>
+      [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+         [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+      [ERROR] Unable to find type 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'
+         [ERROR] Hint: Previous compiler errors may have made this type unavailable
+         [ERROR] Hint: Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+      [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Checking rule <generate-with class='com.google.gwt.user.rebind.rpc.ServiceInterfaceProxyGenerator'/>
+      [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Panel.java'
+         [ERROR] Line 36: The constructor UIStacksEjemplo(Panel) is undefined
+      [ERROR] Unable to find type 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'
+         [ERROR] Hint: Previous compiler errors may have made this type unavailable
+         [ERROR] Hint: Check the inheritance chain from your module; it may not be inheriting a required module or a module may not be adding its source path entries properly
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.Panel
+Invalid units found: 1
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608941921.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608941921.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,07 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608941921_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608942488.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608942488.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608942488_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608945842.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608945842.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608945842_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608978253.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608978253.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608978253_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.Panel
+Invalid units found: 1
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608983662.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608983662.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608983662_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608984164.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608984164.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608984164_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2766 cached/archived units.  Used 2766 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990323.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990323.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990323_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990828.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990828.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407608990828_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Invoking generator com.google.gwt.uibinder.rebind.UiBinderGenerator
+      [ERROR] Must have a child widget: <g:stack> (:4)
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Invoking generator com.google.gwt.uibinder.rebind.UiBinderGenerator
+      [ERROR] Must have a child widget: <g:stack> (:4)
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032360.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032360.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032360_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032903.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032903.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609032903_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609052362.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609052362.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609052362_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609056485.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609056485.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609056485_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060008.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060008.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060008_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060164.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060164.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609060164_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609064900.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609064900.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609064900_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609077502.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609077502.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609077502_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609081988.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609081988.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609081988_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100286.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100286.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100286_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100394.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100394.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609100394_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609106006.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609106006.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609106006_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279101.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279101.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279101_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279208.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279208.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609279208_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609284000.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609284000.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609284000_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609285780.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609285780.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609285780_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Invoking generator com.google.gwt.uibinder.rebind.UiBinderGenerator
+      [ERROR] May have only one body element: <g:Tree> (:6)
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.Panel
+Invalid units found: 1
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Invoking generator com.google.gwt.uibinder.rebind.UiBinderGenerator
+      [ERROR] May have only one body element: <g:Tree> (:6)
+[ERROR] Deferred binding failed for 'org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder'; expect subsequent failures
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.Panel
+Invalid units found: 1
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609478986.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609478986.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609478986_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479435.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479435.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479435_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479850.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479850.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609479850_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487848.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487848.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487848_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487966.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487966.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609487966_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609489213.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609489213.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609489213_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609492309.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609492309.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609492309_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609498141.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609498141.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609498141_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609501509.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609501509.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609501509_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609503087.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609503087.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609503087_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609516884.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609516884.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609516884_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609536064.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609536064.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609536064_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609540158.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609540158.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609540158_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557895.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557895.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557895_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557980.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557980.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609557980_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607824.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607824.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607824_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607929.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607929.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609607929_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609611542.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609611542.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609611542_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609620443.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609620443.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609620443_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609624365.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609624365.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609624365_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609629164.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609629164.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609629164_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2765 cached/archived units.  Used 2765 / 2766 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/Buscador_Parametro_Inv.java'
+      [ERROR] Line 109: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlService.java'
+      [ERROR] Line 16: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/api/SqlServiceAsync.java'
+      [ERROR] Line 11: No source code is available for type org.habitatguate.hgerp.seguridad.service.segParametro; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642240.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642240.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642240_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642669.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642669.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609642669_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609660704.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609660704.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609660704_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609685343.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609685343.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609685343_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609693444.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609693444.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1407609693444_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units

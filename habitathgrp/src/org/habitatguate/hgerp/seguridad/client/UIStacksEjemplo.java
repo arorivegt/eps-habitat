@@ -3,49 +3,43 @@ package org.habitatguate.hgerp.seguridad.client;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ResizeComposite;
-import com.google.gwt.user.client.ui.Tree;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
  
- @SuppressWarnings("deprecation")
 public class UIStacksEjemplo extends ResizeComposite {
+	 private Panel nuevo;
 	 private static UiStackEjemploUiBinder uiBinder = GWT.create(UiStackEjemploUiBinder.class);
-	 
-   @UiField(provided = true)
-   final Tree arbol1 = new Tree();
-   {
-     arbol1.addItem("Usuarios");
-     arbol1.addItem("Reportes");
-     arbol1.addItem("Opción 3");
-   }
-   
-   @UiField
-   Tree arbol2;
-   
-   @UiField(provided = true)
-   final Tree arbol3 = new Tree();
-   {
-     arbol3.addItem("Opción 7");
-     arbol3.addItem("Opción 8");
-     arbol3.addItem("Opción 9");
-   }
-   
-   @UiField(provided = true)
-   final Tree arbol4 = new Tree();
-   {
-	  arbol4.addItem("Opción 1");
-	  arbol4.addItem("Opción 2");
-	  arbol4.addItem("Opción 3");
-	}
-   
-   public UIStacksEjemplo() {
+	 @UiField Label label_1;
+
+   public UIStacksEjemplo(Panel nuevo) {
      initWidget(uiBinder.createAndBindUi(this));
-     arbol2.addItem("<a href=\"/seguridad/Insertar\">Parametro</a>");
-     arbol2.addItem("Opción 5");
-     arbol2.addItem("Opción 6");
+     this.nuevo = nuevo;
    }
 
    
    interface UiStackEjemploUiBinder extends UiBinder<Widget, UIStacksEjemplo> {
    }
+ 	@UiHandler("label_1")
+ 	void onLabel_1Click(ClickEvent event) {
+ 		Buscador_Empleados buscador = new Buscador_Empleados();
+ 		this.nuevo.getAbsolutePanel_1().add(buscador, 0, 0);
+ 	}
+ 	@UiHandler("label_2")
+ 	void onLabel_2Click(ClickEvent event) {
+ 		Window.alert("no esta disponible");
+ 	}
+ 	@UiHandler("label_3")
+ 	void onLabel_3Click(ClickEvent event) {
+
+ 		Window.alert("no esta disponible");
+ 	}
+ 	@UiHandler("label_4")
+ 	void onLabel_4Click(ClickEvent event) {
+
+ 		Window.alert("no esta disponible");
+ 	}
  }

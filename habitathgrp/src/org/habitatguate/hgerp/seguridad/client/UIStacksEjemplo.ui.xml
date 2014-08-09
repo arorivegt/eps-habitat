@@ -3,7 +3,12 @@
        <g:StackLayoutPanel ui:field="stack" unit="EM">
          <g:stack>
            <g:header size='2'>RRHH</g:header>
-           <g:Tree ui:field="arbol1"/>
+           <g:Tree>
+           	<g:Label styleName="" text="Empleados" ui:field="label_1"/>
+           	<g:Label styleName="" text="Informe Ministerio Trabajo" ui:field="label_2"/>
+           	<g:Label styleName="" text="Informe Indenmizaciones y mas" ui:field="label_3"/>
+           	<g:Label styleName="" text="Informe Empleados" ui:field="label_4"/>
+           </g:Tree>
          </g:stack>
          <g:stack>
            <g:header size='2'>Finanzas</g:header>
@@ -17,5 +22,6 @@
            <g:header size='2'>Soluciones</g:header>
            <g:Tree ui:field="arbol4"/>
          </g:stack>
+         
        </g:StackLayoutPanel>
 </ui:UiBinder>

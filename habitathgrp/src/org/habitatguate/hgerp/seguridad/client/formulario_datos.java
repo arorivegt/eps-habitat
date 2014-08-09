@@ -785,7 +785,7 @@ public class formulario_datos extends Composite {
 		        for (int i = 0; i < numerosComoArray.length; i++) {
 		        	listCedulaMunicipio.addItem(numerosComoArray[i]);
 		        }
-		        listCedulaMunicipio.setVisibleItemCount(1);
+		        listCedulaMunicipio.setSelectedIndex(2);
 			}		
 		});
 		listCedulaDepartamento.setStyleName("gwt-TextBox2");
@@ -806,7 +806,7 @@ public class formulario_datos extends Composite {
 		        	listDireccionMunicipio.addItem(numerosComoArray[i]);
 		        }
 
-		        listDireccionMunicipio.setVisibleItemCount(1);
+		        listDireccionMunicipio.setSelectedIndex(2);
 			}
 		});
 		listDireccionDepartamento.addItem("Alta Verapaz");
@@ -881,12 +881,12 @@ public class formulario_datos extends Composite {
 			
 				if(bandera){
 					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
-					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
+					depto_municipio_dos = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
 					System.out.println("pais en: "+listPais.getSelectedIndex());
 					loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), txtConIVS.getText(), txtSinIVS.getText(), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listPais.getSelectedIndex()),
+							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
 							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
 							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
 							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
@@ -907,19 +907,20 @@ public class formulario_datos extends Composite {
 	                            	empleado.id_empleado = result;
 	                            	bandera = false;
 	                            	empleado.Nuevas_Pestañas();
+	                            	empleado.familia_unica();
 	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! "+id_empleado);
 	                            }
 
 	                     });
 				}else{
 					depto_municipio_uno = listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getItemText(listCedulaMunicipio.getSelectedIndex());
-					depto_municipio_uno = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
+					depto_municipio_dos = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
 
 					
 					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), txtConIVS.getText(), txtSinIVS.getText(), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listPais.getSelectedIndex()),
+							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
 							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
 							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
 							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
@@ -1371,13 +1372,13 @@ public class formulario_datos extends Composite {
 		this.txtSinIVS.setText(txtSinIVS);
         bandera = true;
         for(int i=0; i < this.listPais.getItemCount() && bandera; i++){
-           bandera = this.listPais.getItemText(i).equals(listPais);
+           bandera = !this.listPais.getItemText(i).equals(listPais);
            this.listPais.setSelectedIndex(i);
         }   
 		this.txtNit.setText(txtNit);
         bandera = true;
         for(int i=0; i < this.listNoDependientes.getItemCount() && bandera; i++){
-            bandera = this.listNoDependientes.getItemText(i).equals(listNoDependientes);
+            bandera = !this.listNoDependientes.getItemText(i).equals(listNoDependientes);
             this.listNoDependientes.setSelectedIndex(i);
         }   
 		this.txtNoOrden.setText(txtNoOrden);
@@ -1409,15 +1410,45 @@ public class formulario_datos extends Composite {
 		this.txtSalarioBase.setText(txtSalarioBase);
 		this.txtTotal.setText(txtTotal);
 		this.txtBonificacion.setText(txtBonificacion);
+
+		System.out.println(listDireccionDepartamento);
+        bandera = true;
+        for(int i=0; i < this.listDireccionDepartamento.getItemCount() && bandera; i++){
+            bandera = !this.listDireccionDepartamento.getItemText(i).equals(listDireccionDepartamento);
+            this.listDireccionDepartamento.setSelectedIndex(i);
+        }   
+        
+
+		System.out.println(listCedulaDepartamento);
+        bandera = true;
+        for(int i=0; i < this.listCedulaDepartamento.getItemCount() && bandera; i++){
+            bandera = !this.listCedulaDepartamento.getItemText(i).equals(listCedulaDepartamento);
+            this.listCedulaDepartamento.setSelectedIndex(i);
+        }   
+
+        this.listCedulaMunicipio.clear();
+        String[] numerosComoArray = Depto_Municipio(this.listCedulaDepartamento.getItemText(this.listCedulaDepartamento.getSelectedIndex())).split(",");
+        for (int i = 0; i < numerosComoArray.length; i++) {
+        	this.listCedulaMunicipio.addItem(numerosComoArray[i]);
+        }
+
+
+        this.listDireccionMunicipio.clear();
+        String[] numerosComoArray2 = Depto_Municipio(this.listDireccionDepartamento.getItemText(this.listDireccionDepartamento.getSelectedIndex())).split(",");
+        for (int i = 0; i < numerosComoArray2.length; i++) {
+        	this.listDireccionMunicipio.addItem(numerosComoArray2[i]);
+        }
+		System.out.println(listCedulaMunicipio);
         bandera = true;
         for(int i=0; i < this.listCedulaMunicipio.getItemCount() && bandera; i++){
-            bandera = this.listCedulaMunicipio.getItemText(i).equals(listCedulaMunicipio);
+            bandera = !this.listCedulaMunicipio.getItemText(i).equals(listCedulaMunicipio);
             this.listCedulaMunicipio.setSelectedIndex(i);
         }   
 
+		System.out.println(listDireccionMunicipio);
         bandera = true;
         for(int i=0; i < this.listDireccionMunicipio.getItemCount() && bandera; i++){
-            bandera = this.listDireccionMunicipio.getItemText(i).equals(listDireccionMunicipio);
+            bandera = !this.listDireccionMunicipio.getItemText(i).equals(listDireccionMunicipio);
             this.listDireccionMunicipio.setSelectedIndex(i);
         }   
 				  

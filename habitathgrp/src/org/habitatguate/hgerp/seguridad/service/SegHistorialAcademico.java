@@ -34,8 +34,7 @@ public class SegHistorialAcademico implements Serializable {
 	
 	@Persistent
     private String titulo;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 
 	public SegHistorialAcademico() {

@@ -98,7 +98,6 @@ public class SegEntrevista implements Serializable {
 	@Persistent
     private String Otros_Ingresos;
 
-	@Persistent
     private SegEmpleado empleado;
 
 	public SegEntrevista() {

@@ -33,8 +33,7 @@ public class SegReferenciaPersonal implements Serializable {
 
 	@Persistent
     private String actitudes_cualidades;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 
 	public SegReferenciaPersonal() {

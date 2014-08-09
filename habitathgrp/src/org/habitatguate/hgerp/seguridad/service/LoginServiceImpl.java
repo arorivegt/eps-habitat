@@ -1140,6 +1140,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							 	t.setPregunta9(n8.getPregunta9());
 							 	t.setPregunta10(n8.getPregunta10());
 							 	t.setFecha_test(n8.getFecha_test().getTime());
+							 	t.setEvaluador(n8.getEvaluador());
+							 	t.setTipo_test(n8.getTipo_test());
 							 	nuevo.getTest().add(t);
 						    }
 				    	}

@@ -28,8 +28,7 @@ public class SegVacaciones implements Serializable {
 
 	@Persistent
     private String Descripcion;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 	
 	public SegVacaciones() {

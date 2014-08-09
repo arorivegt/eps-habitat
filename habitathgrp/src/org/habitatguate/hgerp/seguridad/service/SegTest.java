@@ -59,7 +59,6 @@ public class SegTest implements Serializable {
 	@Persistent
     private String tipo_test;
 
-	@Persistent
     private SegEmpleado empleado;
 
 	public SegTest() {

@@ -1,8 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
+
 import java.util.Iterator;
 import java.util.List;
-
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.service.segParametro;
@@ -10,7 +9,7 @@ import org.habitatguate.hgerp.seguridad.service.segParametro;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;

@@ -49,8 +49,7 @@ public class SegReferenciaLaboral implements Serializable {
 	
 	@Persistent
     private String recomiendo;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 
 

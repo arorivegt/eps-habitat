@@ -39,8 +39,7 @@ public class SegFamilia implements Serializable {
 	
 	@Persistent
 	private String parentesco;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 
 	public SegFamilia() {

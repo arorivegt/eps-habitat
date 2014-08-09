@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -110,33 +111,43 @@ public class SegEmpleado implements Serializable {
 	//aqui vienen todas los objetos con los que se relaciona
 
 	@Persistent(mappedBy = "empleado")
+    @Element(dependent = "true")
 	private List <SegVacaciones> vacaciones;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegFamilia> familia;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegHistorialAcademico> historial_academico;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegReferenciaLaboral> referencia_laboral;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegEntrevista> entrevista;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegPuesto> puestos;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegIdioma> idiomas;
 	
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegReferenciaPersonal> referencia_personal;
 	
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegHistorial> Historial;
 
 	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegTest> test;
 	
 	//datos del patrono

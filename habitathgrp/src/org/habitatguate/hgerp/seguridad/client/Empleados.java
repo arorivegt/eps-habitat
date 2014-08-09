@@ -176,9 +176,9 @@ public class Empleados extends Composite {
 	 String[] numerosComoArray2  = r.getDepto_municipio_residencia().split(",");
 	 for (int i = 0; i < numerosComoArray2.length; i++) {
 		 if(i == 0)
-			 deptocedula = numerosComoArray2[i];
+			 deptodir = numerosComoArray2[i];
 		 if(i == 1)
-			 municedula = numerosComoArray2[i];
+			 munidir = numerosComoArray2[i];
      }	
 	 this.id_empleado = r.getId_empleado();
 			fd.LlenarDatos(r.getId_empleado(),r.getEstado_civil(), r.getSexo(), r.getPrimer_apellido(), r.getSegundo_apellido(), 
@@ -227,6 +227,7 @@ public class Empleados extends Composite {
 	public void setFPP(List<AuxTest> r) {
 		if(!r.isEmpty()){
 			for (AuxTest n : r) {
+				System.out.println("n.getTipo_test() "+n.getTipo_test().equals("1") );
 				if(n.getTipo_test().equals("1")){
 					fpp.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
@@ -238,6 +239,11 @@ public class Empleados extends Composite {
 				}
 			}//fin del for
 		}//fin del if r.isEmpty
+	}
+	
+	public void familia_unica()
+	{
+		f.agregar_parientes_unicos();
 	}
 
 }

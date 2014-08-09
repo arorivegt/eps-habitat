@@ -28,8 +28,7 @@ public class SegHistorial implements Serializable {
 
 	@Persistent
     private String tipo_historial;
-	
-	@Persistent
+
     private SegEmpleado empleado;
 
 	public SegHistorial() {

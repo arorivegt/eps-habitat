@@ -12,7 +12,12 @@
          </g:stack>
          <g:stack>
            <g:header size='2'>Finanzas</g:header>
-           <g:Tree ui:field="arbol2"/>
+           <g:Tree>
+           	<g:Label styleName="" text="Parametros" ui:field="label_1_Finan"/>
+           	<g:Label styleName="" text="Gestor de Inventario" ui:field="label_2_Finan"/>
+           	<g:Label styleName="" text="Crear Conocimiento" ui:field="label_3_Finan"/>
+           	<g:Label styleName="" text="Asignar Recurso" ui:field="label_4_Finan"/>
+           </g:Tree>
          </g:stack>
          <g:stack>
            <g:header size='2'>Planificacion</g:header>

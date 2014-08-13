@@ -106,13 +106,13 @@ public class Buscador_Parametro_Inv extends Composite {
                 }
 
          });*/
-			loginService.ConsultaTodosParam(new AsyncCallback<List<segParametro>>() {
+			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
 				
 				@Override
-				public void onSuccess(List<segParametro> result) {
-					Iterator<segParametro> iter = result.iterator();
+				public void onSuccess(List<AuxParametro> result) {
+					Iterator<AuxParametro> iter = result.iterator();
 					while (iter.hasNext())
-					  System.out.println(iter.next().getNomParametro());	
+					System.out.println(iter.next().getNomParametro());	
 					
 				}
 				

@@ -1,8 +1,11 @@
 package org.habitatguate.hgerp.seguridad.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -33,11 +36,23 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<segParametro> ConsultaTodosParam(){
+	public List<AuxParametro> ConsultaTodosParam(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-		Query query = gestorPersistencia.newQuery(segParametro.class); 
+		Query query = gestorPersistencia.newQuery(segParametro.class);
+		List<AuxParametro> valor = new ArrayList<AuxParametro>();
 		List<segParametro> execute = (List<segParametro>)query.execute("Google App Engine");
-		return execute;
+		if (!execute.isEmpty()){
+			for (segParametro p : execute){
+				AuxParametro aux = new AuxParametro();
+				aux.setIdParametro(p.getIdParametro());
+				aux.setNomParametro(p.getNomParametro());
+				aux.setCodContable(p.getCodContable());
+				aux.setCodUno(p.getCodUno());
+				aux.setCodDos(p.getCodDos());
+				valor.add(aux);
+			}
+		}
+		return valor;
 	}
 
 

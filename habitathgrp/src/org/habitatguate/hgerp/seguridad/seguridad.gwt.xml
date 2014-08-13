@@ -6,4 +6,5 @@
 	<entry-point
 		class="org.habitatguate.hgerp.seguridad.client.Index">
 	</entry-point>
+	<source path="service" />
 </module>

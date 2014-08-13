@@ -1,41 +1,28 @@
-package org.habitatguate.hgerp.seguridad.service;
-
-
-
-
-import java.io.Serializable;
+package org.habitatguate.hgerp.seguridad.client;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-@SuppressWarnings("serial")
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class segParametro implements Serializable{
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
+public class AuxParametro implements IsSerializable {
+
+
 	private Long idParametro;
-	@Persistent
+
 	private String nomParametro;
-	@Persistent
+
 	private int codContable;
-	@Persistent
+
 	private int codUno;
-	@Persistent
+
 	private int codDos;
 	
 	
-	public segParametro(String nomParametro, int codContable, int codUno, int codDos){
+	public AuxParametro(){
 		super();
-		this.nomParametro = nomParametro;
-		this.codContable = codContable;
-		this.codUno = codUno;
-		this.codDos = codDos;
-		
-		
+	
 	}
 
 

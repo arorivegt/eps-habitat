@@ -2,14 +2,15 @@ package org.habitatguate.hgerp.seguridad.client;
 
 import java.util.Iterator;
 import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
-import org.habitatguate.hgerp.seguridad.service.segParametro;
+import org.habitatguate.hgerp.seguridad.service.SegParametro;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -87,7 +88,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			/*loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
+			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
 					new AsyncCallback<String[]>(){
                 public void onFailure(Throwable caught) 
                 {
@@ -103,25 +104,30 @@ public class Buscador_Parametro_Inv extends Composite {
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	textBox_3.setText("");
+                	loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+                		
+                		@Override
+                		public void onSuccess(List<AuxParametro> result) {
+                			TablaEntryPoint e = new TablaEntryPoint(result);
+                			grid.setWidget(1, 0,e);
+                			e.setSize("1187px", "648px");
+                		//	Iterator<AuxParametro> iter = result.iterator();
+                		//	while (iter.hasNext())
+                		//	System.out.println(iter.next().getNomParametro());	
+                			
+                		}
+                		
+                		@Override
+                		public void onFailure(Throwable caught) {
+                			System.out.println(caught);
+                			
+                		}
+                	});
+                	
                 }
 
-         });*/
-			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
-				
-				@Override
-				public void onSuccess(List<AuxParametro> result) {
-					Iterator<AuxParametro> iter = result.iterator();
-					while (iter.hasNext())
-					System.out.println(iter.next().getNomParametro());	
-					
-				}
-				
-				@Override
-				public void onFailure(Throwable caught) {
-					System.out.println(caught);
-					
-				}
-			});
+         });
+
 		}
 	});		
 
@@ -136,10 +142,28 @@ public class Buscador_Parametro_Inv extends Composite {
 	simplePanel.setSize("1184px", "716px");
 	grid.clearCell(1, 0);
 //	Empleados e = new Empleados();
-	TablasEntryPoint e = new TablasEntryPoint();
-	grid.setWidget(1, 0,e);
-	e.setSize("1187px", "648px");
-    
+	//TablasEntryPoint e = new TablasEntryPoint();
+	//grid.setWidget(1, 0,e);
+	//e.setSize("1187px", "648px");
+	loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+		
+		@Override
+		public void onSuccess(List<AuxParametro> result) {
+			TablaEntryPoint e = new TablaEntryPoint(result);
+			grid.setWidget(1, 0,e);
+			e.setSize("1187px", "648px");
+		//	Iterator<AuxParametro> iter = result.iterator();
+		//	while (iter.hasNext())
+		//	System.out.println(iter.next().getNomParametro());	
+			
+		}
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			System.out.println(caught);
+			
+		}
+	});
    
 }
 		

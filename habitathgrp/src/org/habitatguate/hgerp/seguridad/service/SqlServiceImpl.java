@@ -23,7 +23,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			System.out.println("GUARDANDO PARAMETRO");
 			
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			segParametro nuevo = new segParametro(nomParam, codContable, codUno, codDos);
+			SegParametro nuevo = new SegParametro(nomParam, codContable, codUno, codDos);
 			try{
 				gestorPersistencia.makePersistent(nuevo);
 				System.out.println("PARAMETRO GUARDADO CORRECTAMENTE");
@@ -38,11 +38,11 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 	@SuppressWarnings("unchecked")
 	public List<AuxParametro> ConsultaTodosParam(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-		Query query = gestorPersistencia.newQuery(segParametro.class);
+		Query query = gestorPersistencia.newQuery(SegParametro.class);
 		List<AuxParametro> valor = new ArrayList<AuxParametro>();
-		List<segParametro> execute = (List<segParametro>)query.execute("Google App Engine");
+		List<SegParametro> execute = (List<SegParametro>)query.execute("Google App Engine");
 		if (!execute.isEmpty()){
-			for (segParametro p : execute){
+			for (SegParametro p : execute){
 				AuxParametro aux = new AuxParametro();
 				aux.setIdParametro(p.getIdParametro());
 				aux.setNomParametro(p.getNomParametro());

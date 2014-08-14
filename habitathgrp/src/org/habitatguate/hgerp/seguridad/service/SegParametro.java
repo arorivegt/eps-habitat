@@ -13,7 +13,7 @@ import javax.jdo.annotations.PrimaryKey;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class segParametro implements Serializable{
+public class SegParametro implements Serializable{
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -28,7 +28,7 @@ public class segParametro implements Serializable{
 	private int codDos;
 	
 	
-	public segParametro(String nomParametro, int codContable, int codUno, int codDos){
+	public SegParametro(String nomParametro, int codContable, int codUno, int codDos){
 		super();
 		this.nomParametro = nomParametro;
 		this.codContable = codContable;

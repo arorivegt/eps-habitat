@@ -1,14 +1,23 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.view.client.ProvidesKey;
 
 public class AuxParametro implements IsSerializable {
 
-
+	/**
+     * The key provider that provides the unique ID of a contact.
+     */
+    public static final ProvidesKey<AuxParametro> KEY_PROVIDER = new ProvidesKey<AuxParametro>() {
+      @Override
+      public Object getKey(AuxParametro item) {
+        return item == null ? null : item.getIdParametro();
+      }
+    };
+	
+	
 	private Long idParametro;
 
 	private String nomParametro;

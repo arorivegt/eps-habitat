@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
@@ -88,6 +89,8 @@ public class Buscador_Parametro_Inv extends Composite {
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
+			if (!textBox.getText().equals("")){
+			//	Window.alert(textBox.getText());
 			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
 					new AsyncCallback<String[]>(){
                 public void onFailure(Throwable caught) 
@@ -110,7 +113,7 @@ public class Buscador_Parametro_Inv extends Composite {
                 		public void onSuccess(List<AuxParametro> result) {
                 			TablaEntryPoint e = new TablaEntryPoint(result);
                 			grid.setWidget(1, 0,e);
-                			e.setSize("1187px", "648px");
+                			e.setSize("1000px", "400px");
                 		//	Iterator<AuxParametro> iter = result.iterator();
                 		//	while (iter.hasNext())
                 		//	System.out.println(iter.next().getNomParametro());	
@@ -127,7 +130,11 @@ public class Buscador_Parametro_Inv extends Composite {
                 }
 
          });
-
+		}
+		
+		else{
+			Window.alert("Debe completar el formulario");
+		}
 		}
 	});		
 
@@ -139,7 +146,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	
 	SimplePanel simplePanel = new SimplePanel();
 	grid.setWidget(1, 0, simplePanel);
-	simplePanel.setSize("1184px", "716px");
+	simplePanel.setSize("1000px", "400px");
 	grid.clearCell(1, 0);
 //	Empleados e = new Empleados();
 	//TablasEntryPoint e = new TablasEntryPoint();
@@ -151,7 +158,7 @@ public class Buscador_Parametro_Inv extends Composite {
 		public void onSuccess(List<AuxParametro> result) {
 			TablaEntryPoint e = new TablaEntryPoint(result);
 			grid.setWidget(1, 0,e);
-			e.setSize("1187px", "648px");
+			e.setSize("1000px", "400px");
 		//	Iterator<AuxParametro> iter = result.iterator();
 		//	while (iter.hasNext())
 		//	System.out.println(iter.next().getNomParametro());	

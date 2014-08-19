@@ -135,7 +135,7 @@ public class Buscador_Empleados extends Composite  {
 
 		grid.clearCell(1, 0);
 		final Empleados e = new Empleados();
-		e.Nuevas_Pestañas();
+		e.NuevasPestanas();
 		grid.setWidget(1, 0,e);
         e.setSize("1187px", "648px");
         

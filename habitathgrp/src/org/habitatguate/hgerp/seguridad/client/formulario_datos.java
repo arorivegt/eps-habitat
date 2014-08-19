@@ -906,7 +906,7 @@ public class formulario_datos extends Composite {
 	                            	id_empleado = result;
 	                            	empleado.id_empleado = result;
 	                            	bandera = false;
-	                            	empleado.Nuevas_Pestañas();
+	                            	empleado.NuevasPestanas();
 	                            	empleado.familia_unica();
 	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! "+id_empleado);
 	                            }

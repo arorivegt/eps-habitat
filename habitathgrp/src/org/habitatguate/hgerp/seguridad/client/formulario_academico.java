@@ -11,6 +11,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.datepicker.client.DateBox;
@@ -18,8 +20,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.FileUpload;
 public class formulario_academico extends Composite {
-	
 	private academico a;
 	private Empleados empleado;
 	private boolean bandera = true;
@@ -39,7 +43,7 @@ public class formulario_academico extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("738px", "40px");
+		absolutePanel.setSize("1101px", "160px");
 		
 		Label lblNivelAcademico = new Label("Nivel Academico");
 		lblNivelAcademico.setStyleName("label");

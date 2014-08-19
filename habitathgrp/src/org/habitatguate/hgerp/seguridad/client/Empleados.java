@@ -45,7 +45,7 @@ public class Empleados extends Composite {
 		
 	}	
 	
-	public void Nuevas_Pestañas(){
+	public void NuevasPestanas(){
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_1, "Familia",true);

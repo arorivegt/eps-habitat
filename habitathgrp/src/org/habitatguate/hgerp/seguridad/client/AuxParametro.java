@@ -2,10 +2,11 @@ package org.habitatguate.hgerp.seguridad.client;
 
 
 
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
-public class AuxParametro implements IsSerializable {
+public class AuxParametro implements Comparable<AuxParametro>,IsSerializable{
 
 	/**
      * The key provider that provides the unique ID of a contact.
@@ -16,8 +17,15 @@ public class AuxParametro implements IsSerializable {
         return item == null ? null : item.getIdParametro();
       }
     };
+    @Override
+    public int compareTo(AuxParametro o) {
+      return (o == null || o.idParametro == null) ? -1 : -o.idParametro.compareTo(idParametro);
+    }
 	
-	
+    
+
+
+    
 	private Long idParametro;
 
 	private String nomParametro;
@@ -28,10 +36,11 @@ public class AuxParametro implements IsSerializable {
 
 	private int codDos;
 	
+
 	
 	public AuxParametro(){
 		super();
-	
+
 	}
 
 

@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 
+
 import java.util.List;
 
 import com.google.gwt.cell.client.CheckboxCell;
@@ -23,7 +24,9 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.DefaultSelectionEventManager;
+import com.google.gwt.view.client.DefaultSelectionEventManager.SelectAction;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
@@ -31,12 +34,11 @@ import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
 public class TablaEntryPoint extends Composite implements EntryPoint{
-    private final DateTimeFormat fmt = DateTimeFormat.getFormat("dd/MM/yyyy");
-    private SelectionModel<AuxParametro> sm = new MultiSelectionModel<AuxParametro>(AuxParametro.KEY_PROVIDER);
- /*   {
+ 
+	MultiSelectionModel<AuxParametro> sm = new MultiSelectionModel<AuxParametro>(AuxParametro.KEY_PROVIDER);
     	
-    	       Añade un objeto que recibe notificaciones cuando cambia la selección. 
-    	      sm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
+    //	       Añade un objeto que recibe notificaciones cuando cambia la selección. 
+    /*	      sm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
     	        @Override
     	        public void onSelectionChange(SelectionChangeEvent event) {
     	          AuxParametro c = sm.getSelectedObject();
@@ -45,28 +47,17 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
     	          }
     	        }
     	      });
-    	
-    }*/
+    	*/
+    
     /** La tabla trabaja por páginas. En este caso la longitud de página se pasa en el
      * constructor. También hay un constructor sin parámetros que define una longitud
      * por defecto de 15 renglones por página. */
     private final CellTable<AuxParametro> tblConocidos = new CellTable<AuxParametro>(10);
     {
       // asigna el objeto que controla las selecciones.
-    
-    tblConocidos.setSelectionModel(sm, DefaultSelectionEventManager
-            .<AuxParametro> createCheckboxManager());
+
       // Agrega columnas.
-    Column<AuxParametro, Boolean> checkColumn = new Column<AuxParametro, Boolean>(
-            new CheckboxCell(true, false)) {
-          @Override
-          public Boolean getValue(AuxParametro object) {
-            // Get the value from the selection model.
-            return sm.isSelected(object);
-          }
-        };
-        tblConocidos.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
-        tblConocidos.setColumnWidth(checkColumn, 40, Unit.PX);
+
       // Columna numérica. El constructor de "NumberCell"puede recibir un"NumberFormat".
       tblConocidos.addColumn(new Column<AuxParametro, Number>(new NumberCell()) {
         {
@@ -116,7 +107,17 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
        }
      }, "Codigo Dos");
       
-
+    /*  Column<AuxParametro, Boolean> checkColumn = new Column<AuxParametro, Boolean>(
+    		    new CheckboxCell(true, false)) {
+    		  @Override
+    		  public Boolean getValue(AuxParametro object) {
+    		    // Get the value from the selection model.
+    		    return sm.isSelected(object);
+    		  }
+    		};
+    		tblConocidos.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
+    		tblConocidos.setColumnWidth(checkColumn, 40, Unit.PX);
+    		 */    
    }
 
     private final SimplePager pager = new SimplePager();
@@ -132,9 +133,11 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
         panel.add(tblConocidos);
         panel.add(pager);
         initWidget(panel);
+        
+    	tblConocidos.setSelectionModel(sm);
       }
       public void onModuleLoad() {
-        RootPanel.get().add(this);
+        RootPanel.get("nelson").add(this);
       }
     
 }

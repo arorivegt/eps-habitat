@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;

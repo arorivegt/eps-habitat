@@ -16,6 +16,18 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegEntrevista;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegFamilia;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegHistorial;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegIdioma;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPuesto;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegTest;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegVacaciones;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.appengine.api.datastore.Key;

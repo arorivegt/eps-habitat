@@ -4,7 +4,7 @@
 	<inherits name="com.google.gwt.user.User" />
 	<source path="client" />
 	<entry-point
-		class="org.habitatguate.hgerp.seguridad.client.Index">
+		class="org.habitatguate.hgerp.seguridad.client.principal.Index">
 	</entry-point>
 	<source path="service" />
 </module>

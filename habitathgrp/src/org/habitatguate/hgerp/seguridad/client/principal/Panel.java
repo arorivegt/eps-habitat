@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.seguridad.client.principal;
 
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;

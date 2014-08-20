@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
-import org.habitatguate.hgerp.seguridad.service.SegParametro;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

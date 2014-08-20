@@ -4,7 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.AuxParametro;
-import org.habitatguate.hgerp.seguridad.service.SegParametro;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.service;
+package org.habitatguate.hgerp.seguridad.service.jdo;
 
 
 

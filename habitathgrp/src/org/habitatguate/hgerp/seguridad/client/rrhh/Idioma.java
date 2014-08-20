@@ -43,21 +43,21 @@ public class Idioma extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_idiomas(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formularioIdiomas(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxIdioma> results){
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxIdioma n2 : results) {
-			    	formulario_idiomas fa = new  formulario_idiomas(this,empleado);
+			    	formularioIdiomas fa = new  formularioIdiomas(this,empleado);
 			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
 	    }
 	    
-	    public void EliminarFormulario(final formulario_idiomas fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final formularioIdiomas fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Idioma(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 

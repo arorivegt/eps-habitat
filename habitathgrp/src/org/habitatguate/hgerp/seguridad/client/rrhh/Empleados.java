@@ -23,13 +23,13 @@ public class Empleados extends Composite {
 	private historiales h;
 	private Idioma i;
 	private puestos p;
-	private referencia_laboral rl ;
-	private referencia_personal rp;
+	private referenciaLaboral rl ;
+	private referenciaPersonal rp;
 	private vacaciones v;
-	private formulario_datos fd;
-	private formulario_entrevista fe ;
-	private formulario_prueba_periodo fpp;
-	private formulario_prueba_periodo_dos fppd;
+	private formularioDatos fd;
+	private formularioEntrevista fe ;
+	private formularioPruebaPeriodo fpp;
+	private formularioPruebaPeriodoDos fppd;
 	public Empleados() {
 		
 		tabPanel = new TabPanel();
@@ -40,7 +40,7 @@ public class Empleados extends Composite {
 		scrollPanel.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel, "Datos",true);
 		scrollPanel.setSize("1200px", "480px");
-		fd = new formulario_datos(this);
+		fd = new formularioDatos(this);
 		scrollPanel.setWidget(fd);
 		
 		
@@ -66,7 +66,7 @@ public class Empleados extends Composite {
 		scrollPanel_3.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_3, "Referencia Laboral", true);
 		scrollPanel_3.setSize("1200px", "480px");
-		rl = new referencia_laboral(this);///
+		rl = new referenciaLaboral(this);///
 		scrollPanel_3.setWidget(rl);
 		rl.setHeight("236px");
 		
@@ -74,7 +74,7 @@ public class Empleados extends Composite {
 		scrollPanel_5.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_5, "Referencia Personal", true);
 		scrollPanel_5.setSize("1200px", "480px");
-		rp = new referencia_personal(this);///
+		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);
 		
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
@@ -89,14 +89,14 @@ public class Empleados extends Composite {
 		scrollPanel_6.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_6, "Evaluacion", true);
 		scrollPanel_6.setSize("1200px", "480px");
-		fpp = new formulario_prueba_periodo(this);
+		fpp = new formularioPruebaPeriodo(this);
 		scrollPanel_6.setWidget(fpp);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_7, "Desempeño", true);
 		scrollPanel_7.setSize("1200px", "480px");
-		fppd = new formulario_prueba_periodo_dos(this);
+		fppd = new formularioPruebaPeriodoDos(this);
 		scrollPanel_7.setWidget(fppd);
 		
 		ScrollPanel scrollPanel_8 = new ScrollPanel();
@@ -110,7 +110,7 @@ public class Empleados extends Composite {
 		scrollPanel_9.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("1200px", "480px");
-		fe = new formulario_entrevista(this);
+		fe = new formularioEntrevista(this);
 		scrollPanel_9.setWidget(fe);
 		
 		ScrollPanel scrollPanel_10 = new ScrollPanel();

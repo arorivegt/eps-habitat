@@ -41,21 +41,21 @@ public class historiales extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_historial(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formularioHistorial(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxHistorial> results){
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxHistorial n2 : results) {
-			    	formulario_historial fa = new  formulario_historial(this,empleado);
+			    	formularioHistorial fa = new  formularioHistorial(this,empleado);
 			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
 	    }
 	    
-	    public void EliminarFormulario(final formulario_historial fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final formularioHistorial fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Historial(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 

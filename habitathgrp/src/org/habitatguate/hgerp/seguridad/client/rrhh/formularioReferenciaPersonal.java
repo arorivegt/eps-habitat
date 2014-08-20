@@ -15,10 +15,10 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class formulario_referencia_personal extends Composite {
+public class formularioReferenciaPersonal extends Composite {
 
 	private Empleados empleado;
-	private referencia_personal a;
+	private referenciaPersonal a;
 	private boolean bandera = true;
 	private Long id_referencia_personal = 0L;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -30,7 +30,7 @@ public class formulario_referencia_personal extends Composite {
 	private IntegerBox txtTelefono;
 	
 	
-	public formulario_referencia_personal(referencia_personal a,Empleados e) {
+	public formularioReferenciaPersonal(referenciaPersonal a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

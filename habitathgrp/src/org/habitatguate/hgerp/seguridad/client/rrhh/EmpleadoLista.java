@@ -12,12 +12,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
-public class Empleado_Lista extends Composite {
+public class EmpleadoLista extends Composite {
 	
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-    private Empleado_Lista a;
+    private EmpleadoLista a;
     private FlexTable flexTable;
-	public Empleado_Lista() {
+	public EmpleadoLista() {
 		this.a =this;
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
@@ -33,7 +33,7 @@ public class Empleado_Lista extends Composite {
 		flexTable.setSize("100%", "80px");
 	}
 	
-    public void agregarFormulario(final char tipo, final Buscador_Empleados b, final String primer_nombre, String segundo_nombre, 
+    public void agregarFormulario(final char tipo, final BuscadorEmpleados b, final String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido){
     	System.out.println("tipo "+tipo);
     	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
@@ -47,7 +47,7 @@ public class Empleado_Lista extends Composite {
             public void onSuccess( List<AuxEmpleado> result)
             {
 				for(AuxEmpleado p : result) {
-			        flexTable.setWidget(flexTable.getRowCount(), 0, new Empleado_Item(b,a,p.getId_empleado(),p.getPrimer_nombre(),
+			        flexTable.setWidget(flexTable.getRowCount(), 0, new EmpleadoItem(b,a,p.getId_empleado(),p.getPrimer_nombre(),
 			        		p.getSegundo_nombre(),p.getPrimer_apellido(),p.getSegundo_apellido()));
 				}
             }
@@ -55,7 +55,7 @@ public class Empleado_Lista extends Composite {
      });
     }
     
-    public void EliminarFormulario(final Empleado_Item a){
+    public void EliminarFormulario(final EmpleadoItem a){
     	flexTable.remove(a);
     }
     

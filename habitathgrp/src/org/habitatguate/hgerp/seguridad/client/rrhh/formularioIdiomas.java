@@ -15,7 +15,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class formulario_idiomas extends Composite {
+public class formularioIdiomas extends Composite {
 
 	private Idioma a;
 	private Empleados empleado;
@@ -26,7 +26,7 @@ public class formulario_idiomas extends Composite {
     private ListBox listNivel;
     private TextBox txtIdioma;
     
-	public formulario_idiomas(Idioma a,Empleados e) {
+	public formularioIdiomas(Idioma a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

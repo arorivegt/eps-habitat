@@ -44,21 +44,21 @@ public class vacaciones extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_vacaciones(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formularioVacaciones(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxVacaciones> results){
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxVacaciones n2 : results) {
-			    	formulario_vacaciones fa = new  formulario_vacaciones(this,empleado);
+			    	formularioVacaciones fa = new  formularioVacaciones(this,empleado);
 			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
 	    }
 	    
-	    public void EliminarFormulario(final formulario_vacaciones fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final formularioVacaciones fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Vacaciones(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 

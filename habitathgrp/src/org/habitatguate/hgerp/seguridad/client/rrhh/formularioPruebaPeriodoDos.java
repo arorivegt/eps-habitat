@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-public class formulario_prueba_periodo_dos extends Composite {
+public class formularioPruebaPeriodoDos extends Composite {
 
 	 	private Empleados empleado;
 		private Long id_prueba = 0L;
@@ -39,7 +39,7 @@ public class formulario_prueba_periodo_dos extends Composite {
 		private DoubleBox txtPunteoTotal;
 		private DateBox dateFecha ;
 		
-	public formulario_prueba_periodo_dos(Empleados e) {
+	public formularioPruebaPeriodoDos(Empleados e) {
 
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();

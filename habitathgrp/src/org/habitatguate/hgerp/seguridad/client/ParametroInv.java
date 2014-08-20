@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.formulario_academico;
+import org.habitatguate.hgerp.seguridad.client.rrhh.formularioAcademico;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -37,7 +37,7 @@ public class ParametroInv extends Composite  {
 	    private void agregarFormulario(){
 	        //flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this));//
 	    }
-	    public void EliminarFormulario(formulario_academico fa){
+	    public void EliminarFormulario(formularioAcademico fa){
 	        flextable.remove(fa);
 	    }
 	    

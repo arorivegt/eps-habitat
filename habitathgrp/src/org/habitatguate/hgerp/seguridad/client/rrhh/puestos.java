@@ -43,14 +43,14 @@ public class puestos extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_puestos(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formularioPuestos(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxPuesto> results){
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxPuesto n2 : results) {
-			    	formulario_puestos fa = new  formulario_puestos(this,empleado);
+			    	formularioPuestos fa = new  formularioPuestos(this,empleado);
 			    	String valor = "No";
 			    	if(n2.isActivo()){ valor = "Si";}
 			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
@@ -60,7 +60,7 @@ public class puestos extends Composite  {
 	    	}	    
 	    }
 	    
-	    public void EliminarFormulario(final formulario_puestos fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final formularioPuestos fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Puesto(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 

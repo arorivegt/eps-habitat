@@ -18,7 +18,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class formulario_vacaciones extends Composite {
+public class formularioVacaciones extends Composite {
 
 	private vacaciones a;
 	private Empleados empleado;
@@ -30,7 +30,7 @@ public class formulario_vacaciones extends Composite {
     private DateBox dateFecha1;
     private DateBox dateFecha2;
     
-	public formulario_vacaciones(vacaciones a,Empleados e) {
+	public formularioVacaciones(vacaciones a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

@@ -20,7 +20,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class formulario_datos extends Composite {
+public class formularioDatos extends Composite {
 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
@@ -69,7 +69,7 @@ public class formulario_datos extends Composite {
     private TextBox txtConIVS ;
     private TextBox txtSinIVS ;
     
-	public formulario_datos(Empleados e) {
+	public formularioDatos(Empleados e) {
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

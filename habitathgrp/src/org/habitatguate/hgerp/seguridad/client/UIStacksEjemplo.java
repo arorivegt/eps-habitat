@@ -1,6 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.Buscador_Empleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -27,7 +27,7 @@ public class UIStacksEjemplo extends ResizeComposite {
    }
  	@UiHandler("label_1")
  	void onLabel_1Click(ClickEvent event) {
- 		Buscador_Empleados buscador = new Buscador_Empleados();
+ 		BuscadorEmpleados buscador = new BuscadorEmpleados();
  		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(buscador, 0, 0);
  	}

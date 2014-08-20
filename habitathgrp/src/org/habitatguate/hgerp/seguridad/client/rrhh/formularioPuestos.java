@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class formulario_puestos extends Composite {
+public class formularioPuestos extends Composite {
 
 	private puestos a;
 	private Empleados empleado;
@@ -34,7 +34,7 @@ public class formulario_puestos extends Composite {
 	private TextArea txtFunciones;
 	private TextBox txtSalario;
 	
-	public formulario_puestos(puestos a,Empleados e) {
+	public formularioPuestos(puestos a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

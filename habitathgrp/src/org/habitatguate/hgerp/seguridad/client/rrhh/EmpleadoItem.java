@@ -8,12 +8,12 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 
-public class Empleado_Item extends Composite {
+public class EmpleadoItem extends Composite {
 
-	private Empleado_Lista a;
+	private EmpleadoLista a;
 	private Long id_empleado = 0L;
-	private Buscador_Empleados BE;
-	public Empleado_Item(Buscador_Empleados b, Empleado_Lista a,Long id_emplead, String primer_nombre, String segundo_nombre, 
+	private BuscadorEmpleados BE;
+	public EmpleadoItem(BuscadorEmpleados b, EmpleadoLista a,Long id_emplead, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido) {
 		this.id_empleado = id_emplead;
 		this.BE = b;

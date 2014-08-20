@@ -23,10 +23,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class formulario_referencia_laboral extends Composite {
+public class formularioReferenciaLaboral extends Composite {
 
 	private Empleados empleado;
-	private referencia_laboral a;
+	private referenciaLaboral a;
 	private boolean bandera = true;
 	private Long id_referencia_laboral = 0L;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -42,7 +42,7 @@ public class formulario_referencia_laboral extends Composite {
 	private TextBox txtSalarioFinal;
 	private TextBox txtPuestoCandidato;
 	
-	public formulario_referencia_laboral(referencia_laboral a,Empleados e) {
+	public formularioReferenciaLaboral(referenciaLaboral a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

@@ -17,12 +17,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Grid;
 
-public class Buscador_Empleados extends Composite  {
+public class BuscadorEmpleados extends Composite  {
 
     private  Grid grid;
-    private Buscador_Empleados a;
+    private BuscadorEmpleados a;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-	public Buscador_Empleados() {
+	public BuscadorEmpleados() {
 		this.a = this;
 		grid = new Grid(2, 1);
 		initWidget(grid);
@@ -83,7 +83,7 @@ public class Buscador_Empleados extends Composite  {
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				grid.clearCell(1, 0);
-				Empleado_Lista  nuevo = new Empleado_Lista();
+				EmpleadoLista  nuevo = new EmpleadoLista();
 				nuevo.agregarFormulario('1',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
 						txtPrimerApellido.getText(), txtSegundoApellido.getText());
 				grid.setWidget(1, 0,nuevo);
@@ -113,7 +113,7 @@ public class Buscador_Empleados extends Composite  {
 			public void onClick(ClickEvent event) {
 
 				grid.clearCell(1, 0);
-				Empleado_Lista  nuevo = new Empleado_Lista();
+				EmpleadoLista  nuevo = new EmpleadoLista();
 				nuevo.agregarFormulario('2',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
 						txtPrimerApellido.getText(), txtSegundoApellido.getText());
 				grid.setWidget(1, 0,nuevo);

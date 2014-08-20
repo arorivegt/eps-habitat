@@ -17,7 +17,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
 
-public class formulario_familia  extends Composite  {
+public class formularioFamilia  extends Composite  {
 
 	private familiares a;
 	private Empleados empleado;
@@ -33,7 +33,7 @@ public class formulario_familia  extends Composite  {
 	private TextBox txtParentesco;
 	private TextBox txtEdad ;
 	
-	public formulario_familia(String pariente, familiares a,Empleados e) {
+	public formularioFamilia(String pariente, familiares a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

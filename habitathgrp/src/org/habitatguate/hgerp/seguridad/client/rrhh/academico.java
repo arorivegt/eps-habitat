@@ -41,20 +41,20 @@ public class academico extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formulario_academico(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new formularioAcademico(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxHistorialAcademico> results){
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxHistorialAcademico n2 : results) {
-			    	formulario_academico fa = new formulario_academico(this,empleado);
+			    	formularioAcademico fa = new formularioAcademico(this,empleado);
 			    	fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
 	    }
-	    public void EliminarFormulario(final formulario_academico fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final formularioAcademico fa, final Long id_empledo, final Long id){
 
 			loginService.Eliminar_Academico(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 

@@ -59,7 +59,7 @@ public class familiares extends Composite  {
 	}
     
     private void agregarFormulario(String pariente){
-        flextable.setWidget(flextable.getRowCount(), 0, new formulario_familia(pariente,this,empleado));  	
+        flextable.setWidget(flextable.getRowCount(), 0, new formularioFamilia(pariente,this,empleado));  	
     }
     
     public void agregarFormulario_lleno(List<AuxFamilia> results){
@@ -72,7 +72,7 @@ public class familiares extends Composite  {
 		    		if(n2.getParentesco().equals("padre")) padre = true;
 		    		else if(n2.getParentesco().equals("madre")) madre = true;
 		    		else if(n2.getParentesco().equals("conyugue")) conyugue = true;
-		    	 formulario_familia fa = new  formulario_familia(n2.getParentesco(),this,empleado);
+		    	 formularioFamilia fa = new  formularioFamilia(n2.getParentesco(),this,empleado);
 		    	  fa.LlenarDatos(n2.getId_familia(),n2.getPrimer_apellido(),n2.getSegundo_apellido(),n2.getPrimer_nombre(),
 		    					 n2.getSegundo_nombre(),n2.getOcupacion(),n2.getParentesco(),""+n2.getEdad());
 		        flextable.setWidget(flextable.getRowCount(), 0,fa );
@@ -93,7 +93,7 @@ public class familiares extends Composite  {
     		
     }
     
-    public void EliminarFormulario(final formulario_familia fa, final Long id_empledo, final Long id){
+    public void EliminarFormulario(final formularioFamilia fa, final Long id_empledo, final Long id){
 
 		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 

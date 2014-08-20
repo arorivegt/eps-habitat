@@ -22,7 +22,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class formulario_entrevista extends Composite {
+public class formularioEntrevista extends Composite {
 
 	 private Empleados empleado;
 	 private boolean bandera = true;
@@ -58,7 +58,7 @@ public class formulario_entrevista extends Composite {
 	 
    
 
-	public formulario_entrevista(Empleados e) {
+	public formularioEntrevista(Empleados e) {
 
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();

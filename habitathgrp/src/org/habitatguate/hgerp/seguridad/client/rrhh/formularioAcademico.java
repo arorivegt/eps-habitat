@@ -18,7 +18,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
-public class formulario_academico extends Composite {
+public class formularioAcademico extends Composite {
 	private academico a;
 	private Empleados empleado;
 	private boolean bandera = true;
@@ -31,7 +31,7 @@ public class formulario_academico extends Composite {
 	private TextBox txtEstablecimiento;
 	private ListBox listNIvel_Academico;
 	
-	public formulario_academico(academico a,Empleados e) {
+	public formularioAcademico(academico a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

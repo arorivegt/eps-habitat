@@ -1,6 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client;
 
 
+import org.habitatguate.hgerp.seguridad.client.rrhh.formulario_academico;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;

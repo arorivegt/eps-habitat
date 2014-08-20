@@ -3,7 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

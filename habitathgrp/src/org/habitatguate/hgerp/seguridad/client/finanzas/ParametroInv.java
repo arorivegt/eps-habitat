@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 import org.habitatguate.hgerp.seguridad.client.rrhh.formularioAcademico;

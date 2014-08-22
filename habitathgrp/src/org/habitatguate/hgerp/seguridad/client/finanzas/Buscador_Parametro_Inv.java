@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.Iterator;
 import java.util.List;

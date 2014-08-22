@@ -1,6 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
-import org.habitatguate.hgerp.seguridad.client.Buscador_Parametro_Inv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 
 import com.google.gwt.core.client.GWT;

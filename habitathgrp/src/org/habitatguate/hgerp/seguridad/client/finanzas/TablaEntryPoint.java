@@ -1,8 +1,10 @@
-package org.habitatguate.hgerp.seguridad.client;
+package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -30,6 +32,7 @@ import com.google.gwt.view.client.DefaultSelectionEventManager.SelectAction;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.SelectionChangeEvent;
+import com.google.gwt.view.client.SelectionChangeEvent.Handler;
 import com.google.gwt.view.client.SelectionModel;
 import com.google.gwt.view.client.SingleSelectionModel;
 
@@ -38,16 +41,19 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
 	MultiSelectionModel<AuxParametro> sm = new MultiSelectionModel<AuxParametro>(AuxParametro.KEY_PROVIDER);
     	
     //	       Añade un objeto que recibe notificaciones cuando cambia la selección. 
-    /*	      sm.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
-    	        @Override
-    	        public void onSelectionChange(SelectionChangeEvent event) {
-    	          AuxParametro c = sm.getSelectedObject();
-    	          if (c != null) {
-    	            Window.alert(c.getNomParametro());
-    	          }
-    	        }
+	{      sm.addSelectionChangeHandler(new Handler() {
+				@Override
+				public void onSelectionChange(SelectionChangeEvent event) {
+					// TODO Auto-generated method stub
+				      ArrayList<AuxParametro> rows = new ArrayList<AuxParametro>(sm.getSelectedSet( ));
+	    	          if (rows != null) {
+	    	            Window.alert(rows.get(0).getNomParametro());
+	    	        
+	    	          }
+					
+				}
     	      });
-    	*/
+	}	
     
     /** La tabla trabaja por páginas. En este caso la longitud de página se pasa en el
      * constructor. También hay un constructor sin parámetros que define una longitud
@@ -59,6 +65,17 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
       // Agrega columnas.
 
       // Columna numérica. El constructor de "NumberCell"puede recibir un"NumberFormat".
+        Column<AuxParametro, Boolean> checkColumn = new Column<AuxParametro, Boolean>(
+    		    new CheckboxCell(true, false)) {
+    		  @Override
+    		  public Boolean getValue(AuxParametro object) {
+    		    // Get the value from the selection model.
+    		    return sm.isSelected(object);
+    		  }
+    		};
+    		tblConocidos.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
+    		tblConocidos.setColumnWidth(checkColumn, 40, Unit.PX);	
+    	
       tblConocidos.addColumn(new Column<AuxParametro, Number>(new NumberCell()) {
         {
           setHorizontalAlignment(HasAlignment.ALIGN_RIGHT);
@@ -107,17 +124,8 @@ public class TablaEntryPoint extends Composite implements EntryPoint{
        }
      }, "Codigo Dos");
       
-    /*  Column<AuxParametro, Boolean> checkColumn = new Column<AuxParametro, Boolean>(
-    		    new CheckboxCell(true, false)) {
-    		  @Override
-    		  public Boolean getValue(AuxParametro object) {
-    		    // Get the value from the selection model.
-    		    return sm.isSelected(object);
-    		  }
-    		};
-    		tblConocidos.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
-    		tblConocidos.setColumnWidth(checkColumn, 40, Unit.PX);
-    		 */    
+
+    		    
    }
 
     private final SimplePager pager = new SimplePager();

@@ -4,8 +4,8 @@ package org.habitatguate.hgerp.seguridad.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.util.PMF;

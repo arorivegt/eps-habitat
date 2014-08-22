@@ -96,13 +96,19 @@ public class SegEmpleado implements Serializable {
 
 	//con IVS, sin IVS
 	@Persistent    
-    private String ConIVS;
-	
-	@Persistent    
-    private String SinIVS;
+    private String IVS;
 	
 	@Persistent    
     private String pais;
+
+	@Persistent    
+    private String URLFile;
+
+	@Persistent    
+    private String KeyFile;
+
+	@Persistent    
+    private String Estado;
 
 	public SegEmpleado() {
 		super();
@@ -178,6 +184,22 @@ public class SegEmpleado implements Serializable {
 	@Persistent
     private float bonificacion;
 
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
+
 	public Long getId_empleado() {
 		return id_empleado.getId();
 	}
@@ -188,6 +210,14 @@ public class SegEmpleado implements Serializable {
 
 	public void setAfiliacion_igss(String afiliacion_igss) {
 		this.afiliacion_igss = afiliacion_igss;
+	}
+
+	public String getEstado() {
+		return Estado;
+	}
+
+	public void setEstado(String estado) {
+		Estado = estado;
 	}
 
 	public String getEstado_civil() {
@@ -539,19 +569,12 @@ public class SegEmpleado implements Serializable {
 	}
 	
 
-	public String getConIVS() {
-		return ConIVS;
+
+	public String getIVS() {
+		return IVS;
 	}
 
-	public void setConIVS(String conIVS) {
-		ConIVS = conIVS;
-	}
-
-	public String getSinIVS() {
-		return SinIVS;
-	}
-
-	public void setSinIVS(String sinIVS) {
-		SinIVS = sinIVS;
+	public void setIVS(String IVS) {
+		this.IVS = IVS;
 	}
 }

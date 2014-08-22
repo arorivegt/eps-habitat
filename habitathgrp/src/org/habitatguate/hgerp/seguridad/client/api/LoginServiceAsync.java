@@ -3,9 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
 import java.util.List;
-
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -17,7 +15,7 @@ public interface LoginServiceAsync {
 	void Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
-            String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
+            String primer_nombre, String segundo_nombre, String IVS,
             String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
             String tipo_pasaporte, String no_pasaporte,
             String depto_municipio_cedula, String direccion_actual,
@@ -26,13 +24,13 @@ public interface LoginServiceAsync {
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
-            float bonificacion,AsyncCallback<Long> callback) throws IllegalArgumentException;
+            float bonificacion,String  URLFile, String KeyFile,String Estado,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Familiar(Long id_empleado,String primer_nombre, String segundo_nombre,
 			String primer_apellido, String segundo_apellido, int edad, String ocupacion,String parentesco, 
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Academico(Long id_empleado, Date fecha1, Date fecha2,
 			String nivel_academico, String establecimiento, String titulo, 
-			AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Referencia_Laboral(Long id_empleado,String nombre_referencia, String telefono, 
 			String puesto_candidato,String empresa_referencia, Date fecha1, 
 			Date fecha2,String motivo_retiro, float salario_final, String actitudes_cualidades,
@@ -41,7 +39,7 @@ public interface LoginServiceAsync {
 			String puesto_candidato, String relacion, String actitudes_cualidades, 
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Idioma(Long id_empleado, String nivel, String idioma, 
-			AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
 			int pregunta9, int pregunta10, Date fecha_test, String evaluador,
@@ -68,7 +66,7 @@ public interface LoginServiceAsync {
 		void Actualizar_Emppleado(Long id, String Stringafiliacion_igss,
 	            String estado_civil, String sexo, String primer_apellido,
 	            String segundo_apellido, String apellido_casada,
-	            String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
+	            String primer_nombre, String segundo_nombre, String IVS,
 	            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
 	            String tipo_pasaporte, String no_pasaporte,
 	            String depto_municipio_cedula, String direccion_actual,
@@ -77,13 +75,14 @@ public interface LoginServiceAsync {
 	            String no_licencia, String centro_trabajo, String ocupacion,
 	            Date fecha_ingreso, String codigo_ingreso, String profesion,
 	            String tipo_planilla, float salario_base, float total,
-	            float bonificacion,AsyncCallback<Long> callback) throws IllegalArgumentException;
+	            float bonificacion,String  URLFile, String KeyFile,String Estado,
+	            AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Familiar(Long id_empleado,Long id,String primer_nombre, String segundo_nombre,
 				String primer_apellido, String segundo_apellido, int edad, String ocupacion,String parentesco, 
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Academico(Long id_empleado,Long id, Date fecha1, Date fecha2,
 				String nivel_academico, String establecimiento, String titulo, 
-				AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Referencia_Laboral(Long id_empleado,Long id,String nombre_referencia, String telefono, 
 				String puesto_candidato,String empresa_referencia, Date fecha1, 
 				Date fecha2,String motivo_retiro, float salario_final, String actitudes_cualidades,
@@ -92,7 +91,7 @@ public interface LoginServiceAsync {
 				String puesto_candidato, String relacion, String actitudes_cualidades, 
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Idioma(Long id_empleado,Long id, String nivel, String idioma, 
-				AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 				int pregunta5, int pregunta6, int pregunta7, int pregunta8,
 				int pregunta9, int pregunta10, Date fecha_test, String evaluador,
@@ -148,6 +147,9 @@ public interface LoginServiceAsync {
 	    
 	    void Empleado_Registrado(Long id_empleado,
 	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
+	    
+	    void remove(String fileURL,
+	    		AsyncCallback<String> callback)throws IllegalArgumentException;
 		
 
 	

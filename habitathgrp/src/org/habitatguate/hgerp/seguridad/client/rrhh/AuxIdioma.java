@@ -11,6 +11,11 @@ public class AuxIdioma implements IsSerializable{
 	
 	
     private String idioma;   
+  
+    private String URLFile;
+    
+    private String KeyFile;
+
 	
 
 	public AuxIdioma() {
@@ -39,6 +44,22 @@ public class AuxIdioma implements IsSerializable{
 
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 
 	

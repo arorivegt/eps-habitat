@@ -1,8 +1,10 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -49,7 +51,8 @@ public class academico extends Composite  {
 	    		
 			    for ( AuxHistorialAcademico n2 : results) {
 			    	formularioAcademico fa = new formularioAcademico(this,empleado);
-			    	fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico());
+			    	fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico()
+			    			, n2.getURLFile(), n2.getKeyFile());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

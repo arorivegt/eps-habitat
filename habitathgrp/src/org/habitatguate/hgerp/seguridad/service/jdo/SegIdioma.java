@@ -27,8 +27,38 @@ public class SegIdioma implements Serializable {
 
     private SegEmpleado empleado;
 
+	@Persistent    
+    private String URLFile;
+
+	@Persistent    
+    private String KeyFile;
+
 	public SegIdioma() {
 		super();
+	}
+
+	public SegEmpleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(SegEmpleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 
 	public Long getId_idioma() {

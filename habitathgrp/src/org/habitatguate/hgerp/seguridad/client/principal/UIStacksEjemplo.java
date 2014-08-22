@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -64,5 +65,11 @@ public class UIStacksEjemplo extends ResizeComposite {
  	void onLabel_4_FinanClick(ClickEvent event) {
  		Window.alert("no esta disponible");
  	}
+	@UiHandler("label_5")
+	void onLabel_5Click(ClickEvent event) {
+		Empleados e = new Empleados();
+ 		this.nuevo.getAbsolutePanel_1().clear();
+ 		this.nuevo.getAbsolutePanel_1().add(e, 0, 0);
+	}
  }
 

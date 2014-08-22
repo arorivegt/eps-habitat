@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEntrevista;
@@ -74,7 +78,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	public Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
-            String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
+            String primer_nombre, String segundo_nombre, String IVS,
             String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
             String tipo_pasaporte, String no_pasaporte,
             String depto_municipio_cedula, String direccion_actual,
@@ -83,7 +87,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
-            float bonificacion) throws IllegalArgumentException {
+            float bonificacion,String  URLFile, String KeyFile,String Estado) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -100,8 +104,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setApellido_casada(apellido_casada.toUpperCase());
 	         e.setPrimer_nombre(primer_nombre.toUpperCase());
 	         e.setSegundo_nombre(segundo_nombre.toUpperCase());
-	         e.setConIVS(ConIVS);
-	         e.setSinIVS(SinIVS);
+	         e.setIVS(IVS);
 	         e.setPais(pais);
 	         e.setNit(nit);
 	         e.setFecha_nacimiento(fecha_nacimiento);
@@ -129,6 +132,9 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setSalario_base(salario_base);
 	         e.setTotal(total);
 	         e.setBonificacion(bonificacion);
+	         e.setURLFile(URLFile);
+	         e.setKeyFile(KeyFile);
+	         e.setEstado(Estado);
 	         gestorPersistencia.makePersistent(e); 
 	         valor = e.getId_empleado();
 	         
@@ -172,7 +178,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 	@Override
 	public Long Insertar_Academico(Long id_empleado, Date fecha1, Date fecha2,
-			String nivel_academico, String establecimiento, String titulo) throws IllegalArgumentException {
+			String nivel_academico, String establecimiento, String titulo
+			,String  URLFile, String KeyFile) throws IllegalArgumentException {
 		
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -185,6 +192,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			 	a.setFecha2(fecha2);
 			 	a.setNivel_academico(nivel_academico);
 			 	a.setTitulo(titulo.toUpperCase());
+		        a.setURLFile(URLFile);
+		        a.setKeyFile(KeyFile);
 	      	 	a.setEmpleados(e);
 	      	 	e.getHistorial_academico().add(a);
 			 	valor = a.getId_historial_academico();
@@ -252,8 +261,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	}
 
 	@Override
-	public Long Insertar_Idioma(Long id_empleado, String nivel, String idioma)
-			throws IllegalArgumentException {
+	public Long Insertar_Idioma(Long id_empleado, String nivel, String idioma
+			,String  URLFile, String KeyFile)throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
 		Long valor = 0L;
@@ -263,6 +272,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	i.setNivel(nivel);
 				 	i.setIdioma(idioma.toUpperCase());
 		      	 	i.setEmpleados(e);
+			        i.setURLFile(URLFile);
+			        i.setKeyFile(KeyFile);
 		      	 	e.getIdiomas().add(i);
 				 	valor = i.getId_idioma();
 				 }finally {  
@@ -429,7 +440,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			public Long Actualizar_Emppleado(Long id,String afiliacion_igss,
 		            String estado_civil, String sexo, String primer_apellido,
 		            String segundo_apellido, String apellido_casada,
-		            String primer_nombre, String segundo_nombre, String ConIVS, String SinIVS,
+		            String primer_nombre, String segundo_nombre, String IVS,
 		            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
 		            String tipo_pasaporte, String no_pasaporte,
 		            String depto_municipio_cedula, String direccion_actual,
@@ -438,7 +449,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
 		            String tipo_planilla, float salario_base, float total,
-		            float bonificacion) throws IllegalArgumentException {
+		            float bonificacion,String  URLFile, String KeyFile,String Estado) throws IllegalArgumentException {
 				
 
 
@@ -453,8 +464,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					         e.setApellido_casada(apellido_casada.toUpperCase());
 					         e.setPrimer_nombre(primer_nombre.toUpperCase());
 					         e.setSegundo_nombre(segundo_nombre.toUpperCase());
-					         e.setConIVS(ConIVS);
-					         e.setSinIVS(SinIVS);
+					         e.setIVS(IVS);
 					         e.setPais(pais);
 					         e.setNit(nit);
 					         e.setFecha_nacimiento(fecha_nacimiento);
@@ -482,6 +492,9 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					         e.setSalario_base(salario_base);
 					         e.setTotal(total);
 					         e.setBonificacion(bonificacion);
+					         e.setURLFile(URLFile);
+					         e.setKeyFile(KeyFile);
+					         e.setEstado(Estado);
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -520,7 +533,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 			@Override
 			public Long Actualizar_Academico(Long id_empleado,Long id, Date fecha1, Date fecha2,
-					String nivel_academico, String establecimiento, String titulo) throws IllegalArgumentException {
+					String nivel_academico, String establecimiento, String titulo
+					,String  URLFile, String KeyFile) throws IllegalArgumentException {
 				
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -536,6 +550,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					 	a.setFecha2(fecha2);
 					 	a.setNivel_academico(nivel_academico);
 					 	a.setTitulo(titulo);
+				        a.setURLFile(URLFile);
+				        a.setKeyFile(KeyFile);
 					 	valor = a.getId_historial_academico();
 					 }finally {  
 						 Persistencia.close();  
@@ -603,7 +619,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			}
 
 			@Override
-			public Long Actualizar_Idioma(Long id_empleado,Long id, String nivel, String idioma)
+			public Long Actualizar_Idioma(Long id_empleado,Long id, String nivel, String idioma
+					,String  URLFile, String KeyFile)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -616,6 +633,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 final SegIdioma i = Persistencia.getObjectById(SegIdioma.class, k); 
 						 	i.setNivel(nivel);
 						 	i.setIdioma(idioma.toUpperCase());
+					        i.setURLFile(URLFile);
+					        i.setKeyFile(KeyFile);
 						 	valor = i.getId_idioma();
 						 }finally {  
 							 Persistencia.close();  
@@ -966,13 +985,15 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setCelular(p.getCelular());
 				    	nuevo.setCentro_trabajo(p.getCentro_trabajo());
 				    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
-				    	nuevo.setConIVS(p.getConIVS());
+				    	nuevo.setIVS(p.getIVS());
 				    	nuevo.setCui(p.getCui());
 				    	nuevo.setDepto_municipio_cedula(p.getDepto_municipio_cedula());
 				    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
 				    	nuevo.setDireccion_actual(p.getDireccion_actual());
 				    	nuevo.setEmail(p.getEmail());
-				    	
+				    	nuevo.setURLFile(p.getURLFile());
+				    	nuevo.setKeyFile(p.getKeyFile());
+				    	nuevo.setEstado(p.getEstado());
 				    	List<SegEntrevista> results0 = p.getEntrevista();
 				    	if (!results0.isEmpty()) {
 						    for (SegEntrevista n0 : results0) {
@@ -1038,6 +1059,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							 	a.setFecha2(n2.getFecha2().getTime());
 							 	a.setNivel_academico(n2.getNivel_academico());
 							 	a.setTitulo(n2.getTitulo());
+						    	a.setURLFile(n2.getURLFile());
+						    	a.setKeyFile(n2.getKeyFile());
 							 	nuevo.getHistorial_academico().add(a);
 						    }
 				    	}
@@ -1064,6 +1087,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						    	i.setId_idioma(n4.getId_idioma());
 							 	i.setNivel(n4.getNivel());
 							 	i.setIdioma(n4.getIdioma());
+						    	i.setURLFile(n4.getURLFile());
+						    	i.setKeyFile(n4.getKeyFile());
 							 	nuevo.getIdiomas().add(i);
 						    }
 				    	}
@@ -1132,7 +1157,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setSegundo_apellido(p.getSegundo_apellido());
 				    	nuevo.setSegundo_nombre(p.getSegundo_nombre());
 				    	nuevo.setSexo(p.getSexo());
-				    	nuevo.setSinIVS(p.getSinIVS());
 				    	nuevo.setTelefono(p.getTelefono());
 				    	
 				    	List<SegTest> results8 = p.getTest();
@@ -1180,6 +1204,17 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 			return nuevo;
 			}
+
+			@Override
+			public String remove(String key)throws IllegalArgumentException {
+				
+			    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+			    BlobKey blobKey = new BlobKey(key);
+			    blobstoreService.delete(blobKey);
+				return "eliminado";
+			}
+			
+
 
 
 		

@@ -51,7 +51,7 @@ public class Idioma extends Composite  {
 	    		
 			    for ( AuxIdioma n2 : results) {
 			    	formularioIdiomas fa = new  formularioIdiomas(this,empleado);
-			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma());
+			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma(), n2.getURLFile(), n2.getKeyFile());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

@@ -19,7 +19,11 @@ public class AuxHistorialAcademico implements IsSerializable{
     private String establecimiento;
 	
 	
-    private String titulo;
+    private String titulo; 
+  
+    private String URLFile;
+    
+    private String KeyFile;
 	
 
 	public AuxHistorialAcademico() {
@@ -72,6 +76,22 @@ public class AuxHistorialAcademico implements IsSerializable{
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 
 

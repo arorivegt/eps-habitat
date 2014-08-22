@@ -4,42 +4,65 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
+import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FileUpload;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.datepicker.client.DateBox;
 public class formularioAcademico extends Composite {
 	private academico a;
 	private Empleados empleado;
 	private boolean bandera = true;
 	private Long id_historial_academico = 0L;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-	
+
+	private final UploadUrlServiceAsync uploadUrlService = GWT
+			.create(UploadUrlService.class);
+	private Grid grid;
 	private DateBox dateInicio;
 	private DateBox dateFinal ;
 	private TextBox txtTitulo;
 	private TextBox txtEstablecimiento;
 	private ListBox listNIvel_Academico;
+	private AbsolutePanel absolutePanel ;
+
+	private FormPanel form;
+	private VerticalPanel formElements;
+	private FileUpload fileUpload;
+	private Button button;
+	private String URLFile ="";
+	private String KeyFile ="";
 	
 	public formularioAcademico(academico a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1101px", "81px");
-		
+		absolutePanel.setSize("1101px", "40px");
+		absolutePanel.add(getFormPanel(), 786, 10);
+		getFormUrl();
 		listNIvel_Academico = new ListBox();
 		listNIvel_Academico.addItem("Primaria");
 		listNIvel_Academico.addItem("Basicos");
@@ -101,7 +124,7 @@ public class formularioAcademico extends Composite {
 				if(bandera) {
 					loginService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
 							listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
-							txtTitulo.getText(), new AsyncCallback<Long>(){
+							txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                             Window.alert("Error  al Guardar Datos"+caught);
@@ -119,7 +142,7 @@ public class formularioAcademico extends Composite {
 		}else{
 			loginService.Actualizar_Academico(empleado.id_empleado,id_historial_academico, dateInicio.getValue(), dateFinal.getValue(), 
 					listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
-					txtTitulo.getText(), new AsyncCallback<Long>(){
+					txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
                     Window.alert("Error al Actualizar Datos"+caught);
@@ -184,6 +207,7 @@ public class formularioAcademico extends Composite {
 		lblAl.setStyleName("label");
 		absolutePanel.add(lblAl, 649, 36);
 		lblAl.setSize("23px", "13px");
+
 		
 	}
 	private void EliminarFormulario(){
@@ -192,8 +216,12 @@ public class formularioAcademico extends Composite {
 	
 	public void LlenarDatos(Long id,Long dateInicio, Long dateFinal,
 							String txtTitulo, String txtEstablecimiento,
-							String listNIvel_Academico)
+							String listNIvel_Academico,String  URLFile, 
+						    String KeyFile)
 	{
+
+		this.KeyFile = KeyFile;
+		this.URLFile = URLFile;
 		this.id_historial_academico = id;
 		this.bandera = false;
 		this.dateInicio.setValue(new Date(dateInicio));
@@ -209,5 +237,144 @@ public class formularioAcademico extends Composite {
 		    this.listNIvel_Academico.setSelectedIndex(i);
 		}
 		
+	}
+	
+	private FormPanel getFormPanel() {
+		if (form == null) {
+			form = new FormPanel();
+			form.setSize("357px", "59px");
+			form.setAction("/upload");
+			form.setEncoding(FormPanel.ENCODING_MULTIPART);
+	    form.setMethod(FormPanel.METHOD_POST);
+			form.setWidget(getFormElements());
+			//form.add(getHidden());
+			
+			// add submit handler
+	    form.addSubmitHandler(new SubmitHandler() {
+				public void onSubmit(SubmitEvent event) {
+					if (fileUpload.getFilename().length() == 0) {
+	          Window.alert("Did you select a file?");
+	          event.cancel();
+	        }
+				}
+			});
+	    
+	    // add submit complete handler
+	    form.addSubmitCompleteHandler(new SubmitCompleteHandler() {
+				public void onSubmitComplete(SubmitCompleteEvent event) {
+					button.setEnabled(false);
+					String results = event.getResults();
+					try{
+						int i = results.indexOf("key=");
+						KeyFile = results.substring(i+4, results.length()-2);
+						i = results.indexOf("http");
+						URLFile = results.substring(i, results.length()-2);
+						Window.alert(URLFile);
+						Window.alert(KeyFile);
+						//pResponse.add(new HTML(results));
+						getFormUrl();
+						form.setVisible(false);
+						Archivo();
+					}catch(Exception e){
+						Archivo();
+						Window.alert(results);
+						
+					}
+				}
+			});
+	    
+		}
+		return form;
+	}
+	
+	private VerticalPanel getFormElements() {
+		if (formElements == null) {
+			formElements = new VerticalPanel();
+			formElements.setSize("356px", "100%");
+			formElements.add(getFileUpload());
+			formElements.add(getButton());
+		}
+		return formElements;
+	}
+	
+	private FileUpload getFileUpload() {
+		if (fileUpload == null) {
+			fileUpload = new FileUpload();
+			fileUpload.setWidth("357px");
+			fileUpload.setName("myFile");
+		}
+		return fileUpload;
+	}
+	
+	private Button getButton() {
+		if (button == null) {
+			button = new Button("Upload");
+			button.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					form.submit();
+				}
+			});
+			button.setEnabled(false);
+		}
+		return button;
+	}
+	
+	private void getFormUrl() {
+		
+		uploadUrlService.getUploadUrl(new AsyncCallback<String>() {
+			public void onSuccess(String url) {
+				form.setAction(url);
+				button.setEnabled(true);
+				System.out.println("retrieved url for blob store: " + url);
+			}
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Something went wrong with the rpc call.");
+			}
+		});
+		
+	}
+
+	public void Archivo(){
+
+		grid = new Grid(1, 2);
+		absolutePanel.add(grid, 786, 10);
+		grid.setSize("357px", "59px");
+		Button btnEliminar = new Button("Eliminar");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
+					@Override
+					public void onFailure(Throwable caught) {
+						form.setVisible(true);
+						grid.setVisible(false);
+						Window.alert("Archivo No Eliminado");
+					}
+					@Override
+					public void onSuccess(String result) {
+						Window.alert("Archivo Eliminado");
+					}
+
+                });
+			}
+		});
+		grid.setWidget(0, 1, btnEliminar);
+		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 }

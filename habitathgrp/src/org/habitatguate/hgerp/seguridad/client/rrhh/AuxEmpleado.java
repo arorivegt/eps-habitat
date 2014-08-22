@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxEmpleado implements IsSerializable{
@@ -81,17 +83,18 @@ public class AuxEmpleado implements IsSerializable{
 	 
     private String no_licencia;
 	 
-    private String ConIVS;
+    private String IVS;
 	
 	 
-    private String SinIVS;
-	
-	 
-    private String pais;
+    private String pais; 
+  
+    private String URLFile;
     
+    private String KeyFile;
 
-  	
-  	private List <AuxVacaciones> vacaciones = new ArrayList<AuxVacaciones>();
+    private String Estado;
+
+    private List <AuxVacaciones> vacaciones = new ArrayList<AuxVacaciones>();
 
     private List <AuxFamilia> familia= new ArrayList<AuxFamilia>();
 
@@ -403,28 +406,19 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public String getConIVS() {
-		return ConIVS;
-	}
-
-
-	public void setConIVS(String conIVS) {
-		ConIVS = conIVS;
-	}
-
-
-	public String getSinIVS() {
-		return SinIVS;
-	}
-
-
-	public void setSinIVS(String sinIVS) {
-		SinIVS = sinIVS;
-	}
-
 
 	public String getPais() {
 		return pais;
+	}
+
+
+	public String getIVS() {
+		return IVS;
+	}
+
+
+	public void setIVS(String iVS) {
+		IVS = iVS;
 	}
 
 
@@ -622,6 +616,36 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setBonificacion(float bonificacion) {
 		this.bonificacion = bonificacion;
+	}
+
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
+
+
+	public String getEstado() {
+		return Estado;
+	}
+
+
+	public void setEstado(String estado) {
+		Estado = estado;
 	}
 
 	

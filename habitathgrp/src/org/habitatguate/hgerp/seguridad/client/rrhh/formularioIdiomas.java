@@ -2,18 +2,30 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
+import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FileUpload;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
 
 public class formularioIdiomas extends Composite {
 
@@ -26,14 +38,26 @@ public class formularioIdiomas extends Composite {
     private ListBox listNivel;
     private TextBox txtIdioma;
     
+    private FormPanel form;
+	private VerticalPanel formElements;
+	private FileUpload fileUpload;
+	private Button button;
+	private String URLFile ="";
+	private String KeyFile ="";
+	private Grid grid;
+	private AbsolutePanel absolutePanel;
+
+	private final UploadUrlServiceAsync uploadUrlService = GWT
+			.create(UploadUrlService.class);
+    
 	public formularioIdiomas(Idioma a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "20px");
+		absolutePanel.setSize("1065px", "30px");
 		
 		txtIdioma = new TextBox();
 		txtIdioma.setStyleName("gwt-TextBox2");
@@ -48,7 +72,8 @@ public class formularioIdiomas extends Composite {
 		listNivel.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listNivel, 188, 29);
 		listNivel.setSize("140px", "22px");
-		
+		absolutePanel.add(getFormPanel(), 715, 10);
+		getFormUrl();
 
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -56,7 +81,7 @@ public class formularioIdiomas extends Composite {
 
 				if(bandera) {
 					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getItemText(listNivel.getSelectedIndex()), 
-							txtIdioma.getText(), new AsyncCallback<Long>(){
+							txtIdioma.getText(), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                             Window.alert("Error  al Guardar Datos"+caught);
@@ -72,7 +97,7 @@ public class formularioIdiomas extends Composite {
 						});
 				}else{
 					loginService.Actualizar_Idioma(empleado.id_empleado,id_idioma, listNivel.getItemText(listNivel.getSelectedIndex()), 
-							txtIdioma.getText(), new AsyncCallback<Long>(){
+							txtIdioma.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                             Window.alert("Error  al Actualizar Datos"+caught);
@@ -126,8 +151,12 @@ public class formularioIdiomas extends Composite {
         a.EliminarFormulario(this,empleado.id_empleado,id_idioma);
     }
 	
-	public void LlenarDatos(Long id, String listNivel, String txtIdioma)
+	public void LlenarDatos(Long id, String listNivel, String txtIdioma,String  URLFile, 
+		    String KeyFile)
 	{
+
+		this.KeyFile = KeyFile;
+		this.URLFile = URLFile;
 		this.id_idioma = id;
 		this.bandera = false;
 		this.txtIdioma.setText(txtIdioma);
@@ -137,6 +166,145 @@ public class formularioIdiomas extends Composite {
 		    this.listNivel.setSelectedIndex(i);
 		}
 		
+	}
+	
+	private FormPanel getFormPanel() {
+		if (form == null) {
+			form = new FormPanel();
+			form.setSize("357px", "59px");
+			form.setAction("/upload");
+			form.setEncoding(FormPanel.ENCODING_MULTIPART);
+	    form.setMethod(FormPanel.METHOD_POST);
+			form.setWidget(getFormElements());
+			//form.add(getHidden());
+			
+			// add submit handler
+	    form.addSubmitHandler(new SubmitHandler() {
+				public void onSubmit(SubmitEvent event) {
+					if (fileUpload.getFilename().length() == 0) {
+	          Window.alert("Did you select a file?");
+	          event.cancel();
+	        }
+				}
+			});
+	    
+	    // add submit complete handler
+	    form.addSubmitCompleteHandler(new SubmitCompleteHandler() {
+				public void onSubmitComplete(SubmitCompleteEvent event) {
+					button.setEnabled(false);
+					String results = event.getResults();
+					try{
+						int i = results.indexOf("key=");
+						KeyFile = results.substring(i+4, results.length()-2);
+						i = results.indexOf("http");
+						URLFile = results.substring(i, results.length()-2);
+						Window.alert(URLFile);
+						Window.alert(KeyFile);
+						//pResponse.add(new HTML(results));
+						getFormUrl();
+						form.setVisible(false);
+						Archivo();
+					}catch(Exception e){
+						Archivo();
+						Window.alert(results);
+						
+					}
+				}
+			});
+	    
+		}
+		return form;
+	}
+	
+	private VerticalPanel getFormElements() {
+		if (formElements == null) {
+			formElements = new VerticalPanel();
+			formElements.setSize("356px", "100%");
+			formElements.add(getFileUpload());
+			formElements.add(getButton());
+		}
+		return formElements;
+	}
+	
+	private FileUpload getFileUpload() {
+		if (fileUpload == null) {
+			fileUpload = new FileUpload();
+			fileUpload.setWidth("357px");
+			fileUpload.setName("myFile");
+		}
+		return fileUpload;
+	}
+	
+	private Button getButton() {
+		if (button == null) {
+			button = new Button("Upload");
+			button.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					form.submit();
+				}
+			});
+			button.setEnabled(false);
+		}
+		return button;
+	}
+	
+	private void getFormUrl() {
+		
+		uploadUrlService.getUploadUrl(new AsyncCallback<String>() {
+			public void onSuccess(String url) {
+				form.setAction(url);
+				button.setEnabled(true);
+				System.out.println("retrieved url for blob store: " + url);
+			}
+
+			public void onFailure(Throwable caught) {
+				Window.alert("Something went wrong with the rpc call.");
+			}
+		});
+		
+	}
+
+	public void Archivo(){
+
+		grid = new Grid(1, 2);
+		absolutePanel.add(grid, 715, 10);
+		grid.setSize("357px", "59px");
+		Button btnEliminar = new Button("Eliminar");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Archivo No Eliminado");
+					}
+					@Override
+					public void onSuccess(String result) {
+						form.setVisible(true);
+						grid.setVisible(false);
+						Window.alert("Archivo Eliminado");
+					}
+
+                });
+			}
+		});
+		grid.setWidget(0, 1, btnEliminar);
+		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 
 }

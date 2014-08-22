@@ -35,6 +35,12 @@ public class SegHistorialAcademico implements Serializable {
 	@Persistent
     private String titulo;
 
+	@Persistent    
+    private String URLFile;
+
+	@Persistent    
+    private String KeyFile;
+
     private SegEmpleado empleado;
 
 	public SegHistorialAcademico() {
@@ -63,6 +69,30 @@ public class SegHistorialAcademico implements Serializable {
 
 	public String getNivel_academico() {
 		return nivel_academico;
+	}
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
+
+	public SegEmpleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(SegEmpleado empleado) {
+		this.empleado = empleado;
 	}
 
 	public void setNivel_academico(String nivel_academico) {

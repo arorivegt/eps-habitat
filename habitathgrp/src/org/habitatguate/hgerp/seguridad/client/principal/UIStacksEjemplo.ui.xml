@@ -6,8 +6,10 @@
            <g:Tree>
            	<g:Label styleName="" text="Empleados" ui:field="label_1"/>
            	<g:Label styleName="" text="Mi Perfil" ui:field="label_5"/>
-           	<g:Label styleName="" text="Informe Ministerio" ui:field="label_2"/>
+           	<g:Label styleName="" text="Puestos" ui:field="label_6"/>
            	<g:Label styleName="" text="Prestaciones" ui:field="label_3"/>
+           	<g:Label styleName="" text="Configuracion" ui:field="label_7"/>
+           	<g:Label styleName="" text="Informe Ministerio" ui:field="label_2"/>
            	<g:Label styleName="" text="Informe  Empleados" ui:field="label_4"/>
            </g:Tree>
          </g:stack>

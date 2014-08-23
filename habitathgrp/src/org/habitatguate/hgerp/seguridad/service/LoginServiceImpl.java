@@ -9,6 +9,7 @@ import com.google.appengine.api.blobstore.BlobstoreService;
 import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEntrevista;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxFamilia;
@@ -20,6 +21,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEntrevista;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegFamilia;
@@ -1212,6 +1214,65 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			    BlobKey blobKey = new BlobKey(key);
 			    blobstoreService.delete(blobKey);
 				return "eliminado";
+			}
+
+			@Override
+			public Long Insertar_BDPuesto(Date fecha_puesto,
+					String nombre_puesto, String funciones)
+					throws IllegalArgumentException {
+				final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+				Long valor = 0L;
+				 try { 
+					 SegBDPuesto p = new SegBDPuesto();
+					 	p.setFecha_puesto(fecha_puesto);
+					 	p.setNombre_puesto(nombre_puesto.toUpperCase());
+					 	p.setFunciones(funciones.toUpperCase());
+			         gestorPersistencia.makePersistent(p); 
+			         valor = p.getId_puesto();
+			     }finally {  
+					 gestorPersistencia.close();  
+				 }
+				return valor;
+			}
+
+			@Override
+			public Long Actualizar_BDPuesto(Long id, Date fecha_puesto,
+					String nombre_puesto, String funciones)
+					throws IllegalArgumentException {
+				
+				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+				Long valor = 0L;
+				 try { 
+					 final SegBDPuesto p = Persistencia.getObjectById(SegBDPuesto.class, id); 
+					 	p.setFecha_puesto(fecha_puesto);
+					 	p.setNombre_puesto(nombre_puesto.toUpperCase());
+					 	p.setFunciones(funciones.toUpperCase());
+			         valor = p.getId_puesto();
+			     }finally {  
+					Persistencia.close();  
+				 }
+				return valor;
+			}
+
+			@Override
+			public List<AuxBDPuesto> BDPuesto() throws IllegalArgumentException {
+				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+				List<AuxBDPuesto> valor = new ArrayList<AuxBDPuesto>();
+				
+				Query q = pm.newQuery(SegBDPuesto.class);
+				List<SegBDPuesto> results = (List<SegBDPuesto>) q.execute();
+				if (!results.isEmpty()) {
+
+				    for (SegBDPuesto n5 : results) {
+						AuxBDPuesto pp = new AuxBDPuesto();
+				    	pp.setId_puesto(n5.getId_puesto());
+				    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
+					 	pp.setNombre_puesto(n5.getNombre_puesto());
+					 	pp.setFunciones(n5.getFunciones());
+					 	valor.add(pp);
+				    }
+				}
+				return valor;
 			}
 			
 

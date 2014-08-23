@@ -224,7 +224,6 @@ public class formularioIdiomas extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-						Archivo();
 						Window.alert(results);
 						
 					}

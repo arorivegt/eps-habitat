@@ -3,7 +3,10 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
 import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
@@ -46,6 +49,8 @@ public interface LoginServiceAsync {
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones,
+			 	AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Entrevista(Long id_empleado,Date fecha_entrevista, String que_conoces,
 			String por_que_trabajas_aqui, String como_se_describe,
 			String trabajar_por_presion, String metas,
@@ -98,6 +103,8 @@ public interface LoginServiceAsync {
 				String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 				float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
+		void Actualizar_BDPuesto(Long id,Date fecha_puesto, String nombre_puesto, String funciones,
+				 AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Entrevista(Long id_empleado,Long id,Date fecha_entrevista, String que_conoces,
 				String por_que_trabajas_aqui, String como_se_describe,
 				String trabajar_por_presion, String metas,
@@ -147,6 +154,8 @@ public interface LoginServiceAsync {
 	    
 	    void Empleado_Registrado(Long id_empleado,
 	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
+
+	    void BDPuesto(AsyncCallback<List<AuxBDPuesto>> callback)throws IllegalArgumentException;
 	    
 	    void remove(String fileURL,
 	    		AsyncCallback<String> callback)throws IllegalArgumentException;

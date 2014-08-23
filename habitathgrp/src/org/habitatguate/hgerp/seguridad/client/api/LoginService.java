@@ -2,9 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
 import java.util.List;
-
+import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -48,6 +47,7 @@ public interface LoginService extends RemoteService {
 			String tipo_test)throws IllegalArgumentException;
 	Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo)throws IllegalArgumentException;
+	Long Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones) throws IllegalArgumentException;
 	Long Insertar_Entrevista(Long id_empleado,Date fecha_entrevista, String que_conoces,
 			String por_que_trabajas_aqui, String como_se_describe,
 			String trabajar_por_presion, String metas,
@@ -99,6 +99,8 @@ public interface LoginService extends RemoteService {
 			String tipo_test)throws IllegalArgumentException;
 	Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo)throws IllegalArgumentException;
+	Long Actualizar_BDPuesto(Long id,Date fecha_puesto, String nombre_puesto, String funciones)
+			throws IllegalArgumentException;
 	Long Actualizar_Entrevista(Long id_empleado,Long id,Date fecha_entrevista, String que_conoces,
 			String por_que_trabajas_aqui, String como_se_describe,
 			String trabajar_por_presion, String metas,
@@ -134,7 +136,8 @@ public interface LoginService extends RemoteService {
     List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido) throws IllegalArgumentException;
     
-
+    List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
+    
     ///querys
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     

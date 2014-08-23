@@ -297,7 +297,6 @@ public class formularioAcademico extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-						Archivo();
 						Window.alert(results);
 						
 					}
@@ -385,7 +384,6 @@ public class formularioAcademico extends Composite {
                 });
 			}
 		});
-		Window.alert(URLFile);
 		grid.setWidget(0, 1, btnEliminar);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}

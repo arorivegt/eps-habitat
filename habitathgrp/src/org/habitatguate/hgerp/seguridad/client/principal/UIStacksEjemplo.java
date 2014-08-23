@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
+import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 
@@ -70,6 +71,13 @@ public class UIStacksEjemplo extends ResizeComposite {
 		Empleados e = new Empleados();
  		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(e, 0, 0);
+	}
+	@UiHandler("label_6")
+	void onLabel_6Click(ClickEvent event) {
+		BDpuestos e = new BDpuestos();
+ 		this.nuevo.getAbsolutePanel_1().clear();
+ 		this.nuevo.getAbsolutePanel_1().add(e, 0, 0);
+		
 	}
  }
 

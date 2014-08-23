@@ -746,7 +746,7 @@ public class formularioDatos extends Composite {
 	                            	bandera = false;
 	                            	empleado.NuevasPestanas();
 	                            	empleado.familia_unica();
-	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! "+id_empleado);
+	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! ");
 	                            }
 
 	                     });
@@ -775,7 +775,7 @@ public class formularioDatos extends Composite {
 	                            public void onSuccess(Long result)
 	                            {
 	                            	bandera = false;
-	                                Window.alert("Datos Actualizados exitosamente!!! "+id_empleado);
+	                                Window.alert("Datos Actualizados exitosamente!!! ");
 	                            }
 
 	                     });
@@ -1403,7 +1403,15 @@ public class formularioDatos extends Composite {
 		    String KeyFile,String Estado)
 	{
 		this.KeyFile = KeyFile;
-		image.setUrl( URLFile);
+		this.URLFile = URLFile;
+		//Window.alert("llenar datos"+URLFile);
+		//Window.alert("llenar datos"+this.URLFile);
+		try{
+			image.setUrl( URLFile);
+			Archivo();
+		}catch(Exception e){
+			image.setUrl("images/imagenempresa");
+		}
 		this.id_empleado = id;
 		this.bandera = false;
 		this.txtNo_iggs.setText(txtNo_iggs);
@@ -1545,9 +1553,9 @@ public class formularioDatos extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-	          Window.alert("Did you select a file?");
-	          event.cancel();
-	        }
+						Window.alert("Selecciono un archivo?");
+						event.cancel();
+					}
 				}
 			});
 	    
@@ -1561,15 +1569,14 @@ public class formularioDatos extends Composite {
 						KeyFile = results.substring(i+4, results.length()-2);
 						i = results.indexOf("http");
 						URLFile = results.substring(i, results.length()-2);
-						Window.alert(URLFile);
-						Window.alert(KeyFile);
+						//Window.alert(URLFile);
+						//Window.alert(KeyFile);
 						//pResponse.add(new HTML(results));
 						getFormUrl();
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-						Archivo();
-						Window.alert(results);
+						Window.alert("error al subir foto");
 						
 					}
 				}
@@ -1594,13 +1601,14 @@ public class formularioDatos extends Composite {
 			fileUpload = new FileUpload();
 			fileUpload.setWidth("357px");
 			fileUpload.setName("myFile");
+			fileUpload.getElement().setAttribute("accept", "image/png, image/gif,image/jpeg");
 		}
 		return fileUpload;
 	}
 	
 	private Button getButton() {
 		if (button == null) {
-			button = new Button("Upload");
+			button = new Button("Subir");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					form.submit();
@@ -1628,10 +1636,12 @@ public class formularioDatos extends Composite {
 	}
 	public void Archivo(){
 
+		form.setVisible(false);
 		grid = new Grid(1, 2);
-		absolutePanel.add(grid, 557, 109);
+		absolutePanel.add(grid, 580, 109);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
+		grid.setVisible(true);
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
@@ -1643,6 +1653,8 @@ public class formularioDatos extends Composite {
 					public void onSuccess(String result) {
 						form.setVisible(true);
 						grid.setVisible(false);
+						KeyFile = "";
+						URLFile = "";
 						Window.alert("Archivo Eliminado");
 					}
 
@@ -1652,6 +1664,7 @@ public class formularioDatos extends Composite {
 
 		image.setUrl(URLFile);
 		grid.setWidget(0, 1, btnEliminar);
+		//Window.alert(URLFile);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}
 

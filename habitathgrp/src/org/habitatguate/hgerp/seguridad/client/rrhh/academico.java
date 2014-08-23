@@ -74,5 +74,8 @@ public class academico extends Composite  {
 
          });
 	    }
+	    public void EliminarFormulario(formularioAcademico fa){
+	    	flextable.remove(fa);
+	    }
 	    
 }

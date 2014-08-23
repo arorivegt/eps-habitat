@@ -344,7 +344,7 @@ public class formularioEntrevista extends Composite {
                         {
 							id_entrevista = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! "+id_entrevista);
+                        	Window.alert("Datos Guardados exitosamente!!! ");
                         }
 
                  });
@@ -370,7 +370,7 @@ public class formularioEntrevista extends Composite {
 	                        public void onSuccess(Long result)
 	                        {
 								bandera = false;
-	                        	Window.alert("Datos Actualizados exitosamente!!! "+id_entrevista);
+	                        	Window.alert("Datos Actualizados exitosamente!!! ");
 	                        }
 
 	                 });

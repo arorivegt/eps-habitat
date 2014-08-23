@@ -77,4 +77,8 @@ public class puestos extends Composite  {
 
          });
 	    }
+	    
+	    public void EliminarFormulario(formularioPuestos fa){
+        	        flextable.remove(fa);
+	    }
 }

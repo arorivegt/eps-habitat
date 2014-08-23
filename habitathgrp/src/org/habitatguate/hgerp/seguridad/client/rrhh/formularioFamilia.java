@@ -127,7 +127,7 @@ public class formularioFamilia  extends Composite  {
 	                            {
 									id_familia = result;
 									bandera = false;
-	                            	Window.alert("Datos Guardados exitosamente!!! "+id_familia);
+	                            	Window.alert("Datos Guardados exitosamente!!! ");
 	                            }
 
 	                     });
@@ -145,7 +145,7 @@ public class formularioFamilia  extends Composite  {
 	                            public void onSuccess(Long result)
 	                            {
 									bandera = false;
-	                            	Window.alert("Datos Actualizados exitosamente!!! "+id_familia);
+	                            	Window.alert("Datos Actualizados exitosamente!!! ");
 	                            }
 
 	                     });
@@ -165,9 +165,10 @@ public class formularioFamilia  extends Composite  {
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(bandera){
-					Window.alert("No se a guardado los datos");
+					EliminarFormularioSinDatos();
 				}else{
-					EliminarFormulario();
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
 				}
 			}
 		});
@@ -215,6 +216,10 @@ public class formularioFamilia  extends Composite  {
 	}
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado, id_familia);
+    }
+	
+	private void EliminarFormularioSinDatos(){
+        a.EliminarFormulario(this);
     }
 	
 	public void LlenarDatos(Long id,String txtPrimer_apellido ,

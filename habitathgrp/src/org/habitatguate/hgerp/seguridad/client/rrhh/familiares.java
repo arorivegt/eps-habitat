@@ -110,6 +110,11 @@ public class familiares extends Composite  {
 
      });
     }
+    
+    public void EliminarFormulario(formularioFamilia fa){
+    	flextable.remove(fa);
+     }
+   
   
     public void agregar_parientes_unicos(){
 

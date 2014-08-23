@@ -74,4 +74,8 @@ public class Idioma extends Composite  {
 
          });
 	    }
+	    
+	    public void EliminarFormulario(formularioIdiomas fa){
+        	        flextable.remove(fa);
+	    }
 }

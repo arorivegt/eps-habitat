@@ -88,7 +88,7 @@ public class formularioVacaciones extends Composite {
                         {
 							id_vacaciones = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! "+id_vacaciones);
+                        	Window.alert("Datos Guardados exitosamente!!! ");
                         }
 						});
 				}else{
@@ -104,7 +104,7 @@ public class formularioVacaciones extends Composite {
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-                        	Window.alert("Datos Actualizados exitosamente!!! "+id_vacaciones);
+                        	Window.alert("Datos Actualizados exitosamente!!! ");
                         }
 						});
 				}
@@ -121,9 +121,10 @@ public class formularioVacaciones extends Composite {
 			public void onClick(ClickEvent event) {
 
 				if(bandera){
-					Window.alert("No se a guardado los datos");
+					EliminarFormularioSinDatos();
 				}else{
-					EliminarFormulario();
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
 				}
 			}
 		});
@@ -151,7 +152,9 @@ public class formularioVacaciones extends Composite {
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_vacaciones);
     }
-	
+	private void EliminarFormularioSinDatos(){
+        a.EliminarFormulario(this);
+    }
 	public void LlenarDatos(Long id, String txtDescripcion,
 		    Long dateFecha1,
 		    Long dateFecha2)

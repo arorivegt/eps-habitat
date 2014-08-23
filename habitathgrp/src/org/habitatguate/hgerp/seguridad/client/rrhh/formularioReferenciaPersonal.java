@@ -89,7 +89,7 @@ public class formularioReferenciaPersonal extends Composite {
                         {
 							id_referencia_personal = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! "+id_referencia_personal);
+                        	Window.alert("Datos Guardados exitosamente!!! ");
                         }
 						});
 				}else{
@@ -104,7 +104,7 @@ public class formularioReferenciaPersonal extends Composite {
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-                        	Window.alert("Datos Actualizados exitosamente!!! "+id_referencia_personal);
+                        	Window.alert("Datos Actualizados exitosamente!!! ");
                         }
 						});
 				}
@@ -121,9 +121,10 @@ public class formularioReferenciaPersonal extends Composite {
 			public void onClick(ClickEvent event) {
 
 				if(bandera){
-					Window.alert("No se a guardado los datos");
+					EliminarFormularioSinDatos();
 				}else{
-					EliminarFormulario();
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
 				}
 			}
 		});
@@ -161,6 +162,9 @@ public class formularioReferenciaPersonal extends Composite {
 	}
 	private void EliminarFormulario(){
         a.EliminarFormulario(this,empleado.id_empleado,id_referencia_personal);
+    }
+	private void EliminarFormularioSinDatos(){
+        a.EliminarFormulario(this);
     }
 	
 	public void LlenarDatos(Long id, String txtNombre,

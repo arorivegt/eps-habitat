@@ -263,7 +263,7 @@ public class formularioPruebaPeriodo extends Composite {
                         {
 							id_prueba= result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! "+id_prueba);
+                        	Window.alert("Datos Guardados exitosamente!!! ");
                         }
 
                  });
@@ -284,7 +284,7 @@ public class formularioPruebaPeriodo extends Composite {
                 public void onSuccess(Long result)
                 {
 					bandera = false;
-                	Window.alert("Datos Actualizados exitosamente!!! "+id_prueba);
+                	Window.alert("Datos Actualizados exitosamente!!! ");
                 }
 
          });

@@ -76,5 +76,9 @@ public class vacaciones extends Composite  {
          });
 	    }
 	    
+	    public void EliminarFormulario(formularioVacaciones fa){
+        	        flextable.remove(fa);
+	    }
+	    
 
 }

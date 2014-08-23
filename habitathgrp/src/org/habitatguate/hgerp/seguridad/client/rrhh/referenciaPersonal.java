@@ -76,4 +76,8 @@ public class referenciaPersonal extends Composite  {
 
          });
 	    }
+	    
+	    public void EliminarFormulario(formularioReferenciaPersonal fa){
+	    		flextable.remove(fa);
+	 	}
 }

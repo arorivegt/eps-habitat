@@ -73,4 +73,8 @@ public class historiales extends Composite  {
 	         });
 
 	    }
+	    
+	    public void EliminarFormulario(formularioHistorial fa){
+	    	flextable.remove(fa);
+		}
 }

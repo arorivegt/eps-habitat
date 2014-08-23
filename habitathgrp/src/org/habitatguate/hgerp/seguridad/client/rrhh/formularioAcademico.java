@@ -135,7 +135,7 @@ public class formularioAcademico extends Composite {
                         {
 							id_historial_academico = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! "+id_historial_academico);
+                        	Window.alert("Datos Guardados exitosamente!!! ");
                         }
 
                  });
@@ -152,7 +152,7 @@ public class formularioAcademico extends Composite {
                 public void onSuccess(Long result)
                 {
 					bandera = false;
-                	Window.alert("Datos Actualizados exitosamente!!! "+id_historial_academico);
+                	Window.alert("Datos Actualizados exitosamente!!! ");
                 }
 
          });
@@ -171,9 +171,10 @@ public class formularioAcademico extends Composite {
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(bandera){
-					Window.alert("No se a guardado los datos");
+					EliminarFormulario_SinDatos();
 				}else{
-					EliminarFormulario();
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
 				}
 			}
 		});
@@ -212,16 +213,35 @@ public class formularioAcademico extends Composite {
 	}
 	private void EliminarFormulario(){
 	        a.EliminarFormulario(this,empleado.id_empleado,id_historial_academico);
+	        if(!getKeyFile().equals(""))
+	        {
+	        	loginService.remove(getKeyFile() , new AsyncCallback<String>(){
+	        		@Override
+	        		public void onFailure(Throwable caught) {
+	        		}
+	        		@Override
+	        		public void onSuccess(String result) {
+	        		}
+
+	        	});
+	        }
     }
+	private void EliminarFormulario_SinDatos(){
+		a.EliminarFormulario(this);
+	}
 	
 	public void LlenarDatos(Long id,Long dateInicio, Long dateFinal,
 							String txtTitulo, String txtEstablecimiento,
 							String listNIvel_Academico,String  URLFile, 
 						    String KeyFile)
 	{
-
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
+		//Window.alert("llenar datos"+URLFile);
+		//Window.alert("llenar datos"+this.URLFile);
+		if(!URLFile.equals(""))
+			Archivo();
+		//Window.alert("llenar datos"+this.URLFile);
 		this.id_historial_academico = id;
 		this.bandera = false;
 		this.dateInicio.setValue(new Date(dateInicio));
@@ -253,8 +273,8 @@ public class formularioAcademico extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-	          Window.alert("Did you select a file?");
-	          event.cancel();
+						Window.alert("Selecciono un archivo?");
+						event.cancel();
 	        }
 				}
 			});
@@ -266,11 +286,12 @@ public class formularioAcademico extends Composite {
 					String results = event.getResults();
 					try{
 						int i = results.indexOf("key=");
-						KeyFile = results.substring(i+4, results.length()-2);
+						int j = results.indexOf("\" type");
+						KeyFile = results.substring(i+4, j);
 						i = results.indexOf("http");
-						URLFile = results.substring(i, results.length()-2);
-						Window.alert(URLFile);
-						Window.alert(KeyFile);
+						URLFile = results.substring(i, j);
+						//Window.alert(URLFile);
+						//Window.alert(KeyFile);
 						//pResponse.add(new HTML(results));
 						getFormUrl();
 						form.setVisible(false);
@@ -302,13 +323,14 @@ public class formularioAcademico extends Composite {
 			fileUpload = new FileUpload();
 			fileUpload.setWidth("357px");
 			fileUpload.setName("myFile");
+			fileUpload.getElement().setAttribute("accept", "application/pdf");
 		}
 		return fileUpload;
 	}
 	
 	private Button getButton() {
 		if (button == null) {
-			button = new Button("Upload");
+			button = new Button("Subir");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					form.submit();
@@ -337,6 +359,7 @@ public class formularioAcademico extends Composite {
 
 	public void Archivo(){
 
+		form.setVisible(false);
 		grid = new Grid(1, 2);
 		absolutePanel.add(grid, 786, 10);
 		grid.setSize("357px", "59px");
@@ -352,12 +375,17 @@ public class formularioAcademico extends Composite {
 					}
 					@Override
 					public void onSuccess(String result) {
+						form.setVisible(true);
+						grid.setVisible(false);
+						KeyFile = "";
+						URLFile = "";
 						Window.alert("Archivo Eliminado");
 					}
 
                 });
 			}
 		});
+		Window.alert(URLFile);
 		grid.setWidget(0, 1, btnEliminar);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}

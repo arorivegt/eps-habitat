@@ -74,4 +74,7 @@ public class referenciaLaboral extends Composite  {
 
          });
 	    }
+	    public void EliminarFormulario(formularioReferenciaLaboral fa){
+        	        flextable.remove(fa);
+	    }
 }

@@ -68,7 +68,8 @@ public class UIStacksEjemplo extends ResizeComposite {
  	}
 	@UiHandler("label_5")
 	void onLabel_5Click(ClickEvent event) {
-		Empleados e = new Empleados();
+		Empleados e = new Empleados(1);
+		e.inavilidarDatosYPestanas();
  		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(e, 0, 0);
 	}

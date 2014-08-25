@@ -13,7 +13,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("login")
 public interface LoginService extends RemoteService {
 	//metodos para insertar en la base de datos
-	String[] login(String user,String password) throws IllegalArgumentException;
+	String login(String user,String password) throws IllegalArgumentException;
+	Boolean login_inicio(String user,String password) throws IllegalArgumentException;	
 	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,

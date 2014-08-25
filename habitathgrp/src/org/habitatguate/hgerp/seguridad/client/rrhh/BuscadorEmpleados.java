@@ -30,7 +30,7 @@ public class BuscadorEmpleados extends Composite  {
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1130px", "20px");
+		absolutePanel.setSize("1130px", "101px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		Label label = new Label("Primer Apellido");
@@ -97,7 +97,7 @@ public class BuscadorEmpleados extends Composite  {
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				grid.clearCell(1, 0);
-				Empleados e = new Empleados();
+				Empleados e = new Empleados(0);
 				grid.setWidget(1, 0,e);
 		        e.setSize("1187px", "648px");
 			}
@@ -126,6 +126,28 @@ public class BuscadorEmpleados extends Composite  {
 		absolutePanel.add(btnBuscarTodos, 730, 0);
 		btnBuscarTodos.setSize("157px", "20px");
 		
+		TextBox txtDPI = new TextBox();
+		txtDPI.setStyleName("gwt-TextBox2");
+		txtDPI.setMaxLength(100);
+		absolutePanel.add(txtDPI, 10, 76);
+		txtDPI.setSize("137px", "11px");
+		
+		Label dpi = new Label("DPI");
+		dpi.setStyleName("label");
+		absolutePanel.add(dpi, 10, 57);
+		dpi.setSize("157px", "13px");
+		
+		Label NoPasaporte = new Label("No Pasaporte");
+		NoPasaporte.setStyleName("label");
+		absolutePanel.add(NoPasaporte, 173, 57);
+		NoPasaporte.setSize("157px", "13px");
+		
+		TextBox textBox = new TextBox();
+		textBox.setStyleName("gwt-TextBox2");
+		textBox.setMaxLength(100);
+		absolutePanel.add(textBox, 173, 76);
+		textBox.setSize("137px", "11px");
+		
 		SimplePanel simplePanel = new SimplePanel();
 		grid.setWidget(1, 0, simplePanel);
 		simplePanel.setSize("1184px", "716px");
@@ -134,7 +156,7 @@ public class BuscadorEmpleados extends Composite  {
 	public void Empleado_registrado(final Long id_empleado){
 
 		grid.clearCell(1, 0);
-		final Empleados e = new Empleados();
+		final Empleados e = new Empleados(0);
 		e.NuevasPestanas();
 		grid.setWidget(1, 0,e);
         e.setSize("1187px", "648px");

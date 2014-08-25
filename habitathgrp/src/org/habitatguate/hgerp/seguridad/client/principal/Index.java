@@ -82,7 +82,7 @@ public class Index implements EntryPoint {
                                 textToServerLabel.setText(usertxt+" / "+passtxt);
                                 serverResponseLabel.setText("");
                                                 
-                                loginService.login(usertxt,passtxt, new AsyncCallback<String[]>() 
+                                loginService.login_inicio(usertxt,passtxt, new AsyncCallback<Boolean>() 
                                 {
                                         public void onFailure(Throwable caught) 
                                         {
@@ -92,10 +92,10 @@ public class Index implements EntryPoint {
                                                 closeButton.setFocus(true);
                                         }
                                         
-                                        public void onSuccess(String result[])
+                                        public void onSuccess(Boolean result)
                                         {
                                                 //si la autentificacion es correcta limpia y contruye el menu
-                                                if(result!=null)
+                                                if(result)
                                                 {
                                                         Panel inicio = new Panel();
                                                         RootPanel.get().clear();
@@ -126,14 +126,28 @@ public class Index implements EntryPoint {
             Label lblNewLabel_1 = new Label("");
             lblNewLabel_1.setStyleName("gwt-Label-new");
             rootPanel.add(lblNewLabel_1, 508, 135);
-            lblNewLabel_1.setSize("346px", "175px");
-                    
-            final Button btnIniciar = new Button("Send");
-            rootPanel.add(btnIniciar, 545, 286);
-            btnIniciar.setText("Iniciar sesion");
-            btnIniciar.setStyleName("sendButton");
-            btnIniciar.addClickHandler(handler);
-            btnIniciar.setSize("341px", "44px");
+            lblNewLabel_1.setSize("346px", "216px");
+            rootPanel.add(txtuser, 545, 161);
+            txtuser.addBlurHandler(new BlurHandler() {
+                public void onBlur(BlurEvent event) {
+
+                        if (txtuser.getText().equals(""))
+                        {
+                                txtuser.setText("Usuario");
+                        }
+                }
+            });
+            txtuser.addFocusHandler(new FocusHandler() {
+                public void onFocus(FocusEvent event) {
+                        if (txtuser.getText().equals("Usuario"))
+                        {
+                                txtuser.setText("");
+                        }
+                                        
+                }
+            });
+            txtuser.setText("Usuario");
+            txtuser.setSize("321px", "36px");
             rootPanel.add(txtpass, 545, 226);
             txtpass.addFocusHandler(new FocusHandler() {
                 public void onFocus(FocusEvent event) {
@@ -154,27 +168,26 @@ public class Index implements EntryPoint {
             
                     txtpass.setText("password");
                     txtpass.setSize("321px", "36px");
-                    rootPanel.add(txtuser, 545, 161);
-                    txtuser.addBlurHandler(new BlurHandler() {
-                        public void onBlur(BlurEvent event) {
-
-                                if (txtuser.getText().equals(""))
-                                {
-                                        txtuser.setText("Usuario");
-                                }
-                        }
+                    
+            final Button btnIniciar = new Button("Send");
+            rootPanel.add(btnIniciar, 545, 286);
+            btnIniciar.setText("Iniciar sesion");
+            btnIniciar.setStyleName("sendButton");
+            btnIniciar.addClickHandler(handler);
+            btnIniciar.setSize("341px", "44px");
+                    
+                    Button button = new Button("Send");
+                    button.addClickHandler(new ClickHandler() {
+                    	public void onClick(ClickEvent event) {
+                    		formularioRegistro inicio = new formularioRegistro();
+                            RootPanel.get().clear();
+                            RootPanel.get().add(inicio);
+                    	}
                     });
-                    txtuser.addFocusHandler(new FocusHandler() {
-                        public void onFocus(FocusEvent event) {
-                                if (txtuser.getText().equals("Usuario"))
-                                {
-                                        txtuser.setText("");
-                                }
-                                                
-                        }
-                    });
-                    txtuser.setText("Usuario");
-                    txtuser.setSize("321px", "36px");
+                    button.setText("Registrarse");
+                    button.setStyleName("sendButton");
+                    rootPanel.add(button, 545, 334);
+                    button.setSize("341px", "44px");
                     
                     Image image = new Image("images/mailicon.png");
                     rootPanel.add(image, 522, 175);

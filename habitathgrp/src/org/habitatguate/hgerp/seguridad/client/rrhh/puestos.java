@@ -1,10 +1,9 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -19,9 +18,10 @@ public class puestos extends Composite  {
 
 	 private FlexTable flextable;
 	 private Empleados empleado;
-		private VerticalPanel panel = new VerticalPanel();
-	     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-		
+	 private VerticalPanel panel = new VerticalPanel();
+	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	 
 	    public puestos(Empleados e) {
 
 			this.empleado = e;
@@ -40,6 +40,7 @@ public class puestos extends Composite  {
 	        });
 	        
 	        btnAgregar.setWidth("246px");
+	        BDPuesto();
 		}
 	    
 	    private void agregarFormulario(){
@@ -80,5 +81,22 @@ public class puestos extends Composite  {
 	    
 	    public void EliminarFormulario(formularioPuestos fa){
         	        flextable.remove(fa);
+	    }
+	    
+	    private void BDPuesto(){
+	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+	    		public void onFailure(Throwable caught) 
+	    		{
+	    			Window.alert("Error en BD puestos"+caught);
+	    		}
+
+				@Override
+				public void onSuccess(List<AuxBDPuesto> results)
+				{
+					if (!(results.size()==0)) {
+						BDpuestos = results;
+			    	}	
+				}
+			});
 	    }
 }

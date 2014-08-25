@@ -39,12 +39,12 @@ public class formularioPruebaPeriodo extends Composite {
 		private ListBox listPregunta9;
 		private ListBox listPregunta10;
 		private TextBox txtEvaluador;
-		private TextBox txtAprobo;
 		private DoubleBox txtPunteoTotal;
 		private DateBox dateFecha ;
+		private Desempeno d;
 		
-	public formularioPruebaPeriodo(Empleados e) {
-
+	public formularioPruebaPeriodo(Desempeno d, Empleados e) {
+		this.d = d;
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -230,12 +230,6 @@ public class formularioPruebaPeriodo extends Composite {
 		absolutePanel.add(dateFecha, 332, 611);
 		dateFecha.setSize("117px", "11px");
 		
-		txtAprobo = new TextBox();
-		txtAprobo.setMaxLength(200);
-		txtAprobo.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtAprobo, 567, 611);
-		txtAprobo.setSize("117px", "11px");
-		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -294,7 +288,7 @@ public class formularioPruebaPeriodo extends Composite {
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("gwt-TextBox2");
 		btnGuardar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnGuardar, 269, 720);
+		absolutePanel.add(btnGuardar, 93, 722);
 		btnGuardar.setSize("198px", "32px");
 		
 		Label lblNivelAcademico = new Label("Evaluación de Período de Prueba realizada en Oficina Nacional");
@@ -387,10 +381,30 @@ public class formularioPruebaPeriodo extends Composite {
 		absolutePanel.add(lblFecha, 283, 611);
 		lblFecha.setSize("75px", "13px");
 		
-		Label lblAprobo = new Label("Aprobo");
-		lblAprobo.setStyleName("label");
-		absolutePanel.add(lblAprobo, 521, 611);
-		lblAprobo.setSize("75px", "13px");
+		Button button = new Button("Send");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				if(bandera){
+					EliminarFormulario_SinDatos();
+				}else{
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
+				}
+			}
+		});
+		button.setText("Eliminar");
+		button.setStylePrimaryName("gwt-TextBox2");
+		button.setStyleName("gwt-TextBox2");
+		absolutePanel.add(button, 332, 722);
+		button.setSize("198px", "32px");
+	}
+	private void EliminarFormulario_SinDatos(){
+		d.EliminarFormulario(this);
+	}
+	
+	private void EliminarFormulario(){
+        d.EliminarFormulario(this,empleado.id_empleado,id_prueba);
 	}
 	
 	public  void LlenarDatos(Long id, String listPregunta1,

@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -22,7 +23,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class formularioPuestos extends Composite {
 
-	private puestos a;
+	private puestos aa;
 	private Empleados empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
@@ -30,25 +31,43 @@ public class formularioPuestos extends Composite {
     
     private DateBox dateFecha;
     private ListBox listActivo;
-	private TextBox txtPuesto;
 	private TextArea txtFunciones;
 	private TextBox txtSalario;
+	private ListBox ListPuesto ;
 	
 	public formularioPuestos(puestos a,Empleados e) {
 
 		this.empleado = e;
-		this.a = a;
+		this.aa = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("700px", "110px");
 		
-		txtPuesto = new TextBox();
-		txtPuesto.setStyleName("gwt-TextBox2");
-		txtPuesto.setMaxLength(100);
-		absolutePanel.add(txtPuesto, 10, 29);
-		txtPuesto.setSize("137px", "11px");
-		
+		ListPuesto = new ListBox();
+		ListPuesto.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+
+				long lg;
+				for (AuxBDPuesto p : aa.BDpuestos) 
+				{
+					lg  = Long.valueOf(ListPuesto.getValue(ListPuesto.getSelectedIndex()));
+					if(lg == p.getId_puesto())
+					{
+						txtFunciones.setText(p.getFunciones());
+						break;
+					}
+			    }
+					
+			}
+		});
+
+	    for (AuxBDPuesto p : this.aa.BDpuestos) {
+	    	ListPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
+	    }
+		ListPuesto.setStyleName("gwt-TextBox2");
+		absolutePanel.add(ListPuesto, 10, 29);
+		ListPuesto.setSize("157px", "19px");
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
@@ -86,6 +105,7 @@ public class formularioPuestos extends Composite {
 		listActivo.setSize("157px", "19px");
 		
 		txtFunciones = new TextArea();
+		txtFunciones.setReadOnly(true);
 		txtFunciones.getElement().setAttribute("maxlength", "500");
 		txtFunciones.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtFunciones, 10, 77);
@@ -101,7 +121,7 @@ public class formularioPuestos extends Composite {
 						}
 					
 						if(bandera) {					
-							loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), txtPuesto.getText(), 
+							loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
 									txtFunciones.getText(), Float.parseFloat(txtSalario.getText()), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si")
 									, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
@@ -118,7 +138,7 @@ public class formularioPuestos extends Composite {
                         }
 								});
 						}else{
-							loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), txtPuesto.getText(), 
+							loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
 								txtFunciones.getText(), Float.parseFloat(txtSalario.getText()), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si")
 								, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
@@ -184,12 +204,14 @@ public class formularioPuestos extends Composite {
 		lblFunciones.setStyleName("label");
 		absolutePanel.add(lblFunciones, 10, 58);
 		lblFunciones.setSize("192px", "13px");
+		
+		
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this,empleado.id_empleado,id_puesto);
+        aa.EliminarFormulario(this,empleado.id_empleado,id_puesto);
     }
 	private void EliminarFormularioSinDatos(){
-        a.EliminarFormulario(this);
+        aa.EliminarFormulario(this);
     }
 	public void LlenarDatos(Long id, Long dateFecha,
 		     String listActivo,
@@ -205,7 +227,11 @@ public class formularioPuestos extends Composite {
 			bandera = !this.listActivo.getItemText(i).equals(listActivo);
 		    this.listActivo.setSelectedIndex(i);
 		}
-		this.txtPuesto.setText(txtPuesto);
+		bandera = true;
+		for(int i=0; i < this.ListPuesto.getItemCount() && bandera; i++){
+			bandera = !this.ListPuesto.getItemText(i).equals(txtPuesto);
+		    this.ListPuesto.setSelectedIndex(i);
+		}
 		this.txtFunciones.setText(txtFunciones);
 		this.txtSalario.setText(txtSalario);
 	}

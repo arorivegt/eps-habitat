@@ -3,8 +3,8 @@
  */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -28,9 +28,10 @@ public class Empleados extends Composite {
 	private vacaciones v;
 	private formularioDatos fd;
 	private formularioEntrevista fe ;
-	private formularioPruebaPeriodo fpp;
+	private Desempeno fpp;
 	private formularioPruebaPeriodoDos fppd;
-	public Empleados() {
+	
+	public Empleados(int tipo) {
 		
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
@@ -40,7 +41,7 @@ public class Empleados extends Composite {
 		scrollPanel.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel, "Datos",true);
 		scrollPanel.setSize("1200px", "480px");
-		fd = new formularioDatos(this);
+		fd = new formularioDatos(this,tipo);
 		scrollPanel.setWidget(fd);
 		
 		
@@ -87,14 +88,14 @@ public class Empleados extends Composite {
 		
 		ScrollPanel scrollPanel_6 = new ScrollPanel();
 		scrollPanel_6.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_6, "Evaluacion", true);
+		tabPanel.add(scrollPanel_6, "Desempeño", true);
 		scrollPanel_6.setSize("1200px", "480px");
-		fpp = new formularioPruebaPeriodo(this);
+		fpp = new  Desempeno(this);
 		scrollPanel_6.setWidget(fpp);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_7, "Desempeño", true);
+		tabPanel.add(scrollPanel_7, "Evaluacion", true);
 		scrollPanel_7.setSize("1200px", "480px");
 		fppd = new formularioPruebaPeriodoDos(this);
 		scrollPanel_7.setWidget(fppd);
@@ -126,6 +127,52 @@ public class Empleados extends Composite {
 		scrollPanel_11.setSize("1200px", "480px");
 		v = new vacaciones(this);
 		scrollPanel_11.setWidget(v);
+	}
+	public void NuevasPestanasdos(){
+		ScrollPanel scrollPanel_1 = new ScrollPanel();
+		scrollPanel_1.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_1, "Familia",true);
+		scrollPanel_1.setSize("1200px", "489px");
+		f = new familiares(this);
+		scrollPanel_1.setWidget(f);
+
+		
+		ScrollPanel scrollPanel_2 = new ScrollPanel();
+		scrollPanel_2.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_2, "Academico", true);
+		scrollPanel_2.setSize("1200px", "480px");
+		a = new academico(this);
+		scrollPanel_2.setWidget(a);
+		
+		ScrollPanel scrollPanel_3 = new ScrollPanel();
+		scrollPanel_3.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_3, "Referencia Laboral", true);
+		scrollPanel_3.setSize("1200px", "480px");
+		rl = new referenciaLaboral(this);///
+		scrollPanel_3.setWidget(rl);
+		rl.setHeight("236px");
+		
+		ScrollPanel scrollPanel_5 = new ScrollPanel();
+		scrollPanel_5.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_5, "Referencia Personal", true);
+		scrollPanel_5.setSize("1200px", "480px");
+		rp = new referenciaPersonal(this);///
+		scrollPanel_5.setWidget(rp);
+		
+		ScrollPanel scrollPanel_4 = new ScrollPanel();
+		scrollPanel_4.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_4, "Idiomas", true);
+		scrollPanel_4.setSize("1200px", "480px");
+		setStyleName("");
+		i = new Idioma(this);
+		scrollPanel_4.setWidget(i);
+		
+		ScrollPanel scrollPanel_9 = new ScrollPanel();
+		scrollPanel_9.setAlwaysShowScrollBars(true);
+		tabPanel.add(scrollPanel_9, "Entrevista", true);
+		scrollPanel_9.setSize("1200px", "480px");
+		fe = new formularioEntrevista(this);
+		scrollPanel_9.setWidget(fe);
 	}
 
 	public void setA(List<AuxHistorialAcademico> results) {
@@ -226,25 +273,29 @@ public class Empleados extends Composite {
 		    }
 
 	public void setFPP(List<AuxTest> r) {
+		List<AuxTest> valor = new ArrayList<AuxTest>();
 		if(!r.isEmpty()){
 			for (AuxTest n : r) {
 				System.out.println("n.getTipo_test() "+n.getTipo_test().equals("1") );
 				if(n.getTipo_test().equals("1")){
-					fpp.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
-							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
-							""+n.getPregunta10(), n.getEvaluador(), n.getFecha_test());
+					valor.add(n);
 				}else{
 					fppd.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
 							""+n.getPregunta10(), n.getEvaluador(), n.getFecha_test());
 				}
 			}//fin del for
+			fpp.agregar_formularios(valor);
 		}//fin del if r.isEmpty
 	}
 	
 	public void familia_unica()
 	{
 		f.agregar_parientes_unicos();
+	}
+	
+	public void inavilidarDatosYPestanas(){
+		fd.Inavilitar_Casillas();
 	}
 
 }

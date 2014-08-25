@@ -14,7 +14,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface LoginServiceAsync {
 	//metodos para insertar una tupla en la entidad especifica
-	void login(String user,String i2, AsyncCallback<String[]> callback) throws IllegalArgumentException;
+	void login(String user,String i2, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void login_inicio(String user,String i2, AsyncCallback<Boolean> callback) throws IllegalArgumentException;
 	void Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,

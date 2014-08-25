@@ -43,6 +43,23 @@ public class formularioDatos extends Composite {
 	private String depto_municipio_dos="";
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
     
+    private Label label_16 ;
+    private Label label_17;
+    private Label label_26 ;
+    private Label label_27 ;
+    private Label lblD ;
+    private Label lblEstadoDelEmpleado ;
+    private Label lblCentroTrabajo;
+	private Label lblOcupacion;
+	private Label lblFechaIngreso;
+	private Label lblCodigoOcupacion;
+	private Label lblProfesion;
+	private Label lblTipoPlanilla;
+	private Label lblSalarioBase;
+	private Label lblBonificacion;
+	private Label lblTotal;
+	private Button btnActualizar;
+    private int tipo = 0;
     private ListBox listTienePasaporte ;
     private ListBox listEstadoCivil;
     private ListBox listSexo;
@@ -97,12 +114,13 @@ public class formularioDatos extends Composite {
 			.create(UploadUrlService.class);
     private AbsolutePanel absolutePanel;
     
-	public formularioDatos(Empleados e) {
+	public formularioDatos(Empleados e,final int tipo) {
 		this.empleado = e;
+		this.setTipo(tipo);
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("890px", "1188px");
+		absolutePanel.setSize("997px", "1188px");
 
 		absolutePanel.add(getFormPanel(), 591, 109);
 		getFormUrl();
@@ -426,9 +444,13 @@ public class formularioDatos extends Composite {
 				{
 					txtTipoPasaporte.setVisible(false);
 					txtNoPasaporte.setVisible(false);
+					label_17.setVisible(false);
+					label_16.setVisible(false);
 				}else{
 					txtTipoPasaporte.setVisible(true);
 					txtNoPasaporte.setVisible(true);
+					label_17.setVisible(true);
+					label_16.setVisible(true);
 				}
 			}
 		});
@@ -608,9 +630,13 @@ public class formularioDatos extends Composite {
 				{
 					listTipoLicencia.setVisible(false);
 					txtNoLicencia.setVisible(false);
+					label_26.setVisible(false);
+					label_27.setVisible(false);
 				}else{
 					listTipoLicencia.setVisible(true);
 					txtNoLicencia.setVisible(true);
+					label_26.setVisible(true);
+					label_27.setVisible(true);
 				}
 				
 			}
@@ -695,7 +721,7 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(txtTotal, 591, 1043);
 		txtTotal.setSize("227px", "19px");
 		
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox");
 		btnActualizar.setStyleName("gwt-TextBox");
@@ -744,7 +770,10 @@ public class formularioDatos extends Composite {
 	                            	id_empleado = result;
 	                            	empleado.id_empleado = result;
 	                            	bandera = false;
-	                            	empleado.NuevasPestanas();
+	                            	if(tipo == 0)
+	                            		empleado.NuevasPestanas();
+	                            	else
+	                            		empleado.NuevasPestanasdos();
 	                            	empleado.familia_unica();
 	                                Window.alert("Nuevo Empleado Guardados exitosamente!!! ");
 	                            }
@@ -863,12 +892,12 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(label_15, 34, 489);
 		label_15.setSize("178px", "19px");
 		
-		Label label_16 = new Label("Tipo Pasaporte");
+		label_16 = new Label("Tipo Pasaporte");
 		label_16.setStyleName("label");
 		absolutePanel.add(label_16, 314, 489);
 		label_16.setSize("192px", "19px");
 		
-		Label label_17 = new Label("No. Pasaporte");
+		label_17 = new Label("No. Pasaporte");
 		label_17.setStyleName("label");
 		absolutePanel.add(label_17, 587, 489);
 		label_17.setSize("192px", "19px");
@@ -908,70 +937,70 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(label_25, 37, 774);
 		label_25.setSize("178px", "19px");
 		
-		Label label_26 = new Label("No. Licencia");
+		label_26 = new Label("No. Licencia");
 		label_26.setStyleName("label");
 		absolutePanel.add(label_26, 590, 774);
 		label_26.setSize("192px", "19px");
 		
-		Label label_27 = new Label("Tipo Licencia");
+		label_27 = new Label("Tipo Licencia");
 		label_27.setStyleName("label");
 		absolutePanel.add(label_27, 318, 774);
 		label_27.setSize("192px", "19px");
+		
+		lblCentroTrabajo = new Label("Centro Trabajo");
+		lblCentroTrabajo.setStyleName("label");
+		absolutePanel.add(lblCentroTrabajo, 38, 884);
+		lblCentroTrabajo.setSize("192px", "19px");
+		
+		lblOcupacion = new Label("Ocupacion");
+		lblOcupacion.setStyleName("label");
+		absolutePanel.add(lblOcupacion, 318, 884);
+		lblOcupacion.setSize("192px", "19px");
+		
+		lblFechaIngreso = new Label("Fecha Ingreso");
+		lblFechaIngreso.setStyleName("label");
+		absolutePanel.add(lblFechaIngreso, 590, 884);
+		lblFechaIngreso.setSize("192px", "19px");
+		
+		lblCodigoOcupacion = new Label("Codigo Ocupacion");
+		lblCodigoOcupacion.setStyleName("label");
+		absolutePanel.add(lblCodigoOcupacion, 37, 946);
+		lblCodigoOcupacion.setSize("192px", "19px");
+		
+		lblProfesion = new Label("profesion");
+		lblProfesion.setStyleName("label");
+		absolutePanel.add(lblProfesion, 318, 946);
+		lblProfesion.setSize("192px", "19px");
+		
+		lblTipoPlanilla = new Label("Tipo Planilla");
+		lblTipoPlanilla.setStyleName("label");
+		absolutePanel.add(lblTipoPlanilla, 590, 946);
+		lblTipoPlanilla.setSize("192px", "19px");
+		
+		lblSalarioBase = new Label("Salario Base");
+		lblSalarioBase.setStyleName("label");
+		absolutePanel.add(lblSalarioBase, 37, 1013);
+		lblSalarioBase.setSize("192px", "19px");
+		
+		lblBonificacion = new Label("Bonificacion");
+		lblBonificacion.setStyleName("label");
+		absolutePanel.add(lblBonificacion, 318, 1018);
+		lblBonificacion.setSize("192px", "19px");
+		
+		lblTotal = new Label("Total");
+		lblTotal.setStyleName("label");
+		absolutePanel.add(lblTotal, 590, 1018);
+		lblTotal.setSize("192px", "19px");
 		
 		Label label_28 = new Label("Año de Nacimiento");
 		label_28.setStyleName("label");
 		absolutePanel.add(label_28, 590, 553);
 		label_28.setSize("192px", "19px");
 		
-		Label lblFechaIngreso = new Label("Fecha Ingreso");
-		lblFechaIngreso.setStyleName("label");
-		absolutePanel.add(lblFechaIngreso, 590, 884);
-		lblFechaIngreso.setSize("192px", "19px");
-		
-		Label lblOcupacion = new Label("Ocupacion");
-		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 318, 884);
-		lblOcupacion.setSize("192px", "19px");
-		
-		Label lblCentroTrabajo = new Label("Centro Trabajo");
-		lblCentroTrabajo.setStyleName("label");
-		absolutePanel.add(lblCentroTrabajo, 37, 884);
-		lblCentroTrabajo.setSize("192px", "19px");
-		
-		Label lblD = new Label("Datos del Patrono: (Uso exclusivo de la Fundacion");
+		lblD = new Label("Datos del Patrono: (Uso exclusivo de la Fundacion");
 		lblD.setStyleName("label");
 		absolutePanel.add(lblD, 37, 845);
 		lblD.setSize("449px", "19px");
-		
-		Label lblCodigoOcupacion = new Label("Codigo Ocupacion");
-		lblCodigoOcupacion.setStyleName("label");
-		absolutePanel.add(lblCodigoOcupacion, 37, 946);
-		lblCodigoOcupacion.setSize("192px", "19px");
-		
-		Label lblProfesion = new Label("profesion");
-		lblProfesion.setStyleName("label");
-		absolutePanel.add(lblProfesion, 318, 946);
-		lblProfesion.setSize("192px", "19px");
-		
-		Label lblTipoPlanilla = new Label("Tipo Planilla");
-		lblTipoPlanilla.setStyleName("label");
-		absolutePanel.add(lblTipoPlanilla, 590, 946);
-		lblTipoPlanilla.setSize("192px", "19px");
-		
-		Label lblBonificacion = new Label("Bonificacion");
-		lblBonificacion.setStyleName("label");
-		absolutePanel.add(lblBonificacion, 318, 1018);
-		lblBonificacion.setSize("192px", "19px");
-		
-		Label lblTotal = new Label("Total");
-		lblTotal.setStyleName("label");
-		absolutePanel.add(lblTotal, 590, 1018);
-		lblTotal.setSize("192px", "19px");
-		
-		Label lblSalarioBase = new Label("Salario Base");
-		lblSalarioBase.setStyleName("label");
-		absolutePanel.add(lblSalarioBase, 37, 1013);
-		lblSalarioBase.setSize("192px", "19px");
 		
 		Label lblCedulaExtendidadepartamento = new Label("Cedula extendida-Departamento");
 		lblCedulaExtendidadepartamento.setStyleName("label");
@@ -996,7 +1025,7 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(listEstado, 38, 119);
 		listEstado.setSize("247px", "27px");
 		
-		Label lblEstadoDelEmpleado = new Label("Estado Del Empleado");
+		lblEstadoDelEmpleado = new Label("Estado Del Empleado");
 		lblEstadoDelEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoDelEmpleado, 37, 101);
 		lblEstadoDelEmpleado.setSize("192px", "19px");
@@ -1538,6 +1567,19 @@ public class formularioDatos extends Composite {
 		txtBonificacion.setVisible(false);
 		txtTotal.setVisible(false);
 		listEstado.setVisible(false);
+		
+		 	lblEstadoDelEmpleado.setVisible(false);			
+		 	lblCentroTrabajo.setVisible(false);
+			lblOcupacion.setVisible(false);
+			lblFechaIngreso.setVisible(false);
+			lblCodigoOcupacion.setVisible(false);
+			lblProfesion.setVisible(false);
+			lblTipoPlanilla.setVisible(false);
+			lblSalarioBase.setVisible(false);
+			lblBonificacion.setVisible(false);
+			lblTotal.setVisible(false);
+			lblD.setVisible(false);
+			absolutePanel.add(btnActualizar, 316, 904);
 	}
 	private FormPanel getFormPanel() {
 		if (form == null) {
@@ -1682,5 +1724,13 @@ public class formularioDatos extends Composite {
 
 	public void setKeyFile(String keyFile) {
 		KeyFile = keyFile;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 }

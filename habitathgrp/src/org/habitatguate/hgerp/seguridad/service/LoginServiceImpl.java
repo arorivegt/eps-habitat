@@ -48,33 +48,40 @@ import javax.jdo.Query;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
 	///metodos para insertar en las diferentes entidades
-	public String[] login(String user,String password) throws IllegalArgumentException {
+	public String login(String user,String password) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && password!=null){
-					SegUsuario e = new SegUsuario("Alfred", "Smith");
 			try{ 
-				  
-			    gestorPersistencia.makePersistent(e);  
-			    
-			}finally{  
-			    gestorPersistencia.close();  
-			} 
-			
-			if(user.compareTo("developer")==0 & password.compareTo("dev")==0){
-				String[] menu=new String[6];
-				menu[0]="Planificacion";
-				menu[1]="RRHH";
-				menu[2]="Soluciones";
-				menu[3]="Finanzas";
-				menu[4]="Configuracion";
-				menu[5]="Seguridad";
-				return menu;
+				final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
+				return "El usuario "+e.getUser()+" ya existe" ;
+			}catch(Exception e){
+				SegUsuario u = new SegUsuario(user, password);
+				try{ 
+				    gestorPersistencia.makePersistent(u); 
+				}finally{  
+				    gestorPersistencia.close();  
+				} 
 			}
+
+			return "no existe";
 		}
 		
-		return null;
+		return "error";
 	}
+
+	@Override
+	public Boolean login_inicio(String user,String password) throws IllegalArgumentException {
+		;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+		try{ 
+			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
 
 	@Override
 	public Long Insertar_Emppleado(String afiliacion_igss,

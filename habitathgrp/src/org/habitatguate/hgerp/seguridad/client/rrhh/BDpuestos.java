@@ -27,11 +27,11 @@ public class BDpuestos extends Composite  {
 			a = this;
 			scrollPanel = new ScrollPanel();
 			initWidget(scrollPanel);
-			scrollPanel.setSize("900px", "561px");
+			scrollPanel.setSize("900px", "489px");
 			
 			verticalPanel = new VerticalPanel();
 			scrollPanel.setWidget(verticalPanel);
-			verticalPanel.setSize("877px", "577px");
+			verticalPanel.setSize("877px", "93px");
 			
 			flextable = new FlexTable();
 			verticalPanel.add(flextable);

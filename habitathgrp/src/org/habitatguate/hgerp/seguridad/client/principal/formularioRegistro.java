@@ -31,7 +31,7 @@ public class formularioRegistro extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("997px", "545px");
+		absolutePanel.setSize("240px", "170px");
 		
 		txtUsuario = new TextBox();
 		txtUsuario.setText("Usuario");
@@ -56,12 +56,10 @@ public class formularioRegistro extends Composite {
         });
 		txtUsuario.setMaxLength(50);
 		txtUsuario.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtUsuario, 349, 61);
+		absolutePanel.add(txtUsuario, 20, 35);
 		txtUsuario.setSize("227px", "19px");
-		
 		txtContrasena = new PasswordTextBox();
-		txtContrasena.setText("Contraseña");
-
+		txtContrasena.setText("password");
         txtContrasena.addFocusHandler(new FocusHandler() {
             public void onFocus(FocusEvent event) {
                     if (txtContrasena.getText().equals("password"))
@@ -78,19 +76,19 @@ public class formularioRegistro extends Composite {
                     }
             }
         });
-		absolutePanel.add(txtContrasena, 349, 132);
+		absolutePanel.add(txtContrasena, 20, 106);
 		txtContrasena.setSize("227px", "19px");
 		
 		btnGuardar = new Button("Send");
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("gwt-TextBox");
 		btnGuardar.setStyleName("gwt-TextBox");
-		absolutePanel.add(btnGuardar, 349, 192);
+		absolutePanel.add(btnGuardar, 20, 166);
 		btnGuardar.setSize("247px", "34px");
 		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				 loginService.login(txtUsuario.getText(),txtContrasena.getText(), new AsyncCallback<String>() 
+				 loginService.Registro(txtUsuario.getText(),txtContrasena.getText(), new AsyncCallback<String>() 
                  {
 					 public void onFailure(Throwable caught) 
                      {
@@ -104,23 +102,23 @@ public class formularioRegistro extends Composite {
 							 Window.alert("error al registrar");
 						 else
 							 Window.alert(result);
+
 							 
                      }
 				});
 				
 			}
 		});
-		
 		Label lblUsuario = new Label("Usuario");
 		lblUsuario.setStyleName("label");
-		absolutePanel.add(lblUsuario, 424, 36);
+		absolutePanel.add(lblUsuario, 95, 10);
 		lblUsuario.setSize("192px", "19px");
 		
 		Label lblContrasea = new Label("Contraseña");
 		lblContrasea.setStyleName("label");
-		absolutePanel.add(lblContrasea, 424, 107);
+		absolutePanel.add(lblContrasea, 95, 81);
 		lblContrasea.setSize("192px", "19px");
 	}
-	
+
 
 }

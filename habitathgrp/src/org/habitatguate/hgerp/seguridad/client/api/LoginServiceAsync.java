@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -14,8 +15,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface LoginServiceAsync {
 	//metodos para insertar una tupla en la entidad especifica
-	void login(String user,String i2, AsyncCallback<String> callback) throws IllegalArgumentException;
-	void login_inicio(String user,String i2, AsyncCallback<Boolean> callback) throws IllegalArgumentException;
+	void Registro(String user,String i2, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void login_inicio(String user,String i2, AsyncCallback<valores_sesion> callback) throws IllegalArgumentException;
 	void Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
@@ -151,7 +152,8 @@ public interface LoginServiceAsync {
 
 	    ///querys
 	    void Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
-				String primer_apellido, String segundo_apellido,AsyncCallback<List<AuxEmpleado>> callback) throws IllegalArgumentException;
+				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
+				String Estado,AsyncCallback<List<AuxEmpleado>> callback) throws IllegalArgumentException;
 	    
 	    void Empleado_Registrado(Long id_empleado,
 	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;

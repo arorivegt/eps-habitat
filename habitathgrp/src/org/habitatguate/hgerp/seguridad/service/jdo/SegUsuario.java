@@ -15,10 +15,21 @@ public class SegUsuario{
 	@Persistent
 	private String password;
 	
+	@Persistent
+	private Long id_empleado;
+	
 	public SegUsuario(String user2, String password2) {
 		super();
 		this.user=user2;
 		this.password=password2;
+	}
+
+	public Long getId_empleado() {
+		return id_empleado;
+	}
+
+	public void setId_empleado(Long id_empleado) {
+		this.id_empleado = id_empleado;
 	}
 
 	public String getUser() {

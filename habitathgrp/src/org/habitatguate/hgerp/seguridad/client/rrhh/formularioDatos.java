@@ -1018,8 +1018,8 @@ public class formularioDatos extends Composite {
 		lblConIvs.setSize("97px", "19px");
 		
 		listEstado = new ListBox();
-		listEstado.addItem("activo");
-		listEstado.addItem("inactivo");
+		listEstado.addItem("empleado activo");
+		listEstado.addItem("empleado inactivo");
 		listEstado.addItem("posible empleado");
 		listEstado.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstado, 38, 119);

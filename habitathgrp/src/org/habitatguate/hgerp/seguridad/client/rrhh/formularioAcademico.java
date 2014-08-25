@@ -237,6 +237,7 @@ public class formularioAcademico extends Composite {
 	{
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
+		this.bandera = false;
 		//Window.alert("llenar datos"+URLFile);
 		//Window.alert("llenar datos"+this.URLFile);
 		if(!URLFile.equals(""))

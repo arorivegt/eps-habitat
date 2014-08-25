@@ -2,8 +2,11 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 import java.util.Date;
 import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -13,8 +16,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("login")
 public interface LoginService extends RemoteService {
 	//metodos para insertar en la base de datos
-	String login(String user,String password) throws IllegalArgumentException;
-	Boolean login_inicio(String user,String password) throws IllegalArgumentException;	
+	String Registro(String user,String password) throws IllegalArgumentException;
+	valores_sesion login_inicio(String user,String password) throws IllegalArgumentException;	
 	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
@@ -135,7 +138,8 @@ public interface LoginService extends RemoteService {
 
     ///querys
     List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
-			String primer_apellido, String segundo_apellido) throws IllegalArgumentException;
+			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
+			String Estado) throws IllegalArgumentException;
     
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
     

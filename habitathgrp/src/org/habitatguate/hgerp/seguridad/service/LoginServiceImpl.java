@@ -21,6 +21,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEntrevista;
@@ -48,7 +49,7 @@ import javax.jdo.Query;
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
 
 	///metodos para insertar en las diferentes entidades
-	public String login(String user,String password) throws IllegalArgumentException {
+	public String Registro(String user,String password) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && password!=null){
@@ -56,12 +57,34 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
 				return "El usuario "+e.getUser()+" ya existe" ;
 			}catch(Exception e){
-				SegUsuario u = new SegUsuario(user, password);
+				SegEmpleado em = new SegEmpleado();
+				em.setPrimer_nombre("".toUpperCase());
+				em.setPrimer_apellido("".toUpperCase());
+				em.setSegundo_apellido("".toUpperCase());
+				em.setSegundo_nombre("".toUpperCase());
+				em.setEstado("posible empleado");
+				em.setIVS("Con IVS");
+				em.setNo_Dependientes("0");
+				em.setDepto_municipio_cedula("Alta Verapaz,Chahal");
+				em.setDepto_municipio_residencia("Alta Verapaz,Chahal");
+				em.setEstado_civil("Soltero/a");
+				em.setPais("Afganistan");
+				em.setSexo("femenino");
+				em.setTipo_licencia("B");
+				em.setFecha_nacimiento(new Date(1407518124684L));
+				em.setFecha_ingreso(new Date(1407518124684L));
 				try{ 
-				    gestorPersistencia.makePersistent(u); 
-				}finally{  
-				    gestorPersistencia.close();  
-				} 
+				    gestorPersistencia.makePersistent(em); 
+				}finally{
+					SegUsuario u = new SegUsuario(user, password);
+					u.setId_empleado(em.getId_empleado());
+					try{ 
+					    gestorPersistencia.makePersistent(u); 
+					}finally{  
+					    gestorPersistencia.close();  
+					} 
+					
+				}
 			}
 
 			return "no existe";
@@ -71,14 +94,17 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	}
 
 	@Override
-	public Boolean login_inicio(String user,String password) throws IllegalArgumentException {
-		;
+	public valores_sesion login_inicio(String user,String password) throws IllegalArgumentException {
+		valores_sesion vs = new valores_sesion();
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		try{ 
-			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
-			return true;
+			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user);
+			vs.setCorrecto(true);
+			vs.setId_empleado(e.getId_empleado());
+			return vs;
 		}catch(Exception e){
-			return false;
+			vs.setCorrecto(false);
+			return vs;
 		}
 	}
 
@@ -943,12 +969,56 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
             @Override
 			public List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
-					String primer_apellido, String segundo_apellido)throws IllegalArgumentException {
+					String primer_apellido, String segundo_apellido,String DPI, String Pasaporte
+					,String Estado)throws IllegalArgumentException {
 				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
-				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
 				
-				Query q = pm.newQuery(SegEmpleado.class);
-				List<SegEmpleado> results = (List<SegEmpleado>) q.execute();
+				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
+				List<SegEmpleado> results = null ;
+				
+				if(tipo=='1' || tipo =='2'){
+					Query q = pm.newQuery(SegEmpleado.class);
+					results = (List<SegEmpleado>) q.execute();
+				}else if(tipo=='4'){
+					Query q = pm.newQuery(SegEmpleado.class,"cui == '"+DPI+"'");
+					results = (List<SegEmpleado>) q.execute();
+				    for (SegEmpleado p : results) {
+				    	AuxEmpleado nuevo = new AuxEmpleado();
+			    		nuevo.setId_empleado(p.getId_empleado());
+			    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
+			    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
+			    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
+			    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
+			    		valor.add(nuevo);
+				    }
+		    		return valor;
+				}else if(tipo=='3'){
+					Query q = pm.newQuery(SegEmpleado.class,"no_pasaporte == '"+Pasaporte+"'");
+					results = (List<SegEmpleado>) q.execute();
+				    for (SegEmpleado p : results) {
+				    	AuxEmpleado nuevo = new AuxEmpleado();
+			    		nuevo.setId_empleado(p.getId_empleado());
+			    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
+			    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
+			    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
+			    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
+			    		valor.add(nuevo);
+				    }
+				    return valor;
+				}else if(tipo=='5'){
+					Query q = pm.newQuery(SegEmpleado.class,"Estado== '"+Estado+"'");
+					results = (List<SegEmpleado>) q.execute();
+				    for (SegEmpleado p : results) {
+				    	AuxEmpleado nuevo = new AuxEmpleado();
+			    		nuevo.setId_empleado(p.getId_empleado());
+			    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
+			    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
+			    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
+			    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
+			    		valor.add(nuevo);
+				    }
+				    return valor;
+				}
 				if (!results.isEmpty()) {
 				    for (SegEmpleado p : results) {
 				    	if((primer_nombre.toUpperCase().equals(p.getPrimer_nombre()) 
@@ -956,6 +1026,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	|| primer_apellido.toUpperCase().equals(p.getPrimer_apellido())
 				    	|| segundo_apellido.toUpperCase().equals(p.getSegundo_apellido())) && tipo =='1')
 				    	{
+							System.out.println("buscado "+tipo);
 				    		AuxEmpleado nuevo = new AuxEmpleado();
 				    		nuevo.setId_empleado(p.getId_empleado());
 				    		nuevo.setPrimer_apellido(p.getPrimer_apellido());

@@ -13,11 +13,12 @@ public class EmpleadoItem extends Composite {
 	private EmpleadoLista a;
 	private Long id_empleado = 0L;
 	private BuscadorEmpleados BE;
+	
 	public EmpleadoItem(BuscadorEmpleados b, EmpleadoLista a,Long id_emplead, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido) {
 		this.id_empleado = id_emplead;
 		this.BE = b;
-		this.a = a;
+		this.setA(a);
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -87,22 +88,12 @@ public class EmpleadoItem extends Composite {
 		absolutePanel.add(button_2, 675, 19);
 		button_2.setSize("84px", "20px");
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				EliminarFormulario();
-			}
-		});
-		button.setText("Eliminar");
-		button.setStylePrimaryName("gwt-TextBox2");
-		button.setStyleName("gwt-TextBox2");
-		absolutePanel.add(button, 764, 19);
-		button.setSize("84px", "20px");
-		
 	}
-	
-	private void EliminarFormulario(){
-        a.EliminarFormulario(this);
+	public EmpleadoLista getA() {
+		return a;
+	}
+	public void setA(EmpleadoLista a) {
+		this.a = a;
 	}
 
 }

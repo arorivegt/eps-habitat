@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.SplitLayoutPanel;
 public class Panel extends Composite {
 
 	private AbsolutePanel absolutePanel_1;
+	private Long id_empleado;
+	
 		public Panel() {
          SplitLayoutPanel splitLayoutPanel = new SplitLayoutPanel();
          initWidget(splitLayoutPanel);
@@ -53,4 +55,14 @@ public class Panel extends Composite {
         public AbsolutePanel getAbsolutePanel_1() {
 		return absolutePanel_1;
 	}
+
+
+		public Long getId_empleado() {
+			return id_empleado;
+		}
+
+
+		public void setId_empleado(Long id_empleado) {
+			this.id_empleado = id_empleado;
+		}
 }

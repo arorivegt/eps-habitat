@@ -34,10 +34,9 @@ public class EmpleadoLista extends Composite {
 	}
 	
     public void agregarFormulario(final char tipo, final BuscadorEmpleados b, final String primer_nombre, String segundo_nombre, 
-			String primer_apellido, String segundo_apellido){
-    	System.out.println("tipo "+tipo);
+			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
     	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
-						primer_apellido, segundo_apellido,new AsyncCallback<List<AuxEmpleado>>(){
+						primer_apellido, segundo_apellido,DPI, Pasaporte,Estado,new AsyncCallback<List<AuxEmpleado>>(){
             public void onFailure(Throwable caught) 
             {
                 Window.alert("No hay resultados "+caught);

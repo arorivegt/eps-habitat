@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -11,6 +12,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -26,7 +28,7 @@ public class Index implements EntryPoint {
         
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
-        final Button sendButton = new Button("Send");
+    	private DialogBox Registro = new DialogBox();
         private final LoginServiceAsync loginService = GWT.create(LoginService.class);
         
         @Override
@@ -34,6 +36,7 @@ public class Index implements EntryPoint {
         {
             
              final DialogBox dialogBox = new DialogBox();
+             
                 dialogBox.setText("Autenticacion");
                 dialogBox.setAnimationEnabled(true);
                 final Button closeButton = new Button("cerrar");
@@ -82,7 +85,7 @@ public class Index implements EntryPoint {
                                 textToServerLabel.setText(usertxt+" / "+passtxt);
                                 serverResponseLabel.setText("");
                                                 
-                                loginService.login_inicio(usertxt,passtxt, new AsyncCallback<Boolean>() 
+                                loginService.login_inicio(usertxt,passtxt, new AsyncCallback<valores_sesion>() 
                                 {
                                         public void onFailure(Throwable caught) 
                                         {
@@ -92,12 +95,13 @@ public class Index implements EntryPoint {
                                                 closeButton.setFocus(true);
                                         }
                                         
-                                        public void onSuccess(Boolean result)
+                                        public void onSuccess(valores_sesion result)
                                         {
                                                 //si la autentificacion es correcta limpia y contruye el menu
-                                                if(result)
+                                                if(result.isCorrecto())
                                                 {
                                                         Panel inicio = new Panel();
+                                                        inicio.setId_empleado(result.getId_empleado());
                                                         RootPanel.get().clear();
                                                         RootPanel.get().add(inicio);
                                                         //RootPanel.get().add(buildMenu(result));
@@ -176,12 +180,36 @@ public class Index implements EntryPoint {
             btnIniciar.addClickHandler(handler);
             btnIniciar.setSize("341px", "44px");
                     
-                    Button button = new Button("Send");
+                   final  Button button = new Button("Send");
                     button.addClickHandler(new ClickHandler() {
                     	public void onClick(ClickEvent event) {
+
+                            final Button close= new Button("cerrar");
+                            VerticalPanel dialogVPanel = new VerticalPanel();
+                            HTML serverResponseLabel = new HTML();
+                            dialogVPanel.addStyleName("dialogVPanel");
                     		formularioRegistro inicio = new formularioRegistro();
-                            RootPanel.get().clear();
-                            RootPanel.get().add(inicio);
+                    		Registro .setText("Registro");
+                    		dialogVPanel.add(serverResponseLabel );
+                    		dialogVPanel.add(inicio);
+                            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
+                            dialogVPanel.add(close);
+                            Registro .setWidget(dialogVPanel);
+                    		Registro .setModal(true);
+                    		Registro .setGlassEnabled(true);
+                    		Registro .setAnimationEnabled(true);
+                    		Registro .center();
+                    		Registro .show();
+                            close.setFocus(true);
+                            close.addClickHandler(new ClickHandler() {
+                    			public void onClick(ClickEvent event) {
+                    				Registro.hide();
+                                    button.setEnabled(true);
+                                    button.setFocus(true);
+                    			}
+                            });
+                            //RootPanel.get().clear();
+                            //RootPanel.get().add(inicio);
                     	}
                     });
                     button.setText("Registrarse");

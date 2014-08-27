@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client.finanzas;
+package	 org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Widget;
 
 public class Buscador_Parametro_Inv extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -111,9 +112,9 @@ public class Buscador_Parametro_Inv extends Composite {
                 		
                 		@Override
                 		public void onSuccess(List<AuxParametro> result) {
-                			TablaEntryPoint e = new TablaEntryPoint(result);
+                			GWT11 e = new GWT11(result);
                 			grid.setWidget(1, 0,e);
-                			e.setSize("1000px", "400px");
+                			e.setSize("700px", "500px");
                 		//	Iterator<AuxParametro> iter = result.iterator();
                 		//	while (iter.hasNext())
                 		//	System.out.println(iter.next().getNomParametro());	
@@ -146,7 +147,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	
 	SimplePanel simplePanel = new SimplePanel();
 	grid.setWidget(1, 0, simplePanel);
-	simplePanel.setSize("1000px", "400px");
+	simplePanel.setSize("700px", "500px");
 	grid.clearCell(1, 0);
 //	Empleados e = new Empleados();
 	//TablasEntryPoint e = new TablasEntryPoint();
@@ -156,9 +157,10 @@ public class Buscador_Parametro_Inv extends Composite {
 		
 		@Override
 		public void onSuccess(List<AuxParametro> result) {
-			TablaEntryPoint e = new TablaEntryPoint(result);
+			//TablaEntryPoint e = new TablaEntryPoint(result);
+			GWT11 e = new GWT11(result);
 			grid.setWidget(1, 0,e);
-			e.setSize("1000px", "400px");
+			e.setSize("700px", "500px");
 		//	Iterator<AuxParametro> iter = result.iterator();
 		//	while (iter.hasNext())
 		//	System.out.println(iter.next().getNomParametro());	

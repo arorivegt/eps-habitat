@@ -114,7 +114,7 @@ public class Buscador_Parametro_Inv extends Composite {
                 		public void onSuccess(List<AuxParametro> result) {
                 			GWT11 e = new GWT11(result);
                 			grid.setWidget(1, 0,e);
-                			e.setSize("700px", "500px");
+                			e.setSize("1000px", "300px");
                 		//	Iterator<AuxParametro> iter = result.iterator();
                 		//	while (iter.hasNext())
                 		//	System.out.println(iter.next().getNomParametro());	
@@ -147,7 +147,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	
 	SimplePanel simplePanel = new SimplePanel();
 	grid.setWidget(1, 0, simplePanel);
-	simplePanel.setSize("700px", "500px");
+	simplePanel.setSize("1000px", "300px");
 	grid.clearCell(1, 0);
 //	Empleados e = new Empleados();
 	//TablasEntryPoint e = new TablasEntryPoint();
@@ -160,7 +160,7 @@ public class Buscador_Parametro_Inv extends Composite {
 			//TablaEntryPoint e = new TablaEntryPoint(result);
 			GWT11 e = new GWT11(result);
 			grid.setWidget(1, 0,e);
-			e.setSize("700px", "500px");
+			e.setSize("1000px", "300px");
 		//	Iterator<AuxParametro> iter = result.iterator();
 		//	while (iter.hasNext())
 		//	System.out.println(iter.next().getNomParametro());	

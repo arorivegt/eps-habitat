@@ -1,7 +1,12 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,6 +16,7 @@ import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -37,9 +43,10 @@ public abstract class PagingDataGrid<T> extends Composite {
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
 	private Button botonEliminar;
-    final SelectionModel<T> selectionModel =
+    final MultiSelectionModel<T> selectionModel =
             new MultiSelectionModel<T>((ProvidesKey<T>)AuxParametro.KEY_PROVIDER);
- 
+    private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+	Iterator<AuxParametro> iter = null;
     public PagingDataGrid() {
         initWidget(dock);
         dataGrid = new DataGrid<T>();
@@ -76,8 +83,25 @@ public abstract class PagingDataGrid<T> extends Composite {
             @Override
             public void onClick(ClickEvent event) {
               // Commit the changes.
-            	Window.alert("Eliminar Seleccionados");
-              
+            	Set<T> lista = selectionModel.getSelectedSet();
+            	iter = (Iterator<AuxParametro>) lista.iterator();
+        			while (iter.hasNext()){
+        			loginService.Eliminar_Parametro(iter.next().getIdParametro(), new AsyncCallback<Long>() {
+        				
+        				@Override
+        				public void onSuccess(Long result) {
+                			System.out.println("Eliminado: " + result);
+        				}
+        				
+        				@Override
+        				public void onFailure(Throwable caught) {
+        					System.out.println(caught);
+        					
+        				}
+        			});
+        			}
+        			
+	
             }
           });
         

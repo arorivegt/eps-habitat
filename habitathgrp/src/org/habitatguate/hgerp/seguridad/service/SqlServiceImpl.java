@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -35,7 +36,20 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		
 		return null;
 	}
+
 	
+///////-------------------------------------------------------ELIMINAR------------------------------------	
+    @Override
+    public Long Eliminar_Parametro(Long id) throws IllegalArgumentException {
+    	
+    	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+    	final SegParametro e = Persistencia.getObjectById(SegParametro.class, id); 
+        Persistencia.deletePersistent(e);         
+        return id;
+    }	
+	
+	
+//------------------------------------------------------CONSULTAS--------------------------------------------------	
 	@SuppressWarnings("unchecked")
 	public List<AuxParametro> ConsultaTodosParam(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();

@@ -9,7 +9,8 @@ import com.google.gwt.view.client.ProvidesKey;
 public class AuxParametro implements Comparable<AuxParametro>,IsSerializable{
 
 	/**
-     * The key provider that provides the unique ID of a contact.
+
+     * El KEY_PROVIDER es el que provee el ID de un contacto.
      */
     public static final ProvidesKey<AuxParametro> KEY_PROVIDER = new ProvidesKey<AuxParametro>() {
       @Override

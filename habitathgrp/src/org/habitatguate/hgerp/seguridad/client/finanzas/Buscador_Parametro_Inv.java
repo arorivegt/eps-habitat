@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.Button;
 
 public class Buscador_Parametro_Inv extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-
+    TablaGWT e = null;
 	public Buscador_Parametro_Inv(){
 
 	final Grid grid = new Grid(2, 1);
@@ -118,14 +118,8 @@ public class Buscador_Parametro_Inv extends Composite {
         		
         		@Override
         		public void onSuccess(List<AuxParametro> result) {
-
-        			GWT11 e = new GWT11(result);
-        			grid.setWidget(1, 0,e);
-        			e.setSize("1000px", "300px");
-
-        		//	Iterator<AuxParametro> iter = result.iterator();
-        		//	while (iter.hasNext())
-        		//	System.out.println(iter.next().getNomParametro());	
+        			e.ActulizarList(result);      			
+        			
         			
         		}
         		
@@ -149,25 +143,17 @@ public class Buscador_Parametro_Inv extends Composite {
 	absolutePanel.add(button, 730, 29);
 	button.setSize("157px", "20px");
 	
-	SimplePanel simplePanel = new SimplePanel();
-	grid.setWidget(1, 0, simplePanel);
-	simplePanel.setSize("1000px", "300px");
-	grid.clearCell(1, 0);
-//	Empleados e = new Empleados();
-	//TablasEntryPoint e = new TablasEntryPoint();
-	//grid.setWidget(1, 0,e);
-	//e.setSize("1187px", "648px");
+	
+
 	loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
 		
 		@Override
 		public void onSuccess(List<AuxParametro> result) {
-			//TablaEntryPoint e = new TablaEntryPoint(result);
-			GWT11 e = new GWT11(result);
+
+			e = new TablaGWT(result);
 			grid.setWidget(1, 0,e);
 			e.setSize("1000px", "300px");
-		//	Iterator<AuxParametro> iter = result.iterator();
-		//	while (iter.hasNext())
-		//	System.out.println(iter.next().getNomParametro());	
+	
 			
 		}
 		

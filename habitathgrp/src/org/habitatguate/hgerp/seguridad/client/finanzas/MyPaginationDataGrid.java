@@ -5,7 +5,7 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 
-import sun.print.resources.serviceui;
+
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.CheckboxCell;
@@ -24,12 +24,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
  
 /**
- * MyPaginationDataGrid extends PagingDataGrid to add Columns into Grid by implementation of 
- * initTableColumns() method
+ * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
 public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
      
-    // Add a selection model so we can select cells.
     private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
     public void initTableColumns(DataGrid<T> dataGrid,
@@ -38,7 +36,7 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
                 new Column<T, Boolean>(new CheckboxCell(true, false)) {
                   @Override
                   public Boolean getValue(T object) {
-                    // Get the value from the selection model.
+                    // obtiene el valor del select model
                     return selectionModel.isSelected(object);
                   }
                 };
@@ -65,7 +63,7 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
         nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
 			@Override
 			public void update(int index, T object, String value) {
-				// TODO Auto-generated method stub
+				
 				((AuxParametro) object).setNomParametro(value);
 				
 			}
@@ -82,7 +80,7 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
  
         
  
-        // Last name.
+        // Codigo Uno.
         Column<T, String> codUnoColumn = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
@@ -108,7 +106,7 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
         dataGrid.addColumn(codDosColumn, "Codigo Dos");
         dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
         
-        // ButtonCell.
+        // ActionCell.
         ActionCell<T> reListCell = new ActionCell<T>("Modificar",
         	    new ActionCell.Delegate<T>() {
         	        @Override

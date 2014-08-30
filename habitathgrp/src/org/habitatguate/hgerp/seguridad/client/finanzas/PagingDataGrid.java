@@ -15,7 +15,6 @@ import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -25,14 +24,11 @@ import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.ProvidesKey;
-import com.google.gwt.view.client.SelectionModel;
+
  
 /**
- * Abstract PaggingDataGrid class to set initial GWT DataGrid and Simple Pager with ListDataProvider
+ * Clase abstracta PaggingDataGrid para establecer la simple pagina inicial del DataGrid  con ListDataProvider
  * 
- * @author Ravi Soni
- *
- * @param <T>
  */
 public abstract class PagingDataGrid<T> extends Composite {
  
@@ -87,7 +83,7 @@ public abstract class PagingDataGrid<T> extends Composite {
         botonEliminar.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-              // Commit the changes.
+              // Elimina los parametros.
             	Set<T> lista = selectionModel.getSelectedSet();
             	iter = (Iterator<T>) lista.iterator();
         			while (iter.hasNext()){
@@ -98,6 +94,7 @@ public abstract class PagingDataGrid<T> extends Composite {
         				public void onSuccess(Long result) {
                 			System.out.println("Eliminado: " + result);
                 			dataProvider.getList().remove(objectoEliminado);
+
         				}
         				
         				@Override
@@ -111,17 +108,37 @@ public abstract class PagingDataGrid<T> extends Composite {
 	
             }
           });
-        
+        botonRefresh.addClickHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+              // Refresca el datagrid
+	
+        			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+        				
+        				@Override
+        				public void onSuccess(List result) {
+                			ActualizarList();
+                			setDataList(result);
+        				}
+        				
+        				@Override
+        				public void onFailure(Throwable caught) {
+        					System.out.println(caught);
+        					
+        				}
+        			});
+        			}
+        	});
     }
  
     public void setEmptyTableWidget() {
         dataGrid.setEmptyTableWidget(new HTML(
-                "The current request has taken longer than the allowed time limit. Please try your report query again."));
+                "La actual solicitud ha sobrepasado el limiete de tiempo. Porfavor prueba de nuevo."));
     }
  
     /**
      * 
-     * Abstract Method to implements for adding Column into Grid
+     * Metodo Abstracto para implementar la acciónde agregar columnas al datagrid
      * 
      * @param dataGrid
      * @param sortHandler
@@ -146,6 +163,10 @@ public abstract class PagingDataGrid<T> extends Composite {
         List<T> list = dataProvider.getList();
         list.addAll(this.dataList);
         dataProvider.refresh();
+    }
+    public void ActualizarList() {
+    	System.out.println("Limpiar ");
+		dataProvider.getList().clear();
     }
  
     public ListDataProvider<T> getDataProvider() {

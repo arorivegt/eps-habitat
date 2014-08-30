@@ -18,6 +18,7 @@ public class GWT11 extends Composite implements EntryPoint {
         grid.setHeight("500px");
         grid.setDataList(ContactDatabase.get().generateContacts(100));
         initWidget(grid);
+        
 	}
 	public GWT11(List datagrid){
         MyPaginationDataGrid<ContactInfo> grid = new MyPaginationDataGrid<ContactInfo>();

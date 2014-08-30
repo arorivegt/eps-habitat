@@ -43,10 +43,12 @@ public abstract class PagingDataGrid<T> extends Composite {
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
 	private Button botonEliminar;
+	private Button botonRefresh;
     final MultiSelectionModel<T> selectionModel =
             new MultiSelectionModel<T>((ProvidesKey<T>)AuxParametro.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-	Iterator<AuxParametro> iter = null;
+	Iterator<T> iter = null;
+	T objectoEliminado = null;
     public PagingDataGrid() {
         initWidget(dock);
         dataGrid = new DataGrid<T>();
@@ -60,7 +62,7 @@ public abstract class PagingDataGrid<T> extends Composite {
         
         dataProvider = new ListDataProvider<T>();
         dataProvider.setList(new ArrayList<T>());
-        dataGrid.setEmptyTableWidget(new HTML("No Data to Display"));
+        dataGrid.setEmptyTableWidget(new HTML("No existen datos a mostrar"));
         ListHandler<T> sortHandler = new ListHandler<T>(dataProvider.getList());
         dataGrid.setSelectionModel(selectionModel, DefaultSelectionEventManager
                 .<T> createCheckboxManager());
@@ -69,7 +71,9 @@ public abstract class PagingDataGrid<T> extends Composite {
         dataGrid.addColumnSortHandler(sortHandler);
  
         dataProvider.addDataDisplay(dataGrid);
-        botonEliminar = new Button("Eliminar");
+        
+        botonEliminar = new Button("Eliminar Parametro");
+        botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);
         botonEliminar.setVisible(true);
@@ -78,19 +82,22 @@ public abstract class PagingDataGrid<T> extends Composite {
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
+        dock.add(botonRefresh,DockPanel.EAST);
         dock.add(botonEliminar,DockPanel.EAST);
         botonEliminar.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
               // Commit the changes.
             	Set<T> lista = selectionModel.getSelectedSet();
-            	iter = (Iterator<AuxParametro>) lista.iterator();
+            	iter = (Iterator<T>) lista.iterator();
         			while (iter.hasNext()){
-        			loginService.Eliminar_Parametro(iter.next().getIdParametro(), new AsyncCallback<Long>() {
+        			objectoEliminado = iter.next();	
+        			loginService.Eliminar_Parametro(((AuxParametro)objectoEliminado).getIdParametro(), new AsyncCallback<Long>() {
         				
         				@Override
         				public void onSuccess(Long result) {
                 			System.out.println("Eliminado: " + result);
+                			dataProvider.getList().remove(objectoEliminado);
         				}
         				
         				@Override

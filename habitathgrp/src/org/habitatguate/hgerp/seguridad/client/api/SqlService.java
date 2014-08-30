@@ -14,7 +14,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("Insertar")
 public interface SqlService extends RemoteService{
 	String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException;
-	List<AuxParametro> ConsultaTodosParam() throws IllegalArgumentException;
+	List<AuxParametro> ConsultaTodosParam();
 	Long Eliminar_Parametro(Long id);
+	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
 	
 }

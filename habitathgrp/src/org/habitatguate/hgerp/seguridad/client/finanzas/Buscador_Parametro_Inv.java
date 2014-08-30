@@ -1,11 +1,11 @@
 package	 org.habitatguate.hgerp.seguridad.client.finanzas;
 
-import java.util.Iterator;
+
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
+
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,15 +17,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ScrollPanel;
+
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Widget;
+
 
 public class Buscador_Parametro_Inv extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-    
+
 	public Buscador_Parametro_Inv(){
 
 	final Grid grid = new Grid(2, 1);
@@ -91,9 +91,10 @@ public class Buscador_Parametro_Inv extends Composite {
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
-			//	Window.alert(textBox.getText());
+
 			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
 					new AsyncCallback<String[]>(){
+				@Override		
                 public void onFailure(Throwable caught) 
                 {
                     Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
@@ -101,36 +102,39 @@ public class Buscador_Parametro_Inv extends Composite {
 
 				@Override
                 public void onSuccess(String[] result)
-                {
-
+                {			
                 	Window.alert("Datos Almacenados Correctamente");
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	textBox_3.setText("");
-                	loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
-                		
-                		@Override
-                		public void onSuccess(List<AuxParametro> result) {
-                			GWT11 e = new GWT11(result);
-                			grid.setWidget(1, 0,e);
-                			e.setSize("1000px", "300px");
-                		//	Iterator<AuxParametro> iter = result.iterator();
-                		//	while (iter.hasNext())
-                		//	System.out.println(iter.next().getNomParametro());	
-                			
-                		}
-                		
-                		@Override
-                		public void onFailure(Throwable caught) {
-                			System.out.println(caught);
-                			
-                		}
-                	});
+
                 	
                 }
 
          });
+			
+			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+        		
+        		@Override
+        		public void onSuccess(List<AuxParametro> result) {
+
+        			GWT11 e = new GWT11(result);
+        			grid.setWidget(1, 0,e);
+        			e.setSize("1000px", "300px");
+
+        		//	Iterator<AuxParametro> iter = result.iterator();
+        		//	while (iter.hasNext())
+        		//	System.out.println(iter.next().getNomParametro());	
+        			
+        		}
+        		
+        		@Override
+        		public void onFailure(Throwable caught) {
+        			System.out.println(caught);
+        			
+        		}
+        	});
 		}
 		
 		else{
@@ -139,7 +143,7 @@ public class Buscador_Parametro_Inv extends Composite {
 		}
 	});		
 
-	button.setText("Nuevo Empleado");
+	button.setText("Nuevo Parametro");
 	button.setStylePrimaryName("gwt-TextBox2");
 	button.setStyleName("gwt-TextBox2");
 	absolutePanel.add(button, 730, 29);

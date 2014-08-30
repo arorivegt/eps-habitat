@@ -19,6 +19,8 @@ import javax.jdo.Query;
 @SuppressWarnings("serial")
 public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 
+	
+	//--------------------------------INSERTAR---------------------------------------------------
 	public String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(nomParam!=null){
@@ -71,6 +73,26 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 	}
 
 
+	//------------------------------------------MODIFICAR------------------------------------
 	
+	public Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(nomParam!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegParametro e = gestorPersistencia.getObjectById(SegParametro.class, id);
+				 e.setCodContable(codContable);
+				 e.setNomParametro(nomParam);
+				 e.setCodUno(codUno);
+				 e.setCodContable(codContable);
+				 e.setCodDos(codDos);
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
 	
 }

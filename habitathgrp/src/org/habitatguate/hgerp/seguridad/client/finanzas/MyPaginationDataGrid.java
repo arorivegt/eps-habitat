@@ -2,15 +2,23 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+
+import sun.print.resources.serviceui;
+
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.TextCell;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 
 
@@ -22,7 +30,7 @@ import com.google.gwt.user.client.Window;
 public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
      
     // Add a selection model so we can select cells.
-    
+    private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
     public void initTableColumns(DataGrid<T> dataGrid,
             ListHandler<T> sortHandler) {
@@ -54,8 +62,15 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
                 return ((AuxParametro) object).getNomParametro();
             }
         };
-        dataGrid.addColumn(nomParamColumn, "Nombre Parametro");
-        
+        nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
+			@Override
+			public void update(int index, T object, String value) {
+				// TODO Auto-generated method stub
+				((AuxParametro) object).setNomParametro(value);
+				
+			}
+        	});
+        dataGrid.addColumn(nomParamColumn, "Nombre Parametro");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
@@ -97,9 +112,22 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
         ActionCell<T> reListCell = new ActionCell<T>("Modificar",
         	    new ActionCell.Delegate<T>() {
         	        @Override
-        	        public void execute(T object) {
+        	        public void execute(final T object) {
         	           // code to be executed 
-        	        	Window.alert("Funciona");
+        	        	loginService.Actualizar_Parametro(((AuxParametro)object).getIdParametro(), ((AuxParametro)object).getNomParametro(), ((AuxParametro)object).getCodContable(), ((AuxParametro)object).getCodUno(), ((AuxParametro)object).getCodDos(), new AsyncCallback<Long>() {
+            				
+            				@Override
+            				public void onSuccess(Long result) {
+                	        	Window.alert("Modificado: "+ ((AuxParametro)object).getNomParametro());
+            				}
+            				
+            				@Override
+            				public void onFailure(Throwable caught) {
+            					System.out.println(caught);
+            					
+            				}
+            			});
+
         	        }
         	     }) 
         	 {

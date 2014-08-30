@@ -40,48 +40,48 @@ public class formularioFamilia  extends Composite  {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "100px");
+		absolutePanel.setSize("1263px", "100px");
 		
 		txtPrimer_apellido = new TextBox();
 		txtPrimer_apellido.setMaxLength(100);
 		txtPrimer_apellido.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtPrimer_apellido, 10, 29);
-		txtPrimer_apellido.setSize("137px", "11px");
+		txtPrimer_apellido.setSize("227px", "34px");
 		
 		txtSegundo_apellidp = new TextBox();
 		txtSegundo_apellidp.setMaxLength(100);
 		txtSegundo_apellidp.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtSegundo_apellidp, 190, 29);
-		txtSegundo_apellidp.setSize("137px", "11px");
+		absolutePanel.add(txtSegundo_apellidp, 267, 29);
+		txtSegundo_apellidp.setSize("227px", "34px");
 		
 		txtParentesco = new TextBox();
 		txtParentesco.setStylePrimaryName("gwt-TextBox2");
 		txtParentesco.setStyleName("gwt-TextBox2");
 		txtParentesco.setEnabled(false);
-		absolutePanel.add(txtParentesco, 373, 29);
-		txtParentesco.setSize("137px", "11px");
+		absolutePanel.add(txtParentesco, 516, 29);
+		txtParentesco.setSize("227px", "34px");
 		txtParentesco.setText(pariente);
 		
 		txtPrimer_nombre = new TextBox();
 		txtPrimer_nombre.setMaxLength(100);
 		txtPrimer_nombre.setStylePrimaryName("gwt-TextBox2");
 		txtPrimer_nombre.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPrimer_nombre, 10, 68);
-		txtPrimer_nombre.setSize("137px", "11px");
+		absolutePanel.add(txtPrimer_nombre, 10, 99);
+		txtPrimer_nombre.setSize("227px", "34px");
 		
 		txtSegundo_nombre = new TextBox();
 		txtSegundo_nombre.setMaxLength(100);
 		txtSegundo_nombre.setStylePrimaryName("gwt-TextBox2");
 		txtSegundo_nombre.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtSegundo_nombre, 190, 68);
-		txtSegundo_nombre.setSize("137px", "11px");
+		absolutePanel.add(txtSegundo_nombre, 267, 99);
+		txtSegundo_nombre.setSize("227px", "34px");
 		
 		txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(100);
 		txtOcupacion.setStylePrimaryName("gwt-TextBox2");
 		txtOcupacion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtOcupacion, 374, 68);
-		txtOcupacion.setSize("137px", "11px");
+		absolutePanel.add(txtOcupacion, 515, 99);
+		txtOcupacion.setSize("227px", "34px");
 		
 				txtEdad = new TextBox();
 				txtEdad.addChangeHandler(new ChangeHandler() {
@@ -104,8 +104,8 @@ public class formularioFamilia  extends Composite  {
 				txtEdad.setStylePrimaryName("gwt-TextBox2");
 				txtEdad.setStyleName("gwt-TextBox2");
 				txtEdad.setMaxLength(100);
-				absolutePanel.add(txtEdad, 564, 68);
-				txtEdad.setSize("137px", "11px");
+				absolutePanel.add(txtEdad, 761, 99);
+				txtEdad.setSize("68px", "34px");
 		
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -155,9 +155,9 @@ public class formularioFamilia  extends Composite  {
 		});
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 102, 110);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 855, 22);
+		btnActualizar.setSize("227px", "34px");
 		
 		
 		
@@ -174,9 +174,9 @@ public class formularioFamilia  extends Composite  {
 		});
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 286, 110);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 855, 101);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label label_3 = new Label("Primer Apellido");
 		label_3.setStyleName("label");
@@ -185,32 +185,32 @@ public class formularioFamilia  extends Composite  {
 		
 		Label label_4 = new Label("Segundo Apellido");
 		label_4.setStyleName("label");
-		absolutePanel.add(label_4, 190, 10);
+		absolutePanel.add(label_4, 267, 10);
 		label_4.setSize("192px", "13px");
 		
 		Label label_6 = new Label("Primer Nombre");
 		label_6.setStyleName("label");
-		absolutePanel.add(label_6, 10, 54);
+		absolutePanel.add(label_6, 10, 80);
 		label_6.setSize("157px", "19px");
 		
 		Label label_7 = new Label("2do y Demás Nombres");
 		label_7.setStyleName("label");
-		absolutePanel.add(label_7, 190, 54);
-		label_7.setSize("157px", "13px");
+		absolutePanel.add(label_7, 267, 80);
+		label_7.setSize("219px", "13px");
 		
 		Label lblParentesco = new Label("Parentesco");
 		lblParentesco.setStyleName("label");
-		absolutePanel.add(lblParentesco, 374, 10);
+		absolutePanel.add(lblParentesco, 517, 10);
 		lblParentesco.setSize("192px", "13px");
 		
 		Label lblOcupacion = new Label("Ocupacion ");
 		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 374, 54);
+		absolutePanel.add(lblOcupacion, 515, 80);
 		lblOcupacion.setSize("163px", "13px");
 		
 		Label lblEdad = new Label("Edad");
 		lblEdad.setStyleName("label");
-		absolutePanel.add(lblEdad, 567, 49);
+		absolutePanel.add(lblEdad, 763, 71);
 		lblEdad.setSize("76px", "13px");
 		
 	}

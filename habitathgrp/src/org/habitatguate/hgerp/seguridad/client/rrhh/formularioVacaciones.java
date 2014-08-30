@@ -37,7 +37,7 @@ public class formularioVacaciones extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("534px", "105px");
+		absolutePanel.setSize("741px", "170px");
 		
 		dateFecha1 = new DateBox();
 		dateFecha1.setValue(new Date(1407519270283L));
@@ -45,21 +45,21 @@ public class formularioVacaciones extends Composite {
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha1, 10, 29);
-		dateFecha1.setSize("124px", "11px");
+		dateFecha1.setSize("227px", "34px");
 		
 		dateFecha2 = new DateBox();
 		dateFecha2.setValue(new Date(1407519274369L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha2, 183, 30);
-		dateFecha2.setSize("137px", "11px");
+		absolutePanel.add(dateFecha2, 254, 29);
+		dateFecha2.setSize("227px", "34px");
 		
 		txtDescripcion = new TextArea();
 		txtDescripcion.getElement().setAttribute("maxlength", "1000");
-		txtDescripcion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDescripcion, 10, 71);
-		txtDescripcion.setSize("317px", "61px");
+		txtDescripcion.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtDescripcion, 10, 106);
+		txtDescripcion.setSize("423px", "58px");
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -111,10 +111,10 @@ public class formularioVacaciones extends Composite {
 			}
 		});
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 377, 42);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 537, 56);
+		btnActualizar.setSize("227px", "34px");
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -129,10 +129,10 @@ public class formularioVacaciones extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 377, 78);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 537, 134);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");
@@ -141,12 +141,12 @@ public class formularioVacaciones extends Composite {
 		
 		Label lblMotivo = new Label("Descripcion");
 		lblMotivo.setStyleName("label");
-		absolutePanel.add(lblMotivo, 10, 56);
+		absolutePanel.add(lblMotivo, 10, 87);
 		lblMotivo.setSize("192px", "13px");
 		
 		Label lblLoRecomienda = new Label("Fecha Final");
 		lblLoRecomienda.setStyleName("label");
-		absolutePanel.add(lblLoRecomienda, 183, 10);
+		absolutePanel.add(lblLoRecomienda, 256, 10);
 		lblLoRecomienda.setSize("103px", "13px");
 	}
 	private void EliminarFormulario(){

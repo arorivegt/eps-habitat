@@ -36,27 +36,29 @@ public class formularioBDPuestos extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("702px", "80px");
+		absolutePanel.setSize("931px", "100px");
 		
 		txtPuesto = new TextBox();
 		txtPuesto.setStyleName("gwt-TextBox2");
 		txtPuesto.setMaxLength(100);
 		absolutePanel.add(txtPuesto, 10, 29);
-		txtPuesto.setSize("137px", "11px");
+		txtPuesto.setSize("227px", "34px");
+
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 10, 68);
-		dateFecha.setSize("137px", "11px");
+		absolutePanel.add(dateFecha, 10, 89);
+		dateFecha.setSize("227px", "34px");
+
 		
 		txtFunciones = new TextArea();
 		txtFunciones.getElement().setAttribute("maxlength", "500");
-		txtFunciones.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtFunciones, 187, 29);
-		txtFunciones.setSize("318px", "61px");
+		txtFunciones.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtFunciones, 259, 27);
+		txtFunciones.setSize("348px", "58px");
 		
 				Button btnGuardar = new Button("Send");
 				btnGuardar.addClickHandler(new ClickHandler() {
@@ -103,25 +105,10 @@ public class formularioBDPuestos extends Composite {
 					
 				});
 				btnGuardar.setText("Guardar");
-				btnGuardar.setStylePrimaryName("gwt-TextBox2");
-				btnGuardar.setStyleName("gwt-TextBox2");
-				absolutePanel.add(btnGuardar, 547, 29);
-				btnGuardar.setSize("157px", "20px");
-		
-		Label lblNivelAcademico = new Label("Puesto");
-		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
-		lblNivelAcademico.setSize("192px", "13px");
-		
-		Label lblTitulodiploma = new Label("Fecha");
-		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 10, 54);
-		lblTitulodiploma.setSize("192px", "13px");
-		
-		Label lblFunciones = new Label("Funciones");
-		lblFunciones.setStyleName("label");
-		absolutePanel.add(lblFunciones, 187, 10);
-		lblFunciones.setSize("192px", "13px");
+				btnGuardar.setStylePrimaryName("sendButton");
+				btnGuardar.setStyleName("sendButton");
+				absolutePanel.add(btnGuardar, 682, 29);
+				btnGuardar.setSize("227px", "34px");
 		
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
@@ -130,10 +117,26 @@ public class formularioBDPuestos extends Composite {
 			}
 		});
 		button.setText("Quitar formulario");
-		button.setStylePrimaryName("gwt-TextBox2");
-		button.setStyleName("gwt-TextBox2");
-		absolutePanel.add(button, 547, 78);
-		button.setSize("157px", "20px");
+		button.setStylePrimaryName("sendButton");
+		button.setStyleName("sendButton");
+		absolutePanel.add(button, 682, 91);
+		button.setSize("227px", "34px");
+
+		
+		Label lblNivelAcademico = new Label("Puesto");
+		lblNivelAcademico.setStyleName("label");
+		absolutePanel.add(lblNivelAcademico, 10, 10);
+		lblNivelAcademico.setSize("192px", "13px");
+		
+		Label lblTitulodiploma = new Label("Fecha");
+		lblTitulodiploma.setStyleName("label");
+		absolutePanel.add(lblTitulodiploma, 10, 70);
+		lblTitulodiploma.setSize("192px", "13px");
+		
+		Label lblFunciones = new Label("Funciones");
+		lblFunciones.setStyleName("label");
+		absolutePanel.add(lblFunciones, 272, 10);
+		lblFunciones.setSize("192px", "13px");
 	}
 	
 	private void EliminarFormularioSinDatos(){

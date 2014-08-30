@@ -64,106 +64,106 @@ public class formularioEntrevista extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "1090px");
+		absolutePanel.setSize("918px", "1253px");
 		
 		txtQueConoces = new TextArea();
 		//txtQueConoces.getElement().setAttribute("maxlength", "500");
-		txtQueConoces.setStyleName("gwt-TextBox2");
+		txtQueConoces.setStyleName("gwt-TextBox");
 		absolutePanel.add(txtQueConoces, 10, 48);
-		txtQueConoces.setSize("318px", "61px");
+		txtQueConoces.setSize("272px", "39px");
 		
 		txtPorque_Trabajar = new TextArea();
 		//txtPorque_Trabajar.getElement().setAttribute("maxlength", "500");
-		txtPorque_Trabajar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPorque_Trabajar, 379, 48);
-		txtPorque_Trabajar.setSize("318px", "61px");
+		txtPorque_Trabajar.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtPorque_Trabajar, 458, 48);
+		txtPorque_Trabajar.setSize("272px", "39px");
 		
 		txtComoDescribe = new TextArea();
 		//txtComoDescribe.getElement().setAttribute("maxlength", "500");
-		txtComoDescribe.setStyleName("gwt-TextBox2");
+		txtComoDescribe.setStyleName("gwt-TextBox");
 		absolutePanel.add(txtComoDescribe, 10, 157);
-		txtComoDescribe.setSize("318px", "61px");
+		txtComoDescribe.setSize("272px", "39px");
 		
 		txtPresion = new TextArea();
 		//txtPresion.getElement().setAttribute("maxlength", "500");
-		txtPresion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPresion, 379, 157);
-		txtPresion.setSize("318px", "61px");
+		txtPresion.setStyleName("gwt-TextBox ");
+		absolutePanel.add(txtPresion, 458, 157);
+		txtPresion.setSize("272px", "39px");
 		
 		txtMetas = new TextArea();
 		//txtMetas.getElement().setAttribute("maxlength", "1000");
-		txtMetas.setStyleName("gwt-TextBox2");
+		txtMetas.setStyleName("gwt-TextBox ");
 		absolutePanel.add(txtMetas, 10, 263);
-		txtMetas.setSize("687px", "100px");
+		txtMetas.setSize("720px", "83px");
 		
 		listA = new ListBox();
 		listA.addItem("Si");
 		listA.addItem("No");
 		listA.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listA, 567, 421);
-		listA.setSize("137px", "19px");
+		absolutePanel.add(listA, 643, 395);
+		listA.setSize("137px", "26px");
 		
 		listB = new ListBox();
 		listB.addItem("Si");
 		listB.addItem("No");
 		listB.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listB, 567, 446);
-		listB.setSize("137px", "19px");
+		absolutePanel.add(listB, 643, 427);
+		listB.setSize("137px", "26px");
 		
 		listC = new ListBox();
 		listC.addItem("Si");
 		listC.addItem("No");
 		listC.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listC, 567, 471);
-		listC.setSize("137px", "19px");
+		absolutePanel.add(listC, 643, 459);
+		listC.setSize("137px", "26px");
 		
 		listE = new ListBox();
 		listE.addItem("Si");
 		listE.addItem("No");
 		listE.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listE, 567, 496);
-		listE.setSize("137px", "19px");
+		absolutePanel.add(listE, 643, 491);
+		listE.setSize("137px", "26px");
 		
 		listF = new ListBox();
 		listF.addItem("Si");
 		listF.addItem("No");
 		listF.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listF, 567, 521);
-		listF.setSize("137px", "19px");
+		absolutePanel.add(listF, 643, 525);
+		listF.setSize("137px", "26px");
 		
 		listG = new ListBox();
 		listG.addItem("Si");
 		listG.addItem("No");
 		listG.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listG, 567, 546);
-		listG.setSize("137px", "19px");
+		absolutePanel.add(listG, 643, 557);
+		listG.setSize("137px", "26px");
 		
 		listH = new ListBox();
 		listH.addItem("Si");
 		listH.addItem("No");
 		listH.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listH, 567, 571);
-		listH.setSize("137px", "19px");
+		absolutePanel.add(listH, 643, 589);
+		listH.setSize("137px", "26px");
 		
 		listI = new ListBox();
 		listI.addItem("Si");
 		listI.addItem("No");
 		listI.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listI, 567, 596);
-		listI.setSize("137px", "19px");
+		absolutePanel.add(listI, 643, 621);
+		listI.setSize("137px", "26px");
 		
 		listJ = new ListBox();
 		listJ.addItem("Si");
 		listJ.addItem("No");
 		listJ.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listJ, 567, 621);
-		listJ.setSize("137px", "19px");
+		absolutePanel.add(listJ, 643, 653);
+		listJ.setSize("137px", "26px");
 		
 		txtEnfermedades = new TextArea();
 		txtEnfermedades.getElement().setAttribute("maxlength", "500");
-		txtEnfermedades.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEnfermedades, 10, 673);
-		txtEnfermedades.setSize("687px", "100px");
+		txtEnfermedades.setStyleName("gwt-TextBox ");
+		absolutePanel.add(txtEnfermedades, 10, 715);
+		txtEnfermedades.setSize("720px", "64px");
 		
 		txtAporteCasa = new DoubleBox();
 		txtAporteCasa.addChangeHandler(new ChangeHandler() {
@@ -182,15 +182,15 @@ public class formularioEntrevista extends Composite {
 		});
 		txtAporteCasa.setText("0.0");
 		txtAporteCasa.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtAporteCasa, 20, 812);
-		txtAporteCasa.setSize("117px", "11px");
+		absolutePanel.add(txtAporteCasa, 10, 867);
+		txtAporteCasa.setSize("227px", "34px");
 		
 		listDeudas = new ListBox();
 		listDeudas.addItem("Si");
 		listDeudas.addItem("No");
 		listDeudas.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listDeudas, 175, 812);
-		listDeudas.setSize("137px", "19px");
+		absolutePanel.add(listDeudas, 485, 867);
+		listDeudas.setSize("47px", "36px");
 		
 		txtAmortizacion = new DoubleBox();
 		txtAmortizacion.addChangeHandler(new ChangeHandler() {
@@ -209,14 +209,14 @@ public class formularioEntrevista extends Composite {
 		});
 		txtAmortizacion.setText("0.0");
 		txtAmortizacion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtAmortizacion, 330, 812);
-		txtAmortizacion.setSize("117px", "11px");
+		absolutePanel.add(txtAmortizacion, 551, 867);
+		txtAmortizacion.setSize("227px", "34px");
 		
 		txtNombreEmpresa = new TextBox();
 		txtNombreEmpresa.setMaxLength(200);
 		txtNombreEmpresa.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreEmpresa, 488, 812);
-		txtNombreEmpresa.setSize("209px", "11px");
+		absolutePanel.add(txtNombreEmpresa, 245, 867);
+		txtNombreEmpresa.setSize("227px", "34px");
 		
 		listNoDependientes = new ListBox();
 		listNoDependientes.addItem("0");
@@ -242,23 +242,23 @@ public class formularioEntrevista extends Composite {
 		listNoDependientes.addItem("19");
 		listNoDependientes.addItem("20");
 		listNoDependientes.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listNoDependientes, 20, 862);
-		listNoDependientes.setSize("137px", "19px");
+		absolutePanel.add(listNoDependientes, 10, 939);
+		listNoDependientes.setSize("229px", "41px");
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407518819070L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 175, 862);
-		dateFecha.setSize("117px", "11px");
+		absolutePanel.add(dateFecha, 250, 939);
+		dateFecha.setSize("222px", "34px");
 		
 		listAlquila = new ListBox();
 		listAlquila.addItem("Si");
 		listAlquila.addItem("No");
 		listAlquila.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listAlquila, 330, 862);
-		listAlquila.setSize("137px", "19px");
+		absolutePanel.add(listAlquila, 485, 939);
+		listAlquila.setSize("47px", "36px");
 		
 		txtPagoMensual = new DoubleBox();
 		txtPagoMensual.addChangeHandler(new ChangeHandler() {
@@ -277,8 +277,8 @@ public class formularioEntrevista extends Composite {
 		});
 		txtPagoMensual.setText("0.0");
 		txtPagoMensual.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPagoMensual, 485, 862);
-		txtPagoMensual.setSize("117px", "11px");
+		absolutePanel.add(txtPagoMensual, 551, 939);
+		txtPagoMensual.setSize("227px", "34px");
 		
 		txtPretencionSalarial = new DoubleBox();
 		txtPretencionSalarial.addChangeHandler(new ChangeHandler() {
@@ -297,20 +297,20 @@ public class formularioEntrevista extends Composite {
 		});
 		txtPretencionSalarial.setText("0.0");
 		txtPretencionSalarial.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPretencionSalarial, 20, 906);
-		txtPretencionSalarial.setSize("117px", "11px");
+		absolutePanel.add(txtPretencionSalarial, 10, 1005);
+		txtPretencionSalarial.setSize("227px", "34px");
 		
 		txtEntrevisto = new TextBox();
 		txtEntrevisto.setMaxLength(500);
 		txtEntrevisto.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEntrevisto, 175, 906);
-		txtEntrevisto.setSize("117px", "11px");
+		absolutePanel.add(txtEntrevisto, 245, 1005);
+		txtEntrevisto.setSize("227px", "34px");
 		
 		txtOtrosIngresos = new TextArea();
 		//txtOtrosIngresos.getElement().setAttribute("maxlength", "500");
-		txtOtrosIngresos.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtOtrosIngresos, 10, 958);
-		txtOtrosIngresos.setSize("687px", "100px");
+		txtOtrosIngresos.setStyleName("gwt-TextBox ");
+		absolutePanel.add(txtOtrosIngresos, 13, 1078);
+		txtOtrosIngresos.setSize("717px", "100px");
 		
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
@@ -378,15 +378,15 @@ public class formularioEntrevista extends Composite {
 			}
 		});
 		button.setText("Guardar");
-		button.setStylePrimaryName("gwt-TextBox2");
-		button.setStyleName("gwt-TextBox2");
-		absolutePanel.add(button, 290, 1088);
-		button.setSize("198px", "32px");
+		button.setStylePrimaryName("sendButton");
+		button.setStyleName("sendButton");
+		absolutePanel.add(button, 290, 1231);
+		button.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Informe Entrevista");
 		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 115, 10);
-		lblNivelAcademico.setSize("456px", "13px");
+		absolutePanel.add(lblNivelAcademico, 290, 10);
+		lblNivelAcademico.setSize("150px", "13px");
 		
 		Label lblQueConoce = new Label("1. Qué conoces de la Fundación?");
 		lblQueConoce.setStyleName("label");
@@ -395,7 +395,7 @@ public class formularioEntrevista extends Composite {
 		
 		Label lblPorQu = new Label("2. Por qué desea trabajar en la Fundación?");
 		lblPorQu.setStyleName("label");
-		absolutePanel.add(lblPorQu, 379, 29);
+		absolutePanel.add(lblPorQu, 458, 29);
 		lblPorQu.setSize("338px", "13px");
 		
 		Label lblCmoSe = new Label("3. Cómo se describe así mismo?");
@@ -405,7 +405,7 @@ public class formularioEntrevista extends Composite {
 		
 		Label lblpuedesTrabajar = new Label("4. ¿Puedes trabajar bajo presión?");
 		lblpuedesTrabajar.setStyleName("label");
-		absolutePanel.add(lblpuedesTrabajar, 379, 138);
+		absolutePanel.add(lblpuedesTrabajar, 458, 138);
 		lblpuedesTrabajar.setSize("338px", "13px");
 		
 		Label lblMetas = new Label("Metas");
@@ -415,107 +415,107 @@ public class formularioEntrevista extends Composite {
 		
 		Label lblATieneDisponibilidad = new Label("a) Tiene disponibilidad inmediata");
 		lblATieneDisponibilidad.setStyleName("label");
-		absolutePanel.add(lblATieneDisponibilidad, 37, 427);
+		absolutePanel.add(lblATieneDisponibilidad, 37, 395);
 		lblATieneDisponibilidad.setSize("293px", "13px");
 		
 		Label lblBTieneDisposicin = new Label("b) Tiene disposición de viajar incluso fines de semana");
 		lblBTieneDisposicin.setStyleName("label");
-		absolutePanel.add(lblBTieneDisposicin, 37, 452);
+		absolutePanel.add(lblBTieneDisposicin, 37, 427);
 		lblBTieneDisposicin.setSize("511px", "13px");
 		
 		Label lblCTieneFlexibilidad = new Label("c) Tiene flexibilidad en el horario");
 		lblCTieneFlexibilidad.setStyleName("label");
-		absolutePanel.add(lblCTieneFlexibilidad, 37, 477);
+		absolutePanel.add(lblCTieneFlexibilidad, 37, 459);
 		lblCTieneFlexibilidad.setSize("524px", "13px");
 		
 		Label lblETieneAntecedentes = new Label("e) Tiene antecedentes penales");
 		lblETieneAntecedentes.setStyleName("label");
-		absolutePanel.add(lblETieneAntecedentes, 37, 502);
+		absolutePanel.add(lblETieneAntecedentes, 37, 491);
 		lblETieneAntecedentes.setSize("511px", "13px");
 		
 		Label lblFTieneAntecedentes = new Label("f) Tiene antecedentes policíacos");
 		lblFTieneAntecedentes.setStyleName("label");
-		absolutePanel.add(lblFTieneAntecedentes, 37, 527);
+		absolutePanel.add(lblFTieneAntecedentes, 37, 525);
 		lblFTieneAntecedentes.setSize("511px", "13px");
 		
 		Label lblGCartasDe = new Label("g) Cartas de recomendación laborales");
 		lblGCartasDe.setStyleName("label");
-		absolutePanel.add(lblGCartasDe, 37, 552);
+		absolutePanel.add(lblGCartasDe, 37, 557);
 		lblGCartasDe.setSize("511px", "13px");
 		
 		Label lblHCartasDe = new Label("h) Cartas de recomendación personales");
 		lblHCartasDe.setStyleName("label");
-		absolutePanel.add(lblHCartasDe, 37, 577);
+		absolutePanel.add(lblHCartasDe, 37, 589);
 		lblHCartasDe.setSize("511px", "13px");
 		
 		Label lblEnfermedades = new Label("Enfermedades");
 		lblEnfermedades.setStyleName("label");
-		absolutePanel.add(lblEnfermedades, 10, 654);
+		absolutePanel.add(lblEnfermedades, 10, 685);
 		lblEnfermedades.setSize("338px", "13px");
 		
 		Label lblI = new Label("i) Vive con familia");
 		lblI.setStyleName("label");
-		absolutePanel.add(lblI, 37, 602);
+		absolutePanel.add(lblI, 34, 627);
 		lblI.setSize("511px", "13px");
 		
 		Label lblAporteCasa = new Label("Aporte Casa");
 		lblAporteCasa.setStyleName("label");
-		absolutePanel.add(lblAporteCasa, 20, 787);
-		lblAporteCasa.setSize("75px", "13px");
+		absolutePanel.add(lblAporteCasa, 13, 848);
+		lblAporteCasa.setSize("149px", "13px");
 		
 		Label lblTieneDeudas = new Label("Tiene deudas");
 		lblTieneDeudas.setStyleName("label");
-		absolutePanel.add(lblTieneDeudas, 175, 787);
+		absolutePanel.add(lblTieneDeudas, 485, 825);
 		lblTieneDeudas.setSize("81px", "13px");
 		
 		Label lblAmortizacinMensual = new Label("Amortización mensual");
 		lblAmortizacinMensual.setStyleName("label");
-		absolutePanel.add(lblAmortizacinMensual, 330, 787);
-		lblAmortizacinMensual.setSize("137px", "13px");
+		absolutePanel.add(lblAmortizacinMensual, 551, 848);
+		lblAmortizacinMensual.setSize("209px", "13px");
 		
 		Label lblNombreDeLa = new Label("Nombre de la institución donde tiene el crédito");
 		lblNombreDeLa.setStyleName("label");
-		absolutePanel.add(lblNombreDeLa, 488, 787);
+		absolutePanel.add(lblNombreDeLa, 245, 831);
 		lblNombreDeLa.setSize("229px", "13px");
 		
 		Label lblNoDependientes = new Label("No. Dependientes");
 		lblNoDependientes.setStyleName("label");
-		absolutePanel.add(lblNoDependientes, 20, 837);
+		absolutePanel.add(lblNoDependientes, 10, 920);
 		lblNoDependientes.setSize("137px", "13px");
 		
 		Label label = new Label("Fecha");
 		label.setStyleName("label");
-		absolutePanel.add(label, 175, 837);
+		absolutePanel.add(label, 257, 920);
 		label.setSize("75px", "13px");
 		
 		Label lblPagoMensual = new Label("Pago mensual-alquiler");
 		lblPagoMensual.setStyleName("label");
-		absolutePanel.add(lblPagoMensual, 485, 837);
-		lblPagoMensual.setSize("137px", "13px");
+		absolutePanel.add(lblPagoMensual, 551, 920);
+		lblPagoMensual.setSize("275px", "13px");
 		
 		Label lblAlquila = new Label("Alquila");
 		lblAlquila.setStyleName("label");
-		absolutePanel.add(lblAlquila, 330, 837);
+		absolutePanel.add(lblAlquila, 480, 920);
 		lblAlquila.setSize("81px", "13px");
 		
 		Label lblKCasaPropia = new Label("J) Casa Propia");
 		lblKCasaPropia.setStyleName("label");
-		absolutePanel.add(lblKCasaPropia, 37, 627);
+		absolutePanel.add(lblKCasaPropia, 34, 659);
 		lblKCasaPropia.setSize("511px", "13px");
 		
 		Label lblPretencionSalarial = new Label("Pretencion Salarial");
 		lblPretencionSalarial.setStyleName("label");
-		absolutePanel.add(lblPretencionSalarial, 20, 887);
+		absolutePanel.add(lblPretencionSalarial, 10, 986);
 		lblPretencionSalarial.setSize("137px", "13px");
 		
 		Label lblOtrosIngresos = new Label("Otros Ingresos");
 		lblOtrosIngresos.setStyleName("label");
-		absolutePanel.add(lblOtrosIngresos, 10, 939);
+		absolutePanel.add(lblOtrosIngresos, 10, 1059);
 		lblOtrosIngresos.setSize("338px", "13px");
 		
 		Label lblEntrevisto = new Label("Entrevisto");
 		lblEntrevisto.setStyleName("label");
-		absolutePanel.add(lblEntrevisto, 175, 887);
+		absolutePanel.add(lblEntrevisto, 247, 986);
 		lblEntrevisto.setSize("137px", "13px");
 	}
 	

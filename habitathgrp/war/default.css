@@ -14,19 +14,17 @@ h1 {
   text-align: center;
 }
 .sendButton {
-  background: #a9db80; /* Old browsers */
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
-  -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 20px;
-	color: White;
-	font-size: 18px;
+background: #93b631;
+	color: #fff;
+	padding: 8px 10px;
+	border: 0;
+	font-size: 16px;
+	font-style: normal;
+	font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
 }
 
 /** Most GWT widgets already have a style name defined */
@@ -52,59 +50,37 @@ h1 {
 .login_css {
 }
 .gwt-TextBox {
-	color: gray;
-	font-size: 18px;
-	opacity:0.6	
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 20px;
-	
-	background: #eee;
-	color: #777;
-	padding: 4px 10px;
-	width: 328px;
-	
-	border: none;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
+background: #fff;
+border: 0;
+overflow: hidden;
+-moz-box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
+-webkit-box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
+box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
+color: #dadada;
+font-family: Oswald, sans-serif;
+font-size: 16px;
+font-weight: normal;
+line-height: 1.4;
+padding: 20px 25px;
 }
 .gwt-PasswordTextBox {
-	color: gray;
-	font-size: 18px;
-	opacity:0.6
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 20px;
-	
-	background-color: #eee;
-	color: #777;
-	padding: 4px 10px;
-	width: 328px;
-	
-	border: none;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
+background: #fff;
+overflow: hidden;
+box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
+	color: #dadada;
+	border: 0;
+	font-size: 16px;
+	font-family: Oswald, sans-serif;
+	font-weight: bold;
+	line-height: 1.4px;
 }
 .gwt-Label {
-  background: #a9db80; /* Old browsers */
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
-	border-radius: 20px 20px 0 0;
-	color: #fff;
-	font-size: 28px;
-	padding: 20px 26px;
-	margin-right: 14px;
+display: block;
+	color: grey;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
 }
  
  
@@ -132,18 +108,13 @@ color: White;
 }
 
 .gwt-Label-new {
-
-        background: lightsteelblue;
-        border-radius: 0 0 20px 20px;
-        padding: 20px 26px;
-}
-input {
-	border: none;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
+background: #f2f5f8;
+border: 5px solid #eaeef2;
+border-radius: 5px;
+color: #7d8791;
+margin: 0 0 30px 0;
+padding: 35px 35px 10px;
+position: relative;
 }
 .gwt-Tree {
 	color: Black;
@@ -193,10 +164,10 @@ background: #a9db80; /* Old browsers */
   background: linear-gradient(#3a4d9c, #2c3b77);
   border-color: transparent;
   -webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 20px;
-	color: White;
-	font-size: 18px;
+        -moz-border-radius: 3px;
+        border-radius: 20px;
+        color: White;
+        font-size: 18px;
 }
 
 .gwt-TabBar {
@@ -206,11 +177,11 @@ background: #a9db80; /* Old browsers */
 }
 
 .gwt-TabBarItem {
-	margin-right: 2px;
-	padding: 4px;
-	border-bottom: 2px solid white;
-	background-color: #e8e8e8;
-	cursor: pointer;
+        margin-right: 2px;
+        padding: 4px;
+        border-bottom: 2px solid white;
+        background-color: #e8e8e8;
+        cursor: pointer;
 }
 
 .gwt-TabBarItem-selected {
@@ -222,31 +193,12 @@ background: #a9db80; /* Old browsers */
   background: -moz-linear-gradient(#3a4d9c, #2c3b77);
   background: linear-gradient(#3a4d9c, #2c3b77);
   border-color: transparent;
-	color: White;
-	font-size: 18px;
+        color: White;
+        font-size: 18px;
 }
 .label {
-	color: Black;
-	font-size: 10px;
-}
-.gwt-TextBox2 {
-	color: black;
-	font-size: 12px;
-	opacity:0.6	
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 20px;
-	
-	background: #eee;
-	padding: 4px 10px;
-	width: 328px;
-	
-	border: none;
-	font-family: inherit;
-	font-size: 10;
-	font-weight: inherit;
-	line-height: inherit;
-	-webkit-appearance: none;
+	color: #7d8791;
+	font-size: 14px;
 }
 /* 
 * Global widget style. 
@@ -363,4 +315,20 @@ background: #a9db80; /* Old browsers */
 }
 item_arbol {
 	background-color: lightblue;
+}
+.sendButton:hover {
+	background: #005596;
+}
+.gwt-TextBox2 {
+background: #fff;
+overflow: hidden;
+box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
+	color: #dadada;
+	border: 0;
+	font-size: 16px;
+	font-family: Oswald, sans-serif;
+	font-weight: bold;
+	line-height: 1.4px;
+}
+.gwt-TextBox  {
 } 

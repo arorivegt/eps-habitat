@@ -49,50 +49,50 @@ public class formularioReferenciaLaboral extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "200px");
+		absolutePanel.setSize("1219px", "210px");
 		
 		txtNombre = new TextBox();
 		txtNombre.setMaxLength(200);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombre, 10, 29);
-		txtNombre.setSize("137px", "11px");
+		absolutePanel.add(txtNombre, 10, 19);
+		txtNombre.setSize("227px", "34px");
 		
 		txtTelefono = new IntegerBox();
 		txtTelefono.setText("0");
 		txtTelefono.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefono, 190, 29);
-		txtTelefono.setSize("137px", "11px");
+		absolutePanel.add(txtTelefono, 257, 19);
+		txtTelefono.setSize("227px", "34px");
 		
 		txtPuestoCandidato = new TextBox();
 		txtPuestoCandidato.setMaxLength(200);
 		txtPuestoCandidato.setStylePrimaryName("gwt-TextBox2");
 		txtPuestoCandidato.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPuestoCandidato, 374, 29);
-		txtPuestoCandidato.setSize("137px", "11px");
+		absolutePanel.add(txtPuestoCandidato, 502, 19);
+		txtPuestoCandidato.setSize("227px", "34px");
 		
 		dateFecha1 = new DateBox();
 		dateFecha1.setValue(new Date(1407519069711L));
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha1, 537, 29);
-		dateFecha1.setSize("75px", "11px");
+		absolutePanel.add(dateFecha1, 750, 19);
+		dateFecha1.setSize("227px", "34px");
 		
 		dateFecha2 = new DateBox();
 		dateFecha2.setValue(new Date(1407519076388L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha2, 649, 29);
-		dateFecha2.setSize("73px", "11px");
+		absolutePanel.add(dateFecha2, 1044, 19);
+		dateFecha2.setSize("227px", "34px");
 		
 		txtEmpresa = new TextBox();
 		txtEmpresa.setMaxLength(100);
 		txtEmpresa.setStylePrimaryName("gwt-TextBox2");
 		txtEmpresa.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEmpresa, 10, 73);
-		txtEmpresa.setSize("137px", "11px");
+		absolutePanel.add(txtEmpresa, 10, 75);
+		txtEmpresa.setSize("227px", "34px");
 		
 		txtSalarioFinal = new TextBox();
 		txtSalarioFinal.addChangeHandler(new ChangeHandler() {
@@ -113,27 +113,27 @@ public class formularioReferenciaLaboral extends Composite {
 		txtSalarioFinal.setStylePrimaryName("gwt-TextBox2");
 		txtSalarioFinal.setStyleName("gwt-TextBox2");
 		txtSalarioFinal.setMaxLength(100);
-		absolutePanel.add(txtSalarioFinal, 190, 73);
-		txtSalarioFinal.setSize("137px", "11px");
+		absolutePanel.add(txtSalarioFinal, 257, 75);
+		txtSalarioFinal.setSize("227px", "34px");
 		
 		listRecomienda = new ListBox();
 		listRecomienda.addItem("Si");
 		listRecomienda.addItem("No");
 		listRecomienda.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listRecomienda, 374, 73);
-		listRecomienda.setSize("157px", "19px");
+		absolutePanel.add(listRecomienda, 502, 77);
+		listRecomienda.setSize("227px", "34px");
 		
 		txtMotivoRetiro = new TextArea();
 		txtMotivoRetiro.getElement().setAttribute("maxlength", "500");
-		txtMotivoRetiro.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtMotivoRetiro, 10, 122);
-		txtMotivoRetiro.setSize("317px", "61px");
+		txtMotivoRetiro.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtMotivoRetiro, 10, 144);
+		txtMotivoRetiro.setSize("426px", "61px");
 		
 		txtActitudes = new TextArea();
 		txtActitudes.getElement().setAttribute("maxlength", "500");
-		txtActitudes.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtActitudes, 374, 126);
-		txtActitudes.setSize("318px", "61px");
+		txtActitudes.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtActitudes, 499, 144);
+		txtActitudes.setSize("430px", "61px");
 		
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -188,10 +188,10 @@ public class formularioReferenciaLaboral extends Composite {
 			}
 		});
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 166, 210);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 1046, 144);
+		btnActualizar.setSize("227px", "34px");
 		
 		
 		Button btnEliminar = new Button("Send");
@@ -207,59 +207,59 @@ public class formularioReferenciaLaboral extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 350, 210);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 1046, 211);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Nombre");
 		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
+		absolutePanel.add(lblNivelAcademico, 10, 0);
 		lblNivelAcademico.setSize("192px", "13px");
 		
 		Label lblTitulodiploma = new Label("Telefono");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 190, 10);
+		absolutePanel.add(lblTitulodiploma, 257, 0);
 		lblTitulodiploma.setSize("192px", "13px");
 		
 		Label lblParentesco = new Label("Puesto Candidato");
 		lblParentesco.setStyleName("label");
-		absolutePanel.add(lblParentesco, 374, 10);
+		absolutePanel.add(lblParentesco, 502, 0);
 		lblParentesco.setSize("192px", "13px");
 		
 		Label lblAos = new Label("Periodo Labores");
 		lblAos.setStyleName("label");
-		absolutePanel.add(lblAos, 584, 10);
-		lblAos.setSize("103px", "13px");
+		absolutePanel.add(lblAos, 970, 0);
+		lblAos.setSize("192px", "13px");
 		
 		Label lblEmpresa = new Label("Empresa");
 		lblEmpresa.setStyleName("label");
-		absolutePanel.add(lblEmpresa, 10, 54);
+		absolutePanel.add(lblEmpresa, 10, 61);
 		lblEmpresa.setSize("192px", "13px");
 		
 		Label lblMotivo = new Label("Motivo Retiro");
 		lblMotivo.setStyleName("label");
-		absolutePanel.add(lblMotivo, 10, 107);
-		lblMotivo.setSize("196px", "82px");
+		absolutePanel.add(lblMotivo, 10, 119);
+		lblMotivo.setSize("196px", "19px");
 		
 		Label lblSalarioFinal = new Label("Salario  Final");
 		lblSalarioFinal.setStyleName("label");
-		absolutePanel.add(lblSalarioFinal, 190, 54);
+		absolutePanel.add(lblSalarioFinal, 257, 61);
 		lblSalarioFinal.setSize("192px", "13px");
 		
 		Label lblLoRecomienda = new Label("Lo recomienda");
 		lblLoRecomienda.setStyleName("label");
-		absolutePanel.add(lblLoRecomienda, 374, 54);
-		lblLoRecomienda.setSize("103px", "13px");
+		absolutePanel.add(lblLoRecomienda, 502, 61);
+		lblLoRecomienda.setSize("229px", "5px");
 		
 		Label lblActitudescualidadesaptitudesObserv = new Label("Actitudes/cualidades/aptitudes observadas");
 		lblActitudescualidadesaptitudesObserv.setStyleName("label");
-		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 374, 107);
+		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 499, 122);
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
 		Label label = new Label("al");
 		label.setStyleName("label");
-		absolutePanel.add(label, 635, 29);
+		absolutePanel.add(label, 1000, 28);
 		label.setSize("38px", "13px");
 	}
 	private void EliminarFormulario(){

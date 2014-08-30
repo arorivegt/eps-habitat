@@ -36,7 +36,7 @@ public class formularioHistorial extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("534px", "105px");
+		absolutePanel.setSize("763px", "170px");
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407518904795L));
@@ -44,7 +44,7 @@ public class formularioHistorial extends Composite {
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 10, 29);
-		dateFecha.setSize("123px", "11px");
+		dateFecha.setSize("227px", "34px");
 		
 		listTipo = new ListBox();
 		listTipo.addItem("permisos");
@@ -52,8 +52,8 @@ public class formularioHistorial extends Composite {
 		listTipo.addItem("aciertos ");
 		listTipo.addItem("llamadas de atención");
 		listTipo.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTipo, 173, 29);
-		listTipo.setSize("157px", "22px");
+		absolutePanel.add(listTipo, 259, 29);
+		listTipo.setSize("229px", "36px");
 		
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -99,16 +99,16 @@ public class formularioHistorial extends Composite {
 			}
 		});
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 378, 41);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 541, 93);
+		btnActualizar.setSize("227px", "34px");
 		
 		txtDescripcion = new TextArea();
 		//txtDescripcion.getElement().setAttribute("maxlength", "1000");
-		txtDescripcion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDescripcion, 10, 71);
-		txtDescripcion.setSize("317px", "61px");
+		txtDescripcion.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtDescripcion, 10, 93);
+		txtDescripcion.setSize("428px", "61px");
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -123,10 +123,10 @@ public class formularioHistorial extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 378, 83);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 541, 160);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha");
 		lblNivelAcademico.setStyleName("label");
@@ -135,12 +135,12 @@ public class formularioHistorial extends Composite {
 		
 		Label lblMotivo = new Label("Descripcion");
 		lblMotivo.setStyleName("label");
-		absolutePanel.add(lblMotivo, 10, 56);
+		absolutePanel.add(lblMotivo, 10, 74);
 		lblMotivo.setSize("192px", "13px");
 		
 		Label lblLoRecomienda = new Label("Tipo ");
 		lblLoRecomienda.setStyleName("label");
-		absolutePanel.add(lblLoRecomienda, 173, 10);
+		absolutePanel.add(lblLoRecomienda, 259, 10);
 		lblLoRecomienda.setSize("103px", "13px");
 	}
 	

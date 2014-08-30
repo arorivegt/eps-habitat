@@ -42,7 +42,7 @@ public class formularioPuestos extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "110px");
+		absolutePanel.setSize("1140px", "170px");
 		
 		ListPuesto = new ListBox();
 		ListPuesto.addChangeHandler(new ChangeHandler() {
@@ -67,14 +67,15 @@ public class formularioPuestos extends Composite {
 	    }
 		ListPuesto.setStyleName("gwt-TextBox2");
 		absolutePanel.add(ListPuesto, 10, 29);
-		ListPuesto.setSize("157px", "19px");
+		ListPuesto.setSize("227px", "34px");
+		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 190, 29);
-		dateFecha.setSize("137px", "11px");
+		absolutePanel.add(dateFecha, 259, 29);
+		dateFecha.setSize("227px", "34px");
 		
 		txtSalario = new TextBox();
 		txtSalario.addChangeHandler(new ChangeHandler() {
@@ -94,22 +95,22 @@ public class formularioPuestos extends Composite {
 		txtSalario.setText("0.0");
 		txtSalario.setStyleName("gwt-TextBox2");
 		txtSalario.setMaxLength(100);
-		absolutePanel.add(txtSalario, 374, 29);
-		txtSalario.setSize("137px", "11px");
+		absolutePanel.add(txtSalario, 514, 29);
+		txtSalario.setSize("227px", "34px");
 		
 		listActivo = new ListBox();
 		listActivo.addItem("Si");
 		listActivo.addItem("No");
 		listActivo.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listActivo, 551, 29);
-		listActivo.setSize("157px", "19px");
+		absolutePanel.add(listActivo, 761, 29);
+		listActivo.setSize("227px", "34px");;
 		
 		txtFunciones = new TextArea();
 		txtFunciones.setReadOnly(true);
 		txtFunciones.getElement().setAttribute("maxlength", "500");
-		txtFunciones.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtFunciones, 10, 77);
-		txtFunciones.setSize("318px", "61px");
+		txtFunciones.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtFunciones, 10, 97);
+		txtFunciones.setSize("428px", "62px");
 		
 				Button btnGuardar = new Button("Send");
 				btnGuardar.addClickHandler(new ClickHandler() {
@@ -157,10 +158,10 @@ public class formularioPuestos extends Composite {
 					}
 				});
 				btnGuardar.setText("Guardar");
-				btnGuardar.setStylePrimaryName("gwt-TextBox2");
-				btnGuardar.setStyleName("gwt-TextBox2");
-				absolutePanel.add(btnGuardar, 379, 114);
-				btnGuardar.setSize("157px", "20px");
+				btnGuardar.setStylePrimaryName("sendButton");
+				btnGuardar.setStyleName("sendButton");
+				absolutePanel.add(btnGuardar, 514, 125);
+				btnGuardar.setSize("227px", "34px");
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -175,10 +176,10 @@ public class formularioPuestos extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 563, 114);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 761, 125);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Puesto");
 		lblNivelAcademico.setStyleName("label");
@@ -187,22 +188,22 @@ public class formularioPuestos extends Composite {
 		
 		Label lblTitulodiploma = new Label("Fecha");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 190, 10);
+		absolutePanel.add(lblTitulodiploma, 259, 10);
 		lblTitulodiploma.setSize("192px", "13px");
 		
 		Label lblParentesco = new Label("Salario");
 		lblParentesco.setStyleName("label");
-		absolutePanel.add(lblParentesco, 374, 10);
+		absolutePanel.add(lblParentesco, 514, 10);
 		lblParentesco.setSize("192px", "13px");
 		
 		Label lblActivo = new Label("Activo");
 		lblActivo.setStyleName("label");
-		absolutePanel.add(lblActivo, 550, 10);
+		absolutePanel.add(lblActivo, 761, 10);
 		lblActivo.setSize("192px", "13px");
 		
 		Label lblFunciones = new Label("Funciones");
 		lblFunciones.setStyleName("label");
-		absolutePanel.add(lblFunciones, 10, 58);
+		absolutePanel.add(lblFunciones, 10, 78);
 		lblFunciones.setSize("192px", "13px");
 		
 		

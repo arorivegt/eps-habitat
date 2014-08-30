@@ -118,17 +118,12 @@ public class Index implements EntryPoint {
                 MyHandler handler = new MyHandler();
             RootPanel rootPanel = RootPanel.get();
             rootPanel.setStyleName("body");
-                
-            // Add some standard form options
-                            
-            Label lblNewLabel = new Label("Inicio");
-            rootPanel.add(lblNewLabel, 508, 72);
-            lblNewLabel.setSize("346px", "30px");
             
             Label lblNewLabel_1 = new Label("");
             lblNewLabel_1.setStyleName("gwt-Label-new");
-            rootPanel.add(lblNewLabel_1, 508, 135);
-            lblNewLabel_1.setSize("346px", "216px");
+            rootPanel.add(lblNewLabel_1, 489, 98);
+            lblNewLabel_1.setSize("346px", "254px");
+            txtuser.setStyleName("gwt-PasswordTextBox");
             rootPanel.add(txtuser, 545, 161);
             txtuser.addBlurHandler(new BlurHandler() {
                 public void onBlur(BlurEvent event) {
@@ -149,8 +144,8 @@ public class Index implements EntryPoint {
                 }
             });
             txtuser.setText("Usuario");
-            txtuser.setSize("321px", "36px");
-            rootPanel.add(txtpass, 545, 226);
+            txtuser.setSize("325px", "49px");
+            rootPanel.add(txtpass, 545, 218);
             txtpass.addFocusHandler(new FocusHandler() {
                 public void onFocus(FocusEvent event) {
                         if (txtpass.getText().equals("password"))
@@ -169,14 +164,14 @@ public class Index implements EntryPoint {
             });
             
                     txtpass.setText("password");
-                    txtpass.setSize("321px", "36px");
+                    txtpass.setSize("325px", "49px");
                     
             final Button btnIniciar = new Button("Send");
             rootPanel.add(btnIniciar, 545, 286);
             btnIniciar.setText("Iniciar sesion");
             btnIniciar.setStyleName("sendButton");
             btnIniciar.addClickHandler(handler);
-            btnIniciar.setSize("341px", "44px");
+            btnIniciar.setSize("327px", "44px");
                     
                    final  Button button = new Button("Send");
                     button.addClickHandler(new ClickHandler() {
@@ -185,7 +180,7 @@ public class Index implements EntryPoint {
                             final Button close= new Button("cerrar");
                             VerticalPanel dialogVPanel = new VerticalPanel();
                             HTML serverResponseLabel = new HTML();
-                            dialogVPanel.addStyleName("dialogVPanel");
+                            dialogVPanel.addStyleName("gwt-TextBox2");
                     		formularioRegistro inicio = new formularioRegistro();
                     		Registro .setText("Registro");
                     		dialogVPanel.add(serverResponseLabel );
@@ -213,7 +208,7 @@ public class Index implements EntryPoint {
                     button.setText("Registrarse");
                     button.setStyleName("sendButton");
                     rootPanel.add(button, 545, 334);
-                    button.setSize("341px", "44px");
+                    button.setSize("327px", "44px");
                     
                     Image image = new Image("images/mailicon.png");
                     rootPanel.add(image, 522, 175);
@@ -222,6 +217,13 @@ public class Index implements EntryPoint {
                     Image image_1 = new Image("images/passicon.png");
                     rootPanel.add(image_1, 522, 236);
                     image_1.setSize("9px", "17px");
+                    
+                    Label lblIniciarSesion = new Label("Iniciar Sesion");
+                    rootPanel.add(lblIniciarSesion, 639, 108);
+                    
+                    Image image_2 = new Image("images/imagenempresa.png");
+                    rootPanel.add(image_2, 27, 10);
+                    image_2.setSize("386px", "136px");
             //RootPanel.get().add(dialogBox);
             
 

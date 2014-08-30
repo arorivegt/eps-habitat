@@ -32,14 +32,14 @@ public class puestos extends Composite  {
 	        Button btnAgregar = new Button("Agregar");
 	        panel.add(btnAgregar);
 	        
-	        btnAgregar.setStyleName("gwt-PasswordTextBox");
+	        btnAgregar.setStyleName("sendButton");
 	        btnAgregar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
 	        		agregarFormulario();
 	        	}
 	        });
 	        
-	        btnAgregar.setWidth("246px");
+	        btnAgregar.setSize("227px", "34px");
 	        BDPuesto();
 		}
 	    

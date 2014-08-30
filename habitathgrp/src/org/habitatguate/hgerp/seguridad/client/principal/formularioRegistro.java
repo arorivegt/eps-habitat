@@ -31,7 +31,7 @@ public class formularioRegistro extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("240px", "170px");
+		absolutePanel.setSize("220px", "170px");
 		
 		txtUsuario = new TextBox();
 		txtUsuario.setText("Usuario");
@@ -57,7 +57,7 @@ public class formularioRegistro extends Composite {
 		txtUsuario.setMaxLength(50);
 		txtUsuario.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtUsuario, 20, 35);
-		txtUsuario.setSize("227px", "19px");
+		txtUsuario.setSize("227px", "34px");
 		txtContrasena = new PasswordTextBox();
 		txtContrasena.setText("password");
         txtContrasena.addFocusHandler(new FocusHandler() {
@@ -77,14 +77,14 @@ public class formularioRegistro extends Composite {
             }
         });
 		absolutePanel.add(txtContrasena, 20, 106);
-		txtContrasena.setSize("227px", "19px");
+		txtContrasena.setSize("227px", "34px");
 		
 		btnGuardar = new Button("Send");
 		btnGuardar.setText("Guardar");
-		btnGuardar.setStylePrimaryName("gwt-TextBox");
-		btnGuardar.setStyleName("gwt-TextBox");
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 20, 166);
-		btnGuardar.setSize("247px", "34px");
+		btnGuardar.setSize("227px", "34px");
 		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {

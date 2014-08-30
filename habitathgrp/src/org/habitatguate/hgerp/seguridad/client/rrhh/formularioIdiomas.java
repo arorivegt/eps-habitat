@@ -57,22 +57,22 @@ public class formularioIdiomas extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1065px", "30px");
+		absolutePanel.setSize("1065px", "100px");
 		
 		txtIdioma = new TextBox();
 		txtIdioma.setStyleName("gwt-TextBox2");
 		txtIdioma.setMaxLength(100);
 		absolutePanel.add(txtIdioma, 10, 29);
-		txtIdioma.setSize("137px", "11px");
+		txtIdioma.setSize("227px", "34px");
 		
 		listNivel = new ListBox();
 		listNivel.addItem("Avanzado");
 		listNivel.addItem("Intermedio");
 		listNivel.addItem("Principiante");
 		listNivel.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listNivel, 188, 29);
-		listNivel.setSize("140px", "22px");
-		absolutePanel.add(getFormPanel(), 715, 10);
+		absolutePanel.add(listNivel, 266, 29);
+		listNivel.setSize("227px", "36px");
+		absolutePanel.add(getFormPanel(), 527, 10);
 		getFormUrl();
 
 		Button btnActualizar = new Button("Send");
@@ -114,10 +114,10 @@ public class formularioIdiomas extends Composite {
 			}
 		});
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 358, 29);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 10, 92);
+		btnActualizar.setSize("227px", "34px");
 		
 		
 		Button btnEliminar = new Button("Send");
@@ -133,10 +133,10 @@ public class formularioIdiomas extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 527, 29);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 266, 92);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Idioma");
 		lblNivelAcademico.setStyleName("label");
@@ -145,7 +145,7 @@ public class formularioIdiomas extends Composite {
 		
 		Label lblTitulodiploma = new Label("Nivel");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 160, 10);
+		absolutePanel.add(lblTitulodiploma, 266, 10);
 		lblTitulodiploma.setSize("192px", "13px");
 	}
 	private void EliminarFormulario(){
@@ -247,6 +247,7 @@ public class formularioIdiomas extends Composite {
 	private FileUpload getFileUpload() {
 		if (fileUpload == null) {
 			fileUpload = new FileUpload();
+			fileUpload.setStyleName("gwt-TextBox2");
 			fileUpload.setWidth("357px");
 			fileUpload.setName("myFile");
 			fileUpload.getElement().setAttribute("accept", "application/pdf");
@@ -257,6 +258,8 @@ public class formularioIdiomas extends Composite {
 	private Button getButton() {
 		if (button == null) {
 			button = new Button("Subir");
+			button.setHeight("27px");
+			button.setStyleName("sendButton");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					form.submit();
@@ -287,7 +290,7 @@ public class formularioIdiomas extends Composite {
 
 		form.setVisible(false);
 		grid = new Grid(1, 2);
-		absolutePanel.add(grid, 730, 10);
+		absolutePanel.add(grid,  527, 10);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
 		btnEliminar.addClickHandler(new ClickHandler() {

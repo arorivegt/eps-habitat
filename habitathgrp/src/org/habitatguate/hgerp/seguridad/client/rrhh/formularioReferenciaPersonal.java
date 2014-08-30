@@ -37,40 +37,40 @@ public class formularioReferenciaPersonal extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("700px", "150px");
+		absolutePanel.setSize("1007px", "150px");
 		
 		txtNombre = new TextBox();
 		txtNombre.setMaxLength(200);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombre, 10, 29);
-		txtNombre.setSize("137px", "11px");
+		txtNombre.setSize("227px", "34px");
 		
 		txtTelefono = new IntegerBox();
 		txtTelefono.setText("0");
 		txtTelefono.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefono, 190, 29);
-		txtTelefono.setSize("137px", "11px");
+		absolutePanel.add(txtTelefono, 255, 29);
+		txtTelefono.setSize("227px", "34px");
 		
 		txtPuestoCandidato = new TextBox();
 		txtPuestoCandidato.setMaxLength(200);
 		txtPuestoCandidato.setStylePrimaryName("gwt-TextBox2");
 		txtPuestoCandidato.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPuestoCandidato, 374, 29);
-		txtPuestoCandidato.setSize("137px", "11px");
+		absolutePanel.add(txtPuestoCandidato, 501, 29);
+		txtPuestoCandidato.setSize("227px", "34px");
 		
 		txtRelacion = new TextBox();
 		txtRelacion.setMaxLength(100);
 		txtRelacion.setStylePrimaryName("gwt-TextBox2");
 		txtRelacion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtRelacion, 10, 73);
-		txtRelacion.setSize("137px", "11px");
+		absolutePanel.add(txtRelacion, 10, 102);
+		txtRelacion.setSize("227px", "34px");
 		
 		txtActitudes = new TextArea();
 		txtActitudes.getElement().setAttribute("maxlength", "500");
-		txtActitudes.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtActitudes, 190, 73);
-		txtActitudes.setSize("318px", "61px");
+		txtActitudes.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtActitudes, 255, 102);
+		txtActitudes.setSize("425px", "53px");
 		
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -111,10 +111,10 @@ public class formularioReferenciaPersonal extends Composite {
 			}
 		});
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 71, 160);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 746, 29);
+		btnActualizar.setSize("227px", "34px");
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -129,10 +129,10 @@ public class formularioReferenciaPersonal extends Composite {
 			}
 		});
 		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("gwt-TextBox2");
-		btnEliminar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnEliminar, 255, 160);
-		btnEliminar.setSize("157px", "20px");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 746, 129);
+		btnEliminar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Nombre");
 		lblNivelAcademico.setStyleName("label");
@@ -141,22 +141,22 @@ public class formularioReferenciaPersonal extends Composite {
 		
 		Label lblTitulodiploma = new Label("Telefono");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 190, 10);
+		absolutePanel.add(lblTitulodiploma, 255, 10);
 		lblTitulodiploma.setSize("192px", "13px");
 		
 		Label lblParentesco = new Label("Puesto Candidato");
 		lblParentesco.setStyleName("label");
-		absolutePanel.add(lblParentesco, 374, 10);
+		absolutePanel.add(lblParentesco, 501, 10);
 		lblParentesco.setSize("192px", "13px");
 		
 		Label lblEmpresa = new Label("Relacion");
 		lblEmpresa.setStyleName("label");
-		absolutePanel.add(lblEmpresa, 10, 54);
+		absolutePanel.add(lblEmpresa, 10, 83);
 		lblEmpresa.setSize("192px", "13px");
 		
 		Label lblActitudescualidadesaptitudesObserv = new Label("Actitudes/cualidades/aptitudes observadas");
 		lblActitudescualidadesaptitudesObserv.setStyleName("label");
-		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 190, 54);
+		absolutePanel.add(lblActitudescualidadesaptitudesObserv, 255, 83);
 		lblActitudescualidadesaptitudesObserv.setSize("338px", "13px");
 		
 	}

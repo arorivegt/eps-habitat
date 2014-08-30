@@ -27,15 +27,15 @@ public class BDpuestos extends Composite  {
 			a = this;
 			scrollPanel = new ScrollPanel();
 			initWidget(scrollPanel);
-			scrollPanel.setSize("900px", "489px");
+			scrollPanel.setSize("1029px", "489px");
 			
 			verticalPanel = new VerticalPanel();
 			scrollPanel.setWidget(verticalPanel);
-			verticalPanel.setSize("877px", "93px");
+			verticalPanel.setSize("1027px", "93px");
 			
 			flextable = new FlexTable();
 			verticalPanel.add(flextable);
-			flextable.setSize("869px", "80px");
+			flextable.setSize("1027px", "80px");
 			
 			button = new Button("Agregar");
 			button.addClickHandler(new ClickHandler() {
@@ -44,8 +44,8 @@ public class BDpuestos extends Composite  {
 				}
 			});
 			verticalPanel.add(button);
-			button.setStyleName("gwt-PasswordTextBox");
-			button.setWidth("246px");
+			button.setStyleName("sendButton");
+			button.setSize("227px", "34px");
 			agregarFormulario_lleno();
 		}
 	    

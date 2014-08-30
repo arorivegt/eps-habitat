@@ -42,19 +42,19 @@ public class Desempeno extends Composite  {
 	        	}
 	        });
 	        btnTest.setText("Ver Test");
-	        btnTest.setStyleName("gwt-PasswordTextBox");
-	        btnTest.setWidth("246px");
+	        btnTest.setStyleName("sendButton");
+	        btnTest.setSize("227px", "34px");
 	        Button btnAgregar = new Button("Agregar");
 	        grid.setWidget(0, 2, btnAgregar);
 	        
-	        btnAgregar.setStyleName("gwt-PasswordTextBox");
+	        btnAgregar.setStyleName("sendButton");
 	        btnAgregar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
 	        		agregarFormulario();
 	        	}
 	        });
 	        
-	        btnAgregar.setWidth("246px");
+	        btnAgregar.setSize("227px", "34px");
 		}
 	    
 	    private void agregarFormulario(){

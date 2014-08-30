@@ -36,13 +36,15 @@ public class Empleados extends Composite {
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
+		tabPanel.setWidth("983px");
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel, "Datos",true);
-		scrollPanel.setSize("1200px", "480px");
+		scrollPanel.setSize("100%", "480px");
 		fd = new formularioDatos(this,tipo);
 		scrollPanel.setWidget(fd);
+		fd.setSize("997px", "1337px");
 		
 		
 	}	

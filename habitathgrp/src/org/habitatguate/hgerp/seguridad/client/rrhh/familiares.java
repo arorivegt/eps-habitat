@@ -37,20 +37,18 @@ public class familiares extends Composite  {
         Button btnAgregar_pariente = new Button("Agregar hijo(a)");
         grid.setWidget(0, 0, btnAgregar_pariente);
         
-        btnAgregar_pariente.setStyleName("gwt-PasswordTextBox");
+        btnAgregar_pariente.setStyleName("sendButton");
         btnAgregar_pariente.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
         		agregarFormulario("hijo(a)");
         	}
         });
-        
-        btnAgregar_pariente.setWidth("246px");
+        btnAgregar_pariente.setSize("267px", "34px");
         
         btnAgregarHermanoa = new Button("Agregar hermano(a)");
         grid.setWidget(0, 2, btnAgregarHermanoa);
-        btnAgregarHermanoa.setStyleName("gwt-PasswordTextBox");
-        btnAgregarHermanoa.setWidth("246px");
-        btnAgregarHermanoa.setStyleName("gwt-PasswordTextBox");
+        btnAgregarHermanoa.setStyleName("sendButton");
+        btnAgregarHermanoa.setSize("295px", "34px");
         btnAgregarHermanoa.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
         		agregarFormulario("hermano(a)");

@@ -28,7 +28,7 @@ public class formularioDesempeno extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("708px", "20px");
+		absolutePanel.setSize("1121px", "30px");
 		
 		dateFecha = new DateBox();
 		dateFecha.setEnabled(false);
@@ -37,23 +37,23 @@ public class formularioDesempeno extends Composite {
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 10, 29);
-		dateFecha.setSize("123px", "11px");
+		dateFecha.setSize("227px", "34px");
 		dateFecha.setValue(new Date(prueba.getFecha_test()));
 		
 		txtEvaluador = new TextBox();
 		txtEvaluador.setReadOnly(true);
 		txtEvaluador.setStyleName("gwt-TextBox2");
 		txtEvaluador.setMaxLength(500);
-		absolutePanel.add(txtEvaluador, 181, 29);
-		txtEvaluador.setSize("117px", "11px");
+		absolutePanel.add(txtEvaluador, 256, 29);
+		txtEvaluador.setSize("227px", "34px");
 		
 		txtEvaluador.setText(prueba.getEvaluador());
 		
 		txtPunteo = new DoubleBox();
 		txtPunteo.setReadOnly(true);
 		txtPunteo.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPunteo, 342, 29);
-		txtPunteo.setSize("117px", "11px");
+		absolutePanel.add(txtPunteo, 500, 29);
+		txtPunteo.setSize("227px", "34px");
 
 		txtEvaluador.setText(prueba.getEvaluador());
 		int valor = prueba.getPregunta1() + prueba.getPregunt2() + prueba.getPregunta3()
@@ -70,11 +70,11 @@ public class formularioDesempeno extends Composite {
 				d.agregarFormulario_lleno(prueba);
 			}
 		});
-		btnActualizar.setText("Ver Formulario Completo");
+		btnActualizar.setText("Ver");
 		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(btnActualizar, 499, 29);
-		btnActualizar.setSize("157px", "20px");
+		btnActualizar.setStyleName("sendButton");
+		absolutePanel.add(btnActualizar, 768, 31);
+		btnActualizar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha");
 		lblNivelAcademico.setStyleName("label");
@@ -83,13 +83,13 @@ public class formularioDesempeno extends Composite {
 		
 		Label label = new Label("Evaluador");
 		label.setStyleName("label");
-		absolutePanel.add(label, 185, 10);
+		absolutePanel.add(label, 256, 10);
 		label.setSize("75px", "13px");
 		
 		Label label_1 = new Label("Punteo Total");
 		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 342, 10);
-		label_1.setSize("75px", "13px");
+		absolutePanel.add(label_1, 511, 10);
+		label_1.setSize("147px", "13px");
 		
 	}
 

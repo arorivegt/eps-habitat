@@ -36,7 +36,7 @@ public class Empleados extends Composite {
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
-		tabPanel.setWidth("983px");
+		tabPanel.setWidth("782px");
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(true);
@@ -44,12 +44,12 @@ public class Empleados extends Composite {
 		scrollPanel.setSize("100%", "480px");
 		fd = new formularioDatos(this,tipo);
 		scrollPanel.setWidget(fd);
-		fd.setSize("997px", "1337px");
 		
 		
 	}	
 	
 	public void NuevasPestanas(){
+
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(true);
 		tabPanel.add(scrollPanel_1, "Familia",true);
@@ -67,7 +67,7 @@ public class Empleados extends Composite {
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_3, "Referencia Laboral", true);
+		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("1200px", "480px");
 		rl = new referenciaLaboral(this);///
 		scrollPanel_3.setWidget(rl);
@@ -75,7 +75,7 @@ public class Empleados extends Composite {
 		
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_5, "Referencia Personal", true);
+		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("1200px", "480px");
 		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);
@@ -148,7 +148,7 @@ public class Empleados extends Composite {
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_3, "Referencia Laboral", true);
+		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("1200px", "480px");
 		rl = new referenciaLaboral(this);///
 		scrollPanel_3.setWidget(rl);
@@ -156,7 +156,7 @@ public class Empleados extends Composite {
 		
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(true);
-		tabPanel.add(scrollPanel_5, "Referencia Personal", true);
+		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("1200px", "480px");
 		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);

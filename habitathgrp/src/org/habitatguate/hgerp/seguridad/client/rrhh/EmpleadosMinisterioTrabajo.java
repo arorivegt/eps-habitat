@@ -43,13 +43,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		listEstado.addItem("empleado inactivo");
 		listEstado.addItem("posible empleado");
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 156, 29);
-		listEstado.setSize("157px", "20px");
+		absolutePanel.add(listEstado, 170, 31);
+		listEstado.setSize("227px", "34px");
 		
 		Label lblBusquedaPor = new Label("Crear Reporte Empleados:");
 		lblBusquedaPor.setStyleName("label");
-		absolutePanel.add(lblBusquedaPor, 173, 10);
-		lblBusquedaPor.setSize("180px", "13px");
+		absolutePanel.add(lblBusquedaPor, 170, 10);
+		lblBusquedaPor.setSize("262px", "13px");
 		
 		scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(true);
@@ -189,13 +189,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			}
 		});
 
-		absolutePanel.add(image, 336, 10);
+		absolutePanel.add(image, 438, 10);
 		image.setSize("103px", "55px");
 		
 		Label lblEstadoEmpleado = new Label("Estado Empleado");
 		lblEstadoEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoEmpleado, 10, 29);
-		lblEstadoEmpleado.setSize("118px", "13px");
+		lblEstadoEmpleado.setSize("154px", "13px");
 		
 	}
 }

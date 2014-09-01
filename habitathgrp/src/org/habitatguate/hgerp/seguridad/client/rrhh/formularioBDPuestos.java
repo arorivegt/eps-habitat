@@ -36,7 +36,7 @@ public class formularioBDPuestos extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("931px", "100px");
+		absolutePanel.setSize("850px", "100px");
 		
 		txtPuesto = new TextBox();
 		txtPuesto.setStyleName("gwt-TextBox2");

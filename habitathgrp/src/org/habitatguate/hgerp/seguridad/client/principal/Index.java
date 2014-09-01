@@ -124,7 +124,7 @@ public class Index implements EntryPoint {
             rootPanel.add(lblNewLabel_1, 489, 98);
             lblNewLabel_1.setSize("346px", "254px");
             txtuser.setStyleName("gwt-PasswordTextBox");
-            rootPanel.add(txtuser, 545, 161);
+            rootPanel.add(txtuser, 545, 152);
             txtuser.addBlurHandler(new BlurHandler() {
                 public void onBlur(BlurEvent event) {
 
@@ -207,7 +207,7 @@ public class Index implements EntryPoint {
                     });
                     button.setText("Registrarse");
                     button.setStyleName("sendButton");
-                    rootPanel.add(button, 545, 334);
+                    rootPanel.add(button, 545, 346);
                     button.setSize("327px", "44px");
                     
                     Image image = new Image("images/mailicon.png");

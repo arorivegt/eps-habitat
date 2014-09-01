@@ -42,7 +42,7 @@ public class formularioPuestos extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1140px", "170px");
+		absolutePanel.setSize("1024px", "170px");
 		
 		ListPuesto = new ListBox();
 		ListPuesto.addChangeHandler(new ChangeHandler() {

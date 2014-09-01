@@ -22,7 +22,7 @@ public class EmpleadoItem extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1097px", "10px");
+		absolutePanel.setSize("1097px", "20px");
 		
 		Label lblPrimerNombre = new Label("Primer Nombre");
 		lblPrimerNombre.setStyleName("label");

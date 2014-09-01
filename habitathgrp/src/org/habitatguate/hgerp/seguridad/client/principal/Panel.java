@@ -3,7 +3,6 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 
 public class Panel extends Composite {
@@ -18,12 +17,8 @@ public class Panel extends Composite {
                 
          HTMLPanel panel = new HTMLPanel("");
          panel.setStyleName("panelNorth");
-         splitLayoutPanel.addNorth(panel, 43.0);
+         splitLayoutPanel.addNorth(panel, -6.0);
          panel.setSize("100%", "100%");
-             
-             Image image = new Image("images/imagenempresa.png");
-             panel.add(image);
-             image.setSize("123px", "35px");
              
              HTMLPanel panel_1 = new HTMLPanel("");
              panel_1.setStyleName("Panel_Central");
@@ -32,17 +27,17 @@ public class Panel extends Composite {
              
              AbsolutePanel absolutePanel = new AbsolutePanel();
              absolutePanel.setStyleName("html-west");
-             splitLayoutPanel.addWest(absolutePanel, 124.0);
+             splitLayoutPanel.addWest(absolutePanel, 126.0);
              absolutePanel.setSize("100%", "100%");
              
              UIStacksEjemplo menu2 = new UIStacksEjemplo(this);
              absolutePanel.add(menu2, 0, 0);
-             menu2.setSize("124px", "388px");
+             menu2.setSize("127px", "532px");
              
              absolutePanel_1 = new AbsolutePanel();
              splitLayoutPanel.add(absolutePanel_1);
                  setStyleName("Panel_principal");
-                 setSize("1343px", "734px");
+                 setSize("1343px", "1834px");
                  
                  //Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv(); 
                //  Buscador_Empleados buscador = new Buscador_Empleados();

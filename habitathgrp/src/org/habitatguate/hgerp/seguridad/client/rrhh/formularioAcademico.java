@@ -60,7 +60,7 @@ public class formularioAcademico extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1343px", "120px");
+		absolutePanel.setSize("1050px", "120px");
 		absolutePanel.add(getFormPanel(), 522, 108);
 		getFormUrl();
 		listNIvel_Academico = new ListBox();

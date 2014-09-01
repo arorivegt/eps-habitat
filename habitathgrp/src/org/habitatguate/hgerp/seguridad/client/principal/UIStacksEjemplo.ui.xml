@@ -1,25 +1,25 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
      xmlns:g="urn:import:com.google.gwt.user.client.ui">
        <g:StackLayoutPanel ui:field="stack" unit="EM">
-         <g:stack>
-           <g:header size='2'>RRHH</g:header>
-           <g:Tree>
-           	<g:Label styleName="" text="Empleados" ui:field="label_1"/>
-           	<g:Label styleName="" text="Mi Perfil" ui:field="label_5"/>
-           	<g:Label styleName="" text="Puestos" ui:field="label_6"/>
-           	<g:Label styleName="" text="Prestaciones" ui:field="label_3"/>
-           	<g:Label styleName="" text="Configuracion" ui:field="label_7"/>
-           	<g:Label styleName="" text="Informe Ministerio" ui:field="label_2"/>
-           	<g:Label styleName="" text="Informe  Empleados" ui:field="label_4"/>
+       	<g:stack>
+           <g:header size='1.5'>RRHH</g:header>
+           <g:Tree width="147px">
+           	<g:Label text="Empleados" ui:field="label_1" styleName="sendButton2"/>
+           	<g:Label styleName="sendButton2" text="Mi Perfil" ui:field="label_5"/>
+           	<g:Label styleName="sendButton2" text="Puestos" ui:field="label_6"/>
+           	<g:Label styleName="sendButton2" text="Prestaciones" ui:field="label_3"/>
+           	<g:Label styleName="sendButton2" text="Configuracion" ui:field="label_7"/>
+           	<g:Label styleName="sendButton2" text="Inf. Ministerio" ui:field="label_2" height="5px" width="90px" direction="LTR" wordWrap="false"/>
+           	<g:Label styleName="sendButton2" text="Inf. Empleados" ui:field="label_4" horizontalAlignment="ALIGN_LEFT" width="100px" height="31px" direction="RTL"/>
            </g:Tree>
          </g:stack>
          <g:stack>
            <g:header size='2'>Finanzas</g:header>
-           <g:Tree>
-           	<g:Label styleName="" text="Parametros" ui:field="label_1_Finan"/>
-           	<g:Label styleName="" text="Gestor de Inventario" ui:field="label_2_Finan"/>
-           	<g:Label styleName="" text="Crear Conocimiento" ui:field="label_3_Finan"/>
-           	<g:Label styleName="" text="Asignar Recurso" ui:field="label_4_Finan"/>
+           <g:Tree styleName="gwt-Tree">
+           	<g:Label styleName="sendButton2" text="Parametros" ui:field="label_1_Finan"/>
+           	<g:Label styleName="sendButton2" text="Gestor de Inventario" ui:field="label_2_Finan"/>
+           	<g:Label styleName="sendButton2" text="Crear Conocimiento" ui:field="label_3_Finan"/>
+           	<g:Label styleName="sendButton2" text="Asignar Recurso" ui:field="label_4_Finan"/>
            </g:Tree>
          </g:stack>
          <g:stack>

@@ -4,7 +4,13 @@
 /** Example rules used by the template application (remove for your app) */
 
 body {
-	background-color: white;
+    background: white;
+    color: #ddd4d4;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 80%;
+    opacity: 0.9;
+    filter:alpha(opacity=0.8);
 }
 h1 {
   font-size: 2em;
@@ -14,7 +20,7 @@ h1 {
   text-align: center;
 }
 .sendButton {
-background: #93b631;
+ background: #51B948;
 	color: #fff;
 	padding: 8px 10px;
 	border: 0;
@@ -26,7 +32,24 @@ background: #93b631;
 	text-transform: uppercase;
 	cursor: pointer;
 }
-
+.sendButton2 {
+ background: #344655;;
+	color: grey;
+	padding: 8px 10px;
+	border: 0;
+	font-size: 10px;
+	font-style: normal;
+	font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.sendButton2:hover {
+	background: #344655;;
+	color : white;
+							
+}
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 300px;
@@ -86,25 +109,14 @@ display: block;
  
 .panelNorth {
 color: White;
-
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
 }
 .gwt-StackLayoutPanel {
-color: White;
-
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
+ background: #51B948;
+	color: White;
+	font-variant: normal;
+	font-size: 15px;
+	font-style: normal;
+	font-weight: bolder;
 }
 
 .gwt-Label-new {
@@ -117,11 +129,11 @@ padding: 35px 35px 10px;
 position: relative;
 }
 .gwt-Tree {
-	color: Black;
-	font-size: 10px;
+	color: white;
+	font-size: 8px;
 	font-style: normal;
-	font-weight: 400;
-	background-color: powderblue;
+	text-align: left;
+	background-color: #344655;;
 }
 .gwt-Tree .gwt-TreeItem-selected {
   background: #ebeff9;
@@ -130,71 +142,37 @@ position: relative;
 .gwt-TreeItem .gwt-CheckBox input {
   margin-left: 0px;
 }
-.gwt-StackLayoutPanel-new {
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
-color: White; /* IE6-9 */
-}
-.scrollPanel {
-	background-color: lightsteelblue;
-}
-.body-new {
-
-	background-color: lightsteelblue;
-	border-radius: 0 0 20px 20px;
-	padding: 10px 10px;
-	border-radius: 20px 20px 20 20;
-}
 .gwt-TabPanel {
-  margin-top: 4px;
+	margin-top: 4px;
 }
 
 .gwt-TabPanelBottom {
-background: #a9db80; /* Old browsers */
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
-  -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 20px;
-        color: White;
-        font-size: 18px;
+
 }
 
 .gwt-TabBar {
   padding-top: 2px;
-  border-bottom: 4px solid #878787;
   background-color: #fff;
 }
 
 .gwt-TabBarItem {
-        margin-right: 2px;
-        padding: 4px;
-        border-bottom: 2px solid white;
-        background-color: #e8e8e8;
-        cursor: pointer;
+        background: #51B948;
+	color: White;
+	margin-right: 2px;
+	padding: 4px;
+	border-bottom: 2px solid white;
+	font-weight: bolder;
+	cursor: pointer;
 }
 
 .gwt-TabBarItem-selected {
-background: #a9db80; /* Old browsers */
-  color: #ffffff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-  background: #3a4d9c;
-  background: -webkit-linear-gradient(#3a4d9c, #2c3b77);
-  background: -moz-linear-gradient(#3a4d9c, #2c3b77);
-  background: linear-gradient(#3a4d9c, #2c3b77);
-  border-color: transparent;
-        color: White;
-        font-size: 18px;
+background: #005596;
+	color: White;
+	margin-right: 2px;
+	padding: 4px;
+	border-bottom: 2px solid white;
+	font-weight: bolder;
+	cursor: pointer;
 }
 .label {
 	color: #7d8791;
@@ -208,7 +186,8 @@ background: #a9db80; /* Old browsers */
   border-bottom: 2px solid #f1f1f1;
   color: 6b6b6b;
   cursor: default;
-  width: 7em;
+  width: 10em;
+  height: 10em;
 }
 
 .datePickerDay,.datePickerWeekdayLabel,.datePickerWeekendLabel {
@@ -313,11 +292,22 @@ background: #a9db80; /* Old browsers */
 .gwt-CheckBox-disabled {
    color:green;
 }
-item_arbol {
-	background-color: lightblue;
+item_arbol { 
+    background: #51B948;
+	color: #fff;
+	padding: 8px 10px;
+	border: 0;
+	font-size: 8px;
+	font-style: normal;
+	font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
 }
 .sendButton:hover {
 	background: #005596;
+							
 }
 .gwt-TextBox2 {
 background: #fff;
@@ -331,4 +321,19 @@ box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	line-height: 1.4px;
 }
 .gwt-TextBox  {
+}
+. {
+}
+.gwt-TabBarItem-new {
+ background: #51B948;
+	color: #fff;
+	padding: 8px 10px;
+	border: 0;
+	font-size: 10px;
+	font-style: normal;
+	font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
 } 

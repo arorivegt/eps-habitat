@@ -40,7 +40,7 @@ public class formularioFamilia  extends Composite  {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1263px", "100px");
+		absolutePanel.setSize("1050px", "100px");
 		
 		txtPrimer_apellido = new TextBox();
 		txtPrimer_apellido.setMaxLength(100);

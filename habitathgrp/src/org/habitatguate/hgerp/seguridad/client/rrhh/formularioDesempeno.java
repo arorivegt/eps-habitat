@@ -28,7 +28,7 @@ public class formularioDesempeno extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1121px", "30px");
+		absolutePanel.setSize("950px", "30px");
 		
 		dateFecha = new DateBox();
 		dateFecha.setEnabled(false);
@@ -79,7 +79,7 @@ public class formularioDesempeno extends Composite {
 		Label lblNivelAcademico = new Label("Fecha");
 		lblNivelAcademico.setStyleName("label");
 		absolutePanel.add(lblNivelAcademico, 10, 10);
-		lblNivelAcademico.setSize("192px", "13px");
+		lblNivelAcademico.setSize("170px", "13px");
 		
 		Label label = new Label("Evaluador");
 		label.setStyleName("label");

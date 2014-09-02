@@ -371,6 +371,8 @@ public class formularioAcademico extends Composite {
 		absolutePanel.add(grid, 522, 108);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
+		btnEliminar.setStyleName("sendButton");
+		btnEliminar.setHeight("27px");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				loginService.remove(getKeyFile() , new AsyncCallback<String>(){

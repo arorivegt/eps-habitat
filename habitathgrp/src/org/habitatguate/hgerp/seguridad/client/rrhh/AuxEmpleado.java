@@ -43,6 +43,9 @@ public class AuxEmpleado implements IsSerializable{
     
 	 
     private String cui;
+ 
+    
+    private String pasaporte;
     
 	 
     private String tipo_pasaporte;
@@ -70,7 +73,8 @@ public class AuxEmpleado implements IsSerializable{
     
 	 
     private Long fecha_nacimiento;
-    
+
+    private String licencia;
 	 
     private String tipo_licencia;
 	
@@ -643,6 +647,26 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setEstado(String estado) {
 		Estado = estado;
+	}
+
+
+	public String getLicencia() {
+		return licencia;
+	}
+
+
+	public void setLicencia(String licencia) {
+		this.licencia = licencia;
+	}
+
+
+	public String getPasaporte() {
+		return pasaporte;
+	}
+
+
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
 	}
 
 	

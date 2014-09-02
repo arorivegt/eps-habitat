@@ -644,7 +644,7 @@ public class formularioDatos extends Composite {
 		listLicencia.addItem("Si");
 		listLicencia.addItem("No");
 		listLicencia.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listLicencia, 35, 935);
+		absolutePanel.add(listLicencia, 36, 935);
 		listLicencia.setSize("230px", "36px");
 		
 		listTipoLicencia = new ListBox();
@@ -756,7 +756,8 @@ public class formularioDatos extends Composite {
 							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()), new AsyncCallback<Long>() 
+							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()),
+							listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()),listLicencia.getItemText(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -793,7 +794,8 @@ public class formularioDatos extends Composite {
 							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()),new AsyncCallback<Long>() 
+							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()),
+							listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()),listLicencia.getItemText(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1424,7 +1426,7 @@ public class formularioDatos extends Composite {
 		    String txtRegistro , String txtNoOrden , String txtDPI,String txtTelefonoCasa, String txtTelefonoCelular ,
 		    String txtNoLicencia, String txtNit, String txtNoPasaporte,String txtSalarioBase ,String txtBonificacion ,
 		    String txtTotal, String listCedulaDepartamento , String listDireccionDepartamento ,String txtIVS, String  URLFile, 
-		    String KeyFile,String Estado)
+		    String KeyFile,String Estado,String pasaporte, String licencia)
 	{
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
@@ -1449,11 +1451,29 @@ public class formularioDatos extends Composite {
             bandera = !this.listEstado.getItemText(i).equals(Estado);
             this.listEstado.setSelectedIndex(i);
         } 
+       
         bandera = true;
         for(int i=0; i < this.listSexo.getItemCount() && bandera; i++){
             bandera = !this.listSexo.getItemText(i).equals(listSexo);
             this.listSexo.setSelectedIndex(i);
         }   
+        bandera = true;
+        for(int i=0; i < this.listLicencia.getItemCount() && bandera; i++){
+            bandera = !this.listLicencia.getItemText(i).equals(licencia);
+            this.listLicencia.setSelectedIndex(i);
+        } 
+        if(licencia.equals("No"))
+		{
+			this.listTipoLicencia.setVisible(false);
+			this.txtNoLicencia.setVisible(false);
+			label_26.setVisible(false);
+			label_27.setVisible(false);
+		}else{
+			this.listTipoLicencia.setVisible(true);
+			this.txtNoLicencia.setVisible(true);
+			label_26.setVisible(true);
+			label_27.setVisible(true);
+		}
 		this.txtPrimerApellido.setText(txtPrimerApellido);
 		this.txtSegundoApellido.setText(txtSegundoApellido);
 		this.txtApellidoCasada.setText(txtApellidoCasada);
@@ -1527,7 +1547,23 @@ public class formularioDatos extends Composite {
         for (int i = 0; i < numerosComoArray.length; i++) {
         	this.listCedulaMunicipio.addItem(numerosComoArray[i]);
         }
-
+        bandera = true;
+        for(int i=0; i < this.listTienePasaporte.getItemCount() && bandera; i++){
+            bandera = !this.listTienePasaporte.getItemText(i).equals(pasaporte);
+            this.listTienePasaporte.setSelectedIndex(i);
+        } 
+        if(pasaporte.equals("No"))
+		{
+			this.txtTipoPasaporte.setVisible(false);
+			this.txtNoPasaporte.setVisible(false);
+			label_17.setVisible(false);
+			label_16.setVisible(false);
+		}else{
+			this.txtTipoPasaporte.setVisible(true);
+			this.txtNoPasaporte.setVisible(true);
+			label_17.setVisible(true);
+			label_16.setVisible(true);
+		}
 
         this.listDireccionMunicipio.clear();
         String[] numerosComoArray2 = Depto_Municipio(this.listDireccionDepartamento.getItemText(this.listDireccionDepartamento.getSelectedIndex())).split(",");
@@ -1646,6 +1682,8 @@ public class formularioDatos extends Composite {
 	private Button getButton() {
 		if (button == null) {
 			button = new Button("Subir");
+			button.setHeight("31px");
+			button.setStyleName("sendButton");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
 					form.submit();
@@ -1678,6 +1716,8 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(grid, 580, 109);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
+		btnEliminar.setStyleName("sendButton");
+		btnEliminar.setHeight("27px");
 		grid.setVisible(true);
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {

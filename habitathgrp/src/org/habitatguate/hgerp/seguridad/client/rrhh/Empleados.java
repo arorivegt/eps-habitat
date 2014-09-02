@@ -237,7 +237,8 @@ public class Empleados extends Composite {
 					munidir,r.getEmail(), r.getTipo_licencia(), r.getFecha_nacimiento(),r.getOcupacion(), r.getCentro_trabajo(), 
 					""+r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), ""+r.getNo_registro(), 
 					""+r.getNo_orden(),""+ r.getCui(), ""+r.getTelefono(), ""+r.getCelular(), ""+r.getNo_licencia(), r.getNit(), ""+r.getNo_pasaporte(), 
-					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptocedula, deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado());
+					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptocedula, deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado()
+					,r.getPasaporte(),r.getLicencia());
 	
 	}
 	

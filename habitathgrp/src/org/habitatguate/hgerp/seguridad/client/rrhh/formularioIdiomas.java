@@ -214,9 +214,10 @@ public class formularioIdiomas extends Composite {
 					String results = event.getResults();
 					try{
 						int i = results.indexOf("key=");
-						KeyFile = results.substring(i+4, results.length()-2);
+						int j = results.indexOf("\" type");
+						KeyFile = results.substring(i+4, j);
 						i = results.indexOf("http");
-						URLFile = results.substring(i, results.length()-2).replace("\" type=\"application\\pdf", "");;
+						URLFile = results.substring(i, j);
 						//Window.alert(URLFile);
 						//Window.alert(KeyFile);
 						//pResponse.add(new HTML(results));
@@ -293,6 +294,8 @@ public class formularioIdiomas extends Composite {
 		absolutePanel.add(grid,  527, 10);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
+		btnEliminar.setStyleName("sendButton");
+		btnEliminar.setHeight("27px");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				loginService.remove(getKeyFile() , new AsyncCallback<String>(){

@@ -57,7 +57,10 @@ public class SegEmpleado implements Serializable {
     
 	@Persistent    
     private String cui;
-    
+
+	@Persistent    
+    private String pasaporte;
+	
 	@Persistent    
     private String tipo_pasaporte;
     
@@ -84,7 +87,10 @@ public class SegEmpleado implements Serializable {
     
 	@Persistent    
     private Date fecha_nacimiento;
-    
+
+	@Persistent    
+    private String licencia;
+	
 	@Persistent    
     private String tipo_licencia;
 	
@@ -214,6 +220,23 @@ public class SegEmpleado implements Serializable {
 
 	public String getEstado() {
 		return Estado;
+	}
+	
+
+	public String getPasaporte() {
+		return pasaporte;
+	}
+
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
+	}
+
+	public String getLicencia() {
+		return licencia;
+	}
+
+	public void setLicencia(String licencia) {
+		this.licencia = licencia;
 	}
 
 	public void setEstado(String estado) {

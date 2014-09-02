@@ -62259,3 +62259,363 @@ Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiSt
       Compiling...
          Compilation completed in 0,02 seconds
       Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2779 units from cache.
+Compiling...
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 8,96 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2779 units from cache.
+Compiling...
+   40% complete (ETR: 5 seconds)
+   40% complete (ETR: 5 seconds)
+   40% complete (ETR: 5 seconds)
+   40% complete (ETR: 5 seconds)
+   40% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 13,78 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   10% complete (ETR: 33 seconds)
+   10% complete (ETR: 33 seconds)
+   20% complete (ETR: 26 seconds)
+   30% complete (ETR: 20 seconds)
+   40% complete (ETR: 15 seconds)
+   50% complete (ETR: 11 seconds)
+   60% complete (ETR: 8 seconds)
+   70% complete (ETR: 5 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 24,63 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2779 units from cache.
+Compiling...
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   60% complete (ETR: 4 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 11,54 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,09 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2778 cached/archived units.  Used 2778 / 2779 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.api.LoginService
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadoLista
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.Empleados
+Invalid units found: 7
+Compiling...
+   Compilation completed in 0,11 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2777 cached/archived units.  Used 2777 / 2779 units from cache.
+Compiling...
+   Compilation completed in 0,01 seconds
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioFamilia
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.Desempeno
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.familiares
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.principal.formularioRegistro
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioHistorial
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.vacaciones
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.principal.Index
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioVacaciones
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadoLista
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioReferenciaLaboral
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioPruebaPeriodo
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.puestos
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioAcademico
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioReferenciaPersonal
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.referenciaLaboral
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioDatos
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.historiales
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioBDPuestos
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioPuestos
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.referenciaPersonal
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.Idioma
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioEntrevista
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioIdiomas
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.academico
+Invalid Unit: org.habitatguate.hgerp.seguridad.client.rrhh.formularioPruebaPeriodoDos
+Invalid units found: 29
+Compiling...
+   Compilation completed in 0,41 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/formularioDatos.java'
+      [ERROR] Line 750: The method Insertar_Emppleado(String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Date, String, String, String, String, Date, String, String, String, float, float, float, String, String, String, String, String, AsyncCallback<Long>) in the type LoginServiceAsync is not applicable for the arguments (String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Date, String, String, String, String, Date, String, String, String, float, float, float, String, String, String, new AsyncCallback<Long>(){})
+      [ERROR] Line 787: The method Actualizar_Emppleado(Long, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Date, String, String, String, String, Date, String, String, String, float, float, float, String, String, String, String, String, AsyncCallback<Long>) in the type LoginServiceAsync is not applicable for the arguments (Long, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Date, String, String, String, String, Date, String, String, String, float, float, float, String, String, String, new AsyncCallback<Long>(){})
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2779 units from cache.
+Compiling...
+   30% complete (ETR: 12 seconds)
+   30% complete (ETR: 12 seconds)
+   30% complete (ETR: 12 seconds)
+   30% complete (ETR: 12 seconds)
+   40% complete (ETR: 11 seconds)
+   50% complete (ETR: 11 seconds)
+   60% complete (ETR: 10 seconds)
+   70% complete (ETR: 8 seconds)
+   80% complete (ETR: 5 seconds)
+   90% complete (ETR: 2 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 23,41 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units

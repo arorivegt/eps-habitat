@@ -30,7 +30,7 @@ public interface LoginService extends RemoteService {
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
-            float bonificacion,String  URLFile, String KeyFile,String Estado)  throws IllegalArgumentException;
+            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, String licencia)  throws IllegalArgumentException;
 	Long Insertar_Familiar(Long id_empleado,String primer_nombre, String segundo_nombre,
 			String primer_apellido, String segundo_apellido, int edad, String ocupacion,
 			String parentesco)throws IllegalArgumentException;
@@ -82,7 +82,8 @@ public interface LoginService extends RemoteService {
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
-            float bonificacion,String  URLFile, String KeyFile,String Estado)  throws IllegalArgumentException;
+            float bonificacion,String  URLFile, String KeyFile,String Estado,
+            String pasaporte, String licencia)  throws IllegalArgumentException;
 	Long Actualizar_Familiar(Long id_empleado,Long id,String primer_nombre, String segundo_nombre,
 			String primer_apellido, String segundo_apellido, int edad, String ocupacion,
 			String parentesco)throws IllegalArgumentException;

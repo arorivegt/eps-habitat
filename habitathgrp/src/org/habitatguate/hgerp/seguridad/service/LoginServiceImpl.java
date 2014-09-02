@@ -122,7 +122,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
-            float bonificacion,String  URLFile, String KeyFile,String Estado) throws IllegalArgumentException {
+            float bonificacion,String  URLFile, String KeyFile,String Estado,
+            String pasaporte, String licencia) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -170,6 +171,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setURLFile(URLFile);
 	         e.setKeyFile(KeyFile);
 	         e.setEstado(Estado);
+	         e.setPasaporte(pasaporte);
+	         e.setLicencia(licencia);
 	         gestorPersistencia.makePersistent(e); 
 	         valor = e.getId_empleado();
 	         
@@ -484,7 +487,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
 		            String tipo_planilla, float salario_base, float total,
-		            float bonificacion,String  URLFile, String KeyFile,String Estado) throws IllegalArgumentException {
+		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, String licencia) throws IllegalArgumentException {
 				
 
 
@@ -530,6 +533,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					         e.setURLFile(URLFile);
 					         e.setKeyFile(KeyFile);
 					         e.setEstado(Estado);
+					         e.setPasaporte(pasaporte);
+					         e.setLicencia(licencia);
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -1024,6 +1029,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setURLFile(p.getURLFile());
 				    	nuevo.setKeyFile(p.getKeyFile());
 				    	nuevo.setEstado(p.getEstado());
+				    	nuevo.setPasaporte(p.getPasaporte());
+				    	nuevo.setLicencia(p.getLicencia());
 				    	List<SegEntrevista> results0 = p.getEntrevista();
 				    	if (!results0.isEmpty()) {
 						    for (SegEntrevista n0 : results0) {
@@ -1288,6 +1295,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setURLFile(p.getURLFile());
 				    	nuevo.setKeyFile(p.getKeyFile());
 				    	nuevo.setEstado(p.getEstado());
+				    	nuevo.setPasaporte(p.getPasaporte());
+				    	nuevo.setLicencia(p.getLicencia());
 				    	List<SegEntrevista> results0 = p.getEntrevista();
 				    	if (!results0.isEmpty()) {
 						    for (SegEntrevista n0 : results0) {

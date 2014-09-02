@@ -51,36 +51,36 @@ public class Buscador_Parametro_Inv extends Composite {
 	textBox.setStyleName("gwt-TextBox2");
 	textBox.setMaxLength(100);
 	absolutePanel.add(textBox, 10, 29);
-	textBox.setSize("137px", "11px");
+	textBox.setSize("227px", "34px");
 	
 	final TextBox textBox_1 = new TextBox();
 	textBox_1.setStyleName("gwt-TextBox2");
 	textBox_1.setMaxLength(100);
-	absolutePanel.add(textBox_1, 173, 29);
-	textBox_1.setSize("137px", "11px");
+	absolutePanel.add(textBox_1, 247, 29);
+	textBox_1.setSize("227px", "34px");
 	
 	Label label_2 = new Label("Codigo Uno");
 	label_2.setStyleName("label");
-	absolutePanel.add(label_2, 337, 15);
+	absolutePanel.add(label_2, 337, 10);
 	label_2.setSize("157px", "19px");
 	
 	final TextBox textBox_2 = new TextBox();
 	textBox_2.setStylePrimaryName("gwt-TextBox2");
 	textBox_2.setStyleName("gwt-TextBox2");
 	textBox_2.setMaxLength(100);
-	absolutePanel.add(textBox_2, 337, 29);
-	textBox_2.setSize("137px", "11px");
+	absolutePanel.add(textBox_2, 484, 29);
+	textBox_2.setSize("227px", "34px");
 	
 	final TextBox textBox_3 = new TextBox();
 	textBox_3.setStylePrimaryName("gwt-TextBox2");
 	textBox_3.setStyleName("gwt-TextBox2");
 	textBox_3.setMaxLength(100);
-	absolutePanel.add(textBox_3, 500, 29);
-	textBox_3.setSize("137px", "11px");
+	absolutePanel.add(textBox_3, 721, 29);
+	textBox_3.setSize("227px", "34px");
 	
 	Label label_3 = new Label("Codigo dos");
 	label_3.setStyleName("label");
-	absolutePanel.add(label_3, 500, 15);
+	absolutePanel.add(label_3, 500, 10);
 	label_3.setSize("157px", "13px");
 	
 	Image image = new Image("images/ico-lupa.png");
@@ -140,7 +140,7 @@ public class Buscador_Parametro_Inv extends Composite {
 	button.setText("Nuevo Parametro");
 	button.setStylePrimaryName("gwt-TextBox2");
 	button.setStyleName("gwt-TextBox2");
-	absolutePanel.add(button, 730, 29);
+	absolutePanel.add(button, 958, 29);
 	button.setSize("157px", "20px");
 	
 	

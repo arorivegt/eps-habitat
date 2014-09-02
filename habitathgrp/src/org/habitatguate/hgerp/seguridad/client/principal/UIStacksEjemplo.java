@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
@@ -66,7 +67,9 @@ public class UIStacksEjemplo extends ResizeComposite {
  	}
  	@UiHandler("label_2_Finan")
  	void onLabel_2_FinanClick(ClickEvent event) {
- 		Window.alert("no esta disponible");
+ 		Buscador_Soluciones_Inv buscadorSoluciones = new Buscador_Soluciones_Inv();
+ 		this.nuevo.getAbsolutePanel_1().clear();
+ 		this.nuevo.getAbsolutePanel_1().add(buscadorSoluciones, 0, 0);
  	}
  	@UiHandler("label_3_Finan")
  	void onLabel_3_FinanClick(ClickEvent event) {

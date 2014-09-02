@@ -112,6 +112,7 @@ color: White;
 	font-size: 15px;
 	font-style: normal;
 	font-weight: bolder;
+	cursor: pointer;
 }
 
 .gwt-Label-new {
@@ -128,7 +129,7 @@ position: relative;
 	font-size: 8px;
 	font-style: normal;
 	text-align: left;
-	background-color: #344655;;
+	background-color: #344655;
 }
 .gwt-Tree .gwt-TreeItem-selected {
   background: #ebeff9;

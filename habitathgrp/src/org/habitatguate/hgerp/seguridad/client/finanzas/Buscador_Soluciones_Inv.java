@@ -27,60 +27,118 @@ public class Buscador_Soluciones_Inv extends Composite {
 	initWidget(grid);
 	grid.setWidth("1278px");
 	
+	//------------------------------primera fila
+	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
 	absolutePanel.setSize("1000px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
-	Label label = new Label("Nombre Parametro");
+	Label label = new Label("No. Casa");
 	label.setStyleName("label");
-	absolutePanel.add(label, 10, 10);
+	absolutePanel.add(label, 5, 10);
 	label.setSize("157px", "13px");
 	
-	Label label_1 = new Label("Codigo Contable");
+	Label label_1 = new Label("Nombre prestatario");
 	label_1.setStyleName("label");
-	absolutePanel.add(label_1, 173, 10);
+	absolutePanel.add(label_1, 242, 10);
 	label_1.setSize("192px", "13px");
 	
 	final TextBox textBox = new TextBox();
 	textBox.setStyleName("gwt-TextBox2");
 	textBox.setMaxLength(100);
-	absolutePanel.add(textBox, 10, 29);
+	absolutePanel.add(textBox, 5, 29);
 	textBox.setSize("227px", "34px");
 	
 	final TextBox textBox_1 = new TextBox();
 	textBox_1.setStyleName("gwt-TextBox2");
 	textBox_1.setMaxLength(100);
-	absolutePanel.add(textBox_1, 247, 29);
+	absolutePanel.add(textBox_1, 242, 29);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Codigo Uno");
+	Label label_2 = new Label("Dirección");
 	label_2.setStyleName("label");
-	absolutePanel.add(label_2, 337, 10);
+	absolutePanel.add(label_2, 479, 10);
 	label_2.setSize("157px", "19px");
 	
 	final TextBox textBox_2 = new TextBox();
 	textBox_2.setStylePrimaryName("gwt-TextBox2");
 	textBox_2.setStyleName("gwt-TextBox2");
 	textBox_2.setMaxLength(100);
-	absolutePanel.add(textBox_2, 484, 29);
+	absolutePanel.add(textBox_2, 479, 29);
 	textBox_2.setSize("227px", "34px");
 	
 	final TextBox textBox_3 = new TextBox();
 	textBox_3.setStylePrimaryName("gwt-TextBox2");
 	textBox_3.setStyleName("gwt-TextBox2");
 	textBox_3.setMaxLength(100);
-	absolutePanel.add(textBox_3, 721, 29);
+	absolutePanel.add(textBox_3, 716, 29);
 	textBox_3.setSize("227px", "34px");
 	
-	Label label_3 = new Label("Codigo dos");
+	Label label_3 = new Label("Comunidad");
 	label_3.setStyleName("label");
-	absolutePanel.add(label_3, 500, 10);
+	absolutePanel.add(label_3, 716, 10);
 	label_3.setSize("157px", "13px");
 	
+	//---------------------------------segunda fila
+	
+	//----------------------------Segunda fila---------------------------------
+	
+		Label label_4 = new Label("Telefono");
+		label_4.setStyleName("label");
+		absolutePanel.add(label_4, 20, 68);
+		label_4.setSize("157px", "13px");
+		
+		Label label_5 = new Label("Nombre Responsable");
+		label_5.setStyleName("label");
+		absolutePanel.add(label_5, 257, 68);
+		label_5.setSize("192px", "13px");
+		
+		final TextBox textBox_4 = new TextBox();
+		textBox_4.setStyleName("gwt-TextBox2");
+		textBox_4.setMaxLength(100);
+		absolutePanel.add(textBox_4, 20, 85);
+		textBox_4.setSize("227px", "34px");
+		
+		final TextBox textBox_5 = new TextBox();
+		textBox_5.setStyleName("gwt-TextBox2");
+		textBox_5.setMaxLength(100);
+		absolutePanel.add(textBox_5, 257, 85);
+		textBox_5.setSize("227px", "34px");
+		
+		Label label_6 = new Label("Monto Autorizado");
+		label_6.setStyleName("label");
+		absolutePanel.add(label_6, 494, 68);
+		label_6.setSize("157px", "19px");
+		
+		final TextBox textBox_6 = new TextBox();
+		textBox_6.setStylePrimaryName("gwt-TextBox2");
+		textBox_6.setStyleName("gwt-TextBox2");
+		textBox_6.setMaxLength(100);
+		absolutePanel.add(textBox_6, 494, 85);
+		textBox_6.setSize("227px", "34px");
+		
+		final TextBox textBox_7 = new TextBox();
+		textBox_7.setStylePrimaryName("gwt-TextBox2");
+		textBox_7.setStyleName("gwt-TextBox2");
+		textBox_7.setMaxLength(100);
+		absolutePanel.add(textBox_7, 731, 85);
+		textBox_7.setSize("227px", "34px");
+		
+		Label label_7 = new Label("Comunidad");
+		label_7.setStyleName("label");
+		absolutePanel.add(label_7, 731, 68);
+		label_7.setSize("157px", "13px");
+		
+		
+		
+		//-----------------------------	---------------------------------
+	
 	Image image = new Image("images/ico-lupa.png");
-	absolutePanel.add(image, 639, 10);
+	absolutePanel.add(image, 958, 0);
 	image.setSize("103px", "55px");
+	
+	
 	
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {

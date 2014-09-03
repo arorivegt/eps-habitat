@@ -730,7 +730,6 @@ public class formularioDatos extends Composite {
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
 				try{
 					new Date(dateAnnioNacimiento.getValue().getTime());
 				}catch(Exception e){

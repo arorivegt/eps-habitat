@@ -331,3 +331,28 @@ box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	text-transform: uppercase;
 	cursor: pointer;
 } 
+.informacion, .descarga, .referencia {
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  font-family: Tahoma;
+  font-size: 14px;
+  margin: 10px 0px;
+  padding: 15px 10px 15px 55px
+  ;margin-left: auto; /* centrada con respecto a la izquierda */
+margin-right: auto;
+}
+.informacion {
+background-color: #F7F79C; /* el color de fondo */
+background-image: url(images/Knob Valid Green.ico); /* la imagen representativa */
+color: #002299;  /* el color del texto */
+}
+.descarga {
+background-color: #94F79C;  /* el color de fondo */
+background-image: url(images/Knob Valid Green.ico); /* la imagen representativa */
+color: #000000;  /* el color del texto */
+}
+.referencia {
+background-color: #6B9CFF; /* el color de fondo */
+background-image: url(images/Knob Valid Green.ico); /* la imagen representativa */
+color: #FFFFFF; /* el color del texto */
+}

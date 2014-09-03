@@ -102,7 +102,7 @@ public class familiares extends Composite  {
 			@Override
             public void onSuccess(Long result)
             {
-            	Window.alert("Eliminado exitosamente!!! "+id);
+            	Window.alert("Eliminado exitosamente!!! ");
                 flextable.remove(fa);
             }
 

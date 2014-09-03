@@ -45,6 +45,7 @@ public class formularioPuestos extends Composite {
 		absolutePanel.setSize("1024px", "170px");
 		
 		ListPuesto = new ListBox();
+		ListPuesto.addItem("nada seleccionado");
 		ListPuesto.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 

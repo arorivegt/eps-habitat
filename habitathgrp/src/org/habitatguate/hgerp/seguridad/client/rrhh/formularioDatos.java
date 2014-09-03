@@ -1018,7 +1018,7 @@ public class formularioDatos extends Composite {
 		listEstado.addItem("empleado activo");
 		listEstado.addItem("empleado inactivo");
 		listEstado.addItem("posible empleado");
-		listEstado.setStyleName("gwt-TextBox");
+		listEstado.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(listEstado, 36, 163);
 		listEstado.setSize("230px", "36px");
 		

@@ -42,6 +42,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		listEstado.addItem("empleado activo");
 		listEstado.addItem("empleado inactivo");
 		listEstado.addItem("posible empleado");
+		listEstado.addItem("todos");
 		listEstado.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstado, 170, 31);
 		listEstado.setSize("227px", "34px");
@@ -63,7 +64,14 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		Image image = new Image("images/ico-lupa.png");
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginService.Buscar_Empleado('5',"", "", 
+				char tipo = '5';
+				
+				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
+					tipo = '2';
+				else
+					tipo = '5';
+				
+				loginService.Buscar_Empleado(tipo,"", "", 
 						"", "","","",listEstado.getItemText(listEstado.getSelectedIndex()),new AsyncCallback<List<AuxEmpleado>>(){
             public void onFailure(Throwable caught) 
             {
@@ -182,6 +190,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				nuevo.AgregarColumna("29");
 				nuevo.AgregarColumna("30");
 				//nuevo.setSize("1187px", "648px");
+				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);
             }
 

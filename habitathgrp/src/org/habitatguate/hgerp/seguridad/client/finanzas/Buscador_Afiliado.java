@@ -34,12 +34,12 @@ public class Buscador_Afiliado extends Composite {
 	
 	//----------------------------primera fila---------------------------------
 	
-	Label label = new Label("Nombre parametro");
+	Label label = new Label("Nombre Afiliado");
 	label.setStyleName("label");
 	absolutePanel.add(label, 20, 10);
 	label.setSize("157px", "13px");
 	
-	Label label_1 = new Label("Codigo Contable");
+	Label label_1 = new Label("Dirección Afiliado");
 	label_1.setStyleName("label");
 	absolutePanel.add(label_1, 257, 10);
 	label_1.setSize("192px", "13px");
@@ -56,7 +56,7 @@ public class Buscador_Afiliado extends Composite {
 	absolutePanel.add(textBox_1, 257, 29);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Codigo Uno");
+	Label label_2 = new Label("Departamento");
 	label_2.setStyleName("label");
 	absolutePanel.add(label_2, 494, 10);
 	label_2.setSize("157px", "19px");
@@ -75,7 +75,7 @@ public class Buscador_Afiliado extends Composite {
 	absolutePanel.add(textBox_3, 731, 29);
 	textBox_3.setSize("227px", "34px");
 	
-	Label label_3 = new Label("Codigo Dos");
+	Label label_3 = new Label("Municipio");
 	label_3.setStyleName("label");
 	absolutePanel.add(label_3, 731, 10);
 	label_3.setSize("157px", "13px");
@@ -93,8 +93,8 @@ public class Buscador_Afiliado extends Composite {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 
-			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
-					new AsyncCallback<String[]>(){
+			loginService.Insertar_Afiliado(textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),
+					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
                 {
@@ -102,9 +102,9 @@ public class Buscador_Afiliado extends Composite {
                 }
 
 				@Override
-                public void onSuccess(String[] result)
+                public void onSuccess(Long result)
                 {			
-                	Window.alert("Datos Almacenados Correctamente");
+                	Window.alert("Nuevo Afiliado con el codigo: "+ result);
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
@@ -138,7 +138,7 @@ public class Buscador_Afiliado extends Composite {
 		}
 	});		
 
-	button.setText("Nuevo Parametro");
+	button.setText("Nuevo Afiliado");
 	button.setStylePrimaryName("gwt-TextBox2");
 	button.setStyleName("gwt-TextBox2");
 	absolutePanel.add(button, 968, 29);
@@ -146,14 +146,14 @@ public class Buscador_Afiliado extends Composite {
 	
 	
 
-	loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+	loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {
 		
 		@Override
-		public void onSuccess(List<AuxParametro> result) {
+		public void onSuccess(List<AuxAfiliado> result) {
 
-			e = new TablaGWT(result);
-			grid.setWidget(1, 0,e);
-			e.setSize("1000px", "300px");
+			//e = new TablaGWT(result);
+			//grid.setWidget(1, 0,e);
+			//e.setSize("1000px", "300px");
 	
 			
 		}

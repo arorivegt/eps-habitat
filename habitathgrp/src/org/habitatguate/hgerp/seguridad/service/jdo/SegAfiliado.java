@@ -21,13 +21,18 @@ public class SegAfiliado implements Serializable {
 	@Persistent
 	private String dirAfiliado;
 	@Persistent
-	private double municipio;
+	private String municipio;
 	@Persistent
-	private double departamento;
+	private String departamento;
 	
 	@Persistent(mappedBy = "afiliado")
     @Element(dependent = "true")
-	private List <SegAfiliado> solucion;
+	private List <SegSolucion> solucion;
+	
+
+	public SegAfiliado(){
+		super();
+	}
 
 	public Long getIdAfiliado() {
 		return idAfiliado;
@@ -45,37 +50,39 @@ public class SegAfiliado implements Serializable {
 		this.nomAfiliado = nomAfiliado;
 	}
 
-	public String getDirAfiliadol() {
+	public String getDirAfiliado() {
 		return dirAfiliado;
 	}
 
-	public void setDirAfiliadol(String dirAfiliadol) {
-		this.dirAfiliado = dirAfiliadol;
+	public void setDirAfiliado(String dirAfiliado) {
+		this.dirAfiliado = dirAfiliado;
 	}
 
-	public double getMunicipio() {
+	public String getMunicipio() {
 		return municipio;
 	}
 
-	public void setMunicipio(double municipio) {
+	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
 	}
 
-	public double getDepartamento() {
+	public String getDepartamento() {
 		return departamento;
 	}
 
-	public void setDepartamento(double departamento) {
+	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
 
-	public List<SegAfiliado> getSolucion() {
+	public List<SegSolucion> getSolucion() {
 		return solucion;
 	}
 
-	public void setSolucion(List<SegAfiliado> solucion) {
+	public void setSolucion(List<SegSolucion> solucion) {
 		this.solucion = solucion;
 	}
+
+
 	
 	
 }

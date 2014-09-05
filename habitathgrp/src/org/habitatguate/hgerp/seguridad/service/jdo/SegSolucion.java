@@ -8,6 +8,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import com.google.appengine.api.datastore.Key;
 
 
 @SuppressWarnings("serial")
@@ -15,7 +16,7 @@ import javax.jdo.annotations.PrimaryKey;
 public class SegSolucion implements Serializable{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long idSolucion;
+	private Key idSolucion;
 	@Persistent
 	private String nomSolucion;
 	@Persistent
@@ -34,22 +35,16 @@ public class SegSolucion implements Serializable{
 	private int notaDebito;
 	@Persistent
 	private Date fechaInicio;
-	
+
 	private SegBeneficiario beneficiario;
-	
+
 	private SegAfiliado afiliado;
 	
 	public SegSolucion(){
 		super();
 	}
 
-	public Long getIdSolucion() {
-		return idSolucion;
-	}
 
-	public void setIdSolucion(Long idSolucion) {
-		this.idSolucion = idSolucion;
-	}
 
 	public String getNomSolucion() {
 		return nomSolucion;

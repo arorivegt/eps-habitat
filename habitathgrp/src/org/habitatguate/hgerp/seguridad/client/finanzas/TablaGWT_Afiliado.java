@@ -7,15 +7,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.MyPaginationDataGrid;;
-public class TablaGWT extends Composite implements EntryPoint {
+public class TablaGWT_Afiliado extends Composite implements EntryPoint {
 	
 	MyPaginationDataGrid<AuxParametro> grid;
  
-	public TablaGWT(){
+	public TablaGWT_Afiliado(){
 
         grid = null;
 	}
-	public TablaGWT(List<AuxParametro> datagridParametro){
+	public TablaGWT_Afiliado(List<AuxParametro> datagridParametro){
         grid = new MyPaginationDataGrid<AuxParametro>();
         grid.setHeight("500px");
         grid.setDataList(datagridParametro);

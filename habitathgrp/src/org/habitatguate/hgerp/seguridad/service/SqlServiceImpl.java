@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.util.PMF;
@@ -37,6 +39,25 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		}
 		
 		return null;
+	}
+	
+	public Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento) throws IllegalArgumentException{
+			 Long valor = 0L;
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			SegAfiliado nuevo = new SegAfiliado();
+			nuevo.setNomAfiliado(nomAfiliado);
+			nuevo.setDirAfiliado(dirAfiliado);
+			nuevo.setMunicipio(municipio);
+			nuevo.setDepartamento(departamento);
+			
+			try{
+				gestorPersistencia.makePersistent(nuevo);
+				System.out.println("PARAMETRO GUARDADO CORRECTAMENTE");
+				valor = nuevo.getIdAfiliado();
+			}finally{
+				gestorPersistencia.close();
+			}
+			return valor;
 	}
 
 	
@@ -72,7 +93,27 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		return valor;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<AuxAfiliado> ConsultaTodosAfiliados(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegAfiliado.class);
+		List<AuxAfiliado> valor = new ArrayList<AuxAfiliado>();
+		List<SegAfiliado> execute = (List<SegAfiliado>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegAfiliado p : execute){
+				AuxAfiliado n= new AuxAfiliado();
+				n.setIdAfiliado(p.getIdAfiliado());
+				n.setNomAfiliado(p.getNomAfiliado());
+				n.setDirAfiliado(p.getDirAfiliado());
+				n.setMunicipio(p.getMunicipio());
+				n.setDepartamento(p.getDepartamento());
+				valor.add(n);
+			}
+		}
+		return valor;
+	}
 
+	
 	//------------------------------------------MODIFICAR------------------------------------
 	
 	public Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {

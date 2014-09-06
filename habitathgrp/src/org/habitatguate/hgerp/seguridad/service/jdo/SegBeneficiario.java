@@ -9,6 +9,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.OneToMany;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -22,9 +23,11 @@ public class SegBeneficiario implements Serializable{
 	private String dirBeneficiario;
 	@Persistent
 	private int telBeneficiario;
-	@Persistent
-	private int codDos;
-		
+
+	
+	@OneToMany(mappedBy = "beneficiario")
+	private List <SegSolucion> solucion;
+	
 	
 	public SegBeneficiario(){
 		super();
@@ -33,9 +36,7 @@ public class SegBeneficiario implements Serializable{
 	
 	//aqui vienen todas los objetos con los que se relaciona
 
-	@Persistent(mappedBy = "beneficiario")
-    @Element(dependent = "true")
-	private List <SegSolucion> solucion;
+
 
 
 
@@ -87,15 +88,7 @@ public class SegBeneficiario implements Serializable{
 
 
 
-	public int getCodDos() {
-		return codDos;
-	}
 
-
-
-	public void setCodDos(int codDos) {
-		this.codDos = codDos;
-	}
 
 
 

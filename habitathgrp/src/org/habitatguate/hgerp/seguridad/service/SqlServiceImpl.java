@@ -9,6 +9,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.util.PMF;
@@ -59,6 +60,24 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			}
 			return valor;
 	}
+	public Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario) throws IllegalArgumentException{
+		 Long valor = 0L;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		SegBeneficiario nuevo = new SegBeneficiario();
+		nuevo.setNomBeneficiario(nomBeneficiario);
+		nuevo.setDirBeneficiario(dirBeneficiario);
+		nuevo.setTelBeneficiario(telBeneficiario);
+	
+		
+		try{
+			gestorPersistencia.makePersistent(nuevo);
+			System.out.println("BENEFICIARIO GUARDADO CORRECTAMENTE");
+			valor = nuevo.getIdBeneficiario();
+		}finally{
+			gestorPersistencia.close();
+		}
+		return valor;
+}
 
 	
 ///////-------------------------------------------------------ELIMINAR------------------------------------	

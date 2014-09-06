@@ -145,8 +145,8 @@ public class Buscador_Soluciones_Inv extends Composite {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 
-			loginService.Insertar(textBox.getText(), Integer.parseInt(textBox_1.getText()), Integer.parseInt(textBox_2.getText()), Integer.parseInt(textBox_3.getText()),
-					new AsyncCallback<String[]>(){
+			loginService.Insertar_Beneficiario(textBox.getText(),textBox_1.getText(), Integer.parseInt(textBox_2.getText()),
+					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
                 {
@@ -154,7 +154,7 @@ public class Buscador_Soluciones_Inv extends Composite {
                 }
 
 				@Override
-                public void onSuccess(String[] result)
+                public void onSuccess(Long result)
                 {			
                 	Window.alert("Datos Almacenados Correctamente");
                 	textBox.setText("");
@@ -167,7 +167,7 @@ public class Buscador_Soluciones_Inv extends Composite {
 
          });
 			
-			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+			/*loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
         		
         		@Override
         		public void onSuccess(List<AuxParametro> result) {
@@ -181,7 +181,7 @@ public class Buscador_Soluciones_Inv extends Composite {
         			System.out.println(caught);
         			
         		}
-        	});
+        	});*/
 		}
 		
 		else{

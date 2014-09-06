@@ -9,14 +9,14 @@ import com.google.gwt.user.client.ui.RootPanel;
 import org.habitatguate.hgerp.seguridad.client.finanzas.MyPaginationDataGrid;;
 public class TablaGWT_Afiliado extends Composite implements EntryPoint {
 	
-	MyPaginationDataGrid<AuxParametro> grid;
+	MyPaginationDataGrid_Afiliado<AuxAfiliado> grid;
  
 	public TablaGWT_Afiliado(){
 
         grid = null;
 	}
-	public TablaGWT_Afiliado(List<AuxParametro> datagridParametro){
-        grid = new MyPaginationDataGrid<AuxParametro>();
+	public TablaGWT_Afiliado(List<AuxAfiliado> datagridParametro){
+        grid = new MyPaginationDataGrid_Afiliado<AuxAfiliado>();
         grid.setHeight("500px");
         grid.setDataList(datagridParametro);
         initWidget(grid);

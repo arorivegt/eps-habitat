@@ -9,6 +9,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.OneToMany;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -24,10 +25,12 @@ public class SegAfiliado implements Serializable {
 	private String municipio;
 	@Persistent
 	private String departamento;
-	
-	@Persistent(mappedBy = "afiliado")
-    @Element(dependent = "true")
+	@Persistent
+	@OneToMany(mappedBy = "afiliado")
 	private List <SegSolucion> solucion;
+	@Persistent
+	@OneToMany(mappedBy = "empleado")
+	private List<Long> empleados;
 	
 
 	public SegAfiliado(){
@@ -80,6 +83,14 @@ public class SegAfiliado implements Serializable {
 
 	public void setSolucion(List<SegSolucion> solucion) {
 		this.solucion = solucion;
+	}
+
+	public List<Long> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Long> empleados) {
+		this.empleados = empleados;
 	}
 
 

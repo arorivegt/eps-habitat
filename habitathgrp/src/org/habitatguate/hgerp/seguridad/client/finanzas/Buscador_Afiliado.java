@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class Buscador_Afiliado extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-    TablaGWT e = null;
+    TablaGWT_Afiliado e = null;
 	public Buscador_Afiliado(){
 
 	final Grid grid = new Grid(2, 1);
@@ -115,12 +115,12 @@ public class Buscador_Afiliado extends Composite {
 
          });
 			
-			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+			loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {
         		
         		@Override
-        		public void onSuccess(List<AuxParametro> result) {
-        			e.ActulizarList(result);      			
-        			
+        		public void onSuccess(List<AuxAfiliado> result) {
+   			
+        			System.out.println("ya estan todos los afiliados");
         			
         		}
         		
@@ -150,10 +150,10 @@ public class Buscador_Afiliado extends Composite {
 		
 		@Override
 		public void onSuccess(List<AuxAfiliado> result) {
-
-			//e = new TablaGWT(result);
-			//grid.setWidget(1, 0,e);
-			//e.setSize("1000px", "300px");
+			System.out.println("ya estan todos los afiliados");
+			e = new TablaGWT_Afiliado(result);
+			grid.setWidget(1, 0,e);
+			e.setSize("1000px", "300px");
 	
 			
 		}

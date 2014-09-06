@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
-public class PaginationDataGrid_Afiliado<T> extends PagingDataGrid<T>{
+public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>{
      
     private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
@@ -46,10 +46,10 @@ public class PaginationDataGrid_Afiliado<T> extends PagingDataGrid<T>{
         Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxParametro) object).getCodContable());
+                return String.valueOf(((AuxAfiliado) object).getIdAfiliado());
             }
         };
-        dataGrid.addColumn(codContableColumn, "Codigo Contable");
+        dataGrid.addColumn(codContableColumn, "Codigo Afiliado");
         dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
         
         
@@ -57,18 +57,18 @@ public class PaginationDataGrid_Afiliado<T> extends PagingDataGrid<T>{
                 new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return ((AuxParametro) object).getNomParametro();
+                return ((AuxAfiliado) object).getNomAfiliado();
             }
         };
         nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
 			@Override
 			public void update(int index, T object, String value) {
 				
-				((AuxParametro) object).setNomParametro(value);
+				((AuxAfiliado) object).setNomAfiliado(value);
 				
 			}
         	});
-        dataGrid.addColumn(nomParamColumn, "Nombre Parametro");        
+        dataGrid.addColumn(nomParamColumn, "Nombre Afiliado");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
@@ -84,7 +84,7 @@ public class PaginationDataGrid_Afiliado<T> extends PagingDataGrid<T>{
         Column<T, String> codUnoColumn = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxParametro) object).getCodUno());
+                return String.valueOf(((AuxAfiliado) object).getDirAfiliado());
             }
         };
         /*lastNameColumn.setSortable(true);
@@ -94,16 +94,16 @@ public class PaginationDataGrid_Afiliado<T> extends PagingDataGrid<T>{
                         ((ContactInfo) o2).getLastName());
             }
         });*/
-        dataGrid.addColumn(codUnoColumn, "Codigo Uno");
+        dataGrid.addColumn(codUnoColumn, "Dirección Af.");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
         
         Column<T, String> codDosColumn = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxParametro) object).getCodDos());
+                return String.valueOf(((AuxAfiliado) object).getMunicipio());
             }
         };
-        dataGrid.addColumn(codDosColumn, "Codigo Dos");
+        dataGrid.addColumn(codDosColumn, "Municipio");
         dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
         
         // ActionCell.

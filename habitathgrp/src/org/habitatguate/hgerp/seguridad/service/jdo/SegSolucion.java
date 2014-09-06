@@ -8,6 +8,9 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
 import com.google.appengine.api.datastore.Key;
 
 
@@ -36,14 +39,30 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private Date fechaInicio;
 
-	private SegBeneficiario beneficiario;
-
+	@ManyToOne(fetch = FetchType.EAGER)
 	private SegAfiliado afiliado;
+	@ManyToOne
+	private SegBeneficiario beneficiario;
 	
+	public Key getIdSolucion() {
+		return idSolucion;
+	}
+
+
+
+
+	public void setIdSolucion(Key idSolucion) {
+		this.idSolucion = idSolucion;
+	}
+
+
+
+
 	public SegSolucion(){
 		super();
 	}
 
+	
 
 
 	public String getNomSolucion() {

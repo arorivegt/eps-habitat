@@ -33,6 +33,7 @@ public class AuxAfiliado implements Comparable<AuxAfiliado>,IsSerializable{
 	private String municipio;
 
 	private String departamento;
+	
 	public Long getIdAfiliado() {
 		return idAfiliado;
 	}

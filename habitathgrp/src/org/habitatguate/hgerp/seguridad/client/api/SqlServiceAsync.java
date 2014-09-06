@@ -26,6 +26,9 @@ public interface SqlServiceAsync {
 	void Actualizar_Parametro(Long id, String nomParam, int codContable,
 			int codUno, int codDos, AsyncCallback<Long> callback);
 
+	void Insertar_Beneficiario(String nomBeneficiario, String dirBeneficiario,
+			int telBeneficiario, AsyncCallback<Long> callback);
+
 
 
 

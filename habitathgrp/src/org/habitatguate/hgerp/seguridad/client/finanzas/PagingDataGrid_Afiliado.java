@@ -41,7 +41,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
 	private Button botonEliminar;
 	private Button botonRefresh;
     final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxParametro.KEY_PROVIDER);
+            new MultiSelectionModel<T>((ProvidesKey<T>)AuxAfiliado.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	Iterator<T> iter = null;
 	T objectoEliminado = null;
@@ -113,7 +113,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
             public void onClick(ClickEvent event) {
               // Refresca el datagrid
 	
-        			loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+        			loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {
         				
         				@Override
         				public void onSuccess(List result) {

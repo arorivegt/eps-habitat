@@ -11,6 +11,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -161,6 +162,9 @@ public class SegEmpleado implements Serializable {
 	@Persistent(mappedBy = "empleado")
 	@Element(dependent = "true")
 	private List <SegTest> test;
+	
+	@ManyToOne
+	private Long empleado;
 	
 	//datos del patrono
 	@Persistent
@@ -600,4 +604,14 @@ public class SegEmpleado implements Serializable {
 	public void setIVS(String IVS) {
 		this.IVS = IVS;
 	}
+
+	public Long getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Long empleado) {
+		this.empleado = empleado;
+	}
+	
+	
 }

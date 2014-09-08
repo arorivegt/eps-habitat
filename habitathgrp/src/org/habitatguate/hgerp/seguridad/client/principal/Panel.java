@@ -29,7 +29,7 @@ public class Panel extends Composite {
              absolutePanel.setStyleName("html-west");
              splitLayoutPanel.addWest(absolutePanel, 126.0);
              absolutePanel.setSize("100%", "100%");
-             
+
              UIStacksEjemplo menu2 = new UIStacksEjemplo(this);
              absolutePanel.add(menu2, 0, 0);
              menu2.setSize("127px", "532px");

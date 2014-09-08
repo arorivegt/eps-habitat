@@ -71,7 +71,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
-					return object.getDocumentoIdentificación();
+					return object.getDocumentoIdentificacion();
 				}
 			};
 			cellTable.addColumn(nameColumn, "Documento Identificacion");	

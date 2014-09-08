@@ -65,12 +65,12 @@ public class DatosMinisterioTrabajo  implements IsSerializable{
 		TipoIdentificacion = tipoIdentificacion;
 	}
 
-	public String getDocumentoIdentificación() {
+	public String getDocumentoIdentificacion() {
 		return DocumentoIdentificacion;
 	}
 
-	public void setDocumentoIdentificación(String documentoIdentificación) {
-		DocumentoIdentificacion = documentoIdentificación;
+	public void setDocumentoIdentificacion(String documentoIdentificacion) {
+		DocumentoIdentificacion = documentoIdentificacion;
 	}
 
 	public String getPaisOrigen() {

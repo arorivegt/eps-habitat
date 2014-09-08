@@ -7,6 +7,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -134,20 +135,21 @@ public interface LoginService extends RemoteService {
     Long Eliminar_Entrevista(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Historial(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Vacaciones(Long id_empleado,Long id)throws IllegalArgumentException;
-    
+    String remove(String fileURL)throws IllegalArgumentException;
 
 
     ///querys
     List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
-			String Estado) throws IllegalArgumentException;
-    
+			String Estado) throws IllegalArgumentException;    
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
-    
     ///querys
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     
-    String remove(String fileURL)throws IllegalArgumentException;
+    //crear reportes
+    String ReporteEmpleados()throws IllegalArgumentException;
+	
+    
 
 }
 

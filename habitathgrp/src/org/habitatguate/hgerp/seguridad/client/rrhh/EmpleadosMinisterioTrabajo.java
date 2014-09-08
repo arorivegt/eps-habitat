@@ -89,16 +89,16 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					try{
 						if(p.getCui().equals(null) || p.getCui().equals("")){
 							empleado.setTipoIdentificacion("1");
-							empleado.setDocumentoIdentificación(p.getNo_registro()+p.getNo_orden());
+							empleado.setDocumentoIdentificacion(p.getNo_registro()+p.getNo_orden());
 						}
 						if(!p.getCui().equals("")){
 							empleado.setTipoIdentificacion("2");
-							empleado.setDocumentoIdentificación(p.getCui());
+							empleado.setDocumentoIdentificacion(p.getCui());
 						}
 					}catch(Exception e){
 
 						empleado.setTipoIdentificacion("2");
-						empleado.setDocumentoIdentificación(p.getCui());
+						empleado.setDocumentoIdentificacion(p.getCui());
 					}
 					empleado.setPaisOrigen(p.getPais());
 					//empleado.setLugarNacimiento(lugarNacimiento);

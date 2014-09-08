@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 
 public class Index implements EntryPoint {
         
@@ -179,7 +180,6 @@ public class Index implements EntryPoint {
 
                             final Button close= new Button("cerrar");
                             VerticalPanel dialogVPanel = new VerticalPanel();
-                            HTML serverResponseLabel = new HTML();
                             dialogVPanel.addStyleName("gwt-TextBox2");
                     		formularioRegistro inicio = new formularioRegistro();
                     		Registro .setText("Registro");
@@ -224,7 +224,8 @@ public class Index implements EntryPoint {
                     Image image_2 = new Image("images/imagenempresa.png");
                     rootPanel.add(image_2, 27, 10);
                     image_2.setSize("386px", "136px");
-            //RootPanel.get().add(dialogBox);
+                    
+                    //RootPanel.get().add(dialogBox);
             
 
         }

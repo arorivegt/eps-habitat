@@ -113,6 +113,7 @@ public class formularioDatos extends Composite {
 	private final UploadUrlServiceAsync uploadUrlService = GWT
 			.create(UploadUrlService.class);
     private AbsolutePanel absolutePanel;
+    private Button btnImprimir;
     
 	public formularioDatos(Empleados e,final int tipo) {
 		this.empleado = e;
@@ -121,12 +122,20 @@ public class formularioDatos extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("997px", "1337px");
-
-		absolutePanel.add(getFormPanel(), 591, 109);
 		getFormUrl();
+		
+		listEstado = new ListBox();
+		listEstado.addItem("empleado activo");
+		listEstado.addItem("empleado inactivo");
+		listEstado.addItem("posible empleado");
+		listEstado.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(listEstado, 36, 163);
+		listEstado.setSize("230px", "36px");
 		image = new Image("images/imagenempresa.png");
 		absolutePanel.add(image, 341, 10);
 		image.setSize("167px", "158px");
+		
+				absolutePanel.add(getFormPanel(), 591, 109);
 		
 		txtNo_iggs = new IntegerBox();
 		txtNo_iggs.setText("0");
@@ -432,6 +441,20 @@ public class formularioDatos extends Composite {
 		txtRegistro.setSize("227px", "34px");
 		
 		txtDPI = new IntegerBox();
+		txtDPI.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
+				else if(txtDPI.getText().equals(null)) {txtDPI.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtDPI.getText());
+					}catch(Exception e){
+						Window.alert("DPI no valido");
+						txtDPI.setText("0");
+					}
+				}
+			}
+		});
 		txtDPI.setText("0");
 		txtDPI.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtDPI, 592, 536);
@@ -466,6 +489,20 @@ public class formularioDatos extends Composite {
 		txtTipoPasaporte.setSize("227px", "34px");
 		
 		txtNoPasaporte = new IntegerBox();
+		txtNoPasaporte.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtNoPasaporte.getText().equals("")) {txtNoPasaporte.setText("0");}
+				else if(txtNoPasaporte.getText().equals(null)) {txtNoPasaporte.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtNoPasaporte.getText());
+					}catch(Exception e){
+						Window.alert("Pasaporte no valido");
+						txtNoPasaporte.setText("0");
+					}
+				}
+			}
+		});
 		txtNoPasaporte.setText("0");
 		txtNoPasaporte.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtNoPasaporte, 589, 611);
@@ -612,12 +649,42 @@ public class formularioDatos extends Composite {
 		
 		
 		txtTelefonoCasa = new IntegerBox();
+		txtTelefonoCasa.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+
+				if(txtTelefonoCasa.getText().equals("")) {txtTelefonoCasa.setText("0");}
+				else if(txtTelefonoCasa.getText().equals(null)) {txtTelefonoCasa.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoCasa.getText());
+					}catch(Exception e){
+						Window.alert("Telefono de Casa no valido");
+						txtTelefonoCasa.setText("0");
+					}
+				}
+
+			}
+		});
 		txtTelefonoCasa.setText("0");
 		txtTelefonoCasa.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTelefonoCasa, 317, 853);
 		txtTelefonoCasa.setSize("227px", "34px");
 		
 		txtTelefonoCelular = new IntegerBox();
+		txtTelefonoCelular.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoCelular.getText().equals("")) {txtTelefonoCelular.setText("0");}
+				else if(txtTelefonoCelular.getText().equals(null)) {txtTelefonoCelular.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoCelular.getText());
+					}catch(Exception e){
+						Window.alert("Telefono celular no valido");
+						txtTelefonoCelular.setText("0");
+					}
+				}
+			}
+		});
 		txtTelefonoCelular.setText("0");
 		txtTelefonoCelular.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTelefonoCelular, 589, 853);
@@ -657,6 +724,20 @@ public class formularioDatos extends Composite {
 		listTipoLicencia.setSize("230px", "36px");
 		
 		txtNoLicencia = new IntegerBox();
+		txtNoLicencia.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtNoLicencia.getText().equals("")) {txtNoLicencia.setText("0");}
+				else if(txtNoLicencia.getText().equals(null)) {txtNoLicencia.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtNoLicencia.getText());
+					}catch(Exception e){
+						Window.alert("Licencia no valido");
+						txtNoLicencia.setText("0");
+					}
+				}
+			}
+		});
 		txtNoLicencia.setText("0");
 		txtNoLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtNoLicencia, 589, 935);
@@ -701,6 +782,20 @@ public class formularioDatos extends Composite {
 		txtTipoPlanilla.setSize("227px", "34px");
 		
 		txtSalarioBase = new TextBox();
+		txtSalarioBase.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtSalarioBase.getText().equals("")) {txtSalarioBase.setText("0");}
+				else if(txtSalarioBase.getText().equals(null)) {txtSalarioBase.setText("0");}
+				else{
+					try{
+						Float.parseFloat(txtSalarioBase.getText());
+					}catch(Exception e){
+						Window.alert("Salario no valido");
+						txtSalarioBase.setText("0");
+					}
+				}
+			}
+		});
 		txtSalarioBase.setText("0.0");
 		txtSalarioBase.setStyleName("gwt-PasswordTextBox");
 		txtSalarioBase.setMaxLength(50);
@@ -708,6 +803,20 @@ public class formularioDatos extends Composite {
 		txtSalarioBase.setSize("227px", "34px");
 		
 		txtBonificacion = new TextBox();
+		txtBonificacion.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtBonificacion.getText().equals("")) {txtBonificacion.setText("0");}
+				else if(txtBonificacion.getText().equals(null)) {txtBonificacion.setText("0");}
+				else{
+					try{
+						Float.parseFloat(txtBonificacion.getText());
+					}catch(Exception e){
+						Window.alert("Bonificacion no valido");
+						txtBonificacion.setText("0");
+					}
+				}
+			}
+		});
 		txtBonificacion.setText("0.0");
 		txtBonificacion.setStyleName("gwt-PasswordTextBox");
 		txtBonificacion.setMaxLength(50);
@@ -715,6 +824,20 @@ public class formularioDatos extends Composite {
 		txtBonificacion.setSize("227px", "34px");
 		
 		txtTotal = new TextBox();
+		txtTotal.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTotal.getText().equals("")) {txtTotal.setText("0");}
+				else if(txtTotal.getText().equals(null)) {txtTotal.setText("0");}
+				else{
+					try{
+						Float.parseFloat(txtTotal.getText());
+					}catch(Exception e){
+						Window.alert("Total no valido");
+						txtTotal.setText("0");
+					}
+				}
+			}
+		});
 		txtTotal.setText("0.0");
 		txtTotal.setStyleName("gwt-PasswordTextBox");
 		txtTotal.setMaxLength(50);
@@ -1013,18 +1136,36 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(lblDepartamentoResidencia, 316, 751);
 		lblDepartamentoResidencia.setSize("231px", "19px");
 		
-		listEstado = new ListBox();
-		listEstado.addItem("empleado activo");
-		listEstado.addItem("empleado inactivo");
-		listEstado.addItem("posible empleado");
-		listEstado.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listEstado, 36, 163);
-		listEstado.setSize("230px", "36px");
-		
 		lblEstadoDelEmpleado = new Label("Estado Del Empleado");
 		lblEstadoDelEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoDelEmpleado, 38, 138);
 		lblEstadoDelEmpleado.setSize("192px", "19px");
+		
+		btnImprimir = new Button("Send");
+		btnImprimir.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				
+				loginService.ReporteEmpleados(new AsyncCallback<String>() 
+                        {
+                            public void onFailure(Throwable caught) 
+                            {
+                                Window.alert("Error ");
+                            }
+
+							@Override
+                            public void onSuccess(String resutl)
+                            {
+                                Window.alert("exitosamente!!! ");
+                            }
+
+                     });
+			}
+		});
+		btnImprimir.setText("Imprimir");
+		btnImprimir.setStylePrimaryName("sendButton");
+		btnImprimir.setStyleName("sendButton");
+		absolutePanel.add(btnImprimir, 591, 1313);
+		btnImprimir.setSize("229px", "44px");
 	}
 	
 	private String Depto_Municipio(String Departamento){
@@ -1435,7 +1576,7 @@ public class formularioDatos extends Composite {
 			image.setUrl( URLFile);
 			Archivo();
 		}catch(Exception e){
-			image.setUrl("images/imagenempresa");
+			image.setUrl("images/imagenempresa.png");
 		}
 		this.id_empleado = id;
 		this.bandera = false;

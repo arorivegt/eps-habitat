@@ -87,6 +87,14 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
                 return String.valueOf(((AuxAfiliado) object).getDirAfiliado());
             }
         };
+        codUnoColumn.setFieldUpdater(new FieldUpdater<T, String>() {
+			@Override
+			public void update(int index, T object, String value) {
+				
+				((AuxAfiliado) object).setDirAfiliado(value);
+				
+			}
+        	});
         /*lastNameColumn.setSortable(true);
         sortHandler.setComparator(lastNameColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {
@@ -97,7 +105,7 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
         dataGrid.addColumn(codUnoColumn, "Dirección Af.");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
         
-        Column<T, String> codDosColumn = new Column<T, String>(new EditTextCell()) {
+        Column<T, String> codDosColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
                 return String.valueOf(((AuxAfiliado) object).getMunicipio());
@@ -106,17 +114,26 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
         dataGrid.addColumn(codDosColumn, "Municipio");
         dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
         
+        Column<T, String> depAfiliado = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxAfiliado) object).getDepartamento());
+            }
+        };
+        dataGrid.addColumn(depAfiliado, "Departamemto");
+        dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
+        
         // ActionCell.
         ActionCell<T> reListCell = new ActionCell<T>("Modificar",
         	    new ActionCell.Delegate<T>() {
         	        @Override
         	        public void execute(final T object) {
         	           // code to be executed 
-        	        	loginService.Actualizar_Parametro(((AuxParametro)object).getIdParametro(), ((AuxParametro)object).getNomParametro(), ((AuxParametro)object).getCodContable(), ((AuxParametro)object).getCodUno(), ((AuxParametro)object).getCodDos(), new AsyncCallback<Long>() {
+        	        	loginService.Actualizar_Afiliado(((AuxAfiliado)object).getIdAfiliado(), ((AuxAfiliado)object).getNomAfiliado(), ((AuxAfiliado)object).getDirAfiliado(), ((AuxAfiliado)object).getDepartamento(), ((AuxAfiliado)object).getMunicipio(), new AsyncCallback<Long>() {
             				
             				@Override
             				public void onSuccess(Long result) {
-                	        	Window.alert("Modificado: "+ ((AuxParametro)object).getNomParametro());
+                	        	Window.alert("Modificado: "+ ((AuxAfiliado)object).getIdAfiliado());
             				}
             				
             				@Override

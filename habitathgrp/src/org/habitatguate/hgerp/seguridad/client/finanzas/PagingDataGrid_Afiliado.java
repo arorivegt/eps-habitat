@@ -68,7 +68,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
  
         dataProvider.addDataDisplay(dataGrid);
         
-        botonEliminar = new Button("Eliminar Parametro");
+        botonEliminar = new Button("Eliminar Afiliado");
         botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);
@@ -88,7 +88,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
             	iter = (Iterator<T>) lista.iterator();
         			while (iter.hasNext()){
         			objectoEliminado = iter.next();	
-        			loginService.Eliminar_Parametro(((AuxParametro)objectoEliminado).getIdParametro(), new AsyncCallback<Long>() {
+        			loginService.Eliminar_Afiliado(((AuxAfiliado)objectoEliminado).getIdAfiliado(), new AsyncCallback<Long>() {
         				
         				@Override
         				public void onSuccess(Long result) {

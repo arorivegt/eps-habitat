@@ -24,6 +24,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 
 	
 	//--------------------------------INSERTAR---------------------------------------------------
+	@Override
 	public String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(nomParam!=null){
@@ -41,7 +42,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		
 		return null;
 	}
-	
+	@Override
 	public Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento) throws IllegalArgumentException{
 			 Long valor = 0L;
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -60,6 +61,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			}
 			return valor;
 	}
+	@Override
 	public Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario) throws IllegalArgumentException{
 		 Long valor = 0L;
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -90,9 +92,17 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
         return id;
     }	
 	
+	@Override
+    public Long Eliminar_Afiliado(Long id) throws IllegalArgumentException {
+    	
+    	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+    	final SegAfiliado e = Persistencia.getObjectById(SegAfiliado.class, id); 
+        Persistencia.deletePersistent(e);         
+        return id;
+    }
 	
 //------------------------------------------------------CONSULTAS--------------------------------------------------	
-	@SuppressWarnings("unchecked")
+    @Override
 	public List<AuxParametro> ConsultaTodosParam(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegParametro.class);
@@ -112,7 +122,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		return valor;
 	}
 
-	@SuppressWarnings("unchecked")
+    @Override
 	public List<AuxAfiliado> ConsultaTodosAfiliados(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegAfiliado.class);
@@ -134,7 +144,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 
 	
 	//------------------------------------------MODIFICAR------------------------------------
-	
+    @Override
 	public Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(nomParam!=null){	
@@ -154,5 +164,26 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		
 		return id;
 	}
+	@Override
+	public Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(nomAfiliado!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegAfiliado e = gestorPersistencia.getObjectById(SegAfiliado.class, id);
+				 e.setNomAfiliado(nomAfiliado);
+				 e.setDirAfiliado(dirAfiliado);
+				 e.setMunicipio(munAfiliado);
+				 e.setDepartamento(depAfiliado);
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	
+	
 	
 }

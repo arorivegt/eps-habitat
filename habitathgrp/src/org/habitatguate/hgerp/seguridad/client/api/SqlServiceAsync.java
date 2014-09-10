@@ -29,6 +29,11 @@ public interface SqlServiceAsync {
 	void Insertar_Beneficiario(String nomBeneficiario, String dirBeneficiario,
 			int telBeneficiario, AsyncCallback<Long> callback);
 
+	void Eliminar_Afiliado(Long id, AsyncCallback<Long> callback);
+
+	void Actualizar_Afiliado(Long id, String nomAfiliado, String dirAfiliado,
+			String depAfiliado, String munAfiliado, AsyncCallback<Long> callback);
+
 
 
 

@@ -6,13 +6,12 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
  
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+
+
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
@@ -1797,28 +1796,10 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 			@Override
 			public String ReporteEmpleados() throws IllegalArgumentException {
-				 /** Path to the resulting PDF file. */
-				try{
-				    createPdf("/home/anibaljose/Documentos/hello.pdf");
-				}catch(Exception e){
-					
-				}
-				return "null";
+				// TODO Auto-generated method stub
+				return null;
 			}
-			
-			public void createPdf(String filename)
-					throws DocumentException, IOException {
-				        // step 1
-				        Document document = new Document();
-				        // step 2
-				        PdfWriter.getInstance(document, new FileOutputStream(filename));
-				        // step 3
-				        document.open();
-				        // step 4
-				        document.add(new Paragraph("Hello World!"));
-				        // step 5
-				        document.close();
-				    }
+
 		
 
 	}

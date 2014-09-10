@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -20,7 +19,9 @@ public interface SqlService extends RemoteService{
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
 	Long Eliminar_Parametro(Long id);
+	Long Eliminar_Afiliado(Long id);
 	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
+	Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado);
 
 	
 }

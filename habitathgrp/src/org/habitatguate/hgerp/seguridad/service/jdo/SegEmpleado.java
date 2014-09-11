@@ -164,7 +164,8 @@ public class SegEmpleado implements Serializable {
 	private List <SegTest> test;
 	
 	@ManyToOne
-	private Long empleado;
+	private Long afiliado;
+	
 	
 	//datos del patrono
 	@Persistent
@@ -605,13 +606,14 @@ public class SegEmpleado implements Serializable {
 		this.IVS = IVS;
 	}
 
-	public Long getEmpleado() {
-		return empleado;
+	public Long getAfiliado() {
+		return afiliado;
 	}
 
-	public void setEmpleado(Long empleado) {
-		this.empleado = empleado;
+	public void setAfiliado(Long afiliado) {
+		this.afiliado = afiliado;
 	}
-	
+
+
 	
 }

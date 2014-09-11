@@ -120,8 +120,7 @@ public class Buscador_Afiliado extends Composite {
         		@Override
         		public void onSuccess(List<AuxAfiliado> result) {
    			
-        			System.out.println("ya estan todos los afiliados");
-        			
+        			e.ActulizarList(result);
         		}
         		
         		@Override

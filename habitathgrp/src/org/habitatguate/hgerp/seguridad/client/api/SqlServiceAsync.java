@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -33,6 +34,14 @@ public interface SqlServiceAsync {
 
 	void Actualizar_Afiliado(Long id, String nomAfiliado, String dirAfiliado,
 			String depAfiliado, String munAfiliado, AsyncCallback<Long> callback);
+
+	void ConsultaTodosBene(AsyncCallback<List<AuxBeneficiario>> callback);
+
+	void Eliminar_Beneficiario(Long id, AsyncCallback<Long> callback);
+
+	void Actualizar_Beneficiario(Long id, String nomBeneficiario,
+			String dirBeneficiario, int telBeneficiario,
+			AsyncCallback<Long> callback);
 
 
 

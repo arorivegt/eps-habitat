@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
@@ -100,6 +101,13 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
         Persistencia.deletePersistent(e);         
         return id;
     }
+    public Long Eliminar_Beneficiario(Long id) throws IllegalArgumentException {
+    	
+    	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+    	final SegBeneficiario e = Persistencia.getObjectById(SegBeneficiario.class, id); 
+        Persistencia.deletePersistent(e);         
+        return id;
+    }
 	
 //------------------------------------------------------CONSULTAS--------------------------------------------------	
     @Override
@@ -141,6 +149,23 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		}
 		return valor;
 	}
+	public List<AuxBeneficiario> ConsultaTodosBene(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegBeneficiario.class);
+		List<AuxBeneficiario> valor = new ArrayList<AuxBeneficiario>();
+		List<SegBeneficiario> execute = (List<SegBeneficiario>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegBeneficiario p : execute){
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getIdBeneficiario());
+				n.setNomBeneficiario(p.getNomBeneficiario());
+				n.setDirBeneficiario(p.getDirBeneficiario());
+				n.setTelBeneficiario(p.getTelBeneficiario());
+				valor.add(n);
+			}
+		}
+		return valor;
+	}
 
 	
 	//------------------------------------------MODIFICAR------------------------------------
@@ -175,6 +200,24 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 				 e.setDirAfiliado(dirAfiliado);
 				 e.setMunicipio(munAfiliado);
 				 e.setDepartamento(depAfiliado);
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	public Long Actualizar_Beneficiario(Long id,String nomBeneficiario,String dirBeneficiario,int telBeneficiario) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(nomBeneficiario!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegBeneficiario e = gestorPersistencia.getObjectById(SegBeneficiario.class, id);
+				 e.setNomBeneficiario(nomBeneficiario);
+				 e.setDirBeneficiario(dirBeneficiario);
+				 e.setTelBeneficiario(telBeneficiario);
+				 
 				 
 			}finally{
 				gestorPersistencia.close();

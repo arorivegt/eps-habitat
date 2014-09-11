@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -18,10 +19,12 @@ public interface SqlService extends RemoteService{
 	Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario);
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
+	List<AuxBeneficiario> ConsultaTodosBene();
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
+	Long Eliminar_Beneficiario(Long id);
 	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
 	Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado);
-
+	Long Actualizar_Beneficiario(Long id,String nomBeneficiario,String dirBeneficiario,int telBeneficiario);
 	
 }

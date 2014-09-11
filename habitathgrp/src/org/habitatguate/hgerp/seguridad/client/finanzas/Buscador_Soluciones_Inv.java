@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
+
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
@@ -20,9 +21,8 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class Buscador_Soluciones_Inv extends Composite {
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-    TablaGWT e = null;
+    TablaGWT_Beneficiario e = null;
 	public Buscador_Soluciones_Inv(){
-
 	final Grid grid = new Grid(2, 1);
 	initWidget(grid);
 	grid.setWidth("1278px");
@@ -34,12 +34,12 @@ public class Buscador_Soluciones_Inv extends Composite {
 	absolutePanel.setSize("1000px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
-	Label label = new Label("No. Casa");
+	Label label = new Label("Nombre Prestatario");
 	label.setStyleName("label");
 	absolutePanel.add(label, 5, 10);
 	label.setSize("157px", "13px");
 	
-	Label label_1 = new Label("Nombre prestatario");
+	Label label_1 = new Label("Dirección");
 	label_1.setStyleName("label");
 	absolutePanel.add(label_1, 242, 10);
 	label_1.setSize("192px", "13px");
@@ -56,7 +56,7 @@ public class Buscador_Soluciones_Inv extends Composite {
 	absolutePanel.add(textBox_1, 242, 29);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Dirección");
+	Label label_2 = new Label("Telefono");
 	label_2.setStyleName("label");
 	absolutePanel.add(label_2, 479, 10);
 	label_2.setSize("157px", "19px");
@@ -68,69 +68,7 @@ public class Buscador_Soluciones_Inv extends Composite {
 	absolutePanel.add(textBox_2, 479, 29);
 	textBox_2.setSize("227px", "34px");
 	
-	final TextBox textBox_3 = new TextBox();
-	textBox_3.setStylePrimaryName("gwt-TextBox2");
-	textBox_3.setStyleName("gwt-TextBox2");
-	textBox_3.setMaxLength(100);
-	absolutePanel.add(textBox_3, 716, 29);
-	textBox_3.setSize("227px", "34px");
-	
-	Label label_3 = new Label("Comunidad");
-	label_3.setStyleName("label");
-	absolutePanel.add(label_3, 716, 10);
-	label_3.setSize("157px", "13px");
-	
-	//---------------------------------segunda fila
-	
-	//----------------------------Segunda fila---------------------------------
-	
-		Label label_4 = new Label("Telefono");
-		label_4.setStyleName("label");
-		absolutePanel.add(label_4, 20, 68);
-		label_4.setSize("157px", "13px");
-		
-		Label label_5 = new Label("Nombre Responsable");
-		label_5.setStyleName("label");
-		absolutePanel.add(label_5, 257, 68);
-		label_5.setSize("192px", "13px");
-		
-		final TextBox textBox_4 = new TextBox();
-		textBox_4.setStyleName("gwt-TextBox2");
-		textBox_4.setMaxLength(100);
-		absolutePanel.add(textBox_4, 20, 85);
-		textBox_4.setSize("227px", "34px");
-		
-		final TextBox textBox_5 = new TextBox();
-		textBox_5.setStyleName("gwt-TextBox2");
-		textBox_5.setMaxLength(100);
-		absolutePanel.add(textBox_5, 257, 85);
-		textBox_5.setSize("227px", "34px");
-		
-		Label label_6 = new Label("Monto Autorizado");
-		label_6.setStyleName("label");
-		absolutePanel.add(label_6, 494, 68);
-		label_6.setSize("157px", "19px");
-		
-		final TextBox textBox_6 = new TextBox();
-		textBox_6.setStylePrimaryName("gwt-TextBox2");
-		textBox_6.setStyleName("gwt-TextBox2");
-		textBox_6.setMaxLength(100);
-		absolutePanel.add(textBox_6, 494, 85);
-		textBox_6.setSize("227px", "34px");
-		
-		final TextBox textBox_7 = new TextBox();
-		textBox_7.setStylePrimaryName("gwt-TextBox2");
-		textBox_7.setStyleName("gwt-TextBox2");
-		textBox_7.setMaxLength(100);
-		absolutePanel.add(textBox_7, 731, 85);
-		textBox_7.setSize("227px", "34px");
-		
-		Label label_7 = new Label("Comunidad");
-		label_7.setStyleName("label");
-		absolutePanel.add(label_7, 731, 68);
-		label_7.setSize("157px", "13px");
-		
-		
+			
 		
 		//-----------------------------	---------------------------------
 	
@@ -160,17 +98,15 @@ public class Buscador_Soluciones_Inv extends Composite {
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
-                	textBox_3.setText("");
 
                 	
                 }
 
          });
-			
-			/*loginService.ConsultaTodosParam(new AsyncCallback<List<AuxParametro>>() {
+			loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
         		
         		@Override
-        		public void onSuccess(List<AuxParametro> result) {
+        		public void onSuccess(List<AuxBeneficiario> result) {
         			e.ActulizarList(result);      			
         			
         			
@@ -181,7 +117,8 @@ public class Buscador_Soluciones_Inv extends Composite {
         			System.out.println(caught);
         			
         		}
-        	});*/
+        	});
+
 		}
 		
 		else{
@@ -190,12 +127,31 @@ public class Buscador_Soluciones_Inv extends Composite {
 		}
 	});		
 
-	button.setText("Nueva Solución");
+	button.setText("Nueva Beneficiario");
 	button.setStylePrimaryName("gwt-TextBox2");
 	button.setStyleName("gwt-TextBox2");
-	absolutePanel.add(button, 958, 29);
+	absolutePanel.add(button, 720, 29);
 	button.setSize("157px", "40px");
 	
+	loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+		
+		@Override
+		public void onSuccess(List<AuxBeneficiario> result) {
+
+			e = new TablaGWT_Beneficiario(result);
+			grid.setWidget(1, 0,e);
+			e.setSize("1000px", "300px");
+
+	
+			
+		}
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			System.out.println(caught);
+			
+		}
+	});
 	
 
 	

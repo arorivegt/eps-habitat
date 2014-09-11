@@ -27,7 +27,7 @@ public class SegAfiliado implements Serializable {
 	@OneToMany(mappedBy = "afiliado")
 	private List <SegSolucion> solucion;
 	@Persistent
-	@OneToMany(mappedBy = "empleado")
+	@OneToMany(mappedBy = "afiliado")
 	private List<Long> empleados;
 	
 

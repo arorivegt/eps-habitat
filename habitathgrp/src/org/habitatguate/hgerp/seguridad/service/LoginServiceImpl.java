@@ -1799,7 +1799,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				// TODO Auto-generated method stub
 				return null;
 			}
-
-		
+			
 
 	}

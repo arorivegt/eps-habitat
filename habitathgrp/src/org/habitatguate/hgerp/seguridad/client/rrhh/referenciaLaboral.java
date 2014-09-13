@@ -3,7 +3,6 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -62,13 +61,15 @@ public class referenciaLaboral extends Composite  {
 			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                    Window.alert("Error al ELiminar"+caught);
+                	fa.setMensaje("alert alert-error", 
+                			"Error !! \nal Eliminar");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
-                	Window.alert("Eliminado exitosamente!!! ");
+                	fa.setMensaje("alert alert-success", 
+                			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 

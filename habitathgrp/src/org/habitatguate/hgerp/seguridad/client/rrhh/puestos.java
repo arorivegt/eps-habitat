@@ -66,13 +66,15 @@ public class puestos extends Composite  {
 			loginService.Eliminar_Puesto(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                    Window.alert("Error al ELiminar"+caught);
+                	fa.setMensaje("alert alert-error", 
+                			"Error !! \nal Eliminar");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
-                	Window.alert("Eliminado exitosamente!!! ");
+                	fa.setMensaje("alert alert-success", 
+                			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 

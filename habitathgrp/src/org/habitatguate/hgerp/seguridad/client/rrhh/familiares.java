@@ -96,13 +96,16 @@ public class familiares extends Composite  {
 		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
+            	fa.setMensaje("alert alert-error", 
+            			"Error !! \nal eliminar");
                 Window.alert("Error al ELiminar"+caught);
             }
 
 			@Override
             public void onSuccess(Long result)
             {
-            	Window.alert("Eliminado exitosamente!!! ");
+            	fa.setMensaje("alert alert-success", 
+            			"Eliminado\n exitosamente!!!");
                 flextable.remove(fa);
             }
 

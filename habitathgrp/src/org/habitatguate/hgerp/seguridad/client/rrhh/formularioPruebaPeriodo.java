@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -11,10 +12,13 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.DoubleBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -249,7 +253,9 @@ public class formularioPruebaPeriodo extends Composite {
 							txtEvaluador.getText(), "1", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                            Window.alert("Error  al Guardar Datos"+caught);
+                        	setMensaje("alert alert-error", 
+                        			"Error !! \nal Guardar Datos");
+                           // Window.alert("Error  al Guardar Datos"+caught);
                         }
 
 						@Override
@@ -257,7 +263,9 @@ public class formularioPruebaPeriodo extends Composite {
                         {
 							id_prueba= result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! ");
+                        	setMensaje("alert alert-success", 
+                        			"Datos Guardados\n exitosamente!!!");
+                        	//Window.alert("Datos Guardados exitosamente!!! ");
                         }
 
                  });
@@ -271,14 +279,18 @@ public class formularioPruebaPeriodo extends Composite {
 					txtEvaluador.getText(), "2", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                    Window.alert("Error  al Actualizar Datos"+caught);
+                	setMensaje("alert alert-error", 
+                			"Error !! \nal Actualizar Datos");
+                   //Window.alert("Error  al Actualizar Datos"+caught);
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
 					bandera = false;
-                	Window.alert("Datos Actualizados exitosamente!!! ");
+                	setMensaje("alert alert-success", 
+                			"Datos Actualizados\n exitosamente!!!");
+                	//Window.alert("Datos Actualizados exitosamente!!! ");
                 }
 
          });
@@ -468,6 +480,35 @@ public class formularioPruebaPeriodo extends Composite {
 		}
 		this.txtEvaluador.setText(txtEvaluador);
 		this.dateFecha.setValue(new Date(dateFecha));
+	}
+	public void setMensaje(String estilo, String mensaje){
+		final DialogBox Registro2 = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        Mensaje inicio = new Mensaje();
+        
+        Registro2.setStyleName(estilo);
+        inicio.mensajeEntrada(mensaje);
+        inicio.mensajeEstilo(estilo);
+        close.addStyleName("close");
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(inicio);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        Registro2 .setWidget(dialogVPanel);
+        Registro2 .setModal(true);
+        Registro2 .setGlassEnabled(true);
+        Registro2 .setAnimationEnabled(true);
+        Registro2 .center();
+        Registro2 .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Registro2.hide();
+        }
+    });
 	}
 
 }

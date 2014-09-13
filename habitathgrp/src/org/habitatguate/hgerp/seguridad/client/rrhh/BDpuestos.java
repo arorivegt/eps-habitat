@@ -8,7 +8,6 @@ import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -50,10 +49,13 @@ public class BDpuestos extends Composite  {
 		}
 	    
 	    public void agregarFormulario_lleno(){
+	    	final formularioBDPuestos fa = new  formularioBDPuestos(a);
 	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
 	    		public void onFailure(Throwable caught) 
 	    		{
-	    			Window.alert("Error en BD puestos"+caught);
+                	fa.setMensaje("alert alert-error", 
+                			"Error !! \nen la base de datos\nde puestos");
+	    			//Window.alert("Error en BD puestos"+caught);
 	    		}
 
 				@Override
@@ -62,7 +64,6 @@ public class BDpuestos extends Composite  {
 					if (!results.isEmpty()) {
 			    		
 					    for ( AuxBDPuesto n2 : results) {
-					    	formularioBDPuestos fa = new  formularioBDPuestos(a);
 					    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 					        flextable.setWidget(flextable.getRowCount(), 0,fa );
 					    }

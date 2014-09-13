@@ -95,17 +95,17 @@ public class Index implements EntryPoint {
                                         	Mensaje inicio = new Mensaje();
                                         	inicio.mensajeEntrada("Error!! \nEn el servicio "
                                 				+ "\n no se pudo\n iniciar ");
-                                		dialogVPanel.add(serverResponseLabel );
-                                		dialogVPanel.add(inicio);
-                                        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-                                        dialogVPanel.add(close);
-                                        Registro2 .setWidget(dialogVPanel);
-                                		Registro2 .setModal(true);
-                                		Registro2 .setGlassEnabled(true);
-                                		Registro2 .setAnimationEnabled(true);
-                                		Registro2 .center();
-                                		Registro2 .show();
-                                        close.setFocus(true);
+                                        	dialogVPanel.add(serverResponseLabel );
+                                        	dialogVPanel.add(inicio);
+                                        	dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+                                        	dialogVPanel.add(close);
+                                        	Registro2 .setWidget(dialogVPanel);
+                                        	Registro2 .setModal(true);
+                                        	Registro2 .setGlassEnabled(true);
+                                        	Registro2 .setAnimationEnabled(true);
+                                        	Registro2 .center();
+                                        	Registro2 .show();
+                                        	close.setFocus(true);
                                         
                                         close.addClickHandler(new ClickHandler() {
                                 			public void onClick(ClickEvent event) {

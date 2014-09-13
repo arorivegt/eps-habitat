@@ -6,7 +6,6 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -89,13 +88,17 @@ public class Desempeno extends Composite  {
 			loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                    Window.alert("Error al ELiminar"+caught);
+                	fa.setMensaje("alert alert-error", 
+                			"Error !! \nal Eliminar");
+                   // Window.alert("Error al ELiminar"+caught);
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
-                	Window.alert("Eliminado exitosamente!!! ");
+                	fa.setMensaje("alert alert-success", 
+                			"Eliminado exitosamente!!!");
+                	//Window.alert("Eliminado exitosamente!!! ");
         	        flextable.remove(fa);
                 }
 

@@ -4,15 +4,19 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-import com.google.gwt.user.client.Window;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
@@ -174,7 +178,8 @@ public class formularioEntrevista extends Composite {
 					try{
 						Float.parseFloat(txtAporteCasa.getText());
 					}catch(Exception e){
-						Window.alert("Aporte a Casa no valido");
+                    	setMensaje("alert alert-error", 
+                    			"Error !! \nAporte a Casa no valido");
 						txtAporteCasa.setText("0.0");
 					}
 				}
@@ -201,7 +206,8 @@ public class formularioEntrevista extends Composite {
 					try{
 						Float.parseFloat(txtAmortizacion.getText());
 					}catch(Exception e){
-						Window.alert("Amortizacion no valido");
+                    	setMensaje("alert alert-error", 
+                    			"Error !! \nAmortizacion no valido");
 						txtAmortizacion.setText("0.0");
 					}
 				}
@@ -269,7 +275,8 @@ public class formularioEntrevista extends Composite {
 					try{
 						Float.parseFloat(txtPagoMensual.getText());
 					}catch(Exception e){
-						Window.alert("Pago Mensual no valido");
+                    	setMensaje("alert alert-error", 
+                    			"Error !! \nPago Mensual no valido");
 						txtPagoMensual.setText("0.0");
 					}
 				}
@@ -289,7 +296,8 @@ public class formularioEntrevista extends Composite {
 					try{
 						Float.parseFloat(txtPretencionSalarial.getText());
 					}catch(Exception e){
-						Window.alert("Pretencion Salarial no valido");
+                    	setMensaje("alert alert-error", 
+                    			"Error !! \nPretencion Salarial no valido");
 						txtPretencionSalarial.setText("0.0");
 					}
 				}
@@ -336,7 +344,8 @@ public class formularioEntrevista extends Composite {
 			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                            Window.alert("Error  al Guardar Datos"+caught);
+                        	setMensaje("alert alert-error", 
+                        			"Error !! \nal Guardar Datos");
                         }
 
 						@Override
@@ -344,7 +353,8 @@ public class formularioEntrevista extends Composite {
                         {
 							id_entrevista = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! ");
+                        	setMensaje("alert alert-success", 
+                        			"Datos Guardados\n exitosamente!!!");
                         }
 
                  });
@@ -363,14 +373,16 @@ public class formularioEntrevista extends Composite {
 				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
 	                        {
-	                            Window.alert("Error  al Actualizar Datos"+caught);
+	                        	setMensaje("alert alert-error", 
+	                        			"Error !! \nal Actualizar Datos");
 	                        }
 
 							@Override
 	                        public void onSuccess(Long result)
 	                        {
 								bandera = false;
-	                        	Window.alert("Datos Actualizados exitosamente!!! ");
+			                	setMensaje("alert alert-success", 
+			                			"Datos Actualizados\n exitosamente!!!");
 	                        }
 
 	                 });
@@ -611,4 +623,33 @@ public class formularioEntrevista extends Composite {
 			
 			
 		}
+    public void setMensaje(String estilo, String mensaje){
+        final DialogBox Registro2 = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        Mensaje inicio = new Mensaje();
+        
+        Registro2.setStyleName(estilo);
+        inicio.mensajeEntrada(mensaje);
+        inicio.mensajeEstilo(estilo);
+        close.addStyleName("close");
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(inicio);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        Registro2 .setWidget(dialogVPanel);
+        Registro2 .setModal(true);
+        Registro2 .setGlassEnabled(true);
+        Registro2 .setAnimationEnabled(true);
+        Registro2 .center();
+        Registro2 .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Registro2.hide();
+        }
+    });
+    }
 }

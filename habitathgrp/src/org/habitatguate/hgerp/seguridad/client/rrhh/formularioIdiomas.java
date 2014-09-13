@@ -4,6 +4,7 @@ import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -13,6 +14,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -84,7 +86,8 @@ public class formularioIdiomas extends Composite {
 							txtIdioma.getText(), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                            Window.alert("Error  al Guardar Datos"+caught);
+                        	setMensaje("alert alert-error", 
+                        			"Error !! \nal Guardar Datos");
                         }
 
 						@Override
@@ -92,7 +95,8 @@ public class formularioIdiomas extends Composite {
                         {
 							id_idioma = result;
 							bandera = false;
-                        	Window.alert("Datos Guardados exitosamente!!! ");
+                        	setMensaje("alert alert-success", 
+                        			"Datos Guardados\n exitosamente!!!");
                         }
 						});
 				}else{
@@ -100,14 +104,16 @@ public class formularioIdiomas extends Composite {
 							txtIdioma.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                            Window.alert("Error  al Actualizar Datos"+caught);
+                        	setMensaje("alert alert-error", 
+                        			"Error !! \nal Actualizar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-                        	Window.alert("Datos Actualizar exitosamente!!! ");
+		                	setMensaje("alert alert-success", 
+		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
@@ -201,7 +207,8 @@ public class formularioIdiomas extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-						Window.alert("Selecciono un archivo?");
+	                	setMensaje("alert alert-info", 
+	                			"Selecciono un archivo?");
 						event.cancel();
 					}
 				}
@@ -225,7 +232,8 @@ public class formularioIdiomas extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-						Window.alert(results);
+	                	setMensaje("alert alert-error", 
+	                			results);
 						
 					}
 				}
@@ -281,7 +289,8 @@ public class formularioIdiomas extends Composite {
 			}
 
 			public void onFailure(Throwable caught) {
-				Window.alert("Something went wrong with the rpc call.");
+            	setMensaje("alert alert-error", 
+            			"Error !! \nen el servicio");
 			}
 		});
 		
@@ -301,7 +310,6 @@ public class formularioIdiomas extends Composite {
 				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
 					@Override
 					public void onFailure(Throwable caught) {
-						Window.alert("Archivo No Eliminado");
 					}
 					@Override
 					public void onSuccess(String result) {
@@ -309,7 +317,6 @@ public class formularioIdiomas extends Composite {
 						grid.setVisible(false);
 						KeyFile = "";
 						URLFile = "";
-						Window.alert("Archivo Eliminado");
 					}
 
                 });
@@ -335,5 +342,33 @@ public class formularioIdiomas extends Composite {
 	public void setKeyFile(String keyFile) {
 		KeyFile = keyFile;
 	}
-
+    public void setMensaje(String estilo, String mensaje){
+        final DialogBox Registro2 = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        Mensaje inicio = new Mensaje();
+        
+        Registro2.setStyleName(estilo);
+        inicio.mensajeEntrada(mensaje);
+        inicio.mensajeEstilo(estilo);
+        close.addStyleName("close");
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(inicio);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        Registro2 .setWidget(dialogVPanel);
+        Registro2 .setModal(true);
+        Registro2 .setGlassEnabled(true);
+        Registro2 .setAnimationEnabled(true);
+        Registro2 .center();
+        Registro2 .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Registro2.hide();
+        }
+    });
+    }
 }

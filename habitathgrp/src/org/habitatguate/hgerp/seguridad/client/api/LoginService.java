@@ -146,8 +146,6 @@ public interface LoginService extends RemoteService {
     ///querys
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     
-    //crear reportes
-    String ReporteEmpleados()throws IllegalArgumentException;
 	
     
 

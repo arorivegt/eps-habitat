@@ -64191,3 +64191,1503 @@ Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
       Compiling...
          Compilation completed in 0,00 seconds
       Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   20% complete (ETR: 14 seconds)
+   20% complete (ETR: 14 seconds)
+   20% complete (ETR: 14 seconds)
+   30% complete (ETR: 12 seconds)
+   40% complete (ETR: 9 seconds)
+   50% complete (ETR: 7 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 13,76 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2791 units from cache.
+Compiling...
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   60% complete (ETR: 3 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 8,44 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CreatePDFExample.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 24: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 31: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 33: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 35: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 39: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 43: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.FormPanel.IFrameTemplate
+         Generating method body for get()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2791 cached/archived units.  Used 2791 / 2791 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CreatePDFExample.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 23: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 24: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 31: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 33: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 35: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 39: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 43: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,05 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647431500.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647431500.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647431500_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,05 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647433294.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647433294.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647433294_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,05 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647436848.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647436848.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647436848_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647442157.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647442157.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647442157_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,04 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647445391.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647445391.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647445391_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647448254.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647448254.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647448254_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647451802.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647451802.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647451802_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647457760.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647457760.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647457760_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458590.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458590.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458590_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458731.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458731.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647458731_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647461439.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647461439.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647461439_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647466466.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647466466.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647466466_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647470195.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647470195.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647470195_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647476592.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647476592.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647476592_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647481067.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647481067.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647481067_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487026.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487026.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487026_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487158.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487158.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647487158_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488000.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488000.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488000_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488150.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488150.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647488150_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489427.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489427.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489427_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489625.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489625.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647489625_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647510602.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647510602.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410647510602_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2719 units from cache.
+Compiling...
+   10% complete (ETR: 30 seconds)
+   10% complete (ETR: 30 seconds)
+   20% complete (ETR: 24 seconds)
+   30% complete (ETR: 17 seconds)
+   40% complete (ETR: 13 seconds)
+   50% complete (ETR: 10 seconds)
+   60% complete (ETR: 7 seconds)
+   70% complete (ETR: 5 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 21,52 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2719 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Removing invalidated units
+Finding entry point classes
+Public resources found in...
+Translatable source found in...
+Found 2719 cached/archived units.  Used 2719 / 2791 units from cache.
+Compiling...
+   Compilation completed in 1,08 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2791 cached/archived units.  Used 2791 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,04 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/ReporteEmpleados.java'
+      [ERROR] Line 139: The method agregarFormulario(char, BuscadorEmpleados, String, String, String, String, String, String, String) in the type EmpleadoLista is not applicable for the arguments (char, ReporteEmpleados, String, String, String, String, String, String, String)
+      [ERROR] Line 145: The method agregarFormulario(char, BuscadorEmpleados, String, String, String, String, String, String, String) in the type EmpleadoLista is not applicable for the arguments (char, ReporteEmpleados, String, String, String, String, String, String, String)
+      [ERROR] Line 152: The method agregarFormulario(char, BuscadorEmpleados, String, String, String, String, String, String, String) in the type EmpleadoLista is not applicable for the arguments (char, ReporteEmpleados, String, String, String, String, String, String, String)
+      [ERROR] Line 159: The method agregarFormulario(char, BuscadorEmpleados, String, String, String, String, String, String, String) in the type EmpleadoLista is not applicable for the arguments (char, ReporteEmpleados, String, String, String, String, String, String, String)
+      [ERROR] Line 166: The method agregarFormulario(char, BuscadorEmpleados, String, String, String, String, String, String, String) in the type EmpleadoLista is not applicable for the arguments (char, ReporteEmpleados, String, String, String, String, String, String, String)
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2791 cached/archived units.  Used 2791 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2792 units from cache.
+Compiling...
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   50% complete (ETR: 6 seconds)
+   60% complete (ETR: 5 seconds)
+   70% complete (ETR: 4 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 13,92 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2792 cached/archived units.  Used 2792 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2791 cached/archived units.  Used 2791 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,02 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2792 cached/archived units.  Used 2792 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 2792 cached/archived units.  Used 2792 / 2792 units from cache.
+Compiling...
+   Compilation completed in 0,00 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 28: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 32: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 40: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2792 units from cache.
+Compiling...
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   40% complete (ETR: 6 seconds)
+   50% complete (ETR: 6 seconds)
+   60% complete (ETR: 6 seconds)
+   70% complete (ETR: 5 seconds)
+   80% complete (ETR: 3 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 16,63 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 15: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 20: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 21: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 47: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 49: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 51: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 55: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 59: The method close() is undefined for the type OutputStream
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,06 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738484883.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738484883.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738484883_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.Tree.Resources
+   Invoking generator com.google.gwt.resources.rebind.context.InlineClientBundleGenerator
+      Preparing method treeClosed
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeClosed'
+      Preparing method treeLeaf
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeLeaf'
+      Preparing method treeOpen
+         Adding image 'com.google.gwt.user.client.ui.Tree.Resources.treeOpen'
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface com.google.gwt.user.client.ui.impl.ClippedImageImpl.Template
+         Generating method body for image()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738486778.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738486778.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738486778_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738503262.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738503262.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738503262_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,07 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738803542.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738803542.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738803542_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,05 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738807287.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738807287.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738807287_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738810206.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738810206.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738810206_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738813828.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738813828.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738813828_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738821283.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738821283.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738821283_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738824339.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738824339.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+         Generating method body for html5()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738824339_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738829905.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738829905.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738829905_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738830048.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738830048.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738830048_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738833039.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738833039.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738833039_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,02 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738835876.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738835876.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738835876_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo.UiStackEjemploUiBinder
+   Adding '2' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738838956.Template
+   Invoking generator com.google.gwt.safehtml.rebind.SafeHtmlTemplatesGenerator
+      Constructing interface org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738838956.Template
+         Generating method body for html1()
+         Generating method body for html2()
+         Generating method body for html3()
+         Generating method body for html4()
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,00 seconds
+      Removing invalidated units
+Rebinding org.habitatguate.hgerp.seguridad.client.principal.UIStacksEjemplo_UiStackEjemploUiBinderImpl_designTime1410738838956_GenBundle
+   Adding '1' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2792 units from cache.
+Compiling...
+   50% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   50% complete (ETR: 5 seconds)
+   60% complete (ETR: 4 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 10,49 seconds
+Validating units:
+   [ERROR] Errors in 'file:/home/anibaljose/EPS/habitathgrp/src/org/habitatguate/hgerp/seguridad/client/rrhh/CrearReporteEmpleado.java'
+      [ERROR] Line 25: No source code is available for type javax.servlet.http.HttpServlet; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type javax.servlet.http.HttpServletRequest; did you forget to inherit a required module?
+      [ERROR] Line 30: No source code is available for type javax.servlet.http.HttpServletResponse; did you forget to inherit a required module?
+      [ERROR] Line 31: No source code is available for type javax.servlet.ServletException; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.Font; did you forget to inherit a required module?
+      [ERROR] Line 36: No source code is available for type com.itextpdf.text.Font.FontFamily; did you forget to inherit a required module?
+      [ERROR] Line 58: No source code is available for type com.itextpdf.text.Document; did you forget to inherit a required module?
+      [ERROR] Line 60: No source code is available for type com.itextpdf.text.pdf.PdfWriter; did you forget to inherit a required module?
+      [ERROR] Line 63: No source code is available for type com.itextpdf.text.Paragraph; did you forget to inherit a required module?
+      [ERROR] Line 70: No source code is available for type com.itextpdf.text.DocumentException; did you forget to inherit a required module?
+      [ERROR] Line 74: The method close() is undefined for the type OutputStream
+      [ERROR] Line 77: No source code is available for type com.itextpdf.text.pdf.PdfPTable; did you forget to inherit a required module?
+      [ERROR] Line 79: No source code is available for type com.itextpdf.text.pdf.PdfPCell; did you forget to inherit a required module?
+      [ERROR] Line 79: No source code is available for type com.itextpdf.text.Phrase; did you forget to inherit a required module?
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,01 seconds
+      Removing invalidated units
+Public resources found in...
+Translatable source found in...
+Found 0 cached/archived units.  Used 0 / 2791 units from cache.
+Compiling...
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   50% complete (ETR: 4 seconds)
+   60% complete (ETR: 4 seconds)
+   70% complete (ETR: 3 seconds)
+   80% complete (ETR: 2 seconds)
+   90% complete (ETR: 1 seconds)
+   100% complete (ETR: 0 seconds)
+   Compilation completed in 10,04 seconds
+Removing invalidated units
+Finding entry point classes
+Rebinding com.google.gwt.i18n.client.impl.LocaleInfoImpl
+   Invoking generator com.google.gwt.i18n.rebind.LocaleInfoGenerator
+      Processing interface com.google.gwt.i18n.client.constants.NumberConstantsImpl
+         Generating method body for notANumber()
+         Generating method body for currencyPattern()
+         Generating method body for decimalPattern()
+         Generating method body for decimalSeparator()
+         Generating method body for defCurrencyCode()
+         Generating method body for exponentialSymbol()
+         Generating method body for globalCurrencyPattern()
+         Generating method body for groupingSeparator()
+         Generating method body for infinity()
+         Generating method body for minusSign()
+         Generating method body for monetaryGroupingSeparator()
+         Generating method body for monetarySeparator()
+         Generating method body for percent()
+         Generating method body for percentPattern()
+         Generating method body for perMill()
+         Generating method body for plusSign()
+         Generating method body for scientificPattern()
+         Generating method body for simpleCurrencyPattern()
+         Generating method body for zeroDigit()
+   Adding '3' new generated units
+      Compiling...
+         Compilation completed in 0,03 seconds
+      Removing invalidated units

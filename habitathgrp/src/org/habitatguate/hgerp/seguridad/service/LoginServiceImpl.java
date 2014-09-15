@@ -7,9 +7,6 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
- 
 
 
 
@@ -1794,11 +1791,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				return valor;
 			}
 
-			@Override
-			public String ReporteEmpleados() throws IllegalArgumentException {
-				// TODO Auto-generated method stub
-				return null;
-			}
+			
 			
 
 	}

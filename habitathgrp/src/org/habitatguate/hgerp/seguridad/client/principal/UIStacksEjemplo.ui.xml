@@ -10,7 +10,7 @@
                 <g:Label styleName="sendButton2" text="Prestaciones" ui:field="label_3"/>
                 <g:Label styleName="sendButton2" text="Configuracion" ui:field="label_7"/>
                 <g:Label styleName="sendButton2" text="Inf. Ministerio" ui:field="label_2" height="5px" width="90px" direction="LTR" wordWrap="false"/>
-                <g:Label styleName="sendButton2" text="Inf. Empleados" ui:field="label_4" horizontalAlignment="ALIGN_LEFT" width="100px" height="31px" direction="RTL"/>
+                <g:Label styleName="sendButton2" text="Inf. Empleados" ui:field="label_4" horizontalAlignment="ALIGN_LEFT" width="100px" height="31px"/>
            </g:Tree>
          </g:stack>
          <g:stack>

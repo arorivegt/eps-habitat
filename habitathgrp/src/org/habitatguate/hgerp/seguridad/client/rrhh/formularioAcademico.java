@@ -291,7 +291,7 @@ public class formularioAcademico extends Composite {
 					if (fileUpload.getFilename().length() == 0) {
 	                	setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
-						Window.alert("Selecciono un archivo?");
+						//Window.alert("Selecciono un archivo?");
 						event.cancel();
 	        }
 				}

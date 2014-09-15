@@ -1158,22 +1158,6 @@ public class formularioDatos extends Composite {
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-				loginService.ReporteEmpleados(new AsyncCallback<String>() 
-                        {
-                            public void onFailure(Throwable caught) 
-                            {
-                            	setMensaje("alert alert-error", 
-                            			"Error !! \nal imprimir");
-                            }
-
-							@Override
-                            public void onSuccess(String resutl)
-                            {
-			                	setMensaje("alert alert-success", 
-			                			"Impresion\n exitosamente!!!");
-                            }
-
-                     });
 			}
 		});
 		btnImprimir.setText("Imprimir");

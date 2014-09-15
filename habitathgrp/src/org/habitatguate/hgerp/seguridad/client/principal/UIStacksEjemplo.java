@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
@@ -57,8 +58,9 @@ public class UIStacksEjemplo extends ResizeComposite {
  	}
  	@UiHandler("label_4")
  	void onLabel_4Click(ClickEvent event) {
-
- 		Window.alert("no esta disponible");
+ 		ReporteEmpleados buscador = new ReporteEmpleados();
+ 		this.nuevo.getAbsolutePanel_1().clear();
+ 		this.nuevo.getAbsolutePanel_1().add(buscador, 0, 0);
  	}
  	@UiHandler("label_1_Finan")
  	void onLabel_1_FinanClick(ClickEvent event) {

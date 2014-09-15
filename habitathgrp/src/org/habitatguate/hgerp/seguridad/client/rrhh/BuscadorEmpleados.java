@@ -36,32 +36,38 @@ public class BuscadorEmpleados extends Composite  {
 					grid.setWidget(0, 0, absolutePanel);
 					absolutePanel.setSize("1000px", "90px");
 					absolutePanel.setStyleName("gwt-Label-new");
-					
-					final TextBox txtPrimerApellido = new TextBox();
-					txtPrimerApellido.setStyleName("gwt-TextBox2");
-					txtPrimerApellido.setMaxLength(100);
-					absolutePanel.add(txtPrimerApellido, 10, 29);
-					txtPrimerApellido.setSize("227px", "34px");
-					
-					final TextBox txtPrimerNombre = new TextBox();
-					txtPrimerNombre.setStylePrimaryName("gwt-TextBox2");
-					txtPrimerNombre.setStyleName("gwt-TextBox2");
-					txtPrimerNombre.setMaxLength(100);
-					absolutePanel.add(txtPrimerNombre, 480, 29);
-					txtPrimerNombre.setSize("227px", "34px");
-					
-					final TextBox txtSegundoNombre = new TextBox();
-					txtSegundoNombre.setStylePrimaryName("gwt-TextBox2");
-					txtSegundoNombre.setStyleName("gwt-TextBox2");
-					txtSegundoNombre.setMaxLength(100);
-					absolutePanel.add(txtSegundoNombre, 715, 29);
-					txtSegundoNombre.setSize("227px", "34px");
-					
-						final TextBox txtDPI = new TextBox();
-						txtDPI.setStyleName("gwt-TextBox2");
-						txtDPI.setMaxLength(100);
-						absolutePanel.add(txtDPI, 10, 87);
-						txtDPI.setSize("227px", "34px");
+						
+						final TextBox txtPrimerApellido = new TextBox();
+						txtPrimerApellido.setStyleName("gwt-TextBox2");
+						txtPrimerApellido.setMaxLength(100);
+						absolutePanel.add(txtPrimerApellido, 10, 29);
+						txtPrimerApellido.setSize("227px", "34px");
+						
+						final TextBox txtSegundoApellido = new TextBox();
+						txtSegundoApellido.setStyleName("gwt-TextBox2");
+						txtSegundoApellido.setMaxLength(100);
+						absolutePanel.add(txtSegundoApellido, 245, 29);
+						txtSegundoApellido.setSize("227px", "34px");
+						
+						final TextBox txtPrimerNombre = new TextBox();
+						txtPrimerNombre.setStylePrimaryName("gwt-TextBox2");
+						txtPrimerNombre.setStyleName("gwt-TextBox2");
+						txtPrimerNombre.setMaxLength(100);
+						absolutePanel.add(txtPrimerNombre, 480, 29);
+						txtPrimerNombre.setSize("227px", "34px");
+						
+						final TextBox txtSegundoNombre = new TextBox();
+						txtSegundoNombre.setStylePrimaryName("gwt-TextBox2");
+						txtSegundoNombre.setStyleName("gwt-TextBox2");
+						txtSegundoNombre.setMaxLength(100);
+						absolutePanel.add(txtSegundoNombre, 715, 29);
+						txtSegundoNombre.setSize("227px", "34px");
+						
+							final TextBox txtDPI = new TextBox();
+							txtDPI.setStyleName("gwt-TextBox2");
+							txtDPI.setMaxLength(100);
+							absolutePanel.add(txtDPI, 10, 87);
+							txtDPI.setSize("227px", "34px");
 						
 						final TextBox txtPasaporte = new TextBox();
 						txtPasaporte.setStyleName("gwt-TextBox2");
@@ -86,47 +92,6 @@ public class BuscadorEmpleados extends Composite  {
 						listBox.setStyleName("gwt-TextBox2");
 						absolutePanel.add(listBox, 715, 87);
 						listBox.setSize("229px", "36px");
-						
-						final TextBox txtSegundoApellido = new TextBox();
-						txtSegundoApellido.setStyleName("gwt-TextBox2");
-						txtSegundoApellido.setMaxLength(100);
-						absolutePanel.add(txtSegundoApellido, 245, 29);
-						txtSegundoApellido.setSize("227px", "34px");
-						
-						Label label = new Label("Primer Apellido");
-						label.setStyleName("label");
-						absolutePanel.add(label, 10, 10);
-						label.setSize("157px", "13px");
-						
-						Label label_1 = new Label("Segundo Apellido");
-						label_1.setStyleName("label");
-						absolutePanel.add(label_1, 245, 10);
-						label_1.setSize("192px", "13px");
-						
-						Label label_2 = new Label("Primer Nombre");
-						label_2.setStyleName("label");
-						absolutePanel.add(label_2, 480, 10);
-						label_2.setSize("157px", "19px");
-						
-						Label label_3 = new Label("2do y Demás Nombres");
-						label_3.setStyleName("label");
-						absolutePanel.add(label_3, 715, 10);
-						label_3.setSize("261px", "13px");
-						
-						Label dpi = new Label("DPI");
-						dpi.setStyleName("label");
-						absolutePanel.add(dpi, 10, 71);
-						dpi.setSize("157px", "13px");
-						
-						Label NoPasaporte = new Label("No Pasaporte");
-						NoPasaporte.setStyleName("label");
-						absolutePanel.add(NoPasaporte, 245, 71);
-						NoPasaporte.setSize("157px", "13px");
-						
-						Label lblBusquedaPor = new Label("Busqueda por: ");
-						lblBusquedaPor.setStyleName("label");
-						absolutePanel.add(lblBusquedaPor, 715, 71);
-						lblBusquedaPor.setSize("118px", "13px");
 						
 						Image image = new Image("images/ico-lupa.png");
 						image.addClickHandler(new ClickHandler() {
@@ -174,6 +139,41 @@ public class BuscadorEmpleados extends Composite  {
 						
 								absolutePanel.add(image, 973, 42);
 								image.setSize("103px", "55px");
+						
+						Label label = new Label("Primer Apellido");
+						label.setStyleName("label");
+						absolutePanel.add(label, 10, 10);
+						label.setSize("157px", "13px");
+						
+						Label label_1 = new Label("Segundo Apellido");
+						label_1.setStyleName("label");
+						absolutePanel.add(label_1, 245, 10);
+						label_1.setSize("192px", "13px");
+						
+						Label label_2 = new Label("Primer Nombre");
+						label_2.setStyleName("label");
+						absolutePanel.add(label_2, 480, 10);
+						label_2.setSize("157px", "19px");
+						
+						Label label_3 = new Label("2do y Demás Nombres");
+						label_3.setStyleName("label");
+						absolutePanel.add(label_3, 715, 10);
+						label_3.setSize("261px", "13px");
+						
+						Label dpi = new Label("DPI");
+						dpi.setStyleName("label");
+						absolutePanel.add(dpi, 10, 71);
+						dpi.setSize("157px", "13px");
+						
+						Label NoPasaporte = new Label("No Pasaporte");
+						NoPasaporte.setStyleName("label");
+						absolutePanel.add(NoPasaporte, 245, 71);
+						NoPasaporte.setSize("157px", "13px");
+						
+						Label lblBusquedaPor = new Label("Busqueda por: ");
+						lblBusquedaPor.setStyleName("label");
+						absolutePanel.add(lblBusquedaPor, 715, 71);
+						lblBusquedaPor.setSize("118px", "13px");
 								
 								Label lblEstadoEmpleado = new Label("Estado Empleado");
 								lblEstadoEmpleado.setStyleName("label");

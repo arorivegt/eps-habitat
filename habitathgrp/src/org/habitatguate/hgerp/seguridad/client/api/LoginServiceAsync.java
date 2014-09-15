@@ -164,9 +164,6 @@ public interface LoginServiceAsync {
 	    void remove(String fileURL,
 	    		AsyncCallback<String> callback)throws IllegalArgumentException;
 	    
-	    //creacion de pdf
-	    
-	    void ReporteEmpleados(AsyncCallback<String> callback)throws IllegalArgumentException;
 		
 
 	

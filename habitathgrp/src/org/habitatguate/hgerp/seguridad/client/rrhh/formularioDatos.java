@@ -115,6 +115,7 @@ public class formularioDatos extends Composite {
 			.create(UploadUrlService.class);
     private AbsolutePanel absolutePanel;
     private Button btnImprimir;
+    private Button btnExportarDatos;
     
 	public formularioDatos(Empleados e,final int tipo) {
 		this.empleado = e;
@@ -857,7 +858,7 @@ public class formularioDatos extends Composite {
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 320, 1313);
+		absolutePanel.add(btnActualizar, 36, 1313);
 		btnActualizar.setSize("229px", "44px");
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -950,6 +951,25 @@ public class formularioDatos extends Composite {
 				
 			}
 		});
+		
+		btnImprimir = new Button("Send");
+		btnImprimir.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				
+			}
+		});
+		btnImprimir.setText("Imprimir");
+		btnImprimir.setStylePrimaryName("sendButton");
+		btnImprimir.setStyleName("sendButton");
+		absolutePanel.add(btnImprimir, 319, 1314);
+		btnImprimir.setSize("229px", "44px");
+		
+		btnExportarDatos = new Button("Send");
+		btnExportarDatos.setText("Exportar Datos");
+		btnExportarDatos.setStylePrimaryName("sendButton");
+		btnExportarDatos.setStyleName("sendButton");
+		absolutePanel.add(btnExportarDatos, 591, 1313);
+		btnExportarDatos.setSize("229px", "44px");
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
 		absolutePanel.add(lblNoDeAfiliacin, 37, 221);
@@ -1153,18 +1173,6 @@ public class formularioDatos extends Composite {
 		lblEstadoDelEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoDelEmpleado, 38, 138);
 		lblEstadoDelEmpleado.setSize("192px", "19px");
-		
-		btnImprimir = new Button("Send");
-		btnImprimir.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				
-			}
-		});
-		btnImprimir.setText("Imprimir");
-		btnImprimir.setStylePrimaryName("sendButton");
-		btnImprimir.setStyleName("sendButton");
-		absolutePanel.add(btnImprimir, 591, 1313);
-		btnImprimir.setSize("229px", "44px");
 	}
 	
 	private String Depto_Municipio(String Departamento){
@@ -1737,7 +1745,8 @@ public class formularioDatos extends Composite {
 		txtBonificacion.setVisible(false);
 		txtTotal.setVisible(false);
 		listEstado.setVisible(false);
-		
+		btnExportarDatos.setVisible(false);
+		btnImprimir.setVisible(false);
 		 	lblEstadoDelEmpleado.setVisible(false);			
 		 	lblCentroTrabajo.setVisible(false);
 			lblOcupacion.setVisible(false);

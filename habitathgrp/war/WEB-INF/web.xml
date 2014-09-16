@@ -65,6 +65,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
  <url-pattern>/CrearReporte</url-pattern>  
 </servlet-mapping>  
 
+  <servlet>  
+ <servlet-name>ImprimirPerfil</servlet-name>  
+ <servlet-class>org.habitatguate.hgerp.seguridad.service.ImprimirPerfil</servlet-class>  
+</servlet>  
+<servlet-mapping>  
+ <servlet-name>ImprimirPerfil</servlet-name>  
+ <url-pattern>/ImprimirPerfil</url-pattern>  
+</servlet-mapping>  
 
   <!-- Default page to serve -->
   <welcome-file-list>

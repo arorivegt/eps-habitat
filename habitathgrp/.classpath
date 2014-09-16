@@ -4,6 +4,7 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine (1)"/>
 	<classpathentry exported="true" kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/gwt-2.5.1"/>
-	<classpathentry exported="true" kind="lib" path="/home/anibaljose/EPS/habitathgrp/war/WEB-INF/lib/iText-5.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/iText-5.0.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/jxl.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

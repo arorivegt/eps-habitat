@@ -9,6 +9,7 @@ import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -955,7 +956,7 @@ public class formularioDatos extends Composite {
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
+				Window.Location.replace("/ImprimirPerfil?abracadabra="+id_empleado);
 			}
 		});
 		btnImprimir.setText("Imprimir");

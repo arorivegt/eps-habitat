@@ -72,11 +72,11 @@ public class MyPaginationDataGrid_Beneficiario<T> extends PagingDataGrid_Benefic
         	});
         dataGrid.addColumn(nomParamColumn, "Nombre Prestatario");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
-        /*firstNameColumn.setSortable(true);
-        sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
-            public int compare(T o1, T o2) {
-                return ((ContactInfo) o1).getFirstName().compareTo(
-                        ((ContactInfo) o2).getFirstName());
+       /* nomParamColumn.setSortable(true);
+        sortHandler.setComparator(nomParamColumn, new Comparator<T>() {
+        	public int compare(T o1, T o2) {
+                return ((AuxParametro) o1).getNomParametro().compareTo(
+                        ((AuxParametro) o2).getNomParametro());
             }
         });*/
  

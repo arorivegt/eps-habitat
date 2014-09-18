@@ -2,8 +2,13 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 
+import java.util.Comparator;
+
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+
+
+
 
 
 
@@ -70,14 +75,14 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
         	});
         dataGrid.addColumn(nomParamColumn, "Nombre Parametro");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
-        /*firstNameColumn.setSortable(true);
-        sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
+        nomParamColumn.setSortable(true);
+        sortHandler.setComparator(nomParamColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {
-                return ((ContactInfo) o1).getFirstName().compareTo(
-                        ((ContactInfo) o2).getFirstName());
+                return ((AuxParametro) o1).getNomParametro().compareTo(
+                        ((AuxParametro) o2).getNomParametro());
             }
-        });*/
- 
+        });
+
         
  
         // Codigo Uno.
@@ -87,15 +92,17 @@ public class MyPaginationDataGrid<T> extends PagingDataGrid<T>{
                 return String.valueOf(((AuxParametro) object).getCodUno());
             }
         };
-        /*lastNameColumn.setSortable(true);
-        sortHandler.setComparator(lastNameColumn, new Comparator<T>() {
-            public int compare(T o1, T o2) {
-                return ((ContactInfo) o1).getLastName().compareTo(
-                        ((ContactInfo) o2).getLastName());
-            }
-        });*/
         dataGrid.addColumn(codUnoColumn, "Codigo Uno");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
+        codUnoColumn.setSortable(true);
+        sortHandler.setComparator(codUnoColumn, new Comparator<T>() {
+            public int compare(T o1, T o2) {
+            	if (((AuxParametro) o1).getCodUno()==((AuxParametro) o2).getCodUno())
+            		return 0;
+            	else
+            		return 1;
+            }
+        });
         
         Column<T, String> codDosColumn = new Column<T, String>(new EditTextCell()) {
             @Override

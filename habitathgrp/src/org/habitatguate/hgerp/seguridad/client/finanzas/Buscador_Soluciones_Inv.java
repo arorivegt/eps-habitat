@@ -141,8 +141,8 @@ public class Buscador_Soluciones_Inv extends Composite {
 			e = new TablaGWT_Beneficiario(result);
 			grid.setWidget(1, 0,e);
 			e.setSize("1000px", "300px");
+			e.ActulizarList(result);
 
-	
 			
 		}
 		

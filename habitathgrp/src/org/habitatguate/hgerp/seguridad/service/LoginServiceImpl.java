@@ -66,6 +66,10 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				em.setSegundo_nombre("".toUpperCase());
 				em.setEstado("posible empleado");
 				em.setIVS("Con IVS");
+				em.setCui("0");
+				em.setNo_orden("");
+				em.setNo_registro("");
+				em.setEmail("ejemplo@habitat.com");
 				em.setNo_Dependientes("0");
 				em.setAfiliacion_igss("0");
 				em.setNo_registro("0");

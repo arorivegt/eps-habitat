@@ -647,6 +647,31 @@ public class formularioDatos extends Composite {
 		listDireccionMunicipio.setSize("230px", "36px");
 		
 		txtCorreoElectronico = new TextBox();
+		txtCorreoElectronico.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtCorreoElectronico.getText().equals("ejemplo@habitat.com")){
+                	setMensaje("alert alert-error", 
+                			"Error !! \nEmail no valido");
+                	txtCorreoElectronico.setText("ejemplo@habitat.com");
+				}
+                
+                String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
+                
+                
+                boolean valid = false;
+                if(txtCorreoElectronico.getClass().toString().equals(String.class.toString())) {
+                        valid = ((String)txtCorreoElectronico.getText()).matches(emailPattern);
+                } else {
+                        valid = ((Object)txtCorreoElectronico.getText()).toString().matches(emailPattern);
+                }
+                if(!valid){
+                	setMensaje("alert alert-error", 
+                			"Error !! \nEmail no valido");
+                	txtCorreoElectronico.setText("ejemplo@habitat.com");
+                }
+
+			}
+		});
 		txtCorreoElectronico.setMaxLength(200);
 		txtCorreoElectronico.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtCorreoElectronico, 37, 853);
@@ -864,11 +889,7 @@ public class formularioDatos extends Composite {
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				try{
-					new Date(dateAnnioNacimiento.getValue().getTime());
-				}catch(Exception e){
-					dateAnnioNacimiento.setValue(new Date(1407518124684L));
-				}
+				
 			
 				try{
 					new Date(dateFechaIngreso.getValue().getTime());
@@ -956,7 +977,7 @@ public class formularioDatos extends Composite {
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Window.Location.replace("/ImprimirPerfil?abracadabra="+id_empleado);
+				Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
 			}
 		});
 		btnImprimir.setText("Imprimir");

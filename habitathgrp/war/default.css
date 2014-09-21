@@ -7,13 +7,13 @@ body {
     background: white;
     filter:alpha(opacity=1);
 }
-h1 {
+/*h1 {
   font-size: 2em;
   font-weight: bold;
   color: #777777;
   margin: 400px 0px 70px;
   text-align: center;
-}
+}*/
 .sendButton {
  background: #51B948;
 	color: #fff;
@@ -41,7 +41,7 @@ h1 {
 	cursor: pointer;
 }
 .sendButton2:hover {
-	background: #344655;;
+	background: #344655;
 	color : white;
 							
 }
@@ -64,8 +64,6 @@ h1 {
 /** Set ids using widget.getElement().setId("idOfElement") */
 #closeButton {
   margin: 15px 6px 6px;
-}
-.login_css {
 }
 .gwt-TextBox {
 background: #fff;
@@ -126,7 +124,7 @@ position: relative;
 }
 .gwt-Tree {
 	color: white;
-	font-size: 8px;
+	font-size: 10px;
 	font-style: normal;
 	text-align: left;
 	background-color: #344655;
@@ -140,10 +138,6 @@ position: relative;
 }
 .gwt-TabPanel {
 	margin-top: 4px;
-}
-
-.gwt-TabPanelBottom {
-
 }
 
 .gwt-TabBar {
@@ -282,13 +276,14 @@ background: #005596;
 
 .datePickerNextButton {
      text-align: right; 
-}.gwt-CheckBox{ 
+}
+.gwt-CheckBox{ 
    color:green;   
 }
 .gwt-CheckBox-disabled {
    color:green;
 }
-item_arbol { 
+.item_arbol { 
     background: #51B948;
 	color: #fff;
 	padding: 8px 10px;
@@ -318,8 +313,7 @@ box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	line-height: 1px;
 
 }
-. {
-}
+
 .gwt-TabBarItem-new {
  background: #51B948;
 	color: #fff;

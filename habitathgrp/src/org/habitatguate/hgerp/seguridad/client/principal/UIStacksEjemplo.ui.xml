@@ -5,12 +5,11 @@
            <g:header size='1.5'>RRHH</g:header>
            <g:Tree width="147px">
                 <g:Label text="Empleados" ui:field="label_1" styleName="sendButton2"/>
-                <g:Label styleName="sendButton2" text="Mi Perfil" ui:field="label_5"/>
                 <g:Label styleName="sendButton2" text="Puestos" ui:field="label_6"/>
                 <g:Label styleName="sendButton2" text="Prestaciones" ui:field="label_3"/>
                 <g:Label styleName="sendButton2" text="Configuracion" ui:field="label_7"/>
                 <g:Label styleName="sendButton2" text="Inf. Ministerio" ui:field="label_2" height="5px" width="90px" direction="LTR" wordWrap="false"/>
-                <g:Label styleName="sendButton2" text="Inf. Empleados" ui:field="label_4" horizontalAlignment="ALIGN_LEFT" width="100px" height="31px"/>
+                <g:Label styleName="sendButton2" text="Inf. Empleados" ui:field="label_4" horizontalAlignment="ALIGN_LEFT" width="100%" height="31px" direction="RTL"/>
            </g:Tree>
          </g:stack>
          <g:stack>
@@ -32,6 +31,12 @@
            <g:header size='2'>Soluciones</g:header>
            <g:Tree ui:field="arbol4"/>
          </g:stack>
-         
+         <g:stack>
+           <g:header size='1.5'>Configuracion</g:header>
+           <g:Tree width="147px">
+                <g:Label styleName="sendButton2" text="Mi Perfil" ui:field="label_5"/>
+                <g:Label styleName="sendButton2" text="Contraseña" ui:field="label_10"/>
+           </g:Tree>
+         </g:stack>
        </g:StackLayoutPanel>
 </ui:UiBinder>

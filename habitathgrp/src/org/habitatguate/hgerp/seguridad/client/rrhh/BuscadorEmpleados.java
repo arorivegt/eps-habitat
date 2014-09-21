@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class BuscadorEmpleados extends Composite  {
+public class BuscadorEmpleados extends Composite   {
 
     private  Grid grid;
     private BuscadorEmpleados a;
@@ -30,11 +30,11 @@ public class BuscadorEmpleados extends Composite  {
 		this.a = this;
 		grid = new Grid(2, 1);
 		initWidget(grid);
-		grid.setWidth("1278px");
+		grid.setWidth("1100");
 					
 					AbsolutePanel absolutePanel = new AbsolutePanel();
 					grid.setWidget(0, 0, absolutePanel);
-					absolutePanel.setSize("1000px", "90px");
+					absolutePanel.setSize("1100px", "90px");
 					absolutePanel.setStyleName("gwt-Label-new");
 						
 						final TextBox txtPrimerApellido = new TextBox();

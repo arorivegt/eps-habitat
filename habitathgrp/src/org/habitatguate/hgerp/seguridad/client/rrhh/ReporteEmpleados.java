@@ -97,7 +97,7 @@ public class ReporteEmpleados extends Composite  {
 					Image image = new Image("images/pdf.png");
 					image.addClickHandler(new ClickHandler() {
 						public void onClick(ClickEvent event) {
-							Window.Location.replace("/CrearReporte?"
+							Window.open("/CrearReporte?"
 									+"crear="+crearPor.getItemText(crearPor.getSelectedIndex())
 									+"&estado="+listEstado.getItemText(listEstado.getSelectedIndex())
 									+"&familia="+checkFamilia.getValue()
@@ -112,7 +112,7 @@ public class ReporteEmpleados extends Composite  {
 									+"&bono14="+checkBono14.getValue()
 									+"&aguinaldo="+checkAguinaldo.getValue()
 									+"&indemnizacion="+checkIndemnizacion.getValue()
-									);
+									, "_blank", "");
 						}
 					});
 					absolutePanel.add(image, 648, 63);

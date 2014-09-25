@@ -90,8 +90,9 @@ public class UIStacksEjemplo extends ResizeComposite {
  		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(buscadorAfiliado, 0, 0);
  	}
+ 	@UiHandler("label_6_Finan")
  	void onLabel_6_FinanClick(ClickEvent event) {
- 		Window.alert("no esta disponible");
+ 		Window.alert("no esta disponible Administrador de Materiales de Costruccion");
  	}
 	@UiHandler("label_5")
 	void onLabel_5Click(ClickEvent event) {

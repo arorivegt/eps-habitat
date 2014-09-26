@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
@@ -92,7 +93,9 @@ public class UIStacksEjemplo extends ResizeComposite {
  	}
  	@UiHandler("label_6_Finan")
  	void onLabel_6_FinanClick(ClickEvent event) {
- 		Window.alert("no esta disponible Administrador de Materiales de Costruccion");
+ 		Formulario_MaterialCostruccion formCostruccion = new Formulario_MaterialCostruccion();
+ 		this.nuevo.getAbsolutePanel_1().clear();
+ 		this.nuevo.getAbsolutePanel_1().add(formCostruccion,0,0);
  	}
 	@UiHandler("label_5")
 	void onLabel_5Click(ClickEvent event) {

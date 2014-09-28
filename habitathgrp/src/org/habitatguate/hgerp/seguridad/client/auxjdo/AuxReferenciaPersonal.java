@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client.rrhh;
+package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 

@@ -1,5 +1,8 @@
 package org.habitatguate.hgerp.seguridad.service;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,19 +13,25 @@ import javax.jdo.Query;
 
 
 
+
+
+
+
+
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEntrevista;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxFamilia;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxHistorial;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxHistorialAcademico;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxIdioma;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxPuesto;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaLaboral;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaPersonal;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxTest;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEntrevista;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
@@ -49,19 +58,18 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
-	private static String FILE = "PositionPdf.pdf";
 	///metodos para insertar en las diferentes entidades
-	public String Registro(String user,String password) throws IllegalArgumentException {
+	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
-		if(user!=null && password!=null){
+		if(user!=null && pass!=null){
 			try{ 
 				final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
 				return "El usuario "+e.getUser()+" ya existe" ;
 			}catch(Exception e){
 				SegEmpleado em = new SegEmpleado();
-				em.setPrimer_nombre("".toUpperCase());
-				em.setPrimer_apellido("".toUpperCase());
+				em.setPrimer_nombre(Nombre.toUpperCase());
+				em.setPrimer_apellido(Apellido.toUpperCase());
 				em.setSegundo_apellido("".toUpperCase());
 				em.setSegundo_nombre("".toUpperCase());
 				em.setEstado("posible empleado");
@@ -69,10 +77,9 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				em.setCui("0");
 				em.setNo_orden("");
 				em.setNo_registro("");
-				em.setEmail("ejemplo@habitat.com");
+				em.setEmail(user);
 				em.setNo_Dependientes("0");
 				em.setAfiliacion_igss("0");
-				em.setNo_registro("0");
 				em.setNo_pasaporte("0");
 				em.setTelefono("0");
 				em.setCelular("0");
@@ -88,12 +95,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				em.setTipo_licencia("B");
 				em.setPasaporte("Si");
 				em.setLicencia("Si");
-				em.setFecha_nacimiento(new Date(1407518124684L));
+				em.setFecha_nacimiento(fecha_nacimiento);
 				em.setFecha_ingreso(new Date(1407518124684L));
 				try{ 
 				    gestorPersistencia.makePersistent(em); 
 				}finally{
-					SegUsuario u = new SegUsuario(user, password);
+					SegUsuario u = new SegUsuario(user, pass);
 					u.setId_empleado(em.getId_empleado());
 					try{ 
 					    gestorPersistencia.makePersistent(u); 
@@ -116,8 +123,13 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		try{ 
 			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user);
-			vs.setCorrecto(true);
-			vs.setId_empleado(e.getId_empleado());
+			if(e.getPassword().equals(md5(password))){
+				vs.setCorrecto(true);
+				vs.setId_empleado(e.getId_empleado());
+			}else{
+				vs.setCorrecto(false);
+			}
+			
 			return vs;
 		}catch(Exception e){
 			vs.setCorrecto(false);
@@ -1796,6 +1808,22 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			}
 
 			
-			
+		  private String md5(String cadena){
+
+	            try {
+	                MessageDigest md = MessageDigest.getInstance("MD5");
+	                byte[] messageDigest = md.digest(cadena.getBytes());
+	                BigInteger number = new BigInteger(1, messageDigest);
+	                String hashtext = number.toString(16);
+	                // Now we need to zero pad it if you actually want the full 32 chars.
+	                while (hashtext.length() < 32) {
+	                    hashtext = "0" + hashtext;
+	                }
+	                return hashtext;
+	            }
+	            catch (NoSuchAlgorithmException e) {
+	                throw new RuntimeException(e);
+	            }
+	        }
 
 	}

@@ -1,7 +1,8 @@
-package org.habitatguate.hgerp.seguridad.client.rrhh;
+package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxEmpleado implements IsSerializable{

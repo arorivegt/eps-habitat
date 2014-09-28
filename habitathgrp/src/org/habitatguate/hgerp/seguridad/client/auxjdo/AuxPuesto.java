@@ -1,9 +1,9 @@
-package org.habitatguate.hgerp.seguridad.client.rrhh;
+package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class AuxBDPuesto implements IsSerializable{
+public class AuxPuesto implements IsSerializable{
 	
     private Long id_puesto;
 	
@@ -17,8 +17,13 @@ public class AuxBDPuesto implements IsSerializable{
     private String funciones;
 	
 	
+    private float salario;
+	
+	
+    private boolean activo;
+	
 
-	public AuxBDPuesto() {
+	public AuxPuesto() {
 		super();
 	}
 
@@ -52,6 +57,22 @@ public class AuxBDPuesto implements IsSerializable{
 
 	public void setFunciones(String funciones) {
 		this.funciones = funciones;
+	}
+
+	public float getSalario() {
+		return salario;
+	}
+
+	public void setSalario(float salario) {
+		this.salario = salario;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 }

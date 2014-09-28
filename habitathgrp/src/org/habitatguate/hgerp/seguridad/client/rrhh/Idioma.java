@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;

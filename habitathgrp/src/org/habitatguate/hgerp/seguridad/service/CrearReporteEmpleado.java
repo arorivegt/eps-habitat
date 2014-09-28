@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxFamilia;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxHistorial;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxHistorialAcademico;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxIdioma;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxPuesto;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaLaboral;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxReferenciaPersonal;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxTest;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 
 import com.itextpdf.text.BaseColor;
 // Document Object

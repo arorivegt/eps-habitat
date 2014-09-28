@@ -2,28 +2,27 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ResizeComposite;
 import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
  
 public class UIStacksEjemplo extends ResizeComposite {
 	 private Panel nuevo;
@@ -39,6 +38,7 @@ public class UIStacksEjemplo extends ResizeComposite {
    
    interface UiStackEjemploUiBinder extends UiBinder<Widget, UIStacksEjemplo> {
    }
+   /*
  	@UiHandler("label_1")
  	void onLabel_1Click(ClickEvent event) {
  		BuscadorEmpleados buscador = new BuscadorEmpleados();
@@ -48,7 +48,7 @@ public class UIStacksEjemplo extends ResizeComposite {
  	}
  	@UiHandler("label_2")
  	void onLabel_2Click(ClickEvent event) {
- 		EmpleadosMinisterioTrabajo buscador = new EmpleadosMinisterioTrabajo();
+ 		EmpleadosMinisterioTrabajo buscador = new EmpleadosMinisterioTrabajo();f
  		this.nuevo.getAbsolutePanel_1().clear();
  		this.nuevo.getAbsolutePanel_1().add(buscador, 0, 0);
  	
@@ -188,6 +188,6 @@ public class UIStacksEjemplo extends ResizeComposite {
 
         });
 	}
-	
+	*/
  }
 

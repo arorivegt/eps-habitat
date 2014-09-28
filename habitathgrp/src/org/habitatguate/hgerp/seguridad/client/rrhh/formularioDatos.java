@@ -126,6 +126,9 @@ public class formularioDatos extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("997px", "1337px");
 		getFormUrl();
+		image = new Image("images/imagenempresa.png");
+		absolutePanel.add(image, 341, 10);
+		image.setSize("167px", "158px");
 		
 		listEstado = new ListBox();
 		listEstado.addItem("empleado activo");
@@ -134,11 +137,8 @@ public class formularioDatos extends Composite {
 		listEstado.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(listEstado, 36, 163);
 		listEstado.setSize("230px", "36px");
-		image = new Image("images/imagenempresa.png");
-		absolutePanel.add(image, 341, 10);
-		image.setSize("167px", "158px");
 		
-				absolutePanel.add(getFormPanel(), 591, 109);
+		absolutePanel.add(getFormPanel(), 591, 109);
 		
 		txtNo_iggs = new IntegerBox();
 		txtNo_iggs.setText("0");
@@ -890,7 +890,11 @@ public class formularioDatos extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-			
+				try{
+					new Date(dateAnnioNacimiento.getValue().getTime());
+				}catch(Exception e){
+					dateAnnioNacimiento.setValue(new Date(1407518124684L));
+				}
 				try{
 					new Date(dateFechaIngreso.getValue().getTime());
 				}catch(Exception e){

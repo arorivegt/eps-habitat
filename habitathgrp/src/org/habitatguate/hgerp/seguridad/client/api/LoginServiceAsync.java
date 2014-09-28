@@ -4,8 +4,8 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -15,7 +15,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  */
 public interface LoginServiceAsync {
 	//metodos para insertar una tupla en la entidad especifica
-	void Registro(String user,String i2, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento, AsyncCallback<String> callback) throws IllegalArgumentException;
 	void login_inicio(String user,String i2, AsyncCallback<valores_sesion> callback) throws IllegalArgumentException;
 	void Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,

@@ -3,8 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxBDPuesto;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -17,7 +17,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("login")
 public interface LoginService extends RemoteService {
 	//metodos para insertar en la base de datos
-	String Registro(String user,String password) throws IllegalArgumentException;
+	String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento) throws IllegalArgumentException;
 	valores_sesion login_inicio(String user,String password) throws IllegalArgumentException;	
 	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,

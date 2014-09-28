@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;

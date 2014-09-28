@@ -3,14 +3,11 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -26,14 +23,13 @@ public class Index implements EntryPoint {
         
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
-    	private DialogBox Registro = new DialogBox();
         private final LoginServiceAsync loginService = GWT.create(LoginService.class);
         
         @Override
         public void onModuleLoad() 
         {
             
-             final DialogBox dialogBox = new DialogBox();
+             	final DialogBox dialogBox = new DialogBox();
              
                 dialogBox.setText("Autenticacion");
                 dialogBox.setAnimationEnabled(true);
@@ -116,8 +112,13 @@ public class Index implements EntryPoint {
                                         
                                         public void onSuccess(valores_sesion result)
                                         {
+
+                                            Panel inicio = new Panel();
+                                            inicio.setId_empleado(result.getId_empleado());
+                                            RootPanel.get().clear();
+                                            RootPanel.get().add(inicio);
                                                 //si la autentificacion es correcta limpia y contruye el menu
-                                                if(result.isCorrecto())
+                                              /*  if(result.isCorrecto())
                                                 {
                                                         Panel inicio = new Panel();
                                                         inicio.setId_empleado(result.getId_empleado());
@@ -152,7 +153,7 @@ public class Index implements EntryPoint {
                                             				Registro2.hide();
                                             			}
                                                     });
-                                                }
+                                                }*/
                                                                                 
                                         }
                                  });
@@ -168,48 +169,13 @@ public class Index implements EntryPoint {
             rootPanel.add(lblNewLabel_1, 489, 98);
             lblNewLabel_1.setSize("346px", "254px");
             txtuser.setStyleName("gwt-PasswordTextBox");
+            txtuser.getElement().setAttribute("placeHolder", "Usuario@habitat.com");
             rootPanel.add(txtuser, 545, 152);
-            txtuser.addBlurHandler(new BlurHandler() {
-                public void onBlur(BlurEvent event) {
-
-                        if (txtuser.getText().equals(""))
-                        {
-                                txtuser.setText("Usuario");
-                        }
-                }
-            });
-            txtuser.addFocusHandler(new FocusHandler() {
-                public void onFocus(FocusEvent event) {
-                        if (txtuser.getText().equals("Usuario"))
-                        {
-                                txtuser.setText("");
-                        }
-                                        
-                }
-            });
-            txtuser.setText("Usuario");
             txtuser.setSize("325px", "49px");
             rootPanel.add(txtpass, 545, 218);
-            txtpass.addFocusHandler(new FocusHandler() {
-                public void onFocus(FocusEvent event) {
-                        if (txtpass.getText().equals("password"))
-                        {
-                                txtpass.setText("");
-                        }
-                }
-            });
-            txtpass.addBlurHandler(new BlurHandler() {
-                public void onBlur(BlurEvent event) {
-                        if (txtpass.getText().equals(""))
-                        {
-                                txtpass.setText("password");
-                        }
-                }
-            });
             
-                    txtpass.setText("password");
-                    txtpass.setSize("325px", "49px");
-                    
+            txtpass.setSize("325px", "49px");
+            txtpass.getElement().setAttribute("placeHolder", "password");
             final Button btnIniciar = new Button("Send");
             rootPanel.add(btnIniciar, 545, 286);
             btnIniciar.setText("Iniciar sesion");
@@ -220,32 +186,9 @@ public class Index implements EntryPoint {
                    final  Button button = new Button("Send");
                     button.addClickHandler(new ClickHandler() {
                     	public void onClick(ClickEvent event) {
-
-                            final Button close= new Button("cerrar");
-                            VerticalPanel dialogVPanel = new VerticalPanel();
-                            dialogVPanel.addStyleName("gwt-TextBox2");
-                    		formularioRegistro inicio = new formularioRegistro();
-                    		Registro .setText("Registro");
-                    		dialogVPanel.add(serverResponseLabel );
-                    		dialogVPanel.add(inicio);
-                            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-                            dialogVPanel.add(close);
-                            Registro .setWidget(dialogVPanel);
-                    		Registro .setModal(true);
-                    		Registro .setGlassEnabled(true);
-                    		Registro .setAnimationEnabled(true);
-                    		Registro .center();
-                    		Registro .show();
-                            close.setFocus(true);
-                            close.addClickHandler(new ClickHandler() {
-                    			public void onClick(ClickEvent event) {
-                    				Registro.hide();
-                                    button.setEnabled(true);
-                                    button.setFocus(true);
-                    			}
-                            });
-                            //RootPanel.get().clear();
-                            //RootPanel.get().add(inicio);
+                    		Registro nuevo = new Registro();
+                            RootPanel.get().clear();
+                            RootPanel.get().add(nuevo);
                     	}
                     });
                     button.setText("Registrarse");

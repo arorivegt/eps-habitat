@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;

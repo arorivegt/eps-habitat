@@ -2,6 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;

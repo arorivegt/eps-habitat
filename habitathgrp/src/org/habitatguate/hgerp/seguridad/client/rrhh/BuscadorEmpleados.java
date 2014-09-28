@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -30,11 +31,11 @@ public class BuscadorEmpleados extends Composite   {
 		this.a = this;
 		grid = new Grid(2, 1);
 		initWidget(grid);
-		grid.setWidth("1100");
+		grid.setSize("1350px", "100%");
 					
 					AbsolutePanel absolutePanel = new AbsolutePanel();
 					grid.setWidget(0, 0, absolutePanel);
-					absolutePanel.setSize("1100px", "90px");
+					absolutePanel.setSize("100%", "90px");
 					absolutePanel.setStyleName("gwt-Label-new");
 						
 						final TextBox txtPrimerApellido = new TextBox();

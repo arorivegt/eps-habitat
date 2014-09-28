@@ -3,6 +3,10 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
@@ -71,6 +75,41 @@ public class Menu extends Composite {
 	void empleado1(ClickEvent event) {
 		Empleado_registrado();
 	}
+	
+	/*@UiHandler("finan1")
+ 	void onLabel_1_FinanClick(ClickEvent event) {
+ 		Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, buscador);
+ 	}
+	
+ 	@UiHandler("finan2")
+ 	void onLabel_2_FinanClick(ClickEvent event) {
+ 		Buscador_Solucion buscadorSoluciones = new Buscador_Solucion();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, buscadorSoluciones);
+ 	}
+ 	@UiHandler("finan3")
+ 	void onLabel_3_FinanClick(ClickEvent event) {
+ 		Window.alert("no esta disponible");
+ 	}
+ 	@UiHandler("finan4")
+ 	void onLabel_4_FinanClick(ClickEvent event) {
+ 		Window.alert("no esta disponible");
+ 		
+ 	}
+ 	@UiHandler("finan5")
+ 	void onLabel_5_FinanClick(ClickEvent event) {
+ 		Buscador_Afiliado buscadorAfiliado = new Buscador_Afiliado();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, buscadorAfiliado);
+ 	}
+ 	@UiHandler("finan6")
+ 	void onLabel_6_FinanClick(ClickEvent event) {
+ 		Formulario_MaterialCostruccion formCostruccion = new Formulario_MaterialCostruccion();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, formCostruccion);
+ 	}*/
 	
 	public void Empleado_registrado(){
 

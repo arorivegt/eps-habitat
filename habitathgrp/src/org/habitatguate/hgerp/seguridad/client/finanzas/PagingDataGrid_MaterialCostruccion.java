@@ -7,7 +7,8 @@ import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -31,7 +32,7 @@ import com.google.gwt.view.client.ProvidesKey;
  * Clase abstracta PaggingDataGrid para establecer la simple pagina inicial del DataGrid  con ListDataProvider
  * 
  */
-public abstract class PagingDataGrid_Beneficiario<T> extends Composite {
+public abstract class PagingDataGrid_MaterialCostruccion<T> extends Composite {
  
     private DataGrid<T> dataGrid;
     private SimplePager pager;
@@ -42,11 +43,11 @@ public abstract class PagingDataGrid_Beneficiario<T> extends Composite {
 	private Button botonEliminar;
 	private Button botonRefresh;
     final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxBeneficiario.KEY_PROVIDER);
+            new MultiSelectionModel<T>((ProvidesKey<T>)AuxMaterialCostruccion.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	Iterator<T> iter = null;
 	T objectoEliminado = null;
-    public PagingDataGrid_Beneficiario() {
+    public PagingDataGrid_MaterialCostruccion() {
         initWidget(dock);
         dataGrid = new DataGrid<T>();
         dataGrid.setWidth("100%");
@@ -69,7 +70,7 @@ public abstract class PagingDataGrid_Beneficiario<T> extends Composite {
  
         dataProvider.addDataDisplay(dataGrid);
         
-        botonEliminar = new Button("Eliminar Afiliado");
+        botonEliminar = new Button("Eliminar MaterialCostruccion");
         botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);
@@ -89,7 +90,7 @@ public abstract class PagingDataGrid_Beneficiario<T> extends Composite {
             	iter = (Iterator<T>) lista.iterator();
         			while (iter.hasNext()){
         			objectoEliminado = iter.next();	
-        			loginService.Eliminar_Beneficiario(((AuxBeneficiario)objectoEliminado).getIdBeneficiario(), new AsyncCallback<Long>() {
+        			loginService.Eliminar_MaterialCostruccion(((AuxMaterialCostruccion)objectoEliminado).getIdMaterialConstruccion(), new AsyncCallback<Long>() {
         				
         				@Override
         				public void onSuccess(Long result) {
@@ -114,7 +115,7 @@ public abstract class PagingDataGrid_Beneficiario<T> extends Composite {
             public void onClick(ClickEvent event) {
               // Refresca el datagrid
 	
-        			loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+        			loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
         				
         				@Override
         				public void onSuccess(List result) {

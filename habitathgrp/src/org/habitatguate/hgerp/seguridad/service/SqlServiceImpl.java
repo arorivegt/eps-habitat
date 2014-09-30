@@ -2,17 +2,21 @@ package org.habitatguate.hgerp.seguridad.service;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
+import org.habitatguate.hgerp.util.ConvertDate;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -81,6 +85,26 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		}
 		return valor;
 }
+	
+	public Long Insertar_MaterialCostruccion(String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario) throws IllegalArgumentException{
+		 Long valor = 0L;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		SegMaterialCostruccion nuevo = new SegMaterialCostruccion();
+		nuevo.setNomMaterialCostruccion(nomMaterialCostruccion);
+		nuevo.setPrecioUnit(precioUnitario);
+		nuevo.setUnidadMetrica(unidadMetrica);
+		Date time=new Date();
+		Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
+		nuevo.setFechaIngreso(today);
+		try{
+			gestorPersistencia.makePersistent(nuevo);
+			System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+			valor = nuevo.getIdMaterialConstruccion();
+		}finally{
+			gestorPersistencia.close();
+		}
+		return valor;
+}
 
 	
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
@@ -105,6 +129,13 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
     	
     	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
     	final SegBeneficiario e = Persistencia.getObjectById(SegBeneficiario.class, id); 
+        Persistencia.deletePersistent(e);         
+        return id;
+    }
+    public Long Eliminar_MaterialCostruccion(Long id) throws IllegalArgumentException {
+    	
+    	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+    	final SegMaterialCostruccion e = Persistencia.getObjectById(SegMaterialCostruccion.class, id); 
         Persistencia.deletePersistent(e);         
         return id;
     }
@@ -161,6 +192,24 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 				n.setNomBeneficiario(p.getNomBeneficiario());
 				n.setDirBeneficiario(p.getDirBeneficiario());
 				n.setTelBeneficiario(p.getTelBeneficiario());
+				valor.add(n);
+			}
+		}
+		return valor;
+	}
+	public List<AuxMaterialCostruccion> ConsultaTodosMaterialCostruccion(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegMaterialCostruccion.class);
+		List<AuxMaterialCostruccion> valor = new ArrayList<AuxMaterialCostruccion>();
+		List<SegMaterialCostruccion> execute = (List<SegMaterialCostruccion>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegMaterialCostruccion p : execute){
+				AuxMaterialCostruccion n= new AuxMaterialCostruccion();
+				n.setIdMaterialConstruccion(p.getIdMaterialConstruccion());
+				n.setNomMaterialCostruccion(p.getNomMaterialCostruccion());
+				n.setUnidadMetrica(p.getUnidadMetrica());
+				n.setPrecioUnit(p.getPrecioUnit());
+				n.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
 				valor.add(n);
 			}
 		}
@@ -226,7 +275,24 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		
 		return id;
 	}
-	
+	public Long Actualizar_MaterialCostruccion(Long id,String nomMaterialCostruccion,Double precioUnitario,String unidadMetrica) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(nomMaterialCostruccion!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegMaterialCostruccion e = gestorPersistencia.getObjectById(SegMaterialCostruccion.class, id);
+				 e.setNomMaterialCostruccion(nomMaterialCostruccion);;
+				 e.setPrecioUnit(precioUnitario);
+				 e.setUnidadMetrica(unidadMetrica);
+				 
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
 	
 	
 }

@@ -76,6 +76,13 @@ public class Menu extends Composite {
 		Empleado_registrado();
 	}
 	
+ 	@UiHandler("finan3b")
+ 	void finan3b(ClickEvent event) {
+ 		Formulario_MaterialCostruccion buscador = new Formulario_MaterialCostruccion();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, buscador);
+ 	}
+	
 	/*@UiHandler("finan1")
  	void onLabel_1_FinanClick(ClickEvent event) {
  		Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv();
@@ -110,7 +117,8 @@ public class Menu extends Composite {
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, formCostruccion);
  	}*/
-	
+
+ 	
 	public void Empleado_registrado(){
 
 		final Empleados e = new Empleados(1);

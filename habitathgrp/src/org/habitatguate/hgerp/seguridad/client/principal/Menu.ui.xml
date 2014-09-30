@@ -166,14 +166,14 @@
        			 <ul>
            			            <li><a href="#"><g:Label ui:field="finan1a"> Cuentas y Parametros </g:Label></a></li>
            			            <li><a href="#"><g:Label ui:field="finan1b"> Gestor de Inventario</g:Label></a></li>
-								<li><a href="#"><g:Label ui:field="finan1c"> Generar Conocimiento"</g:Label></a></li>
+								<li><a href="#"><g:Label ui:field="finan1c"> Generar Conocimiento</g:Label></a></li>
    	     		</ul>
     		</li>
     		<li><a href="#"><g:Label ui:field="finan2">	Ingreso Soluciones</g:Label> </a></li>
             <li>
         		<a href="#">Inventario Materiales</a>
        			 <ul>
-           			 <li><a href="#"><g:Label ui:field="finan3a"> Cuenta Materiales</g:Label></a></li>
+           			 <li><a href="#"><g:Label ui:field="finan3a">Cuenta Materiales</g:Label></a></li>
            			 <li><a href="#"><g:Label ui:field="finan3b">Administrar Materiales Costrucción</g:Label></a></li>
    	     		</ul>
     		</li>

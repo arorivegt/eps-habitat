@@ -12,6 +12,8 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 
 
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;

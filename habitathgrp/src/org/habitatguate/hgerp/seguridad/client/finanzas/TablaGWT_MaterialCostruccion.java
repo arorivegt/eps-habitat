@@ -6,18 +6,19 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.finanzas.MyPaginationDataGrid;;
-public class TablaGWT_Afiliado extends Composite implements EntryPoint {
+public class TablaGWT_MaterialCostruccion extends Composite implements EntryPoint {
 	
-	MyPaginationDataGrid_Afiliado<AuxAfiliado> grid;
+	MyPaginationDataGrid_MaterialConstruccion<AuxMaterialCostruccion> grid;
  
-	public TablaGWT_Afiliado(){
+	public TablaGWT_MaterialCostruccion(){
 
         grid = null;
 	}
-	public TablaGWT_Afiliado(List<AuxAfiliado> datagridParametro){
-        grid = new MyPaginationDataGrid_Afiliado<AuxAfiliado>();
+	public TablaGWT_MaterialCostruccion(List<AuxMaterialCostruccion> datagridParametro){
+        grid = new MyPaginationDataGrid_MaterialConstruccion<AuxMaterialCostruccion>();
         grid.setHeight("500px");
         grid.setDataList(datagridParametro);
         initWidget(grid);

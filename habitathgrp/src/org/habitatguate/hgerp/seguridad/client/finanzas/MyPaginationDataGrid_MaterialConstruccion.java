@@ -2,13 +2,20 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 
+import java.util.Comparator;
+
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 
 
 
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 
+
+
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+
+import com.google.gwt.i18n.client.DateTimeFormat; 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.EditTextCell;
@@ -28,7 +35,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
-public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>{
+public class MyPaginationDataGrid_MaterialConstruccion<T> extends PagingDataGrid_MaterialCostruccion<T>{
      
     private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
@@ -48,10 +55,10 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
         Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxAfiliado) object).getIdAfiliado());
+                return String.valueOf(((AuxMaterialCostruccion) object).getIdMaterialConstruccion());
             }
         };
-        dataGrid.addColumn(codContableColumn, "Codigo Afiliado");
+        dataGrid.addColumn(codContableColumn, "Codigo Material Costruccion");
         dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
         
         
@@ -59,71 +66,74 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
                 new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return ((AuxAfiliado) object).getNomAfiliado();
+                return ((AuxMaterialCostruccion) object).getNomMaterialCostruccion();
             }
         };
         nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
 			@Override
 			public void update(int index, T object, String value) {
 				
-				((AuxAfiliado) object).setNomAfiliado(value);
+				((AuxMaterialCostruccion) object).setNomMaterialCostruccion(value);
 				
 			}
         	});
-        dataGrid.addColumn(nomParamColumn, "Nombre Afiliado");        
+        dataGrid.addColumn(nomParamColumn, "Nombre Material Costruccion");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
-        /*firstNameColumn.setSortable(true);
-        sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
+        nomParamColumn.setSortable(true);
+        sortHandler.setComparator(nomParamColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {
-                return ((ContactInfo) o1).getFirstName().compareTo(
-                        ((ContactInfo) o2).getFirstName());
+                return ((AuxMaterialCostruccion) o1).getNomMaterialCostruccion().compareTo(
+                        ((AuxMaterialCostruccion) o2).getNomMaterialCostruccion());
             }
-        });*/
- 
+        });
+
         
  
-        // Codigo Uno.
+        // Precio Unitario.
         Column<T, String> codUnoColumn = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxAfiliado) object).getDirAfiliado());
+                return String.valueOf(((AuxMaterialCostruccion) object).getPrecioUnit());
             }
         };
-        codUnoColumn.setFieldUpdater(new FieldUpdater<T, String>() {
-			@Override
-			public void update(int index, T object, String value) {
-				
-				((AuxAfiliado) object).setDirAfiliado(value);
-				
-			}
-        	});
-        /*lastNameColumn.setSortable(true);
-        sortHandler.setComparator(lastNameColumn, new Comparator<T>() {
-            public int compare(T o1, T o2) {
-                return ((ContactInfo) o1).getLastName().compareTo(
-                        ((ContactInfo) o2).getLastName());
-            }
-        });*/
-        dataGrid.addColumn(codUnoColumn, "Dirección Af.");
+        dataGrid.addColumn(codUnoColumn, "Precio Unitario");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
+        codUnoColumn.setSortable(true);
+        sortHandler.setComparator(codUnoColumn, new Comparator<T>() {
+            public int compare(T o1, T o2) {
+                return ((AuxMaterialCostruccion) o1).getUnidadMetrica().compareTo(
+                        ((AuxMaterialCostruccion) o2).getUnidadMetrica());
+            }
+        });
         
-        Column<T, String> codDosColumn = new Column<T, String>(new TextCell()) {
+        //Unidad Metrica
+        Column<T, String> unidadMetrica = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxAfiliado) object).getMunicipio());
+                return String.valueOf(((AuxMaterialCostruccion) object).getUnidadMetrica());
             }
         };
-        dataGrid.addColumn(codDosColumn, "Municipio");
+        dataGrid.addColumn(unidadMetrica, "Precio Unitario");
+        dataGrid.setColumnWidth(unidadMetrica, 20, Unit.PCT);
+        unidadMetrica.setSortable(true);
+        sortHandler.setComparator(unidadMetrica, new Comparator<T>() {
+            public int compare(T o1, T o2) {
+            	if (((AuxMaterialCostruccion) o1).getPrecioUnit()==((AuxMaterialCostruccion) o2).getPrecioUnit())
+            		return 0;
+            	else
+            		return 1;
+            }
+        });
+        
+        Column<T, String> codDosColumn = new Column<T, String>(new EditTextCell()) {
+            @Override
+            public String getValue(T object) {
+            	DateTimeFormat fmt = DateTimeFormat.getFormat("dd-MM-yyyy");
+                return String.valueOf(fmt.format(((AuxMaterialCostruccion) object).getFechaIngreso()));
+            }
+        };
+        dataGrid.addColumn(codDosColumn, "Fecha Ingreso");
         dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
-        
-        Column<T, String> depAfiliado = new Column<T, String>(new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxAfiliado) object).getDepartamento());
-            }
-        };
-        dataGrid.addColumn(depAfiliado, "Departamemto");
-        dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
         
         // ActionCell.
         ActionCell<T> reListCell = new ActionCell<T>("Modificar",
@@ -131,11 +141,12 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
         	        @Override
         	        public void execute(final T object) {
         	           // code to be executed 
-        	        	loginService.Actualizar_Afiliado(((AuxAfiliado)object).getIdAfiliado(), ((AuxAfiliado)object).getNomAfiliado(), ((AuxAfiliado)object).getDirAfiliado(), ((AuxAfiliado)object).getDepartamento(), ((AuxAfiliado)object).getMunicipio(), new AsyncCallback<Long>() {
+        	        	loginService.Actualizar_MaterialCostruccion(((AuxMaterialCostruccion)object).getIdMaterialConstruccion(), ((AuxMaterialCostruccion)object).getNomMaterialCostruccion(),
+        	        			((AuxMaterialCostruccion)object).getPrecioUnit(), ((AuxMaterialCostruccion)object).getUnidadMetrica(), new AsyncCallback<Long>() {
             				
             				@Override
             				public void onSuccess(Long result) {
-                	        	Window.alert("Modificado: "+ ((AuxAfiliado)object).getIdAfiliado());
+                	        	Window.alert("Modificado: "+ ((AuxMaterialCostruccion)object).getNomMaterialCostruccion());
             				}
             				
             				@Override

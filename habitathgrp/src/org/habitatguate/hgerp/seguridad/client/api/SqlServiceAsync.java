@@ -1,10 +1,12 @@
 package org.habitatguate.hgerp.seguridad.client.api;
 
+
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxAfiliado;
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxBeneficiario;
-import org.habitatguate.hgerp.seguridad.client.finanzas.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface SqlServiceAsync {
@@ -42,6 +44,19 @@ public interface SqlServiceAsync {
 	void Actualizar_Beneficiario(Long id, String nomBeneficiario,
 			String dirBeneficiario, int telBeneficiario,
 			AsyncCallback<Long> callback);
+
+	void Insertar_MaterialCostruccion(String nomMaterialCostruccion,
+			String unidadMetrica, Double precioUnitario,
+			AsyncCallback<Long> callback);
+
+	void ConsultaTodosMaterialCostruccion(
+			AsyncCallback<List<AuxMaterialCostruccion>> callback);
+
+	void Actualizar_MaterialCostruccion(Long id, String nomMaterialCostruccion,
+			Double precioUnitario, String unidadMetrica,
+			AsyncCallback<Long> callback);
+
+	void Eliminar_MaterialCostruccion(Long id, AsyncCallback<Long> callback);
 
 
 

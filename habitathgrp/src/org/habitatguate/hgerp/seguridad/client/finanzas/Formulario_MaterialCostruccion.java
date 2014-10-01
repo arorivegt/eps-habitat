@@ -28,6 +28,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private Buscador_MaterialCostruccion bbs;
+	private Plantilla_Solucion ps;
     
 	public Formulario_MaterialCostruccion(){
 		
@@ -41,7 +42,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 		panel1 = new ScrollPanel();
 		panel1.setAlwaysShowScrollBars(true);
 		tabPanel.add(panel1, "Materiales de Construcción",true);
-		tabPanel.add(panel2, "Materiales por Proveedor",true);
+		tabPanel.add(panel2, "Plantilla Solucion",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -50,7 +51,15 @@ public class Formulario_MaterialCostruccion extends Composite{
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>(){
 			  public void onSelection(SelectionEvent<Integer> event){
 			   int tabId = event.getSelectedItem();
-			   ItemUno();
+			   switch(tabId) {
+			   case 0:
+				   ItemUno();
+			       break;
+			   case 1: 
+				   ItemDos();
+			       break;
+			   }
+
 			 }
 			});
 	
@@ -59,6 +68,11 @@ public class Formulario_MaterialCostruccion extends Composite{
 	public void ItemUno(){
 		bbs = new Buscador_MaterialCostruccion();
 		panel1.setWidget(bbs);
+	}
+	
+	public void ItemDos(){
+		ps = new Plantilla_Solucion();
+		panel2.setWidget(ps);
 	}
 	
 	

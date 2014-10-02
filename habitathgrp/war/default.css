@@ -351,3 +351,33 @@ background-color: #6B9CFF; /* el color de fondo */
 background-image: url(images/Knob Valid Green.ico); /* la imagen representativa */
 color: #FFFFFF; /* el color del texto */
 }
+
+
+/******************************************************
+*                        SuggestBox
+******************************************************/
+.gwt-SuggestBox
+{
+    border                      :    1px solid #666;
+    text-align                  :    left;
+    width                       :    400px;
+}
+.gwt-SuggestBoxPopup
+{
+    text-align                   :    left;
+    cursor                       :    pointer;
+    cursor                       :    hand;
+    border                       :    1px solid #666;
+    border-top                   :    0;
+    background-color             :    #fff;
+
+}
+.gwt-SuggestBoxPopup .item
+{
+    border                       :    1px dotted #aaa;
+    width                        :    398px;
+}
+.gwt-SuggestBoxPopup .item-selected
+{
+    background-color             :    #ffc;
+}	

@@ -7,8 +7,10 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -21,6 +23,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class Plantilla_Solucion extends Composite{
@@ -31,12 +35,38 @@ public class Plantilla_Solucion extends Composite{
     
     public Plantilla_Solucion() {
 	final Grid grid = new Grid(2, 1);
+	final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 	initWidget(grid);
 	grid.setWidth("1278px");
 	
+	loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
+		
+		@Override
+		public void onSuccess(List<AuxMaterialCostruccion> result) {
+			if (!result.isEmpty()){
+				for (AuxMaterialCostruccion p : result){
+					oracle.add(new MaterialMultiWordSuggestion(p));	
+				}
+			}
+
+		}
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			System.out.println(caught);
+			
+		}
+	});
+
 	//------------------------------primera fila
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
+	
+
+	
+    SuggestBox suggestbox = new SuggestBox(oracle);
+    
+	
 	grid.setWidget(0, 0, absolutePanel);
 	absolutePanel.setSize("1000px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
@@ -46,11 +76,15 @@ public class Plantilla_Solucion extends Composite{
 	absolutePanel.add(label, 5, 10);
 	label.setSize("157px", "13px");
 	
-	final TextBox textBox = new TextBox();
+	/*final TextBox textBox = new TextBox();
 	textBox.setStyleName("gwt-TextBox2");
 	textBox.setMaxLength(100);
 	absolutePanel.add(textBox, 5, 29);
-	textBox.setSize("227px", "34px");
+	textBox.setSize("227px", "34px");*/
+	suggestbox.setStyleName("gwt-SuggestBox");
+	 absolutePanel.add(suggestbox, 5, 29);
+	 suggestbox.setSize("227px", "34px");
+	
 	
 	Label label_1 = new Label("Tipo");
 	label_1.setStyleName("label");
@@ -76,7 +110,7 @@ public class Plantilla_Solucion extends Composite{
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			if (!textBox.getText().equals("")){
+			if (!textBox_1.getText().equals("")){
 
 		/*	loginService.Insertar_Beneficiario(textBox.getText(),textBox_1.getText(), Integer.parseInt(textBox_2.getText()),
 					new AsyncCallback<Long>(){
@@ -130,14 +164,16 @@ public class Plantilla_Solucion extends Composite{
 	
 
 
-			e = new TablaGWT_PlantillaSolucion(new ArrayList<AuxDetallePlantillaSolucion>());
-			grid.setWidget(1, 0,e);
-			e.setSize("1000px", "300px");
+	e = new TablaGWT_PlantillaSolucion(new ArrayList<AuxDetallePlantillaSolucion>());
+	grid.setWidget(1, 0,e);
+	e.setSize("1000px", "300px");
 
 	
 
 	
    
 }
+    
+    
 	
 }

@@ -27,6 +27,15 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
     public int compareTo(AuxMaterialCostruccion o) {
       return (o == null || o.idMaterialConstruccion == null) ? -1 : -o.idMaterialConstruccion.compareTo(idMaterialConstruccion);
     }
+    
+    public AuxMaterialCostruccion(String nomMaterialConstruccion, Double Precio){
+    	this.nomMaterialCostruccion = nomMaterialConstruccion;
+    	this.precioUnit = Precio;
+    }
+    
+    public AuxMaterialCostruccion(){
+    	
+    }
 	
 	private Long idMaterialConstruccion;
 

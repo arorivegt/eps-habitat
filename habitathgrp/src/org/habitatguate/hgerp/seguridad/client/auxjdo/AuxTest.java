@@ -1,6 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxTest implements IsSerializable{
@@ -46,9 +48,23 @@ public class AuxTest implements IsSerializable{
 	
     private String tipo_test;
 
+	//contiene el id de la bd de test, para poder determinar
+	//que test le correspondia a este, para asociar BDtest--test
+	//asi el empleado tenia un test dependiendo lo que le asigne
+	@Persistent
+    private Long BDtest;
+	
 
 	public AuxTest() {
 		super();
+	}
+
+	public Long getBDtest() {
+		return BDtest;
+	}
+
+	public void setBDtest(Long bDtest) {
+		BDtest = bDtest;
 	}
 
 	public Long getId_test() {

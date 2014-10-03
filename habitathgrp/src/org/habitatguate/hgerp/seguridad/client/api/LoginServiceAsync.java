@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
@@ -48,7 +49,11 @@ public interface LoginServiceAsync {
 			String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-			int pregunta9, int pregunta10, Date fecha_test, String evaluador,
+			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, 
+			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
+			String pregunta5, String pregunta6, String pregunta7, String pregunta8,
+			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
@@ -102,7 +107,11 @@ public interface LoginServiceAsync {
 				String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 				int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-				int pregunta9, int pregunta10, Date fecha_test, String evaluador,
+				int pregunta9, int pregunta10, Date fecha_test,String evaluador,Long BDtest, 
+				String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
+		void Actualizar_BDTest(Long id,String nombreTest,String pregunta1, String pregunta2, String pregunta3, String pregunta4,
+				String pregunta5, String pregunta6, String pregunta7, String pregunta8,
+				String pregunta9, String pregunta10, Date fecha_test,
 				String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 				float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
@@ -160,6 +169,8 @@ public interface LoginServiceAsync {
 	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
 
 	    void BDPuesto(AsyncCallback<List<AuxBDPuesto>> callback)throws IllegalArgumentException;
+	    
+	    void BDTest(AsyncCallback<List<AuxBDTest>> callback)throws IllegalArgumentException;
 	    
 	    void remove(String fileURL,
 	    		AsyncCallback<String> callback)throws IllegalArgumentException;

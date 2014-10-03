@@ -33,66 +33,66 @@ public class BuscadorEmpleados extends Composite   {
 		initWidget(grid);
 		grid.setSize("1350px", "100%");
 					
-					AbsolutePanel absolutePanel = new AbsolutePanel();
-					grid.setWidget(0, 0, absolutePanel);
-					absolutePanel.setSize("100%", "90px");
-					absolutePanel.setStyleName("gwt-Label-new");
+		AbsolutePanel absolutePanel = new AbsolutePanel();
+		grid.setWidget(0, 0, absolutePanel);
+		absolutePanel.setSize("100%", "90px");
+		absolutePanel.setStyleName("gwt-Label-new");
 						
-						final TextBox txtPrimerApellido = new TextBox();
-						txtPrimerApellido.setStyleName("gwt-TextBox2");
-						txtPrimerApellido.setMaxLength(100);
-						absolutePanel.add(txtPrimerApellido, 10, 29);
-						txtPrimerApellido.setSize("227px", "34px");
+		final TextBox txtPrimerApellido = new TextBox();
+		txtPrimerApellido.setStyleName("gwt-TextBox2");
+		txtPrimerApellido.setMaxLength(100);
+		absolutePanel.add(txtPrimerApellido, 10, 29);
+		txtPrimerApellido.setSize("227px", "34px");
+		
+		final TextBox txtSegundoApellido = new TextBox();
+		txtSegundoApellido.setStyleName("gwt-TextBox2");
+		txtSegundoApellido.setMaxLength(100);
+		absolutePanel.add(txtSegundoApellido, 245, 29);
+		txtSegundoApellido.setSize("227px", "34px");
+		
+		final TextBox txtPrimerNombre = new TextBox();
+		txtPrimerNombre.setStylePrimaryName("gwt-TextBox2");
+		txtPrimerNombre.setStyleName("gwt-TextBox2");
+		txtPrimerNombre.setMaxLength(100);
+		absolutePanel.add(txtPrimerNombre, 480, 29);
+		txtPrimerNombre.setSize("227px", "34px");
+		
+		final TextBox txtSegundoNombre = new TextBox();
+		txtSegundoNombre.setStylePrimaryName("gwt-TextBox2");
+		txtSegundoNombre.setStyleName("gwt-TextBox2");
+		txtSegundoNombre.setMaxLength(100);
+		absolutePanel.add(txtSegundoNombre, 715, 29);
+		txtSegundoNombre.setSize("227px", "34px");
+		
+		final TextBox txtDPI = new TextBox();
+		txtDPI.setStyleName("gwt-TextBox2");
+		txtDPI.setMaxLength(100);
+		absolutePanel.add(txtDPI, 10, 87);
+		txtDPI.setSize("227px", "34px");
 						
-						final TextBox txtSegundoApellido = new TextBox();
-						txtSegundoApellido.setStyleName("gwt-TextBox2");
-						txtSegundoApellido.setMaxLength(100);
-						absolutePanel.add(txtSegundoApellido, 245, 29);
-						txtSegundoApellido.setSize("227px", "34px");
-						
-						final TextBox txtPrimerNombre = new TextBox();
-						txtPrimerNombre.setStylePrimaryName("gwt-TextBox2");
-						txtPrimerNombre.setStyleName("gwt-TextBox2");
-						txtPrimerNombre.setMaxLength(100);
-						absolutePanel.add(txtPrimerNombre, 480, 29);
-						txtPrimerNombre.setSize("227px", "34px");
-						
-						final TextBox txtSegundoNombre = new TextBox();
-						txtSegundoNombre.setStylePrimaryName("gwt-TextBox2");
-						txtSegundoNombre.setStyleName("gwt-TextBox2");
-						txtSegundoNombre.setMaxLength(100);
-						absolutePanel.add(txtSegundoNombre, 715, 29);
-						txtSegundoNombre.setSize("227px", "34px");
-						
-							final TextBox txtDPI = new TextBox();
-							txtDPI.setStyleName("gwt-TextBox2");
-							txtDPI.setMaxLength(100);
-							absolutePanel.add(txtDPI, 10, 87);
-							txtDPI.setSize("227px", "34px");
-						
-						final TextBox txtPasaporte = new TextBox();
-						txtPasaporte.setStyleName("gwt-TextBox2");
-						txtPasaporte.setMaxLength(100);
-						absolutePanel.add(txtPasaporte, 245, 87);
-						txtPasaporte.setSize("227px", "34px");
-						
-						final ListBox listEstado = new ListBox();
-						listEstado.addItem("empleado activo");
-						listEstado.addItem("empleado inactivo");
-						listEstado.addItem("posible empleado");
-						listEstado.setStyleName("gwt-TextBox2");
-						absolutePanel.add(listEstado, 480, 89);
-						listEstado.setSize("229px", "34px");
-						
-						listBox = new ListBox();
-						listBox.addItem("DPI");
-						listBox.addItem("Pasaporte");
-						listBox.addItem("Nombres");
-						listBox.addItem("Todos");
-						listBox.addItem("Estado");
-						listBox.setStyleName("gwt-TextBox2");
-						absolutePanel.add(listBox, 715, 87);
-						listBox.setSize("229px", "36px");
+		final TextBox txtPasaporte = new TextBox();
+		txtPasaporte.setStyleName("gwt-TextBox2");
+		txtPasaporte.setMaxLength(100);
+		absolutePanel.add(txtPasaporte, 245, 87);
+		txtPasaporte.setSize("227px", "34px");
+		
+		final ListBox listEstado = new ListBox();
+		listEstado.addItem("empleado activo");
+		listEstado.addItem("empleado inactivo");
+		listEstado.addItem("posible empleado");
+		listEstado.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listEstado, 480, 89);
+		listEstado.setSize("229px", "34px");
+		
+		listBox = new ListBox();
+		listBox.addItem("DPI");
+		listBox.addItem("Pasaporte");
+		listBox.addItem("Nombres");
+		listBox.addItem("Todos");
+		listBox.addItem("Estado");
+		listBox.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listBox, 715, 87);
+		listBox.setSize("229px", "36px");
 						
 						Image image = new Image("images/ico-lupa.png");
 						image.addClickHandler(new ClickHandler() {

@@ -49,7 +49,7 @@ public class formularioPuestos extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("1024px", "170px");
-		
+
 		ListPuesto = new ListBox();
 		ListPuesto.addItem("nada seleccionado");
 		ListPuesto.addChangeHandler(new ChangeHandler() {
@@ -68,10 +68,6 @@ public class formularioPuestos extends Composite {
 					
 			}
 		});
-
-	    for (AuxBDPuesto p : this.aa.BDpuestos) {
-	    	ListPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
-	    }
 		ListPuesto.setStyleName("gwt-TextBox2");
 		absolutePanel.add(ListPuesto, 10, 29);
 		ListPuesto.setSize("227px", "34px");
@@ -111,13 +107,6 @@ public class formularioPuestos extends Composite {
 		listActivo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listActivo, 761, 29);
 		listActivo.setSize("227px", "34px");;
-		
-		txtFunciones = new TextArea();
-		txtFunciones.setReadOnly(true);
-		txtFunciones.getElement().setAttribute("maxlength", "500");
-		txtFunciones.setStyleName("gwt-TextBox");
-		absolutePanel.add(txtFunciones, 10, 97);
-		txtFunciones.setSize("428px", "62px");
 		
 				Button btnGuardar = new Button("Send");
 				btnGuardar.addClickHandler(new ClickHandler() {
@@ -186,6 +175,13 @@ public class formularioPuestos extends Composite {
 				}
 			}
 		});
+		
+		txtFunciones = new TextArea();
+		txtFunciones.setReadOnly(true);
+		txtFunciones.getElement().setAttribute("maxlength", "500");
+		txtFunciones.setStyleName("gwt-TextBox");
+		absolutePanel.add(txtFunciones, 10, 97);
+		txtFunciones.setSize("428px", "62px");
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("sendButton");
 		btnEliminar.setStyleName("sendButton");
@@ -216,6 +212,10 @@ public class formularioPuestos extends Composite {
 		lblFunciones.setStyleName("label");
 		absolutePanel.add(lblFunciones, 10, 78);
 		lblFunciones.setSize("192px", "13px");
+
+	    for (AuxBDPuesto p : this.aa.BDpuestos) {
+	    	ListPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
+	    }
 		
 		
 	}
@@ -247,6 +247,7 @@ public class formularioPuestos extends Composite {
 		this.txtFunciones.setText(txtFunciones);
 		this.txtSalario.setText(txtSalario);
 	}
+	
     public void setMensaje(String estilo, String mensaje){
         final DialogBox Registro2 = new DialogBox();
         final HTML serverResponseLabel = new HTML();

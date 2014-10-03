@@ -6,41 +6,36 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
-public class Desempeno extends Composite  {
+public class TestForm extends Composite  {
 
 	 private FlexTable flextable;
-	 private Empleados empleado;
      private VerticalPanel panel = new VerticalPanel();
      private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-     private List<AuxTest> valor = new ArrayList<AuxTest>();
-     public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
+     private List<AuxBDTest> valor = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
-	    public Desempeno(Empleados e) {
+	    
+     public TestForm() {
 
-			this.empleado = e;
-	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
-	        BDTest();
+	        
 	        panel.add(grid);
 	        grid.setWidget(0, 0, btnTest);
 	        btnTest.addClickHandler(new ClickHandler() {
@@ -62,81 +57,81 @@ public class Desempeno extends Composite  {
 	        });
 	        
 	        btnAgregar.setSize("227px", "34px");
+	        IniciarLlenadoBaseDatosTest();
 		}
 	    
 	    private void agregarFormulario(){
 	    	flextable.clear();
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioPruebaPeriodo(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new CreacionBaseDatosTest(this));
 	    }
 	    
-	    public void agregarFormulario_lleno(AuxTest n){
+	    public void agregarFormulario_lleno(AuxBDTest n){
 	    	flextable.clear();
 	    	if (!n.equals(null)) {
-			    	formularioPruebaPeriodo  fa = new formularioPruebaPeriodo(this,empleado);
-					fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
+	    		CreacionBaseDatosTest  fa = new CreacionBaseDatosTest(this);
+					fa.LlenarDatos(n.getId_test(),n.getNombreTest(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
-							""+n.getPregunta10(), n.getEvaluador(), n.getBDtest(),n.getFecha_test());
+							""+n.getPregunta10(),n.getFecha_test());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 	    	}	    
 	    }
 	    
-	    public void agregar_formularios(List<AuxTest> results){
-	    	ScrollPanel scrollPanel_1 = new ScrollPanel();
-			scrollPanel_1.setAlwaysShowScrollBars(false);
-			scrollPanel_1.setSize("1200px", "489px");
+	    public void agregar_formularios(List<AuxBDTest> results){
+	    	IniciarLlenadoBaseDatosTest();
 	    	flextable.clear();
 	    	if (!(results.size() == 0)) {
 	    		valor = results;
-			    for (AuxTest n : results) {
-			    	formularioDesempeno de = new formularioDesempeno(this, n);
+			    for (AuxBDTest n : results) {
+			    	FormularioTest de = new FormularioTest(this, n);
 			    	flextable.setWidget(flextable.getRowCount(), 0,de);
 			    }
-
-				scrollPanel_1.setWidget(flextable);
 			}			    
 	    }
 	    
-	    public void EliminarFormulario(final formularioPruebaPeriodo fa, final Long id_empledo, final Long id){
-
-			loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
+	    
+	    public void IniciarLlenadoBaseDatosTest(){
+	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
                 public void onFailure(Throwable caught) 
                 {
-                	fa.setMensaje("alert alert-error", 
-                			"Error !! \nal Eliminar");
-                   // Window.alert("Error al ELiminar"+caught);
                 }
 
 				@Override
-                public void onSuccess(Long result)
+                public void onSuccess(List<AuxBDTest> result)
                 {
-                	fa.setMensaje("alert alert-success", 
-                			"Eliminado exitosamente!!!");
-                	//Window.alert("Eliminado exitosamente!!! ");
-        	        flextable.remove(fa);
+					valor.clear();
+					valor = result;
                 }
 
-         });
+	    	});
 	    }
-	    public void EliminarFormulario(formularioPruebaPeriodo fa){
-	    	flextable.remove(fa);
-	    }
-	    
-	    private void BDTest(){
-	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
 
-				@Override
-				public void onFailure(Throwable caught) {
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxBDTest> result) {
-					if (!(result.size()==0)) {
-						BDresult = result;
-			    	}
-					
-				} 
-			});
-	    }
-	    
+    	public void setMensaje(String estilo, String mensaje){
+    		final DialogBox Registro2 = new DialogBox();
+            final HTML serverResponseLabel = new HTML();
+            final Button close= new Button("x");
+            Mensaje inicio = new Mensaje();
+            
+            Registro2.setStyleName(estilo);
+            inicio.mensajeEntrada(mensaje);
+            inicio.mensajeEstilo(estilo);
+            close.addStyleName("close");
+            VerticalPanel dialogVPanel = new VerticalPanel();
+            dialogVPanel.add(serverResponseLabel );
+            dialogVPanel.add(inicio);
+            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+            dialogVPanel.add(close);
+            Registro2 .setWidget(dialogVPanel);
+            Registro2 .setModal(true);
+            Registro2 .setGlassEnabled(true);
+            Registro2 .setAnimationEnabled(true);
+            Registro2 .center();
+            Registro2 .show();
+            close.setFocus(true);
+        
+            close.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                Registro2.hide();
+            }
+        });
+    	}
 }

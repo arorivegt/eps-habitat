@@ -26,6 +26,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 
 	 	private Empleados empleado;
 		private Long id_prueba = 0L;
+		private Long id_BDprueba = 0L;
 		private boolean bandera = true;
 	    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
 		
@@ -42,6 +43,17 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private TextBox txtEvaluador;
 		private DoubleBox txtPunteoTotal;
 		private DateBox dateFecha ;
+		
+		private Label lblPregunta1;
+		private Label lblPregunta2;
+		private Label lblPregunta3;
+		private Label lblPregunta4;
+		private Label lblPregunta5;
+		private Label lblPregunta6;
+		private Label lblPregunta7;
+		private Label lblPregunta8;
+		private Label lblPregunta9;
+		private Label lblPregunta10;
 		
 	public formularioPruebaPeriodoDos(Empleados e) {
 
@@ -213,7 +225,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		
 		txtPunteoTotal = new DoubleBox();
 		txtPunteoTotal.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPunteoTotal, 548, 862);
+		absolutePanel.add(txtPunteoTotal, 546, 939);
 		txtPunteoTotal.setSize("198px", "34px");
 		
 		txtEvaluador = new TextBox();
@@ -227,7 +239,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 330, 939);
+		absolutePanel.add(dateFecha, 284, 939);
 		dateFecha.setSize("198px", "34px");
 		
 		Button btnGuardar = new Button("Send");
@@ -246,7 +258,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 							Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 							Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-							txtEvaluador.getText(), "2", new AsyncCallback<Long>(){
+							txtEvaluador.getText(),id_BDprueba, "2", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	setMensaje("alert alert-error", 
@@ -270,7 +282,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 					Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 					Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-					txtEvaluador.getText(), "2", new AsyncCallback<Long>(){
+					txtEvaluador.getText(),id_BDprueba, "2", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
                 	setMensaje("alert alert-error", 
@@ -292,7 +304,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 332, 1102);
+		absolutePanel.add(btnGuardar, 284, 1102);
 		btnGuardar.setSize("198px", "32px");
 		
 		Label lblNivelAcademico = new Label("Evaluación de Período de Prueba realizada en Oficina Nacional");
@@ -319,60 +331,59 @@ public class formularioPruebaPeriodoDos extends Composite {
 		lblPosteriorA.setStyleName("label");
 		absolutePanel.add(lblPosteriorA, 37, 141);
 		lblPosteriorA.setSize("667px", "13px");
+
+		lblPregunta1 = new Label("pregunta ");
+		lblPregunta1.setStyleName("label");
+		absolutePanel.add(lblPregunta1, 40, 428);
+		lblPregunta1.setSize("482px", "34px");
 		
-		Label lblAtiendeEficientementeLos = new Label("Apoya y motiva a los miembros del comité\t\t\t\t");
-		lblAtiendeEficientementeLos.setStyleName("label");
-		absolutePanel.add(lblAtiendeEficientementeLos, 36, 428);
-		lblAtiendeEficientementeLos.setSize("379px", "13px");
+		lblPregunta2 = new Label("pregunta");
+		lblPregunta2.setStyleName("label");
+		absolutePanel.add(lblPregunta2, 40, 468);
+		lblPregunta2.setSize("482px", "34px");
 		
-		Label lblLaInformacinQue = new Label("Es eficiente y ordenado en la realización de sus actividades\t\t\t\t");
-		lblLaInformacinQue.setStyleName("label");
-		absolutePanel.add(lblLaInformacinQue, 37, 468);
-		lblLaInformacinQue.setSize("511px", "13px");
+		lblPregunta3 = new Label("pregunta");
+		lblPregunta3.setStyleName("label");
+		absolutePanel.add(lblPregunta3, 40, 503);
+		lblPregunta3.setSize("482px", "34px");
 		
-		Label lblTieneClarosLos = new Label("Cumple con lo acordado para los diferentes eventos\t\t\t\t");
-		lblTieneClarosLos.setStyleName("label");
-		absolutePanel.add(lblTieneClarosLos, 37, 508);
-		lblTieneClarosLos.setSize("524px", "13px");
+		lblPregunta4 = new Label("pregunta");
+		lblPregunta4.setStyleName("label");
+		absolutePanel.add(lblPregunta4, 41, 548);
+		lblPregunta4.setSize("482px", "34px");
 		
-		Label lblLosResultadosQue = new Label("Mantiene un clima de unidad\t\t\t\t");
-		lblLosResultadosQue.setStyleName("label");
-		absolutePanel.add(lblLosResultadosQue, 37, 548);
-		lblLosResultadosQue.setSize("293px", "13px");
+		lblPregunta5 = new Label("pregunta");
+		lblPregunta5.setStyleName("label");
+		absolutePanel.add(lblPregunta5, 41, 588);
+		lblPregunta5.setSize("482px", "34px");
 		
-		Label lblProporcionaUnClima = new Label("Supervisa constante \t\t\t\t");
-		lblProporcionaUnClima.setStyleName("label");
-		absolutePanel.add(lblProporcionaUnClima, 37, 588);
-		lblProporcionaUnClima.setSize("511px", "13px");
+		lblPregunta6 = new Label("pregunta");
+		lblPregunta6.setStyleName("label");
+		absolutePanel.add(lblPregunta6, 41, 628);
+		lblPregunta6.setSize("482px", "34px");
 		
-		Label lblSuDisposicinDe = new Label("Su colaboración es expontánea e inmediata\t\t\t\t");
-		lblSuDisposicinDe.setStyleName("label");
-		absolutePanel.add(lblSuDisposicinDe, 37, 629);
-		lblSuDisposicinDe.setSize("511px", "13px");
+		lblPregunta7 = new Label("pregunta");
+		lblPregunta7.setStyleName("label");
+		absolutePanel.add(lblPregunta7, 42, 668);
+		lblPregunta7.setSize("482px", "34px");
 		
-		Label lblMantieneUnaActitud = new Label("Se identifica y compromete con los objetivos de la Fundación\t\t\t\t");
-		lblMantieneUnaActitud.setStyleName("label");
-		absolutePanel.add(lblMantieneUnaActitud, 37, 788);
-		lblMantieneUnaActitud.setSize("511px", "13px");
+		lblPregunta8 = new Label("pregunta");
+		lblPregunta8.setStyleName("label");
+		absolutePanel.add(lblPregunta8, 42, 708);
+		lblPregunta8.setSize("482px", "34px");
 		
-		Label lblAdministraEficientementeLos = new Label("Demuestra deseos de aprender y mejorar\t\t\t\t");
-		lblAdministraEficientementeLos.setStyleName("label");
-		absolutePanel.add(lblAdministraEficientementeLos, 37, 748);
-		lblAdministraEficientementeLos.setSize("511px", "13px");
+		lblPregunta9 = new Label("pregunta");
+		lblPregunta9.setStyleName("label");
+		absolutePanel.add(lblPregunta9, 39, 744);
+		lblPregunta9.setSize("482px", "34px");
 		
-		Label lblLaComunicacinQue = new Label("Se conduce con ética y profesionalismo\t\t\t\t");
-		lblLaComunicacinQue.setStyleName("label");
-		absolutePanel.add(lblLaComunicacinQue, 37, 709);
-		lblLaComunicacinQue.setSize("511px", "13px");
-		
-		Label lblTieneClarasSus = new Label("Conoce su área de trabajo\t\t\t\t");
-		lblTieneClarasSus.setStyleName("label");
-		absolutePanel.add(lblTieneClarasSus, 37, 668);
-		lblTieneClarasSus.setSize("511px", "13px");
-		
+		lblPregunta10 = new Label("pregunta");
+		lblPregunta10.setStyleName("label");
+		absolutePanel.add(lblPregunta10, 39, 783);
+		lblPregunta10.setSize("482px", "34px");
 		Label lblPunteoTotal = new Label("Punteo Total");
 		lblPunteoTotal.setStyleName("label");
-		absolutePanel.add(lblPunteoTotal, 587, 841);
+		absolutePanel.add(lblPunteoTotal, 585, 918);
 		lblPunteoTotal.setSize("143px", "13px");
 		
 		Label lblEvaluador = new Label("Evaluador");
@@ -382,8 +393,18 @@ public class formularioPruebaPeriodoDos extends Composite {
 		
 		Label lblFecha = new Label("Fecha");
 		lblFecha.setStyleName("label");
-		absolutePanel.add(lblFecha, 340, 904);
+		absolutePanel.add(lblFecha, 294, 904);
 		lblFecha.setSize("75px", "13px");
+		
+		ListBox listTest = new ListBox();
+		listTest.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listTest, 37, 1045);
+		listTest.setSize("198px", "34px");
+		
+		Label lblEvaluacionQueSe = new Label("Elija la evaluacion que se asignara a este formulario:");
+		lblEvaluacionQueSe.setStyleName("label");
+		absolutePanel.add(lblEvaluacionQueSe, 39, 1009);
+		lblEvaluacionQueSe.setSize("198px", "18px");
 	}
 	
 
@@ -393,10 +414,10 @@ public class formularioPruebaPeriodoDos extends Composite {
 			String listPregunta4, String listPregunta5,
 			String listPregunta6, String listPregunta7,
 			String listPregunta8, String listPregunta9,
-			String listPregunta10, String txtEvaluador, Long dateFecha) {
+			String listPregunta10, String txtEvaluador, Long id_BDPuestos, Long dateFecha) {
 
 		this.id_prueba = id;
-		this.bandera = false;
+		this.id_BDprueba =id_BDPuestos;
 		boolean bandera = true;
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);

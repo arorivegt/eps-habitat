@@ -19,8 +19,16 @@ import javax.jdo.Query;
 
 
 
+
+
+
+
+
+
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEntrevista;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
@@ -34,6 +42,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegBDTest;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEntrevista;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegFamilia;
@@ -353,7 +362,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	public Long Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3,
 			int pregunta4, int pregunta5, int pregunta6, int pregunta7,
 			int pregunta8, int pregunta9, int pregunta10, Date fecha_test,
-			String evaluador, String tipo_test) throws IllegalArgumentException {
+			String evaluador, Long BDtest,String tipo_test) throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
 		Long valor = 0L;
@@ -373,6 +382,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	t.setFecha_test(fecha_test);
 				 	t.setEvaluador(evaluador.toUpperCase());
 				 	t.setTipo_test(tipo_test);
+				 	t.setBDtest(BDtest);
 		      	 	t.setEmpleado(e);
 		      	 	e.getTest().add(t);
 				 	valor =t.getId_test();
@@ -715,7 +725,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			public Long Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3,
 					int pregunta4, int pregunta5, int pregunta6, int pregunta7,
 					int pregunta8, int pregunta9, int pregunta10, Date fecha_test,
-					String evaluador, String tipo_test) throws IllegalArgumentException {
+					String evaluador, Long BDtest,String tipo_test) throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
 				Long valor = 0L;
@@ -736,6 +746,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 	t.setPregunta9(pregunta9);
 						 	t.setPregunta10(pregunta10);
 						 	t.setFecha_test(fecha_test);
+						 	t.setBDtest(BDtest);
 						 	t.setEvaluador(evaluador.toUpperCase());
 						 	valor =t.getId_test();
 						 }finally {  
@@ -1227,6 +1238,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 								 	t.setPregunta10(n8.getPregunta10());
 								 	t.setFecha_test(n8.getFecha_test().getTime());
 								 	t.setEvaluador(n8.getEvaluador());
+								 	t.setBDtest(n8.getBDtest());
 								 	t.setTipo_test(n8.getTipo_test());
 								 	nuevo.getTest().add(t);
 							    }
@@ -1471,6 +1483,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 								 	t.setPregunta10(n8.getPregunta10());
 								 	t.setFecha_test(n8.getFecha_test().getTime());
 								 	t.setEvaluador(n8.getEvaluador());
+								 	t.setBDtest(n8.getBDtest());
 								 	t.setTipo_test(n8.getTipo_test());
 								 	nuevo.getTest().add(t);
 							    }
@@ -1711,6 +1724,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							 	t.setPregunta10(n8.getPregunta10());
 							 	t.setFecha_test(n8.getFecha_test().getTime());
 							 	t.setEvaluador(n8.getEvaluador());
+							 	t.setBDtest(n8.getBDtest());
 							 	t.setTipo_test(n8.getTipo_test());
 							 	nuevo.getTest().add(t);
 						    }
@@ -1825,5 +1839,101 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	                throw new RuntimeException(e);
 	            }
 	        }
+
+		@Override
+		public Long Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2,
+				String pregunta3, String pregunta4, String pregunta5,
+				String pregunta6, String pregunta7, String pregunta8,
+				String pregunta9, String pregunta10, Date fecha_test,
+				String tipo_test) throws IllegalArgumentException {
+			
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			
+			Long valor = 0L;
+				 try { 
+					 SegBDTest t = new  SegBDTest();
+					 	t.setNombreTest(nombreTest);
+					 	t.setPregunta1(pregunta1);
+					 	t.setPregunt2(pregunt2);
+					 	t.setPregunta3(pregunta3);
+					 	t.setPregunta4(pregunta4);
+					 	t.setPregunta5(pregunta5);
+					 	t.setPregunta6(pregunta6);
+					 	t.setPregunta7(pregunta7);
+					 	t.setPregunta8(pregunta8);
+					 	t.setPregunta9(pregunta9);
+					 	t.setPregunta10(pregunta10);
+					 	t.setFecha_test(fecha_test);
+					 	t.setTipo_test(tipo_test);
+					 	Persistencia.makePersistent(t); 
+					 	valor =t.getId_test();
+					 }finally {  
+						 Persistencia.close();  
+					 }
+				return valor ;
+		}
+
+		@Override
+		public Long Actualizar_BDTest(Long id, String nombreTest,String pregunta1,
+				String pregunt2, String pregunta3, String pregunta4,
+				String pregunta5, String pregunta6, String pregunta7,
+				String pregunta8, String pregunta9, String pregunta10,
+				Date fecha_test, String tipo_test)
+				throws IllegalArgumentException {
+			
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			
+			Long valor = 0L;
+				 try { 
+					 System.out.println("__________"+ id);
+					 final SegBDTest t = Persistencia.getObjectById(SegBDTest.class, id); 
+					 	t.setNombreTest(nombreTest);
+					 	t.setPregunta1(pregunta1);
+					 	t.setPregunt2(pregunt2);
+					 	t.setPregunta3(pregunta3);
+					 	t.setPregunta4(pregunta4);
+					 	t.setPregunta5(pregunta5);
+					 	t.setPregunta6(pregunta6);
+					 	t.setPregunta7(pregunta7);
+					 	t.setPregunta8(pregunta8);
+					 	t.setPregunta9(pregunta9);
+					 	t.setPregunta10(pregunta10);
+					 	t.setFecha_test(fecha_test);
+					 	valor =t.getId_test();
+					 }finally {  
+						 Persistencia.close();  
+					 }
+				return valor ;
+		}
+
+		@Override
+		public List<AuxBDTest> BDTest() throws IllegalArgumentException {
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+			List<AuxBDTest> valor = new ArrayList<AuxBDTest>();
+			
+			Query q = pm.newQuery(SegBDTest.class);
+			List<SegBDTest> results = (List<SegBDTest>) q.execute();
+			if (!results.isEmpty()) {
+          
+			    for (SegBDTest p : results) {
+			    	AuxBDTest t = new AuxBDTest();
+			    	t.setId_test(p.getId_test());
+			    	t.setNombreTest(p.getNombreTest());
+				 	t.setPregunta1(p.getPregunta1());
+				 	t.setPregunt2(p.getPregunt2());
+				 	t.setPregunta3(p.getPregunta3());
+				 	t.setPregunta4(p.getPregunta4());
+				 	t.setPregunta5(p.getPregunta5());
+				 	t.setPregunta6(p.getPregunta6());
+				 	t.setPregunta7(p.getPregunta7());
+				 	t.setPregunta8(p.getPregunta8());
+				 	t.setPregunta9(p.getPregunta9());
+				 	t.setPregunta10(p.getPregunta10());
+				 	t.setFecha_test(p.getFecha_test().getTime());
+				 	valor.add(t);
+			    }
+			}
+			return valor;
+		}
 
 	}

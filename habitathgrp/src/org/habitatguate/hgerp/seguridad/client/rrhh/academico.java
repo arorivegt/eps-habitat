@@ -14,6 +14,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class academico extends Composite  {
 
@@ -25,6 +27,8 @@ public class academico extends Composite  {
 	    public academico(Empleados e) {
 
 			this.empleado = e;
+	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();

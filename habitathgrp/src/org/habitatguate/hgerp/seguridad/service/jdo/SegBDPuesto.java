@@ -29,7 +29,6 @@ public class SegBDPuesto implements Serializable {
 	@Persistent
     private String funciones;
 	
-    private SegEmpleado empleado;
 
 	public SegBDPuesto() {
 		super();
@@ -63,12 +62,5 @@ public class SegBDPuesto implements Serializable {
 		this.funciones = funciones;
 	}
 
-	public SegEmpleado getEmpleado() {
-		return empleado;
-	}
-
-	public void setEmpleado(SegEmpleado empleado) {
-		this.empleado = empleado;
-	}
 	
 }

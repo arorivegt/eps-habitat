@@ -4,10 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -48,7 +48,11 @@ public interface LoginService extends RemoteService {
 			,String  URLFile, String KeyFile)throws IllegalArgumentException;
 	Long Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-			int pregunta9, int pregunta10, Date fecha_test, String evaluador,
+			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, 
+			String tipo_test)throws IllegalArgumentException;
+	Long Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
+			String pregunta5, String pregunta6, String pregunta7, String pregunta8,
+			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test)throws IllegalArgumentException;
 	Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo)throws IllegalArgumentException;
@@ -101,7 +105,11 @@ public interface LoginService extends RemoteService {
 			,String  URLFile, String KeyFile)throws IllegalArgumentException;
 	Long Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-			int pregunta9, int pregunta10, Date fecha_test, String evaluador,
+			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, 
+			String tipo_test)throws IllegalArgumentException;
+	Long Actualizar_BDTest(Long id,String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
+			String pregunta5, String pregunta6, String pregunta7, String pregunta8,
+			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test)throws IllegalArgumentException;
 	Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 			float salario, boolean activo)throws IllegalArgumentException;
@@ -143,6 +151,8 @@ public interface LoginService extends RemoteService {
 			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
 			String Estado) throws IllegalArgumentException;    
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
+    List<AuxBDTest> BDTest()throws IllegalArgumentException;
+    
     ///querys
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     

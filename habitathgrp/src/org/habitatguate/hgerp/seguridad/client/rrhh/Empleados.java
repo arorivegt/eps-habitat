@@ -291,13 +291,12 @@ public class Empleados extends Composite {
 		List<AuxTest> valor = new ArrayList<AuxTest>();
 		if(!r.isEmpty()){
 			for (AuxTest n : r) {
-				System.out.println("n.getTipo_test() "+n.getTipo_test().equals("1") );
 				if(n.getTipo_test().equals("1")){
 					valor.add(n);
 				}else{
 					fppd.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
-							""+n.getPregunta10(), n.getEvaluador(), n.getFecha_test());
+							""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
 				}
 			}//fin del for
 			fpp.agregar_formularios(valor);

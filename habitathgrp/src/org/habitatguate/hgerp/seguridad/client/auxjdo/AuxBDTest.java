@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxBDTest implements IsSerializable {
@@ -43,6 +45,7 @@ public class AuxBDTest implements IsSerializable {
 	
     private String tipo_test;
 
+	
 	public AuxBDTest() {
 		super();
 	}

@@ -58,12 +58,14 @@ public class SegBDTest implements Serializable {
 	
 	@Persistent
     private String tipo_test;
+	
 
 	public SegBDTest() {
 		super();
 	}
 
-	
+
+
 	public String getNombreTest() {
 		return nombreTest;
 	}

@@ -49,7 +49,7 @@ public interface LoginServiceAsync {
 			String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, 
+			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, boolean testBD,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
 			String pregunta5, String pregunta6, String pregunta7, String pregunta8,
@@ -107,7 +107,7 @@ public interface LoginServiceAsync {
 				String  URLFile, String KeyFile,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3, int pregunta4,
 				int pregunta5, int pregunta6, int pregunta7, int pregunta8,
-				int pregunta9, int pregunta10, Date fecha_test,String evaluador,Long BDtest, 
+				int pregunta9, int pregunta10, Date fecha_test,String evaluador,Long BDtest, boolean testBD,
 				String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_BDTest(Long id,String nombreTest,String pregunta1, String pregunta2, String pregunta3, String pregunta4,
 				String pregunta5, String pregunta6, String pregunta7, String pregunta8,

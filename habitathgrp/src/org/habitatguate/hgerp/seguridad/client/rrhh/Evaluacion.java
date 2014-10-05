@@ -8,17 +8,17 @@ import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class Desempeno extends Composite  {
+public class Evaluacion extends Composite  {
 
      private FlexTable flextable;
      private Empleados empleado;
@@ -28,9 +28,10 @@ public class Desempeno extends Composite  {
      public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
-            public Desempeno(Empleados e) {
+     
+            public Evaluacion(Empleados e) {
 
-                        this.empleado = e;
+                this.empleado = e;
                 initWidget(panel);
                 panel.setSize("761px", "85px");
                 flextable = new FlexTable();
@@ -61,13 +62,13 @@ public class Desempeno extends Composite  {
             
             private void agregarFormulario(){
                 flextable.clear();
-                flextable.setWidget(flextable.getRowCount(), 0, new formularioPruebaPeriodo(this,empleado));
+                flextable.setWidget(flextable.getRowCount(), 0, new formularioPruebaPeriodoDos(this,empleado));
             }
             
             public void agregarFormulario_lleno(AuxTest n){
                 flextable.clear();
                 if (!n.equals(null)) {
-                                formularioPruebaPeriodo  fa = new formularioPruebaPeriodo(this,empleado);
+                	formularioPruebaPeriodoDos  fa = new formularioPruebaPeriodoDos(this,empleado);
                                         fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
@@ -80,13 +81,13 @@ public class Desempeno extends Composite  {
                 if (!(results.size() == 0)) {
                         valor = results;
                             for (AuxTest n : results) {
-                                formularioDesempeno de = new formularioDesempeno(this, n);
-                                flextable.setWidget(flextable.getRowCount(), 0,de);
+                            	formularioEvaluacion de = new formularioEvaluacion(this, n);
+                                flextable.setWidget(flextable.getRowCount(), 0, de);
                             }
                         }                           
             }
             
-            public void EliminarFormulario(final formularioPruebaPeriodo fa, final Long id_empledo, final Long id){
+            public void EliminarFormulario(final formularioPruebaPeriodoDos fa, final Long id_empledo, final Long id){
 
                         loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
@@ -107,7 +108,7 @@ public class Desempeno extends Composite  {
 
          });
             }
-            public void EliminarFormulario(formularioPruebaPeriodo fa){
+            public void EliminarFormulario(formularioPruebaPeriodoDos fa){
                 flextable.remove(fa);
             }
             
@@ -121,11 +122,10 @@ public class Desempeno extends Composite  {
 
     				@Override
     				public void onSuccess(List<AuxBDTest> result) {
-    					//System.out.println("___"+result.isEmpty());
     					if (!result.isEmpty()) {
     						for(AuxBDTest a: result )
     						{
-    							if(a.getTipo_test().equals("1"))
+    							if(a.getTipo_test().equals("2"))
     							{
     								BDresult.add(a);
     							}

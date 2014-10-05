@@ -12,6 +12,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -69,56 +70,52 @@ public class Menu extends Composite {
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
 	}
-	
-	
+	@UiHandler("rrhh6")
+	void rrhh6(ClickEvent event) {
+
+		TestForm buscador = new TestForm();
+		this.nuevo.getGrid().setWidth("1000");
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, buscador);
+	}
 	@UiHandler("empleado1")
 	void empleado1(ClickEvent event) {
 		Empleado_registrado();
 	}
 	
- 	@UiHandler("finan3b")
- 	void finan3b(ClickEvent event) {
- 		Formulario_MaterialCostruccion buscador = new Formulario_MaterialCostruccion();
- 		this.nuevo.getGrid().clearCell(1, 0);
- 		this.nuevo.getGrid().setWidget(1, 0, buscador);
- 	}
-	
-	/*@UiHandler("finan1")
+	@UiHandler("label_1_Finan")
  	void onLabel_1_FinanClick(ClickEvent event) {
  		Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
  	}
-	
- 	@UiHandler("finan2")
+ 	@UiHandler("label_2_Finan")
  	void onLabel_2_FinanClick(ClickEvent event) {
  		Buscador_Solucion buscadorSoluciones = new Buscador_Solucion();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscadorSoluciones);
  	}
- 	@UiHandler("finan3")
+ 	@UiHandler("label_3_Finan")
  	void onLabel_3_FinanClick(ClickEvent event) {
  		Window.alert("no esta disponible");
  	}
- 	@UiHandler("finan4")
+ 	@UiHandler("label_4_Finan")
  	void onLabel_4_FinanClick(ClickEvent event) {
  		Window.alert("no esta disponible");
  		
  	}
- 	@UiHandler("finan5")
+ 	@UiHandler("label_5_Finan")
  	void onLabel_5_FinanClick(ClickEvent event) {
  		Buscador_Afiliado buscadorAfiliado = new Buscador_Afiliado();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscadorAfiliado);
  	}
- 	@UiHandler("finan6")
+ 	@UiHandler("label_6_Finan")
  	void onLabel_6_FinanClick(ClickEvent event) {
  		Formulario_MaterialCostruccion formCostruccion = new Formulario_MaterialCostruccion();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, formCostruccion);
- 	}*/
-
- 	
+ 	}
 	public void Empleado_registrado(){
 
 		final Empleados e = new Empleados(1);

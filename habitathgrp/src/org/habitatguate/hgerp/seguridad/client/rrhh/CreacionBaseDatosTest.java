@@ -241,9 +241,14 @@ public class CreacionBaseDatosTest extends Composite{
     			String txtPregunta4, String txtPregunta5,
     			String txtPregunta6, String txtPregunta7, 
     			String txtPregunta8, String txtPregunta9,
-    			String txtPregunta10, Long dateFecha)
+    			String txtPregunta10, String tipo, Long dateFecha)
         {
-
+        	if(tipo.equals("1"))
+        	{
+        		this.lsitTipoTest.setSelectedIndex(0);
+        	}else{
+        		this.lsitTipoTest.setSelectedIndex(1);
+        	}
     		this.id_prueba = id;
     		this.bandera = false;
     		this.txtNombreTest.setText(nombreTest);

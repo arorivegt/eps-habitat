@@ -6,6 +6,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -27,159 +29,212 @@ public class BuscadorEmpleados extends Composite   {
     private BuscadorEmpleados a;
     private ListBox listBox;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private Label lbDato1;
+    private Label lbDato2;
+    private Label lbDato3;
+
+    private TextBox txtDato1;
+    private TextBox txtDato2;
+    private TextBox txtDato3;
+    private  ListBox listEstado ;
+    private Image Busqueda;
+    private AbsolutePanel absolutePanel;
+    
 	public BuscadorEmpleados() {
 		this.a = this;
 		grid = new Grid(2, 1);
 		initWidget(grid);
 		grid.setSize("1350px", "100%");
 					
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "90px");
+		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
+		
+		txtDato1 = new TextBox();
+		txtDato1.setStylePrimaryName("gwt-TextBox2");
+		txtDato1.setStyleName("gwt-TextBox2");
+		txtDato1.setMaxLength(100);
+		absolutePanel.add(txtDato1, 205, 19);
+		txtDato1.setSize("177px", "34px");
+		
+		txtDato2 = new TextBox();
+		txtDato2.setStyleName("gwt-TextBox2");
+		txtDato2.setMaxLength(100);
+		absolutePanel.add(txtDato2, 390, 19);
+		txtDato2.setSize("177px", "34px");
 						
-		final TextBox txtPrimerApellido = new TextBox();
-		txtPrimerApellido.setStyleName("gwt-TextBox2");
-		txtPrimerApellido.setMaxLength(100);
-		absolutePanel.add(txtPrimerApellido, 10, 29);
-		txtPrimerApellido.setSize("227px", "34px");
+		txtDato3 = new TextBox();
+		txtDato3.setStyleName("gwt-TextBox2");
+		txtDato3.setMaxLength(100);
+		absolutePanel.add(txtDato3, 575, 19);
+		txtDato3.setSize("177px", "34px");
 		
-		final TextBox txtSegundoApellido = new TextBox();
-		txtSegundoApellido.setStyleName("gwt-TextBox2");
-		txtSegundoApellido.setMaxLength(100);
-		absolutePanel.add(txtSegundoApellido, 245, 29);
-		txtSegundoApellido.setSize("227px", "34px");
-		
-		final TextBox txtPrimerNombre = new TextBox();
-		txtPrimerNombre.setStylePrimaryName("gwt-TextBox2");
-		txtPrimerNombre.setStyleName("gwt-TextBox2");
-		txtPrimerNombre.setMaxLength(100);
-		absolutePanel.add(txtPrimerNombre, 480, 29);
-		txtPrimerNombre.setSize("227px", "34px");
-		
-		final TextBox txtSegundoNombre = new TextBox();
-		txtSegundoNombre.setStylePrimaryName("gwt-TextBox2");
-		txtSegundoNombre.setStyleName("gwt-TextBox2");
-		txtSegundoNombre.setMaxLength(100);
-		absolutePanel.add(txtSegundoNombre, 715, 29);
-		txtSegundoNombre.setSize("227px", "34px");
-		
-		final TextBox txtDPI = new TextBox();
-		txtDPI.setStyleName("gwt-TextBox2");
-		txtDPI.setMaxLength(100);
-		absolutePanel.add(txtDPI, 10, 87);
-		txtDPI.setSize("227px", "34px");
-						
-		final TextBox txtPasaporte = new TextBox();
-		txtPasaporte.setStyleName("gwt-TextBox2");
-		txtPasaporte.setMaxLength(100);
-		absolutePanel.add(txtPasaporte, 245, 87);
-		txtPasaporte.setSize("227px", "34px");
-		
-		final ListBox listEstado = new ListBox();
+		listEstado = new ListBox();
 		listEstado.addItem("empleado activo");
 		listEstado.addItem("empleado inactivo");
 		listEstado.addItem("posible empleado");
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 480, 89);
-		listEstado.setSize("229px", "34px");
+		listEstado.setVisible(false);
+		absolutePanel.add(listEstado, 205, 16);
+		listEstado.setSize("179px", "39px");
 		
 		listBox = new ListBox();
-		listBox.addItem("DPI");
-		listBox.addItem("Pasaporte");
 		listBox.addItem("Nombres");
-		listBox.addItem("Todos");
+		listBox.addItem("Pasaporte");
 		listBox.addItem("Estado");
+		listBox.addItem("Todos");
+		listBox.addItem("DPI");
+		listBox.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
+				{
+					lbDato1.setText("Ingrese el DPI");
+					lbDato2.setText("Ingrese el DPI");
+					lbDato3.setText("Ingrese el DPI");
+
+					lbDato1.setVisible(true);
+					lbDato2.setVisible(false);
+					lbDato3.setVisible(false);
+					
+					txtDato1.setVisible(true);
+					txtDato2.setVisible(false);
+					txtDato3.setVisible(false);
+					listEstado.setVisible(false);
+					absolutePanel.add(Busqueda, 390, 16);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
+				{
+					lbDato1.setText("Primer Nombre");
+					lbDato2.setText("Primer Apellido");
+					lbDato3.setText("Segundo Apellido");
+
+					lbDato1.setVisible(true);
+					lbDato2.setVisible(true);
+					lbDato3.setVisible(true);
+					
+					txtDato1.setVisible(true);
+					txtDato2.setVisible(true);
+					txtDato3.setVisible(true);
+					listEstado.setVisible(false);
+					absolutePanel.add(Busqueda, 760, 19);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+				{
+					lbDato1.setText("Primer Nombre");
+					lbDato2.setText("Primer Apellido");
+					lbDato3.setText("Segundo Apellido");
+
+					lbDato1.setVisible(false);
+					lbDato2.setVisible(false);
+					lbDato3.setVisible(false);
+					
+					txtDato1.setVisible(false);
+					txtDato2.setVisible(false);
+					txtDato3.setVisible(false);
+					listEstado.setVisible(false);
+					absolutePanel.add(Busqueda, 205, 16);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
+				{
+					lbDato1.setText("Ingrese No. Pasaporte");
+					lbDato2.setText("Primer Apellido");
+					lbDato3.setText("Segundo Apellido");
+
+					lbDato1.setVisible(true);
+					lbDato2.setVisible(false);
+					lbDato3.setVisible(false);
+					
+					txtDato1.setVisible(true);
+					txtDato2.setVisible(false);
+					txtDato3.setVisible(false);
+					listEstado.setVisible(false);
+					absolutePanel.add(Busqueda, 390, 16);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
+				{
+					lbDato1.setText("Seleccione el Estado del empleado");
+					lbDato2.setText("Primer Apellido");
+					lbDato3.setText("Segundo Apellido");
+
+					lbDato1.setVisible(true);
+					lbDato2.setVisible(false);
+					lbDato3.setVisible(false);
+					
+					txtDato1.setVisible(false);
+					txtDato2.setVisible(false);
+					txtDato3.setVisible(false);
+					listEstado.setVisible(true);
+					absolutePanel.add(Busqueda, 390, 19);
+				}
+			}
+		});
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 715, 87);
-		listBox.setSize("229px", "36px");
+		absolutePanel.add(listBox, 10, 16);
+		listBox.setSize("179px", "39px");
 						
-						Image image = new Image("images/ico-lupa.png");
-						image.addClickHandler(new ClickHandler() {
+						Busqueda = new Image("images/ico-lupa.png");
+						Busqueda.addClickHandler(new ClickHandler() {
 							public void onClick(ClickEvent event) {
 								grid.clearCell(1, 0);
 								EmpleadoLista  nuevo = new EmpleadoLista();
 
 								if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 								{
-									nuevo.agregarFormulario('2',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
-											txtPrimerApellido.getText(), txtSegundoApellido.getText(),txtDPI.getText(),txtPasaporte.getText()
+									nuevo.agregarFormulario('2',a,txtDato1.getText(), "",txtDato2.getText(), 
+											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 								{
-									nuevo.agregarFormulario('1',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
-										txtPrimerApellido.getText(), txtSegundoApellido.getText(),txtDPI.getText(),txtPasaporte.getText(),
-										listEstado.getItemText(listEstado.getSelectedIndex()));
+									nuevo.agregarFormulario('1',a,txtDato1.getText(), "",txtDato2.getText(), 
+											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 								{
-									nuevo.agregarFormulario('3',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
-										txtPrimerApellido.getText(), txtSegundoApellido.getText(),txtDPI.getText(),txtPasaporte.getText()
-										,listEstado.getItemText(listEstado.getSelectedIndex()));
+									nuevo.agregarFormulario('3',a,txtDato1.getText(), "",txtDato2.getText(), 
+											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 								{
-									nuevo.agregarFormulario('4',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
-										txtPrimerApellido.getText(), txtSegundoApellido.getText(),txtDPI.getText(),txtPasaporte.getText()
-										,listEstado.getItemText(listEstado.getSelectedIndex()));
+									nuevo.agregarFormulario('4',a,txtDato1.getText(), "",txtDato2.getText(), 
+											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 								{
-									nuevo.agregarFormulario('5',a,txtPrimerNombre.getText(), txtSegundoNombre.getText(), 
-										txtPrimerApellido.getText(), txtSegundoApellido.getText(),txtDPI.getText(),txtPasaporte.getText()
-										,listEstado.getItemText(listEstado.getSelectedIndex()));
+									nuevo.agregarFormulario('5',a,txtDato1.getText(), "",txtDato2.getText(), 
+											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}
 							}
 						});
 						
-								absolutePanel.add(image, 973, 42);
-								image.setSize("103px", "55px");
+								absolutePanel.add(Busqueda, 760, 19);
+								Busqueda.setSize("103px", "55px");
 						
-						Label label = new Label("Primer Apellido");
-						label.setStyleName("label");
-						absolutePanel.add(label, 10, 10);
-						label.setSize("157px", "13px");
+						lbDato1 = new Label("Primer Nombre");
+						lbDato1.setStyleName("label");
+						absolutePanel.add(lbDato1, 205, 0);
+						lbDato1.setSize("368px", "19px");
 						
-						Label label_1 = new Label("Segundo Apellido");
-						label_1.setStyleName("label");
-						absolutePanel.add(label_1, 245, 10);
-						label_1.setSize("192px", "13px");
+						lbDato2 = new Label("Segundo Apellido");
+						lbDato2.setStyleName("label");
+						absolutePanel.add(lbDato2, 390, 0);
+						lbDato2.setSize("157px", "13px");
 						
-						Label label_2 = new Label("Primer Nombre");
-						label_2.setStyleName("label");
-						absolutePanel.add(label_2, 480, 10);
-						label_2.setSize("157px", "19px");
-						
-						Label label_3 = new Label("2do y Demás Nombres");
-						label_3.setStyleName("label");
-						absolutePanel.add(label_3, 715, 10);
-						label_3.setSize("261px", "13px");
-						
-						Label dpi = new Label("DPI");
-						dpi.setStyleName("label");
-						absolutePanel.add(dpi, 10, 71);
-						dpi.setSize("157px", "13px");
-						
-						Label NoPasaporte = new Label("No Pasaporte");
-						NoPasaporte.setStyleName("label");
-						absolutePanel.add(NoPasaporte, 245, 71);
-						NoPasaporte.setSize("157px", "13px");
+						lbDato3 = new Label("Primer Apellido");
+						lbDato3.setStyleName("label");
+						absolutePanel.add(lbDato3, 575, 0);
+						lbDato3.setSize("157px", "13px");
 						
 						Label lblBusquedaPor = new Label("Busqueda por: ");
 						lblBusquedaPor.setStyleName("label");
-						absolutePanel.add(lblBusquedaPor, 715, 71);
+						absolutePanel.add(lblBusquedaPor, 10, 0);
 						lblBusquedaPor.setSize("118px", "13px");
-								
-								Label lblEstadoEmpleado = new Label("Estado Empleado");
-								lblEstadoEmpleado.setStyleName("label");
-								absolutePanel.add(lblEstadoEmpleado, 480, 70);
-								lblEstadoEmpleado.setSize("229px", "13px");
 		
 	}
 	

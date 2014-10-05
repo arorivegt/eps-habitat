@@ -5,9 +5,11 @@ import java.util.Date;
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -22,6 +24,8 @@ import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 public class formularioPruebaPeriodoDos extends Composite {
 
 	 	private Empleados empleado;
@@ -43,7 +47,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private TextBox txtEvaluador;
 		private DoubleBox txtPunteoTotal;
 		private DateBox dateFecha ;
-		
+		private ListBox listTest;
 		private Label lblPregunta1;
 		private Label lblPregunta2;
 		private Label lblPregunta3;
@@ -54,10 +58,13 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private Label lblPregunta8;
 		private Label lblPregunta9;
 		private Label lblPregunta10;
+		private Evaluacion evaluacion;
+		private Label lblEvaluacionQueSe;
+		private Button button;
 		
-	public formularioPruebaPeriodoDos(Empleados e) {
-
+	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Empleados e) {
 		this.empleado = e;
+		this.evaluacion = evaluacion;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -250,7 +257,9 @@ public class formularioPruebaPeriodoDos extends Composite {
 				}catch(Exception e){
 					dateFecha.setValue(new Date(1407518124684L));
 				}
-			
+
+				if(listTest.getSelectedIndex() != 0){
+				
 				if(bandera) {
 					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
@@ -258,7 +267,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 							Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 							Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-							txtEvaluador.getText(),id_BDprueba, "2", new AsyncCallback<Long>(){
+							txtEvaluador.getText(),id_BDprueba, true,"2", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	setMensaje("alert alert-error", 
@@ -282,7 +291,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 					Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 					Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-					txtEvaluador.getText(),id_BDprueba, "2", new AsyncCallback<Long>(){
+					txtEvaluador.getText(),id_BDprueba,true, "2", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
                 	setMensaje("alert alert-error", 
@@ -298,13 +307,17 @@ public class formularioPruebaPeriodoDos extends Composite {
                 }
 
          });
+		}}else{
+
+			setMensaje("alert alert-error", 
+        			"Error !! \nDebe seleccionar un test \nasociado a este formulario");
 		}
 			}
 		});
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 284, 1102);
+		absolutePanel.add(btnGuardar, 39, 1114);
 		btnGuardar.setSize("198px", "32px");
 		
 		Label lblNivelAcademico = new Label("Evaluación de Período de Prueba realizada en Oficina Nacional");
@@ -396,18 +409,54 @@ public class formularioPruebaPeriodoDos extends Composite {
 		absolutePanel.add(lblFecha, 294, 904);
 		lblFecha.setSize("75px", "13px");
 		
-		ListBox listTest = new ListBox();
+		listTest = new ListBox();
+		listTest.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+
+				if(listTest.getSelectedIndex()!=0)
+					BuscarBDtest(Long.valueOf(listTest.getValue(listTest.getSelectedIndex())));
+			}
+		});
+		listTest.addItem("nada seleccionado");
 		listTest.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTest, 37, 1045);
 		listTest.setSize("198px", "34px");
 		
-		Label lblEvaluacionQueSe = new Label("Elija la evaluacion que se asignara a este formulario:");
+		lblEvaluacionQueSe = new Label("Elija la evaluacion que se asignara a este formulario permanentemente:");
 		lblEvaluacionQueSe.setStyleName("label");
-		absolutePanel.add(lblEvaluacionQueSe, 39, 1009);
+		absolutePanel.add(lblEvaluacionQueSe, 39, 993);
 		lblEvaluacionQueSe.setSize("198px", "18px");
+		
+		button = new Button("Send");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				if(bandera){
+					EliminarFormulario_SinDatos();
+				}else{
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
+				}
+			}
+		});
+		button.setText("Eliminar");
+		button.setStylePrimaryName("sendButton");
+		button.setStyleName("sendButton");
+		absolutePanel.add(button, 284, 1114);
+		button.setSize("200px", "34px");
+
+		for (AuxBDTest p : this.evaluacion.BDresult) {
+	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
+	    }
 	}
 	
-
+	private void EliminarFormulario_SinDatos(){
+		evaluacion.EliminarFormulario(this);
+	}
+	
+	private void EliminarFormulario(){
+		evaluacion.EliminarFormulario(this,empleado.id_empleado,id_prueba);
+	}
 	
 	public  void LlenarDatos(Long id, String listPregunta1,
 			String listPregunta2, String listPregunta3,
@@ -418,6 +467,9 @@ public class formularioPruebaPeriodoDos extends Composite {
 
 		this.id_prueba = id;
 		this.id_BDprueba =id_BDPuestos;
+		this.listTest.setVisible(false);
+		this.lblEvaluacionQueSe.setVisible(false);
+		BuscarBDtest(id_BDPuestos);
 		boolean bandera = true;
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
@@ -500,4 +552,29 @@ public class formularioPruebaPeriodoDos extends Composite {
         }
     });
     }
+    
+    public void BuscarBDtest(long lg)
+	{
+		this.id_BDprueba = lg;
+		for (AuxBDTest p : evaluacion.BDresult ) 
+		{
+			if(lg == p.getId_test())
+			{
+				lblPregunta1.setText(p.getPregunta1());
+				lblPregunta2.setText(p.getPregunt2());
+				lblPregunta3.setText(p.getPregunta3());
+				lblPregunta4.setText(p.getPregunta4());
+				lblPregunta5.setText(p.getPregunta5());
+				lblPregunta6.setText(p.getPregunta6());
+				lblPregunta7.setText(p.getPregunta7());
+				lblPregunta8.setText(p.getPregunta8());
+				lblPregunta9.setText(p.getPregunta9());
+				lblPregunta10.setText(p.getPregunta10());
+				break;
+			}
+	    }
+			
+	}
+   
 }
+

@@ -1,34 +1,31 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.DoubleBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formularioPruebaPeriodo extends Composite {
 
@@ -36,7 +33,6 @@ public class formularioPruebaPeriodo extends Composite {
 		private Long id_prueba = 0L;
 		private boolean bandera = true;
 	    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
-	    private List<AuxBDTest> valor = new ArrayList<AuxBDTest>();
 
 		private Long id_BDprueba = 0L;
 	    private ListBox listPregunta1;
@@ -65,6 +61,7 @@ public class formularioPruebaPeriodo extends Composite {
 		private Label lblPregunta8;
 		private Label lblPregunta9;
 		private Label lblPregunta10;
+		private Label lblElijaLaEvaluacion;
 		
 	public formularioPruebaPeriodo(final Desempeno d, Empleados e) {
 		this.d = d;
@@ -260,7 +257,8 @@ public class formularioPruebaPeriodo extends Composite {
 				}catch(Exception e){
 					dateFecha.setValue(new Date(1407518124684L));
 				}
-			
+				if(listTest.getSelectedIndex() != 0){
+				
 				if(bandera) {
 					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
@@ -268,7 +266,7 @@ public class formularioPruebaPeriodo extends Composite {
 							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 							Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 							Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-							txtEvaluador.getText(),id_BDprueba, "1", new AsyncCallback<Long>(){
+							txtEvaluador.getText(),id_BDprueba,true, "1", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	setMensaje("alert alert-error", 
@@ -294,7 +292,7 @@ public class formularioPruebaPeriodo extends Composite {
 					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
 					Integer.parseInt(listPregunta8.getItemText(listPregunta8.getSelectedIndex())), Integer.parseInt(listPregunta9.getItemText(listPregunta9.getSelectedIndex())), 
 					Integer.parseInt(listPregunta10.getItemText(listPregunta10.getSelectedIndex())), dateFecha.getValue(), 
-					txtEvaluador.getText(),id_BDprueba, "1", new AsyncCallback<Long>(){
+					txtEvaluador.getText(),id_BDprueba, true,"1", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
                 	setMensaje("alert alert-error", 
@@ -312,6 +310,10 @@ public class formularioPruebaPeriodo extends Composite {
                 }
 
          });
+		}}else{
+
+			setMensaje("alert alert-error", 
+        			"Error !! \nDebe seleccionar un test \nasociado a este formulario");
 		}
 			}
 		});
@@ -381,37 +383,18 @@ public class formularioPruebaPeriodo extends Composite {
 		
 		listTest = new ListBox();
 		listTest.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTest, 37, 1105);
+		absolutePanel.add(listTest, 37, 1112);
 		listTest.setSize("229px", "34px");
 		listTest.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-
-				long lg;
-				for (AuxBDTest p : d.BDresult ) 
-				{
-					lg  = Long.valueOf(listTest.getValue(listTest.getSelectedIndex()));
-					if(lg == p.getId_test())
-					{
-						lblPregunta1.setText(p.getPregunta1());
-						lblPregunta2.setText(p.getPregunt2());
-						lblPregunta3.setText(p.getPregunta3());
-						lblPregunta4.setText(p.getPregunta4());
-						lblPregunta5.setText(p.getPregunta5());
-						lblPregunta6.setText(p.getPregunta6());
-						lblPregunta7.setText(p.getPregunta7());
-						lblPregunta8.setText(p.getPregunta8());
-						lblPregunta9.setText(p.getPregunta9());
-						lblPregunta10.setText(p.getPregunta10());
-						break;
-					}
-			    }
-					
+				if(listTest.getSelectedIndex()!=0)
+					BuscarBDtest(Long.valueOf(listTest.getValue(listTest.getSelectedIndex())));
 			}
 		});
-		Label label = new Label("Elija la evaluacion que se asignara a este formulario:");
-		label.setStyleName("label");
-		absolutePanel.add(label, 39, 1069);
-		label.setSize("227px", "18px");
+		lblElijaLaEvaluacion = new Label("Elija la evaluacion que se asignara a este formulario permanentemente:");
+		lblElijaLaEvaluacion.setStyleName("label");
+		absolutePanel.add(lblElijaLaEvaluacion, 37, 1061);
+		lblElijaLaEvaluacion.setSize("227px", "18px");
 		
 		lblPregunta1 = new Label("pregunta ");
 		lblPregunta1.setStyleName("label");
@@ -487,6 +470,20 @@ public class formularioPruebaPeriodo extends Composite {
 		this.bandera = false;
 		this.id_BDprueba = id_BDpuestos;
 		boolean bandera = true;
+		this.listTest.setVisible(false);
+		this.lblElijaLaEvaluacion.setVisible(false);
+		BuscarBDtest(id_BDpuestos);
+
+		for(int i=0; i < this.listTest.getItemCount() && bandera; i++){
+			bandera = !this.listTest.getValue(i).equals(""+id_BDprueba);
+			this.listTest.setSelectedIndex(i);
+		}
+		
+		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
+			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
+			this.listPregunta1.setSelectedIndex(i);
+		}
+		
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
 			this.listPregunta1.setSelectedIndex(i);
@@ -570,5 +567,27 @@ public class formularioPruebaPeriodo extends Composite {
 	}
 	
 	
+	public void BuscarBDtest(long lg)
+	{
+		this.id_BDprueba = lg;
+		for (AuxBDTest p : d.BDresult ) 
+		{
+			if(lg == p.getId_test())
+			{
+				lblPregunta1.setText(p.getPregunta1());
+				lblPregunta2.setText(p.getPregunt2());
+				lblPregunta3.setText(p.getPregunta3());
+				lblPregunta4.setText(p.getPregunta4());
+				lblPregunta5.setText(p.getPregunta5());
+				lblPregunta6.setText(p.getPregunta6());
+				lblPregunta7.setText(p.getPregunta7());
+				lblPregunta8.setText(p.getPregunta8());
+				lblPregunta9.setText(p.getPregunta9());
+				lblPregunta10.setText(p.getPregunta10());
+				break;
+			}
+	    }
+			
+	}
 
 }

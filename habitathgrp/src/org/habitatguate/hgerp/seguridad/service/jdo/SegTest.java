@@ -58,7 +58,9 @@ public class SegTest implements Serializable {
 	
 	@Persistent
     private String tipo_test;
-	
+
+	@Persistent
+    private boolean testBD;
 	//contiene el id de la bd de test, para poder determinar
 	//que test le correspondia a este, para asociar BDtest--test
 	//asi el empleado tenia un test dependiendo lo que le asigne
@@ -70,6 +72,17 @@ public class SegTest implements Serializable {
 	public SegTest() {
 		super();
 	}
+
+	
+	public boolean isTestBD() {
+		return testBD;
+	}
+
+
+	public void setTestBD(boolean testBD) {
+		this.testBD = testBD;
+	}
+
 
 	public Long getId_test() {
 		return id_test.getId();

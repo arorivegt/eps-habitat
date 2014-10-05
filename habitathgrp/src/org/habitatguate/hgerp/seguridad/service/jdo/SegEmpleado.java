@@ -116,6 +116,10 @@ public class SegEmpleado implements Serializable {
 
 	@Persistent    
     private String Estado;
+	
+	@Persistent(mappedBy = "empleado")
+    @Element(dependent = "true")
+    private List<Long> testCompartido;
 
 	public SegEmpleado() {
 		super();
@@ -166,7 +170,6 @@ public class SegEmpleado implements Serializable {
 	@ManyToOne
 	private Long afiliado;
 	
-	
 	//datos del patrono
 	@Persistent
 	private String centro_trabajo;
@@ -194,6 +197,15 @@ public class SegEmpleado implements Serializable {
 	
 	@Persistent
     private float bonificacion;
+
+	
+	public List<Long> getIdBDtest() {
+		return testCompartido;
+	}
+
+	public void setIdBDtest(List<Long> testCompartido) {
+		this.testCompartido = testCompartido;
+	}
 
 	public String getURLFile() {
 		return URLFile;

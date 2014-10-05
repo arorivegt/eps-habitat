@@ -362,7 +362,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	public Long Insertar_Test(Long id_empleado,int pregunta1, int pregunt2, int pregunta3,
 			int pregunta4, int pregunta5, int pregunta6, int pregunta7,
 			int pregunta8, int pregunta9, int pregunta10, Date fecha_test,
-			String evaluador, Long BDtest,String tipo_test) throws IllegalArgumentException {
+			String evaluador, Long BDtest,boolean testBD,String tipo_test) throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
 		Long valor = 0L;
@@ -382,6 +382,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	t.setFecha_test(fecha_test);
 				 	t.setEvaluador(evaluador.toUpperCase());
 				 	t.setTipo_test(tipo_test);
+				 	t.setTestBD(testBD);
 				 	t.setBDtest(BDtest);
 		      	 	t.setEmpleado(e);
 		      	 	e.getTest().add(t);
@@ -725,7 +726,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			public Long Actualizar_Test(Long id_empleado,Long id,int pregunta1, int pregunt2, int pregunta3,
 					int pregunta4, int pregunta5, int pregunta6, int pregunta7,
 					int pregunta8, int pregunta9, int pregunta10, Date fecha_test,
-					String evaluador, Long BDtest,String tipo_test) throws IllegalArgumentException {
+					String evaluador, Long BDtest,boolean testBD,String tipo_test) throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
 				Long valor = 0L;
@@ -747,6 +748,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						 	t.setPregunta10(pregunta10);
 						 	t.setFecha_test(fecha_test);
 						 	t.setBDtest(BDtest);
+						 	t.setTestBD(testBD);
 						 	t.setEvaluador(evaluador.toUpperCase());
 						 	valor =t.getId_test();
 						 }finally {  
@@ -1240,6 +1242,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 								 	t.setEvaluador(n8.getEvaluador());
 								 	t.setBDtest(n8.getBDtest());
 								 	t.setTipo_test(n8.getTipo_test());
+								 	t.setTestBD(n8.isTestBD());
 								 	nuevo.getTest().add(t);
 							    }
 					    	}
@@ -1484,6 +1487,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 								 	t.setFecha_test(n8.getFecha_test().getTime());
 								 	t.setEvaluador(n8.getEvaluador());
 								 	t.setBDtest(n8.getBDtest());
+								 	t.setTestBD(n8.isTestBD());
 								 	t.setTipo_test(n8.getTipo_test());
 								 	nuevo.getTest().add(t);
 							    }
@@ -1725,6 +1729,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							 	t.setFecha_test(n8.getFecha_test().getTime());
 							 	t.setEvaluador(n8.getEvaluador());
 							 	t.setBDtest(n8.getBDtest());
+							 	t.setTestBD(n8.isTestBD());
 							 	t.setTipo_test(n8.getTipo_test());
 							 	nuevo.getTest().add(t);
 						    }
@@ -1929,6 +1934,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				 	t.setPregunta8(p.getPregunta8());
 				 	t.setPregunta9(p.getPregunta9());
 				 	t.setPregunta10(p.getPregunta10());
+				 	t.setTipo_test(p.getTipo_test());
 				 	t.setFecha_test(p.getFecha_test().getTime());
 				 	valor.add(t);
 			    }

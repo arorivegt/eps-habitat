@@ -8,10 +8,9 @@
     margin: 0;
     padding: 10px 0 0 0;
     list-style: none;  
-    background-color: #111;
-    background-image: linear-gradient(#444, #111);
+    background-color: #005596;
     border-radius: 50px;
-    box-shadow: 0 2px 1px #9c9c9c;
+    box-shadow: 0 2px 1px #005596;
 }
 
 #menu li {
@@ -24,11 +23,9 @@
     float: left;
     height: 25px;
     padding: 0 25px;
-    color: #999;
-    text-transform: uppercase;
+    color: #FFFFFF;
     font: bold 12px/25px Arial, Helvetica;
     text-decoration: none;
-    text-shadow: 0 1px 0 #000;
 }
 
 #menu li:hover > a {
@@ -50,8 +47,8 @@
     top: 35px;
     left: 0;
     z-index: 99999;    
-    background-color: #444;   
-    background-image: linear-gradient(#444, #111);    
+    background-color: #005596;   
+    background-image: #005596;    
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
@@ -151,11 +148,12 @@
     <li>
         <a href="#">Recursos Humanos</a>
         <ul>
-            <li><a href="#"><g:Label ui:field="rrhh1"> 	Buscar Empleados</g:Label></a></li>
-            <li><a href="#"><g:Label ui:field="rrhh2"> 	Base de Datos de Puestos</g:Label> </a></li>
-            <li><a href="#"><g:Label ui:field="rrhh3">	Informe de Prestaciones</g:Label></a></li>
-            <li><a href="#"><g:Label ui:field="rrhh4">	Informe del Ministerio de Trabajo</g:Label></a></li>
-            <li><a href="#"><g:Label ui:field="rrhh5">	Informe de Empleados</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh1"> 	Buscar Empleados</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh2"> 	Base de Datos de Puestos</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh6"> 	Crear preguntas para test</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh3">	Informe de Prestaciones</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh4">	Informe del Ministerio de Trabajo</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh5">	Informe de Empleados</g:Label></a></li>
         </ul>
     </li>
     <li>
@@ -187,12 +185,26 @@
     		</li>
         </ul>
     </li>
+    
+    <li>
+        <a href="#">Finanzas</a>
+        <ul>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_1_Finan"> 	Parametros</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_2_Finan"> 	Ingreso Soluciones</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_3_Finan">	Gestor de Inventario</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_4_Finan">	Crear Cococimiento</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_5_Finan">	Administracion de Afiliado</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_6_Finan">	Adminnistracion Mat. Costruc.</g:Label></a></li>
+        </ul>
+    </li>
+    
+    
     <li>
         <a href="#">Configuracion Cuenta</a>
         <ul>
-            <li><a href="#"><g:Label ui:field="empleado1"> 	Mi Perfil</g:Label></a></li>
-            <li><a href="#"><g:Label ui:field="empleado2"> 	Cambiar Contraseña</g:Label> </a></li>
-            <li><a href="#"><g:Label ui:field="empleado3"> 	Cambiar Contraseña</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado1"> 	Mi Perfil</g:Label></a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado2"> 	Cambiar Contraseña</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado3"> 	Cambiar Contraseña</g:Label> </a></li>
         </ul>
     </li>
 	</ul>

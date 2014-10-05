@@ -48,6 +48,7 @@ public class AuxTest implements IsSerializable{
 	
     private String tipo_test;
 
+    private boolean testBD;
 	//contiene el id de la bd de test, para poder determinar
 	//que test le correspondia a este, para asociar BDtest--test
 	//asi el empleado tenia un test dependiendo lo que le asigne
@@ -57,6 +58,14 @@ public class AuxTest implements IsSerializable{
 
 	public AuxTest() {
 		super();
+	}
+
+	public boolean isTestBD() {
+		return testBD;
+	}
+
+	public void setTestBD(boolean testBD) {
+		this.testBD = testBD;
 	}
 
 	public Long getBDtest() {

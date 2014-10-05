@@ -71,7 +71,7 @@ public class TestForm extends Composite  {
 	    		CreacionBaseDatosTest  fa = new CreacionBaseDatosTest(this);
 					fa.LlenarDatos(n.getId_test(),n.getNombreTest(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
-							""+n.getPregunta10(),n.getFecha_test());
+							""+n.getPregunta10(),n.getTipo_test(),n.getFecha_test());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 	    	}	    
 	    }

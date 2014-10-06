@@ -62,8 +62,11 @@ public class formularioPruebaPeriodo extends Composite {
 		private Label lblPregunta9;
 		private Label lblPregunta10;
 		private Label lblElijaLaEvaluacion;
+		private Button btnCompartir;
+		private Button btnEliminar;
 		
 	public formularioPruebaPeriodo(final Desempeno d, Empleados e) {
+		botonesVisibles(false);
 		this.d = d;
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -230,24 +233,19 @@ public class formularioPruebaPeriodo extends Composite {
 		absolutePanel.add(listPregunta10, 562, 879);
 		listPregunta10.setSize("198px", "34px");
 		
-		txtPunteoTotal = new DoubleBox();
-		txtPunteoTotal.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPunteoTotal, 562, 1019);
-		txtPunteoTotal.setSize("196px", "34px");
-		
 		txtEvaluador = new TextBox();
 		txtEvaluador.setMaxLength(500);
 		txtEvaluador.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEvaluador, 37, 1019);
-		txtEvaluador.setSize("227px", "34px");
+		absolutePanel.add(txtEvaluador, 26, 1019);
+		txtEvaluador.setSize("218px", "34px");
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407518999395L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 303, 1019);
-		dateFecha.setSize("227px", "34px");
+		absolutePanel.add(dateFecha, 283, 1019);
+		dateFecha.setSize("227px", "32px");
 		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
@@ -317,14 +315,32 @@ public class formularioPruebaPeriodo extends Composite {
 		}
 			}
 		});
+		
+		txtPunteoTotal = new DoubleBox();
+		txtPunteoTotal.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtPunteoTotal, 547, 1019);
+		txtPunteoTotal.setSize("211px", "34px");
+		
+		listTest = new ListBox();
+		listTest.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listTest, 26, 1112);
+		listTest.setSize("220px", "48px");
+		listTest.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(listTest.getSelectedIndex()!=0)
+					BuscarBDtest(Long.valueOf(listTest.getValue(listTest.getSelectedIndex())));
+			}
+		});
+		
+				listTest.addItem("nada seleccionado");
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 37, 1166);
+		absolutePanel.add(btnGuardar, 26, 1180);
 		btnGuardar.setSize("227px", "34px");
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
+		btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
 				if(bandera){
@@ -335,11 +351,18 @@ public class formularioPruebaPeriodo extends Composite {
 				}
 			}
 		});
-		button.setText("Eliminar");
-		button.setStylePrimaryName("sendButton");
-		button.setStyleName("sendButton");
-		absolutePanel.add(button, 303, 1166);
-		button.setSize("227px", "34px");
+		btnEliminar.setText("Eliminar");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 283, 1180);
+		btnEliminar.setSize("227px", "34px");
+		
+		btnCompartir = new Button("Send");
+		btnCompartir.setText("Compartir");
+		btnCompartir.setStylePrimaryName("sendButton");
+		btnCompartir.setStyleName("sendButton");
+		absolutePanel.add(btnCompartir, 547, 1180);
+		btnCompartir.setSize("213px", "34px");
 		
 		Label lblNivelAcademico = new Label("Evaluación de Período de Prueba realizada en Oficina Nacional");
 		lblNivelAcademico.setStyleName("label");
@@ -368,32 +391,21 @@ public class formularioPruebaPeriodo extends Composite {
 		
 		Label lblPunteoTotal = new Label("Punteo Total");
 		lblPunteoTotal.setStyleName("label");
-		absolutePanel.add(lblPunteoTotal, 595, 996);
+		absolutePanel.add(lblPunteoTotal, 562, 996);
 		lblPunteoTotal.setSize("132px", "13px");
 		
 		Label lblEvaluador = new Label("Evaluador");
 		lblEvaluador.setStyleName("label");
-		absolutePanel.add(lblEvaluador, 37, 992);
+		absolutePanel.add(lblEvaluador, 26, 996);
 		lblEvaluador.setSize("75px", "13px");
 		
 		Label lblFecha = new Label("Fecha");
 		lblFecha.setStyleName("label");
-		absolutePanel.add(lblFecha, 306, 992);
+		absolutePanel.add(lblFecha, 283, 996);
 		lblFecha.setSize("75px", "13px");
-		
-		listTest = new ListBox();
-		listTest.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTest, 37, 1112);
-		listTest.setSize("229px", "34px");
-		listTest.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(listTest.getSelectedIndex()!=0)
-					BuscarBDtest(Long.valueOf(listTest.getValue(listTest.getSelectedIndex())));
-			}
-		});
 		lblElijaLaEvaluacion = new Label("Elija la evaluacion que se asignara a este formulario permanentemente:");
 		lblElijaLaEvaluacion.setStyleName("label");
-		absolutePanel.add(lblElijaLaEvaluacion, 37, 1061);
+		absolutePanel.add(lblElijaLaEvaluacion, 26, 1061);
 		lblElijaLaEvaluacion.setSize("227px", "18px");
 		
 		lblPregunta1 = new Label("pregunta ");
@@ -445,8 +457,6 @@ public class formularioPruebaPeriodo extends Composite {
 		lblPregunta10.setStyleName("label");
 		absolutePanel.add(lblPregunta10, 47, 879);
 		lblPregunta10.setSize("482px", "34px");
-
-		listTest.addItem("nada seleccionado");
 		for (AuxBDTest p : this.d.BDresult) {
 	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
 	    }
@@ -566,6 +576,14 @@ public class formularioPruebaPeriodo extends Composite {
     });
 	}
 	
+	public void botonesVisibles(boolean valor)
+	{
+		btnCompartir.setVisible(valor);
+		btnEliminar.setVisible(valor);
+		
+		btnCompartir.setEnabled(valor);
+		btnEliminar.setEnabled(valor);
+	}
 	
 	public void BuscarBDtest(long lg)
 	{

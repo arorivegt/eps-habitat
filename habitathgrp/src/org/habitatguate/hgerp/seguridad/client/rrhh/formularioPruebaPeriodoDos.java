@@ -60,9 +60,12 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private Label lblPregunta10;
 		private Evaluacion evaluacion;
 		private Label lblEvaluacionQueSe;
-		private Button button;
+		private Button btnEliminar;
+		private Button btnCompartir;
 		
 	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Empleados e) {
+
+		botonesVisibles(false);
 		this.empleado = e;
 		this.evaluacion = evaluacion;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -427,8 +430,8 @@ public class formularioPruebaPeriodoDos extends Composite {
 		absolutePanel.add(lblEvaluacionQueSe, 39, 993);
 		lblEvaluacionQueSe.setSize("198px", "18px");
 		
-		button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
+		btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
 				if(bandera){
@@ -439,11 +442,18 @@ public class formularioPruebaPeriodoDos extends Composite {
 				}
 			}
 		});
-		button.setText("Eliminar");
-		button.setStylePrimaryName("sendButton");
-		button.setStyleName("sendButton");
-		absolutePanel.add(button, 284, 1114);
-		button.setSize("200px", "34px");
+		btnEliminar.setText("Eliminar");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 284, 1114);
+		btnEliminar.setSize("200px", "34px");
+		
+		btnCompartir = new Button("Send");
+		btnCompartir.setText("Compartir");
+		btnCompartir.setStylePrimaryName("sendButton");
+		btnCompartir.setStyleName("sendButton");
+		absolutePanel.add(btnCompartir, 546, 1112);
+		btnCompartir.setSize("200px", "34px");
 
 		for (AuxBDTest p : this.evaluacion.BDresult) {
 	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
@@ -575,6 +585,15 @@ public class formularioPruebaPeriodoDos extends Composite {
 	    }
 			
 	}
+	public void botonesVisibles(boolean valor)
+	{
+		btnCompartir.setVisible(valor);
+		btnEliminar.setVisible(valor);
+		
+		btnCompartir.setEnabled(valor);
+		btnEliminar.setEnabled(valor);
+	}
+	
    
 }
 

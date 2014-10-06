@@ -72,7 +72,9 @@ public interface LoginService extends RemoteService {
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
-	
+
+	String InsertarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
+	String QuitarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
 
 	//metodos para Actualizar en la base de datos
 	Long Actualizar_Emppleado(Long id, String Stringafiliacion_igss,

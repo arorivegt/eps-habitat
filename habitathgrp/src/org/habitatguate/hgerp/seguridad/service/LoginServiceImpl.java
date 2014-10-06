@@ -26,6 +26,8 @@ import javax.jdo.Query;
 
 
 
+
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
@@ -231,20 +233,20 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
 		Long valor = 0L;
-			 try { 
-				 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegFamilia f = new  SegFamilia();
-				 	f.setPrimer_nombre(primer_nombre.toUpperCase());
-				 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
-				 	f.setPrimer_apellido(primer_apellido.toUpperCase());
-				 	f.setSegundo_apellido(segundo_apellido.toUpperCase());
-				 	f.setEdad(edad);
-				 	f.setOcupacion(ocupacion.toUpperCase());
-				 	f.setParentesco(parentesco);
-		      	 	f.setEmpleado(e);
-		      	 	e.getFamilia().add(f);
-				 	valor =f.getId_familia();
+		 try { 
+			 
+			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegFamilia f = new  SegFamilia();
+			 	f.setPrimer_nombre(primer_nombre.toUpperCase());
+			 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
+			 	f.setPrimer_apellido(primer_apellido.toUpperCase());
+			 	f.setSegundo_apellido(segundo_apellido.toUpperCase());
+			 	f.setEdad(edad);
+			 	f.setOcupacion(ocupacion.toUpperCase());
+			 	f.setParentesco(parentesco);
+	      	 	f.setEmpleado(e);
+	      	 	e.getFamilia().add(f);
+			 	valor =f.getId_familia();
 				 
 			}finally {  
 					 Persistencia.close();  
@@ -1940,6 +1942,54 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			    }
 			}
 			return valor;
+		}
+
+		@Override
+		public String InsertarCompartido(Long idEmpleado, Long idTest)
+				throws IllegalArgumentException 
+		{
+			
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "Hubo un error al compartir evaluacion";
+			
+			 try { 
+				 
+				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
+				 int i = e.getTestCompartido().indexOf(idTest);
+				 if(i == -1){
+					 valor = "la Evaluacion ya habia sido compartido con\n con "+e.getEmail();
+				 }else
+				 {
+					 e.getTestCompartido().add(idTest);
+					 valor = "Test compartido Exitosamente con\n con "+e.getEmail();
+				 }
+			}finally {  
+					 Persistencia.close();  
+			}
+			 return valor ;
+		}
+
+		@Override
+		public String QuitarCompartido(Long idEmpleado, Long idTest)
+				throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "Hubo un error \nal Quitar evaluacion compartida";
+			
+			 try { 
+				 
+				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
+				 int i = e.getTestCompartido().indexOf(idTest);
+				 if(i != -1)
+				 { 
+					 e.getTestCompartido().remove(i);
+					 valor = "la Evaluacion ha dejado \nde compartise con"+e.getEmail();
+				 }
+				 
+			}finally {  
+					 Persistencia.close();  
+			}
+			 return valor ;
 		}
 
 	}

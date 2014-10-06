@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class BuscadorEmpleados extends Composite   {
 
     private  Grid grid;
-    private BuscadorEmpleados a;
+    private BuscadorEmpleados evaluacionesBuscador;
     private ListBox listBox;
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
     private Label lbDato1;
@@ -41,7 +41,7 @@ public class BuscadorEmpleados extends Composite   {
     private AbsolutePanel absolutePanel;
     
 	public BuscadorEmpleados() {
-		this.a = this;
+		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
 		initWidget(grid);
 		grid.setSize("1350px", "100%");
@@ -177,34 +177,34 @@ public class BuscadorEmpleados extends Composite   {
 
 								if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 								{
-									nuevo.agregarFormulario('2',a,txtDato1.getText(), "",txtDato2.getText(), 
+									nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 								{
-									nuevo.agregarFormulario('1',a,txtDato1.getText(), "",txtDato2.getText(), 
+									nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 								{
-									nuevo.agregarFormulario('3',a,txtDato1.getText(), "",txtDato2.getText(), 
+									nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 								{
-									nuevo.agregarFormulario('4',a,txtDato1.getText(), "",txtDato2.getText(), 
+									nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);
 									nuevo.setSize("1187px", "648px");
 								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 								{
-									nuevo.agregarFormulario('5',a,txtDato1.getText(), "",txtDato2.getText(), 
+									nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 											,listEstado.getItemText(listEstado.getSelectedIndex()));
 									grid.setWidget(1, 0,nuevo);

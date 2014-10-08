@@ -1,44 +1,45 @@
-package org.habitatguate.hgerp.seguridad.client.auxjdo;
+package org.habitatguate.hgerp.seguridad.service.jdo;
+
+import java.io.Serializable;
+
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
+import com.google.appengine.api.datastore.Key;
 
 
-
-import com.google.gwt.user.client.rpc.IsSerializable;
-import com.google.gwt.view.client.ProvidesKey;
-
-public class AuxDetallePlantillaSolucion implements Comparable<AuxDetallePlantillaSolucion>,IsSerializable{
-	
-    public static final ProvidesKey<AuxDetallePlantillaSolucion> KEY_PROVIDER = new ProvidesKey<AuxDetallePlantillaSolucion>() {
-        @Override
-        public Object getKey(AuxDetallePlantillaSolucion item) {
-          return item == null ? null : item.getIdDetallePlantillaSolucion();
-        }
-      };
-      
-      public int compareTo(AuxDetallePlantillaSolucion o) {
-        return (o == null || o.idDetallePlantillaSolucion == null) ? -1 : -o.idDetallePlantillaSolucion.compareTo(idDetallePlantillaSolucion);
-      }  
-
-	
-	
-	private Long idDetallePlantillaSolucion;
-	
+@SuppressWarnings("serial")
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
+public class SegDetallePlantillaSolucion implements Serializable{
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
+	private Key idDetallePlantillaSolucion;
+	@Persistent
 	private String nomMaterialCostruccion;
-	
+	@Persistent
 	private Double cantidad;
-
+	@Persistent
 	private Double precioUnit;
-
+	@Persistent
 	private String unidadMetrica;
-
+	@Persistent
 	private Double subTotal;
-	
+	@Persistent
 	private Double costoAcumulado;
+	
 
-	public Long getIdDetallePlantillaSolucion() {
+	private SegPlantillaSolucion plantillaSolucion;
+
+	public Key getIdDetallePlantillaSolucion() {
 		return idDetallePlantillaSolucion;
 	}
 
-	public void setIdDetallePlantillaSolucion(Long idDetallePlantillaSolucion) {
+	public void setIdDetallePlantillaSolucion(Key idDetallePlantillaSolucion) {
 		this.idDetallePlantillaSolucion = idDetallePlantillaSolucion;
 	}
 
@@ -89,9 +90,14 @@ public class AuxDetallePlantillaSolucion implements Comparable<AuxDetallePlantil
 	public void setCostoAcumulado(Double costoAcumulado) {
 		this.costoAcumulado = costoAcumulado;
 	}
-	
-	
-	
-	
 
+	public SegPlantillaSolucion getPlantillaSolucion() {
+		return plantillaSolucion;
+	}
+
+	public void setPlantillaSolucion(SegPlantillaSolucion plantillaSolucion) {
+		this.plantillaSolucion = plantillaSolucion;
+	}
+	
+	
 }

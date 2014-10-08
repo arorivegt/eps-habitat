@@ -1,12 +1,16 @@
 package org.habitatguate.hgerp.seguridad.client.api;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface SqlServiceAsync {
@@ -57,6 +61,22 @@ public interface SqlServiceAsync {
 			AsyncCallback<Long> callback);
 
 	void Eliminar_MaterialCostruccion(Long id, AsyncCallback<Long> callback);
+
+	void Insertar_PlantillaSolucion(String nomPlantilla, String tipo,
+			Double costoFinal, AsyncCallback<Long> callback);
+
+	void Insertar_DetallePlantillaSolucion(Long idPlantillaSolucion,
+			List<AuxDetallePlantillaSolucion> listaDetallePlantilla,
+			AsyncCallback<Long> callback);
+
+	void Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,
+			AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
+
+	void ConsultaTodasPlantillas(
+			AsyncCallback<List<AuxPlantillaSolucion>> callback);
+
+
+
 
 
 

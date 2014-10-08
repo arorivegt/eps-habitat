@@ -7,6 +7,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
@@ -83,38 +84,13 @@ public class Menu extends Composite {
 		Empleado_registrado();
 	}
 	
-	@UiHandler("label_1_Finan")
- 	void onLabel_1_FinanClick(ClickEvent event) {
- 		Buscador_Parametro_Inv buscador = new Buscador_Parametro_Inv();
- 		this.nuevo.getGrid().clearCell(1, 0);
- 		this.nuevo.getGrid().setWidget(1, 0, buscador);
- 	}
- 	@UiHandler("label_2_Finan")
- 	void onLabel_2_FinanClick(ClickEvent event) {
- 		Buscador_Solucion buscadorSoluciones = new Buscador_Solucion();
- 		this.nuevo.getGrid().clearCell(1, 0);
- 		this.nuevo.getGrid().setWidget(1, 0, buscadorSoluciones);
- 	}
- 	@UiHandler("label_3_Finan")
- 	void onLabel_3_FinanClick(ClickEvent event) {
- 		Window.alert("no esta disponible");
- 	}
- 	@UiHandler("label_4_Finan")
- 	void onLabel_4_FinanClick(ClickEvent event) {
- 		Window.alert("no esta disponible");
- 		
- 	}
- 	@UiHandler("label_5_Finan")
- 	void onLabel_5_FinanClick(ClickEvent event) {
- 		Buscador_Afiliado buscadorAfiliado = new Buscador_Afiliado();
- 		this.nuevo.getGrid().clearCell(1, 0);
- 		this.nuevo.getGrid().setWidget(1, 0, buscadorAfiliado);
- 	}
- 	@UiHandler("label_6_Finan")
- 	void onLabel_6_FinanClick(ClickEvent event) {
- 		Formulario_MaterialCostruccion formCostruccion = new Formulario_MaterialCostruccion();
- 		this.nuevo.getGrid().clearCell(1, 0);
- 		this.nuevo.getGrid().setWidget(1, 0, formCostruccion);
+	@UiHandler("finan3b")
+	void finan3b(ClickEvent event){
+		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+ 	
  	}
 	public void Empleado_registrado(){
 

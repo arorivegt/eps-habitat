@@ -3,26 +3,35 @@ package org.habitatguate.hgerp.seguridad.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 import org.habitatguate.hgerp.util.ConvertDate;
 import org.habitatguate.hgerp.util.PMF;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.jdo.Transaction;
 
 @SuppressWarnings("serial")
 public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
@@ -105,6 +114,91 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		}
 		return valor;
 }
+	public Long Insertar_PlantillaSolucion(String nomPlantilla,String tipo,Double costoFinal) throws IllegalArgumentException{
+		Long valor = 0L;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		SegPlantillaSolucion nuevo = new SegPlantillaSolucion();
+		nuevo.setNomPlantillaSolucion(nomPlantilla);
+		nuevo.setTipo(tipo);
+		nuevo.setCostoFinal(costoFinal);
+		Date time=new Date();
+		Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
+		nuevo.setFechaCreacion(today);
+		try{
+			gestorPersistencia.makePersistent(nuevo);
+			System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+			valor = nuevo.getIdPlantillaSolucion();
+		}finally{
+			gestorPersistencia.close();
+		}
+		return valor;
+}
+
+public Long Insertar_DetallePlantillaSolucion(Long idPlantillaSolucion,List<AuxDetallePlantillaSolucion> listaDetallePlantilla){
+	 Long valor = 0L;
+		System.out.println(listaDetallePlantilla.get(0).getNomMaterialCostruccion());
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		
+	try {
+		SegPlantillaSolucion plantilla = gestorPersistencia.getObjectById(SegPlantillaSolucion.class,idPlantillaSolucion);
+		Iterator<AuxDetallePlantillaSolucion> i = listaDetallePlantilla.iterator();
+		while(i.hasNext()){
+			
+			AuxDetallePlantillaSolucion aux = i.next();
+			System.out.println(aux.getNomMaterialCostruccion());
+			SegDetallePlantillaSolucion auxSeg = new SegDetallePlantillaSolucion();
+			auxSeg.setNomMaterialCostruccion(aux.getNomMaterialCostruccion());
+			auxSeg.setPrecioUnit(aux.getPrecioUnit());
+			auxSeg.setCantidad(aux.getCantidad());
+			auxSeg.setUnidadMetrica(aux.getUnidadMetrica());
+			auxSeg.setCostoAcumulado(aux.getCostoAcumulado());
+			auxSeg.setSubTotal(aux.getSubTotal());
+			auxSeg.setPlantillaSolucion(plantilla);
+			plantilla.getListaDetalle().add(auxSeg);
+			gestorPersistencia.makePersistent(auxSeg);			
+		}
+	} finally {
+	    valor = idPlantillaSolucion;
+	    gestorPersistencia.close();
+	}
+	
+	return valor;
+	
+	
+}
+
+public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxDetallePlantillaSolucion auxDetalle) throws IllegalArgumentException{
+	 Long valor = 0L;
+	 SegPlantillaSolucion plantilla = null;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	try{
+		//System.out.println("Plantilla de la que viene " + idPlantillaSolucion);
+		plantilla = gestorPersistencia.getObjectById(SegPlantillaSolucion.class,idPlantillaSolucion);
+	//	do {
+		//System.out.println("Cantidad de elementos " + plantilla.getListaDetalle().size());
+		SegDetallePlantillaSolucion auxSeg = new SegDetallePlantillaSolucion();
+			auxSeg.setNomMaterialCostruccion(auxDetalle.getNomMaterialCostruccion());
+			auxSeg.setPrecioUnit(auxDetalle.getPrecioUnit());
+			auxSeg.setCantidad(auxDetalle.getCantidad());
+			auxSeg.setUnidadMetrica(auxDetalle.getUnidadMetrica());
+			auxSeg.setCostoAcumulado(auxDetalle.getCostoAcumulado());
+			auxSeg.setSubTotal(auxDetalle.getSubTotal());
+			auxSeg.setPlantillaSolucion(plantilla);
+			plantilla.getListaDetalle().add(auxSeg);	
+	       valor = auxSeg.getIdDetallePlantillaSolucion().getId();
+	       gestorPersistencia.makePersistent(auxSeg);
+	       gestorPersistencia.makePersistent(plantilla);
+		//}while(plantilla != null);
+	}	finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+	
+	
+}
+
+
+
 
 	
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
@@ -210,6 +304,39 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 				n.setUnidadMetrica(p.getUnidadMetrica());
 				n.setPrecioUnit(p.getPrecioUnit());
 				n.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
+				valor.add(n);
+			}
+		}
+		return valor;
+	}
+	
+	public List<AuxPlantillaSolucion> ConsultaTodasPlantillas(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegPlantillaSolucion.class);
+		List<AuxPlantillaSolucion> valor = new ArrayList<AuxPlantillaSolucion>();
+		List<SegPlantillaSolucion> execute = (List<SegPlantillaSolucion>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegPlantillaSolucion p : execute){
+				//System.out.println(p.getListaDetalle().get(0).getNomMaterialCostruccion());
+				AuxPlantillaSolucion n= new AuxPlantillaSolucion();
+				n.setIdPlantillaSolucion(p.getIdPlantillaSolucion());
+				n.setNomPlantillaSolucion(p.getNomPlantillaSolucion());
+				n.setCostoFinal(p.getCostoFinal());
+				n.setFechaCreacion(ConvertDate.g(p.getFechaCreacion()));
+				n.setTipo(p.getTipo());
+				Iterator<SegDetallePlantillaSolucion> i = p.getListaDetalle().iterator();
+				while(i.hasNext()){
+					SegDetallePlantillaSolucion aux = i.next();
+					AuxDetallePlantillaSolucion auxd = new AuxDetallePlantillaSolucion();
+					auxd.setIdDetallePlantillaSolucion(aux.getIdDetallePlantillaSolucion().getId());
+					auxd.setNomMaterialCostruccion(aux.getNomMaterialCostruccion());
+					auxd.setCantidad(aux.getCantidad());
+					auxd.setCostoAcumulado(aux.getCostoAcumulado());
+					auxd.setPrecioUnit(aux.getPrecioUnit());
+					auxd.setSubTotal(aux.getSubTotal());
+					auxd.setUnidadMetrica(aux.getUnidadMetrica());
+					n.getListaDetalle().add(auxd);
+				}
 				valor.add(n);
 			}
 		}

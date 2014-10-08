@@ -6,11 +6,13 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class AuxPlantillaSolucion {
+public class AuxPlantillaSolucion implements IsSerializable {
 
 	private Long idPlantillaSolucion;
 
 	private String nomPlantillaSolucion;
+	
+	private String tipo;
 
 	private Date fechaCreacion;
 
@@ -62,6 +64,15 @@ public class AuxPlantillaSolucion {
 	public void setCostoFinal(Double costoFinal) {
 		this.costoFinal = costoFinal;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 	
 	
 	

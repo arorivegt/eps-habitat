@@ -11,7 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.finanzas.MyPaginationDataGrid;;
 public class TablaGWT_PlantillaSolucion extends Composite implements EntryPoint {
 	
-	MyPaginationDataGrid_PlantillaSolucion<AuxDetallePlantillaSolucion> grid;
+	public MyPaginationDataGrid_PlantillaSolucion<AuxDetallePlantillaSolucion> grid;
  
 	public TablaGWT_PlantillaSolucion(){
 
@@ -34,4 +34,6 @@ public class TablaGWT_PlantillaSolucion extends Composite implements EntryPoint 
     	grid.ActualizarList();
     	grid.setDataList(datagrid);
     }
+    
+
 }

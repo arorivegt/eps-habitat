@@ -9,9 +9,9 @@ import com.google.gwt.user.client.ui.SuggestOracle;
 
 
 
-public class MaterialNameSuggestOracle extends SuggestOracle {
+public class PlantillaNameSuggestOracle extends SuggestOracle {
 
-	private List<MaterialMultiWordSuggestion> materialSuggestions = null;
+	private List<PlantillaMultiWordSuggestion> materialSuggestions = null;
 	
 	@Override
 	public void requestSuggestions(Request request, Callback callback) {
@@ -28,9 +28,9 @@ public class MaterialNameSuggestOracle extends SuggestOracle {
      * @param limit The maximum number of results to return 
      * @return A collection of people suggestions that match.
      */
-     public Collection<MaterialMultiWordSuggestion> matchingPeople(String query, int limit)
+     public Collection<PlantillaMultiWordSuggestion> matchingPeople(String query, int limit)
      {
-         List<MaterialMultiWordSuggestion> matchingPeople = new ArrayList<MaterialMultiWordSuggestion>(limit);
+         List<PlantillaMultiWordSuggestion> matchingPeople = new ArrayList<PlantillaMultiWordSuggestion>(limit);
  
          // only begin to search after the user has type two characters
          if ( query.length() >= 2 )
@@ -70,7 +70,7 @@ public class MaterialNameSuggestOracle extends SuggestOracle {
                  i++;
              }
          }
- //		System.out.println("Numero de encontrados "+ matchingPeople.size() + " "+ materialSuggestions.size());
+ 	//	System.out.println("Numero de encontrados "+ matchingPeople.size() + " "+ materialSuggestions.size());
              return matchingPeople;
      }
  
@@ -81,11 +81,11 @@ public class MaterialNameSuggestOracle extends SuggestOracle {
          * @return
          * @see java.util.List#add(java.lang.Object)
          */
-         public boolean add(MaterialMultiWordSuggestion o)
+         public boolean add(PlantillaMultiWordSuggestion o)
          {
              if ( materialSuggestions == null )
              {
-                materialSuggestions = new ArrayList<MaterialMultiWordSuggestion>();
+                materialSuggestions = new ArrayList<PlantillaMultiWordSuggestion>();
              }
  
              return materialSuggestions.add(o);

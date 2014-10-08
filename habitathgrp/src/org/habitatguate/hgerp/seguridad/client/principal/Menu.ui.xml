@@ -186,18 +186,7 @@
         </ul>
     </li>
     
-    <li>
-        <a href="#">Finanzas</a>
-        <ul>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_1_Finan"> 	Parametros</g:Label></a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_2_Finan"> 	Ingreso Soluciones</g:Label> </a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_3_Finan">	Gestor de Inventario</g:Label></a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_4_Finan">	Crear Cococimiento</g:Label></a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_5_Finan">	Administracion de Afiliado</g:Label></a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="label_6_Finan">	Adminnistracion Mat. Costruc.</g:Label></a></li>
-        </ul>
-    </li>
-    
+  
     
     <li>
         <a href="#">Configuracion Cuenta</a>

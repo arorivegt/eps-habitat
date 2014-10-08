@@ -27,8 +27,10 @@ public class Formulario_MaterialCostruccion extends Composite{
 	public Long id_empleado = 0L;
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
+	private ScrollPanel panel3;
 	private Buscador_MaterialCostruccion bbs;
 	private Plantilla_Solucion ps;
+	private Formulario_AsignarSolucion fas;
     
 	public Formulario_MaterialCostruccion(){
 		
@@ -37,12 +39,16 @@ public class Formulario_MaterialCostruccion extends Composite{
 		initWidget(tabPanel);
 		tabPanel.setWidth("782px");
 		
+		panel3 = new ScrollPanel();
+		panel3.setAlwaysShowScrollBars(true);
 		panel2 = new ScrollPanel();
 		panel2.setAlwaysShowScrollBars(true);
 		panel1 = new ScrollPanel();
 		panel1.setAlwaysShowScrollBars(true);
-		tabPanel.add(panel1, "Materiales de Construcción",true);
+		
+		tabPanel.add(panel1, "Materiales de Construccion",true);
 		tabPanel.add(panel2, "Plantilla Solucion",true);
+		tabPanel.add(panel3, "Asignar Solucion a beneficiario ",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -58,12 +64,18 @@ public class Formulario_MaterialCostruccion extends Composite{
 			   case 1: 
 				   ItemDos();
 			       break;
+			   case 2:
+				   ItemTres();
 			   }
 
 			 }
 			});
 	
    
+	}
+	public void ItemTres(){
+		fas = new Formulario_AsignarSolucion();
+		panel3.setWidget(fas);
 	}
 	public void ItemUno(){
 		bbs = new Buscador_MaterialCostruccion();

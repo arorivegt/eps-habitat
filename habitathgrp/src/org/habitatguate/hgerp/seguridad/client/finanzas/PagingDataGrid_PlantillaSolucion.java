@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 
 import com.google.gwt.core.client.GWT;
@@ -39,10 +40,9 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
     private ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
-	private Button botonAdd;
-	private Button botonRefresh;
+	private Button botonEliminar;
     final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxParametro.KEY_PROVIDER);
+            new MultiSelectionModel<T>((ProvidesKey<T>)AuxDetallePlantillaSolucion.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	Iterator<T> iter = null;
 	T objectoEliminado = null;
@@ -69,40 +69,24 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
  
         dataProvider.addDataDisplay(dataGrid);
         
-        botonAdd = new Button("Agregar Fila");
-        botonRefresh = new Button("Refresh Datos");
+        botonEliminar = new Button("Eliminar Fila");
+        
         pager.setVisible(true);
         dataGrid.setVisible(true);
-        botonAdd.setVisible(true);
+        botonEliminar.setVisible(true);
         dock.add(dataGrid, DockPanel.CENTER);
         dock.add(pager, DockPanel.SOUTH);
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
-        dock.add(botonRefresh,DockPanel.EAST);
-        dock.add(botonAdd,DockPanel.EAST);
-        botonAdd.addClickHandler(new ClickHandler() {
+        dock.add(botonEliminar,DockPanel.EAST);
+        botonEliminar.addClickHandler(new ClickHandler() {
             @Override
-            public void onClick(ClickEvent event) {
-              // Elimina los parametros.
-            	AuxParametro a = new AuxParametro();
-            	a.setCodContable(123123);
-            	a.setCodUno(1);
-            	a.setCodDos(2);
-            	a.setNomParametro("nelson");      	
-            	dataProvider.getList().add((T) a);
-
-        			
+            public void onClick(ClickEvent event) {     			
 	
             }
           });
-        botonRefresh.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-              // Refresca el datagrid
-            	dataGrid.redraw();
-            }
-        	});
+
     }
  
     public void setEmptyTableWidget() {
@@ -149,6 +133,15 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
  
     public void setDataProvider(ListDataProvider<T> dataProvider) {
         this.dataProvider = dataProvider;
+    }
+    
+    public void NuevoMaterial(AuxDetallePlantillaSolucion nuevo){
+
+    	dataProvider.getList().add((T) nuevo);
+    }
+    
+    public List<T> getListMateriales(){
+    	return this.dataProvider.getList();
     }
  
 }

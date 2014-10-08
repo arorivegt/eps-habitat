@@ -14,70 +14,54 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegVacaciones implements Serializable {
-	
+public class SegSalario implements Serializable {
+
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Key id_vacaciones;
+	private Key id_Salario;
 	
 	@Persistent
-    private Date fecha1;	
+	private Date Fecha;
 	
 	@Persistent
-    private Date fecha2;
-
-	@Persistent
-    private String Descripcion;
-
+	private float salario;
+	
 	@Persistent
     private SegEmpleado empleado;
-	
-	public SegVacaciones() {
+
+	public SegSalario() {
 		super();
 	}
-    
-	public Long getId_vacaciones() {
-		return id_vacaciones.getId();
-	}
 
-	public Date getFecha1() {
-		return fecha1;
+	public Long getId_Salario() {
+		return id_Salario.getId();
 	}
 
 
-	public void setFecha1(Date fecha1) {
-		this.fecha1 = fecha1;
+	public Date getFecha() {
+		return Fecha;
 	}
 
-
-	public Date getFecha2() {
-		return fecha2;
+	public float getSalario() {
+		return salario;
 	}
 
-
-	public void setFecha2(Date fecha2) {
-		this.fecha2 = fecha2;
+	public void setSalario(float salario) {
+		this.salario = salario;
 	}
 
-
-	public String getDescripcion() {
-		return Descripcion;
+	public void setFecha(Date fecha) {
+		Fecha = fecha;
 	}
-
-
-	public void setDescripcion(String descripcion) {
-		Descripcion = descripcion;
-	}
-
 
 	public SegEmpleado getEmpleado() {
 		return empleado;
 	}
 
-
 	public void setEmpleado(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}
 
+	
 	
 }

@@ -66,7 +66,8 @@ public class SegTest implements Serializable {
 	//asi el empleado tenia un test dependiendo lo que le asigne
 	@Persistent
     private Long BDtest;
-	
+
+	@Persistent
     private SegEmpleado empleado;
 
 	public SegTest() {

@@ -121,8 +121,9 @@ public class AuxEmpleado implements IsSerializable{
   	
   	private List <AuxHistorial> Historial= new ArrayList<AuxHistorial>();
 
-  	
   	private List <AuxTest> test= new ArrayList<AuxTest>();
+  	
+  	private List <AuxSalario> salario= new ArrayList<AuxSalario>();
 
     private List<Long> testCompartido = new ArrayList<Long>();
   	//datos del patrono
@@ -679,6 +680,16 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setPasaporte(String pasaporte) {
 		this.pasaporte = pasaporte;
+	}
+
+
+	public List <AuxSalario> getSalario() {
+		return salario;
+	}
+
+
+	public void setSalario(List <AuxSalario> salario) {
+		this.salario = salario;
 	}
 
 	

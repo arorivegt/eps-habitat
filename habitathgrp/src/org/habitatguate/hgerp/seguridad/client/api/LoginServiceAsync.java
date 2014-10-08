@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -51,6 +52,8 @@ public interface LoginServiceAsync {
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
 			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, boolean testBD,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_Salario(Long id_empleado,Date Fecha, float salario, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	
 	void InsertarCompartido(String idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
 	void QuitarCompartido(Long idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
@@ -136,6 +139,7 @@ public interface LoginServiceAsync {
 				String tipo_historial, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, String descripcionl, 
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
+		void Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		
 		//metodos para Eliminar en la base de datos
 		//metodos para Eliminar en la base de datos
@@ -161,20 +165,19 @@ public interface LoginServiceAsync {
 					AsyncCallback<Long> callback) throws IllegalArgumentException;
 	    void Eliminar_Vacaciones(Long id_empleado,Long id, 
 					AsyncCallback<Long> callback) throws IllegalArgumentException;
+	    void Eliminar_Salario(Long id_empleado,Long id, 
+					AsyncCallback<Long> callback) throws IllegalArgumentException;
 	    
 	    ///querys
 	    void Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
 				String Estado,AsyncCallback<List<AuxEmpleado>> callback) throws IllegalArgumentException;
-	    
 	    void Empleado_Registrado(Long id_empleado,
 	    		AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
-
 	    void BDPuesto(AsyncCallback<List<AuxBDPuesto>> callback)throws IllegalArgumentException;
-	    
 	    void BDTest(AsyncCallback<List<AuxBDTest>> callback)throws IllegalArgumentException;
-	    
 	    void getCorreos(AsyncCallback<List<String>> callback)throws IllegalArgumentException;
+	    void getSalarios(AsyncCallback<List<AuxSalario>> callback)throws IllegalArgumentException;
 	    void remove(String fileURL,
 	    		AsyncCallback<String> callback)throws IllegalArgumentException;
 	    

@@ -25,6 +25,7 @@ public class SegIdioma implements Serializable {
 	@Persistent
     private String idioma;   
 
+	@Persistent
     private SegEmpleado empleado;
 
 	@Persistent    

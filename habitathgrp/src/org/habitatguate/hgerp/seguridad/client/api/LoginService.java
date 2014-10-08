@@ -6,10 +6,9 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -74,6 +73,7 @@ public interface LoginService extends RemoteService {
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
+	Long Insertar_Salario(Long id_empleado,Date Fecha, float salario) throws IllegalArgumentException;
 
 	String InsertarCompartido(String idEmpleado, Long idTest)throws IllegalArgumentException;
 	String QuitarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
@@ -134,6 +134,7 @@ public interface LoginService extends RemoteService {
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
+	Long Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario) throws IllegalArgumentException;
 	
 	//metodos para Eliminar en la base de datos
     Long Eliminar_Emppleado(Long id)  throws IllegalArgumentException;
@@ -147,6 +148,7 @@ public interface LoginService extends RemoteService {
     Long Eliminar_Entrevista(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Historial(Long id_empleado,Long id)throws IllegalArgumentException;
     Long Eliminar_Vacaciones(Long id_empleado,Long id)throws IllegalArgumentException;
+    Long Eliminar_Salario(Long id_empleado,Long id)throws IllegalArgumentException;
     String remove(String fileURL)throws IllegalArgumentException;
 
 
@@ -156,9 +158,8 @@ public interface LoginService extends RemoteService {
 			String Estado) throws IllegalArgumentException;    
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
     List<AuxBDTest> BDTest()throws IllegalArgumentException;
-
     List<String> getCorreos()throws IllegalArgumentException;
-    ///querys
+    List<AuxSalario> getSalarios()throws IllegalArgumentException;
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     
 	

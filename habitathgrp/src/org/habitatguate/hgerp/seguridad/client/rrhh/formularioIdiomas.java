@@ -38,7 +38,7 @@ public class formularioIdiomas extends Composite {
     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
     
     private ListBox listNivel;
-    private TextBox txtIdioma;
+    private ListBox txtIdioma;
     
     private FormPanel form;
 	private VerticalPanel formElements;
@@ -61,9 +61,46 @@ public class formularioIdiomas extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("1065px", "100px");
 		
-		txtIdioma = new TextBox();
+		txtIdioma = new ListBox();
+		txtIdioma.addItem("Achi","1");
+		txtIdioma.addItem("Akateko","2");
+		txtIdioma.addItem("Awakateko","3");
+		txtIdioma.addItem("Ch'orti","4");
+		txtIdioma.addItem("Chuj","5");
+		txtIdioma.addItem("Itza","6");
+		txtIdioma.addItem("Ixil","7");
+		txtIdioma.addItem("Jakalteko","8");
+		txtIdioma.addItem("Kaqchiquel","9");
+		txtIdioma.addItem("Kiche","10");
+		txtIdioma.addItem("Mam","11");
+		txtIdioma.addItem("Mopan","12");
+		txtIdioma.addItem("Poqoman","13");
+		txtIdioma.addItem("Poqomchi","14");
+		txtIdioma.addItem("Q'anjob'al","15");
+		txtIdioma.addItem("Q'eqchi","16");
+		txtIdioma.addItem("Sakapulteko","17");
+		txtIdioma.addItem("Sipakapense","18");
+		txtIdioma.addItem("Tektiteko","19");
+		txtIdioma.addItem("tz'utujil","20");
+		txtIdioma.addItem("Uspanteko","21");
+		txtIdioma.addItem("Garifuna","22");
+		txtIdioma.addItem("Español","23");
+		txtIdioma.addItem("Ingles","24");
+		txtIdioma.addItem("Frances","25");
+		txtIdioma.addItem("Aleman","26");
+		txtIdioma.addItem("Italiano","27");
+		txtIdioma.addItem("Coreano","28");
+		txtIdioma.addItem("Japones","29");
+		txtIdioma.addItem("Mandarin","30");
+		txtIdioma.addItem("Cantones","31");
+		txtIdioma.addItem("Tailandes","32");
+		txtIdioma.addItem("Portugues","33");
+		txtIdioma.addItem("Arabe","34");
+		txtIdioma.addItem("Hebreo","35");
+		txtIdioma.addItem("Griego","36");
+		txtIdioma.addItem("Neerlandes","37");
+		txtIdioma.addItem("Otros","38");
 		txtIdioma.setStyleName("gwt-TextBox2");
-		txtIdioma.setMaxLength(100);
 		absolutePanel.add(txtIdioma, 10, 29);
 		txtIdioma.setSize("227px", "34px");
 		
@@ -83,7 +120,7 @@ public class formularioIdiomas extends Composite {
 
 				if(bandera) {
 					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getItemText(listNivel.getSelectedIndex()), 
-							txtIdioma.getText(), URLFile, KeyFile,new AsyncCallback<Long>(){
+							txtIdioma.getValue(txtIdioma.getSelectedIndex()), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	setMensaje("alert alert-error", 
@@ -101,7 +138,7 @@ public class formularioIdiomas extends Composite {
 						});
 				}else{
 					loginService.Actualizar_Idioma(empleado.id_empleado,id_idioma, listNivel.getItemText(listNivel.getSelectedIndex()), 
-							txtIdioma.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
+							txtIdioma.getValue(txtIdioma.getSelectedIndex()),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	setMensaje("alert alert-error", 
@@ -184,11 +221,15 @@ public class formularioIdiomas extends Composite {
 			Archivo();
 		this.id_idioma = id;
 		this.bandera = false;
-		this.txtIdioma.setText(txtIdioma);
 		boolean bandera = true;
 		for(int i=0; i < this.listNivel.getItemCount() && bandera; i++){
 			bandera = !this.listNivel.getItemText(i).equals(listNivel);
 		    this.listNivel.setSelectedIndex(i);
+		}
+		 bandera = true;
+		for(int i=0; i < this.txtIdioma.getItemCount() && bandera; i++){
+			bandera = !this.txtIdioma.getValue(i).equals(txtIdioma);
+		    this.txtIdioma.setSelectedIndex(i);
 		}
 		
 	}

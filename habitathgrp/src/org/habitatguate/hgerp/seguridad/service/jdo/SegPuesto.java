@@ -35,6 +35,7 @@ public class SegPuesto implements Serializable {
 	@Persistent
     private boolean activo;
 
+	@Persistent
     private SegEmpleado empleado;
 
 	public SegPuesto() {

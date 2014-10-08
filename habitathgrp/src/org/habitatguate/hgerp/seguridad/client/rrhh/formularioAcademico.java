@@ -66,14 +66,18 @@ public class formularioAcademico extends Composite {
 		absolutePanel.add(getFormPanel(), 522, 108);
 		getFormUrl();
 		listNIvel_Academico = new ListBox();
-		listNIvel_Academico.addItem("Primaria");
-		listNIvel_Academico.addItem("Basicos");
-		listNIvel_Academico.addItem("Diversificado");
-		listNIvel_Academico.addItem("Universidad");
-		listNIvel_Academico.addItem("Maestria");
-		listNIvel_Academico.addItem("Diplomado");
-		listNIvel_Academico.addItem("Titulo");
-		listNIvel_Academico.addItem("Otro");
+		listNIvel_Academico.addItem("No sabe leer y/o Escribir","0");
+		listNIvel_Academico.addItem("sabe leer y/o Escribir","1");
+		listNIvel_Academico.addItem("Primaria Incompleta","2");
+		listNIvel_Academico.addItem("Primaria Completa","3");
+		listNIvel_Academico.addItem("Secundaria Incompleta","4");
+		listNIvel_Academico.addItem("Secundaria Completa","5");
+		listNIvel_Academico.addItem("Diversificado Incompleta","6");
+		listNIvel_Academico.addItem("Diversificado Completa","7");
+		listNIvel_Academico.addItem("Universidad Incompleta","8");
+		listNIvel_Academico.addItem("Universidad Completa","9");
+		listNIvel_Academico.addItem("Postgrados","10");
+		listNIvel_Academico.addItem("Diplomado","11");
 		listNIvel_Academico.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listNIvel_Academico, 10, 29);
 		listNIvel_Academico.setSize("229px", "34px");
@@ -125,7 +129,7 @@ public class formularioAcademico extends Composite {
 				
 				if(bandera) {
 					loginService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
-							listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
+							listNIvel_Academico.getValue(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
 							txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -148,7 +152,7 @@ public class formularioAcademico extends Composite {
                  });
 		}else{
 			loginService.Actualizar_Academico(empleado.id_empleado,id_historial_academico, dateInicio.getValue(), dateFinal.getValue(), 
-					listNIvel_Academico.getItemText(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
+					listNIvel_Academico.getValue(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
 					txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
@@ -268,7 +272,7 @@ public class formularioAcademico extends Composite {
 		//Window.alert("lista: "+this.listNIvel_Academico.getItemCount());
 		for(int i=0; i < this.listNIvel_Academico.getItemCount() && bandera; i++){
 
-			bandera = !this.listNIvel_Academico.getItemText(i).equals(listNIvel_Academico);
+			bandera = !this.listNIvel_Academico.getValue(i).equals(listNIvel_Academico);
 			//Window.alert("lista: "+bandera + " i:"+ i);
 		    this.listNIvel_Academico.setSelectedIndex(i);
 		}

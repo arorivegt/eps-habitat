@@ -137,6 +137,10 @@ public class SegEmpleado implements Serializable {
 
 	@Persistent(mappedBy = "empleado")
 	@Element(dependent = "true")
+	private List <SegSalario> salario;
+
+	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
 	private List <SegHistorialAcademico> historial_academico;
 
 	@Persistent(mappedBy = "empleado")
@@ -217,6 +221,14 @@ public class SegEmpleado implements Serializable {
 
 	public String getKeyFile() {
 		return KeyFile;
+	}
+
+	public List<SegSalario> getSalario() {
+		return salario;
+	}
+
+	public void setSalario(List<SegSalario> salario) {
+		this.salario = salario;
 	}
 
 	public void setKeyFile(String keyFile) {

@@ -7,7 +7,9 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -73,7 +75,7 @@ public interface LoginService extends RemoteService {
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
 
-	String InsertarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
+	String InsertarCompartido(String idEmpleado, Long idTest)throws IllegalArgumentException;
 	String QuitarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
 
 	//metodos para Actualizar en la base de datos
@@ -154,7 +156,8 @@ public interface LoginService extends RemoteService {
 			String Estado) throws IllegalArgumentException;    
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
     List<AuxBDTest> BDTest()throws IllegalArgumentException;
-    
+
+    List<String> getCorreos()throws IllegalArgumentException;
     ///querys
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
     

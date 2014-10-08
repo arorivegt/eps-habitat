@@ -66,7 +66,6 @@ public class formularioPruebaPeriodo extends Composite {
 		private Button btnEliminar;
 		
 	public formularioPruebaPeriodo(final Desempeno d, Empleados e) {
-		botonesVisibles(false);
 		this.d = d;
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -358,6 +357,16 @@ public class formularioPruebaPeriodo extends Composite {
 		btnEliminar.setSize("227px", "34px");
 		
 		btnCompartir = new Button("Send");
+		btnCompartir.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				if(!bandera){
+					MensajeCompartir(id_prueba);
+				}else{
+                	setMensaje("alert alert-error", 
+                			" \nAun no se ha guardo el formulario");
+				}
+			}
+		});
 		btnCompartir.setText("Compartir");
 		btnCompartir.setStylePrimaryName("sendButton");
 		btnCompartir.setStyleName("sendButton");
@@ -460,6 +469,7 @@ public class formularioPruebaPeriodo extends Composite {
 		for (AuxBDTest p : this.d.BDresult) {
 	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
 	    }
+		botonesVisibles(true);
 	}
 	private void EliminarFormulario_SinDatos(){
 		d.EliminarFormulario(this);
@@ -607,5 +617,29 @@ public class formularioPruebaPeriodo extends Composite {
 	    }
 			
 	}
+	public void MensajeCompartir(Long idtest){
+        final DialogBox Registro2 = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        Compartir inicio = new Compartir(idtest);
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(inicio);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        Registro2 .setWidget(dialogVPanel);
+        Registro2 .setModal(true);
+        Registro2 .setGlassEnabled(true);
+        Registro2 .setAnimationEnabled(true);
+        Registro2 .center();
+        Registro2 .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Registro2.hide();
+        }
+        });
+    }
 
 }

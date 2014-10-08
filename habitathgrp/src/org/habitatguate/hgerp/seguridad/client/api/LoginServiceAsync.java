@@ -51,7 +51,7 @@ public interface LoginServiceAsync {
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
 			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, boolean testBD,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
-	void InsertarCompartido(Long idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void InsertarCompartido(String idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
 	void QuitarCompartido(Long idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	void Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
@@ -174,6 +174,7 @@ public interface LoginServiceAsync {
 	    
 	    void BDTest(AsyncCallback<List<AuxBDTest>> callback)throws IllegalArgumentException;
 	    
+	    void getCorreos(AsyncCallback<List<String>> callback)throws IllegalArgumentException;
 	    void remove(String fileURL,
 	    		AsyncCallback<String> callback)throws IllegalArgumentException;
 	    

@@ -28,6 +28,11 @@ import javax.jdo.Query;
 
 
 
+
+
+
+
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
@@ -1016,7 +1021,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             }
             
 
-            @Override
+            @SuppressWarnings("unchecked")
+			@Override
 			public List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 					String primer_apellido, String segundo_apellido,String DPI, String Pasaporte
 					,String Estado)throws IllegalArgumentException {
@@ -1807,6 +1813,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				return valor;
 			}
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public List<AuxBDPuesto> BDPuesto() throws IllegalArgumentException {
 				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
@@ -1913,6 +1920,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				return valor ;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public List<AuxBDTest> BDTest() throws IllegalArgumentException {
 			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
@@ -1945,23 +1953,29 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		}
 
 		@Override
-		public String InsertarCompartido(Long idEmpleado, Long idTest)
+		public String InsertarCompartido(String idEmpleado, Long idTest)
 				throws IllegalArgumentException 
 		{
 			
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			String valor = "Hubo un error al compartir evaluacion";
-			
-			 try { 
+			SegUsuario results = null;
+			try{
+				 results = Persistencia.getObjectById(SegUsuario.class, idEmpleado); 
+			}catch(Exception t){
+				return idEmpleado+" \nno existe";
+			}
+			 try {
 				 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
+				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, results.getId_empleado()); 
+				 
 				 int i = e.getTestCompartido().indexOf(idTest);
 				 if(i == -1){
-					 valor = "la Evaluacion ya habia sido compartido con\n con "+e.getEmail();
+					 valor = "la Evaluacion ya habia sido compartido con\n"+idEmpleado;
 				 }else
 				 {
 					 e.getTestCompartido().add(idTest);
-					 valor = "Test compartido Exitosamente con\n con "+e.getEmail();
+					 valor = "Test compartido Exitosamente con\n con "+idEmpleado;
 				 }
 			}finally {  
 					 Persistencia.close();  
@@ -1990,6 +2004,27 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					 Persistencia.close();  
 			}
 			 return valor ;
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<String> getCorreos() throws IllegalArgumentException 
+		{
+			
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			List<SegUsuario> results = null;
+			List<String> correos = new ArrayList<String>();
+			 try { 
+
+					Query q = Persistencia.newQuery(SegUsuario.class);
+					results = (List<SegUsuario>) q.execute();
+					for(SegUsuario seg: results){
+						correos.add(seg.getUser());
+					}
+			}finally {  
+					 Persistencia.close();  
+			}
+			 return correos ;
 		}
 
 	}

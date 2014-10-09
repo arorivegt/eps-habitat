@@ -9,6 +9,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.finanzas.PagingDataGrid_MaterialCostruccion.TablaResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -48,7 +49,8 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
 	T objectoEliminado = null;
     public PagingDataGrid_PlantillaSolucion() {
         initWidget(dock);
-        dataGrid = new DataGrid<T>();
+        dataGrid = new DataGrid<T>(30,
+                GWT.<TablaResources> create(TablaResources.class));
         dataGrid.setWidth("100%");
 
         SimplePager.Resources pagerResources = GWT

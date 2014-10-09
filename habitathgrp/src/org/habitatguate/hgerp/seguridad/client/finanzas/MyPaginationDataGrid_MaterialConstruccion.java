@@ -58,7 +58,7 @@ public class MyPaginationDataGrid_MaterialConstruccion<T> extends PagingDataGrid
                 return String.valueOf(((AuxMaterialCostruccion) object).getIdMaterialConstruccion());
             }
         };
-        dataGrid.addColumn(codContableColumn, "Codigo Material Costruccion");
+        dataGrid.addColumn(codContableColumn, "Codigo Material ");
         dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
         
         
@@ -77,7 +77,7 @@ public class MyPaginationDataGrid_MaterialConstruccion<T> extends PagingDataGrid
 				
 			}
         	});
-        dataGrid.addColumn(nomParamColumn, "Nombre Material Costruccion");        
+        dataGrid.addColumn(nomParamColumn, "Nombre Material");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
         nomParamColumn.setSortable(true);
         sortHandler.setComparator(nomParamColumn, new Comparator<T>() {

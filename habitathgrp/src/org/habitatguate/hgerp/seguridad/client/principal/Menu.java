@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
@@ -84,6 +85,15 @@ public class Menu extends Composite {
 		Empleado_registrado();
 	}
 	
+	@UiHandler("finan2a")
+	void fina2a(ClickEvent event){
+		Buscador_Soluciones_Inv fmc = new Buscador_Soluciones_Inv();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+ 	
+ 	}
+	
 	@UiHandler("finan3b")
 	void finan3b(ClickEvent event){
 		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
@@ -92,6 +102,16 @@ public class Menu extends Composite {
 		this.nuevo.getGrid().setWidget(1, 0, fmc);
  	
  	}
+	
+	@UiHandler("finan4")
+	void fina4a(ClickEvent event){
+		Buscador_Afiliado fmc = new Buscador_Afiliado();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+ 	
+ 	}
+	
 	public void Empleado_registrado(){
 
 		final Empleados e = new Empleados(1);

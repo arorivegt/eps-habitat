@@ -12,6 +12,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -25,13 +26,34 @@ import com.google.gwt.user.client.ui.TextBox;
 public class Buscador_MaterialCostruccion extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     TablaGWT_MaterialCostruccion e = null;
-    
+	
+    Timer timer2 = new Timer(){
+  	  public void run() {
+			loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
+        		
+        		@Override
+        		public void onSuccess(List<AuxMaterialCostruccion> result) {
+        			e.ActulizarList(result);      			
+        			
+        			
+        		}
+        		
+        		@Override
+        		public void onFailure(Throwable caught) {
+        			System.out.println(caught);
+        			
+        		}
+        	});
+
+  	  }
+    };
 	public Buscador_MaterialCostruccion(){
 	final Grid grid = new Grid(2, 1);
 	initWidget(grid);
 	grid.setWidth("1278px");
 	
 	//------------------------------primera fila
+
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
@@ -111,26 +133,12 @@ public class Buscador_MaterialCostruccion extends Composite{
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
-
+                	timer2.schedule(1500);
                 	
                 }
 
          });
-			loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
-        		
-        		@Override
-        		public void onSuccess(List<AuxMaterialCostruccion> result) {
-        			e.ActulizarList(result);      			
-        			
-        			
-        		}
-        		
-        		@Override
-        		public void onFailure(Throwable caught) {
-        			System.out.println(caught);
-        			
-        		}
-        	});
+
 
 		}
 		

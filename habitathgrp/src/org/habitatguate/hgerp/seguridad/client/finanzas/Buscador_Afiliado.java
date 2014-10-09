@@ -9,6 +9,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -22,11 +23,32 @@ import com.google.gwt.user.client.ui.TextBox;
 public class Buscador_Afiliado extends Composite {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     TablaGWT_Afiliado e = null;
+    Timer timer2 = new Timer(){
+  	  public void run() {
+			loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {
+        		
+        		@Override
+        		public void onSuccess(List<AuxAfiliado> result) {
+   			
+        			e.ActulizarList(result);
+        		}
+        		
+        		@Override
+        		public void onFailure(Throwable caught) {
+        			System.out.println(caught);
+        			
+        		}
+        	});
+
+  	  }
+    };
 	public Buscador_Afiliado(){
 
 	final Grid grid = new Grid(2, 1);
 	initWidget(grid);
 	grid.setWidth("1178px");
+	
+
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
@@ -110,26 +132,13 @@ public class Buscador_Afiliado extends Composite {
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	textBox_3.setText("");
-
+                	timer2.schedule(1500);	
                 	
                 }
 
          });
 			
-			loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {
-        		
-        		@Override
-        		public void onSuccess(List<AuxAfiliado> result) {
-   			
-        			e.ActulizarList(result);
-        		}
-        		
-        		@Override
-        		public void onFailure(Throwable caught) {
-        			System.out.println(caught);
-        			
-        		}
-        	});
+
 		}
 		
 		else{

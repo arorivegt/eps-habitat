@@ -167,7 +167,13 @@
 								<li><a href="#"><g:Label ui:field="finan1c"> Generar Conocimiento</g:Label></a></li>
    	     		</ul>
     		</li>
-    		<li><a href="#"><g:Label ui:field="finan2">	Ingreso Soluciones</g:Label> </a></li>
+    		<li>
+        		<a href="#">Soluciones</a>
+       			 <ul>
+           			 <li><a href="#"><g:Label ui:field="finan2a">Ingreso Beneficiario</g:Label></a></li>
+           			 <li><a href="#"><g:Label ui:field="finan2b">Ingreso de Solucion</g:Label></a></li>
+   	     		</ul>
+    		</li>
             <li>
         		<a href="#">Inventario Materiales</a>
        			 <ul>

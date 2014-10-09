@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -23,10 +24,32 @@ import com.google.gwt.user.client.ui.TextBox;
 public class Buscador_Soluciones_Inv extends Composite {
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     TablaGWT_Beneficiario e = null;
+    Timer timer2 = new Timer(){
+    	  public void run() {
+			loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+        		
+        		@Override
+        		public void onSuccess(List<AuxBeneficiario> result) {
+        			e.ActulizarList(result);      			
+        			
+        			
+        		}
+        		
+        		@Override
+        		public void onFailure(Throwable caught) {
+        			System.out.println(caught);
+        			
+        		}
+        	});
+
+    	  }
+      };
 	public Buscador_Soluciones_Inv(){
 	final Grid grid = new Grid(2, 1);
 	initWidget(grid);
 	grid.setWidth("1278px");
+	
+
 	
 	//------------------------------primera fila
 	
@@ -99,26 +122,12 @@ public class Buscador_Soluciones_Inv extends Composite {
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
-
+                	timer2.schedule(1500);
                 	
                 }
 
          });
-			loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
-        		
-        		@Override
-        		public void onSuccess(List<AuxBeneficiario> result) {
-        			e.ActulizarList(result);      			
-        			
-        			
-        		}
-        		
-        		@Override
-        		public void onFailure(Throwable caught) {
-        			System.out.println(caught);
-        			
-        		}
-        	});
+
 
 		}
 		

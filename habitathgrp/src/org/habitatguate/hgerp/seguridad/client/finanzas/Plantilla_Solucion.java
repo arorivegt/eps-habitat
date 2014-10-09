@@ -47,12 +47,7 @@ public class Plantilla_Solucion extends Composite{
     public boolean banderaTimer = false;
     public boolean banderaWhile = false;
     
-    Timer timer2 = new Timer(){
-  	  public void run() {
-  		  System.out.println("tiempo expirado");
-  		  banderaWhile = false;
-  	  }
-    };
+
     
     Timer timer = new Timer() {
         public void run() {

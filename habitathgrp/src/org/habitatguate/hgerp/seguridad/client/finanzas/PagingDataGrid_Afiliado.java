@@ -8,6 +8,7 @@ import java.util.Set;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.PagingDataGrid_MaterialCostruccion.TablaResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -40,7 +41,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
 	private Button botonEliminar;
-	private Button botonRefresh;
+	//private Button botonRefresh;
     final MultiSelectionModel<T> selectionModel =
             new MultiSelectionModel<T>((ProvidesKey<T>)AuxAfiliado.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -48,7 +49,8 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
 	T objectoEliminado = null;
     public PagingDataGrid_Afiliado() {
         initWidget(dock);
-        dataGrid = new DataGrid<T>();
+        dataGrid = new DataGrid<T>(30,
+                GWT.<TablaResources> create(TablaResources.class));
         dataGrid.setWidth("100%");
 
         SimplePager.Resources pagerResources = GWT
@@ -56,6 +58,8 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
         pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0,
                 true);
         pager.setDisplay(dataGrid);
+
+        
         
         dataProvider = new ListDataProvider<T>();
         dataProvider.setList(new ArrayList<T>());
@@ -70,7 +74,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
         dataProvider.addDataDisplay(dataGrid);
         
         botonEliminar = new Button("Eliminar Afiliado");
-        botonRefresh = new Button("Refresh Datos");
+     //   botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);
         botonEliminar.setVisible(true);
@@ -79,7 +83,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
-        dock.add(botonRefresh,DockPanel.EAST);
+      //  dock.add(botonRefresh,DockPanel.EAST);
         dock.add(botonEliminar,DockPanel.EAST);
         botonEliminar.addClickHandler(new ClickHandler() {
             @Override
@@ -109,7 +113,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
 	
             }
           });
-        botonRefresh.addClickHandler(new ClickHandler() {
+       /* botonRefresh.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
               // Refresca el datagrid
@@ -129,7 +133,7 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
         				}
         			});
         			}
-        	});
+        	});*/
     }
  
     public void setEmptyTableWidget() {
@@ -177,5 +181,10 @@ public abstract class PagingDataGrid_Afiliado<T> extends Composite {
     public void setDataProvider(ListDataProvider<T> dataProvider) {
         this.dataProvider = dataProvider;
     }
- 
+    public interface TablaResources extends DataGrid.Resources {
+    	  @Override
+    	    @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGrid2.css"})
+    	    DataGrid.Style dataGridStyle();
+      }
+    
 }

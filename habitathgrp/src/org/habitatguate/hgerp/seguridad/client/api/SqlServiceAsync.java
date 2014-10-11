@@ -34,7 +34,7 @@ public interface SqlServiceAsync {
 			int codUno, int codDos, AsyncCallback<Long> callback);
 
 	void Insertar_Beneficiario(String nomBeneficiario, String dirBeneficiario,
-			int telBeneficiario, AsyncCallback<Long> callback);
+			int telBeneficiario,Long idAfiliado, AsyncCallback<Long> callback);
 
 	void Eliminar_Afiliado(Long id, AsyncCallback<Long> callback);
 
@@ -74,6 +74,9 @@ public interface SqlServiceAsync {
 
 	void ConsultaTodasPlantillas(
 			AsyncCallback<List<AuxPlantillaSolucion>> callback);
+
+	void Insertar_Bene(String nomBeneficiario, String dirBeneficiario,
+			int telBeneficiario, Long idAfiliado, AsyncCallback<Long> callback);
 
 
 

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
@@ -33,6 +35,8 @@ public class AuxAfiliado implements Comparable<AuxAfiliado>,IsSerializable{
 	private String municipio;
 
 	private String departamento;
+	
+	private List<AuxBeneficiario> listaBene;
 	
 	public Long getIdAfiliado() {
 		return idAfiliado;
@@ -72,6 +76,14 @@ public class AuxAfiliado implements Comparable<AuxAfiliado>,IsSerializable{
 
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
+	}
+
+	public List<AuxBeneficiario> getListaBene() {
+		return listaBene;
+	}
+
+	public void setListaBene(List<AuxBeneficiario> listaBene) {
+		this.listaBene = listaBene;
 	}
 	
 	

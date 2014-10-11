@@ -2,6 +2,8 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -23,9 +25,9 @@ public class SegAfiliado implements Serializable {
 	private String municipio;
 	@Persistent
 	private String departamento;
-	@Persistent
-	@OneToMany(mappedBy = "afiliado")
-	private List <SegSolucion> solucion;
+	@Persistent(mappedBy = "afiliado")
+    @Element(dependent = "true")
+	private List <SegBeneficiario> beneficiario;
 	@Persistent
 	@OneToMany(mappedBy = "afiliado")
 	private List<Long> empleados;
@@ -75,12 +77,12 @@ public class SegAfiliado implements Serializable {
 		this.departamento = departamento;
 	}
 
-	public List<SegSolucion> getSolucion() {
-		return solucion;
+	public List<SegBeneficiario> getSolucion() {
+		return beneficiario;
 	}
 
-	public void setSolucion(List<SegSolucion> solucion) {
-		this.solucion = solucion;
+	public void setSolucion(List<SegBeneficiario> solucion) {
+		this.beneficiario = solucion;
 	}
 
 	public List<Long> getEmpleados() {

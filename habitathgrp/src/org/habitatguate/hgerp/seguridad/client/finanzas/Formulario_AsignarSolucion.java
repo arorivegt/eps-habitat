@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
@@ -35,6 +36,7 @@ public class Formulario_AsignarSolucion extends Composite{
     TablaGWT_PlantillaSolucion e = null;
     
     public AuxMaterialCostruccion selectNuevo = null;
+    public AuxBeneficiario selectNuevoBene = null;
     public double costoAcumulado = 0;
     public Long idPlantillaSolucionAlmacenado = 0L;
     public Long correlativo = (long) 1; 
@@ -99,11 +101,12 @@ public class Formulario_AsignarSolucion extends Composite{
 		final Grid grid = new Grid(2, 1);
 		final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 		final PlantillaNameSuggestOracle plantilla = new PlantillaNameSuggestOracle();
+		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
 		initWidget(grid);
 		grid.setWidth("1278px");
 		
 		e = new TablaGWT_PlantillaSolucion(new ArrayList<AuxDetallePlantillaSolucion>());
-		e.grid.setSize("1086px", "1500");
+		e.grid.setSize("1171px", "1500");
 		grid.setWidget(1, 0,e);
 		e.setSize("1000px", "300px");
 		
@@ -146,6 +149,25 @@ public class Formulario_AsignarSolucion extends Composite{
 				
 			}
 		});
+		
+		loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+			
+			@Override
+			public void onSuccess(List<AuxBeneficiario> result) {
+				if (!result.isEmpty()){
+					for (AuxBeneficiario p : result){
+						bene.add(new BeneficiarioMultiWordSuggestion(p));	
+					}
+				}
+
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println(caught);
+				
+			}
+		});
 
 		//------------------------------primera fila
 		
@@ -156,13 +178,6 @@ public class Formulario_AsignarSolucion extends Composite{
 		grid.setWidget(0, 0, absolutePanel);
 		absolutePanel.setSize("1241px", "90px");
 		absolutePanel.setStyleName("gwt-Label-new");
-		
-			
-			//-----------------------------	---------------------------------
-		
-		Image image = new Image("images/ico-lupa.png");
-		absolutePanel.add(image, 643, 10);
-		image.setSize("54px", "36px");
 		
 	//------------------------- NUEVO MATERIAL DE COSTRUCCION----------------------------------
 		Label label_2a = new Label("Nombre Material Costruccion");
@@ -315,31 +330,33 @@ public class Formulario_AsignarSolucion extends Composite{
 				}
 			});		
 			
-					button.setText("Escoger Plantilla");
+					button.setText("Update Archivo");
 					button.setStylePrimaryName("gwt-TextBox2");
 					button.setStyleName("gwt-TextBox2");
 					button.setSize("134px", "23px");
 			
 			AbsolutePanel absolutePanel_2 = new AbsolutePanel();
 			absolutePanel_2.setStyleName("panelMenu");
-			absolutePanel.add(absolutePanel_2, 703, 0);
-			absolutePanel_2.setSize("598px", "129px");
+			absolutePanel.add(absolutePanel_2, 643, 0);
+			absolutePanel_2.setSize("259px", "129px");
 			
 			Label lblNombreBeneficiario = new Label("Nombre Beneficiario");
 			absolutePanel_2.add(lblNombreBeneficiario);
 			lblNombreBeneficiario.setStyleName("label");
 			lblNombreBeneficiario.setSize("157px", "13px");
 			
-			SuggestBox suggestBox_1 = new SuggestBox();
+			final SuggestBox suggestBox_1 = new SuggestBox(bene);
 			absolutePanel_2.add(suggestBox_1, 10, 19);
 			suggestBox_1.setSize("234px", "16px");
+			
+
 			
 			Label lblDireccion = new Label("Direccion");
 			lblDireccion.setStyleName("label");
 			absolutePanel_2.add(lblDireccion, 0, 45);
 			lblDireccion.setSize("157px", "13px");
 			
-			TextBox textBox = new TextBox();
+			final TextBox textBox = new TextBox();
 			textBox.setStyleName("gwt-TextBox2");
 			textBox.setMaxLength(100);
 			absolutePanel_2.add(textBox, 19, 64);
@@ -350,11 +367,49 @@ public class Formulario_AsignarSolucion extends Composite{
 			absolutePanel_2.add(lblAfiliado, 0, 90);
 			lblAfiliado.setSize("157px", "13px");
 			
-			TextBox textBox_2 = new TextBox();
+			final TextBox textBox_2 = new TextBox();
 			textBox_2.setStyleName("gwt-TextBox2");
 			textBox_2.setMaxLength(100);
 			absolutePanel_2.add(textBox_2, 19, 109);
 			textBox_2.setSize("227px", "19px");
+			
+			AbsolutePanel absolutePanel_3 = new AbsolutePanel();
+			absolutePanel.add(absolutePanel_3, 914, 0);
+			absolutePanel_3.setSize("387px", "130px");
+			
+			Label lblMontoAutorizado = new Label("Monto Autorizado");
+			lblMontoAutorizado.setStyleName("label");
+			absolutePanel_3.add(lblMontoAutorizado, 10, 10);
+			lblMontoAutorizado.setSize("157px", "13px");
+			
+			TextBox textBox_3 = new TextBox();
+			textBox_3.setStyleName("gwt-TextBox2");
+			textBox_3.setMaxLength(100);
+			absolutePanel_3.add(textBox_3, 173, 10);
+			textBox_3.setSize("176px", "19px");
+			
+			TextBox textBox_4 = new TextBox();
+			textBox_4.setStyleName("gwt-TextBox2");
+			textBox_4.setMaxLength(100);
+			absolutePanel_3.add(textBox_4, 173, 37);
+			textBox_4.setSize("176px", "19px");
+			
+			Label lblDiferencia = new Label("Diferencia");
+			lblDiferencia.setStyleName("label");
+			absolutePanel_3.add(lblDiferencia, 10, 37);
+			lblDiferencia.setSize("157px", "13px");
+			
+			suggestBox_1.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
+				
+				@Override
+				public void onSelection(SelectionEvent<Suggestion> event) {
+					// TODO Auto-generated method stub
+					BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
+					selectNuevoBene = select.getAfiliado();
+					textBox.setText(selectNuevoBene.getDirBeneficiario());
+					textBox_2.setText(selectNuevoBene.getAfiliado().getNomAfiliado());
+				}
+			});
 		
 	}
 }

@@ -75,20 +75,21 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			}
 			return valor;
 	}
-	@Override
-	public Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario) throws IllegalArgumentException{
+
+	public Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{
 		 Long valor = 0L;
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
 		SegBeneficiario nuevo = new SegBeneficiario();
 		nuevo.setNomBeneficiario(nomBeneficiario);
 		nuevo.setDirBeneficiario(dirBeneficiario);
 		nuevo.setTelBeneficiario(telBeneficiario);
-	
+		selectB.getSolucion().add(nuevo);
 		
 		try{
 			gestorPersistencia.makePersistent(nuevo);
 			System.out.println("BENEFICIARIO GUARDADO CORRECTAMENTE");
-			valor = nuevo.getIdBeneficiario();
+			valor = nuevo.getIdBeneficiario().getId();
 		}finally{
 			gestorPersistencia.close();
 		}
@@ -282,10 +283,17 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 		if (!execute.isEmpty()){
 			for (SegBeneficiario p : execute){
 				AuxBeneficiario n= new AuxBeneficiario();
-				n.setIdBeneficiario(p.getIdBeneficiario());
+				n.setIdBeneficiario(p.getIdBeneficiario().getId());
 				n.setNomBeneficiario(p.getNomBeneficiario());
 				n.setDirBeneficiario(p.getDirBeneficiario());
 				n.setTelBeneficiario(p.getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getAfiliado().getNomAfiliado());
+				n.setAfiliado(aux);
 				valor.add(n);
 			}
 		}
@@ -421,5 +429,25 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 		return id;
 	}
 	
+	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{
+		 Long valor = 0L;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
+		SegBeneficiario nuevo = new SegBeneficiario();
+		nuevo.setNomBeneficiario(nomBeneficiario);
+		nuevo.setDirBeneficiario(dirBeneficiario);
+		nuevo.setTelBeneficiario(telBeneficiario);
+		nuevo.setAfiliado(selectB);
+		selectB.getSolucion().add(nuevo);
+		
+		try{
+			gestorPersistencia.makePersistent(nuevo);
+			System.out.println("BENEFICIARIO GUARDADO CORRECTAMENTE");
+			valor = nuevo.getIdBeneficiario().getId();
+		}finally{
+			gestorPersistencia.close();
+		}
+		return valor;
+}
 	
 }

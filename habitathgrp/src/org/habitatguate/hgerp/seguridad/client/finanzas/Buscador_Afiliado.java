@@ -49,6 +49,7 @@ public class Buscador_Afiliado extends Composite {
 	grid.setWidth("1178px");
 	
 
+
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
@@ -126,13 +127,14 @@ public class Buscador_Afiliado extends Composite {
 
 				@Override
                 public void onSuccess(Long result)
-                {			
+                {	
+                	timer2.schedule(2000);	
                 	Window.alert("Nuevo Afiliado con el codigo: "+ result);
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	textBox_3.setText("");
-                	timer2.schedule(1500);	
+
                 	
                 }
 

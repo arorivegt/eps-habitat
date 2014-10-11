@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 
-import com.google.appengine.datanucleus.annotations.Unowned;
+
 
 
 

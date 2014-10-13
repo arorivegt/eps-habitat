@@ -28,7 +28,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 public class formularioPruebaPeriodoDos extends Composite {
 
-	 	private Empleados empleado;
+	 	private Long empleado;
 		private Long id_prueba = 0L;
 		private Long id_BDprueba = 0L;
 		private boolean bandera = true;
@@ -63,7 +63,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private Button btnEliminar;
 		private Button btnCompartir;
 		
-	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Empleados e) {
+	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Long e) {
 
 		this.empleado = e;
 		this.evaluacion = evaluacion;
@@ -263,7 +263,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 				if(listTest.getSelectedIndex() != 0){
 				
 				if(bandera) {
-					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+					loginService.Insertar_Test(empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
 							Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
 							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
@@ -287,7 +287,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 
                  });
 		}else{
-			loginService.Actualizar_Test(empleado.id_empleado,id_prueba, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+			loginService.Actualizar_Test(empleado,id_prueba, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 					Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
 					Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
 					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
@@ -451,7 +451,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		btnCompartir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(!bandera){
-					MensajeCompartir(id_prueba);
+					MensajeCompartir(id_prueba,empleado);
 				}else{
                 	setMensaje("alert alert-error", 
                 			" \nAun no se ha guardo el formulario");
@@ -475,7 +475,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 	}
 	
 	private void EliminarFormulario(){
-		evaluacion.EliminarFormulario(this,empleado.id_empleado,id_prueba);
+		evaluacion.EliminarFormulario(this,empleado,id_prueba);
 	}
 	
 	public  void LlenarDatos(Long id, String listPregunta1,
@@ -485,12 +485,19 @@ public class formularioPruebaPeriodoDos extends Composite {
 			String listPregunta8, String listPregunta9,
 			String listPregunta10, String txtEvaluador, Long id_BDPuestos, Long dateFecha) {
 
+		Window.alert(""+id_BDPuestos);
 		this.id_prueba = id;
 		this.id_BDprueba =id_BDPuestos;
 		this.listTest.setVisible(false);
 		this.lblEvaluacionQueSe.setVisible(false);
 		BuscarBDtest(id_BDPuestos);
+
 		boolean bandera = true;
+		for(int i=0; i < this.listTest.getItemCount() && bandera; i++){
+			bandera = !this.listTest.getValue(i).equals(""+id_BDprueba);
+			this.listTest.setSelectedIndex(i);
+		}
+		bandera = true;
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
 			this.listPregunta1.setSelectedIndex(i);
@@ -604,11 +611,11 @@ public class formularioPruebaPeriodoDos extends Composite {
 		btnEliminar.setEnabled(valor);
 	}
 	
-	  public void MensajeCompartir(Long idtest){
+	  public void MensajeCompartir(Long idtest,Long idEmpleadoCompartido){
           final DialogBox Registro2 = new DialogBox();
           final HTML serverResponseLabel = new HTML();
           final Button close= new Button("x");
-          Compartir inicio = new Compartir(idtest);
+          Compartir inicio = new Compartir(idtest,idEmpleadoCompartido);
           VerticalPanel dialogVPanel = new VerticalPanel();
           dialogVPanel.add(serverResponseLabel );
           dialogVPanel.add(inicio);

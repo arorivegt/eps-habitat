@@ -2,7 +2,6 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -118,8 +117,6 @@ public class SegEmpleado implements Serializable {
 	@Persistent    
     private String Estado;
 
-	@Persistent 
-    private List<Long> testCompartido = new ArrayList<Long>();;
 	
 	public SegEmpleado() {
 		super();
@@ -127,6 +124,10 @@ public class SegEmpleado implements Serializable {
 
 	//aqui vienen todas los objetos con los que se relaciona
 
+	@Persistent(mappedBy = "empleado")
+    @Element(dependent = "true")
+    private List<SegTestCompartidos> testCompartido;
+    
 	@Persistent(mappedBy = "empleado")
     @Element(dependent = "true")
 	private List <SegVacaciones> vacaciones;
@@ -203,11 +204,11 @@ public class SegEmpleado implements Serializable {
     private float bonificacion;
 
 	
-	public List<Long> getTestCompartido() {
+	public List<SegTestCompartidos> getTestCompartido() {
 		return testCompartido;
 	}
 
-	public void setTestCompartido(List<Long> testCompartido) {
+	public void setTestCompartido(List<SegTestCompartidos> testCompartido) {
 		this.testCompartido = testCompartido;
 	}
 

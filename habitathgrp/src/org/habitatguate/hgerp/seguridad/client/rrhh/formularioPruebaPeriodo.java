@@ -29,7 +29,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 public class formularioPruebaPeriodo extends Composite {
 
-	 	private Empleados empleado;
+	 	private Long empleado;
 		private Long id_prueba = 0L;
 		private boolean bandera = true;
 	    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
@@ -65,7 +65,7 @@ public class formularioPruebaPeriodo extends Composite {
 		private Button btnCompartir;
 		private Button btnEliminar;
 		
-	public formularioPruebaPeriodo(final Desempeno d, Empleados e) {
+	public formularioPruebaPeriodo(final Desempeno d, Long e) {
 		this.d = d;
 		this.empleado = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -255,9 +255,8 @@ public class formularioPruebaPeriodo extends Composite {
 					dateFecha.setValue(new Date(1407518124684L));
 				}
 				if(listTest.getSelectedIndex() != 0){
-				
 				if(bandera) {
-					loginService.Insertar_Test(empleado.id_empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+					loginService.Insertar_Test(empleado, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 							Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
 							Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
 							Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
@@ -283,7 +282,7 @@ public class formularioPruebaPeriodo extends Composite {
 
                  });
 		}else{
-			loginService.Actualizar_Test(empleado.id_empleado,id_prueba, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
+			loginService.Actualizar_Test(empleado,id_prueba, Integer.parseInt(listPregunta1.getItemText(listPregunta1.getSelectedIndex())), 
 					Integer.parseInt(listPregunta2.getItemText(listPregunta2.getSelectedIndex())), Integer.parseInt(listPregunta3.getItemText(listPregunta3.getSelectedIndex())), 
 					Integer.parseInt(listPregunta4.getItemText(listPregunta4.getSelectedIndex())), Integer.parseInt(listPregunta5.getItemText(listPregunta5.getSelectedIndex())), 
 					Integer.parseInt(listPregunta6.getItemText(listPregunta6.getSelectedIndex())), Integer.parseInt(listPregunta7.getItemText(listPregunta7.getSelectedIndex())), 
@@ -331,7 +330,7 @@ public class formularioPruebaPeriodo extends Composite {
 			}
 		});
 		
-				listTest.addItem("nada seleccionado");
+		listTest.addItem("nada seleccionado");
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
@@ -360,7 +359,7 @@ public class formularioPruebaPeriodo extends Composite {
 		btnCompartir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(!bandera){
-					MensajeCompartir(id_prueba);
+					MensajeCompartir(id_prueba,empleado);
 				}else{
                 	setMensaje("alert alert-error", 
                 			" \nAun no se ha guardo el formulario");
@@ -466,6 +465,7 @@ public class formularioPruebaPeriodo extends Composite {
 		lblPregunta10.setStyleName("label");
 		absolutePanel.add(lblPregunta10, 47, 879);
 		lblPregunta10.setSize("482px", "34px");
+		
 		for (AuxBDTest p : this.d.BDresult) {
 	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
 	    }
@@ -476,7 +476,7 @@ public class formularioPruebaPeriodo extends Composite {
 	}
 	
 	private void EliminarFormulario(){
-        d.EliminarFormulario(this,empleado.id_empleado,id_prueba);
+        d.EliminarFormulario(this,empleado,id_prueba);
 	}
 	
 	public  void LlenarDatos(Long id, String listPregunta1,
@@ -485,7 +485,6 @@ public class formularioPruebaPeriodo extends Composite {
 			String listPregunta6, String listPregunta7,
 			String listPregunta8, String listPregunta9,
 			String listPregunta10, String txtEvaluador,Long id_BDpuestos, Long dateFecha) {
-
 		this.id_prueba = id;
 		this.bandera = false;
 		this.id_BDprueba = id_BDpuestos;
@@ -493,12 +492,13 @@ public class formularioPruebaPeriodo extends Composite {
 		this.listTest.setVisible(false);
 		this.lblElijaLaEvaluacion.setVisible(false);
 		BuscarBDtest(id_BDpuestos);
-
+		
 		for(int i=0; i < this.listTest.getItemCount() && bandera; i++){
-			bandera = !this.listTest.getValue(i).equals(""+id_BDprueba);
+			bandera = !this.listTest.getValue(i).equals(""+id_BDpuestos);
 			this.listTest.setSelectedIndex(i);
 		}
-		
+
+		Window.alert(""+listTest.getSelectedIndex());
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
 			this.listPregunta1.setSelectedIndex(i);
@@ -617,11 +617,11 @@ public class formularioPruebaPeriodo extends Composite {
 	    }
 			
 	}
-	public void MensajeCompartir(Long idtest){
+	public void MensajeCompartir(Long idtest,Long idEmpleadoCompartido){
         final DialogBox Registro2 = new DialogBox();
         final HTML serverResponseLabel = new HTML();
         final Button close= new Button("x");
-        Compartir inicio = new Compartir(idtest);
+        Compartir inicio = new Compartir(idtest, idEmpleadoCompartido);
         VerticalPanel dialogVPanel = new VerticalPanel();
         dialogVPanel.add(serverResponseLabel );
         dialogVPanel.add(inicio);

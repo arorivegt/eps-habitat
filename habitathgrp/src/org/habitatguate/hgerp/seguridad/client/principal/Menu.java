@@ -1,16 +1,17 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
+import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
@@ -83,6 +84,28 @@ public class Menu extends Composite {
 	@UiHandler("empleado1")
 	void empleado1(ClickEvent event) {
 		Empleado_registrado();
+	}
+	
+	@UiHandler("empleado3")
+	void empleado3(ClickEvent event) {
+		final Compartidas comp = new Compartidas();
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, comp);
+        loginService.getEvaluacionesCompartidas(this.nuevo.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){
+        	
+        	public void onFailure(Throwable caught) 
+        	{
+        		Window.alert("No hay resultados "+caught);
+        	}
+
+        	@Override
+        	public void onSuccess(List<AuxTestCompartidos> result)
+        	{ 
+        		if(!result.isEmpty()){
+        			comp.agregar_formularios(result);
+        		}
+        	}
+        });
 	}
 	
 	@UiHandler("finan2a")

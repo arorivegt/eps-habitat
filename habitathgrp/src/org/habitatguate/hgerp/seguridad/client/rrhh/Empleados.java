@@ -104,14 +104,14 @@ public class Empleados extends Composite {
 		scrollPanel_6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_6, "Desempeño", true);
 		scrollPanel_6.setSize("100", "480px");
-		fpp = new  Desempeno(this);
+		fpp = new  Desempeno(id_empleado);
 		scrollPanel_6.setWidget(fpp);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_7, "Evaluacion", true);
 		scrollPanel_7.setSize("100", "480px");
-		fppd = new Evaluacion(this);
+		fppd = new Evaluacion(id_empleado);
 		scrollPanel_7.setWidget(fppd);
 		
 		ScrollPanel scrollPanel_8 = new ScrollPanel();
@@ -172,7 +172,8 @@ public class Empleados extends Composite {
 		scrollPanel_5.setSize("100", "480px");
 		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);
-		
+
+
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
 		scrollPanel_4.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
@@ -189,6 +190,29 @@ public class Empleados extends Composite {
 		scrollPanel_9.setWidget(fe);
 	}
 
+	public void EvaluacionesCompartidas()
+	{
+		ScrollPanel scrollPanel_6 = new ScrollPanel();
+		scrollPanel_6.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel_6, "Desempeño", true);
+		scrollPanel_6.setSize("100", "480px");
+		fpp = new  Desempeno(id_empleado);
+		fpp.btnAgregar.setVisible(false);
+		fpp.btnAgregar.setEnabled(false);
+		fpp.bandera = false;
+		scrollPanel_6.setWidget(fpp);
+		
+		ScrollPanel scrollPanel_7 = new ScrollPanel();
+		scrollPanel_7.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel_7, "Evaluacion", true);
+		scrollPanel_7.setSize("100", "480px");
+		fppd = new Evaluacion(id_empleado);
+		fppd.btnAgregar.setVisible(false);
+		fppd.btnAgregar.setEnabled(false);
+		fppd.bandera = false;
+		scrollPanel_7.setWidget(fppd);
+	}
+	
 	public void setA(List<AuxHistorialAcademico> results) {
 		a.agregarFormulario_lleno(results);
 	}

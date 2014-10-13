@@ -125,7 +125,7 @@ public class AuxEmpleado implements IsSerializable{
   	
   	private List <AuxSalario> salario= new ArrayList<AuxSalario>();
 
-    private List<Long> testCompartido = new ArrayList<Long>();
+    private List<AuxTestCompartidos> testCompartido = new ArrayList<AuxTestCompartidos>();
   	//datos del patrono
   	
   	private String centro_trabajo;
@@ -160,12 +160,12 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public List<Long> getTestCompartido() {
+	public List<AuxTestCompartidos> getTestCompartido() {
 		return testCompartido;
 	}
 
 
-	public void setTestCompartido(List<Long> testCompartido) {
+	public void setTestCompartido(List<AuxTestCompartidos> testCompartido) {
 		this.testCompartido = testCompartido;
 	}
 

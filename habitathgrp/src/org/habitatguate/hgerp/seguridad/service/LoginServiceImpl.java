@@ -36,6 +36,11 @@ import javax.jdo.Query;
 
 
 
+
+
+
+
+
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
@@ -50,6 +55,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
@@ -67,6 +73,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegSalario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegTest;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegVacaciones;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegTestCompartidos;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -1988,7 +1995,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		}
 
 		@Override
-		public String InsertarCompartido(String idEmpleado, Long idTest)
+		public String InsertarCompartido(String idEmpleado, Long idTest, Long idEmpleadoCompartido)
 				throws IllegalArgumentException 
 		{
 			
@@ -2000,21 +2007,25 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 			}catch(Exception t){
 				return idEmpleado+" \nno existe";
 			}
-			 try {
+			 
 				 
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, results.getId_empleado()); 
 				 
 				 int i = e.getTestCompartido().indexOf(idTest);
-				 if(i == -1){
+				 if(i != -1){
 					 valor = "la Evaluacion ya habia sido compartido con\n"+idEmpleado;
 				 }else
 				 {
-					 e.getTestCompartido().add(idTest);
+					 SegTestCompartidos valores = new SegTestCompartidos();
+					 valores.setIdTest(idTest);
+					 valores.setId_empleado(idEmpleadoCompartido);
+					 valores.setEmpleado(e);
+					 e.getTestCompartido().add(valores);
 					 valor = "Test compartido Exitosamente con\n con "+idEmpleado;
+				 
 				 }
-			}finally {  
 					 Persistencia.close();  
-			}
+			
 			 return valor ;
 		}
 
@@ -2136,6 +2147,59 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					 Persistencia.close();  
 			}
 			 return salarios ;
+		}
+
+		@Override
+		public List<AuxTestCompartidos> getEvaluacionesCompartidas(Long id)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			List<AuxTestCompartidos> res = new ArrayList<AuxTestCompartidos>();
+			 try { 
+					final SegEmpleado r = Persistencia.getObjectById(SegEmpleado.class,id);
+					
+					for(SegTestCompartidos seg: r.getTestCompartido()){
+						AuxTestCompartidos nuevo = new AuxTestCompartidos();
+						nuevo.setId(seg.getId_empleado().longValue());
+						nuevo.setId_empleado(seg.getId_empleado());
+						nuevo.setIdTest(seg.getIdTest());
+						res.add(nuevo);
+					}
+			}finally {  
+					 Persistencia.close();  
+			}
+			 return res ;
+		}
+
+		@Override
+		public AuxTest getTest(Long idTest, Long id)
+				throws IllegalArgumentException {final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+				
+				 AuxTest t = new AuxTest();
+					 try { 
+						 Key k = new KeyFactory
+							        .Builder(SegEmpleado.class.getSimpleName(), id)
+							        .addChild(SegTest.class.getSimpleName(), idTest)
+							        .getKey();
+						 final SegTest nuevo = Persistencia.getObjectById(SegTest.class, k); 
+						 	t.setId_test(nuevo.getId_test());
+						 	t.setPregunta1(nuevo.getPregunta1());
+						 	t.setPregunt2(nuevo.getPregunt2());
+						 	t.setPregunta3(nuevo.getPregunta3());
+						 	t.setPregunta4(nuevo.getPregunta4());
+						 	t.setPregunta5(nuevo.getPregunta5());
+						 	t.setPregunta6(nuevo.getPregunta6());
+						 	t.setPregunta7(nuevo.getPregunta7());
+						 	t.setPregunta8(nuevo.getPregunta8());
+						 	t.setPregunta9(nuevo.getPregunta9());
+						 	t.setPregunta10(nuevo.getPregunta10());
+						 	t.setFecha_test(nuevo.getFecha_test().getTime());
+						 	t.setTipo_test(nuevo.getTipo_test());
+						 	t.setBDtest(nuevo.getBDtest());
+						 	t.setEvaluador(nuevo.getEvaluador().toUpperCase());
+						 }finally {  
+							 Persistencia.close();  
+						 }
+					return t ;
 		}
 
 	}

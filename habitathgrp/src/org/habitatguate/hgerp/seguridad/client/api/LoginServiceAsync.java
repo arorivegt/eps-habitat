@@ -8,6 +8,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -54,8 +56,8 @@ public interface LoginServiceAsync {
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Salario(Long id_empleado,Date Fecha, float salario, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
-	void InsertarCompartido(String idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
-	void QuitarCompartido(Long idEmpleado,Long idTest, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void InsertarCompartido(String idEmpleado,Long idTest, Long idEmpleadoCompartido, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void QuitarCompartido(Long idEmpleado,Long idTeist, AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	void Insertar_BDTest(String nombreTest,String pregunta1, String pregunt2, String pregunta3, String pregunta4,
 			String pregunta5, String pregunta6, String pregunta7, String pregunta8,
@@ -177,9 +179,10 @@ public interface LoginServiceAsync {
 	    void BDPuesto(AsyncCallback<List<AuxBDPuesto>> callback)throws IllegalArgumentException;
 	    void BDTest(AsyncCallback<List<AuxBDTest>> callback)throws IllegalArgumentException;
 	    void getCorreos(AsyncCallback<List<String>> callback)throws IllegalArgumentException;
+	    void getEvaluacionesCompartidas(Long id,AsyncCallback<List<AuxTestCompartidos>> callback)throws IllegalArgumentException;
+	    void getTest(Long idTest,Long id,AsyncCallback<AuxTest> callback)throws IllegalArgumentException;
 	    void getSalarios(AsyncCallback<List<AuxSalario>> callback)throws IllegalArgumentException;
-	    void remove(String fileURL,
-	    		AsyncCallback<String> callback)throws IllegalArgumentException;
+	    void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;
 	    
 		
 

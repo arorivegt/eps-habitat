@@ -79,6 +79,7 @@ public class EmpleadoItem extends Composite {
 		Button button_2 = new Button("Send");
 		button_2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+				
 				BE.Empleado_registrado(id_empleado);
 			}
 		});

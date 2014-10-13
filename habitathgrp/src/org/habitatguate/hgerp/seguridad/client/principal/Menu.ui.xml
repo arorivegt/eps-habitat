@@ -150,7 +150,7 @@
         <ul>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh1"> 	Buscar Empleados</g:Label></a></li>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh2"> 	Base de Datos de Puestos</g:Label> </a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh6"> 	Crear preguntas para test</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh6"> 	Crear Formulario de Evaluacion</g:Label> </a></li>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh3">	Informe de Prestaciones</g:Label></a></li>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh4">	Informe del Ministerio de Trabajo</g:Label></a></li>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh5">	Informe de Empleados</g:Label></a></li>
@@ -199,7 +199,7 @@
         <ul>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado1"> 	Mi Perfil</g:Label></a></li>
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado2"> 	Cambiar Contraseña</g:Label> </a></li>
-            <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado3"> 	Cambiar Contraseña</g:Label> </a></li>
+            <li><a href="#"><g:Label styleName="menuestilo" ui:field="empleado3"> 	Evaluaciones Compartidas</g:Label> </a></li>
         </ul>
     </li>
 	</ul>

@@ -11,6 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -21,15 +22,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Evaluacion extends Composite  {
 
      private FlexTable flextable;
-     private Empleados empleado;
+     private Long empleado;
      private VerticalPanel panel = new VerticalPanel();
      private final LoginServiceAsync loginService = GWT.create(LoginService.class);
      private List<AuxTest> valor = new ArrayList<AuxTest>();
      public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
-     
-            public Evaluacion(Empleados e) {
+     public Button btnAgregar;
+     public boolean bandera = true;
+            public Evaluacion(Long e) {
 
                 this.empleado = e;
                 initWidget(panel);
@@ -47,7 +49,7 @@ public class Evaluacion extends Composite  {
                 btnTest.setText("Ver Test");
                 btnTest.setStyleName("sendButton");
                 btnTest.setSize("227px", "34px");
-                Button btnAgregar = new Button("Agregar");
+                btnAgregar = new Button("Agregar");
                 grid.setWidget(0, 2, btnAgregar);
                 
                 btnAgregar.setStyleName("sendButton");
@@ -66,6 +68,7 @@ public class Evaluacion extends Composite  {
             }
             
             public void agregarFormulario_lleno(AuxTest n){
+            	Window.alert("ingreso aqui");
                 flextable.clear();
                 if (!n.equals(null)) {
                 	formularioPruebaPeriodoDos  fa = new formularioPruebaPeriodoDos(this,empleado);
@@ -73,6 +76,11 @@ public class Evaluacion extends Composite  {
                                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
                                 flextable.setWidget(flextable.getRowCount(), 0,fa );
+                                if(bandera){
+                                	fa.botonesVisibles(true);
+                                }else{
+                                	fa.botonesVisibles(false);
+                                }
                 }           
             }
             
@@ -122,6 +130,7 @@ public class Evaluacion extends Composite  {
 
     				@Override
     				public void onSuccess(List<AuxBDTest> result) {
+    					System.out.println("___"+result.isEmpty());
     					if (!result.isEmpty()) {
     						for(AuxBDTest a: result )
     						{

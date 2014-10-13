@@ -28,7 +28,8 @@ public class Index implements EntryPoint {
         @Override
         public void onModuleLoad() 
         {
-            
+        	txtuser.setText("anibal@gmail.com");
+        	txtpass.setText("Aqwe123");
              	final DialogBox dialogBox = new DialogBox();
              
                 dialogBox.setText("Autenticacion");
@@ -113,12 +114,8 @@ public class Index implements EntryPoint {
                                         public void onSuccess(valores_sesion result)
                                         {
 
-                                            Panel inicio = new Panel();
-                                            inicio.setId_empleado(result.getId_empleado());
-                                            RootPanel.get().clear();
-                                            RootPanel.get().add(inicio);
                                                 //si la autentificacion es correcta limpia y contruye el menu
-                                              /*  if(result.isCorrecto())
+                                               if(result.isCorrecto())
                                                 {
                                                         Panel inicio = new Panel();
                                                         inicio.setId_empleado(result.getId_empleado());
@@ -153,7 +150,7 @@ public class Index implements EntryPoint {
                                             				Registro2.hide();
                                             			}
                                                     });
-                                                }*/
+                                                }
                                                                                 
                                         }
                                  });

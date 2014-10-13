@@ -21,16 +21,19 @@ import com.google.gwt.user.client.ui.Grid;
 public class Desempeno extends Composite  {
 
      private FlexTable flextable;
-     private Empleados empleado;
+     private Long empleado;
      private VerticalPanel panel = new VerticalPanel();
      private final LoginServiceAsync loginService = GWT.create(LoginService.class);
      private List<AuxTest> valor = new ArrayList<AuxTest>();
      public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
-            public Desempeno(Empleados e) {
+     public Button btnAgregar;
+     public boolean bandera = true;
+     
+            public Desempeno(Long e) {
 
-                        this.empleado = e;
+                this.empleado = e;
                 initWidget(panel);
                 panel.setSize("761px", "85px");
                 flextable = new FlexTable();
@@ -46,7 +49,7 @@ public class Desempeno extends Composite  {
                 btnTest.setText("Ver Test");
                 btnTest.setStyleName("sendButton");
                 btnTest.setSize("227px", "34px");
-                Button btnAgregar = new Button("Agregar");
+                btnAgregar = new Button("Agregar");
                 grid.setWidget(0, 2, btnAgregar);
                 
                 btnAgregar.setStyleName("sendButton");
@@ -72,6 +75,11 @@ public class Desempeno extends Composite  {
                                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
                                 flextable.setWidget(flextable.getRowCount(), 0,fa );
+                                if(bandera){
+                                	fa.botonesVisibles(true);
+                                }else{
+                                	fa.botonesVisibles(false);
+                                }
                 }           
             }
             
@@ -121,7 +129,6 @@ public class Desempeno extends Composite  {
 
     				@Override
     				public void onSuccess(List<AuxBDTest> result) {
-    					//System.out.println("___"+result.isEmpty());
     					if (!result.isEmpty()) {
     						for(AuxBDTest a: result )
     						{

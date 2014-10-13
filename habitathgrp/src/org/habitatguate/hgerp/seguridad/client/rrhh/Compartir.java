@@ -25,9 +25,11 @@ public class Compartir extends Composite{
         
        private final LoginServiceAsync loginService = GWT.create(LoginService.class);
        private Long idTes = 0L;
+       private Long idEmpleadoCompartido = 0L;
        final SuggestBox txtUser;
-        public Compartir(Long idTest) 
+        public Compartir(Long idTest, Long id) 
         {
+        	this.idEmpleadoCompartido = id;
         	this.idTes = idTest;
         	AbsolutePanel rootPanel = new AbsolutePanel();
         	rootPanel.setSize("299px", "199px");
@@ -46,7 +48,7 @@ public class Compartir extends Composite{
             Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
-            		 loginService.InsertarCompartido(txtUser.getText(),idTes,new AsyncCallback<String>()
+            		 loginService.InsertarCompartido(txtUser.getText(),idTes,idEmpleadoCompartido,new AsyncCallback<String>()
 					    {
 				            public void onFailure(Throwable caught) 
 				            {

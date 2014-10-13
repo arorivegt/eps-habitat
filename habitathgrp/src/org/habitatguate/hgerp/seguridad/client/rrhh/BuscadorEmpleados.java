@@ -39,7 +39,6 @@ public class BuscadorEmpleados extends Composite   {
     private  ListBox listEstado ;
     private Image Busqueda;
     private AbsolutePanel absolutePanel;
-    
 	public BuscadorEmpleados() {
 		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
@@ -242,12 +241,12 @@ public class BuscadorEmpleados extends Composite   {
 
 		grid.clearCell(1, 0);
 		final Empleados e = new Empleados(0);
+		e.id_empleado = id_empleado;
 		e.NuevasPestanas(); 
 		grid.setWidget(1, 0,e);
         e.setSize("1187px", "648px");
         
         loginService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
-        	
         	public void onFailure(Throwable caught) 
         	{
             	setMensaje("alert alert-information alert-block", 

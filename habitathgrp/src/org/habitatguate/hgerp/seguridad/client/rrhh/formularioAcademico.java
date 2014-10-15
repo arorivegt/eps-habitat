@@ -98,6 +98,10 @@ public class formularioAcademico extends Composite {
 		dateInicio.setValue(new Date(1407518124684L));
 		dateInicio.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateInicio.getDatePicker().setYearArrowsVisible(true);
+		dateInicio.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateInicio.getDatePicker().setVisibleYearCount(100);
+        
 		dateInicio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateInicio, 10, 107);
 		dateInicio.setSize("227px", "34px");
@@ -106,6 +110,9 @@ public class formularioAcademico extends Composite {
 		dateFinal.setValue(new Date(1407518566816L));
 		dateFinal.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFinal.getDatePicker().setYearArrowsVisible(true);
+		dateFinal.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFinal.getDatePicker().setVisibleYearCount(100);
 		dateFinal.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFinal, 274, 107);
 		dateFinal.setSize("227px", "34px");

@@ -3,11 +3,13 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.LoginService;
 import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -21,9 +23,6 @@ import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 
 public class Registro extends Composite{
         
@@ -100,57 +99,57 @@ public class Registro extends Composite{
             Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
-            		//validar correo         	
-            		
-                    String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
-                    String pass = "[A-Z][A-Za-z0-9]+{10}";
-                    String  MensajeError = "";
-                    boolean err = false;
-                    boolean valid = false;
-                    boolean valid2 = false;
-                    if(txtUser.getClass().toString().equals(String.class.toString())) {
-                            valid = ((String)txtUser.getText()).matches(emailPattern);
-                    } else {
-                            valid = ((Object)txtUser.getText()).toString().matches(emailPattern);
-                    }
+//            		//validar correo         	
+//            		
+//                    String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
+//                    String pass = "[A-Z][A-Za-z0-9]+{10}";
+//                    String  MensajeError = "";
+//                    boolean err = false;
+//                    boolean valid = false;
+//                    boolean valid2 = false;
+//                    if(txtUser.getClass().toString().equals(String.class.toString())) {
+//                            valid = ((String)txtUser.getText()).matches(emailPattern);
+//                    } else {
+//                            valid = ((Object)txtUser.getText()).toString().matches(emailPattern);
+//                    }
+//                    
+//                    if(txtPass.getClass().toString().equals(String.class.toString())) {
+//                        valid2 = ((String)txtPass.getText()).matches(pass);
+//	                } else {
+//	                     valid2 = ((Object)txtPass.getText()).toString().matches(pass);
+//	                }
+//                    
+//                    if(!valid){
+//                    	MensajeError = "\nEmail no valido";
+//                    	err = true;
+//                    }
+//                    if(!valid2){
+//                    	MensajeError = "\nContraseña debe  Iniciar con:"
+//                    			+ "\n Mayuscula, seguido de letras o numero"
+//                    			+ "\n y debe tener un tamaño de 10";
+//                    	err = true;
+//                    }
+//                    if(txtNombre.getText().equals("")){
+//                    	MensajeError = "\nNombre no debe estar vacio";
+//                    	err = true;
+//                    }if(txtApellido.getText().equals("")){
+//                    	MensajeError = "\nApellido no debe estar vacio";
+//                    	err = true;
+//                    	
+//                    }if(!txtPass.getText().equals(txtRepitaPassword.getText())){
+//                    	MensajeError = "\nContraseña  no son iguales";
+//                    	err = true;
+//                    }
+//                    
+//                    try{
+//    					new Date(dateBox.getValue().getTime());
+//    				}catch(Exception e){
+//                    	MensajeError = "\nFecha Nacimiento no valida";
+//    					err = true;
+//    				}
                     
-                    if(txtPass.getClass().toString().equals(String.class.toString())) {
-                        valid2 = ((String)txtPass.getText()).matches(pass);
-	                } else {
-	                     valid2 = ((Object)txtPass.getText()).toString().matches(pass);
-	                }
-                    
-                    if(!valid){
-                    	MensajeError = "\nEmail no valido";
-                    	err = true;
-                    }
-                    if(!valid2){
-                    	MensajeError = "\nContraseña debe  Iniciar con:"
-                    			+ "\n Mayuscula, seguido de letras o numero"
-                    			+ "\n y debe tener un tamaño de 10";
-                    	err = true;
-                    }
-                    if(txtNombre.getText().equals("")){
-                    	MensajeError = "\nNombre no debe estar vacio";
-                    	err = true;
-                    }if(txtApellido.getText().equals("")){
-                    	MensajeError = "\nApellido no debe estar vacio";
-                    	err = true;
-                    	
-                    }if(!txtPass.getText().equals(txtRepitaPassword.getText())){
-                    	MensajeError = "\nContraseña  no son iguales";
-                    	err = true;
-                    }
-                    
-                    try{
-    					new Date(dateBox.getValue().getTime());
-    				}catch(Exception e){
-                    	MensajeError = "\nFecha Nacimiento no valida";
-    					err = true;
-    				}
-                    
-                    if(err){
-                    	setMensaje("alert alert-error", MensajeError);
+                    if(false){
+                    	//setMensaje("alert alert-error", MensajeError);
                     }else{
                     	loginService.Registro(txtUser.getText(),md5(txtPass.getText()),txtNombre.getText(), txtApellido.getText(),dateBox.getValue(),
                     			new AsyncCallback<String>() 

@@ -247,6 +247,9 @@ public class formularioPruebaPeriodoDos extends Composite {
 		dateFecha.setValue(new Date(1407518962255L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha.getDatePicker().setYearArrowsVisible(true);
+		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 284, 939);
 		dateFecha.setSize("198px", "34px");

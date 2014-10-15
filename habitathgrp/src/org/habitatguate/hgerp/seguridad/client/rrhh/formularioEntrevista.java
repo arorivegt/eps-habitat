@@ -255,6 +255,9 @@ public class formularioEntrevista extends Composite {
 		dateFecha.setValue(new Date(1407518819070L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFecha.getDatePicker().setYearArrowsVisible(true);
+		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 250, 939);
 		dateFecha.setSize("222px", "34px");

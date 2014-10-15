@@ -52,6 +52,9 @@ public class formularioBDPuestos extends Composite {
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha.getDatePicker().setYearArrowsVisible(true);
+		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 10, 89);
 		dateFecha.setSize("227px", "34px");

@@ -94,6 +94,9 @@ public class formularioReferenciaLaboral extends Composite {
 		dateFecha1.setValue(new Date(1407519069711L));
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha1.getDatePicker().setYearArrowsVisible(true);
+		dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha1.getDatePicker().setVisibleYearCount(100);
 		dateFecha1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha1, 750, 19);
 		dateFecha1.setSize("227px", "34px");
@@ -102,6 +105,9 @@ public class formularioReferenciaLaboral extends Composite {
 		dateFecha2.setValue(new Date(1407519076388L));
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha2.getDatePicker().setYearArrowsVisible(true);
+		dateFecha2.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha2.getDatePicker().setVisibleYearCount(100);
 		dateFecha2.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha2, 1044, 19);
 		dateFecha2.setSize("227px", "34px");

@@ -577,6 +577,9 @@ public class formularioDatos extends Composite {
 		dateAnnioNacimiento.setValue(new Date(1407518707105L));
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateAnnioNacimiento.getDatePicker().setYearArrowsVisible(true);
+		dateAnnioNacimiento.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateAnnioNacimiento.getDatePicker().setVisibleYearCount(100);
 		dateAnnioNacimiento.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(dateAnnioNacimiento, 588, 680);
 		dateAnnioNacimiento.setSize("228px", "41px");
@@ -796,6 +799,9 @@ public class formularioDatos extends Composite {
 		dateFechaIngreso.setValue(new Date(1407518751219L));
 		dateFechaIngreso.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFechaIngreso.getDatePicker().setYearArrowsVisible(true);
+		dateFechaIngreso.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFechaIngreso.getDatePicker().setVisibleYearCount(100);
 		dateFechaIngreso.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(dateFechaIngreso, 588, 1102);
 		dateFechaIngreso.setSize("228px", "35px");

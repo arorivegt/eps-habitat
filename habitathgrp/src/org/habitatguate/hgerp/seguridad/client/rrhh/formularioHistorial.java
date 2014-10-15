@@ -48,6 +48,9 @@ public class formularioHistorial extends Composite {
 		dateFecha.setValue(new Date(1407518904795L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha.getDatePicker().setYearArrowsVisible(true);
+		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFecha, 10, 29);
 		dateFecha.setSize("227px", "34px");

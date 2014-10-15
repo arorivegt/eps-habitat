@@ -16,6 +16,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 	private CellTable<DatosMinisterioTrabajo> cellTable;
 	private List<DatosMinisterioTrabajo> DATOS = new ArrayList<DatosMinisterioTrabajo>();
 	private  VerticalPanel vp ;
+	
 	public ReporteMinisterioTrabajo(List<DatosMinisterioTrabajo> DATOS2) {
 
 	    vp = new VerticalPanel();

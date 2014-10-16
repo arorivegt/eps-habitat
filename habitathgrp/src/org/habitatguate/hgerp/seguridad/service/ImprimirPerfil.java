@@ -34,7 +34,7 @@ public class ImprimirPerfil extends HttpServlet {
     private AuxEmpleado p = new AuxEmpleado();
    private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.NORMAL,BaseColor.BLACK);
    private Font catFont2 = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD,BaseColor.BLACK);
-    private LoginServiceImpl loginService = new  LoginServiceImpl();
+    private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
     
 	//invoked from doGet method to create PDF through servlet 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

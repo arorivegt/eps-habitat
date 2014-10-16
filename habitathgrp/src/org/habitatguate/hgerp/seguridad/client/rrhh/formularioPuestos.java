@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -33,7 +33,7 @@ public class formularioPuestos extends Composite {
 	private Empleados empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private DateBox dateFecha;
     private ListBox listActivo;

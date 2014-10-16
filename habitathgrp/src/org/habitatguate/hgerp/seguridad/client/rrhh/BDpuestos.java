@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 
 import com.google.gwt.core.client.GWT;
@@ -23,7 +23,7 @@ public class BDpuestos extends Composite  {
      private BDpuestos a;
 	 private FlexTable flextable;
      private VerticalPanel panel = new VerticalPanel();
-     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
      

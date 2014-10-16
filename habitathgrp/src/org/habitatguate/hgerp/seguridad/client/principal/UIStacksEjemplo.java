@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Parametro_Inv;
@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class UIStacksEjemplo extends ResizeComposite {
 	 private Panel nuevo;
 	 private static UiStackEjemploUiBinder uiBinder = GWT.create(UiStackEjemploUiBinder.class);
-	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 @UiField Label label_1;
 
    public UIStacksEjemplo(Panel nuevo) {

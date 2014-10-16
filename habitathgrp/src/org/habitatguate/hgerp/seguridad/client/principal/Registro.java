@@ -4,8 +4,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,7 +27,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 public class Registro extends Composite{
         
         
-       private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         public Registro() 
         {

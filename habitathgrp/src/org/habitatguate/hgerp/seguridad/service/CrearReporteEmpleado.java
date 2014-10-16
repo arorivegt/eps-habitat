@@ -44,7 +44,7 @@ public class CrearReporteEmpleado extends HttpServlet {
     private List<AuxEmpleado> empl = new ArrayList<AuxEmpleado>();
     private Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL, BaseColor.BLUE);
     private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
-    private LoginServiceImpl loginService = new  LoginServiceImpl();
+    private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
 	//invoked from doGet method to create PDF through servlet 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

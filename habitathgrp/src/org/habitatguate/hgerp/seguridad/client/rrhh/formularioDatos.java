@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -41,9 +41,8 @@ public class formularioDatos extends Composite {
 	private Empleados empleado;
 	private Long id_empleado = 0L;
 	private boolean bandera = true;
-	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private Label label_16 ;
     private Label label_17;
@@ -75,7 +74,6 @@ public class formularioDatos extends Composite {
     private ListBox listPais;
     private ListBox listNoDependientes ;
     private TextBox txtTipoPasaporte ;
-    private ListBox listCedulaMunicipio;
     private TextBox txtDireccion ;
     private ListBox listDireccionMunicipio;
     private TextBox txtCorreoElectronico;
@@ -88,8 +86,11 @@ public class formularioDatos extends Composite {
     private TextBox txtTipoPlanilla ;
     private ListBox listLicencia ;
     private DateBox dateFechaIngreso;
-    private IntegerBox txtRegistro ;
-    private TextBox txtNoOrden ;
+    
+    private IntegerBox noCuenta ;
+    private ListBox tipoCuenta ;
+    private ListBox nombreBanco ;
+    
     private IntegerBox txtDPI;
     private IntegerBox txtTelefonoCasa;
     private IntegerBox txtTelefonoCelular ;
@@ -99,7 +100,6 @@ public class formularioDatos extends Composite {
     private TextBox txtSalarioBase ;
     private TextBox txtBonificacion ;
     private TextBox txtTotal ;
-    private ListBox listCedulaDepartamento ;
     private ListBox listDireccionDepartamento ;
     private ListBox listIVS;
 
@@ -119,32 +119,38 @@ public class formularioDatos extends Composite {
     private Button btnExportarDatos;
     
 	public formularioDatos(Empleados e,final int tipo) {
+		
 		this.empleado = e;
 		this.setTipo(tipo);
+		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
-		initWidget(absolutePanel);
 		absolutePanel.setSize("997px", "1337px");
+		initWidget(absolutePanel);
+		
 		getFormUrl();
+		absolutePanel.add(getFormPanel(), 591, 109);
+		
 		image = new Image("images/imagenempresa.png");
-		absolutePanel.add(image, 341, 10);
 		image.setSize("167px", "158px");
+		absolutePanel.add(image, 341, 10);
 		
 		listEstado = new ListBox();
-		listEstado.addItem("empleado activo");
-		listEstado.addItem("empleado inactivo");
-		listEstado.addItem("posible empleado");
+		listEstado.addItem("empleado activo","0");
+		listEstado.addItem("empleado inactivo","1");
+		listEstado.addItem("posible empleado","2");
+		listEstado.addItem("practicante","3");
+		listEstado.addItem("interino","4");
 		listEstado.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listEstado, 36, 163);
 		listEstado.setSize("230px", "36px");
+		absolutePanel.add(listEstado, 36, 163);
 		
-		absolutePanel.add(getFormPanel(), 591, 109);
 		
 		txtNo_iggs = new IntegerBox();
 		txtNo_iggs.setText("0");
 		txtNo_iggs.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtNo_iggs, 36, 239);
 		txtNo_iggs.setSize("227px", "34px");
+		absolutePanel.add(txtNo_iggs, 36, 239);
 		
 		listEstadoCivil = new ListBox();
 		listEstadoCivil.addItem("Soltero(a)","0");
@@ -152,27 +158,27 @@ public class formularioDatos extends Composite {
 		listEstadoCivil.addItem("Viudo(a)","2");
 		listEstadoCivil.addItem("Divorciado(a)","3");
 		listEstadoCivil.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listEstadoCivil, 319, 239);
 		listEstadoCivil.setSize("230px", "36px");
+		absolutePanel.add(listEstadoCivil, 319, 239);
 		
 		listSexo = new ListBox();
-		listSexo.addItem("femenino");
-		listSexo.addItem("masculino");
+		listSexo.addItem("femenino","0");
+		listSexo.addItem("masculino","1");
 		listSexo.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listSexo, 591, 239);
 		listSexo.setSize("227px", "34px");
+		absolutePanel.add(listSexo, 591, 239);
 		
 		txtPrimerApellido = new TextBox();
 		txtPrimerApellido.setMaxLength(50);
 		txtPrimerApellido.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtPrimerApellido, 36, 312);
 		txtPrimerApellido.setSize("227px", "34px");
+		absolutePanel.add(txtPrimerApellido, 36, 312);
 		
 		txtSegundoApellido = new TextBox();
 		txtSegundoApellido.setMaxLength(50);
 		txtSegundoApellido.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtSegundoApellido, 317, 312);
 		txtSegundoApellido.setSize("227px", "34px");
+		absolutePanel.add(txtSegundoApellido, 317, 312);
 		
 		txtApellidoCasada = new TextBox();
 		txtApellidoCasada.setMaxLength(50);
@@ -183,226 +189,226 @@ public class formularioDatos extends Composite {
 		txtPrimerNombre = new TextBox();
 		txtPrimerNombre.setMaxLength(50);
 		txtPrimerNombre.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtPrimerNombre, 37, 383);
 		txtPrimerNombre.setSize("227px", "34px");
+		absolutePanel.add(txtPrimerNombre, 37, 383);
 		
 		txtSegundoNombre = new TextBox();
 		txtSegundoNombre.setMaxLength(50);
 		txtSegundoNombre.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtSegundoNombre, 318, 383);
 		txtSegundoNombre.setSize("227px", "34px");
+		absolutePanel.add(txtSegundoNombre, 318, 383);
 		
 		listPais = new ListBox();
-		listPais.addItem("Afganistan");
-		listPais.addItem("Albania");
-		listPais.addItem("Alemania");
-		listPais.addItem("Andorra");
-		listPais.addItem("Angola");
-		listPais.addItem("Antigua y Barbuda");
-		listPais.addItem("Arabia Saudita");
-		listPais.addItem("Argelia");
-		listPais.addItem("Argentina");
-		listPais.addItem("Armenia");
-		listPais.addItem("Australia");
-		listPais.addItem("Austria");
-		listPais.addItem("Azerbaiyan");
-		listPais.addItem("Bahamas");
-		listPais.addItem("Banglades");
-		listPais.addItem("Barbados");
-		listPais.addItem("Barein");
-		listPais.addItem("Belgica");
-		listPais.addItem("Belice");
-		listPais.addItem("Benin");
-		listPais.addItem("Bielorrusia");
-		listPais.addItem("Birmania");
-		listPais.addItem("Bolivia");
-		listPais.addItem("Bosnia y Herzegovina");
-		listPais.addItem("Botsuana");
-		listPais.addItem("Brasil");
-		listPais.addItem("Brunei");
-		listPais.addItem("Bulgaria");
-		listPais.addItem("Burkina Faso");
-		listPais.addItem("Burundi");
-		listPais.addItem("Butan");
-		listPais.addItem("Cabo Verde");
-		listPais.addItem("Camboya");
-		listPais.addItem("Camerun");
-		listPais.addItem("Canada");
-		listPais.addItem("Catar");
-		listPais.addItem("Chad");
-		listPais.addItem("Chile");
-		listPais.addItem("China");
-		listPais.addItem("Chipre");
-		listPais.addItem("Ciudad del Vaticano");
-		listPais.addItem("Colombia");
-		listPais.addItem("Comoras");
-		listPais.addItem("Corea del Norte");
-		listPais.addItem("Corea del Sur");
-		listPais.addItem("Costa de Marfil");
-		listPais.addItem("Costa Rica");
-		listPais.addItem("Croacia");
-		listPais.addItem("Cuba");
-		listPais.addItem("Dinamarca");
-		listPais.addItem("Dominica");
-		listPais.addItem("Ecuador");
-		listPais.addItem("Egipto");
-		listPais.addItem("El Salvador");
-		listPais.addItem("Emiratos arabes Unidos");
-		listPais.addItem("Eritrea");
-		listPais.addItem("Eslovaquia");
-		listPais.addItem("Eslovenia");
-		listPais.addItem("España");
-		listPais.addItem("Estados Unidos");
-		listPais.addItem("Estonia");
-		listPais.addItem("Etiopia");
-		listPais.addItem("Filipinas");
-		listPais.addItem("Finlandia");
-		listPais.addItem("Fiyi");
-		listPais.addItem("Francia");
-		listPais.addItem("Gabon");
-		listPais.addItem("Gambia");
-		listPais.addItem("Georgia");
-		listPais.addItem("Ghana");
-		listPais.addItem("Granada");
-		listPais.addItem("Grecia");
-		listPais.addItem("Guatemala");
-		listPais.addItem("Guyana");
-		listPais.addItem("Guinea");
-		listPais.addItem("Guinea ecuatorial");
-		listPais.addItem("Guinea-Bisau");
-		listPais.addItem("Haiti");
-		listPais.addItem("Honduras");
-		listPais.addItem("Hungria");
-		listPais.addItem("India");
-		listPais.addItem("Indonesia");
-		listPais.addItem("Irak");
-		listPais.addItem("Iran");
-		listPais.addItem("Irlanda");
-		listPais.addItem("Islandia");
-		listPais.addItem("Islas Marshall");
-		listPais.addItem("Islas Salomon");
-		listPais.addItem("Israel");
-		listPais.addItem("Italia");
-		listPais.addItem("Jamaica");
-		listPais.addItem("Japon");
-		listPais.addItem("Jordania");
-		listPais.addItem("Kazajistan");
-		listPais.addItem("Kenia");
-		listPais.addItem("Kirguistan");
-		listPais.addItem("Kiribati");
-		listPais.addItem("Kuwait");
-		listPais.addItem("Laos");
-		listPais.addItem("Lesoto");
-		listPais.addItem("Letonia");
-		listPais.addItem("Libano");
-		listPais.addItem("Liberia");
-		listPais.addItem("Libia");
-		listPais.addItem("Liechtenstein");
-		listPais.addItem("Lituania");
-		listPais.addItem("Luxemburgo");
-		listPais.addItem("Madagascar");
-		listPais.addItem("Malasia");
-		listPais.addItem("Malaui");
-		listPais.addItem("Maldivas");
-		listPais.addItem("Mali");
-		listPais.addItem("Malta");
-		listPais.addItem("Marruecos");
-		listPais.addItem("Mauricio");
-		listPais.addItem("Mauritania");
-		listPais.addItem("Mexico");
-		listPais.addItem("Micronesia");
-		listPais.addItem("Moldavia");
-		listPais.addItem("Monaco");
-		listPais.addItem("Mongolia");
-		listPais.addItem("Montenegro");
-		listPais.addItem("Mozambique");
-		listPais.addItem("Namibia");
-		listPais.addItem("Nauru");
-		listPais.addItem("Nepal");
-		listPais.addItem("Nicaragua");
-		listPais.addItem("Niger");
-		listPais.addItem("Nigeria");
-		listPais.addItem("Noruega");
-		listPais.addItem("Nueva Zelanda");
-		listPais.addItem("Oman");
-		listPais.addItem("Paises Bajos");
-		listPais.addItem("Pakistan");
-		listPais.addItem("Palaos");
-		listPais.addItem("Panama");
-		listPais.addItem("Papua Nueva Guinea");
-		listPais.addItem("Paraguay");
-		listPais.addItem("Peru");
-		listPais.addItem("Polonia");
-		listPais.addItem("Portugal");
-		listPais.addItem("Reino Unido");
-		listPais.addItem("Republica Centroafricana");
-		listPais.addItem("Republica Checa");
-		listPais.addItem("Republica de Macedonia");
-		listPais.addItem("Republica del Congo");
-		listPais.addItem("Republica Democratica del Congo");
-		listPais.addItem("Republica Dominicana");
-		listPais.addItem("Republica Sudafricana");
-		listPais.addItem("Ruanda");
-		listPais.addItem("Rumania");
-		listPais.addItem("Rusia");
-		listPais.addItem("Samoa");
-		listPais.addItem("San Cristobal y Nieves");
-		listPais.addItem("San Marino");
-		listPais.addItem("San Vicente y las Granadinas");
-		listPais.addItem("Santa Lucia");
-		listPais.addItem("Santo Tome y Principe");
-		listPais.addItem("Senegal");
-		listPais.addItem("Serbia");
-		listPais.addItem("Seychelles");
-		listPais.addItem("Sierra Leona");
-		listPais.addItem("Singapur");
-		listPais.addItem("Siria");
-		listPais.addItem("Somalia");
-		listPais.addItem("Sri Lanka");
-		listPais.addItem("Suazilandia");
-		listPais.addItem("Sudan");
-		listPais.addItem("Sudan del Sur");
-		listPais.addItem("Suecia");
-		listPais.addItem("Suiza");
-		listPais.addItem("Surinam");
-		listPais.addItem("Tailandia");
-		listPais.addItem("Tanzania");
-		listPais.addItem("Tayikistan");
-		listPais.addItem("Timor Oriental");
-		listPais.addItem("Togo");
-		listPais.addItem("Tonga");
-		listPais.addItem("Trinidad y Tobago");
-		listPais.addItem("Tunez");
-		listPais.addItem("Turkmenistan");
-		listPais.addItem("Turquia");
-		listPais.addItem("Tuvalu");
-		listPais.addItem("Ucrania");
-		listPais.addItem("Uganda");
-		listPais.addItem("Uruguay");
-		listPais.addItem("Uzbekistan");
-		listPais.addItem("Vanuatu");
-		listPais.addItem("Venezuela");
-		listPais.addItem("Vietnam");
-		listPais.addItem("Yemen");
-		listPais.addItem("Yibuti");
-		listPais.addItem("Zambia");
-		listPais.addItem("Zimbabue");
+		listPais.addItem("Afganistan","1");
+		listPais.addItem("Albania","2");
+		listPais.addItem("Alemania","3");
+		listPais.addItem("Andorra","4");
+		listPais.addItem("Angola","5");
+		listPais.addItem("Antigua y Barbuda","6");
+		listPais.addItem("Arabia Saudita","7");
+		listPais.addItem("Argelia","8");
+		listPais.addItem("Argentina","9");
+		listPais.addItem("Armenia","10");
+		listPais.addItem("Australia","11");
+		listPais.addItem("Austria","12");
+		listPais.addItem("Azerbaiyan","13");
+		listPais.addItem("Bahamas","14");
+		listPais.addItem("Banglades","15");
+		listPais.addItem("Barbados","16");
+		listPais.addItem("Barein","17");
+		listPais.addItem("Belgica","18");
+		listPais.addItem("Belice","19");
+		listPais.addItem("Benin","20");
+		listPais.addItem("Bielorrusia","21");
+		listPais.addItem("Birmania","22");
+		listPais.addItem("Bolivia","23");
+		listPais.addItem("Bosnia y Herzegovina","24");
+		listPais.addItem("Botsuana","25");
+		listPais.addItem("Brasil","26");
+		listPais.addItem("Brunei","27");
+		listPais.addItem("Bulgaria","28");
+		listPais.addItem("Burkina Faso","29");
+		listPais.addItem("Burundi","30");
+		listPais.addItem("Butan","31");
+		listPais.addItem("Cabo Verde","32");
+		listPais.addItem("Camboya","33");
+		listPais.addItem("Camerun","34");
+		listPais.addItem("Canada","35");
+		listPais.addItem("Catar","36");
+		listPais.addItem("Chad","37");
+		listPais.addItem("Chile","38");
+		listPais.addItem("China","39");
+		listPais.addItem("Chipre","40");
+		listPais.addItem("Ciudad del Vaticano","41");
+		listPais.addItem("Colombia","42");
+		listPais.addItem("Comoras","43");
+		listPais.addItem("Corea del Norte","44");
+		listPais.addItem("Corea del Sur","45");
+		listPais.addItem("Costa de Marfil","46");
+		listPais.addItem("Costa Rica","47");
+		listPais.addItem("Croacia","48");
+		listPais.addItem("Cuba","49");
+		listPais.addItem("Dinamarca","50");
+		listPais.addItem("Dominica","51");
+		listPais.addItem("Ecuador","52");
+		listPais.addItem("Egipto","53");
+		listPais.addItem("El Salvador","54");
+		listPais.addItem("Emiratos arabes Unidos","55");
+		listPais.addItem("Eritrea","56");
+		listPais.addItem("Eslovaquia","57");
+		listPais.addItem("Eslovenia","58");
+		listPais.addItem("España","59");
+		listPais.addItem("Estados Unidos","60");
+		listPais.addItem("Estonia","61");
+		listPais.addItem("Etiopia","62");
+		listPais.addItem("Filipinas","63");
+		listPais.addItem("Finlandia","64");
+		listPais.addItem("Fiyi","65");
+		listPais.addItem("Francia","66");
+		listPais.addItem("Gabon","67");
+		listPais.addItem("Gambia","68");
+		listPais.addItem("Georgia","69");
+		listPais.addItem("Ghana","70");
+		listPais.addItem("Granada","71");
+		listPais.addItem("Grecia","72");
+		listPais.addItem("Guatemala","73");
+		listPais.addItem("Guyana","74");
+		listPais.addItem("Guinea","75");
+		listPais.addItem("Guinea ecuatorial","76");
+		listPais.addItem("Guinea-Bisau","77");
+		listPais.addItem("Haiti","78");
+		listPais.addItem("Honduras","79");
+		listPais.addItem("Hungria","80");
+		listPais.addItem("India","81");
+		listPais.addItem("Indonesia","82");
+		listPais.addItem("Irak","83");
+		listPais.addItem("Iran","84");
+		listPais.addItem("Irlanda","85");
+		listPais.addItem("Islandia","86");
+		listPais.addItem("Islas Marshall","87");
+		listPais.addItem("Islas Salomon","88");
+		listPais.addItem("Israel","90");
+		listPais.addItem("Italia","91");
+		listPais.addItem("Jamaica","92");
+		listPais.addItem("Japon","93");
+		listPais.addItem("Jordania","94");
+		listPais.addItem("Kazajistan","95");
+		listPais.addItem("Kenia","96");
+		listPais.addItem("Kirguistan","97");
+		listPais.addItem("Kiribati","98");
+		listPais.addItem("Kuwait","100");
+		listPais.addItem("Laos","101");
+		listPais.addItem("Lesoto","102");
+		listPais.addItem("Letonia","103");
+		listPais.addItem("Libano","104");
+		listPais.addItem("Liberia","105");
+		listPais.addItem("Libia","106");
+		listPais.addItem("Liechtenstein","107");
+		listPais.addItem("Lituania","108");
+		listPais.addItem("Luxemburgo","109");
+		listPais.addItem("Madagascar","110");
+		listPais.addItem("Malasia","111");
+		listPais.addItem("Malaui","112");
+		listPais.addItem("Maldivas","113");
+		listPais.addItem("Mali","114");
+		listPais.addItem("Malta","115");
+		listPais.addItem("Marruecos","116");
+		listPais.addItem("Mauricio","117");
+		listPais.addItem("Mauritania","118");
+		listPais.addItem("Mexico","119");
+		listPais.addItem("Micronesia","120");
+		listPais.addItem("Moldavia","121");
+		listPais.addItem("Monaco","122");
+		listPais.addItem("Mongolia","123");
+		listPais.addItem("Montenegro","124");
+		listPais.addItem("Mozambique","125");
+		listPais.addItem("Namibia","126");
+		listPais.addItem("Nauru","127");
+		listPais.addItem("Nepal","128");
+		listPais.addItem("Nicaragua","129");
+		listPais.addItem("Niger","130");
+		listPais.addItem("Nigeria","131");
+		listPais.addItem("Noruega","132");
+		listPais.addItem("Nueva Zelanda","133");
+		listPais.addItem("Oman","134");
+		listPais.addItem("Paises Bajos","135");
+		listPais.addItem("Pakistan","136");
+		listPais.addItem("Palaos","137");
+		listPais.addItem("Panama","138");
+		listPais.addItem("Papua Nueva Guinea","139");
+		listPais.addItem("Paraguay","140");
+		listPais.addItem("Peru","141");
+		listPais.addItem("Polonia","142");
+		listPais.addItem("Portugal","143");
+		listPais.addItem("Reino Unido","144");
+		listPais.addItem("Republica Centroafricana","145");
+		listPais.addItem("Republica Checa","146");
+		listPais.addItem("Republica de Macedonia","147");
+		listPais.addItem("Republica del Congo","148");
+		listPais.addItem("Republica Democratica del Congo","150");
+		listPais.addItem("Republica Dominicana","151");
+		listPais.addItem("Republica Sudafricana","152");
+		listPais.addItem("Ruanda","153");
+		listPais.addItem("Rumania","154");
+		listPais.addItem("Rusia","155");
+		listPais.addItem("Samoa","156");
+		listPais.addItem("San Cristobal y Nieves","157");
+		listPais.addItem("San Marino","158");
+		listPais.addItem("San Vicente y las Granadinas","159");
+		listPais.addItem("Santa Lucia","160");
+		listPais.addItem("Santo Tome y Principe","161");
+		listPais.addItem("Senegal","162");
+		listPais.addItem("Serbia","163");
+		listPais.addItem("Seychelles","164");
+		listPais.addItem("Sierra Leona","165");
+		listPais.addItem("Singapur","166");
+		listPais.addItem("Siria","167");
+		listPais.addItem("Somalia","168");
+		listPais.addItem("Sri Lanka","169");
+		listPais.addItem("Suazilandia","170");
+		listPais.addItem("Sudan","171");
+		listPais.addItem("Sudan del Sur","172");
+		listPais.addItem("Suecia","173");
+		listPais.addItem("Suiza","174");
+		listPais.addItem("Surinam","175");
+		listPais.addItem("Tailandia","176");
+		listPais.addItem("Tanzania","177");
+		listPais.addItem("Tayikistan","178");
+		listPais.addItem("Timor Oriental","179");
+		listPais.addItem("Togo","180");
+		listPais.addItem("Tonga","181");
+		listPais.addItem("Trinidad y Tobago","182");
+		listPais.addItem("Tunez","183");
+		listPais.addItem("Turkmenistan","184");
+		listPais.addItem("Turquia","185");
+		listPais.addItem("Tuvalu","186");
+		listPais.addItem("Ucrania","187");
+		listPais.addItem("Uganda","188");
+		listPais.addItem("Uruguay","189");
+		listPais.addItem("Uzbekistan","190");
+		listPais.addItem("Vanuatu","191");
+		listPais.addItem("Venezuela","192");
+		listPais.addItem("Vietnam","193");
+		listPais.addItem("Yemen","194");
+		listPais.addItem("Yibuti","195");
+		listPais.addItem("Zambia","196");
+		listPais.addItem("Zimbabue","197");
 		listPais.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listPais, 590, 383);
 		listPais.setSize("230px", "36px");
+		absolutePanel.add(listPais, 590, 383);
 		
 		listIVS = new ListBox();
-		listIVS.addItem("Con IVS");
-		listIVS.addItem("Sin IVS");
+		listIVS.addItem("Con IVS","0");
+		listIVS.addItem("Sin IVS","1");
 		listIVS.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listIVS, 34, 467);
 		listIVS.setSize("230px", "36px");
+		absolutePanel.add(listIVS, 34, 467);
 		
 		txtNit = new TextBox();
 		txtNit.setStyleName("gwt-PasswordTextBox");
-		txtNit.setMaxLength(50);
-		absolutePanel.add(txtNit, 315, 467);
+		txtNit.setMaxLength(30);
 		txtNit.setSize("227px", "34px");
+		absolutePanel.add(txtNit, 315, 467);
 		
 		listNoDependientes = new ListBox();
 		listNoDependientes.addItem("0");
@@ -427,20 +433,31 @@ public class formularioDatos extends Composite {
 		listNoDependientes.addItem("19");
 		listNoDependientes.addItem("20");
 		listNoDependientes.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listNoDependientes, 588, 467);
 		listNoDependientes.setSize("230px", "36px");
+		absolutePanel.add(listNoDependientes, 588, 467);
+
+		noCuenta = new IntegerBox();
+		noCuenta.setText("0");
+		noCuenta.setMaxLength(30);
+		noCuenta.setSize("227px", "34px");
+		noCuenta.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(noCuenta, 320, 536);
 		
-		txtNoOrden = new TextBox();
-		txtNoOrden.setStyleName("gwt-PasswordTextBox");
-		txtNoOrden.setMaxLength(50);
-		absolutePanel.add(txtNoOrden, 40, 536);
-		txtNoOrden.setSize("227px", "34px");
+		tipoCuenta = new ListBox();
+		tipoCuenta.addItem("Ahorro","0");
+		tipoCuenta.addItem("Monetaria","1");
+		tipoCuenta.setSize("227px", "34px");
+		tipoCuenta.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(tipoCuenta, 40, 536);
 		
-		txtRegistro = new IntegerBox();
-		txtRegistro.setText("0");
-		txtRegistro.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtRegistro, 320, 536);
-		txtRegistro.setSize("227px", "34px");
+
+		nombreBanco = new ListBox();
+		nombreBanco.addItem("G&T Continental","0");
+		nombreBanco.addItem("Banrural","1");
+		nombreBanco.setSize("230px", "36px");
+		nombreBanco.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(nombreBanco, 35, 687);
+		
 		
 		txtDPI = new IntegerBox();
 		txtDPI.addChangeHandler(new ChangeHandler() {
@@ -459,12 +476,13 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtDPI.setText("0");
+		txtDPI.setSize("227px", "34px");
 		txtDPI.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtDPI, 592, 536);
-		txtDPI.setSize("227px", "34px");
 		
 		listTienePasaporte = new ListBox();
-		listTienePasaporte.addChangeHandler(new ChangeHandler() {
+		listTienePasaporte.addChangeHandler(new ChangeHandler() 
+		{
 			public void onChange(ChangeEvent event) {
 				if(listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()).equals("No"))
 				{
@@ -480,16 +498,16 @@ public class formularioDatos extends Composite {
 				}
 			}
 		});
-		listTienePasaporte.addItem("Si");
-		listTienePasaporte.addItem("No");
+		listTienePasaporte.addItem("Si","0");
+		listTienePasaporte.addItem("No","1");
 		listTienePasaporte.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listTienePasaporte, 38, 611);
 		listTienePasaporte.setSize("232px", "36px");
+		absolutePanel.add(listTienePasaporte, 38, 611);
 		
 		txtTipoPasaporte = new TextBox();
 		txtTipoPasaporte.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTipoPasaporte, 320, 611);
 		txtTipoPasaporte.setSize("227px", "34px");
+		absolutePanel.add(txtTipoPasaporte, 320, 611);
 		
 		txtNoPasaporte = new IntegerBox();
 		txtNoPasaporte.addChangeHandler(new ChangeHandler() {
@@ -509,69 +527,8 @@ public class formularioDatos extends Composite {
 		});
 		txtNoPasaporte.setText("0");
 		txtNoPasaporte.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtNoPasaporte, 589, 611);
 		txtNoPasaporte.setSize("230px", "36px");
-		
-		listCedulaDepartamento = new ListBox();
-		listCedulaDepartamento.addItem("Guatemala","01");
-		listCedulaDepartamento.addItem("Baja Verapaz","15");
-		listCedulaDepartamento.addItem("Alta Verapaz","14");
-		listCedulaDepartamento.addItem("El Progreso","02");
-		listCedulaDepartamento.addItem("Izabal","18");
-		listCedulaDepartamento.addItem("Zacapa","19");
-		listCedulaDepartamento.addItem("Chiquimula","20");
-		listCedulaDepartamento.addItem("Santa Rosa","06");
-		listCedulaDepartamento.addItem("Jalapa","21");
-		listCedulaDepartamento.addItem("Jutiapa","22");
-		listCedulaDepartamento.addItem("Sacatepequez","03");
-		listCedulaDepartamento.addItem("Chimaltenango","04");
-		listCedulaDepartamento.addItem("Escuintla","05");
-		listCedulaDepartamento.addItem("Solola","07");
-		listCedulaDepartamento.addItem("Totonicapan","08");
-		listCedulaDepartamento.addItem("Quezaltenango","09");
-		listCedulaDepartamento.addItem("Suchitepequez","10");
-		listCedulaDepartamento.addItem("Retalhuleu","11");
-		listCedulaDepartamento.addItem("San Marcos","12");
-		listCedulaDepartamento.addItem("Huehuetenango","13");
-		listCedulaDepartamento.addItem("Quiche","14");
-		listCedulaDepartamento.addItem("Peten","17");
-		listCedulaDepartamento.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				listCedulaMunicipio.clear();
-		        String[] numerosComoArray = Depto_Municipio(listCedulaDepartamento.getItemText(listCedulaDepartamento.getSelectedIndex())).split(",");
-		        int correlativo = 0 + Integer.parseInt(listCedulaDepartamento.getValue(listCedulaDepartamento.getSelectedIndex())+"00");
-		        for (int i = 0; i < numerosComoArray.length; i++) {
-		        	listCedulaMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
-		        	correlativo++;
-		        }
-		        listCedulaMunicipio.setSelectedIndex(2);
-			}		
-		});
-		listCedulaDepartamento.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listCedulaDepartamento, 35, 687);
-		listCedulaDepartamento.setSize("230px", "36px");
-		
-		listCedulaMunicipio = new ListBox();
-		listCedulaMunicipio.addItem("Chahal");
-		listCedulaMunicipio.addItem("Chisec");
-		listCedulaMunicipio.addItem("Coban");
-		listCedulaMunicipio.addItem("Fray Bartolome de las Casas");
-		listCedulaMunicipio.addItem("La Tinta");
-		listCedulaMunicipio.addItem("Lanquin");
-		listCedulaMunicipio.addItem("Panzos");
-		listCedulaMunicipio.addItem("Raxruha");
-		listCedulaMunicipio.addItem("San Cristobal Verapaz");
-		listCedulaMunicipio.addItem("San Juan Chamelco");
-		listCedulaMunicipio.addItem("San Pedro Carcha");
-		listCedulaMunicipio.addItem("Santa Cruz Verapaz");
-		listCedulaMunicipio.addItem("Santa Maria Cahabon");
-		listCedulaMunicipio.addItem("Senahu");
-		listCedulaMunicipio.addItem("Tamahu");
-		listCedulaMunicipio.addItem("Tactic");
-		listCedulaMunicipio.addItem("Tucuru");
-		listCedulaMunicipio.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listCedulaMunicipio, 316, 687);
-		listCedulaMunicipio.setSize("230px", "36px");
+		absolutePanel.add(txtNoPasaporte, 589, 611);
 		
 		dateAnnioNacimiento = new DateBox();
 		dateAnnioNacimiento.setValue(new Date(1407518707105L));
@@ -581,14 +538,14 @@ public class formularioDatos extends Composite {
 		dateAnnioNacimiento.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateAnnioNacimiento.getDatePicker().setVisibleYearCount(100);
 		dateAnnioNacimiento.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(dateAnnioNacimiento, 588, 680);
 		dateAnnioNacimiento.setSize("228px", "41px");
+		absolutePanel.add(dateAnnioNacimiento, 588, 680);
 		
 		txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
 		txtDireccion.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtDireccion, 37, 774);
 		txtDireccion.setSize("227px", "34px");
+		absolutePanel.add(txtDireccion, 37, 774);
 
 		listDireccionDepartamento = new ListBox();
 		listDireccionDepartamento.addChangeHandler(new ChangeHandler() {
@@ -632,26 +589,9 @@ public class formularioDatos extends Composite {
 		listDireccionDepartamento.setSize("230px", "36px");
 		
 		listDireccionMunicipio = new ListBox();
-		listDireccionMunicipio.addItem("Tucuru");
-		listDireccionMunicipio.addItem("Tactic");
-		listDireccionMunicipio.addItem("Tamahu");
-		listDireccionMunicipio.addItem("Senahu");
-		listDireccionMunicipio.addItem("Santa Maria Cahabon");
-		listDireccionMunicipio.addItem("Santa Cruz Verapaz");
-		listDireccionMunicipio.addItem("San Pedro Carcha");
-		listDireccionMunicipio.addItem("San Juan Chamelco");
-		listDireccionMunicipio.addItem("San Cristobal Verapaz");
-		listDireccionMunicipio.addItem("Raxruha");
-		listDireccionMunicipio.addItem("Panzos");
-		listDireccionMunicipio.addItem("Lanquin");
-		listDireccionMunicipio.addItem("La Tinta");
-		listDireccionMunicipio.addItem("Fray Bartolome de las Casas");
-		listDireccionMunicipio.addItem("Coban");
-		listDireccionMunicipio.addItem("Chisec");
-		listDireccionMunicipio.addItem("Chahal");
 		listDireccionMunicipio.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(listDireccionMunicipio, 588, 774);
 		listDireccionMunicipio.setSize("230px", "36px");
+		absolutePanel.add(listDireccionMunicipio, 588, 774);
 		
 		txtCorreoElectronico = new TextBox();
 		txtCorreoElectronico.addChangeHandler(new ChangeHandler() {
@@ -663,7 +603,6 @@ public class formularioDatos extends Composite {
 				}
                 
                 String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
-                
                 
                 boolean valid = false;
                 if(txtCorreoElectronico.getClass().toString().equals(String.class.toString())) {
@@ -681,8 +620,8 @@ public class formularioDatos extends Composite {
 		});
 		txtCorreoElectronico.setMaxLength(200);
 		txtCorreoElectronico.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtCorreoElectronico, 37, 853);
 		txtCorreoElectronico.setSize("227px", "34px");
+		absolutePanel.add(txtCorreoElectronico, 37, 853);
 		
 		
 		txtTelefonoCasa = new IntegerBox();
@@ -704,9 +643,9 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtTelefonoCasa.setText("0");
+		txtTelefonoCasa.setSize("227px", "34px");
 		txtTelefonoCasa.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTelefonoCasa, 317, 853);
-		txtTelefonoCasa.setSize("227px", "34px");
 		
 		txtTelefonoCelular = new IntegerBox();
 		txtTelefonoCelular.addChangeHandler(new ChangeHandler() {
@@ -725,9 +664,9 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtTelefonoCelular.setText("0");
+		txtTelefonoCelular.setSize("227px", "34px");
 		txtTelefonoCelular.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTelefonoCelular, 589, 853);
-		txtTelefonoCelular.setSize("227px", "34px");
 		
 		listLicencia = new ListBox();
 		listLicencia.addChangeHandler(new ChangeHandler() {
@@ -747,20 +686,20 @@ public class formularioDatos extends Composite {
 				
 			}
 		});
-		listLicencia.addItem("Si");
-		listLicencia.addItem("No");
+		listLicencia.addItem("Si","0");
+		listLicencia.addItem("No","1");
+		listLicencia.setSize("230px", "36px");
 		listLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(listLicencia, 36, 935);
-		listLicencia.setSize("230px", "36px");
 		
 		listTipoLicencia = new ListBox();
-		listTipoLicencia.addItem("A");
-		listTipoLicencia.addItem("B");
-		listTipoLicencia.addItem("C");
-		listTipoLicencia.addItem("M");
+		listTipoLicencia.addItem("A","0");
+		listTipoLicencia.addItem("B","1");
+		listTipoLicencia.addItem("C","2");
+		listTipoLicencia.addItem("M","3");
+		listTipoLicencia.setSize("230px", "36px");
 		listTipoLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(listTipoLicencia, 316, 935);
-		listTipoLicencia.setSize("230px", "36px");
 		
 		txtNoLicencia = new IntegerBox();
 		txtNoLicencia.addChangeHandler(new ChangeHandler() {
@@ -779,21 +718,21 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtNoLicencia.setText("0");
+		txtNoLicencia.setSize("227px", "34px");
 		txtNoLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtNoLicencia, 589, 935);
-		txtNoLicencia.setSize("227px", "34px");
 		
 		txtCentroTrabajo = new TextBox();
 		txtCentroTrabajo.setMaxLength(50);
+		txtCentroTrabajo.setSize("227px", "34px");
 		txtCentroTrabajo.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtCentroTrabajo, 37, 1103);
-		txtCentroTrabajo.setSize("227px", "34px");
 		
 		txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(50);
+		txtOcupacion.setSize("227px", "34px");
 		txtOcupacion.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtOcupacion, 314, 1103);
-		txtOcupacion.setSize("227px", "34px");
 		
 		dateFechaIngreso = new DateBox();
 		dateFechaIngreso.setValue(new Date(1407518751219L));
@@ -802,27 +741,27 @@ public class formularioDatos extends Composite {
 		dateFechaIngreso.getDatePicker().setYearArrowsVisible(true);
 		dateFechaIngreso.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateFechaIngreso.getDatePicker().setVisibleYearCount(100);
+		dateFechaIngreso.setSize("228px", "35px");
 		dateFechaIngreso.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(dateFechaIngreso, 588, 1102);
-		dateFechaIngreso.setSize("228px", "35px");
 		
 		txt_CodigoOcupacion = new TextBox();
 		txt_CodigoOcupacion.setMaxLength(50);
+		txt_CodigoOcupacion.setSize("227px", "34px");
 		txt_CodigoOcupacion.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txt_CodigoOcupacion, 37, 1166);
-		txt_CodigoOcupacion.setSize("227px", "34px");
 		
 		txtProfesion = new TextBox();
 		txtProfesion.setMaxLength(50);
+		txtProfesion.setSize("227px", "34px");
 		txtProfesion.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtProfesion, 314, 1166);
-		txtProfesion.setSize("227px", "34px");
 		
 		txtTipoPlanilla = new TextBox();
 		txtTipoPlanilla.setMaxLength(50);
+		txtTipoPlanilla.setSize("227px", "34px");
 		txtTipoPlanilla.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTipoPlanilla, 589, 1166);
-		txtTipoPlanilla.setSize("227px", "34px");
 		
 		txtSalarioBase = new TextBox();
 		txtSalarioBase.addChangeHandler(new ChangeHandler() {
@@ -841,10 +780,10 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtSalarioBase.setText("0.0");
-		txtSalarioBase.setStyleName("gwt-PasswordTextBox");
 		txtSalarioBase.setMaxLength(50);
-		absolutePanel.add(txtSalarioBase, 38, 1233);
 		txtSalarioBase.setSize("227px", "34px");
+		txtSalarioBase.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtSalarioBase, 38, 1233);
 		
 		txtBonificacion = new TextBox();
 		txtBonificacion.addChangeHandler(new ChangeHandler() {
@@ -863,10 +802,10 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtBonificacion.setText("0.0");
-		txtBonificacion.setStyleName("gwt-PasswordTextBox");
 		txtBonificacion.setMaxLength(50);
-		absolutePanel.add(txtBonificacion, 319, 1234);
 		txtBonificacion.setSize("227px", "34px");
+		txtBonificacion.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtBonificacion, 319, 1234);
 		
 		txtTotal = new TextBox();
 		txtTotal.addChangeHandler(new ChangeHandler() {
@@ -885,17 +824,17 @@ public class formularioDatos extends Composite {
 			}
 		});
 		txtTotal.setText("0.0");
-		txtTotal.setStyleName("gwt-PasswordTextBox");
 		txtTotal.setMaxLength(50);
-		absolutePanel.add(txtTotal, 592, 1234);
 		txtTotal.setSize("227px", "34px");
+		txtTotal.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtTotal, 592, 1234);
 		
 		btnActualizar = new Button("Send");
 		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 36, 1313);
 		btnActualizar.setSize("229px", "44px");
+		btnActualizar.setStylePrimaryName("sendButton");
+		absolutePanel.add(btnActualizar, 36, 1313);
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -912,20 +851,19 @@ public class formularioDatos extends Composite {
 				}
 			
 				if(bandera){
-					depto_municipio_uno = listCedulaDepartamento.getValue(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getValue(listCedulaMunicipio.getSelectedIndex());
 					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
-					System.out.println("pais en: "+listPais.getSelectedIndex());
+					
 					loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
-							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getItemText(listIVS.getSelectedIndex()), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
-							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
-							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
-							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
+							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getValue(listIVS.getSelectedIndex()), 
+							listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
+							noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()) , txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+							txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()),
-							listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()),listLicencia.getItemText(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
+							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -951,21 +889,19 @@ public class formularioDatos extends Composite {
 
 	                     });
 				}else{
-					depto_municipio_uno = listCedulaDepartamento.getValue(listCedulaDepartamento.getSelectedIndex()) + "," +listCedulaMunicipio.getValue(listCedulaMunicipio.getSelectedIndex());
 					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
-					System.out.println(depto_municipio_uno);
-					System.out.println(depto_municipio_dos);
+					
 					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
-							listSexo.getItemText(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getItemText(listIVS.getSelectedIndex()), 
-							listPais.getItemText(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
-							txtNoOrden.getText(), txtRegistro.getText(), txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
-							depto_municipio_uno, txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
-							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()), 
+							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
+							listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
+							noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()),txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+							txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getItemText(listEstado.getSelectedIndex()),
-							listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()),listLicencia.getItemText(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
+							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1600,46 +1536,59 @@ public class formularioDatos extends Composite {
 	public void LlenarDatos(Long id,String listEstadoCivil,String listSexo,String txtPrimerApellido,
 		    String txtSegundoApellido , String txtApellidoCasada ,String txtNo_iggs, String txtPrimerNombre,
 		    String txtSegundoNombre ,String listPais,String listNoDependientes , String txtTipoPasaporte ,
-		    String listCedulaMunicipio,String txtDireccion , String listDireccionMunicipio, String txtCorreoElectronico,
+		    String listDireccionMunicipio,String txtDireccion , String txtCorreoElectronico,
 		    String listTipoLicencia, Long dateAnnioNacimiento,String txtOcupacion , String txtCentroTrabajo,
 		    String txt_CodigoOcupacion, String txtProfesion,String txtTipoPlanilla, Long dateFechaIngreso,
-		    String txtRegistro , String txtNoOrden , String txtDPI,String txtTelefonoCasa, String txtTelefonoCelular ,
+		    String noCuenta, String tipoCuenta, String nombreBanco , String txtDPI,String txtTelefonoCasa, String txtTelefonoCelular ,
 		    String txtNoLicencia, String txtNit, String txtNoPasaporte,String txtSalarioBase ,String txtBonificacion ,
-		    String txtTotal, String listCedulaDepartamento , String listDireccionDepartamento ,String txtIVS, String  URLFile, 
+		    String txtTotal, String listDireccionDepartamento ,String txtIVS, String  URLFile, 
 		    String KeyFile,String Estado,String pasaporte, String licencia)
 	{
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
-		//Window.alert("llenar datos"+URLFile);
-		//Window.alert("llenar datos"+this.URLFile);
+		this.id_empleado = id;
+		this.bandera = false;
+		this.txtNo_iggs.setText(txtNo_iggs);
+		
 		try{
 			image.setUrl( URLFile);
 			Archivo();
 		}catch(Exception e){
 			image.setUrl("images/imagenempresa.png");
 		}
-		this.id_empleado = id;
-		this.bandera = false;
-		this.txtNo_iggs.setText(txtNo_iggs);
+		
         boolean bandera = true;
         for(int i=0; i < this.listEstadoCivil.getItemCount() && bandera; i++){
             bandera = !this.listEstadoCivil.getValue(i).equals(listEstadoCivil);
             this.listEstadoCivil.setSelectedIndex(i);
         }   
+
+		bandera = true;
+	    for(int i=0; i < this.nombreBanco.getItemCount() && bandera; i++){
+	       bandera = !this.nombreBanco.getValue(i).equals(nombreBanco);
+	       this.nombreBanco.setSelectedIndex(i);
+	    } 
+	    
+		bandera = true;
+	    for(int i=0; i < this.tipoCuenta.getItemCount() && bandera; i++){
+	       bandera = !this.tipoCuenta.getValue(i).equals(tipoCuenta);
+	       this.tipoCuenta.setSelectedIndex(i);
+	    } 
+	        
         bandera = true;
         for(int i=0; i < this.listEstado.getItemCount() && bandera; i++){
-            bandera = !this.listEstado.getItemText(i).equals(Estado);
+            bandera = !this.listEstado.getValue(i).equals(Estado);
             this.listEstado.setSelectedIndex(i);
         } 
        
         bandera = true;
         for(int i=0; i < this.listSexo.getItemCount() && bandera; i++){
-            bandera = !this.listSexo.getItemText(i).equals(listSexo);
+            bandera = !this.listSexo.getValue(i).equals(listSexo);
             this.listSexo.setSelectedIndex(i);
         }   
         bandera = true;
         for(int i=0; i < this.listLicencia.getItemCount() && bandera; i++){
-            bandera = !this.listLicencia.getItemText(i).equals(licencia);
+            bandera = !this.listLicencia.getValue(i).equals(licencia);
             this.listLicencia.setSelectedIndex(i);
         } 
         if(licencia.equals("No"))
@@ -1662,13 +1611,13 @@ public class formularioDatos extends Composite {
 		
 		 bandera = true;
 	        for(int i=0; i < this.listIVS.getItemCount() && bandera; i++){
-	           bandera = !this.listIVS.getItemText(i).equals(txtIVS);
+	           bandera = !this.listIVS.getValue(i).equals(txtIVS);
 	           this.listIVS.setSelectedIndex(i);
 	        }  
 	        
         bandera = true;
         for(int i=0; i < this.listPais.getItemCount() && bandera; i++){
-           bandera = !this.listPais.getItemText(i).equals(listPais);
+           bandera = !this.listPais.getValue(i).equals(listPais);
            this.listPais.setSelectedIndex(i);
         }   
 		this.txtNit.setText(txtNit);
@@ -1677,8 +1626,7 @@ public class formularioDatos extends Composite {
             bandera = !this.listNoDependientes.getItemText(i).equals(listNoDependientes);
             this.listNoDependientes.setSelectedIndex(i);
         }   
-		this.txtNoOrden.setText(txtNoOrden);
-		this.txtRegistro.setText(txtRegistro);
+		this.noCuenta.setText(noCuenta);
 		this.txtDPI.setText(txtDPI);
 		this.txtTipoPasaporte.setText(txtTipoPasaporte);
 		this.txtNoPasaporte.setText(txtNoPasaporte);
@@ -1686,19 +1634,16 @@ public class formularioDatos extends Composite {
 		this.txtCorreoElectronico.setText(txtCorreoElectronico);
 		this.txtTelefonoCasa.setText(txtTelefonoCasa);
 		this.txtTelefonoCelular.setText(txtTelefonoCelular);
-		//SimpleDateFormat formatter = new SimpleDateFormat("dow mon dd HH:mm:ss zzz yyyy");
-		//Date date = formatter.parse(dateAnnioNacimiento);
 		
 		this.dateAnnioNacimiento.setValue(new Date(dateAnnioNacimiento));
         bandera = true;
         for(int i=0; i < this.listTipoLicencia.getItemCount() && bandera; i++){
-            bandera = this.listTipoLicencia.getItemText(i).equals(listTipoLicencia);
+            bandera = this.listTipoLicencia.getValue(i).equals(listTipoLicencia);
             this.listTipoLicencia.setSelectedIndex(i);
         }   
 		this.txtNoLicencia.setText(txtNoLicencia);
 		this.txtCentroTrabajo.setText(txtCentroTrabajo);
 		this.txtOcupacion.setText(txtOcupacion);
-		//Date date2 = formatter.parse(dateFechaIngreso);
 		this.dateFechaIngreso.setValue(new Date(dateFechaIngreso));
 		this.txt_CodigoOcupacion.setText(txt_CodigoOcupacion);
 		this.txtProfesion.setText(txtProfesion);
@@ -1707,7 +1652,6 @@ public class formularioDatos extends Composite {
 		this.txtTotal.setText(txtTotal);
 		this.txtBonificacion.setText(txtBonificacion);
 
-		System.out.println(listDireccionDepartamento);
         bandera = true;
         for(int i=0; i < this.listDireccionDepartamento.getItemCount() && bandera; i++){
             bandera = !this.listDireccionDepartamento.getValue(i).equals(listDireccionDepartamento);
@@ -1715,23 +1659,15 @@ public class formularioDatos extends Composite {
         }   
         
 
-		System.out.println(listCedulaDepartamento);
         bandera = true;
-        for(int i=0; i < this.listCedulaDepartamento.getItemCount() && bandera; i++){
-            bandera = !this.listCedulaDepartamento.getValue(i).equals(listCedulaDepartamento);
-            this.listCedulaDepartamento.setSelectedIndex(i);
+        for(int i=0; i < this.nombreBanco.getItemCount() && bandera; i++){
+            bandera = !this.nombreBanco.getValue(i).equals(nombreBanco);
+            this.nombreBanco.setSelectedIndex(i);
         }   
 
-        this.listCedulaMunicipio.clear();
-        String[] numerosComoArray = Depto_Municipio(this.listCedulaDepartamento.getItemText(this.listCedulaDepartamento.getSelectedIndex())).split(",");
-        int correlativo = 0 + Integer.parseInt(this.listCedulaDepartamento.getValue(this.listCedulaDepartamento.getSelectedIndex())+"00");
-        for (int i = 0; i < numerosComoArray.length; i++) {
-        	this.listCedulaMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
-        	correlativo++;
-        }
         bandera = true;
         for(int i=0; i < this.listTienePasaporte.getItemCount() && bandera; i++){
-            bandera = !this.listTienePasaporte.getItemText(i).equals(pasaporte);
+            bandera = !this.listTienePasaporte.getValue(i).equals(pasaporte);
             this.listTienePasaporte.setSelectedIndex(i);
         } 
         if(pasaporte.equals("No"))
@@ -1749,19 +1685,12 @@ public class formularioDatos extends Composite {
 
         this.listDireccionMunicipio.clear();
         String[] numerosComoArray2 = Depto_Municipio(this.listDireccionDepartamento.getItemText(this.listDireccionDepartamento.getSelectedIndex())).split(",");
-        correlativo = 0 + Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"00");
+        int correlativo = 0 + Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"00");
         for (int i = 0; i < numerosComoArray2.length; i++) {
         	this.listDireccionMunicipio.addItem(numerosComoArray2[i],String.valueOf(correlativo));
         	correlativo++;
         }
-		System.out.println(listCedulaMunicipio);
-        bandera = true;
-        for(int i=0; i < this.listCedulaMunicipio.getItemCount() && bandera; i++){
-            bandera = !this.listCedulaMunicipio.getValue(i).equals(listCedulaMunicipio);
-            this.listCedulaMunicipio.setSelectedIndex(i);
-        }   
 
-		System.out.println(listDireccionMunicipio);
         bandera = true;
         for(int i=0; i < this.listDireccionMunicipio.getItemCount() && bandera; i++){
             bandera = !this.listDireccionMunicipio.getValue(i).equals(listDireccionMunicipio);

@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -28,7 +28,7 @@ public class formularioVacaciones extends Composite {
 	private Empleados empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private TextArea txtDescripcion;
     private DateBox dateFecha1;

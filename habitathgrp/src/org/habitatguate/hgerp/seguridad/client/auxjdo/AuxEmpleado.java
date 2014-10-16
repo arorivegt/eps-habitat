@@ -53,40 +53,28 @@ public class AuxEmpleado implements IsSerializable{
     
 	 
     private String no_pasaporte;
-    
-	 
-    private String depto_municipio_cedula;
-    
 	 
     private String direccion_actual;
-    
 	 
     private String depto_municipio_residencia;
-    
 	 
     private String email;
-    
 	 
     private String telefono;
-    
 	 
-    private String celular;
-    
+    private String celular;    
 	 
     private Long fecha_nacimiento;
 
     private String licencia;
 	 
     private String tipo_licencia;
-	
 	 
     private String No_Dependientes;
-
 	 
     private String no_licencia;
 	 
-    private String IVS;
-	
+    private String IVS;	
 	 
     private String pais; 
   
@@ -95,6 +83,12 @@ public class AuxEmpleado implements IsSerializable{
     private String KeyFile;
 
     private String Estado;
+
+    private String noCuenta;
+	
+    private String tipoCuenta;
+	
+    private String nombreBanco;
 
     private List <AuxVacaciones> vacaciones = new ArrayList<AuxVacaciones>();
 
@@ -318,17 +312,6 @@ public class AuxEmpleado implements IsSerializable{
 	public void setNo_pasaporte(String no_pasaporte) {
 		this.no_pasaporte = no_pasaporte;
 	}
-
-
-	public String getDepto_municipio_cedula() {
-		return depto_municipio_cedula;
-	}
-
-
-	public void setDepto_municipio_cedula(String depto_municipio_cedula) {
-		this.depto_municipio_cedula = depto_municipio_cedula;
-	}
-
 
 	public String getDireccion_actual() {
 		return direccion_actual;
@@ -690,6 +673,36 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setSalario(List <AuxSalario> salario) {
 		this.salario = salario;
+	}
+
+
+	public String getNoCuenta() {
+		return noCuenta;
+	}
+
+
+	public void setNoCuenta(String noCuenta) {
+		this.noCuenta = noCuenta;
+	}
+
+
+	public String getTipoCuenta() {
+		return tipoCuenta;
+	}
+
+
+	public void setTipoCuenta(String tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
+	}
+
+
+	public String getNombreBanco() {
+		return nombreBanco;
+	}
+
+
+	public void setNombreBanco(String nombreBanco) {
+		this.nombreBanco = nombreBanco;
 	}
 
 	

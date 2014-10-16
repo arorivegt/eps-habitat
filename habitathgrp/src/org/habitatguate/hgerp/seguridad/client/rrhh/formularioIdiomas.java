@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -35,7 +35,7 @@ public class formularioIdiomas extends Composite {
 	private Empleados empleado;
 	private Long id_idioma = 0L;
 	private boolean bandera = true;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private ListBox listNivel;
     private ListBox txtIdioma;

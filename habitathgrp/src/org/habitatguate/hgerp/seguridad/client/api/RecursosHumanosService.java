@@ -18,7 +18,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * The client-side stub for the RPC service.
  */
 @RemoteServiceRelativePath("login")
-public interface LoginService extends RemoteService {
+public interface RecursosHumanosService extends RemoteService {
 	//metodos para insertar en la base de datos
 	String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento) throws IllegalArgumentException;
 	valores_sesion login_inicio(String user,String password) throws IllegalArgumentException;	
@@ -26,9 +26,8 @@ public interface LoginService extends RemoteService {
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String IVS,
-            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-            String tipo_pasaporte, String no_pasaporte,
-            String depto_municipio_cedula, String direccion_actual,
+            String pais,String nit, String No_Dependientes, String noCuenta, String tipoCuenta, String nombreBanco,
+            String cui, String tipo_pasaporte, String no_pasaporte, String direccion_actual,
             String depto_municipio_residencia, String email, String telefono,
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
@@ -75,7 +74,7 @@ public interface LoginService extends RemoteService {
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
-	Long Insertar_Salario(Long id_empleado,Date Fecha, float salario) throws IllegalArgumentException;
+	Long Insertar_Salario(Long id_empleado,Date Fecha, float salario,String tipoSalario) throws IllegalArgumentException;
 
 	String InsertarCompartido(String idEmpleado, Long idTest, Long idEmpleadoCompartido)throws IllegalArgumentException;
 	String QuitarCompartido(Long idEmpleado, Long idTest)throws IllegalArgumentException;
@@ -85,9 +84,8 @@ public interface LoginService extends RemoteService {
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String IVS,
-            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-            String tipo_pasaporte, String no_pasaporte,
-            String depto_municipio_cedula, String direccion_actual,
+            String pais,String nit, String No_Dependientes,String noCuenta, String tipoCuenta, String nombreBanco, String cui,
+            String tipo_pasaporte, String no_pasaporte, String direccion_actual,
             String depto_municipio_residencia, String email, String telefono,
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
@@ -136,7 +134,7 @@ public interface LoginService extends RemoteService {
 			String tipo_historial)throws IllegalArgumentException;
 	Long  Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, 
 			String descripcionl)throws IllegalArgumentException;
-	Long Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario) throws IllegalArgumentException;
+	Long Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario,String tipoSalario) throws IllegalArgumentException;
 	
 	//metodos para Eliminar en la base de datos
     Long Eliminar_Emppleado(Long id)  throws IllegalArgumentException;

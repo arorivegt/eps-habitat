@@ -51,12 +51,6 @@ public class SegEmpleado implements Serializable {
     private String nit;
     
 	@Persistent    
-    private String no_orden ;
-    
-	@Persistent    
-    private String no_registro;
-    
-	@Persistent    
     private String cui;
 
 	@Persistent    
@@ -67,9 +61,6 @@ public class SegEmpleado implements Serializable {
     
 	@Persistent    
     private String no_pasaporte;
-    
-	@Persistent 
-    private String depto_municipio_cedula;
     
 	@Persistent    
     private String direccion_actual;
@@ -117,10 +108,14 @@ public class SegEmpleado implements Serializable {
 	@Persistent    
     private String Estado;
 
+	@Persistent
+    private String noCuenta;
 	
-	public SegEmpleado() {
-		super();
-	}
+	@Persistent
+    private String tipoCuenta;
+	
+	@Persistent
+    private String nombreBanco;
 
 	//aqui vienen todas los objetos con los que se relaciona
 
@@ -203,7 +198,36 @@ public class SegEmpleado implements Serializable {
 	@Persistent
     private float bonificacion;
 
+
 	
+	public SegEmpleado() {
+		super();
+	}
+
+	public String getNoCuenta() {
+		return noCuenta;
+	}
+
+	public void setNoCuenta(String noCuenta) {
+		this.noCuenta = noCuenta;
+	}
+
+	public String getTipoCuenta() {
+		return tipoCuenta;
+	}
+
+	public void setTipoCuenta(String tipoCuenta) {
+		this.tipoCuenta = tipoCuenta;
+	}
+
+	public String getNombreBanco() {
+		return nombreBanco;
+	}
+
+	public void setNombreBanco(String nombreBanco) {
+		this.nombreBanco = nombreBanco;
+	}
+
 	public List<SegTestCompartidos> getTestCompartido() {
 		return testCompartido;
 	}
@@ -335,22 +359,6 @@ public class SegEmpleado implements Serializable {
 
 	public void setNit(String nit) {
 		this.nit = nit;
-	}
-
-	public String getNo_orden() {
-		return no_orden;
-	}
-
-	public void setNo_orden(String no_orden) {
-		this.no_orden = no_orden;
-	}
-
-	public String getNo_registro() {
-		return no_registro;
-	}
-
-	public void setNo_registro(String no_registro) {
-		this.no_registro = no_registro;
 	}
 
 	public String getCui() {
@@ -596,15 +604,7 @@ public class SegEmpleado implements Serializable {
 	public void setNo_Dependientes(String no_Dependientes) {
 		No_Dependientes = no_Dependientes;
 	}
-
-	public String getDepto_municipio_cedula() {
-		return depto_municipio_cedula;
-	}
-
-	public void setDepto_municipio_cedula(String depto_municipio_cedula) {
-		this.depto_municipio_cedula = depto_municipio_cedula;
-	}
-
+	
 	public String getDepto_municipio_residencia() {
 		return depto_municipio_residencia;
 	}

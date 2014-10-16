@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 
 public class EmpleadoLista extends Composite {
 	
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private EmpleadoLista listaEmpleado;
     private FlexTable flexTable;
 	public EmpleadoLista() {

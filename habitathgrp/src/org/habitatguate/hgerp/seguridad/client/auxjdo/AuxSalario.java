@@ -10,7 +10,8 @@ public class AuxSalario implements IsSerializable{
 	private Long Fecha;
 	
 	private float salario;
-	
+
+	private String tipoSalario;
 
 	public AuxSalario() {
 		super();
@@ -44,6 +45,16 @@ public class AuxSalario implements IsSerializable{
 
 	public void setSalario(float salario) {
 		this.salario = salario;
+	}
+
+
+	public String getTipoSalario() {
+		return tipoSalario;
+	}
+
+
+	public void setTipoSalario(String tipoSalario) {
+		this.tipoSalario = tipoSalario;
 	}
 
 	

@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -23,7 +23,7 @@ public class Index implements EntryPoint {
         
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
-        private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+        private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         @Override
         public void onModuleLoad() 

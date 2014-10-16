@@ -3,8 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 
@@ -23,7 +23,7 @@ public class puestos extends Composite  {
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private VerticalPanel panel = new VerticalPanel();
-	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	 
 	    public puestos(Empleados e) {

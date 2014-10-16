@@ -10,38 +10,7 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
@@ -85,7 +54,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 
 @SuppressWarnings("serial")
-public class LoginServiceImpl extends RemoteServiceServlet implements LoginService {
+public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements RecursosHumanosService {
 	///metodos para insertar en las diferentes entidades
 	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento) throws IllegalArgumentException {
 
@@ -100,11 +69,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				em.setPrimer_apellido(Apellido.toUpperCase());
 				em.setSegundo_apellido("".toUpperCase());
 				em.setSegundo_nombre("".toUpperCase());
-				em.setEstado("posible empleado");
-				em.setIVS("Con IVS");
+				em.setEstado("2");
+				em.setIVS("0");
 				em.setCui("0");
-				em.setNo_orden("");
-				em.setNo_registro("");
+				em.setNoCuenta("0");
+				em.setTipoCuenta("1");
+				em.setNombreBanco("1");
 				em.setEmail(user);
 				em.setNo_Dependientes("0");
 				em.setAfiliacion_igss("0");
@@ -115,16 +85,15 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				em.setBonificacion(0.0f);
 				em.setTotal(0.0f);
 				em.setSalario_base(0.0f);
-				em.setDepto_municipio_cedula("01,101");
 				em.setDepto_municipio_residencia("01,101");
 				em.setEstado_civil("0");
-				em.setPais("Guatemala");
-				em.setSexo("femenino");
-				em.setTipo_licencia("B");
-				em.setPasaporte("Si");
-				em.setLicencia("Si");
+				em.setPais("73");
+				em.setSexo("1");
+				em.setTipo_licencia("0");
+				em.setPasaporte("0");
+				em.setLicencia("0");
 				em.setFecha_nacimiento(fecha_nacimiento);
-				em.setFecha_ingreso(new Date(1407518124684L));
+				em.setFecha_ingreso(new Date());
 				try{ 
 				    gestorPersistencia.makePersistent(em); 
 				}finally{
@@ -171,9 +140,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String IVS,
-            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-            String tipo_pasaporte, String no_pasaporte,
-            String depto_municipio_cedula, String direccion_actual,
+            String pais,String nit, String No_Dependientes,String noCuenta, String tipoCuenta, String nombreBanco, String cui,
+            String tipo_pasaporte, String no_pasaporte, String direccion_actual,
             String depto_municipio_residencia, String email, String telefono,
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
@@ -202,12 +170,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 	         e.setNit(nit);
 	         e.setFecha_nacimiento(fecha_nacimiento);
 	         e.setNo_Dependientes(No_Dependientes);
-	         e.setNo_orden(no_orden.toUpperCase());
-	         e.setNo_registro(no_registro);
+	         e.setNoCuenta(noCuenta);
+			 e.setTipoCuenta(tipoCuenta);
+			 e.setNombreBanco(nombreBanco);
 	         e.setCui(cui);
 	         e.setTipo_pasaporte(tipo_pasaporte);
 	         e.setNo_pasaporte(no_pasaporte);
-	         e.setDepto_municipio_cedula(depto_municipio_cedula);
 	         e.setDireccion_actual(direccion_actual.toUpperCase());
 	         e.setDepto_municipio_residencia(depto_municipio_residencia);
 	         e.setEmail(email);
@@ -538,9 +506,8 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		            String estado_civil, String sexo, String primer_apellido,
 		            String segundo_apellido, String apellido_casada,
 		            String primer_nombre, String segundo_nombre, String IVS,
-		            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-		            String tipo_pasaporte, String no_pasaporte,
-		            String depto_municipio_cedula, String direccion_actual,
+		            String pais,String nit, String No_Dependientes, String noCuenta, String tipoCuenta, String nombreBanco, String cui,
+		            String tipo_pasaporte, String no_pasaporte,String direccion_actual,
 		            String depto_municipio_residencia, String email, String telefono,
 		            String celular, Date fecha_nacimiento, String tipo_licencia,
 		            String no_licencia, String centro_trabajo, String ocupacion,
@@ -566,12 +533,12 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					         e.setNit(nit);
 					         e.setFecha_nacimiento(fecha_nacimiento);
 					         e.setNo_Dependientes(No_Dependientes);
-					         e.setNo_orden(no_orden.toUpperCase());
-					         e.setNo_registro(no_registro);
+					         e.setNoCuenta(noCuenta);
+							 e.setTipoCuenta(tipoCuenta);
+							 e.setNombreBanco(nombreBanco);
 					         e.setCui(cui);
 					         e.setTipo_pasaporte(tipo_pasaporte);
 					         e.setNo_pasaporte(no_pasaporte);
-					         e.setDepto_municipio_cedula(depto_municipio_cedula);
 					         e.setDireccion_actual(direccion_actual.toUpperCase());
 					         e.setDepto_municipio_residencia(depto_municipio_residencia);
 					         e.setEmail(email);
@@ -1071,7 +1038,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
 					    	nuevo.setIVS(p.getIVS());
 					    	nuevo.setCui(p.getCui());
-					    	nuevo.setDepto_municipio_cedula(p.getDepto_municipio_cedula());
 					    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
 					    	nuevo.setDireccion_actual(p.getDireccion_actual());
 					    	nuevo.setEmail(p.getEmail());
@@ -1181,9 +1147,10 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					    	nuevo.setNit(p.getNit());
 					    	nuevo.setNo_Dependientes(p.getNo_Dependientes());
 					    	nuevo.setNo_licencia(p.getNo_licencia());
-					    	nuevo.setNo_orden(p.getNo_orden());
+					        nuevo.setNoCuenta(p.getNoCuenta());
+					        nuevo.setTipoCuenta(p.getTipoCuenta());
+					        nuevo.setNombreBanco(p.getNombreBanco());
 					    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
-					    	nuevo.setNo_registro(p.getNo_registro());
 					    	nuevo.setOcupacion(p.getOcupacion());
 					    	nuevo.setPais(p.getPais());
 					    	nuevo.setPrimer_apellido(p.getPrimer_apellido());
@@ -1292,6 +1259,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 							    	AuxSalario s = new AuxSalario();
 							    	s.setFecha(n10.getFecha().getTime());
 							    	s.setSalario(n10.getSalario());
+							    	s.setTipoSalario(n10.getTipoSalario());
 							    	nuevo.getSalario().add(s);
 							    }
 					    	}
@@ -1547,6 +1515,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 //							    	AuxSalario s = new AuxSalario();
 //							    	s.setFecha(n10.getFecha().getTime());
 //							    	s.setSalario(n10.getSalario());
+//		    						s.setTipoSalario(n10.getTipoSalario());
 //							    	nuevo.getSalario().add(s);
 //							    }
 //					    	}
@@ -1576,7 +1545,6 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
 				    	nuevo.setIVS(p.getIVS());
 				    	nuevo.setCui(p.getCui());
-				    	nuevo.setDepto_municipio_cedula(p.getDepto_municipio_cedula());
 				    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
 				    	nuevo.setDireccion_actual(p.getDireccion_actual());
 				    	nuevo.setEmail(p.getEmail());
@@ -1686,9 +1654,10 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 				    	nuevo.setNit(p.getNit());
 				    	nuevo.setNo_Dependientes(p.getNo_Dependientes());
 				    	nuevo.setNo_licencia(p.getNo_licencia());
-				    	nuevo.setNo_orden(p.getNo_orden());
+				        nuevo.setTipoCuenta(p.getTipoCuenta());
+				        nuevo.setNombreBanco(p.getNombreBanco());
 				    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
-				    	nuevo.setNo_registro(p.getNo_registro());
+				    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
 				    	nuevo.setOcupacion(p.getOcupacion());
 				    	nuevo.setPais(p.getPais());
 				    	nuevo.setPrimer_apellido(p.getPrimer_apellido());
@@ -1798,6 +1767,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						    	AuxSalario s = new AuxSalario();
 						    	s.setFecha(n10.getFecha().getTime());
 						    	s.setSalario(n10.getSalario());
+						    	s.setTipoSalario(n10.getTipoSalario());
 						    	nuevo.getSalario().add(s);
 						    }
 				    	}
@@ -2074,7 +2044,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 		}
 
 		@Override
-		public Long Insertar_Salario(Long id_empleado, Date Fecha, float salario)
+		public Long Insertar_Salario(Long id_empleado, Date Fecha, float salario,String tipoSalario)
 				throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			
@@ -2084,6 +2054,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					 SegSalario s = new  SegSalario();
 					 	s.setFecha(Fecha);
 					 	s.setSalario(salario);
+					 	s.setTipoSalario(tipoSalario);
 			      	 	s.setEmpleado(e);
 			      	 	e.getSalario().add(s);
 					 	valor = s.getId_Salario();
@@ -2095,7 +2066,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 
 		@Override
 		public Long Actualizar_Salario(Long id_empleado, Long id, Date Fecha,
-				float salario) throws IllegalArgumentException {
+				float salario,String tipoSalario) throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			
 			Long valor = 0L;
@@ -2107,6 +2078,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 					 SegSalario s = Persistencia.getObjectById(SegSalario.class, k); 
 					 	s.setFecha(Fecha);
 					 	s.setSalario(salario);
+					 	s.setTipoSalario(tipoSalario);
 					 	valor = s.getId_Salario();
 					 }finally {  
 						 Persistencia.close();  
@@ -2141,6 +2113,7 @@ public class LoginServiceImpl extends RemoteServiceServlet implements LoginServi
 						AuxSalario s = new AuxSalario();
 						s.setFecha(seg.getFecha().getTime());
 						s.setSalario(seg.getSalario());
+						s.setTipoSalario(seg.getTipoSalario());
 						salarios.add(s);
 					}
 			}finally {  

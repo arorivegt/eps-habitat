@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
@@ -30,7 +30,7 @@ public class Menu extends Composite {
 
 	private static MenuUiBinder uiBinder = GWT.create(MenuUiBinder.class);
 	 private Panel nuevo;
-	 private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 
 	interface MenuUiBinder extends UiBinder<Widget, Menu> {
 	}

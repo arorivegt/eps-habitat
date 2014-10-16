@@ -2,8 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Compartir extends Composite{
         
         
-       private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
        private Long idTes = 0L;
        private Long idEmpleadoCompartido = 0L;
        final SuggestBox txtUser;

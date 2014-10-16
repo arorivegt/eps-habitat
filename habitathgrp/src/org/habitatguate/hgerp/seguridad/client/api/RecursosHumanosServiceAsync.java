@@ -17,7 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * The async counterpart of <code>GreetingService</code>.
  */
-public interface LoginServiceAsync {
+public interface RecursosHumanosServiceAsync {
 	//metodos para insertar una tupla en la entidad especifica
 	void Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento, AsyncCallback<String> callback) throws IllegalArgumentException;
 	void login_inicio(String user,String i2, AsyncCallback<valores_sesion> callback) throws IllegalArgumentException;
@@ -25,9 +25,8 @@ public interface LoginServiceAsync {
             String estado_civil, String sexo, String primer_apellido,
             String segundo_apellido, String apellido_casada,
             String primer_nombre, String segundo_nombre, String IVS,
-            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-            String tipo_pasaporte, String no_pasaporte,
-            String depto_municipio_cedula, String direccion_actual,
+            String pais,String nit, String No_Dependientes,String noCuenta, String tipoCuenta, String nombreBanco,String cui,
+            String tipo_pasaporte, String no_pasaporte, String direccion_actual,
             String depto_municipio_residencia, String email, String telefono,
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
@@ -54,7 +53,7 @@ public interface LoginServiceAsync {
 			int pregunta5, int pregunta6, int pregunta7, int pregunta8,
 			int pregunta9, int pregunta10, Date fecha_test, String evaluador,Long BDtest, boolean testBD,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
-	void Insertar_Salario(Long id_empleado,Date Fecha, float salario, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_Salario(Long id_empleado,Date Fecha, float salario, String tipoSalario, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	void InsertarCompartido(String idEmpleado,Long idTest, Long idEmpleadoCompartido, AsyncCallback<String> callback) throws IllegalArgumentException;
 	void QuitarCompartido(Long idEmpleado,Long idTeist, AsyncCallback<String> callback) throws IllegalArgumentException;
@@ -88,9 +87,8 @@ public interface LoginServiceAsync {
 	            String estado_civil, String sexo, String primer_apellido,
 	            String segundo_apellido, String apellido_casada,
 	            String primer_nombre, String segundo_nombre, String IVS,
-	            String pais,String nit, String No_Dependientes,String no_orden, String no_registro, String cui,
-	            String tipo_pasaporte, String no_pasaporte,
-	            String depto_municipio_cedula, String direccion_actual,
+	            String pais,String nit, String No_Dependientes,String noCuenta, String tipoCuenta, String nombreBanco, String cui,
+	            String tipo_pasaporte, String no_pasaporte, String direccion_actual,
 	            String depto_municipio_residencia, String email, String telefono,
 	            String celular, Date fecha_nacimiento, String tipo_licencia,
 	            String no_licencia, String centro_trabajo, String ocupacion,
@@ -141,7 +139,7 @@ public interface LoginServiceAsync {
 				String tipo_historial, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, String descripcionl, 
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
-		void Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario, AsyncCallback<Long> callback) throws IllegalArgumentException;
+		void Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario, String tipoSalario,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		
 		//metodos para Eliminar en la base de datos
 		//metodos para Eliminar en la base de datos

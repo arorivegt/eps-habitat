@@ -27,6 +27,9 @@ public class SegSalario implements Serializable {
 	private float salario;
 	
 	@Persistent
+	private String tipoSalario;
+	
+	@Persistent
     private SegEmpleado empleado;
 
 	public SegSalario() {
@@ -62,6 +65,13 @@ public class SegSalario implements Serializable {
 		this.empleado = empleado;
 	}
 
-	
+	public String getTipoSalario() {
+		return tipoSalario;
+	}
+
+	public void setTipoSalario(String tipoSalario) {
+		this.tipoSalario = tipoSalario;
+	}
+
 	
 }

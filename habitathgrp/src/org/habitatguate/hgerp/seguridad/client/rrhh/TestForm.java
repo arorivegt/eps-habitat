@@ -3,8 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -24,7 +24,7 @@ public class TestForm extends Composite  {
 
 	 private FlexTable flextable;
      private VerticalPanel panel = new VerticalPanel();
-     private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      private List<AuxBDTest> valor = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);

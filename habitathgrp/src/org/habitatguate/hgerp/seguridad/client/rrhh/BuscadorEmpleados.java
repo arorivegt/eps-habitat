@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -28,7 +28,7 @@ public class BuscadorEmpleados extends Composite   {
     private  Grid grid;
     private BuscadorEmpleados evaluacionesBuscador;
     private ListBox listBox;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private Label lbDato1;
     private Label lbDato2;
     private Label lbDato3;
@@ -220,12 +220,12 @@ public class BuscadorEmpleados extends Composite   {
 						absolutePanel.add(lbDato1, 205, 0);
 						lbDato1.setSize("368px", "19px");
 						
-						lbDato2 = new Label("Segundo Apellido");
+						lbDato2 = new Label("Primer Apellido");
 						lbDato2.setStyleName("label");
 						absolutePanel.add(lbDato2, 390, 0);
 						lbDato2.setSize("157px", "13px");
 						
-						lbDato3 = new Label("Primer Apellido");
+						lbDato3 = new Label("Segundo Apellido");
 						lbDato3.setStyleName("label");
 						absolutePanel.add(lbDato3, 575, 0);
 						lbDato3.setSize("157px", "13px");

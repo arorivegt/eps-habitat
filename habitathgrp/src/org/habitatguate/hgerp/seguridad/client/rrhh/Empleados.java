@@ -245,19 +245,10 @@ public class Empleados extends Composite {
 	}
 
 	public void setFD(AuxEmpleado r) {
-
-	 String[] numerosComoArray  = r.getDepto_municipio_cedula().split(",");
-	 String deptocedula ="";
-	 String deptodir  ="";
-	 String municedula ="";
-	 String munidir ="";
+		
+	 String deptodir  = "";
+	 String munidir   = "";
 	 
-	 for (int i = 0; i < numerosComoArray.length; i++) {
-		 if(i == 0)
-			 deptocedula = numerosComoArray[i];
-		 if(i == 1)
-			 municedula = numerosComoArray[i];
-     }	
 
 	 String[] numerosComoArray2  = r.getDepto_municipio_residencia().split(",");
 	 for (int i = 0; i < numerosComoArray2.length; i++) {
@@ -268,12 +259,12 @@ public class Empleados extends Composite {
      }	
 	 this.id_empleado = r.getId_empleado();
 			fd.LlenarDatos(r.getId_empleado(),r.getEstado_civil(), r.getSexo(), r.getPrimer_apellido(), r.getSegundo_apellido(), 
-					r.getApellido_casada(), ""+r.getAfiliacion_igss(), r.getPrimer_nombre(), r.getSegundo_nombre(), 
-					r.getPais(), ""+r.getNo_Dependientes(), r.getTipo_pasaporte(), municedula, r.getDireccion_actual(), 
-					munidir,r.getEmail(), r.getTipo_licencia(), r.getFecha_nacimiento(),r.getOcupacion(), r.getCentro_trabajo(), 
-					""+r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), ""+r.getNo_registro(), 
-					""+r.getNo_orden(),""+ r.getCui(), ""+r.getTelefono(), ""+r.getCelular(), ""+r.getNo_licencia(), r.getNit(), ""+r.getNo_pasaporte(), 
-					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptocedula, deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado()
+					r.getApellido_casada(), r.getAfiliacion_igss(), r.getPrimer_nombre(), r.getSegundo_nombre(), 
+					r.getPais(), r.getNo_Dependientes(), r.getTipo_pasaporte(), munidir,r.getDireccion_actual(), 
+					r.getEmail(), r.getTipo_licencia(), r.getFecha_nacimiento(),r.getOcupacion(), r.getCentro_trabajo(), 
+					r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), 
+					r.getNoCuenta(), r.getTipoCuenta(),r.getNombreBanco(), r.getCui(), r.getTelefono(), r.getCelular(), r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), 
+					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado()
 					,r.getPasaporte(),r.getLicencia());
 	
 	}

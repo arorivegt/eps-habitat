@@ -1,7 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import org.habitatguate.hgerp.seguridad.client.api.LoginService;
-import org.habitatguate.hgerp.seguridad.client.api.LoginServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.Window;
@@ -28,7 +28,7 @@ public class formularioReferenciaPersonal extends Composite {
 	private referenciaPersonal a;
 	private boolean bandera = true;
 	private Long id_referencia_personal = 0L;
-    private final LoginServiceAsync loginService = GWT.create(LoginService.class);
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	
 	private TextBox txtNombre;
 	private TextBox txtPuestoCandidato;

@@ -16,7 +16,7 @@ public class Panel extends Composite {
      		//agregar menu
             grid.setWidget(0, 0, menu);
             grid.setSize("100%", "100%");
-            menu.setSize("100%", "32px");
+            menu.setSize("100%", "100%");
             initWidget(grid);
         }
 

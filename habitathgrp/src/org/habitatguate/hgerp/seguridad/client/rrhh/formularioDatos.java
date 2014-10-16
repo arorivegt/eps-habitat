@@ -29,6 +29,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -441,6 +443,21 @@ public class formularioDatos extends Composite {
 		noCuenta.setMaxLength(30);
 		noCuenta.setSize("227px", "34px");
 		noCuenta.setStyleName("gwt-PasswordTextBox");
+		noCuenta.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
+				else if(txtDPI.getText().equals(null)) {txtDPI.setText("0");}
+				else{
+					try{
+						Integer.parseInt(noCuenta.getText());
+					}catch(Exception e){
+                    	setMensaje("alert alert-error", 
+                    			"Error !! \nNo Cuenta no valido");
+                    	noCuenta.setText("0");
+					}
+				}
+			}
+		});
 		absolutePanel.add(noCuenta, 320, 536);
 		
 		tipoCuenta = new ListBox();
@@ -539,6 +556,19 @@ public class formularioDatos extends Composite {
 		dateAnnioNacimiento.getDatePicker().setVisibleYearCount(100);
 		dateAnnioNacimiento.setStyleName("gwt-PasswordTextBox");
 		dateAnnioNacimiento.setSize("228px", "41px");
+
+		dateAnnioNacimiento.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				try{
+					new Date(dateAnnioNacimiento.getValue().getTime());
+				}catch(Exception e){
+                	setMensaje("alert alert-error", 
+                			"Error !! \nFecha Nacimiento no valida");
+                	dateAnnioNacimiento.setValue(new Date(1407518124684L));
+				}
+			}
+		});
 		absolutePanel.add(dateAnnioNacimiento, 588, 680);
 		
 		txtDireccion = new TextBox();
@@ -743,6 +773,19 @@ public class formularioDatos extends Composite {
 		dateFechaIngreso.getDatePicker().setVisibleYearCount(100);
 		dateFechaIngreso.setSize("228px", "35px");
 		dateFechaIngreso.setStyleName("gwt-PasswordTextBox");
+		dateFechaIngreso.addValueChangeHandler(new ValueChangeHandler<Date>() {
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				Window.alert("fecha");
+				try{
+					new Date(dateFechaIngreso.getValue().getTime());
+				}catch(Exception e){
+                	setMensaje("alert alert-error", 
+                			"Error !! \nFecha de Ingreso no valida");
+					dateFechaIngreso.setValue(new Date(1407518124684L));
+				}
+			}
+		});
 		absolutePanel.add(dateFechaIngreso, 588, 1102);
 		
 		txt_CodigoOcupacion = new TextBox();

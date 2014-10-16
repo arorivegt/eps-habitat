@@ -382,7 +382,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 	@Override
 	public Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto,
-			String funciones, float salario, boolean activo)
+			String funciones, String motivoPuesto, boolean activo, String jornada, String horasTrabajo)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -393,8 +393,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	p.setFecha_puesto(fecha_puesto);
 				 	p.setNombre_puesto(nombre_puesto.toUpperCase());
 				 	p.setFunciones(funciones.toUpperCase());
-				 	p.setSalario(salario);
+				 	p.setMotivoPuesto(motivoPuesto);
 				 	p.setActivo(activo);
+				 	p.setJornada(jornada);
+				 	p.setHorasTrabajo(horasTrabajo);
 		      	 	p.setEmpleado(e);
 		      	 	e.getPuestos().add(p);
 				 	valor =p.getId_puesto();
@@ -745,7 +747,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 			@Override
 			public Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto,
-					String funciones, float salario, boolean activo)
+					String funciones, String motivoPuesto, boolean activo,String jornada, String horasTrabajo)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -759,7 +761,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	p.setFecha_puesto(fecha_puesto);
 						 	p.setNombre_puesto(nombre_puesto.toUpperCase());
 						 	p.setFunciones(funciones.toUpperCase());
-						 	p.setSalario(salario);
+						 	p.setMotivoPuesto(motivoPuesto);
+						 	p.setJornada(jornada);
+						 	p.setHorasTrabajo(horasTrabajo);
 						 	p.setActivo(activo);
 						 	valor =p.getId_puesto();
 						 }finally {  
@@ -1166,8 +1170,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
 								 	pp.setNombre_puesto(n5.getNombre_puesto());
 								 	pp.setFunciones(n5.getFunciones());
-								 	pp.setSalario(n5.getSalario());
+								 	pp.setMotivoPuesto(n5.getMotivoPuesto());
 								 	pp.setActivo(n5.getActivo());
+								 	pp.setJornada(n5.getJornada());
+								 	pp.setHorasTrabajo(n5.getHorasTrabajo());
 								 	nuevo.getPuestos().add(pp);
 							    }
 					    	}
@@ -1673,8 +1679,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
 							 	pp.setNombre_puesto(n5.getNombre_puesto());
 							 	pp.setFunciones(n5.getFunciones());
-							 	pp.setSalario(n5.getSalario());
+							 	pp.setMotivoPuesto(n5.getMotivoPuesto());
 							 	pp.setActivo(n5.getActivo());
+							 	pp.setHorasTrabajo(n5.getHorasTrabajo());
 							 	nuevo.getPuestos().add(pp);
 						    }
 				    	}

@@ -63,7 +63,7 @@ public interface RecursosHumanosServiceAsync {
 			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
-			float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String motivoPuesto, boolean activo,  String jornada, String horasTrabajo,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones,
 			 	AsyncCallback<Long> callback) throws IllegalArgumentException;
 	void Insertar_Entrevista(Long id_empleado,Date fecha_entrevista, String que_conoces,
@@ -120,7 +120,7 @@ public interface RecursosHumanosServiceAsync {
 				String pregunta9, String pregunta10, Date fecha_test,
 				String tipo_test, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
-				float salario, boolean activo, AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String motivoPuesto, boolean activo, String jornada, String horasTrabajo, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_BDPuesto(Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 				 AsyncCallback<Long> callback) throws IllegalArgumentException;
 		void Actualizar_Entrevista(Long id_empleado,Long id,Date fecha_entrevista, String que_conoces,

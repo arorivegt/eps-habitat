@@ -440,7 +440,7 @@ public class CrearReporteEmpleado extends HttpServlet {
         table.setHeaderRows(1);
 
         table.addCell(f.getNombre_puesto());
-        table.addCell(""+f.getSalario());
+        table.addCell(""+0);
         table.addCell(AnnioPuesto);
         return table;
     }

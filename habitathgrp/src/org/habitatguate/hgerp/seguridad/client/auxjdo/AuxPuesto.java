@@ -1,6 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxPuesto implements IsSerializable{
@@ -16,10 +15,16 @@ public class AuxPuesto implements IsSerializable{
 	
     private String funciones;
 	
+    
+    private String motivoPuesto;
+
+    
+    private String jornada;
 	
-    private float salario;
+    
+    private String horasTrabajo;
 	
-	
+    
     private boolean activo;
 	
 
@@ -59,20 +64,36 @@ public class AuxPuesto implements IsSerializable{
 		this.funciones = funciones;
 	}
 
-	public float getSalario() {
-		return salario;
-	}
-
-	public void setSalario(float salario) {
-		this.salario = salario;
-	}
-
 	public boolean isActivo() {
 		return activo;
 	}
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public String getMotivoPuesto() {
+		return motivoPuesto;
+	}
+
+	public void setMotivoPuesto(String motivoPuesto) {
+		this.motivoPuesto = motivoPuesto;
+	}
+
+	public String getJornada() {
+		return jornada;
+	}
+
+	public void setJornada(String jornada) {
+		this.jornada = jornada;
+	}
+
+	public String getHorasTrabajo() {
+		return horasTrabajo;
+	}
+
+	public void setHorasTrabajo(String horasTrabajo) {
+		this.horasTrabajo = horasTrabajo;
 	}
 
 }

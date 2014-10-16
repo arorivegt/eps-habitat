@@ -30,11 +30,17 @@ public class SegPuesto implements Serializable {
     private String funciones;
 	
 	@Persistent
-    private float salario;
-	
-	@Persistent
     private boolean activo;
 
+	@Persistent
+    private String motivoPuesto;
+	
+	@Persistent
+    private String jornada;
+	
+	@Persistent
+    private String horasTrabajo;
+	
 	@Persistent
     private SegEmpleado empleado;
 
@@ -48,6 +54,30 @@ public class SegPuesto implements Serializable {
 
 	public Date getFecha_puesto() {
 		return fecha_puesto;
+	}
+
+	public String getMotivoPuesto() {
+		return motivoPuesto;
+	}
+
+	public String getJornada() {
+		return jornada;
+	}
+
+	public void setJornada(String jornada) {
+		this.jornada = jornada;
+	}
+
+	public String getHorasTrabajo() {
+		return horasTrabajo;
+	}
+
+	public void setHorasTrabajo(String horasTrabajo) {
+		this.horasTrabajo = horasTrabajo;
+	}
+
+	public void setMotivoPuesto(String motivoPuesto) {
+		this.motivoPuesto = motivoPuesto;
 	}
 
 	public void setFecha_puesto(Date fecha_puesto) {
@@ -68,14 +98,6 @@ public class SegPuesto implements Serializable {
 
 	public void setFunciones(String funciones) {
 		this.funciones = funciones;
-	}
-
-	public float getSalario() {
-		return salario;
-	}
-
-	public void setSalario(float salario) {
-		this.salario = salario;
 	}
 
 	public boolean getActivo() {

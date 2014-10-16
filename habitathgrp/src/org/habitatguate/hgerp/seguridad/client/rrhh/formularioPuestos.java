@@ -7,25 +7,24 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class formularioPuestos extends Composite {
 
@@ -38,7 +37,7 @@ public class formularioPuestos extends Composite {
     private DateBox dateFecha;
     private ListBox listActivo;
 	private TextArea txtFunciones;
-	private TextBox txtSalario;
+	private TextArea txtMotivoPuesto;
 	private ListBox ListPuesto ;
 	
 	public formularioPuestos(puestos a,Empleados e) {
@@ -83,26 +82,11 @@ public class formularioPuestos extends Composite {
 		absolutePanel.add(dateFecha, 259, 29);
 		dateFecha.setSize("227px", "34px");
 		
-		txtSalario = new TextBox();
-		txtSalario.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtSalario.getText().equals("")) {txtSalario.setText("0");}
-				else if(txtSalario.getText().equals(null)) {txtSalario.setText("0");}
-				else{
-					try{
-						Float.parseFloat(txtSalario.getText());
-					}catch(Exception e){
-                    	setMensaje("alert alert-error", "salario no valido");
-						txtSalario.setText("0.0");
-					}
-				}
-			}
-		});
-		txtSalario.setText("0.0");
-		txtSalario.setStyleName("gwt-TextBox2");
-		txtSalario.setMaxLength(100);
-		absolutePanel.add(txtSalario, 514, 29);
-		txtSalario.setSize("227px", "34px");
+		txtMotivoPuesto = new TextArea();
+		txtMotivoPuesto.setText("");
+		txtMotivoPuesto.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtMotivoPuesto, 514, 29);
+		txtMotivoPuesto.setSize("227px", "34px");
 		
 		listActivo = new ListBox();
 		listActivo.addItem("Si");
@@ -122,7 +106,7 @@ public class formularioPuestos extends Composite {
 					
 						if(bandera) {					
 							loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
-									txtFunciones.getText(), Float.parseFloat(txtSalario.getText()), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si")
+									txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),"",""
 									, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -141,7 +125,7 @@ public class formularioPuestos extends Composite {
 								});
 						}else{
 							loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
-								txtFunciones.getText(), Float.parseFloat(txtSalario.getText()), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si")
+								txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),"",""
 								, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
@@ -232,7 +216,7 @@ public class formularioPuestos extends Composite {
 		     String listActivo,
 			 String txtPuesto,
 			 String txtFunciones,
-			 String txtSalario)
+			 String txtMotivoPuesto)
 	{
 		this.id_puesto = id;
 		this.bandera = false;
@@ -248,7 +232,7 @@ public class formularioPuestos extends Composite {
 		    this.ListPuesto.setSelectedIndex(i);
 		}
 		this.txtFunciones.setText(txtFunciones);
-		this.txtSalario.setText(txtSalario);
+		this.txtMotivoPuesto.setText(txtMotivoPuesto);
 	}
 	
     public void setMensaje(String estilo, String mensaje){

@@ -57,7 +57,7 @@ public interface RecursosHumanosService extends RemoteService {
 			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test)throws IllegalArgumentException;
 	Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
-			float salario, boolean activo)throws IllegalArgumentException;
+			String motivoPuesto, boolean activo, String jornada, String horasTrabajo)throws IllegalArgumentException;
 	Long Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones) throws IllegalArgumentException;
 	Long Insertar_Entrevista(Long id_empleado,Date fecha_entrevista, String que_conoces,
 			String por_que_trabajas_aqui, String como_se_describe,
@@ -116,7 +116,7 @@ public interface RecursosHumanosService extends RemoteService {
 			String pregunta9, String pregunta10, Date fecha_test,
 			String tipo_test)throws IllegalArgumentException;
 	Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
-			float salario, boolean activo)throws IllegalArgumentException;
+			String motivoPuesto, boolean activo, String jornada, String horasTrabajo)throws IllegalArgumentException;
 	Long Actualizar_BDPuesto(Long id,Date fecha_puesto, String nombre_puesto, String funciones)
 			throws IllegalArgumentException;
 	Long Actualizar_Entrevista(Long id_empleado,Long id,Date fecha_entrevista, String que_conoces,

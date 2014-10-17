@@ -25,6 +25,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 		cellTable = new CellTable<DatosMinisterioTrabajo>();
 		cellTable.setPageSize(10);
 		initWidget(vp);
+	
 		AsyncDataProvider<DatosMinisterioTrabajo> provider = new AsyncDataProvider<DatosMinisterioTrabajo>() {
 		      @Override
 		      protected void onRangeChanged(HasData<DatosMinisterioTrabajo> display) {

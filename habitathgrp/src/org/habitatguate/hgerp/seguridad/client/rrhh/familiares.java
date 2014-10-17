@@ -23,6 +23,7 @@ public class familiares extends Composite  {
 	private Empleados empleado;
     private FlexTable flextable;
 	private Button btnAgregarHermanoa;
+	private Button btnAgregar_pariente;
 	private VerticalPanel panel = new VerticalPanel();
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	
@@ -35,7 +36,7 @@ public class familiares extends Composite  {
         panel.add(flextable);
         grid = new Grid(1, 3);
         panel.add(grid);
-        Button btnAgregar_pariente = new Button("Agregar hijo(a)");
+        btnAgregar_pariente = new Button("Agregar hijo(a)");
         grid.setWidget(0, 0, btnAgregar_pariente);
         
         btnAgregar_pariente.setStyleName("sendButton");

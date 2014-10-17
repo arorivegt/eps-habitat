@@ -1,3 +1,9 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -26,23 +32,25 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class BuscadorEmpleados extends Composite   {
 
     private  Grid grid;
-    private BuscadorEmpleados evaluacionesBuscador;
     private ListBox listBox;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private Label lbDato1;
     private Label lbDato2;
     private Label lbDato3;
-
+    private Image Busqueda;
     private TextBox txtDato1;
     private TextBox txtDato2;
     private TextBox txtDato3;
     private  ListBox listEstado ;
-    private Image Busqueda;
     private AbsolutePanel absolutePanel;
+    private BuscadorEmpleados evaluacionesBuscador;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    
+    /**
+     * constructor
+     */
 	public BuscadorEmpleados() {
 		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
-		initWidget(grid);
 		grid.setSize("1350px", "100%");
 					
 		absolutePanel = new AbsolutePanel();
@@ -164,79 +172,87 @@ public class BuscadorEmpleados extends Composite   {
 				}
 			}
 		});
+		
 		listBox.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listBox, 10, 16);
 		listBox.setSize("179px", "39px");
 						
-						Busqueda = new Image("images/ico-lupa.png");
-						Busqueda.addClickHandler(new ClickHandler() {
-							public void onClick(ClickEvent event) {
-								grid.clearCell(1, 0);
-								EmpleadoLista  nuevo = new EmpleadoLista();
+		Busqueda = new Image("images/ico-lupa.png");
+		Busqueda.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				grid.clearCell(1, 0);
+				EmpleadoLista  nuevo = new EmpleadoLista();
 
-								if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-								{
-									nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-											,listEstado.getItemText(listEstado.getSelectedIndex()));
-									grid.setWidget(1, 0,nuevo);
-								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
-								{
-									nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-											,listEstado.getItemText(listEstado.getSelectedIndex()));
-									grid.setWidget(1, 0,nuevo);
-									nuevo.setSize("1187px", "648px");
-								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
-								{
-									nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-											,listEstado.getItemText(listEstado.getSelectedIndex()));
-									grid.setWidget(1, 0,nuevo);
-									nuevo.setSize("1187px", "648px");
-								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
-								{
-									nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-											,listEstado.getItemText(listEstado.getSelectedIndex()));
-									grid.setWidget(1, 0,nuevo);
-									nuevo.setSize("1187px", "648px");
-								}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
-								{
-									nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-											txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-											,listEstado.getItemText(listEstado.getSelectedIndex()));
-									grid.setWidget(1, 0,nuevo);
-									nuevo.setSize("1187px", "648px");
-								}
-							}
-						});
+				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+				{
+					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getItemText(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
+				{
+					nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getItemText(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("1187px", "648px");
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
+				{
+					nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getItemText(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("1187px", "648px");
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
+				{
+					nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getItemText(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("1187px", "648px");
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
+				{
+					nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getItemText(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("1187px", "648px");
+				}
+			}
+		});
 						
-								absolutePanel.add(Busqueda, 760, 19);
-								Busqueda.setSize("103px", "55px");
-						
-						lbDato1 = new Label("Primer Nombre");
-						lbDato1.setStyleName("label");
-						absolutePanel.add(lbDato1, 205, 0);
-						lbDato1.setSize("368px", "19px");
-						
-						lbDato2 = new Label("Primer Apellido");
-						lbDato2.setStyleName("label");
-						absolutePanel.add(lbDato2, 390, 0);
-						lbDato2.setSize("157px", "13px");
-						
-						lbDato3 = new Label("Segundo Apellido");
-						lbDato3.setStyleName("label");
-						absolutePanel.add(lbDato3, 575, 0);
-						lbDato3.setSize("157px", "13px");
-						
-						Label lblBusquedaPor = new Label("Busqueda por: ");
-						lblBusquedaPor.setStyleName("label");
-						absolutePanel.add(lblBusquedaPor, 10, 0);
-						lblBusquedaPor.setSize("118px", "13px");
+		absolutePanel.add(Busqueda, 760, 19);
+		Busqueda.setSize("103px", "55px");
+		
+		lbDato1 = new Label("Primer Nombre");
+		lbDato1.setStyleName("label");
+		lbDato1.setSize("368px", "19px");
+		absolutePanel.add(lbDato1, 205, 0);
+		
+		lbDato2 = new Label("Primer Apellido");
+		lbDato2.setStyleName("label");
+		lbDato2.setSize("157px", "13px");
+		absolutePanel.add(lbDato2, 390, 0);
+		
+		lbDato3 = new Label("Segundo Apellido");
+		lbDato3.setStyleName("label");
+		lbDato3.setSize("157px", "13px");
+		absolutePanel.add(lbDato3, 575, 0);
+		
+		Label lblBusquedaPor = new Label("Busqueda por: ");
+		lblBusquedaPor.setStyleName("label");
+		lblBusquedaPor.setSize("118px", "13px");
+		absolutePanel.add(lblBusquedaPor, 10, 0);
+	
+		initWidget(grid);
 		
 	}
-	
+	/**
+	 * agrega un empleado con los datos extraidos del datastore
+	 * como formulario de datos, familia, academico, idiomas
+	 * referencia laboral, personal, etc.
+	 * @param id_empleado
+	 */
 	public void Empleado_registrado(final Long id_empleado){
 
 		grid.clearCell(1, 0);
@@ -320,6 +336,11 @@ public class BuscadorEmpleados extends Composite   {
 
         });
 	}
+	/**
+	 * muestra un mensaje con estilo
+	 * @param estilo
+	 * @param mensaje
+	 */
 	public void setMensaje(String estilo, String mensaje){
 		final DialogBox Registro2 = new DialogBox();
         final HTML serverResponseLabel = new HTML();

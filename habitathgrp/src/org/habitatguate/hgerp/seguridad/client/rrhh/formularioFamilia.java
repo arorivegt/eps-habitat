@@ -36,12 +36,12 @@ public class formularioFamilia  extends Composite  {
 	private TextBox txtOcupacion;
 	private TextBox txtParentesco;
 	private TextBox txtEdad ;
-	
+	private AbsolutePanel absolutePanel ;
 	public formularioFamilia(String pariente, familiares a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("1050px", "100px");

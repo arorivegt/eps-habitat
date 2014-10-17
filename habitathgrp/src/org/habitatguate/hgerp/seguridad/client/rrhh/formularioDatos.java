@@ -458,14 +458,14 @@ public class formularioDatos extends Composite {
 				}
 			}
 		});
-		absolutePanel.add(noCuenta, 320, 536);
+		absolutePanel.add(noCuenta, 36, 545);
 		
 		tipoCuenta = new ListBox();
 		tipoCuenta.addItem("Ahorro","0");
 		tipoCuenta.addItem("Monetaria","1");
-		tipoCuenta.setSize("227px", "34px");
+		tipoCuenta.setSize("227px", "36px");
 		tipoCuenta.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(tipoCuenta, 40, 536);
+		absolutePanel.add(tipoCuenta, 591, 545);
 		
 
 		nombreBanco = new ListBox();
@@ -473,7 +473,7 @@ public class formularioDatos extends Composite {
 		nombreBanco.addItem("Banrural","1");
 		nombreBanco.setSize("230px", "36px");
 		nombreBanco.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(nombreBanco, 35, 687);
+		absolutePanel.add(nombreBanco, 319, 545);
 		
 		
 		txtDPI = new IntegerBox();
@@ -495,7 +495,7 @@ public class formularioDatos extends Composite {
 		txtDPI.setText("0");
 		txtDPI.setSize("227px", "34px");
 		txtDPI.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtDPI, 592, 536);
+		absolutePanel.add(txtDPI, 317, 687);
 		
 		listTienePasaporte = new ListBox();
 		listTienePasaporte.addChangeHandler(new ChangeHandler() 
@@ -569,7 +569,7 @@ public class formularioDatos extends Composite {
 				}
 			}
 		});
-		absolutePanel.add(dateAnnioNacimiento, 588, 680);
+		absolutePanel.add(dateAnnioNacimiento, 36, 680);
 		
 		txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
@@ -1044,19 +1044,19 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(label_11, 587, 449);
 		label_11.setSize("192px", "19px");
 		
-		Label label_12 = new Label("Cedula No. Orden");
-		label_12.setStyleName("label");
-		absolutePanel.add(label_12, 39, 518);
-		label_12.setSize("192px", "19px");
+		Label lblTipoDeCuenta = new Label("Tipo de Cuenta");
+		lblTipoDeCuenta.setStyleName("label");
+		absolutePanel.add(lblTipoDeCuenta, 590, 527);
+		lblTipoDeCuenta.setSize("192px", "19px");
 		
-		Label label_13 = new Label("Cedula No. Registro");
+		Label label_13 = new Label("No. Cuenta");
 		label_13.setStyleName("label");
-		absolutePanel.add(label_13, 320, 518);
+		absolutePanel.add(label_13, 36, 527);
 		label_13.setSize("192px", "19px");
 		
 		Label lblDpi = new Label("DPI");
 		lblDpi.setStyleName("label");
-		absolutePanel.add(lblDpi, 593, 518);
+		absolutePanel.add(lblDpi, 318, 669);
 		lblDpi.setSize("247px", "19px");
 		
 		Label label_15 = new Label("Pasaporte");
@@ -1073,11 +1073,6 @@ public class formularioDatos extends Composite {
 		label_17.setStyleName("label");
 		absolutePanel.add(label_17, 591, 593);
 		label_17.setSize("192px", "19px");
-		
-		Label lblCedulaExtendidamunicipio = new Label("Cedula (Municipio)");
-		lblCedulaExtendidamunicipio.setStyleName("label");
-		absolutePanel.add(lblCedulaExtendidamunicipio, 316, 662);
-		lblCedulaExtendidamunicipio.setSize("231px", "19px");
 		
 		Label label_20 = new Label("DIreccion Actual");
 		label_20.setStyleName("label");
@@ -1166,7 +1161,7 @@ public class formularioDatos extends Composite {
 		
 		Label label_28 = new Label("Año de Nacimiento");
 		label_28.setStyleName("label");
-		absolutePanel.add(label_28, 588, 655);
+		absolutePanel.add(label_28, 36, 655);
 		label_28.setSize("192px", "19px");
 		
 		lblD = new Label("Datos del Patrono: (Uso exclusivo de la Fundacion");
@@ -1174,10 +1169,10 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(lblD, 38, 1004);
 		lblD.setSize("449px", "19px");
 		
-		Label lblCedulaExtendidadepartamento = new Label("Cedula (Departamento)");
-		lblCedulaExtendidadepartamento.setStyleName("label");
-		absolutePanel.add(lblCedulaExtendidadepartamento, 36, 662);
-		lblCedulaExtendidadepartamento.setSize("230px", "19px");
+		Label lbNombreBanco = new Label("Nombre del Banco");
+		lbNombreBanco.setStyleName("label");
+		absolutePanel.add(lbNombreBanco, 320, 527);
+		lbNombreBanco.setSize("230px", "19px");
 		
 		Label lblDepartamentoResidencia = new Label("Departamento residencia");
 		lblDepartamentoResidencia.setStyleName("label");

@@ -32,32 +32,37 @@ public class formularioPuestos extends Composite {
 	private Empleados empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	private AbsolutePanel absolutePanel;
     
     private DateBox dateFecha;
     private ListBox listActivo;
+	private ListBox listPuesto ;
+	private ListBox listJornada ;
+	private ListBox listHorasTrabajadas;
+	private Button btnGuardar;
+	private Button btnEliminar;
 	private TextArea txtFunciones;
 	private TextArea txtMotivoPuesto;
-	private ListBox ListPuesto ;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	
 	public formularioPuestos(puestos a,Empleados e) {
 
 		this.empleado = e;
 		this.aa = a;
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
-		initWidget(absolutePanel);
 		absolutePanel.setSize("1024px", "170px");
+		initWidget(absolutePanel);
 
-		ListPuesto = new ListBox();
-		ListPuesto.addItem("nada seleccionado");
-		ListPuesto.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-
+		listPuesto = new ListBox();
+		listPuesto.addItem("nada seleccionado");
+		listPuesto.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) 
+			{
 				long lg;
 				for (AuxBDPuesto p : aa.BDpuestos) 
 				{
-					lg  = Long.valueOf(ListPuesto.getValue(ListPuesto.getSelectedIndex()));
+					lg  = Long.valueOf(listPuesto.getValue(listPuesto.getSelectedIndex()));
 					if(lg == p.getId_puesto())
 					{
 						txtFunciones.setText(p.getFunciones());
@@ -67,9 +72,9 @@ public class formularioPuestos extends Composite {
 					
 			}
 		});
-		ListPuesto.setStyleName("gwt-TextBox2");
-		absolutePanel.add(ListPuesto, 10, 29);
-		ListPuesto.setSize("227px", "34px");
+		listPuesto.setStyleName("gwt-TextBox2");
+		listPuesto.setSize("227px", "34px");
+		absolutePanel.add(listPuesto, 10, 29);
 		
 		dateFecha = new DateBox();
 		dateFecha.setValue(new Date(1407519035556L));
@@ -79,78 +84,130 @@ public class formularioPuestos extends Composite {
 		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 259, 29);
 		dateFecha.setSize("227px", "34px");
+		absolutePanel.add(dateFecha, 259, 29);
 		
 		txtMotivoPuesto = new TextArea();
 		txtMotivoPuesto.setText("");
 		txtMotivoPuesto.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtMotivoPuesto, 514, 29);
 		txtMotivoPuesto.setSize("227px", "34px");
+		absolutePanel.add(txtMotivoPuesto, 514, 29);
+
+		listActivo = new ListBox();
+		listActivo.addItem("Si");
+		listActivo.addItem("No");
+		listActivo.setStyleName("gwt-TextBox2");
+		listActivo.setSize("227px", "34px");
+		absolutePanel.add(listActivo, 761, 29);
 		
 		listActivo = new ListBox();
 		listActivo.addItem("Si");
 		listActivo.addItem("No");
 		listActivo.setStyleName("gwt-TextBox2");
+		listActivo.setSize("227px", "34px");
 		absolutePanel.add(listActivo, 761, 29);
-		listActivo.setSize("227px", "34px");;
 		
-				Button btnGuardar = new Button("Send");
-				btnGuardar.addClickHandler(new ClickHandler() {
-					public void onClick(ClickEvent event) {
-						try{
-							new Date(dateFecha.getValue().getTime());
-						}catch(Exception e){
-							dateFecha.setValue(new Date(1407518124684L));
-						}
-					
-						if(bandera) {					
-							loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
-									txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),"",""
-									, new AsyncCallback<Long>(){
-                        public void onFailure(Throwable caught) 
-                        {
-                        	setMensaje("alert alert-error", 
-                        			"Error !! \nal Guardar Datos");
-                        }
-
-								@Override
-                        public void onSuccess(Long result)
-                        {
-									id_puesto = result;
-									bandera = false;
-		                        	setMensaje("alert alert-success", 
-		                        			"Datos Guardados\n exitosamente!!!");
-                        }
-								});
-						}else{
-							loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), ListPuesto.getItemText(ListPuesto.getSelectedIndex()), 
-								txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),"",""
-								, new AsyncCallback<Long>(){
-                    public void onFailure(Throwable caught) 
-                    {
-                    	setMensaje("alert alert-error", 
-                    			"Error !! \nal Actualizar Datos");
-                    }
-
-							@Override
-                    public void onSuccess(Long result)
-                    {
-								bandera = false;
-			                	setMensaje("alert alert-success", 
-			                			"Datos Actualizados\n exitosamente!!!");
-                    }
-							});
-						}
-					}
-				});
-				btnGuardar.setText("Guardar");
-				btnGuardar.setStylePrimaryName("sendButton");
-				btnGuardar.setStyleName("sendButton");
-				absolutePanel.add(btnGuardar, 514, 125);
-				btnGuardar.setSize("227px", "34px");
+		listJornada = new ListBox();
+		listJornada.addItem("Diurna","0");
+		listJornada.addItem("Nocturna","1");
+		listJornada.addItem("Mixta","2");
+		listJornada.setStyleName("gwt-TextBox2");
+		listJornada.setSize("227px", "34px");
+		absolutePanel.add(listJornada, 780, 29);
 		
-		Button btnEliminar = new Button("Send");
+
+		listHorasTrabajadas = new ListBox();
+		listHorasTrabajadas.addItem("0");
+		listHorasTrabajadas.addItem("1");
+		listHorasTrabajadas.addItem("2");
+		listHorasTrabajadas.addItem("3");
+		listHorasTrabajadas.addItem("4");
+		listHorasTrabajadas.addItem("5");
+		listHorasTrabajadas.addItem("6");
+		listHorasTrabajadas.addItem("7");
+		listHorasTrabajadas.addItem("8");
+		listHorasTrabajadas.addItem("9");
+		listHorasTrabajadas.addItem("10");
+		listHorasTrabajadas.addItem("11");
+		listHorasTrabajadas.addItem("12");
+		listHorasTrabajadas.addItem("13");
+		listHorasTrabajadas.addItem("14");
+		listHorasTrabajadas.addItem("15");
+		listHorasTrabajadas.addItem("16");
+		listHorasTrabajadas.addItem("17");
+		listHorasTrabajadas.addItem("18");
+		listHorasTrabajadas.addItem("19");
+		listHorasTrabajadas.addItem("20");
+		listHorasTrabajadas.addItem("21");
+		listHorasTrabajadas.addItem("22");
+		listHorasTrabajadas.addItem("23");
+		listHorasTrabajadas.addItem("24");
+		listHorasTrabajadas.setStyleName("gwt-TextBox2");
+		listHorasTrabajadas.setSize("227px", "34px");
+		absolutePanel.add(listHorasTrabajadas, 800, 29);
+		
+		btnGuardar = new Button("Send");
+		btnGuardar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				try{
+					new Date(dateFecha.getValue().getTime());
+				}catch(Exception e){
+					dateFecha.setValue(new Date(1407518124684L));
+				}
+			
+				if(bandera) {					
+					loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
+							txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),
+							listJornada.getValue(listJornada.getSelectedIndex()),listHorasTrabajadas.getValue(listHorasTrabajadas.getSelectedIndex())
+							, new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                	setMensaje("alert alert-error", 
+                			"Error !! \nal Guardar Datos");
+                }
+
+						@Override
+                public void onSuccess(Long result)
+                {
+							id_puesto = result;
+							bandera = false;
+                        	setMensaje("alert alert-success", 
+                        			"Datos Guardados\n exitosamente!!!");
+                }
+						});
+				}else{
+					loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
+						txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si"),
+						listJornada.getItemText(listJornada.getSelectedIndex()),listHorasTrabajadas.getItemText(listHorasTrabajadas.getSelectedIndex())
+						, new AsyncCallback<Long>(){
+            public void onFailure(Throwable caught) 
+            {
+            	setMensaje("alert alert-error", 
+            			"Error !! \nal Actualizar Datos");
+            }
+
+					@Override
+            public void onSuccess(Long result)
+            {
+						bandera = false;
+	                	setMensaje("alert alert-success", 
+	                			"Datos Actualizados\n exitosamente!!!");
+            }
+					});
+				}
+			}
+		});
+		btnGuardar.setText("Guardar");
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		btnGuardar.setSize("227px", "34px");
+		absolutePanel.add(btnGuardar, 514, 125);
+		
+		btnEliminar = new Button("Send");
+		btnEliminar.setText("Eliminar");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		btnEliminar.setSize("227px", "34px");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -162,46 +219,44 @@ public class formularioPuestos extends Composite {
 				}
 			}
 		});
+		absolutePanel.add(btnEliminar, 761, 125);
 		
 		txtFunciones = new TextArea();
 		txtFunciones.setReadOnly(true);
 		txtFunciones.getElement().setAttribute("maxlength", "500");
 		txtFunciones.setStyleName("gwt-TextBox");
-		absolutePanel.add(txtFunciones, 10, 97);
 		txtFunciones.setSize("428px", "62px");
-		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("sendButton");
-		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 761, 125);
-		btnEliminar.setSize("227px", "34px");
+		absolutePanel.add(txtFunciones, 10, 97);
+		
 		
 		Label lblNivelAcademico = new Label("Puesto");
 		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
 		lblNivelAcademico.setSize("192px", "13px");
+		absolutePanel.add(lblNivelAcademico, 10, 10);
 		
 		Label lblTitulodiploma = new Label("Fecha");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 259, 10);
 		lblTitulodiploma.setSize("192px", "13px");
+		absolutePanel.add(lblTitulodiploma, 259, 10);
 		
 		Label lblParentesco = new Label("Salario");
 		lblParentesco.setStyleName("label");
-		absolutePanel.add(lblParentesco, 514, 10);
 		lblParentesco.setSize("192px", "13px");
+		absolutePanel.add(lblParentesco, 514, 10);
 		
 		Label lblActivo = new Label("Activo");
 		lblActivo.setStyleName("label");
-		absolutePanel.add(lblActivo, 761, 10);
 		lblActivo.setSize("192px", "13px");
+		absolutePanel.add(lblActivo, 761, 10);
 		
 		Label lblFunciones = new Label("Funciones");
 		lblFunciones.setStyleName("label");
-		absolutePanel.add(lblFunciones, 10, 78);
 		lblFunciones.setSize("192px", "13px");
+		absolutePanel.add(lblFunciones, 10, 78);
 
-	    for (AuxBDPuesto p : this.aa.BDpuestos) {
-	    	ListPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
+	    for (AuxBDPuesto p : this.aa.BDpuestos) 
+	    {
+	    	listPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 	    }
 		
 		
@@ -216,8 +271,12 @@ public class formularioPuestos extends Composite {
 		     String listActivo,
 			 String txtPuesto,
 			 String txtFunciones,
-			 String txtMotivoPuesto)
+			 String txtMotivoPuesto,
+			 String listJornada,
+			 String listhorasTrabajadas)
 	{
+		this.listActivo.setVisible(false);
+		this.listActivo.setEnabled(false);
 		this.id_puesto = id;
 		this.bandera = false;
 		this.dateFecha.setValue(new Date(dateFecha));
@@ -227,9 +286,19 @@ public class formularioPuestos extends Composite {
 		    this.listActivo.setSelectedIndex(i);
 		}
 		bandera = true;
-		for(int i=0; i < this.ListPuesto.getItemCount() && bandera; i++){
-			bandera = !this.ListPuesto.getItemText(i).equals(txtPuesto);
-		    this.ListPuesto.setSelectedIndex(i);
+		for(int i=0; i < this.listPuesto.getItemCount() && bandera; i++){
+			bandera = !this.listPuesto.getValue(i).equals(txtPuesto);
+		    this.listPuesto.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listJornada.getItemCount() && bandera; i++){
+			bandera = !this.listJornada.getValue(i).equals(listJornada);
+		    this.listJornada.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listHorasTrabajadas.getItemCount() && bandera; i++){
+			bandera = !this.listHorasTrabajadas.getItemText(i).equals(listhorasTrabajadas);
+		    this.listHorasTrabajadas.setSelectedIndex(i);
 		}
 		this.txtFunciones.setText(txtFunciones);
 		this.txtMotivoPuesto.setText(txtMotivoPuesto);

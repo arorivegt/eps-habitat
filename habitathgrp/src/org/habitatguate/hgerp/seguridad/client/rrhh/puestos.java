@@ -59,7 +59,7 @@ public class puestos extends Composite  {
 			    	String valor = "No";
 			    	if(n2.isActivo()){ valor = "Si";}
 			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
-			    					n2.getFunciones(),""+n2.getMotivoPuesto());
+			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

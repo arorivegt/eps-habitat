@@ -87,7 +87,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setSalario_base(0.0f);
 				em.setDepto_municipio_residencia("01,101");
 				em.setEstado_civil("0");
-				em.setPais("73");
+				em.setPais("83");
 				em.setSexo("1");
 				em.setTipo_licencia("0");
 				em.setPasaporte("0");

@@ -11,6 +11,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +30,8 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
  */
 public class academico extends Composite  {
 
-	
+
+	private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private Button btnAgregar;
@@ -44,6 +46,7 @@ public class academico extends Composite  {
 	 {
 
 			this.empleado = empleado;
+			mensaje = new Mensaje();
 			
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -106,13 +109,13 @@ public class academico extends Composite  {
 		{
 	        public void onFailure(Throwable caught) 
 	        {
-	        	formularioAcademico.setMensaje("alert alert-error", "Error !! \nal ELiminar Formulario");
+	        	mensaje.setMensaje("alert alert-error", "Error !! \nal ELiminar Formulario");
 	        }
 	
 			@Override
 	        public void onSuccess(Long resultLong)
 	        {
-	        	formularioAcademico.setMensaje("alert alert-success", "Eliminado Exitosamente");
+				mensaje.setMensaje("alert alert-success", "Eliminado Exitosamente");
 		        flextable.remove(formularioAcademico);
 	        }
 	

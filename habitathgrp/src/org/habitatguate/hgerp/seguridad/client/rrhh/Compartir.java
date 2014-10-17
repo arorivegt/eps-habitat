@@ -13,12 +13,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Compartir extends Composite{
         
@@ -27,8 +24,11 @@ public class Compartir extends Composite{
        private Long idTes = 0L;
        private Long idEmpleadoCompartido = 0L;
        final SuggestBox txtUser;
+   	  private Mensaje mensaje; 
+   		
         public Compartir(Long idTest, Long id) 
         {
+			mensaje = new Mensaje();
         	this.idEmpleadoCompartido = id;
         	this.idTes = idTest;
         	AbsolutePanel rootPanel = new AbsolutePanel();
@@ -52,13 +52,13 @@ public class Compartir extends Composite{
 					    {
 				            public void onFailure(Throwable caught) 
 				            {
-			                	setMensaje("alert alert-error", 
+				            	mensaje.setMensaje("alert alert-error", 
 			                			"Error !! \nal Compartir Evaluacion");
 				            }
 	
 							public void onSuccess(String result)
 				            {
-			                	setMensaje("alert alert-success", result);
+								mensaje.setMensaje("alert alert-success", result);
 				            }
 	
 					    });
@@ -102,33 +102,5 @@ public class Compartir extends Composite{
 	    });
 	    return oracle;
     }
-        public void setMensaje(String estilo, String mensaje){
-            final DialogBox Registro2 = new DialogBox();
-            final HTML serverResponseLabel = new HTML();
-            final Button close= new Button("x");
-            Mensaje inicio = new Mensaje();
-            
-            Registro2.setStyleName(estilo);
-            inicio.mensajeEntrada(mensaje);
-            inicio.mensajeEstilo(estilo);
-            close.addStyleName("close");
-            VerticalPanel dialogVPanel = new VerticalPanel();
-            dialogVPanel.add(serverResponseLabel );
-            dialogVPanel.add(inicio);
-            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            dialogVPanel.add(close);
-            Registro2 .setWidget(dialogVPanel);
-            Registro2 .setModal(true);
-            Registro2 .setGlassEnabled(true);
-            Registro2 .setAnimationEnabled(true);
-            Registro2 .center();
-            Registro2 .show();
-            close.setFocus(true);
-        
-            close.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                Registro2.hide();
-            }
-            });
-        }
+       
 }

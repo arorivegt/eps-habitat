@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -17,6 +18,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 
 public class referenciaLaboral extends Composite  {
 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
      private VerticalPanel panel = new VerticalPanel();
@@ -24,6 +26,7 @@ public class referenciaLaboral extends Composite  {
 		
 	    public referenciaLaboral(Empleados e) {
 
+			mensaje = new Mensaje();
 			this.empleado = e;
 	        initWidget(panel);
 	        panel.setSize("761px", "79px");
@@ -64,14 +67,14 @@ public class referenciaLaboral extends Composite  {
 			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                	fa.setMensaje("alert alert-error", 
+                	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
-                	fa.setMensaje("alert alert-success", 
+					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }

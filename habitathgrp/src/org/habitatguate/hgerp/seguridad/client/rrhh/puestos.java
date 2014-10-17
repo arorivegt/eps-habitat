@@ -7,19 +7,20 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
-import com.google.gwt.user.client.Window;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 
 public class puestos extends Composite  {
 
+	private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private VerticalPanel panel = new VerticalPanel();
@@ -28,6 +29,7 @@ public class puestos extends Composite  {
 	 
 	    public puestos(Empleados e) {
 
+			mensaje = new Mensaje();
 			this.empleado = e;
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
@@ -70,14 +72,14 @@ public class puestos extends Composite  {
 			loginService.Eliminar_Puesto(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                	fa.setMensaje("alert alert-error", 
+                	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
-                	fa.setMensaje("alert alert-success", 
+					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
@@ -93,7 +95,7 @@ public class puestos extends Composite  {
 	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
 	    		public void onFailure(Throwable caught) 
 	    		{
-	    			Window.alert("Error en BD puestos"+caught);
+	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
 	    		}
 
 				@Override

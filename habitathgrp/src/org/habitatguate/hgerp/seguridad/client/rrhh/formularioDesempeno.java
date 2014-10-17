@@ -24,7 +24,7 @@ public class formularioDesempeno extends Composite {
     private Desempeno d;
     
 	public formularioDesempeno(final Desempeno d,final AuxTest prueba) {
-		
+
 		this.setD(d);
 		this.setPrueba(prueba);
 		AbsolutePanel absolutePanel = new AbsolutePanel();

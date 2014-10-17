@@ -11,6 +11,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,6 +31,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
  */
 public class BDpuestos extends Composite  {
 
+	private Mensaje mensaje; 
      private BDpuestos a;
 	 private Button btnAgregar;
      private final Grid grid ;
@@ -46,6 +48,7 @@ public class BDpuestos extends Composite  {
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         panel.setSize("761px", "85px");
+		mensaje = new Mensaje();
         
         flextable = new FlexTable();
         panel.add(flextable);
@@ -89,7 +92,7 @@ public class BDpuestos extends Composite  {
     	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
-            	fa.setMensaje("alert alert-error", "Error !! \nen la base de datos\nde puestos");
+    			mensaje.setMensaje("alert alert-error", "Error !! \nen la base de datos\nde puestos");
     		}
 
 			@Override

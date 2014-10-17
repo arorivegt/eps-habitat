@@ -14,16 +14,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class formularioBDPuestos extends Composite {
 
+	private Mensaje mensaje; 
 	private BDpuestos a;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
@@ -35,6 +33,7 @@ public class formularioBDPuestos extends Composite {
 	
 	public formularioBDPuestos(BDpuestos a) {
 
+		mensaje = new Mensaje();
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -80,9 +79,8 @@ public class formularioBDPuestos extends Composite {
 									txtFunciones.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
+                        	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
-                            //Window.alert("Error  al Guardar Datos"+caught);
                         }
 
 								@Override
@@ -90,9 +88,8 @@ public class formularioBDPuestos extends Composite {
                         {
 									id_puesto = result;
 									bandera = false;
-		                        	setMensaje("alert alert-success", 
+									mensaje.setMensaje("alert alert-success", 
 		                        			"Datos Guardados\n exitosamente!!!");
-									//Window.alert("Datos Guardados exitosamente!!! ");
                         }
 								});
 						}else{
@@ -100,18 +97,16 @@ public class formularioBDPuestos extends Composite {
 								txtFunciones.getText(), new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
-                    	setMensaje("alert alert-error", 
+                    	mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nal Actualizar Datos");
-                        //Window.alert("Error  al Actualizar Datos"+caught);
                     }
 
 							@Override
                     public void onSuccess(Long result)
                     {
 								bandera = false;
-			                	setMensaje("alert alert-success", 
+								mensaje.setMensaje("alert alert-success", 
 			                			"Datos Actualizados\n exitosamente!!!");
-                    	//Window.alert("Datos Actualizados exitosamente!!! ");
                     }
 							});
 						}
@@ -167,33 +162,5 @@ public class formularioBDPuestos extends Composite {
 		this.txtPuesto.setText(txtPuesto);
 		this.txtFunciones.setText(txtFunciones);
 	}
-	public void setMensaje(String estilo, String mensaje){
-		final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
-    
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-	}
+	
 }

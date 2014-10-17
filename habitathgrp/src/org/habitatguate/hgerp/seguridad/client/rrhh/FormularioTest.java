@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -19,9 +20,11 @@ public class FormularioTest extends Composite {
 	private AuxBDTest prueba;
     private DateBox dateFecha ;
     private TestForm d;
+	private Mensaje mensaje; 
     
 	public FormularioTest(final TestForm d,final AuxBDTest prueba) {
-		
+
+		mensaje = new Mensaje();
 		this.setD(d);
 		this.setPrueba(prueba);
 		AbsolutePanel absolutePanel = new AbsolutePanel();

@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.Grid;
 
 public class TestForm extends Composite  {
 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
      private VerticalPanel panel = new VerticalPanel();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -31,6 +32,7 @@ public class TestForm extends Composite  {
 	    
      public TestForm() {
 
+ 			mensaje = new Mensaje();
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();
@@ -105,33 +107,5 @@ public class TestForm extends Composite  {
 	    	});
 	    }
 
-    	public void setMensaje(String estilo, String mensaje){
-    		final DialogBox Registro2 = new DialogBox();
-            final HTML serverResponseLabel = new HTML();
-            final Button close= new Button("x");
-            Mensaje inicio = new Mensaje();
-            
-            Registro2.setStyleName(estilo);
-            inicio.mensajeEntrada(mensaje);
-            inicio.mensajeEstilo(estilo);
-            close.addStyleName("close");
-            VerticalPanel dialogVPanel = new VerticalPanel();
-            dialogVPanel.add(serverResponseLabel );
-            dialogVPanel.add(inicio);
-            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            dialogVPanel.add(close);
-            Registro2 .setWidget(dialogVPanel);
-            Registro2 .setModal(true);
-            Registro2 .setGlassEnabled(true);
-            Registro2 .setAnimationEnabled(true);
-            Registro2 .center();
-            Registro2 .show();
-            close.setFocus(true);
-        
-            close.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                Registro2.hide();
-            }
-        });
-    	}
+    	
 }

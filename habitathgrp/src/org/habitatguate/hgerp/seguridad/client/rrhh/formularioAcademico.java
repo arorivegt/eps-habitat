@@ -17,7 +17,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -32,6 +31,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 public class formularioAcademico extends Composite {
+	private Mensaje mensaje; 
 	private academico a;
 	private Empleados empleado;
 	private boolean bandera = true;
@@ -57,6 +57,7 @@ public class formularioAcademico extends Composite {
 	
 	public formularioAcademico(academico a,Empleados e) {
 
+		mensaje = new Mensaje();
 		this.empleado = e;
 		this.a = a;
 		absolutePanel = new AbsolutePanel();
@@ -120,7 +121,6 @@ public class formularioAcademico extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//validar fechas, si el datebox no esta vacio
 					try{
 						new Date(dateFinal.getValue().getTime());
 					}catch(Exception e){
@@ -140,7 +140,7 @@ public class formularioAcademico extends Composite {
 							txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
+                        	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                             //Window.alert("Error  al Guardar Datos"+caught);
                         }
@@ -151,7 +151,7 @@ public class formularioAcademico extends Composite {
 							id_historial_academico = result;
 							bandera = false;
 							
-                        	setMensaje("alert alert-success", 
+							mensaje.setMensaje("alert alert-success", 
                         			"Datos Guardados\n exitosamente!!!");
                         	//Window.alert("Datos Guardados exitosamente!!! ");
                         }
@@ -163,7 +163,7 @@ public class formularioAcademico extends Composite {
 					txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                	setMensaje("alert alert-error", 
+                	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Actualizar Datos");
                    // Window.alert("Error al Actualizar Datos"+caught);
                 }
@@ -172,7 +172,7 @@ public class formularioAcademico extends Composite {
                 public void onSuccess(Long result)
                 {
 					bandera = false;
-                	setMensaje("alert alert-success", 
+					mensaje.setMensaje("alert alert-success", 
                 			"Datos Actualizados\n exitosamente!!!");
                 	//Window.alert("Datos Actualizados exitosamente!!! ");
                 }
@@ -264,11 +264,8 @@ public class formularioAcademico extends Composite {
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
 		this.bandera = false;
-		//Window.alert("llenar datos"+URLFile);
-		//Window.alert("llenar datos"+this.URLFile);
 		if(!URLFile.equals(""))
 			Archivo();
-		//Window.alert("llenar datos"+this.URLFile);
 		this.id_historial_academico = id;
 		this.bandera = false;
 		this.dateInicio.setValue(new Date(dateInicio));
@@ -276,11 +273,9 @@ public class formularioAcademico extends Composite {
 		this.txtTitulo.setText(txtTitulo);
 		this.txtEstablecimiento.setText(txtEstablecimiento);
 		boolean bandera = true;
-		//Window.alert("lista: "+this.listNIvel_Academico.getItemCount());
 		for(int i=0; i < this.listNIvel_Academico.getItemCount() && bandera; i++){
 
 			bandera = !this.listNIvel_Academico.getValue(i).equals(listNIvel_Academico);
-			//Window.alert("lista: "+bandera + " i:"+ i);
 		    this.listNIvel_Academico.setSelectedIndex(i);
 		}
 		
@@ -300,9 +295,8 @@ public class formularioAcademico extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-	                	setMensaje("alert alert-info", 
+						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
-						//Window.alert("Selecciono un archivo?");
 						event.cancel();
 	        }
 				}
@@ -319,14 +313,11 @@ public class formularioAcademico extends Composite {
 						KeyFile = results.substring(i+4, j);
 						i = results.indexOf("http");
 						URLFile = results.substring(i, j);
-						//Window.alert(URLFile);
-						//Window.alert(KeyFile);
-						//pResponse.add(new HTML(results));
 						getFormUrl();
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-	                	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
 	                			results);
 						
 					}
@@ -383,7 +374,7 @@ public class formularioAcademico extends Composite {
 			}
 
 			public void onFailure(Throwable caught) {
-            	setMensaje("alert alert-error", 
+				mensaje.setMensaje("alert alert-error", 
             			"Algo esta Mal !! \nal iniciar Servicio");
 				//Window.alert("Something went wrong with the rpc call.");
 			}
@@ -407,7 +398,7 @@ public class formularioAcademico extends Composite {
 					public void onFailure(Throwable caught) {
 						form.setVisible(true);
 						grid.setVisible(false);
-	                	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
 	                			"Archivo !! \nNo eliminado");
 						//Window.alert("Archivo No Eliminado");
 					}
@@ -417,7 +408,7 @@ public class formularioAcademico extends Composite {
 						grid.setVisible(false);
 						KeyFile = "";
 						URLFile = "";
-	                	setMensaje("alert alert-success", 
+						mensaje.setMensaje("alert alert-success", 
 	                			"Archivo !! \n eliminado");
 						//Window.alert("Archivo Eliminado");
 					}
@@ -445,33 +436,5 @@ public class formularioAcademico extends Composite {
 		KeyFile = keyFile;
 	}
 	
-	public void setMensaje(String estilo, String mensaje){
-		final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
-    
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-	}
+
 }

@@ -14,7 +14,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -25,7 +24,6 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 
@@ -35,25 +33,25 @@ public class formularioIdiomas extends Composite {
 	private Empleados empleado;
 	private Long id_idioma = 0L;
 	private boolean bandera = true;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    
     private ListBox listNivel;
     private ListBox txtIdioma;
-    
     private FormPanel form;
-	private VerticalPanel formElements;
-	private FileUpload fileUpload;
 	private Button button;
+	private Grid grid;
+	private Mensaje mensaje; 
 	private String URLFile ="";
 	private String KeyFile ="";
-	private Grid grid;
+	private FileUpload fileUpload;
+	private VerticalPanel formElements;
 	private AbsolutePanel absolutePanel;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 
 	private final UploadUrlServiceAsync uploadUrlService = GWT
 			.create(UploadUrlService.class);
     
 	public formularioIdiomas(Idioma a,Empleados e) {
 
+		mensaje = new Mensaje();
 		this.empleado = e;
 		this.a = a;
 		absolutePanel = new AbsolutePanel();
@@ -123,7 +121,7 @@ public class formularioIdiomas extends Composite {
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
+                        	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
 
@@ -132,7 +130,7 @@ public class formularioIdiomas extends Composite {
                         {
 							id_idioma = result;
 							bandera = false;
-                        	setMensaje("alert alert-success", 
+							mensaje.setMensaje("alert alert-success", 
                         			"Datos Guardados\n exitosamente!!!");
                         }
 						});
@@ -141,7 +139,7 @@ public class formularioIdiomas extends Composite {
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
+                        	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Actualizar Datos");
                         }
 
@@ -149,7 +147,7 @@ public class formularioIdiomas extends Composite {
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-		                	setMensaje("alert alert-success", 
+							mensaje.setMensaje("alert alert-success", 
 		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
@@ -248,7 +246,7 @@ public class formularioIdiomas extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-	                	setMensaje("alert alert-info", 
+						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();
 					}
@@ -273,7 +271,7 @@ public class formularioIdiomas extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-	                	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
 	                			results);
 						
 					}
@@ -326,11 +324,10 @@ public class formularioIdiomas extends Composite {
 			public void onSuccess(String url) {
 				form.setAction(url);
 				button.setEnabled(true);
-				System.out.println("retrieved url for blob store: " + url);
 			}
 
 			public void onFailure(Throwable caught) {
-            	setMensaje("alert alert-error", 
+				mensaje.setMensaje("alert alert-error", 
             			"Error !! \nen el servicio");
 			}
 		});
@@ -363,7 +360,6 @@ public class formularioIdiomas extends Composite {
                 });
 			}
 		});
-		//Window.alert(URLFile);
 		grid.setWidget(0, 1, btnEliminar);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}
@@ -383,33 +379,5 @@ public class formularioIdiomas extends Composite {
 	public void setKeyFile(String keyFile) {
 		KeyFile = keyFile;
 	}
-    public void setMensaje(String estilo, String mensaje){
-        final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
-    
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-    }
+
 }

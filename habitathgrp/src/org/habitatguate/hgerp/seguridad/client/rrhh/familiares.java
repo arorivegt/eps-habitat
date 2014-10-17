@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -19,6 +20,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 
 public class familiares extends Composite  {
 
+	private Mensaje mensaje; 
 	private Grid grid;
 	private Empleados empleado;
     private FlexTable flextable;
@@ -29,6 +31,7 @@ public class familiares extends Composite  {
 	
     public familiares(Empleados e) {
 
+		mensaje = new Mensaje();
 		this.empleado = e;
         initWidget(panel);
         panel.setSize("761px", "381px");
@@ -98,7 +101,7 @@ public class familiares extends Composite  {
 		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
-            	fa.setMensaje("alert alert-error", 
+            	mensaje.setMensaje("alert alert-error", 
             			"Error !! \nal eliminar");
                 Window.alert("Error al ELiminar"+caught);
             }
@@ -106,7 +109,7 @@ public class familiares extends Composite  {
 			@Override
             public void onSuccess(Long result)
             {
-            	fa.setMensaje("alert alert-success", 
+				mensaje.setMensaje("alert alert-success", 
             			"Eliminado\n exitosamente!!!");
                 flextable.remove(fa);
             }

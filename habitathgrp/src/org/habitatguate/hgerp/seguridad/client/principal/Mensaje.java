@@ -1,8 +1,13 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Mensaje extends Composite {
 	
@@ -27,4 +32,35 @@ public class Mensaje extends Composite {
 	{
 		mensaje.setStyleName(cadena);
 	}
+	
+	public void setMensaje(String estilo, String mensaje)
+	{
+        final DialogBox dialogo = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        
+        dialogo.setStyleName(estilo);
+        mensajeEntrada(mensaje);
+        mensajeEstilo(estilo);
+        close.addStyleName("close");
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(this);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        dialogo .setWidget(dialogVPanel);
+        dialogo .setModal(true);
+        dialogo .setGlassEnabled(true);
+        dialogo .setAnimationEnabled(true);
+        dialogo .center();
+        dialogo .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() 
+        {
+        	public void onClick(ClickEvent event) {
+        		dialogo.hide();
+        	}
+        });
+    }
 }

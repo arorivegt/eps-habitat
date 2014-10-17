@@ -8,38 +8,38 @@ import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FileUpload;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
+import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
+import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.FormPanel;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
-import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
-import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 
 public class formularioDatos extends Composite {
 
+	private Mensaje mensaje; 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
 	private boolean bandera = true;
@@ -121,7 +121,8 @@ public class formularioDatos extends Composite {
     private Button btnExportarDatos;
     
 	public formularioDatos(Empleados e,final int tipo) {
-		
+
+		mensaje = new Mensaje();
 		this.empleado = e;
 		this.setTipo(tipo);
 		
@@ -516,7 +517,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(noCuenta.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nNo Cuenta no valido");
                     	noCuenta.setText("0");
 					}
@@ -550,7 +551,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(txtDPI.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nDPI no valido");
 						txtDPI.setText("0");
 					}
@@ -600,7 +601,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(txtNoPasaporte.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nPasaporte no valido");
 						txtNoPasaporte.setText("0");
 					}
@@ -628,7 +629,7 @@ public class formularioDatos extends Composite {
 				try{
 					new Date(dateAnnioNacimiento.getValue().getTime());
 				}catch(Exception e){
-                	setMensaje("alert alert-error", 
+					mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nFecha Nacimiento no valida");
                 	dateAnnioNacimiento.setValue(new Date(1407518124684L));
 				}
@@ -692,7 +693,7 @@ public class formularioDatos extends Composite {
 		txtCorreoElectronico.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtCorreoElectronico.getText().equals("ejemplo@habitat.com")){
-                	setMensaje("alert alert-error", 
+					mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nEmail no valido");
                 	txtCorreoElectronico.setText("ejemplo@habitat.com");
 				}
@@ -706,7 +707,7 @@ public class formularioDatos extends Composite {
                         valid = ((Object)txtCorreoElectronico.getText()).toString().matches(emailPattern);
                 }
                 if(!valid){
-                	setMensaje("alert alert-error", 
+                	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nEmail no valido");
                 	txtCorreoElectronico.setText("ejemplo@habitat.com");
                 }
@@ -729,7 +730,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(txtTelefonoCasa.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nTelefono de Casa no valido");
 						txtTelefonoCasa.setText("0");
 					}
@@ -751,7 +752,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(txtTelefonoCelular.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nTelefono celular no valido");
 						txtTelefonoCelular.setText("0");
 					}
@@ -805,7 +806,7 @@ public class formularioDatos extends Composite {
 					try{
 						Integer.parseInt(txtNoLicencia.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nLicencia no valido");
 						txtNoLicencia.setText("0");
 					}
@@ -845,7 +846,7 @@ public class formularioDatos extends Composite {
 				try{
 					new Date(dateFechaIngreso.getValue().getTime());
 				}catch(Exception e){
-                	setMensaje("alert alert-error", 
+					mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nFecha de Ingreso no valida");
 					dateFechaIngreso.setValue(new Date(1407518124684L));
 				}
@@ -880,7 +881,7 @@ public class formularioDatos extends Composite {
 					try{
 						Float.parseFloat(txtSalarioBase.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nSalario no valido");
 						txtSalarioBase.setText("0");
 					}
@@ -902,7 +903,7 @@ public class formularioDatos extends Composite {
 					try{
 						Float.parseFloat(txtBonificacion.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nBonificacion no valido");
 						txtBonificacion.setText("0");
 					}
@@ -924,7 +925,7 @@ public class formularioDatos extends Composite {
 					try{
 						Float.parseFloat(txtTotal.getText());
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nTotal no valido");
 						txtTotal.setText("0");
 					}
@@ -975,7 +976,7 @@ public class formularioDatos extends Composite {
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
-	                            	setMensaje("alert alert-error", 
+	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Guardar Datos");
 	                            }
 
@@ -991,7 +992,7 @@ public class formularioDatos extends Composite {
 	                            	else
 	                            		empleado.NuevasPestanasdos();
 	                            	empleado.familia_unica();
-		                        	setMensaje("alert alert-success", 
+	                            	mensaje.setMensaje("alert alert-success", 
 		                        			"Datos Guardados\n exitosamente!!!");
 	                            }
 
@@ -1013,7 +1014,7 @@ public class formularioDatos extends Composite {
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
-	                            	setMensaje("alert alert-error", 
+	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Actualizar Datos");
 	                            }
 
@@ -1021,7 +1022,7 @@ public class formularioDatos extends Composite {
 	                            public void onSuccess(Long result)
 	                            {
 	                            	bandera = false;
-				                	setMensaje("alert alert-success", 
+	                            	mensaje.setMensaje("alert alert-success", 
 				                			"Datos Actualizados\n exitosamente!!!");
 	                            }
 
@@ -1842,7 +1843,7 @@ public class formularioDatos extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
-	                	setMensaje("alert alert-info", 
+						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();
 					}
@@ -1866,7 +1867,7 @@ public class formularioDatos extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
-                    	setMensaje("alert alert-error", 
+						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nal subir foto");
 						
 					}
@@ -1922,7 +1923,7 @@ public class formularioDatos extends Composite {
 			}
 
 			public void onFailure(Throwable caught) {
-            	setMensaje("alert alert-error", 
+				mensaje.setMensaje("alert alert-error", 
             			"Error !! \nen el servicio");
 			}
 		});
@@ -1958,7 +1959,6 @@ public class formularioDatos extends Composite {
 
 		image.setUrl(URLFile);
 		grid.setWidget(0, 1, btnEliminar);
-		//Window.alert(URLFile);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}
 
@@ -1986,33 +1986,5 @@ public class formularioDatos extends Composite {
 		this.tipo = tipo;
 	}
 	
-    public void setMensaje(String estilo, String mensaje){
-        final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
-    
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-    }
+
 }

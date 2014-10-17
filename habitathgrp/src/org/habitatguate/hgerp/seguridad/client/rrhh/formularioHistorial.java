@@ -6,22 +6,19 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 
 public class formularioHistorial extends Composite {
 
@@ -29,19 +26,23 @@ public class formularioHistorial extends Composite {
 	private Empleados empleado;
 	private boolean bandera = true;
 	private Long id_historial = 0L;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    
+	private Button btnActualizar ;
     private ListBox listTipo ;
     private DateBox dateFecha ;
     private TextArea txtDescripcion ;
+	private AbsolutePanel absolutePanel ;
+	private Button btnEliminar ;
+	private Mensaje mensaje; 
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    
     
 	public formularioHistorial(historiales a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+		mensaje = new Mensaje();
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
-		initWidget(absolutePanel);
 		absolutePanel.setSize("763px", "170px");
 		
 		dateFecha = new DateBox();
@@ -64,7 +65,7 @@ public class formularioHistorial extends Composite {
 		absolutePanel.add(listTipo, 259, 29);
 		listTipo.setSize("229px", "36px");
 		
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				try{
@@ -78,8 +79,7 @@ public class formularioHistorial extends Composite {
 							listTipo.getItemText(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
-                        			"Error !! \nal Guardar Datos");
+                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
                         }
 
 						@Override
@@ -87,8 +87,7 @@ public class formularioHistorial extends Composite {
                         {
 							id_historial = result;
 							bandera = false;
-                        	setMensaje("alert alert-success", 
-                        			"Datos Guardados\n exitosamente!!!");
+							mensaje.setMensaje("alert alert-success", "Datos Guardados\n exitosamente!!!");
                         }
 						});
 				}else{
@@ -96,16 +95,14 @@ public class formularioHistorial extends Composite {
 							listTipo.getItemText(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
-                        			"Error !! \nal Actualizar Datos");
+                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Actualizar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-		                	setMensaje("alert alert-success", 
-		                			"Datos Actualizados\n exitosamente!!!");
+							mensaje.setMensaje("alert alert-success", "Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
@@ -123,10 +120,9 @@ public class formularioHistorial extends Composite {
 		absolutePanel.add(txtDescripcion, 10, 93);
 		txtDescripcion.setSize("428px", "61px");
 		
-		Button btnEliminar = new Button("Send");
+		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
@@ -138,23 +134,24 @@ public class formularioHistorial extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("sendButton");
 		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 541, 160);
 		btnEliminar.setSize("227px", "34px");
+		absolutePanel.add(btnEliminar, 541, 160);
 		
 		Label lblNivelAcademico = new Label("Fecha");
 		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
 		lblNivelAcademico.setSize("192px", "13px");
+		absolutePanel.add(lblNivelAcademico, 10, 10);
 		
 		Label lblMotivo = new Label("Descripcion");
 		lblMotivo.setStyleName("label");
-		absolutePanel.add(lblMotivo, 10, 74);
 		lblMotivo.setSize("192px", "13px");
+		absolutePanel.add(lblMotivo, 10, 74);
 		
 		Label lblLoRecomienda = new Label("Tipo ");
 		lblLoRecomienda.setStyleName("label");
-		absolutePanel.add(lblLoRecomienda, 259, 10);
 		lblLoRecomienda.setSize("103px", "13px");
+		absolutePanel.add(lblLoRecomienda, 259, 10);
+		initWidget(absolutePanel);
 	}
 	
 	private void EliminarFormulario(){
@@ -170,42 +167,14 @@ public class formularioHistorial extends Composite {
 	{
 		this.id_historial = id;
 		this.bandera = false;
+		this.dateFecha.setValue(new Date(dateFecha));
+		this.txtDescripcion.setText(txtDescripcion);
+		
 		boolean bandera = true;
 		for(int i=0; i < this.listTipo.getItemCount() && bandera; i++){
 			bandera = !this.listTipo.getItemText(i).equals(listTipo);
 		    this.listTipo.setSelectedIndex(i);
 		}
-		this.dateFecha.setValue(new Date(dateFecha));
-		this.txtDescripcion.setText(txtDescripcion);
 	}
-    public void setMensaje(String estilo, String mensaje){
-        final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
-    
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-    }
 	
 }

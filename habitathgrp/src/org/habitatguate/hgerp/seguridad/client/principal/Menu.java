@@ -7,8 +7,10 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_Proveedor;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
@@ -129,6 +131,14 @@ public class Menu extends Composite {
 	@UiHandler("finan4")
 	void fina4a(ClickEvent event){
 		Buscador_Afiliado fmc = new Buscador_Afiliado();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+ 	
+ 	}	
+	@UiHandler("finan5")
+	void fina5(ClickEvent event){
+		Menu_Proveedores fmc = new Menu_Proveedores();
 		this.nuevo.getGrid().setWidth("1000");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, fmc);

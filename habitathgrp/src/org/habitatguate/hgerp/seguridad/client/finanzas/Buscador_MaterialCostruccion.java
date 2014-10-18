@@ -7,6 +7,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -22,6 +23,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+
 
 public class Buscador_MaterialCostruccion extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -48,7 +50,7 @@ public class Buscador_MaterialCostruccion extends Composite{
   	  }
     };
 	public Buscador_MaterialCostruccion(){
-	final Grid grid = new Grid(2, 1);
+	final Grid grid = new Grid(2, 2);
 	initWidget(grid);
 	grid.setWidth("1278px");
 	
@@ -57,7 +59,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
-	absolutePanel.setSize("1000px", "60px");
+	absolutePanel.setSize("1025px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
 	Label label = new Label("Nombre Material Costruccion");
@@ -78,7 +80,7 @@ public class Buscador_MaterialCostruccion extends Composite{
         }
     });	
 	
-	Label label_1 = new Label("Precio Unitario");
+	Label label_1 = new Label("Precio Sugerido");
 	label_1.setStyleName("label");
 	absolutePanel.add(label_1, 242, 10);
 	label_1.setSize("192px", "13px");
@@ -91,7 +93,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	absolutePanel.add(textBox_1, 242, 29);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Unidad Metrica");
+	Label label_2 = new Label("Unidad Medida");
 		label_2.setStyleName("label");
 		absolutePanel.add(label_2, 479, 10);
 	label_2.setSize("157px", "19px");
@@ -117,6 +119,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
+				
 
 			loginService.Insertar_MaterialCostruccion(textBox.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
 					new AsyncCallback<Long>(){
@@ -161,7 +164,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 			System.out.println("ya estan todos los afiliados");
 			e = new TablaGWT_MaterialCostruccion(result);
 			grid.setWidget(1, 0,e);
-			e.setSize("1000px", "300px");   			
+			e.setSize("700px", "300px"); 			
 			
 			
 		}

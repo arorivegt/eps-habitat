@@ -7,18 +7,19 @@ import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.finanzas.PagingDataGrid_MaterialCostruccion.TablaResources;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -35,13 +36,13 @@ import com.google.gwt.view.client.ProvidesKey;
  */
 public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
  
-    private DataGrid<T> dataGrid;
+    public DataGrid<T> dataGrid;
     private SimplePager pager;
     private String height;
     private ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
-	private Button botonEliminar;
+	//private Button botonEliminar;
     final MultiSelectionModel<T> selectionModel =
             new MultiSelectionModel<T>((ProvidesKey<T>)AuxDetallePlantillaSolucion.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -51,7 +52,8 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
         initWidget(dock);
         dataGrid = new DataGrid<T>(30,
                 GWT.<TablaResources> create(TablaResources.class));
-        dataGrid.setWidth("100%");
+    //    dataGrid.setWidth("100%");
+        dataGrid.setSize("1100px", "300px");
 
         SimplePager.Resources pagerResources = GWT
                 .create(SimplePager.Resources.class);
@@ -71,23 +73,18 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
  
         dataProvider.addDataDisplay(dataGrid);
         
-        botonEliminar = new Button("Eliminar Fila");
+        //botonEliminar = new Button("Eliminar Fila");
         
         pager.setVisible(true);
         dataGrid.setVisible(true);
-        botonEliminar.setVisible(true);
+       // botonEliminar.setVisible(true);
         dock.add(dataGrid, DockPanel.CENTER);
         dock.add(pager, DockPanel.SOUTH);
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
-        dock.add(botonEliminar,DockPanel.EAST);
-        botonEliminar.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {     			
-	
-            }
-          });
+        
+
 
     }
  
@@ -144,6 +141,29 @@ public abstract class PagingDataGrid_PlantillaSolucion<T> extends Composite {
     
     public List<T> getListMateriales(){
     	return this.dataProvider.getList();
+    }
+    
+    
+    public void EliminarFila(){
+    	Set<T> lista = selectionModel.getSelectedSet();
+    	iter = (Iterator<T>) lista.iterator();
+			while (iter.hasNext()){
+					objectoEliminado = iter.next();	
+         			dataProvider.getList().remove(objectoEliminado);
+
+			}
+    }
+    
+    public Double ActualizarTabla(){
+    	Double total = 0.0;
+    	Iterator<T> lista = dataProvider.getList().iterator();
+    		while (lista.hasNext()){
+    				AuxDetallePlantillaSolucion aux = (AuxDetallePlantillaSolucion)lista.next();
+    				total = total + aux.getSubTotal();
+    				aux.setCostoAcumulado(total);
+    		}
+    		dataProvider.refresh();
+    	return total;
     }
  
 }

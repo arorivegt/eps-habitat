@@ -18,15 +18,15 @@ public class TablaGWT_PlantillaSolucion extends Composite implements EntryPoint 
         grid = null;
 	}
 	public TablaGWT_PlantillaSolucion(List<AuxDetallePlantillaSolucion> datagridParametro){
+
         grid = new MyPaginationDataGrid_PlantillaSolucion<AuxDetallePlantillaSolucion>();
-        grid.setHeight("500px");
+        grid.setSize("1100x", "500px");
         grid.setDataList(datagridParametro);
         initWidget(grid);
 	}
 
 	
     public void onModuleLoad() {
-
         RootPanel.get("Tabla").add(this);
     }
     

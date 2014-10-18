@@ -10,11 +10,13 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucio
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -98,14 +100,14 @@ public class Plantilla_Solucion extends Composite{
  
     
     public Plantilla_Solucion() {
-    	final Grid grid = new Grid(2, 1);
+    	final Grid grid = new Grid(2, 2);
 		final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 		initWidget(grid);
 		grid.setWidth("1278px");
 		
 		e = new TablaGWT_PlantillaSolucion(new ArrayList<AuxDetallePlantillaSolucion>());
+		e.setSize("700px", "300px");
 		grid.setWidget(1, 0,e);
-		e.setSize("1000px", "300px");
 		
 		
 		
@@ -138,7 +140,7 @@ public class Plantilla_Solucion extends Composite{
 	    
 		
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1000px", "90px");
+		absolutePanel.setSize("1025px", "90px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		Label label = new Label("Nombre Plantilla");
@@ -170,18 +172,18 @@ public class Plantilla_Solucion extends Composite{
 			//-----------------------------	---------------------------------
 		
 		Image image = new Image("images/ico-lupa.png");
-		absolutePanel.add(image, 958, 0);
-		image.setSize("103px", "55px");
+		absolutePanel.add(image, 904, 29);
+		image.setSize("56px", "36px");
 		
 	//------------------------- NUEVO MATERIAL DE COSTRUCCION----------------------------------
 		Label label_2a = new Label("Nombre Material Costruccion");
 		label.setStyleName("label");
-		absolutePanel.add(label_2a, 5, 90);
+		absolutePanel.add(label_2a, 5, 71);
 		label.setSize("157px", "13px");
 		
 		suggestbox.setStyleName("gwt-SuggestBox");
 		absolutePanel.add(suggestbox, 5, 90);
-		suggestbox.setSize("227px", "30px");
+		suggestbox.setSize("219px", "30px");
 		
 		suggestbox.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
 			
@@ -208,7 +210,7 @@ public class Plantilla_Solucion extends Composite{
 		button_2a.setText("Agregar Material");
 		button_2a.setStylePrimaryName("gwt-TextBox2");
 		button_2a.setStyleName("gwt-TextBox2");
-		absolutePanel.add(button_2a, 720, 90);
+		absolutePanel.add(button_2a, 501, 92);
 		button_2a.setSize("157px", "40px");
 		
 		
@@ -244,8 +246,8 @@ public class Plantilla_Solucion extends Composite{
 		
 	//--------------------------------------	
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
+		Button btnGestionarPlantilla = new Button("Gestionar Plantilla");
+		btnGestionarPlantilla.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
 				if (!textBox_1.getText().equals("")){
@@ -280,14 +282,42 @@ public class Plantilla_Solucion extends Composite{
 			}
 		});		
 
-		button.setText("Nueva Plantilla");
-		button.setStylePrimaryName("gwt-TextBox2");
-		button.setStyleName("gwt-TextBox2");
-		absolutePanel.add(button, 720, 29);
-		button.setSize("157px", "40px");
+		btnGestionarPlantilla.setText("Gestionar Plantilla");
+		btnGestionarPlantilla.setStylePrimaryName("gwt-TextBox2");
+		btnGestionarPlantilla.setStyleName("gwt-TextBox2");
+		absolutePanel.add(btnGestionarPlantilla, 720, 29);
+		btnGestionarPlantilla.setSize("157px", "40px");
+		
+		AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+		absolutePanel_1.setStyleName("gwt-Label-new");
+		absolutePanel_1.setSize("100px", "500px");
+		grid.setWidget(1, 1, absolutePanel_1);
+		
+		Button eliminar = new Button("Agregar Material");
+		eliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				e.grid.EliminarFila();
+				costoAcumulado = e.grid.ActualizarTabla();
+			}
+		});
+		eliminar.setText("Eliminar Material");
+		eliminar.setStylePrimaryName("gwt-TextBox2");
+		eliminar.setStyleName("gwt-TextBox2");
+		absolutePanel_1.add(eliminar,0,10);
+		eliminar.setSize("145px", "38px");
 	
 
-	
+        Column<AuxDetallePlantillaSolucion, String> nomParamColumn = (Column<AuxDetallePlantillaSolucion, String>) e.grid.dataGrid.getColumn(4);
+        
+        nomParamColumn.setFieldUpdater(new FieldUpdater<AuxDetallePlantillaSolucion, String>() {
+			@Override
+			public void update(int index, AuxDetallePlantillaSolucion object, String value) {
+				
+				object.setPrecioUnit(Double.valueOf(value));
+				object.setSubTotal(object.getCantidad() * Double.valueOf(value));
+				costoAcumulado = e.grid.ActualizarTabla();
+			}
+        	});
 
 	
    

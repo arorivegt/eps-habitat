@@ -11,11 +11,13 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucio
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -98,7 +100,7 @@ public class Formulario_AsignarSolucion extends Composite{
       };
 	
 	public Formulario_AsignarSolucion(){
-		final Grid grid = new Grid(2, 1);
+		final Grid grid = new Grid(2, 2);
 		final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 		final PlantillaNameSuggestOracle plantilla = new PlantillaNameSuggestOracle();
 		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
@@ -286,6 +288,7 @@ public class Formulario_AsignarSolucion extends Composite{
 					textBox_1.setText(select.getPlantillaSolucion().getTipo());
 					e.grid.ActualizarList();
 					e.grid.setDataList(select.getPlantillaSolucion().getListaDetalle());
+					costoAcumulado = select.getPlantillaSolucion().getCostoFinal();
 				}
 			});
 			
@@ -399,6 +402,13 @@ public class Formulario_AsignarSolucion extends Composite{
 			absolutePanel_3.add(lblDiferencia, 10, 37);
 			lblDiferencia.setSize("157px", "13px");
 			
+			Button btnAsignarSolucion = new Button("Asignar Solucion");
+			btnAsignarSolucion.setText("Asignar Solucion");
+			btnAsignarSolucion.setStylePrimaryName("gwt-TextBox2");
+			btnAsignarSolucion.setStyleName("gwt-TextBox2");
+			absolutePanel_3.add(btnAsignarSolucion, 217, 86);
+			btnAsignarSolucion.setSize("134px", "22px");
+			
 			suggestBox_1.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
 				
 				@Override
@@ -410,6 +420,35 @@ public class Formulario_AsignarSolucion extends Composite{
 					textBox_2.setText(selectNuevoBene.getAfiliado().getNomAfiliado());
 				}
 			});
-		
+			
+			AbsolutePanel absolutePanel_4 = new AbsolutePanel();
+			absolutePanel_4.setStyleName("gwt-Label-new");
+			absolutePanel_4.setSize("100px", "500px");
+			grid.setWidget(1, 1, absolutePanel_4);
+			
+			Button eliminar = new Button("Agregar Material");
+			eliminar.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					e.grid.EliminarFila();
+					costoAcumulado = e.grid.ActualizarTabla();
+				}
+			});
+			eliminar.setText("Eliminar Material");
+			eliminar.setStylePrimaryName("gwt-TextBox2");
+			eliminar.setStyleName("gwt-TextBox2");
+			absolutePanel_4.add(eliminar,0,10);
+			eliminar.setSize("145px", "38px");
+			
+	        Column<AuxDetallePlantillaSolucion, String> nomParamColumn = (Column<AuxDetallePlantillaSolucion, String>) e.grid.dataGrid.getColumn(4);
+	        
+	        nomParamColumn.setFieldUpdater(new FieldUpdater<AuxDetallePlantillaSolucion, String>() {
+				@Override
+				public void update(int index, AuxDetallePlantillaSolucion object, String value) {
+					
+					object.setPrecioUnit(Double.valueOf(value));
+					object.setSubTotal(object.getCantidad() * Double.valueOf(value));
+					costoAcumulado = e.grid.ActualizarTabla();
+				}
+	        	});
 	}
 }

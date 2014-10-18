@@ -19,7 +19,7 @@ public class TablaGWT_MaterialCostruccion extends Composite implements EntryPoin
 	}
 	public TablaGWT_MaterialCostruccion(List<AuxMaterialCostruccion> datagridParametro){
         grid = new MyPaginationDataGrid_MaterialConstruccion<AuxMaterialCostruccion>();
-        grid.setHeight("500px");
+        grid.setSize("1100x", "500px");
         grid.setDataList(datagridParametro);
         initWidget(grid);
 	}

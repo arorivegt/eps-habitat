@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
@@ -10,6 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucio
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -77,6 +79,14 @@ public interface SqlServiceAsync {
 
 	void Insertar_Bene(String nomBeneficiario, String dirBeneficiario,
 			int telBeneficiario, Long idAfiliado, AsyncCallback<Long> callback);
+
+	void Insertar_Proveedor(Boolean aprobadoComision, String dirProveedor,
+			Date fechaIngreso, String nomProveedor, String numeroNit,
+			String paginaWeb, String personaJuridica, Boolean servicioEntrega,
+			String telProveedor,String observaciones, AsyncCallback<Long> callback);
+
+	void ConsultaTodosProveedor_PorAfiliado(Long Afiliado,
+			AsyncCallback<List<AuxProveedor>> callback);
 
 
 

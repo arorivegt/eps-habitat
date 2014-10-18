@@ -28,6 +28,9 @@ public class SegAfiliado implements Serializable {
 	@Persistent(mappedBy = "afiliado")
     @Element(dependent = "true")
 	private List <SegBeneficiario> beneficiario;
+	@Persistent(mappedBy = "afiliado")
+    @Element(dependent = "true")
+	private List <SegProveedor> proveedor;
 	@Persistent
 	@OneToMany(mappedBy = "afiliado")
 	private List<Long> empleados;

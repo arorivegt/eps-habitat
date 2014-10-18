@@ -28,7 +28,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private ScrollPanel panel3;
-	private Buscador_MaterialCostruccion bbs;
+	private Buscador_MaterialConstruccion bbs;
 	private Plantilla_Solucion ps;
 	private Formulario_AsignarSolucion fas;
     
@@ -78,7 +78,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 		panel3.setWidget(fas);
 	}
 	public void ItemUno(){
-		bbs = new Buscador_MaterialCostruccion();
+		bbs = new Buscador_MaterialConstruccion();
 		panel1.setWidget(bbs);
 	}
 	

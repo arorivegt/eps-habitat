@@ -14,6 +14,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
@@ -22,6 +23,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegProveedor;
 import org.habitatguate.hgerp.util.ConvertDate;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -198,7 +200,38 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 	
 }
 
-
+public Long Insertar_Proveedor(Boolean aprobadoComision,
+		String dirProveedor,
+		Date fechaIngreso,
+		String nomProveedor,
+		String numeroNit,
+		String paginaWeb,
+		String personaJuridica,
+		Boolean servicioEntrega,
+		String telProveedor,
+		String observaciones) throws IllegalArgumentException{
+	 Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	SegProveedor nuevo = new SegProveedor();
+	nuevo.setAprobadoComision(aprobadoComision);
+	nuevo.setDirProveedor(dirProveedor);
+	//nuevo.setFechaIngreso(fechaIngreso);
+	nuevo.setNomProveedor(nomProveedor);
+	nuevo.setNumeroNit(numeroNit);
+	nuevo.setPaginaWeb(paginaWeb);
+	nuevo.setPersonaJuridica(personaJuridica);
+	nuevo.setServicioEntrega(servicioEntrega);
+	nuevo.setTelProveedor(telProveedor);
+	nuevo.setObservaciones(observaciones);
+	try{
+		gestorPersistencia.makePersistent(nuevo);
+		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+		valor = nuevo.getIdProveedor().getId();
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+}
 
 
 	
@@ -351,6 +384,30 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 		return valor;
 	}
 
+	public List<AuxProveedor> ConsultaTodosProveedor_PorAfiliado(Long Afiliado){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegProveedor.class);
+		List<AuxProveedor> valor = new ArrayList<AuxProveedor>();
+		List<SegProveedor> execute = (List<SegProveedor>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegProveedor p : execute){
+				AuxProveedor aux = new AuxProveedor();
+				aux.setAprobadoComision(p.getAprobadoComision());
+				aux.setDirProveedor(p.getDirProveedor());
+				aux.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
+				aux.setIdProveedor(p.getIdProveedor().getId());
+				aux.setNomProveedor(p.getNomProveedor());
+				aux.setNumeroNit(p.getNumeroNit());
+				aux.setObservaciones(p.getObservaciones());
+				aux.setPaginaWeb(p.getPaginaWeb());
+				aux.setPersonaJuridica(p.getPersonaJuridica());
+				aux.setServicioEntrega(p.getServicioEntrega());
+				aux.setTelProveedor(p.getTelProveedor());
+				valor.add(aux);
+			}
+		}
+		return valor;
+	}
 	
 	//------------------------------------------MODIFICAR------------------------------------
     @Override

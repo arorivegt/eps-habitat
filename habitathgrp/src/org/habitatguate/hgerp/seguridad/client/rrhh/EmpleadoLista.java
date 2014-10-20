@@ -26,11 +26,11 @@ public class EmpleadoLista extends Composite {
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
 		initWidget(scrollPanel);
-		scrollPanel.setSize("1184px", "716px");
+		scrollPanel.setSize("100%", "716px");
 		
 		VerticalPanel verticalPanel = new VerticalPanel();
 		scrollPanel.setWidget(verticalPanel);
-		verticalPanel.setSize("1184px", "739px");
+		verticalPanel.setSize("100%", "739px");
 		
 		flexTable = new FlexTable();
 		verticalPanel.add(flexTable);

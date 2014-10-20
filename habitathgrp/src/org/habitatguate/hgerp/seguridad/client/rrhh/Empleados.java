@@ -1,5 +1,8 @@
- /**
- * 
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
  */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
@@ -23,6 +26,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
 /**
+ * 
  * @author anibaljose
  *
  */
@@ -47,17 +51,14 @@ public class Empleados extends Composite {
 	public Empleados(int tipo) {
 		
 		tabPanel = new TabPanel();
-		tabPanel.setVisible(true);
+		tabPanel.setSize("100%", "100%");
 		initWidget(tabPanel);
-		tabPanel.setWidth("100%");
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
 		tabPanel.add(scrollPanel, "Datos",true);
-		scrollPanel.setSize("100%", "695px");
+		scrollPanel.setSize("100%", "100%");
 		fd = new formularioDatos(this,tipo);
 		scrollPanel.setWidget(fd);
-		
-		
 	}	
 	
 	public void NuevasPestanas(){
@@ -65,7 +66,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
-		scrollPanel_1.setSize("100", "695px");
+		scrollPanel_1.setSize("100%", "1000px");
 		f = new familiares(this);
 		scrollPanel_1.setWidget(f);
 
@@ -73,14 +74,14 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_2 = new ScrollPanel();
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
-		scrollPanel_2.setSize("100", "480px");
+		scrollPanel_2.setSize("100%", "1000px");
 		a = new academico(this);
 		scrollPanel_2.setWidget(a);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
-		scrollPanel_3.setSize("100", "480px");
+		scrollPanel_3.setSize("100%", "1000px");
 		rl = new referenciaLaboral(this);///
 		scrollPanel_3.setWidget(rl);
 		rl.setHeight("236px");
@@ -88,14 +89,14 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
-		scrollPanel_5.setSize("100", "480px");
+		scrollPanel_5.setSize("100%", "1000px");
 		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);
 		
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
 		scrollPanel_4.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
-		scrollPanel_4.setSize("100", "480px");
+		scrollPanel_4.setSize("100%", "1000px");
 		setStyleName("");
 		i = new Idioma(this);
 		scrollPanel_4.setWidget(i);
@@ -103,42 +104,42 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_6 = new ScrollPanel();
 		scrollPanel_6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_6, "Desempeño", true);
-		scrollPanel_6.setSize("100", "480px");
+		scrollPanel_6.setSize("100%", "1000px");
 		fpp = new  Desempeno(id_empleado);
 		scrollPanel_6.setWidget(fpp);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_7, "Evaluacion", true);
-		scrollPanel_7.setSize("100", "480px");
+		scrollPanel_7.setSize("100%", "1000px");
 		fppd = new Evaluacion(id_empleado);
 		scrollPanel_7.setWidget(fppd);
 		
 		ScrollPanel scrollPanel_8 = new ScrollPanel();
 		scrollPanel_8.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_8, "Puestos ", true);
-		scrollPanel_8.setSize("100", "480px");
+		scrollPanel_8.setSize("100%", "1000px");
 		p = new puestos(this);
 		scrollPanel_8.setWidget(p);
 		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
-		scrollPanel_9.setSize("100", "480px");
+		scrollPanel_9.setSize("100%", "1000px");
 		fe = new formularioEntrevista(this);
 		scrollPanel_9.setWidget(fe);
 		
 		ScrollPanel scrollPanel_10 = new ScrollPanel();
 		scrollPanel_10.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_10, "Historial", true);
-		scrollPanel_10.setSize("100", "480px");
+		scrollPanel_10.setSize("100%", "1000px");
 		h = new historiales(this);
 		scrollPanel_10.setWidget(h);
 
 		ScrollPanel scrollPanel_11 = new ScrollPanel();
 		scrollPanel_11.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_11, "vacaciones", true);
-		scrollPanel_11.setSize("100", "480px");
+		scrollPanel_11.setSize("100%", "1000px");
 		v = new vacaciones(this);
 		scrollPanel_11.setWidget(v);
 	}
@@ -146,7 +147,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
-		scrollPanel_1.setSize("100", "695px");
+		scrollPanel_1.setSize("100%", "1000px");
 		f = new familiares(this);
 		scrollPanel_1.setWidget(f);
 
@@ -154,14 +155,14 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_2 = new ScrollPanel();
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
-		scrollPanel_2.setSize("100", "480px");
+		scrollPanel_2.setSize("100%", "1000px");
 		a = new academico(this);
 		scrollPanel_2.setWidget(a);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
-		scrollPanel_3.setSize("100", "480px");
+		scrollPanel_3.setSize("100%", "1000px");
 		rl = new referenciaLaboral(this);///
 		scrollPanel_3.setWidget(rl);
 		rl.setHeight("236px");
@@ -169,7 +170,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
-		scrollPanel_5.setSize("100", "480px");
+		scrollPanel_5.setSize("100%", "1000px");
 		rp = new referenciaPersonal(this);///
 		scrollPanel_5.setWidget(rp);
 
@@ -177,7 +178,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
 		scrollPanel_4.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
-		scrollPanel_4.setSize("100", "480px");
+		scrollPanel_4.setSize("100%", "1000px");
 		setStyleName("");
 		i = new Idioma(this);
 		scrollPanel_4.setWidget(i);
@@ -185,7 +186,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
-		scrollPanel_9.setSize("100", "480px");
+		scrollPanel_9.setSize("100%", "1000px");
 		fe = new formularioEntrevista(this);
 		scrollPanel_9.setWidget(fe);
 	}
@@ -195,7 +196,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_6 = new ScrollPanel();
 		scrollPanel_6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_6, "Desempeño", true);
-		scrollPanel_6.setSize("100", "480px");
+		scrollPanel_6.setSize("100%", "1000px");
 		fpp = new  Desempeno(id_empleado);
 		fpp.btnAgregar.setVisible(false);
 		fpp.btnAgregar.setEnabled(false);
@@ -205,7 +206,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_7, "Evaluacion", true);
-		scrollPanel_7.setSize("100", "480px");
+		scrollPanel_7.setSize("100%", "1000px");
 		fppd = new Evaluacion(id_empleado);
 		fppd.btnAgregar.setVisible(false);
 		fppd.btnAgregar.setEnabled(false);
@@ -265,7 +266,7 @@ public class Empleados extends Composite {
 					r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), 
 					r.getNoCuenta(), r.getTipoCuenta(),r.getNombreBanco(), r.getCui(), r.getTelefono(), r.getCelular(), r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), 
 					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado()
-					,r.getPasaporte(),r.getLicencia());
+					,r.getPasaporte(),r.getLicencia(),r.getEtnia(),r.getNombreEmergencia(),r.getTelefonoEmergencia(),r.getNombreEmergencia2(),r.getTelefonoEmergencia2());
 	
 	}
 	

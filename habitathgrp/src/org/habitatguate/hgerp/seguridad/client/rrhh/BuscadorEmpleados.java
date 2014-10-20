@@ -49,7 +49,7 @@ public class BuscadorEmpleados extends Composite   {
 		mensaje = new Mensaje();
 		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
-		grid.setSize("1350px", "100%");
+		grid.setSize("100%", "100%");
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
@@ -193,28 +193,28 @@ public class BuscadorEmpleados extends Composite   {
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 							,listEstado.getItemText(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("1187px", "648px");
+					nuevo.setSize("100%", "648px");
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 							,listEstado.getItemText(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("1187px", "648px");
+					nuevo.setSize("100%", "648px");
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
 					nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 							,listEstado.getItemText(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("1187px", "648px");
+					nuevo.setSize("100%", "648px");
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
 					nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 							,listEstado.getItemText(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("1187px", "648px");
+					nuevo.setSize("100%", "648px");
 				}
 			}
 		});
@@ -258,7 +258,7 @@ public class BuscadorEmpleados extends Composite   {
 		e.id_empleado = id_empleado;
 		e.NuevasPestanas(); 
 		grid.setWidget(1, 0,e);
-        e.setSize("1187px", "648px");
+        e.setSize("100%", "648px");
         
         loginService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
         	public void onFailure(Throwable caught) 

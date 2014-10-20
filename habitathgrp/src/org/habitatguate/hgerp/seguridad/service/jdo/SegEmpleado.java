@@ -116,7 +116,18 @@ public class SegEmpleado implements Serializable {
 	
 	@Persistent
     private String nombreBanco;
-
+	
+	@Persistent
+    private String NombreEmergencia;
+	
+	@Persistent
+    private String TelefonoEmergencia;
+	
+	@Persistent
+    private String NombreEmergencia2;
+	
+	@Persistent
+    private String TelefonoEmergencia2;
 	//aqui vienen todas los objetos con los que se relaciona
 
 	@Persistent(mappedBy = "empleado")
@@ -197,6 +208,9 @@ public class SegEmpleado implements Serializable {
 	
 	@Persistent
     private float bonificacion;
+	
+	@Persistent
+    private String Etnia;
 
 
 	
@@ -210,6 +224,38 @@ public class SegEmpleado implements Serializable {
 
 	public void setNoCuenta(String noCuenta) {
 		this.noCuenta = noCuenta;
+	}
+	
+	public String getNombreEmergencia() {
+		return NombreEmergencia;
+	}
+
+	public void setNombreEmergencia(String nombreEmergencia) {
+		NombreEmergencia = nombreEmergencia;
+	}
+
+	public String getTelefonoEmergencia() {
+		return TelefonoEmergencia;
+	}
+
+	public void setTelefonoEmergencia(String telefonoEmergencia) {
+		TelefonoEmergencia = telefonoEmergencia;
+	}
+
+	public String getNombreEmergencia2() {
+		return NombreEmergencia2;
+	}
+
+	public void setNombreEmergencia2(String nombreEmergencia2) {
+		NombreEmergencia2 = nombreEmergencia2;
+	}
+
+	public String getTelefonoEmergencia2() {
+		return TelefonoEmergencia2;
+	}
+
+	public void setTelefonoEmergencia2(String telefonoEmergencia2) {
+		TelefonoEmergencia2 = telefonoEmergencia2;
 	}
 
 	public String getTipoCuenta() {
@@ -226,6 +272,14 @@ public class SegEmpleado implements Serializable {
 
 	public void setNombreBanco(String nombreBanco) {
 		this.nombreBanco = nombreBanco;
+	}
+
+	public String getEtnia() {
+		return Etnia;
+	}
+
+	public void setEtnia(String etnia) {
+		Etnia = etnia;
 	}
 
 	public List<SegTestCompartidos> getTestCompartido() {

@@ -45,6 +45,8 @@ public class Menu extends Composite {
 	@UiHandler("rrhh1")
  	void rrhh1(ClickEvent event) {
  		BuscadorEmpleados buscador = new BuscadorEmpleados();
+ 		buscador.setSize("100%", "100%");
+ 		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
  	}
@@ -152,7 +154,7 @@ public class Menu extends Composite {
 		e.inavilidarDatosYPestanas();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, e);
-        e.setSize("1187px", "648px");
+        e.setSize("100%", "1000px");
 
         loginService.Empleado_Registrado(this.nuevo.getId_empleado(),new AsyncCallback<AuxEmpleado>(){
         	

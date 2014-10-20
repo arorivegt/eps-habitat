@@ -148,7 +148,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
-            String pasaporte, String licencia) throws IllegalArgumentException {
+            String pasaporte, String licencia,String Etnia,
+            String NombreEmergencia, String TelefonoEmergencia,
+            String NombreEmergencia2, String TelefonoEmergencia2
+           ) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -198,6 +201,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	         e.setEstado(Estado);
 	         e.setPasaporte(pasaporte);
 	         e.setLicencia(licencia);
+	         e.setEtnia(Etnia);
+	         e.setNombreEmergencia(NombreEmergencia.toUpperCase());
+	         e.setTelefonoEmergencia(TelefonoEmergencia);
+	         e.setNombreEmergencia2(NombreEmergencia2.toUpperCase());
+	         e.setTelefonoEmergencia2(TelefonoEmergencia2);
+	         
+	         
 	         gestorPersistencia.makePersistent(e); 
 	         valor = e.getId_empleado();
 	         
@@ -379,10 +389,12 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 }
 			return valor ;
 	}
-
+	
 	@Override
 	public Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto,
-			String funciones, String motivoPuesto, boolean activo, String jornada, String horasTrabajo)
+			String funciones, String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
+			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
+			boolean Sabado,boolean Domingo)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -397,6 +409,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	p.setActivo(activo);
 				 	p.setJornada(jornada);
 				 	p.setHorasTrabajo(horasTrabajo);
+				 	p.setLunes(Lunes);
+				 	p.setMartes(Martes);
+				 	p.setMiercoles(Miercoles);
+				 	p.setJueves(Jueves);
+				 	p.setViernes(Viernres);
+				 	p.setSabado(Sabado);
+				 	p.setDomingo(Domingo);
 		      	 	p.setEmpleado(e);
 		      	 	e.getPuestos().add(p);
 				 	valor =p.getId_puesto();
@@ -483,7 +502,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 	@Override
 	public Long Insertar_Vacaciones(Long id_empleado, Date fecha1, Date fecha2,
-			String descripcionl) throws IllegalArgumentException {
+			String descripcionl,String tipoPermisos) throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
 		Long valor = 0L;
@@ -493,6 +512,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	v.setFecha1(fecha1);
 				 	v.setFecha2(fecha2);
 				 	v.setDescripcion(descripcionl.toUpperCase());
+				 	v.setTipoPermisos(tipoPermisos);
 		      	 	v.setEmpleado(e);
 		      	 	e.getVacaciones().add(v);
 				 	valor = v.getId_vacaciones();
@@ -508,14 +528,18 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		            String estado_civil, String sexo, String primer_apellido,
 		            String segundo_apellido, String apellido_casada,
 		            String primer_nombre, String segundo_nombre, String IVS,
-		            String pais,String nit, String No_Dependientes, String noCuenta, String tipoCuenta, String nombreBanco, String cui,
+		            String pais,String nit, String No_Dependientes, String noCuenta, String tipoCuenta, 
+		            String nombreBanco, String cui,
 		            String tipo_pasaporte, String no_pasaporte,String direccion_actual,
 		            String depto_municipio_residencia, String email, String telefono,
 		            String celular, Date fecha_nacimiento, String tipo_licencia,
 		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
 		            String tipo_planilla, float salario_base, float total,
-		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, String licencia) throws IllegalArgumentException {
+		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, 
+		            String licencia, String Etnia,
+		            String NombreEmergencia, String TelefonoEmergencia,
+		            String NombreEmergencia2, String TelefonoEmergencia2) throws IllegalArgumentException {
 				
 
 
@@ -563,6 +587,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					         e.setEstado(Estado);
 					         e.setPasaporte(pasaporte);
 					         e.setLicencia(licencia);
+					         e.setEtnia(Etnia);
+					         e.setNombreEmergencia(NombreEmergencia.toUpperCase());
+					         e.setTelefonoEmergencia(TelefonoEmergencia);
+					         e.setNombreEmergencia2(NombreEmergencia2.toUpperCase());
+					         e.setTelefonoEmergencia2(TelefonoEmergencia2);
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -747,7 +776,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 			@Override
 			public Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto,
-					String funciones, String motivoPuesto, boolean activo,String jornada, String horasTrabajo)
+					String funciones, String motivoPuesto, boolean activo,String jornada, String horasTrabajo,
+					boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
+					boolean Sabado,boolean Domingo)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -765,6 +796,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	p.setJornada(jornada);
 						 	p.setHorasTrabajo(horasTrabajo);
 						 	p.setActivo(activo);
+						 	p.setLunes(Lunes);
+						 	p.setMartes(Martes);
+						 	p.setMiercoles(Miercoles);
+						 	p.setJueves(Jueves);
+						 	p.setViernes(Viernres);
+						 	p.setSabado(Sabado);
+						 	p.setDomingo(Domingo);
 						 	valor =p.getId_puesto();
 						 }finally {  
 							 Persistencia.close();  
@@ -852,7 +890,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 			@Override
 			public Long Actualizar_Vacaciones(Long id_empleado,Long id, Date fecha1, Date fecha2,
-					String descripcionl) throws IllegalArgumentException {
+					String descripcionl,String tipoPermisos) throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
 				Long valor = 0L;
@@ -865,6 +903,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	v.setFecha1(fecha1);
 						 	v.setFecha2(fecha2);
 						 	v.setDescripcion(descripcionl.toUpperCase());
+						 	v.setTipoPermisos(tipoPermisos);
 						 	valor = v.getId_vacaciones();
 						 }finally {  
 							 Persistencia.close();  
@@ -1050,6 +1089,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	nuevo.setEstado(p.getEstado());
 					    	nuevo.setPasaporte(p.getPasaporte());
 					    	nuevo.setLicencia(p.getLicencia());
+					    	nuevo.setEtnia(p.getEtnia());
+					    	nuevo.setNombreEmergencia(p.getNombreEmergencia());
+					    	nuevo.setTelefonoEmergencia(p.getTelefonoEmergencia());
+					    	nuevo.setNombreEmergencia2(p.getNombreEmergencia2());
+					    	nuevo.setTelefonoEmergencia2(p.getTelefonoEmergencia2());
 					    	List<SegEntrevista> results0 = p.getEntrevista();
 					    	if (!results0.isEmpty()) {
 							    for (SegEntrevista n0 : results0) {
@@ -1174,6 +1218,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 								 	pp.setActivo(n5.getActivo());
 								 	pp.setJornada(n5.getJornada());
 								 	pp.setHorasTrabajo(n5.getHorasTrabajo());
+								 	pp.setLunes(n5.getLunes());
+								 	pp.setMartes(n5.getMartes());
+								 	pp.setMiercoles(n5.getMiercoles());
+								 	pp.setJueves(n5.getJueves());
+								 	pp.setViernes(n5.getViernes());
+								 	pp.setSabado(n5.getSabado());
+								 	pp.setDomingo(n5.getDomingo());
 								 	nuevo.getPuestos().add(pp);
 							    }
 					    	}
@@ -1559,6 +1610,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	nuevo.setEstado(p.getEstado());
 				    	nuevo.setPasaporte(p.getPasaporte());
 				    	nuevo.setLicencia(p.getLicencia());
+				    	nuevo.setEtnia(p.getEtnia());
+				    	nuevo.setNombreEmergencia(p.getNombreEmergencia());
+				    	nuevo.setTelefonoEmergencia(p.getTelefonoEmergencia());
+				    	nuevo.setNombreEmergencia2(p.getNombreEmergencia2());
+				    	nuevo.setTelefonoEmergencia2(p.getTelefonoEmergencia2());
 				    	List<SegEntrevista> results0 = p.getEntrevista();
 				    	if (!results0.isEmpty()) {
 						    for (SegEntrevista n0 : results0) {
@@ -1682,6 +1738,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	pp.setMotivoPuesto(n5.getMotivoPuesto());
 							 	pp.setActivo(n5.getActivo());
 							 	pp.setHorasTrabajo(n5.getHorasTrabajo());
+							 	pp.setLunes(n5.getLunes());
+							 	pp.setMartes(n5.getMartes());
+							 	pp.setMiercoles(n5.getMiercoles());
+							 	pp.setJueves(n5.getJueves());
+							 	pp.setViernes(n5.getViernes());
+							 	pp.setSabado(n5.getSabado());
+							 	pp.setDomingo(n5.getDomingo());
 							 	nuevo.getPuestos().add(pp);
 						    }
 				    	}

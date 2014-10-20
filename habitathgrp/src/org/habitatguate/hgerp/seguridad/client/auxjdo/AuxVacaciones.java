@@ -14,6 +14,9 @@ public class AuxVacaciones implements IsSerializable{
 
 	
     private String Descripcion;
+    
+
+    private String tipoPermisos;
 	
 	public AuxVacaciones() {
 		super();
@@ -55,6 +58,14 @@ public class AuxVacaciones implements IsSerializable{
 
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
+	}
+
+	public String getTipoPermisos() {
+		return tipoPermisos;
+	}
+
+	public void setTipoPermisos(String tipoPermisos) {
+		this.tipoPermisos = tipoPermisos;
 	}
 
 

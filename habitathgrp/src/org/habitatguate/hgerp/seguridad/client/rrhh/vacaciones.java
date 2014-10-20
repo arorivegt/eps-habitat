@@ -55,7 +55,8 @@ public class vacaciones extends Composite  {
 	    		
 			    for ( AuxVacaciones n2 : results) {
 			    	formularioVacaciones fa = new  formularioVacaciones(this,empleado);
-			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2());
+			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
+			    				   n2.getTipoPermisos());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

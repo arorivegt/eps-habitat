@@ -92,8 +92,12 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param Estado
 	 * @param pasaporte
 	 * @param licencia
+	 * @param Etnia
+	 * @param NombreEmergencia
+	 * @param TelefonoEmergencia
+	 * @param NombreEmergencia2
+	 * @param TelefonoEmergencia2
 	 * @return
-	 * @throws IllegalArgumentException
 	 */
 	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
@@ -108,7 +112,10 @@ public interface RecursosHumanosService extends RemoteService {
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
-            String pasaporte, String licencia)  throws IllegalArgumentException;
+            String pasaporte, String licencia,String Etnia,
+            String NombreEmergencia, String TelefonoEmergencia,
+            String NombreEmergencia2, String TelefonoEmergencia2
+            )  throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -243,13 +250,22 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param activo
 	 * @param jornada
 	 * @param horasTrabajo
+	 * @param Lunes
+	 * @param Martes
+	 * @param Miercoles
+	 * @param Jueves
+	 * @param Viernres
+	 * @param Sabado
+	 * @param Domingo
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
 	Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
-			String motivoPuesto, boolean activo, String jornada, String horasTrabajo)throws IllegalArgumentException;
+			String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
+			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
+			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
 	/**
-	 * 
+	 *
 	 * @param fecha_puesto
 	 * @param nombre_puesto
 	 * @param funciones
@@ -318,11 +334,12 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param fecha1
 	 * @param fecha2
 	 * @param descripcionl
+	 * @param tipoPermisos
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
 	Long  Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, 
-			String descripcionl)throws IllegalArgumentException;
+			String descripcionl,String tipoPermisos)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -389,8 +406,12 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param Estado
 	 * @param pasaporte
 	 * @param licencia
+	 * @param Etnia
+	 * @param NombreEmergencia
+	 * @param TelefonoEmergencia
+	 * @param NombreEmergencia2
+	 * @param TelefonoEmergencia2
 	 * @return
-	 * @throws IllegalArgumentException
 	 */
 	Long Actualizar_Emppleado(Long id, String Stringafiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
@@ -405,7 +426,10 @@ public interface RecursosHumanosService extends RemoteService {
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
-            String pasaporte, String licencia)  throws IllegalArgumentException;
+            String pasaporte, String licencia,String Etnia,
+            String NombreEmergencia, String TelefonoEmergencia,
+            String NombreEmergencia2, String TelefonoEmergencia2
+            )  throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -548,11 +572,20 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param activo
 	 * @param jornada
 	 * @param horasTrabajo
+	 * @param Lunes
+	 * @param Martes
+	 * @param Miercoles
+	 * @param Jueves
+	 * @param Viernres
+	 * @param Sabado
+	 * @param Domingo
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
 	Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
-			String motivoPuesto, boolean activo, String jornada, String horasTrabajo)throws IllegalArgumentException;
+			String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
+			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
+			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id
@@ -628,11 +661,13 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param fecha1
 	 * @param fecha2
 	 * @param descripcionl
+	 * @param tipoPermisos
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
+
 	Long  Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, 
-			String descripcionl)throws IllegalArgumentException;
+			String descripcionl,String tipoPermisos)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado

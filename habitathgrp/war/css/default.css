@@ -14,6 +14,10 @@ body {
   margin: 400px 0px 70px;
   text-align: center;
 }*/
+
+table {
+	width: 100%;
+}
 .sendButton {
  background: #51B948;
 	color: #fff;
@@ -74,7 +78,7 @@ overflow: hidden;
 box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 color: darkgray;
 font-family: Oswald, sans-serif;
-font-size: 16px;
+font-size: 12px;
 font-weight: normal;
 line-height: 1.4;
 padding: 20px 25px;
@@ -85,7 +89,7 @@ overflow: hidden;
 box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	color: darkgray;
 	border: 0;
-	font-size: 16px;
+	font-size: 12px;
 	font-family: Oswald, sans-serif;
 	font-weight: bold;
 	line-height: 1.4px;
@@ -119,7 +123,8 @@ border: 5px solid #eaeef2;
 border-radius: 5px;
 color: #7d8791;
 padding: 35px 35px 10px;
-position: relative;
+margin: 0 auto;
+width: 90%; height: auto
 }
 .gwt-Tree {
 	color: white;
@@ -301,14 +306,14 @@ td.datePickerYear {
 .gwt-TextBox2 {
 text-align: justify;
 background: #fff;
-overflow: hidden;
+overflow: scroll;
 box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	color: darkgray;
 	border: 0;
 	font-size: 12px;
 	font-family: Oswald, sans-serif;
 	font-weight: bold;
-	line-height: 1px;
+	line-height: 1;
 
 }
 

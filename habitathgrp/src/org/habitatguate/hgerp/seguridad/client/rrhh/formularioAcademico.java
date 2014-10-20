@@ -64,7 +64,6 @@ public class formularioAcademico extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("1050px", "120px");
-		absolutePanel.add(getFormPanel(), 522, 108);
 		getFormUrl();
 		listNIvel_Academico = new ListBox();
 		listNIvel_Academico.addItem("No sabe leer y/o Escribir","0");
@@ -182,6 +181,7 @@ public class formularioAcademico extends Composite {
 				
 			}
 		});
+		absolutePanel.add(getFormPanel(), 522, 108);
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");

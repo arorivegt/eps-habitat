@@ -37,6 +37,8 @@ public class formularioFamilia  extends Composite  {
 	private AbsolutePanel absolutePanel ;
 	public formularioFamilia(String pariente, familiares a,Empleados e) {
 
+		
+		
 		mensaje = new Mensaje();
 		this.empleado = e;
 		this.a = a;

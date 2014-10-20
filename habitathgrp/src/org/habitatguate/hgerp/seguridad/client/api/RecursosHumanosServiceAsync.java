@@ -89,6 +89,11 @@ public interface RecursosHumanosServiceAsync {
 	 * @param Estado
 	 * @param pasaporte
 	 * @param licencia
+	 * @param Etnia
+	 * @param NombreEmergencia
+	 * @param TelefonoEmergencia
+	 * @param NombreEmergencia2
+	 * @param TelefonoEmergencia2
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
@@ -104,7 +109,10 @@ public interface RecursosHumanosServiceAsync {
             Date fecha_ingreso, String codigo_ingreso, String profesion,
             String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
-            String pasaporte, String licencia,AsyncCallback<Long> callback) throws IllegalArgumentException;
+            String pasaporte, String licencia,String Etnia,
+            String NombreEmergencia, String TelefonoEmergencia,
+            String NombreEmergencia2, String TelefonoEmergencia2,
+            AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -262,12 +270,20 @@ public interface RecursosHumanosServiceAsync {
 	 * @param activo
 	 * @param jornada
 	 * @param horasTrabajo
+	 * @param Lunes
+	 * @param Martes
+	 * @param Miercoles
+	 * @param Jueves
+	 * @param Viernres
+	 * @param Sabado
+	 * @param Domingo
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
 	void Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
-			String motivoPuesto, boolean activo,  String jornada, 
-			String horasTrabajo,AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String motivoPuesto, boolean activo,  String jornada, String horasTrabajo, 
+			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, 
+			boolean Viernres, boolean Sabado, boolean Domingo, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param fecha_puesto
@@ -339,11 +355,12 @@ public interface RecursosHumanosServiceAsync {
 	 * @param fecha1
 	 * @param fecha2
 	 * @param descripcionl
+	 * @param tipoPermisos
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
 	void Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
-			AsyncCallback<Long> callback) throws IllegalArgumentException;
+			String tipoPermisos,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	///metodos para actualizar las entidades
 	/**
@@ -389,6 +406,11 @@ public interface RecursosHumanosServiceAsync {
 	 * @param Estado
 	 * @param pasaporte
 	 * @param licencia
+	 * @param Etnia
+	 * @param NombreEmergencia
+	 * @param TelefonoEmergencia
+	 * @param NombreEmergencia2
+	 * @param TelefonoEmergencia2
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
@@ -404,7 +426,10 @@ public interface RecursosHumanosServiceAsync {
 	            Date fecha_ingreso, String codigo_ingreso, String profesion,
 	            String tipo_planilla, float salario_base, float total,
 	            float bonificacion,String  URLFile, String KeyFile,String Estado,
-	            String pasaporte, String licencia,AsyncCallback<Long> callback) throws IllegalArgumentException;
+	            String pasaporte, String licencia,String Etnia,
+	            String NombreEmergencia, String TelefonoEmergencia,
+	            String NombreEmergencia2, String TelefonoEmergencia2,
+	            AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 
 		 * @param id_empleado
@@ -548,12 +573,20 @@ public interface RecursosHumanosServiceAsync {
 		 * @param activo
 		 * @param jornada
 		 * @param horasTrabajo
+		 * @param Lunes
+		 * @param Martes
+		 * @param Miercoles
+		 * @param Jueves
+		 * @param Viernres
+		 * @param Sabado
+		 * @param Domingo
 		 * @param callback
 		 * @throws IllegalArgumentException
 		 */
 		void Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
-				String motivoPuesto, boolean activo, String jornada, 
-				String horasTrabajo, AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String motivoPuesto, boolean activo, String jornada,  String horasTrabajo,
+				boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
+				boolean Sabado, boolean Domingo,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 
 		 * @param id
@@ -630,11 +663,12 @@ public interface RecursosHumanosServiceAsync {
 		 * @param fecha1
 		 * @param fecha2
 		 * @param descripcionl
+		 * @param tipoPermisos
 		 * @param callback
 		 * @throws IllegalArgumentException
 		 */
 		void Actualizar_Vacaciones(Long id_empleado,Long id,Date fecha1, Date fecha2, String descripcionl, 
-				AsyncCallback<Long> callback) throws IllegalArgumentException;
+				String tipoPermisos,AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 
 		 * @param id_empleado

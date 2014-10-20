@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxEmpleado implements IsSerializable{
@@ -89,7 +91,17 @@ public class AuxEmpleado implements IsSerializable{
     private String tipoCuenta;
 	
     private String nombreBanco;
+    
+    private String Etnia;
+	
+    private String NombreEmergencia;
+	
+    private String TelefonoEmergencia;
+	
+    private String NombreEmergencia2;
 
+    private String TelefonoEmergencia2;
+    
     private List <AuxVacaciones> vacaciones = new ArrayList<AuxVacaciones>();
 
     private List <AuxFamilia> familia= new ArrayList<AuxFamilia>();
@@ -703,6 +715,56 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setNombreBanco(String nombreBanco) {
 		this.nombreBanco = nombreBanco;
+	}
+
+
+	public String getEtnia() {
+		return Etnia;
+	}
+
+
+	public void setEtnia(String etnia) {
+		Etnia = etnia;
+	}
+
+
+	public String getNombreEmergencia() {
+		return NombreEmergencia;
+	}
+
+
+	public void setNombreEmergencia(String nombreEmergencia) {
+		NombreEmergencia = nombreEmergencia;
+	}
+
+
+	public String getTelefonoEmergencia() {
+		return TelefonoEmergencia;
+	}
+
+
+	public void setTelefonoEmergencia(String telefonoEmergencia) {
+		TelefonoEmergencia = telefonoEmergencia;
+	}
+
+
+	public String getNombreEmergencia2() {
+		return NombreEmergencia2;
+	}
+
+
+	public void setNombreEmergencia2(String nombreEmergencia2) {
+		NombreEmergencia2 = nombreEmergencia2;
+	}
+
+
+	public String getTelefonoEmergencia2() {
+		return TelefonoEmergencia2;
+	}
+
+
+	public void setTelefonoEmergencia2(String telefonoEmergencia2) {
+		TelefonoEmergencia2 = telefonoEmergencia2;
 	}
 
 	

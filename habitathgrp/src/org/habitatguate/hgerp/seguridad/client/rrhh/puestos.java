@@ -17,6 +17,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class puestos extends Composite  {
 
@@ -31,6 +33,8 @@ public class puestos extends Composite  {
 
 			mensaje = new Mensaje();
 			this.empleado = e;
+	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();
@@ -61,7 +65,9 @@ public class puestos extends Composite  {
 			    	String valor = "No";
 			    	if(n2.isActivo()){ valor = "Si";}
 			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
-			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo());
+			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo(),
+			    					n2.getLunes(),n2.getMartes(),n2.getMiercoles(),n2.getJueves(),n2.getViernes(),
+			    					n2.getSabado(),n2.getDomingo());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

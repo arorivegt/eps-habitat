@@ -57,7 +57,7 @@ public class formularioIdiomas extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1065px", "100px");
+		absolutePanel.setSize("663px", "100px");
 		
 		txtIdioma = new ListBox();
 		txtIdioma.addItem("Achi","1");
@@ -100,16 +100,16 @@ public class formularioIdiomas extends Composite {
 		txtIdioma.addItem("Otros","38");
 		txtIdioma.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtIdioma, 10, 29);
-		txtIdioma.setSize("227px", "34px");
+		txtIdioma.setSize("115px", "34px");
 		
 		listNivel = new ListBox();
-		listNivel.addItem("Avanzado");
-		listNivel.addItem("Intermedio");
-		listNivel.addItem("Principiante");
+		listNivel.addItem("Avanzado","0");
+		listNivel.addItem("Intermedio","1");
+		listNivel.addItem("Principiante","2");
 		listNivel.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listNivel, 266, 29);
-		listNivel.setSize("227px", "36px");
-		absolutePanel.add(getFormPanel(), 527, 10);
+		absolutePanel.add(listNivel, 146, 27);
+		listNivel.setSize("115px", "36px");
+		absolutePanel.add(getFormPanel(), 294, 30);
 		getFormUrl();
 
 		Button btnActualizar = new Button("Send");
@@ -117,7 +117,7 @@ public class formularioIdiomas extends Composite {
 			public void onClick(ClickEvent event) {
 
 				if(bandera) {
-					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getItemText(listNivel.getSelectedIndex()), 
+					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getValue(listNivel.getSelectedIndex()), 
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -135,7 +135,7 @@ public class formularioIdiomas extends Composite {
                         }
 						});
 				}else{
-					loginService.Actualizar_Idioma(empleado.id_empleado,id_idioma, listNivel.getItemText(listNivel.getSelectedIndex()), 
+					loginService.Actualizar_Idioma(empleado.id_empleado,id_idioma, listNivel.getValue(listNivel.getSelectedIndex()), 
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -158,7 +158,7 @@ public class formularioIdiomas extends Composite {
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
 		absolutePanel.add(btnActualizar, 10, 92);
-		btnActualizar.setSize("227px", "34px");
+		btnActualizar.setSize("115px", "34px");
 		
 		
 		Button btnEliminar = new Button("Send");
@@ -176,8 +176,8 @@ public class formularioIdiomas extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("sendButton");
 		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 266, 92);
-		btnEliminar.setSize("227px", "34px");
+		absolutePanel.add(btnEliminar, 146, 92);
+		btnEliminar.setSize("115px", "34px");
 		
 		Label lblNivelAcademico = new Label("Idioma");
 		lblNivelAcademico.setStyleName("label");
@@ -186,7 +186,7 @@ public class formularioIdiomas extends Composite {
 		
 		Label lblTitulodiploma = new Label("Nivel");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 266, 10);
+		absolutePanel.add(lblTitulodiploma, 146, 8);
 		lblTitulodiploma.setSize("192px", "13px");
 	}
 	private void EliminarFormulario(){
@@ -221,7 +221,7 @@ public class formularioIdiomas extends Composite {
 		this.bandera = false;
 		boolean bandera = true;
 		for(int i=0; i < this.listNivel.getItemCount() && bandera; i++){
-			bandera = !this.listNivel.getItemText(i).equals(listNivel);
+			bandera = !this.listNivel.getValue(i).equals(listNivel);
 		    this.listNivel.setSelectedIndex(i);
 		}
 		 bandera = true;
@@ -235,10 +235,10 @@ public class formularioIdiomas extends Composite {
 	private FormPanel getFormPanel() {
 		if (form == null) {
 			form = new FormPanel();
-			form.setSize("357px", "59px");
+			form.setSize("357px", "85px");
 			form.setAction("/upload");
 			form.setEncoding(FormPanel.ENCODING_MULTIPART);
-	    form.setMethod(FormPanel.METHOD_POST);
+			form.setMethod(FormPanel.METHOD_POST);
 			form.setWidget(getFormElements());
 			//form.add(getHidden());
 			

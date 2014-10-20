@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
+import java.io.IOException;
+
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;

@@ -15,6 +15,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class referenciaLaboral extends Composite  {
 
@@ -28,6 +30,8 @@ public class referenciaLaboral extends Composite  {
 
 			mensaje = new Mensaje();
 			this.empleado = e;
+	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "79px");
 	        flextable = new FlexTable();

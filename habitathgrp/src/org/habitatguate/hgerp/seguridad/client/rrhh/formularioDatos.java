@@ -119,6 +119,17 @@ public class formularioDatos extends Composite {
     private AbsolutePanel absolutePanel;
     private Button btnImprimir;
     private Button btnExportarDatos;
+    private Label lblEtnia;
+    private ListBox listEtnia;
+    private TextBox txtNombreEmergencia;
+    private Label lblNombreYApellido;
+    private TextBox txtTelefonoEmergencia;
+    private Label lblNoTelefono;
+    private TextBox txtNombreEmergencia2;
+    private Label label_14;
+    private TextBox txtTelefonoEmergencia2;
+    private Label lblTelefono;
+    private Label lblTelefonoSeEmergencia;
     
 	public formularioDatos(Empleados e,final int tipo) {
 
@@ -128,15 +139,15 @@ public class formularioDatos extends Composite {
 		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
-		absolutePanel.setSize("997px", "1337px");
+		absolutePanel.setSize("997px", "1468px");
 		initWidget(absolutePanel);
 		
 		getFormUrl();
-		absolutePanel.add(getFormPanel(), 591, 109);
 		
 		image = new Image("images/imagenempresa.png");
 		image.setSize("167px", "158px");
 		absolutePanel.add(image, 341, 10);
+		absolutePanel.add(getFormPanel(), 591, 109);
 		
 		listEstado = new ListBox();
 		listEstado.addItem("empleado activo","0");
@@ -526,13 +537,6 @@ public class formularioDatos extends Composite {
 		});
 		absolutePanel.add(noCuenta, 36, 545);
 		
-		tipoCuenta = new ListBox();
-		tipoCuenta.addItem("Ahorro","0");
-		tipoCuenta.addItem("Monetaria","1");
-		tipoCuenta.setSize("227px", "36px");
-		tipoCuenta.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(tipoCuenta, 591, 545);
-		
 
 		nombreBanco = new ListBox();
 		nombreBanco.addItem("G&T Continental","0");
@@ -540,6 +544,13 @@ public class formularioDatos extends Composite {
 		nombreBanco.setSize("230px", "36px");
 		nombreBanco.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(nombreBanco, 319, 545);
+		
+		tipoCuenta = new ListBox();
+		tipoCuenta.addItem("Ahorro","0");
+		tipoCuenta.addItem("Monetaria","1");
+		tipoCuenta.setSize("227px", "36px");
+		tipoCuenta.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(tipoCuenta, 591, 545);
 		
 		
 		txtDPI = new IntegerBox();
@@ -558,10 +569,6 @@ public class formularioDatos extends Composite {
 				}
 			}
 		});
-		txtDPI.setText("0");
-		txtDPI.setSize("227px", "34px");
-		txtDPI.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtDPI, 317, 687);
 		
 		listTienePasaporte = new ListBox();
 		listTienePasaporte.addChangeHandler(new ChangeHandler() 
@@ -622,20 +629,34 @@ public class formularioDatos extends Composite {
 		dateAnnioNacimiento.getDatePicker().setVisibleYearCount(100);
 		dateAnnioNacimiento.setStyleName("gwt-PasswordTextBox");
 		dateAnnioNacimiento.setSize("228px", "41px");
-
-		dateAnnioNacimiento.addValueChangeHandler(new ValueChangeHandler<Date>() {
-			@Override
-			public void onValueChange(ValueChangeEvent<Date> event) {
-				try{
-					new Date(dateAnnioNacimiento.getValue().getTime());
-				}catch(Exception e){
-					mensaje.setMensaje("alert alert-error", 
-                			"Error !! \nFecha Nacimiento no valida");
-                	dateAnnioNacimiento.setValue(new Date(1407518124684L));
-				}
-			}
-		});
+		
+				dateAnnioNacimiento.addValueChangeHandler(new ValueChangeHandler<Date>() {
+					@Override
+					public void onValueChange(ValueChangeEvent<Date> event) {
+						try{
+							new Date(dateAnnioNacimiento.getValue().getTime());
+						}catch(Exception e){
+							mensaje.setMensaje("alert alert-error", 
+		                			"Error !! \nFecha Nacimiento no valida");
+		                	dateAnnioNacimiento.setValue(new Date(1407518124684L));
+						}
+					}
+				});
 		absolutePanel.add(dateAnnioNacimiento, 36, 680);
+		txtDPI.setText("0");
+		txtDPI.setSize("227px", "34px");
+		txtDPI.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtDPI, 317, 687);
+		
+		listEtnia = new ListBox();
+		listEtnia.addItem("Xinca","1");
+		listEtnia.addItem("Maya","2");
+		listEtnia.addItem("Garifuna","3");
+		listEtnia.addItem("Mestiza","4");
+		listEtnia.addItem("Extranjeros","5");
+		listEtnia.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(listEtnia, 591, 687);
+		listEtnia.setSize("227px", "36px");
 		
 		txtDireccion = new TextBox();
 		txtDireccion.setMaxLength(200);
@@ -714,7 +735,6 @@ public class formularioDatos extends Composite {
 
 			}
 		});
-		txtCorreoElectronico.setMaxLength(200);
 		txtCorreoElectronico.setStyleName("gwt-PasswordTextBox");
 		txtCorreoElectronico.setSize("227px", "34px");
 		absolutePanel.add(txtCorreoElectronico, 37, 853);
@@ -818,17 +838,69 @@ public class formularioDatos extends Composite {
 		txtNoLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtNoLicencia, 589, 935);
 		
+		txtNombreEmergencia = new TextBox();
+		txtNombreEmergencia.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtNombreEmergencia, 38, 1044);
+		txtNombreEmergencia.setSize("227px", "34px");
+		
+		txtTelefonoEmergencia = new TextBox();
+		txtTelefonoEmergencia.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoEmergencia.getText().equals("")) {txtTelefonoEmergencia.setText("0");}
+				else if(txtTelefonoEmergencia.getText().equals(null)) {txtTelefonoEmergencia.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoEmergencia.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nTelefono Emergencia no valido");
+						txtTelefonoEmergencia.setText("0");
+					}
+				}
+			}
+		});
+		txtTelefonoEmergencia.setStyleName("gwt-PasswordTextBox");
+		txtTelefonoEmergencia.setMaxLength(20);
+		absolutePanel.add(txtTelefonoEmergencia, 320, 1044);
+		txtTelefonoEmergencia.setSize("227px", "34px");
+		
+		txtNombreEmergencia2 = new TextBox();
+		txtNombreEmergencia2.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtNombreEmergencia2, 38, 1104);
+		txtNombreEmergencia2.setSize("227px", "34px");
+		
+		txtTelefonoEmergencia2 = new TextBox();
+		txtTelefonoEmergencia2.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoEmergencia2.getText().equals("")) {txtTelefonoEmergencia2.setText("0");}
+				else if(txtTelefonoEmergencia2.getText().equals(null)) {txtTelefonoEmergencia2.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoEmergencia2.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nTelefono Emergencia no valido");
+						txtTelefonoEmergencia2.setText("0");
+					}
+				}
+			}
+		});
+		txtTelefonoEmergencia2.setStyleName("gwt-PasswordTextBox");
+		txtTelefonoEmergencia2.setMaxLength(20);
+		absolutePanel.add(txtTelefonoEmergencia2, 320, 1104);
+		txtTelefonoEmergencia2.setSize("227px", "34px");
+		
 		txtCentroTrabajo = new TextBox();
 		txtCentroTrabajo.setMaxLength(50);
 		txtCentroTrabajo.setSize("227px", "34px");
 		txtCentroTrabajo.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtCentroTrabajo, 37, 1103);
+		absolutePanel.add(txtCentroTrabajo, 34, 1223);
 		
 		txtOcupacion = new TextBox();
 		txtOcupacion.setMaxLength(50);
 		txtOcupacion.setSize("227px", "34px");
 		txtOcupacion.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtOcupacion, 314, 1103);
+		absolutePanel.add(txtOcupacion, 311, 1223);
 		
 		dateFechaIngreso = new DateBox();
 		dateFechaIngreso.setValue(new Date(1407518751219L));
@@ -852,25 +924,25 @@ public class formularioDatos extends Composite {
 				}
 			}
 		});
-		absolutePanel.add(dateFechaIngreso, 588, 1102);
+		absolutePanel.add(dateFechaIngreso, 585, 1222);
 		
 		txt_CodigoOcupacion = new TextBox();
 		txt_CodigoOcupacion.setMaxLength(50);
 		txt_CodigoOcupacion.setSize("227px", "34px");
 		txt_CodigoOcupacion.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txt_CodigoOcupacion, 37, 1166);
+		absolutePanel.add(txt_CodigoOcupacion, 34, 1286);
 		
 		txtProfesion = new TextBox();
 		txtProfesion.setMaxLength(50);
 		txtProfesion.setSize("227px", "34px");
 		txtProfesion.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtProfesion, 314, 1166);
+		absolutePanel.add(txtProfesion, 311, 1286);
 		
 		txtTipoPlanilla = new TextBox();
 		txtTipoPlanilla.setMaxLength(50);
 		txtTipoPlanilla.setSize("227px", "34px");
 		txtTipoPlanilla.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTipoPlanilla, 589, 1166);
+		absolutePanel.add(txtTipoPlanilla, 586, 1286);
 		
 		txtSalarioBase = new TextBox();
 		txtSalarioBase.addChangeHandler(new ChangeHandler() {
@@ -892,7 +964,7 @@ public class formularioDatos extends Composite {
 		txtSalarioBase.setMaxLength(50);
 		txtSalarioBase.setSize("227px", "34px");
 		txtSalarioBase.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtSalarioBase, 38, 1233);
+		absolutePanel.add(txtSalarioBase, 35, 1353);
 		
 		txtBonificacion = new TextBox();
 		txtBonificacion.addChangeHandler(new ChangeHandler() {
@@ -914,7 +986,7 @@ public class formularioDatos extends Composite {
 		txtBonificacion.setMaxLength(50);
 		txtBonificacion.setSize("227px", "34px");
 		txtBonificacion.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtBonificacion, 319, 1234);
+		absolutePanel.add(txtBonificacion, 311, 1353);
 		
 		txtTotal = new TextBox();
 		txtTotal.addChangeHandler(new ChangeHandler() {
@@ -936,14 +1008,14 @@ public class formularioDatos extends Composite {
 		txtTotal.setMaxLength(50);
 		txtTotal.setSize("227px", "34px");
 		txtTotal.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTotal, 592, 1234);
+		absolutePanel.add(txtTotal, 591, 1353);
 		
 		btnActualizar = new Button("Send");
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStyleName("sendButton");
 		btnActualizar.setSize("229px", "44px");
 		btnActualizar.setStylePrimaryName("sendButton");
-		absolutePanel.add(btnActualizar, 36, 1313);
+		absolutePanel.add(btnActualizar, 33, 1433);
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -972,7 +1044,9 @@ public class formularioDatos extends Composite {
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
-							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
+							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
+							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
+							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1010,7 +1084,9 @@ public class formularioDatos extends Composite {
 							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
-							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),new AsyncCallback<Long>() 
+							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
+							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
+							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1042,14 +1118,14 @@ public class formularioDatos extends Composite {
 		btnImprimir.setText("Imprimir");
 		btnImprimir.setStylePrimaryName("sendButton");
 		btnImprimir.setStyleName("sendButton");
-		absolutePanel.add(btnImprimir, 319, 1314);
+		absolutePanel.add(btnImprimir, 316, 1434);
 		btnImprimir.setSize("229px", "44px");
 		
 		btnExportarDatos = new Button("Send");
 		btnExportarDatos.setText("Exportar Datos");
 		btnExportarDatos.setStylePrimaryName("sendButton");
 		btnExportarDatos.setStyleName("sendButton");
-		absolutePanel.add(btnExportarDatos, 591, 1313);
+		absolutePanel.add(btnExportarDatos, 588, 1433);
 		btnExportarDatos.setSize("229px", "44px");
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
@@ -1182,47 +1258,47 @@ public class formularioDatos extends Composite {
 		
 		lblCentroTrabajo = new Label("Centro Trabajo");
 		lblCentroTrabajo.setStyleName("label");
-		absolutePanel.add(lblCentroTrabajo, 35, 1078);
+		absolutePanel.add(lblCentroTrabajo, 32, 1198);
 		lblCentroTrabajo.setSize("192px", "19px");
 		
 		lblOcupacion = new Label("Ocupacion");
 		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 315, 1082);
+		absolutePanel.add(lblOcupacion, 312, 1202);
 		lblOcupacion.setSize("192px", "19px");
 		
 		lblFechaIngreso = new Label("Fecha Ingreso");
 		lblFechaIngreso.setStyleName("label");
-		absolutePanel.add(lblFechaIngreso, 587, 1082);
+		absolutePanel.add(lblFechaIngreso, 584, 1202);
 		lblFechaIngreso.setSize("192px", "19px");
 		
 		lblCodigoOcupacion = new Label("Codigo Ocupacion");
 		lblCodigoOcupacion.setStyleName("label");
-		absolutePanel.add(lblCodigoOcupacion, 34, 1145);
+		absolutePanel.add(lblCodigoOcupacion, 31, 1265);
 		lblCodigoOcupacion.setSize("192px", "19px");
 		
 		lblProfesion = new Label("profesion");
 		lblProfesion.setStyleName("label");
-		absolutePanel.add(lblProfesion, 315, 1145);
+		absolutePanel.add(lblProfesion, 312, 1265);
 		lblProfesion.setSize("192px", "19px");
 		
 		lblTipoPlanilla = new Label("Tipo Planilla");
 		lblTipoPlanilla.setStyleName("label");
-		absolutePanel.add(lblTipoPlanilla, 587, 1145);
+		absolutePanel.add(lblTipoPlanilla, 590, 1261);
 		lblTipoPlanilla.setSize("192px", "19px");
 		
 		lblSalarioBase = new Label("Salario Base");
 		lblSalarioBase.setStyleName("label");
-		absolutePanel.add(lblSalarioBase, 38, 1208);
+		absolutePanel.add(lblSalarioBase, 35, 1328);
 		lblSalarioBase.setSize("192px", "19px");
 		
 		lblBonificacion = new Label("Bonificacion");
 		lblBonificacion.setStyleName("label");
-		absolutePanel.add(lblBonificacion, 318, 1208);
+		absolutePanel.add(lblBonificacion, 315, 1328);
 		lblBonificacion.setSize("192px", "19px");
 		
 		lblTotal = new Label("Total");
 		lblTotal.setStyleName("label");
-		absolutePanel.add(lblTotal, 590, 1208);
+		absolutePanel.add(lblTotal, 587, 1328);
 		lblTotal.setSize("192px", "19px");
 		
 		Label label_28 = new Label("Año de Nacimiento");
@@ -1232,7 +1308,7 @@ public class formularioDatos extends Composite {
 		
 		lblD = new Label("Datos del Patrono: (Uso exclusivo de la Fundacion");
 		lblD.setStyleName("label");
-		absolutePanel.add(lblD, 38, 1004);
+		absolutePanel.add(lblD, 36, 1159);
 		lblD.setSize("449px", "19px");
 		
 		Label lbNombreBanco = new Label("Nombre del Banco");
@@ -1249,6 +1325,36 @@ public class formularioDatos extends Composite {
 		lblEstadoDelEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoDelEmpleado, 38, 138);
 		lblEstadoDelEmpleado.setSize("192px", "19px");
+		
+		lblEtnia = new Label("Etnia");
+		lblEtnia.setStyleName("label");
+		absolutePanel.add(lblEtnia, 592, 669);
+		lblEtnia.setSize("247px", "19px");
+		
+		lblNombreYApellido = new Label("Nombre y Apellido");
+		lblNombreYApellido.setStyleName("label");
+		absolutePanel.add(lblNombreYApellido, 36, 1026);
+		lblNombreYApellido.setSize("192px", "19px");
+		
+		lblNoTelefono = new Label("Telefono");
+		lblNoTelefono.setStyleName("label");
+		absolutePanel.add(lblNoTelefono, 318, 1026);
+		lblNoTelefono.setSize("192px", "19px");
+		
+		label_14 = new Label("Nombre y Apellido");
+		label_14.setStyleName("label");
+		absolutePanel.add(label_14, 36, 1086);
+		label_14.setSize("192px", "19px");
+		
+		lblTelefono = new Label("Telefono");
+		lblTelefono.setStyleName("label");
+		absolutePanel.add(lblTelefono, 318, 1086);
+		lblTelefono.setSize("192px", "19px");
+		
+		lblTelefonoSeEmergencia = new Label("Escribe nombres y Telefonos de emergencia");
+		lblTelefonoSeEmergencia.setStyleName("label");
+		absolutePanel.add(lblTelefonoSeEmergencia, 36, 991);
+		lblTelefonoSeEmergencia.setSize("449px", "19px");
 	}
 	
 	private String Depto_Municipio(String Departamento){
@@ -1646,14 +1752,19 @@ public class formularioDatos extends Composite {
 		    String noCuenta, String tipoCuenta, String nombreBanco , String txtDPI,String txtTelefonoCasa, String txtTelefonoCelular ,
 		    String txtNoLicencia, String txtNit, String txtNoPasaporte,String txtSalarioBase ,String txtBonificacion ,
 		    String txtTotal, String listDireccionDepartamento ,String txtIVS, String  URLFile, 
-		    String KeyFile,String Estado,String pasaporte, String licencia)
+		    String KeyFile,String Estado,String pasaporte, String licencia, String Etnia,
+            String NombreEmergencia, String TelefonoEmergencia,
+            String NombreEmergencia2, String TelefonoEmergencia2)
 	{
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
 		this.id_empleado = id;
 		this.bandera = false;
 		this.txtNo_iggs.setText(txtNo_iggs);
-
+		this.txtNombreEmergencia.setText(NombreEmergencia);
+		this.txtTelefonoEmergencia.setText(TelefonoEmergencia);
+		this.txtNombreEmergencia2.setText(NombreEmergencia2);
+		this.txtTelefonoEmergencia2.setText(TelefonoEmergencia2);
 		this.noCuenta.setText(noCuenta);
 		this.txtDPI.setText(txtDPI);
 		this.txtTipoPasaporte.setText(txtTipoPasaporte);
@@ -1686,7 +1797,13 @@ public class formularioDatos extends Composite {
             bandera = !this.listEstadoCivil.getValue(i).equals(listEstadoCivil);
             this.listEstadoCivil.setSelectedIndex(i);
         }   
-
+        
+        bandera = true;
+	    for(int i=0; i < this.listEtnia.getItemCount() && bandera; i++){
+	       bandera = !this.listEtnia.getValue(i).equals(Etnia);
+	       this.listEtnia.setSelectedIndex(i);
+	    } 
+	    
 		bandera = true;
 	    for(int i=0; i < this.nombreBanco.getItemCount() && bandera; i++){
 	       bandera = !this.nombreBanco.getValue(i).equals(nombreBanco);

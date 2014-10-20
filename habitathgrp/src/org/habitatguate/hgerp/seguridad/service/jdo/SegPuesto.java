@@ -42,6 +42,27 @@ public class SegPuesto implements Serializable {
     private String horasTrabajo;
 	
 	@Persistent
+    private boolean Lunes;
+	
+	@Persistent
+    private boolean Martes;
+	
+	@Persistent
+    private boolean Miercoles;
+	
+	@Persistent
+    private boolean Jueves;
+	
+	@Persistent
+    private boolean Viernes;
+	
+	@Persistent
+    private boolean Sabado;
+	
+	@Persistent
+    private boolean Domingo;
+	
+	@Persistent
     private SegEmpleado empleado;
 
 	public SegPuesto() {
@@ -54,6 +75,62 @@ public class SegPuesto implements Serializable {
 
 	public Date getFecha_puesto() {
 		return fecha_puesto;
+	}
+
+	public boolean getLunes() {
+		return Lunes;
+	}
+
+	public void setLunes(boolean lunes) {
+		Lunes = lunes;
+	}
+
+	public boolean getMartes() {
+		return Martes;
+	}
+
+	public void setMartes(boolean martes) {
+		Martes = martes;
+	}
+
+	public boolean getMiercoles() {
+		return Miercoles;
+	}
+
+	public void setMiercoles(boolean miercoles) {
+		Miercoles = miercoles;
+	}
+
+	public boolean getJueves() {
+		return Jueves;
+	}
+
+	public void setJueves(boolean jueves) {
+		Jueves = jueves;
+	}
+
+	public boolean getViernes() {
+		return Viernes;
+	}
+
+	public void setViernes(boolean viernes) {
+		Viernes = viernes;
+	}
+
+	public boolean getSabado() {
+		return Sabado;
+	}
+
+	public void setSabado(boolean sabado) {
+		Sabado = sabado;
+	}
+
+	public boolean getDomingo() {
+		return Domingo;
+	}
+
+	public void setDomingo(boolean domingo) {
+		Domingo = domingo;
 	}
 
 	public String getMotivoPuesto() {

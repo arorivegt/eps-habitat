@@ -28,6 +28,9 @@ public class SegVacaciones implements Serializable {
 
 	@Persistent
     private String Descripcion;
+	
+	@Persistent
+    private String tipoPermisos;
 
 	@Persistent
     private SegEmpleado empleado;
@@ -79,5 +82,18 @@ public class SegVacaciones implements Serializable {
 		this.empleado = empleado;
 	}
 
+	public void setId_vacaciones(Key id_vacaciones) {
+		this.id_vacaciones = id_vacaciones;
+	}
+
+	public String getTipoPermisos() {
+		return tipoPermisos;
+	}
+
+	public void setTipoPermisos(String tipoPermisos) {
+		this.tipoPermisos = tipoPermisos;
+	}
+ 
+	 
 	
 }

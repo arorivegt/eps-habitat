@@ -587,6 +587,15 @@ public interface RecursosHumanosService extends RemoteService {
 			String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
 			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
 			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
+
+	/**
+	 * 
+	 * @param id_empleado
+	 * @param id
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+    String Actualizar_Estado_Puesto(Long id_empleado,Long id) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id

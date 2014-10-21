@@ -1,3 +1,9 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
@@ -130,11 +136,15 @@ public class formularioDatos extends Composite {
     private TextBox txtTelefonoEmergencia2;
     private Label lblTelefono;
     private Label lblTelefonoSeEmergencia;
-    
-	public formularioDatos(Empleados e,final int tipo) {
+    /**
+     * 
+     * @param empleadoo
+     * @param tipo
+     */
+	public formularioDatos(Empleados empleadoo,final int tipo) {
 
 		mensaje = new Mensaje();
-		this.empleado = e;
+		this.empleado = empleadoo;
 		this.setTipo(tipo);
 		
 		absolutePanel = new AbsolutePanel();
@@ -1356,7 +1366,11 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(lblTelefonoSeEmergencia, 36, 991);
 		lblTelefonoSeEmergencia.setSize("449px", "19px");
 	}
-	
+	/**
+	 * metodo para obtener los municipios del departemento entrante
+	 * @param Departamento
+	 * @return
+	 */
 	private String Depto_Municipio(String Departamento){
 		String valor = "";
 		if(Departamento.equals("Guatemala")){	
@@ -1742,7 +1756,56 @@ public class formularioDatos extends Composite {
 		}
 		return valor;
 	}
-	
+	/**
+	 * llena los datos que vienen del datastore, a este formulario
+	 * @param id
+	 * @param listEstadoCivil
+	 * @param listSexo
+	 * @param txtPrimerApellido
+	 * @param txtSegundoApellido
+	 * @param txtApellidoCasada
+	 * @param txtNo_iggs
+	 * @param txtPrimerNombre
+	 * @param txtSegundoNombre
+	 * @param listPais
+	 * @param listNoDependientes
+	 * @param txtTipoPasaporte
+	 * @param listDireccionMunicipio
+	 * @param txtDireccion
+	 * @param txtCorreoElectronico
+	 * @param listTipoLicencia
+	 * @param dateAnnioNacimiento
+	 * @param txtOcupacion
+	 * @param txtCentroTrabajo
+	 * @param txt_CodigoOcupacion
+	 * @param txtProfesion
+	 * @param txtTipoPlanilla
+	 * @param dateFechaIngreso
+	 * @param noCuenta
+	 * @param tipoCuenta
+	 * @param nombreBanco
+	 * @param txtDPI
+	 * @param txtTelefonoCasa
+	 * @param txtTelefonoCelular
+	 * @param txtNoLicencia
+	 * @param txtNit
+	 * @param txtNoPasaporte
+	 * @param txtSalarioBase
+	 * @param txtBonificacion
+	 * @param txtTotal
+	 * @param listDireccionDepartamento
+	 * @param txtIVS
+	 * @param URLFile
+	 * @param KeyFile
+	 * @param Estado
+	 * @param pasaporte
+	 * @param licencia
+	 * @param Etnia
+	 * @param NombreEmergencia
+	 * @param TelefonoEmergencia
+	 * @param NombreEmergencia2
+	 * @param TelefonoEmergencia2
+	 */
 	public void LlenarDatos(Long id,String listEstadoCivil,String listSexo,String txtPrimerApellido,
 		    String txtSegundoApellido , String txtApellidoCasada ,String txtNo_iggs, String txtPrimerNombre,
 		    String txtSegundoNombre ,String listPais,String listNoDependientes , String txtTipoPasaporte ,
@@ -1920,7 +1983,9 @@ public class formularioDatos extends Composite {
 				  
 		
 	}
-	
+	/**
+	 * invalida casiillas que solo se le presenta a un usuario en especifico
+	 */
 	public void Inavilitar_Casillas(){
 		txtCentroTrabajo.setVisible(false);
 		txtOcupacion.setVisible(false);
@@ -1947,6 +2012,10 @@ public class formularioDatos extends Composite {
 		lblD.setVisible(false);
 		absolutePanel.add(btnActualizar, 316, 1200);
 	}
+	/**
+	 * se obtiene un form, que contiene para subir archivos al blobStore
+	 * @return
+	 */
 	private FormPanel getFormPanel() {
 		if (form == null) {
 			form = new FormPanel();
@@ -1994,7 +2063,10 @@ public class formularioDatos extends Composite {
 		}
 		return form;
 	}
-	
+	/**
+	 * se agrega los elementos como fileupload, y boton a un panel
+	 * @return
+	 */
 	private VerticalPanel getFormElements() {
 		if (formElements == null) {
 			formElements = new VerticalPanel();
@@ -2004,7 +2076,10 @@ public class formularioDatos extends Composite {
 		}
 		return formElements;
 	}
-	
+	/**
+	 * se crea un file ulpoad
+	 * @return
+	 */
 	private FileUpload getFileUpload() {
 		if (fileUpload == null) {
 			fileUpload = new FileUpload();
@@ -2014,7 +2089,10 @@ public class formularioDatos extends Composite {
 		}
 		return fileUpload;
 	}
-	
+	/**
+	 * se crea un boton para el form para subir archivos
+	 * @return
+	 */
 	private Button getButton() {
 		if (button == null) {
 			button = new Button("Subir");
@@ -2029,14 +2107,16 @@ public class formularioDatos extends Composite {
 		}
 		return button;
 	}
-	
+	/**
+	 * se realiza el procedimiento para subir el archivo y crear una URL
+	 */
 	private void getFormUrl() {
 		
 		uploadUrlService.getUploadUrl(new AsyncCallback<String>() {
 			public void onSuccess(String url) {
 				form.setAction(url);
 				button.setEnabled(true);
-				System.out.println("retrieved url for blob store: " + url);
+				//System.out.println("retrieved url for blob store: " + url);
 			}
 
 			public void onFailure(Throwable caught) {
@@ -2046,6 +2126,9 @@ public class formularioDatos extends Composite {
 		});
 		
 	}
+	/**
+	 * se obtiene el archivo, tanto el key, como la URL
+	 */
 	public void Archivo(){
 
 		form.setVisible(false);
@@ -2078,27 +2161,45 @@ public class formularioDatos extends Composite {
 		grid.setWidget(0, 1, btnEliminar);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}
-
+/**
+ * 
+ * @return
+ */
 	public String getURLFile() {
 		return URLFile;
 	}
-
+/**
+ * 
+ * @param uRLFile
+ */
 	public void setURLFile(String uRLFile) {
 		URLFile = uRLFile;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public String getKeyFile() {
 		return KeyFile;
 	}
-
+/**
+ * 
+ * @param keyFile
+ */
 	public void setKeyFile(String keyFile) {
 		KeyFile = keyFile;
 	}
-
+/**
+ * 
+ * @return
+ */
 	public int getTipo() {
 		return tipo;
 	}
-
+/**
+ * 
+ * @param tipo
+ */
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}

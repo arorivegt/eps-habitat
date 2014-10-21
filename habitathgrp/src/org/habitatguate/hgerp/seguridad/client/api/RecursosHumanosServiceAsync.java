@@ -588,6 +588,15 @@ public interface RecursosHumanosServiceAsync {
 				String motivoPuesto, boolean activo, String jornada,  String horasTrabajo,
 				boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
 				boolean Sabado, boolean Domingo,AsyncCallback<Long> callback) throws IllegalArgumentException;
+
+		/**
+		 * 
+		 * @param id_empleado
+		 * @param id
+		 * @param mensaje
+		 * @throws IllegalArgumentException
+		 */
+	    void Actualizar_Estado_Puesto(Long id_empleado,Long id,AsyncCallback<String> mensaje) throws IllegalArgumentException;
 		/**
 		 * 
 		 * @param id
@@ -873,6 +882,7 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;
+	    
 	    
 		
 

@@ -2164,12 +2164,16 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		public Long Eliminar_Salario(Long id_empleado, Long id)
 				throws IllegalArgumentException {
         	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
-			 Key k = new KeyFactory
-				        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
-				        .addChild(SegSalario.class.getSimpleName(), id)
-				        .getKey();
-			 SegSalario s = Persistencia.getObjectById(SegSalario.class, k);
-            Persistencia.deletePersistent(s);
+			try{
+				 Key k = new KeyFactory
+					        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
+					        .addChild(SegSalario.class.getSimpleName(), id)
+					        .getKey();
+				 SegSalario s = Persistencia.getObjectById(SegSalario.class, k);
+				 Persistencia.deletePersistent(s);
+        	}catch(Exception e){
+        		
+        	}
             return id ;
 		}
 
@@ -2248,6 +2252,31 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 Persistencia.close();  
 						 }
 					return t ;
+		}
+
+		@Override
+		public String Actualizar_Estado_Puesto(Long id_empleado, Long id) throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String mensaje = "Error al Activar Puesto";
+			 try { 
+				 final SegEmpleado empleado = Persistencia.getObjectById(SegEmpleado.class,id);
+				 for(SegPuesto p: empleado.getPuestos())
+				 {
+					 if(p.getId_puesto().equals(id)){
+						 p.setActivo(true);
+					 }else{
+						 p.setActivo(false);
+					 }
+				 }
+				 mensaje = "Activar Puesto Exitosamente";
+			}catch(Exception e){
+				mensaje = "Error al Activar Puesto";
+			}
+			 finally {  
+			
+					 Persistencia.close();  
+			}
+			 return mensaje;
 		}
 
 	}

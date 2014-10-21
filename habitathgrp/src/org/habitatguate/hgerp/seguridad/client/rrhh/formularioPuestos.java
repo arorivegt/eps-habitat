@@ -9,6 +9,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.Date;
 
 
+
 /**
  * 
  */
@@ -36,7 +37,7 @@ import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 public class formularioPuestos extends Composite {
 
-	private puestos aa;
+	private puestos puesto;
 	private Empleados empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
@@ -67,11 +68,16 @@ public class formularioPuestos extends Composite {
     private Label lblSabado;
     private Label lblDomingo;
 	
-	public formularioPuestos(puestos a,Empleados e) {
+    /**
+     * 
+     * @param puest
+     * @param emplead
+     */
+	public formularioPuestos(puestos puest,Empleados emplead) {
 
 		mensaje = new Mensaje();
-		this.empleado = e;
-		this.aa = a;
+		this.empleado = emplead;
+		this.puesto = puest;
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		absolutePanel.setSize("950px", "210px");
@@ -83,7 +89,7 @@ public class formularioPuestos extends Composite {
 			public void onChange(ChangeEvent event) 
 			{
 				long lg;
-				for (AuxBDPuesto p : aa.BDpuestos) 
+				for (AuxBDPuesto p : puesto.BDpuestos) 
 				{
 					lg  = Long.valueOf(listPuesto.getValue(listPuesto.getSelectedIndex()));
 					if(lg == p.getId_puesto())
@@ -173,26 +179,42 @@ public class formularioPuestos extends Composite {
 					dateFecha.setValue(new Date(1407518124684L));
 				}
 			
-				if(bandera) {					
+				if(bandera) {		
+					
 					loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
 							txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getValue(listActivo.getSelectedIndex()).equals("1"),
 							listJornada.getValue(listJornada.getSelectedIndex()),listHorasTrabajadas.getValue(listHorasTrabajadas.getSelectedIndex())
 							,checkLunes.isChecked(),checkMartes.isChecked(),checkMiercoles.isChecked(),checkJueves.isChecked(),checkViernes.isChecked(),
 						    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
-                public void onFailure(Throwable caught) 
-                {
-                	mensaje.setMensaje("alert alert-error", 
-                			"Error !! \nal Guardar Datos");
-                }
-
-						@Override
-                public void onSuccess(Long result)
-                {
-							id_puesto = result;
-							bandera = false;
-							mensaje.setMensaje("alert alert-success", 
-                        			"Datos Guardados\n exitosamente!!!");
-                }
+				            public void onFailure(Throwable caught) 
+				            {
+				            	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
+				            }
+				
+									@Override
+				            public void onSuccess(Long result)
+				            {
+									id_puesto = result;
+									bandera = false;
+									mensaje.setMensaje("alert alert-success", "Datos Guardados\n exitosamente!!!");
+									//se actualiza el Puesto a Activo, si en caso eligio activarlo
+									if(listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si") && bandera == false)
+									{
+										loginService.Actualizar_Estado_Puesto(empleado.id_empleado, id_puesto,new AsyncCallback<String>(){
+											public void onFailure(Throwable caught) 
+								            {
+								            	mensaje.setMensaje("alert alert-error", caught.getMessage());
+								            }
+											@Override
+								            public void onSuccess(String result)
+								            {
+												mensaje.setMensaje("alert alert-success", result);
+								            }
+										});
+									}
+										
+										
+				            }
 						});
 				}else{
 					loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
@@ -269,6 +291,24 @@ public class formularioPuestos extends Composite {
 		absolutePanel.add(btnEliminar, 788, 91);
 		
 		listActivo = new ListBox();
+		listActivo.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si") && bandera == false)
+				{
+					loginService.Actualizar_Estado_Puesto(empleado.id_empleado, id_puesto,new AsyncCallback<String>(){
+						public void onFailure(Throwable caught) 
+			            {
+			            	mensaje.setMensaje("alert alert-error", caught.getMessage());
+			            }
+						@Override
+			            public void onSuccess(String result)
+			            {
+							mensaje.setMensaje("alert alert-success", result);
+			            }
+					});
+				}
+			}
+		});
 		listActivo.addItem("Si","1");
 		listActivo.addItem("No","0");
 		listActivo.setStyleName("gwt-TextBox2");
@@ -351,19 +391,43 @@ public class formularioPuestos extends Composite {
 		absolutePanel.add(lblDomingo, 608, 172);
 		lblDomingo.setSize("52px", "18px");
 
-	    for (AuxBDPuesto p : this.aa.BDpuestos) 
+	    for (AuxBDPuesto p : this.puesto.BDpuestos) 
 	    {
 	    	listPuesto.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 	    }
 		
 		
 	}
+	/**
+	 * elimina este formulario tanto en el forma visual, como en datastore
+	 */
 	private void EliminarFormulario(){
-        aa.EliminarFormulario(this,empleado.id_empleado,id_puesto);
+        puesto.EliminarFormulario(this,empleado.id_empleado,id_puesto);
     }
+	/**
+	 * elimina el formulario, no del datastore, ya que este no esta guardado en el
+	 */
 	private void EliminarFormularioSinDatos(){
-        aa.EliminarFormulario(this);
+        puesto.EliminarFormulario(this);
     }
+	/**
+	 * llena los datos, que vienen del datastore
+	 * @param id
+	 * @param dateFecha
+	 * @param listActivo
+	 * @param txtPuesto
+	 * @param txtFunciones
+	 * @param txtMotivoPuesto
+	 * @param listJornada
+	 * @param listhorasTrabajadas
+	 * @param Lunes
+	 * @param Martes
+	 * @param Miercoles
+	 * @param Jueves
+	 * @param Viernres
+	 * @param Sabado
+	 * @param Domingo
+	 */
 	@SuppressWarnings("deprecation")
 	public void LlenarDatos(Long id, Long dateFecha,
 		     String listActivo,

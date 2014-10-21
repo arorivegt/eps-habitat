@@ -2,7 +2,6 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -21,13 +20,16 @@ public class SegSalario implements Serializable {
 	private Key id_Salario;
 	
 	@Persistent
-	private Date Fecha;
-	
-	@Persistent
 	private float salario;
 	
 	@Persistent
+	private String anio;
+	
+	@Persistent
 	private String tipoSalario;
+	
+	@Persistent
+	private String Descripcion;
 	
 	@Persistent
     private SegEmpleado empleado;
@@ -41,9 +43,6 @@ public class SegSalario implements Serializable {
 	}
 
 
-	public Date getFecha() {
-		return Fecha;
-	}
 
 	public float getSalario() {
 		return salario;
@@ -51,10 +50,6 @@ public class SegSalario implements Serializable {
 
 	public void setSalario(float salario) {
 		this.salario = salario;
-	}
-
-	public void setFecha(Date fecha) {
-		Fecha = fecha;
 	}
 
 	public SegEmpleado getEmpleado() {
@@ -71,6 +66,22 @@ public class SegSalario implements Serializable {
 
 	public void setTipoSalario(String tipoSalario) {
 		this.tipoSalario = tipoSalario;
+	}
+
+	public String getAnio() {
+		return anio;
+	}
+
+	public void setAnio(String anio) {
+		this.anio = anio;
+	}
+
+	public String getDescripcion() {
+		return Descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		Descripcion = descripcion;
 	}
 
 	

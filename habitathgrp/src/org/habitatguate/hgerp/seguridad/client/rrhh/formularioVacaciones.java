@@ -68,6 +68,17 @@ public class formularioVacaciones extends Composite {
 		
 		txtDescripcion = new TextArea();
 		txtDescripcion.getElement().setAttribute("maxlength", "1000");
+		
+		listTipoPermiso = new ListBox();
+		listTipoPermiso.addItem("Vacaciones con goce salaria","0");
+		listTipoPermiso.addItem("Vacaciones sin goce salaria","1");
+		listTipoPermiso.addItem("Permiso con goce salarial","2");
+		listTipoPermiso.addItem("Permiso sin goce salarial","3");
+		listTipoPermiso.addItem("Suspension con goce salarial","4");
+		listTipoPermiso.addItem("Suspension sin goce salarial","5");
+		listTipoPermiso.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listTipoPermiso, 226, 29);
+		listTipoPermiso.setSize("115px", "36px");
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 106);
 		txtDescripcion.setSize("327px", "95px");
@@ -164,16 +175,6 @@ public class formularioVacaciones extends Composite {
 		lblLoRecomienda.setStyleName("label");
 		absolutePanel.add(lblLoRecomienda, 119, 10);
 		lblLoRecomienda.setSize("103px", "13px");
-		
-		listTipoPermiso = new ListBox();
-		listTipoPermiso.addItem("Vacaciones sin goce salaria","0");
-		listTipoPermiso.addItem("Permiso con goce salarial","1");
-		listTipoPermiso.addItem("Permiso sin goce salarial","2");
-		listTipoPermiso.addItem("Suspension con goce salarial","3");
-		listTipoPermiso.addItem("Suspension sin goce salarial","4");
-		listTipoPermiso.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTipoPermiso, 226, 29);
-		listTipoPermiso.setSize("115px", "36px");
 		
 		Label lblTipoDePermiso = new Label("Tipo de Permiso");
 		lblTipoDePermiso.setStyleName("label");

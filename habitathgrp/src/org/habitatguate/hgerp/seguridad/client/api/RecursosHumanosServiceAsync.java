@@ -219,14 +219,15 @@ public interface RecursosHumanosServiceAsync {
 	/**
 	 * 
 	 * @param id_empleado
-	 * @param Fecha
+	 * @param anio
 	 * @param salario
 	 * @param tipoSalario
+	 * @param Descripcion
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
-	void Insertar_Salario(Long id_empleado,Date Fecha, float salario, 
-			String tipoSalario, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	void Insertar_Salario(Long id_empleado, String anio, float salario, 
+			String tipoSalario, String Descripcion, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param idEmpleado
@@ -673,14 +674,15 @@ public interface RecursosHumanosServiceAsync {
 		 * 
 		 * @param id_empleado
 		 * @param id
-		 * @param Fecha
+		 * @param anio
 		 * @param salario
 		 * @param tipoSalario
+		 * @param Descripcion
 		 * @param callback
 		 * @throws IllegalArgumentException
 		 */
-		void Actualizar_Salario(Long id_empleado,Long id,Date Fecha, float salario, 
-				String tipoSalario,AsyncCallback<Long> callback) throws IllegalArgumentException;
+		void Actualizar_Salario(Long id_empleado,Long id, String anio,float salario, 
+				String tipoSalario, String Descripcion, AsyncCallback<Long> callback) throws IllegalArgumentException;
 		
 		//metodos para Eliminar en la base de datos..................................................................................................
 	   /**

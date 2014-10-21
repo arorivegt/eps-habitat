@@ -82,9 +82,9 @@ public class Registro extends Composite{
             dateBox.setStyleName("gwt-PasswordTextBox");
             dateBox.getElement().setAttribute("placeHolder", "Fecha Nacimiento");
             
-    //        dateBox.getDatePicker().setYearArrowsVisible(true);
-     //       dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
-     //       dateBox.getDatePicker().setVisibleYearCount(100);
+            dateBox.getDatePicker().setYearArrowsVisible(true);
+            dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
+            dateBox.getDatePicker().setVisibleYearCount(100);
             
             rootPanel.add(dateBox, 543, 512);
             dateBox.setSize("325px", "49px");

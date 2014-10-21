@@ -1314,9 +1314,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	if (!results10.isEmpty()) {
 							    for (SegSalario n10 : results10) {
 							    	AuxSalario s = new AuxSalario();
-							    	s.setFecha(n10.getFecha().getTime());
 							    	s.setSalario(n10.getSalario());
 							    	s.setTipoSalario(n10.getTipoSalario());
+								 	s.setAnio(n10.getAnio());
+								 	s.setDescripcion(n10.getDescripcion());
 							    	nuevo.getSalario().add(s);
 							    }
 					    	}
@@ -1835,9 +1836,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	if (!results10.isEmpty()) {
 						    for (SegSalario n10 : results10) {
 						    	AuxSalario s = new AuxSalario();
-						    	s.setFecha(n10.getFecha().getTime());
 						    	s.setSalario(n10.getSalario());
 						    	s.setTipoSalario(n10.getTipoSalario());
+							 	s.setAnio(n10.getAnio());
+							 	s.setDescripcion(n10.getDescripcion());
 						    	nuevo.getSalario().add(s);
 						    }
 				    	}
@@ -2114,7 +2116,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		}
 
 		@Override
-		public Long Insertar_Salario(Long id_empleado, Date Fecha, float salario,String tipoSalario)
+		public Long Insertar_Salario(Long id_empleado, String anio, float salario,String tipoSalario, String Descripcion)
 				throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			
@@ -2122,8 +2124,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 try { 
 					 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 					 SegSalario s = new  SegSalario();
-					 	s.setFecha(Fecha);
 					 	s.setSalario(salario);
+					 	s.setAnio(anio);
+					 	s.setDescripcion(Descripcion);
 					 	s.setTipoSalario(tipoSalario);
 			      	 	s.setEmpleado(e);
 			      	 	e.getSalario().add(s);
@@ -2135,8 +2138,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		}
 
 		@Override
-		public Long Actualizar_Salario(Long id_empleado, Long id, Date Fecha,
-				float salario,String tipoSalario) throws IllegalArgumentException {
+		public Long Actualizar_Salario(Long id_empleado, Long id, 
+				String anio, float salario,String tipoSalario, String Descripcion) throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			
 			Long valor = 0L;
@@ -2146,8 +2149,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						        .addChild(SegSalario.class.getSimpleName(), id)
 						        .getKey();
 					 SegSalario s = Persistencia.getObjectById(SegSalario.class, k); 
-					 	s.setFecha(Fecha);
 					 	s.setSalario(salario);
+					 	s.setAnio(anio);
+					 	s.setDescripcion(Descripcion);
 					 	s.setTipoSalario(tipoSalario);
 					 	valor = s.getId_Salario();
 					 }finally {  
@@ -2181,9 +2185,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					results = (List<SegSalario>) q.execute();
 					for(SegSalario seg: results){
 						AuxSalario s = new AuxSalario();
-						s.setFecha(seg.getFecha().getTime());
 						s.setSalario(seg.getSalario());
 						s.setTipoSalario(seg.getTipoSalario());
+					 	s.setAnio(seg.getAnio());
+					 	s.setDescripcion(seg.getDescripcion());
 						salarios.add(s);
 					}
 			}finally {  

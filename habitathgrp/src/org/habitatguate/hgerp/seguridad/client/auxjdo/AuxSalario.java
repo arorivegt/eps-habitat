@@ -7,26 +7,17 @@ public class AuxSalario implements IsSerializable{
 
 	private Long id_Salario;
 	
-	private Long Fecha;
+	private String anio;
 	
 	private float salario;
 
 	private String tipoSalario;
+	
+	private String Descripcion;
 
 	public AuxSalario() {
 		super();
 	}
-
-
-	public Long getFecha() {
-		return Fecha;
-	}
-
-
-	public void setFecha(Long fecha) {
-		Fecha = fecha;
-	}
-
 
 	public Long getId_Salario() {
 		return id_Salario;
@@ -55,6 +46,22 @@ public class AuxSalario implements IsSerializable{
 
 	public void setTipoSalario(String tipoSalario) {
 		this.tipoSalario = tipoSalario;
+	}
+
+	public String getAnio() {
+		return anio;
+	}
+
+	public void setAnio(String anio) {
+		this.anio = anio;
+	}
+
+	public String getDescripcion() {
+		return Descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		Descripcion = descripcion;
 	}
 
 	

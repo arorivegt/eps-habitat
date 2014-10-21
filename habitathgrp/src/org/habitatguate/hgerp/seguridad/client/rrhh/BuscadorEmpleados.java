@@ -329,6 +329,12 @@ public class BuscadorEmpleados extends Composite   {
         		}catch(Exception e){
         			
         		}
+
+        		try{
+        			e.setS(result.getSalario());
+        		}catch(Exception e){
+        			
+        		}
         		
         	}
 

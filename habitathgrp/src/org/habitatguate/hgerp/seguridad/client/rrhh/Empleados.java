@@ -18,6 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 
@@ -47,6 +48,7 @@ public class Empleados extends Composite {
 	private formularioEntrevista fe ;
 	private Desempeno fpp;
 	private Evaluacion fppd;
+	private salario s;
 	
 	public Empleados(int tipo) {
 		
@@ -122,6 +124,14 @@ public class Empleados extends Composite {
 		p = new puestos(this);
 		scrollPanel_8.setWidget(p);
 		
+
+		ScrollPanel scrollPanel_s = new ScrollPanel();
+		scrollPanel_s.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel_s, "Salarios", true);
+		scrollPanel_s.setSize("100%", "1000px");
+		s = new salario(this);
+		scrollPanel_s.setWidget(s);
+		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
@@ -138,7 +148,7 @@ public class Empleados extends Composite {
 
 		ScrollPanel scrollPanel_11 = new ScrollPanel();
 		scrollPanel_11.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_11, "vacaciones", true);
+		tabPanel.add(scrollPanel_11, "Permisos", true);
 		scrollPanel_11.setSize("100%", "1000px");
 		v = new vacaciones(this);
 		scrollPanel_11.setWidget(v);
@@ -243,6 +253,10 @@ public class Empleados extends Composite {
 	}
 	public void setV(List<AuxVacaciones> results) {
 		v.agregarFormulario_lleno(results);
+	}
+
+	public void setS(List<AuxSalario> results) {
+		s.agregarFormulario_lleno(results);
 	}
 
 	public void setFD(AuxEmpleado r) {

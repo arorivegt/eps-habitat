@@ -1,3 +1,9 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -44,10 +50,11 @@ public class formularioIdiomas extends Composite {
 	private FileUpload fileUpload;
 	private VerticalPanel formElements;
 	private AbsolutePanel absolutePanel;
+	private Button btnEliminar;
+	private Button btnActualizar;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 
-	private final UploadUrlServiceAsync uploadUrlService = GWT
-			.create(UploadUrlService.class);
+	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     
 	public formularioIdiomas(Idioma a,Empleados e) {
 
@@ -112,7 +119,7 @@ public class formularioIdiomas extends Composite {
 		absolutePanel.add(getFormPanel(), 294, 30);
 		getFormUrl();
 
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -161,7 +168,7 @@ public class formularioIdiomas extends Composite {
 		btnActualizar.setSize("115px", "34px");
 		
 		
-		Button btnEliminar = new Button("Send");
+		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

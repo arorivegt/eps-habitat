@@ -1,7 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client.principal;
 
-import java.io.IOException;
-
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
@@ -30,8 +28,8 @@ public class Index implements EntryPoint {
         @Override
         public void onModuleLoad() 
         {
-        	txtuser.setText("anibal@gmail.com");
-        	txtpass.setText("Aqwe123");
+	        	txtuser.setText("anibal@gmail.com");
+	        	txtpass.setText("Aqwe123");
              	final DialogBox dialogBox = new DialogBox();
              
                 dialogBox.setText("Autenticacion");
@@ -86,31 +84,9 @@ public class Index implements EntryPoint {
                                 {
                                         public void onFailure(Throwable caught) 
                                         {
-                                        	final DialogBox Registro2 = new DialogBox();
-                                        	Registro2.setStyleName("alert alert-error");
-                                        	final Button close= new Button("x");
-                                        	close.addStyleName("close");
-                                        	VerticalPanel dialogVPanel = new VerticalPanel();
                                         	Mensaje inicio = new Mensaje();
                                         	inicio.mensajeEntrada("Error!! \nEn el servicio "
                                 				+ "\n no se pudo\n iniciar ");
-                                        	dialogVPanel.add(serverResponseLabel );
-                                        	dialogVPanel.add(inicio);
-                                        	dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-                                        	dialogVPanel.add(close);
-                                        	Registro2 .setWidget(dialogVPanel);
-                                        	Registro2 .setModal(true);
-                                        	Registro2 .setGlassEnabled(true);
-                                        	Registro2 .setAnimationEnabled(true);
-                                        	Registro2 .center();
-                                        	Registro2 .show();
-                                        	close.setFocus(true);
-                                        
-                                        close.addClickHandler(new ClickHandler() {
-                                			public void onClick(ClickEvent event) {
-                                				Registro2.hide();
-                                			}
-                                        });
                                         }
                                         
                                         public void onSuccess(valores_sesion result)
@@ -126,32 +102,8 @@ public class Index implements EntryPoint {
                                                         //RootPanel.get().add(buildMenu(result));
                                                 }else
                                                 {
-
-                                                   final DialogBox Registro2 = new DialogBox();
-                                                   Registro2.setStyleName("alert alert-error");
-                                                    final Button close= new Button("x");
-                                                    close.addStyleName("close");
-                                                    VerticalPanel dialogVPanel = new VerticalPanel();
                                             		Mensaje inicio = new Mensaje();
-                                            		inicio.mensajeEntrada("Error!! \nEn el usuario "
-                                            				+ "\n y/o Contraseña");
-                                            		dialogVPanel.add(serverResponseLabel );
-                                            		dialogVPanel.add(inicio);
-                                                    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-                                                    dialogVPanel.add(close);
-                                                    Registro2 .setWidget(dialogVPanel);
-                                            		Registro2 .setModal(true);
-                                            		Registro2 .setGlassEnabled(true);
-                                            		Registro2 .setAnimationEnabled(true);
-                                            		Registro2 .center();
-                                            		Registro2 .show();
-                                                    close.setFocus(true);
-                                                    
-                                                    close.addClickHandler(new ClickHandler() {
-                                            			public void onClick(ClickEvent event) {
-                                            				Registro2.hide();
-                                            			}
-                                                    });
+                                            		inicio.mensajeEntrada("Error!! \nEn el usuario y/o Contraseña");
                                                 }
                                                                                 
                                         }
@@ -159,7 +111,7 @@ public class Index implements EntryPoint {
                         }
                 }// Add a handler to send the name to the server
                 
-                MyHandler handler = new MyHandler();
+            MyHandler handler = new MyHandler();
             RootPanel rootPanel = RootPanel.get();
             rootPanel.setStyleName("body");
             
@@ -182,35 +134,33 @@ public class Index implements EntryPoint {
             btnIniciar.addClickHandler(handler);
             btnIniciar.setSize("327px", "44px");
                     
-                   final  Button button = new Button("Send");
-                    button.addClickHandler(new ClickHandler() {
-                    	public void onClick(ClickEvent event) {
-                    		Registro nuevo = new Registro();
-                            RootPanel.get().clear();
-                            RootPanel.get().add(nuevo);
-                    	}
-                    });
-                    button.setText("Registrarse");
-                    button.setStyleName("sendButton");
-                    rootPanel.add(button, 545, 346);
-                    button.setSize("327px", "44px");
-                    
-                    Image image = new Image("images/mailicon.png");
-                    rootPanel.add(image, 522, 175);
-                    image.setSize("16px", "10px");
-                    
-                    Image image_1 = new Image("images/passicon.png");
-                    rootPanel.add(image_1, 522, 236);
-                    image_1.setSize("9px", "17px");
-                    
-                    Label lblIniciarSesion = new Label("Iniciar Sesion");
-                    rootPanel.add(lblIniciarSesion, 639, 108);
-                    
-                    Image image_2 = new Image("images/imagenempresa.png");
-                    rootPanel.add(image_2, 27, 10);
-                    image_2.setSize("386px", "136px");
-                    
-                    //RootPanel.get().add(dialogBox);
+           final  Button button = new Button("Send");
+            button.addClickHandler(new ClickHandler() {
+            	public void onClick(ClickEvent event) {
+            		Registro nuevo = new Registro();
+                    RootPanel.get().clear();
+                    RootPanel.get().add(nuevo);
+            	}
+            });
+            button.setText("Registrarse");
+            button.setStyleName("sendButton");
+            rootPanel.add(button, 545, 346);
+            button.setSize("327px", "44px");
+            
+            Image image = new Image("images/mailicon.png");
+            rootPanel.add(image, 522, 175);
+            image.setSize("16px", "10px");
+            
+            Image image_1 = new Image("images/passicon.png");
+            rootPanel.add(image_1, 522, 236);
+            image_1.setSize("9px", "17px");
+            
+            Label lblIniciarSesion = new Label("Iniciar Sesion");
+            rootPanel.add(lblIniciarSesion, 639, 108);
+            
+            Image image_2 = new Image("images/imagenempresa.png");
+            rootPanel.add(image_2, 27, 10);
+            image_2.setSize("386px", "136px");
             
 
         }

@@ -8,6 +8,8 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 
 import com.google.gwt.core.client.GWT;
@@ -104,7 +106,150 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						empleado.setDocumentoIdentificacion("");
 					}
 					empleado.setPaisOrigen(p.getPais());
-					//empleado.setLugarNacimiento(lugarNacimiento);-----------------------------------------------------------------------
+
+					 String[] numerosComoArray2  = p.getDepto_municipio_residencia().split(",");
+					 String deptodir = "";
+					 String munidir = "";
+					 for (int i1 = 0; i1 < numerosComoArray2.length; i1++) {
+						 if(i1 == 0)
+							 deptodir = numerosComoArray2[i1];
+						 if(i1 == 1)
+							 munidir = numerosComoArray2[i1];
+				     }	
+					 if(deptodir.equals("01")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("I"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("I"+munidir);
+						 }
+					 }
+					 else if(deptodir.equals("15")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("II"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("II"+munidir);
+						 }}
+					 else if(deptodir.equals("16")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("II"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("II"+munidir);
+						 }}
+					 else if(deptodir.equals("02")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("III"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("III"+munidir);
+						 }}
+					 else if(deptodir.equals("18")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("III"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("III"+munidir);
+						 }}
+					 else if(deptodir.equals("19")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("III"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("III"+munidir);
+						 }}
+					 else if(deptodir.equals("20")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("III"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("III"+munidir);
+						 }}
+					 else if(deptodir.equals("06")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("IV"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("IV"+munidir);
+						 }}
+					 else if(deptodir.equals("21")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("IV"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("IV"+munidir);
+						 }}
+					 else if(deptodir.equals("22")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("IV"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("IV"+munidir);
+						 }}
+					 else if(deptodir.equals("03")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("V"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("V"+munidir);
+						 }}
+					 else if(deptodir.equals("04")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("V"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("V"+munidir);
+						 }}
+					 else if(deptodir.equals("05")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("V"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("V"+munidir);
+						 }}
+					 else if(deptodir.equals("07")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("08")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("09")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("10")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("11")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("12")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VI"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VI"+munidir);
+						 }}
+					 else if(deptodir.equals("13")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VII"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VII"+munidir);
+						 }}
+					 else if(deptodir.equals("14")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VII"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VII"+munidir);
+						 }}
+					 else if(deptodir.equals("17")){
+						 if(munidir.length()<4){
+							 empleado.setLugarNacimiento("VIII"+"0"+munidir);
+						 }else{
+							 empleado.setLugarNacimiento("VIII"+munidir);
+						 }}
+
 					empleado.setNitEmpleado(p.getNit());
 					empleado.setIGSSEmpleado(p.getAfiliacion_igss());
 					empleado.setDeportadoPais("");
@@ -138,35 +283,91 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setEdad(""+edadtotal);
 					
 					empleado.setSexo(""+p.getSexo().toUpperCase().charAt(0));
-					empleado.setTiempodelaborar(""+365);
 					
+					Long diaslaborados = p.getFecha_ingreso() -new Date().getTime();
+					if(Integer.parseInt(Anio)< Integer.parseInt(AnnioActual)){
+						empleado.setTiempodelaborar(""+365);
+					}else{
+						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
+						empleado.setTiempodelaborar(""+dialaboradoss);
+					}
+					String DescansoSemanal = "";
 					for (AuxPuesto f : p.getPuestos()) {
 						if(f.isActivo()){
 							empleado.setPuesto(f.getNombre_puesto());
+							empleado.setJornada(f.getJornada());
+							empleado.setHorasAlDia(f.getHorasTrabajo());
+							empleado.setTotalHorasExtras("0");
+							empleado.setHorasAlDia("0");
+							if(f.getLunes()){
+								DescansoSemanal = "Lunes";
+							}if(f.getMartes()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Martes";
+								else
+									DescansoSemanal +=","+ "Martes";
+									
+							}if(f.getMiercoles()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Miercoles";
+								else
+									DescansoSemanal +=","+ "Miercoles";
+							}if(f.getJueves()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Jueves";
+								else
+									DescansoSemanal +=","+ "Jueves";
+							}if(f.getViernes()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Viernes";
+								else
+									DescansoSemanal +=","+ "Viernes";
+							}if(f.getSabado()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Sabado";
+								else
+									DescansoSemanal +=","+ "Sabado";
+							}if(f.getDomingo()){
+								if(!DescansoSemanal.equals(""))
+									DescansoSemanal =  "Domingo";
+								else
+									DescansoSemanal +=","+ "Domingo";
+							}
+							empleado.setDescansoSemanal(DescansoSemanal);
 							break;
 						}
 					}
+					empleado.setEtnia(empleado.getEtnia());
+					String idioma ="";
+					for (AuxIdioma id : p.getIdiomas()) {
+						idioma = id.getIdioma() +",";
+					}
+					idioma = idioma.substring(0, idioma.length()-2);
+					empleado.setIdiomas(idioma);
+
+					int nivelAcademico = 0;
+					String profesion = "";
+					for (AuxHistorialAcademico academico : p.getHistorial_academico()) {
+						if(Integer.parseInt(academico.getNivel_academico()) > nivelAcademico){
+							nivelAcademico = Integer.parseInt(academico.getNivel_academico());
+							profesion = academico.getTitulo();
+						}
+					}
+					empleado.setNivelAcademico(""+nivelAcademico);
+					empleado.setProfesion(profesion);
+					empleado.setTipoContrato("Indefinido");
 					
 					/*
 					private String DiasTrabajadosAnnio;	
-					private String DescansoSemanal;
-					private String Jornada;
-					private String HorasAlDia;
 					private String SalarioMensualNominal;
 					private String Decreto7889 ;
-					private String TotalHorasExtras;
-					private String ValordeHoraExtra;
 					private String Aguinaldo;
 					private String Bono14;
 					private String Comisiones;	
-					private String NivelAcademico;
-					private String Profesion;
-					private String Etnia;
 					private String PermisoTrabajo;
-					private String TipoContrato;
 					private String Indemnizacion;
 					private String OtrosPagos;
-					private String Idiomas;*/
+					*/
 					
 					DATOS.add(empleado);
 					i++;
@@ -202,6 +403,15 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				nuevo.AgregarColumna("28");
 				nuevo.AgregarColumna("29");
 				nuevo.AgregarColumna("30");
+				nuevo.AgregarColumna("31");
+				nuevo.AgregarColumna("32");
+				nuevo.AgregarColumna("33");
+				nuevo.AgregarColumna("34");
+				nuevo.AgregarColumna("35");
+				nuevo.AgregarColumna("36");
+				nuevo.AgregarColumna("37");
+				nuevo.AgregarColumna("38");
+				nuevo.AgregarColumna("39");
 				//nuevo.setSize("1187px", "648px");
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

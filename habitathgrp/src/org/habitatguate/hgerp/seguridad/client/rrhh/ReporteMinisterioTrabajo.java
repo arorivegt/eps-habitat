@@ -53,7 +53,6 @@ public class ReporteMinisterioTrabajo extends Composite  {
 
 		if(tipo.equals("1"))
 		{
-
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -161,11 +160,19 @@ public class ReporteMinisterioTrabajo extends Composite  {
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
+					return object.getEstadoCivil();
+				}
+			};
+			cellTable.addColumn(nameColumn, "Estado Civil");	
+		}else if(tipo.equals("15")){
+			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
+				@Override
+				public String getValue(DatosMinisterioTrabajo object) {
 					return object.getNumeroHijos();
 				}
 			};
 			cellTable.addColumn(nameColumn, "Número Hijos");	
-		}else if(tipo.equals("15")){
+		}else if(tipo.equals("16")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -173,7 +180,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Fecha Nacimiento");	
-		}else if(tipo.equals("16")){
+		}else if(tipo.equals("17")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -181,7 +188,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Edad aprox.");	
-		}else if(tipo.equals("17")){
+		}else if(tipo.equals("18")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -189,7 +196,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Sexo");	
-		}else if(tipo.equals("18")){
+		}else if(tipo.equals("19")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -197,7 +204,15 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Tiempo de laborar");	
-		}else if(tipo.equals("19")){
+		}else if(tipo.equals("20")){
+			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
+				@Override
+				public String getValue(DatosMinisterioTrabajo object) {
+					return object.getPuesto();
+				}
+			};
+			cellTable.addColumn(nameColumn, "puesto");	
+		}else if(tipo.equals("21")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -205,7 +220,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Dias Trabajados Año");	
-		}else if(tipo.equals("20")){
+		}else if(tipo.equals("22")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -213,7 +228,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Descanso  Semanal");	
-		}else if(tipo.equals("21")){
+		}else if(tipo.equals("23")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -221,7 +236,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Jornada");	
-		}else if(tipo.equals("22")){
+		}else if(tipo.equals("24")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -229,7 +244,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Horas al Día");	
-		}else if(tipo.equals("23")){
+		}else if(tipo.equals("25")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -237,7 +252,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Salario Mensual Nominal");	
-		}else if(tipo.equals("24")){
+		}else if(tipo.equals("26")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -245,7 +260,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Decreto 78-89  (Q.250.00)");	
-		}else if(tipo.equals("25")){
+		}else if(tipo.equals("27")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -253,7 +268,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Total Horas Extras");	
-		}else if(tipo.equals("26")){
+		}else if(tipo.equals("28")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -261,7 +276,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Valor de Hora Extra ");	
-		}else if(tipo.equals("26")){
+		}else if(tipo.equals("29")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -269,7 +284,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Aguinaldo Decreto 76-78");	
-		}else if(tipo.equals("27")){
+		}else if(tipo.equals("30")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -277,7 +292,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Bono 14  decreto 42-92");	
-		}else if(tipo.equals("28")){
+		}else if(tipo.equals("31")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -285,7 +300,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Comisiones");	
-		}else if(tipo.equals("29")){
+		}else if(tipo.equals("32")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -293,7 +308,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Nivel Academico");	
-		}else if(tipo.equals("30")){
+		}else if(tipo.equals("33")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -301,7 +316,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Profesión");	
-		}else if(tipo.equals("31")){
+		}else if(tipo.equals("34")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -309,7 +324,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Etnia");	
-		}else if(tipo.equals("32")){
+		}else if(tipo.equals("35")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -317,7 +332,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Idiomas");	
-		}else if(tipo.equals("33")){
+		}else if(tipo.equals("36")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -325,7 +340,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Permiso Trabajo");	
-		}else if(tipo.equals("34")){
+		}else if(tipo.equals("37")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -333,7 +348,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Tipo Contrato");	
-		}else if(tipo.equals("35")){
+		}else if(tipo.equals("38")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
@@ -341,7 +356,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 				}
 			};
 			cellTable.addColumn(nameColumn, "Indemnización (Articulo 82)");	
-		}else if(tipo.equals("36")){
+		}else if(tipo.equals("39")){
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {

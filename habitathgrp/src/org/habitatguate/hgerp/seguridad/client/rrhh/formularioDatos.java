@@ -120,8 +120,7 @@ public class formularioDatos extends Composite {
 	private Button button;
 	private Grid grid;
 	private Image image ;
-	private final UploadUrlServiceAsync uploadUrlService = GWT
-			.create(UploadUrlService.class);
+	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     private AbsolutePanel absolutePanel;
     private Button btnImprimir;
     private Button btnExportarDatos;
@@ -679,7 +678,7 @@ public class formularioDatos extends Composite {
 			public void onChange(ChangeEvent event) {
 				listDireccionMunicipio.clear();
 		        String[] numerosComoArray = Depto_Municipio(listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex())).split(",");
-		        int correlativo = 0 + Integer.parseInt(listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex())+"00");
+		        int correlativo = Integer.parseInt(listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex())+"00");
 		        for (int i = 0; i < numerosComoArray.length; i++) {
 		        	listDireccionMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
 		        	correlativo++;
@@ -691,7 +690,7 @@ public class formularioDatos extends Composite {
 
 		listDireccionDepartamento.addItem("Guatemala","01");
 		listDireccionDepartamento.addItem("Baja Verapaz","15");
-		listDireccionDepartamento.addItem("Alta Verapaz","14");
+		listDireccionDepartamento.addItem("Alta Verapaz","16");
 		listDireccionDepartamento.addItem("El Progreso","02");
 		listDireccionDepartamento.addItem("Izabal","18");
 		listDireccionDepartamento.addItem("Zacapa","19");
@@ -1969,7 +1968,7 @@ public class formularioDatos extends Composite {
 
         this.listDireccionMunicipio.clear();
         String[] numerosComoArray2 = Depto_Municipio(this.listDireccionDepartamento.getItemText(this.listDireccionDepartamento.getSelectedIndex())).split(",");
-        int correlativo = 0 + Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"00");
+        int correlativo = Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"00");
         for (int i = 0; i < numerosComoArray2.length; i++) {
         	this.listDireccionMunicipio.addItem(numerosComoArray2[i],String.valueOf(correlativo));
         	correlativo++;

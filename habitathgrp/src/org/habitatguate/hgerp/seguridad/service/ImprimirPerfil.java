@@ -101,7 +101,6 @@ public class ImprimirPerfil extends HttpServlet {
 	            table.addCell(new Paragraph("DPI",catFont2));
 	            table.addCell(new Paragraph("Cedula",catFont2));
 	            table.addCell(new Paragraph(p.getCui(),catFont));
-	            table.addCell(new Paragraph(p.getNo_registro()+"-"+p.getNo_orden(),catFont));
 	            table.addCell(new Paragraph("Correo",catFont2));
 	            table.addCell(new Paragraph("Año de Nacimiento",catFont2));
 	            table.addCell(new Paragraph(p.getEmail(),catFont));

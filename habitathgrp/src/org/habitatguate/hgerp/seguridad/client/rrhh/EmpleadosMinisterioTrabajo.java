@@ -90,24 +90,24 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					DatosMinisterioTrabajo empleado = new DatosMinisterioTrabajo();
 					empleado.setNoEmpleado(""+i);
 					try{
-						if(p.getCui().equals(null) || p.getCui().equals("")){
-							empleado.setTipoIdentificacion("1");
-							empleado.setDocumentoIdentificacion(p.getNo_registro()+p.getNo_orden());
-						}
-						if(!p.getCui().equals("")){
+						if(p.getPais().equals("83")){
 							empleado.setTipoIdentificacion("2");
 							empleado.setDocumentoIdentificacion(p.getCui());
+						}
+						else{
+							empleado.setTipoIdentificacion("4");
+							empleado.setDocumentoIdentificacion(p.getNo_pasaporte());
 						}
 					}catch(Exception e){
 
 						empleado.setTipoIdentificacion("2");
-						empleado.setDocumentoIdentificacion(p.getCui());
+						empleado.setDocumentoIdentificacion("");
 					}
 					empleado.setPaisOrigen(p.getPais());
-					//empleado.setLugarNacimiento(lugarNacimiento);
+					//empleado.setLugarNacimiento(lugarNacimiento);-----------------------------------------------------------------------
 					empleado.setNitEmpleado(p.getNit());
 					empleado.setIGSSEmpleado(p.getAfiliacion_igss());
-					//empleado.setDeportadoPais(deportadoPais);
+					empleado.setDeportadoPais("");
 					empleado.setNombre1(p.getPrimer_nombre());
 					empleado.setNombre2(p.getSegundo_nombre());
 					//empleado.setNombre3(p.getPrimer_nombre());
@@ -120,16 +120,26 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							NoHijos++;
 					}
 					empleado.setNumeroHijos(""+NoHijos);
-					empleado.setFechaNacimiento(""+new Date(p.getFecha_nacimiento()));
+					//fecha de naicmiento con formato dia/mes/año
+					DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
+					String dia = dtDia.format(new Date(p.getFecha_nacimiento()));
+					DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
+					String Mes = dtMes.format(new Date(p.getFecha_nacimiento()));
+					DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
+					String Anio = dtAnio.format(new Date(p.getFecha_nacimiento()));
+					empleado.setFechaNacimiento(dia+"/"+Mes+"/"+Anio);
 					
+					//calculo de edad del empleado
+					//resta del año de actual - año nacimiento, para calcular edad aproximada
 					DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy");
 					String AnnioNacimiento = dtf.format(new Date(p.getFecha_nacimiento()));
 					String AnnioActual = dtf.format(new Date());
-					//resta del año de actual - año nacimiento, para calcular edad aproximada
 					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
 					empleado.setEdad(""+edadtotal);
+					
 					empleado.setSexo(""+p.getSexo().toUpperCase().charAt(0));
 					empleado.setTiempodelaborar(""+365);
+					
 					for (AuxPuesto f : p.getPuestos()) {
 						if(f.isActivo()){
 							empleado.setPuesto(f.getNombre_puesto());

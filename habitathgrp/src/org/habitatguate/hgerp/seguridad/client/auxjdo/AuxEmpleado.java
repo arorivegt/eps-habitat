@@ -38,11 +38,6 @@ public class AuxEmpleado implements IsSerializable{
 	 
     private String nit;
     
-	 
-    private String no_orden ;
-    
-	 
-    private String no_registro;
     
 	 
     private String cui;
@@ -273,26 +268,6 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setNit(String nit) {
 		this.nit = nit;
-	}
-
-
-	public String getNo_orden() {
-		return no_orden;
-	}
-
-
-	public void setNo_orden(String no_orden) {
-		this.no_orden = no_orden;
-	}
-
-
-	public String getNo_registro() {
-		return no_registro;
-	}
-
-
-	public void setNo_registro(String no_registro) {
-		this.no_registro = no_registro;
 	}
 
 

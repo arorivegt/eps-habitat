@@ -343,14 +343,14 @@ public interface RecursosHumanosService extends RemoteService {
 	/**
 	 * 
 	 * @param id_empleado
-	 * @param anio
+	 * @param fecha
 	 * @param salario
 	 * @param tipoSalario
 	 * @param Descripcion
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	Long Insertar_Salario(Long id_empleado, String anio, float salario, 
+	Long Insertar_Salario(Long id_empleado, Date fecha, float salario, 
 			String tipoSalario, String Descripcion) throws IllegalArgumentException;
 	/**
 	 * 
@@ -682,14 +682,14 @@ public interface RecursosHumanosService extends RemoteService {
 	 * 
 	 * @param id_empleado
 	 * @param id
-	 * @param anio
+	 * @param fecha
 	 * @param salario
 	 * @param tipoSalario
 	 * @param Descripcion
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	Long Actualizar_Salario(Long id_empleado,Long id, String anio,float salario, 
+	Long Actualizar_Salario(Long id_empleado,Long id, Date fecha,float salario, 
 			String tipoSalario, String Descripcion) throws IllegalArgumentException;
 	
 	//metodos para Eliminar en la base de datos

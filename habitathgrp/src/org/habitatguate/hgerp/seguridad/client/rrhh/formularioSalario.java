@@ -1,4 +1,12 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
+
+import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
@@ -9,19 +17,22 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 
 public class formularioSalario extends Composite {
 
-	private salario a;
+	private salario salario;
 	private Empleados empleado;
 	private Long id_salario = 0L;
 	private boolean bandera = true;
@@ -29,19 +40,19 @@ public class formularioSalario extends Composite {
 	private AbsolutePanel absolutePanel;
 	private TextBox txtSalario;
 	private Button btnActualizar ;
-	private TextBox txtTipoSalario;
+	private Button btnEliminar ;
+	private ListBox txtTipoSalario;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private TextArea txtDescipcion;
     private Label label;
-    private ListBox listAnio;
+    private DateBox fecha;
     private Label lblAo;
 
-	public formularioSalario(salario a,Empleados e, String tipoSalario) {
+	public formularioSalario(salario salari,Empleados e) {
 
-		txtTipoSalario.setText(tipoSalario);
 		mensaje = new Mensaje();
 		this.empleado = e;
-		this.a = a;
+		this.salario = salari;
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -51,9 +62,14 @@ public class formularioSalario extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+				try{
+					new Date(fecha.getValue().getTime());
+				}catch(Exception e){
+					fecha.setValue(new Date(1407518124684L));
+				}
 				if(bandera) {
-					loginService.Insertar_Salario(empleado.id_empleado, listAnio.getItemText(listAnio.getSelectedIndex()) ,
-							Float.parseFloat(txtSalario.getText()), txtTipoSalario.getText(), txtDescipcion.getText(),
+					loginService.Insertar_Salario(empleado.id_empleado, fecha.getValue(),
+							Float.parseFloat(txtSalario.getText()), txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()), txtDescipcion.getText(),
 							new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -71,20 +87,18 @@ public class formularioSalario extends Composite {
                         }
 						});
 				}else{
-					loginService.Actualizar_Salario(empleado.id_empleado,id_salario,  listAnio.getItemText(listAnio.getSelectedIndex()) ,
-							Float.parseFloat(txtSalario.getText()), txtTipoSalario.getText(),txtDescipcion.getText(),new AsyncCallback<Long>(){
+					loginService.Actualizar_Salario(empleado.id_empleado,id_salario,  fecha.getValue(),
+							Float.parseFloat(txtSalario.getText()), txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()),txtDescipcion.getText(),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	mensaje.setMensaje("alert alert-error", 
-                        			"Error !! \nal Actualizar Datos");
+                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Actualizar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
 							bandera = false;
-							mensaje.setMensaje("alert alert-success", 
-		                			"Datos Actualizados\n exitosamente!!!");
+							mensaje.setMensaje("alert alert-success", "Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
@@ -101,7 +115,7 @@ public class formularioSalario extends Composite {
 						Float.parseFloat(txtSalario.getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nBonificacion no valido");
+                    			"Error !! \nSalario no valido");
 						txtSalario.setText("0");
 					}
 				}
@@ -114,12 +128,13 @@ public class formularioSalario extends Composite {
 		absolutePanel.add(txtSalario, 10, 27);
 		txtSalario.setSize("134px", "34px");
 		
-		txtTipoSalario = new TextBox();
-		txtTipoSalario.setEnabled(false);
-		txtTipoSalario.setReadOnly(true);
+		txtTipoSalario = new ListBox();
+		txtTipoSalario.addItem("Salario Base", "0");
+		txtTipoSalario.addItem("Decreto(78-89)", "1");
+		txtTipoSalario.addItem("Comisiones", "2");
+		txtTipoSalario.addItem("Otros pagos", "3");
 		txtTipoSalario.setStylePrimaryName("gwt-TextBox2");
 		txtTipoSalario.setStyleName("gwt-TextBox2");
-		txtTipoSalario.setMaxLength(100);
 		absolutePanel.add(txtTipoSalario, 10, 90);
 		txtTipoSalario.setSize("134px", "34px");
 		
@@ -128,32 +143,41 @@ public class formularioSalario extends Composite {
 		absolutePanel.add(txtDescipcion, 166, 27);
 		txtDescipcion.setSize("327px", "95px");
 		
-		listAnio = new ListBox();
-		listAnio.addItem("2014");
-		listAnio.addItem("2015");
-		listAnio.addItem("2016");
-		listAnio.addItem("2017");
-		listAnio.addItem("2018");
-		listAnio.addItem("2019");
-		listAnio.addItem("2020");
-		listAnio.addItem("2021");
-		listAnio.addItem("2022");
-		listAnio.addItem("2023");
-		listAnio.addItem("2024");
-		listAnio.addItem("2025");
-		listAnio.addItem("2026");
-		listAnio.addItem("2027");
-		listAnio.addItem("2028");
-		listAnio.addItem("2029");
-		listAnio.addItem("2030");
-		listAnio.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listAnio, 516, 27);
-		listAnio.setSize("115px", "36px");
+
+		fecha = new DateBox();
+		fecha.setValue(new Date(1407518707105L));
+		fecha.setFormat(new DateBox.DefaultFormat 
+	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		fecha.getDatePicker().setYearArrowsVisible(true);
+		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		fecha.getDatePicker().setVisibleYearCount(100);
+		fecha.setStyleName("gwt-PasswordTextBox");
+		fecha.setSize("228px", "41px");
+		absolutePanel.add(fecha, 516, 27);
+		
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
 		absolutePanel.add(btnActualizar, 516, 90);
 		btnActualizar.setSize("115px", "34px");
+		
+		btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				if(bandera){
+					EliminarFormularioSinDatos();
+				}else{
+					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
+						EliminarFormulario();
+				}
+			}
+		});
+		btnEliminar.setText("Eliminar");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 550, 90);
+		btnEliminar.setSize("115px", "34px");
 		
 		Label lblTitulodiploma = new Label("");
 		lblTitulodiploma.setStyleName("label");
@@ -179,23 +203,31 @@ public class formularioSalario extends Composite {
 		lblAo.setStyleName("label");
 		absolutePanel.add(lblAo, 518, 8);
 		lblAo.setSize("139px", "13px");
+		
+		
 	}
 	
-	public void LlenarDatos(Long id, String txtSalario, String anio,
+	private void EliminarFormulario(){
+        salario.EliminarFormulario(this,empleado.id_empleado,id_salario);
+    }
+	private void EliminarFormularioSinDatos(){
+		salario.EliminarFormulario(this);
+    }
+	
+	public void LlenarDatos(Long id, String txtSalario, Long fecha,
 				String txtTipoSalario, String Descripcion)
 	{
 
 		this.id_salario = id;
 		this.bandera = false;
 		this.txtSalario.setText(txtSalario);
-		this.txtTipoSalario.setText(txtTipoSalario);
-		this.txtDescipcion.setText(Descripcion);
-		
 		boolean bandera = true;
-		for(int i=0; i < this.listAnio.getItemCount() && bandera; i++){
-			bandera = !this.listAnio.getItemText(i).equals(anio);
-		    this.listAnio.setSelectedIndex(i);
+		for(int i=0; i < this.txtTipoSalario.getItemCount() && bandera; i++){
+			bandera = !this.txtTipoSalario.getValue(i).equals(txtTipoSalario);
+		    this.txtTipoSalario.setSelectedIndex(i);
 		}
+		this.txtDescipcion.setText(Descripcion);
+		this.fecha.setValue(new Date(fecha));
 	}
 	
 	

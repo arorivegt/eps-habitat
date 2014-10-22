@@ -122,7 +122,7 @@ public class Buscador_Proveedor extends Composite{
 			if (!textBox.getText().equals("")){
 				
 
-			loginService.Insertar_MaterialCostruccion(textBox.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
+		/*	loginService.Insertar_MaterialCostruccion(textBox.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -141,7 +141,7 @@ public class Buscador_Proveedor extends Composite{
                 	
                 }
 
-         });
+         });*/
 
 
 		}

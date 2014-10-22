@@ -140,13 +140,12 @@ public class MyPaginationDataGrid_Proveedor<T> extends PagingDataGrid_Proveedor<
         	    new ActionCell.Delegate<T>() {
         	        @Override
         	        public void execute(final T object) {
-        	           // code to be executed 
-        	        /*	loginService.Actualizar_MaterialCostruccion(((AuxProveedor)object).getIdMaterialConstruccion(), ((AuxProveedor)object).getNomMaterialCostruccion(),
-        	        			((AuxProveedor)object).getPrecioUnit(), ((AuxProveedor)object).getUnidadMetrica(), new AsyncCallback<Long>() {
+        	        	AuxProveedor aux  = (AuxProveedor)object;
+        	        	loginService.Actualizar_Proveedor(((AuxProveedor)object).getIdProveedor(), ((AuxProveedor)object).getAprobadoComision(), ((AuxProveedor)object).getDirProveedor(), ((AuxProveedor)object).getFechaIngreso().getTime(), ((AuxProveedor)object).getNomProveedor(), ((AuxProveedor)object).getNumeroNit(),((AuxProveedor)object).getObservaciones(), ((AuxProveedor)object).getPaginaWeb(), ((AuxProveedor)object).getPersonaJuridica(), ((AuxProveedor)object).getServicioEntrega(), ((AuxProveedor)object).getTelProveedor(), new AsyncCallback<Long>() {
             				
             				@Override
             				public void onSuccess(Long result) {
-                	        	Window.alert("Modificado: "+ ((AuxProveedor)object).getNomMaterialCostruccion());
+                	        	Window.alert("Modificado: "+ ((AuxProveedor)object).getIdProveedor());
             				}
             				
             				@Override
@@ -154,7 +153,7 @@ public class MyPaginationDataGrid_Proveedor<T> extends PagingDataGrid_Proveedor<
             					System.out.println(caught);
             					
             				}
-            			});*/
+            			});
 
         	        }
         	     }) 

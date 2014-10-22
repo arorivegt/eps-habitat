@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.service;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -101,6 +102,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 	public Long Insertar_MaterialCostruccion(String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario) throws IllegalArgumentException{
 		 Long valor = 0L;
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		//SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
 		SegMaterialCostruccion nuevo = new SegMaterialCostruccion();
 		nuevo.setNomMaterialCostruccion(nomMaterialCostruccion);
 		nuevo.setPrecioUnit(precioUnitario);
@@ -108,10 +110,13 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		Date time=new Date();
 		Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 		nuevo.setFechaIngreso(today);
+		//nuevo.setProveedor(prov);
+		//prov.getMaterialCostruccion().add(nuevo);
 		try{
 			gestorPersistencia.makePersistent(nuevo);
+	//		gestorPersistencia.makePersistent(prov);
 			System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
-			valor = nuevo.getIdMaterialConstruccion();
+			valor = nuevo.getIdMaterialConstruccion().getId();
 		}finally{
 			gestorPersistencia.close();
 		}
@@ -215,7 +220,8 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 	SegProveedor nuevo = new SegProveedor();
 	nuevo.setAprobadoComision(aprobadoComision);
 	nuevo.setDirProveedor(dirProveedor);
-	//nuevo.setFechaIngreso(fechaIngreso);
+	Calendar c = Calendar.getInstance();
+	nuevo.setFechaIngreso(new java.sql.Date(c.getTimeInMillis()));
 	nuevo.setNomProveedor(nomProveedor);
 	nuevo.setNumeroNit(numeroNit);
 	nuevo.setPaginaWeb(paginaWeb);
@@ -232,7 +238,30 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 	}
 	return valor;
 }
-
+public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario) throws IllegalArgumentException{
+	 Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	try{
+	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
+	SegMaterialCostruccion nuevo = new SegMaterialCostruccion();
+	nuevo.setNomMaterialCostruccion(nomMaterialCostruccion);
+	nuevo.setPrecioUnit(precioUnitario);
+	nuevo.setUnidadMetrica(unidadMetrica);
+	Date time=new Date();
+	Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
+	nuevo.setFechaIngreso(today);
+	nuevo.setProveedor(prov);
+	prov.getMaterialCostruccion().add(nuevo);
+	valor = nuevo.getIdMaterialConstruccion().getId();
+	//gestorPersistencia.makePersistent(nuevo);
+	//gestorPersistencia.makePersistent(prov);
+		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+	
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+}
 
 	
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
@@ -340,7 +369,7 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 		if (!execute.isEmpty()){
 			for (SegMaterialCostruccion p : execute){
 				AuxMaterialCostruccion n= new AuxMaterialCostruccion();
-				n.setIdMaterialConstruccion(p.getIdMaterialConstruccion());
+				n.setIdMaterialConstruccion(p.getIdMaterialConstruccion().getId());
 				n.setNomMaterialCostruccion(p.getNomMaterialCostruccion());
 				n.setUnidadMetrica(p.getUnidadMetrica());
 				n.setPrecioUnit(p.getPrecioUnit());
@@ -477,6 +506,31 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 				 e.setPrecioUnit(precioUnitario);
 				 e.setUnidadMetrica(unidadMetrica);
 				 
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	public Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(nomProveedor!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,id);
+				 e.setAprobadoComision(aprobadoComision);
+				 e.setDirProveedor(dirProveedor);
+				 e.setFechaIngreso(new java.sql.Date(fechaIngreso));
+				 e.setNomProveedor(nomProveedor);
+				 e.setNumeroNit(numeroNit);
+				 e.setObservaciones(observaciones);
+				 e.setPaginaWeb(paginaWeb);
+				 e.setPersonaJuridica(personaJuridica);
+				 e.setServicioEntrega(servicioEntrega);
+				 e.setTelProveedor(telProveedor);
+			 
 				 
 			}finally{
 				gestorPersistencia.close();

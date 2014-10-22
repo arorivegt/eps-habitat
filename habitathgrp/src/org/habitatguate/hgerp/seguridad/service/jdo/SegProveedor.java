@@ -2,7 +2,9 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -39,6 +41,11 @@ public class SegProveedor implements Serializable{
 	private String observaciones;
 	
 	private SegAfiliado afiliado;
+	
+	@Persistent(mappedBy = "proveedor")
+    @Element(dependent = "true")
+	private List <SegMaterialCostruccion> materialCostruccion;
+	
 	
 	public Key getIdProveedor() {
 		return idProveedor;
@@ -111,6 +118,13 @@ public class SegProveedor implements Serializable{
 	}
 	public void setAfiliado(SegAfiliado afiliado) {
 		this.afiliado = afiliado;
+	}
+	public List<SegMaterialCostruccion> getMaterialCostruccion() {
+		return materialCostruccion;
+	}
+	public void setMaterialCostruccion(
+			List<SegMaterialCostruccion> materialCostruccion) {
+		this.materialCostruccion = materialCostruccion;
 	}
 	
 	

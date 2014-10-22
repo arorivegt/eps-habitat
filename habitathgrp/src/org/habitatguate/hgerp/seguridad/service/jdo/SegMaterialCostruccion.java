@@ -8,12 +8,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import com.google.appengine.api.datastore.Key;
+
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegMaterialCostruccion {
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long idMaterialConstruccion;
+	private Key idMaterialConstruccion;
 	@Persistent
 	private String nomMaterialCostruccion;
 	@Persistent
@@ -22,10 +24,13 @@ public class SegMaterialCostruccion {
 	private String unidadMetrica;
 	@Persistent
 	private Date fechaIngreso;
-	public Long getIdMaterialConstruccion() {
+	
+	private SegProveedor proveedor;
+	
+	public Key getIdMaterialConstruccion() {
 		return idMaterialConstruccion;
 	}
-	public void setIdMaterialConstruccion(Long idMaterialConstruccion) {
+	public void setIdMaterialConstruccion(Key idMaterialConstruccion) {
 		this.idMaterialConstruccion = idMaterialConstruccion;
 	}
 	public String getNomMaterialCostruccion() {
@@ -51,6 +56,12 @@ public class SegMaterialCostruccion {
 	}
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
+	}
+	public SegProveedor getProveedor() {
+		return proveedor;
+	}
+	public void setProveedor(SegProveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 	
 	

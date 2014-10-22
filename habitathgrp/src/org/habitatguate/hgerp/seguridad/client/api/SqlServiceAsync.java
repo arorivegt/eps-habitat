@@ -88,6 +88,16 @@ public interface SqlServiceAsync {
 	void ConsultaTodosProveedor_PorAfiliado(Long Afiliado,
 			AsyncCallback<List<AuxProveedor>> callback);
 
+	void Actualizar_Proveedor(Long id, Boolean aprobadoComision,
+			String dirProveedor, Long fechaIngreso,
+			String nomProveedor, String numeroNit, String observaciones,
+			String paginaWeb, String personaJuridica, Boolean servicioEntrega,
+			String telProveedor, AsyncCallback<Long> callback);
+
+	void Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,
+			String nomMaterialCostruccion, String unidadMetrica,
+			Double precioUnitario, AsyncCallback<Long> callback);
+
 
 
 

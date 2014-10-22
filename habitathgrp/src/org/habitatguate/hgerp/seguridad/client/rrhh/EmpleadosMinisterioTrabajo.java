@@ -281,55 +281,69 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					String AnnioActual = dtf.format(new Date());
 					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
 					empleado.setEdad(""+edadtotal);
+
+					if(p.getSexo().equals("0")){
+						empleado.setSexo("F");
+					}else{
+						empleado.setSexo("M");
+					}
+					 Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
+					 String Anio2 = dtAnio.format(new Date());
+					 
 					
-					empleado.setSexo(""+p.getSexo().toUpperCase().charAt(0));
-					
-					Long diaslaborados = p.getFecha_ingreso() -new Date().getTime();
-					if(Integer.parseInt(Anio)< Integer.parseInt(AnnioActual)){
+					long diaslaborados = new Date().getTime()-p.getFecha_ingreso();
+					System.out.println(Anio);
+					System.out.println(Anio2);
+					if(Integer.parseInt(Anio)< Integer.parseInt(Anio2)){
 						empleado.setTiempodelaborar(""+365);
 					}else{
 						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
 						empleado.setTiempodelaborar(""+dialaboradoss);
 					}
+
+					empleado.setTotalHorasExtras("0");
+					empleado.setValordeHoraExtra("0");
 					String DescansoSemanal = "";
 					for (AuxPuesto f : p.getPuestos()) {
 						if(f.isActivo()){
 							empleado.setPuesto(f.getNombre_puesto());
 							empleado.setJornada(f.getJornada());
 							empleado.setHorasAlDia(f.getHorasTrabajo());
-							empleado.setTotalHorasExtras("0");
 							empleado.setHorasAlDia("0");
 							if(f.getLunes()){
-								DescansoSemanal = "Lunes";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Lunes";
+								else
+									DescansoSemanal +=","+ "Lunes";
 							}if(f.getMartes()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Martes";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Martes";
 								else
 									DescansoSemanal +=","+ "Martes";
 									
 							}if(f.getMiercoles()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Miercoles";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Miercoles";
 								else
 									DescansoSemanal +=","+ "Miercoles";
 							}if(f.getJueves()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Jueves";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Jueves";
 								else
 									DescansoSemanal +=","+ "Jueves";
 							}if(f.getViernes()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Viernes";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Viernes";
 								else
 									DescansoSemanal +=","+ "Viernes";
 							}if(f.getSabado()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Sabado";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Sabado";
 								else
 									DescansoSemanal +=","+ "Sabado";
 							}if(f.getDomingo()){
-								if(!DescansoSemanal.equals(""))
-									DescansoSemanal =  "Domingo";
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Domingo";
 								else
 									DescansoSemanal +=","+ "Domingo";
 							}
@@ -340,9 +354,11 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setEtnia(empleado.getEtnia());
 					String idioma ="";
 					for (AuxIdioma id : p.getIdiomas()) {
-						idioma = id.getIdioma() +",";
+						if(idioma.equals(""))
+							idioma = id.getIdioma();
+						else
+							idioma += ","+id.getIdioma();
 					}
-					idioma = idioma.substring(0, idioma.length()-2);
 					empleado.setIdiomas(idioma);
 
 					int nivelAcademico = 0;

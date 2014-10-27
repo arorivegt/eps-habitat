@@ -8,6 +8,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
@@ -23,6 +24,7 @@ public class Index implements EntryPoint {
         
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
+        Mensaje inicio;
         private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         @Override
@@ -30,6 +32,7 @@ public class Index implements EntryPoint {
         {
 	        	txtuser.setText("anibal@gmail.com");
 	        	txtpass.setText("Aqwe123");
+	        	inicio=  new Mensaje();
              	final DialogBox dialogBox = new DialogBox();
              
                 dialogBox.setText("Autenticacion");
@@ -84,8 +87,7 @@ public class Index implements EntryPoint {
                                 {
                                         public void onFailure(Throwable caught) 
                                         {
-                                        	Mensaje inicio = new Mensaje();
-                                        	inicio.mensajeEntrada("Error!! \nEn el servicio "
+                                    		inicio.setMensaje("alert alert-error","Error!! \nEn el servicio "
                                 				+ "\n no se pudo\n iniciar ");
                                         }
                                         
@@ -102,8 +104,7 @@ public class Index implements EntryPoint {
                                                         //RootPanel.get().add(buildMenu(result));
                                                 }else
                                                 {
-                                            		Mensaje inicio = new Mensaje();
-                                            		inicio.mensajeEntrada("Error!! \nEn el usuario y/o Contraseña");
+                                            		inicio.setMensaje("alert alert-error", "Error\n En el usuario y/o Contraseña");
                                                 }
                                                                                 
                                         }

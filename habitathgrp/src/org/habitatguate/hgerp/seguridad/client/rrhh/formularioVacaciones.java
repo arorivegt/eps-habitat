@@ -42,10 +42,10 @@ public class formularioVacaciones extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("538px", "170px");
+		absolutePanel.setSize("773px", "170px");
 		
 		dateFecha1 = new DateBox();
-		dateFecha1.setValue(new Date(1407519270283L));
+		dateFecha1.setValue(new Date());
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.getDatePicker().setYearArrowsVisible(true);
@@ -56,7 +56,7 @@ public class formularioVacaciones extends Composite {
 		dateFecha1.setSize("89px", "34px");
 		
 		dateFecha2 = new DateBox();
-		dateFecha2.setValue(new Date(1407519274369L));
+		dateFecha2.setValue(new Date());
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.getDatePicker().setYearArrowsVisible(true);
@@ -76,12 +76,14 @@ public class formularioVacaciones extends Composite {
 		listTipoPermiso.addItem("Permiso sin goce salarial","3");
 		listTipoPermiso.addItem("Suspension con goce salarial","4");
 		listTipoPermiso.addItem("Suspension sin goce salarial","5");
+		listTipoPermiso.addItem("Ausencia con goce salarial","6");
+		listTipoPermiso.addItem("Ausencia sin goce salarial","7");
 		listTipoPermiso.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipoPermiso, 226, 29);
-		listTipoPermiso.setSize("115px", "36px");
+		listTipoPermiso.setSize("221px", "36px");
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 106);
-		txtDescripcion.setSize("327px", "95px");
+		txtDescripcion.setSize("433px", "95px");
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -140,7 +142,7 @@ public class formularioVacaciones extends Composite {
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 407, 60);
+		absolutePanel.add(btnActualizar, 580, 51);
 		btnActualizar.setSize("114px", "34px");
 		
 		Button btnEliminar = new Button("Send");
@@ -158,7 +160,7 @@ public class formularioVacaciones extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("sendButton");
 		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 407, 133);
+		absolutePanel.add(btnEliminar, 580, 124);
 		btnEliminar.setSize("114px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");

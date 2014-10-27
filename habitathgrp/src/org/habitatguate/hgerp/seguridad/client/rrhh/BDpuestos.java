@@ -15,11 +15,13 @@ import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -44,7 +46,12 @@ public class BDpuestos extends Composite  {
       * contructor
       */
     public BDpuestos() {
-    	
+
+		ScrollPanel scrollPanel = new ScrollPanel();
+		scrollPanel.setAlwaysShowScrollBars(false);
+		scrollPanel.setSize("100%", "716px");
+		initWidget(scrollPanel);
+		
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         panel.setSize("761px", "85px");
@@ -77,7 +84,9 @@ public class BDpuestos extends Composite  {
         btnAgregar.setSize("227px", "34px");
         grid.setWidget(0, 2, btnAgregar);
         
-        initWidget(panel);
+
+		scrollPanel.setWidget(panel);
+        
 	}
     
     /**
@@ -102,6 +111,7 @@ public class BDpuestos extends Composite  {
 				{
 				    for ( AuxBDPuesto n2 : results) 
 				    {
+				    	Window.alert("aqui");
 				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 				    	flextable.setWidget(flextable.getRowCount(), 0,fa );
 				    }

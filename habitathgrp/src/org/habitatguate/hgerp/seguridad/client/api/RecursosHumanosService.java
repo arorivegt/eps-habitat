@@ -12,9 +12,11 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -97,7 +99,10 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param TelefonoEmergencia
 	 * @param NombreEmergencia2
 	 * @param TelefonoEmergencia2
+	 * @param depto_municipio_nacimiento
+	 * @param Jefe_Inmediato
 	 * @return
+	 * @throws IllegalArgumentException
 	 */
 	Long Insertar_Emppleado(String afiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
@@ -114,7 +119,8 @@ public interface RecursosHumanosService extends RemoteService {
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
-            String NombreEmergencia2, String TelefonoEmergencia2
+            String NombreEmergencia2, String TelefonoEmergencia2,
+            String depto_municipio_nacimiento, Long Jefe_Inmediato
             )  throws IllegalArgumentException;
 	/**
 	 * 
@@ -412,7 +418,10 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @param TelefonoEmergencia
 	 * @param NombreEmergencia2
 	 * @param TelefonoEmergencia2
+	 * @param depto_municipio_nacimiento
+	 * @param Jefe_Inmediato
 	 * @return
+	 * @throws IllegalArgumentException
 	 */
 	Long Actualizar_Emppleado(Long id, String Stringafiliacion_igss,
             String estado_civil, String sexo, String primer_apellido,
@@ -429,7 +438,8 @@ public interface RecursosHumanosService extends RemoteService {
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
-            String NombreEmergencia2, String TelefonoEmergencia2
+            String NombreEmergencia2, String TelefonoEmergencia2,
+            String depto_municipio_nacimiento, Long Jefe_Inmediato
             )  throws IllegalArgumentException;
 	/**
 	 * 
@@ -868,9 +878,29 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     AuxEmpleado Empleado_Registrado(Long id_empleado) throws IllegalArgumentException;
-    
-	
-    
+    /**
+     * 
+     * @param Correo
+     * @return
+     * @throws IllegalArgumentException
+     */
+    Long getIdEmpleado(String Correo)throws IllegalArgumentException;
 
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws IllegalArgumentException
+     */
+    List<AuxHistorial> getHistorial(Long id)throws IllegalArgumentException;
+
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws IllegalArgumentException
+     */
+    List<AuxVacaciones> getPermisos(Long id)throws IllegalArgumentException;
+    
 }
 

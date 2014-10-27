@@ -25,6 +25,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class EmpleadosMinisterioTrabajo extends Composite  {
 
@@ -32,6 +34,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private ScrollPanel scrollPanel;
     private AbsolutePanel absolutePanel_1;
+    private  ListBox listEstado ;
 	public EmpleadosMinisterioTrabajo() {
 		
 		grid = new Grid(2, 1);
@@ -43,14 +46,31 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		absolutePanel.setSize("1130px", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		final ListBox listEstado = new ListBox();
-		listEstado.addItem("empleado activo");
-		listEstado.addItem("empleado inactivo");
-		listEstado.addItem("posible empleado");
+		listEstado = new ListBox();
+		listEstado.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				busqueda();
+			}
+		});
+		listEstado.addItem("empleado activo","0");
+		listEstado.addItem("empleado inactivo","1");
+		listEstado.addItem("posible empleado","2");
+		listEstado.addItem("practicante","3");
+		listEstado.addItem("interino","4");
 		listEstado.addItem("todos");
 		listEstado.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstado, 170, 31);
 		listEstado.setSize("227px", "34px");
+		
+			Image image = new Image("images/ico-lupa.png");
+			image.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {
+					busqueda();
+				}
+			});
+			
+					absolutePanel.add(image, 438, 10);
+					image.setSize("103px", "55px");
 		
 		Label lblBusquedaPor = new Label("Crear Reporte Empleados:");
 		lblBusquedaPor.setStyleName("label");
@@ -65,27 +85,32 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		absolutePanel_1 = new AbsolutePanel();
 		scrollPanel.setWidget(absolutePanel_1);
 		absolutePanel_1.setSize("10322px", "601px");
+		
+		Label lblEstadoEmpleado = new Label("Estado Empleado");
+		lblEstadoEmpleado.setStyleName("label");
+		absolutePanel.add(lblEstadoEmpleado, 10, 29);
+		lblEstadoEmpleado.setSize("154px", "13px");
+		
+	}
 	
-		Image image = new Image("images/ico-lupa.png");
-		image.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				char tipo = '5';
-				
-				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
-					tipo = '2';
-				else
-					tipo = '5';
-				
-				loginService.Buscar_Empleado(tipo,"", "", 
-						"", "","","",listEstado.getItemText(listEstado.getSelectedIndex()),new AsyncCallback<List<AuxEmpleado>>(){
-            public void onFailure(Throwable caught) 
-            {
-                Window.alert("No hay resultados "+caught);
-            }
-
+	public void busqueda(){
+		char tipo = '5';
+		
+		if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
+			tipo = '2';
+		else
+			tipo = '5';
+		
+		loginService.Buscar_Empleado(tipo,"", "", 
+				"", "","","",listEstado.getValue(listEstado.getSelectedIndex()),new AsyncCallback<List<AuxEmpleado>>(){
+		public void onFailure(Throwable caught) 
+		{
+		    Window.alert("No hay resultados "+caught);
+		}
+		
 			@Override
-            public void onSuccess( List<AuxEmpleado> result)
-            {
+		public void onSuccess( List<AuxEmpleado> result)
+		{
 				List<DatosMinisterioTrabajo> DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				for (AuxEmpleado p : result) {
@@ -101,13 +126,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							empleado.setDocumentoIdentificacion(p.getNo_pasaporte());
 						}
 					}catch(Exception e){
-
+		
 						empleado.setTipoIdentificacion("2");
 						empleado.setDocumentoIdentificacion("");
 					}
 					empleado.setPaisOrigen(p.getPais());
-
-					 String[] numerosComoArray2  = p.getDepto_municipio_residencia().split(",");
+		
+					 String[] numerosComoArray2  = p.getDepto_municipio_nacimiento().split(",");
 					 String deptodir = "";
 					 String munidir = "";
 					 for (int i1 = 0; i1 < numerosComoArray2.length; i1++) {
@@ -249,7 +274,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						 }else{
 							 empleado.setLugarNacimiento("VIII"+munidir);
 						 }}
-
+		
 					empleado.setNitEmpleado(p.getNit());
 					empleado.setIGSSEmpleado(p.getAfiliacion_igss());
 					empleado.setDeportadoPais("");
@@ -281,7 +306,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					String AnnioActual = dtf.format(new Date());
 					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
 					empleado.setEdad(""+edadtotal);
-
+		
 					if(p.getSexo().equals("0")){
 						empleado.setSexo("F");
 					}else{
@@ -300,7 +325,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
 						empleado.setTiempodelaborar(""+dialaboradoss);
 					}
-
+		
 					empleado.setTotalHorasExtras("0");
 					empleado.setValordeHoraExtra("0");
 					String DescansoSemanal = "";
@@ -309,7 +334,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							empleado.setPuesto(f.getNombre_puesto());
 							empleado.setJornada(f.getJornada());
 							empleado.setHorasAlDia(f.getHorasTrabajo());
-							empleado.setHorasAlDia("0");
 							if(f.getLunes()){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Lunes";
@@ -351,7 +375,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							break;
 						}
 					}
-					empleado.setEtnia(empleado.getEtnia());
+					empleado.setEtnia(p.getEtnia());
 					String idioma ="";
 					for (AuxIdioma id : p.getIdiomas()) {
 						if(idioma.equals(""))
@@ -360,7 +384,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							idioma += ","+id.getIdioma();
 					}
 					empleado.setIdiomas(idioma);
-
+		
 					int nivelAcademico = 0;
 					String profesion = "";
 					for (AuxHistorialAcademico academico : p.getHistorial_academico()) {
@@ -431,19 +455,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				//nuevo.setSize("1187px", "648px");
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);
-            }
-
+		}
+		
 				});
-			}
-		});
 
-		absolutePanel.add(image, 438, 10);
-		image.setSize("103px", "55px");
-		
-		Label lblEstadoEmpleado = new Label("Estado Empleado");
-		lblEstadoEmpleado.setStyleName("label");
-		absolutePanel.add(lblEstadoEmpleado, 10, 29);
-		lblEstadoEmpleado.setSize("154px", "13px");
-		
 	}
 }

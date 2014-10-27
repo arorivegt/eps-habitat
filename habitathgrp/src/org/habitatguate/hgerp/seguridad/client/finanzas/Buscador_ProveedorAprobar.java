@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
 
-public class Buscador_Proveedor extends Composite{
+public class Buscador_ProveedorAprobar extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     TablaGWT_Proveedor e = null;
 	
@@ -50,7 +50,7 @@ public class Buscador_Proveedor extends Composite{
 
   	  }
     };
-	public Buscador_Proveedor(){
+	public Buscador_ProveedorAprobar(){
 	final Grid grid = new Grid(2, 2);
 	initWidget(grid);
 	grid.setWidth("1278px");
@@ -75,18 +75,17 @@ public class Buscador_Proveedor extends Composite{
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			e.grid.EliminarFila();
-			e.grid.ActualizarTabla();
+			e.grid.AprobarProveedor();
 		}
 	});		
 
-	button.setText("Eliminar Proveedor");
+	button.setText("Aprobar Proveedor");
 	button.setStylePrimaryName("gwt-TextBox2");
 	button.setStyleName("gwt-TextBox2");
 	absolutePanel.add(button, 914, 28);
 	button.setSize("160px", "27px");
 	
-	loginService.ConsultaTodosProveedor_PorAfiliado(0L,new AsyncCallback<List<AuxProveedor>>() {
+	loginService.ConsultaTodosProveedor_SinAprobar(0L,new AsyncCallback<List<AuxProveedor>>() {
 		
 		@Override
 		public void onSuccess(List<AuxProveedor> result) {

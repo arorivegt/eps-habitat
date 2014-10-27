@@ -37,14 +37,18 @@ public interface SqlService extends RemoteService{
 	List<AuxPlantillaSolucion> ConsultaTodasPlantillas();
 	List<AuxMaterialCostruccion> ConsultaTodosMaterialCostruccion();
 	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliado(Long Afiliado);
+	List<AuxProveedor> ConsultaTodosProveedor_SinAprobar(Long Afiliado);
+	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
 	Long Eliminar_MaterialCostruccion(Long id);
+	Long Eliminar_Proveedor(Long id);
 	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
 	Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado);
 	Long Actualizar_Beneficiario(Long id,String nomBeneficiario,String dirBeneficiario,int telBeneficiario);
 	Long Actualizar_MaterialCostruccion(Long id,String nomMaterialCostruccion,Double precioUnitario,String unidadMetrica);
 	Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor);
+	Long Actualizar_ProveedorAprobado(Long id);
 	
 }

@@ -98,6 +98,16 @@ public interface SqlServiceAsync {
 			String nomMaterialCostruccion, String unidadMetrica,
 			Double precioUnitario, AsyncCallback<Long> callback);
 
+	void Eliminar_Proveedor(Long id, AsyncCallback<Long> callback);
+
+	void ConsultaTodosProveedor_SinAprobar(Long Afiliado,
+			AsyncCallback<List<AuxProveedor>> callback);
+
+	void Actualizar_ProveedorAprobado(Long id, AsyncCallback<Long> callback);
+
+	void ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado,
+			AsyncCallback<List<AuxProveedor>> callback);
+
 
 
 

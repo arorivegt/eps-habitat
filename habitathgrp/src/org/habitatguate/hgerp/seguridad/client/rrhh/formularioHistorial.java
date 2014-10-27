@@ -46,7 +46,7 @@ public class formularioHistorial extends Composite {
 		absolutePanel.setSize("763px", "170px");
 		
 		dateFecha = new DateBox();
-		dateFecha.setValue(new Date(1407518904795L));
+		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);
@@ -57,10 +57,8 @@ public class formularioHistorial extends Composite {
 		dateFecha.setSize("227px", "34px");
 		
 		listTipo = new ListBox();
-		listTipo.addItem("permisos");
-		listTipo.addItem("ausencias");
-		listTipo.addItem("aciertos ");
-		listTipo.addItem("llamadas de atención");
+		listTipo.addItem("aciertos ","0");
+		listTipo.addItem("llamadas de atención","1");
 		listTipo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipo, 259, 29);
 		listTipo.setSize("229px", "36px");
@@ -76,7 +74,7 @@ public class formularioHistorial extends Composite {
 			
 				if(bandera) {
 					loginService.Insertar_Historial(empleado.id_empleado, dateFecha.getValue(),txtDescripcion.getText(), 
-							listTipo.getItemText(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
+							listTipo.getValue(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
@@ -92,7 +90,7 @@ public class formularioHistorial extends Composite {
 						});
 				}else{
 					loginService.Actualizar_Historial(empleado.id_empleado,id_historial, dateFecha.getValue(),txtDescripcion.getText(), 
-							listTipo.getItemText(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
+							listTipo.getValue(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
                         	mensaje.setMensaje("alert alert-error", "Error !! \nal Actualizar Datos");
@@ -172,7 +170,7 @@ public class formularioHistorial extends Composite {
 		
 		boolean bandera = true;
 		for(int i=0; i < this.listTipo.getItemCount() && bandera; i++){
-			bandera = !this.listTipo.getItemText(i).equals(listTipo);
+			bandera = !this.listTipo.getValue(i).equals(listTipo);
 		    this.listTipo.setSelectedIndex(i);
 		}
 	}

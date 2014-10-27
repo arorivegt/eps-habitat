@@ -19,6 +19,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class TestForm extends Composite  {
 
@@ -33,6 +35,8 @@ public class TestForm extends Composite  {
      public TestForm() {
 
  			mensaje = new Mensaje();
+	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
 	        flextable = new FlexTable();

@@ -86,6 +86,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setTotal(0.0f);
 				em.setSalario_base(0.0f);
 				em.setDepto_municipio_residencia("01,0101");
+				em.setDepto_municipio_nacimiento("01,0101");
+				em.setJefe_Inmediato(0L);
+				em.setEtnia("1");
+				em.setNombreEmergencia("");
+				em.setTelefonoEmergencia("");
+				em.setNombreEmergencia2("");
+				em.setTelefonoEmergencia2("");
 				em.setEstado_civil("0");
 				em.setPais("83");
 				em.setSexo("1");
@@ -150,7 +157,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
-            String NombreEmergencia2, String TelefonoEmergencia2
+            String NombreEmergencia2, String TelefonoEmergencia2,
+            String depto_municipio_nacimiento, Long Jefe_Inmediato
            ) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
@@ -206,7 +214,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	         e.setTelefonoEmergencia(TelefonoEmergencia);
 	         e.setNombreEmergencia2(NombreEmergencia2.toUpperCase());
 	         e.setTelefonoEmergencia2(TelefonoEmergencia2);
-	         
+	         e.setDepto_municipio_nacimiento(depto_municipio_nacimiento);
+	         e.setJefe_Inmediato(Jefe_Inmediato);
 	         
 	         gestorPersistencia.makePersistent(e); 
 	         valor = e.getId_empleado();
@@ -539,7 +548,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, 
 		            String licencia, String Etnia,
 		            String NombreEmergencia, String TelefonoEmergencia,
-		            String NombreEmergencia2, String TelefonoEmergencia2) throws IllegalArgumentException {
+		            String NombreEmergencia2, String TelefonoEmergencia2,
+		            String depto_municipio_nacimiento, Long Jefe_Inmediato) throws IllegalArgumentException {
 				
 
 
@@ -592,6 +602,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					         e.setTelefonoEmergencia(TelefonoEmergencia);
 					         e.setNombreEmergencia2(NombreEmergencia2.toUpperCase());
 					         e.setTelefonoEmergencia2(TelefonoEmergencia2);
+					         e.setDepto_municipio_nacimiento(depto_municipio_nacimiento);
+					         e.setJefe_Inmediato(Jefe_Inmediato);
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -1052,22 +1064,44 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
 				List<SegEmpleado> results = null ;
+				List<SegEmpleado> aux = null ;
 				
-				if(tipo=='1' || tipo =='2'){
+				if(tipo=='1'){
 					Query q = pm.newQuery(SegEmpleado.class);
 					q.setFilter("primer_nombre == '"+primer_nombre.toUpperCase()+"'");
 					q.setFilter("primer_apellido == '"+primer_apellido.toUpperCase()+"'");
 					q.setFilter("segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
 					results = (List<SegEmpleado>) q.execute();
-				}else if(tipo=='4'){
-					Query q = pm.newQuery(SegEmpleado.class,"cui == '"+DPI.toUpperCase()+"'");
+				}else if(tipo =='2'){
+					Query q = pm.newQuery(SegEmpleado.class);
 					results = (List<SegEmpleado>) q.execute();
 				}else if(tipo=='3'){
 					Query q = pm.newQuery(SegEmpleado.class,"no_pasaporte == '"+Pasaporte.toUpperCase()+"'");
 					results = (List<SegEmpleado>) q.execute();
+				}else if(tipo=='4'){
+					Query q = pm.newQuery(SegEmpleado.class,"cui == '"+DPI.toUpperCase()+"'");
+					results = (List<SegEmpleado>) q.execute();
 				}else if(tipo=='5'){
 					Query q = pm.newQuery(SegEmpleado.class,"Estado== '"+Estado+"'");
 					results = (List<SegEmpleado>) q.execute();
+				}else if(tipo=='6'){
+					Query q = pm.newQuery(SegEmpleado.class);
+					aux = (List<SegEmpleado>) q.execute();
+					
+					for(SegEmpleado e:aux)
+					{
+						for(SegPuesto s : e.getPuestos())
+						{
+							//verifica en los puestos, si es igual al puesto buscado y lo agregar 
+							//a los empleados que encontro con el puesto indicado
+							if(s.getActivo() && s.getNombre_puesto().equals(Estado.trim()))
+							{
+								results = new ArrayList<SegEmpleado>();
+								results.add(e);
+							}
+						}
+					}
+					
 				}
 				if(!results.isEmpty())
 				{
@@ -1089,11 +1123,14 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	nuevo.setEstado(p.getEstado());
 					    	nuevo.setPasaporte(p.getPasaporte());
 					    	nuevo.setLicencia(p.getLicencia());
+					    	System.out.println("ss"+p.getEtnia());
 					    	nuevo.setEtnia(p.getEtnia());
 					    	nuevo.setNombreEmergencia(p.getNombreEmergencia());
 					    	nuevo.setTelefonoEmergencia(p.getTelefonoEmergencia());
 					    	nuevo.setNombreEmergencia2(p.getNombreEmergencia2());
 					    	nuevo.setTelefonoEmergencia2(p.getTelefonoEmergencia2());
+					    	nuevo.setDepto_municipio_nacimiento(p.getDepto_municipio_nacimiento());
+					    	nuevo.setJefe_Inmediato(p.getJefe_Inmediato());
 					    	List<SegEntrevista> results0 = p.getEntrevista();
 					    	if (!results0.isEmpty()) {
 							    for (SegEntrevista n0 : results0) {
@@ -1306,6 +1343,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							    	v.setId_vacaciones(n9.getId_vacaciones());
 							    	v.setFecha1(n9.getFecha1().getTime());
 								 	v.setFecha2(n9.getFecha2().getTime());
+								 	v.setTipoPermisos(n9.getTipoPermisos());
 								 	v.setDescripcion(n9.getDescripcion());
 								 	nuevo.getVacaciones().add(v);
 							    }
@@ -1325,265 +1363,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    }
 					 return valor;
 				}
-//				if (!results.isEmpty() && tipo=='1' || tipo =='2') {
-//				    for (SegEmpleado p : results) {
-//				    	if((primer_nombre.toUpperCase().equals(p.getPrimer_nombre()) 
-//				    	|| segundo_nombre.toUpperCase().equals(p.getSegundo_nombre())
-//				    	|| primer_apellido.toUpperCase().equals(p.getPrimer_apellido())
-//				    	|| segundo_apellido.toUpperCase().equals(p.getSegundo_apellido())) && tipo =='1')
-//				    	{
-//							System.out.println("buscado "+tipo);
-//				    		AuxEmpleado nuevo = new AuxEmpleado();
-//				    		nuevo.setId_empleado(p.getId_empleado());
-//				    		nuevo.setPrimer_apellido(p.getPrimer_apellido());
-//				    		nuevo.setPrimer_nombre(p.getPrimer_nombre());
-//				    		nuevo.setSegundo_apellido(p.getSegundo_apellido());
-//				    		nuevo.setSegundo_nombre(p.getSegundo_nombre());
-//				    		valor.add(nuevo);
-//				    	}
-//				    	if(tipo == '2'){
-//					    	AuxEmpleado nuevo = new AuxEmpleado();
-//					    	nuevo.setAfiliacion_igss(p.getAfiliacion_igss());
-//					    	nuevo.setApellido_casada(p.getApellido_casada());
-//					    	nuevo.setBonificacion(p.getBonificacion());
-//					    	nuevo.setCelular(p.getCelular());
-//					    	nuevo.setCentro_trabajo(p.getCentro_trabajo());
-//					    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
-//					    	nuevo.setIVS(p.getIVS());
-//					    	nuevo.setCui(p.getCui());
-//					    	nuevo.setDepto_municipio_cedula(p.getDepto_municipio_cedula());
-//					    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
-//					    	nuevo.setDireccion_actual(p.getDireccion_actual());
-//					    	nuevo.setEmail(p.getEmail());
-//					    	nuevo.setURLFile(p.getURLFile());
-//					    	nuevo.setKeyFile(p.getKeyFile());
-//					    	nuevo.setEstado(p.getEstado());
-//					    	nuevo.setPasaporte(p.getPasaporte());
-//					    	nuevo.setLicencia(p.getLicencia());
-//					    	List<SegEntrevista> results0 = p.getEntrevista();
-//					    	if (!results0.isEmpty()) {
-//							    for (SegEntrevista n0 : results0) {
-//							    	AuxEntrevista l = new AuxEntrevista();
-//							    	l.setId_entrevista(n0.getId_entrevista().getId());
-//							    	l.setFecha_entrevista(n0.getFecha_entrevista().getTime());
-//								 	l.setQue_conoces(n0.getQue_conoces());
-//								 	l.setPor_que_trabajas_aqui(n0.getPor_que_trabajas_aqui());
-//								 	l.setComo_se_describe(n0.getComo_se_describe());
-//								 	l.setTrabajar_por_presion(n0.getTrabajar_por_presion());
-//								 	l.setMetas(n0.getMetas());
-//								 	l.setDisponibilidad_inmediata(n0.getDisponibilidad_inmediata());
-//								 	l.setDisposicion_a_viajar(n0.getDisposicion_a_viajar());
-//								 	l.setFlexibilidad_horario(n0.getFlexibilidad_horario());
-//								 	l.setPretencion_salarial_minimo(n0.getPretencion_salarial_minimo());
-//								 	l.setAntecedentes_penales(n0.getAntecedentes_penales());
-//								 	l.setAntecedentes_policiacos(n0.getAntecedentes_policiacos());
-//								 	l.setCarta_recomendacion_laboral(n0.getCarta_recomendacion_laboral());
-//								 	l.setCarta_recomendacion_personal(n0.getCarta_recomendacion_personal());
-//								 	l.setVive_con_familia(n0.getVive_con_familia());
-//								 	l.setCasa_propia(n0.getCasa_propia());
-//								 	l.setEntrevisto(n0.getEntrevisto());
-//								 	l.setEnfermedades(n0.getEnfermedades());
-//								 	l.setAporte_casa(n0.getAporte_casa());
-//								 	l.setTiene_deudas(n0.getTiene_deudas());
-//								 	l.setNo_dependientes(n0.getNo_dependientes());
-//								 	l.setEmpresa_credito(n0.getEmpresa_credito());
-//								 	l.setAlquila(n0.getAlquila());
-//								 	l.setOtros_Ingresos(n0.getOtros_Ingresos());
-//								 	l.setAmortizacion(n0.getAmortizacion());
-//								 	nuevo.getEntrevista().add(l);
-//							    }
-//					    	}
-//					    	nuevo.setEstado_civil(p.getEstado_civil());
-//					    	
-//					    	List<SegFamilia> results22 = p.getFamilia();
-//					    	if (!results22.isEmpty()) {
-//							    for (SegFamilia n : results22) {
-//							    	AuxFamilia f = new AuxFamilia();
-//							    	f.setId_familia(n.getId_familia());
-//								 	f.setPrimer_nombre(n.getPrimer_nombre());
-//								 	f.setSegundo_nombre(n.getSegundo_nombre());
-//								 	f.setPrimer_apellido(n.getPrimer_apellido());
-//								 	f.setSegundo_apellido(n.getSegundo_apellido());
-//								 	f.setEdad(n.getEdad());
-//								 	f.setOcupacion(n.getOcupacion());
-//								 	f.setParentesco(n.getParentesco());
-//								 	nuevo.getFamilia().add(f);
-//							    }
-//					    	}
-//							    
-//					    	nuevo.setFecha_ingreso(p.getFecha_ingreso().getTime());
-//					    	nuevo.setFecha_nacimiento(p.getFecha_nacimiento().getTime());
-//					    	
-//					    	List< SegHistorialAcademico> results2 = p.getHistorial_academico();
-//					    	if (!results2.isEmpty()) {
-//							    for ( SegHistorialAcademico n2 : results2) {
-//
-//							    	AuxHistorialAcademico a = new AuxHistorialAcademico();
-//							    	a.setId_historial_academico(n2.getId_historial_academico());
-//							    	a.setEstablecimiento(n2.getEstablecimiento());
-//								 	a.setFecha1(n2.getFecha1().getTime());
-//								 	a.setFecha2(n2.getFecha2().getTime());
-//								 	a.setNivel_academico(n2.getNivel_academico());
-//								 	a.setTitulo(n2.getTitulo());
-//							    	a.setURLFile(n2.getURLFile());
-//							    	a.setKeyFile(n2.getKeyFile());
-//								 	nuevo.getHistorial_academico().add(a);
-//							    }
-//					    	}
-//					    	
-//					    	List< SegHistorial> results3 = p.getHistorial();
-//					    	if (!results3.isEmpty()) {
-//							    for ( SegHistorial n3 : results3) {
-//
-//							    	AuxHistorial h = new AuxHistorial();
-//							    	h.setId_historial(n3.getId_historial());
-//							    	h.setFecha(n3.getFecha().getTime());
-//								 	h.setDescripcion(n3.getDescripcion());
-//								 	h.setTipo_historial(n3.getTipo_historial());
-//								 	nuevo.getHistorial().add(h);
-//							    }
-//					    	}
-//					    	nuevo.setId_empleado(p.getId_empleado());
-//					    	
-//					    	List<SegIdioma> results4 = p.getIdiomas();
-//					    	if (!results4.isEmpty()) {
-//							    for (SegIdioma n4 : results4) {
-//
-//							    	AuxIdioma i = new AuxIdioma();
-//							    	i.setId_idioma(n4.getId_idioma());
-//								 	i.setNivel(n4.getNivel());
-//								 	i.setIdioma(n4.getIdioma());
-//							    	i.setURLFile(n4.getURLFile());
-//							    	i.setKeyFile(n4.getKeyFile());
-//								 	nuevo.getIdiomas().add(i);
-//							    }
-//					    	}
-//					    	nuevo.setNit(p.getNit());
-//					    	nuevo.setNo_Dependientes(p.getNo_Dependientes());
-//					    	nuevo.setNo_licencia(p.getNo_licencia());
-//					    	nuevo.setNo_orden(p.getNo_orden());
-//					    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
-//					    	nuevo.setNo_registro(p.getNo_registro());
-//					    	nuevo.setOcupacion(p.getOcupacion());
-//					    	nuevo.setPais(p.getPais());
-//					    	nuevo.setPrimer_apellido(p.getPrimer_apellido());
-//					    	nuevo.setPrimer_nombre(p.getPrimer_nombre());
-//					    	nuevo.setProfesion(p.getProfesion());
-//					    	
-//					    	List<SegPuesto> results5 = p.getPuestos();
-//					    	if (!results5.isEmpty()) {
-//							    for (SegPuesto n5 : results5) {
-//
-//							    	AuxPuesto pp = new AuxPuesto();
-//							    	pp.setId_puesto(n5.getId_puesto());
-//							    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
-//								 	pp.setNombre_puesto(n5.getNombre_puesto());
-//								 	pp.setFunciones(n5.getFunciones());
-//								 	pp.setSalario(n5.getSalario());
-//								 	pp.setActivo(n5.getActivo());
-//								 	nuevo.getPuestos().add(pp);
-//							    }
-//					    	}
-//					    	
-//					    	List<SegReferenciaPersonal> results6 = p.getReferencia_personal();
-//					    	if (!results6.isEmpty()) {
-//							    for (SegReferenciaPersonal n6 : results6) {
-//
-//							    	AuxReferenciaPersonal rp = new AuxReferenciaPersonal();
-//							    	rp.setId_referencia_personal(n6.getId_referencia_personal());
-//							    	rp.setNombre_referencia(n6.getNombre_referencia());
-//								 	rp.setTelefono(n6.getTelefono());
-//								 	rp.setPuesto_candidato(n6.getPuesto_candidato());
-//								 	rp.setRelacion(n6.getRelacion());
-//								 	rp.setActitudes_cualidades(n6.getActitudes_cualidades());
-//								 	nuevo.getReferencia_personal().add(rp);
-//							    }
-//					    	}
-//					    	
-//					    	List<SegReferenciaLaboral> results7 = p.getReferencia_laboral();
-//					    	if (!results7.isEmpty()) {
-//							    for (SegReferenciaLaboral n7 : results7) {
-//
-//							    	AuxReferenciaLaboral rl = new AuxReferenciaLaboral();
-//							    	rl.setId_referencia_laboral(n7.getId_referencia_laboral());
-//							    	rl.setNombre_referencia(n7.getNombre_referencia());
-//								 	rl.setTelefono(n7.getTelefono());
-//								 	rl.setPuesto_candidato(n7.getPuesto_candidato());
-//								 	rl.setEmpresa_referencia(n7.getEmpresa_referencia());
-//								 	rl.setFecha1(n7.getFecha1().getTime());
-//								 	rl.setFecha2(n7.getFecha2().getTime());
-//								 	rl.setMotivo_retiro(n7.getMotivo_retiro());
-//								 	rl.setSalario_final(n7.getSalario_final());
-//								 	rl.setActitudes_cualidades(n7.getActitudes_cualidades());
-//								 	rl.setRecomiendo(n7.getRecomiendo());
-//								 	nuevo.getReferencia_laboral().add(rl);
-//							    }
-//					    	}
-//					    	nuevo.setSalario_base(p.getSalario_base());
-//					    	nuevo.setSegundo_apellido(p.getSegundo_apellido());
-//					    	nuevo.setSegundo_nombre(p.getSegundo_nombre());
-//					    	nuevo.setSexo(p.getSexo());
-//					    	nuevo.setTelefono(p.getTelefono());
-//					    	
-//					    	List<SegTest> results8 = p.getTest();
-//					    	if (!results8.isEmpty()) {
-//							    for (SegTest n8 : results8) {
-//
-//							    	AuxTest t= new AuxTest();
-//							    	t.setId_test(n8.getId_test());
-//							    	t.setPregunta1(n8.getPregunta1());
-//								 	t.setPregunt2(n8.getPregunt2());
-//								 	t.setPregunta3(n8.getPregunta3());
-//								 	t.setPregunta4(n8.getPregunta4());
-//								 	t.setPregunta5(n8.getPregunta5());
-//								 	t.setPregunta6(n8.getPregunta6());
-//								 	t.setPregunta7(n8.getPregunta7());
-//								 	t.setPregunta8(n8.getPregunta8());
-//								 	t.setPregunta9(n8.getPregunta9());
-//								 	t.setPregunta10(n8.getPregunta10());
-//								 	t.setFecha_test(n8.getFecha_test().getTime());
-//								 	t.setEvaluador(n8.getEvaluador());
-//								 	t.setBDtest(n8.getBDtest());
-//								 	t.setTestBD(n8.isTestBD());
-//								 	t.setTipo_test(n8.getTipo_test());
-//								 	nuevo.getTest().add(t);
-//							    }
-//					    	}
-//					    	nuevo.setTipo_licencia(p.getTipo_licencia());
-//					    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
-//					    	nuevo.setTipo_planilla(p.getTipo_planilla());
-//					    	nuevo.setTotal(p.getTotal());
-//					    	
-//					    	List<SegVacaciones> results9 = p.getVacaciones();
-//					    	if (!results9.isEmpty()) {
-//							    for (SegVacaciones n9 : results9) {
-//
-//							    	AuxVacaciones v= new AuxVacaciones();
-//							    	v.setId_vacaciones(n9.getId_vacaciones());
-//							    	v.setFecha1(n9.getFecha1().getTime());
-//								 	v.setFecha2(n9.getFecha2().getTime());
-//								 	v.setDescripcion(n9.getDescripcion());
-//								 	nuevo.getVacaciones().add(v);
-//							    }
-//					    	}
-//
-//					    	List<SegSalario> results10 = p.getSalario();
-//					    	if (!results10.isEmpty()) {
-//							    for (SegSalario n10 : results10) {
-//							    	AuxSalario s = new AuxSalario();
-//							    	s.setFecha(n10.getFecha().getTime());
-//							    	s.setSalario(n10.getSalario());
-//		    						s.setTipoSalario(n10.getTipoSalario());
-//							    	nuevo.getSalario().add(s);
-//							    }
-//					    	}
-//				    		valor.add(nuevo);
-//					    }
-//				    		
-//				    	}
-//				    }
-				  
-				
 				return valor;
 			}
 
@@ -1616,6 +1395,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	nuevo.setTelefonoEmergencia(p.getTelefonoEmergencia());
 				    	nuevo.setNombreEmergencia2(p.getNombreEmergencia2());
 				    	nuevo.setTelefonoEmergencia2(p.getTelefonoEmergencia2());
+				    	nuevo.setDepto_municipio_nacimiento(p.getDepto_municipio_nacimiento());
+				    	nuevo.setJefe_Inmediato(p.getJefe_Inmediato());
 				    	List<SegEntrevista> results0 = p.getEntrevista();
 				    	if (!results0.isEmpty()) {
 						    for (SegEntrevista n0 : results0) {
@@ -1828,6 +1609,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						    	v.setFecha1(n9.getFecha1().getTime());
 							 	v.setFecha2(n9.getFecha2().getTime());
 							 	v.setDescripcion(n9.getDescripcion());
+							 	v.setTipoPermisos(n9.getTipoPermisos());
 							 	nuevo.getVacaciones().add(v);
 						    }
 				    	}
@@ -2259,7 +2041,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			String mensaje = "Error al Activar Puesto";
 			 try { 
-				 final SegEmpleado empleado = Persistencia.getObjectById(SegEmpleado.class,id);
+				 final SegEmpleado empleado = Persistencia.getObjectById(SegEmpleado.class,id_empleado);
 				 for(SegPuesto p: empleado.getPuestos())
 				 {
 					 if(p.getId_puesto().equals(id)){
@@ -2278,5 +2060,85 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			}
 			 return mensaje;
 		}
+
+		@Override
+		public Long getIdEmpleado(String Correo)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			SegUsuario result = null;
+			Long valor = 0L;
+			try{
+				 result = Persistencia.getObjectById(SegUsuario.class, Correo); 
+				 valor = result.getId_empleado();
+			}catch(Exception t){
+				return 0L;
+			}finally{
+				 Persistencia.close();  
+			}
+			 return valor ;
+		}
+
+		@Override
+		public List<AuxHistorial> getHistorial(Long id)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+
+			SegEmpleado result; 
+			List<AuxHistorial> valor = new ArrayList<AuxHistorial>();
+			result = null;
+			try{
+				 result = Persistencia.getObjectById(SegEmpleado.class, id); 
+				 if (!result.getHistorial().isEmpty()) {
+					    for ( SegHistorial n3 : result.getHistorial()) 
+					    {
+					    	AuxHistorial h = new AuxHistorial();
+					    	h.setId_historial(n3.getId_historial());
+					    	h.setFecha(n3.getFecha().getTime());
+						 	h.setDescripcion(n3.getDescripcion());
+						 	h.setTipo_historial(n3.getTipo_historial());
+						 	valor.add(h);
+					    }
+			    	}
+			}catch(Exception t){
+				return valor;
+			}finally{
+				 Persistencia.close();  
+			}
+			 return valor ;
+		}
+
+		@Override
+		public List<AuxVacaciones> getPermisos(Long id)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+
+			 System.out.println("sdadas::"+id);
+				SegEmpleado result; 
+				List<AuxVacaciones> valor = new ArrayList<AuxVacaciones>();
+				result = null;
+				try{
+					 result = Persistencia.getObjectById(SegEmpleado.class, id); 
+					 if (!result.getVacaciones().isEmpty()) {
+						    for ( SegVacaciones n9 : result.getVacaciones()) 
+						    {
+						    	AuxVacaciones v= new AuxVacaciones();
+						    	v.setId_vacaciones(n9.getId_vacaciones());
+						    	v.setFecha1(n9.getFecha1().getTime());
+							 	v.setFecha2(n9.getFecha2().getTime());
+							 	v.setTipoPermisos(n9.getTipoPermisos());
+							 	v.setDescripcion(n9.getDescripcion());
+							 	valor.add(v);
+						    }
+				    	}
+				}catch(Exception t){
+					return valor;
+				}finally{
+					 Persistencia.close();  
+				}
+				System.out.println(valor.isEmpty());
+				 return valor ;
+		}
+
+		
 
 	}

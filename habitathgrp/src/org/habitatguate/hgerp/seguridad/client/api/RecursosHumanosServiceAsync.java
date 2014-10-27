@@ -12,9 +12,11 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -94,6 +96,8 @@ public interface RecursosHumanosServiceAsync {
 	 * @param TelefonoEmergencia
 	 * @param NombreEmergencia2
 	 * @param TelefonoEmergencia2
+	 * @param depto_municipio_nacimiento
+	 * @param Jefe_Inmediato
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
@@ -112,6 +116,7 @@ public interface RecursosHumanosServiceAsync {
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,
+            String depto_municipio_nacimiento, Long Jefe_Inmediato,
             AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
@@ -412,6 +417,8 @@ public interface RecursosHumanosServiceAsync {
 	 * @param TelefonoEmergencia
 	 * @param NombreEmergencia2
 	 * @param TelefonoEmergencia2
+	 * @param depto_municipio_nacimiento
+	 * @param Jefe_Inmediato
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
@@ -430,6 +437,7 @@ public interface RecursosHumanosServiceAsync {
 	            String pasaporte, String licencia,String Etnia,
 	            String NombreEmergencia, String TelefonoEmergencia,
 	            String NombreEmergencia2, String TelefonoEmergencia2,
+	            String depto_municipio_nacimiento, Long Jefe_Inmediato,
 	            AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 
@@ -882,9 +890,26 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;
-	    
-	    
-		
+	    /**
+	     * 
+	     * @param Correo
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getIdEmpleado(String Correo,AsyncCallback<Long> callback)throws IllegalArgumentException;
+	    /**
+	     * 
+	     * @param id
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getHistorial(Long id,AsyncCallback<List<AuxHistorial>> callback)throws IllegalArgumentException;
 
-	
+	    /**
+	     * 
+	     * @param id
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getPermisos(Long id,AsyncCallback<List<AuxVacaciones>> callback)throws IllegalArgumentException;
 }

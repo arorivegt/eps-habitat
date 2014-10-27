@@ -27,6 +27,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
@@ -48,7 +49,9 @@ public class formularioDatos extends Composite {
 	private Mensaje mensaje; 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
+	private Long idJefe = 0L;
 	private boolean bandera = true;
+	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
@@ -135,6 +138,13 @@ public class formularioDatos extends Composite {
     private TextBox txtTelefonoEmergencia2;
     private Label lblTelefono;
     private Label lblTelefonoSeEmergencia;
+    private ListBox listNacimientoDepartamento;
+    private Label lblDepartamentoNacimiento;
+    private ListBox listNacimientoMunicipio;
+    private Label lblMunicipioNacimiento;
+    private IntegerBox txtJefeInmediato;
+    private Label lblJefeInmediato;
+    private Button btnOK;
     /**
      * 
      * @param empleadoo
@@ -148,7 +158,7 @@ public class formularioDatos extends Composite {
 		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
-		absolutePanel.setSize("997px", "1468px");
+		absolutePanel.setSize("997px", "1557px");
 		initWidget(absolutePanel);
 		
 		getFormUrl();
@@ -156,7 +166,7 @@ public class formularioDatos extends Composite {
 		image = new Image("images/imagenempresa.png");
 		image.setSize("167px", "158px");
 		absolutePanel.add(image, 341, 10);
-		absolutePanel.add(getFormPanel(), 591, 109);
+		absolutePanel.add(getFormPanel(), 596, 43);
 		
 		listEstado = new ListBox();
 		listEstado.addItem("empleado activo","0");
@@ -166,7 +176,7 @@ public class formularioDatos extends Composite {
 		listEstado.addItem("interino","4");
 		listEstado.setStyleName("gwt-PasswordTextBox");
 		listEstado.setSize("230px", "36px");
-		absolutePanel.add(listEstado, 36, 163);
+		absolutePanel.add(listEstado, 36, 94);
 		
 		
 		txtNo_iggs = new IntegerBox();
@@ -678,8 +688,8 @@ public class formularioDatos extends Composite {
 			public void onChange(ChangeEvent event) {
 				listDireccionMunicipio.clear();
 		        String[] numerosComoArray = Depto_Municipio(listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex())).split(",");
-		        int correlativo = Integer.parseInt(listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex())+"00");
-		        for (int i = 0; i < numerosComoArray.length; i++) {
+		        int correlativo = Integer.parseInt(listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex())+"01");
+		        for (int i = 1; i < numerosComoArray.length; i++) {
 		        	listDireccionMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
 		        	correlativo++;
 		        }
@@ -847,10 +857,56 @@ public class formularioDatos extends Composite {
 		txtNoLicencia.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtNoLicencia, 589, 935);
 		
+		listNacimientoDepartamento = new ListBox();
+		listNacimientoDepartamento.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				listNacimientoMunicipio.clear();
+		        String[] numerosComoArray = Depto_Municipio(listNacimientoDepartamento.getItemText(listNacimientoDepartamento.getSelectedIndex())).split(",");
+		        int correlativo = Integer.parseInt(listNacimientoDepartamento.getValue(listNacimientoDepartamento.getSelectedIndex())+"01");
+		        for (int i = 1; i < numerosComoArray.length; i++) {
+		        	listNacimientoMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
+		        	correlativo++;
+		        }
+
+		        listNacimientoMunicipio.setSelectedIndex(2);
+				
+			}
+		});
+		listNacimientoDepartamento.setStyleName("gwt-PasswordTextBox");
+		listNacimientoDepartamento.addItem("Guatemala","01");
+		listNacimientoDepartamento.addItem("Baja Verapaz","15");
+		listNacimientoDepartamento.addItem("Alta Verapaz","16");
+		listNacimientoDepartamento.addItem("El Progreso","02");
+		listNacimientoDepartamento.addItem("Izabal","18");
+		listNacimientoDepartamento.addItem("Zacapa","19");
+		listNacimientoDepartamento.addItem("Chiquimula","20");
+		listNacimientoDepartamento.addItem("Santa Rosa","06");
+		listNacimientoDepartamento.addItem("Jalapa","21");
+		listNacimientoDepartamento.addItem("Jutiapa","22");
+		listNacimientoDepartamento.addItem("Sacatepequez","03");
+		listNacimientoDepartamento.addItem("Chimaltenango","04");
+		listNacimientoDepartamento.addItem("Escuintla","05");
+		listNacimientoDepartamento.addItem("Solola","07");
+		listNacimientoDepartamento.addItem("Totonicapan","08");
+		listNacimientoDepartamento.addItem("Quezaltenango","09");
+		listNacimientoDepartamento.addItem("Suchitepequez","10");
+		listNacimientoDepartamento.addItem("Retalhuleu","11");
+		listNacimientoDepartamento.addItem("San Marcos","12");
+		listNacimientoDepartamento.addItem("Huehuetenango","13");
+		listNacimientoDepartamento.addItem("Quiche","14");
+		listNacimientoDepartamento.addItem("Peten","17");
+		absolutePanel.add(listNacimientoDepartamento, 36, 1014);
+		listNacimientoDepartamento.setSize("230px", "36px");
+		
+		listNacimientoMunicipio = new ListBox();
+		listNacimientoMunicipio.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(listNacimientoMunicipio, 308, 1012);
+		listNacimientoMunicipio.setSize("230px", "36px");
+		
 		txtNombreEmergencia = new TextBox();
 		txtNombreEmergencia.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtNombreEmergencia, 38, 1044);
-		txtNombreEmergencia.setSize("227px", "34px");
+		absolutePanel.add(txtNombreEmergencia, 38, 1117);
+		txtNombreEmergencia.setSize("187px", "34px");
 		
 		txtTelefonoEmergencia = new TextBox();
 		txtTelefonoEmergencia.addChangeHandler(new ChangeHandler() {
@@ -870,13 +926,13 @@ public class formularioDatos extends Composite {
 		});
 		txtTelefonoEmergencia.setStyleName("gwt-PasswordTextBox");
 		txtTelefonoEmergencia.setMaxLength(20);
-		absolutePanel.add(txtTelefonoEmergencia, 320, 1044);
-		txtTelefonoEmergencia.setSize("227px", "34px");
+		absolutePanel.add(txtTelefonoEmergencia, 267, 1117);
+		txtTelefonoEmergencia.setSize("146px", "34px");
 		
 		txtNombreEmergencia2 = new TextBox();
 		txtNombreEmergencia2.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtNombreEmergencia2, 38, 1104);
-		txtNombreEmergencia2.setSize("227px", "34px");
+		absolutePanel.add(txtNombreEmergencia2, 463, 1117);
+		txtNombreEmergencia2.setSize("169px", "34px");
 		
 		txtTelefonoEmergencia2 = new TextBox();
 		txtTelefonoEmergencia2.addChangeHandler(new ChangeHandler() {
@@ -896,8 +952,8 @@ public class formularioDatos extends Composite {
 		});
 		txtTelefonoEmergencia2.setStyleName("gwt-PasswordTextBox");
 		txtTelefonoEmergencia2.setMaxLength(20);
-		absolutePanel.add(txtTelefonoEmergencia2, 320, 1104);
-		txtTelefonoEmergencia2.setSize("227px", "34px");
+		absolutePanel.add(txtTelefonoEmergencia2, 672, 1117);
+		txtTelefonoEmergencia2.setSize("144px", "34px");
 		
 		txtCentroTrabajo = new TextBox();
 		txtCentroTrabajo.setMaxLength(50);
@@ -1017,14 +1073,33 @@ public class formularioDatos extends Composite {
 		txtTotal.setMaxLength(50);
 		txtTotal.setSize("227px", "34px");
 		txtTotal.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTotal, 591, 1353);
+		absolutePanel.add(txtTotal, 596, 1353);
+		
+		txtJefeInmediato = new IntegerBox();
+		txtJefeInmediato.setEnabled(false);
+		txtJefeInmediato.setReadOnly(true);
+		txtJefeInmediato.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtJefeInmediato, 37, 1420);
+		txtJefeInmediato.setSize("187px", "34px");
+		
+		btnOK = new Button("Send");
+		btnOK.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				MensajeBusquedaEmpleado();
+			}
+		});
+		btnOK.setText("OK");
+		btnOK.setStylePrimaryName("sendButton");
+		btnOK.setStyleName("sendButton");
+		absolutePanel.add(btnOK, 219, 1420);
+		btnOK.setSize("50px", "36px");
 		
 		btnActualizar = new Button("Send");
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStyleName("sendButton");
 		btnActualizar.setSize("229px", "44px");
 		btnActualizar.setStylePrimaryName("sendButton");
-		absolutePanel.add(btnActualizar, 33, 1433);
+		absolutePanel.add(btnActualizar, 36, 1500);
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -1039,10 +1114,9 @@ public class formularioDatos extends Composite {
 				}catch(Exception e){
 					dateFechaIngreso.setValue(new Date(1407518124684L));
 				}
-			
+				depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
+				depto_municipio_uno = listNacimientoDepartamento.getValue(listNacimientoDepartamento.getSelectedIndex()) + "," +listNacimientoMunicipio.getValue(listNacimientoMunicipio.getSelectedIndex());
 				if(bandera){
-					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
-					
 					loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getValue(listIVS.getSelectedIndex()), 
@@ -1055,7 +1129,7 @@ public class formularioDatos extends Composite {
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),new AsyncCallback<Long>() 
+							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe, new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1081,7 +1155,6 @@ public class formularioDatos extends Composite {
 
 	                     });
 				}else{
-					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
 					
 					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
@@ -1095,7 +1168,7 @@ public class formularioDatos extends Composite {
 							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),new AsyncCallback<Long>() 
+							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,new AsyncCallback<Long>() 
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
@@ -1127,14 +1200,14 @@ public class formularioDatos extends Composite {
 		btnImprimir.setText("Imprimir");
 		btnImprimir.setStylePrimaryName("sendButton");
 		btnImprimir.setStyleName("sendButton");
-		absolutePanel.add(btnImprimir, 316, 1434);
+		absolutePanel.add(btnImprimir, 319, 1501);
 		btnImprimir.setSize("229px", "44px");
 		
 		btnExportarDatos = new Button("Send");
 		btnExportarDatos.setText("Exportar Datos");
 		btnExportarDatos.setStylePrimaryName("sendButton");
 		btnExportarDatos.setStyleName("sendButton");
-		absolutePanel.add(btnExportarDatos, 588, 1433);
+		absolutePanel.add(btnExportarDatos, 591, 1500);
 		btnExportarDatos.setSize("229px", "44px");
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
@@ -1317,7 +1390,7 @@ public class formularioDatos extends Composite {
 		
 		lblD = new Label("Datos del Patrono: (Uso exclusivo de la Fundacion");
 		lblD.setStyleName("label");
-		absolutePanel.add(lblD, 36, 1159);
+		absolutePanel.add(lblD, 20, 1173);
 		lblD.setSize("449px", "19px");
 		
 		Label lbNombreBanco = new Label("Nombre del Banco");
@@ -1332,7 +1405,7 @@ public class formularioDatos extends Composite {
 		
 		lblEstadoDelEmpleado = new Label("Estado Del Empleado");
 		lblEstadoDelEmpleado.setStyleName("label");
-		absolutePanel.add(lblEstadoDelEmpleado, 38, 138);
+		absolutePanel.add(lblEstadoDelEmpleado, 38, 69);
 		lblEstadoDelEmpleado.setSize("192px", "19px");
 		
 		lblEtnia = new Label("Etnia");
@@ -1342,28 +1415,43 @@ public class formularioDatos extends Composite {
 		
 		lblNombreYApellido = new Label("Nombre y Apellido");
 		lblNombreYApellido.setStyleName("label");
-		absolutePanel.add(lblNombreYApellido, 36, 1026);
+		absolutePanel.add(lblNombreYApellido, 36, 1099);
 		lblNombreYApellido.setSize("192px", "19px");
 		
 		lblNoTelefono = new Label("Telefono");
 		lblNoTelefono.setStyleName("label");
-		absolutePanel.add(lblNoTelefono, 318, 1026);
+		absolutePanel.add(lblNoTelefono, 265, 1099);
 		lblNoTelefono.setSize("192px", "19px");
 		
 		label_14 = new Label("Nombre y Apellido");
 		label_14.setStyleName("label");
-		absolutePanel.add(label_14, 36, 1086);
+		absolutePanel.add(label_14, 461, 1099);
 		label_14.setSize("192px", "19px");
 		
 		lblTelefono = new Label("Telefono");
 		lblTelefono.setStyleName("label");
-		absolutePanel.add(lblTelefono, 318, 1086);
+		absolutePanel.add(lblTelefono, 672, 1099);
 		lblTelefono.setSize("192px", "19px");
 		
 		lblTelefonoSeEmergencia = new Label("Escribe nombres y Telefonos de emergencia");
 		lblTelefonoSeEmergencia.setStyleName("label");
-		absolutePanel.add(lblTelefonoSeEmergencia, 36, 991);
+		absolutePanel.add(lblTelefonoSeEmergencia, 36, 1064);
 		lblTelefonoSeEmergencia.setSize("449px", "19px");
+		
+		lblDepartamentoNacimiento = new Label("Departamento Nacimiento");
+		lblDepartamentoNacimiento.setStyleName("label");
+		absolutePanel.add(lblDepartamentoNacimiento, 36, 989);
+		lblDepartamentoNacimiento.setSize("231px", "19px");
+		
+		lblMunicipioNacimiento = new Label("Municipio Nacimiento");
+		lblMunicipioNacimiento.setStyleName("label");
+		absolutePanel.add(lblMunicipioNacimiento, 308, 989);
+		lblMunicipioNacimiento.setSize("192px", "19px");
+		
+		lblJefeInmediato = new Label("Jefe Inmediato");
+		lblJefeInmediato.setStyleName("label");
+		absolutePanel.add(lblJefeInmediato, 36, 1395);
+		lblJefeInmediato.setSize("192px", "19px");
 	}
 	/**
 	 * metodo para obtener los municipios del departemento entrante
@@ -1804,6 +1892,9 @@ public class formularioDatos extends Composite {
 	 * @param TelefonoEmergencia
 	 * @param NombreEmergencia2
 	 * @param TelefonoEmergencia2
+	 * @param depto_nacimiento
+	 * @param municipio_nacimiento
+	 * @param Jefe_Inmediato
 	 */
 	public void LlenarDatos(Long id,String listEstadoCivil,String listSexo,String txtPrimerApellido,
 		    String txtSegundoApellido , String txtApellidoCasada ,String txtNo_iggs, String txtPrimerNombre,
@@ -1816,8 +1907,11 @@ public class formularioDatos extends Composite {
 		    String txtTotal, String listDireccionDepartamento ,String txtIVS, String  URLFile, 
 		    String KeyFile,String Estado,String pasaporte, String licencia, String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
-            String NombreEmergencia2, String TelefonoEmergencia2)
+            String NombreEmergencia2, String TelefonoEmergencia2,String depto_nacimiento,
+            String municipio_nacimiento, Long Jefe_Inmediato)
 	{
+		this.idJefe = Jefe_Inmediato;
+		this.txtJefeInmediato.setText(""+Jefe_Inmediato);
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
 		this.id_empleado = id;
@@ -1940,7 +2034,13 @@ public class formularioDatos extends Composite {
         for(int i=0; i < this.listDireccionDepartamento.getItemCount() && bandera; i++){
             bandera = !this.listDireccionDepartamento.getValue(i).equals(listDireccionDepartamento);
             this.listDireccionDepartamento.setSelectedIndex(i);
-        }           
+        }  
+        
+        bandera = true;
+        for(int i=0; i < this.listNacimientoDepartamento.getItemCount() && bandera; i++){
+            bandera = !this.listNacimientoDepartamento.getValue(i).equals(depto_nacimiento);
+            this.listNacimientoDepartamento.setSelectedIndex(i);
+        }
 
         bandera = true;
         for(int i=0; i < this.nombreBanco.getItemCount() && bandera; i++){
@@ -1968,8 +2068,8 @@ public class formularioDatos extends Composite {
 
         this.listDireccionMunicipio.clear();
         String[] numerosComoArray2 = Depto_Municipio(this.listDireccionDepartamento.getItemText(this.listDireccionDepartamento.getSelectedIndex())).split(",");
-        int correlativo = Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"00");
-        for (int i = 0; i < numerosComoArray2.length; i++) {
+        int correlativo = Integer.parseInt(this.listDireccionDepartamento.getValue(this.listDireccionDepartamento.getSelectedIndex())+"01");
+        for (int i = 1; i < numerosComoArray2.length; i++) {
         	this.listDireccionMunicipio.addItem(numerosComoArray2[i],String.valueOf(correlativo));
         	correlativo++;
         }
@@ -1979,6 +2079,21 @@ public class formularioDatos extends Composite {
             bandera = !this.listDireccionMunicipio.getValue(i).equals(listDireccionMunicipio);
             this.listDireccionMunicipio.setSelectedIndex(i);
         }   
+        
+        this.listNacimientoMunicipio.clear();
+        String[] numerosComoArray = Depto_Municipio(this.listNacimientoDepartamento.getItemText(this.listNacimientoDepartamento.getSelectedIndex())).split(",");
+        correlativo = Integer.parseInt(this.listNacimientoDepartamento.getValue(this.listNacimientoDepartamento.getSelectedIndex())+"01");
+        for (int i = 1; i < numerosComoArray.length; i++) {
+        	
+        	this.listNacimientoMunicipio.addItem(numerosComoArray[i],String.valueOf(correlativo));
+        	correlativo++;
+        }
+
+        bandera = true;
+        for(int i=0; i < this.listNacimientoMunicipio.getItemCount() && bandera; i++){
+            bandera = !this.listNacimientoMunicipio.getValue(i).equals(municipio_nacimiento);
+            this.listNacimientoMunicipio.setSelectedIndex(i);
+        } 
 				  
 		
 	}
@@ -2009,6 +2124,9 @@ public class formularioDatos extends Composite {
 		lblBonificacion.setVisible(false);
 		lblTotal.setVisible(false);
 		lblD.setVisible(false);
+		lblJefeInmediato.setVisible(false);
+		txtJefeInmediato.setVisible(false);
+		btnOK.setVisible(false);
 		absolutePanel.add(btnActualizar, 316, 1200);
 	}
 	/**
@@ -2160,6 +2278,33 @@ public class formularioDatos extends Composite {
 		grid.setWidget(0, 1, btnEliminar);
 		grid.setWidget(0, 0, new HTML("<a  target=\"_blank\" href=" + URLFile +">Ver</a>"));
 	}
+	public void MensajeBusquedaEmpleado(){
+        final DialogBox Registro2 = new DialogBox();
+        final HTML serverResponseLabel = new HTML();
+        final Button close= new Button("x");
+        AsignarJefe inicio = new AsignarJefe(this);
+        VerticalPanel dialogVPanel = new VerticalPanel();
+        dialogVPanel.add(serverResponseLabel );
+        dialogVPanel.add(inicio);
+        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+        dialogVPanel.add(close);
+        Registro2 .setWidget(dialogVPanel);
+        Registro2 .setModal(true);
+        Registro2 .setGlassEnabled(true);
+        Registro2 .setAnimationEnabled(true);
+        Registro2 .center();
+        Registro2 .show();
+        close.setFocus(true);
+    
+        close.addClickHandler(new ClickHandler() {
+        public void onClick(ClickEvent event) {
+            Registro2.hide();
+        }
+        });
+    }
+	public void setJefe(String correo){
+		txtJefeInmediato.setText(correo);
+	}
 /**
  * 
  * @return
@@ -2202,6 +2347,18 @@ public class formularioDatos extends Composite {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-	
-
-}
+	/**
+	 * 
+	 * @return
+	 */
+	public Long getIdJefe() {
+		return idJefe;
+	}
+	/**
+	 * 
+	 * @param idJefe
+	 */
+	public void setIdJefe(Long idJefe) {
+		this.idJefe = idJefe;
+	}
+	}

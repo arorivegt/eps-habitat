@@ -71,6 +71,7 @@ public class FormularioTest extends Composite {
 		txtNombre.setSize("227px", "34px");
 		txtNombre.setText(prueba.getNombreTest());
 		
+		
 		Label lblNombreDelTest = new Label("Nombre del Test");
 		lblNombreDelTest.setStyleName("label");
 		absolutePanel.add(lblNombreDelTest, 267, 10);

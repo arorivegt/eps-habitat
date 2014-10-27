@@ -45,6 +45,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 		    vp.add(cellTable);
 		    cellTable.setWidth("421px");
 		    vp.add(pager);
+		    pager.setWidth("219px");
 		
 	}
 

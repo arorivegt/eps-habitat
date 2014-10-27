@@ -6,8 +6,12 @@
  */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -40,6 +44,7 @@ public class BuscadorEmpleados extends Composite   {
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
     private BuscadorEmpleados evaluacionesBuscador;
+	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     /**
@@ -49,7 +54,7 @@ public class BuscadorEmpleados extends Composite   {
 		mensaje = new Mensaje();
 		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
-		grid.setSize("100%", "100%");
+		grid.setSize("876px", "100%");
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
@@ -76,18 +81,23 @@ public class BuscadorEmpleados extends Composite   {
 		txtDato3.setSize("177px", "34px");
 		
 		listEstado = new ListBox();
-		listEstado.addItem("empleado activo");
-		listEstado.addItem("empleado inactivo");
-		listEstado.addItem("posible empleado");
+		listEstado.addItem("empleado activo","0");
+		listEstado.addItem("empleado inactivo","1");
+		listEstado.addItem("posible empleado","2");
+		listEstado.addItem("practicante","3");
+		listEstado.addItem("interino","4");
 		listEstado.setStyleName("gwt-TextBox2");
 		listEstado.setVisible(false);
 		absolutePanel.add(listEstado, 205, 16);
 		listEstado.setSize("179px", "39px");
 		
+		
+		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Pasaporte");
 		listBox.addItem("Estado");
+		listBox.addItem("Puesto");
 		listBox.addItem("Todos");
 		listBox.addItem("DPI");
 		listBox.addChangeHandler(new ChangeHandler() {
@@ -137,6 +147,13 @@ public class BuscadorEmpleados extends Composite   {
 					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
 					absolutePanel.add(Busqueda, 205, 16);
+
+					grid.clearCell(1, 0);
+					EmpleadoLista  nuevo = new EmpleadoLista();
+					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,"");
+					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					lbDato1.setText("Ingrese No. Pasaporte");
@@ -154,7 +171,36 @@ public class BuscadorEmpleados extends Composite   {
 					absolutePanel.add(Busqueda, 390, 16);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
+					listEstado.clear();
+					listEstado.addItem("empleado activo","0");
+					listEstado.addItem("empleado inactivo","1");
+					listEstado.addItem("posible empleado","2");
+					listEstado.addItem("practicante","3");
+					listEstado.addItem("interino","4");
+					
 					lbDato1.setText("Seleccione el Estado del empleado");
+					lbDato2.setText("Primer Apellido");
+					lbDato3.setText("Segundo Apellido");
+
+					lbDato1.setVisible(true);
+					lbDato2.setVisible(false);
+					lbDato3.setVisible(false);
+					
+					txtDato1.setVisible(false);
+					txtDato2.setVisible(false);
+					txtDato3.setVisible(false);
+					listEstado.setVisible(true);
+					absolutePanel.add(Busqueda, 390, 19);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
+				{
+
+					listEstado.clear();
+					listEstado.addItem("seleccione un puesto","0");
+				    for (AuxBDPuesto p : BDpuestos) 
+				    {
+				    	listEstado.addItem(p.getNombre_puesto(),""+p.getId_puesto());
+				    }
+					lbDato1.setText("Seleccione el puesto");
 					lbDato2.setText("Primer Apellido");
 					lbDato3.setText("Segundo Apellido");
 
@@ -180,39 +226,66 @@ public class BuscadorEmpleados extends Composite   {
 			public void onClick(ClickEvent event) {
 				grid.clearCell(1, 0);
 				EmpleadoLista  nuevo = new EmpleadoLista();
-
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
 					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getItemText(listEstado.getSelectedIndex()));
+							,"");
 					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
-					nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getItemText(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
+
+					if(!txtDato1.getText().equals("") || !txtDato2.getText().equals("") 
+							|| !txtDato3.getText().equals("")){
+						nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+								,"");
+						grid.setWidget(1, 0,nuevo);
+						nuevo.setSize("100%", "648px");
+					}
+					else{
+
+		    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
+					}
+				}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
-					nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getItemText(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
+					if(!txtDato1.getText().equals("") ){
+						nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+								,"");
+						grid.setWidget(1, 0,nuevo);
+						nuevo.setSize("100%", "648px");
+					}
+					else{
+
+		    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
+		    		}
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
-					nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getItemText(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
+
+					if(!txtDato1.getText().equals("") ){
+						nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+								,"");
+						grid.setWidget(1, 0,nuevo);
+						nuevo.setSize("100%", "648px");
+					}
+					else{
+
+		    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
+		    		}
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
 					nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getItemText(listEstado.getSelectedIndex()));
+							,listEstado.getValue(listEstado.getSelectedIndex()));
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
+				{
+					nuevo.agregarFormulario('6',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
+							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+							,listEstado.getValue(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}
@@ -241,7 +314,21 @@ public class BuscadorEmpleados extends Composite   {
 		lblBusquedaPor.setStyleName("label");
 		lblBusquedaPor.setSize("118px", "13px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
-	
+		
+	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+	    		public void onFailure(Throwable caught) 
+	    		{
+	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+	    		}
+
+				@Override
+				public void onSuccess(List<AuxBDPuesto> results)
+				{
+					if (!(results.size()==0)) {
+						BDpuestos = results;
+			    	}	
+				}
+			});
 		initWidget(grid);
 		
 	}

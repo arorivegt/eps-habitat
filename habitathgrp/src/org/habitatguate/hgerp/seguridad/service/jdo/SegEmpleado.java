@@ -67,6 +67,9 @@ public class SegEmpleado implements Serializable {
     
 	@Persistent 
     private String depto_municipio_residencia;
+
+	@Persistent 
+    private String depto_municipio_nacimiento;
     
 	@Persistent    
     private String email;
@@ -125,6 +128,9 @@ public class SegEmpleado implements Serializable {
 	
 	@Persistent
     private String NombreEmergencia2;
+
+	@Persistent
+    private Long Jefe_Inmediato;
 	
 	@Persistent
     private String TelefonoEmergencia2;
@@ -288,6 +294,22 @@ public class SegEmpleado implements Serializable {
 
 	public void setTestCompartido(List<SegTestCompartidos> testCompartido) {
 		this.testCompartido = testCompartido;
+	}
+
+	public String getDepto_municipio_nacimiento() {
+		return depto_municipio_nacimiento;
+	}
+
+	public void setDepto_municipio_nacimiento(String depto_municipio_nacimiento) {
+		this.depto_municipio_nacimiento = depto_municipio_nacimiento;
+	}
+
+	public Long getJefe_Inmediato() {
+		return Jefe_Inmediato;
+	}
+
+	public void setJefe_Inmediato(Long jefe_Inmediato) {
+		Jefe_Inmediato = jefe_Inmediato;
 	}
 
 	public String getURLFile() {

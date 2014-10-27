@@ -3,8 +3,6 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.jdo.annotations.Persistent;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxEmpleado implements IsSerializable{
@@ -54,6 +52,8 @@ public class AuxEmpleado implements IsSerializable{
     private String direccion_actual;
 	 
     private String depto_municipio_residencia;
+    
+    private String depto_municipio_nacimiento;
 	 
     private String email;
 	 
@@ -88,6 +88,8 @@ public class AuxEmpleado implements IsSerializable{
     private String nombreBanco;
     
     private String Etnia;
+    
+    private Long Jefe_Inmediato;
 	
     private String NombreEmergencia;
 	
@@ -740,6 +742,26 @@ public class AuxEmpleado implements IsSerializable{
 
 	public void setTelefonoEmergencia2(String telefonoEmergencia2) {
 		TelefonoEmergencia2 = telefonoEmergencia2;
+	}
+
+
+	public Long getJefe_Inmediato() {
+		return Jefe_Inmediato;
+	}
+
+
+	public void setJefe_Inmediato(Long jefe_Inmediato) {
+		Jefe_Inmediato = jefe_Inmediato;
+	}
+
+
+	public String getDepto_municipio_nacimiento() {
+		return depto_municipio_nacimiento;
+	}
+
+
+	public void setDepto_municipio_nacimiento(String depto_municipio_nacimiento) {
+		this.depto_municipio_nacimiento = depto_municipio_nacimiento;
 	}
 
 	

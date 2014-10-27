@@ -25,7 +25,9 @@ public class EmpleadoLista extends Composite {
 		mensaje = new Mensaje();
 		
 		ScrollPanel scrollPanel = new ScrollPanel();
+		scrollPanel.setAlwaysShowScrollBars(false);
 		initWidget(scrollPanel);
+		
 		scrollPanel.setSize("100%", "716px");
 		
 		VerticalPanel verticalPanel = new VerticalPanel();

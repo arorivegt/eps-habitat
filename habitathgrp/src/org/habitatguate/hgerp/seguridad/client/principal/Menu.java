@@ -54,15 +54,16 @@ public class Menu extends Composite {
 	@UiHandler("rrhh2")
 	void rrhh2(ClickEvent event) {
 		BDpuestos puestos = new BDpuestos();
+		this.nuevo.getGrid().setWidth("1000");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, puestos);
 		
 	}
  	
-	@UiHandler("rrhh3")
-	void rrhh3(ClickEvent event) {
-		Window.alert("No disponible en este momento");
-	}
+//	@UiHandler("rrhh3")
+//	void rrhh3(ClickEvent event) {
+//		Window.alert("No disponible en este momento");
+//	}
 
 	@UiHandler("rrhh4")
 	void rrhh4(ClickEvent event) {

@@ -30,6 +30,9 @@ public class Compartidas extends Composite  {
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 1);
      private Compartidas compartida;
+
+ 	private Desempeno d = new Desempeno(0L);
+	private Evaluacion e = new Evaluacion(0L);
      public boolean bandera = true;
      
             public Compartidas() {
@@ -54,8 +57,6 @@ public class Compartidas extends Composite  {
             public void agregarFormulario_lleno(AuxTest n,Long idEmpleado, String tipo){
                 flextable.clear();
                 if (tipo.equals("1")) {
-                	Desempeno d = new Desempeno(0L);
-                    Window.alert("Listo");
                     formularioPruebaPeriodo  fa = new formularioPruebaPeriodo(d,idEmpleado);
                     fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                                     ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
@@ -63,7 +64,6 @@ public class Compartidas extends Composite  {
                     flextable.setWidget(flextable.getRowCount(), 0,fa );
                     fa.botonesVisibles(false);
                 }else if(tipo.equals("2")){
-                	Evaluacion e = new Evaluacion(0L);
                 	formularioPruebaPeriodoDos  fa = new formularioPruebaPeriodoDos(e,idEmpleado);
                     fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                                     ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 

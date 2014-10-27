@@ -241,7 +241,9 @@ public class formularioPuestos extends Composite {
 		});
 		
 		checkLunes = new SimpleCheckBox();
-		absolutePanel.add(checkLunes, 234, 199);
+		absolutePanel.add(checkLunes, 235, 199);
+		checkMartes.setSize("22px", "22px");
+		
 		checkMartes = new SimpleCheckBox();
 		absolutePanel.add(checkMartes, 295, 199);
 		checkMartes.setSize("22px", "22px");

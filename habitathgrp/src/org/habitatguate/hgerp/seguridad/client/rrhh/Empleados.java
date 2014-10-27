@@ -264,6 +264,9 @@ public class Empleados extends Composite {
 	 String deptodir  = "";
 	 String munidir   = "";
 	 
+	 String deptodir2  = "";
+	 String munidir2   = "";
+	 
 
 	 String[] numerosComoArray2  = r.getDepto_municipio_residencia().split(",");
 	 for (int i = 0; i < numerosComoArray2.length; i++) {
@@ -272,15 +275,25 @@ public class Empleados extends Composite {
 		 if(i == 1)
 			 munidir = numerosComoArray2[i];
      }	
+	 
+	 String[] numerosComoArray1  = r.getDepto_municipio_nacimiento().split(",");
+	 for (int i = 0; i < numerosComoArray1.length; i++) {
+		 if(i == 0)
+			 deptodir2 = numerosComoArray1[i];
+		 if(i == 1)
+			 munidir2 = numerosComoArray1[i];
+     }
 	 this.id_empleado = r.getId_empleado();
 			fd.LlenarDatos(r.getId_empleado(),r.getEstado_civil(), r.getSexo(), r.getPrimer_apellido(), r.getSegundo_apellido(), 
 					r.getApellido_casada(), r.getAfiliacion_igss(), r.getPrimer_nombre(), r.getSegundo_nombre(), 
 					r.getPais(), r.getNo_Dependientes(), r.getTipo_pasaporte(), munidir,r.getDireccion_actual(), 
 					r.getEmail(), r.getTipo_licencia(), r.getFecha_nacimiento(),r.getOcupacion(), r.getCentro_trabajo(), 
 					r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), 
-					r.getNoCuenta(), r.getTipoCuenta(),r.getNombreBanco(), r.getCui(), r.getTelefono(), r.getCelular(), r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), 
-					""+r.getSalario_base(), ""+r.getBonificacion(), ""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado()
-					,r.getPasaporte(),r.getLicencia(),r.getEtnia(),r.getNombreEmergencia(),r.getTelefonoEmergencia(),r.getNombreEmergencia2(),r.getTelefonoEmergencia2());
+					r.getNoCuenta(), r.getTipoCuenta(),r.getNombreBanco(), r.getCui(), r.getTelefono(), r.getCelular(), 
+					r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), ""+r.getSalario_base(), ""+r.getBonificacion(), 
+					""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado(),r.getPasaporte(),
+					r.getLicencia(),r.getEtnia(),r.getNombreEmergencia(),r.getTelefonoEmergencia(),r.getNombreEmergencia2(),
+					r.getTelefonoEmergencia2(),deptodir2,munidir2,r.getJefe_Inmediato());
 	
 	}
 	

@@ -40,7 +40,7 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
     private ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
-	private Button botonEliminar;
+//	private Button botonEliminar;
 	//private Button botonRefresh;
     final MultiSelectionModel<T> selectionModel =
             new MultiSelectionModel<T>((ProvidesKey<T>)AuxProveedor.KEY_PROVIDER);
@@ -71,67 +71,20 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
  
         dataProvider.addDataDisplay(dataGrid);
         
-        botonEliminar = new Button("Eliminar MaterialCostruccion");
+  //      botonEliminar = new Button("Eliminar MaterialCostruccion");
    //     botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);
-        botonEliminar.setVisible(true);
+    //    botonEliminar.setVisible(true);
         dock.add(dataGrid, DockPanel.CENTER);
         dock.add(pager, DockPanel.SOUTH);
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
      //   dock.add(botonRefresh,DockPanel.EAST);
-        dock.add(botonEliminar,DockPanel.EAST);
-        botonEliminar.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-              // Elimina los parametros.
-            	Set<T> lista = selectionModel.getSelectedSet();
-            	iter = (Iterator<T>) lista.iterator();
-        			while (iter.hasNext()){
-        			objectoEliminado = iter.next();	
-        			/*loginService.Eliminar_MaterialCostruccion(((AuxMaterialCostruccion)objectoEliminado).getIdMaterialConstruccion(), new AsyncCallback<Long>() {
-        				
-        				@Override
-        				public void onSuccess(Long result) {
-                			System.out.println("Eliminado: " + result);
-                			dataProvider.getList().remove(objectoEliminado);
+      //  dock.add(botonEliminar,DockPanel.EAST);
+      
 
-        				}
-        				
-        				@Override
-        				public void onFailure(Throwable caught) {
-        					System.out.println(caught);
-        					
-        				}
-        			});*/
-        			}
-        			
-	
-            }
-          });
-     /*   botonRefresh.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-              // Refresca el datagrid
-	
-        			loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
-        				
-        				@Override
-        				public void onSuccess(List result) {
-                			ActualizarList();
-                			setDataList(result);
-        				}
-        				
-        				@Override
-        				public void onFailure(Throwable caught) {
-        					System.out.println(caught);
-        					
-        				}
-        			});
-        			}
-        	});*/
     }
  
     public void setEmptyTableWidget() {
@@ -152,6 +105,58 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
         return height;
     }
  
+    public void EliminarFila(){
+    	Set<T> lista = selectionModel.getSelectedSet();
+    	iter = (Iterator<T>) lista.iterator();
+			while (iter.hasNext()){
+					objectoEliminado = iter.next();	
+					loginService.Eliminar_Proveedor(((AuxProveedor)objectoEliminado).getIdProveedor(), 
+							new AsyncCallback<Long>() {
+								
+								@Override
+								public void onSuccess(Long result) {
+				         			dataProvider.getList().remove(objectoEliminado);
+									
+								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+									
+								}
+					}
+							);
+
+			}
+    }
+    
+    public void AprobarProveedor(){
+    	Set<T> lista = selectionModel.getSelectedSet();
+    	iter = (Iterator<T>) lista.iterator();
+			while (iter.hasNext()){
+					objectoEliminado = iter.next();	
+					loginService.Actualizar_ProveedorAprobado(((AuxProveedor)objectoEliminado).getIdProveedor(), 
+							new AsyncCallback<Long>() {
+								
+								@Override
+								public void onSuccess(Long result) {
+	
+								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+									
+								}
+					}
+							);
+
+			}
+    }
+    
+    public void ActualizarTabla(){
+    	dataProvider.refresh();
+    }
     public void setHeight(String height) {
         this.height = height;
         dataGrid.setHeight(height);

@@ -63,7 +63,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	//------------------------------primera fila
 
-	loginService.ConsultaTodosProveedor_PorAfiliado(0L,new AsyncCallback<List<AuxProveedor>>() {
+	loginService.ConsultaTodosProveedor_PorAfiliadoAprobados(0L,new AsyncCallback<List<AuxProveedor>>() {
 		
 		@Override
 		public void onSuccess(List<AuxProveedor> result) {
@@ -142,6 +142,23 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	
 	Button button = new Button("Send");
+		
+
+	button.setText("Nueva Beneficiario");
+	button.setStylePrimaryName("gwt-TextBox2");
+	button.setStyleName("gwt-TextBox2");
+	absolutePanel.add(button, 725, 85);
+	button.setSize("157px", "40px");
+	
+	Label lblProveedor = new Label("Proveedor");
+	lblProveedor.setStyleName("label");
+	absolutePanel.add(lblProveedor, 10, 10);
+	lblProveedor.setSize("157px", "13px");
+	
+	final SuggestBox suggestBox = new SuggestBox(listaproveedor);
+	absolutePanel.add(suggestBox, 20, 29);
+	suggestBox.setSize("375px", "18px");
+	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
@@ -162,6 +179,7 @@ public class Buscador_MaterialCostruccion extends Composite{
                 	textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
+                	suggestBox.setText("");
                 	selectProveedor = null;
                 	timer2.schedule(1500);
                 	
@@ -177,22 +195,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 			Window.alert("Debe completar el formulario");
 		}
 		}
-	});		
-
-	button.setText("Nueva Beneficiario");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
-	absolutePanel.add(button, 725, 85);
-	button.setSize("157px", "40px");
-	
-	Label lblProveedor = new Label("Proveedor");
-	lblProveedor.setStyleName("label");
-	absolutePanel.add(lblProveedor, 10, 10);
-	lblProveedor.setSize("157px", "13px");
-	
-	SuggestBox suggestBox = new SuggestBox(listaproveedor);
-	absolutePanel.add(suggestBox, 20, 29);
-	suggestBox.setSize("375px", "18px");
+	});	
 	
 	suggestBox.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
 		

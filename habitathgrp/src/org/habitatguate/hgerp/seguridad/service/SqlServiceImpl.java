@@ -296,6 +296,14 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
         Persistencia.deletePersistent(e);         
         return id;
     }
+    public Long Eliminar_Proveedor(Long id) throws IllegalArgumentException {
+    	
+    	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+    	final SegProveedor e = Persistencia.getObjectById(SegProveedor.class, id);
+    	System.out.println(e.getNomProveedor());
+        Persistencia.deletePersistent(e);         
+        return id;
+    }
 	
 //------------------------------------------------------CONSULTAS--------------------------------------------------	
     @Override
@@ -437,7 +445,56 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 		}
 		return valor;
 	}
-	
+	public List<AuxProveedor> ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegProveedor.class);
+		query.setFilter("aprobadoComision == true");
+		List<AuxProveedor> valor = new ArrayList<AuxProveedor>();
+		List<SegProveedor> execute = (List<SegProveedor>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegProveedor p : execute){
+				AuxProveedor aux = new AuxProveedor();
+				aux.setAprobadoComision(p.getAprobadoComision());
+				aux.setDirProveedor(p.getDirProveedor());
+				aux.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
+				aux.setIdProveedor(p.getIdProveedor().getId());
+				aux.setNomProveedor(p.getNomProveedor());
+				aux.setNumeroNit(p.getNumeroNit());
+				aux.setObservaciones(p.getObservaciones());
+				aux.setPaginaWeb(p.getPaginaWeb());
+				aux.setPersonaJuridica(p.getPersonaJuridica());
+				aux.setServicioEntrega(p.getServicioEntrega());
+				aux.setTelProveedor(p.getTelProveedor());
+				valor.add(aux);
+			}
+		}
+		return valor;
+	}
+	public List<AuxProveedor> ConsultaTodosProveedor_SinAprobar(Long Afiliado){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegProveedor.class);
+		query.setFilter("aprobadoComision == false");
+		List<AuxProveedor> valor = new ArrayList<AuxProveedor>();
+		List<SegProveedor> execute = (List<SegProveedor>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegProveedor p : execute){
+				AuxProveedor aux = new AuxProveedor();
+				aux.setAprobadoComision(p.getAprobadoComision());
+				aux.setDirProveedor(p.getDirProveedor());
+				aux.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
+				aux.setIdProveedor(p.getIdProveedor().getId());
+				aux.setNomProveedor(p.getNomProveedor());
+				aux.setNumeroNit(p.getNumeroNit());
+				aux.setObservaciones(p.getObservaciones());
+				aux.setPaginaWeb(p.getPaginaWeb());
+				aux.setPersonaJuridica(p.getPersonaJuridica());
+				aux.setServicioEntrega(p.getServicioEntrega());
+				aux.setTelProveedor(p.getTelProveedor());
+				valor.add(aux);
+			}
+		}
+		return valor;
+	}
 	//------------------------------------------MODIFICAR------------------------------------
     @Override
 	public Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {
@@ -531,6 +588,22 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 				 e.setServicioEntrega(servicioEntrega);
 				 e.setTelProveedor(telProveedor);
 			 
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	
+	public Long Actualizar_ProveedorAprobado(Long id) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(id!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,id);
+				 e.setAprobadoComision(true);	 
 				 
 			}finally{
 				gestorPersistencia.close();

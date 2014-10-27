@@ -332,7 +332,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					for (AuxPuesto f : p.getPuestos()) {
 						if(f.isActivo()){
 							empleado.setPuesto(f.getNombre_puesto());
-							empleado.setJornada(f.getJornada());
+							if(f.getJornada().equals("0")){
+								empleado.setJornada("Diurna");
+							}else if(f.getJornada().equals("1")){
+								empleado.setJornada("Nocturna");
+							}else if(f.getJornada().equals("2")){
+								empleado.setJornada("Mixta");
+							}
 							empleado.setHorasAlDia(f.getHorasTrabajo());
 							if(f.getLunes()){
 								if(DescansoSemanal.equals(""))

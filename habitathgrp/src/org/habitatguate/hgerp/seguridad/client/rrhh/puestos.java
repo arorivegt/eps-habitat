@@ -62,8 +62,8 @@ public class puestos extends Composite  {
 	    		
 			    for ( AuxPuesto n2 : results) {
 			    	formularioPuestos fa = new  formularioPuestos(this,empleado);
-			    	String valor = "No";
-			    	if(n2.isActivo()){ valor = "Si";}
+			    	String valor = "0";
+			    	if(n2.isActivo()){ valor = "1";}
 			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
 			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo(),
 			    					n2.getLunes(),n2.getMartes(),n2.getMiercoles(),n2.getJueves(),n2.getViernes(),

@@ -1,8 +1,18 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 
 import com.google.gwt.user.client.rpc.IsSerializable;
-
+/**
+ * 
+ * @author arodriguez
+ *
+ */
 public class AuxBDPuesto implements IsSerializable{
 	
     private Long id_puesto;
@@ -21,15 +31,15 @@ public class AuxBDPuesto implements IsSerializable{
 	public AuxBDPuesto() {
 		super();
 	}
-
+	
 	public Long getId_puesto() {
 		return id_puesto;
 	}
-
+	
 	public void setId_puesto(Long id_puesto) {
 		this.id_puesto = id_puesto;
 	}
-
+	
 	public Long getFecha_puesto() {
 		return fecha_puesto;
 	}

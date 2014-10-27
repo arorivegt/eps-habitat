@@ -90,7 +90,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 		            document.add(new Paragraph("........................................................"
 		            		+ "......................................................"
 		            		+ "........................................................",catFont));
-	           document.add(new Paragraph("Nombre:"+" "+p.getPrimer_nombre()+" "+p.getSegundo_nombre()+","+p.getPrimer_apellido()+" "+p.getSegundo_apellido(), redFont));
+	            document.add(new Paragraph("Nombre:"+" "+p.getPrimer_nombre()+" "+p.getSegundo_nombre()+","+p.getPrimer_apellido()+" "+p.getSegundo_apellido(), redFont));
 	            document.add(new Paragraph("Sexo:"+" "+p.getSexo(), redFont));
 	            document.add(new Paragraph("Email:"+" "+p.getEmail(), redFont));
 	            document.add(new Paragraph("Pais:"+" "+p.getPais(), redFont));

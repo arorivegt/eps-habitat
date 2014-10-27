@@ -219,7 +219,7 @@ public class formularioPuestos extends Composite {
 				}else{
 					loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
 						txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getValue(listActivo.getSelectedIndex()).equals("1"),
-						listJornada.getItemText(listJornada.getSelectedIndex()),listHorasTrabajadas.getItemText(listHorasTrabajadas.getSelectedIndex())
+						listJornada.getValue(listJornada.getSelectedIndex()),listHorasTrabajadas.getItemText(listHorasTrabajadas.getSelectedIndex())
 						,checkLunes.isChecked(),checkMartes.isChecked(),checkMiercoles.isChecked(),checkJueves.isChecked(),checkViernes.isChecked(),
 					    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
@@ -242,7 +242,7 @@ public class formularioPuestos extends Composite {
 		
 		checkLunes = new SimpleCheckBox();
 		absolutePanel.add(checkLunes, 235, 199);
-		checkMartes.setSize("22px", "22px");
+		checkLunes.setSize("22px", "22px");
 		
 		checkMartes = new SimpleCheckBox();
 		absolutePanel.add(checkMartes, 295, 199);

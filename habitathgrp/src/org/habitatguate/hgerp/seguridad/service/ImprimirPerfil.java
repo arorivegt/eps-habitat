@@ -32,8 +32,8 @@ public class ImprimirPerfil extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
     private AuxEmpleado p = new AuxEmpleado();
-   private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.NORMAL,BaseColor.BLACK);
-   private Font catFont2 = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD,BaseColor.BLACK);
+    private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.NORMAL,BaseColor.BLACK);
+    private Font catFont2 = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD,BaseColor.BLACK);
     private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
     
 	//invoked from doGet method to create PDF through servlet 

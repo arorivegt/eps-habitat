@@ -1518,6 +1518,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	pp.setNombre_puesto(n5.getNombre_puesto());
 							 	pp.setFunciones(n5.getFunciones());
 							 	pp.setMotivoPuesto(n5.getMotivoPuesto());
+							 	pp.setJornada(n5.getJornada());
 							 	pp.setActivo(n5.getActivo());
 							 	pp.setHorasTrabajo(n5.getHorasTrabajo());
 							 	pp.setLunes(n5.getLunes());

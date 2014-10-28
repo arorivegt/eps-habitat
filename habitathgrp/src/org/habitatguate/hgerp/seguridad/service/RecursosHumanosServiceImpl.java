@@ -1063,15 +1063,48 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 				
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
-				List<SegEmpleado> results = null ;
+				List<SegEmpleado> results = new ArrayList<SegEmpleado>() ;
+				List<SegEmpleado> result2 = new ArrayList<SegEmpleado>() ;
+				List<SegEmpleado> result3 = new ArrayList<SegEmpleado>() ;
+				List<SegEmpleado> result4 = new ArrayList<SegEmpleado>() ;
 				List<SegEmpleado> aux = null ;
-				
+				if(primer_nombre.equals("")){
+					primer_nombre = primer_nombre + "@";
+				}if(primer_apellido.equals("")){
+					primer_apellido = primer_apellido + "@";
+				}if(segundo_apellido.equals("")){
+					segundo_apellido = segundo_apellido + "@";
+				}
 				if(tipo=='1'){
-					Query q = pm.newQuery(SegEmpleado.class);
-					q.setFilter("primer_nombre == '"+primer_nombre.toUpperCase()+"'");
-					q.setFilter("primer_apellido == '"+primer_apellido.toUpperCase()+"'");
-					q.setFilter("segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
-					results = (List<SegEmpleado>) q.execute();
+					Query q = pm.newQuery(SegEmpleado.class,"primer_nombre == '"+primer_nombre.toUpperCase()+"'");
+					result2 = (List<SegEmpleado>) q.execute();
+					q = pm.newQuery(SegEmpleado.class,"primer_apellido == '"+primer_apellido.toUpperCase()+"'");
+					result3 = (List<SegEmpleado>) q.execute();
+					q = pm.newQuery(SegEmpleado.class,"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
+					result4 = (List<SegEmpleado>) q.execute();
+					if(!result2.isEmpty())
+						results.addAll(result2);
+					if(!result3.isEmpty()){
+						int i = 0;
+						for(SegEmpleado r: result3)
+						{
+							i = results.indexOf(r);
+							if(i!=-1)
+								results.remove(i);
+						}
+						results.addAll(result3);
+					}
+					if(!result4.isEmpty()){
+						int i = 0;
+						for(SegEmpleado r: result4)
+						{
+							i = results.indexOf(r);
+							if(i!=-1)
+								results.remove(i);
+						}
+						results.addAll(result4);
+					}
+					
 				}else if(tipo =='2'){
 					Query q = pm.newQuery(SegEmpleado.class);
 					results = (List<SegEmpleado>) q.execute();

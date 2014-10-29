@@ -156,35 +156,35 @@
             <li><a href="#"><g:Label styleName="menuestilo" ui:field="rrhh5">	Informe de Empleados</g:Label></a></li>
         </ul>
     </li>
-    <li>
-        <a href="#">Finanzas</a>
-        <ul>
-            <li>
-        		<a href="#">Inventario Activos Fijos</a>
-       			 <ul>
-           			            <li><a href="#"><g:Label ui:field="finan1a"> Cuentas y Parametros </g:Label></a></li>
-           			            <li><a href="#"><g:Label ui:field="finan1b"> Gestor de Inventario</g:Label></a></li>
-								<li><a href="#"><g:Label ui:field="finan1c"> Generar Conocimiento</g:Label></a></li>
-   	     		</ul>
-    		</li>
-    		<li>
-        		<a href="#">Soluciones</a>
-       			 <ul>
-           			 <li><a href="#"><g:Label ui:field="finan2a">Ingreso Beneficiario</g:Label></a></li>
-           			 <li><a href="#"><g:Label ui:field="finan2b">Ingreso de Solucion</g:Label></a></li>
-   	     		</ul>
-    		</li>
-            <li>
-        		<a href="#">Inventario Materiales</a>
-       			 <ul>
-           			 <li><a href="#"><g:Label ui:field="finan3a">Cuenta Materiales</g:Label></a></li>
-           			 <li><a href="#"><g:Label ui:field="finan3b">Administrar Materiales Costrucción</g:Label></a></li>
-   	     		</ul>
-    		</li>
-            <li><a href="#"><g:Label ui:field="finan4">	Admin. Afiliado</g:Label></a></li>
-            <li><a href="#"><g:Label ui:field="finan5">	Admin. Proveedores</g:Label></a></li>
-        </ul>
-    </li>
+<!--     <li> -->
+<!--         <a href="#">Finanzas</a> -->
+<!--         <ul> -->
+<!--             <li> -->
+<!--         		<a href="#">Inventario Activos Fijos</a> -->
+<!--        			 <ul> -->
+<!--            			            <li><a href="#"><g:Label ui:field="finan1a"> Cuentas y Parametros </g:Label></a></li> -->
+<!--            			            <li><a href="#"><g:Label ui:field="finan1b"> Gestor de Inventario</g:Label></a></li> -->
+<!-- 								<li><a href="#"><g:Label ui:field="finan1c"> Generar Conocimiento</g:Label></a></li> -->
+<!--    	     		</ul> -->
+<!--     		</li> -->
+<!--     		<li> -->
+<!--         		<a href="#">Soluciones</a> -->
+<!--        			 <ul> -->
+<!--            			 <li><a href="#"><g:Label ui:field="finan2a">Ingreso Beneficiario</g:Label></a></li> -->
+<!--            			 <li><a href="#"><g:Label ui:field="finan2b">Ingreso de Solucion</g:Label></a></li> -->
+<!--    	     		</ul> -->
+<!--     		</li> -->
+<!--             <li> -->
+<!--         		<a href="#">Inventario Materiales</a> -->
+<!--        			 <ul> -->
+<!--            			 <li><a href="#"><g:Label ui:field="finan3a">Cuenta Materiales</g:Label></a></li> -->
+<!--            			 <li><a href="#"><g:Label ui:field="finan3b">Administrar Materiales Costrucción</g:Label></a></li> -->
+<!--    	     		</ul> -->
+<!--     		</li> -->
+<!--             <li><a href="#"><g:Label ui:field="finan4">	Admin. Afiliado</g:Label></a></li> -->
+<!--             <li><a href="#"><g:Label ui:field="finan5">	Admin. Proveedores</g:Label></a></li> -->
+<!--         </ul> -->
+<!--     </li> -->
     
   
     

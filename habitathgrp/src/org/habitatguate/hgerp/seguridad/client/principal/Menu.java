@@ -6,11 +6,6 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_Proveedor;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
-import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
@@ -113,41 +108,41 @@ public class Menu extends Composite {
         });
 	}
 	
-	@UiHandler("finan2a")
-	void fina2a(ClickEvent event){
-		Buscador_Soluciones_Inv fmc = new Buscador_Soluciones_Inv();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
- 	
- 	}
-	
-	@UiHandler("finan3b")
-	void finan3b(ClickEvent event){
-		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
- 	
- 	}
-	
-	@UiHandler("finan4")
-	void fina4a(ClickEvent event){
-		Buscador_Afiliado fmc = new Buscador_Afiliado();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
- 	
- 	}	
-	@UiHandler("finan5")
-	void fina5(ClickEvent event){
-		Menu_Proveedores fmc = new Menu_Proveedores();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
- 	
- 	}
-	
+//	@UiHandler("finan2a")
+//	void fina2a(ClickEvent event){
+//		Buscador_Soluciones_Inv fmc = new Buscador_Soluciones_Inv();
+//		this.nuevo.getGrid().setWidth("1000");
+//		this.nuevo.getGrid().clearCell(1, 0);
+//		this.nuevo.getGrid().setWidget(1, 0, fmc);
+// 	
+// 	}
+//	
+//	@UiHandler("finan3b")
+//	void finan3b(ClickEvent event){
+//		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
+//		this.nuevo.getGrid().setWidth("1000");
+//		this.nuevo.getGrid().clearCell(1, 0);
+//		this.nuevo.getGrid().setWidget(1, 0, fmc);
+// 	
+// 	}
+//	
+//	@UiHandler("finan4")
+//	void fina4a(ClickEvent event){
+//		Buscador_Afiliado fmc = new Buscador_Afiliado();
+//		this.nuevo.getGrid().setWidth("1000");
+//		this.nuevo.getGrid().clearCell(1, 0);
+//		this.nuevo.getGrid().setWidget(1, 0, fmc);
+// 	
+// 	}	
+//	@UiHandler("finan5")
+//	void fina5(ClickEvent event){
+//		Menu_Proveedores fmc = new Menu_Proveedores();
+//		this.nuevo.getGrid().setWidth("1000");
+//		this.nuevo.getGrid().clearCell(1, 0);
+//		this.nuevo.getGrid().setWidget(1, 0, fmc);
+// 	
+// 	}
+//	
 	public void Empleado_registrado(){
 
 		final Empleados e = new Empleados(1);

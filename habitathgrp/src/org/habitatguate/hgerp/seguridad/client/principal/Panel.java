@@ -11,11 +11,11 @@ public class Panel extends Composite {
 		public Panel() {
 			//instanciar objetos
             grid = new Grid(2, 1);
-            Menu menu = new Menu(this);
+            MenuPrincipal menu = new MenuPrincipal(this);
      		
      		//agregar menu
             grid.setWidget(0, 0, menu);
-            grid.setSize("100%", "100%");
+            grid.setSize("100%", "40%");
             menu.setSize("100%", "100%");
             initWidget(grid);
         }

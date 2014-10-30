@@ -6,25 +6,19 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 public class ReporteEmpleados extends Composite  {
 
     private  Grid grid;
     private ListBox crearPor;
-	private Mensaje mensaje; 
 	
 	public ReporteEmpleados() {
-		mensaje = new Mensaje();
 		grid = new Grid(1, 1);
 		initWidget(grid);
 		grid.setSize("1278px", "312px");

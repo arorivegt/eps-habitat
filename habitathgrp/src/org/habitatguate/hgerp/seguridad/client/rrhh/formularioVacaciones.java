@@ -45,6 +45,7 @@ public class formularioVacaciones extends Composite {
 		absolutePanel.setSize("773px", "170px");
 		
 		dateFecha1 = new DateBox();
+		dateFecha1.getTextBox().setReadOnly(true);
 		dateFecha1.setValue(new Date());
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -56,6 +57,7 @@ public class formularioVacaciones extends Composite {
 		dateFecha1.setSize("89px", "34px");
 		
 		dateFecha2 = new DateBox();
+		dateFecha2.getTextBox().setReadOnly(true);
 		dateFecha2.setValue(new Date());
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));

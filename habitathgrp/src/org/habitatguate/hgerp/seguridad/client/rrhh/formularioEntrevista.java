@@ -251,6 +251,7 @@ public class formularioEntrevista extends Composite {
 		listNoDependientes.setSize("229px", "41px");
 		
 		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setValue(new Date(1407518819070L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 

@@ -19,8 +19,6 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -37,7 +35,7 @@ public class MenuPrincipal extends Composite {
 	public MenuPrincipal(Panel nuevo) {
 		this.nuevo = nuevo;
 		absolutePanel = new AbsolutePanel();
-		absolutePanel.setStyleName("gwt-Label-new");
+		//absolutePanel.setStyleName("gwt-Label-new");
 	
 		Command cmd = new Command() {
 	       public void execute() {
@@ -66,7 +64,7 @@ public class MenuPrincipal extends Composite {
 	     };
 	     Command cmdrrhh5 = new Command() {
 	       public void execute() {
-	    	   rrhh1();
+	    	   rrhh5();
 	       }
 	     };
 	     Command cmdrrhh6 = new Command() {
@@ -126,9 +124,9 @@ public class MenuPrincipal extends Composite {
 	     //finanzas menu
 	    MenuBar MenuEmpleados = new MenuBar(true);
 	    MenuEmpleados.setAnimationEnabled(true);
-	    MenuEmpleados.addItem("Mi Perfil", cmd);
+	    MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
 	    MenuEmpleados.addSeparator();
-	    MenuEmpleados.addItem("Evaluaciones Compartidas", cmd);
+	    MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
 	     //Inventario Activos menu
 	    MenuBar MenuInventarioActivos = new MenuBar(true);

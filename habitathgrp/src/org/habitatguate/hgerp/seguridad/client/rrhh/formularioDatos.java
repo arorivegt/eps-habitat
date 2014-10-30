@@ -640,6 +640,7 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(txtNoPasaporte, 589, 611);
 		
 		dateAnnioNacimiento = new DateBox();
+		dateAnnioNacimiento.getTextBox().setReadOnly(true);
 		dateAnnioNacimiento.setValue(new Date(1407518707105L));
 		dateAnnioNacimiento.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -968,6 +969,7 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(txtOcupacion, 311, 1223);
 		
 		dateFechaIngreso = new DateBox();
+		dateFechaIngreso.getTextBox().setReadOnly(true);
 		dateFechaIngreso.setValue(new Date(1407518751219L));
 		dateFechaIngreso.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 

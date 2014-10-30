@@ -95,6 +95,10 @@ public class CreacionBaseDatosTest extends Composite{
             txtPregunta5.setSize("727px", "49px");
 
             dateBox = new DateBox();
+            dateBox.getTextBox().setReadOnly(true);
+            dateBox.getDatePicker().setYearArrowsVisible(true);
+            dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
+            dateBox.getDatePicker().setVisibleYearCount(100);
             dateBox.setFireNullValues(true);
             dateBox.setStyleName("gwt-PasswordTextBox");
             dateBox.getElement().setAttribute("placeHolder", "Fecha Nacimiento");

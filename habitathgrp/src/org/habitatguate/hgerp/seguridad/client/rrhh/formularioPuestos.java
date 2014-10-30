@@ -106,7 +106,8 @@ public class formularioPuestos extends Composite {
 		absolutePanel.add(listPuesto, 10, 29);
 		
 		dateFecha = new DateBox();
-		dateFecha.setValue(new Date(1407519035556L));
+		dateFecha.getTextBox().setReadOnly(true);
+		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);

@@ -48,6 +48,7 @@ public class formularioBDPuestos extends Composite {
 
 		
 		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));

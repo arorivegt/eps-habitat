@@ -43,7 +43,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1130px", "30px");
+		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		listEstado = new ListBox();
@@ -80,11 +80,11 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(true);
 		grid.setWidget(1, 0, scrollPanel);
-		scrollPanel.setSize("1187px", "379px");
+		scrollPanel.setSize("2000px", "100%");
 		
 		absolutePanel_1 = new AbsolutePanel();
 		scrollPanel.setWidget(absolutePanel_1);
-		absolutePanel_1.setSize("10322px", "601px");
+		absolutePanel_1.setSize("10000px", "100%");
 		
 		Label lblEstadoEmpleado = new Label("Estado Empleado");
 		lblEstadoEmpleado.setStyleName("label");

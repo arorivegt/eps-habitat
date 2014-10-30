@@ -90,7 +90,8 @@ public class formularioReferenciaLaboral extends Composite {
 		txtPuestoCandidato.setSize("227px", "34px");
 		
 		dateFecha1 = new DateBox();
-		dateFecha1.setValue(new Date(1407519069711L));
+		dateFecha1.getTextBox().setReadOnly(true);
+		dateFecha1.setValue(new Date());
 		dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha1.getDatePicker().setYearArrowsVisible(true);
@@ -101,7 +102,8 @@ public class formularioReferenciaLaboral extends Composite {
 		dateFecha1.setSize("227px", "34px");
 		
 		dateFecha2 = new DateBox();
-		dateFecha2.setValue(new Date(1407519076388L));
+		dateFecha2.getTextBox().setReadOnly(true);
+		dateFecha2.setValue(new Date());
 		dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha2.getDatePicker().setYearArrowsVisible(true);

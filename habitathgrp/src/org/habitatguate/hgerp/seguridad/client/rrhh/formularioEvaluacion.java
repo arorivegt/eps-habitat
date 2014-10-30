@@ -33,6 +33,7 @@ public class formularioEvaluacion extends Composite {
 		absolutePanel.setSize("950px", "30px");
 		
 		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setEnabled(false);
 		dateFecha.setValue(new Date(1407518904795L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 

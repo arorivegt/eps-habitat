@@ -65,7 +65,7 @@ public class formularioSalario extends Composite {
 				try{
 					new Date(fecha.getValue().getTime());
 				}catch(Exception e){
-					fecha.setValue(new Date(1407518124684L));
+					fecha.setValue(new Date());
 				}
 				if(bandera) {
 					loginService.Insertar_Salario(empleado.id_empleado, fecha.getValue(),
@@ -145,7 +145,8 @@ public class formularioSalario extends Composite {
 		
 
 		fecha = new DateBox();
-		fecha.setValue(new Date(1407518707105L));
+		fecha.getTextBox().setReadOnly(true);
+		fecha.setValue(new Date());
 		fecha.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
 		fecha.getDatePicker().setYearArrowsVisible(true);

@@ -32,8 +32,8 @@ public class vacaciones extends Composite  {
 	 List<AuxVacaciones> permiso = new ArrayList<AuxVacaciones> ();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 private final Grid grid = new Grid(1, 4);
-	 private final DateBox dateFecha1 = new DateBox();
-	 private final DateBox dateFecha2 = new DateBox();
+	 private DateBox dateFecha1;
+	 private DateBox dateFecha2;
 	 private final ListBox listTipoPermiso = new ListBox();
 	 private final Button btnBuscar = new Button("Agregar");
 		
@@ -48,7 +48,9 @@ public class vacaciones extends Composite  {
 	        panel.add(grid);
 	        dateFecha1.setStyleName("gwt-TextBox2");
 	        
+	        dateFecha1 = new DateBox();
 	        grid.setWidget(0, 0, dateFecha1);
+			dateFecha1.getTextBox().setReadOnly(true);
 	        dateFecha1.setSize("227px", "34px");
 	        dateFecha1.setValue(new Date());
 	        dateFecha1.setFormat(new DateBox.DefaultFormat 
@@ -58,7 +60,9 @@ public class vacaciones extends Composite  {
 	        dateFecha1.getDatePicker().setVisibleYearCount(100);
 	        dateFecha2.setStyleName("gwt-TextBox2");
 	        
+	        dateFecha2 =  new DateBox();;
 	        grid.setWidget(0, 1, dateFecha2);
+			dateFecha2.getTextBox().setReadOnly(true);
 	        dateFecha2.setValue(new Date());
 	        dateFecha2.setFormat(new DateBox.DefaultFormat 
 				    (DateTimeFormat.getFormat("dd/MM/yyyy")));

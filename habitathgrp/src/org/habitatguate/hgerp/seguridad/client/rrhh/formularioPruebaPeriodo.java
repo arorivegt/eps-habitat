@@ -239,7 +239,8 @@ public class formularioPruebaPeriodo extends Composite {
 		txtEvaluador.setSize("218px", "34px");
 		
 		dateFecha = new DateBox();
-		dateFecha.setValue(new Date(1407518999395L));
+		dateFecha.getTextBox().setReadOnly(true);
+		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);

@@ -33,7 +33,7 @@ public class formularioDesempeno extends Composite {
 		absolutePanel.setSize("950px", "30px");
 		
 		dateFecha = new DateBox();
-		dateFecha.setEnabled(false);
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setValue(new Date(1407518904795L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));

@@ -3,8 +3,6 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -20,11 +18,9 @@ public class FormularioTest extends Composite {
 	private AuxBDTest prueba;
     private DateBox dateFecha ;
     private TestForm d;
-	private Mensaje mensaje; 
     
 	public FormularioTest(final TestForm d,final AuxBDTest prueba) {
 
-		mensaje = new Mensaje();
 		this.setD(d);
 		this.setPrueba(prueba);
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -33,8 +29,9 @@ public class FormularioTest extends Composite {
 		absolutePanel.setSize("751px", "30px");
 		
 		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setEnabled(false);
-		dateFecha.setValue(new Date(1407518904795L));
+		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);

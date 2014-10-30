@@ -46,6 +46,7 @@ public class formularioHistorial extends Composite {
 		absolutePanel.setSize("763px", "170px");
 		
 		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));

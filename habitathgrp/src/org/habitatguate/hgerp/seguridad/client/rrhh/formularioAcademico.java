@@ -95,6 +95,7 @@ public class formularioAcademico extends Composite {
 		txtEstablecimiento.setSize("227px", "34px");
 		
 		dateInicio = new DateBox();
+		dateInicio.getTextBox().setReadOnly(true);
 		dateInicio.setValue(new Date(1407518124684L));
 		dateInicio.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
@@ -107,6 +108,7 @@ public class formularioAcademico extends Composite {
 		dateInicio.setSize("227px", "34px");
 		
 		dateFinal = new DateBox();
+		dateFinal.getTextBox().setReadOnly(true);
 		dateFinal.setValue(new Date(1407518566816L));
 		dateFinal.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 

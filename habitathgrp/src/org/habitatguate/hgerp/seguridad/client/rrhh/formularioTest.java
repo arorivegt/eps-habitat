@@ -33,8 +33,8 @@ public class formularioTest extends Composite {
 		absolutePanel.setSize("765px", "30px");
 		
 		dateFecha = new DateBox();
-		dateFecha.setEnabled(false);
-		dateFecha.setValue(new Date(1407518904795L));
+		dateFecha.getTextBox().setReadOnly(true);
+		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);

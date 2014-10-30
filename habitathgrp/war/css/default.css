@@ -14,7 +14,22 @@ body {
   margin: 400px 0px 70px;
   text-align: center;
 }*/
+.caja {
+ margin: 0 auto;
+}
 
+.loading {
+    text-align: center;
+    margin-left: -100px;
+    width: 100px; 
+    height: 100px; 
+    -moz-border-radius: 100px; 
+    -webkit-border-radius: 100px; 
+}
+.backloading{
+    opacity: 0.0;
+    filter: alpha(opacity=40); 
+}
 table {
 	width: 100%;
 }

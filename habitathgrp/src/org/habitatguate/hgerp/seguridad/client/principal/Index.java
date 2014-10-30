@@ -8,6 +8,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
@@ -25,93 +26,70 @@ public class Index implements EntryPoint {
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
         Mensaje inicio;
+        Loading load ;
         private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         @Override
         public void onModuleLoad() 
         {
-	        	txtuser.setText("anibal@gmail.com");
-	        	txtpass.setText("Aqwe123");
-	        	inicio=  new Mensaje();
-             	final DialogBox dialogBox = new DialogBox();
-             
-                dialogBox.setText("Autenticacion");
-                dialogBox.setAnimationEnabled(true);
-                final Button closeButton = new Button("cerrar");
-                
-                // We can set the id of a widget by accessing its Element
-                closeButton.getElement().setId("closeButton");
-                final Label textToServerLabel = new Label();
-                final HTML serverResponseLabel = new HTML();
-                final VerticalPanel dialogVPanel = new VerticalPanel();
-                dialogVPanel.addStyleName("dialogVPanel");
-                dialogVPanel.add(serverResponseLabel);
-                dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-                dialogVPanel.add(closeButton);
-                dialogBox.setWidget(dialogVPanel);
+//        	load = new Loading();
+//            load.Mostrar();
+        	txtuser.setText("anibal@gmail.com");
+        	txtpass.setText("Aqwe123");
+        	inicio=  new Mensaje();
+         	
         
-                // Add a handler to close the DialogBox
+            // Add a handler to close the DialogBox
 
-                
-                // Create a handler for the sendButton and nameField
-                class MyHandler implements ClickHandler
-                {
-                        
-                        public void onClick(ClickEvent event) 
-                        {
-                                login();
-                        }
-                        private void login() 
-                        {
-                                // First, we validate the input.
-                                final Button sendButton = new Button("Send");   
-                                String usertxt = txtuser.getText();
-                                String passtxt= txtpass.getText();
-                                // Then, we send the input to the server.
-                                sendButton.setEnabled(false);
-                                                
-                                closeButton.addClickHandler(new ClickHandler() 
-                                {
-                                        public void onClick(ClickEvent event) 
-                                        {
-                                                dialogBox.hide();
-                                                sendButton.setEnabled(true);
-                                                sendButton.setFocus(true);
-                                        }
-                                });
-                                
-                                textToServerLabel.setText(usertxt+" / "+passtxt);
-                                serverResponseLabel.setText("");
-                                                
-                                loginService.login_inicio(usertxt,passtxt, new AsyncCallback<valores_sesion>() 
-                                {
-                                        public void onFailure(Throwable caught) 
-                                        {
-                                    		inicio.setMensaje("alert alert-error","Error!! \nEn el servicio "
-                                				+ "\n no se pudo\n iniciar ");
-                                        }
-                                        
-                                        public void onSuccess(valores_sesion result)
-                                        {
+            
+            // Create a handler for the sendButton and nameField
+            class MyHandler implements ClickHandler
+            {
+                    
+                    public void onClick(ClickEvent event) 
+                    {
+                            login();
+                    }
+                    private void login() 
+                    {
+                            // First, we validate the input.
+                            final Button sendButton = new Button("Send");   
+                            String usertxt = txtuser.getText();
+                            String passtxt= txtpass.getText();
+                            // Then, we send the input to the server.
+                            sendButton.setEnabled(false);
+                           
+                           // load.visible();
+                            loginService.login_inicio(usertxt,passtxt, new AsyncCallback<valores_sesion>() 
+                            {
+                                    public void onFailure(Throwable caught) 
+                                    {
+                                       // load.invisible();
 
-                                                //si la autentificacion es correcta limpia y contruye el menu
-                                               if(result.isCorrecto())
-                                                {
-                                                        Panel inicio = new Panel();
-                                                        inicio.setId_empleado(result.getId_empleado());
-                                                        RootPanel.get().clear();
-                                                        RootPanel.get().add(inicio);
-                                                        //RootPanel.get().add(buildMenu(result));
-                                                }else
-                                                {
-                                            		inicio.setMensaje("alert alert-error", "Error\n En el usuario y/o Contraseña");
-                                                }
-                                                                                
-                                        }
-                                 });
-                        }
-                }// Add a handler to send the name to the server
-                
+                                		inicio.setMensaje("alert alert-error","Error!! \nEn el servicio "
+                            				+ "\n no se pudo\n iniciar ");
+                                    }
+                                    
+                                    public void onSuccess(valores_sesion result)
+                                    {
+                                        //load.invisible();
+                                            //si la autentificacion es correcta limpia y contruye el menu
+                                           if(result.isCorrecto())
+                                            {
+                                                    Panel inicio = new Panel();
+                                                    inicio.setId_empleado(result.getId_empleado());
+                                                    RootPanel.get().clear();
+                                                    RootPanel.get().add(inicio);
+                                            }else
+                                            {
+                                        		inicio.setMensaje("alert alert-error", "Error\n En el usuario y/o Contraseña");
+                                            }
+                                                                            
+                                    }
+                             });
+                    }
+            }// Add a handler to send the name to the server
+            
             MyHandler handler = new MyHandler();
             RootPanel rootPanel = RootPanel.get();
             rootPanel.setStyleName("body");

@@ -10,12 +10,14 @@ import java.util.Date;
 
 
 
+
 /**
  * 
  */
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -67,6 +69,7 @@ public class formularioPuestos extends Composite {
     private SimpleCheckBox checkDomingo;
     private Label lblSabado;
     private Label lblDomingo;
+    private Loading load ;
 	
     /**
      * 
@@ -76,6 +79,9 @@ public class formularioPuestos extends Composite {
 	public formularioPuestos(puestos puest,Empleados emplead) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = emplead;
 		this.puesto = puest;
 		absolutePanel = new AbsolutePanel();
@@ -174,6 +180,7 @@ public class formularioPuestos extends Composite {
 		btnGuardar.addClickHandler(new ClickHandler() {
 			@SuppressWarnings("deprecation")
 			public void onClick(ClickEvent event) {
+		        load.visible();
 				try{
 					new Date(dateFecha.getValue().getTime());
 				}catch(Exception e){
@@ -189,6 +196,7 @@ public class formularioPuestos extends Composite {
 						    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
 				            public void onFailure(Throwable caught) 
 				            {
+						        load.invisible();
 				            	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
 				            }
 				
@@ -204,11 +212,13 @@ public class formularioPuestos extends Composite {
 										loginService.Actualizar_Estado_Puesto(empleado.id_empleado, id_puesto,new AsyncCallback<String>(){
 											public void onFailure(Throwable caught) 
 								            {
+										        load.invisible();
 								            	mensaje.setMensaje("alert alert-error", caught.getMessage());
 								            }
 											@Override
 								            public void onSuccess(String result)
 								            {
+										        load.invisible();
 												mensaje.setMensaje("alert alert-success", result);
 								            }
 										});
@@ -225,6 +235,7 @@ public class formularioPuestos extends Composite {
 					    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
+		        load.invisible();
             	mensaje.setMensaje("alert alert-error", 
             			"Error !! \nal Actualizar Datos");
             }
@@ -232,12 +243,14 @@ public class formularioPuestos extends Composite {
 					@Override
             public void onSuccess(Long result)
             {
+				        load.invisible();
 						bandera = false;
 						mensaje.setMensaje("alert alert-success", 
 	                			"Datos Actualizados\n exitosamente!!!");
             }
 					});
 				}
+		        load.invisible();
 			}
 		});
 		
@@ -286,6 +299,7 @@ public class formularioPuestos extends Composite {
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}
@@ -296,20 +310,24 @@ public class formularioPuestos extends Composite {
 		listActivo = new ListBox();
 		listActivo.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
+		        load.visible();
 				if(listActivo.getItemText(listActivo.getSelectedIndex()).equals("Si") && bandera == false)
 				{
 					loginService.Actualizar_Estado_Puesto(empleado.id_empleado, id_puesto,new AsyncCallback<String>(){
 						public void onFailure(Throwable caught) 
 			            {
+					        load.invisible();
 			            	mensaje.setMensaje("alert alert-error", caught.getMessage());
 			            }
 						@Override
 			            public void onSuccess(String result)
 			            {
+					        load.invisible();
 							mensaje.setMensaje("alert alert-success", result);
 			            }
 					});
 				}
+		        load.invisible();
 			}
 		});
 		listActivo.addItem("Si","1");

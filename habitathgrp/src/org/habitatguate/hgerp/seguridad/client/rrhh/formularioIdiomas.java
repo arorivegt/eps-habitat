@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -53,12 +54,16 @@ public class formularioIdiomas extends Composite {
 	private Button btnEliminar;
 	private Button btnActualizar;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private Loading load ;
 
 	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     
 	public formularioIdiomas(Idioma a,Empleados e) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.a = a;
 		absolutePanel = new AbsolutePanel();
@@ -123,11 +128,13 @@ public class formularioIdiomas extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+		        load.visible();
 				if(bandera) {
 					loginService.Insertar_Idioma(empleado.id_empleado, listNivel.getValue(listNivel.getSelectedIndex()), 
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()), URLFile, KeyFile,new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -135,6 +142,7 @@ public class formularioIdiomas extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_idioma = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -146,6 +154,7 @@ public class formularioIdiomas extends Composite {
 							txtIdioma.getValue(txtIdioma.getSelectedIndex()),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Actualizar Datos");
                         }
@@ -153,12 +162,14 @@ public class formularioIdiomas extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
 		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");
@@ -253,6 +264,7 @@ public class formularioIdiomas extends Composite {
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0) {
+				        load.invisible();
 						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();
@@ -278,6 +290,7 @@ public class formularioIdiomas extends Composite {
 						form.setVisible(false);
 						Archivo();
 					}catch(Exception e){
+				        load.invisible();
 						mensaje.setMensaje("alert alert-error", 
 	                			results);
 						
@@ -334,6 +347,7 @@ public class formularioIdiomas extends Composite {
 			}
 
 			public void onFailure(Throwable caught) {
+		        load.invisible();
 				mensaje.setMensaje("alert alert-error", 
             			"Error !! \nen el servicio");
 			}

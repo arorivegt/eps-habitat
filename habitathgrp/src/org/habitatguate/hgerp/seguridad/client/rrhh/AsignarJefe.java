@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -24,10 +25,14 @@ public class AsignarJefe extends Composite{
        final SuggestBox txtUser;
    	   private Mensaje mensaje; 
    	   private formularioDatos datos;
+       private Loading load ;
    		
         public AsignarJefe(formularioDatos dato) 
         {
         	this.datos = dato;
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			mensaje = new Mensaje();
         	AbsolutePanel rootPanel = new AbsolutePanel();
         	rootPanel.setSize("299px", "199px");
@@ -46,10 +51,12 @@ public class AsignarJefe extends Composite{
             Button btnAsignar = new Button("Send");
             btnAsignar.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
+                    load.visible();
             		 loginService.getIdEmpleado(txtUser.getText(),new AsyncCallback<Long>()
 					    {
 				            public void onFailure(Throwable caught) 
 				            {
+				                load.invisible();
 				            	mensaje.setMensaje("alert alert-error", 
 			                			"Error !! \nal No se encontro el Empleado que buscaba");
 				            }

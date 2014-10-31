@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -33,10 +34,14 @@ public class formularioVacaciones extends Composite {
     private DateBox dateFecha2;
 	private Mensaje mensaje; 
 	private ListBox listTipoPermiso ;
+    private Loading load ;
     
 	public formularioVacaciones(vacaciones a,Empleados e) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -89,6 +94,7 @@ public class formularioVacaciones extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 
 				try{
 					new Date(dateFecha1.getValue().getTime());
@@ -106,6 +112,7 @@ public class formularioVacaciones extends Composite {
 							dateFecha2.getValue(), txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -113,6 +120,7 @@ public class formularioVacaciones extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_vacaciones = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -126,6 +134,7 @@ public class formularioVacaciones extends Composite {
 							listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Actualizar Datos");
                         }
@@ -133,12 +142,14 @@ public class formularioVacaciones extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
 		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");
@@ -154,6 +165,7 @@ public class formularioVacaciones extends Composite {
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}

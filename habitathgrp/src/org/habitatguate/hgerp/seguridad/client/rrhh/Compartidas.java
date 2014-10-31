@@ -8,6 +8,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -30,12 +31,17 @@ public class Compartidas extends Composite  {
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 1);
      private Compartidas compartida;
+     private Loading load ;
 
  	private Desempeno d = new Desempeno(0L);
 	private Evaluacion e = new Evaluacion(0L);
      public boolean bandera = true;
      
             public Compartidas() {
+
+            	load = new Loading();
+                load.Mostrar();
+                load.invisible();
             	compartida = this;
                 initWidget(panel);
                 panel.setSize("761px", "85px");
@@ -74,6 +80,8 @@ public class Compartidas extends Composite  {
             }
             
             public void agregar_formularios(List<AuxTestCompartidos> results){
+
+                load.visible();
                 flextable.clear();
                 if (!(results.size() == 0)) {
                 	valor = results;
@@ -84,24 +92,30 @@ public class Compartidas extends Composite  {
                         	
                         	public void onFailure(Throwable caught) 
                         	{
+                		        load.invisible();
                         		Window.alert("No hay resultados "+caught);
                         	}
 
                         	@Override
                         	public void onSuccess(AuxTest result)
                         	{
+                		        load.invisible();
                             	formularioTest de = new formularioTest(result,compartida);
                             	de.id_Empleado = n.getId_empleado();
                                 flextable.setWidget(flextable.getRowCount(), 0,de);
                         	}
                         });
                     }
-                }                           
+                }     
+
+		        load.invisible();
             }
             
          
             
             private void BDTest(){
+
+                load.visible();
     	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
 
     				@Override
@@ -124,6 +138,8 @@ public class Compartidas extends Composite  {
     					
     				} 
     			});
+
+                load.invisible();
     	    }
             
 }

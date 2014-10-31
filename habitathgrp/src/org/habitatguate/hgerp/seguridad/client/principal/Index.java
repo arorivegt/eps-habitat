@@ -29,10 +29,10 @@ public class Index implements EntryPoint {
         {
         	load = new Loading();
             load.Mostrar();
+            load.invisible();
         	txtuser.setText("anibal@gmail.com");
         	txtpass.setText("Aqwe123");
         	inicio=  new Mensaje();
-            load.invisible();
          	
         
             // Add a handler to close the DialogBox

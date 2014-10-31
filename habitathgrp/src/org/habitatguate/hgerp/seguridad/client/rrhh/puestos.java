@@ -7,6 +7,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -28,10 +29,14 @@ public class puestos extends Composite  {
 	 private VerticalPanel panel = new VerticalPanel();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	    private Loading load ;
 	 
 	    public puestos(Empleados e) {
 
 			mensaje = new Mensaje();
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			this.empleado = e;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -54,10 +59,13 @@ public class puestos extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
+	        load.visible();
 	        flextable.setWidget(flextable.getRowCount(), 0, new formularioPuestos(this,empleado));
+	        load.invisible();
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxPuesto> results){
+	        load.visible();
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxPuesto n2 : results) {
@@ -70,14 +78,17 @@ public class puestos extends Composite  {
 			    					n2.getSabado(),n2.getDomingo());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
-	    	}	    
+	    	}	  
+	        load.invisible();  
 	    }
 	    
 	    public void EliminarFormulario(final formularioPuestos fa, final Long id_empledo, final Long id){
 
+	        load.visible();
 			loginService.Eliminar_Puesto(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
@@ -85,32 +96,40 @@ public class puestos extends Composite  {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
          });
+	        load.invisible();
 	    }
 	    
 	    public void EliminarFormulario(formularioPuestos fa){
-        	        flextable.remove(fa);
+	        load.visible();
+	        flextable.remove(fa);
+	        load.invisible();
 	    }
 	    
 	    private void BDPuesto(){
+	        load.visible();
 	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
 	    		public void onFailure(Throwable caught) 
 	    		{
+			        load.invisible();
 	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
 	    		}
 
 				@Override
 				public void onSuccess(List<AuxBDPuesto> results)
 				{
+			        load.invisible();
 					if (!(results.size()==0)) {
 						BDpuestos = results;
 			    	}	
 				}
 			});
+	        load.invisible();
 	    }
 }

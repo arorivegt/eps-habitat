@@ -11,6 +11,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -36,6 +37,7 @@ public class academico extends Composite  {
 	 private Empleados empleado;
 	 private Button btnAgregar;
      private VerticalPanel panel = new VerticalPanel();
+	    private Loading load ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      
     /**
@@ -47,6 +49,9 @@ public class academico extends Composite  {
 
 			this.empleado = empleado;
 			mensaje = new Mensaje();
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -72,7 +77,9 @@ public class academico extends Composite  {
       */
 	private void agregarFormulario()
 	{
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioAcademico(this,empleado));
+        load.visible();
+        flextable.setWidget(flextable.getRowCount(), 0, new formularioAcademico(this,empleado));
+        load.invisible();
 	}
 	
 	
@@ -82,6 +89,7 @@ public class academico extends Composite  {
 	 */
 	public void agregarFormulario_lleno(List<AuxHistorialAcademico> results)
 	{
+        load.visible();
 		if (!results.isEmpty()) 
 		{
 			for ( AuxHistorialAcademico n2 : results) 
@@ -92,7 +100,8 @@ public class academico extends Composite  {
 			    			, n2.getURLFile(), n2.getKeyFile());
 			    flextable.setWidget(flextable.getRowCount(), 0,fa );
 			 }
-	    }	    
+	    }	  
+        load.invisible();  
 	}
 	
 	
@@ -104,7 +113,8 @@ public class academico extends Composite  {
 	 */
 	public void EliminarFormulario(final formularioAcademico formularioAcademico, final Long id_empledo, final Long id_FormularioAcademico)
 	{
-	
+
+        load.visible();
 		loginService.Eliminar_Academico(id_empledo, id_FormularioAcademico, new AsyncCallback<Long>()
 		{
 	        public void onFailure(Throwable caught) 
@@ -120,6 +130,7 @@ public class academico extends Composite  {
 	        }
 	
 		});
+        load.invisible();
 	}
 	
 	
@@ -129,7 +140,9 @@ public class academico extends Composite  {
 	 */
 	public void EliminarFormulario(formularioAcademico formularioAcademico)
 	{
+        load.visible();
 		flextable.remove(formularioAcademico);
+        load.invisible();
 	}
 	    
 }

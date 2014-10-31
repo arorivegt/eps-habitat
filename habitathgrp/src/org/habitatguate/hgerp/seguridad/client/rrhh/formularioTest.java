@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -23,9 +24,13 @@ public class formularioTest extends Composite {
     private DoubleBox txtPunteo;
     public Long id_Empleado = 0L;
     private Compartidas compartido;
+    private Loading load ;
     
 	public formularioTest(final AuxTest prueba, Compartidas comp) {
 		compartido = comp;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.setPrueba(prueba);
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

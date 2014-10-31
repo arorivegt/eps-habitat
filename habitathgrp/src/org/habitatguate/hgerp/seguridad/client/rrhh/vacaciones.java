@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -36,9 +37,13 @@ public class vacaciones extends Composite  {
 	 private DateBox dateFecha2;
 	 private final ListBox listTipoPermiso = new ListBox();
 	 private final Button btnBuscar = new Button("Agregar");
+	    private Loading load ;
 		
 	    public vacaciones(Empleados e) {
 
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			mensaje = new Mensaje();
 			this.empleado = e;
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -85,6 +90,7 @@ public class vacaciones extends Composite  {
 	        btnBuscar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
 
+	                load.visible();
 	        		loginService.getPermisos(empleado.id_empleado, new AsyncCallback<List<AuxVacaciones>>(){
 	        			
 	                    public void onFailure(Throwable caught) 
@@ -127,16 +133,19 @@ public class vacaciones extends Composite  {
 	        		if(!vacacio.isEmpty()){
 	        			agregarFormulario_lleno(vacacio);
 	        		}else{
+	    		        load.invisible();
 	                	mensaje.setMensaje("alert alert-error", 
 	                			"No se encontro resultado");
 	        		}
 	        		}catch(Exception e){
 
+	    		        load.invisible();
 	                	mensaje.setMensaje("alert alert-error", 
 	                			"No se encontro resultado");
 		        	}
 
 
+	                load.invisible();
 	        	}
 	        });
 	        btnBuscar.setText("Buscar");
@@ -165,6 +174,7 @@ public class vacaciones extends Composite  {
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxVacaciones> results){
+	        load.visible();
 	    	flextable.clear();
 	    	if (!results.isEmpty()) {
 	    		permiso = results;
@@ -175,13 +185,16 @@ public class vacaciones extends Composite  {
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
+	        load.invisible();
 	    }
 	    
 	    public void EliminarFormulario(final formularioVacaciones fa, final Long id_empledo, final Long id){
 
+	        load.visible();
 			loginService.Eliminar_Vacaciones(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
@@ -189,16 +202,20 @@ public class vacaciones extends Composite  {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
          });
+	        load.invisible();
 	    }
 	    
 	    public void EliminarFormulario(formularioVacaciones fa){
-        	        flextable.remove(fa);
+	        load.visible();
+	        flextable.remove(fa);
+	        load.invisible();
 	    }
 	    
 

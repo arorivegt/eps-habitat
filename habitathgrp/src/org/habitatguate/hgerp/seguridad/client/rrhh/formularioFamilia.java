@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -35,11 +36,15 @@ public class formularioFamilia  extends Composite  {
 	private TextBox txtParentesco;
 	private TextBox txtEdad ;
 	private AbsolutePanel absolutePanel ;
+    private Loading load ;
 	public formularioFamilia(String pariente, familiares a,Empleados e) {
 
 		
 		
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.a = a;
 		absolutePanel = new AbsolutePanel();
@@ -117,6 +122,7 @@ public class formularioFamilia  extends Composite  {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+		        load.visible();
 				if(bandera) {
 					System.out.println(empleado.id_empleado);
 					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
@@ -125,6 +131,7 @@ public class formularioFamilia  extends Composite  {
 							new AsyncCallback<Long>(){
 	                            public void onFailure(Throwable caught) 
 	                            {
+	                		        load.invisible();
 	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Guardar Datos");
 	                            }
@@ -132,6 +139,7 @@ public class formularioFamilia  extends Composite  {
 								@Override
 	                            public void onSuccess(Long result)
 	                            {
+							        load.invisible();
 									id_familia = result;
 									bandera = false;
 									mensaje.setMensaje("alert alert-success", 
@@ -146,6 +154,7 @@ public class formularioFamilia  extends Composite  {
 							new AsyncCallback<Long>(){
 	                            public void onFailure(Throwable caught) 
 	                            {
+	                		        load.invisible();
 	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Actualizar Datos");
 	                                //Window.alert("Error  al Actualizar Datos"+caught);
@@ -154,6 +163,7 @@ public class formularioFamilia  extends Composite  {
 								@Override
 	                            public void onSuccess(Long result)
 	                            {
+							        load.invisible();
 									bandera = false;
 									mensaje.setMensaje("alert alert-success", 
 				                			"Datos Actualizados\n exitosamente!!!");
@@ -162,7 +172,8 @@ public class formularioFamilia  extends Composite  {
 
 	                     });
 				}
-					
+
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");

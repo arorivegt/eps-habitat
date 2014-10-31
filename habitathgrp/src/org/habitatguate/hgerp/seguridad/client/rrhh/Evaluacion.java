@@ -7,6 +7,8 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -30,10 +32,16 @@ public class Evaluacion extends Composite  {
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
      public Button btnAgregar;
+     private Loading load ;
+	 private Mensaje mensaje; 
      public boolean bandera = true;
             public Evaluacion(Long e) {
 
+    			mensaje = new Mensaje();
                 this.empleado = e;
+            	load = new Loading();
+                load.Mostrar();
+                load.invisible();
                 initWidget(panel);
                 panel.setSize("761px", "85px");
                 flextable = new FlexTable();
@@ -63,12 +71,15 @@ public class Evaluacion extends Composite  {
                 }
             
             private void agregarFormulario(){
+                load.visible();
                 flextable.clear();
                 flextable.setWidget(flextable.getRowCount(), 0, new formularioPruebaPeriodoDos(this,empleado));
+                load.invisible();
             }
             
             public void agregarFormulario_lleno(AuxTest n){
-            	Window.alert("ingreso aqui");
+
+                load.visible();
                 flextable.clear();
                 if (!n.equals(null)) {
                 	formularioPruebaPeriodoDos  fa = new formularioPruebaPeriodoDos(this,empleado);
@@ -81,26 +92,31 @@ public class Evaluacion extends Composite  {
                                 }else{
                                 	fa.botonesVisibles(false);
                                 }
-                }           
+                }   
+                load.invisible();        
             }
             
             public void agregar_formularios(List<AuxTest> results){
+                load.visible();
                 flextable.clear();
                 if (!(results.size() == 0)) {
-                        valor = results;
-                            for (AuxTest n : results) {
-                            	formularioEvaluacion de = new formularioEvaluacion(this, n);
-                                flextable.setWidget(flextable.getRowCount(), 0, de);
-                            }
-                        }                           
+                valor = results;
+                    for (AuxTest n : results) {
+                    	formularioEvaluacion de = new formularioEvaluacion(this, n);
+                        flextable.setWidget(flextable.getRowCount(), 0, de);
+                    }
+                }     
+                load.invisible();                      
             }
             
             public void EliminarFormulario(final formularioPruebaPeriodoDos fa, final Long id_empledo, final Long id){
 
+                load.visible();
                         loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                        fa.setMensaje("alert alert-error", 
+    		        load.invisible();
+    		        mensaje.setMensaje("alert alert-error", 
                                         "Error !! \nal Eliminar");
                    // Window.alert("Error al ELiminar"+caught);
                 }
@@ -108,16 +124,20 @@ public class Evaluacion extends Composite  {
                                 @Override
                 public void onSuccess(Long result)
                 {
-                        fa.setMensaje("alert alert-success", 
-                                        "Eliminado exitosamente!!!");
+        		        load.invisible();
+        		        mensaje.setMensaje("alert alert-success", 
+                            "Eliminado exitosamente!!!");
                         //Window.alert("Eliminado exitosamente!!! ");
                         flextable.remove(fa);
                 }
 
          });
+                        load.invisible();
             }
             public void EliminarFormulario(formularioPruebaPeriodoDos fa){
+                load.visible();
                 flextable.remove(fa);
+                load.invisible();
             }
             
             private void BDTest(){
@@ -130,7 +150,6 @@ public class Evaluacion extends Composite  {
 
     				@Override
     				public void onSuccess(List<AuxBDTest> result) {
-    					System.out.println("___"+result.isEmpty());
     					if (!result.isEmpty()) {
     						for(AuxBDTest a: result )
     						{

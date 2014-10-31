@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -43,10 +44,14 @@ public class formularioReferenciaLaboral extends Composite {
 	private TextBox txtSalarioFinal;
 	private TextBox txtPuestoCandidato;
 	private Mensaje mensaje; 
+    private Loading load ;
 	
 	public formularioReferenciaLaboral(referenciaLaboral a,Empleados e) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -165,6 +170,7 @@ public class formularioReferenciaLaboral extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 				try{
 					new Date(dateFecha1.getValue().getTime());
 				}catch(Exception e){
@@ -183,6 +189,7 @@ public class formularioReferenciaLaboral extends Composite {
 							listRecomienda.getItemText(listRecomienda.getSelectedIndex()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -190,6 +197,7 @@ public class formularioReferenciaLaboral extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_referencia_laboral = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -203,6 +211,7 @@ public class formularioReferenciaLaboral extends Composite {
 							listRecomienda.getItemText(listRecomienda.getSelectedIndex()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Actualizar Datos");
                         }
@@ -210,12 +219,14 @@ public class formularioReferenciaLaboral extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
 		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");
@@ -232,6 +243,7 @@ public class formularioReferenciaLaboral extends Composite {
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}

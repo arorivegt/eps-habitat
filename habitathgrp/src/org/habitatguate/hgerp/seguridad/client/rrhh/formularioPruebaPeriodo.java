@@ -5,6 +5,7 @@ import java.util.Date;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -64,10 +65,14 @@ public class formularioPruebaPeriodo extends Composite {
 		private Label lblElijaLaEvaluacion;
 		private Button btnCompartir;
 		private Button btnEliminar;
+        private Loading load ;
 		
 	public formularioPruebaPeriodo(final Desempeno d, Long e) {
 		this.d = d;
 		this.empleado = e;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -253,6 +258,7 @@ public class formularioPruebaPeriodo extends Composite {
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 				try{
 					new Date(dateFecha.getValue().getTime());
 				}catch(Exception e){
@@ -269,6 +275,7 @@ public class formularioPruebaPeriodo extends Composite {
 							txtEvaluador.getText(),id_BDprueba,true, "1", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                            // Window.alert("Error  al Guardar Datos"+caught);
@@ -277,6 +284,7 @@ public class formularioPruebaPeriodo extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_prueba= result;
 							bandera = false;
                         	setMensaje("alert alert-success", 
@@ -295,6 +303,7 @@ public class formularioPruebaPeriodo extends Composite {
 					txtEvaluador.getText(),id_BDprueba, true,"1", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	setMensaje("alert alert-error", 
                 			"Error !! \nal Actualizar Datos");
                    //Window.alert("Error  al Actualizar Datos"+caught);
@@ -303,6 +312,7 @@ public class formularioPruebaPeriodo extends Composite {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					bandera = false;
                 	setMensaje("alert alert-success", 
                 			"Datos Actualizados\n exitosamente!!!");
@@ -312,9 +322,12 @@ public class formularioPruebaPeriodo extends Composite {
          });
 		}}else{
 
+	        load.invisible();
 			setMensaje("alert alert-error", 
         			"Error !! \nDebe seleccionar un test \nasociado a este formulario");
 		}
+
+		        load.invisible();
 			}
 		});
 		
@@ -365,6 +378,7 @@ public class formularioPruebaPeriodo extends Composite {
 				if(!bandera){
 					MensajeCompartir(id_prueba,empleado);
 				}else{
+			        load.invisible();
                 	setMensaje("alert alert-error", 
                 			" \nAun no se ha guardo el formulario");
 				}

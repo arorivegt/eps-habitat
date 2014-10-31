@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -33,11 +34,15 @@ public class formularioReferenciaPersonal extends Composite {
 	private TextArea txtActitudes;
 	private IntegerBox txtTelefono;
 	private Mensaje mensaje; 
+    private Loading load ;
 	
 	
 	public formularioReferenciaPersonal(referenciaPersonal a,Empleados e) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -97,11 +102,13 @@ public class formularioReferenciaPersonal extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+		        load.visible();
 				if(bandera) {
 					loginService.Insertar_Referencia_Personal(empleado.id_empleado, txtNombre.getText(), txtTelefono.getText(), 
 							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -109,6 +116,7 @@ public class formularioReferenciaPersonal extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_referencia_personal = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -120,6 +128,7 @@ public class formularioReferenciaPersonal extends Composite {
 							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Actualizar Datos");
                         }
@@ -127,12 +136,14 @@ public class formularioReferenciaPersonal extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
 		                			"Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");
@@ -148,6 +159,7 @@ public class formularioReferenciaPersonal extends Composite {
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}

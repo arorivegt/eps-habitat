@@ -11,21 +11,21 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.Window;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 /**
  * 
  * @author arodriguez
@@ -40,6 +40,7 @@ public class BDpuestos extends Composite  {
 	 private FlexTable flextable;
      private final Button btnTest;
      private VerticalPanel panel = new VerticalPanel();
+     private Loading load ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      
      /**
@@ -47,6 +48,9 @@ public class BDpuestos extends Composite  {
       */
     public BDpuestos() {
 
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
 		scrollPanel.setSize("100%", "716px");
@@ -95,12 +99,14 @@ public class BDpuestos extends Composite  {
      */
     public void agregarFormulario_lleno()
     {
+        load.visible();
     	flextable.clear();
     	final formularioBDPuestos fa = new  formularioBDPuestos(a);
     	
     	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
+    	        load.invisible();
     			mensaje.setMensaje("alert alert-error", "Error !! \nen la base de datos\nde puestos");
     		}
 
@@ -111,11 +117,11 @@ public class BDpuestos extends Composite  {
 				{
 				    for ( AuxBDPuesto n2 : results) 
 				    {
-				    	Window.alert("aqui");
 				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 				    	flextable.setWidget(flextable.getRowCount(), 0,fa );
 				    }
 		    	}	
+		        load.invisible();
 			}
 		});
     }
@@ -124,7 +130,9 @@ public class BDpuestos extends Composite  {
      * agrega un formulario nuevo de Base de datos de puestos 
      */
     private void agregarFormulario(){
+        load.visible();
     	flextable.setWidget(flextable.getRowCount(), 0, new formularioBDPuestos(this));
+        load.invisible();
     }
 	    
     /**

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -24,10 +25,14 @@ public class Compartir extends Composite{
        private Long idTes = 0L;
        private Long idEmpleadoCompartido = 0L;
        final SuggestBox txtUser;
-   	  private Mensaje mensaje; 
+   	   private Mensaje mensaje; 
+       private Loading load ;
    		
         public Compartir(Long idTest, Long id) 
         {
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			mensaje = new Mensaje();
         	this.idEmpleadoCompartido = id;
         	this.idTes = idTest;
@@ -48,20 +53,26 @@ public class Compartir extends Composite{
             Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
+
+                    load.visible();
             		 loginService.InsertarCompartido(txtUser.getText(),idTes,idEmpleadoCompartido,new AsyncCallback<String>()
 					    {
 				            public void onFailure(Throwable caught) 
 				            {
+						        load.invisible();
 				            	mensaje.setMensaje("alert alert-error", 
 			                			"Error !! \nal Compartir Evaluacion");
 				            }
 	
 							public void onSuccess(String result)
 				            {
+						        load.invisible();
 								mensaje.setMensaje("alert alert-success", result);
 				            }
 	
 					    });
+
+                     load.invisible();
             	}
             });
             button.setText("Aceptar");

@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -54,12 +55,16 @@ public class formularioAcademico extends Composite {
 	private Button button;
 	private String URLFile ="";
 	private String KeyFile ="";
+    private Loading load ;
 	
 	public formularioAcademico(academico a,Empleados e) {
 
 		mensaje = new Mensaje();
 		this.empleado = e;
 		this.a = a;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -122,6 +127,7 @@ public class formularioAcademico extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 					try{
 						new Date(dateFinal.getValue().getTime());
 					}catch(Exception e){
@@ -180,8 +186,10 @@ public class formularioAcademico extends Composite {
 
          });
 		}
-				
+
+		        load.invisible();
 			}
+			
 		});
 		absolutePanel.add(getFormPanel(), 522, 108);
 		btnActualizar.setText("Guardar");
@@ -240,6 +248,7 @@ public class formularioAcademico extends Composite {
 		
 	}
 	private void EliminarFormulario(){
+        load.visible();
 	        a.EliminarFormulario(this,empleado.id_empleado,id_historial_academico);
 	        if(!getKeyFile().equals(""))
 	        {
@@ -253,6 +262,7 @@ public class formularioAcademico extends Composite {
 
 	        	});
 	        }
+	        load.invisible();
     }
 	private void EliminarFormulario_SinDatos(){
 		a.EliminarFormulario(this);

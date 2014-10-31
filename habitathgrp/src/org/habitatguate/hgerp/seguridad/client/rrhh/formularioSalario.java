@@ -10,6 +10,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -47,10 +48,14 @@ public class formularioSalario extends Composite {
     private Label label;
     private DateBox fecha;
     private Label lblAo;
+    private Loading load ;
 
 	public formularioSalario(salario salari,Empleados e) {
 
 		mensaje = new Mensaje();
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.empleado = e;
 		this.salario = salari;
 		absolutePanel = new AbsolutePanel();
@@ -62,6 +67,7 @@ public class formularioSalario extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+		        load.visible();
 				try{
 					new Date(fecha.getValue().getTime());
 				}catch(Exception e){
@@ -73,6 +79,7 @@ public class formularioSalario extends Composite {
 							new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -80,6 +87,7 @@ public class formularioSalario extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_salario = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -91,17 +99,20 @@ public class formularioSalario extends Composite {
 							Float.parseFloat(txtSalario.getText()), txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()),txtDescipcion.getText(),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", "Error !! \nal Actualizar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", "Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		
@@ -169,6 +180,7 @@ public class formularioSalario extends Composite {
 				if(bandera){
 					EliminarFormularioSinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}

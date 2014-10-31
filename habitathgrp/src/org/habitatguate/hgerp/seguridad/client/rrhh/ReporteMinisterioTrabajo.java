@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -16,11 +18,15 @@ public class ReporteMinisterioTrabajo extends Composite  {
 	private CellTable<DatosMinisterioTrabajo> cellTable;
 	private List<DatosMinisterioTrabajo> DATOS = new ArrayList<DatosMinisterioTrabajo>();
 	private  VerticalPanel vp ;
+    private Loading load ;
 	
 	public ReporteMinisterioTrabajo(List<DatosMinisterioTrabajo> DATOS2) {
 
 	    vp = new VerticalPanel();
-	    
+
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		setDATOS(DATOS2);
 		cellTable = new CellTable<DatosMinisterioTrabajo>();
 		cellTable.setPageSize(10);

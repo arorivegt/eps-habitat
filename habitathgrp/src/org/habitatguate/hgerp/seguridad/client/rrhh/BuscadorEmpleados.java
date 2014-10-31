@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -45,12 +46,17 @@ public class BuscadorEmpleados extends Composite   {
     private AbsolutePanel absolutePanel;
     private BuscadorEmpleados evaluacionesBuscador;
 	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+     private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     /**
      * constructor
      */
 	public BuscadorEmpleados() {
+
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		mensaje = new Mensaje();
 		this.evaluacionesBuscador = this;
 		grid = new Grid(2, 1);
@@ -102,6 +108,8 @@ public class BuscadorEmpleados extends Composite   {
 		listBox.addItem("DPI");
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
+
+		        load.visible();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
 					lbDato1.setText("Ingrese el DPI");
@@ -214,6 +222,7 @@ public class BuscadorEmpleados extends Composite   {
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 390, 19);
 				}
+		        load.invisible();
 			}
 		});
 		
@@ -224,6 +233,8 @@ public class BuscadorEmpleados extends Composite   {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+
+		        load.visible();
 				grid.clearCell(1, 0);
 				EmpleadoLista  nuevo = new EmpleadoLista();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
@@ -237,6 +248,13 @@ public class BuscadorEmpleados extends Composite   {
 
 					if(!txtDato1.getText().equals("") || !txtDato2.getText().equals("") 
 							|| !txtDato3.getText().equals("")){
+						if(txtDato1.getText().equals("")){
+							txtDato1.setText("    ");
+						}if(txtDato2.getText().equals("")){
+							txtDato2.setText("    ");
+						}if(txtDato3.getText().equals("")){
+							txtDato3.setText("    ");
+						}
 						nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
 								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
 								,"");
@@ -289,6 +307,8 @@ public class BuscadorEmpleados extends Composite   {
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}
+
+		        load.invisible();
 			}
 		});
 						
@@ -340,6 +360,7 @@ public class BuscadorEmpleados extends Composite   {
 	 */
 	public void Empleado_registrado(final Long id_empleado){
 
+        load.visible();
 		grid.clearCell(1, 0);
 		final Empleados e = new Empleados(0);
 		e.id_empleado = id_empleado;
@@ -350,9 +371,9 @@ public class BuscadorEmpleados extends Composite   {
         loginService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
         	public void onFailure(Throwable caught) 
         	{
+                load.invisible();
             	mensaje.setMensaje("alert alert-information alert-block", 
             			"\nNo hay resultados");
-        		//Window.alert("No hay resultados "+caught);
         	}
 
         	@Override
@@ -422,7 +443,8 @@ public class BuscadorEmpleados extends Composite   {
         		}catch(Exception e){
         			
         		}
-        		
+
+                load.invisible();
         	}
 
         });

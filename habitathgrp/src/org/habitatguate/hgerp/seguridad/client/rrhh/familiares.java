@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.Window;
@@ -30,11 +31,15 @@ public class familiares extends Composite  {
 	private Button btnAgregar_pariente;
 	private VerticalPanel panel = new VerticalPanel();
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private Loading load ;
 	
     public familiares(Empleados e) {
 
 		mensaje = new Mensaje();
 		this.empleado = e;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         initWidget(panel);
@@ -66,13 +71,16 @@ public class familiares extends Composite  {
 	}
     
     private void agregarFormulario(String pariente){
-        flextable.setWidget(flextable.getRowCount(), 0, new formularioFamilia(pariente,this,empleado));  	
+        load.visible();
+        flextable.setWidget(flextable.getRowCount(), 0, new formularioFamilia(pariente,this,empleado)); 
+        load.invisible(); 	
     }
     
     public void agregarFormulario_lleno(List<AuxFamilia> results){
     	boolean padre = false;
     	boolean madre = false;
     	boolean conyugue = false;
+        load.visible();
     	if (!results.isEmpty()) {
     		
 		    for ( AuxFamilia n2 : results) {
@@ -97,32 +105,39 @@ public class familiares extends Composite  {
     	}else{
     		agregar_parientes_unicos();
     	}
+
+        load.invisible();
     		
     }
     
     public void EliminarFormulario(final formularioFamilia fa, final Long id_empledo, final Long id){
 
+        load.visible();
 		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
+		        load.invisible();
             	mensaje.setMensaje("alert alert-error", 
             			"Error !! \nal eliminar");
-                Window.alert("Error al ELiminar"+caught);
             }
 
 			@Override
             public void onSuccess(Long result)
             {
+		        load.invisible();
 				mensaje.setMensaje("alert alert-success", 
             			"Eliminado\n exitosamente!!!");
                 flextable.remove(fa);
             }
 
      });
+        load.visible();
     }
     
     public void EliminarFormulario(formularioFamilia fa){
+        load.visible();
     	flextable.remove(fa);
+        load.invisible();
      }
    
   

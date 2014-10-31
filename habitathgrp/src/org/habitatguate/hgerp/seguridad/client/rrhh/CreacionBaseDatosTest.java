@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -42,8 +43,12 @@ public class CreacionBaseDatosTest extends Composite{
        private DateBox dateBox ;
        private ListBox lsitTipoTest;
        private TextBox txtNombreTest;
+       private Loading load ;
         public CreacionBaseDatosTest(TestForm test ) 
         {
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
         	this.setTest(test);
         	
         	AbsolutePanel rootPanel = new AbsolutePanel();
@@ -154,8 +159,10 @@ public class CreacionBaseDatosTest extends Composite{
             
             Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
+
             	public void onClick(ClickEvent event) 
             	{      
+                    load.visible();
             		try{
     					new Date(dateBox.getValue().getTime());
     				}catch(Exception e){
@@ -182,6 +189,7 @@ public class CreacionBaseDatosTest extends Composite{
     	    					tipo, new AsyncCallback<Long>(){
                             public void onFailure(Throwable caught) 
                             {
+                		        load.invisible();
                             	setMensaje("alert alert-error", 
                             			"Error !! \nal Guardar Datos");
                             }
@@ -189,6 +197,7 @@ public class CreacionBaseDatosTest extends Composite{
     						@Override
                             public void onSuccess(Long result)
                             {
+    					        load.invisible();
     							id_prueba= result;
     							bandera = false;
                             	setMensaje("alert alert-success", 
@@ -206,6 +215,7 @@ public class CreacionBaseDatosTest extends Composite{
     					tipo, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
+        		        load.invisible();
                     	setMensaje("alert alert-error", 
                     			"Error !! \nal Actualizar Datos");
                     }
@@ -213,6 +223,7 @@ public class CreacionBaseDatosTest extends Composite{
     				@Override
                     public void onSuccess(Long result)
                     {
+    			        load.invisible();
     					bandera = false;
                     	setMensaje("alert alert-success", 
                     			"Datos Actualizados\n exitosamente!!!");
@@ -222,9 +233,12 @@ public class CreacionBaseDatosTest extends Composite{
     		}
                 }else{
 
+    		        load.invisible();
                 	setMensaje("alert alert-error", 
                 			"Error !! \nlas preguntas no pueden ir vacias");
             	}
+
+                    load.invisible();
             	}
             });
             

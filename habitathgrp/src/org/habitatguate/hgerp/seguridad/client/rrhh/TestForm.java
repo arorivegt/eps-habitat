@@ -6,6 +6,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -28,9 +29,13 @@ public class TestForm extends Composite  {
      private List<AuxBDTest> valor = new ArrayList<AuxBDTest>();
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
+     private Loading load ;
 	    
      public TestForm() {
 
+     	load = new Loading();
+         load.Mostrar();
+         load.invisible();
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
@@ -63,11 +68,14 @@ public class TestForm extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
+	        load.visible();
 	    	flextable.clear();
 	        flextable.setWidget(flextable.getRowCount(), 0, new CreacionBaseDatosTest(this));
+	        load.invisible();
 	    }
 	    
 	    public void agregarFormulario_lleno(AuxBDTest n){
+	        load.visible();
 	    	flextable.clear();
 	    	if (!n.equals(null)) {
 	    		CreacionBaseDatosTest  fa = new CreacionBaseDatosTest(this);
@@ -75,10 +83,12 @@ public class TestForm extends Composite  {
 							""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
 							""+n.getPregunta10(),n.getTipo_test(),n.getFecha_test());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
-	    	}	    
+	    	}	   
+	        load.invisible(); 
 	    }
 	    
 	    public void agregar_formularios(List<AuxBDTest> results){
+	        load.visible();
 	    	IniciarLlenadoBaseDatosTest();
 	    	flextable.clear();
 	    	if (!(results.size() == 0)) {
@@ -87,11 +97,13 @@ public class TestForm extends Composite  {
 			    	FormularioTest de = new FormularioTest(this, n);
 			    	flextable.setWidget(flextable.getRowCount(), 0,de);
 			    }
-			}			    
+			}		
+	        load.invisible();	    
 	    }
 	    
 	    
 	    public void IniciarLlenadoBaseDatosTest(){
+	        load.visible();
 	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
                 public void onFailure(Throwable caught) 
                 {
@@ -105,6 +117,7 @@ public class TestForm extends Composite  {
                 }
 
 	    	});
+	        load.invisible();
 	    }
 
     	

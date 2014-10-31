@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -17,8 +18,12 @@ public class ReporteEmpleados extends Composite  {
 
     private  Grid grid;
     private ListBox crearPor;
+    private Loading load ;
 	
 	public ReporteEmpleados() {
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		grid = new Grid(1, 1);
 		initWidget(grid);
 		grid.setSize("1278px", "312px");

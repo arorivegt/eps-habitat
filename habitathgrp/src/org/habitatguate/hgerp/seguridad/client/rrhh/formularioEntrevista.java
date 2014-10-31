@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -57,6 +58,7 @@ public class formularioEntrevista extends Composite {
 	 private DoubleBox txtAmortizacion ;
 	 private DoubleBox txtPagoMensual ;
 	 private DoubleBox txtPretencionSalarial;
+     private Loading load ;
 	 
    
 
@@ -64,6 +66,9 @@ public class formularioEntrevista extends Composite {
 
 		mensaje = new Mensaje();
 		this.empleado = e;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -326,6 +331,8 @@ public class formularioEntrevista extends Composite {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+
+		        load.visible();
 				try{
 					new Date(dateFecha.getValue().getTime());
 				}catch(Exception e){
@@ -347,6 +354,7 @@ public class formularioEntrevista extends Composite {
 			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -354,6 +362,7 @@ public class formularioEntrevista extends Composite {
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_entrevista = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
@@ -376,6 +385,7 @@ public class formularioEntrevista extends Composite {
 				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
 	                        {
+	            		        load.invisible();
 	                        	mensaje.setMensaje("alert alert-error", 
 	                        			"Error !! \nal Actualizar Datos");
 	                        }
@@ -383,6 +393,7 @@ public class formularioEntrevista extends Composite {
 							@Override
 	                        public void onSuccess(Long result)
 	                        {
+						        load.invisible();
 								bandera = false;
 								mensaje.setMensaje("alert alert-success", 
 			                			"Datos Actualizados\n exitosamente!!!");
@@ -390,6 +401,7 @@ public class formularioEntrevista extends Composite {
 
 	                 });
 					}
+		        load.invisible();
 			}
 		});
 		button.setText("Guardar");

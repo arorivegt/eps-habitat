@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -20,10 +21,14 @@ public class EmpleadoLista extends Composite {
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private EmpleadoLista listaEmpleado;
     private FlexTable flexTable;
+    private Loading load ;
 	public EmpleadoLista() {
 		this.listaEmpleado =this;
 		mensaje = new Mensaje();
-		
+
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
 		initWidget(scrollPanel);
@@ -38,13 +43,16 @@ public class EmpleadoLista extends Composite {
 		verticalPanel.add(flexTable);
 		flexTable.setSize("100%", "80px");
 	}
-	
+
     public void agregarFormulario(final char tipo, final BuscadorEmpleados buscador, final String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
+
+        load.visible();
     	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
 						primer_apellido, segundo_apellido,DPI, Pasaporte,Estado,new AsyncCallback<List<AuxEmpleado>>(){
             public void onFailure(Throwable caught) 
             {
+		        load.invisible();
             	mensaje.setMensaje("alert alert-information alert-block", 
             			"\nNo hay resultados");
                // Window.alert("No hay resultados "+caught);
@@ -57,13 +65,18 @@ public class EmpleadoLista extends Composite {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, new EmpleadoItem(buscador,listaEmpleado,p.getId_empleado(),p.getPrimer_nombre(),
 			        		p.getSegundo_nombre(),p.getPrimer_apellido(),p.getSegundo_apellido()));
 				}
+		        load.invisible();
             }
 
      });
+
+        load.invisible();
     }
     
     public void EliminarFormulario(final EmpleadoItem a){
+        load.visible();
     	flexTable.remove(a);
+        load.invisible();
     }
     
 

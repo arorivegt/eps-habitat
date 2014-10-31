@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -34,12 +35,16 @@ public class formularioHistorial extends Composite {
 	private Button btnEliminar ;
 	private Mensaje mensaje; 
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private Loading load ;
     
     
 	public formularioHistorial(historiales a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		mensaje = new Mensaje();
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -67,6 +72,7 @@ public class formularioHistorial extends Composite {
 		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 				try{
 					new Date(dateFecha.getValue().getTime());
 				}catch(Exception e){
@@ -78,12 +84,14 @@ public class formularioHistorial extends Composite {
 							listTipo.getValue(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_historial = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", "Datos Guardados\n exitosamente!!!");
@@ -94,17 +102,20 @@ public class formularioHistorial extends Composite {
 							listTipo.getValue(listTipo.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", "Error !! \nal Actualizar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", "Datos Actualizados\n exitosamente!!!");
                         }
 						});
 				}
+		        load.invisible();
 			}
 		});
 		btnActualizar.setText("Guardar");

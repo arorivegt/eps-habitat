@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -18,10 +20,14 @@ public class FormularioTest extends Composite {
 	private AuxBDTest prueba;
     private DateBox dateFecha ;
     private TestForm d;
+    private Loading load ;
     
 	public FormularioTest(final TestForm d,final AuxBDTest prueba) {
 
 		this.setD(d);
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.setPrueba(prueba);
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

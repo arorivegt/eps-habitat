@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -30,11 +31,15 @@ public class formularioBDPuestos extends Composite {
     private DateBox dateFecha;
 	private TextBox txtPuesto;
 	private TextArea txtFunciones;
+    private Loading load ;
 	
 	public formularioBDPuestos(BDpuestos a) {
 
 		mensaje = new Mensaje();
 		this.a = a;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -69,6 +74,7 @@ public class formularioBDPuestos extends Composite {
 				Button btnGuardar = new Button("Send");
 				btnGuardar.addClickHandler(new ClickHandler() {
 					public void onClick(ClickEvent event) {
+				        load.visible();
 						try{
 							new Date(dateFecha.getValue().getTime());
 						}catch(Exception e){
@@ -80,6 +86,7 @@ public class formularioBDPuestos extends Composite {
 									txtFunciones.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
+            		        load.invisible();
                         	mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
@@ -87,6 +94,7 @@ public class formularioBDPuestos extends Composite {
 								@Override
                         public void onSuccess(Long result)
                         {
+							        load.invisible();
 									id_puesto = result;
 									bandera = false;
 									mensaje.setMensaje("alert alert-success", 
@@ -98,6 +106,7 @@ public class formularioBDPuestos extends Composite {
 								txtFunciones.getText(), new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
+        		        load.invisible();
                     	mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nal Actualizar Datos");
                     }
@@ -105,12 +114,14 @@ public class formularioBDPuestos extends Composite {
 							@Override
                     public void onSuccess(Long result)
                     {
+						        load.invisible();
 								bandera = false;
 								mensaje.setMensaje("alert alert-success", 
 			                			"Datos Actualizados\n exitosamente!!!");
                     }
 							});
 						}
+				        load.invisible();
 					}
 					
 				});

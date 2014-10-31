@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -37,10 +38,14 @@ public class historiales extends Composite  {
 	 private DateBox dateFecha1;
 	 private ListBox listTipo;
 	 private Button btnBuscar;
+	    private Loading load ;
 		
 	    public historiales(Empleados e) {
 
 			mensaje = new Mensaje();
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			this.empleado = e;
     		mensaje = new Mensaje();
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -84,6 +89,7 @@ public class historiales extends Composite  {
 	        btnBuscar = new Button("Agregar");
 	        btnBuscar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
+	                load.visible();
 	        		loginService.getHistorial(empleado.id_empleado, new AsyncCallback<List<AuxHistorial>>(){
 	                    public void onFailure(Throwable caught) 
 	                    {
@@ -113,15 +119,18 @@ public class historiales extends Composite  {
 		        		if(!hist.isEmpty()){
 		        			agregarFormularios(hist);
 		        		}else{
+		    		        load.invisible();
 		                	mensaje.setMensaje("alert alert-error", 
 		                			"No se encontro resultado");
 		        		}
 		        	}catch(Exception e){
 
+				        load.invisible();
 	                	mensaje.setMensaje("alert alert-error", 
 	                			"No se encontro resultado");
 		        	}
 
+	                load.invisible();
 	        	}
 	        });
 	        btnBuscar.setText("Buscar");
@@ -149,7 +158,8 @@ public class historiales extends Composite  {
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxHistorial> results){
-	    	
+
+	        load.visible();
 	    	flextable.clear();
 	    	if (!results.isEmpty()) {
 
@@ -160,10 +170,12 @@ public class historiales extends Composite  {
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    
+	        load.invisible();
 	    }
 	    
 	    public void agregarFormularios(List<AuxHistorial> results){
-	    	
+
+	        load.visible();
 	    	flextable.clear();
 	    	if (!results.isEmpty()) {
 
@@ -173,14 +185,17 @@ public class historiales extends Composite  {
 			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
-	    	}	    
+	    	}	
+	        load.invisible();    
 	    }
 	    
 	    public void EliminarFormulario(final formularioHistorial fa, final Long id_empledo, final Long id){
 
+	        load.visible();
 			loginService.Eliminar_Historial(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
@@ -188,16 +203,20 @@ public class historiales extends Composite  {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
 	         });
+	        load.invisible();
 
 	    }
 	    
 	    public void EliminarFormulario(formularioHistorial fa){
+	        load.visible();
 	    	flextable.remove(fa);
+	        load.invisible();
 		}
 }

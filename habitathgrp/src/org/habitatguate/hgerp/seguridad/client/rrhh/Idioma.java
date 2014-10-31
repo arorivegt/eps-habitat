@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -25,10 +26,14 @@ public class Idioma extends Composite  {
 	 private Empleados empleado;
 	 private VerticalPanel panel = new VerticalPanel();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+     private Loading load ;
 		
 	    public Idioma(Empleados e) {
 
 			mensaje = new Mensaje();
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			this.empleado = e;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -50,10 +55,13 @@ public class Idioma extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
+	        load.visible();
 	        flextable.setWidget(flextable.getRowCount(), 0, new formularioIdiomas(this,empleado));
+	        load.invisible();
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxIdioma> results){
+	        load.visible();
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxIdioma n2 : results) {
@@ -61,14 +69,17 @@ public class Idioma extends Composite  {
 			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma(), n2.getURLFile(), n2.getKeyFile());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
-	    	}	    
+	    	}	
+	        load.invisible();    
 	    }
 	    
 	    public void EliminarFormulario(final formularioIdiomas fa, final Long id_empledo, final Long id){
 
+	        load.visible();
 			loginService.Eliminar_Idioma(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
@@ -76,15 +87,19 @@ public class Idioma extends Composite  {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
          });
+	        load.invisible();
 	    }
 	    
 	    public void EliminarFormulario(formularioIdiomas fa){
-        	        flextable.remove(fa);
+	        load.visible();
+	        flextable.remove(fa);
+	        load.invisible();
 	    }
 }

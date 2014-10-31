@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 
@@ -62,11 +63,17 @@ public class formularioPruebaPeriodoDos extends Composite {
 		private Label lblEvaluacionQueSe;
 		private Button btnEliminar;
 		private Button btnCompartir;
+        private Loading load ;
+   	 private Mensaje mensaje; 
 		
 	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Long e) {
 
 		this.empleado = e;
+		mensaje = new Mensaje();
 		this.evaluacion = evaluacion;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -258,6 +265,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+		        load.visible();
 				try{
 					new Date(dateFecha.getValue().getTime());
 				}catch(Exception e){
@@ -276,16 +284,18 @@ public class formularioPruebaPeriodoDos extends Composite {
 							txtEvaluador.getText(),id_BDprueba, true,"2", new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
-                        	setMensaje("alert alert-error", 
+            		        load.invisible();
+            		        mensaje.setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
                         }
 
 						@Override
                         public void onSuccess(Long result)
                         {
+					        load.invisible();
 							id_prueba= result;
 							bandera = false;
-                        	setMensaje("alert alert-success", 
+							mensaje.setMensaje("alert alert-success", 
                         			"Datos Guardados\n exitosamente!!!");
                         }
 
@@ -300,24 +310,27 @@ public class formularioPruebaPeriodoDos extends Composite {
 					txtEvaluador.getText(),id_BDprueba,true, "2", new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
-                	setMensaje("alert alert-error", 
+    		        load.invisible();
+    		        mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Actualizar Datos");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					bandera = false;
-                	setMensaje("alert alert-success", 
+					mensaje.setMensaje("alert alert-success", 
                 			"Datos Actualizados\n exitosamente!!!");
                 }
 
          });
 		}}else{
 
-			setMensaje("alert alert-error", 
+			mensaje.setMensaje("alert alert-error", 
         			"Error !! \nDebe seleccionar un test \nasociado a este formulario");
 		}
+		        load.invisible();
 			}
 		});
 		btnGuardar.setText("Guardar");
@@ -440,6 +453,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 				if(bandera){
 					EliminarFormulario_SinDatos();
 				}else{
+			        load.invisible();
 					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
 						EliminarFormulario();
 				}
@@ -457,7 +471,8 @@ public class formularioPruebaPeriodoDos extends Composite {
 				if(!bandera){
 					MensajeCompartir(id_prueba,empleado);
 				}else{
-                	setMensaje("alert alert-error", 
+			        load.invisible();
+			        mensaje.setMensaje("alert alert-error", 
                 			" \nAun no se ha guardo el formulario");
 				}
 			}
@@ -554,35 +569,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 		this.txtEvaluador.setText(txtEvaluador);
 		this.dateFecha.setValue(new Date(dateFecha));
 	}
-    public void setMensaje(String estilo, String mensaje){
-        final DialogBox Registro2 = new DialogBox();
-        final HTML serverResponseLabel = new HTML();
-        final Button close= new Button("x");
-        Mensaje inicio = new Mensaje();
-        
-        Registro2.setStyleName(estilo);
-        inicio.mensajeEntrada(mensaje);
-        inicio.mensajeEstilo(estilo);
-        close.addStyleName("close");
-        VerticalPanel dialogVPanel = new VerticalPanel();
-        dialogVPanel.add(serverResponseLabel );
-        dialogVPanel.add(inicio);
-        dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        dialogVPanel.add(close);
-        Registro2 .setWidget(dialogVPanel);
-        Registro2 .setModal(true);
-        Registro2 .setGlassEnabled(true);
-        Registro2 .setAnimationEnabled(true);
-        Registro2 .center();
-        Registro2 .show();
-        close.setFocus(true);
     
-        close.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent event) {
-            Registro2.hide();
-        }
-    });
-    }
     
     public void BuscarBDtest(long lg)
 	{

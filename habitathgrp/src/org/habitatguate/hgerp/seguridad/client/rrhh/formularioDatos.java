@@ -12,6 +12,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
@@ -145,6 +146,7 @@ public class formularioDatos extends Composite {
     private IntegerBox txtJefeInmediato;
     private Label lblJefeInmediato;
     private Button btnOK;
+    private Loading load ;
     /**
      * 
      * @param empleadoo
@@ -155,6 +157,9 @@ public class formularioDatos extends Composite {
 		mensaje = new Mensaje();
 		this.empleado = empleadoo;
 		this.setTipo(tipo);
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -1105,7 +1110,8 @@ public class formularioDatos extends Composite {
 		
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
+
+		        load.visible();
 				try{
 					new Date(dateAnnioNacimiento.getValue().getTime());
 				}catch(Exception e){
@@ -1135,6 +1141,7 @@ public class formularioDatos extends Composite {
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
+	                		        load.invisible();
 	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Guardar Datos");
 	                            }
@@ -1143,6 +1150,7 @@ public class formularioDatos extends Composite {
 	                            public void onSuccess(Long result)
 	                            {
 
+							        load.invisible();
 	                            	id_empleado = result;
 	                            	empleado.id_empleado = result;
 	                            	bandera = false;
@@ -1174,6 +1182,7 @@ public class formularioDatos extends Composite {
 	                        {
 	                            public void onFailure(Throwable caught) 
 	                            {
+	                		        load.invisible();
 	                            	mensaje.setMensaje("alert alert-error", 
 	                            			"Error !! \nal Actualizar Datos");
 	                            }
@@ -1181,6 +1190,7 @@ public class formularioDatos extends Composite {
 								@Override
 	                            public void onSuccess(Long result)
 	                            {
+							        load.invisible();
 	                            	bandera = false;
 	                            	mensaje.setMensaje("alert alert-success", 
 				                			"Datos Actualizados\n exitosamente!!!");
@@ -1189,7 +1199,8 @@ public class formularioDatos extends Composite {
 	                     });
 					
 				}
-				
+
+		        load.invisible();
 			}
 		});
 		
@@ -2239,6 +2250,7 @@ public class formularioDatos extends Composite {
 			}
 
 			public void onFailure(Throwable caught) {
+		        load.invisible();
 				mensaje.setMensaje("alert alert-error", 
             			"Error !! \nen el servicio");
 			}

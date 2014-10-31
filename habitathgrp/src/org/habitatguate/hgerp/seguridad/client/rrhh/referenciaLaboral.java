@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -24,11 +25,15 @@ public class referenciaLaboral extends Composite  {
 	 private FlexTable flextable;
 	 private Empleados empleado;
      private VerticalPanel panel = new VerticalPanel();
+     private Loading load ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
 	    public referenciaLaboral(Empleados e) {
 
 			mensaje = new Mensaje();
+        	load = new Loading();
+            load.Mostrar();
+            load.invisible();
 			this.empleado = e;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -50,10 +55,13 @@ public class referenciaLaboral extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
+	        load.visible();
 	        flextable.setWidget(flextable.getRowCount(), 0, new formularioReferenciaLaboral(this,empleado));
+	        load.invisible();
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxReferenciaLaboral> results){
+	        load.visible();
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxReferenciaLaboral n2 : results) {
@@ -63,14 +71,17 @@ public class referenciaLaboral extends Composite  {
 			    				   n2.getFecha1(), n2.getFecha2(), ""+n2.getSalario_final(), n2.getPuesto_candidato());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
-	    	}	    
+	    	}	 
+	        load.invisible();   
 	    }
 	    
 	    public void EliminarFormulario(final formularioReferenciaLaboral fa, final Long id_empledo, final Long id){
 
+	        load.visible();
 			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+    		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
                 			"Error !! \nal Eliminar");
                 }
@@ -78,14 +89,18 @@ public class referenciaLaboral extends Composite  {
 				@Override
                 public void onSuccess(Long result)
                 {
+			        load.invisible();
 					mensaje.setMensaje("alert alert-success", 
                 			"Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
          });
+	        load.invisible();
 	    }
 	    public void EliminarFormulario(formularioReferenciaLaboral fa){
-        	        flextable.remove(fa);
+	        load.visible();
+	        flextable.remove(fa);
+	        load.invisible();
 	    }
 }

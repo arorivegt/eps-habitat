@@ -11,6 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -35,12 +36,17 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
     private ScrollPanel scrollPanel;
     private AbsolutePanel absolutePanel_1;
     private  ListBox listEstado ;
+    private Loading load ;
 	public EmpleadosMinisterioTrabajo() {
 		
 		grid = new Grid(2, 1);
 		initWidget(grid);
 		grid.setWidth("100%");
-		
+
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
+        
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
 		absolutePanel.setSize("100%", "30px");
@@ -94,6 +100,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 	}
 	
 	public void busqueda(){
+
+        load.visible();
 		char tipo = '5';
 		
 		if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
@@ -105,6 +113,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				"", "","","",listEstado.getValue(listEstado.getSelectedIndex()),new AsyncCallback<List<AuxEmpleado>>(){
 		public void onFailure(Throwable caught) 
 		{
+	        load.invisible();
 		    Window.alert("No hay resultados "+caught);
 		}
 		
@@ -464,6 +473,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		}
 		
 				});
+
+        load.invisible();
 
 	}
 }

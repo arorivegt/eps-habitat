@@ -39,7 +39,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		
 		grid = new Grid(2, 1);
 		initWidget(grid);
-		grid.setWidth("1178px");
+		grid.setWidth("100%");
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
@@ -78,13 +78,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		lblBusquedaPor.setSize("262px", "13px");
 		
 		scrollPanel = new ScrollPanel();
-		scrollPanel.setAlwaysShowScrollBars(true);
+		scrollPanel.setAlwaysShowScrollBars(false);
 		grid.setWidget(1, 0, scrollPanel);
-		scrollPanel.setSize("2000px", "100%");
+		scrollPanel.setSize("1400px", "100%");
 		
 		absolutePanel_1 = new AbsolutePanel();
 		scrollPanel.setWidget(absolutePanel_1);
-		absolutePanel_1.setSize("10000px", "100%");
+		absolutePanel_1.setSize("4500px", "100%");
 		
 		Label lblEstadoEmpleado = new Label("Estado Empleado");
 		lblEstadoEmpleado.setStyleName("label");

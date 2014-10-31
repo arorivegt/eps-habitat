@@ -22,20 +22,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuBar;
 
 public class MenuPrincipal extends Composite {
 	
-    private AbsolutePanel absolutePanel; 
     private Panel nuevo;
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
 	public MenuPrincipal(Panel nuevo) {
 		this.nuevo = nuevo;
-		absolutePanel = new AbsolutePanel();
-		//absolutePanel.setStyleName("gwt-Label-new");
 	
 		Command cmd = new Command() {
 	       public void execute() {
@@ -168,6 +164,7 @@ public class MenuPrincipal extends Composite {
 	    
 	    //agregar item para el menu
 	    MenuBar MenuVertical = new MenuBar();
+	    MenuVertical.setHeight("100%");
 	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
 	    MenuVertical.addSeparator();
 	    MenuVertical.addItem("Finanzas", MenuFinanzas);
@@ -176,12 +173,10 @@ public class MenuPrincipal extends Composite {
 	    MenuVertical.addSeparator();
 	    
 	    MenuVertical.setAutoOpen(true);
-	    MenuVertical.setWidth("500px");
 	    MenuVertical.setAnimationEnabled(true);
 		    
 		    
-	   absolutePanel.add(MenuVertical);
-	   initWidget(absolutePanel);
+	   initWidget(MenuVertical);
 	}
 	
 	void rrhh1() {
@@ -194,7 +189,7 @@ public class MenuPrincipal extends Composite {
 
 	void rrhh2() {
 		BDpuestos puestos = new BDpuestos();
-		this.nuevo.getGrid().setWidth("1000");
+ 		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, puestos);
 		
@@ -208,6 +203,7 @@ public class MenuPrincipal extends Composite {
 	//@UiHandler("rrhh4")
 	void rrhh4() {
  		EmpleadosMinisterioTrabajo buscador = new EmpleadosMinisterioTrabajo();
+ 		this.nuevo.getGrid().setHeight("100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
 	}
@@ -215,6 +211,7 @@ public class MenuPrincipal extends Composite {
 	//@UiHandler("rrhh5")
 	void rrhh5() {
  		ReporteEmpleados buscador = new ReporteEmpleados();
+ 		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
 	}
@@ -222,7 +219,7 @@ public class MenuPrincipal extends Composite {
 	void rrhh6() {
 
 		TestForm buscador = new TestForm();
-		this.nuevo.getGrid().setWidth("1000");
+ 		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
 	}

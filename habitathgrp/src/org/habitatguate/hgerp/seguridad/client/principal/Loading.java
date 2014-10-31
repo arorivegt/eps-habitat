@@ -12,8 +12,8 @@ public class Loading extends Composite {
 	final DialogBox dialogo = new DialogBox();
 	public Loading() {
 		image = new Image("images/loading.gif");
-		initWidget(image);
 		image.setSize("100%", "100%");
+		initWidget(image);
 	}
 	
 	
@@ -32,7 +32,6 @@ public class Loading extends Composite {
         dialogo .setGlassEnabled(true);
         dialogo .setAnimationEnabled(true);
         dialogo .center();
-        dialogo .show();
     }
 	
 	public void invisible(){

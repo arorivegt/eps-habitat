@@ -8,35 +8,31 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Index implements EntryPoint {
         
         final TextBox txtuser =new TextBox();
         final PasswordTextBox txtpass =new PasswordTextBox();
-        Mensaje inicio;
-        Loading load ;
+        private Mensaje inicio;
+        private Loading load ;
         private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         @Override
         public void onModuleLoad() 
         {
-//        	load = new Loading();
-//            load.Mostrar();
+        	load = new Loading();
+            load.Mostrar();
         	txtuser.setText("anibal@gmail.com");
         	txtpass.setText("Aqwe123");
         	inicio=  new Mensaje();
+            load.invisible();
          	
         
             // Add a handler to close the DialogBox
@@ -52,19 +48,17 @@ public class Index implements EntryPoint {
                     }
                     private void login() 
                     {
-                            // First, we validate the input.
                             final Button sendButton = new Button("Send");   
                             String usertxt = txtuser.getText();
                             String passtxt= txtpass.getText();
-                            // Then, we send the input to the server.
                             sendButton.setEnabled(false);
                            
-                           // load.visible();
+                            load.visible();
                             loginService.login_inicio(usertxt,passtxt, new AsyncCallback<valores_sesion>() 
                             {
                                     public void onFailure(Throwable caught) 
                                     {
-                                       // load.invisible();
+                                       load.invisible();
 
                                 		inicio.setMensaje("alert alert-error","Error!! \nEn el servicio "
                             				+ "\n no se pudo\n iniciar ");
@@ -72,7 +66,7 @@ public class Index implements EntryPoint {
                                     
                                     public void onSuccess(valores_sesion result)
                                     {
-                                        //load.invisible();
+                                        load.invisible();
                                             //si la autentificacion es correcta limpia y contruye el menu
                                            if(result.isCorrecto())
                                             {
@@ -116,6 +110,8 @@ public class Index implements EntryPoint {
            final  Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
+
+                    load.visible();
             		Registro nuevo = new Registro();
                     RootPanel.get().clear();
                     RootPanel.get().add(nuevo);

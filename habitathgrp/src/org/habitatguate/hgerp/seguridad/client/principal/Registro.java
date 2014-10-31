@@ -15,23 +15,26 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class Registro extends Composite{
         
-        
+
+	   private Loading load ;
+       private Mensaje inicio;
        private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
         
         public Registro() 
         {
-        	
+
+        	load = new Loading();
+        	inicio=  new Mensaje();
+            load.Mostrar();
+            load.invisible();
         	AbsolutePanel rootPanel = new AbsolutePanel();
         	rootPanel.setSize("1038px", "671px");
             rootPanel.setStyleName("body");
@@ -101,7 +104,8 @@ public class Registro extends Composite{
             button.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
             		//validar correo         	
-            		
+
+                    load.visible();
                     String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
                     String pass = "^[A-Z][A-Za-z0-9]+{10}$";
                     String  MensajeError = "";
@@ -144,26 +148,28 @@ public class Registro extends Composite{
                     
                     
                     if(err){
-                    	setMensaje("alert alert-error", MensajeError);
+                    	inicio.setMensaje("alert alert-error", MensajeError);
                     }else{
                     	loginService.Registro(txtUser.getText(),md5(txtPass.getText()),txtNombre.getText(), txtApellido.getText(),dateBox.getValue(),
                     			new AsyncCallback<String>() 
                                 {
                					 public void onFailure(Throwable caught) 
                                  {
-                                 	setMensaje("alert alert-error", "Hubo un error en el Registro, Intentelo mas tarde");
+               			            load.invisible();
+               			         inicio.setMensaje("alert alert-error", "Hubo un error en el Registro, Intentelo mas tarde");
                					 }
                					 public void onSuccess(String result)
-                                    {
+                                  {
+               			            load.invisible();
                						 if(result.equals("no existe"))
-                                      	setMensaje("alert alert-success", "registro exitoso");
+               							inicio.setMensaje("alert alert-success", "registro exitoso");
                						 else if(result.equals("error"))
-                                       	setMensaje("alert alert-error", "error al registrar");
+               							inicio.setMensaje("alert alert-error", "error al registrar");
                						 else
-               							 setMensaje("alert alert-error", result);
+               							inicio. setMensaje("alert alert-error", result);
 
                							 
-                                    }
+                                   }
                				});
                				
                			}
@@ -198,35 +204,7 @@ public class Registro extends Composite{
             }
             
     	}
-        public void setMensaje(String estilo, String mensaje){
-            final DialogBox Registro2 = new DialogBox();
-            final HTML serverResponseLabel = new HTML();
-            final Button close= new Button("x");
-            Mensaje inicio = new Mensaje();
-            
-            Registro2.setStyleName(estilo);
-            inicio.mensajeEntrada(mensaje);
-            inicio.mensajeEstilo(estilo);
-            close.addStyleName("close");
-            VerticalPanel dialogVPanel = new VerticalPanel();
-            dialogVPanel.add(serverResponseLabel );
-            dialogVPanel.add(inicio);
-            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            dialogVPanel.add(close);
-            Registro2 .setWidget(dialogVPanel);
-            Registro2 .setModal(true);
-            Registro2 .setGlassEnabled(true);
-            Registro2 .setAnimationEnabled(true);
-            Registro2 .center();
-            Registro2 .show();
-            close.setFocus(true);
-        
-            close.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                Registro2.hide();
-            }
-        });
-        }
+       
     
         
 }

@@ -8,7 +8,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 <!-- Servlets -->
   <servlet>
     <servlet-name>loginServlet</servlet-name>
-    <servlet-class>org.habitatguate.hgerp.seguridad.service.LoginServiceImpl</servlet-class>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.RecursosHumanosServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>

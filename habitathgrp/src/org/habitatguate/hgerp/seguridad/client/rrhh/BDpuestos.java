@@ -41,6 +41,7 @@ public class BDpuestos extends Composite  {
      private final Button btnTest;
      private VerticalPanel panel = new VerticalPanel();
      private Loading load ;
+ 	 private formularioBDPuestos fa ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      
      /**
@@ -53,19 +54,21 @@ public class BDpuestos extends Composite  {
         load.invisible();
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
-		scrollPanel.setSize("100%", "716px");
+		scrollPanel.setSize("100%", "500px");
 		initWidget(scrollPanel);
 		
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-        panel.setSize("761px", "85px");
+        panel.setSize("100%", "177px");
 		mensaje = new Mensaje();
         
         flextable = new FlexTable();
         panel.add(flextable);
+        flextable.setSize("100%", "82px");
         
         grid = new Grid(1, 3);
         panel.add(grid);
+        grid.setWidth("733px");
         
         btnTest = new Button("Agregar");
         btnTest.addClickHandler(new ClickHandler() {
@@ -90,6 +93,7 @@ public class BDpuestos extends Composite  {
         
 
 		scrollPanel.setWidget(panel);
+        agregarFormulario_lleno();
         
 	}
     
@@ -101,7 +105,6 @@ public class BDpuestos extends Composite  {
     {
         load.visible();
     	flextable.clear();
-    	final formularioBDPuestos fa = new  formularioBDPuestos(a);
     	
     	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
@@ -117,6 +120,7 @@ public class BDpuestos extends Composite  {
 				{
 				    for ( AuxBDPuesto n2 : results) 
 				    {
+				    	fa = new  formularioBDPuestos(a);
 				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 				    	flextable.setWidget(flextable.getRowCount(), 0,fa );
 				    }

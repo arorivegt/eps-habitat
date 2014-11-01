@@ -19,17 +19,14 @@ body {
 }
 
 .loading {
-    text-align: center;
-    margin-left: -100px;
-    width: 100px; 
-    height: 100px; 
-    -moz-border-radius: 100px; 
-    -webkit-border-radius: 100px; 
+	padding: 8px 35px 8px 14px;
+	margin-bottom: 18px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+    filter:alpha(opacity=0);
 }
-.backloading{
-    opacity: 0.0;
-    filter: alpha(opacity=40); 
-}
+
 table {
 	width: 100%;
 }

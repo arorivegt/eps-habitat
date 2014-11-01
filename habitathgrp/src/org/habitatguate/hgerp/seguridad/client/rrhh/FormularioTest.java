@@ -37,7 +37,7 @@ public class FormularioTest extends Composite {
 		dateFecha = new DateBox();
 		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setEnabled(false);
-		dateFecha.setValue(new Date());
+		dateFecha.setValue(new Date(1407519035556L));
 		dateFecha.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 		dateFecha.getDatePicker().setYearArrowsVisible(true);
@@ -79,6 +79,8 @@ public class FormularioTest extends Composite {
 		lblNombreDelTest.setStyleName("label");
 		absolutePanel.add(lblNombreDelTest, 267, 10);
 		lblNombreDelTest.setSize("170px", "13px");
+		
+		
 		
 	}
 

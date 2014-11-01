@@ -234,7 +234,6 @@ public class BuscadorEmpleados extends Composite   {
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-		        load.visible();
 				grid.clearCell(1, 0);
 				EmpleadoLista  nuevo = new EmpleadoLista();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
@@ -307,8 +306,6 @@ public class BuscadorEmpleados extends Composite   {
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}
-
-		        load.invisible();
 			}
 		});
 						
@@ -359,8 +356,9 @@ public class BuscadorEmpleados extends Composite   {
 	 * @param id_empleado
 	 */
 	public void Empleado_registrado(final Long id_empleado){
-
+		System.out.println("empezo");
         load.visible();
+        
 		grid.clearCell(1, 0);
 		final Empleados e = new Empleados(0);
 		e.id_empleado = id_empleado;

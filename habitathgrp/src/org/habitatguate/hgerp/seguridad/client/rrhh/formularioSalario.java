@@ -61,7 +61,7 @@ public class formularioSalario extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("595px", "126px");
+		absolutePanel.setSize("795px", "126px");
 
 		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
@@ -137,22 +137,27 @@ public class formularioSalario extends Composite {
 		txtSalario.setStyleName("gwt-TextBox2");
 		txtSalario.setMaxLength(100);
 		absolutePanel.add(txtSalario, 10, 27);
-		txtSalario.setSize("134px", "34px");
+		txtSalario.setSize("184px", "34px");
 		
 		txtTipoSalario = new ListBox();
 		txtTipoSalario.addItem("Salario Base", "0");
 		txtTipoSalario.addItem("Decreto(78-89)", "1");
 		txtTipoSalario.addItem("Comisiones", "2");
-		txtTipoSalario.addItem("Otros pagos", "3");
+		txtTipoSalario.addItem("Bonificacion", "3");
+		txtTipoSalario.addItem("Bono 14", "4");
+		txtTipoSalario.addItem("Aguinaldo", "5");
+		txtTipoSalario.addItem("Vacaciones", "6");
+		txtTipoSalario.addItem("Indemnizacion", "7");
+		txtTipoSalario.addItem("Otros pagos", "8");
 		txtTipoSalario.setStylePrimaryName("gwt-TextBox2");
 		txtTipoSalario.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTipoSalario, 10, 90);
-		txtTipoSalario.setSize("134px", "34px");
+		txtTipoSalario.setSize("186px", "34px");
 		
 		txtDescipcion = new TextArea();
 		txtDescipcion.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDescipcion, 166, 27);
-		txtDescipcion.setSize("327px", "95px");
+		absolutePanel.add(txtDescipcion, 247, 20);
+		txtDescipcion.setSize("327px", "100px");
 		
 
 		fecha = new DateBox();
@@ -164,13 +169,13 @@ public class formularioSalario extends Composite {
 		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
 		fecha.getDatePicker().setVisibleYearCount(100);
 		fecha.setStyleName("gwt-PasswordTextBox");
-		fecha.setSize("228px", "41px");
-		absolutePanel.add(fecha, 516, 27);
+		fecha.setSize("113px", "41px");
+		absolutePanel.add(fecha, 607, 20);
 		
 		btnActualizar.setText("Guardar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 516, 90);
+		absolutePanel.add(btnActualizar, 740, 27);
 		btnActualizar.setSize("115px", "34px");
 		
 		btnEliminar = new Button("Send");
@@ -189,7 +194,7 @@ public class formularioSalario extends Composite {
 		btnEliminar.setText("Eliminar");
 		btnEliminar.setStylePrimaryName("sendButton");
 		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 550, 90);
+		absolutePanel.add(btnEliminar, 740, 90);
 		btnEliminar.setSize("115px", "34px");
 		
 		Label lblTitulodiploma = new Label("");
@@ -209,12 +214,12 @@ public class formularioSalario extends Composite {
 		
 		label = new Label("Descripcion");
 		label.setStyleName("label");
-		absolutePanel.add(label, 166, 8);
+		absolutePanel.add(label, 247, 3);
 		label.setSize("192px", "13px");
 		
 		lblAo = new Label("Año");
 		lblAo.setStyleName("label");
-		absolutePanel.add(lblAo, 518, 8);
+		absolutePanel.add(lblAo, 607, 3);
 		lblAo.setSize("139px", "13px");
 		
 		

@@ -20,6 +20,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Compartidas extends Composite  {
 
@@ -43,6 +45,8 @@ public class Compartidas extends Composite  {
                 load.Mostrar();
                 load.invisible();
             	compartida = this;
+                panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+                panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
                 initWidget(panel);
                 panel.setSize("761px", "85px");
                 flextable = new FlexTable();

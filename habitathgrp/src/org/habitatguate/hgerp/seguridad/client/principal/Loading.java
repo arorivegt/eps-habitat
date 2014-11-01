@@ -12,7 +12,7 @@ public class Loading extends Composite {
 	final DialogBox dialogo = new DialogBox();
 	public Loading() {
 		image = new Image("images/loading.gif");
-		image.setSize("100%", "100%");
+		image.setSize("150px", "150px");
 		initWidget(image);
 	}
 	

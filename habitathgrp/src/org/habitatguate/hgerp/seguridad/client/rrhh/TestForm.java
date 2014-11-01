@@ -7,7 +7,6 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,6 +18,7 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class TestForm extends Composite  {
@@ -38,12 +38,18 @@ public class TestForm extends Composite  {
          load.invisible();
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-	        initWidget(panel);
-	        panel.setSize("761px", "85px");
+
+			ScrollPanel scrollPanel = new ScrollPanel();
+			scrollPanel.setAlwaysShowScrollBars(false);
+			scrollPanel.setSize("100%", "500px");
+			initWidget(scrollPanel);
+	        panel.setSize("100%", "177px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
+	        flextable.setSize("100%", "82px");
 	        
 	        panel.add(grid);
+	        grid.setWidth("632px");
 	        grid.setWidget(0, 0, btnTest);
 	        btnTest.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
@@ -64,6 +70,7 @@ public class TestForm extends Composite  {
 	        });
 	        
 	        btnAgregar.setSize("227px", "34px");
+			scrollPanel.setWidget(panel);
 	        IniciarLlenadoBaseDatosTest();
 		}
 	    
@@ -89,10 +96,9 @@ public class TestForm extends Composite  {
 	    
 	    public void agregar_formularios(List<AuxBDTest> results){
 	        load.visible();
-	    	IniciarLlenadoBaseDatosTest();
+	        IniciarLlenadoBaseDatosTest();
 	    	flextable.clear();
 	    	if (!(results.size() == 0)) {
-	    		valor = results;
 			    for (AuxBDTest n : results) {
 			    	FormularioTest de = new FormularioTest(this, n);
 			    	flextable.setWidget(flextable.getRowCount(), 0,de);

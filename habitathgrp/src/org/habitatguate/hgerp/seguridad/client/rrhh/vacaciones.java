@@ -51,7 +51,6 @@ public class vacaciones extends Composite  {
 	        panel.setSize("761px", "85px");
 	        
 	        panel.add(grid);
-	        dateFecha1.setStyleName("gwt-TextBox2");
 	        
 	        dateFecha1 = new DateBox();
 	        grid.setWidget(0, 0, dateFecha1);
@@ -63,7 +62,7 @@ public class vacaciones extends Composite  {
 	        dateFecha1.getDatePicker().setYearArrowsVisible(true);
 	        dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
 	        dateFecha1.getDatePicker().setVisibleYearCount(100);
-	        dateFecha2.setStyleName("gwt-TextBox2");
+	        dateFecha1.setStyleName("gwt-TextBox2");
 	        
 	        dateFecha2 =  new DateBox();;
 	        grid.setWidget(0, 1, dateFecha2);
@@ -75,7 +74,7 @@ public class vacaciones extends Composite  {
 	        dateFecha2.getDatePicker().setYearAndMonthDropdownVisible(true);
 	        dateFecha2.getDatePicker().setVisibleYearCount(100);
 	        dateFecha2.setSize("227px", "34px");
-	        listTipoPermiso.setStyleName("gwt-TextBox2");
+	        dateFecha2.setStyleName("gwt-TextBox2");
 	        
 	        grid.setWidget(0, 2, listTipoPermiso);
 	        listTipoPermiso.setSize("229px", "36px");
@@ -87,6 +86,7 @@ public class vacaciones extends Composite  {
 			listTipoPermiso.addItem("Suspension sin goce salarial","5");
 			listTipoPermiso.addItem("Ausencia con goce salarial","6");
 			listTipoPermiso.addItem("Ausencia sin goce salarial","7");
+	        listTipoPermiso.setStyleName("gwt-TextBox2");
 	        btnBuscar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
 

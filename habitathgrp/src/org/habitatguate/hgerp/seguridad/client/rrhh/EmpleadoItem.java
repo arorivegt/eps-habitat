@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
@@ -13,11 +15,15 @@ public class EmpleadoItem extends Composite {
 	private EmpleadoLista a;
 	private Long id_empleado = 0L;
 	private BuscadorEmpleados BE;
+    private Loading load ;
 	
 	public EmpleadoItem(BuscadorEmpleados b, EmpleadoLista a,Long id_emplead, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido) {
 		this.id_empleado = id_emplead;
 		this.BE = b;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
 		this.setA(a);
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -79,7 +85,6 @@ public class EmpleadoItem extends Composite {
 		Button button_2 = new Button("Send");
 		button_2.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
 				BE.Empleado_registrado(id_empleado);
 			}
 		});

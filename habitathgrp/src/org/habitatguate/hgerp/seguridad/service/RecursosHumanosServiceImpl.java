@@ -1868,23 +1868,28 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			 
 				 
 				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, results.getId_empleado()); 
-				 
-				 int i = e.getTestCompartido().indexOf(idTest);
-				 if(i != -1){
-					 valor = "la Evaluacion ya habia sido compartido con\n"+idEmpleado;
-				 }else
-				 {
-					 SegTestCompartidos valores = new SegTestCompartidos();
-					 valores.setIdTest(idTest);
-					 valores.setId_empleado(idEmpleadoCompartido);
-					 valores.setEmpleado(e);
-					 e.getTestCompartido().add(valores);
-					 valor = "Test compartido Exitosamente con\n con "+idEmpleado;
-				 
+				 if(idEmpleadoCompartido.equals(results.getId_empleado())){
+
+					 valor = "No se puede compartir la evaluacion \ncon el mismo empleado: "+idEmpleado;
+					 return valor ;
+				 }else{
+					 int i = e.getTestCompartido().indexOf(idTest);
+					 if(i != -1){
+						 valor = "la Evaluacion ya habia sido compartido con\n"+idEmpleado;
+					 }else
+					 {
+						 SegTestCompartidos valores = new SegTestCompartidos();
+						 valores.setIdTest(idTest);
+						 valores.setId_empleado(idEmpleadoCompartido);
+						 valores.setEmpleado(e);
+						 e.getTestCompartido().add(valores);
+						 valor = "Test compartido Exitosamente con\n con "+idEmpleado;
+					 
+					 }
+						 Persistencia.close();  
+				
+				 return valor ;
 				 }
-					 Persistencia.close();  
-			
-			 return valor ;
 		}
 
 		@Override
@@ -1893,20 +1898,22 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			String valor = "Hubo un error \nal Quitar evaluacion compartida";
-			
-			 try { 
+			System.out.println(idEmpleado);
+			System.out.println(idTest);
+			System.out.println("...........................................");
+			try{
+				 Key k = new KeyFactory
+					        .Builder(SegEmpleado.class.getSimpleName(), idEmpleado)
+					        .addChild(SegTestCompartidos.class.getSimpleName(), idTest)
+					        .getKey();
+				 SegTestCompartidos s = Persistencia.getObjectById(SegTestCompartidos.class, k);
+				 Persistencia.deletePersistent(s);
+				 valor = "la Evaluacion se ha quitado de Evaluaciones compartidas";
+        	}catch(Exception e){
+        		
+        	}
 				 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
-				 int i = e.getTestCompartido().indexOf(idTest);
-				 if(i != -1)
-				 { 
-					 e.getTestCompartido().remove(i);
-					 valor = "la Evaluacion ha dejado \nde compartise con"+e.getEmail();
-				 }
-				 
-			}finally {  
-					 Persistencia.close();  
-			}
+		
 			 return valor ;
 		}
 
@@ -2027,7 +2034,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					
 					for(SegTestCompartidos seg: r.getTestCompartido()){
 						AuxTestCompartidos nuevo = new AuxTestCompartidos();
-						nuevo.setId(seg.getId_empleado().longValue());
+						nuevo.setId(seg.getId().getId());
 						nuevo.setId_empleado(seg.getId_empleado());
 						nuevo.setIdTest(seg.getIdTest());
 						res.add(nuevo);

@@ -9,8 +9,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -34,12 +34,15 @@ public class Compartidas extends Composite  {
      private final Grid grid = new Grid(1, 1);
      private Compartidas compartida;
      private Loading load ;
+     public Long id_EmpleadoPrincipal = 0L;
 
  	private Desempeno d = new Desempeno(0L);
 	private Evaluacion e = new Evaluacion(0L);
      public boolean bandera = true;
+     private Mensaje inicio;
      
             public Compartidas() {
+            	inicio=  new Mensaje();
 
             	load = new Loading();
                 load.Mostrar();
@@ -53,6 +56,7 @@ public class Compartidas extends Composite  {
                 panel.add(flextable);
     	        BDTest();
                 panel.add(grid);
+                grid.setWidth("233px");
                 grid.setWidget(0, 0, btnTest);
                 btnTest.addClickHandler(new ClickHandler() {
                         public void onClick(ClickEvent event) {
@@ -97,14 +101,14 @@ public class Compartidas extends Composite  {
                         	public void onFailure(Throwable caught) 
                         	{
                 		        load.invisible();
-                        		Window.alert("No hay resultados "+caught);
+                        		inicio.setMensaje("alert alert-error","No hay resultados ");
                         	}
 
                         	@Override
                         	public void onSuccess(AuxTest result)
                         	{
                 		        load.invisible();
-                            	formularioTest de = new formularioTest(result,compartida);
+                            	formularioTest de = new formularioTest(result,compartida,n.getId());
                             	de.id_Empleado = n.getId_empleado();
                                 flextable.setWidget(flextable.getRowCount(), 0,de);
                         	}
@@ -114,8 +118,33 @@ public class Compartidas extends Composite  {
 
 		        load.invisible();
             }
-            
          
+        public void DejarCompartir(Long idEmpleadoPrincipal, Long idTestCompartido, final formularioTest test){
+
+            load.visible();
+                    
+        	loginService.QuitarCompartido(idEmpleadoPrincipal, idTestCompartido,  new AsyncCallback<String>(){
+            	
+            	public void onFailure(Throwable caught) 
+            	{
+    		        load.invisible();
+            		inicio.setMensaje("alert alert-error","Error en el servicio");
+            	}
+
+            	@Override
+            	public void onSuccess(String result)
+            	{
+    		        load.invisible();
+            		inicio.setMensaje("alert alert-success",result);
+        	        BDTest();
+            		remover(test);
+            	}
+                    });
+	        load.invisible();
+        }
+        public void remover(formularioTest test){
+        	flextable.remove(test);
+        }
             
             private void BDTest(){
 
@@ -129,7 +158,6 @@ public class Compartidas extends Composite  {
 
     				@Override
     				public void onSuccess(List<AuxBDTest> result) {
-    					//System.out.println("___"+result.isEmpty());
     					if (!result.isEmpty()) {
     						for(AuxBDTest a: result )
     						{

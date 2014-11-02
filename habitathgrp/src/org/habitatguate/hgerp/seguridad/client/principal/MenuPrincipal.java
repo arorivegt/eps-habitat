@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
+import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
@@ -48,11 +49,11 @@ public class MenuPrincipal extends Composite {
 	    	   rrhh2();
 	       }
 	     };
-//	     Command cmdrrhh3 = new Command() {
-//	       public void execute() {
-//	    	   //rrhh1();
-//	       }
-//	     };
+	     Command cmdrrhh3 = new Command() {
+	       public void execute() {
+	    	   rrhh3();
+	       }
+	     };
 	     Command cmdrrhh4 = new Command() {
 	       public void execute() {
 	    	   rrhh4();
@@ -103,6 +104,18 @@ public class MenuPrincipal extends Composite {
 	    	   fina5();
 	       }
 	     };
+	     
+	     //informes Menu
+	    MenuBar MenuInforme = new MenuBar(true);
+	    MenuInforme.setAnimationEnabled(true);
+	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
+	    //MenuInforme.addSeparator();
+	   // MenuInforme.addItem("Informe Bancos", cmdrrhh6);
+	    MenuInforme.addSeparator();
+	    MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
+	    MenuInforme.addSeparator();
+	    MenuInforme.addItem("Informe de prestaciones", cmdrrhh3);
+	    
 	     //recursos humano menu
 	    MenuBar MenuRecursosHumanos = new MenuBar(true);
 	    MenuRecursosHumanos.setAnimationEnabled(true);
@@ -110,12 +123,11 @@ public class MenuPrincipal extends Composite {
 	    MenuRecursosHumanos.addSeparator();
 	    MenuRecursosHumanos.addItem("Base de Datos de Puestos", cmdrrhh2);
 	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Crear Formulario de Evaluacion", cmdrrhh6);
+	    MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
 	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
-	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Informe de Empleados", cmdrrhh5);
-	    MenuRecursosHumanos.addSeparator();
+	    MenuRecursosHumanos.addItem("Informes", MenuInforme);
+	    
+	    
 	    
 	     //finanzas menu
 	    MenuBar MenuEmpleados = new MenuBar(true);
@@ -195,10 +207,13 @@ public class MenuPrincipal extends Composite {
 		
 	}
 	
-	//	@UiHandler("rrhh3")
-//	void rrhh3() {
-//		Window.alert("No disponible en este momento");
-//	}
+	//@UiHandler("rrhh3")
+	void rrhh3() {
+		CrearPrestacionesLaborales nuevo = new CrearPrestacionesLaborales();
+ 		this.nuevo.getGrid().setSize("100%", "100%");
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+	}
 
 	//@UiHandler("rrhh4")
 	void rrhh4() {
@@ -231,6 +246,7 @@ public class MenuPrincipal extends Composite {
 //	@UiHandler("empleado3")
 	void empleado3() {
 		final Compartidas comp = new Compartidas();
+		comp.id_EmpleadoPrincipal = this.nuevo.getId_empleado();
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, comp);
         loginService.getEvaluacionesCompartidas(this.nuevo.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){

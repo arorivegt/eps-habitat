@@ -119,15 +119,15 @@ public class formularioSalario extends Composite {
 		txtSalario = new TextBox();
 		txtSalario.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				if(txtSalario.getText().equals("")) {txtSalario.setText("0");}
-				else if(txtSalario.getText().equals(null)) {txtSalario.setText("0");}
+				if(txtSalario.getText().equals("")) {txtSalario.setText("0.0");}
+				else if(txtSalario.getText().equals(null)) {txtSalario.setText("0.0");}
 				else{
 					try{
 						Float.parseFloat(txtSalario.getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nSalario no valido");
-						txtSalario.setText("0");
+						txtSalario.setText("0.0");
 					}
 				}
 			}
@@ -217,7 +217,7 @@ public class formularioSalario extends Composite {
 		absolutePanel.add(label, 247, 3);
 		label.setSize("192px", "13px");
 		
-		lblAo = new Label("Año");
+		lblAo = new Label("Fecha");
 		lblAo.setStyleName("label");
 		absolutePanel.add(lblAo, 607, 3);
 		lblAo.setSize("139px", "13px");

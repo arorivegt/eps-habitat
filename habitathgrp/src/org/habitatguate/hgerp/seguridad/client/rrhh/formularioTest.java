@@ -23,10 +23,14 @@ public class formularioTest extends Composite {
     private TextBox txtEvaluador ;
     private DoubleBox txtPunteo;
     public Long id_Empleado = 0L;
+    public Long id_TestCompartido = 0L;
     private Compartidas compartido;
     private Loading load ;
+    private formularioTest test;
     
-	public formularioTest(final AuxTest prueba, Compartidas comp) {
+	public formularioTest(final AuxTest prueba, Compartidas comp, Long idCompartido) {
+		test = this;
+		id_TestCompartido = idCompartido;
 		compartido = comp;
     	load = new Loading();
         load.Mostrar();
@@ -35,9 +39,10 @@ public class formularioTest extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("765px", "30px");
+		absolutePanel.setSize("914px", "30px");
 		
 		dateFecha = new DateBox();
+		dateFecha.setEnabled(false);
 		dateFecha.getTextBox().setReadOnly(true);
 		dateFecha.setValue(new Date());
 		dateFecha.setFormat(new DateBox.DefaultFormat 
@@ -100,6 +105,18 @@ public class formularioTest extends Composite {
 		label_1.setStyleName("label");
 		absolutePanel.add(label_1, 483, 10);
 		label_1.setSize("147px", "13px");
+		
+		Button btnQuitar = new Button("Send");
+		btnQuitar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				compartido.DejarCompartir(compartido.id_EmpleadoPrincipal,id_TestCompartido,test);
+			}
+		});
+		btnQuitar.setText("Dejar de seguir");
+		btnQuitar.setStylePrimaryName("gwt-TextBox2");
+		btnQuitar.setStyleName("sendButton");
+		absolutePanel.add(btnQuitar, 751, 31);
+		btnQuitar.setSize("206px", "34px");
 		
 	}
 

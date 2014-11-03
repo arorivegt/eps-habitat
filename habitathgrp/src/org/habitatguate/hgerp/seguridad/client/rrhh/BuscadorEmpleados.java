@@ -21,6 +21,9 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -28,7 +31,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 
 public class BuscadorEmpleados extends Composite   {
 
@@ -36,12 +40,8 @@ public class BuscadorEmpleados extends Composite   {
     private  Grid grid;
     private ListBox listBox;
     private Label lbDato1;
-    private Label lbDato2;
-    private Label lbDato3;
     private Image Busqueda;
-    private TextBox txtDato1;
-    private TextBox txtDato2;
-    private TextBox txtDato3;
+    private SuggestBox txtDato1;
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
     private BuscadorEmpleados evaluacionesBuscador;
@@ -67,24 +67,22 @@ public class BuscadorEmpleados extends Composite   {
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		txtDato1 = new TextBox();
+		txtDato1 = new SuggestBox(createCountriesOracle());
+		//modificar para que sea un solo enter
+		txtDato1.addKeyDownHandler(new KeyDownHandler() {
+		    @Override
+		    public void onKeyDown(KeyDownEvent event) {
+		     if(event.getNativeKeyCode() == KeyCodes.KEY_ENTER) 
+		     {
+					busqueda();
+		     }
+		    }
+		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		txtDato1.setMaxLength(100);
+		//txtDato1.setMaxLength(100);
 		absolutePanel.add(txtDato1, 205, 19);
-		txtDato1.setSize("177px", "34px");
-		
-		txtDato2 = new TextBox();
-		txtDato2.setStyleName("gwt-TextBox2");
-		txtDato2.setMaxLength(100);
-		absolutePanel.add(txtDato2, 390, 19);
-		txtDato2.setSize("177px", "34px");
-						
-		txtDato3 = new TextBox();
-		txtDato3.setStyleName("gwt-TextBox2");
-		txtDato3.setMaxLength(100);
-		absolutePanel.add(txtDato3, 575, 19);
-		txtDato3.setSize("177px", "34px");
+		txtDato1.setSize("250px", "34px");
 		
 		listEstado = new ListBox();
 		listEstado.addItem("empleado activo","0");
@@ -97,6 +95,10 @@ public class BuscadorEmpleados extends Composite   {
 		absolutePanel.add(listEstado, 205, 16);
 		listEstado.setSize("179px", "39px");
 		
+		lbDato1 = new Label("Primer Nombre");
+        lbDato1.setStyleName("label");
+        lbDato1.setSize("368px", "19px");
+        absolutePanel.add(lbDato1, 205, 0);
 		
 		
 		listBox = new ListBox();
@@ -113,73 +115,49 @@ public class BuscadorEmpleados extends Composite   {
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
 					lbDato1.setText("Ingrese el DPI");
-					lbDato2.setText("Ingrese el DPI");
-					lbDato3.setText("Ingrese el DPI");
-
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
-					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 390, 16);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
-					lbDato1.setText("Primer Nombre");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
-
+					lbDato1.setText("Escriba el nombre de la persona a buscar");
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(true);
-					lbDato3.setVisible(true);
-					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(true);
-					txtDato3.setVisible(true);
+					txtDato1.showSuggestionList();
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 760, 19);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
 					lbDato1.setText("Primer Nombre");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
-
 					lbDato1.setVisible(false);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
-					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
 					absolutePanel.add(Busqueda, 205, 16);
 
 					grid.clearCell(1, 0);
 					EmpleadoLista  nuevo = new EmpleadoLista();
-					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "","", 
+							"",txtDato1.getText(),txtDato1.getText()
 							,"");
 					grid.setWidget(1, 0,nuevo);
+			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					lbDato1.setText("Ingrese No. Pasaporte");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
-
+					txtDato1.setValue("");
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 390, 16);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
 					listEstado.clear();
+					txtDato1.setValue("");
 					listEstado.addItem("empleado activo","0");
 					listEstado.addItem("empleado inactivo","1");
 					listEstado.addItem("posible empleado","2");
@@ -187,18 +165,11 @@ public class BuscadorEmpleados extends Composite   {
 					listEstado.addItem("interino","4");
 					
 					lbDato1.setText("Seleccione el Estado del empleado");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
-
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
-					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(true);
-					absolutePanel.add(Busqueda, 390, 19);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 				{
 
@@ -209,18 +180,13 @@ public class BuscadorEmpleados extends Composite   {
 				    	listEstado.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 				    }
 					lbDato1.setText("Seleccione el puesto");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(true);
-					absolutePanel.add(Busqueda, 390, 19);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}
 		        load.invisible();
 			}
@@ -233,99 +199,13 @@ public class BuscadorEmpleados extends Composite   {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
-				grid.clearCell(1, 0);
-				EmpleadoLista  nuevo = new EmpleadoLista();
-				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-				{
-					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,"");
-					grid.setWidget(1, 0,nuevo);
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
-				{
-
-					if(!txtDato1.getText().equals("") || !txtDato2.getText().equals("") 
-							|| !txtDato3.getText().equals("")){
-						if(txtDato1.getText().equals("")){
-							txtDato1.setText("    ");
-						}if(txtDato2.getText().equals("")){
-							txtDato2.setText("    ");
-						}if(txtDato3.getText().equals("")){
-							txtDato3.setText("    ");
-						}
-						nuevo.agregarFormulario('1',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
-					}
-				}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
-				{
-					if(!txtDato1.getText().equals("") ){
-						nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
-				{
-
-					if(!txtDato1.getText().equals("") ){
-						nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
-				{
-					nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
-				{
-					nuevo.agregarFormulario('6',evaluacionesBuscador,txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
-							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
-				}
+				busqueda();
 			}
 		});
 						
-		absolutePanel.add(Busqueda, 760, 19);
+		absolutePanel.add(Busqueda, 420, 19);
 		Busqueda.setSize("103px", "55px");
 		
-		lbDato1 = new Label("Primer Nombre");
-		lbDato1.setStyleName("label");
-		lbDato1.setSize("368px", "19px");
-		absolutePanel.add(lbDato1, 205, 0);
-		
-		lbDato2 = new Label("Primer Apellido");
-		lbDato2.setStyleName("label");
-		lbDato2.setSize("157px", "13px");
-		absolutePanel.add(lbDato2, 390, 0);
-		
-		lbDato3 = new Label("Segundo Apellido");
-		lbDato3.setStyleName("label");
-		lbDato3.setSize("157px", "13px");
-		absolutePanel.add(lbDato3, 575, 0);
 		
 		Label lblBusquedaPor = new Label("Busqueda por: ");
 		lblBusquedaPor.setStyleName("label");
@@ -348,6 +228,88 @@ public class BuscadorEmpleados extends Composite   {
 			});
 		initWidget(grid);
 		
+	}
+	
+	public void busqueda(){
+
+		grid.clearCell(1, 0);
+		EmpleadoLista  nuevo = new EmpleadoLista();
+		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+		{
+			nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,"");
+			grid.setWidget(1, 0,nuevo);
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
+		{
+			String nombreArray[] = txtDato1.getText().split(" ");
+			String primerNombre = nombreArray[0];
+			String segundoApellido = nombreArray[1];
+			String primerApellido =  nombreArray[2];
+
+			try{
+			 primerNombre = nombreArray[0];
+			 primerApellido =  nombreArray[1];
+			 segundoApellido = nombreArray[2];
+			}catch(Exception e){
+				 primerNombre = "";
+				 segundoApellido = "";
+				 primerApellido =  "";
+			}
+			System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
+			if(!txtDato1.getText().equals("")){
+				nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, "",primerApellido, 
+						segundoApellido,txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba datos a buscar");
+			}
+		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
+		{
+			if(!txtDato1.getText().equals("") ){
+				nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "","", 
+						"",txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
+		{
+
+			if(!txtDato1.getText().equals("") ){
+				nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "","", 
+						"",txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
+		{
+			nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
+		{
+			nuevo.agregarFormulario('6',evaluacionesBuscador,txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}
 	}
 	/**
 	 * agrega un empleado con los datos extraidos del datastore
@@ -447,6 +409,28 @@ public class BuscadorEmpleados extends Composite   {
 
         });
 	}
-
+	MultiWordSuggestOracle createCountriesOracle()
+	{
+	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+	    
+	    loginService.Buscar_Empleado('2', "", "", 
+	    		"", "","", "","",new AsyncCallback<List<AuxEmpleado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		        load.invisible();
+		    }
+		
+			@Override
+		    public void onSuccess( List<AuxEmpleado> result)
+		    {
+				for(AuxEmpleado p : result) 
+				{
+					oracle.add(p.getPrimer_nombre()+" "+p.getPrimer_apellido()+" "+p.getSegundo_apellido());
+				}
+		    }
+		
+		});
+	    return oracle;
+    }
 	
 }

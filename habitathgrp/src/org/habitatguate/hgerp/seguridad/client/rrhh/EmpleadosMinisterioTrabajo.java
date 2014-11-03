@@ -11,6 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialAcademico;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 
 import com.google.gwt.core.client.GWT;
@@ -37,6 +38,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
     private AbsolutePanel absolutePanel_1;
     private  ListBox listEstado ;
     private Loading load ;
+    private ListBox listAnnio;
+    private Label lblAoDelReporte;
 	public EmpleadosMinisterioTrabajo() {
 		
 		grid = new Grid(2, 1);
@@ -75,13 +78,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				}
 			});
 			
-					absolutePanel.add(image, 438, 10);
+					absolutePanel.add(image, 604, 10);
 					image.setSize("103px", "55px");
 		
 		Label lblBusquedaPor = new Label("Crear Reporte Empleados:");
 		lblBusquedaPor.setStyleName("label");
 		absolutePanel.add(lblBusquedaPor, 170, 10);
-		lblBusquedaPor.setSize("262px", "13px");
+		lblBusquedaPor.setSize("227px", "13px");
 		
 		scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
@@ -96,6 +99,68 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		lblEstadoEmpleado.setStyleName("label");
 		absolutePanel.add(lblEstadoEmpleado, 10, 29);
 		lblEstadoEmpleado.setSize("154px", "13px");
+		
+		listAnnio = new ListBox();
+		listAnnio.addItem("2000");
+		listAnnio.addItem("2001");
+		listAnnio.addItem("2002");
+		listAnnio.addItem("2003");
+		listAnnio.addItem("2004");
+		listAnnio.addItem("2005");
+		listAnnio.addItem("2006");
+		listAnnio.addItem("2007");
+		listAnnio.addItem("2008");
+		listAnnio.addItem("2009");
+		listAnnio.addItem("2010");
+		listAnnio.addItem("2011");
+		listAnnio.addItem("2012");
+		listAnnio.addItem("2013");
+		listAnnio.addItem("2014");
+		listAnnio.addItem("2015");
+		listAnnio.addItem("2016");
+		listAnnio.addItem("2017");
+		listAnnio.addItem("2018");
+		listAnnio.addItem("2019");
+		listAnnio.addItem("2020");
+		listAnnio.addItem("2021");
+		listAnnio.addItem("2022");
+		listAnnio.addItem("2023");
+		listAnnio.addItem("2024");
+		listAnnio.addItem("2025");
+		listAnnio.addItem("2026");
+		listAnnio.addItem("2027");
+		listAnnio.addItem("2028");
+		listAnnio.addItem("2029");
+		listAnnio.addItem("2030");
+		listAnnio.addItem("2031");
+		listAnnio.addItem("2032");
+		listAnnio.addItem("2033");
+		listAnnio.addItem("2034");
+		listAnnio.addItem("2035");
+		listAnnio.addItem("2036");
+		listAnnio.addItem("2037");
+		listAnnio.addItem("2038");
+		listAnnio.addItem("2039");
+		listAnnio.addItem("2040");
+		listAnnio.addItem("2050");
+		listAnnio.addItem("2051");
+		listAnnio.addItem("2052");
+		listAnnio.addItem("2053");
+		listAnnio.addItem("2054");
+		listAnnio.addItem("2055");
+		listAnnio.addItem("2056");
+		listAnnio.addItem("2057");
+		listAnnio.addItem("2058");
+		listAnnio.addItem("2059");
+		listAnnio.addItem("2060");
+		listAnnio.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listAnnio, 403, 29);
+		listAnnio.setSize("179px", "39px");
+		
+		lblAoDelReporte = new Label("Año del Reporte");
+		lblAoDelReporte.setStyleName("label");
+		absolutePanel.add(lblAoDelReporte, 403, 10);
+		lblAoDelReporte.setSize("173px", "13px");
 		
 	}
 	
@@ -411,12 +476,21 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setNivelAcademico(""+nivelAcademico);
 					empleado.setProfesion(profesion);
 					empleado.setTipoContrato("Indefinido");
-					
+
+			 		DateTimeFormat anio = DateTimeFormat.getFormat("yyyy");
+			 		DateTimeFormat mes 	= DateTimeFormat.getFormat("MM");
+			 		DateTimeFormat diaa 	= DateTimeFormat.getFormat("dd");
+			 		String formatAnio 	= "";
+			 		String formatMes 	= "";
+			 		String formatDia 	= "";
+					for (AuxSalario s : p.getSalario()) {
+		 				formatAnio = anio.format(new Date(s.getFecha()));
+		 				formatMes  = mes.format(new Date(s.getFecha()));
+					}
 					/*
 					private String DiasTrabajadosAnnio;	
 					private String SalarioMensualNominal;
 					private String Decreto7889 ;
-					private String Aguinaldo;
 					private String Bono14;
 					private String Comisiones;	
 					private String PermisoTrabajo;

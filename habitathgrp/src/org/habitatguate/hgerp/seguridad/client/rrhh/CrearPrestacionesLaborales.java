@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 public class CrearPrestacionesLaborales extends Composite   {
 
@@ -48,14 +49,19 @@ public class CrearPrestacionesLaborales extends Composite   {
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
     private prestaciones  nuevo;
-	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-     private Loading load ;
+	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+    private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private Label lblElijaElTipo;
     private ListBox listTipoPrestaciones;
-    private Label lblElijaLasConfiguraciones;
     private Label lblElijaElAo;
     private ListBox listAnnio;
+    private DateBox fecha;
+    private Label label;
+    private TextBox txtDescripcion;
+    private Label lblDescripcionPequea;
+    private TextBox Cantidad;
+    private Label lblCantidad;
     
     /**
      * constructor
@@ -67,7 +73,7 @@ public class CrearPrestacionesLaborales extends Composite   {
         load.invisible();
 		mensaje = new Mensaje();
 		grid = new Grid(2, 1);
-		grid.setSize("100%", "100%");
+		grid.setSize("1117px", "100%");
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
@@ -86,7 +92,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 
-		        load.visible();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
 					lbDato1.setText("Ingrese el DPI");
@@ -199,7 +204,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 390, 19);
 				}
-		        load.invisible();
 			}
 		});
 		
@@ -317,6 +321,9 @@ public class CrearPrestacionesLaborales extends Composite   {
 		});
 		
 		listTipoPrestaciones = new ListBox();
+		//listTipoPrestaciones.addItem("Decreto(78-89)", "1");
+		listTipoPrestaciones.addItem("Comisiones", "2");
+		listTipoPrestaciones.addItem("Bonificacion", "3");
 		listTipoPrestaciones.addItem("Bono 14", "4");
 		listTipoPrestaciones.addItem("Aguinaldo", "5");
 		listTipoPrestaciones.addItem("Vacaciones", "6");
@@ -325,7 +332,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");
 						
-		absolutePanel.add(Busqueda, 760, 19);
+		absolutePanel.add(Busqueda, 984, 19);
 		Busqueda.setSize("103px", "55px");
 		
 		lbDato1 = new Label("Primer Nombre");
@@ -352,11 +359,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 		lblElijaElTipo.setStyleName("label");
 		absolutePanel.add(lblElijaElTipo, 10, 61);
 		lblElijaElTipo.setSize("179px", "13px");
-		
-		lblElijaLasConfiguraciones = new Label("Elija las configuraciones que se le presentan, para realizar calculo de prestaciones, segun empleados elegidos, y el tipo de prestaciones a calcular");
-		lblElijaLasConfiguraciones.setStyleName("label");
-		absolutePanel.add(lblElijaLasConfiguraciones, 390, 79);
-		lblElijaLasConfiguraciones.setSize("368px", "13px");
 		
 		lblElijaElAo = new Label("Elija el año para calcular prestaciones");
 		lblElijaElAo.setStyleName("label");
@@ -405,9 +407,75 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listAnnio.addItem("2038");
 		listAnnio.addItem("2039");
 		listAnnio.addItem("2040");
+		listAnnio.addItem("2050");
+		listAnnio.addItem("2051");
+		listAnnio.addItem("2052");
+		listAnnio.addItem("2053");
+		listAnnio.addItem("2054");
+		listAnnio.addItem("2055");
+		listAnnio.addItem("2056");
+		listAnnio.addItem("2057");
+		listAnnio.addItem("2058");
+		listAnnio.addItem("2059");
+		listAnnio.addItem("2060");
 		listAnnio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listAnnio, 205, 94);
 		listAnnio.setSize("179px", "39px");
+		
+		fecha = new DateBox();
+		fecha.getTextBox().setReadOnly(true);
+		fecha.setValue(new Date());
+		fecha.setFormat(new DateBox.DefaultFormat 
+	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		fecha.getDatePicker().setYearArrowsVisible(true);
+		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		fecha.getDatePicker().setVisibleYearCount(100);
+		fecha.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(fecha, 390, 90);
+		fecha.setSize("177px", "41px");
+		
+		label = new Label("Fecha");
+		label.setStyleName("label");
+		absolutePanel.add(label, 390, 73);
+		label.setSize("139px", "13px");
+		
+		txtDescripcion = new TextBox();
+		txtDescripcion.setStyleName("gwt-TextBox2");
+		txtDescripcion.setMaxLength(100);
+		absolutePanel.add(txtDescripcion, 575, 92);
+		txtDescripcion.setSize("177px", "39px");
+		
+		lblDescripcionPequea = new Label("Descripcion Pequeña");
+		lblDescripcionPequea.setStyleName("label");
+		absolutePanel.add(lblDescripcionPequea, 575, 73);
+		lblDescripcionPequea.setSize("157px", "13px");
+		
+		Cantidad = new TextBox();
+		Cantidad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(Cantidad.getText().equals("")) {Cantidad.setText("0.0");}
+				else if(Cantidad.getText().equals(null)) {Cantidad.setText("0.0");}
+				else{
+					try{
+						Float.parseFloat(Cantidad.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nCantidad no valida");
+						Cantidad.setText("0.0");
+					}
+				}
+			}
+		});
+		Cantidad.setText("0.0");
+		Cantidad.setStyleName("gwt-TextBox2");
+		Cantidad.setMaxLength(100);
+		absolutePanel.add(Cantidad, 773, 92);
+		Cantidad.setSize("145px", "39px");
+		
+		lblCantidad = new Label("Cantidad");
+		lblCantidad.setStyleName("label");
+		absolutePanel.add(lblCantidad, 773, 73);
+		lblCantidad.setSize("157px", "13px");
 		
 	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
 	    		public void onFailure(Throwable caught) 
@@ -470,6 +538,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		String formatAnio 	= "";
 	 		String formatMes 	= "";
 	 		//String formatDia 	= "";
+	 		nuevo.limpiar();
 	 		
 	 		for(AuxEmpleado e:result)
 	 		{
@@ -628,18 +697,23 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			mayo 	= mayo + mayoBono;
 	 			junio 	= junio + junioBono;
 	 			salarioBaseCalculo = (enero + febrero + marzo + abril + mayo + junio) / 6;
-	 			if(tipo.equals("4"))
+
+	 			if(tipo.equals("2") || tipo.equals("3")){
+	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
+	 						,""+Cantidad.getText(), "1", "1",fecha.getValue());
+	 			}if(tipo.equals("4")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Bono 14 del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365");
-	 			if(tipo.equals("5"))
+	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 			}if(tipo.equals("5")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Aguinaldo del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365");
-	 			if(tipo.equals("6"))
+	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 			}if(tipo.equals("6")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Vacaciones del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365");
-	 			if(tipo.equals("7"))
+	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 			}if(tipo.equals("7")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Indemnizacion del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365");
+	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 			}
 	 			enero = 0;
 	 			febrero = 0;
 	 			marzo = 0;

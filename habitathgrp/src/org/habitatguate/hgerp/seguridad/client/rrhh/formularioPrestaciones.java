@@ -2,18 +2,21 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
 
-import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.core.client.GWT;
 
 
 public class formularioPrestaciones  extends Composite  {
@@ -26,16 +29,17 @@ public class formularioPrestaciones  extends Composite  {
 	private TextBox txtPromedioSalario;
 	private AbsolutePanel absolutePanel ;
     private TextBox txtDiasAnnio;
-    private Loading load ;
     private DateBox dateFecha;
-    private SimpleCheckBox checkOk;
+    public SimpleCheckBox checkOk;
     private TextBox txtTotal;
     private TextBox txtDiasTrabajados;
+    private Long id_salario = 0L;
+    private boolean bandera = true;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    
+    
 	public formularioPrestaciones() {
 		mensaje = new Mensaje();
-    	load = new Loading();
-        load.Mostrar();
-        load.invisible();
         
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -210,13 +214,14 @@ public class formularioPrestaciones  extends Composite  {
 			 String nombre,
 			 String promedioSalario,
 			 String txtDiasTrabajados,
-			 String txtDiasAnnio){
+			 String txtDiasAnnio,
+			 Date fecha){
 		float total = 0;
 		this.txtPromedioSalario.setText(promedioSalario);
 		this.txtDiasAnnio.setText(txtDiasAnnio);
 		this.txtDiasTrabajados.setText(txtDiasTrabajados);
 		this.txtEmpleado.setText(nombre);
-		
+		this.dateFecha.setValue(fecha);
 		this.idEmpleado = idEmpleado;
 		this.codigoSalario = codigoSalario;
 		this.descripcion = descripcion;
@@ -225,5 +230,38 @@ public class formularioPrestaciones  extends Composite  {
 		this.txtTotal.setText(""+total);
 		
 	}
+	
+	public void insertar_actualizar(){
+		
+		if(bandera) {
+			loginService.Insertar_Salario(this.idEmpleado, this.dateFecha.getValue(),
+					Float.parseFloat(this.txtTotal.getText()), this.codigoSalario, this.descripcion,new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                }
+
+				@Override
+                public void onSuccess(Long result)
+                {
+					id_salario = result;
+					bandera = false;
+                }
+				});
+		}else{
+			loginService.Actualizar_Salario(this.idEmpleado,id_salario,  this.dateFecha.getValue(),
+					Float.parseFloat(this.txtTotal.getText()), this.codigoSalario, this.descripcion,new AsyncCallback<Long>(){
+                public void onFailure(Throwable caught) 
+                {
+                }
+
+				@Override
+                public void onSuccess(Long result)
+                {
+					bandera = false;
+                }
+				});
+		}
+	}
+	
 	
 }

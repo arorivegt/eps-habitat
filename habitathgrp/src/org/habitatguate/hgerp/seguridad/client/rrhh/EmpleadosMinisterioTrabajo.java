@@ -483,19 +483,51 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			 		String formatAnio 	= "";
 			 		String formatMes 	= "";
 			 		String formatDia 	= "";
+			 		
+			 		float bono14 = 0;
+			 		float aguinaldo = 0;
+			 		float comisiones = 0;
+			 		float indemnizacion = 0;
+			 		float otrosPagos = 0;
+			 		float salarioMensualNominal = 0;
+			 		float decreto7889 = 0;
+			 		
 					for (AuxSalario s : p.getSalario()) {
 		 				formatAnio = anio.format(new Date(s.getFecha()));
 		 				formatMes  = mes.format(new Date(s.getFecha()));
+		 				
+		 				if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("4"))
+		 				{
+		 					bono14 = s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("5"))
+		 				{
+		 					aguinaldo = s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("2"))
+		 				{
+		 					comisiones += s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("1"))
+		 				{
+		 					decreto7889 = s.getSalario();
+		 				}
+		 				
+		 				//falta salario mensual nominal y otros pagos que incluye estos dos?
+		 				
 					}
+					empleado.setBono14(""+bono14);
+					empleado.setAguinaldo(""+aguinaldo);
+					empleado.setIndemnizacion(""+indemnizacion);
+					empleado.setComisiones(""+comisiones);
+					empleado.setDecreto7889(""+decreto7889);
+					empleado.setOtrosPagos(""+otrosPagos);
+					empleado.setSalarioMensualNominal(""+salarioMensualNominal);
+					
 					/*
 					private String DiasTrabajadosAnnio;	
-					private String SalarioMensualNominal;
-					private String Decreto7889 ;
-					private String Bono14;
-					private String Comisiones;	
 					private String PermisoTrabajo;
-					private String Indemnizacion;
-					private String OtrosPagos;
 					*/
 					
 					DATOS.add(empleado);

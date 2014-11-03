@@ -1064,9 +1064,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
 				List<SegEmpleado> results = new ArrayList<SegEmpleado>() ;
-				List<SegEmpleado> result2 = new ArrayList<SegEmpleado>() ;
-				List<SegEmpleado> result3 = new ArrayList<SegEmpleado>() ;
-				List<SegEmpleado> result4 = new ArrayList<SegEmpleado>() ;
 				List<SegEmpleado> aux = null ;
 				if(primer_nombre.equals("")){
 					primer_nombre = primer_nombre + "@";
@@ -1076,35 +1073,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					segundo_apellido = segundo_apellido + "@";
 				}
 				if(tipo=='1'){
-					Query q = pm.newQuery(SegEmpleado.class,"primer_nombre == '"+primer_nombre.toUpperCase()+"'");
-					result2 = (List<SegEmpleado>) q.execute();
-					q = pm.newQuery(SegEmpleado.class,"primer_apellido == '"+primer_apellido.toUpperCase()+"'");
-					result3 = (List<SegEmpleado>) q.execute();
-					q = pm.newQuery(SegEmpleado.class,"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
-					result4 = (List<SegEmpleado>) q.execute();
-					if(!result2.isEmpty())
-						results.addAll(result2);
-					if(!result3.isEmpty()){
-						int i = 0;
-						for(SegEmpleado r: result3)
-						{
-							i = results.indexOf(r);
-							if(i!=-1)
-								results.remove(i);
-						}
-						results.addAll(result3);
-					}
-					if(!result4.isEmpty()){
-						int i = 0;
-						for(SegEmpleado r: result4)
-						{
-							i = results.indexOf(r);
-							if(i!=-1)
-								results.remove(i);
-						}
-						results.addAll(result4);
-					}
-					
+					System.out.println("primer_nombre == '"+primer_nombre.toUpperCase()+
+							"' && "+"primer_apellido == '"+primer_apellido.toUpperCase()+
+							"' && "+"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
+					Query q = pm.newQuery(SegEmpleado.class,"primer_nombre == '"+primer_nombre.toUpperCase()+
+							"' && "+"primer_apellido == '"+primer_apellido.toUpperCase()+
+							"' && "+"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
+					results = (List<SegEmpleado>) q.execute();
 				}else if(tipo =='2'){
 					Query q = pm.newQuery(SegEmpleado.class);
 					results = (List<SegEmpleado>) q.execute();

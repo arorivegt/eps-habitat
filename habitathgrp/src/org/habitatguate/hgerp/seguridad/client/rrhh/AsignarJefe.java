@@ -63,6 +63,7 @@ public class AsignarJefe extends Composite{
 	
 							public void onSuccess(Long result)
 				            {
+					            load.invisible();
 								if(result == 0L){
 
 					            	mensaje.setMensaje("alert alert-error", 

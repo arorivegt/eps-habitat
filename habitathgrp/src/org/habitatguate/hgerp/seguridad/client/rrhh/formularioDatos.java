@@ -544,23 +544,7 @@ public class formularioDatos extends Composite {
 		noCuenta.setMaxLength(30);
 		noCuenta.setSize("227px", "34px");
 		noCuenta.setStyleName("gwt-PasswordTextBox");
-		noCuenta.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
-				else if(txtDPI.getText().equals(null)) {txtDPI.setText("0");}
-				else{
-					try{
-						Integer.parseInt(noCuenta.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNo Cuenta no valido");
-                    	noCuenta.setText("0");
-					}
-				}
-			}
-		});
 		absolutePanel.add(noCuenta, 36, 545);
-		
 
 		nombreBanco = new ListBox();
 		nombreBanco.addItem("G&T Continental","0");
@@ -578,21 +562,10 @@ public class formularioDatos extends Composite {
 		
 		
 		txtDPI = new IntegerBox();
-		txtDPI.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtDPI.getText().equals("")) {txtDPI.setText("0");}
-				else if(txtDPI.getText().equals(null)) {txtDPI.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtDPI.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nDPI no valido");
-						txtDPI.setText("0");
-					}
-				}
-			}
-		});
+		txtDPI.setText("0");
+		txtDPI.setSize("227px", "34px");
+		txtDPI.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtDPI, 317, 687);
 		
 		listTienePasaporte = new ListBox();
 		listTienePasaporte.addChangeHandler(new ChangeHandler() 
@@ -668,10 +641,6 @@ public class formularioDatos extends Composite {
 					}
 				});
 		absolutePanel.add(dateAnnioNacimiento, 36, 680);
-		txtDPI.setText("0");
-		txtDPI.setSize("227px", "34px");
-		txtDPI.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtDPI, 317, 687);
 		
 		listEtnia = new ListBox();
 		listEtnia.addItem("Xinca","1");

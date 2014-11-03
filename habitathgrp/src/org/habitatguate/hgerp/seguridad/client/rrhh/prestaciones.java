@@ -1,11 +1,11 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.principal.Loading;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import com.google.gwt.core.client.GWT;
+import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -18,18 +18,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class prestaciones extends Composite  {
 
-	private Mensaje mensaje; 
 	private Grid grid;
     private FlexTable flextable;
 	private Button btnTodo;
 	private Button btnSeleccionados;
 	private VerticalPanel panel = new VerticalPanel();
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private formularioPrestaciones fp;
     private Loading load ;
-	
+    private List<formularioPrestaciones> listfp = new ArrayList<formularioPrestaciones>();
     public prestaciones() {
 
-		mensaje = new Mensaje();
     	load = new Loading();
         load.Mostrar();
         load.invisible();
@@ -41,7 +39,7 @@ public class prestaciones extends Composite  {
         panel.add(flextable);
         grid = new Grid(1, 3);
         panel.add(grid);
-        grid.setWidth("650px");
+        grid.setWidth("609px");
         btnSeleccionados = new Button("Guardar Todo");
         grid.setWidget(0, 0, btnSeleccionados);
         
@@ -49,6 +47,11 @@ public class prestaciones extends Composite  {
         btnSeleccionados.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) 
         	{
+                load.visible();
+        		for(int i = 0; i < listfp.size(); i++){
+        			listfp.get(i).insertar_actualizar();
+        		}
+                load.invisible();
         	}
         });
         btnSeleccionados.setSize("267px", "34px");
@@ -60,6 +63,15 @@ public class prestaciones extends Composite  {
         btnTodo.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) 
         	{
+
+                load.visible();
+        		for(int i = 0; i < listfp.size(); i++){
+        			if(listfp.get(i).checkOk.isChecked())
+        			{
+        				listfp.get(i).insertar_actualizar();
+        			}
+        		}
+                load.invisible();
         	}
         });
 	}
@@ -71,12 +83,20 @@ public class prestaciones extends Composite  {
 			 String nombre,
 			 String promedioSalario,
 			 String txtDiasTrabajados,
-			 String txtDiasAnnio)
+			 String txtDiasAnnio,
+			 Date fecha)
     {
-    	formularioPrestaciones fp = new formularioPrestaciones();
-    	fp.llenar_datos(idEmpleado, codigoSalario, descripcion, nombre, promedioSalario, txtDiasTrabajados, txtDiasAnnio);
+    	fp = new formularioPrestaciones();
+    	fp.llenar_datos(idEmpleado, codigoSalario, descripcion, nombre, promedioSalario, txtDiasTrabajados, txtDiasAnnio,fecha);
         flextable.setWidget(flextable.getRowCount(), 0, fp); 
+    	listfp.add(fp);
         	
+    }
+    
+    public void limpiar()
+    {
+    	listfp.clear();
+    	flextable.clear();
     }
     
    

@@ -6,6 +6,7 @@
  */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -25,7 +26,10 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 /**
  * 
  * @author arodriguez
@@ -42,7 +46,11 @@ public class BDpuestos extends Composite  {
      private VerticalPanel panel = new VerticalPanel();
      private Loading load ;
  	 private formularioBDPuestos fa ;
+ 	 private List<AuxBDPuesto> bdpuesto = new ArrayList<AuxBDPuesto>();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+     private Grid grid_1;
+     private TextBox idPuesto;
+     private Button button;
      
      /**
       * contructor
@@ -54,13 +62,59 @@ public class BDpuestos extends Composite  {
         load.invisible();
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
-		scrollPanel.setSize("100%", "500px");
+		scrollPanel.setSize("100%", "1000px");
 		initWidget(scrollPanel);
 		
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         panel.setSize("100%", "177px");
 		mensaje = new Mensaje();
+        
+        grid_1 = new Grid(1, 2);
+        panel.add(grid_1);
+        grid_1.setWidth("678px");
+        
+        idPuesto = new TextBox();
+        idPuesto.setText("0");
+		idPuesto.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(idPuesto.getText().equals("")) {idPuesto.setText("0");}
+				else if(idPuesto.getText().equals(null)) {idPuesto.setText("0");}
+				else{
+					try{
+						Long.parseLong(idPuesto.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nid no valido");
+						idPuesto.setText("0");
+					}
+				}
+			}
+		});
+        idPuesto.getElement().setAttribute("placeHolder", "ID puesto");
+        idPuesto.setStyleName("gwt-TextBox2");
+        grid_1.setWidget(0, 0, idPuesto);
+        idPuesto.setSize("227px", "34px");
+        
+        button = new Button("Agregar");
+        button.addClickHandler(new ClickHandler() {
+        	public void onClick(ClickEvent event) {
+        		for ( AuxBDPuesto n2 : bdpuesto) 
+			    {
+        			if(n2.getId_puesto() == Long.parseLong(idPuesto.getText()))
+        			{
+        				flextable.clear();
+        		    	fa = new  formularioBDPuestos(a);
+        		    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
+        		    	flextable.setWidget(flextable.getRowCount(), 0,fa );
+        			}
+			    }
+        	}
+        });
+        button.setText("Buscar");
+        button.setStyleName("sendButton");
+        grid_1.setWidget(0, 1, button);
+        button.setSize("227px", "34px");
         
         flextable = new FlexTable();
         panel.add(flextable);
@@ -105,7 +159,7 @@ public class BDpuestos extends Composite  {
     {
         load.visible();
     	flextable.clear();
-    	
+    	bdpuesto.clear();
     	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
@@ -120,6 +174,7 @@ public class BDpuestos extends Composite  {
 				{
 				    for ( AuxBDPuesto n2 : results) 
 				    {
+				    	bdpuesto.add(n2);
 				    	fa = new  formularioBDPuestos(a);
 				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 				    	flextable.setWidget(flextable.getRowCount(), 0,fa );

@@ -10,15 +10,13 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
-
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegBDPuesto implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Key id_puesto;
+    private Long id_puesto;
 	
 	@Persistent
     private Date fecha_puesto;
@@ -35,11 +33,15 @@ public class SegBDPuesto implements Serializable {
 	}
 
 	public Long getId_puesto() {
-		return id_puesto.getId();
+		return id_puesto;
 	}
 
 	public Date getFecha_puesto() {
 		return fecha_puesto;
+	}
+
+	public void setId_puesto(Long id_puesto) {
+		this.id_puesto = id_puesto;
 	}
 
 	public void setFecha_puesto(Date fecha_puesto) {

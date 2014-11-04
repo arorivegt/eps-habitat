@@ -31,6 +31,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
@@ -40,12 +42,8 @@ public class CrearPrestacionesLaborales extends Composite   {
     private  Grid grid;
     private ListBox listBox;
     private Label lbDato1;
-    private Label lbDato2;
-    private Label lbDato3;
     private Image Busqueda;
-    private TextBox txtDato1;
-    private TextBox txtDato2;
-    private TextBox txtDato3;
+    private SuggestBox txtDato1;
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
     private prestaciones  nuevo;
@@ -95,70 +93,45 @@ public class CrearPrestacionesLaborales extends Composite   {
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
 				{
 					lbDato1.setText("Ingrese el DPI");
-					lbDato2.setText("Ingrese el DPI");
-					lbDato3.setText("Ingrese el DPI");
-
+					
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
-					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 390, 16);
+					absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
 					lbDato1.setText("Primer Nombre");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(true);
-					lbDato3.setVisible(true);
 					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(true);
-					txtDato3.setVisible(true);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 760, 19);
+					absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
 					lbDato1.setText("Primer Nombre");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(false);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
 					absolutePanel.add(Busqueda, 205, 16);
 
 					grid.clearCell(1, 0);
 					nuevo = new prestaciones();
-					agregarFormulario('2',txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					agregarFormulario('2',txtDato1.getText(), "","", 
+							"",txtDato1.getText(),txtDato1.getText()
 							,"");
 					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					lbDato1.setText("Ingrese No. Pasaporte");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(true);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 390, 16);
+					absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
 					listEstado.clear();
@@ -169,16 +142,10 @@ public class CrearPrestacionesLaborales extends Composite   {
 					listEstado.addItem("interino","4");
 					
 					lbDato1.setText("Seleccione el Estado del empleado");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 390, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
@@ -191,16 +158,10 @@ public class CrearPrestacionesLaborales extends Composite   {
 				    	listEstado.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 				    }
 					lbDato1.setText("Seleccione el puesto");
-					lbDato2.setText("Primer Apellido");
-					lbDato3.setText("Segundo Apellido");
 
 					lbDato1.setVisible(true);
-					lbDato2.setVisible(false);
-					lbDato3.setVisible(false);
 					
 					txtDato1.setVisible(false);
-					txtDato2.setVisible(false);
-					txtDato3.setVisible(false);
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 390, 19);
 				}
@@ -211,24 +172,11 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(listBox, 10, 16);
 		listBox.setSize("179px", "39px");
 		
-		txtDato1 = new TextBox();
+		txtDato1 =  new SuggestBox(createCountriesOracle());
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		txtDato1.setMaxLength(100);
 		absolutePanel.add(txtDato1, 205, 19);
-		txtDato1.setSize("177px", "34px");
-		
-		txtDato2 = new TextBox();
-		txtDato2.setStyleName("gwt-TextBox2");
-		txtDato2.setMaxLength(100);
-		absolutePanel.add(txtDato2, 390, 19);
-		txtDato2.setSize("177px", "34px");
-						
-		txtDato3 = new TextBox();
-		txtDato3.setStyleName("gwt-TextBox2");
-		txtDato3.setMaxLength(100);
-		absolutePanel.add(txtDato3, 575, 19);
-		txtDato3.setSize("177px", "34px");
+		txtDato1.setSize("250px", "34px");
 		
 		listEstado = new ListBox();
 		listEstado.addItem("empleado activo","0");
@@ -249,24 +197,34 @@ public class CrearPrestacionesLaborales extends Composite   {
 				nuevo = new prestaciones();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
-					agregarFormulario('2',txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					agregarFormulario('2',txtDato1.getText(), "","", 
+							"",txtDato1.getText(),txtDato1.getText()
 							,"");
 					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
 
-					if(!txtDato1.getText().equals("") || !txtDato2.getText().equals("") 
-							|| !txtDato3.getText().equals("")){
-						if(txtDato1.getText().equals("")){
-							txtDato1.setText("    ");
-						}if(txtDato2.getText().equals("")){
-							txtDato2.setText("    ");
-						}if(txtDato3.getText().equals("")){
-							txtDato3.setText("    ");
-						}
-						agregarFormulario('1',txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					String nombreArray[] = txtDato1.getText().split(" ");
+					String primerNombre = "";
+					String segundoNombre = "";
+					String segundoApellido = "";
+					String primerApellido =  "";
+
+					try{
+						 primerNombre = nombreArray[0];
+						 segundoNombre =  nombreArray[1];
+						 primerApellido =  nombreArray[2];
+						 segundoApellido = nombreArray[3];
+					}catch(Exception e){
+						 primerNombre = "";
+						 segundoNombre = "";
+						 segundoApellido = "";
+						 primerApellido =  "";
+					}
+					System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
+					if(!txtDato1.getText().equals("")){
+						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
+								segundoApellido,txtDato1.getText(),txtDato1.getText()
 								,"");
 						grid.setWidget(1, 0,nuevo);
 						nuevo.setSize("100%", "648px");
@@ -278,8 +236,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 				}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					if(!txtDato1.getText().equals("") ){
-						agregarFormulario('3',txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+						agregarFormulario('3',txtDato1.getText(), "","", 
+								"",txtDato1.getText(),txtDato1.getText()
 								,"");
 						grid.setWidget(1, 0,nuevo);
 						nuevo.setSize("100%", "648px");
@@ -292,8 +250,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 				{
 
 					if(!txtDato1.getText().equals("") ){
-						agregarFormulario('4',txtDato1.getText(), "",txtDato2.getText(), 
-								txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+						agregarFormulario('4',txtDato1.getText(), "","", 
+								"",txtDato1.getText(),txtDato1.getText()
 								,"");
 						grid.setWidget(1, 0,nuevo);
 						nuevo.setSize("100%", "648px");
@@ -304,15 +262,15 @@ public class CrearPrestacionesLaborales extends Composite   {
 		    		}
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
-					agregarFormulario('5',txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					agregarFormulario('5',txtDato1.getText(), "","", 
+							"",txtDato1.getText(),txtDato1.getText()
 							,listEstado.getValue(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 				{
-					agregarFormulario('6',txtDato1.getText(), "",txtDato2.getText(), 
-							txtDato3.getText(),txtDato1.getText(),txtDato1.getText()
+					agregarFormulario('6',txtDato1.getText(), "","", 
+							"",txtDato1.getText(),txtDato1.getText()
 							,listEstado.getValue(listEstado.getSelectedIndex()));
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
@@ -339,16 +297,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 		lbDato1.setStyleName("label");
 		lbDato1.setSize("368px", "19px");
 		absolutePanel.add(lbDato1, 205, 0);
-		
-		lbDato2 = new Label("Primer Apellido");
-		lbDato2.setStyleName("label");
-		lbDato2.setSize("157px", "13px");
-		absolutePanel.add(lbDato2, 390, 0);
-		
-		lbDato3 = new Label("Segundo Apellido");
-		lbDato3.setStyleName("label");
-		lbDato3.setSize("157px", "13px");
-		absolutePanel.add(lbDato3, 575, 0);
 		
 		Label lblBusquedaPor = new Label("Busqueda por: ");
 		lblBusquedaPor.setStyleName("label");
@@ -431,23 +379,23 @@ public class CrearPrestacionesLaborales extends Composite   {
 		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
 		fecha.getDatePicker().setVisibleYearCount(100);
 		fecha.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(fecha, 390, 90);
+		absolutePanel.add(fecha, 463, 17);
 		fecha.setSize("177px", "41px");
 		
 		label = new Label("Fecha");
 		label.setStyleName("label");
-		absolutePanel.add(label, 390, 73);
+		absolutePanel.add(label, 463, 0);
 		label.setSize("139px", "13px");
 		
 		txtDescripcion = new TextBox();
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		txtDescripcion.setMaxLength(100);
-		absolutePanel.add(txtDescripcion, 575, 92);
+		absolutePanel.add(txtDescripcion, 648, 19);
 		txtDescripcion.setSize("177px", "39px");
 		
 		lblDescripcionPequea = new Label("Descripcion Pequeña");
 		lblDescripcionPequea.setStyleName("label");
-		absolutePanel.add(lblDescripcionPequea, 575, 73);
+		absolutePanel.add(lblDescripcionPequea, 648, 0);
 		lblDescripcionPequea.setSize("157px", "13px");
 		
 		Cantidad = new TextBox();
@@ -469,12 +417,12 @@ public class CrearPrestacionesLaborales extends Composite   {
 		Cantidad.setText("0.0");
 		Cantidad.setStyleName("gwt-TextBox2");
 		Cantidad.setMaxLength(100);
-		absolutePanel.add(Cantidad, 773, 92);
+		absolutePanel.add(Cantidad, 846, 19);
 		Cantidad.setSize("145px", "39px");
 		
 		lblCantidad = new Label("Cantidad");
 		lblCantidad.setStyleName("label");
-		absolutePanel.add(lblCantidad, 773, 73);
+		absolutePanel.add(lblCantidad, 846, 0);
 		lblCantidad.setSize("157px", "13px");
 		
 	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
@@ -731,5 +679,28 @@ public class CrearPrestacionesLaborales extends Composite   {
 
 	        load.invisible();
 	 	}
-	
+	 	
+	 	MultiWordSuggestOracle createCountriesOracle()
+		{
+		    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+		    
+		    loginService.Buscar_Empleado('2', "", "", 
+		    		"", "","", "","",new AsyncCallback<List<AuxEmpleado>>(){
+			    public void onFailure(Throwable caught) 
+			    {
+			        load.invisible();
+			    }
+			
+				@Override
+			    public void onSuccess( List<AuxEmpleado> result)
+			    {
+					for(AuxEmpleado p : result) 
+					{
+						oracle.add(p.getPrimer_nombre()+" "+p.getSegundo_nombre()+" "+p.getPrimer_apellido()+" "+p.getSegundo_apellido());
+					}
+			    }
+			
+			});
+		    return oracle;
+	    }
 }

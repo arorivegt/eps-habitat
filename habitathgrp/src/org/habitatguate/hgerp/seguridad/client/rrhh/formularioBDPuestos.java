@@ -19,6 +19,8 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class formularioBDPuestos extends Composite {
 
@@ -32,6 +34,7 @@ public class formularioBDPuestos extends Composite {
 	private TextBox txtPuesto;
 	private TextArea txtFunciones;
     private Loading load ;
+    private TextBox txtIdPuesto ;
 	
 	public formularioBDPuestos(BDpuestos a) {
 
@@ -45,10 +48,31 @@ public class formularioBDPuestos extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("850px", "100px");
 		
+		txtIdPuesto = new TextBox();
+		txtIdPuesto.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtIdPuesto.getText().equals("")) {txtIdPuesto.setText("0");}
+				else if(txtIdPuesto.getText().equals(null)) {txtIdPuesto.setText("0");}
+				else{
+					try{
+						Long.parseLong(txtIdPuesto.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nid no valido");
+						txtIdPuesto.setText("0");
+					}
+				}
+			}
+		});
+		txtIdPuesto.setStyleName("gwt-TextBox2");
+		txtIdPuesto.setMaxLength(100);
+		absolutePanel.add(txtIdPuesto, 10, 63);
+		txtIdPuesto.setSize("74px", "34px");
+		
 		txtPuesto = new TextBox();
 		txtPuesto.setStyleName("gwt-TextBox2");
 		txtPuesto.setMaxLength(100);
-		absolutePanel.add(txtPuesto, 10, 29);
+		absolutePanel.add(txtPuesto, 118, 29);
 		txtPuesto.setSize("227px", "34px");
 
 		
@@ -61,15 +85,15 @@ public class formularioBDPuestos extends Composite {
 		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 10, 89);
+		absolutePanel.add(dateFecha, 118, 89);
 		dateFecha.setSize("227px", "34px");
 
 		
 		txtFunciones = new TextArea();
 		txtFunciones.getElement().setAttribute("maxlength", "500");
 		txtFunciones.setStyleName("gwt-TextBox");
-		absolutePanel.add(txtFunciones, 259, 27);
-		txtFunciones.setSize("348px", "58px");
+		absolutePanel.add(txtFunciones, 372, 27);
+		txtFunciones.setSize("304px", "58px");
 		
 				Button btnGuardar = new Button("Send");
 				btnGuardar.addClickHandler(new ClickHandler() {
@@ -82,7 +106,7 @@ public class formularioBDPuestos extends Composite {
 						}
 					
 						if(bandera) {					
-							loginService.Insertar_BDPuesto(dateFecha.getValue(), txtPuesto.getText(), 
+							loginService.Insertar_BDPuesto(Long.parseLong(txtIdPuesto.getText()),dateFecha.getValue(), txtPuesto.getText(), 
 									txtFunciones.getText(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
@@ -128,8 +152,8 @@ public class formularioBDPuestos extends Composite {
 				btnGuardar.setText("Guardar");
 				btnGuardar.setStylePrimaryName("sendButton");
 				btnGuardar.setStyleName("sendButton");
-				absolutePanel.add(btnGuardar, 682, 29);
-				btnGuardar.setSize("227px", "34px");
+				absolutePanel.add(btnGuardar, 763, 29);
+				btnGuardar.setSize("146px", "34px");
 		
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
@@ -140,24 +164,29 @@ public class formularioBDPuestos extends Composite {
 		button.setText("Quitar formulario");
 		button.setStylePrimaryName("sendButton");
 		button.setStyleName("sendButton");
-		absolutePanel.add(button, 682, 91);
-		button.setSize("227px", "34px");
+		absolutePanel.add(button, 763, 91);
+		button.setSize("146px", "34px");
 
 		
 		Label lblNivelAcademico = new Label("Puesto");
 		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
+		absolutePanel.add(lblNivelAcademico, 118, 10);
 		lblNivelAcademico.setSize("192px", "13px");
 		
 		Label lblTitulodiploma = new Label("Fecha");
 		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 10, 70);
+		absolutePanel.add(lblTitulodiploma, 118, 70);
 		lblTitulodiploma.setSize("192px", "13px");
 		
 		Label lblFunciones = new Label("Funciones");
 		lblFunciones.setStyleName("label");
-		absolutePanel.add(lblFunciones, 272, 10);
+		absolutePanel.add(lblFunciones, 385, 10);
 		lblFunciones.setSize("192px", "13px");
+		
+		Label lblIdPuesto = new Label("Id puesto");
+		lblIdPuesto.setStyleName("label");
+		absolutePanel.add(lblIdPuesto, 10, 44);
+		lblIdPuesto.setSize("76px", "13px");
 	}
 	
 	private void EliminarFormularioSinDatos(){
@@ -168,6 +197,8 @@ public class formularioBDPuestos extends Composite {
 			 String txtPuesto,
 			 String txtFunciones)
 	{
+		this.txtIdPuesto.setText(""+id);
+		this.txtIdPuesto.setEnabled(false);
 		this.id_puesto = id;
 		this.bandera = false;
 		this.dateFecha.setValue(new Date(dateFecha));

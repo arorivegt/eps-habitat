@@ -292,13 +292,14 @@ public interface RecursosHumanosServiceAsync {
 			boolean Viernres, boolean Sabado, boolean Domingo, AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
+	 * @param id
 	 * @param fecha_puesto
 	 * @param nombre_puesto
 	 * @param funciones
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
-	void Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones,
+	void Insertar_BDPuesto(Long id, Date fecha_puesto, String nombre_puesto, String funciones,
 			 	AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 

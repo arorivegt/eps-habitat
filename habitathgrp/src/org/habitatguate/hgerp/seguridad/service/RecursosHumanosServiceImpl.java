@@ -1073,12 +1073,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					segundo_apellido = segundo_apellido + "@";
 				}
 				if(tipo=='1'){
-					System.out.println("primer_nombre == '"+primer_nombre.toUpperCase()+
-							"' && "+"primer_apellido == '"+primer_apellido.toUpperCase()+
-							"' && "+"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
-					Query q = pm.newQuery(SegEmpleado.class,"primer_nombre == '"+primer_nombre.toUpperCase()+
-							"' && "+"primer_apellido == '"+primer_apellido.toUpperCase()+
-							"' && "+"segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
+					Query q = pm.newQuery(SegEmpleado.class,
+							"primer_nombre == '"+primer_nombre.toUpperCase()+
+							"' && segundo_nombre == '"+segundo_nombre.toUpperCase()+
+							"' && primer_apellido == '"+primer_apellido.toUpperCase()+
+							"' && segundo_apellido == '"+segundo_apellido.toUpperCase()+"'");
 					results = (List<SegEmpleado>) q.execute();
 				}else if(tipo =='2'){
 					Query q = pm.newQuery(SegEmpleado.class);
@@ -1651,13 +1650,14 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			}
 
 			@Override
-			public Long Insertar_BDPuesto(Date fecha_puesto,
+			public Long Insertar_BDPuesto(Long id,Date fecha_puesto,
 					String nombre_puesto, String funciones)
 					throws IllegalArgumentException {
 				final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 				Long valor = 0L;
 				 try { 
 					 SegBDPuesto p = new SegBDPuesto();
+					 	p.setId_puesto(id);
 					 	p.setFecha_puesto(fecha_puesto);
 					 	p.setNombre_puesto(nombre_puesto.toUpperCase());
 					 	p.setFunciones(funciones.toUpperCase());

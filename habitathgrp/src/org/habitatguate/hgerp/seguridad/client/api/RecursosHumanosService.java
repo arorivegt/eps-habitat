@@ -271,14 +271,15 @@ public interface RecursosHumanosService extends RemoteService {
 			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
 			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
 	/**
-	 *
+	 * 
+	 * @param id
 	 * @param fecha_puesto
 	 * @param nombre_puesto
 	 * @param funciones
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	Long Insertar_BDPuesto(Date fecha_puesto, String nombre_puesto, String funciones) throws IllegalArgumentException;
+	Long Insertar_BDPuesto(Long id,Date fecha_puesto, String nombre_puesto, String funciones) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado

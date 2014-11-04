@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
+import org.habitatguate.hgerp.seguridad.client.rrhh.CrearInformeBancos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
@@ -247,7 +248,7 @@ public class MenuPrincipal extends Composite {
 
 //	@UiHandler("rrhh7")
 	void rrhh7() {
-		CrearPrestacionesLaborales nuevo = new CrearPrestacionesLaborales();
+		CrearInformeBancos nuevo = new CrearInformeBancos();
  		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, nuevo);

@@ -405,6 +405,21 @@ public class CrearInformeBancos extends Composite   {
 	 	private void Bancos(List<AuxEmpleado> result, String listMes,String listAnio)
 	 	{
 	 		String nombre = "";
+	 		String xmlInicio = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
+	 						+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
+	 						+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>"
+	 						+"</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table><tbody>";
+	 		xmlInicio += "<tr>"
+ 					+ "<td>"+"Correlativo"+"</td>"
+ 					+ "<td>"+"Tipo de Cuenta"+"</td>"
+ 					+ "<td>"+"No Cuenta"+"</td>"
+ 		 			+ "<td>"+"Nombre"+"</td>"
+ 					+ "<td>"+"Monto"+"</td>"
+ 					+ "<td>" +"Descripcion"+" </td>"
+ 					+ "</tr>";
+
+	 		String  xmlFinal = "</tbody></table></body></html>";
+	 		int i = 0;
 	 		float salarioCalculo = 0;
 	 		float enero = 0, Bono = 0;
 	 		float febrero= 0 , marzo = 0;
@@ -644,43 +659,56 @@ public class CrearInformeBancos extends Composite   {
  				//****************************************calculo de planilla del mes a calcular*****************************************
 	 			
 	 			if(Integer.parseInt(listMes) == 01){
-	 				salarioCalculo = (float) (enero - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (enero - (enero*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 02){
-	 				salarioCalculo = (float) (febrero- (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (febrero- (febrero*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 03){
-	 				salarioCalculo = (float) (marzo - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (marzo - (marzo*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 04){
-	 				salarioCalculo = (float) (abril - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (abril - (abril*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 05){
-	 				salarioCalculo = (float) (mayo - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (mayo - (mayo*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 06){
-	 				salarioCalculo = (float) (junio - (salarioCalculo*4.83/100) + Bono);
+	 				salarioCalculo = (float) (junio - (junio*4.83/100) + Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 07){
-	 				salarioCalculo = (float) (julio - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (julio - (julio*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 8){
-	 				salarioCalculo = (float) (agosto - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (agosto - (agosto*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 9){
-	 				salarioCalculo = (float) (septiembre - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (septiembre - (septiembre*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 10){
 	 				salarioCalculo = octubre + Bono;
 	 				
 	 			}else if(Integer.parseInt(listMes) == 11){
-	 				salarioCalculo = (float) (noviembre - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (noviembre - (noviembre*4.83/100)+ Bono);
 	 				
 	 			}else if(Integer.parseInt(listMes) == 12){
-	 				salarioCalculo = (float) (diciembre - (salarioCalculo*4.83/100)+ Bono);
+	 				salarioCalculo = (float) (diciembre - (diciembre*4.83/100)+ Bono);
 	 				
 	 			}
-	 			
+	 			String tipoCuenta = "";
+	 			if(e.getTipoCuenta().equals("0")){
+	 				tipoCuenta = "Ahorro";
+	 			}else{
+	 				tipoCuenta = "Monetaria";
+	 			}
+	 			xmlInicio+= "<tr>"
+	 					+ "<td>"+i+"</td>"
+	 					+ "<td>"+tipoCuenta.toUpperCase()+"</td>"
+	 					+ "<td>"+e.getNoCuenta()+"</td>"
+	 		 			+ "<td>"+nombre+"</td>"
+	 					+ "<td>"+salarioCalculo+"</td>"
+	 					+ "<td> PLANILLA "+this.listMes.getItemText(this.listMes.getSelectedIndex()).toUpperCase()+" "+this.listAnnio.getItemText(this.listAnnio.getSelectedIndex())+" </td>"
+	 					+ "</tr>";
 	 			//aqui se crea cada fila con sus respectivas columnas para el excel
 	 			enero = 0;
 	 			febrero = 0;
@@ -697,7 +725,8 @@ public class CrearInformeBancos extends Composite   {
 	 			
 	 			Bono = 0;
 	 		}//fin for empleado
-
+	 		xmlInicio = xmlInicio + xmlFinal;
+	 		System.out.println(xmlInicio);
 	        load.invisible();
 	 	}
 	 	

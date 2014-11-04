@@ -321,7 +321,6 @@ public class BuscadorEmpleados extends Composite   {
 	 * @param id_empleado
 	 */
 	public void Empleado_registrado(final Long id_empleado){
-		System.out.println("empezo");
         load.visible();
         
 		grid.clearCell(1, 0);

@@ -112,6 +112,7 @@ public class vacaciones extends Composite  {
 	        		{
 	        			Date aux = new Date(h.getFecha1());
 	        			Date aux2 = new Date(h.getFecha2());
+	        			
 	        			if(aux.after(dateFecha1.getValue())
 	        			&& aux.before(dateFecha2.getValue())
 	        			&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))

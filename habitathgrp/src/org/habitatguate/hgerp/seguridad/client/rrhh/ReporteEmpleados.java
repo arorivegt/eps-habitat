@@ -1,7 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

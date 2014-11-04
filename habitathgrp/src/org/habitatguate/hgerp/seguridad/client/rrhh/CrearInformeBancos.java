@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class CrearPrestacionesLaborales extends Composite   {
+public class CrearInformeBancos extends Composite   {
 
 	private Mensaje mensaje; 
     private  Grid grid;
@@ -46,25 +46,18 @@ public class CrearPrestacionesLaborales extends Composite   {
     private SuggestBox txtDato1;
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
-    private prestaciones  nuevo;
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
     private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private Label lblElijaElTipo;
-    private ListBox listTipoPrestaciones;
-    private Label lblElijaElAo;
+    private ListBox listMes;
     private ListBox listAnnio;
-    private DateBox fecha;
     private Label label;
-    private TextBox txtDescripcion;
-    private Label lblDescripcionPequea;
-    private TextBox Cantidad;
-    private Label lblCantidad;
     
     /**
      * constructor
      */
-	public CrearPrestacionesLaborales() {
+	public CrearInformeBancos() {
 
     	load = new Loading();
         load.Mostrar();
@@ -118,11 +111,9 @@ public class CrearPrestacionesLaborales extends Composite   {
 					absolutePanel.add(Busqueda, 205, 16);
 
 					grid.clearCell(1, 0);
-					nuevo = new prestaciones();
 					agregarFormulario('2',txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,"");
-					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Pasaporte"))
 				{
 					lbDato1.setText("Ingrese No. Pasaporte");
@@ -194,13 +185,11 @@ public class CrearPrestacionesLaborales extends Composite   {
 			public void onClick(ClickEvent event) {
 
 				grid.clearCell(1, 0);
-				nuevo = new prestaciones();
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
 					agregarFormulario('2',txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,"");
-					grid.setWidget(1, 0,nuevo);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
 
@@ -226,8 +215,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
 								segundoApellido,txtDato1.getText(),txtDato1.getText()
 								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
 					}
 					else{
 
@@ -239,8 +226,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 						agregarFormulario('3',txtDato1.getText(), "","", 
 								"",txtDato1.getText(),txtDato1.getText()
 								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
 					}
 					else{
 
@@ -253,8 +238,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 						agregarFormulario('4',txtDato1.getText(), "","", 
 								"",txtDato1.getText(),txtDato1.getText()
 								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
 					}
 					else{
 
@@ -265,30 +248,32 @@ public class CrearPrestacionesLaborales extends Composite   {
 					agregarFormulario('5',txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 				{
 					agregarFormulario('6',txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
 				}
 			}
 		});
 		
-		listTipoPrestaciones = new ListBox();
-		//listTipoPrestaciones.addItem("Decreto(78-89)", "1");
-		listTipoPrestaciones.addItem("Comisiones", "2");
-		listTipoPrestaciones.addItem("Bonificacion", "3");
-		listTipoPrestaciones.addItem("Bono 14", "4");
-		listTipoPrestaciones.addItem("Aguinaldo", "5");
-		listTipoPrestaciones.addItem("Vacaciones", "6");
-		listTipoPrestaciones.addItem("Indemnizacion", "7");
-		listTipoPrestaciones.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTipoPrestaciones, 10, 94);
-		listTipoPrestaciones.setSize("179px", "39px");
+		listMes = new ListBox();
+		//listMes.addItem("Decreto(78-89)", "1");
+		listMes.addItem("Enero", "1");
+		listMes.addItem("Febrero", "2");
+		listMes.addItem("Marzo", "3");
+		listMes.addItem("Abril", "4");
+		listMes.addItem("Mayo", "5");
+		listMes.addItem("Junio", "6");
+		listMes.addItem("Julio", "7");
+		listMes.addItem("Agosto", "8");
+		listMes.addItem("Septiembre", "9");
+		listMes.addItem("Octubre", "10");
+		listMes.addItem("Noviembre", "1|");
+		listMes.addItem("Diciembre", "11");
+		listMes.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listMes, 10, 94);
+		listMes.setSize("179px", "39px");
 						
 		absolutePanel.add(Busqueda, 984, 19);
 		Busqueda.setSize("103px", "55px");
@@ -307,11 +292,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		lblElijaElTipo.setStyleName("label");
 		absolutePanel.add(lblElijaElTipo, 10, 61);
 		lblElijaElTipo.setSize("179px", "13px");
-		
-		lblElijaElAo = new Label("Elija el año para calcular prestaciones");
-		lblElijaElAo.setStyleName("label");
-		absolutePanel.add(lblElijaElAo, 205, 61);
-		lblElijaElAo.setSize("179px", "13px");
+	
 		
 		listAnnio = new ListBox();
 		listAnnio.addItem("2000");
@@ -370,75 +351,28 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(listAnnio, 205, 94);
 		listAnnio.setSize("179px", "39px");
 		
-		fecha = new DateBox();
-		fecha.getTextBox().setReadOnly(true);
-		fecha.setValue(new Date());
-		fecha.setFormat(new DateBox.DefaultFormat 
-	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
-		fecha.getDatePicker().setYearArrowsVisible(true);
-		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
-		fecha.getDatePicker().setVisibleYearCount(100);
-		fecha.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(fecha, 463, 17);
-		fecha.setSize("177px", "41px");
+		
 		
 		label = new Label("Fecha");
 		label.setStyleName("label");
 		absolutePanel.add(label, 463, 0);
 		label.setSize("139px", "13px");
 		
-		txtDescripcion = new TextBox();
-		txtDescripcion.setStyleName("gwt-TextBox2");
-		txtDescripcion.setMaxLength(100);
-		absolutePanel.add(txtDescripcion, 648, 19);
-		txtDescripcion.setSize("177px", "39px");
 		
-		lblDescripcionPequea = new Label("Descripcion Pequeña");
-		lblDescripcionPequea.setStyleName("label");
-		absolutePanel.add(lblDescripcionPequea, 648, 0);
-		lblDescripcionPequea.setSize("157px", "13px");
-		
-		Cantidad = new TextBox();
-		Cantidad.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(Cantidad.getText().equals("")) {Cantidad.setText("0.0");}
-				else if(Cantidad.getText().equals(null)) {Cantidad.setText("0.0");}
-				else{
-					try{
-						Float.parseFloat(Cantidad.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nCantidad no valida");
-						Cantidad.setText("0.0");
-					}
-				}
+    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+    		public void onFailure(Throwable caught) 
+    		{
+    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+    		}
+
+			@Override
+			public void onSuccess(List<AuxBDPuesto> results)
+			{
+				if (!(results.size()==0)) {
+					BDpuestos = results;
+		    	}	
 			}
 		});
-		Cantidad.setText("0.0");
-		Cantidad.setStyleName("gwt-TextBox2");
-		Cantidad.setMaxLength(100);
-		absolutePanel.add(Cantidad, 846, 19);
-		Cantidad.setSize("145px", "39px");
-		
-		lblCantidad = new Label("Cantidad");
-		lblCantidad.setStyleName("label");
-		absolutePanel.add(lblCantidad, 846, 0);
-		lblCantidad.setSize("157px", "13px");
-		
-	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
-	    		public void onFailure(Throwable caught) 
-	    		{
-	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
-	    		}
-
-				@Override
-				public void onSuccess(List<AuxBDPuesto> results)
-				{
-					if (!(results.size()==0)) {
-						BDpuestos = results;
-			    	}	
-				}
-			});
 		initWidget(grid);
 		
 	}
@@ -452,16 +386,14 @@ public class CrearPrestacionesLaborales extends Composite   {
 	            public void onFailure(Throwable caught) 
 	            {
 			        load.invisible();
-	            	mensaje.setMensaje("alert alert-information alert-block", 
-	            			"\nNo hay resultados");
+	            	mensaje.setMensaje("alert alert-information alert-block", "\nNo hay resultados");
 	            }
 
 				@Override
 	            public void onSuccess( List<AuxEmpleado> result)
 	            {
 					if(!result.isEmpty()){
-						Prestaciones(result,listTipoPrestaciones.getValue(listTipoPrestaciones.getSelectedIndex()),
-								listAnnio.getItemText(listAnnio.getSelectedIndex()));
+						Bancos(result,listMes.getValue(listMes.getSelectedIndex()),listAnnio.getItemText(listAnnio.getSelectedIndex()));
 					}
 	            }
 
@@ -470,16 +402,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 	    }
 	 
 
-	 	private void Prestaciones(List<AuxEmpleado> result, String tipo,String listAnio)
+	 	private void Bancos(List<AuxEmpleado> result, String listMes,String listAnio)
 	 	{
 	 		String nombre = "";
-	 		float salarioBaseCalculo = 0;
-	 		float enero = 0, eneroBono = 0;
-	 		float febrero= 0 , febreroBono = 0;
-	 		float marzo= 0, marzoBono = 0;
-	 		float abril= 0, abrilBono = 0;
-	 		float mayo= 0, mayoBono = 0;
-	 		float junio= 0, junioBono = 0;
+	 		float salarioCalculo = 0;
+	 		float enero = 0, Bono = 0;
+	 		float febrero= 0 , marzo = 0;
+	 		float abril= 0, mayo = 0;
+	 		float junio= 0, julio = 0;
+	 		float agosto= 0, septiembre = 0;
+	 		float octubre= 0, noviembre = 0;
+	 		float diciembre= 0;
 	 		
 	 		boolean bEnero = true;
 	 		boolean bFebrero = true;
@@ -487,23 +420,24 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		boolean bAbril = true;
 	 		boolean bMayo = true;
 	 		boolean bJunio = true;
+	 		boolean bJulio = true;
+	 		boolean bAgosto = true;
+	 		boolean bSeptiembre = true;
+	 		boolean bOctubre = true;
+	 		boolean bNoviembre = true;
+	 		boolean bDiciembre = true;
 	 		
 	 		DateTimeFormat anio = DateTimeFormat.getFormat("yyyy");
 	 		DateTimeFormat mes 	= DateTimeFormat.getFormat("MM");
-	 		//DateTimeFormat dia 	= DateTimeFormat.getFormat("dd");
-
 	 		int ultimoAnnio = 0;
 	 		int ultimoMes = 0;
 	 		float ultimoSalario = 0;
 	 		String formatAnio 	= "";
 	 		String formatMes 	= "";
-	 		//String formatDia 	= "";
-	 		nuevo.limpiar();
 	 		
 	 		for(AuxEmpleado e:result)
 	 		{
 	 			nombre = e.getPrimer_nombre() +" "+ e.getSegundo_nombre() +" "+e.getPrimer_apellido() +" "+e.getSegundo_apellido(); 
-	 			
 	 			for(AuxSalario s:e.getSalario())
 	 			{
 	 				formatAnio = anio.format(new Date(s.getFecha()));
@@ -551,8 +485,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 					febrero = s.getSalario();
 	 					bFebrero  = false;
 	 				}else if(bFebrero && s.getTipoSalario().equals("0") &&
-								(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 02 && ultimoAnnio == Integer.parseInt(listAnio))) 
-								)
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 02 && ultimoAnnio == Integer.parseInt(listAnio))) 
+ 							)
 	 				{
 	 					febrero = ultimoSalario;
 	 				}
@@ -564,8 +498,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 					marzo = s.getSalario();
 	 					bMarzo  = false;
 	 				}else if(bMarzo && s.getTipoSalario().equals("0")&&
-								(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 03 && ultimoAnnio == Integer.parseInt(listAnio)))
-								)
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 03 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
 	 				{
 	 					marzo = ultimoSalario;
 	 				}
@@ -577,8 +511,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 					abril = s.getSalario();
 	 					bAbril  = false;
 	 				}else if(bAbril && s.getTipoSalario().equals("0")&&
-								(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 04 && ultimoAnnio == Integer.parseInt(listAnio)))
-								)
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 04 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
 	 				{
 	 					abril = ultimoSalario;
 	 				}
@@ -590,8 +524,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 					mayo = s.getSalario();
 	 					bMayo  = false;
 	 				}else if(bMayo && s.getTipoSalario().equals("0") &&
-								(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 05 && ultimoAnnio == Integer.parseInt(listAnio)))
-								)
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 05 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
 	 				{
 	 					mayo = ultimoSalario;
 	 				}
@@ -603,94 +537,165 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 					junio = s.getSalario();
 	 					bJunio  = false;
 	 				}else if(bJunio && s.getTipoSalario().equals("0")&&
-								(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 06 && ultimoAnnio == Integer.parseInt(listAnio)))
-								)
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 06 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
 	 				{
 	 					junio = ultimoSalario;
 	 				}
 	 				
+
+	 				//salario de julio
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("07")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					julio = s.getSalario();
+	 					bJulio  = false;
+	 				}else if(bJulio && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 07 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					julio = ultimoSalario;
+	 				}
+	 				
+	 				//salario de agosto
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("08")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					agosto = s.getSalario();
+	 					bAgosto  = false;
+	 				}else if(bAgosto && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 8 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					agosto = ultimoSalario;
+	 				}
 	 				
 
+	 				//salario de septiembre
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("09")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					septiembre = s.getSalario();
+	 					bSeptiembre  = false;
+	 				}else if(bSeptiembre && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 9 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					septiembre = ultimoSalario;
+	 				}
+	 				
+
+	 				//salario de octubre
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("10")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					octubre = s.getSalario();
+	 					bOctubre  = false;
+	 				}else if(bOctubre && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 10 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					octubre = ultimoSalario;
+	 				}
+	 				
+
+	 				//salario de noviembre
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("11")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					noviembre = s.getSalario();
+	 					bNoviembre  = false;
+	 				}else if(bNoviembre && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 11 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					noviembre = ultimoSalario;
+	 				}
+	 				
+
+	 				//salario de diciembre
+	 				if(formatAnio.equals(listAnio) && formatMes.equals("12")
+	 				   && s.getTipoSalario().equals("0"))
+	 				{
+	 					diciembre = s.getSalario();
+	 					bDiciembre  = false;
+	 				}else if(bDiciembre && s.getTipoSalario().equals("0") &&
+ 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 12 && ultimoAnnio == Integer.parseInt(listAnio)))
+ 							)
+	 				{
+	 					diciembre = ultimoSalario;
+	 				}
+	 				
 	 				//*********************************************************************************
 	 				
 	 				//*********************************************************************************
-	 				//bonos de enero
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("01")
+	 				//bonos
+	 				if(formatAnio.equals(listAnio) && formatMes.equals(listMes)
 	 	 				   && s.getTipoSalario().equals("3"))
 	 				{
-	 					eneroBono += s.getSalario();
-	 				}
-	 				//bonos de febrero
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("02")
-	 	 				   && s.getTipoSalario().equals("3"))
-	 				{
-	 					febreroBono += s.getSalario();
-	 				}
-	 				//bonos de marzo
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("03")
-	 	 				   && s.getTipoSalario().equals("3"))
-	 				{
-	 					marzoBono += s.getSalario();
-	 				}
-	 				//bonos de abril
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("04")
-	 	 				   && s.getTipoSalario().equals("3"))
-	 				{
-	 					abrilBono += s.getSalario();
-	 				}
-	 				//bonos de mayo
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("05")
-	 	 				   && s.getTipoSalario().equals("3"))
-	 				{
-	 					mayoBono += s.getSalario();
-	 				}
-	 				//bonos de junio
-	 				if(formatAnio.equals(listAnio) && formatMes.equals("06")
-	 	 				   && s.getTipoSalario().equals("3"))
-	 				{
-	 					junioBono += s.getSalario();
+	 					Bono += s.getSalario();
 	 				}
 	 				//*********************************************************************************
 	 				
 	 				
 	 			}//fin for salario
-	 			enero 	= enero + eneroBono;
-	 			febrero = febrero + febreroBono;
-	 			marzo 	= marzo + marzoBono;
-	 			abril 	= abril + abrilBono;
-	 			mayo 	= mayo + mayoBono;
-	 			junio 	= junio + junioBono;
-	 			salarioBaseCalculo = (enero + febrero + marzo + abril + mayo + junio) / 6;
+	 			
 
-	 			if(tipo.equals("2") || tipo.equals("3")){
-	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
-	 						,""+Cantidad.getText(), "1", "1",fecha.getValue());
-	 			}if(tipo.equals("4")){
-	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Bono 14 del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
-	 			}if(tipo.equals("5")){
-	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Aguinaldo del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
-	 			}if(tipo.equals("6")){
-	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Vacaciones del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
-	 			}if(tipo.equals("7")){
-	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Indemnizacion del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+ 				//****************************************calculo de planilla del mes a calcular*****************************************
+	 			
+	 			if(Integer.parseInt(listMes) == 01){
+	 				salarioCalculo = (float) (enero - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 02){
+	 				salarioCalculo = (float) (febrero- (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 03){
+	 				salarioCalculo = (float) (marzo - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 04){
+	 				salarioCalculo = (float) (abril - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 05){
+	 				salarioCalculo = (float) (mayo - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 06){
+	 				salarioCalculo = (float) (junio - (salarioCalculo*4.83/100) + Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 07){
+	 				salarioCalculo = (float) (julio - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 8){
+	 				salarioCalculo = (float) (agosto - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 9){
+	 				salarioCalculo = (float) (septiembre - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 10){
+	 				salarioCalculo = octubre + Bono;
+	 				
+	 			}else if(Integer.parseInt(listMes) == 11){
+	 				salarioCalculo = (float) (noviembre - (salarioCalculo*4.83/100)+ Bono);
+	 				
+	 			}else if(Integer.parseInt(listMes) == 12){
+	 				salarioCalculo = (float) (diciembre - (salarioCalculo*4.83/100)+ Bono);
+	 				
 	 			}
+	 			
+	 			//aqui se crea cada fila con sus respectivas columnas para el excel
 	 			enero = 0;
 	 			febrero = 0;
 	 			marzo = 0;
 	 			abril = 0;
 	 			mayo = 0;
 	 			junio = 0;
+	 			julio = 0;
+	 			agosto = 0;
+	 			septiembre = 0;
+	 			octubre = 0;
+	 			noviembre = 0;
+	 			diciembre = 0;
 	 			
-	 			eneroBono = 0;
-	 			febreroBono = 0;
-	 			marzoBono = 0;
-	 			abrilBono = 0;
-	 			mayoBono = 0;
-	 			junioBono = 0;
+	 			Bono = 0;
 	 		}//fin for empleado
 
 	        load.invisible();

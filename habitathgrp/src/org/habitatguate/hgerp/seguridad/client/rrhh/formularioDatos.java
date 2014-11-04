@@ -1177,6 +1177,8 @@ public class formularioDatos extends Composite {
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
+				//Window.open("/ExportAs?abracadabra="+id_empleado,"_blank", "");
+				
 			}
 		});
 		btnImprimir.setText("Imprimir");

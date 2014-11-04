@@ -69,6 +69,11 @@ public class MenuPrincipal extends Composite {
 	    	   rrhh6();
 	       }
 	     };
+	     Command cmdrrhh7 = new Command() {
+	       public void execute() {
+	    	   rrhh7();
+	       }
+	     };
 	     
 
 	     Command cmdempleado1 = new Command() {
@@ -109,12 +114,12 @@ public class MenuPrincipal extends Composite {
 	    MenuBar MenuInforme = new MenuBar(true);
 	    MenuInforme.setAnimationEnabled(true);
 	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
+	    MenuInforme.addSeparator();
+	    MenuInforme.addItem("Informe Bancos", cmdrrhh7);
 	    //MenuInforme.addSeparator();
-	   // MenuInforme.addItem("Informe Bancos", cmdrrhh6);
+	    //MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
 	    MenuInforme.addSeparator();
-	    MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
-	    MenuInforme.addSeparator();
-	    MenuInforme.addItem("Informe de prestaciones", cmdrrhh3);
+	    MenuInforme.addItem("Informe de Salarios", cmdrrhh3);
 	    
 	     //recursos humano menu
 	    MenuBar MenuRecursosHumanos = new MenuBar(true);
@@ -237,6 +242,16 @@ public class MenuPrincipal extends Composite {
  		this.nuevo.getGrid().setSize("100%", "100%");
  		this.nuevo.getGrid().clearCell(1, 0);
  		this.nuevo.getGrid().setWidget(1, 0, buscador);
+	}
+	
+
+//	@UiHandler("rrhh7")
+	void rrhh7() {
+		CrearPrestacionesLaborales nuevo = new CrearPrestacionesLaborales();
+ 		this.nuevo.getGrid().setSize("100%", "100%");
+ 		this.nuevo.getGrid().clearCell(1, 0);
+ 		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {

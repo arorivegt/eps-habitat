@@ -20,6 +20,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
  <url-pattern>/ExportAs</url-pattern>  
 </servlet-mapping>  
   
+    <servlet>
+    <servlet-name>ExportBancos</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportBancos</servlet-class>
+  </servlet>
+<servlet-mapping>  
+ <servlet-name>ExportBancos</servlet-name>  
+ <url-pattern>/ExportBancos</url-pattern>  
+</servlet-mapping> 
+  
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/seguridad/login</url-pattern>

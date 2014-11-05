@@ -1180,18 +1180,10 @@ public class formularioDatos extends Composite {
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				tabla = "<tr><td>Primer Nombre</td><td>Segundo Nombre</td></tr><tr><td>"+txtPrimerNombre.getText()+"</td><td>"+txtSegundoNombre.getText()+"</td></tr>"
-						+"<tr><td>Primer Apellido</td><td>Segundo Apellido</td></tr><tr><td>"+txtPrimerApellido.getText()+"</td><td>"+txtSegundoApellido.getText()+"</td></tr>"
-						+"<tr><td>Estado Civil</td><td>Sexo</td></tr><tr><td>"+listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex())+"</td><td>"+listSexo.getItemText(listSexo.getSelectedIndex())+"</td></tr>"
-						+"<tr><td>Pais</td><td>Fecha Nacimiento</td></tr><tr><td>"+listPais.getItemText(listPais.getSelectedIndex())+"</td><td>"+dateAnnioNacimiento.getTextBox().getText()+"</td></tr>"
-						+"<tr><td>DPI</td><td>NIT</td></tr><tr><td>"+txtDPI.getText()+"</td><td>"+txtNit.getText()+"</td></tr>"
-						+"<tr><td>Telefono Casa</td><td>Telefono Celular</td></tr><tr><td>"+txtTelefonoCasa.getText()+"</td><td>"+txtTelefonoCelular.getText()+"</td></tr>"
-						+"<tr><td>Correo</td><td>Direccion</td></tr><tr><td>"+txtCorreoElectronico.getText()+"</td><td>"+txtDireccion.getText()+"</td></tr>";
-				//Window.alert(tabla);
-				formPanel.setAction("/ExportAs?tabla="+tabla);
+				formPanel.setAction("/ExportAs?id="+id_empleado);
 				formPanel.submit();
 				//Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
-				//Window.open("/ExportAs?abracadabra="+id_empleado,"_blank", "");
+				//Window.open("/ExportAs?id="+id_empleado,"_blank", "");
 				
 			}
 		});
@@ -1207,8 +1199,8 @@ public class formularioDatos extends Composite {
 		btnExportarDatos.setSize("229px", "44px");
 		
 		formPanel = new FormPanel();
-		formPanel.setAction("/ExportAs?tabla="+tabla);
-		formPanel.setEncoding(FormPanel.METHOD_POST);
+		formPanel.setAction("/ExportAs?id="+id_empleado);
+		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
 		verticalPanel = new VerticalPanel();
 		formPanel.setWidget(verticalPanel);

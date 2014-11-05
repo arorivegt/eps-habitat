@@ -44,50 +44,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
     private ListBox listAnnio;
     private Label lblAoDelReporte;
     private List<DatosMinisterioTrabajo> DATOS;
-    private String xmlInicio = "<table><tbody>"
-				+"<tr>"
-				+"<td>No. de empleado</td>"	
-				+"<td>Tipo Documento Identificación</td>"
-				+"<td>Documento Identificación</td>"	
-				+"<td>Pais Origen</td>"	
-				+"<td>Lugar Nacimiento</td>"	
-				+"<td>Nit Empleado</td>"	
-				+"<td>IGSS Empleado</td>"
-				+"<td>Deportado de algún País</td>"	
-				+"<td>Nombre1</td>"	
-				+"<td>Nombre2</td>"	
-				+"<td>Nombre3</td>"	
-				+"<td>Apellido1</td>"	
-				+"<td>Apellido2</td>"	
-				+"<td>Estado Civil</td>"	
-				+"<td>Número Hijos</td>"	
-				+"<td>Fecha Nacimiento</td>"	
-				+"<td>Edad aprox.</td>"	 
-				+"<td>Sexo (M) O (F)</td>"	
-				+"<td>Tiempo de laborar</td>"	
-				+"<td>Puesto</td>"	 
-				+"<td>Dias Trabajados Año</td>"	
-				+"<td>Descanso Semanal</td>"	
-				+"<td>Jornada</td>"	
-				+"<td>Horas al Día</td>"	
-				+"<td>Salario Mensual Nominal</td>"	
-				+"<td>Decreto 78-89  (Q.250.00)</td>"	
-				+"<td>Total Horas Extras</td>"	
-				+"<td>Valor de Hora Extra </td>"	
-				+"<td>Aguinaldo Decreto 76-78</td>"	
-				+"<td>Bono 14 decreto 42-92</td>"	
-				+"<td>Comisiones</td>"	
-				+"<td>Nivel Academico</td>"	
-				+"<td>Profesión</td>"
-				+"<td>Etnia</td>"	 
-				+"<td>Idiomas</td>"	
-				+"<td>Permiso Trabajo</td>"	
-				+"<td>Tipo Contrato</td>"	
-				+"<td>Indemnización (Articulo 82)</td>"
-				+"<td>Otros Pagos</td>"
-				+"</tr>";
-
-	String  xmlFinal = "</tbody></table>";
+  
 	private FormPanel formPanel;
 	private VerticalPanel verticalPanel;
 	private Button button;
@@ -215,9 +172,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		
 		formPanel = new FormPanel();
 		absolutePanel.add(formPanel, 708, 21);
-		formPanel.setMethod(FormPanel.METHOD_POST);
+		formPanel.setMethod(FormPanel.ENCODING_MULTIPART);
 		formPanel.setEncoding(FormPanel.METHOD_POST);
-		formPanel.setAction("/ExportAs?tabla=1");
+		formPanel.setAction("/ExportAs?id=2");
 		formPanel.setSize("209px", "44px");
 		
 		verticalPanel = new VerticalPanel();
@@ -227,8 +184,17 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				System.out.println("/ExportAs?tabla="+DATOS+"");
-				formPanel.setAction("/ExportAs?tabla="+DATOS+"");
+
+				formPanel.setAction("/ExportAs?id=3");
+				formPanel.submit();
+				char tipo = '5';
+				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
+					tipo = '2';
+				else
+					tipo = '5';
+				
+				System.out.println("/ExportAs?tipo="+tipo+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex()));
+				formPanel.setAction("/ExportAs");
 				formPanel.submit();
 			}
 		});
@@ -268,29 +234,21 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					DatosMinisterioTrabajo empleado = new DatosMinisterioTrabajo();
 					
 					empleado.setNoEmpleado(""+i);
-					xmlInicio += "<td>"+i+"</td>";
 					
 					try{
 						if(p.getPais().equals("83")){
 							empleado.setTipoIdentificacion("2");
 							empleado.setDocumentoIdentificacion(p.getCui());
-							xmlInicio += "<td>2</td>";
-							xmlInicio += "<td>"+p.getCui()+"</td>";
 						}
 						else{
 							empleado.setTipoIdentificacion("4");
 							empleado.setDocumentoIdentificacion(p.getNo_pasaporte());
-							xmlInicio += "<td>4</td>";
-							xmlInicio += "<td>"+p.getCui()+"</td>";
 						}
 					}catch(Exception e){
 						empleado.setTipoIdentificacion("2");
 						empleado.setDocumentoIdentificacion("");
-						xmlInicio += "<td>2</td>";
-						xmlInicio += "<td>"+p.getCui()+"</td>";
 					}
 					empleado.setPaisOrigen(p.getPais());
-					xmlInicio += "<td>"+p.getPais()+"</td>";
 		
 					 String[] numerosComoArray2  = p.getDepto_municipio_nacimiento().split(",");
 					 String deptodir = "";
@@ -304,207 +262,154 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					 if(deptodir.equals("01")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("I"+"0"+munidir);
-								xmlInicio += "<td>"+"I"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("I"+"0"+munidir);
-								xmlInicio += "<td>"+"I"+munidir+"</td>";
 						 }
 					 }
 					 else if(deptodir.equals("15")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("II"+"0"+munidir);
-								xmlInicio += "<td>"+"II"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("II"+munidir);
-								xmlInicio += "<td>"+"II"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("16")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("II"+"0"+munidir);
-								xmlInicio += "<td>"+"II"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("II"+munidir);
-								xmlInicio += "<td>"+"II"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("02")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("III"+"0"+munidir);
-								xmlInicio += "<td>"+"III"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("III"+munidir);
-								xmlInicio += "<td>"+"III"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("18")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("III"+"0"+munidir);
-								xmlInicio += "<td>"+"III"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("III"+munidir);
-								xmlInicio += "<td>"+"III"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("19")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("III"+"0"+munidir);
-								xmlInicio += "<td>"+"III"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("III"+munidir);
-								xmlInicio += "<td>"+"III"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("20")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("III"+"0"+munidir);
-								xmlInicio += "<td>"+"III"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("III"+munidir);
-								xmlInicio += "<td>"+"III"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("06")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("IV"+"0"+munidir);
-								xmlInicio += "<td>"+"IV"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("IV"+munidir);
-								xmlInicio += "<td>"+"IV"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("21")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("IV"+"0"+munidir);
-								xmlInicio += "<td>"+"IV"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("IV"+munidir);
-								xmlInicio += "<td>"+"IV"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("22")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("IV"+"0"+munidir);
-								xmlInicio += "<td>"+"IV"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("IV"+munidir);
-								xmlInicio += "<td>"+"IV"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("03")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("V"+"0"+munidir);
-								xmlInicio += "<td>"+"V"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("V"+munidir);
-								xmlInicio += "<td>"+"V"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("04")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("V"+"0"+munidir);
-								xmlInicio += "<td>"+"V"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("V"+munidir);
-								xmlInicio += "<td>"+"V"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("05")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("V"+"0"+munidir);
-								xmlInicio += "<td>"+"V"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("V"+munidir);
-								xmlInicio += "<td>"+"V"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("07")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("08")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("09")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("10")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("11")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("12")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VI"+"0"+munidir);
-								xmlInicio += "<td>"+"VI"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VI"+munidir);
-								xmlInicio += "<td>"+"VI"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("13")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VII"+"0"+munidir);
-								xmlInicio += "<td>"+"VIII"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VII"+munidir);
-								xmlInicio += "<td>"+"VII"+"0"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("14")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VII"+"0"+munidir);
-								xmlInicio += "<td>"+"VIII"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VII"+munidir);
-								xmlInicio += "<td>"+"VIII"+munidir+"</td>";
 						 }}
 					 else if(deptodir.equals("17")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("VIII"+"0"+munidir);
-								xmlInicio += "<td>"+"VIII"+"0"+munidir+"</td>";
 						 }else{
 							 empleado.setLugarNacimiento("VIII"+munidir);
-								xmlInicio += "<td>"+"VIII"+munidir+"</td>";
 						 }}
 		
 					empleado.setNitEmpleado(p.getNit());
-					xmlInicio += "<td>"+p.getNit()+"</td>";
 					
 					empleado.setIGSSEmpleado(p.getAfiliacion_igss());
-					xmlInicio += "<td>"+p.getAfiliacion_igss()+"</td>";
 					
 					empleado.setDeportadoPais("");
-					xmlInicio += "<td>"+""+"</td>";
 					
 					empleado.setNombre1(p.getPrimer_nombre());
-					xmlInicio += "<td>"+p.getPrimer_nombre()+"</td>";
 					
 					empleado.setNombre2(p.getSegundo_nombre());
-					xmlInicio += "<td>"+p.getSegundo_nombre()+"</td>";
 					
 					//empleado.setNombre3(p.getPrimer_nombre());
-					xmlInicio += "<td>"+""+"</td>";
 					
 					empleado.setApellido1(p.getPrimer_apellido());
-					xmlInicio += "<td>"+p.getPrimer_apellido()+"</td>";
 					
 					empleado.setApellido2(p.getSegundo_apellido());
-					xmlInicio += "<td>"+p.getSegundo_apellido()+"</td>";
 					
 					empleado.setEstadoCivil(p.getEstado_civil());
-					xmlInicio += "<td>"+p.getEstado_civil()+"</td>";
 					
 					int NoHijos = 0;
 					for (AuxFamilia f : p.getFamilia()) {
@@ -512,7 +417,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							NoHijos++;
 					}
 					empleado.setNumeroHijos(""+NoHijos);
-					xmlInicio += "<td>"+NoHijos+"</td>";
 					
 					//fecha de naicmiento con formato dia/mes/año
 					DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
@@ -523,7 +427,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					String Anio = dtAnio.format(new Date(p.getFecha_nacimiento()));
 					
 					empleado.setFechaNacimiento(dia+"/"+Mes+"/"+Anio);
-					xmlInicio += "<td>"+dia+"/"+Mes+"/"+Anio+"</td>";
 					
 					//calculo de edad del empleado
 					//resta del año de actual - año nacimiento, para calcular edad aproximada
@@ -533,14 +436,11 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
 					
 					empleado.setEdad(""+edadtotal);
-					xmlInicio += "<td>"+edadtotal+"</td>";
 		
 					if(p.getSexo().equals("0")){
 						empleado.setSexo("F");
-						xmlInicio += "<td>"+"F"+"</td>";
 					}else{
 						empleado.setSexo("M");
-						xmlInicio += "<td>"+"M"+"</td>";
 					}
 					 Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
 					 String Anio2 = dtAnio.format(new Date());
@@ -549,11 +449,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					long diaslaborados = new Date().getTime()-p.getFecha_ingreso();
 					if(Integer.parseInt(Anio)< Integer.parseInt(Anio2)){
 						empleado.setTiempodelaborar("365");
-						xmlInicio += "<td>"+"365"+"</td>";
 					}else{
 						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
 						empleado.setTiempodelaborar(""+dialaboradoss);
-						xmlInicio += "<td>"+dialaboradoss+"</td>";
 					}
 		
 					String DescansoSemanal = "";
@@ -562,9 +460,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						if(f.isActivo()){
 							
 							empleado.setPuesto(f.getNombre_puesto());
-							xmlInicio += "<td>"+f.getNombre_puesto()+"</td>";
-							
-							xmlInicio += "<td>"+""+"</td>";
 
 							//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
 							
@@ -615,13 +510,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							}
 
 							empleado.setDescansoSemanal(DescansoSemanal);
-							xmlInicio += "<td>"+DescansoSemanal+"</td>";
 							
 							empleado.setJornada(jornada);
-							xmlInicio += "<td>"+jornada+"</td>";
 
 							empleado.setHorasAlDia(f.getHorasTrabajo());
-							xmlInicio += "<td>"+f.getHorasTrabajo()+"</td>";
 							break;
 						}
 					}
@@ -695,50 +587,35 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 				
 					}
 					empleado.setSalarioMensualNominal(""+salarioMensualNominal);
-					xmlInicio += "<td>"+salarioMensualNominal+"</td>";
 					
 					empleado.setDecreto7889(""+decreto7889);
-					xmlInicio += "<td>"+decreto7889+"</td>";
 					
 					empleado.setTotalHorasExtras("0");
-					xmlInicio += "<td>"+"0"+"</td>";
 					
 					empleado.setValordeHoraExtra("0");
-					xmlInicio += "<td>"+"0"+"</td>";
 					
 					empleado.setAguinaldo(""+aguinaldo);
-					xmlInicio += "<td>"+aguinaldo+"</td>";
 					
 					empleado.setBono14(""+bono14);
-					xmlInicio += "<td>"+bono14+"</td>";
 					
 					empleado.setComisiones(""+comisiones);
-					xmlInicio += "<td>"+comisiones+"</td>";
 					
 
 					empleado.setNivelAcademico(""+nivelAcademico);
-					xmlInicio += "<td>"+nivelAcademico+"</td>";
 					
 					empleado.setProfesion(profesion);
-					xmlInicio += "<td>"+profesion+"</td>";
 					
 					empleado.setEtnia(p.getEtnia());
-					xmlInicio += "<td>"+p.getEtnia()+"</td>";
 
 					empleado.setIdiomas(idioma);
-					xmlInicio += "<td>"+idioma+"</td>";
 
-					xmlInicio += "<td>"+""+"</td>";
 					//private String PermisoTrabajo;
 					
 					empleado.setTipoContrato("Indefinido");
-					xmlInicio += "<td>"+"Indefinido"+"</td>";
 					
 					empleado.setIndemnizacion(""+indemnizacion);
-					xmlInicio += "<td>"+indemnizacion+"</td>";
 					
 					empleado.setOtrosPagos(""+otrosPagos);
-					xmlInicio += "<td>"+otrosPagos+"</td></tr>";
 					
 					
 					
@@ -746,8 +623,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					i++;
 				}
 
-		 		xmlInicio = xmlInicio + xmlFinal;
-		 		System.out.println(xmlInicio);
 				ReporteMinisterioTrabajo nuevo = new ReporteMinisterioTrabajo(DATOS);
 				nuevo.AgregarColumna("1");
 				nuevo.AgregarColumna("2");

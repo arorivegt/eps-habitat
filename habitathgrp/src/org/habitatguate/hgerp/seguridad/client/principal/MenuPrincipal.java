@@ -190,7 +190,7 @@ public class MenuPrincipal extends Composite {
 	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 	    MenuVertical.addSeparator();
 	    
-	    MenuVertical.setAutoOpen(true);
+	    MenuVertical.setAutoOpen(false);
 	    MenuVertical.setAnimationEnabled(true);
 		    
 		    

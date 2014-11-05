@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.service;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -63,6 +64,7 @@ public class ImprimirPerfil extends HttpServlet {
 	            
 	            document.open();
 	            image1.setAlignment(Element.ALIGN_CENTER);
+	            image1.scaleAbsolute(50.0f, 50.0f);
 	            document.add(image1);
 	            document.add(new Paragraph("",catFont));
 	            document.add(new Paragraph("",catFont));
@@ -76,6 +78,8 @@ public class ImprimirPerfil extends HttpServlet {
 	            table.addCell(c1);
 	            table.setHeaderRows(1);
 
+		 		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+		 		
 	            table.addCell(new Paragraph(p.getPrimer_nombre(),catFont));
 	            table.addCell(new Paragraph(p.getSegundo_nombre(),catFont));
 	            table.addCell(new Paragraph("Primer Apellido",catFont2));
@@ -99,12 +103,13 @@ public class ImprimirPerfil extends HttpServlet {
 	            table.addCell(new Paragraph(p.getCelular(),catFont));
 	            table.addCell(new Paragraph(p.getTelefono(),catFont));
 	            table.addCell(new Paragraph("DPI",catFont2));
-	            table.addCell(new Paragraph("Cedula",catFont2));
-	            table.addCell(new Paragraph(p.getCui(),catFont));
 	            table.addCell(new Paragraph("Correo",catFont2));
-	            table.addCell(new Paragraph("Año de Nacimiento",catFont2));
+	            table.addCell(new Paragraph(p.getCui(),catFont));
 	            table.addCell(new Paragraph(p.getEmail(),catFont));
-	            table.addCell(new Paragraph(""+new Date(p.getFecha_nacimiento()),catFont));
+	            table.addCell(new Paragraph("Año de Nacimiento",catFont2));
+	            table.addCell(new Paragraph("Fecha Ingreso",catFont2));
+	            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_nacimiento())),catFont));
+	            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_ingreso())),catFont));
 	            document.add(table);
 	            /* Basic PDF Creation inside servlet */
 	          

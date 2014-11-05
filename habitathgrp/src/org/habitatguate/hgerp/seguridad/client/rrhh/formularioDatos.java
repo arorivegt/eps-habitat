@@ -1188,9 +1188,9 @@ public class formularioDatos extends Composite {
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				formPanel.setAction("/ExportAs?id="+id_empleado);
-				formPanel.submit();
-				//Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
+				//formPanel.setAction("/ImprimirPerfil?abracadabra="+id_empleado);
+				//formPanel.submit();
+				Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
 				//Window.open("/ExportAs?id="+id_empleado,"_blank", "");
 				
 			}
@@ -1200,6 +1200,7 @@ public class formularioDatos extends Composite {
 		btnImprimir.setStyleName("sendButton");
 		
 		btnExportarDatos = new Button("Send");
+		btnExportarDatos.setVisible(false);
 		btnExportarDatos.setText("Exportar Datos");
 		btnExportarDatos.setStylePrimaryName("sendButton");
 		btnExportarDatos.setStyleName("sendButton");
@@ -1207,9 +1208,9 @@ public class formularioDatos extends Composite {
 		btnExportarDatos.setSize("229px", "44px");
 		
 		formPanel = new FormPanel();
-		formPanel.setAction("/ExportAs?id="+id_empleado);
+		formPanel.setAction("/ImprimirPerfil?abracadabra="+id_empleado);
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
-		formPanel.setMethod(FormPanel.METHOD_POST);
+		formPanel.setMethod(FormPanel.METHOD_GET);
 		verticalPanel = new VerticalPanel();
 		formPanel.setWidget(verticalPanel);
 		verticalPanel.setSize("208px", "43px");

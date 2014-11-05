@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
@@ -120,14 +122,21 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		return "error";
 	}
-
+ 
 	@Override
 	public valores_sesion login_inicio(String user,String password) throws IllegalArgumentException {
 		valores_sesion vs = new valores_sesion();
+		
+		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		try{ 
 			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user);
 			if(e.getPassword().equals(md5(password))){
+				//si es correcto crea una nueva session para poder manejarlo en toda la aplicacion
+				HttpServletRequest request = this.getThreadLocalRequest();
+				HttpSession session = request.getSession(true);
+				session.setAttribute("usserHabitat", user);
+				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
 				vs.setCorrecto(true);
 				vs.setId_empleado(e.getId_empleado());
 			}else{
@@ -2153,6 +2162,47 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				}
 				System.out.println(valor.isEmpty());
 				 return valor ;
+		}
+
+		@Override
+		public Boolean CheqLog() throws IllegalArgumentException {
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			if (session == null || session.getAttribute("usserHabitat") == null){
+				return false;
+			}
+
+			System.out.println(session.getAttribute("usserHabitat"));
+			// session and userid is available, looks like user is logged in.
+			return true;
+		}
+
+		@Override
+		public Long obtenerId() throws IllegalArgumentException {
+			
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			String id =  session.getAttribute("idEmpleadoHabitat").toString();
+			if (session == null || session.getAttribute("idEmpleadoHabitat") == null){
+				return Long.parseLong(id);
+			}else{
+				System.out.println(session.getAttribute("idEmpleadoHabitat"));
+				return Long.parseLong(id);
+			}
+		}
+
+
+		@Override
+		public Boolean logout() throws IllegalArgumentException {
+
+			HttpServletRequest request = this.getThreadLocalRequest();
+			HttpSession session = request.getSession(false);
+			if (session == null)
+				return true;
+			session.invalidate();
+			return true;
 		}
 
 		

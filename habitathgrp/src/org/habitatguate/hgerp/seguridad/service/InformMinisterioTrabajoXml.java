@@ -13,7 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 
 
-public class EmpleadosXml {
+public class InformMinisterioTrabajoXml {
 
     private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
 	    private String xmlInicio = "<table><tbody>"

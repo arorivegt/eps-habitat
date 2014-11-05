@@ -913,4 +913,25 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void getPermisos(Long id,AsyncCallback<List<AuxVacaciones>> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void CheqLog(AsyncCallback<Boolean> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void obtenerId(AsyncCallback<Long> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void logout(AsyncCallback<Boolean> callback)throws IllegalArgumentException;
 }

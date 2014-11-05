@@ -23,10 +23,43 @@ public class Index implements EntryPoint {
         private Mensaje inicio;
         private Loading load ;
         private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-        
+        private Panel inicioPanel;
         @Override
         public void onModuleLoad() 
         {
+        	
+        	loginService.CheqLog(new AsyncCallback<Boolean>() 
+            {
+        		
+                    public void onFailure(Throwable caught) 
+                    {
+                    }
+                    
+                    public void onSuccess(Boolean result)
+                    {
+                    	System.out.println("rsultado1 : "+result);
+                    	if(result){
+                    		loginService.obtenerId(new AsyncCallback<Long>() 
+            	            {
+            	                    public void onFailure(Throwable caught) 
+            	                    {
+            	                    }
+            	                    
+            	                    public void onSuccess(Long results)
+            	                    {
+            	                    	System.out.println("rsultado2: "+results);
+                                		inicioPanel = new Panel();
+            	                    	inicioPanel.setId_empleado(results);
+                                    	RootPanel.get().clear();
+                                    	RootPanel.get().add(inicioPanel);
+            	                                                            
+            	                    }
+            	             });
+                    		
+                    	}
+                                                            
+                    }
+             });
         	load = new Loading();
             load.Mostrar();
             load.invisible();
@@ -70,10 +103,10 @@ public class Index implements EntryPoint {
                                             //si la autentificacion es correcta limpia y contruye el menu
                                            if(result.isCorrecto())
                                             {
-                                                    Panel inicio = new Panel();
-                                                    inicio.setId_empleado(result.getId_empleado());
+                                        	   		inicioPanel = new Panel();
+                                        	   		inicioPanel.setId_empleado(result.getId_empleado());
                                                     RootPanel.get().clear();
-                                                    RootPanel.get().add(inicio);
+                                                    RootPanel.get().add(inicioPanel);
                                             }else
                                             {
                                         		inicio.setMensaje("alert alert-error", "Error\n En el usuario y/o Contraseña");

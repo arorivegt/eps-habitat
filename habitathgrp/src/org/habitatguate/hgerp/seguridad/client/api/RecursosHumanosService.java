@@ -903,5 +903,26 @@ public interface RecursosHumanosService extends RemoteService {
      */
     List<AuxVacaciones> getPermisos(Long id)throws IllegalArgumentException;
     
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    Boolean CheqLog()throws IllegalArgumentException;
+    
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    Long obtenerId()throws IllegalArgumentException;
+    
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    Boolean logout()throws IllegalArgumentException;
+    
 }
 

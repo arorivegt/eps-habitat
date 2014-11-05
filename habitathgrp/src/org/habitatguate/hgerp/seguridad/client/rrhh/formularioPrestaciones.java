@@ -232,7 +232,10 @@ public class formularioPrestaciones  extends Composite  {
 	}
 	
 	public void insertar_actualizar(){
-		
+
+		float total = 0;
+		total = Float.parseFloat(this.txtPromedioSalario.getText())/Float.parseFloat(this.txtDiasAnnio.getText())*Float.parseFloat(this.txtDiasTrabajados.getText());
+		this.txtTotal.setText(""+total);
 		if(bandera) {
 			loginService.Insertar_Salario(this.idEmpleado, this.dateFecha.getValue(),
 					Float.parseFloat(this.txtTotal.getText()), this.codigoSalario, this.descripcion,new AsyncCallback<Long>(){

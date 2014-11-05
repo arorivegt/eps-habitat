@@ -50,7 +50,6 @@ public class formularioDatos extends Composite {
 	private Mensaje mensaje; 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
-	private String tabla = "";
 	private Long idJefe = 0L;
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
@@ -1095,82 +1094,91 @@ public class formularioDatos extends Composite {
 				}catch(Exception e){
 					dateFechaIngreso.setValue(new Date(1407518124684L));
 				}
-				depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
-				depto_municipio_uno = listNacimientoDepartamento.getValue(listNacimientoDepartamento.getSelectedIndex()) + "," +listNacimientoMunicipio.getValue(listNacimientoMunicipio.getSelectedIndex());
-				if(bandera){
-					loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
-							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getValue(listIVS.getSelectedIndex()), 
-							listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
-							noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()) , txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
-							txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
-							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
-							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
-							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
-							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
-							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe, new AsyncCallback<Long>() 
-	                        {
-	                            public void onFailure(Throwable caught) 
-	                            {
-	                		        load.invisible();
-	                            	mensaje.setMensaje("alert alert-error", 
-	                            			"Error !! \nal Guardar Datos");
-	                            }
+				if(txtPrimerApellido.getText().equals("") && txtSegundoApellido.getText().equals("")  
+						&& txtPrimerNombre.getText().equals("")  && txtSegundoNombre.getText().equals("") ){
 
-								@Override
-	                            public void onSuccess(Long result)
-	                            {
-
-							        load.invisible();
-	                            	id_empleado = result;
-	                            	empleado.id_empleado = result;
-	                            	bandera = false;
-	                            	if(tipo == 0)
-	                            		empleado.NuevasPestanas();
-	                            	else
-	                            		empleado.NuevasPestanasdos();
-	                            	empleado.familia_unica();
-	                            	mensaje.setMensaje("alert alert-success", 
-		                        			"Datos Guardados\n exitosamente!!!");
-	                            }
-
-	                     });
+                
+					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
+					depto_municipio_uno = listNacimientoDepartamento.getValue(listNacimientoDepartamento.getSelectedIndex()) + "," +listNacimientoMunicipio.getValue(listNacimientoMunicipio.getSelectedIndex());
+					if(bandera){
+						loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
+								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getValue(listIVS.getSelectedIndex()), 
+								listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
+								noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()) , txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+								txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
+								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
+								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
+								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
+								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
+								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe, new AsyncCallback<Long>() 
+		                        {
+		                            public void onFailure(Throwable caught) 
+		                            {
+		                		        load.invisible();
+		                            	mensaje.setMensaje("alert alert-error", 
+		                            			"Error !! \nal Guardar Datos");
+		                            }
+	
+									@Override
+		                            public void onSuccess(Long result)
+		                            {
+	
+								        load.invisible();
+		                            	id_empleado = result;
+		                            	empleado.id_empleado = result;
+		                            	bandera = false;
+		                            	if(tipo == 0)
+		                            		empleado.NuevasPestanas();
+		                            	else
+		                            		empleado.NuevasPestanasdos();
+		                            	empleado.familia_unica();
+		                            	mensaje.setMensaje("alert alert-success", 
+			                        			"Datos Guardados\n exitosamente!!!");
+		                            }
+	
+		                     });
+					}else{
+						
+						loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
+								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
+								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
+								listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
+								noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()),txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
+								txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
+								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
+								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
+								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
+								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
+								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
+								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,new AsyncCallback<Long>() 
+		                        {
+		                            public void onFailure(Throwable caught) 
+		                            {
+		                		        load.invisible();
+		                            	mensaje.setMensaje("alert alert-error", 
+		                            			"Error !! \nal Actualizar Datos");
+		                            }
+	
+									@Override
+		                            public void onSuccess(Long result)
+		                            {
+								        load.invisible();
+		                            	bandera = false;
+		                            	mensaje.setMensaje("alert alert-success", 
+					                			"Datos Actualizados\n exitosamente!!!");
+		                            }
+	
+		                     });
+					}
+					
 				}else{
-					
-					loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
-							listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
-							txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
-							listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
-							noCuenta.getText(),tipoCuenta.getValue(tipoCuenta.getSelectedIndex()) , nombreBanco.getValue(nombreBanco.getSelectedIndex()),txtDPI.getText(), txtTipoPasaporte.getText(), txtNoPasaporte.getText(), 
-							txtDireccion.getText(), depto_municipio_dos, txtCorreoElectronico.getText(), txtTelefonoCasa.getText(), 
-							txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
-							txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
-							txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-							Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
-							listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
-							listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-							txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,new AsyncCallback<Long>() 
-	                        {
-	                            public void onFailure(Throwable caught) 
-	                            {
-	                		        load.invisible();
-	                            	mensaje.setMensaje("alert alert-error", 
-	                            			"Error !! \nal Actualizar Datos");
-	                            }
-
-								@Override
-	                            public void onSuccess(Long result)
-	                            {
-							        load.invisible();
-	                            	bandera = false;
-	                            	mensaje.setMensaje("alert alert-success", 
-				                			"Datos Actualizados\n exitosamente!!!");
-	                            }
-
-	                     });
-					
+    		        load.invisible();
+                	mensaje.setMensaje("alert alert-error", 
+                			"Error !! \nNombresno pueden ir vacios");
 				}
 
 		        load.invisible();

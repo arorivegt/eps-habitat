@@ -50,6 +50,7 @@ public class formularioDatos extends Composite {
 	private Mensaje mensaje; 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
+	private String tabla = "";
 	private Long idJefe = 0L;
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
@@ -114,6 +115,7 @@ public class formularioDatos extends Composite {
     private TextBox txtTotal ;
     private ListBox listDireccionDepartamento ;
     private ListBox listIVS;
+    private FormPanel formPanel;
 
 	private String URLFile ="";
 	private String KeyFile ="";
@@ -147,6 +149,7 @@ public class formularioDatos extends Composite {
     private Label lblJefeInmediato;
     private Button btnOK;
     private Loading load ;
+    private VerticalPanel verticalPanel;
     /**
      * 
      * @param empleadoo
@@ -160,13 +163,14 @@ public class formularioDatos extends Composite {
     	load = new Loading();
         load.Mostrar();
         load.invisible();
-		
+  		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		absolutePanel.setSize("997px", "1557px");
 		initWidget(absolutePanel);
 		
 		getFormUrl();
+		
 		
 		image = new Image("images/imagenempresa.png");
 		image.setSize("167px", "158px");
@@ -1176,7 +1180,17 @@ public class formularioDatos extends Composite {
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
+				tabla = "<tr><td>Primer Nombre</td><td>Segundo Nombre</td></tr><tr><td>"+txtPrimerNombre.getText()+"</td><td>"+txtSegundoNombre.getText()+"</td></tr>"
+						+"<tr><td>Primer Apellido</td><td>Segundo Apellido</td></tr><tr><td>"+txtPrimerApellido.getText()+"</td><td>"+txtSegundoApellido.getText()+"</td></tr>"
+						+"<tr><td>Estado Civil</td><td>Sexo</td></tr><tr><td>"+listEstadoCivil.getItemText(listEstadoCivil.getSelectedIndex())+"</td><td>"+listSexo.getItemText(listSexo.getSelectedIndex())+"</td></tr>"
+						+"<tr><td>Pais</td><td>Fecha Nacimiento</td></tr><tr><td>"+listPais.getItemText(listPais.getSelectedIndex())+"</td><td>"+dateAnnioNacimiento.getTextBox().getText()+"</td></tr>"
+						+"<tr><td>DPI</td><td>NIT</td></tr><tr><td>"+txtDPI.getText()+"</td><td>"+txtNit.getText()+"</td></tr>"
+						+"<tr><td>Telefono Casa</td><td>Telefono Celular</td></tr><tr><td>"+txtTelefonoCasa.getText()+"</td><td>"+txtTelefonoCelular.getText()+"</td></tr>"
+						+"<tr><td>Correo</td><td>Direccion</td></tr><tr><td>"+txtCorreoElectronico.getText()+"</td><td>"+txtDireccion.getText()+"</td></tr>";
+				//Window.alert(tabla);
+				formPanel.setAction("/ExportAs?tabla="+tabla);
+				formPanel.submit();
+				//Window.open("/ImprimirPerfil?abracadabra="+id_empleado, "_blank", "");
 				//Window.open("/ExportAs?abracadabra="+id_empleado,"_blank", "");
 				
 			}
@@ -1184,8 +1198,6 @@ public class formularioDatos extends Composite {
 		btnImprimir.setText("Imprimir");
 		btnImprimir.setStylePrimaryName("sendButton");
 		btnImprimir.setStyleName("sendButton");
-		absolutePanel.add(btnImprimir, 319, 1501);
-		btnImprimir.setSize("229px", "44px");
 		
 		btnExportarDatos = new Button("Send");
 		btnExportarDatos.setText("Exportar Datos");
@@ -1193,6 +1205,19 @@ public class formularioDatos extends Composite {
 		btnExportarDatos.setStyleName("sendButton");
 		absolutePanel.add(btnExportarDatos, 591, 1500);
 		btnExportarDatos.setSize("229px", "44px");
+		
+		formPanel = new FormPanel();
+		formPanel.setAction("/ExportAs?tabla="+tabla);
+		formPanel.setEncoding(FormPanel.METHOD_POST);
+		formPanel.setMethod(FormPanel.METHOD_POST);
+		verticalPanel = new VerticalPanel();
+		formPanel.setWidget(verticalPanel);
+		verticalPanel.setSize("208px", "43px");
+        verticalPanel.add(btnImprimir);
+        btnImprimir.setSize("198px", "41px");
+        
+        absolutePanel.add(formPanel, 329, 1500);
+        formPanel.setSize("209px", "44px");
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
 		absolutePanel.add(lblNoDeAfiliacin, 37, 221);

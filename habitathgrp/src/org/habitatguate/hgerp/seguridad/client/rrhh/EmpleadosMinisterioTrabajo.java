@@ -29,6 +29,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Button;
 
 public class EmpleadosMinisterioTrabajo extends Composite  {
 
@@ -40,10 +43,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
     private Loading load ;
     private ListBox listAnnio;
     private Label lblAoDelReporte;
-    private String xmlInicio = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
-				+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
-				+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>"
-				+"</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table><tbody>"
+    private List<DatosMinisterioTrabajo> DATOS;
+    private String xmlInicio = "<table><tbody>"
 				+"<tr>"
 				+"<td>No. de empleado</td>"	
 				+"<td>Tipo Documento Identificación</td>"
@@ -86,7 +87,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				+"<td>Otros Pagos</td>"
 				+"</tr>";
 
-	String  xmlFinal = "</tbody></table></body></html>";
+	String  xmlFinal = "</tbody></table>";
+	private FormPanel formPanel;
+	private VerticalPanel verticalPanel;
+	private Button button;
 	public EmpleadosMinisterioTrabajo() {
 		
 		grid = new Grid(2, 1);
@@ -209,6 +213,31 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		absolutePanel.add(lblAoDelReporte, 403, 10);
 		lblAoDelReporte.setSize("173px", "13px");
 		
+		formPanel = new FormPanel();
+		absolutePanel.add(formPanel, 708, 21);
+		formPanel.setMethod(FormPanel.METHOD_POST);
+		formPanel.setEncoding(FormPanel.METHOD_POST);
+		formPanel.setAction("/ExportAs?tabla=1");
+		formPanel.setSize("209px", "44px");
+		
+		verticalPanel = new VerticalPanel();
+		formPanel.setWidget(verticalPanel);
+		verticalPanel.setSize("208px", "43px");
+		
+		button = new Button("Send");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				System.out.println("/ExportAs?tabla="+DATOS+"");
+				formPanel.setAction("/ExportAs?tabla="+DATOS+"");
+				formPanel.submit();
+			}
+		});
+		button.setText("Exportar");
+		button.setStylePrimaryName("sendButton");
+		button.setStyleName("sendButton");
+		verticalPanel.add(button);
+		button.setSize("198px", "41px");
+		
 	}
 	
 	public void busqueda(){
@@ -232,7 +261,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			@Override
 		public void onSuccess( List<AuxEmpleado> result)
 		{
-				List<DatosMinisterioTrabajo> DATOS = new ArrayList<DatosMinisterioTrabajo>();
+				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				
 				for (AuxEmpleado p : result) {

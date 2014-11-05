@@ -33,7 +33,7 @@ public class ExportAs extends HttpServlet {
 				+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
 				+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 
-		String  xmlFinal =inicio+ n.busqueda('2', "", "2014");
+		String  xmlFinal =inicio+ n.busqueda(tipo.charAt(0), estado, annio);
 		
 		PrintWriter out = response.getWriter();
 		out.write(xmlFinal);

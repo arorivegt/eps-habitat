@@ -169,24 +169,11 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		lblAoDelReporte.setStyleName("label");
 		absolutePanel.add(lblAoDelReporte, 403, 10);
 		lblAoDelReporte.setSize("173px", "13px");
-		
-		formPanel = new FormPanel();
-		absolutePanel.add(formPanel, 708, 21);
-		formPanel.setMethod(FormPanel.ENCODING_MULTIPART);
-		formPanel.setEncoding(FormPanel.METHOD_POST);
-		formPanel.setAction("/ExportAs?id=2");
-		formPanel.setSize("209px", "44px");
-		
-		verticalPanel = new VerticalPanel();
-		formPanel.setWidget(verticalPanel);
-		verticalPanel.setSize("208px", "43px");
-		
+
 		button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				formPanel.setAction("/ExportAs?id=3");
-				formPanel.submit();
 				char tipo = '5';
 				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("todos"))
 					tipo = '2';
@@ -194,15 +181,29 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					tipo = '5';
 				
 				System.out.println("/ExportAs?tipo="+tipo+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex()));
-				formPanel.setAction("/ExportAs");
+				formPanel.setAction("/ExportAs?tipo="+tipo+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex()));
 				formPanel.submit();
 			}
 		});
 		button.setText("Exportar");
 		button.setStylePrimaryName("sendButton");
 		button.setStyleName("sendButton");
-		verticalPanel.add(button);
 		button.setSize("198px", "41px");
+
+		formPanel = new FormPanel();
+		formPanel.setAction("/ExportAs?tipo="+"0"+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex()));
+		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
+		formPanel.setMethod(FormPanel.METHOD_POST);
+		
+		verticalPanel = new VerticalPanel();
+		formPanel.setWidget(verticalPanel);
+		verticalPanel.setSize("208px", "43px");
+        verticalPanel.add(button);
+		absolutePanel.add(formPanel, 708, 21);
+        formPanel.setSize("209px", "44px");
+        
+		
+
 		
 	}
 	

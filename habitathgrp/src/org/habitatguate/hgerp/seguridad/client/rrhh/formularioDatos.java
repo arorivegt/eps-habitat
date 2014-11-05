@@ -1210,6 +1210,7 @@ public class formularioDatos extends Composite {
         
         absolutePanel.add(formPanel, 329, 1500);
         formPanel.setSize("209px", "44px");
+        
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
 		absolutePanel.add(lblNoDeAfiliacin, 37, 221);

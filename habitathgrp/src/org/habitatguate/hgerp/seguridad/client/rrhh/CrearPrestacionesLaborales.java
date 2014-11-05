@@ -284,8 +284,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listTipoPrestaciones.addItem("Bonificacion", "3");
 		listTipoPrestaciones.addItem("Bono 14", "4");
 		listTipoPrestaciones.addItem("Aguinaldo", "5");
-		listTipoPrestaciones.addItem("Vacaciones", "6");
-		listTipoPrestaciones.addItem("Indemnizacion", "7");
+		//listTipoPrestaciones.addItem("Vacaciones", "6");
+		//listTipoPrestaciones.addItem("Indemnizacion", "7");
 		listTipoPrestaciones.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");

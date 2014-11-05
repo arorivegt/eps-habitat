@@ -353,6 +353,7 @@ public class InformBancosXml {
 	 			diciembre = 0;
 	 			
 	 			Bono = 0;
+	 			i++;
 	 		}//fin for empleado
 	 		xmlInicio = xmlInicio + xmlFinal;
 	 		return xmlInicio;

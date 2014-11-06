@@ -22,8 +22,8 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -68,15 +68,14 @@ public class BuscadorEmpleados extends Composite   {
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		txtDato1 = new SuggestBox(createCountriesOracle());
-		//modificar para que sea un solo enter
-		txtDato1.addKeyDownHandler(new KeyDownHandler() {
-		    @Override
-		    public void onKeyDown(KeyDownEvent event) {
-		     if(event.getNativeKeyCode() == KeyCodes.KEY_ENTER) 
-		     {
-					busqueda();
-		     }
-		    }
+		txtDato1.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+
+			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
+			     {
+						busqueda();
+			     }
+			}
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");

@@ -916,6 +916,13 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     Long obtenerId()throws IllegalArgumentException;
+
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    Long obtenerIdAfiliado()throws IllegalArgumentException;
     
     /**
      * 

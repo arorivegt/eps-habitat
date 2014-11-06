@@ -7,11 +7,15 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.Date;
+import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -50,11 +54,13 @@ public class formularioDatos extends Composite {
 	private Mensaje mensaje; 
 	private Empleados empleado;
 	private Long id_empleado = 0L;
+	private Long id_afiliado = 0L;
 	private Long idJefe = 0L;
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync service = GWT.create(SqlService.class);
     
     private Label label_16 ;
     private Label label_17;
@@ -149,6 +155,8 @@ public class formularioDatos extends Composite {
     private Button btnOK;
     private Loading load ;
     private VerticalPanel verticalPanel;
+    private ListBox listAfiliado;
+    private Label lblAfiliado;
     /**
      * 
      * @param empleadoo
@@ -1052,7 +1060,7 @@ public class formularioDatos extends Composite {
 		txtTotal.setMaxLength(50);
 		txtTotal.setSize("227px", "34px");
 		txtTotal.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTotal, 596, 1353);
+		absolutePanel.add(txtTotal, 585, 1353);
 		
 		txtJefeInmediato = new IntegerBox();
 		txtJefeInmediato.setEnabled(false);
@@ -1094,8 +1102,8 @@ public class formularioDatos extends Composite {
 				}catch(Exception e){
 					dateFechaIngreso.setValue(new Date(1407518124684L));
 				}
-				if(txtPrimerApellido.getText().equals("") && txtSegundoApellido.getText().equals("")  
-						&& txtPrimerNombre.getText().equals("")  && txtSegundoNombre.getText().equals("") ){
+				if(!txtPrimerApellido.getText().equals("") && !txtSegundoApellido.getText().equals("")  
+						&& !txtPrimerNombre.getText().equals("")  && !txtSegundoNombre.getText().equals("") ){
 
                 
 					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
@@ -1113,7 +1121,8 @@ public class formularioDatos extends Composite {
 								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe, new AsyncCallback<Long>() 
+								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
+								Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),new AsyncCallback<Long>() 
 		                        {
 		                            public void onFailure(Throwable caught) 
 		                            {
@@ -1142,6 +1151,25 @@ public class formularioDatos extends Composite {
 		                     });
 					}else{
 						
+						if(id_afiliado==0L)
+						{
+							id_afiliado = Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex()));							
+						}
+						if(!listAfiliado.getValue(listAfiliado.getSelectedIndex()).equals("0")){
+							service.Actualizar_AfiliadoEmpleado(Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),
+									id_empleado,new AsyncCallback<Long>(){
+							    public void onFailure(Throwable caught) 
+							    {
+							    	
+							    }
+							
+								@Override
+							    public void onSuccess(Long result)
+							    {
+									
+							    }
+							});
+						}
 						loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
@@ -1154,7 +1182,8 @@ public class formularioDatos extends Composite {
 								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
-								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,new AsyncCallback<Long>() 
+								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
+								id_afiliado,new AsyncCallback<Long>() 
 		                        {
 		                            public void onFailure(Throwable caught) 
 		                            {
@@ -1178,7 +1207,7 @@ public class formularioDatos extends Composite {
 				}else{
     		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
-                			"Error !! \nNombresno pueden ir vacios");
+                			"Error !! \nNombres no pueden ir vacios");
 				}
 
 		        load.invisible();
@@ -1219,6 +1248,11 @@ public class formularioDatos extends Composite {
         
         absolutePanel.add(formPanel, 329, 1500);
         formPanel.setSize("209px", "44px");
+		
+		listAfiliado = new ListBox();
+		listAfiliado.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(listAfiliado, 308, 1420);
+		listAfiliado.setSize("230px", "36px");
         
 		Label lblNoDeAfiliacin = new Label("No. De Afiliacion al IGSS");
 		lblNoDeAfiliacin.setStyleName("label");
@@ -1463,6 +1497,32 @@ public class formularioDatos extends Composite {
 		lblJefeInmediato.setStyleName("label");
 		absolutePanel.add(lblJefeInmediato, 36, 1395);
 		lblJefeInmediato.setSize("192px", "19px");
+		
+		lblAfiliado = new Label("Afiliado");
+		lblAfiliado.setStyleName("label");
+		absolutePanel.add(lblAfiliado, 308, 1397);
+		lblAfiliado.setSize("192px", "19px");
+		
+
+		
+		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		    }
+		
+			@Override
+		    public void onSuccess(List<AuxAfiliado> result)
+		    {
+				listAfiliado.addItem("nada seleccionado", ""+0);
+				if(!result.isEmpty()){
+					for(AuxAfiliado af: result)
+					{
+						listAfiliado.addItem(af.getNomAfiliado(), ""+af.getIdAfiliado());
+						
+					}
+				}
+		    }
+		});
 	}
 	/**
 	 * metodo para obtener los municipios del departemento entrante
@@ -1919,8 +1979,19 @@ public class formularioDatos extends Composite {
 		    String KeyFile,String Estado,String pasaporte, String licencia, String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,String depto_nacimiento,
-            String municipio_nacimiento, Long Jefe_Inmediato)
+            String municipio_nacimiento, Long Jefe_Inmediato, Long afiliado)
 	{
+		if(afiliado==0L){
+			id_afiliado = 0L;
+			listAfiliado.setVisible(true);
+		}else{
+			id_afiliado = afiliado;
+			listAfiliado.setVisible(false);
+			listAfiliado.setEnabled(false);
+			lblAfiliado.setVisible(false);
+			
+		}
+		System.out.println(id);
 		this.idJefe = Jefe_Inmediato;
 		this.txtJefeInmediato.setText(""+Jefe_Inmediato);
 		this.KeyFile = KeyFile;
@@ -2112,6 +2183,11 @@ public class formularioDatos extends Composite {
 	 * invalida casiillas que solo se le presenta a un usuario en especifico
 	 */
 	public void Inavilitar_Casillas(){
+
+		lblAfiliado.setVisible(false);
+		
+		listAfiliado.setVisible(false);
+		listAfiliado.setEnabled(false);
 		txtCentroTrabajo.setVisible(false);
 		txtOcupacion.setVisible(false);
 		dateFechaIngreso.setVisible(false);

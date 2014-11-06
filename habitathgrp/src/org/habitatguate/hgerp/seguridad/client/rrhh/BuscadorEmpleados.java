@@ -341,6 +341,7 @@ public class BuscadorEmpleados extends Composite   {
         	@Override
         	public void onSuccess(AuxEmpleado result)
         	{
+        		System.out.println(result.getAfiliado());
 
         		try{
         			

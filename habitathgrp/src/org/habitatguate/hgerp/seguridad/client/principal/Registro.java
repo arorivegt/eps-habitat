@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
@@ -36,13 +37,13 @@ public class Registro extends Composite{
             load.Mostrar();
             load.invisible();
         	AbsolutePanel rootPanel = new AbsolutePanel();
-        	rootPanel.setSize("1038px", "671px");
+        	rootPanel.setSize("1038px", "815px");
             rootPanel.setStyleName("body");
             
             Label lblNewLabel_1 = new Label("");
             lblNewLabel_1.setStyleName("gwt-Label-new");
             rootPanel.add(lblNewLabel_1, 489, 98);
-            lblNewLabel_1.setSize("346px", "503px");
+            lblNewLabel_1.setSize("346px", "652px");
                     
            
             Label lblIniciarSesion = new Label("Formulario de Registro:");
@@ -70,17 +71,18 @@ public class Registro extends Composite{
             
             final TextBox txtNombre = new TextBox();
             txtNombre.setStyleName("gwt-PasswordTextBox");
-            txtNombre.getElement().setAttribute("placeHolder", "Nombre");
+            txtNombre.getElement().setAttribute("placeHolder", "Primer Nombre");
             rootPanel.add(txtNombre, 543, 381);
             txtNombre.setSize("325px", "49px");
-                                    
-            final TextBox txtApellido = new TextBox();
-            txtApellido.setStyleName("gwt-PasswordTextBox");
-            txtApellido.getElement().setAttribute("placeHolder", "Apellido");
-            rootPanel.add(txtApellido, 543, 447);
-            txtApellido.setSize("325px", "49px");
+            
+            final TextBox txtNombre2 = new TextBox();
+            txtNombre2.setStyleName("gwt-PasswordTextBox");
+            txtNombre2.getElement().setAttribute("placeHolder", "Segundo Nombre");
+            rootPanel.add(txtNombre2, 543, 444);
+            txtNombre2.setSize("325px", "49px");
 
             final DateBox dateBox = new DateBox();
+            dateBox.setValue(new Date());
             dateBox.getTextBox().setReadOnly(true);
             dateBox.setFireNullValues(true);
             dateBox.setStyleName("gwt-PasswordTextBox");
@@ -90,15 +92,23 @@ public class Registro extends Composite{
             dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
             dateBox.getDatePicker().setVisibleYearCount(100);
             
-            rootPanel.add(dateBox, 543, 512);
+            final TextBox txtApellido2 = new TextBox();
+            txtApellido2.setStyleName("gwt-PasswordTextBox");
+            txtApellido2.getElement().setAttribute("placeHolder", "Segundo Apellido");
+            
+            final TextBox txtApellido = new TextBox();
+            txtApellido.setStyleName("gwt-PasswordTextBox");
+            txtApellido.getElement().setAttribute("placeHolder", "Primer Apellido");
+            rootPanel.add(txtApellido, 543, 510);
+            txtApellido.setSize("325px", "49px");
+            rootPanel.add(txtApellido2, 543, 572);
+            txtApellido2.setSize("325px", "49px");
+            
+            rootPanel.add(dateBox, 543, 646);
             dateBox.setSize("325px", "49px");
 
             dateBox.setFormat(new DateBox.DefaultFormat 
             	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
-            
-            Label lblLleneLoQue = new Label("Llene lo que a contiuacion se le pide, todos los campos son obligatorios:");
-            rootPanel.add(lblLleneLoQue, 543, 124);
-            lblLleneLoQue.setSize("343px", "4px");
             
             Button button = new Button("Send");
             button.addClickHandler(new ClickHandler() {
@@ -107,50 +117,59 @@ public class Registro extends Composite{
 
                     load.visible();
                     String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(?:[a-zA-Z]{2,6})$";
-                    String pass = "^[A-Z][A-Za-z0-9]+{10}$";
+                    //String pass = "^[A-Z][A-Za-z0-9]+{10}$";
                     String  MensajeError = "";
                     boolean err = false;
                     boolean valid = false;
-                    boolean valid2 = false;
+                    boolean valid2 = true;
                     if(txtUser.getClass().toString().equals(String.class.toString())) {
                             valid = ((String)txtUser.getText()).matches(emailPattern);
                     } else {
                             valid = ((Object)txtUser.getText()).toString().matches(emailPattern);
                     }
                     
-                    if(txtPass.getClass().toString().equals(String.class.toString())) {
-                        valid2 = ((String)txtPass.getText()).matches(pass);
-	                } else {
-	                     valid2 = ((Object)txtPass.getText()).toString().matches(pass);
-	                }
+//                    if(txtPass.getClass().toString().equals(String.class.toString())) {
+//                        valid2 = ((String)txtPass.getText()).matches(pass);
+//	                } else {
+//	                     valid2 = ((Object)txtPass.getText()).toString().matches(pass);
+//	                }
                     
                     if(!valid){
                     	MensajeError = "\nEmail no valido";
                     	err = true;
                     }
-                    if(!valid2){
+                    else if(!valid2){
                     	MensajeError = "\nContraseña debe  Iniciar con:"
                     			+ "\n Mayuscula, seguido de letras o numero"
                     			+ "\n y debe tener un tamaño de 10";
                     	err = true;
                     }
-                    if(txtNombre.getText().equals("")){
+                    else if(txtNombre.getText().equals("")){
                     	MensajeError = "\nNombre no debe estar vacio";
                     	err = true;
-                    }if(txtApellido.getText().equals("")){
+                    }else if(txtApellido.getText().equals("")){
                     	MensajeError = "\nApellido no debe estar vacio";
                     	err = true;
                     	
-                    }if(!txtPass.getText().equals(txtRepitaPassword.getText())){
+                    }else if(txtNombre2.getText().equals("")){
+                    	MensajeError = "\nSegundo Nombre no debe estar vacio";
+                    	err = true;
+                    }else if(txtApellido2.getText().equals("")){
+                    	MensajeError = "\nSegundo Apellido no debe estar vacio";
+                    	err = true;
+                    	
+                    }else if(!txtPass.getText().equals(txtRepitaPassword.getText())){
                     	MensajeError = "\nContraseña  no son iguales";
                     	err = true;
                     }
                     
                     
                     if(err){
+                        load.invisible();
                     	inicio.setMensaje("alert alert-error", MensajeError);
                     }else{
-                    	loginService.Registro(txtUser.getText(),md5(txtPass.getText()),txtNombre.getText(), txtApellido.getText(),dateBox.getValue(),
+                    	loginService.Registro(txtUser.getText(),md5(txtPass.getText()),txtNombre.getText(), 
+                    			txtApellido.getText(),dateBox.getValue(),txtNombre2.getText(), txtApellido2.getText(),
                     			new AsyncCallback<String>() 
                                 {
                					 public void onFailure(Throwable caught) 
@@ -179,10 +198,14 @@ public class Registro extends Composite{
             
             button.setText("Aceptar");
             button.setStyleName("sendButton");
-            rootPanel.add(button, 543, 585);
+            rootPanel.add(button, 543, 719);
             button.setSize("327px", "44px");
             
             initWidget(rootPanel);
+            
+            Label lblLleneLoQue = new Label("Llene lo que a contiuacion se le pide, todos los campos son obligatorios:");
+            rootPanel.add(lblLleneLoQue, 543, 124);
+            lblLleneLoQue.setSize("343px", "4px");
             
 
         }

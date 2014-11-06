@@ -17,6 +17,9 @@ public class AuxEmpleado implements IsSerializable{
 	
 	 
     private String sexo;  
+    
+
+    private Long afiliado;  
 
 	 
     private String primer_apellido;
@@ -205,6 +208,16 @@ public class AuxEmpleado implements IsSerializable{
 
 	public String getSexo() {
 		return sexo;
+	}
+
+
+	public Long getAfiliado() {
+		return afiliado;
+	}
+
+
+	public void setAfiliado(Long afiliado) {
+		this.afiliado = afiliado;
 	}
 
 

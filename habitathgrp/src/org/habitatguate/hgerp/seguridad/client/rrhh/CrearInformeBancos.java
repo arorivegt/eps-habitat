@@ -21,6 +21,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -32,6 +33,8 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 
 public class CrearInformeBancos extends Composite   {
 
@@ -162,6 +165,45 @@ public class CrearInformeBancos extends Composite   {
 		listBox.setSize("179px", "39px");
 		
 		txtDato1 =  new SuggestBox(createCountriesOracle());
+		txtDato1.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+				if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER){
+					
+					String nombreArray[] = txtDato1.getText().split(" ");
+					String primerNombre = "";
+					String segundoNombre = "";
+					String segundoApellido = "";
+					String primerApellido =  "";
+
+					try{
+						 primerNombre = nombreArray[0];
+						 segundoNombre =  nombreArray[1];
+						 primerApellido =  nombreArray[2];
+						 segundoApellido = nombreArray[3];
+					}catch(Exception e){
+						 primerNombre = "";
+						 segundoNombre = "";
+						 segundoApellido = "";
+						 primerApellido =  "";
+					}
+					if(!txtDato1.getText().equals("")){
+
+						formPanel.setAction("/ExportBancos?tipo="+"1"
+								+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+								+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+								+"&primer_nombre="+primerNombre
+								+"&segundo_nombre="+segundoNombre
+								+"&primer_apellido="+primerApellido
+								+"&segundo_apellido="+segundoApellido
+								+"&DPI="+"a"
+								+"&Pasaporte="+"a"
+								+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+						formPanel.submit();
+					}
+				}
+
+			}
+		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDato1, 205, 19);

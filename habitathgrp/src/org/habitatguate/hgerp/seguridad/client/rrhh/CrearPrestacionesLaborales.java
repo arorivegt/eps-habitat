@@ -23,6 +23,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -35,6 +36,8 @@ import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 
 public class CrearPrestacionesLaborales extends Composite   {
 
@@ -173,6 +176,38 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listBox.setSize("179px", "39px");
 		
 		txtDato1 =  new SuggestBox(createCountriesOracle());
+		txtDato1.addKeyUpHandler(new KeyUpHandler() {
+			public void onKeyUp(KeyUpEvent event) {
+
+				if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER){
+
+					String nombreArray[] = txtDato1.getText().split(" ");
+					String primerNombre = "";
+					String segundoNombre = "";
+					String segundoApellido = "";
+					String primerApellido =  "";
+
+					try{
+						 primerNombre = nombreArray[0];
+						 segundoNombre =  nombreArray[1];
+						 primerApellido =  nombreArray[2];
+						 segundoApellido = nombreArray[3];
+					}catch(Exception e){
+						 primerNombre = "";
+						 segundoNombre = "";
+						 segundoApellido = "";
+						 primerApellido =  "";
+					}
+					System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
+					if(!txtDato1.getText().equals("")){
+						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
+								segundoApellido,txtDato1.getText(),txtDato1.getText()
+								,"");
+						grid.setWidget(1, 0,nuevo);
+					}
+				}
+			}
+		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDato1, 205, 19);

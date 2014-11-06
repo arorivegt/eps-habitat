@@ -82,6 +82,12 @@ public class MenuPrincipal extends Composite {
 	    	   empleado1();
 	       }
 	     };
+	     Command cmdCerrarSesion = new Command() {
+		       public void execute() {
+		    	   cerrarSesion();
+		       }
+		     };
+		     
 	     Command cmdempleado3 = new Command() {
 	       public void execute() {
 	    	   empleado3();
@@ -189,6 +195,7 @@ public class MenuPrincipal extends Composite {
 	    MenuVertical.addSeparator();
 	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 	    MenuVertical.addSeparator();
+	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 	    
 	    MenuVertical.setAutoOpen(false);
 	    MenuVertical.setAnimationEnabled(true);
@@ -258,6 +265,25 @@ public class MenuPrincipal extends Composite {
 	void empleado1() {
 		Empleado_registrado();
 	}
+	
+	void cerrarSesion() {
+		 loginService.logout(new AsyncCallback<Boolean>(){
+	        	
+	        	public void onFailure(Throwable caught) 
+	        	{
+	        		Window.alert("No se pudo cerrar sesion "+caught);
+	        	}
+
+	        	@Override
+	        	public void onSuccess(Boolean result)
+	        	{ 
+	        		if(result){
+	        			Window.Location.reload();
+	        		}
+	        	}
+	        });
+	}
+	
 	
 //	@UiHandler("empleado3")
 	void empleado3() {

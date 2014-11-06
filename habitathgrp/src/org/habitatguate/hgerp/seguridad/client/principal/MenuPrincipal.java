@@ -208,18 +208,18 @@ public class MenuPrincipal extends Composite {
 	            	                     	System.out.println("menu resultado : "+results);
 	             	                    	//si el rol es 1, entonces es empledo
 	             	                    	if(results == 1L){
-	             	                   	    
-	             	                   	    //agregar item para el menu
-	             	                   	    MenuVertical.addSeparator();
-	             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
-	             	                   	    MenuVertical.addSeparator();
-	             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-	             	                   	    
-	             	                   	    MenuVertical.setAutoOpen(false);
-	             	                   	    MenuVertical.setAnimationEnabled(true);
+
+		             	                   	    MenuVertical.setHeight("100%");
+	             	                    		//agregar item para el menu
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+		             	                   	    
+		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAnimationEnabled(true);
 	             	                   		    
 	             	                    	}else if(results == 2L){//si el rol es 2, entonces es RRHH
-		             	                   	    MenuVertical.setHeight("100%");
 		             	                   	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 

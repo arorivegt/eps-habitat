@@ -51,6 +51,12 @@ public class Registro extends Composite{
             rootPanel.add(lblIniciarSesion, 615, 98);
             
             Image image_2 = new Image("images/imagenempresa.png");
+
+            image_2.addClickHandler(new ClickHandler() {
+    			public void onClick(ClickEvent event) {
+	        			Window.Location.reload();
+    			}
+    		});
             rootPanel.add(image_2, 27, 10);
             image_2.setSize("386px", "136px");
             

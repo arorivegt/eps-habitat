@@ -12,6 +12,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -180,8 +181,10 @@ public class Registro extends Composite{
                					 public void onSuccess(String result)
                                   {
                			            load.invisible();
-               						 if(result.equals("no existe"))
+               						 if(result.equals("no existe")){
                							inicio.setMensaje("alert alert-success", "registro exitoso");
+               		        			Window.Location.reload();
+               							}
                						 else if(result.equals("error"))
                							inicio.setMensaje("alert alert-error", "error al registrar");
                						 else

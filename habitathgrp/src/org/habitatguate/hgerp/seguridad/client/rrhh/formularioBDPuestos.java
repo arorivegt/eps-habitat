@@ -161,7 +161,7 @@ public class formularioBDPuestos extends Composite {
 				EliminarFormularioSinDatos();
 			}
 		});
-		button.setText("Quitar formulario");
+		button.setText("Quitar");
 		button.setStylePrimaryName("sendButton");
 		button.setStyleName("sendButton");
 		absolutePanel.add(button, 763, 91);

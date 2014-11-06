@@ -693,16 +693,18 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 	}
 	
 	
-	public Long Actualizar_Afiliado(Long idAfiliado, Long idEmpleado){
+	public Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado){
+		Long valor = 0L;
 		if(idAfiliado == null){
-			return 0L;
+			return valor;
 		}else
 		{
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 			 final SegAfiliado e = gestorPersistencia.getObjectById(SegAfiliado.class, idAfiliado);
 			 e.getEmpleados().add(idEmpleado);
+			 valor = idEmpleado;
 		}
-		return 0L;
+		return valor;
 	}
 	
 	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{

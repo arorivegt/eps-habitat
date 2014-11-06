@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ExportAs
@@ -20,29 +21,34 @@ public class ExportAs extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InformMinisterioTrabajoXml n = new InformMinisterioTrabajoXml();
-		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "inline; Filename=document_name.xls");
-		
-		String tipo = request.getParameter("tipo");
-		String estado = request.getParameter("estado");
-		String annio = request.getParameter("annio");
-		System.out.println(tipo+" "+estado+" "+annio);
-		String  xmlFinal = "";
-		String inicio= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
-				+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
-				+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
-				+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 
-		try{
-			xmlFinal =inicio+ n.busqueda(tipo.charAt(0), estado, annio)+"</body></html>";
-		}catch(Exception e){
-			xmlFinal = "";
-		}
-		
-		PrintWriter out = response.getWriter();
-		out.write(xmlFinal);
-		
+		HttpSession session = request.getSession(false);
+        System.out.println(session.getAttribute("usserHabitat"));
+        if(session.getAttribute("usserHabitat") != null)
+        {  
+			InformMinisterioTrabajoXml n = new InformMinisterioTrabajoXml();
+			response.setContentType("application/vnd.ms-excel");
+			response.setHeader("Content-Disposition", "inline; Filename=document_name.xls");
+			
+			String tipo = request.getParameter("tipo");
+			String estado = request.getParameter("estado");
+			String annio = request.getParameter("annio");
+			System.out.println(tipo+" "+estado+" "+annio);
+			String  xmlFinal = "";
+			String inicio= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
+					+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
+					+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
+					+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
+	
+			try{
+				xmlFinal =inicio+ n.busqueda(tipo.charAt(0), estado, annio)+"</body></html>";
+			}catch(Exception e){
+				xmlFinal = "";
+			}
+			
+			PrintWriter out = response.getWriter();
+			out.write(xmlFinal);
+        }
 	}
 	
 //	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

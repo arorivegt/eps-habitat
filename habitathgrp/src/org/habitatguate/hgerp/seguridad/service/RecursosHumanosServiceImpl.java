@@ -2174,16 +2174,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 		@Override
 		public Boolean CheqLog() throws IllegalArgumentException {
-			HttpServletRequest request = this.getThreadLocalRequest();
-			// dont create a new one -> false
-			HttpSession session = request.getSession(false);
-			if (session == null || session.getAttribute("usserHabitat") == null){
+			try{
+				HttpServletRequest request = this.getThreadLocalRequest();
+				// dont create a new one -> false
+				HttpSession session = request.getSession(false);
+				if (session == null || session.getAttribute("usserHabitat") == null){
+					return false;
+				}
+	
+				System.out.println(session.getAttribute("usserHabitat"));
+				// session and userid is available, looks like user is logged in.
+				return true;
+			}catch(Exception e){
 				return false;
 			}
-
-			System.out.println(session.getAttribute("usserHabitat"));
-			// session and userid is available, looks like user is logged in.
-			return true;
 		}
 
 		@Override

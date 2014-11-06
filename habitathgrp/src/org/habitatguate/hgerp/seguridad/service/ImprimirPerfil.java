@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 
@@ -44,84 +45,87 @@ public class ImprimirPerfil extends HttpServlet {
         //browser will open the document only if this is set
         response.setContentType("application/pdf");
 
-        long abracadabra = Long.parseLong(request.getParameter("abracadabra"));
-        
-        p = loginService.Empleado_Registrado(abracadabra);
-        
-        OutputStream out = response.getOutputStream();
-       
-			//Get the output stream for writing PDF object  zzz
-	        try {
-	            Document document = new Document();
-	            PdfWriter.getInstance(document, out);
-	            Image image1 = null ;
-	            
-	            try{
-	            	image1 = Image.getInstance(new URL(p.getURLFile()));
-	            }catch(Exception e){
-	            	image1 = Image.getInstance("images/imagenempresa.png");
-	            }
-	            
-	            document.open();
-	            image1.setAlignment(Element.ALIGN_CENTER);
-	            image1.scaleAbsolute(50.0f, 50.0f);
-	            document.add(image1);
-	            document.add(new Paragraph("",catFont));
-	            document.add(new Paragraph("",catFont));
-	            document.add(new Paragraph("",catFont));
-	            PdfPTable table = new PdfPTable(2);
-	        	PdfPCell c1 = new PdfPCell(new Phrase("Primer Nombre",catFont2));
-	            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-	            table.addCell(c1);
-	            c1 = new PdfPCell(new Phrase("Segundo Nombre",catFont2));
-	            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-	            table.addCell(c1);
-	            table.setHeaderRows(1);
-
-		 		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-		 		
-	            table.addCell(new Paragraph(p.getPrimer_nombre(),catFont));
-	            table.addCell(new Paragraph(p.getSegundo_nombre(),catFont));
-	            table.addCell(new Paragraph("Primer Apellido",catFont2));
-	            table.addCell(new Paragraph("Segundo Apellido",catFont2));
-	            table.addCell(new Paragraph(p.getPrimer_apellido(),catFont));
-	            table.addCell(new Paragraph(p.getSegundo_apellido(),catFont));
-	            table.addCell(new Paragraph("Sexo",catFont2));
-	            table.addCell(new Paragraph("Estado Civil",catFont2));
-	            table.addCell(new Paragraph(p.getSexo(),catFont));
-	            table.addCell(new Paragraph(p.getEstado_civil(),catFont));
-	            table.addCell(new Paragraph("No Afiliado IGSS",catFont2));
-	            table.addCell(new Paragraph("NIT",catFont2));
-	            table.addCell(new Paragraph(p.getAfiliacion_igss(),catFont));
-	            table.addCell(new Paragraph(p.getNit(),catFont));
-	            table.addCell(new Paragraph("Pais",catFont2));
-	            table.addCell(new Paragraph("Direccion Actual",catFont2));
-	            table.addCell(new Paragraph(p.getPais(),catFont));
-	            table.addCell(new Paragraph(p.getDireccion_actual(),catFont));
-	            table.addCell(new Paragraph("Celular",catFont2));
-	            table.addCell(new Paragraph("Telefono",catFont2));
-	            table.addCell(new Paragraph(p.getCelular(),catFont));
-	            table.addCell(new Paragraph(p.getTelefono(),catFont));
-	            table.addCell(new Paragraph("DPI",catFont2));
-	            table.addCell(new Paragraph("Correo",catFont2));
-	            table.addCell(new Paragraph(p.getCui(),catFont));
-	            table.addCell(new Paragraph(p.getEmail(),catFont));
-	            table.addCell(new Paragraph("Año de Nacimiento",catFont2));
-	            table.addCell(new Paragraph("Fecha Ingreso",catFont2));
-	            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_nacimiento())),catFont));
-	            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_ingreso())),catFont));
-	            document.add(table);
-	            /* Basic PDF Creation inside servlet */
-	          
-	            document.close();
-	        }catch (DocumentException exc){
-	        	throw new IOException(exc.getMessage());
-	        }
-	        finally {            
-	            out.close();
-	        }
+		HttpSession session = request.getSession(false);
+        System.out.println(session.getAttribute("usserHabitat"));
+        if(session.getAttribute("usserHabitat") != null)
+        {  
+        	long abracadabra = Long.parseLong(request.getParameter("abracadabra"));
+	        p = loginService.Empleado_Registrado(abracadabra);
+	        
+	        OutputStream out = response.getOutputStream();
+	       
+				//Get the output stream for writing PDF object  zzz
+		        try {
+		            Document document = new Document();
+		            PdfWriter.getInstance(document, out);
+		            Image image1 = null ;
+		            
+		            try{
+		            	image1 = Image.getInstance(new URL(p.getURLFile()));
+		            }catch(Exception e){
+		            	image1 = Image.getInstance("images/imagenempresa.png");
+		            }
+		            
+		            document.open();
+		            image1.setAlignment(Element.ALIGN_CENTER);
+		            image1.scaleAbsolute(50.0f, 50.0f);
+		            document.add(image1);
+		            document.add(new Paragraph("",catFont));
+		            document.add(new Paragraph("",catFont));
+		            document.add(new Paragraph("",catFont));
+		            PdfPTable table = new PdfPTable(2);
+		        	PdfPCell c1 = new PdfPCell(new Phrase("Primer Nombre",catFont2));
+		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		            table.addCell(c1);
+		            c1 = new PdfPCell(new Phrase("Segundo Nombre",catFont2));
+		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
+		            table.addCell(c1);
+		            table.setHeaderRows(1);
+	
+			 		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+			 		
+		            table.addCell(new Paragraph(p.getPrimer_nombre(),catFont));
+		            table.addCell(new Paragraph(p.getSegundo_nombre(),catFont));
+		            table.addCell(new Paragraph("Primer Apellido",catFont2));
+		            table.addCell(new Paragraph("Segundo Apellido",catFont2));
+		            table.addCell(new Paragraph(p.getPrimer_apellido(),catFont));
+		            table.addCell(new Paragraph(p.getSegundo_apellido(),catFont));
+		            table.addCell(new Paragraph("Sexo",catFont2));
+		            table.addCell(new Paragraph("Estado Civil",catFont2));
+		            table.addCell(new Paragraph(p.getSexo(),catFont));
+		            table.addCell(new Paragraph(p.getEstado_civil(),catFont));
+		            table.addCell(new Paragraph("No Afiliado IGSS",catFont2));
+		            table.addCell(new Paragraph("NIT",catFont2));
+		            table.addCell(new Paragraph(p.getAfiliacion_igss(),catFont));
+		            table.addCell(new Paragraph(p.getNit(),catFont));
+		            table.addCell(new Paragraph("Pais",catFont2));
+		            table.addCell(new Paragraph("Direccion Actual",catFont2));
+		            table.addCell(new Paragraph(p.getPais(),catFont));
+		            table.addCell(new Paragraph(p.getDireccion_actual(),catFont));
+		            table.addCell(new Paragraph("Celular",catFont2));
+		            table.addCell(new Paragraph("Telefono",catFont2));
+		            table.addCell(new Paragraph(p.getCelular(),catFont));
+		            table.addCell(new Paragraph(p.getTelefono(),catFont));
+		            table.addCell(new Paragraph("DPI",catFont2));
+		            table.addCell(new Paragraph("Correo",catFont2));
+		            table.addCell(new Paragraph(p.getCui(),catFont));
+		            table.addCell(new Paragraph(p.getEmail(),catFont));
+		            table.addCell(new Paragraph("Año de Nacimiento",catFont2));
+		            table.addCell(new Paragraph("Fecha Ingreso",catFont2));
+		            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_nacimiento())),catFont));
+		            table.addCell(new Paragraph(fecha.format(new Date(p.getFecha_ingreso())),catFont));
+		            document.add(table);
+		            /* Basic PDF Creation inside servlet */
+		          
+		            document.close();
+		        }catch (DocumentException exc){
+		        	throw new IOException(exc.getMessage());
+		        }
+		        finally {            
+		            out.close();
+		        }
 		
-        
+        }
     }
 
   

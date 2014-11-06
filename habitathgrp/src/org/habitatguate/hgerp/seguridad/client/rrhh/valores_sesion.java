@@ -8,6 +8,8 @@ public class valores_sesion implements IsSerializable{
 	
 	private Long id_empleado;
 	
+	private Long id_rol;
+	
 	public valores_sesion() {
 	}
 
@@ -25,6 +27,20 @@ public class valores_sesion implements IsSerializable{
 
 	public void setId_empleado(Long id_empleado) {
 		this.id_empleado = id_empleado;
+	}
+
+	/**
+	 * @return the id_rol
+	 */
+	public Long getId_rol() {
+		return id_rol;
+	}
+
+	/**
+	 * @param id_rol the id_rol to set
+	 */
+	public void setId_rol(Long id_rol) {
+		this.id_rol = id_rol;
 	}
 
 }

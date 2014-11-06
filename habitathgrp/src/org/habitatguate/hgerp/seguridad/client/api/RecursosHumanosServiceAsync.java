@@ -942,5 +942,12 @@ public interface RecursosHumanosServiceAsync {
 	     * @param callback
 	     * @throws IllegalArgumentException
 	     */
+	    void obtenerIdRol(AsyncCallback<Long> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
 	    void logout(AsyncCallback<Boolean> callback)throws IllegalArgumentException;
 }

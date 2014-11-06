@@ -110,6 +110,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				}finally{
 					SegUsuario u = new SegUsuario(user, pass);
 					u.setId_empleado(em.getId_empleado());
+					u.setId_rol(1L);
 					try{ 
 					    gestorPersistencia.makePersistent(u); 
 					}finally{  
@@ -141,8 +142,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				session.setAttribute("usserHabitat", user);
 				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
 				session.setAttribute("idAfiliadoHabitat", em.getAfiliado() );
+				session.setAttribute("idRolHabitat", em.getAfiliado() );
 				vs.setCorrecto(true);
 				vs.setId_empleado(e.getId_empleado());
+				vs.setId_rol(e.getId_rol());
 			}else{
 				vs.setCorrecto(false);
 			}
@@ -2227,6 +2230,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				return Long.parseLong(id);
 			}else{
 				System.out.println(session.getAttribute("idAfiliadoHabitat"));
+				return Long.parseLong(id);
+			}
+		}
+
+		@Override
+		public Long obtenerIdRol() throws IllegalArgumentException {
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			String id =  session.getAttribute("idRolHabitat").toString();
+			if (session == null || session.getAttribute("idRolHabitat") == null){
+				return Long.parseLong(id);
+			}else{
+				System.out.println(session.getAttribute("idRolHabitat"));
 				return Long.parseLong(id);
 			}
 		}

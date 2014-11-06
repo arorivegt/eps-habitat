@@ -18,6 +18,9 @@ public class SegUsuario{
 	@Persistent
 	private Long id_empleado;
 	
+	@Persistent
+	private Long id_rol;
+	
 	public SegUsuario(String user2, String password2) {
 		super();
 		this.user=user2;
@@ -26,6 +29,16 @@ public class SegUsuario{
 
 	public Long getId_empleado() {
 		return id_empleado;
+	}
+	
+	
+
+	public Long getId_rol() {
+		return id_rol;
+	}
+
+	public void setId_rol(Long id_rol) {
+		this.id_rol = id_rol;
 	}
 
 	public void setId_empleado(Long id_empleado) {

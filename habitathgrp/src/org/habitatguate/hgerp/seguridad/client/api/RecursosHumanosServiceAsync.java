@@ -929,6 +929,14 @@ public interface RecursosHumanosServiceAsync {
 	     */
 	    void obtenerId(AsyncCallback<Long> callback)throws IllegalArgumentException;
 	    
+
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void obtenerIdAfiliado(AsyncCallback<Long> callback)throws IllegalArgumentException;
+	    
 	    /**
 	     * 
 	     * @param callback

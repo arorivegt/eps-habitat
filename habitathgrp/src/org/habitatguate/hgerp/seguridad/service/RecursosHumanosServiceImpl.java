@@ -134,11 +134,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		try{ 
 			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user);
 			if(e.getPassword().equals(md5(password))){
+				final SegEmpleado em = gestorPersistencia.getObjectById(SegEmpleado.class, e.getId_empleado());
 				//si es correcto crea una nueva session para poder manejarlo en toda la aplicacion
 				HttpServletRequest request = this.getThreadLocalRequest();
 				HttpSession session = request.getSession(true);
 				session.setAttribute("usserHabitat", user);
 				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
+				session.setAttribute("idAfiliadoHabitat", em.getAfiliado() );
 				vs.setCorrecto(true);
 				vs.setId_empleado(e.getId_empleado());
 			}else{
@@ -2209,6 +2211,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				return true;
 			session.invalidate();
 			return true;
+		}
+		
+		@Override
+		public Long obtenerIdAfiliado() throws IllegalArgumentException {
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			String id =  session.getAttribute("idAfiliadoHabitat").toString();
+			if (session == null || session.getAttribute("idAfiliadoHabitat") == null){
+				return Long.parseLong(id);
+			}else{
+				System.out.println(session.getAttribute("idAfiliadoHabitat"));
+				return Long.parseLong(id);
+			}
 		}
 
 		

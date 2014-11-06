@@ -966,7 +966,7 @@ public class formularioDatos extends Composite {
 		dateFechaIngreso.addValueChangeHandler(new ValueChangeHandler<Date>() {
 			@Override
 			public void onValueChange(ValueChangeEvent<Date> event) {
-				Window.alert("fecha");
+				//Window.alert("fecha");
 				try{
 					new Date(dateFechaIngreso.getValue().getTime());
 				}catch(Exception e){

@@ -717,4 +717,6 @@ public class SegEmpleado implements Serializable {
 
 
 	
+	
+	
 }

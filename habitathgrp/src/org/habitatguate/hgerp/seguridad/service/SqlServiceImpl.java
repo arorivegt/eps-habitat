@@ -630,6 +630,8 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 		
 		return id;
 	}
+	
+	
 	public Long Actualizar_MaterialCostruccion(Long id,String nomMaterialCostruccion,Double precioUnitario,String unidadMetrica) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(nomMaterialCostruccion!=null){	
@@ -688,6 +690,19 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 		}
 		
 		return id;
+	}
+	
+	
+	public Long Actualizar_Afiliado(Long idAfiliado, Long idEmpleado){
+		if(idAfiliado == null){
+			return 0L;
+		}else
+		{
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			 final SegAfiliado e = gestorPersistencia.getObjectById(SegAfiliado.class, idAfiliado);
+			 e.getEmpleados().add(idEmpleado);
+		}
+		return 0L;
 	}
 	
 	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{

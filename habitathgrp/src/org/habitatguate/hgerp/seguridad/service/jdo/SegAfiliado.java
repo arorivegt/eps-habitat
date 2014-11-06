@@ -90,14 +90,16 @@ public class SegAfiliado implements Serializable {
 		this.beneficiario = solucion;
 	}
 
-//	public List<Long> getEmpleados() {
-//		return empleados;
-//	}
+	public List<Long> getEmpleados() {
+		return empleados;
+	}
 
-//	public void setEmpleados(List<Long> empleados) {
-//		this.empleados = empleados;
-//	}
+	public void setEmpleados(List<Long> empleados) {
+		this.empleados = empleados;
+	}
 
+	
+	
 
 	
 	

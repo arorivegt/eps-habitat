@@ -142,7 +142,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				session.setAttribute("usserHabitat", user);
 				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
 				session.setAttribute("idAfiliadoHabitat", em.getAfiliado() );
-				session.setAttribute("idRolHabitat", em.getAfiliado() );
+				session.setAttribute("idRolHabitat", e.getId_rol());
 				vs.setCorrecto(true);
 				vs.setId_empleado(e.getId_empleado());
 				vs.setId_rol(e.getId_rol());

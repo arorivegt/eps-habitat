@@ -26,6 +26,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class MenuPrincipal extends Composite {
 	
@@ -35,171 +36,221 @@ public class MenuPrincipal extends Composite {
 	public MenuPrincipal(Panel nuevo) {
 		this.nuevo = nuevo;
 	
-		Command cmd = new Command() {
+		 final Command cmd = new Command() {
 	       public void execute() {
 	    	   System.out.println();
 	       }
 	     };
-	     Command cmdrrhh1 = new Command() {
+	     final  Command cmdrrhh1 = new Command() {
 	       public void execute() {
 	    	   rrhh1();
 	       }
 	     };
-	     Command cmdrrhh2 = new Command() {
+	     final Command cmdrrhh2 = new Command() {
 	       public void execute() {
 	    	   rrhh2();
 	       }
 	     };
-	     Command cmdrrhh3 = new Command() {
+	     final Command cmdrrhh3 = new Command() {
 	       public void execute() {
 	    	   rrhh3();
 	       }
 	     };
-	     Command cmdrrhh4 = new Command() {
+	     final Command cmdrrhh4 = new Command() {
 	       public void execute() {
 	    	   rrhh4();
 	       }
 	     };
-	     Command cmdrrhh5 = new Command() {
+	     final  Command cmdrrhh5 = new Command() {
 	       public void execute() {
 	    	   rrhh5();
 	       }
 	     };
-	     Command cmdrrhh6 = new Command() {
+	     final Command cmdrrhh6 = new Command() {
 	       public void execute() {
 	    	   rrhh6();
 	       }
 	     };
-	     Command cmdrrhh7 = new Command() {
+	     final Command cmdrrhh7 = new Command() {
 	       public void execute() {
 	    	   rrhh7();
 	       }
 	     };
 	     
 
-	     Command cmdempleado1 = new Command() {
+	     final Command cmdempleado1 = new Command() {
 	       public void execute() {
 	    	   empleado1();
 	       }
 	     };
-	     Command cmdCerrarSesion = new Command() {
+	     final Command cmdCerrarSesion = new Command() {
 		       public void execute() {
 		    	   cerrarSesion();
 		       }
 		     };
 		     
-	     Command cmdempleado3 = new Command() {
+		     final Command cmdempleado3 = new Command() {
 	       public void execute() {
 	    	   empleado3();
 	       }
 	     };
 	     
 
-	     Command cmdfina2a = new Command() {
+	     final  Command cmdfina2a = new Command() {
 	       public void execute() {
 	    	   fina2a();
 	       }
 	     };
-	     Command cmdfinan3b = new Command() {
+	     final Command cmdfinan3b = new Command() {
 	       public void execute() {
 	    	   finan3b();
 	       }
 	     };
 
-	     Command cmdfina4a = new Command() {
+	     final Command cmdfina4a = new Command() {
 	       public void execute() {
 	    	   fina4a();
 	       }
 	     };
-	     Command cmdfina5 = new Command() {
+	     final Command cmdfina5 = new Command() {
 	       public void execute() {
 	    	   fina5();
 	       }
 	     };
-	     
-	     //informes Menu
-	    MenuBar MenuInforme = new MenuBar(true);
-	    MenuInforme.setAnimationEnabled(true);
-	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
-	    MenuInforme.addSeparator();
-	    MenuInforme.addItem("Informe Bancos", cmdrrhh7);
-	    //MenuInforme.addSeparator();
-	    //MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
-	    MenuInforme.addSeparator();
-	    MenuInforme.addItem("Informe de Salarios", cmdrrhh3);
-	    
-	     //recursos humano menu
-	    MenuBar MenuRecursosHumanos = new MenuBar(true);
-	    MenuRecursosHumanos.setAnimationEnabled(true);
-	    MenuRecursosHumanos.addItem("Buscar Empleados", cmdrrhh1);
-	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Base de Datos de Puestos", cmdrrhh2);
-	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
-	    MenuRecursosHumanos.addSeparator();
-	    MenuRecursosHumanos.addItem("Informes", MenuInforme);
-	    
-	    
-	    
-	     //finanzas menu
-	    MenuBar MenuEmpleados = new MenuBar(true);
-	    MenuEmpleados.setAnimationEnabled(true);
-	    MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
-	    MenuEmpleados.addSeparator();
-	    MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
+	     	//informes Menu
+	 	    final MenuBar MenuInforme = new MenuBar(true);
+	 	    MenuInforme.setAnimationEnabled(true);
+	 	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
+	 	    MenuInforme.addSeparator();
+	 	    MenuInforme.addItem("Informe Bancos", cmdrrhh7);
+	 	    //MenuInforme.addSeparator();
+	 	    //MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
+	 	    MenuInforme.addSeparator();
+	 	    MenuInforme.addItem("Informe de Salarios", cmdrrhh3);
+	 	    
+	 	     //recursos humano menu
+	 	   final MenuBar MenuRecursosHumanos = new MenuBar(true);
+	 	    MenuRecursosHumanos.setAnimationEnabled(true);
+	 	    MenuRecursosHumanos.addItem("Buscar Empleados", cmdrrhh1);
+	 	    MenuRecursosHumanos.addSeparator();
+	 	    MenuRecursosHumanos.addItem("Base de Datos de Puestos", cmdrrhh2);
+	 	    MenuRecursosHumanos.addSeparator();
+	 	    MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
+	 	    MenuRecursosHumanos.addSeparator();
+	 	    MenuRecursosHumanos.addItem("Informes", MenuInforme);
+	 	    
+	 	    
+	 	    
+	 	     //finanzas menu
+	 	   final MenuBar MenuEmpleados = new MenuBar(true);
+	 	    MenuEmpleados.setAnimationEnabled(true);
+	 	    MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
+	 	    MenuEmpleados.addSeparator();
+	 	    MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
-	     //Inventario Activos menu
-	    MenuBar MenuInventarioActivos = new MenuBar(true);
-	    MenuInventarioActivos.setAnimationEnabled(true);
-	    MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
-	    MenuInventarioActivos.addSeparator();
-	    MenuInventarioActivos.addItem("Gestor de Inventario", cmd);
-	    MenuInventarioActivos.addSeparator();
-	    MenuInventarioActivos.addItem("Generar Conocimiento", cmd);
-	    
-	     //soluciones menu
-	    MenuBar MenuSoluciones = new MenuBar(true);
-	    MenuSoluciones.setAnimationEnabled(true);
-	    MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
-	    MenuSoluciones.addSeparator();
-	    MenuSoluciones.addItem("Ingreso de Solucion", cmdfina5);
-	    
+	 	     //Inventario Activos menu
+	 	   final MenuBar MenuInventarioActivos = new MenuBar(true);
+	 	    MenuInventarioActivos.setAnimationEnabled(true);
+	 	    MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
+	 	    MenuInventarioActivos.addSeparator();
+	 	    MenuInventarioActivos.addItem("Gestor de Inventario", cmd);
+	 	    MenuInventarioActivos.addSeparator();
+	 	    MenuInventarioActivos.addItem("Generar Conocimiento", cmd);
+	 	    
+	 	     //soluciones menu
+	 	   final MenuBar MenuSoluciones = new MenuBar(true);
+	 	    MenuSoluciones.setAnimationEnabled(true);
+	 	    MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
+	 	    MenuSoluciones.addSeparator();
+	 	    MenuSoluciones.addItem("Ingreso de Solucion", cmdfina5);
+	 	    
 
-	     //soluciones menu
-	    MenuBar MenuInventarioMateriales = new MenuBar(true);
-	    MenuInventarioMateriales.setAnimationEnabled(true);
-	    MenuInventarioMateriales.addItem("Cuenta Materiales", cmd);
-	    MenuInventarioMateriales.addSeparator();
-	    MenuInventarioMateriales.addItem("Administrar Materiales Costrucción", cmdfinan3b);
-	    
-	     //recursos humano menu
-	    MenuBar MenuFinanzas = new MenuBar(true);
-	    MenuFinanzas.setAnimationEnabled(true);
-	    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);
-	    MenuFinanzas.addSeparator();
-	    MenuFinanzas.addItem("Soluciones", MenuSoluciones);
-	    MenuFinanzas.addSeparator();
-	    MenuFinanzas.addItem("Inventario Materiales", MenuInventarioMateriales);
-	    MenuFinanzas.addSeparator();
-	    MenuFinanzas.addItem("Administrador Afiliado", cmdfina4a);
-	    MenuFinanzas.addSeparator();
-	    MenuFinanzas.addItem("Administrador Proveedores", cmdfina5);
-	    
-	    
-	    //agregar item para el menu
-	    MenuBar MenuVertical = new MenuBar();
-	    MenuVertical.setHeight("100%");
-	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
-	    MenuVertical.addSeparator();
-	    MenuVertical.addItem("Finanzas", MenuFinanzas);
-	    MenuVertical.addSeparator();
-	    MenuVertical.addItem("Empleado",MenuEmpleados); 
-	    MenuVertical.addSeparator();
-	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-	    
-	    MenuVertical.setAutoOpen(false);
-	    MenuVertical.setAnimationEnabled(true);
-		    
+	 	     //soluciones menu
+	 	   final MenuBar MenuInventarioMateriales = new MenuBar(true);
+	 	    MenuInventarioMateriales.setAnimationEnabled(true);
+	 	    MenuInventarioMateriales.addItem("Cuenta Materiales", cmd);
+	 	    MenuInventarioMateriales.addSeparator();
+	 	    MenuInventarioMateriales.addItem("Administrar Materiales Costrucción", cmdfinan3b);
+	 	    
+	 	     //recursos humano menu
+	 	   final MenuBar MenuFinanzas = new MenuBar(true);
+	 	    MenuFinanzas.setAnimationEnabled(true);
+	 	    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);
+	 	    MenuFinanzas.addSeparator();
+	 	    MenuFinanzas.addItem("Soluciones", MenuSoluciones);
+	 	    MenuFinanzas.addSeparator();
+	 	    MenuFinanzas.addItem("Inventario Materiales", MenuInventarioMateriales);
+	 	    MenuFinanzas.addSeparator();
+	 	    MenuFinanzas.addItem("Administrador Afiliado", cmdfina4a);
+	 	    MenuFinanzas.addSeparator();
+	 	    MenuFinanzas.addItem("Administrador Proveedores", cmdfina5);
+	 	    
+
+          final  MenuBar MenuVertical = new MenuBar();
+	     loginService.CheqLog(new AsyncCallback<Boolean>() 
+	             {
+	         		
+	                     public void onFailure(Throwable caught) 
+	                     {
+	                     }
+	                     
+	                     public void onSuccess(Boolean result)
+	                     {
+	                     	if(result){
+	                     		loginService.obtenerIdRol(new AsyncCallback<Long>() 
+	             	            {
+	             	                    public void onFailure(Throwable caught) 
+	             	                    {
+	             	                    }
+	             	                    
+	             	                    public void onSuccess(Long results)
+	             	                    {
+	            	                     	System.out.println("menu resultado : "+results);
+	             	                    	//si el rol es 1, entonces es empledo
+	             	                    	if(results == 1L){
+	             	                   	    
+	             	                   	    //agregar item para el menu
+	             	                   	    MenuVertical.addSeparator();
+	             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
+	             	                   	    MenuVertical.addSeparator();
+	             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+	             	                   	    
+	             	                   	    MenuVertical.setAutoOpen(false);
+	             	                   	    MenuVertical.setAnimationEnabled(true);
+	             	                   		    
+	             	                    	}else if(results == 2L){//si el rol es 2, entonces es RRHH
+		             	                   	    MenuVertical.setHeight("100%");
+		             	                   	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAnimationEnabled(true);
+		             	                   	    
+	             	                    	}else if(results == 3L){//si el rol es 3, entonces es finanzas
+		             	                   	    //agregar item para el menu
+		             	                   	    MenuVertical.setHeight("100%");
+		             	                   	    MenuVertical.addItem("Finanzas", MenuFinanzas);
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAnimationEnabled(true);
+	             	                    	}
+	             	                                                            
+	             	                    }
+	             	             });
+	                     		
+	                     	}
+	                                                             
+	                     }
+	              });
+
+  	   
+ 	    
+	 
 		    
 	   initWidget(MenuVertical);
 	}

@@ -225,6 +225,7 @@ public class Plantilla_Solucion extends Composite{
 				nuevoElemento.setUnidadMetrica(selectNuevo.getUnidadMetrica());
 				nuevoElemento.setCantidad(Double.parseDouble(textBox_2b.getText()));
 				nuevoElemento.setPrecioUnit(selectNuevo.getPrecioUnit());
+				nuevoElemento.setMaterialCostruccion(selectNuevo);
 				double subTotal = Double.parseDouble(textBox_2b.getText())*selectNuevo.getPrecioUnit();
 				nuevoElemento.setSubTotal(subTotal);
 				costoAcumulado = costoAcumulado + subTotal;

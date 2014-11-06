@@ -33,7 +33,13 @@ public class AuxDetallePlantillaSolucion implements Comparable<AuxDetallePlantil
 	private Double subTotal;
 	
 	private Double costoAcumulado;
+	
+	private AuxMaterialCostruccion materialCostruccion;
 
+	public AuxDetallePlantillaSolucion(){
+		materialCostruccion = new AuxMaterialCostruccion();
+	}
+	
 	public Long getIdDetallePlantillaSolucion() {
 		return idDetallePlantillaSolucion;
 	}
@@ -88,6 +94,14 @@ public class AuxDetallePlantillaSolucion implements Comparable<AuxDetallePlantil
 
 	public void setCostoAcumulado(Double costoAcumulado) {
 		this.costoAcumulado = costoAcumulado;
+	}
+
+	public AuxMaterialCostruccion getMaterialCostruccion() {
+		return materialCostruccion;
+	}
+
+	public void setMaterialCostruccion(AuxMaterialCostruccion materialCostruccion) {
+		this.materialCostruccion = materialCostruccion;
 	}
 	
 	

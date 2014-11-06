@@ -177,7 +177,7 @@ public class MenuPrincipal extends Composite {
 	    MenuFinanzas.addSeparator();
 	    MenuFinanzas.addItem("Administrador Afiliado", cmdfina4a);
 	    MenuFinanzas.addSeparator();
-	    MenuFinanzas.addItem("Administrador Proveedores", cmdempleado3);
+	    MenuFinanzas.addItem("Administrador Proveedores", cmdfina5);
 	    
 	    
 	    //agregar item para el menu

@@ -54,5 +54,6 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_MaterialCostruccion(Long id,String nomMaterialCostruccion,Double precioUnitario,String unidadMetrica);
 	Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor);
 	Long Actualizar_ProveedorAprobado(Long id);
+	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
 	
 }

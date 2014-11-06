@@ -116,6 +116,9 @@ public interface SqlServiceAsync {
 	void Insertar_UnicoDetalleSolucion(Long idSolucion,
 			AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
 
+	void Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado,
+			AsyncCallback<Long> callback);
+
 
 
 

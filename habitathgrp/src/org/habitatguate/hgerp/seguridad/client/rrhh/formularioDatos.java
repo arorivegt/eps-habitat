@@ -2304,7 +2304,9 @@ public class formularioDatos extends Composite {
 			button.setStyleName("sendButton");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
+					load.visible();
 					form.submit();
+					load.invisible();
 				}
 			});
 			button.setEnabled(false);

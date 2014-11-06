@@ -34,7 +34,7 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
     }
     
     public AuxMaterialCostruccion(){
-    	
+    	proveedor = new AuxProveedor();
     }
 	
 	private Long idMaterialConstruccion;
@@ -46,6 +46,8 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
 	private String unidadMetrica;
 
 	private Date fechaIngreso;
+	
+	private AuxProveedor proveedor;
 	
 	public Long getIdMaterialConstruccion() {
 		return idMaterialConstruccion;
@@ -86,6 +88,15 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
 	public void setFechaIngreso(Date fechaIngreso) {
 		this.fechaIngreso = fechaIngreso;
 	}
+
+	public AuxProveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(AuxProveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+	
 	
 	
 }

@@ -8,10 +8,12 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -107,6 +109,12 @@ public interface SqlServiceAsync {
 
 	void ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado,
 			AsyncCallback<List<AuxProveedor>> callback);
+
+	void Insertar_Solucion(AuxSolucion auxS, Double costoFinal,
+			AsyncCallback<Long> callback);
+
+	void Insertar_UnicoDetalleSolucion(Long idSolucion,
+			AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
 
 
 

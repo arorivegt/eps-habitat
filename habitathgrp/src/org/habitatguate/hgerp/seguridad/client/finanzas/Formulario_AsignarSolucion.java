@@ -10,9 +10,12 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -39,18 +42,14 @@ public class Formulario_AsignarSolucion extends Composite{
     
     public AuxMaterialCostruccion selectNuevo = null;
     public AuxBeneficiario selectNuevoBene = null;
+    public AuxPlantillaSolucion selectPlant = null;
     public double costoAcumulado = 0;
-    public Long idPlantillaSolucionAlmacenado = 0L;
+    public Long idSolucionAlmacenado = 0L;
     public Long correlativo = (long) 1; 
     public boolean banderaTimer = false;
     public boolean banderaWhile = false;
     
-    Timer timer2 = new Timer(){
-  	  public void run() {
-  		  System.out.println("tiempo expirado");
-  		  banderaWhile = false;
-  	  }
-    };
+
     
     Timer timer = new Timer() {
         public void run() {
@@ -62,7 +61,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			//		banderaWhile = true;
 					AuxDetallePlantillaSolucion aux = i.next();
 			//		timer2.schedule(1000);
-					loginService.Insertar_UnicoDetallePlantillaSolucion(idPlantillaSolucionAlmacenado,aux,
+					loginService.Insertar_UnicoDetalleSolucion(idSolucionAlmacenado,aux,
         			new AsyncCallback<Long>() {
 
 						@Override
@@ -94,7 +93,10 @@ public class Formulario_AsignarSolucion extends Composite{
 			Window.alert("Plantilla Almacenada Correctamente");
 			e.grid.ActualizarList();
 		    costoAcumulado = 0;
-		    idPlantillaSolucionAlmacenado = 0L;
+		    idSolucionAlmacenado = 0L;
+		    selectNuevo = null;
+		    selectNuevoBene = null;
+		    selectPlant = null;
 		    correlativo = (long) 1; 
         }
       };
@@ -226,6 +228,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				nuevoElemento.setUnidadMetrica(selectNuevo.getUnidadMetrica());
 				nuevoElemento.setCantidad(Double.parseDouble(textBox_2b.getText()));
 				nuevoElemento.setPrecioUnit(selectNuevo.getPrecioUnit());
+				nuevoElemento.setMaterialCostruccion(selectNuevo);
 				double subTotal = Double.parseDouble(textBox_2b.getText())*selectNuevo.getPrecioUnit();
 				nuevoElemento.setSubTotal(subTotal);
 				costoAcumulado = costoAcumulado + subTotal;
@@ -286,6 +289,7 @@ public class Formulario_AsignarSolucion extends Composite{
 					// TODO Auto-generated method stub
 					PlantillaMultiWordSuggestion select = (PlantillaMultiWordSuggestion)event.getSelectedItem();
 					textBox_1.setText(select.getPlantillaSolucion().getTipo());
+					selectPlant = select.getPlantillaSolucion();
 					e.grid.ActualizarList();
 					e.grid.setDataList(select.getPlantillaSolucion().getListaDetalle());
 					costoAcumulado = select.getPlantillaSolucion().getCostoFinal();
@@ -385,17 +389,19 @@ public class Formulario_AsignarSolucion extends Composite{
 			absolutePanel_3.add(lblMontoAutorizado, 10, 10);
 			lblMontoAutorizado.setSize("157px", "13px");
 			
-			TextBox textBox_3 = new TextBox();
+			final TextBox textBox_3 = new TextBox();
 			textBox_3.setStyleName("gwt-TextBox2");
 			textBox_3.setMaxLength(100);
 			absolutePanel_3.add(textBox_3, 173, 10);
 			textBox_3.setSize("176px", "19px");
 			
-			TextBox textBox_4 = new TextBox();
+			
+			final TextBox textBox_4 = new TextBox();
 			textBox_4.setStyleName("gwt-TextBox2");
 			textBox_4.setMaxLength(100);
 			absolutePanel_3.add(textBox_4, 173, 37);
 			textBox_4.setSize("176px", "19px");
+			textBox_4.setEnabled(false);
 			
 			Label lblDiferencia = new Label("Diferencia");
 			lblDiferencia.setStyleName("label");
@@ -408,6 +414,16 @@ public class Formulario_AsignarSolucion extends Composite{
 			btnAsignarSolucion.setStyleName("gwt-TextBox2");
 			absolutePanel_3.add(btnAsignarSolucion, 217, 86);
 			btnAsignarSolucion.setSize("134px", "22px");
+			
+			textBox_3.addChangeHandler(new ChangeHandler() {
+				
+				@Override
+				public void onChange(ChangeEvent event) {
+					double dif = Double.valueOf(textBox_3.getText()) - costoAcumulado; 
+					textBox_4.setText(" " +dif);
+					
+				}
+			});
 			
 			suggestBox_1.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
 				
@@ -450,5 +466,37 @@ public class Formulario_AsignarSolucion extends Composite{
 					costoAcumulado = e.grid.ActualizarTabla();
 				}
 	        	});
+	        btnAsignarSolucion.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					AuxSolucion auxS = new AuxSolucion();
+					auxS.setNomSolucion(selectPlant.getNomPlantillaSolucion());
+					auxS.setCostoAdministrativo(0.0);
+					auxS.setCostoDirecto(0.0);
+					auxS.setCostoMaterial(0.0);
+					auxS.setCostoTotal(costoAcumulado);
+					auxS.setDisenio(selectPlant.getTipo());
+					auxS.setNotaDebito(0);
+					auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
+					auxS.setBeneficiario(selectNuevoBene);
+					loginService.Insertar_Solucion(auxS, costoAcumulado, new AsyncCallback<Long>() {
+						
+						@Override
+						public void onSuccess(Long result) {
+							idSolucionAlmacenado = result;
+							//Window.alert(String.valueOf(result));
+							timer.schedule(1500);
+						}
+						
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					
+				}
+			});
 	}
 }

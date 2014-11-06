@@ -58,7 +58,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements RecursosHumanosService {
 	///metodos para insertar en las diferentes entidades
-	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento) throws IllegalArgumentException {
+	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento,
+			String Nombre2, String Apellido2) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && pass!=null){
@@ -69,8 +70,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				SegEmpleado em = new SegEmpleado();
 				em.setPrimer_nombre(Nombre.toUpperCase());
 				em.setPrimer_apellido(Apellido.toUpperCase());
-				em.setSegundo_apellido("".toUpperCase());
-				em.setSegundo_nombre("".toUpperCase());
+				em.setSegundo_apellido(Apellido2.toUpperCase());
+				em.setSegundo_nombre(Nombre2.toUpperCase());
 				em.setEstado("2");
 				em.setIVS("0");
 				em.setCui("0");
@@ -101,6 +102,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setTipo_licencia("0");
 				em.setPasaporte("0");
 				em.setLicencia("0");
+				em.setAfiliado(0L);
 				em.setFecha_nacimiento(fecha_nacimiento);
 				em.setFecha_ingreso(new Date());
 				try{ 
@@ -167,7 +169,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,
-            String depto_municipio_nacimiento, Long Jefe_Inmediato
+            String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado
            ) throws IllegalArgumentException {
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
@@ -177,6 +179,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		 try { 
 			  
 			 SegEmpleado e = new SegEmpleado();
+			 e.setAfiliado(afiliado);
 			 e.setAfiliacion_igss(afiliacion_igss);
 	         e.setEstado_civil(estado_civil);
 	         e.setSexo(sexo);
@@ -558,13 +561,14 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		            String licencia, String Etnia,
 		            String NombreEmergencia, String TelefonoEmergencia,
 		            String NombreEmergencia2, String TelefonoEmergencia2,
-		            String depto_municipio_nacimiento, Long Jefe_Inmediato) throws IllegalArgumentException {
+		            String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado) throws IllegalArgumentException {
 				
 
 
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 					 try {  
 							 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id); 
+							 e.setAfiliado(afiliado);
 							 e.setAfiliacion_igss(afiliacion_igss);
 					         e.setEstado_civil(estado_civil);
 					         e.setSexo(sexo);
@@ -1123,6 +1127,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				{
 					 for (SegEmpleado p : results) {
 					    	AuxEmpleado nuevo = new AuxEmpleado();
+					    	nuevo.setAfiliado(p.getAfiliado());
 					    	nuevo.setAfiliacion_igss(p.getAfiliacion_igss());
 					    	nuevo.setApellido_casada(p.getApellido_casada());
 					    	nuevo.setBonificacion(p.getBonificacion());
@@ -1390,6 +1395,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				AuxEmpleado nuevo = new AuxEmpleado();
 				 try { 
 					 final SegEmpleado p = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				    	nuevo.setAfiliado(p.getAfiliado());
 					 	nuevo.setAfiliacion_igss(p.getAfiliacion_igss());
 				    	nuevo.setApellido_casada(p.getApellido_casada());
 				    	nuevo.setBonificacion(p.getBonificacion());

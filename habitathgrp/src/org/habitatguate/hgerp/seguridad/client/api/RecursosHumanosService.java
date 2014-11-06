@@ -43,7 +43,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	String Registro(String user,String pass,String Nombre, String Apellido, 
-			        Date fecha_nacimiento) throws IllegalArgumentException;
+			        Date fecha_nacimiento,String Nombre2, String Apellido2) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param user
@@ -120,7 +120,7 @@ public interface RecursosHumanosService extends RemoteService {
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,
-            String depto_municipio_nacimiento, Long Jefe_Inmediato
+            String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado
             )  throws IllegalArgumentException;
 	/**
 	 * 
@@ -440,7 +440,7 @@ public interface RecursosHumanosService extends RemoteService {
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,
-            String depto_municipio_nacimiento, Long Jefe_Inmediato
+            String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado
             )  throws IllegalArgumentException;
 	/**
 	 * 

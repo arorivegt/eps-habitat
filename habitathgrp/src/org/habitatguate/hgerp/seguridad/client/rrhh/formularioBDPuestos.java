@@ -108,23 +108,23 @@ public class formularioBDPuestos extends Composite {
 						if(bandera) {					
 							loginService.Insertar_BDPuesto(Long.parseLong(txtIdPuesto.getText()),dateFecha.getValue(), txtPuesto.getText(), 
 									txtFunciones.getText(), new AsyncCallback<Long>(){
-                        public void onFailure(Throwable caught) 
-                        {
-            		        load.invisible();
-                        	mensaje.setMensaje("alert alert-error", 
-                        			"Error !! \nal Guardar Datos");
-                        }
-
-								@Override
-                        public void onSuccess(Long result)
-                        {
-							        load.invisible();
-									id_puesto = result;
-									bandera = false;
-									mensaje.setMensaje("alert alert-success", 
-		                        			"Datos Guardados\n exitosamente!!!");
-                        }
-								});
+		                        public void onFailure(Throwable caught) 
+		                        {
+		            		        load.invisible();
+		                        	mensaje.setMensaje("alert alert-error", 
+		                        			"Error !! \nal Guardar Datos");
+		                        }
+		
+										@Override
+		                        public void onSuccess(Long result)
+		                        {
+									        load.invisible();
+											id_puesto = result;
+											bandera = false;
+											mensaje.setMensaje("alert alert-success", 
+				                        			"Datos Guardados\n exitosamente!!!");
+		                        }
+										});
 						}else{
 							loginService.Actualizar_BDPuesto(id_puesto, dateFecha.getValue(), txtPuesto.getText(), 
 								txtFunciones.getText(), new AsyncCallback<Long>(){

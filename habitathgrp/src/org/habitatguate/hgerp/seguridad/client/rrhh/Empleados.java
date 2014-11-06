@@ -293,7 +293,7 @@ public class Empleados extends Composite {
 					r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), ""+r.getSalario_base(), ""+r.getBonificacion(), 
 					""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado(),r.getPasaporte(),
 					r.getLicencia(),r.getEtnia(),r.getNombreEmergencia(),r.getTelefonoEmergencia(),r.getNombreEmergencia2(),
-					r.getTelefonoEmergencia2(),deptodir2,munidir2,r.getJefe_Inmediato());
+					r.getTelefonoEmergencia2(),deptodir2,munidir2,r.getJefe_Inmediato(),r.getAfiliado());
 	
 	}
 	

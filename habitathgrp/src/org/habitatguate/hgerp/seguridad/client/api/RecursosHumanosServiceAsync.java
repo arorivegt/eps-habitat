@@ -40,6 +40,7 @@ public interface RecursosHumanosServiceAsync {
 	 * @throws IllegalArgumentException
 	 */
 	void Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento, 
+			String Nombre2, String Apellido2,
 			AsyncCallback<String> callback) throws IllegalArgumentException;
 	/**
 	 * 
@@ -116,7 +117,7 @@ public interface RecursosHumanosServiceAsync {
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
             String NombreEmergencia2, String TelefonoEmergencia2,
-            String depto_municipio_nacimiento, Long Jefe_Inmediato,
+            String depto_municipio_nacimiento, Long Jefe_Inmediato, Long afiliado,
             AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
@@ -438,7 +439,7 @@ public interface RecursosHumanosServiceAsync {
 	            String pasaporte, String licencia,String Etnia,
 	            String NombreEmergencia, String TelefonoEmergencia,
 	            String NombreEmergencia2, String TelefonoEmergencia2,
-	            String depto_municipio_nacimiento, Long Jefe_Inmediato,
+	            String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado,
 	            AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 

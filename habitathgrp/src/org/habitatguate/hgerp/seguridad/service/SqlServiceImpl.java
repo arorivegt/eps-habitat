@@ -11,25 +11,34 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegEntrevista;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegProveedor;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolucion;
 import org.habitatguate.hgerp.util.ConvertDate;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.gwt.i18n.server.testing.Child;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import javax.jdo.PersistenceManager;
@@ -178,12 +187,16 @@ public Long Insertar_DetallePlantillaSolucion(Long idPlantillaSolucion,List<AuxD
 public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxDetallePlantillaSolucion auxDetalle) throws IllegalArgumentException{
 	 Long valor = 0L;
 	 SegPlantillaSolucion plantilla = null;
+	 SegMaterialCostruccion materialCos = null;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	try{
 		//System.out.println("Plantilla de la que viene " + idPlantillaSolucion);
 		plantilla = gestorPersistencia.getObjectById(SegPlantillaSolucion.class,idPlantillaSolucion);
-	//	do {
-		//System.out.println("Cantidad de elementos " + plantilla.getListaDetalle().size());
+		 Key k = new KeyFactory
+			        .Builder(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
+		 			.addChild(SegMaterialCostruccion.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion())	
+			        .getKey();
+		materialCos = gestorPersistencia.getObjectById(SegMaterialCostruccion.class,k);
 		SegDetallePlantillaSolucion auxSeg = new SegDetallePlantillaSolucion();
 			auxSeg.setNomMaterialCostruccion(auxDetalle.getNomMaterialCostruccion());
 			auxSeg.setPrecioUnit(auxDetalle.getPrecioUnit());
@@ -192,11 +205,11 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 			auxSeg.setCostoAcumulado(auxDetalle.getCostoAcumulado());
 			auxSeg.setSubTotal(auxDetalle.getSubTotal());
 			auxSeg.setPlantillaSolucion(plantilla);
+			auxSeg.setMaterialCostruccion(materialCos);
 			plantilla.getListaDetalle().add(auxSeg);	
 	       valor = auxSeg.getIdDetallePlantillaSolucion().getId();
 	       gestorPersistencia.makePersistent(auxSeg);
 	       gestorPersistencia.makePersistent(plantilla);
-		//}while(plantilla != null);
 	}	finally{
 		gestorPersistencia.close();
 	}
@@ -263,7 +276,68 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 	return valor;
 }
 
+public Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal) throws IllegalArgumentException{
+	Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	 Key k = new KeyFactory
+		        .Builder(SegAfiliado.class.getSimpleName(), auxS.getBeneficiario().getAfiliado().getIdAfiliado())
+	 			.addChild(SegBeneficiario.class.getSimpleName(), auxS.getBeneficiario().getIdBeneficiario())	
+		        .getKey();
+	SegBeneficiario bene = gestorPersistencia.getObjectById(SegBeneficiario.class, k);
+	SegSolucion nuevo = new SegSolucion();
+	nuevo.setCostoAdministrativo(auxS.getCostoAdministrativo());
+	nuevo.setCostoDirecto(auxS.getCostoDirecto());
+	nuevo.setCostoMaterial(auxS.getCostoMaterial());
+	nuevo.setDisenio(auxS.getDisenio());
+	nuevo.setNotaDebito(auxS.getNotaDebito());
+	nuevo.setNomSolucion(auxS.getNomSolucion());
+	nuevo.setValorContrato(auxS.getValorContrato());
+	Date time=new Date();
+	Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
+	nuevo.setFechaInicio(today);
+	nuevo.setBeneficiario(bene);
+	//bene.setSolucion(nuevo);
+	try{
+		gestorPersistencia.makePersistent(nuevo);
+		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+		valor = nuevo.getIdSolucion().getId();
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+}	
+
+public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle) throws IllegalArgumentException{
+	 Long valor = 0L;
+	 SegSolucion plantilla = null;
+	 SegMaterialCostruccion materialCos = null;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	try{
+	//	System.out.println("Plantilla de la que viene " + auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion());
+		plantilla = gestorPersistencia.getObjectById(SegSolucion.class,idSolucion);
+		 Key k = new KeyFactory
+			        .Builder(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
+		 			.addChild(SegMaterialCostruccion.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion())	
+			        .getKey();
+		materialCos = gestorPersistencia.getObjectById(SegMaterialCostruccion.class,k);
+		SegDetalleSolucion auxSeg = new SegDetalleSolucion();
+			auxSeg.setCantidad(auxDetalle.getCantidad());
+			auxSeg.setUnidadMetrica(auxDetalle.getUnidadMetrica());
+			auxSeg.setCostoAcumulado(auxDetalle.getCostoAcumulado());
+			auxSeg.setSubTotal(auxDetalle.getSubTotal());
+			auxSeg.setSolucion(plantilla);
+			auxSeg.setMaterialCostruccion(materialCos);
+			plantilla.getListaDetalle().add(auxSeg);	
+	       valor = auxSeg.getIdDetalleSolucion().getId();
+	       gestorPersistencia.makePersistent(auxSeg);
+	       gestorPersistencia.makePersistent(plantilla);
+	}	finally{
+		gestorPersistencia.close();
+	}
+	return valor;
 	
+	
+}
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
     @Override
     public Long Eliminar_Parametro(Long id) throws IllegalArgumentException {
@@ -382,6 +456,7 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 				n.setUnidadMetrica(p.getUnidadMetrica());
 				n.setPrecioUnit(p.getPrecioUnit());
 				n.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
+				n.getProveedor().setIdProveedor(p.getProveedor().getIdProveedor().getId());
 				valor.add(n);
 			}
 		}
@@ -413,6 +488,8 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 					auxd.setPrecioUnit(aux.getPrecioUnit());
 					auxd.setSubTotal(aux.getSubTotal());
 					auxd.setUnidadMetrica(aux.getUnidadMetrica());
+					auxd.getMaterialCostruccion().setIdMaterialConstruccion(aux.getMaterialCostruccion().getIdMaterialConstruccion().getId());
+					auxd.getMaterialCostruccion().getProveedor().setIdProveedor(aux.getMaterialCostruccion().getProveedor().getIdProveedor().getId());
 					n.getListaDetalle().add(auxd);
 				}
 				valor.add(n);

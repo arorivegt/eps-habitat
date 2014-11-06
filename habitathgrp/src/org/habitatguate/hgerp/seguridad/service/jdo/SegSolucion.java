@@ -2,7 +2,9 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
@@ -12,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 
 @SuppressWarnings("serial")
@@ -38,11 +41,12 @@ public class SegSolucion implements Serializable{
 	private int notaDebito;
 	@Persistent
 	private Date fechaInicio;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	private SegAfiliado afiliado;
-	@ManyToOne
+	@Persistent
+	@Unowned
 	private SegBeneficiario beneficiario;
+	@Persistent(mappedBy = "solucion")
+    @Element(dependent = "true")
+	private List<SegDetalleSolucion> listaDetalle;
 	
 	public Key getIdSolucion() {
 		return idSolucion;
@@ -145,13 +149,21 @@ public class SegSolucion implements Serializable{
 		this.beneficiario = beneficiario;
 	}
 
-	public SegAfiliado getAfiliado() {
-		return afiliado;
+
+
+
+	public List<SegDetalleSolucion> getListaDetalle() {
+		return listaDetalle;
 	}
 
-	public void setAfiliado(SegAfiliado afiliado) {
-		this.afiliado = afiliado;
+
+
+
+	public void setListaDetalle(List<SegDetalleSolucion> listaDetalle) {
+		this.listaDetalle = listaDetalle;
 	}
+
+
 	
 	
 	

@@ -7,25 +7,17 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.datanucleus.annotations.Unowned;
-
-
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegDetallePlantillaSolucion implements Serializable{
+public class SegDetalleSolucion implements Serializable{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Key idDetallePlantillaSolucion;
-	@Persistent
-	private String nomMaterialCostruccion;
+	private Key idDetalleSolucion;
 	@Persistent
 	private Double cantidad;
-	@Persistent
-	private Double precioUnit;
 	@Persistent
 	private String unidadMetrica;
 	@Persistent
@@ -36,22 +28,14 @@ public class SegDetallePlantillaSolucion implements Serializable{
 	@Unowned
     private SegMaterialCostruccion materialCostruccion;
 	
-	private SegPlantillaSolucion plantillaSolucion;
+	private SegSolucion solucion;
 
-	public Key getIdDetallePlantillaSolucion() {
-		return idDetallePlantillaSolucion;
+	public Key getIdDetalleSolucion() {
+		return idDetalleSolucion;
 	}
 
-	public void setIdDetallePlantillaSolucion(Key idDetallePlantillaSolucion) {
-		this.idDetallePlantillaSolucion = idDetallePlantillaSolucion;
-	}
-
-	public String getNomMaterialCostruccion() {
-		return nomMaterialCostruccion;
-	}
-
-	public void setNomMaterialCostruccion(String nomMaterialCostruccion) {
-		this.nomMaterialCostruccion = nomMaterialCostruccion;
+	public void setIdDetalleSolucion(Key idDetalleSolucion) {
+		this.idDetalleSolucion = idDetalleSolucion;
 	}
 
 	public Double getCantidad() {
@@ -60,14 +44,6 @@ public class SegDetallePlantillaSolucion implements Serializable{
 
 	public void setCantidad(Double cantidad) {
 		this.cantidad = cantidad;
-	}
-
-	public Double getPrecioUnit() {
-		return precioUnit;
-	}
-
-	public void setPrecioUnit(Double precioUnit) {
-		this.precioUnit = precioUnit;
 	}
 
 	public String getUnidadMetrica() {
@@ -94,14 +70,6 @@ public class SegDetallePlantillaSolucion implements Serializable{
 		this.costoAcumulado = costoAcumulado;
 	}
 
-	public SegPlantillaSolucion getPlantillaSolucion() {
-		return plantillaSolucion;
-	}
-
-	public void setPlantillaSolucion(SegPlantillaSolucion plantillaSolucion) {
-		this.plantillaSolucion = plantillaSolucion;
-	}
-
 	public SegMaterialCostruccion getMaterialCostruccion() {
 		return materialCostruccion;
 	}
@@ -109,6 +77,15 @@ public class SegDetallePlantillaSolucion implements Serializable{
 	public void setMaterialCostruccion(SegMaterialCostruccion materialCostruccion) {
 		this.materialCostruccion = materialCostruccion;
 	}
-	
+
+	public SegSolucion getSolucion() {
+		return solucion;
+	}
+
+	public void setSolucion(SegSolucion solucion) {
+		this.solucion = solucion;
+	}
+
+
 	
 }

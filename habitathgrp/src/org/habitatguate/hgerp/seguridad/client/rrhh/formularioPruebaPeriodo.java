@@ -278,7 +278,6 @@ public class formularioPruebaPeriodo extends Composite {
             		        load.invisible();
                         	setMensaje("alert alert-error", 
                         			"Error !! \nal Guardar Datos");
-                           // Window.alert("Error  al Guardar Datos"+caught);
                         }
 
 						@Override
@@ -289,7 +288,6 @@ public class formularioPruebaPeriodo extends Composite {
 							bandera = false;
                         	setMensaje("alert alert-success", 
                         			"Datos Guardados\n exitosamente!!!");
-                        	//Window.alert("Datos Guardados exitosamente!!! ");
                         }
 
                  });
@@ -306,7 +304,6 @@ public class formularioPruebaPeriodo extends Composite {
     		        load.invisible();
                 	setMensaje("alert alert-error", 
                 			"Error !! \nal Actualizar Datos");
-                   //Window.alert("Error  al Actualizar Datos"+caught);
                 }
 
 				@Override
@@ -316,7 +313,6 @@ public class formularioPruebaPeriodo extends Composite {
 					bandera = false;
                 	setMensaje("alert alert-success", 
                 			"Datos Actualizados\n exitosamente!!!");
-                	//Window.alert("Datos Actualizados exitosamente!!! ");
                 }
 
          });
@@ -572,6 +568,12 @@ public class formularioPruebaPeriodo extends Composite {
 		}
 		this.txtEvaluador.setText(txtEvaluador);
 		this.dateFecha.setValue(new Date(dateFecha));
+
+		int valor = Integer.parseInt(listPregunta1) + Integer.parseInt(listPregunta2) + Integer.parseInt(listPregunta3)
+				+Integer.parseInt(listPregunta4)+Integer.parseInt(listPregunta5) +Integer.parseInt(listPregunta6)
+				+Integer.parseInt(listPregunta7)+Integer.parseInt(listPregunta8)+Integer.parseInt(listPregunta9)
+				+Integer.parseInt(listPregunta10);
+		this.txtPunteoTotal.setText(""+valor);
 	}
 	public void setMensaje(String estilo, String mensaje){
 		final DialogBox Registro2 = new DialogBox();

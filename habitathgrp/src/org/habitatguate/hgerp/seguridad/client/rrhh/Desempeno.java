@@ -48,6 +48,7 @@ public class Desempeno extends Composite  {
         grid.setWidget(0, 0, btnTest);
         btnTest.addClickHandler(new ClickHandler() {
         public void onClick(ClickEvent event) {
+            	BDTest();
                 agregar_formularios(valor);
         }
         });
@@ -139,6 +140,8 @@ public class Desempeno extends Composite  {
         }
         
         private void BDTest(){
+
+        	BDresult.clear();
 	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
 
 				@Override

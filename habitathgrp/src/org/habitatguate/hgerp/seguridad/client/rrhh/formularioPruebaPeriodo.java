@@ -512,11 +512,7 @@ public class formularioPruebaPeriodo extends Composite {
 			this.listTest.setSelectedIndex(i);
 		}
 
-		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
-			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
-			this.listPregunta1.setSelectedIndex(i);
-		}
-		
+		bandera = true;
 		for(int i=0; i < this.listPregunta1.getItemCount() && bandera; i++){
 			bandera = !this.listPregunta1.getItemText(i).equals(listPregunta1);
 			this.listPregunta1.setSelectedIndex(i);

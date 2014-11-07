@@ -873,6 +873,14 @@ public interface RecursosHumanosServiceAsync {
 	    void getEvaluacionesCompartidas(Long id,AsyncCallback<List<AuxTestCompartidos>> callback)throws IllegalArgumentException;
 	    /**
 	     * 
+	     * @param id
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getEmpleado(Long id,AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
+
+	    /**
+	     * 
 	     * @param idTest
 	     * @param id
 	     * @param callback

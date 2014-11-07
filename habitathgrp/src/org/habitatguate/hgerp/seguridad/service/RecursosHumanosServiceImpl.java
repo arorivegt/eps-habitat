@@ -2251,6 +2251,71 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			}
 		}
 
+		@Override
+		public AuxEmpleado getEmpleado(Long id) throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			AuxEmpleado nuevo = new AuxEmpleado();
+			 try { 
+				 final SegEmpleado p = Persistencia.getObjectById(SegEmpleado.class, id); 
+			    	nuevo.setAfiliado(p.getAfiliado());
+				 	nuevo.setAfiliacion_igss(p.getAfiliacion_igss());
+			    	nuevo.setApellido_casada(p.getApellido_casada());
+			    	nuevo.setBonificacion(p.getBonificacion());
+			    	nuevo.setCelular(p.getCelular());
+			    	nuevo.setCentro_trabajo(p.getCentro_trabajo());
+			    	nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
+			    	nuevo.setIVS(p.getIVS());
+			    	nuevo.setCui(p.getCui());
+			    	nuevo.setDepto_municipio_residencia(p.getDepto_municipio_residencia());
+			    	nuevo.setDireccion_actual(p.getDireccion_actual());
+			    	nuevo.setEmail(p.getEmail());
+			    	nuevo.setURLFile(p.getURLFile());
+			    	nuevo.setKeyFile(p.getKeyFile());
+			    	nuevo.setEstado(p.getEstado());
+			    	nuevo.setPasaporte(p.getPasaporte());
+			    	nuevo.setLicencia(p.getLicencia());
+			    	nuevo.setEtnia(p.getEtnia());
+			    	nuevo.setNombreEmergencia(p.getNombreEmergencia());
+			    	nuevo.setTelefonoEmergencia(p.getTelefonoEmergencia());
+			    	nuevo.setNombreEmergencia2(p.getNombreEmergencia2());
+			    	nuevo.setTelefonoEmergencia2(p.getTelefonoEmergencia2());
+			    	nuevo.setDepto_municipio_nacimiento(p.getDepto_municipio_nacimiento());
+			    	nuevo.setJefe_Inmediato(p.getJefe_Inmediato());
+			    	nuevo.setEstado_civil(p.getEstado_civil());
+			    	nuevo.setFecha_ingreso(p.getFecha_ingreso().getTime());
+			    	nuevo.setFecha_nacimiento(p.getFecha_nacimiento().getTime());
+			    	nuevo.setId_empleado(p.getId_empleado());
+			    	nuevo.setNit(p.getNit());
+			    	nuevo.setNo_Dependientes(p.getNo_Dependientes());
+			    	nuevo.setNo_licencia(p.getNo_licencia());
+			        nuevo.setTipoCuenta(p.getTipoCuenta());
+			        nuevo.setNombreBanco(p.getNombreBanco());
+			    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
+			    	nuevo.setNo_pasaporte(p.getNo_pasaporte());
+			    	nuevo.setOcupacion(p.getOcupacion());
+			    	nuevo.setPais(p.getPais());
+			    	nuevo.setPrimer_apellido(p.getPrimer_apellido());
+			    	nuevo.setPrimer_nombre(p.getPrimer_nombre());
+			    	nuevo.setProfesion(p.getProfesion());
+			    	nuevo.setSalario_base(p.getSalario_base());
+			    	nuevo.setSegundo_apellido(p.getSegundo_apellido());
+			    	nuevo.setSegundo_nombre(p.getSegundo_nombre());
+			    	nuevo.setSexo(p.getSexo());
+			    	nuevo.setTelefono(p.getTelefono());
+			    	nuevo.setTipo_licencia(p.getTipo_licencia());
+			    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
+			    	nuevo.setTipo_planilla(p.getTipo_planilla());
+			    	nuevo.setTotal(p.getTotal());
+			    
+		 }finally {  
+			 Persistencia.close();  
+		 }
+
+		return nuevo;
+
+		}
+
 		
 
 	}

@@ -6,11 +6,13 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -35,6 +37,7 @@ public class Compartidas extends Composite  {
      private Compartidas compartida;
      private Loading load ;
      public Long id_EmpleadoPrincipal = 0L;
+     private String nombre = "";
 
  	private Desempeno d = new Desempeno(0L);
 	private Evaluacion e = new Evaluacion(0L);
@@ -105,13 +108,28 @@ public class Compartidas extends Composite  {
                         	}
 
                         	@Override
-                        	public void onSuccess(AuxTest result)
+                        	public void onSuccess(final AuxTest result)
                         	{
+                        		loginService.getEmpleado(n.getId_empleado(), new AsyncCallback<AuxEmpleado>(){
+                                	
+                                	public void onFailure(Throwable caught) 
+                                	{
+                        		        load.invisible();
+                                		System.out.println("fracaso");
+                                	}
+
+                                	@Override
+                                	public void onSuccess(AuxEmpleado resul)
+                                	{
+                                		nombre = resul.getPrimer_nombre() +" "+ resul.getPrimer_apellido() + " "+resul.getSegundo_apellido();
+                                    	formularioTest de = new formularioTest(result,compartida,n.getId(),nombre);
+                                    	de.id_Empleado = n.getId_empleado();
+                                        flextable.setWidget(flextable.getRowCount(), 0,de);
+                                		System.out.println("exito"+nombre);
+                                	}
+                                });
+                        		
                 		        load.invisible();
-                		        
-                            	formularioTest de = new formularioTest(result,compartida,n.getId());
-                            	de.id_Empleado = n.getId_empleado();
-                                flextable.setWidget(flextable.getRowCount(), 0,de);
                         	}
                         });
                     }

@@ -28,7 +28,7 @@ public class formularioTest extends Composite {
     private Loading load ;
     private formularioTest test;
     
-	public formularioTest(final AuxTest prueba, Compartidas comp, Long idCompartido) {
+	public formularioTest(final AuxTest prueba, Compartidas comp, Long idCompartido, String nombre) {
 		test = this;
 		id_TestCompartido = idCompartido;
 		compartido = comp;
@@ -61,8 +61,8 @@ public class formularioTest extends Composite {
 		txtEvaluador.setMaxLength(500);
 		absolutePanel.add(txtEvaluador, 218, 29);
 		txtEvaluador.setSize("227px", "34px");
-		
-		txtEvaluador.setText(prueba.getEvaluador());
+
+		txtEvaluador.setText(nombre);
 		
 		txtPunteo = new DoubleBox();
 		txtPunteo.setReadOnly(true);
@@ -70,7 +70,6 @@ public class formularioTest extends Composite {
 		absolutePanel.add(txtPunteo, 483, 29);
 		txtPunteo.setSize("97px", "34px");
 
-		txtEvaluador.setText(prueba.getEvaluador());
 		int valor = prueba.getPregunta1() + prueba.getPregunt2() + prueba.getPregunta3()
 				+prueba.getPregunta4()+prueba.getPregunta5() +prueba.getPregunta6()
 				+prueba.getPregunta7()+prueba.getPregunta8()+prueba.getPregunta9()
@@ -96,7 +95,7 @@ public class formularioTest extends Composite {
 		absolutePanel.add(lblNivelAcademico, 10, 10);
 		lblNivelAcademico.setSize("170px", "13px");
 		
-		Label lblEvaluacionDe = new Label("Evaluador");
+		Label lblEvaluacionDe = new Label("Persona a Evaluar");
 		lblEvaluacionDe.setStyleName("label");
 		absolutePanel.add(lblEvaluacionDe, 218, 10);
 		lblEvaluacionDe.setSize("201px", "13px");

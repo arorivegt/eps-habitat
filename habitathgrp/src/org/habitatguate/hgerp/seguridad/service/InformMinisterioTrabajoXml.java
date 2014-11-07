@@ -294,15 +294,12 @@ public class InformMinisterioTrabajoXml {
 		
 					String DescansoSemanal = "";
 					String jornada = "";
+					String nombre_puesto = "";
+					String horas_trabajadas = "";
 					for (AuxPuesto f : p.getPuestos()) {
 						if(f.isActivo()){
-							
-							xmlInicio += "<td>"+f.getNombre_puesto()+"</td>";
-							
-							xmlInicio += "<td>"+""+"</td>";
-
-							//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
-							
+							nombre_puesto = f.getNombre_puesto();
+							horas_trabajadas = f.getHorasTrabajo();
 							if(f.getJornada().equals("0")){
 								jornada = "Diurna";
 							}else if(f.getJornada().equals("1")){
@@ -348,16 +345,21 @@ public class InformMinisterioTrabajoXml {
 								else
 									DescansoSemanal +=","+ "Domingo";
 							}
-
-							xmlInicio += "<td>"+DescansoSemanal+"</td>";
-							
-							xmlInicio += "<td>"+jornada+"</td>";
-
-							xmlInicio += "<td>"+f.getHorasTrabajo()+"</td>";
 							break;
 						}
 					}
 
+					xmlInicio += "<td>"+nombre_puesto+"</td>";
+					
+					xmlInicio += "<td>"+""+"</td>";
+
+					//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
+
+					xmlInicio += "<td>"+DescansoSemanal+"</td>";
+					
+					xmlInicio += "<td>"+jornada+"</td>";
+
+					xmlInicio += "<td>"+horas_trabajadas+"</td>";
 					
 					
 					String idioma ="";

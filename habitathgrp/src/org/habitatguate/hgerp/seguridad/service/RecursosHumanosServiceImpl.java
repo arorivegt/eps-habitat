@@ -75,6 +75,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setEstado("2");
 				em.setIVS("0");
 				em.setCui("0");
+				em.setNit("0");
 				em.setNoCuenta("0");
 				em.setTipoCuenta("1");
 				em.setNombreBanco("1");

@@ -44,7 +44,7 @@ public class formularioPrestaciones  extends Composite  {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("889px", "35px");
+		absolutePanel.setSize("950px", "35px");
 		
 		txtEmpleado = new TextBox();
 		txtEmpleado.setReadOnly(true);

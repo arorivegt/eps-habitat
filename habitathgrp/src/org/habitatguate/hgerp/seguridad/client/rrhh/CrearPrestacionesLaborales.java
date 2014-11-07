@@ -695,6 +695,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Indemnizacion del año: "+listAnio,nombre
 	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
 	 			}
+	 			salarioBaseCalculo = 0;
 	 			enero = 0;
 	 			febrero = 0;
 	 			marzo = 0;
@@ -708,6 +709,20 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			abrilBono = 0;
 	 			mayoBono = 0;
 	 			junioBono = 0;
+	 			
+
+		 		 bEnero = true;
+		 		 bFebrero = true;
+		 		 bMarzo	= true;
+		 		 bAbril = true;
+		 		 bMayo = true;
+		 		 bJunio = true;
+
+		 		 ultimoAnnio = 0;
+		 		 ultimoMes = 0;
+		 		 ultimoSalario = 0;
+		 		 formatAnio 	= "";
+		 		 formatMes 	= "";
 	 		}//fin for empleado
 
 	        load.invisible();

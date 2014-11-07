@@ -108,6 +108,7 @@ public class Compartidas extends Composite  {
                         	public void onSuccess(AuxTest result)
                         	{
                 		        load.invisible();
+                		        
                             	formularioTest de = new formularioTest(result,compartida,n.getId());
                             	de.id_Empleado = n.getId_empleado();
                                 flextable.setWidget(flextable.getRowCount(), 0,de);

@@ -19,6 +19,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -857,6 +858,13 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     List<AuxSalario> getSalarios()throws IllegalArgumentException;
+    /**
+     * 
+     * @param id
+     * @return
+     * @throws IllegalArgumentException
+     */
+    AuxEmpleado getEmpleado(Long id)throws IllegalArgumentException;
     /**
      * 
      * @param id

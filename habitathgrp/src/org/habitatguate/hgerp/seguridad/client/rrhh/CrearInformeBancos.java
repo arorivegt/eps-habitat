@@ -168,38 +168,7 @@ public class CrearInformeBancos extends Composite   {
 		txtDato1.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
 				if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER){
-					
-					String nombreArray[] = txtDato1.getText().split(" ");
-					String primerNombre = "";
-					String segundoNombre = "";
-					String segundoApellido = "";
-					String primerApellido =  "";
-
-					try{
-						 primerNombre = nombreArray[0];
-						 segundoNombre =  nombreArray[1];
-						 primerApellido =  nombreArray[2];
-						 segundoApellido = nombreArray[3];
-					}catch(Exception e){
-						 primerNombre = "";
-						 segundoNombre = "";
-						 segundoApellido = "";
-						 primerApellido =  "";
-					}
-					if(!txtDato1.getText().equals("")){
-
-						formPanel.setAction("/ExportBancos?tipo="+"1"
-								+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-								+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-								+"&primer_nombre="+primerNombre
-								+"&segundo_nombre="+segundoNombre
-								+"&primer_apellido="+primerApellido
-								+"&segundo_apellido="+segundoApellido
-								+"&DPI="+"a"
-								+"&Pasaporte="+"a"
-								+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-						formPanel.submit();
-					}
+					buscar();
 				}
 
 			}
@@ -223,128 +192,7 @@ public class CrearInformeBancos extends Composite   {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
-				grid.clearCell(1, 0);
-				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-				{
-					formPanel.setAction("/ExportBancos?tipo="+"2"
-							+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-							+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-							+"&primer_nombre="+"a"
-							+"&segundo_nombre="+"a"
-							+"&primer_apellido="+"a"
-							+"&segundo_apellido="+"a"
-							+"&DPI="+"a"
-							+"&Pasaporte="+"a"
-							+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-					formPanel.submit();
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
-				{
-
-					String nombreArray[] = txtDato1.getText().split(" ");
-					String primerNombre = "";
-					String segundoNombre = "";
-					String segundoApellido = "";
-					String primerApellido =  "";
-
-					try{
-						 primerNombre = nombreArray[0];
-						 segundoNombre =  nombreArray[1];
-						 primerApellido =  nombreArray[2];
-						 segundoApellido = nombreArray[3];
-					}catch(Exception e){
-						 primerNombre = "";
-						 segundoNombre = "";
-						 segundoApellido = "";
-						 primerApellido =  "";
-					}
-					if(!txtDato1.getText().equals("")){
-
-						formPanel.setAction("/ExportBancos?tipo="+"1"
-								+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-								+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-								+"&primer_nombre="+primerNombre
-								+"&segundo_nombre="+segundoNombre
-								+"&primer_apellido="+primerApellido
-								+"&segundo_apellido="+segundoApellido
-								+"&DPI="+"a"
-								+"&Pasaporte="+"a"
-								+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-						formPanel.submit();
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
-					}
-				}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
-				{
-					if(!txtDato1.getText().equals("") ){
-
-						formPanel.setAction("/ExportBancos?tipo="+"3"
-								+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-								+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-								+"&primer_nombre="+"a"
-								+"&segundo_nombre="+"a"
-								+"&primer_apellido="+"a"
-								+"&segundo_apellido="+"a"
-								+"&DPI="+"a"
-								+"&Pasaporte="+txtDato1.getText()
-								+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-						formPanel.submit();
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
-				{
-
-					if(!txtDato1.getText().equals("") ){
-						formPanel.setAction("/ExportBancos?tipo="+"4"
-								+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-								+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-								+"&primer_nombre="+"a"
-								+"&segundo_nombre="+"a"
-								+"&primer_apellido="+"a"
-								+"&segundo_apellido="+"a"
-								+"&DPI="+txtDato1.getText()
-								+"&Pasaporte="+"a"
-								+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-						formPanel.submit();
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
-				{
-
-					formPanel.setAction("/ExportBancos?tipo="+"5"
-							+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-							+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-							+"&primer_nombre="+"a"
-							+"&segundo_nombre="+"a"
-							+"&primer_apellido="+"a"
-							+"&segundo_apellido="+"a"
-							+"&DPI="+"a"
-							+"&Pasaporte="+"a"
-							+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-					formPanel.submit();
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
-				{
-
-					formPanel.setAction("/ExportBancos?tipo="+"6"
-							+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-							+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
-							+"&primer_nombre="+"a"
-							+"&segundo_nombre="+"a"
-							+"&primer_apellido="+"a"
-							+"&segundo_apellido="+"a"
-							+"&DPI="+"a"
-							+"&Pasaporte="+"a"
-							+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
-					formPanel.submit();
-				}
+				buscar();
 			}
 		});
 		
@@ -482,7 +330,129 @@ public class CrearInformeBancos extends Composite   {
 		initWidget(grid);
 		
 	}
-	
+	public void buscar(){
+		grid.clearCell(1, 0);
+		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+		{
+			formPanel.setAction("/ExportBancos?tipo="+"2"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+					+"&primer_nombre="+"a"
+					+"&segundo_nombre="+"a"
+					+"&primer_apellido="+"a"
+					+"&segundo_apellido="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+			formPanel.submit();
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
+		{
+
+			String nombreArray[] = txtDato1.getText().split(" ");
+			String primerNombre = "";
+			String segundoNombre = "";
+			String segundoApellido = "";
+			String primerApellido =  "";
+
+			try{
+				 primerNombre = nombreArray[0];
+				 segundoNombre =  nombreArray[1];
+				 primerApellido =  nombreArray[2];
+				 segundoApellido = nombreArray[3];
+			}catch(Exception e){
+				 primerNombre = "";
+				 segundoNombre = "";
+				 segundoApellido = "";
+				 primerApellido =  "";
+			}
+			if(!txtDato1.getText().equals("")){
+
+				formPanel.setAction("/ExportBancos?tipo="+"1"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+						+"&primer_nombre="+primerNombre
+						+"&segundo_nombre="+segundoNombre
+						+"&primer_apellido="+primerApellido
+						+"&segundo_apellido="+segundoApellido
+						+"&DPI="+"a"
+						+"&Pasaporte="+"a"
+						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+				formPanel.submit();
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
+			}
+		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
+		{
+			if(!txtDato1.getText().equals("") ){
+
+				formPanel.setAction("/ExportBancos?tipo="+"3"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+						+"&primer_nombre="+"a"
+						+"&segundo_nombre="+"a"
+						+"&primer_apellido="+"a"
+						+"&segundo_apellido="+"a"
+						+"&DPI="+"a"
+						+"&Pasaporte="+txtDato1.getText()
+						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+				formPanel.submit();
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
+		{
+
+			if(!txtDato1.getText().equals("") ){
+				formPanel.setAction("/ExportBancos?tipo="+"4"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+						+"&primer_nombre="+"a"
+						+"&segundo_nombre="+"a"
+						+"&primer_apellido="+"a"
+						+"&segundo_apellido="+"a"
+						+"&DPI="+txtDato1.getText()
+						+"&Pasaporte="+"a"
+						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+				formPanel.submit();
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
+		{
+
+			formPanel.setAction("/ExportBancos?tipo="+"5"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+					+"&primer_nombre="+"a"
+					+"&segundo_nombre="+"a"
+					+"&primer_apellido="+"a"
+					+"&segundo_apellido="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+			formPanel.submit();
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
+		{
+
+			formPanel.setAction("/ExportBancos?tipo="+"6"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+					+"&primer_nombre="+"a"
+					+"&segundo_nombre="+"a"
+					+"&primer_apellido="+"a"
+					+"&segundo_apellido="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+			formPanel.submit();
+		}
+	}
 //	 public void agregarFormulario(final char tipo, final String primer_nombre, String segundo_nombre, 
 //				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
 //

@@ -1378,6 +1378,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	if (!results10.isEmpty()) {
 							    for (SegSalario n10 : results10) {
 							    	AuxSalario s = new AuxSalario();
+							    	s.setId_Salario(n10.getId_Salario());
 							    	s.setSalario(n10.getSalario());
 							    	s.setTipoSalario(n10.getTipoSalario());
 								 	s.setFecha(n10.getFecha().getTime());
@@ -1646,6 +1647,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	if (!results10.isEmpty()) {
 						    for (SegSalario n10 : results10) {
 						    	AuxSalario s = new AuxSalario();
+						    	s.setId_Salario(n10.getId_Salario());
 						    	s.setSalario(n10.getSalario());
 						    	s.setTipoSalario(n10.getTipoSalario());
 							 	s.setFecha(n10.getFecha().getTime());

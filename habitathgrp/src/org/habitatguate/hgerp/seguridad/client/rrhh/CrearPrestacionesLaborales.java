@@ -74,6 +74,7 @@ public class CrearPrestacionesLaborales extends Composite   {
         load.invisible();
 		mensaje = new Mensaje();
 		grid = new Grid(2, 1);
+		nuevo = new prestaciones();
 		grid.setSize("1117px", "100%");
 					
 		absolutePanel = new AbsolutePanel();
@@ -100,7 +101,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 					lbDato1.setVisible(true);
 					
 					txtDato1.setVisible(true);
-					absolutePanel.add(Busqueda, 420, 19);
+					//absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
 					lbDato1.setText("Primer Nombre");
@@ -109,7 +110,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 					
 					txtDato1.setVisible(true);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 420, 19);
+					//absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 				{
 					lbDato1.setText("Primer Nombre");
@@ -118,10 +119,9 @@ public class CrearPrestacionesLaborales extends Composite   {
 					
 					txtDato1.setVisible(false);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 205, 16);
+					//absolutePanel.add(Busqueda, 205, 16);
 
 					grid.clearCell(1, 0);
-					nuevo = new prestaciones();
 					agregarFormulario('2',txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,"");
@@ -134,7 +134,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 					
 					txtDato1.setVisible(true);
 					listEstado.setVisible(false);
-					absolutePanel.add(Busqueda, 420, 19);
+					//absolutePanel.add(Busqueda, 420, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 				{
 					listEstado.clear();
@@ -150,7 +150,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 					
 					txtDato1.setVisible(false);
 					listEstado.setVisible(true);
-					absolutePanel.add(Busqueda, 390, 19);
+					//absolutePanel.add(Busqueda, 390, 19);
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 				{
 
@@ -166,7 +166,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 					
 					txtDato1.setVisible(false);
 					listEstado.setVisible(true);
-					absolutePanel.add(Busqueda, 390, 19);
+					//absolutePanel.add(Busqueda, 390, 19);
 				}
 			}
 		});
@@ -180,31 +180,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 			public void onKeyUp(KeyUpEvent event) {
 
 				if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER){
-
-					String nombreArray[] = txtDato1.getText().split(" ");
-					String primerNombre = "";
-					String segundoNombre = "";
-					String segundoApellido = "";
-					String primerApellido =  "";
-
-					try{
-						 primerNombre = nombreArray[0];
-						 segundoNombre =  nombreArray[1];
-						 primerApellido =  nombreArray[2];
-						 segundoApellido = nombreArray[3];
-					}catch(Exception e){
-						 primerNombre = "";
-						 segundoNombre = "";
-						 segundoApellido = "";
-						 primerApellido =  "";
-					}
-					System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
-					if(!txtDato1.getText().equals("")){
-						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
-								segundoApellido,txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-					}
+					Buscar();
 				}
 			}
 		});
@@ -227,89 +203,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
-				grid.clearCell(1, 0);
-				nuevo = new prestaciones();
-				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-				{
-					agregarFormulario('2',txtDato1.getText(), "","", 
-							"",txtDato1.getText(),txtDato1.getText()
-							,"");
-					grid.setWidget(1, 0,nuevo);
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
-				{
-
-					String nombreArray[] = txtDato1.getText().split(" ");
-					String primerNombre = "";
-					String segundoNombre = "";
-					String segundoApellido = "";
-					String primerApellido =  "";
-
-					try{
-						 primerNombre = nombreArray[0];
-						 segundoNombre =  nombreArray[1];
-						 primerApellido =  nombreArray[2];
-						 segundoApellido = nombreArray[3];
-					}catch(Exception e){
-						 primerNombre = "";
-						 segundoNombre = "";
-						 segundoApellido = "";
-						 primerApellido =  "";
-					}
-					System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
-					if(!txtDato1.getText().equals("")){
-						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
-								segundoApellido,txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
-					}
-				}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
-				{
-					if(!txtDato1.getText().equals("") ){
-						agregarFormulario('3',txtDato1.getText(), "","", 
-								"",txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
-				{
-
-					if(!txtDato1.getText().equals("") ){
-						agregarFormulario('4',txtDato1.getText(), "","", 
-								"",txtDato1.getText(),txtDato1.getText()
-								,"");
-						grid.setWidget(1, 0,nuevo);
-						nuevo.setSize("100%", "648px");
-					}
-					else{
-
-		    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
-		    		}
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
-				{
-					agregarFormulario('5',txtDato1.getText(), "","", 
-							"",txtDato1.getText(),txtDato1.getText()
-							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
-				{
-					agregarFormulario('6',txtDato1.getText(), "","", 
-							"",txtDato1.getText(),txtDato1.getText()
-							,listEstado.getValue(listEstado.getSelectedIndex()));
-					grid.setWidget(1, 0,nuevo);
-					nuevo.setSize("100%", "648px");
-				}
+				Buscar();
 			}
 		});
 		
@@ -325,7 +219,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");
 						
-		absolutePanel.add(Busqueda, 984, 19);
+		absolutePanel.add(Busqueda, 470, 78);
 		Busqueda.setSize("103px", "55px");
 		
 		lbDato1 = new Label("Primer Nombre");
@@ -478,6 +372,93 @@ public class CrearPrestacionesLaborales extends Composite   {
 		
 	}
 	
+	public void Buscar()
+	{
+		grid.clearCell(1, 0);
+		nuevo = new prestaciones();
+		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+		{
+			agregarFormulario('2',txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,"");
+			grid.setWidget(1, 0,nuevo);
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
+		{
+
+			String nombreArray[] = txtDato1.getText().split(" ");
+			String primerNombre = "";
+			String segundoNombre = "";
+			String segundoApellido = "";
+			String primerApellido =  "";
+
+			try{
+				 primerNombre = nombreArray[0];
+				 segundoNombre =  nombreArray[1];
+				 primerApellido =  nombreArray[2];
+				 segundoApellido = nombreArray[3];
+			}catch(Exception e){
+				 primerNombre = "";
+				 segundoNombre = "";
+				 segundoApellido = "";
+				 primerApellido =  "";
+			}
+
+			System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
+			if(!txtDato1.getText().equals("")){
+				agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
+						segundoApellido,txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
+			}
+		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
+		{
+			if(!txtDato1.getText().equals("") ){
+				agregarFormulario('3',txtDato1.getText(), "","", 
+						"",txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el No pasaporte");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("DPI"))
+		{
+
+			if(!txtDato1.getText().equals("") ){
+				agregarFormulario('4',txtDato1.getText(), "","", 
+						"",txtDato1.getText(),txtDato1.getText()
+						,"");
+				grid.setWidget(1, 0,nuevo);
+				nuevo.setSize("100%", "648px");
+			}
+			else{
+
+    			mensaje.setMensaje("alert alert-info", "Escriba el DPI");
+    		}
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
+		{
+			agregarFormulario('5',txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
+		{
+			agregarFormulario('6',txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}
+	}
+	
 	 public void agregarFormulario(final char tipo, final String primer_nombre, String segundo_nombre, 
 				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
 
@@ -494,6 +475,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 				@Override
 	            public void onSuccess( List<AuxEmpleado> result)
 	            {
+			        load.invisible();
 					if(!result.isEmpty()){
 						Prestaciones(result,listTipoPrestaciones.getValue(listTipoPrestaciones.getSelectedIndex()),
 								listAnnio.getItemText(listAnnio.getSelectedIndex()));

@@ -44,14 +44,14 @@ public class formularioPrestaciones  extends Composite  {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("802px", "35px");
+		absolutePanel.setSize("889px", "35px");
 		
 		txtEmpleado = new TextBox();
 		txtEmpleado.setReadOnly(true);
 		txtEmpleado.setMaxLength(100);
 		txtEmpleado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEmpleado, 10, 29);
-		txtEmpleado.setSize("198px", "34px");
+		absolutePanel.add(txtEmpleado, 35, 29);
+		txtEmpleado.setSize("323px", "34px");
 		
 		dateFecha = new DateBox();
 		dateFecha.getTextBox().setReadOnly(true);
@@ -62,7 +62,7 @@ public class formularioPrestaciones  extends Composite  {
 		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateFecha.getDatePicker().setVisibleYearCount(100);
 		dateFecha.setStyleName("gwt-TextBox2");
-		absolutePanel.add(dateFecha, 216, 29);
+		absolutePanel.add(dateFecha, 366, 29);
 		dateFecha.setSize("137px", "34px");
 		
 		txtPromedioSalario = new TextBox();
@@ -84,7 +84,7 @@ public class formularioPrestaciones  extends Composite  {
 		txtPromedioSalario.setText("0.0");
 		txtPromedioSalario.setMaxLength(100);
 		txtPromedioSalario.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtPromedioSalario, 371, 29);
+		absolutePanel.add(txtPromedioSalario, 521, 29);
 		txtPromedioSalario.setSize("94px", "34px");
 		
 		txtDiasAnnio = new TextBox();
@@ -108,7 +108,7 @@ public class formularioPrestaciones  extends Composite  {
 		txtDiasAnnio.setText("0");
 		txtDiasAnnio.setStyleName("gwt-TextBox2");
 		txtDiasAnnio.setMaxLength(100);
-		absolutePanel.add(txtDiasAnnio, 486, 29);
+		absolutePanel.add(txtDiasAnnio, 636, 29);
 		txtDiasAnnio.setSize("94px", "34px");
 		
 		txtDiasTrabajados = new TextBox();
@@ -132,7 +132,7 @@ public class formularioPrestaciones  extends Composite  {
 		txtDiasTrabajados.setText("0");
 		txtDiasTrabajados.setStyleName("gwt-TextBox2");
 		txtDiasTrabajados.setMaxLength(100);
-		absolutePanel.add(txtDiasTrabajados, 598, 29);
+		absolutePanel.add(txtDiasTrabajados, 748, 29);
 		txtDiasTrabajados.setSize("94px", "34px");
 		
 		txtTotal = new TextBox();
@@ -154,55 +154,55 @@ public class formularioPrestaciones  extends Composite  {
 		txtTotal.setText("0.0");
 		txtTotal.setStyleName("gwt-TextBox2");
 		txtTotal.setMaxLength(100);
-		absolutePanel.add(txtTotal, 710, 29);
+		absolutePanel.add(txtTotal, 860, 29);
 		txtTotal.setSize("94px", "34px");
 		
 		checkOk = new SimpleCheckBox();
-		absolutePanel.add(checkOk, 812, 33);
+		absolutePanel.add(checkOk, 962, 33);
 		
 		Label lblEmpleado = new Label("Empleado");
 		lblEmpleado.setStyleName("label");
-		absolutePanel.add(lblEmpleado, 10, 10);
+		absolutePanel.add(lblEmpleado, 35, 10);
 		lblEmpleado.setSize("157px", "13px");
 		
 		Label lblPromedioSalario = new Label("Promedio Salario");
 		lblPromedioSalario.setStyleName("label");
-		absolutePanel.add(lblPromedioSalario, 371, 0);
+		absolutePanel.add(lblPromedioSalario, 521, 0);
 		lblPromedioSalario.setSize("75px", "13px");
 		
 		Label lblX = new Label("/");
 		lblX.setStyleName("label");
-		absolutePanel.add(lblX, 476, 42);
+		absolutePanel.add(lblX, 626, 42);
 		lblX.setSize("16px", "13px");
 		
 		Label lblDiasAlAo = new Label("Dias al año");
 		lblDiasAlAo.setStyleName("label");
-		absolutePanel.add(lblDiasAlAo, 486, 10);
+		absolutePanel.add(lblDiasAlAo, 636, 10);
 		lblDiasAlAo.setSize("86px", "13px");
 		
 		Label lblX_1 = new Label("X");
 		lblX_1.setStyleName("label");
-		absolutePanel.add(lblX_1, 586, 42);
+		absolutePanel.add(lblX_1, 736, 42);
 		lblX_1.setSize("16px", "13px");
 		
 		Label lblDiasTrabajados = new Label("Dias Trabajados");
 		lblDiasTrabajados.setStyleName("label");
-		absolutePanel.add(lblDiasTrabajados, 598, 0);
+		absolutePanel.add(lblDiasTrabajados, 748, 0);
 		lblDiasTrabajados.setSize("86px", "13px");
 		
 		Label label = new Label("=");
 		label.setStyleName("label");
-		absolutePanel.add(label, 698, 42);
+		absolutePanel.add(label, 848, 42);
 		label.setSize("16px", "13px");
 		
 		Label lblTotalPrestacion = new Label("Total Prestacion");
 		lblTotalPrestacion.setStyleName("label");
-		absolutePanel.add(lblTotalPrestacion, 710, 0);
+		absolutePanel.add(lblTotalPrestacion, 860, 0);
 		lblTotalPrestacion.setSize("86px", "13px");
 		
 		Label label_1 = new Label("Fecha");
 		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 216, 10);
+		absolutePanel.add(label_1, 366, 10);
 		label_1.setSize("60px", "13px");
 		
 	}

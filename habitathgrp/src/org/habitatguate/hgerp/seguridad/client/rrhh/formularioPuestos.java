@@ -213,13 +213,13 @@ public class formularioPuestos extends Composite {
 											public void onFailure(Throwable caught) 
 								            {
 										        load.invisible();
-								            	mensaje.setMensaje("alert alert-error", caught.getMessage());
+								            	//mensaje.setMensaje("alert alert-error", caught.getMessage());
 								            }
 											@Override
 								            public void onSuccess(String result)
 								            {
 										        load.invisible();
-												mensaje.setMensaje("alert alert-success", result);
+												//mensaje.setMensaje("alert alert-success", result);
 								            }
 										});
 									}

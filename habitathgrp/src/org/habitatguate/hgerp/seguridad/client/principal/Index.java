@@ -27,26 +27,30 @@ public class Index implements EntryPoint {
         @Override
         public void onModuleLoad() 
         {
-        	
+        	load = new Loading();
+            load.Mostrar();
+        	load.visible();
         	loginService.CheqLog(new AsyncCallback<Boolean>() 
             {
         		
                     public void onFailure(Throwable caught) 
                     {
+                        load.invisible();
                     }
                     
                     public void onSuccess(Boolean result)
                     {
-                    	System.out.println("rsultado1 : "+result);
                     	if(result){
                     		loginService.obtenerId(new AsyncCallback<Long>() 
             	            {
             	                    public void onFailure(Throwable caught) 
             	                    {
+            	                        load.invisible();
             	                    }
             	                    
             	                    public void onSuccess(Long results)
             	                    {
+            	                        load.invisible();
             	                    	System.out.println("rsultado2: "+results);
                                 		inicioPanel = new Panel();
             	                    	inicioPanel.setId_empleado(results);
@@ -57,11 +61,10 @@ public class Index implements EntryPoint {
             	             });
                     		
                     	}
+                        load.invisible();
                                                             
                     }
              });
-        	load = new Loading();
-            load.Mostrar();
             load.invisible();
         	txtuser.setText("anibal@gmail.com");
         	txtpass.setText("Aqwe123");

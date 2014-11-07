@@ -200,9 +200,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	         e.setNo_Dependientes(No_Dependientes);
 	         e.setNoCuenta(noCuenta);
 			 e.setTipoCuenta(tipoCuenta);
-			 e.setNombreBanco(nombreBanco);
+			 e.setNombreBanco(nombreBanco.toUpperCase());
 	         e.setCui(cui);
-	         e.setTipo_pasaporte(tipo_pasaporte);
+	         e.setTipo_pasaporte(tipo_pasaporte.toUpperCase());
 	         e.setNo_pasaporte(no_pasaporte);
 	         e.setDireccion_actual(direccion_actual.toUpperCase());
 	         e.setDepto_municipio_residencia(depto_municipio_residencia);
@@ -676,7 +676,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					 	a.setFecha1(fecha1);
 					 	a.setFecha2(fecha2);
 					 	a.setNivel_academico(nivel_academico);
-					 	a.setTitulo(titulo);
+					 	a.setTitulo(titulo.toUpperCase());
 				        a.setURLFile(URLFile);
 				        a.setKeyFile(KeyFile);
 					 	valor = a.getId_historial_academico();
@@ -736,7 +736,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	rp.setNombre_referencia(nombre_referencia.toUpperCase());
 						 	rp.setTelefono(telefono);
 						 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
-						 	rp.setRelacion(relacion);
+						 	rp.setRelacion(relacion.toUpperCase());
 						 	rp.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
 						 	valor = rp.getId_referencia_personal();
 						 }finally {  

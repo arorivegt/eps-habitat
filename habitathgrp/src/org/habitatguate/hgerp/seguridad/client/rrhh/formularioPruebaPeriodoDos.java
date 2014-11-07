@@ -504,7 +504,7 @@ public class formularioPruebaPeriodoDos extends Composite {
 			String listPregunta8, String listPregunta9,
 			String listPregunta10, String txtEvaluador, Long id_BDPuestos, Long dateFecha) {
 
-		Window.alert(""+id_BDPuestos);
+		//Window.alert(""+id_BDPuestos);
 		this.id_prueba = id;
 		this.id_BDprueba =id_BDPuestos;
 		this.listTest.setVisible(false);
@@ -568,6 +568,12 @@ public class formularioPruebaPeriodoDos extends Composite {
 		}
 		this.txtEvaluador.setText(txtEvaluador);
 		this.dateFecha.setValue(new Date(dateFecha));
+
+		int valor = Integer.parseInt(listPregunta1) + Integer.parseInt(listPregunta2) + Integer.parseInt(listPregunta3)
+				+Integer.parseInt(listPregunta4)+Integer.parseInt(listPregunta5) +Integer.parseInt(listPregunta6)
+				+Integer.parseInt(listPregunta7)+Integer.parseInt(listPregunta8)+Integer.parseInt(listPregunta9)
+				+Integer.parseInt(listPregunta10);
+		this.txtPunteoTotal.setText(""+valor);
 	}
     
     

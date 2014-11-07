@@ -344,7 +344,7 @@ public class Empleados extends Composite {
 				}
 			}
 			fpp.agregar_formularios(valor);
-			fppd.agregar_formularios(valor);
+			fppd.agregar_formularios(valor2);
 		}
 	}
 	

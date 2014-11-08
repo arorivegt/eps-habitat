@@ -247,29 +247,57 @@ public class BuscadorEmpleados extends Composite   {
 			String segundoNombre = "";
 			String segundoApellido = "";
 			String primerApellido =  "";
-
+			System.out.println(nombreArray.length);
 			try{
-			 primerNombre = nombreArray[0];
-			 segundoNombre =  nombreArray[1];
-			 primerApellido =  nombreArray[2];
-			 segundoApellido = nombreArray[3];
+
+				if(nombreArray.length == 2){
+					primerNombre = nombreArray[0];
+					segundoNombre = "";
+					primerApellido =  nombreArray[1];
+					segundoApellido = "";
+					
+					nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+				}else if(nombreArray.length == 3){
+					
+					primerNombre = nombreArray[0];
+					segundoNombre =  nombreArray[1];
+					primerApellido =  nombreArray[2];
+					segundoApellido = "";
+					
+					if(nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, 
+							segundoApellido,txtDato1.getText(),txtDato1.getText(),""))
+					{
+						primerNombre = nombreArray[0];
+						segundoNombre =  "";
+						primerApellido =  nombreArray[1];
+						segundoApellido = nombreArray[2];
+						
+						nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, 
+								segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					}
+					
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+					
+				}else if(nombreArray.length == 4){
+					primerNombre = nombreArray[0];
+					segundoNombre = nombreArray[1];
+					primerApellido =  nombreArray[2];
+					segundoApellido = nombreArray[3];
+					
+					nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+				}
+				
 			}catch(Exception e){
 				 primerNombre = "";
 				 segundoApellido = "";
 				 primerApellido =  "";
 			}
-			System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
-			if(!txtDato1.getText().equals("")){
-				nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, 
-						segundoApellido,txtDato1.getText(),txtDato1.getText()
-						,"");
-				grid.setWidget(1, 0,nuevo);
-				nuevo.setSize("100%", "648px");
-			}
-			else{
-
-    			mensaje.setMensaje("alert alert-info", "Escriba datos a buscar");
-			}
+			
 		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
 		{
 			if(!txtDato1.getText().equals("") ){
@@ -427,7 +455,7 @@ public class BuscadorEmpleados extends Composite   {
 		    {
 				for(AuxEmpleado p : result) 
 				{
-					oracle.add(p.getPrimer_nombre()+" "+p.getSegundo_nombre()+" "+p.getPrimer_apellido()+" "+p.getSegundo_apellido());
+					oracle.add(p.getPrimer_nombre().trim()+" "+p.getSegundo_nombre().trim()+" "+p.getPrimer_apellido().trim()+" "+p.getSegundo_apellido().trim());
 				}
 		    }
 		

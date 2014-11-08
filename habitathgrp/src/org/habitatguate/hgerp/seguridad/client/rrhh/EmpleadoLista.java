@@ -22,6 +22,7 @@ public class EmpleadoLista extends Composite {
     private EmpleadoLista listaEmpleado;
     private FlexTable flexTable;
     private Loading load ;
+	boolean bandera = false;
 	public EmpleadoLista() {
 		this.listaEmpleado =this;
 		mensaje = new Mensaje();
@@ -44,23 +45,21 @@ public class EmpleadoLista extends Composite {
 		flexTable.setSize("100%", "80px");
 	}
 
-    public void agregarFormulario(final char tipo, final BuscadorEmpleados buscador, final String primer_nombre, String segundo_nombre, 
+    public boolean agregarFormulario(final char tipo, final BuscadorEmpleados buscador, final String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
 
         load.visible();
-    	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
-						primer_apellido, segundo_apellido,DPI, Pasaporte,Estado,new AsyncCallback<List<AuxEmpleado>>(){
+    	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido,DPI, Pasaporte,Estado,new AsyncCallback<List<AuxEmpleado>>(){
             public void onFailure(Throwable caught) 
             {
 		        load.invisible();
-            	mensaje.setMensaje("alert alert-information alert-block", 
-            			"\nNo hay resultados");
-               // Window.alert("No hay resultados "+caught);
+            	mensaje.setMensaje("alert alert-information alert-block", "\nNo hay resultados");
             }
 
 			@Override
             public void onSuccess( List<AuxEmpleado> result)
             {
+				bandera = !result.isEmpty();
 				for(AuxEmpleado p : result) {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, new EmpleadoItem(buscador,listaEmpleado,p.getId_empleado(),p.getPrimer_nombre(),
 			        		p.getSegundo_nombre(),p.getPrimer_apellido(),p.getSegundo_apellido()));
@@ -68,9 +67,10 @@ public class EmpleadoLista extends Composite {
 		        load.invisible();
             }
 
-     });
+    	});
 
         load.invisible();
+        return bandera;
     }
     
     public void EliminarFormulario(final EmpleadoItem a){

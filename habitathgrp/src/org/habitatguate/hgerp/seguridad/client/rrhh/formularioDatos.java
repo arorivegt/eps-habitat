@@ -1102,8 +1102,7 @@ public class formularioDatos extends Composite {
 				}catch(Exception e){
 					dateFechaIngreso.setValue(new Date(1407518124684L));
 				}
-				if(!txtPrimerApellido.getText().equals("") && !txtSegundoApellido.getText().equals("")  
-						&& !txtPrimerNombre.getText().equals("")  && !txtSegundoNombre.getText().equals("") ){
+				if(!txtPrimerApellido.getText().equals("") && !txtPrimerNombre.getText().equals("")   ){
 
                 
 					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
@@ -1207,7 +1206,7 @@ public class formularioDatos extends Composite {
 				}else{
     		        load.invisible();
                 	mensaje.setMensaje("alert alert-error", 
-                			"Error !! \nNombres no pueden ir vacios");
+                			"Error !! \nPrimer Nombre y/o Apellido no pueden ir vacios");
 				}
 
 		        load.invisible();

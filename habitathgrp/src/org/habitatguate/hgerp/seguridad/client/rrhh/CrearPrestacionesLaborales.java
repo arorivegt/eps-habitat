@@ -48,6 +48,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     private Image Busqueda;
     private SuggestBox txtDato1;
     private  ListBox listEstado ;
+	boolean bandera = false;
     private AbsolutePanel absolutePanel;
     private prestaciones  nuevo;
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
@@ -384,36 +385,62 @@ public class CrearPrestacionesLaborales extends Composite   {
 			grid.setWidget(1, 0,nuevo);
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 		{
-
 			String nombreArray[] = txtDato1.getText().split(" ");
 			String primerNombre = "";
 			String segundoNombre = "";
 			String segundoApellido = "";
 			String primerApellido =  "";
-
+			System.out.println(nombreArray.length);
 			try{
-				 primerNombre = nombreArray[0];
-				 segundoNombre =  nombreArray[1];
-				 primerApellido =  nombreArray[2];
-				 segundoApellido = nombreArray[3];
+
+				if(nombreArray.length == 2){
+					primerNombre = nombreArray[0];
+					segundoNombre = "";
+					primerApellido =  nombreArray[1];
+					segundoApellido = "";
+					
+					agregarFormulario('1',primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+				}else if(nombreArray.length == 3){
+					
+					primerNombre = nombreArray[0];
+					segundoNombre =  nombreArray[1];
+					primerApellido =  nombreArray[2];
+					segundoApellido = "";
+					
+					
+					
+					if(agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
+							segundoApellido,txtDato1.getText(),txtDato1.getText(),""))
+					{
+						primerNombre = nombreArray[0];
+						segundoNombre =  "";
+						primerApellido =  nombreArray[1];
+						segundoApellido = nombreArray[2];
+						
+						agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
+								segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					}
+					
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+					
+				}else if(nombreArray.length == 4){
+					primerNombre = nombreArray[0];
+					segundoNombre = nombreArray[1];
+					primerApellido =  nombreArray[2];
+					segundoApellido = nombreArray[3];
+					
+					agregarFormulario('1',primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					grid.setWidget(1, 0,nuevo);
+					nuevo.setSize("100%", "648px");
+				}
+				
 			}catch(Exception e){
 				 primerNombre = "";
-				 segundoNombre = "";
 				 segundoApellido = "";
 				 primerApellido =  "";
-			}
-
-			System.out.println(primerNombre+" "+segundoApellido+" "+primerApellido);
-			if(!txtDato1.getText().equals("")){
-				agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 
-						segundoApellido,txtDato1.getText(),txtDato1.getText()
-						,"");
-				grid.setWidget(1, 0,nuevo);
-				nuevo.setSize("100%", "648px");
-			}
-			else{
-
-    			mensaje.setMensaje("alert alert-info", "Escriba al menos un dato");
 			}
 		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
 		{
@@ -459,7 +486,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		}
 	}
 	
-	 public void agregarFormulario(final char tipo, final String primer_nombre, String segundo_nombre, 
+	 public boolean agregarFormulario(final char tipo, final String primer_nombre, String segundo_nombre, 
 				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
 
 	        load.visible();
@@ -475,6 +502,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 				@Override
 	            public void onSuccess( List<AuxEmpleado> result)
 	            {
+					bandera = !result.isEmpty();
 			        load.invisible();
 					if(!result.isEmpty()){
 						Prestaciones(result,listTipoPrestaciones.getValue(listTipoPrestaciones.getSelectedIndex()),
@@ -483,6 +511,9 @@ public class CrearPrestacionesLaborales extends Composite   {
 	            }
 
 	     });
+	        load.invisible();
+
+	        return bandera;
 
 	    }
 	 

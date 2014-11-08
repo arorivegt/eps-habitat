@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	private int notaDebito;
 
 	private Date fechaInicio;
+	
+	private List<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
 
 	private AuxBeneficiario beneficiario;
 	public Long getIdSolucion() {
@@ -127,6 +130,14 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public void setBeneficiario(AuxBeneficiario beneficiario) {
 		this.beneficiario = beneficiario;
+	}
+
+	public List<AuxDetalleSolucion> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<AuxDetalleSolucion> lista) {
+		this.lista = lista;
 	}
 	
 	

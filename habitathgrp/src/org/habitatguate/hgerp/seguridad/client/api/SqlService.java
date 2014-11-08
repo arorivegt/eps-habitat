@@ -43,6 +43,7 @@ public interface SqlService extends RemoteService{
 	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliado(Long Afiliado);
 	List<AuxProveedor> ConsultaTodosProveedor_SinAprobar(Long Afiliado);
 	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado);
+	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliado(Long idAfiliado);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);

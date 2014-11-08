@@ -296,7 +296,7 @@ public Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal) throws Illegal
 	Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 	nuevo.setFechaInicio(today);
 	nuevo.setBeneficiario(bene);
-	//bene.setSolucion(nuevo);
+	bene.setSolucion(nuevo);
 	try{
 		gestorPersistencia.makePersistent(nuevo);
 		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
@@ -572,6 +572,72 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 		}
 		return valor;
 	}
+	public List<AuxBeneficiario> ConsultaTodosBene_PorAfiliado(Long idAfiliado){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		final SegAfiliado query = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
+		List<AuxBeneficiario> valor = new ArrayList<AuxBeneficiario>();
+		Iterator<SegBeneficiario> auxB = query.getSolucion().iterator();
+		while (auxB.hasNext()){
+			SegBeneficiario p = auxB.next();
+			
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getNomBeneficiario());
+				n.setDirBeneficiario(p.getDirBeneficiario());
+				n.setTelBeneficiario(p.getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getAfiliado().getNomAfiliado());
+				n.setAfiliado(aux);
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getSolucion().getCostoAdministrativo());
+				auxSolucion.setCostoDirecto(p.getSolucion().getCostoDirecto());
+				auxSolucion.setCostoMaterial(p.getSolucion().getCostoMaterial());
+				auxSolucion.setCostoTotal(p.getSolucion().getCostoTotal());
+				auxSolucion.setDisenio(p.getSolucion().getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getSolucion().getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getSolucion().getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getSolucion().getNomSolucion());
+				auxSolucion.setNotaDebito(p.getSolucion().getNotaDebito());
+				auxSolucion.setValorContrato(p.getSolucion().getValorContrato());
+				System.out.println(p.getSolucion().getListaDetalle().get(0).getMaterialCostruccion().getProveedor().getNomProveedor());
+				List<AuxDetalleSolucion> listaDetalle = new ArrayList<AuxDetalleSolucion>();
+				Iterator<SegDetalleSolucion> i1 = p.getSolucion().getListaDetalle().iterator();
+				while(i1.hasNext()){
+					SegDetalleSolucion auxDetalle = i1.next();
+					AuxDetalleSolucion auxDetalle2 = new AuxDetalleSolucion();
+					auxDetalle2.setCantidad(auxDetalle.getCantidad());
+					auxDetalle2.setCostoAcumulado(auxDetalle.getCostoAcumulado());
+					auxDetalle2.setIdDetalleSolucion(auxDetalle.getIdDetalleSolucion().getId());
+					auxDetalle2.setSubTotal(auxDetalle.getSubTotal());
+					auxDetalle2.setUnidadMetrica(auxDetalle.getUnidadMetrica());
+					SegMaterialCostruccion i2 = auxDetalle.getMaterialCostruccion();
+					AuxMaterialCostruccion auxMat = new AuxMaterialCostruccion();
+					auxMat.setFechaIngreso(ConvertDate.g(i2.getFechaIngreso()));
+					auxMat.setIdMaterialConstruccion(i2.getIdMaterialConstruccion().getId());
+					auxMat.setNomMaterialCostruccion(i2.getNomMaterialCostruccion());
+					auxMat.setPrecioUnit(i2.getPrecioUnit());
+					auxMat.setUnidadMetrica(i2.getUnidadMetrica());
+					SegProveedor i3 = i2.getProveedor();
+					AuxProveedor auxP = new AuxProveedor();
+					auxP.setIdProveedor(i3.getIdProveedor().getId());
+					auxP.setNomProveedor(i3.getNomProveedor());
+					auxMat.setProveedor(auxP);
+					auxDetalle2.setMaterialCostruccion(auxMat);
+					listaDetalle.add(auxDetalle2);
+				}
+				auxSolucion.setLista(listaDetalle);
+				n.setSolucion(auxSolucion);
+				valor.add(n);
+		}
+		return valor;
+	}
+	
+	
+	
 	//------------------------------------------MODIFICAR------------------------------------
     @Override
 	public Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException {

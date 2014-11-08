@@ -15,6 +15,8 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 	private int telBeneficiario;
 	
 	private AuxAfiliado afiliado;
+	
+	private AuxSolucion solucion;
 	/**
 
      * El KEY_PROVIDER es el que provee el ID de un contacto.
@@ -69,6 +71,15 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 	public void setAfiliado(AuxAfiliado afiliado) {
 		this.afiliado = afiliado;
 	}
+
+	public AuxSolucion getSolucion() {
+		return solucion;
+	}
+
+	public void setSolucion(AuxSolucion solucion) {
+		this.solucion = solucion;
+	}
+	
 	
 	
 	

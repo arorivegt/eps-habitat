@@ -8,6 +8,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
@@ -101,6 +102,12 @@ public class MenuPrincipal extends Composite {
 	    	   fina2a();
 	       }
 	     };
+	     final  Command cmdfina3a = new Command() {
+		       public void execute() {
+		    	   fina3a();
+		       }
+		     };
+	     
 	     final Command cmdfinan3b = new Command() {
 	       public void execute() {
 	    	   finan3b();
@@ -162,7 +169,7 @@ public class MenuPrincipal extends Composite {
 	 	    MenuSoluciones.setAnimationEnabled(true);
 	 	    MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
 	 	    MenuSoluciones.addSeparator();
-	 	    MenuSoluciones.addItem("Ingreso de Solucion", cmdfina5);
+	 	    MenuSoluciones.addItem("Gestor de Vales", cmdfina3a);
 	 	    
 
 	 	     //soluciones menu
@@ -211,8 +218,12 @@ public class MenuPrincipal extends Composite {
 
 		             	                   	    MenuVertical.setHeight("100%");
 	             	                    		//agregar item para el menu
+		             	                   	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
+		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
+		             	                   	    MenuVertical.addSeparator();
+		             	                   	    MenuVertical.addItem("Finanzas", MenuFinanzas);
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 		             	                   	    
@@ -392,6 +403,13 @@ public class MenuPrincipal extends Composite {
 		this.nuevo.getGrid().setWidget(1, 0, fmc);
  	
  	}
+	
+	void fina3a(){
+		Formulario_GestorVales fgv = new Formulario_GestorVales();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fgv);
+	}
 	
 	public void Empleado_registrado(){
 

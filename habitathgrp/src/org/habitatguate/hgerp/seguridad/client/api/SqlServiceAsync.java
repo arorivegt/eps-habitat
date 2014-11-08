@@ -119,6 +119,9 @@ public interface SqlServiceAsync {
 	void Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado,
 			AsyncCallback<Long> callback);
 
+	void ConsultaTodosBene_PorAfiliado(Long idAfiliado,
+			AsyncCallback<List<AuxBeneficiario>> callback);
+
 
 
 

@@ -11,6 +11,9 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -47,8 +50,10 @@ public class CrearInformeBancos extends Composite   {
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
     private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync service = GWT.create(SqlService.class);
     private Label lblElijaElTipo;
     private ListBox listMes;
     private ListBox listAnnio;
@@ -76,6 +81,7 @@ public class CrearInformeBancos extends Composite   {
 		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
+		listBox.addItem("Afiliado");
 		listBox.addItem("Pasaporte");
 		listBox.addItem("Estado");
 		listBox.addItem("Puesto");
@@ -156,6 +162,23 @@ public class CrearInformeBancos extends Composite   {
 					txtDato1.setVisible(false);
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 390, 19);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+				{
+
+					listEstado.clear();
+					listEstado.addItem("seleccione un afiliado","0");
+				    for (AuxAfiliado p : BDAfiliados) 
+				    {
+				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
+				    }
+					lbDato1.setText("Seleccione el Afiliado");
+
+					lbDato1.setVisible(true);
+					
+					txtDato1.setVisible(false);
+					listEstado.setVisible(true);
+					absolutePanel.add(Busqueda, 390, 19);
+			        load.invisible();
 				}
 			}
 		});
@@ -327,6 +350,20 @@ public class CrearInformeBancos extends Composite   {
 		    	}	
 			}
 		});
+
+		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		    }
+		
+			@Override
+		    public void onSuccess(List<AuxAfiliado> result)
+		    {
+				if (!(result.size()==0)) {
+					BDAfiliados = result;
+		    	}
+		    }
+		});
 		initWidget(grid);
 		
 	}
@@ -426,6 +463,20 @@ public class CrearInformeBancos extends Composite   {
 		{
 
 			formPanel.setAction("/ExportBancos?tipo="+"6"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
+					+"&primer_nombre="+"a"
+					+"&segundo_nombre="+"a"
+					+"&primer_apellido="+"a"
+					+"&segundo_apellido="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
+			formPanel.submit();
+		}
+		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+		{
+			formPanel.setAction("/ExportBancos?tipo="+"7"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 					+"&primer_nombre="+"a"

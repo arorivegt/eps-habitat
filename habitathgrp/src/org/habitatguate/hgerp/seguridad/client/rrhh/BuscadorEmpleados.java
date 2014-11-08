@@ -11,6 +11,9 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -45,9 +48,11 @@ public class BuscadorEmpleados extends Composite   {
     private  ListBox listEstado ;
     private AbsolutePanel absolutePanel;
     private BuscadorEmpleados evaluacionesBuscador;
-	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-     private Loading load ;
+	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
+    private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync service = GWT.create(SqlService.class);
     
     /**
      * constructor
@@ -86,6 +91,7 @@ public class BuscadorEmpleados extends Composite   {
 		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
+		listBox.addItem("Afiliado");
 		listBox.addItem("Pasaporte");
 		listBox.addItem("Estado");
 		listBox.addItem("Puesto");
@@ -170,6 +176,23 @@ public class BuscadorEmpleados extends Composite   {
 					listEstado.setVisible(true);
 					absolutePanel.add(Busqueda, 420, 19);
 			        load.invisible();
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+				{
+
+					listEstado.clear();
+					listEstado.addItem("seleccione un afiliado","0");
+				    for (AuxAfiliado p : BDAfiliados) 
+				    {
+				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
+				    }
+					lbDato1.setText("Seleccione el Afiliado");
+
+					lbDato1.setVisible(true);
+					
+					txtDato1.setVisible(false);
+					listEstado.setVisible(true);
+					absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}
 		        load.invisible();
 			}
@@ -212,20 +235,35 @@ public class BuscadorEmpleados extends Composite   {
 		lblBusquedaPor.setSize("118px", "13px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
-	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
-	    		public void onFailure(Throwable caught) 
-	    		{
-	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
-	    		}
+    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+    		}
 
-				@Override
-				public void onSuccess(List<AuxBDPuesto> results)
-				{
-					if (!(results.size()==0)) {
-						BDpuestos = results;
-			    	}	
-				}
-			});
+			@Override
+			public void onSuccess(List<AuxBDPuesto> results)
+			{
+				if (!(results.size()==0)) {
+					BDpuestos = results;
+		    	}	
+			}
+		});
+    	
+		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		    }
+		
+			@Override
+		    public void onSuccess(List<AuxAfiliado> result)
+		    {
+				if (!(result.size()==0)) {
+					BDAfiliados = result;
+		    	}
+		    }
+		});
 		initWidget(grid);
 		
 	}
@@ -335,6 +373,13 @@ public class BuscadorEmpleados extends Composite   {
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 		{
 			nuevo.agregarFormulario('6',evaluacionesBuscador,txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+		{
+			nuevo.agregarFormulario('7',evaluacionesBuscador,txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,listEstado.getValue(listEstado.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);

@@ -68,10 +68,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				return "El usuario "+e.getUser()+" ya existe" ;
 			}catch(Exception e){
 				SegEmpleado em = new SegEmpleado();
-				em.setPrimer_nombre(Nombre.toUpperCase());
-				em.setPrimer_apellido(Apellido.toUpperCase());
-				em.setSegundo_apellido(Apellido2.toUpperCase());
-				em.setSegundo_nombre(Nombre2.toUpperCase());
+				em.setPrimer_nombre(Nombre.toUpperCase().trim());
+				em.setPrimer_apellido(Apellido.toUpperCase().trim());
+				em.setSegundo_apellido(Apellido2.toUpperCase().trim());
+				em.setSegundo_nombre(Nombre2.toUpperCase().trim());
 				em.setEstado("2");
 				em.setIVS("0");
 				em.setCui("0");
@@ -189,11 +189,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			 e.setAfiliacion_igss(afiliacion_igss);
 	         e.setEstado_civil(estado_civil);
 	         e.setSexo(sexo);
-	         e.setPrimer_apellido(primer_apellido.toUpperCase());
-	         e.setSegundo_apellido(segundo_apellido.toUpperCase());
-	         e.setApellido_casada(apellido_casada.toUpperCase());
-	         e.setPrimer_nombre(primer_nombre.toUpperCase());
-	         e.setSegundo_nombre(segundo_nombre.toUpperCase());
+	         e.setPrimer_apellido(primer_apellido.toUpperCase().trim());
+	         e.setSegundo_apellido(segundo_apellido.toUpperCase().trim());
+	         e.setApellido_casada(apellido_casada.toUpperCase().trim());
+	         e.setPrimer_nombre(primer_nombre.toUpperCase().trim());
+	         e.setSegundo_nombre(segundo_nombre.toUpperCase().trim());
 	         e.setIVS(IVS);
 	         e.setPais(pais);
 	         e.setNit(nit);
@@ -578,11 +578,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 e.setAfiliacion_igss(afiliacion_igss);
 					         e.setEstado_civil(estado_civil);
 					         e.setSexo(sexo);
-					         e.setPrimer_apellido(primer_apellido.toUpperCase());
-					         e.setSegundo_apellido(segundo_apellido.toUpperCase());
-					         e.setApellido_casada(apellido_casada.toUpperCase());
-					         e.setPrimer_nombre(primer_nombre.toUpperCase());
-					         e.setSegundo_nombre(segundo_nombre.toUpperCase());
+					         e.setPrimer_apellido(primer_apellido.toUpperCase().trim());
+					         e.setSegundo_apellido(segundo_apellido.toUpperCase().trim());
+					         e.setApellido_casada(apellido_casada.toUpperCase().trim());
+					         e.setPrimer_nombre(primer_nombre.toUpperCase().trim());
+					         e.setSegundo_nombre(segundo_nombre.toUpperCase().trim());
 					         e.setIVS(IVS);
 					         e.setPais(pais);
 					         e.setNit(nit);
@@ -1083,14 +1083,12 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
 				List<SegEmpleado> results = new ArrayList<SegEmpleado>() ;
-				List<SegEmpleado> aux = null ;
-				if(primer_nombre.equals("")){
-					primer_nombre = primer_nombre + "@";
-				}if(primer_apellido.equals("")){
-					primer_apellido = primer_apellido + "@";
-				}if(segundo_apellido.equals("")){
-					segundo_apellido = segundo_apellido + "@";
-				}
+				List<SegEmpleado> aux  = new ArrayList<SegEmpleado>() ;
+				System.out.println(primer_nombre);
+				System.out.println(segundo_nombre);
+				System.out.println(primer_apellido);
+				System.out.println(segundo_apellido);
+				System.out.println("....................................");
 				if(tipo=='1'){
 					Query q = pm.newQuery(SegEmpleado.class,
 							"primer_nombre == '"+primer_nombre.toUpperCase()+

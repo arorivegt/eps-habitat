@@ -173,15 +173,15 @@ public class formularioBDPuestos extends Composite {
 		absolutePanel.add(lblNivelAcademico, 118, 10);
 		lblNivelAcademico.setSize("192px", "13px");
 		
-		Label lblTitulodiploma = new Label("Fecha");
+		Label lblTitulodiploma = new Label("Fecha de Creacion del Puesto");
 		lblTitulodiploma.setStyleName("label");
 		absolutePanel.add(lblTitulodiploma, 118, 70);
-		lblTitulodiploma.setSize("192px", "13px");
+		lblTitulodiploma.setSize("229px", "13px");
 		
-		Label lblFunciones = new Label("Funciones");
+		Label lblFunciones = new Label("Descripcion de Funciones del Puesto");
 		lblFunciones.setStyleName("label");
 		absolutePanel.add(lblFunciones, 385, 10);
-		lblFunciones.setSize("192px", "13px");
+		lblFunciones.setSize("341px", "13px");
 		
 		Label lblIdPuesto = new Label("Id puesto");
 		lblIdPuesto.setStyleName("label");

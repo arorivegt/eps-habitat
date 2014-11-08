@@ -45,6 +45,7 @@ public class ExportBancos extends HttpServlet {
 					+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
 					+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 			try{
+				System.out.println(".........................."+primer_nombre);
 				xmlFinal = inicio + n.Bancos(tipo.charAt(0), primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, DPI, Pasaporte, estado, listMes, listAnio);
 			}catch(Exception e){
 				xmlFinal = "";

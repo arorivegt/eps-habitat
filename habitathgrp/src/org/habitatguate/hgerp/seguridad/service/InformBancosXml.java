@@ -22,8 +22,67 @@ public class InformBancosXml {
 	 	{
 	 		String mesPlanilla ="";
 	 		List<AuxEmpleado> result = new ArrayList<AuxEmpleado>();
-	 		result = loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
+	 		if(tipo =='1'){
+
+				String nombreArray[] = primer_nombre.split(":");
+				String primerNombre = "";
+				String segundoNombre = "";
+				String segundoApellido = "";
+				String primerApellido =  "";
+
+		 		System.out.println("desde el servlet: "+nombreArray.length);
+				try{
+
+					if(nombreArray.length == 2){
+						primerNombre = nombreArray[0];
+						segundoNombre = "";
+						primerApellido =  nombreArray[1];
+						segundoApellido = "";
+						
+						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+					}else if(nombreArray.length == 3){
+						
+						primerNombre = nombreArray[0];
+						segundoNombre =  nombreArray[1];
+						primerApellido =  nombreArray[2];
+						segundoApellido = "";
+						
+						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+						
+						if(result.isEmpty()){
+							primerNombre = nombreArray[0];
+							segundoNombre =  nombreArray[1];
+							primerApellido =  "";
+							segundoApellido = nombreArray[2];
+							
+							result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+				 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+							}
+						
+						
+					}else if(nombreArray.length == 4){
+						primerNombre = nombreArray[0];
+						segundoNombre = nombreArray[1];
+						primerApellido =  nombreArray[2];
+						segundoApellido = nombreArray[3];
+						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+					}
+					
+				}catch(Exception e){
+					 primerNombre = "";
+					 primerApellido = "";
+					 segundoApellido = "";
+					 primerApellido =  "";
+				}
+	 		}
+	 		else{
+	 			result = loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
 					primer_apellido, segundo_apellido,DPI, Pasaporte,Estado);
+	 			
+	 		}
         
 	 		String nombre = "";
 	 		xmlInicio += "<table><tbody><tr>"

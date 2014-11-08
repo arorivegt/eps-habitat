@@ -158,13 +158,6 @@ public class Registro extends Composite{
                     	MensajeError = "\nApellido no debe estar vacio";
                     	err = true;
                     	
-                    }else if(txtNombre2.getText().equals("")){
-                    	MensajeError = "\nSegundo Nombre no debe estar vacio";
-                    	err = true;
-                    }else if(txtApellido2.getText().equals("")){
-                    	MensajeError = "\nSegundo Apellido no debe estar vacio";
-                    	err = true;
-                    	
                     }else if(!txtPass.getText().equals(txtRepitaPassword.getText())){
                     	MensajeError = "\nContraseña  no son iguales";
                     	err = true;

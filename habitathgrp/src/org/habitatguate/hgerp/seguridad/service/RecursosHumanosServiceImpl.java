@@ -1084,11 +1084,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
 				List<SegEmpleado> results = new ArrayList<SegEmpleado>() ;
 				List<SegEmpleado> aux  = new ArrayList<SegEmpleado>() ;
-				System.out.println(primer_nombre);
-				System.out.println(segundo_nombre);
-				System.out.println(primer_apellido);
-				System.out.println(segundo_apellido);
-				System.out.println("....................................");
+				
+				System.out.println("afiliado == "+Estado+"");
+				
 				if(tipo=='1'){
 					Query q = pm.newQuery(SegEmpleado.class,
 							"primer_nombre == '"+primer_nombre.toUpperCase()+
@@ -1126,6 +1124,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						}
 					}
 					
+				}else if(tipo=='7'){
+					Query q = pm.newQuery(SegEmpleado.class,"afiliado == "+Estado+"");
+					results = (List<SegEmpleado>) q.execute();
 				}
 				if(!results.isEmpty())
 				{
@@ -1919,7 +1920,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		{
 			
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
-			List<SegUsuario> results = null;
+			List<SegUsuario> results = new ArrayList<SegUsuario>();
 			List<String> correos = new ArrayList<String>();
 			 try { 
 
@@ -2000,7 +2001,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		@Override
 		public List<AuxSalario> getSalarios() throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
-			List<SegSalario> results = null;
+			List<SegSalario> results = new ArrayList<SegSalario>();
 			List<AuxSalario> salarios = new ArrayList<AuxSalario>();
 			 try { 
 
@@ -2312,6 +2313,62 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 		return nuevo;
 
+		}
+
+		@Override
+		public List<AuxSalario> getSalarios(Long id)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			
+			List<AuxSalario> salarios = new ArrayList<AuxSalario>();
+			
+			final SegEmpleado r = Persistencia.getObjectById(SegEmpleado.class,id);
+			 try { 
+					for(SegSalario seg: r.getSalario()){
+						AuxSalario s = new AuxSalario();
+						s.setSalario(seg.getSalario());
+						s.setTipoSalario(seg.getTipoSalario());
+						s.setFecha(seg.getFecha().getTime());
+					 	s.setDescripcion(seg.getDescripcion());
+						salarios.add(s);
+					}
+			}finally {  
+					 Persistencia.close();  
+			}
+			 return salarios ;
+		}
+
+		@Override
+		public List<AuxTest> getTest(Long id) throws IllegalArgumentException {
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		
+		List<AuxTest> test = new ArrayList<AuxTest>();
+		
+		final SegEmpleado r = Persistencia.getObjectById(SegEmpleado.class,id);
+		 try { 
+				for(SegTest nuevo: r.getTest()){
+					AuxTest t = new AuxTest();
+				 	t.setId_test(nuevo.getId_test());
+				 	t.setPregunta1(nuevo.getPregunta1());
+				 	t.setPregunt2(nuevo.getPregunt2());
+				 	t.setPregunta3(nuevo.getPregunta3());
+				 	t.setPregunta4(nuevo.getPregunta4());
+				 	t.setPregunta5(nuevo.getPregunta5());
+				 	t.setPregunta6(nuevo.getPregunta6());
+				 	t.setPregunta7(nuevo.getPregunta7());
+				 	t.setPregunta8(nuevo.getPregunta8());
+				 	t.setPregunta9(nuevo.getPregunta9());
+				 	t.setPregunta10(nuevo.getPregunta10());
+				 	t.setFecha_test(nuevo.getFecha_test().getTime());
+				 	t.setTipo_test(nuevo.getTipo_test());
+				 	t.setBDtest(nuevo.getBDtest());
+				 	t.setEvaluador(nuevo.getEvaluador().toUpperCase());
+				 	test.add(t);
+				}
+		}finally {  
+				 Persistencia.close();  
+		}
+		 return test ;
 		}
 
 		

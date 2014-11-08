@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -8,6 +9,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
@@ -17,7 +19,9 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 public class Desempeno extends Composite  {
 
@@ -30,17 +34,98 @@ public class Desempeno extends Composite  {
      private final Button btnTest = new Button("Agregar");
      private final Grid grid = new Grid(1, 3);
      public Button btnAgregar;
+	 private Mensaje mensaje; 
      private Loading load ;
      public boolean bandera = true;
+     private final Grid grid_1 = new Grid(1, 3);
+     private final DateBox dateFecha1 = new DateBox();
+     private final DateBox dateFecha2 = new DateBox();
+     private final Button button = new Button("Agregar");
      
     public Desempeno(Long e) {
 
     	load = new Loading();
+		mensaje = new Mensaje();
         load.Mostrar();
         load.invisible();
         this.empleado = e;
         initWidget(panel);
         panel.setSize("761px", "85px");
+        
+        panel.add(grid_1);
+
+        dateFecha1.setValue(new Date());
+        dateFecha1.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+        dateFecha1.getDatePicker().setYearArrowsVisible(true);
+        dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
+        dateFecha1.getDatePicker().setVisibleYearCount(100);
+        dateFecha1.setStyleName("gwt-TextBox2");
+        
+        grid_1.setWidget(0, 0, dateFecha1);
+        dateFecha2.setValue(new Date());
+        dateFecha2.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+        dateFecha2.getDatePicker().setYearArrowsVisible(true);
+        dateFecha2.getDatePicker().setYearAndMonthDropdownVisible(true);
+        dateFecha2.getDatePicker().setVisibleYearCount(100);
+        dateFecha1.setSize("227px", "34px");
+        dateFecha2.setStyleName("gwt-TextBox2");
+        
+        grid_1.setWidget(0, 1, dateFecha2);
+        dateFecha2.setSize("227px", "34px");
+        button.addClickHandler(new ClickHandler() {
+        	public void onClick(ClickEvent event) {
+        		load.visible();
+        		
+        		loginService.getTest(empleado, new AsyncCallback<List<AuxTest>>(){
+                    public void onFailure(Throwable caught) 
+                    {
+                    }
+
+    				@Override
+                    public void onSuccess(List<AuxTest> result)
+                    {
+    					valor  = result;
+                    }
+
+    	         });
+        		try{
+	        		List<AuxTest> hist = new ArrayList<AuxTest> ();
+	        		for(AuxTest h: valor)
+	        		{
+	        			Date aux = new Date(h.getFecha_test());
+	        			if(aux.after(dateFecha1.getValue())
+	        			&& aux.before(dateFecha2.getValue())
+	        			&& h.getTipo_test().equals("1")
+	        			||(aux.equals(dateFecha1.getValue())||aux.equals(dateFecha2.getValue())))
+	        			{
+	        				hist.add(h);
+	        			}
+	        		}
+	        		//agregarFormularios
+	        		if(!hist.isEmpty()){
+	        			agregar_formularios(hist);
+	        		}else{
+	    		        load.invisible();
+	                	mensaje.setMensaje("alert alert-error", 
+	                			"No se encontro resultado");
+	        		}
+	        	}catch(Exception e){
+
+			        load.invisible();
+                	mensaje.setMensaje("alert alert-error", 
+                			"No se encontro resultado");
+	        	}
+
+                load.invisible();
+        	}
+        });
+        button.setText("Buscar");
+        button.setStyleName("sendButton");
+        
+        grid_1.setWidget(0, 2, button);
+        button.setSize("227px", "34px");
         flextable = new FlexTable();
         panel.add(flextable);
         BDTest();

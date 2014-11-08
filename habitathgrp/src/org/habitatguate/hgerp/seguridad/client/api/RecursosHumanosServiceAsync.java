@@ -887,12 +887,27 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void getTest(Long idTest,Long id,AsyncCallback<AuxTest> callback)throws IllegalArgumentException;
+
+	    /**
+	     * 
+	     * @param idTest
+	     * @param id
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getTest(Long id,AsyncCallback<List<AuxTest>> callback)throws IllegalArgumentException;
 	    /**
 	     * 
 	     * @param callback
 	     * @throws IllegalArgumentException
 	     */
 	    void getSalarios(AsyncCallback<List<AuxSalario>> callback)throws IllegalArgumentException;
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getSalarios(Long id, AsyncCallback<List<AuxSalario>> callback)throws IllegalArgumentException;
 	    /**
 	     * 
 	     * @param fileURL

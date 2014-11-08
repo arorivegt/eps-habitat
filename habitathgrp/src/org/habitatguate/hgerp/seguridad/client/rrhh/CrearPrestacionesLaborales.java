@@ -12,6 +12,9 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
@@ -52,8 +55,10 @@ public class CrearPrestacionesLaborales extends Composite   {
     private AbsolutePanel absolutePanel;
     private prestaciones  nuevo;
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
     private Loading load ;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync service = GWT.create(SqlService.class);
     private Label lblElijaElTipo;
     private ListBox listTipoPrestaciones;
     private Label lblElijaElAo;
@@ -87,6 +92,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
+		listBox.addItem("Afiliado");
 		listBox.addItem("Pasaporte");
 		listBox.addItem("Estado");
 		listBox.addItem("Puesto");
@@ -168,6 +174,23 @@ public class CrearPrestacionesLaborales extends Composite   {
 					txtDato1.setVisible(false);
 					listEstado.setVisible(true);
 					//absolutePanel.add(Busqueda, 390, 19);
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+				{
+
+					listEstado.clear();
+					listEstado.addItem("seleccione un afiliado","0");
+				    for (AuxAfiliado p : BDAfiliados) 
+				    {
+				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
+				    }
+					lbDato1.setText("Seleccione el Afiliado");
+
+					lbDato1.setVisible(true);
+					
+					txtDato1.setVisible(false);
+					listEstado.setVisible(true);
+					//absolutePanel.add(Busqueda, 420, 19);
+			        load.invisible();
 				}
 			}
 		});
@@ -355,20 +378,34 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(lblCantidad, 846, 0);
 		lblCantidad.setSize("157px", "13px");
 		
-	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
-	    		public void onFailure(Throwable caught) 
-	    		{
-	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
-	    		}
+    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+    		public void onFailure(Throwable caught) 
+    		{
+    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+    		}
 
-				@Override
-				public void onSuccess(List<AuxBDPuesto> results)
-				{
-					if (!(results.size()==0)) {
-						BDpuestos = results;
-			    	}	
-				}
-			});
+			@Override
+			public void onSuccess(List<AuxBDPuesto> results)
+			{
+				if (!(results.size()==0)) {
+					BDpuestos = results;
+		    	}	
+			}
+		});
+
+		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		    }
+		
+			@Override
+		    public void onSuccess(List<AuxAfiliado> result)
+		    {
+				if (!(result.size()==0)) {
+					BDAfiliados = result;
+		    	}
+		    }
+		});
 		initWidget(grid);
 		
 	}
@@ -479,6 +516,13 @@ public class CrearPrestacionesLaborales extends Composite   {
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 		{
 			agregarFormulario('6',txtDato1.getText(), "","", 
+					"",txtDato1.getText(),txtDato1.getText()
+					,listEstado.getValue(listEstado.getSelectedIndex()));
+			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
+		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+		{
+			agregarFormulario('7',txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,listEstado.getValue(listEstado.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);

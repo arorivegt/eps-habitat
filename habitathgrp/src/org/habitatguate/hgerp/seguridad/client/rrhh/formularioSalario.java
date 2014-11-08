@@ -202,7 +202,7 @@ public class formularioSalario extends Composite {
 		absolutePanel.add(lblTitulodiploma, 146, 8);
 		lblTitulodiploma.setSize("192px", "13px");
 		
-		Label lblSalario = new Label("Salario");
+		Label lblSalario = new Label("Monto");
 		lblSalario.setStyleName("label");
 		absolutePanel.add(lblSalario, 12, 8);
 		lblSalario.setSize("113px", "13px");
@@ -217,7 +217,7 @@ public class formularioSalario extends Composite {
 		absolutePanel.add(label, 247, 3);
 		label.setSize("192px", "13px");
 		
-		lblAo = new Label("Fecha");
+		lblAo = new Label("Fecha Creacion");
 		lblAo.setStyleName("label");
 		absolutePanel.add(lblAo, 607, 3);
 		lblAo.setSize("139px", "13px");

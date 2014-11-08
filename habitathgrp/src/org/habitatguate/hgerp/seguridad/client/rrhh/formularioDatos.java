@@ -157,6 +157,7 @@ public class formularioDatos extends Composite {
     private VerticalPanel verticalPanel;
     private ListBox listAfiliado;
     private Label lblAfiliado;
+    private int tip = 0;
     /**
      * 
      * @param empleadoo
@@ -164,6 +165,7 @@ public class formularioDatos extends Composite {
      */
 	public formularioDatos(Empleados empleadoo,final int tipo) {
 
+		tip = tipo;
 		mensaje = new Mensaje();
 		this.empleado = empleadoo;
 		this.setTipo(tipo);
@@ -1502,8 +1504,6 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(lblAfiliado, 308, 1397);
 		lblAfiliado.setSize("192px", "19px");
 		
-
-		
 		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
@@ -1990,6 +1990,12 @@ public class formularioDatos extends Composite {
 			lblAfiliado.setVisible(false);
 			
 		}
+		if(tip != 0){
+			id_afiliado = afiliado;
+			listAfiliado.setVisible(false);
+			listAfiliado.setEnabled(false);
+			lblAfiliado.setVisible(false);
+		}
 		System.out.println(id);
 		this.idJefe = Jefe_Inmediato;
 		this.txtJefeInmediato.setText(""+Jefe_Inmediato);
@@ -2183,10 +2189,11 @@ public class formularioDatos extends Composite {
 	 */
 	public void Inavilitar_Casillas(){
 
-		lblAfiliado.setVisible(false);
 		
+		lblAfiliado.setVisible(false);		
 		listAfiliado.setVisible(false);
 		listAfiliado.setEnabled(false);
+		
 		txtCentroTrabajo.setVisible(false);
 		txtOcupacion.setVisible(false);
 		dateFechaIngreso.setVisible(false);

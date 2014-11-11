@@ -27,6 +27,9 @@ public class SegDetalleSolucion implements Serializable{
 	@Persistent
 	@Unowned
     private SegMaterialCostruccion materialCostruccion;
+	@Persistent
+	@Unowned
+	private SegVale vale;
 	
 	private SegSolucion solucion;
 
@@ -84,6 +87,14 @@ public class SegDetalleSolucion implements Serializable{
 
 	public void setSolucion(SegSolucion solucion) {
 		this.solucion = solucion;
+	}
+
+	public SegVale getVale() {
+		return vale;
+	}
+
+	public void setVale(SegVale vale) {
+		this.vale = vale;
 	}
 
 

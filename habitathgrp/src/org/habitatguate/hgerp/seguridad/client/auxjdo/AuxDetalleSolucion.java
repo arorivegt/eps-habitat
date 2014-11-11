@@ -32,6 +32,8 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
     private AuxMaterialCostruccion materialCostruccion;
 	
 	private AuxSolucion solucion;
+	
+	private AuxVale vale;
 
 	public Long getIdDetalleSolucion() {
 		return idDetalleSolucion;
@@ -87,6 +89,14 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
 
 	public void setSolucion(AuxSolucion solucion) {
 		this.solucion = solucion;
+	}
+
+	public AuxVale getVale() {
+		return vale;
+	}
+
+	public void setVale(AuxVale vale) {
+		this.vale = vale;
 	}
 	
 	

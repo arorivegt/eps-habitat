@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,9 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
@@ -28,6 +32,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
@@ -47,6 +52,8 @@ public class Formulario_CrearVale extends Composite {
 
 	public Formulario_CrearVale(){
 		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
+		final java.util.Date date= new java.util.Date();
+		 System.out.println(new Timestamp(date.getTime()));
 		getSession.obtenerIdAfiliado(new AsyncCallback<Long>() {
 			
 			@Override
@@ -144,7 +151,7 @@ public class Formulario_CrearVale extends Composite {
 		absolutePanel.add(lblDireccion, 387, 76);
 		lblDireccion.setSize("157px", "13px");
 		
-		TextBox textBox_1 = new TextBox();
+		final TextBox textBox_1 = new TextBox();
 		textBox_1.setStyleName("gwt-TextBox2");
 		textBox_1.setMaxLength(100);
 		absolutePanel.add(textBox_1, 538, 59);
@@ -212,15 +219,40 @@ public class Formulario_CrearVale extends Composite {
 		absolutePanel.add(valueListBox, 173, 95);
 		valueListBox.setSize("200px", "22px");
 		
+        valueListBox.addValueChangeHandler(new ValueChangeHandler<AuxProveedor>()
+        {
+            @Override
+            public void onValueChange(ValueChangeEvent<AuxProveedor> event)
+            {
+                AuxProveedor selected = event.getValue();
+                List<AuxDetalleSolucion> listaSolucion = selectNuevoBene.getSolucion().getLista();
+                Iterator<AuxDetalleSolucion> i = listaSolucion.iterator();
+                while(i.hasNext()){
+                	AuxDetalleSolucion aux = i.next();
+                	if (aux.getVale().getIdVale().compareTo(0L) == 0){
+                		if (aux.getMaterialCostruccion().getProveedor().getIdProveedor().compareTo(selected.getIdProveedor()) == 0)
+                			System.out.println("Material " + aux.getMaterialCostruccion().getProveedor().getIdProveedor());
+                	}
+                }
+                // this works, but the CommissionEditor that was first rendered remains
+          //      value.setCommission(selected);
+
+            }
+
+        });
+
+		
 		suggestBox.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {	
 			
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> event) {
 				BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
+				//beneficiario
 				selectNuevoBene = select.getAfiliado();
 				textBox_3.setText(selectNuevoBene.getAfiliado().getNomAfiliado());
 				textBox.setText(selectNuevoBene.getSolucion().getDisenio());
-				textBox_2.setText(selectNuevoBene.getDirBeneficiario());
+				textBox_1.setText(selectNuevoBene.getDirBeneficiario());
+				textBox_4.setText(String.valueOf(new Timestamp(date.getTime())));
 				
 				List<AuxProveedor> listaProveedor = new ArrayList<AuxProveedor>();
 				Iterator<AuxDetalleSolucion> i = selectNuevoBene.getSolucion().getLista().iterator();
@@ -239,8 +271,7 @@ public class Formulario_CrearVale extends Composite {
 						while(i2.hasNext()){
 							AuxProveedor aux2 = i2.next();
 							System.out.println(idActual +" " + aux2.getIdProveedor());
-							if (idActual.compareTo(aux2.getIdProveedor()) == 1){
-
+							if (idActual.compareTo(aux2.getIdProveedor()) == 0){
 								bandera2 = 1;
 							}
 						}

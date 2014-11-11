@@ -324,7 +324,6 @@ public class CrearInformeBancos extends Composite   {
 				+"&DPI="+"a"
 				+"&Pasaporte="+"a"
 				+"&listMes="+"a");
-		formPanel.setAction("/ExportBancos?tipo="+"0"+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex()));
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
 		

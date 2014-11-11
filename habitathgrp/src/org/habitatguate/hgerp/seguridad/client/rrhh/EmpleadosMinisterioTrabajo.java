@@ -1,6 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +32,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Button;
+import com.ibm.icu.text.DecimalFormat;
 
 public class EmpleadosMinisterioTrabajo extends Composite  {
 
@@ -229,8 +229,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			@Override
 		public void onSuccess( List<AuxEmpleado> result)
 		{
-				DecimalFormat df = new DecimalFormat();
-				df.setMaximumFractionDigits(2);
 				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				
@@ -590,19 +588,19 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
 		 				
 					}
-					empleado.setSalarioMensualNominal(""+df.format(salarioMensualNominal));
+					empleado.setSalarioMensualNominal(""+salarioMensualNominal);
 					
-					empleado.setDecreto7889(""+df.format(decreto7889));
+					empleado.setDecreto7889(""+decreto7889);
 					
 					empleado.setTotalHorasExtras("0");
 					
 					empleado.setValordeHoraExtra("0");
 					
-					empleado.setAguinaldo(""+df.format(aguinaldo));
+					empleado.setAguinaldo(""+aguinaldo);
 					
-					empleado.setBono14(""+df.format(bono14));
+					empleado.setBono14(""+bono14);
 					
-					empleado.setComisiones(""+df.format(comisiones));
+					empleado.setComisiones(""+comisiones);
 					
 
 					empleado.setNivelAcademico(""+nivelAcademico);
@@ -617,9 +615,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setTipoContrato("Indefinido");
 					
-					empleado.setIndemnizacion(""+df.format(indemnizacion));
+					empleado.setIndemnizacion(""+indemnizacion);
 					
-					empleado.setOtrosPagos(""+df.format(otrosPagos));
+					empleado.setOtrosPagos(""+otrosPagos);
 					
 					
 					

@@ -1086,7 +1086,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				List<SegEmpleado> results = new ArrayList<SegEmpleado>() ;
 				List<SegEmpleado> aux  = new ArrayList<SegEmpleado>() ;
 				
-				System.out.println("afiliado == "+Estado+"");
+				System.out.println(".."+primer_nombre+"..");
+				System.out.println(".."+segundo_nombre+"..");
+				System.out.println(".."+primer_apellido+"..");
+				System.out.println(".."+segundo_apellido+"..");
 				
 				if(tipo=='1'){
 					Query q = pm.newQuery(SegEmpleado.class,

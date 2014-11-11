@@ -227,7 +227,7 @@ public class MenuPrincipal extends Composite {
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    MenuVertical.setAutoOpen(true);
+		             	                   	    MenuVertical.setAutoOpen(false);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 	             	                   		    
 	             	                    	}else if(results == 2L){//si el rol es 2, entonces es RRHH
@@ -236,7 +236,7 @@ public class MenuPrincipal extends Composite {
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    MenuVertical.setAutoOpen(true);
+		             	                   	    MenuVertical.setAutoOpen(false);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 		             	                   	    
 	             	                    	}else if(results == 3L){//si el rol es 3, entonces es finanzas
@@ -247,7 +247,7 @@ public class MenuPrincipal extends Composite {
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    MenuVertical.setAutoOpen(true);
+		             	                   	    MenuVertical.setAutoOpen(false);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 	             	                    	}
 	             	                                                            

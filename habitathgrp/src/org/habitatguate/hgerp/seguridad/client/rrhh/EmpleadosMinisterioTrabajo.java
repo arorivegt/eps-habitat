@@ -15,24 +15,24 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Button;
-import com.ibm.icu.text.DecimalFormat;
 
 public class EmpleadosMinisterioTrabajo extends Composite  {
 
@@ -229,6 +229,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			@Override
 		public void onSuccess( List<AuxEmpleado> result)
 		{
+				NumberFormat fmt = NumberFormat.getDecimalFormat();
 				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				
@@ -588,19 +589,19 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
 		 				
 					}
-					empleado.setSalarioMensualNominal(""+salarioMensualNominal);
+					empleado.setSalarioMensualNominal(""+fmt.format(salarioMensualNominal));
 					
-					empleado.setDecreto7889(""+decreto7889);
+					empleado.setDecreto7889(""+fmt.format(decreto7889));
 					
 					empleado.setTotalHorasExtras("0");
 					
 					empleado.setValordeHoraExtra("0");
 					
-					empleado.setAguinaldo(""+aguinaldo);
+					empleado.setAguinaldo(""+fmt.format(aguinaldo));
 					
-					empleado.setBono14(""+bono14);
+					empleado.setBono14(""+fmt.format(bono14));
 					
-					empleado.setComisiones(""+comisiones);
+					empleado.setComisiones(""+fmt.format(comisiones));
 					
 
 					empleado.setNivelAcademico(""+nivelAcademico);
@@ -615,9 +616,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setTipoContrato("Indefinido");
 					
-					empleado.setIndemnizacion(""+indemnizacion);
+					empleado.setIndemnizacion(""+fmt.format(indemnizacion));
 					
-					empleado.setOtrosPagos(""+otrosPagos);
+					empleado.setOtrosPagos(""+fmt.format(otrosPagos));
 					
 					
 					

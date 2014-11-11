@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +63,8 @@ public class InformMinisterioTrabajoXml {
 		String  xmlFinal = "</tbody></table>";
 	
 	public String busqueda( char tipo,  String Estado,  String listAnnio){
-
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
 
 	    List<AuxEmpleado> result = new ArrayList<AuxEmpleado>();
 	    result = loginService.Buscar_Empleado(tipo,"", "", "", "","","",Estado);
@@ -428,7 +430,7 @@ public class InformMinisterioTrabajoXml {
 		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
 		 				
 					}
-					xmlInicio += "<td>"+salarioMensualNominal+"</td>";
+					xmlInicio += "<td>"+df.format(salarioMensualNominal)+"</td>";
 					
 					xmlInicio += "<td>"+decreto7889+"</td>";
 					
@@ -436,11 +438,11 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+"0"+"</td>";
 					
-					xmlInicio += "<td>"+aguinaldo+"</td>";
+					xmlInicio += "<td>"+df.format(aguinaldo)+"</td>";
 					
-					xmlInicio += "<td>"+bono14+"</td>";
+					xmlInicio += "<td>"+df.format(bono14)+"</td>";
 					
-					xmlInicio += "<td>"+comisiones+"</td>";
+					xmlInicio += "<td>"+df.format(comisiones)+"</td>";
 					
 					xmlInicio += "<td>"+nivelAcademico+"</td>";
 					
@@ -455,9 +457,9 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+"Indefinido"+"</td>";
 					
-					xmlInicio += "<td>"+indemnizacion+"</td>";
+					xmlInicio += "<td>"+df.format(indemnizacion)+"</td>";
 					
-					xmlInicio += "<td>"+otrosPagos+"</td></tr>";
+					xmlInicio += "<td>"+df.format(otrosPagos)+"</td></tr>";
 					
 				
 					i++;

@@ -125,6 +125,7 @@ public class MenuPrincipal extends Composite {
 	     };
 	     	//informes Menu
 	 	    final MenuBar MenuInforme = new MenuBar(true);
+	 	    MenuInforme.setAutoOpen(true);
 	 	    MenuInforme.setAnimationEnabled(true);
 	 	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
 	 	    MenuInforme.addSeparator();
@@ -136,6 +137,7 @@ public class MenuPrincipal extends Composite {
 	 	    
 	 	     //recursos humano menu
 	 	   final MenuBar MenuRecursosHumanos = new MenuBar(true);
+	 	    MenuRecursosHumanos.setAutoOpen(true);
 	 	    MenuRecursosHumanos.setAnimationEnabled(true);
 	 	    MenuRecursosHumanos.addItem("Buscar Empleados", cmdrrhh1);
 	 	    MenuRecursosHumanos.addSeparator();
@@ -149,6 +151,7 @@ public class MenuPrincipal extends Composite {
 	 	    
 	 	     //finanzas menu
 	 	   final MenuBar MenuEmpleados = new MenuBar(true);
+	 	    MenuEmpleados.setAutoOpen(true);
 	 	    MenuEmpleados.setAnimationEnabled(true);
 	 	    MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
 	 	    MenuEmpleados.addSeparator();
@@ -156,6 +159,7 @@ public class MenuPrincipal extends Composite {
 
 	 	     //Inventario Activos menu
 	 	   final MenuBar MenuInventarioActivos = new MenuBar(true);
+	 	    MenuInventarioActivos.setAutoOpen(true);
 	 	    MenuInventarioActivos.setAnimationEnabled(true);
 	 	    MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
 	 	    MenuInventarioActivos.addSeparator();
@@ -165,6 +169,7 @@ public class MenuPrincipal extends Composite {
 	 	    
 	 	     //soluciones menu
 	 	   final MenuBar MenuSoluciones = new MenuBar(true);
+	 	    MenuSoluciones.setAutoOpen(true);
 	 	    MenuSoluciones.setAnimationEnabled(true);
 	 	    MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
 	 	    MenuSoluciones.addSeparator();
@@ -173,6 +178,7 @@ public class MenuPrincipal extends Composite {
 
 	 	     //soluciones menu
 	 	   final MenuBar MenuInventarioMateriales = new MenuBar(true);
+	 	    MenuInventarioMateriales.setAutoOpen(true);
 	 	    MenuInventarioMateriales.setAnimationEnabled(true);
 	 	    MenuInventarioMateriales.addItem("Cuenta Materiales", cmd);
 	 	    MenuInventarioMateriales.addSeparator();
@@ -180,6 +186,7 @@ public class MenuPrincipal extends Composite {
 	 	    
 	 	     //recursos humano menu
 	 	   final MenuBar MenuFinanzas = new MenuBar(true);
+	 	   	MenuFinanzas.setAutoOpen(true);
 	 	    MenuFinanzas.setAnimationEnabled(true);
 	 	    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);
 	 	    MenuFinanzas.addSeparator();
@@ -219,11 +226,8 @@ public class MenuPrincipal extends Composite {
 	             	                    		//agregar item para el menu
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
-		             	                   	    MenuVertical.addItem("Finanzas", MenuFinanzas);
-		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    
-		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAutoOpen(true);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 	             	                   		    
 	             	                    	}else if(results == 2L){//si el rol es 2, entonces es RRHH
@@ -232,7 +236,7 @@ public class MenuPrincipal extends Composite {
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAutoOpen(true);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 		             	                   	    
 	             	                    	}else if(results == 3L){//si el rol es 3, entonces es finanzas
@@ -243,7 +247,7 @@ public class MenuPrincipal extends Composite {
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-		             	                   	    MenuVertical.setAutoOpen(false);
+		             	                   	    MenuVertical.setAutoOpen(true);
 		             	                   	    MenuVertical.setAnimationEnabled(true);
 	             	                    	}
 	             	                                                            

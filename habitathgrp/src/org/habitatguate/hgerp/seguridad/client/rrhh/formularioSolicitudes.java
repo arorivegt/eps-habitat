@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 public class formularioSolicitudes extends Composite {
 
@@ -35,6 +36,11 @@ public class formularioSolicitudes extends Composite {
     private Loading load ;
     private Button btnSolicitar;
     private AbsolutePanel absolutePanel;
+    private SimpleCheckBox cheqJefe;
+    private SimpleCheckBox cheqRRHH ;
+    private Label lblAprobacionRrhh;
+    private Label labelAprobacion2;
+    private Button btnAceptar;
     
 	public formularioSolicitudes(Empleados e) {
 
@@ -47,7 +53,7 @@ public class formularioSolicitudes extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("671px", "122px");
+		absolutePanel.setSize("846px", "122px");
 		
 		dateFecha1 = new DateBox();
 		dateFecha1.getTextBox().setReadOnly(true);
@@ -91,6 +97,13 @@ public class formularioSolicitudes extends Composite {
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 245, 29);
 		txtDescripcion.setSize("303px", "108px");
+		
+		cheqJefe = new SimpleCheckBox();
+		absolutePanel.add(cheqJefe, 603, 77);
+		
+		cheqRRHH = new SimpleCheckBox();
+		absolutePanel.add(cheqRRHH, 603, 39);
+		cheqRRHH.setSize("22", "22px");
 		
 		btnSolicitar = new Button("Send");
 		btnSolicitar.addClickHandler(new ClickHandler() {
@@ -156,13 +169,15 @@ public class formularioSolicitudes extends Composite {
 		btnSolicitar.setText("Solicitar");
 		btnSolicitar.setStylePrimaryName("sendButton");
 		btnSolicitar.setStyleName("sendButton");
-		absolutePanel.add(btnSolicitar, 572, 46);
+		absolutePanel.add(btnSolicitar, 792, 29);
 		btnSolicitar.setSize("114px", "51px");
 		
-		Label lblNivelAcademico = new Label("Fecha Inicial");
-		lblNivelAcademico.setStyleName("label");
-		absolutePanel.add(lblNivelAcademico, 10, 10);
-		lblNivelAcademico.setSize("192px", "13px");
+		btnAceptar = new Button("Send");
+		btnAceptar.setText("Aceptar");
+		btnAceptar.setStylePrimaryName("sendButton");
+		btnAceptar.setStyleName("sendButton");
+		absolutePanel.add(btnAceptar, 792, 90);
+		btnAceptar.setSize("114px", "51px");
 		
 		Label lblMotivo = new Label("Descripcion");
 		lblMotivo.setStyleName("label");
@@ -178,6 +193,21 @@ public class formularioSolicitudes extends Composite {
 		lblTipoDePermiso.setStyleName("label");
 		absolutePanel.add(lblTipoDePermiso, 12, 86);
 		lblTipoDePermiso.setSize("139px", "13px");
+		
+		Label lblNivelAcademico = new Label("Fecha Inicial");
+		lblNivelAcademico.setStyleName("label");
+		absolutePanel.add(lblNivelAcademico, 10, 10);
+		lblNivelAcademico.setSize("192px", "13px");
+		
+		lblAprobacionRrhh = new Label("Aprobacion RRHH");
+		lblAprobacionRrhh.setStyleName("label");
+		absolutePanel.add(lblAprobacionRrhh, 631, 39);
+		lblAprobacionRrhh.setSize("103px", "22px");
+		
+		labelAprobacion2 = new Label("Aprobacion Jefe Inmediato");
+		labelAprobacion2.setStyleName("label");
+		absolutePanel.add(labelAprobacion2, 631, 77);
+		labelAprobacion2.setSize("103px", "22px");
 	}
 	
 	public void LlenarDatos(Long id, String txtDescripcion,
@@ -196,5 +226,4 @@ public class formularioSolicitudes extends Composite {
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));
 	}
-	
 }

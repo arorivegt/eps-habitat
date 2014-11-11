@@ -19,6 +19,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
@@ -615,6 +616,7 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 					auxDetalle2.setSubTotal(auxDetalle.getSubTotal());
 					auxDetalle2.setUnidadMetrica(auxDetalle.getUnidadMetrica());
 					SegMaterialCostruccion i2 = auxDetalle.getMaterialCostruccion();
+					//
 					AuxMaterialCostruccion auxMat = new AuxMaterialCostruccion();
 					auxMat.setFechaIngreso(ConvertDate.g(i2.getFechaIngreso()));
 					auxMat.setIdMaterialConstruccion(i2.getIdMaterialConstruccion().getId());
@@ -627,6 +629,20 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 					auxP.setNomProveedor(i3.getNomProveedor());
 					auxMat.setProveedor(auxP);
 					auxDetalle2.setMaterialCostruccion(auxMat);
+					//fin Material Construccion
+					if (auxDetalle.getVale() != null){
+					AuxVale auxVale = new AuxVale();
+					auxVale.setIdVale(auxDetalle.getVale().getIdVale());
+					auxVale.setTotalVale(auxDetalle.getVale().getTotalVale());
+					auxVale.setFechaVale(ConvertDate.g(auxDetalle.getVale().getFechaVale()));
+					auxDetalle2.setVale(auxVale);
+					}else
+					{
+						AuxVale auxVale = new AuxVale();
+						auxVale.setIdVale(0L);
+						auxDetalle2.setVale(auxVale);
+					}
+					//fin vale
 					listaDetalle.add(auxDetalle2);
 				}
 				auxSolucion.setLista(listaDetalle);

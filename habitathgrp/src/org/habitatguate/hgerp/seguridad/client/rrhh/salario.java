@@ -119,10 +119,16 @@ public class salario extends Composite  {
 		        		for(AuxSalario h: salario)
 		        		{
 		        			Date aux = new Date(h.getFecha());
-		        			if(aux.after(dateFecha1.getValue())
-		        			&& aux.before(dateFecha2.getValue())
-		        			&& h.getTipoSalario().equals(txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()))
-		        			)
+		        			if( (aux.after(dateFecha1.getValue())
+		        				&& aux.before(dateFecha2.getValue())
+		        				&& h.getTipoSalario().equals(txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()))
+		        				)
+		        				||
+		        				(aux.equals(dateFecha1.getValue())
+		        				&& aux.equals(dateFecha2.getValue())
+		        				&& h.getTipoSalario().equals(txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()))
+		        				)
+		        			  )
 		        			{
 		        				sal.add(h);
 		        			}

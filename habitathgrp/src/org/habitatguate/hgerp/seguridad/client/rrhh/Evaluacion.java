@@ -94,10 +94,15 @@ public class Evaluacion extends Composite  {
         	        		for(AuxTest h: valor)
         	        		{
         	        			Date aux = new Date(h.getFecha_test());
-        	        			if(aux.after(dateFecha1.getValue())
-        	        			&& aux.before(dateFecha2.getValue())
-        	        			&& h.getTipo_test().equals("1")
-        	        			)
+        	        			if( (aux.after(dateFecha1.getValue())
+    		        				&& aux.before(dateFecha2.getValue())
+    		        				&& h.getTipo_test().equals("2")
+    		        				)
+    		        				||
+    		        			   (aux.equals(dateFecha1.getValue())
+    		        				&& aux.equals(dateFecha2.getValue())
+    		        				&& h.getTipo_test().equals("2"))
+    			        		 )
         	        			{
         	        				hist.add(h);
         	        			}

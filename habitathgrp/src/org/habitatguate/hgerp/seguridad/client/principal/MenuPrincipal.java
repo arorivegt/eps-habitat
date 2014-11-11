@@ -27,7 +27,6 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuBar;
-import com.google.gwt.user.client.ui.RootPanel;
 
 public class MenuPrincipal extends Composite {
 	
@@ -130,8 +129,8 @@ public class MenuPrincipal extends Composite {
 	 	    MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
 	 	    MenuInforme.addSeparator();
 	 	    MenuInforme.addItem("Informe Bancos", cmdrrhh7);
-	 	    //MenuInforme.addSeparator();
-	 	    //MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
+	 	    MenuInforme.addSeparator();
+	 	    MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
 	 	    MenuInforme.addSeparator();
 	 	    MenuInforme.addItem("Informe de Salarios", cmdrrhh3);
 	 	    
@@ -218,9 +217,6 @@ public class MenuPrincipal extends Composite {
 
 		             	                   	    MenuVertical.setHeight("100%");
 	             	                    		//agregar item para el menu
-		             	                   	    MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
-		             	                   	    MenuVertical.addSeparator();
-		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Empleado",MenuEmpleados); 
 		             	                   	    MenuVertical.addSeparator();
 		             	                   	    MenuVertical.addItem("Finanzas", MenuFinanzas);

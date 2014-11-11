@@ -113,17 +113,30 @@ public class vacaciones extends Composite  {
 	        			Date aux = new Date(h.getFecha1());
 	        			Date aux2 = new Date(h.getFecha2());
 	        			
-	        			if(aux.after(dateFecha1.getValue())
-	        			&& aux.before(dateFecha2.getValue())
-	        			&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
-	        			)
+	        			if( (aux.after(dateFecha1.getValue())
+	        				&& aux.before(dateFecha2.getValue())
+	        				&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
+	        				)
+	        				||
+	        				(aux.equals(dateFecha1.getValue())
+	        				&& aux.equals(dateFecha2.getValue())
+	        				&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
+	        				)
+	        			  )
 	        			{
 	        				vacacio.add(h);
 	        			}
-	        			else if(aux2.after(dateFecha1.getValue())
-	        			&& aux2.before(dateFecha2.getValue())
-	        			&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
-	        			)
+	        			else if( 
+	        			(aux2.after(dateFecha1.getValue())
+        				&& aux2.before(dateFecha2.getValue())
+        				&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
+        				)
+        				||
+        				(aux2.equals(dateFecha1.getValue())
+        				&& aux2.equals(dateFecha2.getValue())
+        				&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
+        				)
+        			  )
 	        			{
 	        				vacacio.add(h);
 	        				

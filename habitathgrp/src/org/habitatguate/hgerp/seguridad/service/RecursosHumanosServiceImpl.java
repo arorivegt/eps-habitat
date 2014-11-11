@@ -143,6 +143,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				session.setAttribute("usserHabitat", user);
 				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
 				session.setAttribute("idAfiliadoHabitat", em.getAfiliado() );
+				session.setAttribute("idJefeInmediato", em.getJefe_Inmediato() );
 				session.setAttribute("idRolHabitat", e.getId_rol());
 				vs.setCorrecto(true);
 				vs.setId_empleado(e.getId_empleado());
@@ -2369,6 +2370,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 Persistencia.close();  
 		}
 		 return test ;
+		}
+
+		@Override
+		public Long obtenerIdJefe() throws IllegalArgumentException {
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			String id =  session.getAttribute("idJefeInmediato").toString();
+			if (session == null || session.getAttribute("idJefeInmediato") == null){
+				return Long.parseLong(id);
+			}else{
+				System.out.println(session.getAttribute("idJefeInmediato"));
+				return Long.parseLong(id);
+			}
 		}
 
 		

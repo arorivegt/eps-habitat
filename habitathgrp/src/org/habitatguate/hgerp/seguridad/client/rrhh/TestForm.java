@@ -97,9 +97,14 @@ public class TestForm extends Composite  {
         		{
         			Date aux = new Date(h.getFecha_test());
         			if(aux.after(dateFecha1.getValue())
-        			&& aux.before(dateFecha2.getValue())
-        			&& h.getTipo_test().equals(listTipo.getValue(listTipo.getSelectedIndex()))
-        			||(aux.equals(dateFecha1.getValue())||aux.equals(dateFecha2.getValue())))
+	        			&& aux.before(dateFecha2.getValue())
+	        			&& h.getTipo_test().equals(listTipo.getValue(listTipo.getSelectedIndex()))
+	        			||(
+	        			   aux.equals(dateFecha1.getValue())
+	        			&& aux.equals(dateFecha2.getValue())
+	        			&& h.getTipo_test().equals(listTipo.getValue(listTipo.getSelectedIndex())
+        			)
+        			  ))
         			{
         				vacacio.add(h);
         			}

@@ -957,6 +957,13 @@ public interface RecursosHumanosService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
+    Long obtenerIdJefe()throws IllegalArgumentException;
+    
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
     Boolean logout()throws IllegalArgumentException;
     
 }

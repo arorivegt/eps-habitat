@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -228,6 +229,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			@Override
 		public void onSuccess( List<AuxEmpleado> result)
 		{
+				DecimalFormat df = new DecimalFormat();
+				df.setMaximumFractionDigits(2);
 				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				
@@ -587,19 +590,19 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
 		 				
 					}
-					empleado.setSalarioMensualNominal(""+salarioMensualNominal);
+					empleado.setSalarioMensualNominal(""+df.format(salarioMensualNominal));
 					
-					empleado.setDecreto7889(""+decreto7889);
+					empleado.setDecreto7889(""+df.format(decreto7889));
 					
 					empleado.setTotalHorasExtras("0");
 					
 					empleado.setValordeHoraExtra("0");
 					
-					empleado.setAguinaldo(""+aguinaldo);
+					empleado.setAguinaldo(""+df.format(aguinaldo));
 					
-					empleado.setBono14(""+bono14);
+					empleado.setBono14(""+df.format(bono14));
 					
-					empleado.setComisiones(""+comisiones);
+					empleado.setComisiones(""+df.format(comisiones));
 					
 
 					empleado.setNivelAcademico(""+nivelAcademico);
@@ -614,9 +617,9 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setTipoContrato("Indefinido");
 					
-					empleado.setIndemnizacion(""+indemnizacion);
+					empleado.setIndemnizacion(""+df.format(indemnizacion));
 					
-					empleado.setOtrosPagos(""+otrosPagos);
+					empleado.setOtrosPagos(""+df.format(otrosPagos));
 					
 					
 					

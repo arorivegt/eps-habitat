@@ -25,50 +25,57 @@ public class InformBancosXml {
 	 		if(tipo =='1'){
 
 				String nombreArray[] = primer_nombre.split(":");
+				System.out.println(nombreArray);
 				String primerNombre = "";
 				String segundoNombre = "";
 				String segundoApellido = "";
 				String primerApellido =  "";
 
-		 		System.out.println("desde el servlet: "+nombreArray.length);
 				try{
 
 					if(nombreArray.length == 2){
-						primerNombre = nombreArray[0];
-						segundoNombre = "";
-						primerApellido =  nombreArray[1];
-						segundoApellido = "";
+						primerNombre = nombreArray[0].trim();
+						segundoNombre = "".trim();
+						primerApellido =  nombreArray[1].trim();
+						segundoApellido = "".trim();
 						
 						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
 					}else if(nombreArray.length == 3){
 						
-						primerNombre = nombreArray[0];
-						segundoNombre =  nombreArray[1];
-						primerApellido =  nombreArray[2];
-						segundoApellido = "";
+						primerNombre = nombreArray[0].trim();
+						segundoNombre =  nombreArray[1].trim();
+						primerApellido =  nombreArray[2].trim();
+						segundoApellido = "".trim();
 						
 						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
 						
 						if(result.isEmpty()){
-							primerNombre = nombreArray[0];
-							segundoNombre =  nombreArray[1];
-							primerApellido =  "";
-							segundoApellido = nombreArray[2];
+							primerNombre = nombreArray[0].trim();
+							segundoNombre =  nombreArray[1].trim();
+							primerApellido =  "".trim();
+							segundoApellido = nombreArray[2].trim();
 							
 							result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-				 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+									primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
 							}
 						
 						
 					}else if(nombreArray.length == 4){
-						primerNombre = nombreArray[0];
-						segundoNombre = nombreArray[1];
-						primerApellido =  nombreArray[2];
-						segundoApellido = nombreArray[3];
+						primerNombre = nombreArray[0].trim();
+						segundoNombre = nombreArray[1].trim();
+						primerApellido =  nombreArray[2].trim();
+						segundoApellido = nombreArray[3].trim();
+						
+						System.out.println(primerNombre);
+						System.out.println(segundoNombre);
+						System.out.println(primerApellido);
+						System.out.println(segundoApellido);
+						
 						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-			 					segundoApellido, primerApellido,DPI, Pasaporte,Estado);
+								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
+						System.out.println(result.isEmpty());
 					}
 					
 				}catch(Exception e){

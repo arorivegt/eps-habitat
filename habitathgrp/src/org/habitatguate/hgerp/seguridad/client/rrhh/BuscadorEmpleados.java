@@ -111,7 +111,7 @@ public class BuscadorEmpleados extends Composite   {
 			        load.invisible();
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 				{
-					lbDato1.setText("Escriba el nombre de la persona a buscar");
+					lbDato1.setText("Escriba el nombres o apellidos de la persona buscar");
 					lbDato1.setVisible(true);
 					txtDato1.setVisible(true);
 					txtDato1.showSuggestionList();
@@ -224,9 +224,9 @@ public class BuscadorEmpleados extends Composite   {
 		absolutePanel.add(Busqueda, 420, 19);
 		Busqueda.setSize("103px", "55px");
 		
-		lbDato1 = new Label("Primer Nombre");
+		lbDato1 = new Label("Escriba el nombres o apellidos de la persona buscar");
 		lbDato1.setStyleName("label");
-		lbDato1.setSize("368px", "19px");
+		lbDato1.setSize("437px", "19px");
 		absolutePanel.add(lbDato1, 205, 0);
 		
 		

@@ -116,14 +116,14 @@ public class vacaciones extends Composite  {
 	        			if(aux.after(dateFecha1.getValue())
 	        			&& aux.before(dateFecha2.getValue())
 	        			&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
-	        			||(aux.equals(dateFecha1.getValue())||aux.equals(dateFecha2.getValue())))
+	        			)
 	        			{
 	        				vacacio.add(h);
 	        			}
 	        			else if(aux2.after(dateFecha1.getValue())
 	        			&& aux2.before(dateFecha2.getValue())
 	        			&& h.getTipoPermisos().equals(listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()))
-	        			||(aux.equals(dateFecha1.getValue())||aux.equals(dateFecha2.getValue())))
+	        			)
 	        			{
 	        				vacacio.add(h);
 	        				

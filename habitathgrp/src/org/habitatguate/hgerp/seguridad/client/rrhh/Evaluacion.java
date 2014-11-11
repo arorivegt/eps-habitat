@@ -97,7 +97,7 @@ public class Evaluacion extends Composite  {
         	        			if(aux.after(dateFecha1.getValue())
         	        			&& aux.before(dateFecha2.getValue())
         	        			&& h.getTipo_test().equals("1")
-        	        			||(aux.equals(dateFecha1.getValue())||aux.equals(dateFecha2.getValue())))
+        	        			)
         	        			{
         	        				hist.add(h);
         	        			}

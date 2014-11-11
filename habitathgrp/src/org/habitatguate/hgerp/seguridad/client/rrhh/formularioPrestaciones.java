@@ -36,6 +36,7 @@ public class formularioPrestaciones  extends Composite  {
     private Long id_salario = 0L;
     private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	private boolean valor;
     
     
 	public formularioPrestaciones() {
@@ -231,9 +232,10 @@ public class formularioPrestaciones  extends Composite  {
 		
 	}
 	
-	public void insertar_actualizar(){
+	public boolean insertar_actualizar(){
 
 		float total = 0;
+		valor = false;
 		total = Float.parseFloat(this.txtPromedioSalario.getText())/Float.parseFloat(this.txtDiasAnnio.getText())*Float.parseFloat(this.txtDiasTrabajados.getText());
 		this.txtTotal.setText(""+total);
 		if(bandera) {
@@ -241,6 +243,7 @@ public class formularioPrestaciones  extends Composite  {
 					Float.parseFloat(this.txtTotal.getText()), this.codigoSalario, this.descripcion,new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+                	valor = false;
                 }
 
 				@Override
@@ -248,6 +251,7 @@ public class formularioPrestaciones  extends Composite  {
                 {
 					id_salario = result;
 					bandera = false;
+                	valor = true;
                 }
 				});
 		}else{
@@ -255,15 +259,18 @@ public class formularioPrestaciones  extends Composite  {
 					Float.parseFloat(this.txtTotal.getText()), this.codigoSalario, this.descripcion,new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
+                	valor = false;
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
 					bandera = false;
+                	valor = true;
                 }
 				});
 		}
+		return valor;
 	}
 	
 	

@@ -381,7 +381,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
-    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+    			mensaje.setMensaje("alert alert-error", "Error en BD puestos\n"+caught);
     		}
 
 			@Override

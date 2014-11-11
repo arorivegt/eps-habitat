@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,9 @@ public class InformBancosXml {
 	 			String listMes,String listAnio)
 	 	{
 	 		String mesPlanilla ="";
+
+			DecimalFormat df = new DecimalFormat();
+			df.setMaximumFractionDigits(2);
 	 		List<AuxEmpleado> result = new ArrayList<AuxEmpleado>();
 	 		if(tipo =='1'){
 
@@ -401,7 +405,7 @@ public class InformBancosXml {
 	 					+ "<td>"+tipoCuenta.toUpperCase()+"</td>"
 	 					+ "<td>"+e.getNoCuenta()+"</td>"
 	 		 			+ "<td>"+nombre+"</td>"
-	 					+ "<td>"+salarioCalculo+"</td>"
+	 					+ "<td>"+df.format(salarioCalculo)+"</td>"
 	 					+ "<td> PLANILLA "+mesPlanilla.toUpperCase()+" "+listAnio+" </td>"
 	 					+ "</tr>";
 	 			//aqui se crea cada fila con sus respectivas columnas para el excel

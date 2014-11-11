@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -25,10 +26,12 @@ public class prestaciones extends Composite  {
 	private VerticalPanel panel = new VerticalPanel();
     private formularioPrestaciones fp;
     private Loading load ;
+	private Mensaje mensaje; 
     private List<formularioPrestaciones> listfp = new ArrayList<formularioPrestaciones>();
     public prestaciones() {
 
     	load = new Loading();
+		mensaje = new Mensaje();
         load.Mostrar();
         load.invisible();
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -63,15 +66,21 @@ public class prestaciones extends Composite  {
         btnTodo.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) 
         	{
-
+        		boolean valor = false;
                 load.visible();
         		for(int i = 0; i < listfp.size(); i++){
         			if(listfp.get(i).checkOk.isChecked())
         			{
-        				listfp.get(i).insertar_actualizar();
+        				valor = listfp.get(i).insertar_actualizar();
         			}
         		}
                 load.invisible();
+                if(valor){
+        			mensaje.setMensaje("alert alert-success", "Salario guardados con exito");
+                	
+                }else{
+					mensaje.setMensaje("alert alert-error", "Error !! \nHubo un error al guardar salarios");
+                }
         	}
         });
 	}

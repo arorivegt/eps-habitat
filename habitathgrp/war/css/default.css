@@ -61,6 +61,24 @@ table {
 	color : white;
 							
 }
+.finanButton {
+ background: #51B948;
+	color: #fff;
+	padding: 8px 10px;
+	border: 0;
+	font-size: 9px;
+	font-style: normal;
+	font-family: "Oswald", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 1px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.finanButton:hover {
+	background: #344655;
+	color : white;
+							
+}
 /** Most GWT widgets already have a style name defined */
 .gwt-DialogBox {
   width: 300px;

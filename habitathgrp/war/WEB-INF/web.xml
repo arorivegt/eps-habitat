@@ -45,6 +45,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   </servlet-mapping>
 
   <servlet>
+    <servlet-name>RegistroServlet</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.SolucionesConstruidasServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RegistroServlet</servlet-name>
+    <url-pattern>/seguridad/Registro</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
     <servlet-name>upload url servlet</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.UploadUrlServiceImpl</servlet-class>
   </servlet>

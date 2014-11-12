@@ -20,7 +20,7 @@ public class Buscador_Solucion extends Composite {
 	private TabPanel tabPanel;
 	public Long id_empleado = 0L;
 	private ScrollPanel panel1;
-	private Buscador_Soluciones_Inv bbs;
+	private Formulario_AsignarSolucion bbs;
 
 	
 	public Buscador_Solucion() {
@@ -32,7 +32,7 @@ public class Buscador_Solucion extends Composite {
 		
 		panel1 = new ScrollPanel();
 		panel1.setAlwaysShowScrollBars(true);
-		tabPanel.add(panel1, "Datos",true);
+		tabPanel.add(panel1, "Asignar Solucion",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -47,7 +47,7 @@ public class Buscador_Solucion extends Composite {
 	}	
 	
 	public void ItemUno(){
-		bbs = new Buscador_Soluciones_Inv();
+		bbs = new Formulario_AsignarSolucion();
 		panel1.setWidget(bbs);
 	}
 

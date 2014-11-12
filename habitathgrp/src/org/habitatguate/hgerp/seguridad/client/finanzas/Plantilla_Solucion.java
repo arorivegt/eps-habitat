@@ -171,9 +171,9 @@ public class Plantilla_Solucion extends Composite{
 			
 			//-----------------------------	---------------------------------
 		
-		Image image = new Image("images/ico-lupa.png");
+	/*	Image image = new Image("images/ico-lupa.png");
 		absolutePanel.add(image, 904, 29);
-		image.setSize("56px", "36px");
+		image.setSize("56px", "36px");*/
 		
 	//------------------------- NUEVO MATERIAL DE COSTRUCCION----------------------------------
 		Label label_2a = new Label("Nombre Material Costruccion");
@@ -208,8 +208,7 @@ public class Plantilla_Solucion extends Composite{
 
 		Button button_2a = new Button("Agregar Material");
 		button_2a.setText("Agregar Material");
-		button_2a.setStylePrimaryName("gwt-TextBox2");
-		button_2a.setStyleName("gwt-TextBox2");
+		button_2a.setStyleName("finanButton");
 		absolutePanel.add(button_2a, 501, 92);
 		button_2a.setSize("157px", "40px");
 		
@@ -284,8 +283,7 @@ public class Plantilla_Solucion extends Composite{
 		});		
 
 		btnGestionarPlantilla.setText("Gestionar Plantilla");
-		btnGestionarPlantilla.setStylePrimaryName("gwt-TextBox2");
-		btnGestionarPlantilla.setStyleName("gwt-TextBox2");
+		btnGestionarPlantilla.setStyleName("finanButton");
 		absolutePanel.add(btnGestionarPlantilla, 720, 29);
 		btnGestionarPlantilla.setSize("157px", "40px");
 		
@@ -302,8 +300,7 @@ public class Plantilla_Solucion extends Composite{
 			}
 		});
 		eliminar.setText("Eliminar Material");
-		eliminar.setStylePrimaryName("gwt-TextBox2");
-		eliminar.setStyleName("gwt-TextBox2");
+		eliminar.setStyleName("finanButton");
 		absolutePanel_1.add(eliminar,0,10);
 		eliminar.setSize("145px", "38px");
 	

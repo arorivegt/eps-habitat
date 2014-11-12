@@ -106,9 +106,9 @@ public class Buscador_Afiliado extends Composite {
 	
 	
 	
-	Image image = new Image("images/ico-lupa.png");
+/*	Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "55px");
+	image.setSize("103px", "55px");*/
 	
 	
 	
@@ -150,8 +150,7 @@ public class Buscador_Afiliado extends Composite {
 	});		
 
 	button.setText("Nuevo Afiliado");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 968, 29);
 	button.setSize("157px", "30px");
 	

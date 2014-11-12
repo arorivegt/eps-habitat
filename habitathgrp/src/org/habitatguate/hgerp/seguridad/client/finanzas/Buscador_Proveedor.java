@@ -66,13 +66,13 @@ public class Buscador_Proveedor extends Composite{
 			
 		//-----------------------------	---------------------------------
 	
-	Image image = new Image("images/ico-lupa.png");
+/*	Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "21px");
+	image.setSize("103px", "21px");*/
 	
 	
 	
-	Button button = new Button("Send");
+/*	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			e.grid.EliminarFila();
@@ -81,10 +81,9 @@ public class Buscador_Proveedor extends Composite{
 	});		
 
 	button.setText("Eliminar Proveedor");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 914, 28);
-	button.setSize("160px", "27px");
+	button.setSize("160px", "27px");*/
 	
 	loginService.ConsultaTodosProveedor_PorAfiliado(0L,new AsyncCallback<List<AuxProveedor>>() {
 		

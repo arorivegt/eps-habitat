@@ -29,7 +29,7 @@ public class Formulario_GestorVales extends Composite{
 		panel1.setAlwaysShowScrollBars(true);
 		
 		tabPanel.add(panel1, "Generar Vales de Solución",true);
-		tabPanel.add(panel2, "Aprobar Vales",true);
+		//tabPanel.add(panel2, "Aprobar Vales",true);
 		panel1.setSize("100%", "480px");
 
 		

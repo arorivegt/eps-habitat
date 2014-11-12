@@ -69,14 +69,14 @@ public class MyPaginationDataGrid_Proveedor<T> extends PagingDataGrid_Proveedor<
                 return ((AuxProveedor) object).getNomProveedor();
             }
         };
-   /*     nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
+        nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
 			@Override
 			public void update(int index, T object, String value) {
 				
-				((AuxProveedor) object).setNomMaterialCostruccion(value);
+				((AuxProveedor) object).setNomProveedor(value);
 				
 			}
-        	});*/
+        	});
         dataGrid.addColumn(nomParamColumn, "Nombre Proveedor");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
         nomParamColumn.setSortable(true);

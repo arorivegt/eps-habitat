@@ -71,8 +71,13 @@ public abstract class PagingDataGrid_MaterialCostruccion<T> extends Composite {
         dataGrid.addColumnSortHandler(sortHandler);
  
         dataProvider.addDataDisplay(dataGrid);
+        //boton eliminar
+        botonEliminar = new Button("Eliminar Mat.");
+    	botonEliminar.setStyleName("finanButton");
+    	botonEliminar.setSize("157px", "40px");
+    	
+        ////
         
-        botonEliminar = new Button("Eliminar MaterialCostruccion");
    //     botonRefresh = new Button("Refresh Datos");
         pager.setVisible(true);
         dataGrid.setVisible(true);

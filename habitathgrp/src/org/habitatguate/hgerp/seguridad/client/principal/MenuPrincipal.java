@@ -7,6 +7,7 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
@@ -107,11 +108,16 @@ public class MenuPrincipal extends Composite {
                        }
                      };
              
-             final Command cmdfinan3b = new Command() {
+             final Command cmdfina3b = new Command() {
                public void execute() {
-                   finan3b();
+                   fina3b();
                }
              };
+             final Command cmdfina6b = new Command() {
+                 public void execute() {
+                     fina6b();
+                 }
+               };
 
              final Command cmdfina4a = new Command() {
                public void execute() {
@@ -158,45 +164,44 @@ public class MenuPrincipal extends Composite {
                     MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
                      //Inventario Activos menu
-                   final MenuBar MenuInventarioActivos = new MenuBar(true);
+             /*      final MenuBar MenuInventarioActivos = new MenuBar(true);
                     MenuInventarioActivos.setAutoOpen(true);
                     MenuInventarioActivos.setAnimationEnabled(true);
                     MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
                     MenuInventarioActivos.addSeparator();
                     MenuInventarioActivos.addItem("Gestor de Inventario", cmd);
                     MenuInventarioActivos.addSeparator();
-                    MenuInventarioActivos.addItem("Generar Conocimiento", cmd);
+                    MenuInventarioActivos.addItem("Generar Conocimiento", cmd); */
                     
-                     //soluciones menu
-                   final MenuBar MenuSoluciones = new MenuBar(true);
-                    MenuSoluciones.setAutoOpen(true);
-                    MenuSoluciones.setAnimationEnabled(true);
-                    MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
-                    MenuSoluciones.addSeparator();
-                    MenuSoluciones.addItem("Gestor de Vales", cmdfina3a);
-                    
+       	 	     //soluciones menu
+         	 	   final MenuBar MenuSoluciones = new MenuBar(true);
+         	 	    MenuSoluciones.setAnimationEnabled(true);
+         	 	   /* MenuSoluciones.addItem("Ingreso Beneficiario", cmdfina2a);
+         	 	    MenuSoluciones.addSeparator();*/
+         	 	    MenuSoluciones.addItem("Asignar Solucion", cmdfina3b);
+         	 	    MenuSoluciones.addItem("Gestor de Vales", cmdfina3a);
 
-                     //soluciones menu
-                   final MenuBar MenuInventarioMateriales = new MenuBar(true);
-                    MenuInventarioMateriales.setAutoOpen(true);
-                    MenuInventarioMateriales.setAnimationEnabled(true);
-                    MenuInventarioMateriales.addItem("Cuenta Materiales", cmd);
-                    MenuInventarioMateriales.addSeparator();
-                    MenuInventarioMateriales.addItem("Administrar Materiales Costrucción", cmdfinan3b);
-                    
-                     //recursos humano menu
-                   final MenuBar MenuFinanzas = new MenuBar(true);
-                        MenuFinanzas.setAutoOpen(true);
-                    MenuFinanzas.setAnimationEnabled(true);
-                    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);
-                    MenuFinanzas.addSeparator();
-                    MenuFinanzas.addItem("Soluciones", MenuSoluciones);
-                    MenuFinanzas.addSeparator();
-                    MenuFinanzas.addItem("Inventario Materiales", MenuInventarioMateriales);
-                    MenuFinanzas.addSeparator();
-                    MenuFinanzas.addItem("Administrador Afiliado", cmdfina4a);
-                    MenuFinanzas.addSeparator();
-                    MenuFinanzas.addItem("Administrador Proveedores", cmdfina5);
+         	 	     //soluciones menu
+         	 	   final MenuBar MenuInventarioMateriales = new MenuBar(true);
+         	 	    MenuInventarioMateriales.setAnimationEnabled(true);
+         	 	  /*  MenuInventarioMateriales.addItem("Cuenta Materiales", cmd);
+         	 	    MenuInventarioMateriales.addSeparator();*/
+         	 	    MenuInventarioMateriales.addItem("Inventario Materiales de Costrucción", cmdfina6b);
+         	 	    
+         	 	     //recursos humano menu
+         	 	   final MenuBar MenuFinanzas = new MenuBar(true);
+         	 /*	    MenuFinanzas.setAnimationEnabled(true);
+         	 	    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);*/
+         	 	    MenuFinanzas.addSeparator();
+         	 	    MenuFinanzas.addItem("Administrador Afiliado", cmdfina4a);
+         	 	    MenuFinanzas.addSeparator();
+         	 	    MenuFinanzas.addItem("Administrador Proveedores", cmdfina5);
+         	 	    MenuFinanzas.addSeparator();
+         	 	    MenuFinanzas.addItem("Administrador Materiales", MenuInventarioMateriales);
+         	 	    MenuFinanzas.addSeparator();
+         	 	    MenuFinanzas.addItem("Administrador Beneficiario", cmdfina2a);
+         	 	    MenuFinanzas.addSeparator();
+         	 	    MenuFinanzas.addItem("Soluciones", MenuSoluciones);
                     
 
           final  MenuBar MenuVertical = new MenuBar();
@@ -378,8 +383,15 @@ public class MenuPrincipal extends Composite {
         
         }
         
+        void fina3b(){
+            Buscador_Solucion fmc = new Buscador_Solucion();
+            this.nuevo.getGrid().setWidth("1000");
+            this.nuevo.getGrid().clearCell(1, 0);
+            this.nuevo.getGrid().setWidget(1, 0, fmc);
+    
+    }
         //@UiHandler("finan3b")
-        void finan3b(){
+        void fina6b(){
                 Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
                 this.nuevo.getGrid().setWidth("1000");
                 this.nuevo.getGrid().clearCell(1, 0);

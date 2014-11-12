@@ -124,9 +124,9 @@ public class Buscador_Soluciones_Inv extends Composite {
 		
 		//-----------------------------	---------------------------------
 	
-	Image image = new Image("images/ico-lupa.png");
+	/*Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 706, 10);
-	image.setSize("56px", "40px");
+	image.setSize("56px", "40px");*/
 	
 	
 	
@@ -134,8 +134,7 @@ public class Buscador_Soluciones_Inv extends Composite {
 	
 
 	button.setText("Nueva Beneficiario");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 913, 95);
 	button.setSize("157px", "40px");
 	

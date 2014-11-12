@@ -87,9 +87,9 @@ public class Formulario_Proveedor extends Composite{
 		
 		//-----------------------------	---------------------------------
 	
-	Image image = new Image("images/ico-lupa.png");
+	/*Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "55px");
+	image.setSize("103px", "55px");*/
 	
 	
 	
@@ -157,8 +157,7 @@ public class Formulario_Proveedor extends Composite{
 	
 
 	button.setText("Nuevo Proveedor");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 47, 653);
 	button.setSize("157px", "40px");
 	

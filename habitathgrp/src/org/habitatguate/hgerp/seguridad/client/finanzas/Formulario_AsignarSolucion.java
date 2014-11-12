@@ -211,8 +211,7 @@ public class Formulario_AsignarSolucion extends Composite{
 
 		Button button_2a = new Button("Agregar Material");
 		button_2a.setText("Agregar Material");
-		button_2a.setStylePrimaryName("gwt-TextBox2");
-		button_2a.setStyleName("gwt-TextBox2");
+		button_2a.setStyleName("finanButton");
 		absolutePanel.add(button_2a, 451, 108);
 		button_2a.setSize("134px", "22px");
 		
@@ -298,49 +297,17 @@ public class Formulario_AsignarSolucion extends Composite{
 			
 	//--------------------------------------	
 			
-			Button button = new Button("Send");
+	/*		Button button = new Button("Send");
 			absolutePanel_1.add(button, 487, 27);
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					
 
-					
-					/*if (!textBox_1.getText().equals("")){
-
-					loginService.Insertar_PlantillaSolucion(textBox.getText(), textBox_1.getText(), costoAcumulado,
-							new AsyncCallback<Long>(){
-						@Override		
-	                public void onFailure(Throwable caught) 
-	                {
-	                    Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
-	                }
-
-						@Override
-	                public void onSuccess(Long result)
-	                {			
-	                	//Window.alert("Datos Almacenados Correctamente " + result);             	
-	                	textBox.setText("");
-	                	textBox_1.setText("");
-	        			idPlantillaSolucionAlmacenado = result;
-	    				timer.schedule(1500);	
-	                	
-	                }
-
-	         		});	
-					
-	        	//Window.alert("Datos Almacenados Correctamente ");  
-
-					}
-					else{
-					Window.alert("Debe completar el formulario");
-					} */
 				}
 			});		
 			
 					button.setText("Update Archivo");
-					button.setStylePrimaryName("gwt-TextBox2");
-					button.setStyleName("gwt-TextBox2");
-					button.setSize("134px", "23px");
+					button.setStyleName("finanButton");
+					button.setSize("134px", "23px");*/
 			
 			AbsolutePanel absolutePanel_2 = new AbsolutePanel();
 			absolutePanel_2.setStyleName("panelMenu");
@@ -410,8 +377,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			
 			Button btnAsignarSolucion = new Button("Asignar Solucion");
 			btnAsignarSolucion.setText("Asignar Solucion");
-			btnAsignarSolucion.setStylePrimaryName("gwt-TextBox2");
-			btnAsignarSolucion.setStyleName("gwt-TextBox2");
+			btnAsignarSolucion.setStyleName("finanButton");
 			absolutePanel_3.add(btnAsignarSolucion, 217, 86);
 			btnAsignarSolucion.setSize("134px", "22px");
 			
@@ -450,8 +416,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				}
 			});
 			eliminar.setText("Eliminar Material");
-			eliminar.setStylePrimaryName("gwt-TextBox2");
-			eliminar.setStyleName("gwt-TextBox2");
+			eliminar.setStyleName("finanButton");
 			absolutePanel_4.add(eliminar,0,10);
 			eliminar.setSize("145px", "38px");
 			

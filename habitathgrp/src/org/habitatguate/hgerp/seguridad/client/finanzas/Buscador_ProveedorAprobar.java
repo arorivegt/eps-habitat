@@ -66,9 +66,9 @@ public class Buscador_ProveedorAprobar extends Composite{
 			
 		//-----------------------------	---------------------------------
 	
-	Image image = new Image("images/ico-lupa.png");
+	/*Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "21px");
+	image.setSize("103px", "21px");*/
 	
 	
 	
@@ -80,8 +80,7 @@ public class Buscador_ProveedorAprobar extends Composite{
 	});		
 
 	button.setText("Aprobar Proveedor");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 914, 28);
 	button.setSize("160px", "27px");
 	

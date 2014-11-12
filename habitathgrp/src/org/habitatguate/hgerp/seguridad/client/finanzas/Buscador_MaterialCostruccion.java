@@ -135,18 +135,17 @@ public class Buscador_MaterialCostruccion extends Composite{
 		
 		//-----------------------------	---------------------------------
 	
-	Image image = new Image("images/ico-lupa.png");
+	/*Image image = new Image("images/ico-lupa.png");
 	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "55px");
+	image.setSize("103px", "55px");*/
 	
 	
 	
 	Button button = new Button("Send");
 		
 
-	button.setText("Nueva Beneficiario");
-	button.setStylePrimaryName("gwt-TextBox2");
-	button.setStyleName("gwt-TextBox2");
+	button.setText("Nuevo Material Costr.");
+	button.setStyleName("finanButton");
 	absolutePanel.add(button, 725, 85);
 	button.setSize("157px", "40px");
 	

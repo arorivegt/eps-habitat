@@ -168,8 +168,10 @@ public class MyPaginationDataGrid_MaterialConstruccion<T> extends PagingDataGrid
         	      }
         	 };
 
+        	 
         	 dataGrid.addColumn(reListColumn,"Boton");
-        	 dataGrid.setColumnWidth(reListColumn, 20, Unit.PCT); 
+        	 dataGrid.setColumnWidth(reListColumn, 20, Unit.PCT);
+        	 
         
     }
     

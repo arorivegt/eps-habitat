@@ -14,7 +14,9 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 
 
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 
@@ -46,13 +48,17 @@ public class Formulario_CrearVale extends Composite {
     private final RecursosHumanosServiceAsync getSession = GWT.create(RecursosHumanosService.class);
     private AuxBeneficiario selectNuevoBene;
     private AuxSolucion selectSolucion;
+    private Double costoAcumulado = 0.0;
     
-    
+    TablaGWT_Vale e = null;
     private Long idAfiliadoSession = 0L; 
 
 	public Formulario_CrearVale(){
 		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
 		final java.util.Date date= new java.util.Date();
+		final Grid grid = new Grid(2, 2);
+		initWidget(grid);
+		grid.setWidth("1278px");
 		 System.out.println(new Timestamp(date.getTime()));
 		getSession.obtenerIdAfiliado(new AsyncCallback<Long>() {
 			
@@ -91,9 +97,7 @@ public class Formulario_CrearVale extends Composite {
 				
 			}
 		});
-		final Grid grid = new Grid(2, 2);
-		initWidget(grid);
-		grid.setWidth("1278px");
+
 				
 
 		
@@ -227,16 +231,31 @@ public class Formulario_CrearVale extends Composite {
                 AuxProveedor selected = event.getValue();
                 List<AuxDetalleSolucion> listaSolucion = selectNuevoBene.getSolucion().getLista();
                 Iterator<AuxDetalleSolucion> i = listaSolucion.iterator();
+                List<AuxDetallePlantillaSolucion> listaDetalleVale = new ArrayList<AuxDetallePlantillaSolucion>();
                 while(i.hasNext()){
                 	AuxDetalleSolucion aux = i.next();
                 	if (aux.getVale().getIdVale().compareTo(0L) == 0){
-                		if (aux.getMaterialCostruccion().getProveedor().getIdProveedor().compareTo(selected.getIdProveedor()) == 0)
+                		if (aux.getMaterialCostruccion().getProveedor().getIdProveedor().compareTo(selected.getIdProveedor()) == 0){
+                			AuxDetallePlantillaSolucion auxDetalle = new AuxDetallePlantillaSolucion();
+                			auxDetalle.setNomMaterialCostruccion(aux.getMaterialCostruccion().getNomMaterialCostruccion());
+                			auxDetalle.setPrecioUnit(aux.getMaterialCostruccion().getPrecioUnit());
+                			auxDetalle.setCantidad(aux.getCantidad());
+                			auxDetalle.setUnidadMetrica(aux.getMaterialCostruccion().getUnidadMetrica());
+                			auxDetalle.setSubTotal(aux.getSubTotal());
+                			auxDetalle.setCostoAcumulado(0.0);
+                			listaDetalleVale.add(auxDetalle);
                 			System.out.println("Material " + aux.getMaterialCostruccion().getProveedor().getIdProveedor());
+
+                		}
+                		
                 	}
                 }
-                // this works, but the CommissionEditor that was first rendered remains
-          //      value.setCommission(selected);
-
+                
+                
+        		e = new TablaGWT_Vale(listaDetalleVale);
+        		grid.setWidget(1, 0,e);
+        		e.setSize("700px", "300px"); 
+				costoAcumulado = e.grid.ActualizarTabla();
             }
 
         });
@@ -285,7 +304,9 @@ public class Formulario_CrearVale extends Composite {
 			}
 
 		});
-
-
+		e = new TablaGWT_Vale(new ArrayList<AuxDetallePlantillaSolucion>());
+		grid.setWidget(1, 0,e);
+		e.setSize("700px", "300px"); 
+		
 	}
 }

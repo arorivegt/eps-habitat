@@ -285,8 +285,6 @@ public class MenuPrincipal extends Composite {
 								//agregar item para el menu
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
 								MenuVertical.addSeparator();
-								MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
-								MenuVertical.addSeparator();
 								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);
@@ -295,8 +293,6 @@ public class MenuPrincipal extends Composite {
 								MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
@@ -309,7 +305,15 @@ public class MenuPrincipal extends Composite {
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
 								MenuVertical.addSeparator();
+								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+								MenuVertical.setAutoOpen(false);
+								MenuVertical.setAnimationEnabled(true);
+							}else if(results == 4L){//si el rol es 4, entonces es soluciones construidas
+								//agregar item para el menu
+								MenuVertical.setHeight("100%");
 								MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
+								MenuVertical.addSeparator();
+								MenuVertical.addItem("Empleado",MenuEmpleados); 
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);

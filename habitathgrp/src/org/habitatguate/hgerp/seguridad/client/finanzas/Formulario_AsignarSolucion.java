@@ -90,7 +90,7 @@ public class Formulario_AsignarSolucion extends Composite{
 					}
 			}
 			
-			Window.alert("Plantilla Almacenada Correctamente");
+			Window.alert("Solucion asignada Correctamente");
 			e.grid.ActualizarList();
 		    costoAcumulado = 0;
 		    idSolucionAlmacenado = 0L;

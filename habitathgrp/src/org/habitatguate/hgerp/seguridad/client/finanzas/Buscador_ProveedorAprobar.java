@@ -76,6 +76,7 @@ public class Buscador_ProveedorAprobar extends Composite{
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			e.grid.AprobarProveedor();
+			Window.alert("Proveedores Aprobados");
 		}
 	});		
 

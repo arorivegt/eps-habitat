@@ -574,13 +574,14 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 		return valor;
 	}
 	public List<AuxBeneficiario> ConsultaTodosBene_PorAfiliado(Long idAfiliado){
+
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		final SegAfiliado query = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
 		List<AuxBeneficiario> valor = new ArrayList<AuxBeneficiario>();
+		System.out.println("cantidad "+ query.getSolucion().size());
 		Iterator<SegBeneficiario> auxB = query.getSolucion().iterator();
 		while (auxB.hasNext()){
 			SegBeneficiario p = auxB.next();
-			
 				AuxBeneficiario n= new AuxBeneficiario();
 				n.setIdBeneficiario(p.getIdBeneficiario().getId());
 				n.setNomBeneficiario(p.getNomBeneficiario());
@@ -776,6 +777,7 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 	
 	
 	public Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado){
+		System.out.println("id afiliado "+idAfiliado + " id empleado "+idEmpleado);
 		Long valor = 0L;
 		if(idAfiliado == null){
 			return valor;

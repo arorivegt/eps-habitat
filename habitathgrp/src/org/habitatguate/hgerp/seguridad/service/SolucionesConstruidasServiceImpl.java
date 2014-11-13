@@ -495,6 +495,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					"solucionConstruir == '"+solucionConstruir+"'");
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
+		}else if(tipo =='4'){
+			
+			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
+			
+			Query q = pm.newQuery(SegSolicitudGeneral.class,
+					"ID == "+nombreSolicitante);
+			results = (List<SegSolicitudGeneral>) q.execute();
+			
 		}
 		
 		if(!results.isEmpty())

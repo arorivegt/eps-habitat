@@ -48,13 +48,12 @@ public class Sce_BuzonSolicitudLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, final Sce_BuzonSolicitud buscador, final String primer_nombre, String segundo_nombre, 
-			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
+    public void agregarFormulario(final char tipo, final Sce_BuzonSolicitud buscador, final String nombreSolicitante, String solucionConstruir){
 
         load.visible();
         
         solucionesService.buscarFormulario(tipo, 
-        		primer_nombre, segundo_nombre,
+        		nombreSolicitante, solucionConstruir,
         		new AsyncCallback<List<AuxSolicitudGeneral>>(){        	
         	
             public void onFailure(Throwable caught) 

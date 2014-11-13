@@ -253,8 +253,8 @@ public class MenuPrincipal extends Composite {
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Bitacora de Soluciones Construidas", cmdsce4);
 		MenuSolucionesConstruidas.addSeparator();
-		MenuSolucionesConstruidas.addItem("Busqueda Exacta por Parametro", cmdsce5);	
-		MenuSolucionesConstruidas.addSeparator();
+//		MenuSolucionesConstruidas.addItem("Busqueda Exacta por Parametro", cmdsce5);	
+//		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Detalle Soluciones Construidas", cmdsce6);		
 		// --- Fin
 
@@ -496,18 +496,24 @@ public class MenuPrincipal extends Composite {
 	//@UiHandler("sce2")
 	void sce2() {
 		Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud();
+		buzon.setSize("100%", "100%");
+		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, buzon);
 	}	
 	//@UiHandler("sce3")
 	void sce3() {
 		Sce_BuzonSeguimientoSolicitud seguimientoFormulario = new Sce_BuzonSeguimientoSolicitud();
+		seguimientoFormulario.setSize("100%", "100%");
+		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, seguimientoFormulario);
 	}	
 	//@UiHandler("sce4")
 	void sce4() {
 		Sce_BuzonBitacora bitacora = new Sce_BuzonBitacora();
+		bitacora.setSize("100%", "100%");
+		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, bitacora);
 	}		

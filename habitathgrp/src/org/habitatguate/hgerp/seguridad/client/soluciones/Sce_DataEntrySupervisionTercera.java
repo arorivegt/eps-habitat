@@ -60,6 +60,11 @@ public class Sce_DataEntrySupervisionTercera extends Composite {
 
     			System.out.println("ID Tercera Supervison a Cargar: " + n2.getIdSupervisionTercera() + ", ID Formulario: " + n2.getIdFormulario());
     			
+//    			final Sce_DataEntryBitacoraSolicitud bitacoraSolicitud = new Sce_DataEntryBitacoraSolicitud();
+//    			bitacoraSolicitud.habilitarCuartaSupervision();
+    			
+    			System.out.println("Existe Data en Tercera Supervision - Se habilita 4ta Supervision");
+    			
     			data.LlenarDatos(n2.getIdSupervisionTercera(), 
     					n2.getFechaVisita(),
     					n2.getObservaciones(), n2.getAcciones(),

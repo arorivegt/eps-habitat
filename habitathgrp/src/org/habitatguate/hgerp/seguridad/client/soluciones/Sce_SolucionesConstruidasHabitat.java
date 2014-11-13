@@ -127,6 +127,10 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 
 					Sce_DatosSolucionesConstruidas empleado = new Sce_DatosSolucionesConstruidas();
 
+					// DATA A MOSTRAR EN RESULTADO
+					
+					empleado.setIdFormulario(""+p.getIdFormulario());
+					
 					empleado.setNombreSolicitante(p.getNombreSolicitante());
 					
 					String valEstadoCivil = "";
@@ -321,6 +325,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 				nuevo.AgregarColumna("14");
 				nuevo.AgregarColumna("15");
 				nuevo.AgregarColumna("16");
+				nuevo.AgregarColumna("17");
 
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

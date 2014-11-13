@@ -69,7 +69,6 @@ public class Sce_BusquedaFormulario extends Composite  {
 		});
 		txtNombreSolicitante.setStylePrimaryName("gwt-TextBox2");
 		txtNombreSolicitante.setStyleName("gwt-TextBox2");
-		//txtNombreSolicitante.setMaxLength(100);
 		absolutePanel.add(txtNombreSolicitante, 205, 19);
 		txtNombreSolicitante.setSize("250px", "34px");
 		txtNombreSolicitante = new SuggestBox(resultadoFormulario());

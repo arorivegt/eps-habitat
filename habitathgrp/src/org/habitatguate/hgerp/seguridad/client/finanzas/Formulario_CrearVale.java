@@ -65,6 +65,7 @@ public class Formulario_CrearVale extends Composite {
 			@Override
 			public void onSuccess(Long result) {
 				idAfiliadoSession = result;
+				
 				System.out.println("buscar afiliado" + idAfiliadoSession);
 
 				loginService.ConsultaTodosBene_PorAfiliado(idAfiliadoSession, new AsyncCallback<List<AuxBeneficiario>>() {
@@ -78,6 +79,7 @@ public class Formulario_CrearVale extends Composite {
 					@Override
 					public void onSuccess(List<AuxBeneficiario> result) {
 						// TODO Auto-generated method stub
+
 						if (!result.isEmpty()){
 							for (AuxBeneficiario p : result){
 								bene.add(new BeneficiarioMultiWordSuggestion(p));	

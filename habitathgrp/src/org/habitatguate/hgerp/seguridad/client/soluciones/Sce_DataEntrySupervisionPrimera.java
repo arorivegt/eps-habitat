@@ -58,6 +58,11 @@ public class Sce_DataEntrySupervisionPrimera extends Composite {
 
     			System.out.println("ID Primera Supervison a Cargar: " + n2.getIdSupervisionPrimera() + ", ID Formulario: " + n2.getIdFormulario());
     			
+//    			final Sce_DataEntryBitacoraSolicitud bitacoraSolicitud = new Sce_DataEntryBitacoraSolicitud();
+//    			bitacoraSolicitud.habilitarSegundaSupervision();
+    			
+    			System.out.println("Existe Data en Primera Supervision - Se habilita 2da Supervision");
+    			
     			data.LlenarDatos(n2.getIdSupervisionPrimera(), 
     					n2.getFechaVisita(), n2.getCheckSi(), n2.getCheckNo(),
     					n2.getObservaciones(), n2.getAcciones(),

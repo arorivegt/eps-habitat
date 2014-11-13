@@ -8,6 +8,16 @@ public class Sce_DatosSolucionesConstruidas  implements IsSerializable{
 	{
 	}
 
+	private String idFormulario;
+	
+	public String getIdFormulario() {
+		return idFormulario;
+	}
+
+	public void setIdFormulario(String idFormulario) {
+		this.idFormulario = idFormulario;
+	}
+
 	private String nombreSolicitante;
 	
 	public String getNombreSolicitante() {

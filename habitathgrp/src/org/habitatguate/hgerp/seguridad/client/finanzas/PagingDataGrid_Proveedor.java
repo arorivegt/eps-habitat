@@ -140,7 +140,7 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
 								
 								@Override
 								public void onSuccess(Long result) {
-	
+										dataProvider.getList().remove(objectoEliminado);
 								}
 								
 								@Override

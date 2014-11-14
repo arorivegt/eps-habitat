@@ -263,10 +263,10 @@ public class formularioIdiomas extends Composite {
 			// add submit handler
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
-					if (fileUpload.getFilename().length() == 0) {
+					if (fileUpload.getFilename().length() == 0 || fileUpload.getFilename().indexOf("pdf") == -1) {
 				        load.invisible();
 						mensaje.setMensaje("alert alert-info", 
-	                			"Selecciono un archivo?");
+	                			"Selecciono un archivo o la extension no es correcta?");
 						event.cancel();
 					}
 				}
@@ -291,8 +291,7 @@ public class formularioIdiomas extends Composite {
 						Archivo();
 					}catch(Exception e){
 				        load.invisible();
-						mensaje.setMensaje("alert alert-error", 
-	                			results);
+						mensaje.setMensaje("alert alert-error", "verifique que el documento Pese menos de 1MB");
 						
 					}
 				}

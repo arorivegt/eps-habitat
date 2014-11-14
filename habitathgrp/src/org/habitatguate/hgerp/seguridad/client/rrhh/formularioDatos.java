@@ -2238,7 +2238,7 @@ public class formularioDatos extends Composite {
 			// add submit handler
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
-					if (fileUpload.getFilename().length() == 0) {
+					if (fileUpload.getFilename().length() == 0 ) {
 						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();
@@ -2264,7 +2264,7 @@ public class formularioDatos extends Composite {
 						Archivo();
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nal subir foto");
+	                			"verifique que la imagen Pese menos de 1MB");
 						
 					}
 				}
@@ -2295,7 +2295,7 @@ public class formularioDatos extends Composite {
 			fileUpload = new FileUpload();
 			fileUpload.setWidth("357px");
 			fileUpload.setName("myFile");
-			fileUpload.getElement().setAttribute("accept", "image/png, image/gif,image/jpeg");
+			fileUpload.getElement().setAttribute("accept", "image/*");
 		}
 		return fileUpload;
 	}

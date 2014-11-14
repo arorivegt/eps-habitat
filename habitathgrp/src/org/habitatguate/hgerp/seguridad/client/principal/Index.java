@@ -66,7 +66,7 @@ public class Index implements EntryPoint {
                     }
              });
             load.invisible();
-        	txtuser.setText("anibal@gmail.com");
+        	txtuser.setText("jonas@gmail.com");
         	txtpass.setText("Aqwe123");
         	inicio=  new Mensaje();
          	

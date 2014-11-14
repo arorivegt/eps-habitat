@@ -306,7 +306,7 @@ public class formularioAcademico extends Composite {
 			// add submit handler
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
-					if (fileUpload.getFilename().length() == 0) {
+					if (fileUpload.getFilename().length() == 0 || fileUpload.getFilename().indexOf("pdf") == -1) {
 						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();
@@ -330,7 +330,7 @@ public class formularioAcademico extends Composite {
 						Archivo();
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
-	                			results);
+	                			"verifique que el documento Pese menos de 1MB");
 						
 					}
 				}

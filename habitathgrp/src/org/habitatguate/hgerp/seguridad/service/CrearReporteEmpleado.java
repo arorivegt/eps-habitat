@@ -2,6 +2,8 @@ package org.habitatguate.hgerp.seguridad.service;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +44,11 @@ public class CrearReporteEmpleado extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
     private List<AuxEmpleado> empl = new ArrayList<AuxEmpleado>();
-    private Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL, BaseColor.BLUE);
+    private Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD, BaseColor.BLACK);
     private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
+    private SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+    private DecimalFormat df = new DecimalFormat();
 	//invoked from doGet method to create PDF through servlet 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -232,140 +236,103 @@ public class CrearReporteEmpleado extends HttpServlet {
         
     }
     public PdfPTable CrearFamilia(AuxFamilia f) {
-    	PdfPTable table = new PdfPTable(6);
+    	PdfPTable table = new PdfPTable(3);
     	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Nombre",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Primer Nombre",redFont));
+        table.addCell(new Paragraph("Primer Apellido",redFont));
+        table.addCell(new Paragraph("Ocupacion",redFont));
+        table.addCell(new Paragraph(f.getPrimer_nombre(),catFont));
+        table.addCell(new Paragraph(f.getPrimer_apellido(),catFont));
+        table.addCell(new Paragraph(f.getOcupacion(),catFont));
+        
 
-        c1 = new PdfPCell(new Phrase("Primer Apellido",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Segundo Nombre",redFont));
+        table.addCell(new Paragraph("Segundo Apellido",redFont));
+        table.addCell(new Paragraph("Edad",redFont));
+        table.addCell(new Paragraph(f.getSegundo_nombre(),catFont));
+        table.addCell(new Paragraph(f.getSegundo_apellido(),catFont));
+        table.addCell(new Paragraph(""+f.getEdad(),catFont));
+        
 
-        c1 = new PdfPCell(new Phrase("Segundo Apellido",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("Ocupacion",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("Edad",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("Parentesco",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Parentesco",redFont));
+        table.addCell(new Paragraph(f.getParentesco(),catFont));
         
         table.setHeaderRows(1);
 
-        table.addCell(f.getPrimer_nombre());
-        table.addCell(f.getPrimer_apellido());
-        table.addCell(f.getSegundo_apellido());
-        table.addCell(f.getOcupacion());
-        table.addCell(""+f.getEdad());
-        table.addCell(f.getParentesco());
         return table;
     }
     public PdfPTable CrearAcademico(AuxHistorialAcademico f) {
     	PdfPTable table = new PdfPTable(3);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Nivel Academico",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Titulo y/o Diploma",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Establecimiento",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Titulo",redFont));
+        table.addCell(new Paragraph("Establecimiento",redFont));
+        table.addCell(new Paragraph("Nivel Academico",redFont));
+        table.addCell(new Paragraph(f.getTitulo(),catFont));
+        table.addCell(new Paragraph(f.getEstablecimiento(),catFont));
+        table.addCell(new Paragraph(f.getNivel_academico(),catFont));
         
         table.setHeaderRows(1);
 
-        table.addCell(f.getNivel_academico());
-        table.addCell(f.getTitulo());
-        table.addCell(f.getEstablecimiento());
         return table;
     } 
     public PdfPTable CrearRefLaboral(AuxReferenciaLaboral f) {
+
+    	df.setMaximumFractionDigits(2);
     	PdfPTable table = new PdfPTable(4);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Nombre",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Puesto",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Nombre Referencia",redFont));
+        table.addCell(new Paragraph("Puesto Candidato",redFont));
+        table.addCell(new Paragraph("Empresa Referencia",redFont));
+        table.addCell(new Paragraph("Fecha de labores",redFont));
+        table.addCell(new Paragraph(f.getNombre_referencia(),catFont));
+        table.addCell(new Paragraph(f.getPuesto_candidato(),catFont));
+        table.addCell(new Paragraph(f.getEmpresa_referencia(),catFont));
+        table.addCell(new Paragraph(fecha.format(new Date(f.getFecha1()))+" al "+fecha.format(new Date(f.getFecha2())),catFont));
 
-        c1 = new PdfPCell(new Phrase("Empresa",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Lo recomienda",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Telefono Referencia",redFont));
+        table.addCell(new Paragraph("Motivo Retiro",redFont));
+        table.addCell(new Paragraph("Salario Final",redFont));
+        table.addCell(new Paragraph("Recomienda (Si/No)",redFont));
+        table.addCell(new Paragraph(f.getTelefono(),catFont));
+        table.addCell(new Paragraph(f.getMotivo_retiro(),catFont));
+        table.addCell(new Paragraph(""+df.format(f.getSalario_final()),catFont));
+        table.addCell(new Paragraph(f.getRecomiendo(),catFont));       
         
         table.setHeaderRows(1);
-
-        table.addCell(f.getNombre_referencia());
-        table.addCell(f.getPuesto_candidato());
-        table.addCell(f.getEmpresa_referencia());
-        table.addCell(f.getRecomiendo());
+        
         return table;
     }
     
     public PdfPTable CrearRefPersonal(AuxReferenciaPersonal f) {
     	PdfPTable table = new PdfPTable(4);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Nombre",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Puesto",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Relacion",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Telefono",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
+        table.addCell(new Paragraph("Nombre Referencia",redFont));
+        table.addCell(new Paragraph("Puesto Candidato",redFont));
+        table.addCell(new Paragraph("Relacion Referencia",redFont));
+        table.addCell(new Paragraph("Telefono",redFont));
+        table.addCell(new Paragraph(f.getNombre_referencia(),catFont));
+        table.addCell(new Paragraph(f.getPuesto_candidato(),catFont));
+        table.addCell(new Paragraph(f.getPuesto_candidato(),catFont));
+        table.addCell(new Paragraph(f.getTelefono(),catFont));               
         table.setHeaderRows(1);
-
-        table.addCell(f.getNombre_referencia());
-        table.addCell(f.getPuesto_candidato());
-        table.addCell(f.getRelacion());
-        table.addCell(f.getTelefono());
+        
         return table;
     }
     
     public PdfPTable CrearIdioma(AuxIdioma f) {
     	PdfPTable table = new PdfPTable(2);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Idioma",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Nivel",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
+        table.addCell(new Paragraph("Idioma",redFont));
+        table.addCell(new Paragraph("Nivel",redFont));
+        table.addCell(new Paragraph("Telefono",redFont));
+        table.addCell(new Paragraph(f.getIdioma(),catFont));
+        table.addCell(new Paragraph(f.getNivel(),catFont));
         table.setHeaderRows(1);
-
-        table.addCell(f.getIdioma());
-        table.addCell(f.getNivel());
         return table;
     }
     
     public PdfPTable CrearDesempeno(AuxTest f) {
-		String AnnioTest =  ""+new Date(f.getFecha_test());
+		String AnnioTest =  ""+fecha.format(fecha.format(new Date(f.getFecha_test())));
 
 		int valor = f.getPregunta1() + f.getPregunt2() + f.getPregunta3()
 				+f.getPregunta4()+f.getPregunta5() +f.getPregunta6()
@@ -373,28 +340,21 @@ public class CrearReporteEmpleado extends HttpServlet {
 				+f.getPregunta10();
     	PdfPTable table = new PdfPTable(3);
     	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Evaluador",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Fecha",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
+        table.addCell(new Paragraph("Evaluador",redFont));
+        table.addCell(new Paragraph("Fecha",redFont));
+        table.addCell(new Paragraph("Punteo",redFont));
+        table.addCell(new Paragraph(f.getEvaluador(),catFont));
+        table.addCell(new Paragraph(AnnioTest,catFont));
+        table.addCell(new Paragraph(""+valor,catFont));
         
-        c1 = new PdfPCell(new Phrase("Punteo",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
         
         table.setHeaderRows(1);
-
-        table.addCell(f.getEvaluador());
-        table.addCell(AnnioTest);
-        table.addCell(""+valor);
         return table;
     }
     
     public PdfPTable CrearEvaluacion(AuxTest f) {
-		String AnnioTest =  ""+new Date(f.getFecha_test());
+		String AnnioTest =  ""+fecha.format(new Date(f.getFecha_test()));
 
 		int valor = f.getPregunta1() + f.getPregunt2() + f.getPregunta3()
 				+f.getPregunta4()+f.getPregunta5() +f.getPregunta6()
@@ -422,7 +382,7 @@ public class CrearReporteEmpleado extends HttpServlet {
         return table;
     }
     public PdfPTable CrearPuesto(AuxPuesto f) {
-		String AnnioPuesto = ""+new Date(f.getFecha_puesto());
+		String AnnioPuesto = ""+fecha.format(new Date(f.getFecha_puesto()));
     	PdfPTable table = new PdfPTable(3);
     	
     	PdfPCell c1 = new PdfPCell(new Phrase("Puesto",redFont));
@@ -445,7 +405,7 @@ public class CrearReporteEmpleado extends HttpServlet {
         return table;
     }
     public PdfPTable CrearHistorial(AuxHistorial f) {
- 		String Annio = ""+new Date(f.getFecha());
+ 		String Annio = ""+fecha.format(new Date(f.getFecha()));
      	PdfPTable table = new PdfPTable(2);
      	
      	PdfPCell c1 = new PdfPCell(new Phrase("Tipo Historial",redFont));
@@ -463,8 +423,8 @@ public class CrearReporteEmpleado extends HttpServlet {
          return table;
      }
     public PdfPTable CrearVacaciones(AuxVacaciones f) {
- 		String Annio1 = ""+new Date(f.getFecha1());
- 		String Annio2 = ""+new Date(f.getFecha2());
+ 		String Annio1 = ""+fecha.format(new Date(f.getFecha1()));
+ 		String Annio2 = ""+fecha.format(new Date(f.getFecha2()));
      	PdfPTable table = new PdfPTable(2);
      	
      	PdfPCell c1 = new PdfPCell(new Phrase("Desde la fecha",redFont));

@@ -32,8 +32,6 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 //For adding content into PDF document
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
@@ -371,47 +369,47 @@ public class CrearReporteEmpleado extends HttpServlet {
         	table.addCell(new Paragraph("Q'eqchi"));
 		else if(f.getIdioma().equals("17"))
         	table.addCell(new Paragraph("Sakapulteko"));
-		else if(f.getIdioma().equals("19"))
+		else if(f.getIdioma().equals("18"))
         	table.addCell(new Paragraph("Sipakapense"));
-		else if(f.getIdioma().equals("20"))
+		else if(f.getIdioma().equals("19"))
         	table.addCell(new Paragraph("Tektiteko"));
-		else if(f.getIdioma().equals("21"))
+		else if(f.getIdioma().equals("20"))
         	table.addCell(new Paragraph("tz'utujil"));
-		else if(f.getIdioma().equals("22"))
+		else if(f.getIdioma().equals("21"))
         	table.addCell(new Paragraph("Uspanteko"));
-		else if(f.getIdioma().equals("23"))
+		else if(f.getIdioma().equals("22"))
         	table.addCell(new Paragraph("Garelse ifuna"));
-		else if(f.getIdioma().equals("24"))
+		else if(f.getIdioma().equals("23"))
         	table.addCell(new Paragraph("Español"));
-		else if(f.getIdioma().equals("25"))
+		else if(f.getIdioma().equals("24"))
         	table.addCell(new Paragraph("Ingles"));
-		else if(f.getIdioma().equals("26"))
+		else if(f.getIdioma().equals("25"))
         	table.addCell(new Paragraph("Frances"));
-		else if(f.getIdioma().equals("27"))
+		else if(f.getIdioma().equals("26"))
         	table.addCell(new Paragraph("Aleman"));
-		else if(f.getIdioma().equals("28"))
+		else if(f.getIdioma().equals("27"))
         	table.addCell(new Paragraph("Italiano"));
-		else if(f.getIdioma().equals("29"))
+		else if(f.getIdioma().equals("28"))
         	table.addCell(new Paragraph("Coreano"));
-		else if(f.getIdioma().equals("30"))
+		else if(f.getIdioma().equals("29"))
         	table.addCell(new Paragraph("Japones"));
-		else if(f.getIdioma().equals("31"))
+		else if(f.getIdioma().equals("30"))
         	table.addCell(new Paragraph("Mandarin"));
-		else if(f.getIdioma().equals("32"))
+		else if(f.getIdioma().equals("31"))
         	table.addCell(new Paragraph("Cantones"));
-		else if(f.getIdioma().equals("33"))
+		else if(f.getIdioma().equals("32"))
         	table.addCell(new Paragraph("Tailandes"));
-		else if(f.getIdioma().equals("34"))
+		else if(f.getIdioma().equals("33"))
         	table.addCell(new Paragraph("Portugues"));
-		else if(f.getIdioma().equals("1"))
+		else if(f.getIdioma().equals("34"))
         	table.addCell(new Paragraph("Arabe"));
-		else if(f.getIdioma().equals("1"))
+		else if(f.getIdioma().equals("35"))
         	table.addCell(new Paragraph("Hebreo"));
-		else if(f.getIdioma().equals("1"))
+		else if(f.getIdioma().equals("36"))
         	table.addCell(new Paragraph("Griego"));
-		else if(f.getIdioma().equals("1"))
+		else if(f.getIdioma().equals("37"))
         	table.addCell(new Paragraph("Neerlandes"));
-		else if(f.getIdioma().equals("1"))
+		else if(f.getIdioma().equals("38"))
         	table.addCell(new Paragraph("Otros"));
 
         if(f.getNivel().equals("0"))
@@ -481,7 +479,10 @@ public class CrearReporteEmpleado extends HttpServlet {
         table.addCell(new Paragraph("Descripcion",redFont));
         table.addCell(new Paragraph("Tipo Historial",redFont));
         table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        table.addCell(new Paragraph(f.getTipo_historial(),catFont));
+        if(f.getTipo_historial().equals("0"))
+        	table.addCell(new Paragraph("aciertos",catFont));
+        else if(f.getTipo_historial().equals("1"))
+        	table.addCell(new Paragraph("llamadas de atención",catFont));
         
         table.addCell(new Paragraph("Fecha Creacion",redFont));
         table.addCell(new Paragraph(Annio,catFont));
@@ -511,7 +512,24 @@ public class CrearReporteEmpleado extends HttpServlet {
         table.addCell(new Paragraph("Descripcion",redFont));
         table.addCell(new Paragraph("Tipo Salario",redFont));
         table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        table.addCell(new Paragraph(f.getTipoSalario(),catFont));
+        if(f.getTipoSalario().equals("0"))
+        	table.addCell(new Paragraph("Salario Base"));
+		else if(f.getTipoSalario().equals("1"))
+        	table.addCell(new Paragraph("Decreto(78-89)"));
+		else if(f.getTipoSalario().equals("2"))
+        	table.addCell(new Paragraph("Comisiones"));
+		else if(f.getTipoSalario().equals("3"))
+        	table.addCell(new Paragraph("Bonificacion"));
+		else if(f.getTipoSalario().equals("4"))
+        	table.addCell(new Paragraph("Bono 14"));
+		else if(f.getTipoSalario().equals("5"))
+        	table.addCell(new Paragraph("Aguinaldo"));
+		else if(f.getTipoSalario().equals("6"))
+        	table.addCell(new Paragraph("Vacaciones"));
+		else if(f.getTipoSalario().equals("7"))
+        	table.addCell(new Paragraph("Indemnizacion"));
+		else if(f.getTipoSalario().equals("8"))
+        	table.addCell(new Paragraph("Otros pagos"));
         
         table.addCell(new Paragraph("Fecha",redFont));
         table.addCell(new Paragraph("Monto",redFont));

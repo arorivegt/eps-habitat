@@ -17,9 +17,9 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearInformeBancos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
+import org.habitatguate.hgerp.seguridad.client.rrhh.CrearReporteEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
-import org.habitatguate.hgerp.seguridad.client.rrhh.ReporteEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BusquedaFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBitacora;
@@ -366,7 +366,7 @@ public class MenuPrincipal extends Composite {
 
 	//@UiHandler("rrhh5")
 	void rrhh5() {
-		ReporteEmpleados buscador = new ReporteEmpleados();
+		CrearReporteEmpleados buscador = new CrearReporteEmpleados();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, buscador);

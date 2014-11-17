@@ -6,9 +6,7 @@ public class AuxIdioma implements IsSerializable{
 	
     private Long id_idioma;
 	
-	
     private String nivel;
-	
 	
     private String idioma;   
   

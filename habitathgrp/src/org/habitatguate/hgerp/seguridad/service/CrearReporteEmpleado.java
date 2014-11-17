@@ -20,6 +20,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxIdioma;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
 
@@ -69,9 +70,6 @@ public class CrearReporteEmpleado extends HttpServlet {
         String evaluacion = request.getParameter("evaluacion");
         String historial = request.getParameter("historial");
         String vacaciones = request.getParameter("vacaciones");
-        // String bono14 = request.getParameter("bono14");
-        // String aguinaldo = request.getParameter("aguinaldo");
-        //String indemnizacion = request.getParameter("indemnizacion");
         
         if(crear.equals("Todos")){
         	tipo = '2';
@@ -170,7 +168,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            valor = false;
 		            		}
 	    		            document.add(new Paragraph(" "));
-	            			document.add(CrearDesempeno(f));
+	            			document.add(CrearTest(f));
 	            		}
 	            	}
 	            }
@@ -184,7 +182,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            valor = false;
 		            		}
 	    		            document.add(new Paragraph(" "));
-	            			document.add(CrearEvaluacion(f));
+	            			document.add(CrearTest(f));
 	            		}
 	            	}
 	            }
@@ -215,15 +213,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 	            		document.add(CrearVacaciones(f));
 	            	}
 	            }
-	           }/* 
-	            if(bono14.equals("true"))
-	            	document.add(CrearFamilia());
-	            if(bono14.equals("true"))
-	            	document.add(CrearFamilia());
-	            if(aguinaldo.equals("true"))
-	            	document.add(CrearFamilia());
-	            if(indemnizacion.equals("true"))
-	            	document.add(CrearFamilia());*/
+	           }
 	            document.close();
 	        }
 	        catch (DocumentException exc){
@@ -269,7 +259,30 @@ public class CrearReporteEmpleado extends HttpServlet {
         table.addCell(new Paragraph("Nivel Academico",redFont));
         table.addCell(new Paragraph(f.getTitulo(),catFont));
         table.addCell(new Paragraph(f.getEstablecimiento(),catFont));
-        table.addCell(new Paragraph(f.getNivel_academico(),catFont));
+        if(f.getNivel_academico().equals("0"))
+            table.addCell(new Paragraph("No sabe leer y/o Escribir",catFont));
+        else if(f.getNivel_academico().equals("1"))
+             table.addCell(new Paragraph("sabe leer y/o Escribir",catFont));
+        else if(f.getNivel_academico().equals("2"))
+            table.addCell(new Paragraph("Primaria Incompleta",catFont));
+        else if(f.getNivel_academico().equals("3"))
+            table.addCell(new Paragraph("Primaria Completa",catFont));
+        else if(f.getNivel_academico().equals("4"))
+            table.addCell(new Paragraph("Secundaria Incompleta",catFont));
+        else if(f.getNivel_academico().equals("5"))
+            table.addCell(new Paragraph("Secundaria Completa",catFont));
+        else if(f.getNivel_academico().equals("6"))
+            table.addCell(new Paragraph("Diversificado Incompleta",catFont));
+        else if(f.getNivel_academico().equals("7"))
+            table.addCell(new Paragraph("Diversificado Completa",catFont));
+        else if(f.getNivel_academico().equals("8"))
+            table.addCell(new Paragraph("Universidad Incompleta",catFont));
+        else if(f.getNivel_academico().equals("9"))
+            table.addCell(new Paragraph("Universidad Completa",catFont));
+        else if(f.getNivel_academico().equals("10"))
+            table.addCell(new Paragraph("Postgrados",catFont));
+        else if(f.getNivel_academico().equals("11"))
+            table.addCell(new Paragraph("Diplomado",catFont));
         
         table.setHeaderRows(1);
 
@@ -320,127 +333,194 @@ public class CrearReporteEmpleado extends HttpServlet {
     }
     
     public PdfPTable CrearIdioma(AuxIdioma f) {
+    	
     	PdfPTable table = new PdfPTable(2);
-
         table.addCell(new Paragraph("Idioma",redFont));
         table.addCell(new Paragraph("Nivel",redFont));
-        table.addCell(new Paragraph("Telefono",redFont));
-        table.addCell(new Paragraph(f.getIdioma(),catFont));
-        table.addCell(new Paragraph(f.getNivel(),catFont));
+        if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Achi"));
+		else if(f.getIdioma().equals("2"))
+        	table.addCell(new Paragraph("Akateko"));
+		else if(f.getIdioma().equals("3"))
+        	table.addCell(new Paragraph("Awakateko"));
+		else if(f.getIdioma().equals("4"))
+        	table.addCell(new Paragraph("Ch'orti"));
+		else if(f.getIdioma().equals("5"))
+        	table.addCell(new Paragraph("Chuj"));
+		else if(f.getIdioma().equals("6"))
+        	table.addCell(new Paragraph("Itza"));
+		else if(f.getIdioma().equals("7"))
+        	table.addCell(new Paragraph("Ixil"));
+		else if(f.getIdioma().equals("8"))
+        	table.addCell(new Paragraph("Jakalteko"));
+		else if(f.getIdioma().equals("9"))
+        	table.addCell(new Paragraph("Kaqchiquel"));
+		else if(f.getIdioma().equals("10"))
+        	table.addCell(new Paragraph("Kiche"));
+		else if(f.getIdioma().equals("11"))
+        	table.addCell(new Paragraph("Mam"));
+		else if(f.getIdioma().equals("12"))
+        	table.addCell(new Paragraph("Mopan"));
+		else if(f.getIdioma().equals("13"))
+        	table.addCell(new Paragraph("Poqoman"));
+		else if(f.getIdioma().equals("14"))
+        	table.addCell(new Paragraph("Poqomchi"));
+		else if(f.getIdioma().equals("15"))
+        	table.addCell(new Paragraph("Q'anjob'al"));
+		else if(f.getIdioma().equals("16"))
+        	table.addCell(new Paragraph("Q'eqchi"));
+		else if(f.getIdioma().equals("17"))
+        	table.addCell(new Paragraph("Sakapulteko"));
+		else if(f.getIdioma().equals("19"))
+        	table.addCell(new Paragraph("Sipakapense"));
+		else if(f.getIdioma().equals("20"))
+        	table.addCell(new Paragraph("Tektiteko"));
+		else if(f.getIdioma().equals("21"))
+        	table.addCell(new Paragraph("tz'utujil"));
+		else if(f.getIdioma().equals("22"))
+        	table.addCell(new Paragraph("Uspanteko"));
+		else if(f.getIdioma().equals("23"))
+        	table.addCell(new Paragraph("Garelse ifuna"));
+		else if(f.getIdioma().equals("24"))
+        	table.addCell(new Paragraph("Español"));
+		else if(f.getIdioma().equals("25"))
+        	table.addCell(new Paragraph("Ingles"));
+		else if(f.getIdioma().equals("26"))
+        	table.addCell(new Paragraph("Frances"));
+		else if(f.getIdioma().equals("27"))
+        	table.addCell(new Paragraph("Aleman"));
+		else if(f.getIdioma().equals("28"))
+        	table.addCell(new Paragraph("Italiano"));
+		else if(f.getIdioma().equals("29"))
+        	table.addCell(new Paragraph("Coreano"));
+		else if(f.getIdioma().equals("30"))
+        	table.addCell(new Paragraph("Japones"));
+		else if(f.getIdioma().equals("31"))
+        	table.addCell(new Paragraph("Mandarin"));
+		else if(f.getIdioma().equals("32"))
+        	table.addCell(new Paragraph("Cantones"));
+		else if(f.getIdioma().equals("33"))
+        	table.addCell(new Paragraph("Tailandes"));
+		else if(f.getIdioma().equals("34"))
+        	table.addCell(new Paragraph("Portugues"));
+		else if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Arabe"));
+		else if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Hebreo"));
+		else if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Griego"));
+		else if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Neerlandes"));
+		else if(f.getIdioma().equals("1"))
+        	table.addCell(new Paragraph("Otros"));
+
+        if(f.getNivel().equals("0"))
+        	table.addCell(new Paragraph("Avanzado"));
+        else if(f.getNivel().equals("1"))
+        	table.addCell(new Paragraph("Intermedio"));
+        else if(f.getNivel().equals("2"))
+        	table.addCell(new Paragraph("Principiante"));
         table.setHeaderRows(1);
         return table;
     }
     
-    public PdfPTable CrearDesempeno(AuxTest f) {
+    public PdfPTable CrearTest(AuxTest f) {
 		String AnnioTest =  ""+fecha.format(fecha.format(new Date(f.getFecha_test())));
-
 		int valor = f.getPregunta1() + f.getPregunt2() + f.getPregunta3()
 				+f.getPregunta4()+f.getPregunta5() +f.getPregunta6()
 				+f.getPregunta7()+f.getPregunta8()+f.getPregunta9()
 				+f.getPregunta10();
+		
     	PdfPTable table = new PdfPTable(3);
-    	
-
         table.addCell(new Paragraph("Evaluador",redFont));
         table.addCell(new Paragraph("Fecha",redFont));
         table.addCell(new Paragraph("Punteo",redFont));
+        table.addCell(new Paragraph("Tipo Test",redFont));
         table.addCell(new Paragraph(f.getEvaluador(),catFont));
         table.addCell(new Paragraph(AnnioTest,catFont));
         table.addCell(new Paragraph(""+valor,catFont));
-        
-        
+        if(f.getTipo_test().equals("1")){
+            table.addCell(new Paragraph("Desempeño"));
+        }else{
+            table.addCell(new Paragraph("Evaluacion"));
+        }
         table.setHeaderRows(1);
         return table;
     }
     
-    public PdfPTable CrearEvaluacion(AuxTest f) {
-		String AnnioTest =  ""+fecha.format(new Date(f.getFecha_test()));
-
-		int valor = f.getPregunta1() + f.getPregunt2() + f.getPregunta3()
-				+f.getPregunta4()+f.getPregunta5() +f.getPregunta6()
-				+f.getPregunta7()+f.getPregunta8()+f.getPregunta9()
-				+f.getPregunta10();
-    	PdfPTable table = new PdfPTable(3);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Evaluador",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-
-        c1 = new PdfPCell(new Phrase("Fecha",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("Punteo",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        table.setHeaderRows(1);
-
-        table.addCell(f.getEvaluador());
-        table.addCell(AnnioTest);
-        table.addCell(""+valor);
-        return table;
-    }
     public PdfPTable CrearPuesto(AuxPuesto f) {
 		String AnnioPuesto = ""+fecha.format(new Date(f.getFecha_puesto()));
     	PdfPTable table = new PdfPTable(3);
-    	
-    	PdfPCell c1 = new PdfPCell(new Phrase("Puesto",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
 
-        c1 = new PdfPCell(new Phrase("Salario",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
-        c1 = new PdfPCell(new Phrase("fecha",redFont));
-        c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-        table.addCell(c1);
-        
+        table.addCell(new Paragraph("Puesto",redFont));
+        table.addCell(new Paragraph("Fecha del Puesto",redFont));
+        table.addCell(new Paragraph("Horas por trabajo",redFont));
+        table.addCell(new Paragraph(f.getNombre_puesto(),catFont));
+        table.addCell(new Paragraph(AnnioPuesto,catFont));
+        table.addCell(new Paragraph(f.getHorasTrabajo(),catFont));
+
+        table.addCell(new Paragraph("Funciones",redFont));
+        table.addCell(new Paragraph("Jornada",redFont));
+        table.addCell(new Paragraph("Puesto Activo",redFont));
+        table.addCell(new Paragraph(f.getFunciones(),catFont));
+        table.addCell(new Paragraph(f.getJornada(),catFont));
+        if(f.isActivo())
+        	table.addCell(new Paragraph("Si",catFont));
+        else
+        	table.addCell(new Paragraph("No",catFont));
+    	
         table.setHeaderRows(1);
 
-        table.addCell(f.getNombre_puesto());
-        table.addCell(""+0);
-        table.addCell(AnnioPuesto);
         return table;
     }
     public PdfPTable CrearHistorial(AuxHistorial f) {
+    	
  		String Annio = ""+fecha.format(new Date(f.getFecha()));
      	PdfPTable table = new PdfPTable(2);
      	
-     	PdfPCell c1 = new PdfPCell(new Phrase("Tipo Historial",redFont));
-         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-         table.addCell(c1);
-         
-         c1 = new PdfPCell(new Phrase("fecha",redFont));
-         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-         table.addCell(c1);
-         
-         table.setHeaderRows(1);
-
-         table.addCell(f.getTipo_historial());
-         table.addCell(Annio);
-         return table;
-     }
+        table.addCell(new Paragraph("Descripcion",redFont));
+        table.addCell(new Paragraph("Tipo Historial",redFont));
+        table.addCell(new Paragraph(f.getDescripcion(),catFont));
+        table.addCell(new Paragraph(f.getTipo_historial(),catFont));
+        
+        table.addCell(new Paragraph("Fecha Creacion",redFont));
+        table.addCell(new Paragraph(Annio,catFont));
+        return table;
+    }
+    
     public PdfPTable CrearVacaciones(AuxVacaciones f) {
  		String Annio1 = ""+fecha.format(new Date(f.getFecha1()));
  		String Annio2 = ""+fecha.format(new Date(f.getFecha2()));
      	PdfPTable table = new PdfPTable(2);
-     	
-     	PdfPCell c1 = new PdfPCell(new Phrase("Desde la fecha",redFont));
-         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-         table.addCell(c1);
-         
-         c1 = new PdfPCell(new Phrase("Hasta la fecha",redFont));
-         c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-         table.addCell(c1);
-         
-         table.setHeaderRows(1);
 
-         table.addCell(Annio1);
-         table.addCell(Annio2);
+        table.addCell(new Paragraph("Descripcion",redFont));
+        table.addCell(new Paragraph("Tipo Permiso",redFont));
+        table.addCell(new Paragraph(f.getDescripcion(),catFont));
+        table.addCell(new Paragraph(f.getTipoPermisos(),catFont));
+        
+        table.addCell(new Paragraph("Fecha de Permiso",redFont));
+        table.addCell(new Paragraph(Annio1+" al "+Annio2,catFont));
+       
          return table;
      }
+    
+    public PdfPTable CrearSalario(AuxSalario f) {
+ 		String Annio = ""+fecha.format(new Date(f.getFecha()));
+     	PdfPTable table = new PdfPTable(2);
+
+        table.addCell(new Paragraph("Descripcion",redFont));
+        table.addCell(new Paragraph("Tipo Salario",redFont));
+        table.addCell(new Paragraph(f.getDescripcion(),catFont));
+        table.addCell(new Paragraph(f.getTipoSalario(),catFont));
+        
+        table.addCell(new Paragraph("Fecha",redFont));
+        table.addCell(new Paragraph("Monto",redFont));
+        table.addCell(new Paragraph(Annio,catFont));
+        table.addCell(new Paragraph(""+f.getSalario(),catFont));
+       
+         return table;
+     }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

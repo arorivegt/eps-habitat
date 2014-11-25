@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -28,14 +29,11 @@ import com.itextpdf.text.BaseColor;
 // Document Object
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 //For adding content into PDF document
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import java.util.Date;
 
 
 
@@ -496,8 +494,26 @@ public class CrearReporteEmpleado extends HttpServlet {
 
         table.addCell(new Paragraph("Descripcion",redFont));
         table.addCell(new Paragraph("Tipo Permiso",redFont));
+		
         table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        table.addCell(new Paragraph(f.getTipoPermisos(),catFont));
+        if(f.getTipoPermisos().equals("0")){
+            table.addCell(new Paragraph("Vacaciones con goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("1")){
+            table.addCell(new Paragraph("Vacaciones sin goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("2")){
+            table.addCell(new Paragraph("Permiso con goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("3")){
+            table.addCell(new Paragraph("Permiso sin goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("4")){
+            table.addCell(new Paragraph("Suspension con goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("5")){
+            table.addCell(new Paragraph("Suspension sin goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("6")){
+            table.addCell(new Paragraph("Ausencia con goce salaria",catFont));
+        }else if(f.getTipoPermisos().equals("7")){
+            table.addCell(new Paragraph("Ausencia sin goce salaria",catFont));
+        	
+        }
         
         table.addCell(new Paragraph("Fecha de Permiso",redFont));
         table.addCell(new Paragraph(Annio1+" al "+Annio2,catFont));

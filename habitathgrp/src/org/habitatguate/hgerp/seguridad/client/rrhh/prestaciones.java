@@ -64,7 +64,8 @@ public class prestaciones extends Composite  {
         btnTodo.setStyleName("sendButton");
         btnTodo.setSize("295px", "34px");
         btnTodo.addClickHandler(new ClickHandler() {
-        	public void onClick(ClickEvent event) 
+        	@SuppressWarnings("deprecation")
+			public void onClick(ClickEvent event) 
         	{
         		boolean valor = false;
                 load.visible();

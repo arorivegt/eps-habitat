@@ -46,16 +46,45 @@ public class Plantilla_Solucion extends Composite{
     public double costoAcumulado = 0;
     public Long idPlantillaSolucionAlmacenado = 0L;
     public Long correlativo = (long) 1; 
-    public boolean banderaTimer = false;
     public boolean banderaWhile = false;
-    
+    public int index = 0;
 
     
-    Timer timer = new Timer() {
+   
+ 
+    
+    public Plantilla_Solucion() {
+    	/* final Timer timer = new Timer() {
+    	        public void run() {
+    	        	Iterator<AuxDetallePlantillaSolucion> i = e.grid.getListMateriales().iterator();
+    				while (i.hasNext()){
+    						AuxDetallePlantillaSolucion aux = i.next();
+    						loginService.Insertar_UnicoDetallePlantillaSolucion(idPlantillaSolucionAlmacenado,aux,
+    	        			new AsyncCallback<Long>() {
+
+    							@Override
+    							public void onFailure(Throwable caught) {
+    								System.err.println(caught);
+    								
+    							}
+
+    							@Override
+    							public void onSuccess(Long result) {
+
+    								
+    							}
+    	        		
+    						});
+
+    				}
+    				
+
+    	        }
+    	      };*/
+    	final Timer timer = new Timer() {
         public void run() {
-        	Iterator<AuxDetallePlantillaSolucion> i = e.grid.getListMateriales().iterator();
-			while (i.hasNext() && banderaTimer == false){
-					AuxDetallePlantillaSolucion aux = i.next();
+        			if (index < e.grid.getListMateriales().size()){
+					AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
 					loginService.Insertar_UnicoDetallePlantillaSolucion(idPlantillaSolucionAlmacenado,aux,
         			new AsyncCallback<Long>() {
 
@@ -67,24 +96,23 @@ public class Plantilla_Solucion extends Composite{
 
 						@Override
 						public void onSuccess(Long result) {
-
-							
+							index++;
 						}
         		
 					});
-
-			}
+        			}else
+        			{
+        				Window.alert("Plantilla Almacenada Correctamente");
+        				e.grid.ActualizarList();
+        			    costoAcumulado = 0;
+        			    idPlantillaSolucionAlmacenado = 0L;
+        			    correlativo = (long) 1; 
+        				this.cancel();
+        			}
 			
-			Window.alert("Plantilla Almacenada Correctamente");
-			e.grid.ActualizarList();
-		    costoAcumulado = 0;
-		    idPlantillaSolucionAlmacenado = 0L;
-		    correlativo = (long) 1; 
+			
         }
       };
- 
-    
-    public Plantilla_Solucion() {
     	final Grid grid = new Grid(2, 2);
 		final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 		initWidget(grid);
@@ -252,7 +280,8 @@ public class Plantilla_Solucion extends Composite{
 	                	textBox.setText("");
 	                	textBox_1.setText("");
 	        			idPlantillaSolucionAlmacenado = result;
-	    				timer.schedule(3500);	
+	        			index = 0;
+	    				timer.scheduleRepeating(5000);
 	                	
 	                }
 

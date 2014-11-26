@@ -54,13 +54,8 @@ public class Formulario_AsignarSolucion extends Composite{
     Timer timer = new Timer() {
         public void run() {
         	Iterator<AuxDetallePlantillaSolucion> i = e.grid.getListMateriales().iterator();
-			//timer2.schedule(1000);
 			while (i.hasNext() && banderaTimer == false){
-			//	System.out.println("corriendo");
-			//	if (banderaWhile ==false){
-			//		banderaWhile = true;
 					AuxDetallePlantillaSolucion aux = i.next();
-			//		timer2.schedule(1000);
 					loginService.Insertar_UnicoDetalleSolucion(idSolucionAlmacenado,aux,
         			new AsyncCallback<Long>() {
 
@@ -77,17 +72,6 @@ public class Formulario_AsignarSolucion extends Composite{
 						}
         		
 					});
-			//		if(!i.hasNext()){
-		//				banderaTimer= true;
-		//			}
-		//			}
-					Long c = 0L;
-					for (int x = 0; x < 10000; x++){
-						for (int y = 0 ; y <10000; y++){
-							//for (int z = 0; z < 2;z++)
-								c = c + 1;
-						}
-					}
 			}
 			
 			Window.alert("Solucion asignada Correctamente");
@@ -451,7 +435,7 @@ public class Formulario_AsignarSolucion extends Composite{
 						public void onSuccess(Long result) {
 							idSolucionAlmacenado = result;
 							//Window.alert(String.valueOf(result));
-							timer.schedule(1500);
+							timer.schedule(3500);
 						}
 						
 						@Override

@@ -290,6 +290,8 @@ public class MenuPrincipal extends Composite {
 								MenuVertical.setAnimationEnabled(true);
 
 							}else if(results == 2L){//si el rol es 2, entonces es RRHH
+								MenuVertical.addItem("Finanzas", MenuFinanzas);
+								MenuVertical.addSeparator();
 								MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Empleado",MenuEmpleados); 

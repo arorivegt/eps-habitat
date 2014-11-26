@@ -59,8 +59,8 @@ public class formularioDatos extends Composite {
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private final SqlServiceAsync service = GWT.create(SqlService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync finanzasService = GWT.create(SqlService.class);
     
     private Label label_16 ;
     private Label label_17;
@@ -997,7 +997,7 @@ public class formularioDatos extends Composite {
 		txtTipoPlanilla.setSize("227px", "34px");
 		txtTipoPlanilla.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtTipoPlanilla, 586, 1286);
-		
+		//boorar este dato
 		txtSalarioBase = new TextBox();
 		txtSalarioBase.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -1019,7 +1019,7 @@ public class formularioDatos extends Composite {
 		txtSalarioBase.setSize("227px", "34px");
 		txtSalarioBase.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtSalarioBase, 35, 1353);
-		
+		//borrar esta parte
 		txtBonificacion = new TextBox();
 		txtBonificacion.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -1041,7 +1041,7 @@ public class formularioDatos extends Composite {
 		txtBonificacion.setSize("227px", "34px");
 		txtBonificacion.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtBonificacion, 311, 1353);
-		
+		//borrar esta parte
 		txtTotal = new TextBox();
 		txtTotal.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -1110,7 +1110,7 @@ public class formularioDatos extends Composite {
 					depto_municipio_dos = listDireccionDepartamento.getValue(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getValue(listDireccionMunicipio.getSelectedIndex());
 					depto_municipio_uno = listNacimientoDepartamento.getValue(listNacimientoDepartamento.getSelectedIndex()) + "," +listNacimientoMunicipio.getValue(listNacimientoMunicipio.getSelectedIndex());
 					if(bandera){
-						loginService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
+						recursosHumanosService.Insertar_Emppleado(txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(), listIVS.getValue(listIVS.getSelectedIndex()), 
 								listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
@@ -1157,7 +1157,7 @@ public class formularioDatos extends Composite {
 							id_afiliado = Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex()));							
 						}
 						if(!listAfiliado.getValue(listAfiliado.getSelectedIndex()).equals("0")){
-							service.Actualizar_AfiliadoEmpleado(Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),
+							finanzasService.Actualizar_AfiliadoEmpleado(Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),
 									id_empleado,new AsyncCallback<Long>(){
 							    public void onFailure(Throwable caught) 
 							    {
@@ -1171,7 +1171,7 @@ public class formularioDatos extends Composite {
 							    }
 							});
 						}
-						loginService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
+						recursosHumanosService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
 								listPais.getValue(listPais.getSelectedIndex()),txtNit.getText(),listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()),
@@ -1504,7 +1504,7 @@ public class formularioDatos extends Composite {
 		absolutePanel.add(lblAfiliado, 308, 1397);
 		lblAfiliado.setSize("192px", "19px");
 		
-		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		finanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
 		    }
@@ -2354,7 +2354,7 @@ public class formularioDatos extends Composite {
 		grid.setVisible(true);
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
+				recursosHumanosService.remove(getKeyFile() , new AsyncCallback<String>(){
 					@Override
 					public void onFailure(Throwable caught) {
 					}

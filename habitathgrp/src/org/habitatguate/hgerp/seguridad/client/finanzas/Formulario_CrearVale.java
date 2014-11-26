@@ -51,22 +51,14 @@ public class Formulario_CrearVale extends Composite {
     private Double costoAcumulado = 0.0;
     
     TablaGWT_Vale e = null;
-    private Long idAfiliadoSession = 0L; 
 
-	public Formulario_CrearVale(){
+	public Formulario_CrearVale(Long idAfiliadoSession){
 		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
 		final java.util.Date date= new java.util.Date();
 		final Grid grid = new Grid(2, 2);
 		initWidget(grid);
 		grid.setWidth("1278px");
 		 System.out.println(new Timestamp(date.getTime()));
-		getSession.obtenerIdAfiliado(new AsyncCallback<Long>() {
-			
-			@Override
-			public void onSuccess(Long result) {
-				idAfiliadoSession = result;
-				
-				System.out.println("buscar afiliado" + idAfiliadoSession);
 
 				loginService.ConsultaTodosBene_PorAfiliado(idAfiliadoSession, new AsyncCallback<List<AuxBeneficiario>>() {
 
@@ -91,14 +83,7 @@ public class Formulario_CrearVale extends Composite {
 
 				});
 				
-			}
 			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 
 				
 

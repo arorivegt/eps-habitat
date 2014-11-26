@@ -1,7 +1,15 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -14,9 +22,27 @@ public class Formulario_GestorVales extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private Formulario_CrearVale bp;
-	
+	private Long idAfiliadoSession = 0L;
+    private final RecursosHumanosServiceAsync getSession = GWT.create(RecursosHumanosService.class);
 	
 	public Formulario_GestorVales(){
+		getSession.obtenerIdAfiliado(new AsyncCallback<Long>() {
+			
+			@Override
+			public void onSuccess(Long result) {
+				idAfiliadoSession = result;
+				
+				System.out.println("buscar afiliado" + idAfiliadoSession);
+
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
@@ -56,7 +82,7 @@ public class Formulario_GestorVales extends Composite{
 	}
 
 	public void ItemUno(){
-		bp = new Formulario_CrearVale();
+		bp = new Formulario_CrearVale(idAfiliadoSession);
 		panel1.setWidget(bp);
 	}
 	

@@ -57,9 +57,13 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 @SuppressWarnings("serial")
 public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements RecursosHumanosService {
-	///metodos para insertar en las diferentes entidades
+	
+	
+	/**
+	 * 
+	 */
 	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento,
-			String Nombre2, String Apellido2) throws IllegalArgumentException {
+						   String Nombre2, String Apellido2) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && pass!=null){
@@ -134,12 +138,12 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		try{ 
-			final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user);
+			final SegUsuario e	 			= gestorPersistencia.getObjectById(SegUsuario.class, user);
 			if(e.getPassword().equals(md5(password))){
-				final SegEmpleado em = gestorPersistencia.getObjectById(SegEmpleado.class, e.getId_empleado());
+				final SegEmpleado em 		= gestorPersistencia.getObjectById(SegEmpleado.class, e.getId_empleado());
 				//si es correcto crea una nueva session para poder manejarlo en toda la aplicacion
-				HttpServletRequest request = this.getThreadLocalRequest();
-				HttpSession session = request.getSession(true);
+				HttpServletRequest request 	= this.getThreadLocalRequest();
+				HttpSession session 		= request.getSession(true);
 				session.setAttribute("usserHabitat", user);
 				session.setAttribute("idEmpleadoHabitat", e.getId_empleado());
 				session.setAttribute("idAfiliadoHabitat", em.getAfiliado() );
@@ -258,8 +262,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		Long valor = 0L;
 		 try { 
 			 
-			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-			 SegFamilia f = new  SegFamilia();
+			 final SegEmpleado e 		= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegFamilia f 				= new  SegFamilia();
 			 	f.setPrimer_nombre(primer_nombre.toUpperCase());
 			 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
 			 	f.setPrimer_apellido(primer_apellido.toUpperCase());
@@ -286,8 +290,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		 Long valor = 0L;
 		 try { 
-			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-			 SegHistorialAcademico a = new SegHistorialAcademico();
+			 final SegEmpleado e 		= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegHistorialAcademico a 	= new SegHistorialAcademico();
 			 	a.setEstablecimiento(establecimiento.toUpperCase());
 			 	a.setFecha1(fecha1);
 			 	a.setFecha2(fecha2);
@@ -315,8 +319,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		 Long valor = 0L;
 		 try { 
-			 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-			 SegReferenciaLaboral rl = new  SegReferenciaLaboral();
+			 final SegEmpleado e 		= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+			 SegReferenciaLaboral rl 	= new  SegReferenciaLaboral();
 			 	rl.setNombre_referencia(nombre_referencia.toUpperCase());
 			 	rl.setTelefono(telefono);
 			 	rl.setPuesto_candidato(puesto_candidato.toUpperCase());
@@ -345,8 +349,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegReferenciaPersonal rp = new  SegReferenciaPersonal();
+				 final SegEmpleado e 		= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegReferenciaPersonal rp 	= new  SegReferenciaPersonal();
 				 	rp.setNombre_referencia(nombre_referencia.toUpperCase());
 				 	rp.setTelefono(telefono);
 				 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
@@ -368,8 +372,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegIdioma i = new  SegIdioma();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegIdioma i 			= new  SegIdioma();
 				 	i.setNivel(nivel);
 				 	i.setIdioma(idioma.toUpperCase());
 		      	 	i.setEmpleados(e);
@@ -392,8 +396,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegTest t = new  SegTest();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegTest t 				= new  SegTest();
 				 	t.setPregunta1(pregunta1);
 				 	t.setPregunt2(pregunt2);
 				 	t.setPregunta3(pregunta3);
@@ -428,8 +432,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegPuesto p = new  SegPuesto();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegPuesto p 			= new  SegPuesto();
 				 	p.setFecha_puesto(fecha_puesto);
 				 	p.setNombre_puesto(nombre_puesto.toUpperCase());
 				 	p.setFunciones(funciones.toUpperCase());
@@ -470,8 +474,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegEntrevista l = new  SegEntrevista();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegEntrevista l 		= new  SegEntrevista();
 				 	l.setAmortizacion(amortizacion);
 				 	l.setFecha_entrevista(fecha_entrevista);
 				 	l.setQue_conoces(que_conoces);
@@ -514,8 +518,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegHistorial h = new  SegHistorial();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegHistorial h 		= new  SegHistorial();
 				 	h.setFecha(fecha);
 				 	h.setDescripcion(descripcion.toUpperCase());
 				 	h.setTipo_historial(tipo_historial);
@@ -535,8 +539,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		
 		Long valor = 0L;
 			 try { 
-				 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegVacaciones v = new  SegVacaciones();
+				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+				 SegVacaciones v 		= new  SegVacaciones();
 				 	v.setFecha1(fecha1);
 				 	v.setFecha2(fecha2);
 				 	v.setDescripcion(descripcionl.toUpperCase());
@@ -574,7 +578,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 					 try {  
-							 final SegEmpleado e = Persistencia.getObjectById(SegEmpleado.class, id); 
+							 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id); 
 							 e.setAfiliado(afiliado);
 							 e.setAfiliacion_igss(afiliacion_igss);
 					         e.setEstado_civil(estado_civil);
@@ -641,11 +645,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 				Long valor = 0L;
 					 try { 
-						 Key k = new KeyFactory
-							        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
-							        .addChild(SegFamilia.class.getSimpleName(), id)
-							        .getKey();
-						 SegFamilia f = Persistencia.getObjectById(SegFamilia.class, k);
+						 Key k 			= new KeyFactory
+									        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
+									        .addChild(SegFamilia.class.getSimpleName(), id)
+									        .getKey();
+						 SegFamilia f 	= Persistencia.getObjectById(SegFamilia.class, k);
 						 	f.setPrimer_nombre(primer_nombre.toUpperCase());
 						 	f.setSegundo_nombre(segundo_nombre.toUpperCase());
 						 	f.setPrimer_apellido(primer_apellido.toUpperCase());

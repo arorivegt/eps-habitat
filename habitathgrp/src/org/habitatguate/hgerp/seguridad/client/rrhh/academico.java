@@ -32,12 +32,12 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 public class academico extends Composite  {
 
 
-	private Mensaje mensaje; 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private Button btnAgregar;
      private VerticalPanel panel = new VerticalPanel();
-	    private Loading load ;
+	 private Loading load ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      
     /**
@@ -97,7 +97,7 @@ public class academico extends Composite  {
 				formularioAcademico fa = new formularioAcademico(this,empleado);
 				fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), 
 						       n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico()
-			    			, n2.getURLFile(), n2.getKeyFile());
+						       ,n2.getURLFile(), n2.getKeyFile());
 			    flextable.setWidget(flextable.getRowCount(), 0,fa );
 			 }
 	    }	  

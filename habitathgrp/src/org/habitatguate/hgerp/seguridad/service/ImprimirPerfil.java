@@ -36,10 +36,11 @@ import com.itextpdf.text.pdf.PdfPTable;
  */
 public class ImprimirPerfil extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-    private AuxEmpleado auxEmpleado = new AuxEmpleado();
-    private Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.NORMAL,BaseColor.BLACK);
-    private Font catFont2 = new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD,BaseColor.BLACK);
+	private static final long serialVersionUID 	= 1L;
+    private AuxEmpleado auxEmpleado 			= new AuxEmpleado();
+    private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.NORMAL,BaseColor.BLACK);
+    private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 18,Font.BOLD,BaseColor.BLACK);
+    
     private RecursosHumanosServiceImpl recursosHumanosService = new  RecursosHumanosServiceImpl();
     
 	/**
@@ -54,41 +55,44 @@ public class ImprimirPerfil extends HttpServlet {
         response.setContentType("application/pdf");
 
 		HttpSession session = request.getSession(false);
-       // System.out.println(session.getAttribute("usserHabitat"));
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-        	long abracadabra = Long.parseLong(request.getParameter("abracadabra"));
-	        auxEmpleado = recursosHumanosService.Empleado_Registrado(abracadabra);
+        	long abracadabra 			= Long.parseLong(request.getParameter("abracadabra"));
+	        auxEmpleado 				= recursosHumanosService.Empleado_Registrado(abracadabra);
 	        
-	        OutputStream out = response.getOutputStream();
+	        OutputStream out 			= response.getOutputStream();
 	       
-				//Get the output stream for writing PDF object  zzz
 		        try {
-		            Document document = new Document();
+		            Document document 	= new Document();
 		            PdfWriter.getInstance(document, out);
-		            Image image1 = null ;
+		            Image image1 		= null ;
 		            
 		            try{
-		            	image1 = Image.getInstance(new URL(auxEmpleado.getURLFile()));
+		            	image1 			= Image.getInstance(new URL(auxEmpleado.getURLFile()));
 		            }catch(Exception e){
-		            	image1 = Image.getInstance("images/imagenempresa.png");
+		            	image1 			= Image.getInstance("images/imagenempresa.png");
 		            }
 		            
 		            document.open();
+		            
 		            image1.setAlignment(Element.ALIGN_CENTER);
 		            image1.scaleAbsolute(50.0f, 50.0f);
 		            document.add(image1);
+		            
 		            document.add(new Paragraph("",catFont));
 		            document.add(new Paragraph("",catFont));
 		            document.add(new Paragraph("",catFont));
-		            PdfPTable table = new PdfPTable(2);
-		        	PdfPCell c1 = new PdfPCell(new Phrase("Primer Nombre",catFont2));
+		            
+		            PdfPTable table 	= new PdfPTable(2);
+		        	PdfPCell c1 		= new PdfPCell(new Phrase("Primer Nombre",catFont2));
 		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		            table.addCell(c1);
+		            
 		            c1 = new PdfPCell(new Phrase("Segundo Nombre",catFont2));
 		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		            table.addCell(c1);
+		            
 		            table.setHeaderRows(1);
 	
 			 		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -101,7 +105,11 @@ public class ImprimirPerfil extends HttpServlet {
 		            table.addCell(new Paragraph(auxEmpleado.getSegundo_apellido(),catFont));
 		            table.addCell(new Paragraph("Sexo",catFont2));
 		            table.addCell(new Paragraph("Estado Civil",catFont2));
-		            table.addCell(new Paragraph(auxEmpleado.getSexo(),catFont));
+		            if(auxEmpleado.getSexo().equals("0")){
+			            table.addCell(new Paragraph("femenino",catFont));
+		            }else if(auxEmpleado.getSexo().equals("1")){
+			            table.addCell(new Paragraph("masculino",catFont));
+		            }
 		            if(auxEmpleado.getEstado_civil().equals("0")){
 			            table.addCell(new Paragraph("Soltero(a)",catFont));
 		            }else if(auxEmpleado.getEstado_civil().equals("1")){
@@ -132,7 +140,6 @@ public class ImprimirPerfil extends HttpServlet {
 		            table.addCell(new Paragraph(fecha.format(new Date(auxEmpleado.getFecha_nacimiento())),catFont));
 		            table.addCell(new Paragraph(fecha.format(new Date(auxEmpleado.getFecha_ingreso())),catFont));
 		            document.add(table);
-		            /* Basic PDF Creation inside servlet */
 		          
 		            document.close();
 		        }catch (DocumentException exc){
@@ -145,7 +152,7 @@ public class ImprimirPerfil extends HttpServlet {
         }
     }
 
-    public String getPais(String codigoPais){
+    private String getPais(String codigoPais){
     	String pais = "GUATEMALA";
     	if(codigoPais.equals("1")){pais =  "ABUDABI"; }
     	else if(codigoPais.equals("2")){pais = "AFGANISTÁN"; }

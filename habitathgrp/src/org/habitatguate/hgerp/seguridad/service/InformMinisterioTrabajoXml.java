@@ -16,58 +16,59 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 
 public class InformMinisterioTrabajoXml {
 
-    private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
-	    private String xmlInicio = "<table><tbody>"
-					+"<tr>"
-					+"<td>No. de empleado</td>"	
-					+"<td>Tipo Documento Identificación</td>"
-					+"<td>Documento Identificación</td>"	
-					+"<td>Pais Origen</td>"	
-					+"<td>Lugar Nacimiento</td>"	
-					+"<td>Nit Empleado</td>"	
-					+"<td>IGSS Empleado</td>"
-					+"<td>Deportado de algún País</td>"	
-					+"<td>Nombre1</td>"	
-					+"<td>Nombre2</td>"	
-					+"<td>Nombre3</td>"	
-					+"<td>Apellido1</td>"	
-					+"<td>Apellido2</td>"	
-					+"<td>Estado Civil</td>"	
-					+"<td>Número Hijos</td>"	
-					+"<td>Fecha Nacimiento</td>"	
-					+"<td>Edad aprox.</td>"	 
-					+"<td>Sexo (M) O (F)</td>"	
-					+"<td>Tiempo de laborar</td>"	
-					+"<td>Puesto</td>"	 
-					+"<td>Dias Trabajados Año</td>"	
-					+"<td>Descanso Semanal</td>"	
-					+"<td>Jornada</td>"	
-					+"<td>Horas al Día</td>"	
-					+"<td>Salario Mensual Nominal</td>"	
-					+"<td>Decreto 78-89  (Q.250.00)</td>"	
-					+"<td>Total Horas Extras</td>"	
-					+"<td>Valor de Hora Extra </td>"	
-					+"<td>Aguinaldo Decreto 76-78</td>"	
-					+"<td>Bono 14 decreto 42-92</td>"	
-					+"<td>Comisiones</td>"	
-					+"<td>Nivel Academico</td>"	
-					+"<td>Profesión</td>"
-					+"<td>Etnia</td>"	 
-					+"<td>Idiomas</td>"	
-					+"<td>Permiso Trabajo</td>"	
-					+"<td>Tipo Contrato</td>"	
-					+"<td>Indemnización (Articulo 82)</td>"
-					+"<td>Otros Pagos</td>"
-					+"</tr>";
+    private RecursosHumanosServiceImpl recursosHumanosService 	= new  RecursosHumanosServiceImpl();
+	    private String xmlInicio 							 	= "<table><tbody>"
+																+"<tr>"
+																+"<td>No. de empleado</td>"	
+																+"<td>Tipo Documento Identificación</td>"
+																+"<td>Documento Identificación</td>"	
+																+"<td>Pais Origen</td>"	
+																+"<td>Lugar Nacimiento</td>"	
+																+"<td>Nit Empleado</td>"	
+																+"<td>IGSS Empleado</td>"
+																+"<td>Deportado de algún País</td>"	
+																+"<td>Nombre1</td>"	
+																+"<td>Nombre2</td>"	
+																+"<td>Nombre3</td>"	
+																+"<td>Apellido1</td>"	
+																+"<td>Apellido2</td>"	
+																+"<td>Estado Civil</td>"	
+																+"<td>Número Hijos</td>"	
+																+"<td>Fecha Nacimiento</td>"	
+																+"<td>Edad aprox.</td>"	 
+																+"<td>Sexo (M) O (F)</td>"	
+																+"<td>Tiempo de laborar</td>"	
+																+"<td>Puesto</td>"	 
+																+"<td>Dias Trabajados Año</td>"	
+																+"<td>Descanso Semanal</td>"	
+																+"<td>Jornada</td>"	
+																+"<td>Horas al Día</td>"	
+																+"<td>Salario Mensual Nominal</td>"	
+																+"<td>Decreto 78-89  (Q.250.00)</td>"	
+																+"<td>Total Horas Extras</td>"	
+																+"<td>Valor de Hora Extra </td>"	
+																+"<td>Aguinaldo Decreto 76-78</td>"	
+																+"<td>Bono 14 decreto 42-92</td>"	
+																+"<td>Comisiones</td>"	
+																+"<td>Nivel Academico</td>"	
+																+"<td>Profesión</td>"
+																+"<td>Etnia</td>"	 
+																+"<td>Idiomas</td>"	
+																+"<td>Permiso Trabajo</td>"	
+																+"<td>Tipo Contrato</td>"	
+																+"<td>Indemnización (Articulo 82)</td>"
+																+"<td>Otros Pagos</td>"
+																+"</tr>";
 
-		String  xmlFinal = "</tbody></table>";
+		String  xmlFinal 										= "</tbody></table>";
 	
 	public String busqueda( char tipo,  String Estado,  String listAnnio){
-		DecimalFormat df = new DecimalFormat();
+		
+		DecimalFormat df 			= new DecimalFormat();
 		df.setMaximumFractionDigits(2);
 
-	    List<AuxEmpleado> result = new ArrayList<AuxEmpleado>();
-	    result = loginService.Buscar_Empleado(tipo,"", "", "", "","","",Estado);
+	    List<AuxEmpleado> result 	= new ArrayList<AuxEmpleado>();
+	    result 						= recursosHumanosService.Buscar_Empleado(tipo,"", "", "", "","","",Estado);
 				int i = 0;
 				
 				for (AuxEmpleado p : result) {
@@ -89,9 +90,9 @@ public class InformMinisterioTrabajoXml {
 					}
 					xmlInicio += "<td>"+p.getPais()+"</td>";
 		
-					 String[] numerosComoArray2  = p.getDepto_municipio_nacimiento().split(",");
-					 String deptodir = "";
-					 String munidir = "";
+					 String[] numerosComoArray2 = p.getDepto_municipio_nacimiento().split(",");
+					 String deptodir 			= "";
+					 String munidir 			= "";
 					 for (int i1 = 0; i1 < numerosComoArray2.length; i1++) {
 						 if(i1 == 0)
 							 deptodir = numerosComoArray2[i1];

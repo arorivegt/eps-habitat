@@ -22,31 +22,31 @@ public class ExportAs extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		HttpSession session = request.getSession(false);
-        System.out.println(session.getAttribute("usserHabitat"));
+		HttpSession session 			 = request.getSession(false);
+		
         if(session.getAttribute("usserHabitat") != null)
         {  
 			InformMinisterioTrabajoXml n = new InformMinisterioTrabajoXml();
+			
 			response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "inline; Filename=document_name.xls");
 			
-			String tipo = request.getParameter("tipo");
-			String estado = request.getParameter("estado");
-			String annio = request.getParameter("annio");
-			System.out.println(tipo+" "+estado+" "+annio);
-			String  xmlFinal = "";
-			String inicio= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
-					+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
-					+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
-					+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
+			String tipo 		= request.getParameter("tipo");
+			String estado 		= request.getParameter("estado");
+			String annio 		= request.getParameter("annio");
+			String  xmlFinal 	= "";
+			String inicio		= "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:x='urn:schemas-microsoft-com:office:excel' "
+								+ "xmlns='http://www.w3.org/TR/REC-html40'><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>"
+								+ "<x:Name>name</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
+								+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 	
 			try{
-				xmlFinal =inicio+ n.busqueda(tipo.charAt(0), estado, annio)+"</body></html>";
+				xmlFinal 		= inicio+ n.busqueda(tipo.charAt(0), estado, annio)+"</body></html>";
 			}catch(Exception e){
-				xmlFinal = "";
+				xmlFinal 		= inicio+"</body></html>";
 			}
 			
-			PrintWriter out = response.getWriter();
+			PrintWriter out 	= response.getWriter();
 			out.write(xmlFinal);
         }
 	}

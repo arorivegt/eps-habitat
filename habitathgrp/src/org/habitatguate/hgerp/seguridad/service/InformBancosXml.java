@@ -12,130 +12,130 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 
 public class InformBancosXml {
 
-    private RecursosHumanosServiceImpl loginService = new  RecursosHumanosServiceImpl();
-	    private String xmlInicio = "";
-
-		String  xmlFinal = "";
+    	private RecursosHumanosServiceImpl recusosHumanosService = new  RecursosHumanosServiceImpl();
+	    private String xmlInicio 								 = "";
+		private String  xmlFinal 								 = "";
 	
 	 	public String Bancos(char tipo,String  primer_nombre, String segundo_nombre, 
-	 			String primer_apellido, String segundo_apellido,String DPI,String  Pasaporte,String Estado, 
-	 			String listMes,String listAnio)
+				 			String primer_apellido, String segundo_apellido,String DPI,
+				 			String  pasaporte,String estado, 
+				 			String listMes,String listAnio)
 	 	{
-	 		String mesPlanilla ="";
-
-			DecimalFormat df = new DecimalFormat();
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
 			df.setMaximumFractionDigits(2);
-	 		List<AuxEmpleado> result = new ArrayList<AuxEmpleado>();
+			
+	 		List<AuxEmpleado> result 	= new ArrayList<AuxEmpleado>();
 	 		if(tipo =='1'){
 
-				String nombreArray[] = primer_nombre.split(":");
-				System.out.println(nombreArray);
-				String primerNombre = "";
-				String segundoNombre = "";
-				String segundoApellido = "";
-				String primerApellido =  "";
+				String nombreArray[]	= primer_nombre.split(":");
+				String primerNombre 	= "";
+				String segundoNombre 	= "";
+				String segundoApellido 	= "";
+				String primerApellido 	= "";
 
 				try{
 
 					if(nombreArray.length == 2){
-						primerNombre = nombreArray[0].trim();
-						segundoNombre = "".trim();
-						primerApellido =  nombreArray[1].trim();
+						primerNombre 	= nombreArray[0].trim();
+						segundoNombre 	= "".trim();
+						primerApellido 	= nombreArray[1].trim();
 						segundoApellido = "".trim();
 						
-						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
+						result 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																	   			primerApellido,  segundoApellido,DPI, 
+																	   			pasaporte,estado);
 					}else if(nombreArray.length == 3){
 						
-						primerNombre = nombreArray[0].trim();
-						segundoNombre =  nombreArray[1].trim();
-						primerApellido =  nombreArray[2].trim();
+						primerNombre 	= nombreArray[0].trim();
+						segundoNombre 	= nombreArray[1].trim();
+						primerApellido 	= nombreArray[2].trim();
 						segundoApellido = "".trim();
 						
-						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
-						
-						if(result.isEmpty()){
-							primerNombre = nombreArray[0].trim();
-							segundoNombre =  nombreArray[1].trim();
-							primerApellido =  "".trim();
+						result 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																				primerApellido,  segundoApellido,DPI, 
+																				pasaporte,estado);
+						if(result.isEmpty())
+						{
+							primerNombre 	= nombreArray[0].trim();
+							segundoNombre 	= nombreArray[1].trim();
+							primerApellido 	= "".trim();
 							segundoApellido = nombreArray[2].trim();
 							
-							result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-									primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
-							}
+							result 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																				primerApellido,  segundoApellido,DPI, 
+																				pasaporte,estado);
+						}
 						
 						
-					}else if(nombreArray.length == 4){
-						primerNombre = nombreArray[0].trim();
-						segundoNombre = nombreArray[1].trim();
-						primerApellido =  nombreArray[2].trim();
+					}else if(nombreArray.length == 4)
+					{
+						primerNombre 	= nombreArray[0].trim();
+						segundoNombre 	= nombreArray[1].trim();
+						primerApellido 	= nombreArray[2].trim();
 						segundoApellido = nombreArray[3].trim();
 						
-						System.out.println(primerNombre);
-						System.out.println(segundoNombre);
-						System.out.println(primerApellido);
-						System.out.println(segundoApellido);
 						
-						result = loginService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-								primerApellido,  segundoApellido,DPI, Pasaporte,Estado);
-						System.out.println(result.isEmpty());
+						result 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																				primerApellido,  segundoApellido,DPI, 
+																				pasaporte,estado);
 					}
 					
-				}catch(Exception e){
-					 primerNombre = "";
-					 primerApellido = "";
-					 segundoApellido = "";
-					 primerApellido =  "";
+				}catch(Exception e)
+				{
+					 primerNombre 		= "";
+					 primerApellido 	= "";
+					 segundoApellido 	= "";
+					 primerApellido 	= "";
 				}
 	 		}
 	 		else{
-	 			result = loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
-					primer_apellido, segundo_apellido,DPI, Pasaporte,Estado);
-	 			
+	 			result				 	= recusosHumanosService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
+	 																			primer_apellido, segundo_apellido,DPI, 
+	 																			pasaporte,estado);
 	 		}
         
-	 		String nombre = "";
-	 		xmlInicio += "<table><tbody><tr>"
- 					+ "<td>"+"Correlativo"+"</td>"
- 					+ "<td>"+"Tipo de Cuenta"+"</td>"
- 					+ "<td>"+"No Cuenta"+"</td>"
- 		 			+ "<td>"+"Nombre"+"</td>"
- 					+ "<td>"+"Monto"+"</td>"
- 					+ "<td>" +"Descripcion"+" </td>"
- 					+ "</tr>";
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>"
+						 					+ "<td>"+"Correlativo"+"</td>"
+						 					+ "<td>"+"Tipo de Cuenta"+"</td>"
+						 					+ "<td>"+"No Cuenta"+"</td>"
+						 		 			+ "<td>"+"Nombre"+"</td>"
+						 					+ "<td>"+"Monto"+"</td>"
+						 					+ "<td>"+"Descripcion"+"</td>"
+					 					+ "</tr>";
 
 	 		xmlFinal = "</tbody></table></body></html>";
-	 		int i = 0;
-	 		float salarioCalculo = 0;
-	 		float enero = 0, Bono = 0;
-	 		float febrero= 0 , marzo = 0;
-	 		float abril= 0, mayo = 0;
-	 		float junio= 0, julio = 0;
-	 		float agosto= 0, septiembre = 0;
-	 		float octubre= 0, noviembre = 0;
-	 		float diciembre= 0;
+	 		int i 					= 0;
+	 		float salarioCalculo 	= 0;
+	 		float enero 	= 0, Bono  		= 0;
+	 		float febrero	= 0, marzo 		= 0;
+	 		float abril		= 0, mayo 		= 0;
+	 		float junio		= 0, julio 		= 0;
+	 		float agosto	= 0, septiembre = 0;
+	 		float octubre	= 0, noviembre 	= 0;
+	 		float diciembre	= 0;
 	 		
-	 		boolean bEnero = true;
-	 		boolean bFebrero = true;
-	 		boolean bMarzo	= true;
-	 		boolean bAbril = true;
-	 		boolean bMayo = true;
-	 		boolean bJunio = true;
-	 		boolean bJulio = true;
-	 		boolean bAgosto = true;
+	 		boolean bEnero 		= true;
+	 		boolean bFebrero 	= true;
+	 		boolean bMarzo		= true;
+	 		boolean bAbril 		= true;
+	 		boolean bMayo 		= true;
+	 		boolean bJunio 		= true;
+	 		boolean bJulio 		= true;
+	 		boolean bAgosto 	= true;
 	 		boolean bSeptiembre = true;
-	 		boolean bOctubre = true;
-	 		boolean bNoviembre = true;
-	 		boolean bDiciembre = true;
+	 		boolean bOctubre 	= true;
+	 		boolean bNoviembre 	= true;
+	 		boolean bDiciembre 	= true;
 	 		
-	 		SimpleDateFormat anio = new SimpleDateFormat("yyyy");
-	 		SimpleDateFormat mes = new SimpleDateFormat("MM");
-	 		int ultimoAnnio = 0;
-	 		int ultimoMes = 0;
-	 		float ultimoSalario = 0;
-	 		String formatAnio 	= "";
-	 		String formatMes 	= "";
+	 		SimpleDateFormat anio 	= new SimpleDateFormat("yyyy");
+	 		SimpleDateFormat mes 	= new SimpleDateFormat("MM");
+	 		int ultimoAnnio 		= 0;
+	 		int ultimoMes 			= 0;
+	 		float ultimoSalario 	= 0;
+	 		String formatAnio 		= "";
+	 		String formatMes 		= "";
 	 		
 	 		for(AuxEmpleado e:result)
 	 		{
@@ -401,31 +401,32 @@ public class InformBancosXml {
 	 				tipoCuenta = "Monetaria";
 	 			}
 	 			xmlInicio+= "<tr>"
-	 					+ "<td>"+i+"</td>"
-	 					+ "<td>"+tipoCuenta.toUpperCase()+"</td>"
-	 					+ "<td>"+e.getNoCuenta()+"</td>"
-	 		 			+ "<td>"+nombre+"</td>"
-	 					+ "<td>"+df.format(salarioCalculo)+"</td>"
-	 					+ "<td> PLANILLA "+mesPlanilla.toUpperCase()+" "+listAnio+" </td>"
-	 					+ "</tr>";
+			 					+ "<td>"+i+"</td>"
+			 					+ "<td>"+tipoCuenta.toUpperCase()+"</td>"
+			 					+ "<td>"+e.getNoCuenta()+"</td>"
+			 		 			+ "<td>"+nombre+"</td>"
+			 					+ "<td>"+df.format(salarioCalculo)+"</td>"
+			 					+ "<td> PLANILLA "+mesPlanilla.toUpperCase()+" "+listAnio+"</td>"
+		 					+ "</tr>";
 	 			//aqui se crea cada fila con sus respectivas columnas para el excel
-	 			enero = 0;
-	 			febrero = 0;
-	 			marzo = 0;
-	 			abril = 0;
-	 			mayo = 0;
-	 			junio = 0;
-	 			julio = 0;
-	 			agosto = 0;
-	 			septiembre = 0;
-	 			octubre = 0;
-	 			noviembre = 0;
-	 			diciembre = 0;
-	 			
-	 			Bono = 0;
+	 			enero 		= 0;
+	 			febrero 	= 0;
+	 			marzo 		= 0;
+	 			abril 		= 0;
+	 			mayo 		= 0;
+	 			junio 		= 0;
+	 			julio 		= 0;
+	 			agosto 		= 0;
+	 			septiembre 	= 0;
+	 			octubre 	= 0;
+	 			noviembre 	= 0;
+	 			diciembre 	= 0;
+	 			Bono 		= 0;
 	 			i++;
 	 		}//fin for empleado
-	 		xmlInicio = xmlInicio + xmlFinal;
+	 		
+	 		xmlInicio 		= xmlInicio + xmlFinal;
+	 		
 	 		return xmlInicio;
 	 	}
 

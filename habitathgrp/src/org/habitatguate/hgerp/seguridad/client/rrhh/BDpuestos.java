@@ -37,20 +37,20 @@ import com.google.gwt.event.dom.client.ChangeEvent;
  */
 public class BDpuestos extends Composite  {
 
-	private Mensaje mensaje; 
+     private Grid grid_1;
      private BDpuestos a;
+     private Loading load;
+     private Button button;
+	 private Mensaje mensaje; 
+     private final Grid grid;
+     private TextBox idPuesto;
 	 private Button btnAgregar;
-     private final Grid grid ;
 	 private FlexTable flextable;
      private final Button btnTest;
-     private VerticalPanel panel = new VerticalPanel();
-     private Loading load ;
  	 private formularioBDPuestos fa ;
+     private VerticalPanel panel = new VerticalPanel();
  	 private List<AuxBDPuesto> bdpuesto = new ArrayList<AuxBDPuesto>();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-     private Grid grid_1;
-     private TextBox idPuesto;
-     private Button button;
      
      /**
       * contructor
@@ -60,6 +60,7 @@ public class BDpuestos extends Composite  {
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
 		scrollPanel.setSize("100%", "1000px");

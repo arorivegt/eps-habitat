@@ -33,22 +33,23 @@ import com.google.gwt.user.client.ui.TabPanel;
  */
 public class Empleados extends Composite {
 
+
+	private Idioma idioma;
+	private puestos puesto;
+	private salario salario;
+	private familiares familia;
+	private Desempeno desempeno;
+	private vacaciones permisos;
+	private academico academico;
+	private historiales historial;
+	private Evaluacion evaluacion;
+	private formularioDatos formularioDatos;
+	private referenciaLaboral referenciaLaboral ;
+	private referenciaPersonal referenciaPersonal;
+	private formularioEntrevista formularioEntrevista ;
+	
 	private TabPanel tabPanel;
 	public Long id_empleado = 0L;
-	
-	private academico a;
-	private familiares f;
-	private historiales h;
-	private Idioma i;
-	private puestos p;
-	private referenciaLaboral rl ;
-	private referenciaPersonal rp;
-	private vacaciones v;
-	private formularioDatos fd;
-	private formularioEntrevista fe ;
-	private Desempeno fpp;
-	private Evaluacion fppd;
-	private salario s;
 	
 	public Empleados(int tipo) {
 		
@@ -59,8 +60,8 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel = new ScrollPanel();
 		tabPanel.add(scrollPanel, "Datos",true);
 		scrollPanel.setSize("100%", "100%");
-		fd = new formularioDatos(this,tipo);
-		scrollPanel.setWidget(fd);
+		formularioDatos = new formularioDatos(this,tipo);
+		scrollPanel.setWidget(formularioDatos);
 	}	
 	
 	public void NuevasPestanas(){
@@ -69,120 +70,120 @@ public class Empleados extends Composite {
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
 		scrollPanel_1.setSize("100%", "1000px");
-		f = new familiares(this);
-		scrollPanel_1.setWidget(f);
+		familia = new familiares(this);
+		scrollPanel_1.setWidget(familia);
 
 		
 		ScrollPanel scrollPanel_2 = new ScrollPanel();
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
 		scrollPanel_2.setSize("100%", "1000px");
-		a = new academico(this);
-		scrollPanel_2.setWidget(a);
+		academico = new academico(this);
+		scrollPanel_2.setWidget(academico);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("100%", "1000px");
-		rl = new referenciaLaboral(this);///
-		scrollPanel_3.setWidget(rl);
-		rl.setHeight("236px");
+		referenciaLaboral = new referenciaLaboral(this);///
+		scrollPanel_3.setWidget(referenciaLaboral);
+		referenciaLaboral.setHeight("236px");
 		
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("100%", "1000px");
-		rp = new referenciaPersonal(this);///
-		scrollPanel_5.setWidget(rp);
+		referenciaPersonal = new referenciaPersonal(this);///
+		scrollPanel_5.setWidget(referenciaPersonal);
 		
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
 		scrollPanel_4.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
 		scrollPanel_4.setSize("100%", "1000px");
 		setStyleName("");
-		i = new Idioma(this);
-		scrollPanel_4.setWidget(i);
+		idioma = new Idioma(this);
+		scrollPanel_4.setWidget(idioma);
 		
 		ScrollPanel scrollPanel_6 = new ScrollPanel();
 		scrollPanel_6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_6, "Desempeño", true);
 		scrollPanel_6.setSize("100%", "1000px");
-		fpp = new  Desempeno(id_empleado);
-		scrollPanel_6.setWidget(fpp);
+		desempeno = new  Desempeno(id_empleado);
+		scrollPanel_6.setWidget(desempeno);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_7, "Evaluacion", true);
 		scrollPanel_7.setSize("100%", "1000px");
-		fppd = new Evaluacion(id_empleado);
-		scrollPanel_7.setWidget(fppd);
+		evaluacion = new Evaluacion(id_empleado);
+		scrollPanel_7.setWidget(evaluacion);
 		
 		ScrollPanel scrollPanel_8 = new ScrollPanel();
 		scrollPanel_8.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_8, "Puestos ", true);
 		scrollPanel_8.setSize("100%", "1000px");
-		p = new puestos(this);
-		scrollPanel_8.setWidget(p);
+		puesto = new puestos(this);
+		scrollPanel_8.setWidget(puesto);
 		
 
 		ScrollPanel scrollPanel_s = new ScrollPanel();
 		scrollPanel_s.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_s, "Salarios", true);
 		scrollPanel_s.setSize("100%", "1000px");
-		s = new salario(this);
-		scrollPanel_s.setWidget(s);
+		salario = new salario(this);
+		scrollPanel_s.setWidget(salario);
 		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("100%", "1000px");
-		fe = new formularioEntrevista(this);
-		scrollPanel_9.setWidget(fe);
+		formularioEntrevista = new formularioEntrevista(this);
+		scrollPanel_9.setWidget(formularioEntrevista);
 		
 		ScrollPanel scrollPanel_10 = new ScrollPanel();
 		scrollPanel_10.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_10, "Historial", true);
 		scrollPanel_10.setSize("100%", "1000px");
-		h = new historiales(this);
-		scrollPanel_10.setWidget(h);
+		historial = new historiales(this);
+		scrollPanel_10.setWidget(historial);
 
 		ScrollPanel scrollPanel_11 = new ScrollPanel();
 		scrollPanel_11.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_11, "Permisos", true);
 		scrollPanel_11.setSize("100%", "1000px");
-		v = new vacaciones(this);
-		scrollPanel_11.setWidget(v);
+		permisos = new vacaciones(this);
+		scrollPanel_11.setWidget(permisos);
 	}
 	public void NuevasPestanasdos(){
 		ScrollPanel scrollPanel_1 = new ScrollPanel();
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
 		scrollPanel_1.setSize("100%", "1000px");
-		f = new familiares(this);
-		scrollPanel_1.setWidget(f);
+		familia = new familiares(this);
+		scrollPanel_1.setWidget(familia);
 
 		
 		ScrollPanel scrollPanel_2 = new ScrollPanel();
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
 		scrollPanel_2.setSize("100%", "1000px");
-		a = new academico(this);
-		scrollPanel_2.setWidget(a);
+		academico = new academico(this);
+		scrollPanel_2.setWidget(academico);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("100%", "1000px");
-		rl = new referenciaLaboral(this);///
-		scrollPanel_3.setWidget(rl);
-		rl.setHeight("236px");
+		referenciaLaboral = new referenciaLaboral(this);///
+		scrollPanel_3.setWidget(referenciaLaboral);
+		referenciaLaboral.setHeight("236px");
 		
 		ScrollPanel scrollPanel_5 = new ScrollPanel();
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("100%", "1000px");
-		rp = new referenciaPersonal(this);///
-		scrollPanel_5.setWidget(rp);
+		referenciaPersonal = new referenciaPersonal(this);///
+		scrollPanel_5.setWidget(referenciaPersonal);
 
 
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
@@ -190,15 +191,15 @@ public class Empleados extends Composite {
 		tabPanel.add(scrollPanel_4, "Idiomas", true);
 		scrollPanel_4.setSize("100%", "1000px");
 		setStyleName("");
-		i = new Idioma(this);
-		scrollPanel_4.setWidget(i);
+		idioma = new Idioma(this);
+		scrollPanel_4.setWidget(idioma);
 		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("100%", "1000px");
-		fe = new formularioEntrevista(this);
-		scrollPanel_9.setWidget(fe);
+		formularioEntrevista = new formularioEntrevista(this);
+		scrollPanel_9.setWidget(formularioEntrevista);
 	}
 
 	public void EvaluacionesCompartidas()
@@ -207,59 +208,59 @@ public class Empleados extends Composite {
 		scrollPanel_6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_6, "Desempeño", true);
 		scrollPanel_6.setSize("100%", "1000px");
-		fpp = new  Desempeno(id_empleado);
-		fpp.btnAgregar.setVisible(false);
-		fpp.btnAgregar.setEnabled(false);
-		fpp.bandera = false;
-		scrollPanel_6.setWidget(fpp);
+		desempeno = new  Desempeno(id_empleado);
+		desempeno.btnAgregar.setVisible(false);
+		desempeno.btnAgregar.setEnabled(false);
+		desempeno.bandera = false;
+		scrollPanel_6.setWidget(desempeno);
 		
 		ScrollPanel scrollPanel_7 = new ScrollPanel();
 		scrollPanel_7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_7, "Evaluacion", true);
 		scrollPanel_7.setSize("100%", "1000px");
-		fppd = new Evaluacion(id_empleado);
-		fppd.btnAgregar.setVisible(false);
-		fppd.btnAgregar.setEnabled(false);
-		fppd.bandera = false;
-		scrollPanel_7.setWidget(fppd);
+		evaluacion = new Evaluacion(id_empleado);
+		evaluacion.btnAgregar.setVisible(false);
+		evaluacion.btnAgregar.setEnabled(false);
+		evaluacion.bandera = false;
+		scrollPanel_7.setWidget(evaluacion);
 	}
 	
-	public void setA(List<AuxHistorialAcademico> results) {
-		a.agregarFormulario_lleno(results);
+	public void setAcademico(List<AuxHistorialAcademico> listAuxHistorialAcademico) {
+		academico.agregarFormulario_lleno(listAuxHistorialAcademico);
 	}
 
-	public void setF(List<AuxFamilia> results) {
-		f.agregarFormulario_lleno(results);
+	public void setFamilia(List<AuxFamilia> listAuxFamilia) {
+		familia.agregarFormulario_lleno(listAuxFamilia);
 	}
 
-	public void setH(List<AuxHistorial> results) {
-		h.agregarFormulario_lleno(results);
+	public void setHistorial(List<AuxHistorial> listAuxHistorial) {
+		historial.agregarFormulario_lleno(listAuxHistorial);
 	}
 
-	public void setI(List<AuxIdioma> results) {
-		i.agregarFormulario_lleno(results);
+	public void setIdioma(List<AuxIdioma> listAuxIdioma) {
+		idioma.agregarFormulario_lleno(listAuxIdioma);
 	}
 
-	public void setP(List<AuxPuesto> results) {
-		p.agregarFormulario_lleno(results);
+	public void setPuesto(List<AuxPuesto> listAuxPuesto) {
+		puesto.agregarFormulario_lleno(listAuxPuesto);
 	}
 
-	public void setRL(List<AuxReferenciaLaboral> results) {
-		rl.agregarFormulario_lleno(results);
+	public void setReferenciaLaboral(List<AuxReferenciaLaboral> listAuxReferenciaLaboral) {
+		referenciaLaboral.agregarFormulario_lleno(listAuxReferenciaLaboral);
 	}
 
-	public void setRP(List<AuxReferenciaPersonal> results) {
-		rp.agregarFormulario_lleno(results);
+	public void setReferenciaPersonal(List<AuxReferenciaPersonal> listAuxReferenciaPersonal) {
+		referenciaPersonal.agregarFormulario_lleno(listAuxReferenciaPersonal);
 	}
-	public void setV(List<AuxVacaciones> results) {
-		v.agregarFormulario_lleno(results);
-	}
-
-	public void setS(List<AuxSalario> results) {
-		s.agregarFormulario_lleno(results);
+	public void setPermiso(List<AuxVacaciones> lsitAuxPermiso) {
+		permisos.agregarFormulario_lleno(lsitAuxPermiso);
 	}
 
-	public void setFD(AuxEmpleado r) {
+	public void setSalario(List<AuxSalario> listAuxSalario) {
+		salario.agregarFormulario_lleno(listAuxSalario);
+	}
+
+	public void setFormularioDatos(AuxEmpleado auxEmpleado) {
 		
 	 String deptodir  = "";
 	 String munidir   = "";
@@ -268,7 +269,7 @@ public class Empleados extends Composite {
 	 String munidir2   = "";
 	 
 
-	 String[] numerosComoArray2  = r.getDepto_municipio_residencia().split(",");
+	 String[] numerosComoArray2  = auxEmpleado.getDepto_municipio_residencia().split(",");
 	 for (int i = 0; i < numerosComoArray2.length; i++) {
 		 if(i == 0)
 			 deptodir = numerosComoArray2[i];
@@ -276,28 +277,28 @@ public class Empleados extends Composite {
 			 munidir = numerosComoArray2[i];
      }	
 	 
-	 String[] numerosComoArray1  = r.getDepto_municipio_nacimiento().split(",");
+	 String[] numerosComoArray1  = auxEmpleado.getDepto_municipio_nacimiento().split(",");
 	 for (int i = 0; i < numerosComoArray1.length; i++) {
 		 if(i == 0)
 			 deptodir2 = numerosComoArray1[i];
 		 if(i == 1)
 			 munidir2 = numerosComoArray1[i];
      }
-	 this.id_empleado = r.getId_empleado();
-			fd.LlenarDatos(r.getId_empleado(),r.getEstado_civil(), r.getSexo(), r.getPrimer_apellido(), r.getSegundo_apellido(), 
-					r.getApellido_casada(), r.getAfiliacion_igss(), r.getPrimer_nombre(), r.getSegundo_nombre(), 
-					r.getPais(), r.getNo_Dependientes(), r.getTipo_pasaporte(), munidir,r.getDireccion_actual(), 
-					r.getEmail(), r.getTipo_licencia(), r.getFecha_nacimiento(),r.getOcupacion(), r.getCentro_trabajo(), 
-					r.getCodigo_ingreso(), r.getProfesion(), r.getTipo_planilla(),r.getFecha_ingreso(), 
-					r.getNoCuenta(), r.getTipoCuenta(),r.getNombreBanco(), r.getCui(), r.getTelefono(), r.getCelular(), 
-					r.getNo_licencia(), r.getNit(), r.getNo_pasaporte(), ""+r.getSalario_base(), ""+r.getBonificacion(), 
-					""+r.getTotal(), deptodir, r.getIVS(), r.getURLFile(),r.getKeyFile(), r.getEstado(),r.getPasaporte(),
-					r.getLicencia(),r.getEtnia(),r.getNombreEmergencia(),r.getTelefonoEmergencia(),r.getNombreEmergencia2(),
-					r.getTelefonoEmergencia2(),deptodir2,munidir2,r.getJefe_Inmediato(),r.getAfiliado());
+	 this.id_empleado = auxEmpleado.getId_empleado();
+			formularioDatos.LlenarDatos(auxEmpleado.getId_empleado(),auxEmpleado.getEstado_civil(), auxEmpleado.getSexo(), auxEmpleado.getPrimer_apellido(), auxEmpleado.getSegundo_apellido(), 
+					auxEmpleado.getApellido_casada(), auxEmpleado.getAfiliacion_igss(), auxEmpleado.getPrimer_nombre(), auxEmpleado.getSegundo_nombre(), 
+					auxEmpleado.getPais(), auxEmpleado.getNo_Dependientes(), auxEmpleado.getTipo_pasaporte(), munidir,auxEmpleado.getDireccion_actual(), 
+					auxEmpleado.getEmail(), auxEmpleado.getTipo_licencia(), auxEmpleado.getFecha_nacimiento(),auxEmpleado.getOcupacion(), auxEmpleado.getCentro_trabajo(), 
+					auxEmpleado.getCodigo_ingreso(), auxEmpleado.getProfesion(), auxEmpleado.getTipo_planilla(),auxEmpleado.getFecha_ingreso(), 
+					auxEmpleado.getNoCuenta(), auxEmpleado.getTipoCuenta(),auxEmpleado.getNombreBanco(), auxEmpleado.getCui(), auxEmpleado.getTelefono(), auxEmpleado.getCelular(), 
+					auxEmpleado.getNo_licencia(), auxEmpleado.getNit(), auxEmpleado.getNo_pasaporte(), ""+auxEmpleado.getSalario_base(), ""+auxEmpleado.getBonificacion(), 
+					""+auxEmpleado.getTotal(), deptodir, auxEmpleado.getIVS(), auxEmpleado.getURLFile(),auxEmpleado.getKeyFile(), auxEmpleado.getEstado(),auxEmpleado.getPasaporte(),
+					auxEmpleado.getLicencia(),auxEmpleado.getEtnia(),auxEmpleado.getNombreEmergencia(),auxEmpleado.getTelefonoEmergencia(),auxEmpleado.getNombreEmergencia2(),
+					auxEmpleado.getTelefonoEmergencia2(),deptodir2,munidir2,auxEmpleado.getJefe_Inmediato(),auxEmpleado.getAfiliado());
 	
 	}
 	
-	public void setFE(AuxEntrevista r) {
+	public void setFormularioEntrevista(AuxEntrevista auxEntrevista) {
 
         	String valorA = "No";
         	String valorB = "No";
@@ -310,27 +311,27 @@ public class Empleados extends Composite {
         	String valorJ = "No";
         	String valorDeudas = "No";
         	String valorAlquila = "No";
-        	if(r.getDisponibilidad_inmediata()){ valorA = "Si";}
-        	if(r.getDisposicion_a_viajar()){ valorB = "Si";}
-        	if(r.getFlexibilidad_horario()){ valorC = "Si";}
-        	if(r.getAntecedentes_penales()){ valorE = "Si";}
-        	if(r.getAntecedentes_policiacos()){ valorF = "Si";}
-        	if(r.getCarta_recomendacion_laboral()){ valorG = "Si";}
-        	if(r.getCarta_recomendacion_personal()){ valorH = "Si";}
-        	if(r.getVive_con_familia()){ valorI = "Si";}
-        	if(r.getVive_con_familia()){ valorJ = "Si";}
-        	if(r.getTiene_deudas()){ valorDeudas = "Si";}
-        	if(r.getAlquila()){ valorAlquila = "Si";}
+        	if(auxEntrevista.getDisponibilidad_inmediata()){ valorA = "Si";}
+        	if(auxEntrevista.getDisposicion_a_viajar()){ valorB = "Si";}
+        	if(auxEntrevista.getFlexibilidad_horario()){ valorC = "Si";}
+        	if(auxEntrevista.getAntecedentes_penales()){ valorE = "Si";}
+        	if(auxEntrevista.getAntecedentes_policiacos()){ valorF = "Si";}
+        	if(auxEntrevista.getCarta_recomendacion_laboral()){ valorG = "Si";}
+        	if(auxEntrevista.getCarta_recomendacion_personal()){ valorH = "Si";}
+        	if(auxEntrevista.getVive_con_familia()){ valorI = "Si";}
+        	if(auxEntrevista.getVive_con_familia()){ valorJ = "Si";}
+        	if(auxEntrevista.getTiene_deudas()){ valorDeudas = "Si";}
+        	if(auxEntrevista.getAlquila()){ valorAlquila = "Si";}
         	
-		    	fe.LlenarDatos(r.getId_entrevista(),r.getQue_conoces(), r.getPor_que_trabajas_aqui(), r.getComo_se_describe(),r.getMetas(), 
-		    			valorA, valorB, valorC, valorE, valorF, valorG, valorH, valorI, valorJ, r.getEnfermedades(), 
-				r.getTrabajar_por_presion(), r.getEmpresa_credito(), valorDeudas, ""+r.getNo_dependientes(), valorAlquila, 
-				r.getOtros_Ingresos(), r.getEntrevisto(), r.getFecha_entrevista(),""+""+r.getAporte_casa(),""+ r.getAmortizacion(), 
-				""+r.getPago_alquiler(),""+r.getPretencion_salarial_minimo());
+		    	formularioEntrevista.LlenarDatos(auxEntrevista.getId_entrevista(),auxEntrevista.getQue_conoces(), auxEntrevista.getPor_que_trabajas_aqui(), auxEntrevista.getComo_se_describe(),auxEntrevista.getMetas(), 
+		    			valorA, valorB, valorC, valorE, valorF, valorG, valorH, valorI, valorJ, auxEntrevista.getEnfermedades(), 
+				auxEntrevista.getTrabajar_por_presion(), auxEntrevista.getEmpresa_credito(), valorDeudas, ""+auxEntrevista.getNo_dependientes(), valorAlquila, 
+				auxEntrevista.getOtros_Ingresos(), auxEntrevista.getEntrevisto(), auxEntrevista.getFecha_entrevista(),""+""+auxEntrevista.getAporte_casa(),""+ auxEntrevista.getAmortizacion(), 
+				""+auxEntrevista.getPago_alquiler(),""+auxEntrevista.getPretencion_salarial_minimo());
 	
 		    }
 
-	public void setFPP(List<AuxTest> r) {
+	public void setFormularioTest(List<AuxTest> r) {
 		List<AuxTest> valor = new ArrayList<AuxTest>();
 		List<AuxTest> valor2 = new ArrayList<AuxTest>();
 		if(!r.isEmpty())
@@ -343,18 +344,18 @@ public class Empleados extends Composite {
 					valor2.add(n);
 				}
 			}
-			fpp.agregar_formularios(valor);
-			fppd.agregar_formularios(valor2);
+			desempeno.agregar_formularios(valor);
+			evaluacion.agregar_formularios(valor2);
 		}
 	}
 	
 	public void familia_unica()
 	{
-		f.agregar_parientes_unicos();
+		familia.agregar_parientes_unicos();
 	}
 	
 	public void inavilidarDatosYPestanas(){
-		fd.Inavilitar_Casillas();
+		formularioDatos.Inavilitar_Casillas();
 	}
 
 }

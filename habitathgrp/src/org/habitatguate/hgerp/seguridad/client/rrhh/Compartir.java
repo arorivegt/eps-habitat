@@ -21,21 +21,23 @@ import com.google.gwt.user.client.ui.SuggestBox;
 public class Compartir extends Composite{
         
         
-       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-       private Long idTes = 0L;
-       private Long idEmpleadoCompartido = 0L;
-       final SuggestBox txtUser;
+       private Loading load;
+       private Long idTest = 0L;
    	   private Mensaje mensaje; 
-       private Loading load ;
+       private SuggestBox txtUser;
+       private Long idEmpleadoCompartido = 0L;
+       private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
    		
-        public Compartir(Long idTest, Long id) 
+        public Compartir(Long idTes, Long isEmpleadoCompartid) 
         {
         	load = new Loading();
             load.Mostrar();
             load.invisible();
+            
 			mensaje = new Mensaje();
-        	this.idEmpleadoCompartido = id;
-        	this.idTes = idTest;
+        	this.idEmpleadoCompartido = isEmpleadoCompartid;
+        	this.idTest = idTes;
+        	
         	AbsolutePanel rootPanel = new AbsolutePanel();
         	rootPanel.setSize("299px", "199px");
             rootPanel.setStyleName("body");
@@ -55,7 +57,7 @@ public class Compartir extends Composite{
             	public void onClick(ClickEvent event) {
 
                     load.visible();
-            		 loginService.InsertarCompartido(txtUser.getText(),idTes,idEmpleadoCompartido,new AsyncCallback<String>()
+            		 recursosHumanosService.InsertarCompartido(txtUser.getText(),idTest,idEmpleadoCompartido,new AsyncCallback<String>()
 					    {
 				            public void onFailure(Throwable caught) 
 				            {
@@ -94,7 +96,7 @@ public class Compartir extends Composite{
 	{
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    loginService.getCorreos(new AsyncCallback<List<String>>()
+	    recursosHumanosService.getCorreos(new AsyncCallback<List<String>>()
 	    {
             public void onFailure(Throwable caught) 
             {

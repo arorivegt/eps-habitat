@@ -15,21 +15,20 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 public class CreacionBaseDatosTest extends Composite{
         
-        
-       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+
+       private Loading load;
+       private Mensaje inicio;
+       private Button btnAceptar;
+       private DateBox dateFecha;
        private TestForm test = null;
        private Long id_prueba = 0L;
-       private boolean bandera = true;
        private TextBox txtPregunta1;
        private TextBox txtPregunta2;
        private TextBox txtPregunta3;
@@ -40,18 +39,24 @@ public class CreacionBaseDatosTest extends Composite{
        private TextBox txtPregunta8;
        private TextBox txtPregunta9;
        private TextBox txtPregunta10;
-       private DateBox dateBox ;
        private ListBox lsitTipoTest;
        private TextBox txtNombreTest;
-       private Loading load ;
+       private boolean bandera = true;
+       private AbsolutePanel rootPanel;
+       
+       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+       
         public CreacionBaseDatosTest(TestForm test ) 
         {
         	load = new Loading();
             load.Mostrar();
             load.invisible();
+
+        	inicio=  new Mensaje();
+        	
         	this.setTest(test);
         	
-        	AbsolutePanel rootPanel = new AbsolutePanel();
+        	rootPanel = new AbsolutePanel();
         	rootPanel.setSize("1038px", "1078px");
             rootPanel.setStyleName("body");
             
@@ -99,14 +104,14 @@ public class CreacionBaseDatosTest extends Composite{
             rootPanel.add(txtPregunta5, 79, 382);
             txtPregunta5.setSize("727px", "49px");
 
-            dateBox = new DateBox();
-            dateBox.getTextBox().setReadOnly(true);
-            dateBox.getDatePicker().setYearArrowsVisible(true);
-            dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
-            dateBox.getDatePicker().setVisibleYearCount(100);
-            dateBox.setFireNullValues(true);
-            dateBox.setStyleName("gwt-PasswordTextBox");
-            dateBox.getElement().setAttribute("placeHolder", "Fecha Nacimiento");
+            dateFecha = new DateBox();
+            dateFecha.getTextBox().setReadOnly(true);
+            dateFecha.getDatePicker().setYearArrowsVisible(true);
+            dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+            dateFecha.getDatePicker().setVisibleYearCount(100);
+            dateFecha.setFireNullValues(true);
+            dateFecha.setStyleName("gwt-PasswordTextBox");
+            dateFecha.getElement().setAttribute("placeHolder", "Fecha Nacimiento");
             
             txtPregunta6 = new TextBox();
             txtPregunta6.setStyleName("gwt-PasswordTextBox");
@@ -137,10 +142,10 @@ public class CreacionBaseDatosTest extends Composite{
             txtPregunta10.getElement().setAttribute("placeHolder", "Ingrese una de las preguntas");
             rootPanel.add(txtPregunta10, 79, 715);
             txtPregunta10.setSize("727px", "49px");
-            rootPanel.add(dateBox, 79, 782);
-            dateBox.setSize("231px", "49px");
+            rootPanel.add(dateFecha, 79, 782);
+            dateFecha.setSize("231px", "49px");
 
-            dateBox.setFormat(new DateBox.DefaultFormat 
+            dateFecha.setFormat(new DateBox.DefaultFormat 
             	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
             
 
@@ -157,16 +162,16 @@ public class CreacionBaseDatosTest extends Composite{
             rootPanel.add(txtNombreTest, 567, 782);
             txtNombreTest.setSize("239px", "49px");
             
-            Button button = new Button("Send");
-            button.addClickHandler(new ClickHandler() {
+            btnAceptar = new Button("Send");
+            btnAceptar.addClickHandler(new ClickHandler() {
 
             	public void onClick(ClickEvent event) 
             	{      
                     load.visible();
             		try{
-    					new Date(dateBox.getValue().getTime());
+    					new Date(dateFecha.getValue().getTime());
     				}catch(Exception e){
-    					dateBox.setValue(new Date(1407518124684L));
+    					dateFecha.setValue(new Date(1407518124684L));
     				}
             		String tipo = "";
             		if( lsitTipoTest.getItemText(lsitTipoTest.getSelectedIndex()).equals("Evaluacion")){
@@ -185,12 +190,12 @@ public class CreacionBaseDatosTest extends Composite{
     	    					txtPregunta4.getText(), txtPregunta5.getText(), 
     	    					txtPregunta6.getText(), txtPregunta7.getText(), 
     	    					txtPregunta8.getText(), txtPregunta9.getText(), 
-    	    					txtPregunta10.getText(), dateBox.getValue(), 
+    	    					txtPregunta10.getText(), dateFecha.getValue(), 
     	    					tipo, new AsyncCallback<Long>(){
                             public void onFailure(Throwable caught) 
                             {
                 		        load.invisible();
-                            	setMensaje("alert alert-error", 
+                		        inicio.setMensaje("alert alert-error", 
                             			"Error !! \nal Guardar Datos");
                             }
 
@@ -200,7 +205,7 @@ public class CreacionBaseDatosTest extends Composite{
     					        load.invisible();
     							id_prueba= result;
     							bandera = false;
-                            	setMensaje("alert alert-success", 
+    							inicio.setMensaje("alert alert-success", 
                             			"Datos Guardados\n exitosamente!!!");
                             }
 
@@ -211,12 +216,12 @@ public class CreacionBaseDatosTest extends Composite{
     					txtPregunta4.getText(), txtPregunta5.getText(), 
     					txtPregunta6.getText(), txtPregunta7.getText(), 
     					txtPregunta8.getText(), txtPregunta9.getText(), 
-    					txtPregunta10.getText(), dateBox.getValue(), 
+    					txtPregunta10.getText(), dateFecha.getValue(), 
     					tipo, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
         		        load.invisible();
-                    	setMensaje("alert alert-error", 
+        		        inicio.setMensaje("alert alert-error", 
                     			"Error !! \nal Actualizar Datos");
                     }
 
@@ -225,7 +230,7 @@ public class CreacionBaseDatosTest extends Composite{
                     {
     			        load.invisible();
     					bandera = false;
-                    	setMensaje("alert alert-success", 
+    					inicio.setMensaje("alert alert-success", 
                     			"Datos Actualizados\n exitosamente!!!");
                     }
 
@@ -234,7 +239,7 @@ public class CreacionBaseDatosTest extends Composite{
                 }else{
 
     		        load.invisible();
-                	setMensaje("alert alert-error", 
+    		        inicio.setMensaje("alert alert-error", 
                 			"Error !! \nlas preguntas no pueden ir vacias");
             	}
 
@@ -242,10 +247,10 @@ public class CreacionBaseDatosTest extends Composite{
             	}
             });
             
-            button.setText("Aceptar");
-            button.setStyleName("sendButton");
-            rootPanel.add(button, 285, 892);
-            button.setSize("404px", "44px");
+            btnAceptar.setText("Aceptar");
+            btnAceptar.setStyleName("sendButton");
+            rootPanel.add(btnAceptar, 285, 892);
+            btnAceptar.setSize("404px", "44px");
             
             initWidget(rootPanel);
             
@@ -280,39 +285,10 @@ public class CreacionBaseDatosTest extends Composite{
     		this.txtPregunta8.setText(txtPregunta8);
     		this.txtPregunta9.setText(txtPregunta9);
     		this.txtPregunta10.setText(txtPregunta10);
-    		this.dateBox.setValue(new Date(dateFecha));
+    		this.dateFecha.setValue(new Date(dateFecha));
     		
     	}
-    	public void setMensaje(String estilo, String mensaje){
-    		final DialogBox Registro2 = new DialogBox();
-            final HTML serverResponseLabel = new HTML();
-            final Button close= new Button("x");
-            Mensaje inicio = new Mensaje();
-            
-            Registro2.setStyleName(estilo);
-            inicio.mensajeEntrada(mensaje);
-            inicio.mensajeEstilo(estilo);
-            close.addStyleName("close");
-            VerticalPanel dialogVPanel = new VerticalPanel();
-            dialogVPanel.add(serverResponseLabel );
-            dialogVPanel.add(inicio);
-            dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-            dialogVPanel.add(close);
-            Registro2 .setWidget(dialogVPanel);
-            Registro2 .setModal(true);
-            Registro2 .setGlassEnabled(true);
-            Registro2 .setAnimationEnabled(true);
-            Registro2 .center();
-            Registro2 .show();
-            close.setFocus(true);
-        
-            close.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                Registro2.hide();
-            }
-        });
-    	}
-
+    	
 
 		public TestForm getTest() {
 			return test;

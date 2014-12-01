@@ -21,11 +21,11 @@ import com.google.gwt.user.client.ui.SuggestBox;
 public class AsignarJefe extends Composite{
         
         
-       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-       final SuggestBox txtUser;
-   	   private Mensaje mensaje; 
-   	   private formularioDatos datos;
        private Loading load ;
+   	   private Mensaje mensaje; 
+       final SuggestBox txtUser;
+   	   private formularioDatos datos;
+       private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
    		
         public AsignarJefe(formularioDatos dato) 
         {
@@ -52,7 +52,7 @@ public class AsignarJefe extends Composite{
             btnAsignar.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
                     load.visible();
-            		 loginService.getIdEmpleado(txtUser.getText(),new AsyncCallback<Long>()
+            		 recursosHumanosService.getIdEmpleado(txtUser.getText(),new AsyncCallback<Long>()
 					    {
 				            public void onFailure(Throwable caught) 
 				            {
@@ -96,7 +96,7 @@ public class AsignarJefe extends Composite{
 	{
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    loginService.getCorreos(new AsyncCallback<List<String>>()
+	    recursosHumanosService.getCorreos(new AsyncCallback<List<String>>()
 	    {
             public void onFailure(Throwable caught) 
             {

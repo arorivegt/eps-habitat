@@ -25,22 +25,22 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 public class Desempeno extends Composite  {
 
-     private FlexTable flextable;
-     private Long empleado;
-     private VerticalPanel panel = new VerticalPanel();
-     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-     private List<AuxTest> valor = new ArrayList<AuxTest>();
-     public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
-     private final Button btnTest = new Button("Agregar");
-     private final Grid grid = new Grid(1, 3);
-     public Button btnAgregar;
-	 private Mensaje mensaje; 
+     private Grid grid;
+     private Grid grid_1;
      private Loading load ;
-     public boolean bandera = true;
-     private final Grid grid_1 = new Grid(1, 3);
-     private final DateBox dateFecha1 = new DateBox();
-     private final DateBox dateFecha2 = new DateBox();
-     private final Button button = new Button("Agregar");
+     private Button button;
+     private Long empleado;
+     private Button btnTest;
+	 private Mensaje mensaje; 
+     public  Button btnAgregar;
+     private DateBox dateFecha1;
+     private DateBox dateFecha2;
+     private VerticalPanel panel;
+     private FlexTable flextable;
+     public  boolean bandera = true;
+     private List<AuxTest> valor = new ArrayList<AuxTest>();
+     public  List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
+     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      
     public Desempeno(Long e) {
 
@@ -49,11 +49,16 @@ public class Desempeno extends Composite  {
         load.Mostrar();
         load.invisible();
         this.empleado = e;
+        
+        panel = new VerticalPanel();
         initWidget(panel);
+        
         panel.setSize("761px", "85px");
         
+        grid_1 = new Grid(1, 3);
         panel.add(grid_1);
-
+        
+        dateFecha1 = new DateBox();
         dateFecha1.setValue(new Date());
         dateFecha1.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -61,8 +66,9 @@ public class Desempeno extends Composite  {
         dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
         dateFecha1.getDatePicker().setVisibleYearCount(100);
         dateFecha1.setStyleName("gwt-TextBox2");
-        
         grid_1.setWidget(0, 0, dateFecha1);
+        
+        dateFecha2 = new DateBox();
         dateFecha2.setValue(new Date());
         dateFecha2.setFormat(new DateBox.DefaultFormat 
 			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
@@ -74,6 +80,8 @@ public class Desempeno extends Composite  {
         
         grid_1.setWidget(0, 1, dateFecha2);
         dateFecha2.setSize("227px", "34px");
+        
+        button = new Button("Agregar");
         button.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
         		load.visible();
@@ -135,7 +143,11 @@ public class Desempeno extends Composite  {
         flextable = new FlexTable();
         panel.add(flextable);
         BDTest();
+
+        grid = new Grid(1, 3);
         panel.add(grid);
+        
+        btnTest = new Button("Agregar");
         grid.setWidget(0, 0, btnTest);
         btnTest.addClickHandler(new ClickHandler() {
         public void onClick(ClickEvent event) {
@@ -217,7 +229,6 @@ public class Desempeno extends Composite  {
                 		        load.invisible();
                     fa.setMensaje("alert alert-success", 
                                     "Eliminado exitosamente!!!");
-                    //Window.alert("Eliminado exitosamente!!! ");
                     flextable.remove(fa);
             }
 

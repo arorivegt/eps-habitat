@@ -56,8 +56,6 @@ public class CrearReporteEmpleados extends Composite   {
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
     private Loading load ;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private final SqlServiceAsync service = GWT.create(SqlService.class);
 	private FormPanel formPanel;
 	private VerticalPanel verticalPanel;
 	private AbsolutePanel absolutePanel_1;
@@ -96,6 +94,8 @@ public class CrearReporteEmpleados extends Composite   {
 	private DateBox dateSalarioecha1;
 	private DateBox dateSalarioecha2;
 	private ListBox listTipoSalario;
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync FinanzasService = GWT.create(SqlService.class);
     
     /**
      * constructor
@@ -294,7 +294,7 @@ public class CrearReporteEmpleados extends Composite   {
 		lblSeleccioneLosEmpleados.setSize("828px", "13px");
 		
 		
-    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+    	recursosHumanosService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
     			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
@@ -309,7 +309,7 @@ public class CrearReporteEmpleados extends Composite   {
 			}
 		});
 
-		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		FinanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
 		    }
@@ -950,7 +950,7 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 		    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 		    
-		    loginService.Buscar_Empleado('2', "", "", 
+		    recursosHumanosService.Buscar_Empleado('2', "", "", 
 		    		"", "","", "","",new AsyncCallback<List<AuxEmpleado>>(){
 			    public void onFailure(Throwable caught) 
 			    {

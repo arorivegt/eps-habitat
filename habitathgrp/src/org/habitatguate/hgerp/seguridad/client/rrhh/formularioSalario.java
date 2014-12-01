@@ -35,28 +35,28 @@ public class formularioSalario extends Composite {
 
 	private salario salario;
 	private Empleados empleado;
-	private Long id_salario = 0L;
-	private boolean bandera = true;
 	private Mensaje mensaje; 
-	private AbsolutePanel absolutePanel;
-	private TextBox txtSalario;
-	private Button btnActualizar ;
-	private Button btnEliminar ;
-	private ListBox txtTipoSalario;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private TextArea txtDescipcion;
     private Label label;
     private DateBox fecha;
     private Label lblAo;
     private Loading load ;
+	private TextBox txtSalario;
+	private Button btnEliminar;
+	private Long id_salario = 0L;
+	private boolean bandera = true;
+	private Button btnActualizar;
+	private ListBox txtTipoSalario;
+    private TextArea txtDescipcion;
+	private AbsolutePanel absolutePanel;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 
-	public formularioSalario(salario salari,Empleados e) {
+	public formularioSalario(salario salari,Empleados emplead) {
 
 		mensaje = new Mensaje();
     	load = new Loading();
         load.Mostrar();
         load.invisible();
-		this.empleado = e;
+		this.empleado = emplead;
 		this.salario = salari;
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

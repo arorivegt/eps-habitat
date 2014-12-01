@@ -354,9 +354,7 @@ public class InformMinisterioTrabajoXml {
 
 					xmlInicio += "<td>"+nombre_puesto+"</td>";
 					
-					xmlInicio += "<td>"+""+"</td>";
-
-					//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
+					xmlInicio += "<td>"+"0"+"</td>";//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
 
 					xmlInicio += "<td>"+DescansoSemanal+"</td>";
 					
@@ -401,6 +399,20 @@ public class InformMinisterioTrabajoXml {
 		 				formatAnio = anio.format(new Date(s.getFecha()));
 		 				
 		 				if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("0"))
+		 				{
+		 					salarioMensualNominal += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("1"))
+		 				{
+		 					decreto7889 += s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("2"))
+		 				{
+		 					comisiones += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio) 
 		 						&& s.getTipoSalario().equals("4"))
 		 				{
 		 					bono14 = s.getSalario();
@@ -408,27 +420,18 @@ public class InformMinisterioTrabajoXml {
 		 						&& s.getTipoSalario().equals("5"))
 		 				{
 		 					aguinaldo = s.getSalario();
-		 				}else if(formatAnio.equals(listAnnio) 
-		 						&& s.getTipoSalario().equals("2"))
-		 				{
-		 					comisiones += s.getSalario();
-		 				}else if(formatAnio.equals(listAnnio) 
-		 						&& s.getTipoSalario().equals("1"))
-		 				{
-		 					decreto7889 = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio) 
-		 						&& s.getTipoSalario().equals("7")) //abra que incluir bonos?
+		 						&& s.getTipoSalario().equals("7")) 
 		 				{
 		 					indemnizacion = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio) 
-		 						&& s.getTipoSalario().equals("8")) //abra que incluir bonos?
+		 						&& s.getTipoSalario().equals("8")) 
 		 				{
 		 					otrosPagos += s.getSalario();
 		 				}
 		 				
-		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
 		 				
 					}
 					xmlInicio += "<td>"+df.format(salarioMensualNominal)+"</td>";

@@ -33,12 +33,12 @@ public class academico extends Composite  {
 
 
 	 private Mensaje mensaje; 
-	 private FlexTable flextable;
-	 private Empleados empleado;
-	 private Button btnAgregar;
-     private VerticalPanel panel = new VerticalPanel();
 	 private Loading load ;
-     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	 private Button btnAgregar;
+	 private Empleados empleado;
+	 private FlexTable flextable;
+     private VerticalPanel panel = new VerticalPanel();
+     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
      
     /**
      * inicializa los componentes
@@ -115,7 +115,7 @@ public class academico extends Composite  {
 	{
 
         load.visible();
-		loginService.Eliminar_Academico(id_empledo, id_FormularioAcademico, new AsyncCallback<Long>()
+		recursosHumanosService.Eliminar_Academico(id_empledo, id_FormularioAcademico, new AsyncCallback<Long>()
 		{
 	        public void onFailure(Throwable caught) 
 	        {

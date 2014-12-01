@@ -17,19 +17,22 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EmpleadoLista extends Composite {
 
+    private Loading load;
 	private Mensaje mensaje; 
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private EmpleadoLista listaEmpleado;
-    private FlexTable flexTable;
-    private Loading load ;
 	boolean bandera = false;
+    private FlexTable flexTable;
+    private EmpleadoLista listaEmpleado;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	
 	public EmpleadoLista() {
+		
 		this.listaEmpleado =this;
 		mensaje = new Mensaje();
 
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		ScrollPanel scrollPanel = new ScrollPanel();
 		scrollPanel.setAlwaysShowScrollBars(false);
 		initWidget(scrollPanel);

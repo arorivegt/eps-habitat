@@ -39,19 +39,19 @@ import com.google.gwt.user.client.ui.SuggestBox;
 
 public class BuscadorEmpleados extends Composite   {
 
-	private Mensaje mensaje; 
-    private  Grid grid;
-    private ListBox listBox;
+    private Grid grid;
+    private Loading load ;
     private Label lbDato1;
     private Image Busqueda;
+	private Mensaje mensaje; 
+    private ListBox listBox;
     private SuggestBox txtDato1;
-    private  ListBox listEstado ;
+    private ListBox listEstado;
     private AbsolutePanel absolutePanel;
     private BuscadorEmpleados evaluacionesBuscador;
-	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
-    private Loading load ;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	public  List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	public  List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync service = GWT.create(SqlService.class);
     
     /**
@@ -235,7 +235,7 @@ public class BuscadorEmpleados extends Composite   {
 		lblBusquedaPor.setSize("118px", "13px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
-    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>()
+    	recursosHumanosService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>()
     	{
     		public void onFailure(Throwable caught) 
     		{
@@ -402,7 +402,7 @@ public class BuscadorEmpleados extends Composite   {
 		grid.setWidget(1, 0,e);
         e.setSize("100%", "648px");
         
-        loginService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
+        recursosHumanosService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
         	public void onFailure(Throwable caught) 
         	{
                 load.invisible();
@@ -417,64 +417,64 @@ public class BuscadorEmpleados extends Composite   {
 
         		try{
         			
-        			e.setFD(result);
+        			e.setFormularioDatos(result);
         			
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setA(result.getHistorial_academico());
+        			e.setAcademico(result.getHistorial_academico());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setF(result.getFamilia());
+        			e.setFamilia(result.getFamilia());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setH(result.getHistorial());
+        			e.setHistorial(result.getHistorial());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setI(result.getIdiomas());
+        			e.setIdioma(result.getIdiomas());
         		}catch(Exception e){
 
         		}
         		try{
-        			e.setP(result.getPuestos());
+        			e.setPuesto(result.getPuestos());
         		}catch(Exception e){
 
         		}
         		try{
-        			e.setRL(result.getReferencia_laboral());
+        			e.setReferenciaLaboral(result.getReferencia_laboral());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setRP(result.getReferencia_personal());
+        			e.setReferenciaPersonal(result.getReferencia_personal());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setV(result.getVacaciones());
+        			e.setPermiso(result.getVacaciones());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setFE(result.getEntrevista().get(0));
+        			e.setFormularioEntrevista(result.getEntrevista().get(0));
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setFPP(result.getTest());
+        			e.setFormularioTest(result.getTest());
         		}catch(Exception e){
         			
         		}
 
         		try{
-        			e.setS(result.getSalario());
+        			e.setSalario(result.getSalario());
         		}catch(Exception e){
         			
         		}
@@ -488,7 +488,7 @@ public class BuscadorEmpleados extends Composite   {
 	{
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    loginService.Buscar_Empleado('2', "", "", 
+	    recursosHumanosService.Buscar_Empleado('2', "", "", 
 	    		"", "","", "","",new AsyncCallback<List<AuxEmpleado>>(){
 		    public void onFailure(Throwable caught) 
 		    {

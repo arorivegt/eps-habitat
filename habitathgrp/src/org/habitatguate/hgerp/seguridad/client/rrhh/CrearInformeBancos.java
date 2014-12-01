@@ -41,24 +41,24 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 
 public class CrearInformeBancos extends Composite   {
 
-	private Mensaje mensaje; 
-    private  Grid grid;
-    private ListBox listBox;
+    private Grid grid;
+    private Loading load;
     private Label lbDato1;
+	private Mensaje mensaje; 
     private Image Busqueda;
-    private SuggestBox txtDato1;
-    private  ListBox listEstado ;
-    private AbsolutePanel absolutePanel;
-	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
-    private Loading load ;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private final SqlServiceAsync service = GWT.create(SqlService.class);
-    private Label lblElijaElTipo;
+    private ListBox listBox;
     private ListBox listMes;
     private ListBox listAnnio;
+    private ListBox listEstado;
 	private FormPanel formPanel;
+    private SuggestBox txtDato1;
+    private Label lblElijaElTipo;
+    private AbsolutePanel absolutePanel;
 	private VerticalPanel verticalPanel;
+    private final SqlServiceAsync service = GWT.create(SqlService.class);
+	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
+	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     /**
      * constructor

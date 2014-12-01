@@ -57,7 +57,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     private ListBox listAnnio;
     private ListBox listTipoPrestaciones;
     
-    private DateBox fecha;
+    private DateBox dateFecha;
 
     private Label lbDato1;
     private Label label;
@@ -72,8 +72,8 @@ public class CrearPrestacionesLaborales extends Composite   {
     
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
-    private final SqlServiceAsync service = GWT.create(SqlService.class);
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final SqlServiceAsync FinanzasService = GWT.create(SqlService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     
     /**
      * constructor
@@ -328,17 +328,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(listAnnio, 205, 94);
 		listAnnio.setSize("179px", "39px");
 		
-		fecha = new DateBox();
-		fecha.getTextBox().setReadOnly(true);
-		fecha.setValue(new Date());
-		fecha.setFormat(new DateBox.DefaultFormat 
+		dateFecha = new DateBox();
+		dateFecha.getTextBox().setReadOnly(true);
+		dateFecha.setValue(new Date());
+		dateFecha.setFormat(new DateBox.DefaultFormat 
 	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
-		fecha.getDatePicker().setYearArrowsVisible(true);
-		fecha.getDatePicker().setYearAndMonthDropdownVisible(true);
-		fecha.getDatePicker().setVisibleYearCount(100);
-		fecha.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(fecha, 463, 17);
-		fecha.setSize("177px", "41px");
+		dateFecha.getDatePicker().setYearArrowsVisible(true);
+		dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha.getDatePicker().setVisibleYearCount(100);
+		dateFecha.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(dateFecha, 463, 17);
+		dateFecha.setSize("177px", "41px");
 		
 		label = new Label("Fecha");
 		label.setStyleName("label");
@@ -383,7 +383,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(lblCantidad, 846, 0);
 		lblCantidad.setSize("157px", "13px");
 		
-    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+    	recursosHumanosService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
     			mensaje.setMensaje("alert alert-error", "Error en BD puestos\n"+caught);
@@ -398,7 +398,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 			}
 		});
 
-		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		FinanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
 		    }
@@ -539,7 +539,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 				String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,String Estado){
 
 	        load.visible();
-	    	loginService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
+	    	recursosHumanosService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
 							primer_apellido, segundo_apellido,DPI, Pasaporte,Estado,new AsyncCallback<List<AuxEmpleado>>(){
 	            public void onFailure(Throwable caught) 
 	            {
@@ -761,19 +761,19 @@ public class CrearPrestacionesLaborales extends Composite   {
 
 	 			if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
-	 						,""+Cantidad.getText(), "1", "1",fecha.getValue());
+	 						,""+Cantidad.getText(), "1", "1",dateFecha.getValue());
 	 			}if(tipo.equals("4")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Bono 14 del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 						,""+salarioBaseCalculo, "181", "365",dateFecha.getValue());
 	 			}if(tipo.equals("5")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Aguinaldo del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 						,""+salarioBaseCalculo, "181", "365",dateFecha.getValue());
 	 			}if(tipo.equals("6")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Vacaciones del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 						,""+salarioBaseCalculo, "181", "365",dateFecha.getValue());
 	 			}if(tipo.equals("7")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Indemnizacion del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "14", "12",fecha.getValue());
+	 						,""+salarioBaseCalculo, "14", "12",dateFecha.getValue());
 	 			}
  			salarioBaseCalculo = 0;
  			enero = 0;
@@ -812,7 +812,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		{
 		    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 		    
-		    loginService.Buscar_Empleado('2', "", "", 
+		    recursosHumanosService.Buscar_Empleado('2', "", "", 
 		    		"", "","", "","",new AsyncCallback<List<AuxEmpleado>>(){
 			    public void onFailure(Throwable caught) 
 			    {

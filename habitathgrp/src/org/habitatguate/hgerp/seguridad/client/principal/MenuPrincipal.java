@@ -559,57 +559,57 @@ public class MenuPrincipal extends Composite {
 			{
 
 				try{
-					e.setFD(result);
+					e.setFormularioDatos(result);
 				}catch(Exception e){
 
 				}
 				try{
-					e.setA(result.getHistorial_academico());
+					e.setAcademico(result.getHistorial_academico());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setF(result.getFamilia());
+					e.setFamilia(result.getFamilia());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setH(result.getHistorial());
+					e.setHistorial(result.getHistorial());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setI(result.getIdiomas());
+					e.setIdioma(result.getIdiomas());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setP(result.getPuestos());
+					e.setPuesto(result.getPuestos());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setRL(result.getReferencia_laboral());
+					e.setReferenciaLaboral(result.getReferencia_laboral());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setRP(result.getReferencia_personal());
+					e.setReferenciaPersonal(result.getReferencia_personal());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setV(result.getVacaciones());
+					e.setPermiso(result.getVacaciones());
 				}catch(Exception e){
 
 				}
 				try{
-					e.setFE(result.getEntrevista().get(0));
+					e.setFormularioEntrevista(result.getEntrevista().get(0));
 				}catch(Exception e){
 
 				}
 				try{
-					e.setFPP(result.getTest());
+					e.setFormularioTest(result.getTest());
 				}catch(Exception e){
 
 				}

@@ -36,19 +36,19 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class EmpleadosMinisterioTrabajo extends Composite  {
 
-    private  Grid grid;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    private ScrollPanel scrollPanel;
-    private AbsolutePanel absolutePanel_1;
-    private  ListBox listEstado ;
-    private Loading load ;
-    private ListBox listAnnio;
-    private Label lblAoDelReporte;
-    private List<DatosMinisterioTrabajo> DATOS;
-  
-	private FormPanel formPanel;
-	private VerticalPanel verticalPanel;
+    private Grid grid;
+    private Loading load;
 	private Button button;
+    private ListBox listAnnio;
+    private ListBox listEstado;
+	private FormPanel formPanel;
+    private Label lblAoDelReporte;
+    private ScrollPanel scrollPanel;
+	private VerticalPanel verticalPanel;
+    private AbsolutePanel absolutePanel_1;
+    private List<DatosMinisterioTrabajo> DATOS;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+	
 	public EmpleadosMinisterioTrabajo() {
 		
 		grid = new Grid(2, 1);
@@ -406,7 +406,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setNombre2(p.getSegundo_nombre());
 					
-					//empleado.setNombre3(p.getPrimer_nombre());
+					empleado.setNombre3("");
 					
 					empleado.setApellido1(p.getPrimer_apellido());
 					
@@ -463,8 +463,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						if(f.isActivo()){
 							
 							empleado.setPuesto(f.getNombre_puesto());
-
-							//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
+							empleado.setDiasTrabajadosAnnio("0");//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
 							
 							if(f.getJornada().equals("0")){
 								jornada = "Diurna";
@@ -558,7 +557,17 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					for (AuxSalario s : p.getSalario()) {
 		 				formatAnio = anio.format(new Date(s.getFecha()));
 		 				
-		 				if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 				 if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+			 						&& s.getTipoSalario().equals("0"))
+		 				{
+		 					salarioMensualNominal += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("1"))
+		 				{
+		 					decreto7889 += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
 		 						&& s.getTipoSalario().equals("4"))
 		 				{
 		 					bono14 = s.getSalario();
@@ -570,23 +579,19 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 						&& s.getTipoSalario().equals("2"))
 		 				{
 		 					comisiones += s.getSalario();
-		 				}else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
-		 						&& s.getTipoSalario().equals("1"))
-		 				{
-		 					decreto7889 = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
-		 						&& s.getTipoSalario().equals("7")) //abra que incluir bonos?
+		 						&& s.getTipoSalario().equals("7")) 
 		 				{
 		 					indemnizacion = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
-		 						&& s.getTipoSalario().equals("8")) //abra que incluir bonos?
+		 						&& s.getTipoSalario().equals("8")) 
 		 				{
 		 					otrosPagos += s.getSalario();
 		 				}
 		 				
-		 				//falta salario mensual nominal,  y otros pagos que incluye estos dos?
+		 				
 		 				
 					}
 					empleado.setSalarioMensualNominal(""+fmt.format(salarioMensualNominal));
@@ -603,7 +608,6 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setComisiones(""+fmt.format(comisiones));
 					
-
 					empleado.setNivelAcademico(""+nivelAcademico);
 					
 					empleado.setProfesion(profesion);
@@ -612,7 +616,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 
 					empleado.setIdiomas(idioma);
 
-					//private String PermisoTrabajo;
+					empleado.setPermisoTrabajo("0");//private String PermisoTrabajo;
 					
 					empleado.setTipoContrato("Indefinido");
 					

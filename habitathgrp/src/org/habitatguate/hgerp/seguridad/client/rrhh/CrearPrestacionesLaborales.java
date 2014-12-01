@@ -44,31 +44,36 @@ import com.google.gwt.event.dom.client.KeyUpEvent;
 
 public class CrearPrestacionesLaborales extends Composite   {
 
-	private Mensaje mensaje; 
-    private  Grid grid;
-    private ListBox listBox;
-    private Label lbDato1;
+    private Grid grid;
+    private Loading load;
     private Image Busqueda;
-    private SuggestBox txtDato1;
-    private  ListBox listEstado ;
 	boolean bandera = false;
+	private Mensaje mensaje; 
+    private prestaciones nuevo;
+    private SuggestBox txtDato1;
+
+    private ListBox listBox;
+    private ListBox listEstado;
+    private ListBox listAnnio;
+    private ListBox listTipoPrestaciones;
+    
+    private DateBox fecha;
+
+    private Label lbDato1;
+    private Label label;
+    private Label lblCantidad;
+    private Label lblElijaElAo;
+    private Label lblElijaElTipo;
     private AbsolutePanel absolutePanel;
-    private prestaciones  nuevo;
+    private Label lblDescripcionPequea;
+    
+    private TextBox Cantidad;
+    private TextBox txtDescripcion;
+    
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
-    private Loading load ;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync service = GWT.create(SqlService.class);
-    private Label lblElijaElTipo;
-    private ListBox listTipoPrestaciones;
-    private Label lblElijaElAo;
-    private ListBox listAnnio;
-    private DateBox fecha;
-    private Label label;
-    private TextBox txtDescripcion;
-    private Label lblDescripcionPequea;
-    private TextBox Cantidad;
-    private Label lblCantidad;
+    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     /**
      * constructor
@@ -232,13 +237,13 @@ public class CrearPrestacionesLaborales extends Composite   {
 		});
 		
 		listTipoPrestaciones = new ListBox();
-		//listTipoPrestaciones.addItem("Decreto(78-89)", "1");
+		listTipoPrestaciones.addItem("Decreto(78-89)", "1");
 		listTipoPrestaciones.addItem("Comisiones", "2");
 		listTipoPrestaciones.addItem("Bonificacion", "3");
 		listTipoPrestaciones.addItem("Bono 14", "4");
 		listTipoPrestaciones.addItem("Aguinaldo", "5");
 		//listTipoPrestaciones.addItem("Vacaciones", "6");
-		//listTipoPrestaciones.addItem("Indemnizacion", "7");
+		listTipoPrestaciones.addItem("Indemnizacion", "7");
 		listTipoPrestaciones.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");
@@ -754,7 +759,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			junio 	= junio + junioBono;
 	 			salarioBaseCalculo = (enero + febrero + marzo + abril + mayo + junio) / 6;
 
-	 			if(tipo.equals("2") || tipo.equals("3")){
+	 			if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
 	 						,""+Cantidad.getText(), "1", "1",fecha.getValue());
 	 			}if(tipo.equals("4")){
@@ -768,36 +773,36 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
 	 			}if(tipo.equals("7")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, "Indemnizacion del año: "+listAnio,nombre
-	 						,""+salarioBaseCalculo, "181", "365",fecha.getValue());
+	 						,""+salarioBaseCalculo, "14", "12",fecha.getValue());
 	 			}
-	 			salarioBaseCalculo = 0;
-	 			enero = 0;
-	 			febrero = 0;
-	 			marzo = 0;
-	 			abril = 0;
-	 			mayo = 0;
-	 			junio = 0;
-	 			
-	 			eneroBono = 0;
-	 			febreroBono = 0;
-	 			marzoBono = 0;
-	 			abrilBono = 0;
-	 			mayoBono = 0;
-	 			junioBono = 0;
+ 			salarioBaseCalculo = 0;
+ 			enero = 0;
+ 			febrero = 0;
+ 			marzo = 0;
+ 			abril = 0;
+ 			mayo = 0;
+ 			junio = 0;
+ 			
+ 			eneroBono = 0;
+ 			febreroBono = 0;
+ 			marzoBono = 0;
+ 			abrilBono = 0;
+ 			mayoBono = 0;
+ 			junioBono = 0;
 	 			
 
-		 		 bEnero = true;
-		 		 bFebrero = true;
-		 		 bMarzo	= true;
-		 		 bAbril = true;
-		 		 bMayo = true;
-		 		 bJunio = true;
+	 		 bEnero = true;
+	 		 bFebrero = true;
+	 		 bMarzo	= true;
+	 		 bAbril = true;
+	 		 bMayo = true;
+	 		 bJunio = true;
 
-		 		 ultimoAnnio = 0;
-		 		 ultimoMes = 0;
-		 		 ultimoSalario = 0;
-		 		 formatAnio 	= "";
-		 		 formatMes 	= "";
+	 		 ultimoAnnio = 0;
+	 		 ultimoMes = 0;
+	 		 ultimoSalario = 0;
+	 		 formatAnio 	= "";
+	 		 formatMes 	= "";
 	 		}//fin for empleado
 
 	        load.invisible();

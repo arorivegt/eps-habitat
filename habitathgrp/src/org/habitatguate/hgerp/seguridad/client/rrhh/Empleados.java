@@ -35,18 +35,18 @@ public class Empleados extends Composite {
 
 
 	private Idioma idioma;
-	private puestos puesto;
-	private salario salario;
-	private familiares familia;
+	private Puestos puesto;
+	private Salario salario;
+	private Familia familia;
 	private Desempeno desempeno;
-	private vacaciones permisos;
-	private academico academico;
-	private historiales historial;
+	private Permiso permisos;
+	private Academico academico;
+	private Historiales historial;
 	private Evaluacion evaluacion;
-	private formularioDatos formularioDatos;
-	private referenciaLaboral referenciaLaboral ;
-	private referenciaPersonal referenciaPersonal;
-	private formularioEntrevista formularioEntrevista ;
+	private FormularioDatos formularioDatos;
+	private ReferenciaLaboral referenciaLaboral ;
+	private ReferenciaPersonal referenciaPersonal;
+	private FormularioEntrevista formularioEntrevista ;
 	
 	private TabPanel tabPanel;
 	public Long id_empleado = 0L;
@@ -60,7 +60,7 @@ public class Empleados extends Composite {
 		ScrollPanel scrollPanel = new ScrollPanel();
 		tabPanel.add(scrollPanel, "Datos",true);
 		scrollPanel.setSize("100%", "100%");
-		formularioDatos = new formularioDatos(this,tipo);
+		formularioDatos = new FormularioDatos(this,tipo);
 		scrollPanel.setWidget(formularioDatos);
 	}	
 	
@@ -70,7 +70,7 @@ public class Empleados extends Composite {
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
 		scrollPanel_1.setSize("100%", "1000px");
-		familia = new familiares(this);
+		familia = new Familia(this);
 		scrollPanel_1.setWidget(familia);
 
 		
@@ -78,14 +78,14 @@ public class Empleados extends Composite {
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
 		scrollPanel_2.setSize("100%", "1000px");
-		academico = new academico(this);
+		academico = new Academico(this);
 		scrollPanel_2.setWidget(academico);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("100%", "1000px");
-		referenciaLaboral = new referenciaLaboral(this);///
+		referenciaLaboral = new ReferenciaLaboral(this);///
 		scrollPanel_3.setWidget(referenciaLaboral);
 		referenciaLaboral.setHeight("236px");
 		
@@ -93,7 +93,7 @@ public class Empleados extends Composite {
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("100%", "1000px");
-		referenciaPersonal = new referenciaPersonal(this);///
+		referenciaPersonal = new ReferenciaPersonal(this);///
 		scrollPanel_5.setWidget(referenciaPersonal);
 		
 		ScrollPanel scrollPanel_4 = new ScrollPanel();
@@ -122,7 +122,7 @@ public class Empleados extends Composite {
 		scrollPanel_8.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_8, "Puestos ", true);
 		scrollPanel_8.setSize("100%", "1000px");
-		puesto = new puestos(this);
+		puesto = new Puestos(this);
 		scrollPanel_8.setWidget(puesto);
 		
 
@@ -130,28 +130,28 @@ public class Empleados extends Composite {
 		scrollPanel_s.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_s, "Salarios", true);
 		scrollPanel_s.setSize("100%", "1000px");
-		salario = new salario(this);
+		salario = new Salario(this);
 		scrollPanel_s.setWidget(salario);
 		
 		ScrollPanel scrollPanel_9 = new ScrollPanel();
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("100%", "1000px");
-		formularioEntrevista = new formularioEntrevista(this);
+		formularioEntrevista = new FormularioEntrevista(this);
 		scrollPanel_9.setWidget(formularioEntrevista);
 		
 		ScrollPanel scrollPanel_10 = new ScrollPanel();
 		scrollPanel_10.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_10, "Historial", true);
 		scrollPanel_10.setSize("100%", "1000px");
-		historial = new historiales(this);
+		historial = new Historiales(this);
 		scrollPanel_10.setWidget(historial);
 
 		ScrollPanel scrollPanel_11 = new ScrollPanel();
 		scrollPanel_11.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_11, "Permisos", true);
 		scrollPanel_11.setSize("100%", "1000px");
-		permisos = new vacaciones(this);
+		permisos = new Permiso(this);
 		scrollPanel_11.setWidget(permisos);
 	}
 	public void NuevasPestanasdos(){
@@ -159,7 +159,7 @@ public class Empleados extends Composite {
 		scrollPanel_1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_1, "Familia",true);
 		scrollPanel_1.setSize("100%", "1000px");
-		familia = new familiares(this);
+		familia = new Familia(this);
 		scrollPanel_1.setWidget(familia);
 
 		
@@ -167,14 +167,14 @@ public class Empleados extends Composite {
 		scrollPanel_2.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_2, "Academico", true);
 		scrollPanel_2.setSize("100%", "1000px");
-		academico = new academico(this);
+		academico = new Academico(this);
 		scrollPanel_2.setWidget(academico);
 		
 		ScrollPanel scrollPanel_3 = new ScrollPanel();
 		scrollPanel_3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
 		scrollPanel_3.setSize("100%", "1000px");
-		referenciaLaboral = new referenciaLaboral(this);///
+		referenciaLaboral = new ReferenciaLaboral(this);///
 		scrollPanel_3.setWidget(referenciaLaboral);
 		referenciaLaboral.setHeight("236px");
 		
@@ -182,7 +182,7 @@ public class Empleados extends Composite {
 		scrollPanel_5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
 		scrollPanel_5.setSize("100%", "1000px");
-		referenciaPersonal = new referenciaPersonal(this);///
+		referenciaPersonal = new ReferenciaPersonal(this);///
 		scrollPanel_5.setWidget(referenciaPersonal);
 
 
@@ -198,7 +198,7 @@ public class Empleados extends Composite {
 		scrollPanel_9.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel_9, "Entrevista", true);
 		scrollPanel_9.setSize("100%", "1000px");
-		formularioEntrevista = new formularioEntrevista(this);
+		formularioEntrevista = new FormularioEntrevista(this);
 		scrollPanel_9.setWidget(formularioEntrevista);
 	}
 

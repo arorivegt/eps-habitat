@@ -8,7 +8,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceA
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-import org.habitatguate.hgerp.seguridad.client.rrhh.formularioFamilia;
+import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioFamilia;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;

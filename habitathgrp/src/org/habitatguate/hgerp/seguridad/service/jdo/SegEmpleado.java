@@ -142,7 +142,7 @@ public class SegEmpleado implements Serializable {
     
 	@Persistent(mappedBy = "empleado")
     @Element(dependent = "true")
-	private List <SegVacaciones> vacaciones;
+	private List <SegPermiso> vacaciones;
 
 	@Persistent(mappedBy = "empleado")
 	@Element(dependent = "true")
@@ -526,11 +526,11 @@ public class SegEmpleado implements Serializable {
 		this.pais = pais;
 	}
 
-	public List<SegVacaciones> getVacaciones() {
+	public List<SegPermiso> getVacaciones() {
 		return vacaciones;
 	}
 
-	public void setVacaciones(List<SegVacaciones> vacaciones) {
+	public void setVacaciones(List<SegPermiso> vacaciones) {
 		this.vacaciones = vacaciones;
 	}
 

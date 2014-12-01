@@ -17,7 +17,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
-import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -51,7 +51,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	valores_sesion login_inicio(String user,String password) throws IllegalArgumentException;	
+	ValoresSesion login_inicio(String user,String password) throws IllegalArgumentException;	
 	/**
 	 * 
 	 * @param afiliacion_igss

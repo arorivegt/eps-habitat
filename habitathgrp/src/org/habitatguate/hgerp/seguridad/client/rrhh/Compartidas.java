@@ -81,7 +81,7 @@ public class Compartidas extends Composite  {
         flextable.clear();
         if (tipo.equals("1")) 
         {
-            formularioPruebaPeriodo  fa = new formularioPruebaPeriodo(desempeno,idEmpleado);
+            FormularioPruebaPeriodo  fa = new FormularioPruebaPeriodo(desempeno,idEmpleado);
             
             fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                             ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
@@ -90,7 +90,7 @@ public class Compartidas extends Composite  {
             fa.botonesVisibles(false);
         }else if(tipo.equals("2"))
         {
-        	formularioPruebaPeriodoDos  fa = new formularioPruebaPeriodoDos(evaluacion,idEmpleado);
+        	FormularioPruebaPeriodoDos  fa = new FormularioPruebaPeriodoDos(evaluacion,idEmpleado);
         	
             fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                             ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
@@ -133,7 +133,7 @@ public class Compartidas extends Composite  {
                         	public void onSuccess(AuxEmpleado resul)
                         	{
                         		nombre = resul.getPrimer_nombre() +" "+ resul.getPrimer_apellido() + " "+resul.getSegundo_apellido();
-                            	formularioTest de = new formularioTest(result,compartida,n.getId(),nombre);
+                            	FormularioTestCompartido de = new FormularioTestCompartido(result,compartida,n.getId(),nombre);
                             	de.id_Empleado = n.getId_empleado();
                                 flextable.setWidget(flextable.getRowCount(), 0,de);
                         		System.out.println("exito"+nombre);
@@ -149,7 +149,7 @@ public class Compartidas extends Composite  {
         load.invisible();
     }
          
-    public void DejarCompartir(Long idEmpleadoPrincipal, Long idTestCompartido, final formularioTest test){
+    public void DejarCompartir(Long idEmpleadoPrincipal, Long idTestCompartido, final FormularioTestCompartido test){
 
         load.visible();
                 
@@ -173,7 +173,7 @@ public class Compartidas extends Composite  {
         load.invisible();
     }
     
-    public void remover(formularioTest test){
+    public void remover(FormularioTestCompartido test){
     	flextable.remove(test);
     }
             

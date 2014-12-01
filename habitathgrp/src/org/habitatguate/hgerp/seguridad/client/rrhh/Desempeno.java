@@ -174,7 +174,7 @@ public class Desempeno extends Composite  {
         private void agregarFormulario(){
 	        load.visible();
             flextable.clear();
-            flextable.setWidget(flextable.getRowCount(), 0, new formularioPruebaPeriodo(this,empleado));
+            flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodo(this,empleado));
 	        load.invisible();
         }
         
@@ -182,7 +182,7 @@ public class Desempeno extends Composite  {
 	        load.visible();
             flextable.clear();
             if (!n.equals(null)) {
-                formularioPruebaPeriodo  fa = new formularioPruebaPeriodo(this,empleado);
+                FormularioPruebaPeriodo  fa = new FormularioPruebaPeriodo(this,empleado);
                         fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
@@ -203,7 +203,7 @@ public class Desempeno extends Composite  {
             if (!(results.size() == 0)) {
             valor = results;
                 for (AuxTest n : results) {
-                    formularioDesempeno de = new formularioDesempeno(this, n);
+                    FormularioDesempeno de = new FormularioDesempeno(this, n);
                     flextable.setWidget(flextable.getRowCount(), 0,de);
                 }
             }
@@ -211,7 +211,7 @@ public class Desempeno extends Composite  {
             load.invisible();
         }
         
-        public void EliminarFormulario(final formularioPruebaPeriodo fa, final Long id_empledo, final Long id){
+        public void EliminarFormulario(final FormularioPruebaPeriodo fa, final Long id_empledo, final Long id){
 
             load.visible();
                     loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
@@ -235,7 +235,7 @@ public class Desempeno extends Composite  {
      });
                     load.invisible();
         }
-        public void EliminarFormulario(formularioPruebaPeriodo fa){
+        public void EliminarFormulario(FormularioPruebaPeriodo fa){
 	        load.visible();
             flextable.remove(fa);
 	        load.invisible();

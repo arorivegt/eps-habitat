@@ -3,7 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.habitatguate.hgerp.seguridad.client.rrhh.formularioDatos;
+import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioDatos;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;

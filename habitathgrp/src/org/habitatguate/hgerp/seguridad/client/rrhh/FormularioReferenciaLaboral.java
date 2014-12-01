@@ -25,10 +25,10 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class formularioReferenciaLaboral extends Composite {
+public class FormularioReferenciaLaboral extends Composite {
 
 	private Empleados empleado;
-	private referenciaLaboral a;
+	private ReferenciaLaboral a;
 	private boolean bandera = true;
 	private Long id_referencia_laboral = 0L;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -46,7 +46,7 @@ public class formularioReferenciaLaboral extends Composite {
 	private Mensaje mensaje; 
     private Loading load ;
 	
-	public formularioReferenciaLaboral(referenciaLaboral a,Empleados e) {
+	public FormularioReferenciaLaboral(ReferenciaLaboral a,Empleados e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

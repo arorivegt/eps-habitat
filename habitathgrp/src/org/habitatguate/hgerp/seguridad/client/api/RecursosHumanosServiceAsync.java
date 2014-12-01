@@ -17,7 +17,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
-import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -49,7 +49,7 @@ public interface RecursosHumanosServiceAsync {
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
-	void login_inicio(String user,String i2, AsyncCallback<valores_sesion> callback) throws IllegalArgumentException;
+	void login_inicio(String user,String i2, AsyncCallback<ValoresSesion> callback) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param afiliacion_igss

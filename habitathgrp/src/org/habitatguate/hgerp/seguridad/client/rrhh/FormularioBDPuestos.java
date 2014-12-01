@@ -22,28 +22,32 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class formularioBDPuestos extends Composite {
+public class FormularioBDPuestos extends Composite {
 
+	private BDpuestos bdPuestos;
 	private Mensaje mensaje; 
-	private BDpuestos a;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-    
+
+    private Loading load ;
+    private Button btnGuardar;
+    private Button btnEliminar;
     private DateBox dateFecha;
 	private TextBox txtPuesto;
-	private TextArea txtFunciones;
-    private Loading load ;
     private TextBox txtIdPuesto ;
+	private TextArea txtFunciones;
+	private AbsolutePanel absolutePanel;
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 	
-	public formularioBDPuestos(BDpuestos a) {
+	public FormularioBDPuestos(BDpuestos bdPuestos) {
 
 		mensaje = new Mensaje();
-		this.a = a;
+		this.bdPuestos = bdPuestos;
     	load = new Loading();
         load.Mostrar();
         load.invisible();
-		AbsolutePanel absolutePanel = new AbsolutePanel();
+        
+		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("850px", "100px");
@@ -95,77 +99,77 @@ public class formularioBDPuestos extends Composite {
 		absolutePanel.add(txtFunciones, 372, 27);
 		txtFunciones.setSize("304px", "58px");
 		
-				Button btnGuardar = new Button("Send");
-				btnGuardar.addClickHandler(new ClickHandler() {
-					public void onClick(ClickEvent event) {
-				        load.visible();
-						try{
-							new Date(dateFecha.getValue().getTime());
-						}catch(Exception e){
-							dateFecha.setValue(new Date(1407518124684L));
-						}
-					
-						if(bandera) {					
-							loginService.Insertar_BDPuesto(Long.parseLong(txtIdPuesto.getText()),dateFecha.getValue(), txtPuesto.getText(), 
-									txtFunciones.getText(), new AsyncCallback<Long>(){
-		                        public void onFailure(Throwable caught) 
-		                        {
-		            		        load.invisible();
-		                        	mensaje.setMensaje("alert alert-error", 
-		                        			"Error !! \nal Guardar Datos");
-		                        }
-		
-										@Override
-		                        public void onSuccess(Long result)
-		                        {
-									        load.invisible();
-											id_puesto = result;
-											bandera = false;
-											mensaje.setMensaje("alert alert-success", 
-				                        			"Datos Guardados\n exitosamente!!!");
-		                        }
-										});
-						}else{
-							loginService.Actualizar_BDPuesto(id_puesto, dateFecha.getValue(), txtPuesto.getText(), 
-								txtFunciones.getText(), new AsyncCallback<Long>(){
-                    public void onFailure(Throwable caught) 
-                    {
-        		        load.invisible();
-                    	mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nal Actualizar Datos");
-                    }
+		btnGuardar = new Button("Send");
+		btnGuardar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+		        load.visible();
+				try{
+					new Date(dateFecha.getValue().getTime());
+				}catch(Exception e){
+					dateFecha.setValue(new Date(1407518124684L));
+				}
+			
+				if(bandera) {					
+					recursosHumanosService.Insertar_BDPuesto(Long.parseLong(txtIdPuesto.getText()),dateFecha.getValue(), txtPuesto.getText(), 
+							txtFunciones.getText(), new AsyncCallback<Long>(){
+                        public void onFailure(Throwable caught) 
+                        {
+            		        load.invisible();
+                        	mensaje.setMensaje("alert alert-error", 
+                        			"Error !! \nal Guardar Datos");
+                        }
 
-							@Override
-                    public void onSuccess(Long result)
-                    {
-						        load.invisible();
-								bandera = false;
-								mensaje.setMensaje("alert alert-success", 
-			                			"Datos Actualizados\n exitosamente!!!");
-                    }
-							});
-						}
-				        load.invisible();
-					}
-					
-				});
-				btnGuardar.setText("Guardar");
-				btnGuardar.setStylePrimaryName("sendButton");
-				btnGuardar.setStyleName("sendButton");
-				absolutePanel.add(btnGuardar, 763, 29);
-				btnGuardar.setSize("146px", "34px");
+								@Override
+                        public void onSuccess(Long result)
+                        {
+							        load.invisible();
+									id_puesto = result;
+									bandera = false;
+									mensaje.setMensaje("alert alert-success", 
+		                        			"Datos Guardados\n exitosamente!!!");
+                        }
+								});
+				}else{
+					recursosHumanosService.Actualizar_BDPuesto(id_puesto, dateFecha.getValue(), txtPuesto.getText(), 
+						txtFunciones.getText(), new AsyncCallback<Long>(){
+			            public void onFailure(Throwable caught) 
+			            {
+					        load.invisible();
+			            	mensaje.setMensaje("alert alert-error", 
+			            			"Error !! \nal Actualizar Datos");
+			            }
+			
+								@Override
+			            public void onSuccess(Long result)
+			            {
+							        load.invisible();
+									bandera = false;
+									mensaje.setMensaje("alert alert-success", 
+				                			"Datos Actualizados\n exitosamente!!!");
+			            }
+					});
+				}
+		        load.invisible();
+			}
+			
+		});
+		btnGuardar.setText("Guardar");
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		absolutePanel.add(btnGuardar, 763, 29);
+		btnGuardar.setSize("146px", "34px");
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
+		btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				EliminarFormularioSinDatos();
 			}
 		});
-		button.setText("Quitar");
-		button.setStylePrimaryName("sendButton");
-		button.setStyleName("sendButton");
-		absolutePanel.add(button, 763, 91);
-		button.setSize("146px", "34px");
+		btnEliminar.setText("Quitar");
+		btnEliminar.setStylePrimaryName("sendButton");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 763, 91);
+		btnEliminar.setSize("146px", "34px");
 
 		
 		Label lblNivelAcademico = new Label("Puesto");
@@ -190,7 +194,7 @@ public class formularioBDPuestos extends Composite {
 	}
 	
 	private void EliminarFormularioSinDatos(){
-        	a.EliminarFormulario(this);
+        	bdPuestos.EliminarFormulario(this);
     }
 	
 	public void LlenarDatos(Long id, Long dateFecha,

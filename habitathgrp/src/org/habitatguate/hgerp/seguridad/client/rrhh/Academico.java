@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
  * @author arodriguez
  *
  */
-public class academico extends Composite  {
+public class Academico extends Composite  {
 
 
 	 private Mensaje mensaje; 
@@ -44,7 +44,7 @@ public class academico extends Composite  {
      * inicializa los componentes
      * @param empleado
      */
-     public academico(Empleados empleado) 
+     public Academico(Empleados empleado) 
 	 {
 
 			this.empleado = empleado;
@@ -78,7 +78,7 @@ public class academico extends Composite  {
 	private void agregarFormulario()
 	{
         load.visible();
-        flextable.setWidget(flextable.getRowCount(), 0, new formularioAcademico(this,empleado));
+        flextable.setWidget(flextable.getRowCount(), 0, new FormularioAcademico(this,empleado));
         load.invisible();
 	}
 	
@@ -94,7 +94,7 @@ public class academico extends Composite  {
 		{
 			for ( AuxHistorialAcademico n2 : results) 
 			{
-				formularioAcademico fa = new formularioAcademico(this,empleado);
+				FormularioAcademico fa = new FormularioAcademico(this,empleado);
 				fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), 
 						       n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico()
 						       ,n2.getURLFile(), n2.getKeyFile());
@@ -111,7 +111,7 @@ public class academico extends Composite  {
 	 * @param id_empledo
 	 * @param id_FormularioAcademico
 	 */
-	public void EliminarFormulario(final formularioAcademico formularioAcademico, final Long id_empledo, final Long id_FormularioAcademico)
+	public void EliminarFormulario(final FormularioAcademico formularioAcademico, final Long id_empledo, final Long id_FormularioAcademico)
 	{
 
         load.visible();
@@ -138,7 +138,7 @@ public class academico extends Composite  {
 	 *elimina un formulario del panel sin haberse guardado algo 
 	 * @param formularioAcademico
 	 */
-	public void EliminarFormulario(formularioAcademico formularioAcademico)
+	public void EliminarFormulario(FormularioAcademico formularioAcademico)
 	{
         load.visible();
 		flextable.remove(formularioAcademico);

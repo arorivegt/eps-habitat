@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class formularioEntrevista extends Composite {
+public class FormularioEntrevista extends Composite {
 
 	private Mensaje mensaje; 
 	 private Empleados empleado;
@@ -59,16 +59,19 @@ public class formularioEntrevista extends Composite {
 	 private DoubleBox txtPagoMensual ;
 	 private DoubleBox txtPretencionSalarial;
      private Loading load ;
+     private Button btnGuardar;
 	 
    
 
-	public formularioEntrevista(Empleados e) {
+	public FormularioEntrevista(Empleados empleadoo) {
 
 		mensaje = new Mensaje();
-		this.empleado = e;
+		this.empleado = empleadoo;
+		
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -328,8 +331,8 @@ public class formularioEntrevista extends Composite {
 		absolutePanel.add(txtOtrosIngresos, 13, 1078);
 		txtOtrosIngresos.setSize("717px", "100px");
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
+		btnGuardar = new Button("Send");
+		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
 		        load.visible();
@@ -404,11 +407,11 @@ public class formularioEntrevista extends Composite {
 		        load.invisible();
 			}
 		});
-		button.setText("Guardar");
-		button.setStylePrimaryName("sendButton");
-		button.setStyleName("sendButton");
-		absolutePanel.add(button, 290, 1231);
-		button.setSize("227px", "34px");
+		btnGuardar.setText("Guardar");
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		absolutePanel.add(btnGuardar, 290, 1231);
+		btnGuardar.setSize("227px", "34px");
 		
 		Label lblNivelAcademico = new Label("Informe Entrevista");
 		lblNivelAcademico.setStyleName("label");
@@ -575,6 +578,7 @@ public class formularioEntrevista extends Composite {
 		this.txtPagoMensual.setText(txtPagoMensual);
 		this.txtPretencionSalarial.setText(txtPretencionSalarial);
 		boolean bandera = true;
+		
 	    for(int i=0; i < this.listA .getItemCount() && bandera; i++){
 	    	bandera = !this.listA .getItemText(i).equals(listA );
 	    	this.listA .setSelectedIndex(i);

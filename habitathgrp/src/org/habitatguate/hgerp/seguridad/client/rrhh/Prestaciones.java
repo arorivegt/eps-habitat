@@ -17,18 +17,18 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class prestaciones extends Composite  {
+public class Prestaciones extends Composite  {
 
 	private Grid grid;
     private FlexTable flextable;
 	private Button btnTodo;
 	private Button btnSeleccionados;
 	private VerticalPanel panel = new VerticalPanel();
-    private formularioPrestaciones fp;
+    private FormularioPrestaciones fp;
     private Loading load ;
 	private Mensaje mensaje; 
-    private List<formularioPrestaciones> listfp = new ArrayList<formularioPrestaciones>();
-    public prestaciones() {
+    private List<FormularioPrestaciones> listfp = new ArrayList<FormularioPrestaciones>();
+    public Prestaciones() {
 
     	load = new Loading();
 		mensaje = new Mensaje();
@@ -96,7 +96,7 @@ public class prestaciones extends Composite  {
 			 String txtDiasAnnio,
 			 Date fecha)
     {
-    	fp = new formularioPrestaciones();
+    	fp = new FormularioPrestaciones();
     	fp.llenar_datos(idEmpleado, codigoSalario, descripcion, nombre, promedioSalario, txtDiasTrabajados, txtDiasAnnio,fecha);
         flextable.setWidget(flextable.getRowCount(), 0, fp); 
     	listfp.add(fp);

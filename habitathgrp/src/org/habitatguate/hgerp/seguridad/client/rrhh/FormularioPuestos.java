@@ -37,9 +37,9 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 
-public class formularioPuestos extends Composite {
+public class FormularioPuestos extends Composite {
 
-	private puestos puesto;
+	private Puestos puesto;
 	private Empleados empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
@@ -76,7 +76,7 @@ public class formularioPuestos extends Composite {
      * @param puest
      * @param emplead
      */
-	public formularioPuestos(puestos puest,Empleados emplead) {
+	public FormularioPuestos(Puestos puest,Empleados emplead) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

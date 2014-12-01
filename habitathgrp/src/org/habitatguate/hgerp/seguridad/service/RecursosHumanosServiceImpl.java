@@ -28,7 +28,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
-import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDTest;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
@@ -43,7 +43,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSalario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegTest;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegVacaciones;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPermiso;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegTestCompartidos;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -132,8 +132,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	}
  
 	@Override
-	public valores_sesion login_inicio(String user,String password) throws IllegalArgumentException {
-		valores_sesion vs = new valores_sesion();
+	public ValoresSesion login_inicio(String user,String password) throws IllegalArgumentException {
+		ValoresSesion vs = new ValoresSesion();
 		
 		
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
@@ -540,7 +540,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		Long valor = 0L;
 			 try { 
 				 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
-				 SegVacaciones v 		= new  SegVacaciones();
+				 SegPermiso v 		= new  SegPermiso();
 				 	v.setFecha1(fecha1);
 				 	v.setFecha2(fecha2);
 				 	v.setDescripcion(descripcionl.toUpperCase());
@@ -933,9 +933,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					 try { 
 						 Key k = new KeyFactory
 							        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
-							        .addChild(SegVacaciones.class.getSimpleName(), id)
+							        .addChild(SegPermiso.class.getSimpleName(), id)
 							        .getKey();
-						 final SegVacaciones v = Persistencia.getObjectById(SegVacaciones.class, k); 
+						 final SegPermiso v = Persistencia.getObjectById(SegPermiso.class, k); 
 						 	v.setFecha1(fecha1);
 						 	v.setFecha2(fecha2);
 						 	v.setDescripcion(descripcionl.toUpperCase());
@@ -1071,9 +1071,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
                 Key k = new KeyFactory
                 		.Builder(SegEmpleado.class.getSimpleName(), id_empleado)
-                		.addChild(SegVacaciones.class.getSimpleName(), id)
+                		.addChild(SegPermiso.class.getSimpleName(), id)
                         .getKey();
-                SegVacaciones f = Persistencia.getObjectById(SegVacaciones.class, k);
+                SegPermiso f = Persistencia.getObjectById(SegPermiso.class, k);
                 Persistencia.deletePersistent(f);
                 return id ;
             }
@@ -1369,9 +1369,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	nuevo.setTipo_planilla(p.getTipo_planilla());
 					    	nuevo.setTotal(p.getTotal());
 					    	
-					    	List<SegVacaciones> results9 = p.getVacaciones();
+					    	List<SegPermiso> results9 = p.getVacaciones();
 					    	if (!results9.isEmpty()) {
-							    for (SegVacaciones n9 : results9) {
+							    for (SegPermiso n9 : results9) {
 
 							    	AuxVacaciones v= new AuxVacaciones();
 							    	v.setId_vacaciones(n9.getId_vacaciones());
@@ -1637,9 +1637,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	nuevo.setTipo_planilla(p.getTipo_planilla());
 				    	nuevo.setTotal(p.getTotal());
 				    	
-				    	List<SegVacaciones> results9 = p.getVacaciones();
+				    	List<SegPermiso> results9 = p.getVacaciones();
 				    	if (!results9.isEmpty()) {
-						    for (SegVacaciones n9 : results9) {
+						    for (SegPermiso n9 : results9) {
 
 						    	AuxVacaciones v= new AuxVacaciones();
 						    	v.setId_vacaciones(n9.getId_vacaciones());
@@ -2165,7 +2165,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				try{
 					 result = Persistencia.getObjectById(SegEmpleado.class, id); 
 					 if (!result.getVacaciones().isEmpty()) {
-						    for ( SegVacaciones n9 : result.getVacaciones()) 
+						    for ( SegPermiso n9 : result.getVacaciones()) 
 						    {
 						    	AuxVacaciones v= new AuxVacaciones();
 						    	v.setId_vacaciones(n9.getId_vacaciones());

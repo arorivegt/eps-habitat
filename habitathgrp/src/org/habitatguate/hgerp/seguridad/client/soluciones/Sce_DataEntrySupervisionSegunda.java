@@ -11,7 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFami
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-import org.habitatguate.hgerp.seguridad.client.rrhh.formularioFamilia;
+import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioFamilia;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

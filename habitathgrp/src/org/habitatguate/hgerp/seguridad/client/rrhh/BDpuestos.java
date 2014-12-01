@@ -47,7 +47,7 @@ public class BDpuestos extends Composite  {
 	 private Button btnAgregar;
 	 private FlexTable flextable;
      private final Button btnTest;
- 	 private formularioBDPuestos fa ;
+ 	 private FormularioBDPuestos fa ;
      private VerticalPanel panel = new VerticalPanel();
  	 private List<AuxBDPuesto> bdpuesto = new ArrayList<AuxBDPuesto>();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -105,7 +105,7 @@ public class BDpuestos extends Composite  {
         			if(n2.getId_puesto() == Long.parseLong(idPuesto.getText()))
         			{
         				flextable.clear();
-        		    	fa = new  formularioBDPuestos(a);
+        		    	fa = new  FormularioBDPuestos(a);
         		    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
         		    	flextable.setWidget(flextable.getRowCount(), 0,fa );
         			}
@@ -176,7 +176,7 @@ public class BDpuestos extends Composite  {
 				    for ( AuxBDPuesto n2 : results) 
 				    {
 				    	bdpuesto.add(n2);
-				    	fa = new  formularioBDPuestos(a);
+				    	fa = new  FormularioBDPuestos(a);
 				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
 				    	flextable.setWidget(flextable.getRowCount(), 0,fa );
 				    }
@@ -191,7 +191,7 @@ public class BDpuestos extends Composite  {
      */
     private void agregarFormulario(){
         load.visible();
-    	flextable.setWidget(flextable.getRowCount(), 0, new formularioBDPuestos(this));
+    	flextable.setWidget(flextable.getRowCount(), 0, new FormularioBDPuestos(this));
         load.invisible();
     }
 	    
@@ -199,7 +199,7 @@ public class BDpuestos extends Composite  {
      * elimina un formulario del panel, mas no del datastore
      * @param formularioBaseDatosPuestos
      */
-    public void EliminarFormulario(formularioBDPuestos formularioBaseDatosPuestos){
+    public void EliminarFormulario(FormularioBDPuestos formularioBaseDatosPuestos){
     	flextable.remove(formularioBaseDatosPuestos);
 	}
 }

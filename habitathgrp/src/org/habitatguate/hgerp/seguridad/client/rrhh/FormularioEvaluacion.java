@@ -16,18 +16,18 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class formularioEvaluacion extends Composite {
+public class FormularioEvaluacion extends Composite {
 
 	private AuxTest prueba;
     private DateBox dateFecha ;
     private TextBox txtEvaluador ;
     private DoubleBox txtPunteo;
-    private Evaluacion d;
+    private Evaluacion evaluacion;
     private Loading load ;
     
-	public formularioEvaluacion(final Evaluacion d,final AuxTest prueba) {
+	public FormularioEvaluacion(final Evaluacion devaluacion,final AuxTest prueba) {
 
-		this.setD(d);
+		this.setD(devaluacion);
     	load = new Loading();
         load.Mostrar();
         load.invisible();
@@ -78,7 +78,7 @@ public class formularioEvaluacion extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				d.agregarFormulario_lleno(prueba);
+				devaluacion.agregarFormulario_lleno(prueba);
 			}
 		});
 		btnActualizar.setText("Ver");
@@ -113,11 +113,11 @@ public class formularioEvaluacion extends Composite {
 	}
 
 	public Evaluacion getD() {
-		return d;
+		return evaluacion;
 	}
 
 	public void setD(Evaluacion d) {
-		this.d = d;
+		this.evaluacion = d;
 	}
 
 	

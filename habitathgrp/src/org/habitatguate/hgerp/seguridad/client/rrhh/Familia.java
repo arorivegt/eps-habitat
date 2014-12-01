@@ -24,7 +24,7 @@ public class Familia extends Composite  {
 
 	private Mensaje mensaje; 
 	private Grid grid;
-	private Empleados empleado;
+	private Empleado empleado;
     private FlexTable flextable;
 	private Button btnAgregarHermanoa;
 	private Button btnAgregar_pariente;
@@ -32,7 +32,7 @@ public class Familia extends Composite  {
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private Loading load ;
 	
-    public Familia(Empleados e) {
+    public Familia(Empleado e) {
 
 		mensaje = new Mensaje();
 		this.empleado = e;

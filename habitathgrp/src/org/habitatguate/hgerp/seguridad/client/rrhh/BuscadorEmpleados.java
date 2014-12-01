@@ -396,7 +396,7 @@ public class BuscadorEmpleados extends Composite   {
         load.visible();
         
 		grid.clearCell(1, 0);
-		final Empleados e = new Empleados(0);
+		final Empleado e = new Empleado(0);
 		e.id_empleado = id_empleado;
 		e.NuevasPestanas(); 
 		grid.setWidget(1, 0,e);

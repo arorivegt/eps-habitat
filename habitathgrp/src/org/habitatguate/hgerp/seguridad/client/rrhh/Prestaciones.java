@@ -20,29 +20,34 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class Prestaciones extends Composite  {
 
 	private Grid grid;
-    private FlexTable flextable;
+    private Loading load;
 	private Button btnTodo;
+	private Mensaje mensaje; 
+    private FlexTable flextable;
 	private Button btnSeleccionados;
 	private VerticalPanel panel = new VerticalPanel();
-    private FormularioPrestaciones fp;
-    private Loading load ;
-	private Mensaje mensaje; 
+    private FormularioPrestaciones formularioPrestaciones;
     private List<FormularioPrestaciones> listfp = new ArrayList<FormularioPrestaciones>();
+    
     public Prestaciones() {
 
     	load = new Loading();
 		mensaje = new Mensaje();
         load.Mostrar();
         load.invisible();
+        
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
         initWidget(panel);
         panel.setSize("761px", "381px");
+        
         flextable = new FlexTable();
         panel.add(flextable);
+        
         grid = new Grid(1, 3);
         panel.add(grid);
         grid.setWidth("609px");
+        
         btnSeleccionados = new Button("Guardar Todo");
         grid.setWidget(0, 0, btnSeleccionados);
         
@@ -96,10 +101,10 @@ public class Prestaciones extends Composite  {
 			 String txtDiasAnnio,
 			 Date fecha)
     {
-    	fp = new FormularioPrestaciones();
-    	fp.llenar_datos(idEmpleado, codigoSalario, descripcion, nombre, promedioSalario, txtDiasTrabajados, txtDiasAnnio,fecha);
-        flextable.setWidget(flextable.getRowCount(), 0, fp); 
-    	listfp.add(fp);
+    	formularioPrestaciones = new FormularioPrestaciones();
+    	formularioPrestaciones.llenar_datos(idEmpleado, codigoSalario, descripcion, nombre, promedioSalario, txtDiasTrabajados, txtDiasAnnio,fecha);
+        flextable.setWidget(flextable.getRowCount(), 0, formularioPrestaciones); 
+    	listfp.add(formularioPrestaciones);
         	
     }
     

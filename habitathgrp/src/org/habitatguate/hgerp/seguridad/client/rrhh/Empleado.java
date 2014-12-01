@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.TabPanel;
  * @author anibaljose
  *
  */
-public class Empleados extends Composite {
+public class Empleado extends Composite {
 
 
 	private Idioma idioma;
@@ -51,7 +51,7 @@ public class Empleados extends Composite {
 	private TabPanel tabPanel;
 	public Long id_empleado = 0L;
 	
-	public Empleados(int tipo) {
+	public Empleado(int tipo) {
 		
 		tabPanel = new TabPanel();
 		tabPanel.setSize("100%", "100%");

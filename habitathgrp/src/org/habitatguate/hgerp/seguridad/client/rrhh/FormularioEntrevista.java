@@ -27,7 +27,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 public class FormularioEntrevista extends Composite {
 
 	private Mensaje mensaje; 
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private boolean bandera = true;
      private Long id_entrevista = 0L;
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -63,7 +63,7 @@ public class FormularioEntrevista extends Composite {
 	 
    
 
-	public FormularioEntrevista(Empleados empleadoo) {
+	public FormularioEntrevista(Empleado empleadoo) {
 
 		mensaje = new Mensaje();
 		this.empleado = empleadoo;

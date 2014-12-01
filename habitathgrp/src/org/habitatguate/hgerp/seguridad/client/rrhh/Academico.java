@@ -35,7 +35,7 @@ public class Academico extends Composite  {
 	 private Mensaje mensaje; 
 	 private Loading load ;
 	 private Button btnAgregar;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private FlexTable flextable;
      private VerticalPanel panel = new VerticalPanel();
      private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
@@ -44,7 +44,7 @@ public class Academico extends Composite  {
      * inicializa los componentes
      * @param empleado
      */
-     public Academico(Empleados empleado) 
+     public Academico(Empleado empleado) 
 	 {
 
 			this.empleado = empleado;

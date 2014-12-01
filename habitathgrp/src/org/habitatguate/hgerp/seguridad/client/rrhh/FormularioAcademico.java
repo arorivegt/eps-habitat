@@ -35,7 +35,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 public class FormularioAcademico extends Composite {
 	private Mensaje mensaje; 
 	private Academico academico;
-	private Empleados empleado;
+	private Empleado empleado;
 	private boolean bandera = true;
 	private Grid grid;
 	private DateBox dateInicio;
@@ -58,7 +58,7 @@ public class FormularioAcademico extends Composite {
 	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 	
-	public FormularioAcademico(Academico academico,Empleados emplead) {
+	public FormularioAcademico(Academico academico,Empleado emplead) {
 
 		mensaje = new Mensaje();
 		this.empleado = emplead;

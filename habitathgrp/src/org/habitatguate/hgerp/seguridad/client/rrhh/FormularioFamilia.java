@@ -23,7 +23,7 @@ public class FormularioFamilia  extends Composite  {
 
 	private Mensaje mensaje; 
 	private Familia familiares;
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_familia = 0L;
 	private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -39,7 +39,7 @@ public class FormularioFamilia  extends Composite  {
 	private AbsolutePanel absolutePanel ;
     private Loading load ;
     private Button btnEliminar;
-	public FormularioFamilia(String pariente, Familia familia, Empleados empleadoo) {
+	public FormularioFamilia(String pariente, Familia familia, Empleado empleadoo) {
 
 		
 		

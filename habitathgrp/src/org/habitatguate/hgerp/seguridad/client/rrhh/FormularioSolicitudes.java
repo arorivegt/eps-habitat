@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.ListBox;
 
 public class FormularioSolicitudes extends Composite {
 
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -36,7 +36,7 @@ public class FormularioSolicitudes extends Composite {
     private Button btnSolicitar;
     private AbsolutePanel absolutePanel;
     
-	public FormularioSolicitudes(Empleados e) {
+	public FormularioSolicitudes(Empleado e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

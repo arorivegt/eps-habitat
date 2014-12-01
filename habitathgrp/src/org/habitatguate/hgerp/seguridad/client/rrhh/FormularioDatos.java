@@ -52,7 +52,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 public class FormularioDatos extends Composite {
 
 	private Mensaje mensaje; 
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_empleado = 0L;
 	private Long id_afiliado = 0L;
 	private Long idJefe = 0L;
@@ -163,7 +163,7 @@ public class FormularioDatos extends Composite {
      * @param empleadoo
      * @param tipo
      */
-	public FormularioDatos(Empleados empleadoo,final int tipo) {
+	public FormularioDatos(Empleado empleadoo,final int tipo) {
 
 		tip = tipo;
 		mensaje = new Mensaje();

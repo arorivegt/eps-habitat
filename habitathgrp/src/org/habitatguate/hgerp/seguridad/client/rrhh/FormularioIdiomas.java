@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class FormularioIdiomas extends Composite {
 
 	private Idioma a;
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_idioma = 0L;
 	private boolean bandera = true;
     private ListBox listNivel;
@@ -58,7 +58,7 @@ public class FormularioIdiomas extends Composite {
 
 	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     
-	public FormularioIdiomas(Idioma a,Empleados e) {
+	public FormularioIdiomas(Idioma a,Empleado e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -27,7 +27,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 
 public class FormularioReferenciaLaboral extends Composite {
 
-	private Empleados empleado;
+	private Empleado empleado;
 	private ReferenciaLaboral a;
 	private boolean bandera = true;
 	private Long id_referencia_laboral = 0L;
@@ -46,7 +46,7 @@ public class FormularioReferenciaLaboral extends Composite {
 	private Mensaje mensaje; 
     private Loading load ;
 	
-	public FormularioReferenciaLaboral(ReferenciaLaboral a,Empleados e) {
+	public FormularioReferenciaLaboral(ReferenciaLaboral a,Empleado e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

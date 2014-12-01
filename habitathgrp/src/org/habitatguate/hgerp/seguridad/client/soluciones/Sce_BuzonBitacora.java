@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Grid;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
-import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados; // Por cambiar
+import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado; // Por cambiar
 
 public class Sce_BuzonBitacora extends Composite  {
 

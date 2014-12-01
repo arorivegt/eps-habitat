@@ -35,9 +35,9 @@ public class Salario extends Composite  {
 
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
-     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
      private Button btnAgregar;
      private Loading load ;
      private Grid grid;
@@ -47,13 +47,15 @@ public class Salario extends Composite  {
 	 private List<AuxSalario> salario = new ArrayList<AuxSalario> ();
      private Button button;
 		
-	    public Salario(Empleados e) {
+	    public Salario(Empleado empleadoo) {
 
 			mensaje = new Mensaje();
+			
         	load = new Loading();
             load.Mostrar();
             load.invisible();
-			this.empleado = e;
+            
+			this.empleado = empleadoo;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
@@ -102,7 +104,7 @@ public class Salario extends Composite  {
 	        	public void onClick(ClickEvent event) {
 	        		
 	        		load.visible();
-	        		loginService.getSalarios(empleado.id_empleado, new AsyncCallback<List<AuxSalario>>(){
+	        		recursosHumanosService.getSalarios(empleado.id_empleado, new AsyncCallback<List<AuxSalario>>(){
 	                    public void onFailure(Throwable caught) 
 	                    {
 	                    }
@@ -195,7 +197,7 @@ public class Salario extends Composite  {
 	    public void EliminarFormulario(final FormularioSalario fa, final Long id_empledo, final Long id){
 
 	        load.visible();
-			loginService.Eliminar_Salario(id_empledo, id, new AsyncCallback<Long>(){
+			recursosHumanosService.Eliminar_Salario(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
     		        load.invisible();

@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.ListBox;
 public class Historiales extends Composite  {
 
 	 private FlexTable flextable;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 private Mensaje mensaje; 
 	 private List<AuxHistorial> historial = new ArrayList<AuxHistorial> ();
@@ -40,7 +40,7 @@ public class Historiales extends Composite  {
 	 private Button btnBuscar;
 	    private Loading load ;
 		
-	    public Historiales(Empleados e) {
+	    public Historiales(Empleado e) {
 
 			mensaje = new Mensaje();
         	load = new Loading();

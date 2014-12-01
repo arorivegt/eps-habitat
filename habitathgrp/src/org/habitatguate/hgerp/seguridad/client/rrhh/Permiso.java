@@ -28,7 +28,7 @@ public class Permiso extends Composite  {
 
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 List<AuxVacaciones> permiso = new ArrayList<AuxVacaciones> ();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -39,13 +39,13 @@ public class Permiso extends Composite  {
 	 private final Button btnBuscar = new Button("Agregar");
 	    private Loading load ;
 		
-	    public Permiso(Empleados e) {
+	    public Permiso(Empleado empleadoo) {
 
         	load = new Loading();
             load.Mostrar();
             load.invisible();
 			mensaje = new Mensaje();
-			this.empleado = e;
+			this.empleado = empleadoo;
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");

@@ -25,19 +25,19 @@ public class Puestos extends Composite  {
 
 	private Mensaje mensaje; 
 	 private FlexTable flextable;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	    private Loading load ;
 	 
-	    public Puestos(Empleados e) {
+	    public Puestos(Empleado empleados) {
 
 			mensaje = new Mensaje();
         	load = new Loading();
             load.Mostrar();
             load.invisible();
-			this.empleado = e;
+			this.empleado = empleados;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);

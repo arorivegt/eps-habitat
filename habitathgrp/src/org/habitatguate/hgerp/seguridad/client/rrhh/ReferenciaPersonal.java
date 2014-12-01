@@ -23,18 +23,18 @@ public class ReferenciaPersonal extends Composite  {
 
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
-	 private Empleados empleado;
+	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 private Loading load ;
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
-	    public ReferenciaPersonal(Empleados e) {
+	    public ReferenciaPersonal(Empleado empleado) {
 
 			mensaje = new Mensaje();
         	load = new Loading();
             load.Mostrar();
             load.invisible();
-			this.empleado = e;
+			this.empleado = empleado;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 

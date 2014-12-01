@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.SimpleCheckBox;
 public class FormularioPuestos extends Composite {
 
 	private Puestos puesto;
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_puesto = 0L;
 	private boolean bandera = true;
 	private AbsolutePanel absolutePanel;
@@ -76,7 +76,7 @@ public class FormularioPuestos extends Composite {
      * @param puest
      * @param emplead
      */
-	public FormularioPuestos(Puestos puest,Empleados emplead) {
+	public FormularioPuestos(Puestos puest,Empleado emplead) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -18,7 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearInformeBancos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearReporteEmpleados;
-import org.habitatguate.hgerp.seguridad.client.rrhh.Empleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BusquedaFormulario;
@@ -540,7 +540,7 @@ public class MenuPrincipal extends Composite {
 
 	public void Empleado_registrado(){
 
-		final Empleados e = new Empleados(1);
+		final Empleado e = new Empleado(1);
 		e.NuevasPestanasdos();
 		e.inavilidarDatosYPestanas();
 		this.nuevo.getGrid().clearCell(1, 0);

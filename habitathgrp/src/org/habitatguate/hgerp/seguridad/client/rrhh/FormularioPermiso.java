@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.ListBox;
 public class FormularioPermiso extends Composite {
 
 	private Permiso a;
-	private Empleados empleado;
+	private Empleado empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -36,7 +36,7 @@ public class FormularioPermiso extends Composite {
 	private ListBox listTipoPermiso ;
     private Loading load ;
     
-	public FormularioPermiso(Permiso a,Empleados e) {
+	public FormularioPermiso(Permiso a,Empleado e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -22,7 +22,7 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class FormularioReferenciaPersonal extends Composite {
 
-	private Empleados empleado;
+	private Empleado empleado;
 	private ReferenciaPersonal a;
 	private boolean bandera = true;
 	private Long id_referencia_personal = 0L;
@@ -37,7 +37,7 @@ public class FormularioReferenciaPersonal extends Composite {
     private Loading load ;
 	
 	
-	public FormularioReferenciaPersonal(ReferenciaPersonal a,Empleados e) {
+	public FormularioReferenciaPersonal(ReferenciaPersonal a,Empleado e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -19,10 +19,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
 
-public class formularioFamilia  extends Composite  {
+public class FormularioFamilia  extends Composite  {
 
 	private Mensaje mensaje; 
-	private familiares a;
+	private Familia familiares;
 	private Empleados empleado;
 	private Long id_familia = 0L;
 	private boolean bandera = true;
@@ -35,9 +35,11 @@ public class formularioFamilia  extends Composite  {
 	private TextBox txtOcupacion;
 	private TextBox txtParentesco;
 	private TextBox txtEdad ;
+	private Button btnActualizar;
 	private AbsolutePanel absolutePanel ;
     private Loading load ;
-	public formularioFamilia(String pariente, familiares a,Empleados e) {
+    private Button btnEliminar;
+	public FormularioFamilia(String pariente, Familia familia, Empleados empleadoo) {
 
 		
 		
@@ -45,8 +47,10 @@ public class formularioFamilia  extends Composite  {
     	load = new Loading();
         load.Mostrar();
         load.invisible();
-		this.empleado = e;
-		this.a = a;
+        
+		this.empleado = empleadoo;
+		this.familiares = familia;
+		
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -93,32 +97,32 @@ public class formularioFamilia  extends Composite  {
 		absolutePanel.add(txtOcupacion, 515, 99);
 		txtOcupacion.setSize("227px", "34px");
 		
-				txtEdad = new TextBox();
-				txtEdad.addChangeHandler(new ChangeHandler() {
-					public void onChange(ChangeEvent event) {
-						if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
-						else if(txtEdad.getText().equals(null)) {txtEdad.setText("0");}
-						else{
-							try{
-								Integer.parseInt(txtEdad.getText());
-							}catch(Exception e){
-								mensaje.setMensaje("alert alert-error", 
-		                    			"Error !! \nEdad no valida");
-								txtEdad.setText("0");
-							}
-						}
-
-						
+		txtEdad = new TextBox();
+		txtEdad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
+				else if(txtEdad.getText().equals(null)) {txtEdad.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtEdad.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nEdad no valida");
+						txtEdad.setText("0");
 					}
-				});
-				txtEdad.setText("0");
-				txtEdad.setStylePrimaryName("gwt-TextBox2");
-				txtEdad.setStyleName("gwt-TextBox2");
-				txtEdad.setMaxLength(100);
-				absolutePanel.add(txtEdad, 761, 99);
-				txtEdad.setSize("68px", "34px");
+				}
+
+				
+			}
+		});
+		txtEdad.setText("0");
+		txtEdad.setStylePrimaryName("gwt-TextBox2");
+		txtEdad.setStyleName("gwt-TextBox2");
+		txtEdad.setMaxLength(100);
+		absolutePanel.add(txtEdad, 761, 99);
+		txtEdad.setSize("68px", "34px");
 		
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -184,7 +188,7 @@ public class formularioFamilia  extends Composite  {
 		
 		
 		
-		Button btnEliminar = new Button("Send");
+		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(bandera){
@@ -238,11 +242,11 @@ public class formularioFamilia  extends Composite  {
 		
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this,empleado.id_empleado, id_familia);
+        familiares.EliminarFormulario(this,empleado.id_empleado, id_familia);
     }
 	
 	private void EliminarFormularioSinDatos(){
-        a.EliminarFormulario(this);
+        familiares.EliminarFormulario(this);
     }
 	
 	public void LlenarDatos(Long id,String txtPrimer_apellido ,

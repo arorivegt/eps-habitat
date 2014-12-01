@@ -31,9 +31,9 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.datepicker.client.DateBox;
 
 
-public class formularioSalario extends Composite {
+public class FormularioSalario extends Composite {
 
-	private salario salario;
+	private Salario salario;
 	private Empleados empleado;
 	private Mensaje mensaje; 
     private Label label;
@@ -50,7 +50,7 @@ public class formularioSalario extends Composite {
 	private AbsolutePanel absolutePanel;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 
-	public formularioSalario(salario salari,Empleados emplead) {
+	public FormularioSalario(Salario salari,Empleados emplead) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

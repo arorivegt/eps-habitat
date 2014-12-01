@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-public class familiares extends Composite  {
+public class Familia extends Composite  {
 
 	private Mensaje mensaje; 
 	private Grid grid;
@@ -29,10 +29,10 @@ public class familiares extends Composite  {
 	private Button btnAgregarHermanoa;
 	private Button btnAgregar_pariente;
 	private VerticalPanel panel = new VerticalPanel();
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private Loading load ;
 	
-    public familiares(Empleados e) {
+    public Familia(Empleados e) {
 
 		mensaje = new Mensaje();
 		this.empleado = e;
@@ -71,7 +71,7 @@ public class familiares extends Composite  {
     
     private void agregarFormulario(String pariente){
         load.visible();
-        flextable.setWidget(flextable.getRowCount(), 0, new formularioFamilia(pariente,this,empleado)); 
+        flextable.setWidget(flextable.getRowCount(), 0, new FormularioFamilia(pariente,this,empleado)); 
         load.invisible(); 	
     }
     
@@ -86,7 +86,7 @@ public class familiares extends Composite  {
 		    		if(n2.getParentesco().equals("padre")) padre = true;
 		    		else if(n2.getParentesco().equals("madre")) madre = true;
 		    		else if(n2.getParentesco().equals("conyugue")) conyugue = true;
-		    	 formularioFamilia fa = new  formularioFamilia(n2.getParentesco(),this,empleado);
+		    	 FormularioFamilia fa = new  FormularioFamilia(n2.getParentesco(),this,empleado);
 		    	  fa.LlenarDatos(n2.getId_familia(),n2.getPrimer_apellido(),n2.getSegundo_apellido(),n2.getPrimer_nombre(),
 		    					 n2.getSegundo_nombre(),n2.getOcupacion(),n2.getParentesco(),""+n2.getEdad());
 		        flextable.setWidget(flextable.getRowCount(), 0,fa );
@@ -109,10 +109,10 @@ public class familiares extends Composite  {
     		
     }
     
-    public void EliminarFormulario(final formularioFamilia fa, final Long id_empledo, final Long id){
+    public void EliminarFormulario(final FormularioFamilia fa, final Long id_empledo, final Long id){
 
         load.visible();
-		loginService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
+		recursosHumanosService.Eliminar_Familiar(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
 		        load.invisible();
@@ -133,7 +133,7 @@ public class familiares extends Composite  {
         load.visible();
     }
     
-    public void EliminarFormulario(formularioFamilia fa){
+    public void EliminarFormulario(FormularioFamilia fa){
         load.visible();
     	flextable.remove(fa);
         load.invisible();

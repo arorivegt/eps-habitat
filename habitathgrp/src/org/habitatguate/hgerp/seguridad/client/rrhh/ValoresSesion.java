@@ -2,7 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class valores_sesion implements IsSerializable{
+public class ValoresSesion implements IsSerializable{
 
 	private boolean correcto;
 	
@@ -10,7 +10,7 @@ public class valores_sesion implements IsSerializable{
 	
 	private Long id_rol;
 	
-	public valores_sesion() {
+	public ValoresSesion() {
 	}
 
 	public boolean isCorrecto() {

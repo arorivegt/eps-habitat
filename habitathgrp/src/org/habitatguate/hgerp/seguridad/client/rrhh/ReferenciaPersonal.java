@@ -1,37 +1,34 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
-public class puestos extends Composite  {
+public class ReferenciaPersonal extends Composite  {
 
-	private Mensaje mensaje; 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private VerticalPanel panel = new VerticalPanel();
+	 private Loading load ;
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	    private Loading load ;
-	 
-	    public puestos(Empleados e) {
+		
+	    public ReferenciaPersonal(Empleados e) {
 
 			mensaje = new Mensaje();
         	load = new Loading();
@@ -40,8 +37,9 @@ public class puestos extends Composite  {
 			this.empleado = e;
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+
 	        initWidget(panel);
-	        panel.setSize("761px", "85px");
+	        panel.setSize("761px", "79px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
 	        Button btnAgregar = new Button("Agregar");
@@ -55,37 +53,32 @@ public class puestos extends Composite  {
 	        });
 	        
 	        btnAgregar.setSize("227px", "34px");
-	        BDPuesto();
 		}
 	    
 	    private void agregarFormulario(){
 	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioPuestos(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaPersonal(this,empleado));
 	        load.invisible();
 	    }
 	    
-	    public void agregarFormulario_lleno(List<AuxPuesto> results){
+	    public void agregarFormulario_lleno(List<AuxReferenciaPersonal> results){
 	        load.visible();
 	    	if (!results.isEmpty()) {
 	    		
-			    for ( AuxPuesto n2 : results) {
-			    	formularioPuestos fa = new  formularioPuestos(this,empleado);
-			    	String valor = "0";
-			    	if(n2.isActivo()){ valor = "1";}
-			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
-			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo(),
-			    					n2.getLunes(),n2.getMartes(),n2.getMiercoles(),n2.getJueves(),n2.getViernes(),
-			    					n2.getSabado(),n2.getDomingo());
+			    for ( AuxReferenciaPersonal n2 : results) {
+			    	FormularioReferenciaPersonal fa = new  FormularioReferenciaPersonal(this,empleado);
+			    	fa.LlenarDatos( n2.getId_referencia_personal(), n2.getNombre_referencia(), n2.getPuesto_candidato(), n2.getRelacion(),
+			    					n2.getActitudes_cualidades(), ""+n2.getTelefono());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
-	    	}	  
-	        load.invisible();  
+	    	}	   
+	        load.invisible(); 
 	    }
 	    
-	    public void EliminarFormulario(final formularioPuestos fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final FormularioReferenciaPersonal fa, final Long id_empledo, final Long id){
 
 	        load.visible();
-			loginService.Eliminar_Puesto(id_empledo, id, new AsyncCallback<Long>(){
+			loginService.Eliminar_Referencia_Personal(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
     		        load.invisible();
@@ -106,30 +99,9 @@ public class puestos extends Composite  {
 	        load.invisible();
 	    }
 	    
-	    public void EliminarFormulario(formularioPuestos fa){
+	    public void EliminarFormulario(FormularioReferenciaPersonal fa){
 	        load.visible();
-	        flextable.remove(fa);
-	        load.invisible();
-	    }
-	    
-	    private void BDPuesto(){
-	        load.visible();
-	    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
-	    		public void onFailure(Throwable caught) 
-	    		{
-			        load.invisible();
-	    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
-	    		}
-
-				@Override
-				public void onSuccess(List<AuxBDPuesto> results)
-				{
-			        load.invisible();
-					if (!(results.size()==0)) {
-						BDpuestos = results;
-			    	}	
-				}
-			});
-	        load.invisible();
-	    }
+    		flextable.remove(fa);
+            load.invisible();
+	 	}
 }

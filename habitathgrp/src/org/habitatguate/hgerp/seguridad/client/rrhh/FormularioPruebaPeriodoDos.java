@@ -27,7 +27,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
-public class formularioPruebaPeriodoDos extends Composite {
+public class FormularioPruebaPeriodoDos extends Composite {
 
 	 	private Long empleado;
 		private Long id_prueba = 0L;
@@ -66,7 +66,7 @@ public class formularioPruebaPeriodoDos extends Composite {
         private Loading load ;
    	 private Mensaje mensaje; 
 		
-	public formularioPruebaPeriodoDos(Evaluacion evaluacion, Long e) {
+	public FormularioPruebaPeriodoDos(Evaluacion evaluacion, Long e) {
 
 		this.empleado = e;
 		mensaje = new Mensaje();

@@ -24,10 +24,10 @@ public class AsignarJefe extends Composite{
        private Loading load ;
    	   private Mensaje mensaje; 
        final SuggestBox txtUser;
-   	   private formularioDatos datos;
+   	   private FormularioDatos datos;
        private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
    		
-        public AsignarJefe(formularioDatos dato) 
+        public AsignarJefe(FormularioDatos dato) 
         {
         	this.datos = dato;
         	load = new Loading();

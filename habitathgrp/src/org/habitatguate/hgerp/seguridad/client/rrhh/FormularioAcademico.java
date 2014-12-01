@@ -31,16 +31,12 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
-public class formularioAcademico extends Composite {
+
+public class FormularioAcademico extends Composite {
 	private Mensaje mensaje; 
-	private academico a;
+	private Academico academico;
 	private Empleados empleado;
 	private boolean bandera = true;
-	private Long id_historial_academico = 0L;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-
-	private final UploadUrlServiceAsync uploadUrlService = GWT
-			.create(UploadUrlService.class);
 	private Grid grid;
 	private DateBox dateInicio;
 	private DateBox dateFinal ;
@@ -56,20 +52,28 @@ public class formularioAcademico extends Composite {
 	private String URLFile ="";
 	private String KeyFile ="";
     private Loading load ;
+    private Button btnActualizar;
+    private Button btnEliminar;
+	private Long id_historial_academico = 0L;
+	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 	
-	public formularioAcademico(academico a,Empleados e) {
+	public FormularioAcademico(Academico academico,Empleados emplead) {
 
 		mensaje = new Mensaje();
-		this.empleado = e;
-		this.a = a;
+		this.empleado = emplead;
+		this.academico = academico;
+		
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("1050px", "120px");
 		getFormUrl();
+		
 		listNIvel_Academico = new ListBox();
 		listNIvel_Academico.addItem("No sabe leer y/o Escribir","0");
 		listNIvel_Academico.addItem("sabe leer y/o Escribir","1");
@@ -124,7 +128,7 @@ public class formularioAcademico extends Composite {
 		absolutePanel.add(dateFinal, 274, 107);
 		dateFinal.setSize("227px", "34px");
 		
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 		        load.visible();
@@ -142,7 +146,7 @@ public class formularioAcademico extends Composite {
 				
 				
 				if(bandera) {
-					loginService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
+					recursosHumanosService.Insertar_Academico(empleado.id_empleado, dateInicio.getValue(), dateFinal.getValue(), 
 							listNIvel_Academico.getValue(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
 							txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
@@ -165,7 +169,7 @@ public class formularioAcademico extends Composite {
 
                  });
 		}else{
-			loginService.Actualizar_Academico(empleado.id_empleado,id_historial_academico, dateInicio.getValue(), dateFinal.getValue(), 
+			recursosHumanosService.Actualizar_Academico(empleado.id_empleado,id_historial_academico, dateInicio.getValue(), dateFinal.getValue(), 
 					listNIvel_Academico.getValue(listNIvel_Academico.getSelectedIndex()), txtEstablecimiento.getText(), 
 					txtTitulo.getText(),URLFile, KeyFile, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
@@ -198,7 +202,7 @@ public class formularioAcademico extends Composite {
 		absolutePanel.add(btnActualizar, 883, 29);
 		btnActualizar.setSize("227px", "34px");
 		
-		Button btnEliminar = new Button("Send");
+		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(bandera){
@@ -249,23 +253,23 @@ public class formularioAcademico extends Composite {
 	}
 	private void EliminarFormulario(){
         load.visible();
-	        a.EliminarFormulario(this,empleado.id_empleado,id_historial_academico);
-	        if(!getKeyFile().equals(""))
-	        {
-	        	loginService.remove(getKeyFile() , new AsyncCallback<String>(){
-	        		@Override
-	        		public void onFailure(Throwable caught) {
-	        		}
-	        		@Override
-	        		public void onSuccess(String result) {
-	        		}
+        academico.EliminarFormulario(this,empleado.id_empleado,id_historial_academico);
+        if(!getKeyFile().equals(""))
+        {
+        	recursosHumanosService.remove(getKeyFile() , new AsyncCallback<String>(){
+        		@Override
+        		public void onFailure(Throwable caught) {
+        		}
+        		@Override
+        		public void onSuccess(String result) {
+        		}
 
-	        	});
-	        }
-	        load.invisible();
+        	});
+        }
+        load.invisible();
     }
 	private void EliminarFormulario_SinDatos(){
-		a.EliminarFormulario(this);
+		academico.EliminarFormulario(this);
 	}
 	
 	public void LlenarDatos(Long id,Long dateInicio, Long dateFinal,
@@ -405,7 +409,7 @@ public class formularioAcademico extends Composite {
 		btnEliminar.setHeight("27px");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginService.remove(getKeyFile() , new AsyncCallback<String>(){
+				recursosHumanosService.remove(getKeyFile() , new AsyncCallback<String>(){
 					@Override
 					public void onFailure(Throwable caught) {
 						form.setVisible(true);

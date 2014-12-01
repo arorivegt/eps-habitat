@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class formularioPruebaPeriodo extends Composite {
+public class FormularioPruebaPeriodo extends Composite {
 
 	 	private Long empleado;
 		private Long id_prueba = 0L;
@@ -67,7 +67,7 @@ public class formularioPruebaPeriodo extends Composite {
 		private Button btnEliminar;
         private Loading load ;
 		
-	public formularioPruebaPeriodo(final Desempeno d, Long e) {
+	public FormularioPruebaPeriodo(final Desempeno d, Long e) {
 		this.d = d;
 		this.empleado = e;
     	load = new Loading();

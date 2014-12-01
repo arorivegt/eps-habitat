@@ -1,3 +1,9 @@
+/**
+ * Anibal Jose Rodriguez Orive
+ * Ingenieria Ciencias y Sistemas
+ * Universidad de San Carlos de Guatemala
+ * Modulo Recursos Humanos
+ */
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 import java.util.ArrayList;
@@ -6,48 +12,48 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class historiales extends Composite  {
+public class Salario extends Composite  {
 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleados empleado;
 	 private VerticalPanel panel = new VerticalPanel();
-	 private Mensaje mensaje; 
-	 private List<AuxHistorial> historial = new ArrayList<AuxHistorial> ();
-	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-	 private Grid grid;
-	 private DateBox dateFecha2;
-	 private DateBox dateFecha1;
-	 private ListBox listTipo;
-	 private Button btnBuscar;
-	    private Loading load ;
+     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+     private Button btnAgregar;
+     private Loading load ;
+     private Grid grid;
+     private DateBox dateFecha1;
+     private DateBox dateFecha2;
+     private ListBox txtTipoSalario;
+	 private List<AuxSalario> salario = new ArrayList<AuxSalario> ();
+     private Button button;
 		
-	    public historiales(Empleados e) {
+	    public Salario(Empleados e) {
 
 			mensaje = new Mensaje();
         	load = new Loading();
             load.Mostrar();
             load.invisible();
 			this.empleado = e;
-    		mensaje = new Mensaje();
 	        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
@@ -56,9 +62,7 @@ public class historiales extends Composite  {
 	        grid = new Grid(1, 4);
 	        panel.add(grid);
 	        
-	        
-	        dateFecha1 = new DateBox();
-	        dateFecha1.setValue(new Date());
+	        dateFecha1 = new DateBox(); dateFecha1.setValue(new Date());
 	        dateFecha1.setFormat(new DateBox.DefaultFormat 
 				    (DateTimeFormat.getFormat("dd/MM/yyyy")));
 	        dateFecha1.getDatePicker().setYearArrowsVisible(true);
@@ -79,51 +83,59 @@ public class historiales extends Composite  {
 	        grid.setWidget(0, 1, dateFecha2);
 	        dateFecha2.setSize("227px", "34px");
 	        
-	        listTipo = new ListBox();
-	        listTipo.addItem("aciertos ","0");
-	        listTipo.addItem("llamadas de atención","1");
-	        listTipo.setStyleName("gwt-TextBox2");
-	        grid.setWidget(0, 2, listTipo);
-	        listTipo.setSize("229px", "36px");
+	        txtTipoSalario = new ListBox();
+	        txtTipoSalario.addItem("Salario Base", "0");
+			txtTipoSalario.addItem("Decreto(78-89)", "1");
+			txtTipoSalario.addItem("Comisiones", "2");
+			txtTipoSalario.addItem("Bonificacion", "3");
+			txtTipoSalario.addItem("Bono 14", "4");
+			txtTipoSalario.addItem("Aguinaldo", "5");
+			txtTipoSalario.addItem("Vacaciones", "6");
+			txtTipoSalario.addItem("Indemnizacion", "7");
+			txtTipoSalario.addItem("Otros pagos", "8");
+	        txtTipoSalario.setStyleName("gwt-TextBox2");
+	        grid.setWidget(0, 2, txtTipoSalario);
+	        txtTipoSalario.setSize("229px", "36px");
 	        
-	        btnBuscar = new Button("Agregar");
-	        btnBuscar.addClickHandler(new ClickHandler() {
+	        button = new Button("Agregar");
+	        button.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
-	                load.visible();
-	        		loginService.getHistorial(empleado.id_empleado, new AsyncCallback<List<AuxHistorial>>(){
+	        		
+	        		load.visible();
+	        		loginService.getSalarios(empleado.id_empleado, new AsyncCallback<List<AuxSalario>>(){
 	                    public void onFailure(Throwable caught) 
 	                    {
 	                    }
 
 	    				@Override
-	                    public void onSuccess(List<AuxHistorial> result)
+	                    public void onSuccess(List<AuxSalario> result)
 	                    {
-	    					historial  = result;
+	    					salario  = result;
 	                    }
 
 	    	         });
 	        		try{
-		        		List<AuxHistorial> hist = new ArrayList<AuxHistorial> ();
-		        		for(AuxHistorial h: historial)
+		        		List<AuxSalario> sal = new ArrayList<AuxSalario> ();
+		        		for(AuxSalario h: salario)
 		        		{
 		        			Date aux = new Date(h.getFecha());
 		        			if( (aux.after(dateFecha1.getValue())
 		        				&& aux.before(dateFecha2.getValue())
-		        				&& h.getTipo_historial().equals(listTipo.getValue(listTipo.getSelectedIndex()))
+		        				&& h.getTipoSalario().equals(txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()))
 		        				)
 		        				||
 		        				(aux.equals(dateFecha1.getValue())
 		        				&& aux.equals(dateFecha2.getValue())
-		        				&& h.getTipo_historial().equals(listTipo.getValue(listTipo.getSelectedIndex()))
+		        				&& h.getTipoSalario().equals(txtTipoSalario.getValue(txtTipoSalario.getSelectedIndex()))
 		        				)
 		        			  )
 		        			{
-		        				hist.add(h);
+		        				sal.add(h);
 		        			}
 		        		}
 		        		//agregarFormularios
-		        		if(!hist.isEmpty()){
-		        			agregarFormularios(hist);
+		        		if(!sal.isEmpty()){
+		        			agregarFormulario_lleno(sal);
 		        		}else{
 		    		        load.invisible();
 		                	mensaje.setMensaje("alert alert-error", 
@@ -139,90 +151,72 @@ public class historiales extends Composite  {
 	                load.invisible();
 	        	}
 	        });
-	        btnBuscar.setText("Buscar");
-	        btnBuscar.setStyleName("sendButton");
-	        grid.setWidget(0, 3, btnBuscar);
-	        
-	        btnBuscar.setSize("227px", "34px");
+	        button.setText("Buscar");
+	        button.setStyleName("sendButton");
+	        grid.setWidget(0, 3, button);
+	        button.setSize("227px", "34px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
-	        Button btnAgregar = new Button("Agregar");
-	        panel.add(btnAgregar);
 	        
-	        btnAgregar.setStyleName("sendButton");
+	        btnAgregar = new Button("Agregar");
 	        btnAgregar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
-	        		agregarFormulario();
+	        		agregarFormulario("Comision");
 	        	}
 	        });
-	        
+	        btnAgregar.setText("Agregar");
+	        btnAgregar.setStyleName("sendButton");
+	        panel.add(btnAgregar);
 	        btnAgregar.setSize("227px", "34px");
 		}
 	    
-	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioHistorial(this,empleado));
-	    }
-	    
-	    public void agregarFormulario_lleno(List<AuxHistorial> results){
-
+	    private void agregarFormulario(String tipo){
 	        load.visible();
-	    	flextable.clear();
-	    	if (!results.isEmpty()) {
-
-			    historial = results;
-			    for ( AuxHistorial n2 : results) {
-			    	formularioHistorial fa = new  formularioHistorial(this,empleado);
-			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
-			        flextable.setWidget(flextable.getRowCount(), 0,fa );
-			    }
-	    	}	    
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioSalario(this,empleado));
 	        load.invisible();
 	    }
 	    
-	    public void agregarFormularios(List<AuxHistorial> results){
-
+	    public void agregarFormulario_lleno(List<AuxSalario> results){
 	        load.visible();
-	    	flextable.clear();
+	        flextable.clear();
 	    	if (!results.isEmpty()) {
-
-			    historial = results;
-			    for ( AuxHistorial n2 : results) {
-			    	formularioHistorial fa = new  formularioHistorial(this,empleado);
-			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
+	    		
+			    for ( AuxSalario n2 : results) 
+			    {
+			    	FormularioSalario fa = new  FormularioSalario(this,empleado);
+			    	fa.LlenarDatos(n2.getId_Salario(), ""+n2.getSalario(),n2.getFecha(), n2.getTipoSalario(),n2.getDescripcion());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	
-	        load.invisible();    
+	        load.invisible();
+	    	
 	    }
 	    
-	    public void EliminarFormulario(final formularioHistorial fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final FormularioSalario fa, final Long id_empledo, final Long id){
 
 	        load.visible();
-			loginService.Eliminar_Historial(id_empledo, id, new AsyncCallback<Long>(){
+			loginService.Eliminar_Salario(id_empledo, id, new AsyncCallback<Long>(){
                 public void onFailure(Throwable caught) 
                 {
     		        load.invisible();
-                	mensaje.setMensaje("alert alert-error", 
-                			"Error !! \nal Eliminar");
+                	mensaje.setMensaje("alert alert-error", "Error !! \nal Eliminar");
                 }
 
 				@Override
                 public void onSuccess(Long result)
                 {
 			        load.invisible();
-					mensaje.setMensaje("alert alert-success", 
-                			"Eliminado\n exitosamente!!!");
+					mensaje.setMensaje("alert alert-success", "Eliminado\n exitosamente!!!");
         	        flextable.remove(fa);
                 }
 
-	         });
+         });
 	        load.invisible();
-
 	    }
 	    
-	    public void EliminarFormulario(formularioHistorial fa){
+	    public void EliminarFormulario(FormularioSalario fa){
 	        load.visible();
-	    	flextable.remove(fa);
-	        load.invisible();
-		}
+        	flextable.remove(fa);
+            load.invisible();
+	    }
 }

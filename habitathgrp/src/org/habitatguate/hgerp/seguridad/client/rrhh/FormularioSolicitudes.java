@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class formularioSolicitudes extends Composite {
+public class FormularioSolicitudes extends Composite {
 
 	private Empleados empleado;
 	private Long id_vacaciones = 0L;
@@ -36,7 +36,7 @@ public class formularioSolicitudes extends Composite {
     private Button btnSolicitar;
     private AbsolutePanel absolutePanel;
     
-	public formularioSolicitudes(Empleados e) {
+	public FormularioSolicitudes(Empleados e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

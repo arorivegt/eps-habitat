@@ -19,7 +19,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
-public class referenciaLaboral extends Composite  {
+public class ReferenciaLaboral extends Composite  {
 
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
@@ -28,7 +28,7 @@ public class referenciaLaboral extends Composite  {
      private Loading load ;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
-	    public referenciaLaboral(Empleados e) {
+	    public ReferenciaLaboral(Empleados e) {
 
 			mensaje = new Mensaje();
         	load = new Loading();
@@ -56,7 +56,7 @@ public class referenciaLaboral extends Composite  {
 	    
 	    private void agregarFormulario(){
 	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioReferenciaLaboral(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaLaboral(this,empleado));
 	        load.invisible();
 	    }
 	    
@@ -65,7 +65,7 @@ public class referenciaLaboral extends Composite  {
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxReferenciaLaboral n2 : results) {
-			    	formularioReferenciaLaboral fa = new  formularioReferenciaLaboral(this,empleado);
+			    	FormularioReferenciaLaboral fa = new  FormularioReferenciaLaboral(this,empleado);
 			    	fa.LlenarDatos(n2.getId_referencia_laboral(),n2.getNombre_referencia(), n2.getEmpresa_referencia(), n2.getRecomiendo(),
 			    				   n2.getMotivo_retiro(),n2.getActitudes_cualidades(), ""+n2.getTelefono(),
 			    				   n2.getFecha1(), n2.getFecha2(), ""+n2.getSalario_final(), n2.getPuesto_candidato());
@@ -75,7 +75,7 @@ public class referenciaLaboral extends Composite  {
 	        load.invisible();   
 	    }
 	    
-	    public void EliminarFormulario(final formularioReferenciaLaboral fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final FormularioReferenciaLaboral fa, final Long id_empledo, final Long id){
 
 	        load.visible();
 			loginService.Eliminar_Referencia_Laboral(id_empledo, id, new AsyncCallback<Long>(){
@@ -98,7 +98,7 @@ public class referenciaLaboral extends Composite  {
          });
 	        load.invisible();
 	    }
-	    public void EliminarFormulario(formularioReferenciaLaboral fa){
+	    public void EliminarFormulario(FormularioReferenciaLaboral fa){
 	        load.visible();
 	        flextable.remove(fa);
 	        load.invisible();

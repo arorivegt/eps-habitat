@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class vacaciones extends Composite  {
+public class Permiso extends Composite  {
 
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
@@ -39,7 +39,7 @@ public class vacaciones extends Composite  {
 	 private final Button btnBuscar = new Button("Agregar");
 	    private Loading load ;
 		
-	    public vacaciones(Empleados e) {
+	    public Permiso(Empleados e) {
 
         	load = new Loading();
             load.Mostrar();
@@ -184,7 +184,7 @@ public class vacaciones extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioVacaciones(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPermiso(this,empleado));
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxVacaciones> results){
@@ -193,7 +193,7 @@ public class vacaciones extends Composite  {
 	    	if (!results.isEmpty()) {
 	    		permiso = results;
 			    for ( AuxVacaciones n2 : results) {
-			    	formularioVacaciones fa = new  formularioVacaciones(this,empleado);
+			    	FormularioPermiso fa = new  FormularioPermiso(this,empleado);
 			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 			    				   n2.getTipoPermisos());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
@@ -202,7 +202,7 @@ public class vacaciones extends Composite  {
 	        load.invisible();
 	    }
 	    
-	    public void EliminarFormulario(final formularioVacaciones fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final FormularioPermiso fa, final Long id_empledo, final Long id){
 
 	        load.visible();
 			loginService.Eliminar_Vacaciones(id_empledo, id, new AsyncCallback<Long>(){
@@ -226,7 +226,7 @@ public class vacaciones extends Composite  {
 	        load.invisible();
 	    }
 	    
-	    public void EliminarFormulario(formularioVacaciones fa){
+	    public void EliminarFormulario(FormularioPermiso fa){
 	        load.visible();
 	        flextable.remove(fa);
 	        load.invisible();

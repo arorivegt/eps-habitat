@@ -56,7 +56,7 @@ public class Idioma extends Composite  {
 	    
 	    private void agregarFormulario(){
 	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new formularioIdiomas(this,empleado));
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioIdiomas(this,empleado));
 	        load.invisible();
 	    }
 	    
@@ -65,7 +65,7 @@ public class Idioma extends Composite  {
 	    	if (!results.isEmpty()) {
 	    		
 			    for ( AuxIdioma n2 : results) {
-			    	formularioIdiomas fa = new  formularioIdiomas(this,empleado);
+			    	FormularioIdiomas fa = new  FormularioIdiomas(this,empleado);
 			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma(), n2.getURLFile(), n2.getKeyFile());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
@@ -73,7 +73,7 @@ public class Idioma extends Composite  {
 	        load.invisible();    
 	    }
 	    
-	    public void EliminarFormulario(final formularioIdiomas fa, final Long id_empledo, final Long id){
+	    public void EliminarFormulario(final FormularioIdiomas fa, final Long id_empledo, final Long id){
 
 	        load.visible();
 			loginService.Eliminar_Idioma(id_empledo, id, new AsyncCallback<Long>(){
@@ -97,7 +97,7 @@ public class Idioma extends Composite  {
 	        load.invisible();
 	    }
 	    
-	    public void EliminarFormulario(formularioIdiomas fa){
+	    public void EliminarFormulario(FormularioIdiomas fa){
 	        load.visible();
 	        flextable.remove(fa);
 	        load.invisible();

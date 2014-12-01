@@ -80,15 +80,15 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		absolutePanel.add(listEstado, 170, 31);
 		listEstado.setSize("227px", "34px");
 		
-			Image image = new Image("images/ico-lupa.png");
-			image.addClickHandler(new ClickHandler() {
-				public void onClick(ClickEvent event) {
-					busqueda();
-				}
-			});
+		Image image = new Image("images/ico-lupa.png");
+		image.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				busqueda();
+			}
+		});
 			
-					absolutePanel.add(image, 604, 10);
-					image.setSize("103px", "55px");
+		absolutePanel.add(image, 604, 10);
+		image.setSize("103px", "55px");
 		
 		Label lblBusquedaPor = new Label("Crear Reporte Empleados:");
 		lblBusquedaPor.setStyleName("label");
@@ -227,33 +227,33 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		}
 		
 			@Override
-		public void onSuccess( List<AuxEmpleado> result)
+		public void onSuccess(List<AuxEmpleado> listAuxEmpleado)
 		{
 				NumberFormat fmt = NumberFormat.getDecimalFormat();
 				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
 				
-				for (AuxEmpleado p : result) {
+				for (AuxEmpleado itemEmpleado : listAuxEmpleado) {
 					DatosMinisterioTrabajo empleado = new DatosMinisterioTrabajo();
 					
 					empleado.setNoEmpleado(""+i);
 					
 					try{
-						if(p.getPais().equals("83")){
+						if(itemEmpleado.getPais().equals("83")){
 							empleado.setTipoIdentificacion("2");
-							empleado.setDocumentoIdentificacion(p.getCui());
+							empleado.setDocumentoIdentificacion(itemEmpleado.getCui());
 						}
 						else{
 							empleado.setTipoIdentificacion("4");
-							empleado.setDocumentoIdentificacion(p.getNo_pasaporte());
+							empleado.setDocumentoIdentificacion(itemEmpleado.getNo_pasaporte());
 						}
 					}catch(Exception e){
 						empleado.setTipoIdentificacion("2");
 						empleado.setDocumentoIdentificacion("");
 					}
-					empleado.setPaisOrigen(p.getPais());
+					empleado.setPaisOrigen(itemEmpleado.getPais());
 		
-					 String[] numerosComoArray2  = p.getDepto_municipio_nacimiento().split(",");
+					 String[] numerosComoArray2  = itemEmpleado.getDepto_municipio_nacimiento().split(",");
 					 String deptodir = "";
 					 String munidir = "";
 					 for (int i1 = 0; i1 < numerosComoArray2.length; i1++) {
@@ -396,26 +396,26 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 							 empleado.setLugarNacimiento("VIII"+munidir);
 						 }}
 		
-					empleado.setNitEmpleado(p.getNit());
+					empleado.setNitEmpleado(itemEmpleado.getNit());
 					
-					empleado.setIGSSEmpleado(p.getAfiliacion_igss());
+					empleado.setIGSSEmpleado(itemEmpleado.getAfiliacion_igss());
 					
 					empleado.setDeportadoPais("");
 					
-					empleado.setNombre1(p.getPrimer_nombre());
+					empleado.setNombre1(itemEmpleado.getPrimer_nombre());
 					
-					empleado.setNombre2(p.getSegundo_nombre());
+					empleado.setNombre2(itemEmpleado.getSegundo_nombre());
 					
 					empleado.setNombre3("");
 					
-					empleado.setApellido1(p.getPrimer_apellido());
+					empleado.setApellido1(itemEmpleado.getPrimer_apellido());
 					
-					empleado.setApellido2(p.getSegundo_apellido());
+					empleado.setApellido2(itemEmpleado.getSegundo_apellido());
 					
-					empleado.setEstadoCivil(p.getEstado_civil());
+					empleado.setEstadoCivil(itemEmpleado.getEstado_civil());
 					
 					int NoHijos = 0;
-					for (AuxFamilia f : p.getFamilia()) {
+					for (AuxFamilia f : itemEmpleado.getFamilia()) {
 						if(f.getParentesco().equals("hijo(a)"))
 							NoHijos++;
 					}
@@ -423,33 +423,33 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					//fecha de naicmiento con formato dia/mes/año
 					DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
-					String dia = dtDia.format(new Date(p.getFecha_nacimiento()));
+					String dia = dtDia.format(new Date(itemEmpleado.getFecha_nacimiento()));
 					DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
-					String Mes = dtMes.format(new Date(p.getFecha_nacimiento()));
+					String Mes = dtMes.format(new Date(itemEmpleado.getFecha_nacimiento()));
 					DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
-					String Anio = dtAnio.format(new Date(p.getFecha_nacimiento()));
+					String Anio = dtAnio.format(new Date(itemEmpleado.getFecha_nacimiento()));
 					
 					empleado.setFechaNacimiento(dia+"/"+Mes+"/"+Anio);
 					
 					//calculo de edad del empleado
 					//resta del año de actual - año nacimiento, para calcular edad aproximada
 					DateTimeFormat dtf = DateTimeFormat.getFormat("yyyy");
-					String AnnioNacimiento = dtf.format(new Date(p.getFecha_nacimiento()));
+					String AnnioNacimiento = dtf.format(new Date(itemEmpleado.getFecha_nacimiento()));
 					String AnnioActual = dtf.format(new Date());
 					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
 					
 					empleado.setEdad(""+edadtotal);
 		
-					if(p.getSexo().equals("0")){
+					if(itemEmpleado.getSexo().equals("0")){
 						empleado.setSexo("F");
 					}else{
 						empleado.setSexo("M");
 					}
-					 Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
+					 Anio = dtAnio.format(new Date(itemEmpleado.getFecha_ingreso()));
 					 String Anio2 = dtAnio.format(new Date());
 					 
 					
-					long diaslaborados = new Date().getTime()-p.getFecha_ingreso();
+					long diaslaborados = new Date().getTime()-itemEmpleado.getFecha_ingreso();
 					if(Integer.parseInt(Anio)< Integer.parseInt(Anio2)){
 						empleado.setTiempodelaborar("365");
 					}else{
@@ -459,7 +459,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		
 					String DescansoSemanal = "";
 					String jornada = "";
-					for (AuxPuesto f : p.getPuestos()) {
+					for (AuxPuesto f : itemEmpleado.getPuestos()) {
 						if(f.isActivo()){
 							
 							empleado.setPuesto(f.getNombre_puesto());
@@ -523,7 +523,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					
 					String idioma ="";
-					for (AuxIdioma id : p.getIdiomas()) {
+					for (AuxIdioma id : itemEmpleado.getIdiomas()) {
 						if(idioma.equals(""))
 							idioma = id.getIdioma();
 						else
@@ -532,7 +532,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		
 					int nivelAcademico = 0;
 					String profesion = "";
-					for (AuxHistorialAcademico academico : p.getHistorial_academico()) {
+					for (AuxHistorialAcademico academico : itemEmpleado.getHistorial_academico()) {
 						if(Integer.parseInt(academico.getNivel_academico()) > nivelAcademico){
 							nivelAcademico = Integer.parseInt(academico.getNivel_academico());
 							profesion = academico.getTitulo();
@@ -554,7 +554,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			 		float salarioMensualNominal = 0;
 			 		float decreto7889 = 0;
 			 		
-					for (AuxSalario s : p.getSalario()) {
+					for (AuxSalario s : itemEmpleado.getSalario()) {
 		 				formatAnio = anio.format(new Date(s.getFecha()));
 		 				
 		 				 if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
@@ -612,7 +612,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					
 					empleado.setProfesion(profesion);
 					
-					empleado.setEtnia(p.getEtnia());
+					empleado.setEtnia(itemEmpleado.getEtnia());
 
 					empleado.setIdiomas(idioma);
 

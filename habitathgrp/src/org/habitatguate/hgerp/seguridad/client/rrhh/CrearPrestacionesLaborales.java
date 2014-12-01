@@ -49,7 +49,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     private Image Busqueda;
 	boolean bandera = false;
 	private Mensaje mensaje; 
-    private prestaciones nuevo;
+    private Prestaciones nuevo;
     private SuggestBox txtDato1;
 
     private ListBox listBox;
@@ -85,7 +85,7 @@ public class CrearPrestacionesLaborales extends Composite   {
         load.invisible();
 		mensaje = new Mensaje();
 		grid = new Grid(2, 1);
-		nuevo = new prestaciones();
+		nuevo = new Prestaciones();
 		grid.setSize("1117px", "100%");
 					
 		absolutePanel = new AbsolutePanel();
@@ -418,7 +418,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 	public void Buscar()
 	{
 		grid.clearCell(1, 0);
-		nuevo = new prestaciones();
+		nuevo = new Prestaciones();
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
 			agregarFormulario('2',txtDato1.getText(), "","", 

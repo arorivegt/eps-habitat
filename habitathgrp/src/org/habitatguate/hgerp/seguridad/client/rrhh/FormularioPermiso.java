@@ -21,9 +21,9 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class formularioVacaciones extends Composite {
+public class FormularioPermiso extends Composite {
 
-	private vacaciones a;
+	private Permiso a;
 	private Empleados empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
@@ -36,7 +36,7 @@ public class formularioVacaciones extends Composite {
 	private ListBox listTipoPermiso ;
     private Loading load ;
     
-	public formularioVacaciones(vacaciones a,Empleados e) {
+	public FormularioPermiso(Permiso a,Empleados e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -2,7 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.rrhh.valores_sesion;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
@@ -90,7 +90,7 @@ public class Index implements EntryPoint {
                             sendButton.setEnabled(false);
                            
                             load.visible();
-                            loginService.login_inicio(usertxt,passtxt, new AsyncCallback<valores_sesion>() 
+                            loginService.login_inicio(usertxt,passtxt, new AsyncCallback<ValoresSesion>() 
                             {
                                     public void onFailure(Throwable caught) 
                                     {
@@ -100,7 +100,7 @@ public class Index implements EntryPoint {
                             				+ "\n no se pudo\n iniciar ");
                                     }
                                     
-                                    public void onSuccess(valores_sesion result)
+                                    public void onSuccess(ValoresSesion result)
                                     {
                                         load.invisible();
                                             //si la autentificacion es correcta limpia y contruye el menu

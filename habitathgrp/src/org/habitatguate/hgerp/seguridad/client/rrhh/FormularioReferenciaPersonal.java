@@ -20,10 +20,10 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 
-public class formularioReferenciaPersonal extends Composite {
+public class FormularioReferenciaPersonal extends Composite {
 
 	private Empleados empleado;
-	private referenciaPersonal a;
+	private ReferenciaPersonal a;
 	private boolean bandera = true;
 	private Long id_referencia_personal = 0L;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
@@ -37,7 +37,7 @@ public class formularioReferenciaPersonal extends Composite {
     private Loading load ;
 	
 	
-	public formularioReferenciaPersonal(referenciaPersonal a,Empleados e) {
+	public FormularioReferenciaPersonal(ReferenciaPersonal a,Empleados e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();

@@ -21,9 +21,9 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class formularioHistorial extends Composite {
+public class FormularioHistorial extends Composite {
 
-	private historiales a;
+	private Historiales a;
 	private Empleados empleado;
 	private boolean bandera = true;
 	private Long id_historial = 0L;
@@ -38,7 +38,7 @@ public class formularioHistorial extends Composite {
     private Loading load ;
     
     
-	public formularioHistorial(historiales a,Empleados e) {
+	public FormularioHistorial(Historiales a,Empleados e) {
 
 		this.empleado = e;
 		this.a = a;

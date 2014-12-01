@@ -19,7 +19,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 
 
-public class formularioPrestaciones  extends Composite  {
+public class FormularioPrestaciones  extends Composite  {
 
 	private Mensaje mensaje; 
 	private Long idEmpleado = 0L;
@@ -39,7 +39,7 @@ public class formularioPrestaciones  extends Composite  {
 	private boolean valor;
     
     
-	public formularioPrestaciones() {
+	public FormularioPrestaciones() {
 		mensaje = new Mensaje();
         
 		absolutePanel = new AbsolutePanel();

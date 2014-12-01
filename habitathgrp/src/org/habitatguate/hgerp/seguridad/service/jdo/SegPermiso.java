@@ -14,7 +14,7 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegVacaciones implements Serializable {
+public class SegPermiso implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -35,7 +35,7 @@ public class SegVacaciones implements Serializable {
 	@Persistent
     private SegEmpleado empleado;
 	
-	public SegVacaciones() {
+	public SegPermiso() {
 		super();
 	}
     

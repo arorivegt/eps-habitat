@@ -25,6 +25,8 @@ public class Compartir extends Composite{
        private Long idTest = 0L;
    	   private Mensaje mensaje; 
        private SuggestBox txtUser;
+       private Button btnAceptar;
+       private AbsolutePanel rootPanel;
        private Long idEmpleadoCompartido = 0L;
        private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
    		
@@ -38,7 +40,7 @@ public class Compartir extends Composite{
         	this.idEmpleadoCompartido = isEmpleadoCompartid;
         	this.idTest = idTes;
         	
-        	AbsolutePanel rootPanel = new AbsolutePanel();
+        	rootPanel = new AbsolutePanel();
         	rootPanel.setSize("299px", "199px");
             rootPanel.setStyleName("body");
             
@@ -46,14 +48,15 @@ public class Compartir extends Composite{
             lblNewLabel_1.setStyleName("gwt-Label-new");
             rootPanel.add(lblNewLabel_1, 10, 5);
             lblNewLabel_1.setSize("205px", "142px");
+            
             txtUser =new SuggestBox(createCountriesOracle());
             txtUser.setStyleName("gwt-PasswordTextBox");
             txtUser.getElement().setAttribute("placeHolder", "Ingrese correo");
             rootPanel.add(txtUser, 30, 86);
             txtUser.setSize("241px", "49px");
             
-            Button button = new Button("Send");
-            button.addClickHandler(new ClickHandler() {
+            btnAceptar = new Button("Send");
+            btnAceptar.addClickHandler(new ClickHandler() {
             	public void onClick(ClickEvent event) {
 
                     load.visible();
@@ -77,10 +80,10 @@ public class Compartir extends Composite{
                      load.invisible();
             	}
             });
-            button.setText("Aceptar");
-            button.setStyleName("sendButton");
-            rootPanel.add(button, 30, 143);
-            button.setSize("243px", "44px");
+            btnAceptar.setText("Aceptar");
+            btnAceptar.setStyleName("sendButton");
+            rootPanel.add(btnAceptar, 30, 143);
+            btnAceptar.setSize("243px", "44px");
             
             initWidget(rootPanel);
             
@@ -102,11 +105,11 @@ public class Compartir extends Composite{
             {
             }
 
-			public void onSuccess(List<String> result)
+			public void onSuccess(List<String> ListCorreos)
             {
-				if(!result.isEmpty())
+				if(!ListCorreos.isEmpty())
 				{	
-					for(String correo: result){
+					for(String correo: ListCorreos){
 						oracle.add(correo);
 					}
 				}

@@ -70,9 +70,9 @@ public class CrearPrestacionesLaborales extends Composite   {
     private TextBox Cantidad;
     private TextBox txtDescripcion;
     
-	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
-    private final SqlServiceAsync FinanzasService = GWT.create(SqlService.class);
+	public List <AuxBDPuesto> auxbdPuestos = new ArrayList<AuxBDPuesto>();	
+	public List <AuxAfiliado> auxAfiliados = new ArrayList<AuxAfiliado>();	
+    private final SqlServiceAsync finanzasService = GWT.create(SqlService.class);
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     
     /**
@@ -83,6 +83,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		mensaje = new Mensaje();
 		grid = new Grid(2, 1);
 		nuevo = new Prestaciones();
@@ -168,7 +169,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 
 					listEstado.clear();
 					listEstado.addItem("seleccione un puesto","0");
-				    for (AuxBDPuesto p : BDpuestos) 
+				    for (AuxBDPuesto p : auxbdPuestos) 
 				    {
 				    	listEstado.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 				    }
@@ -184,7 +185,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 
 					listEstado.clear();
 					listEstado.addItem("seleccione un afiliado","0");
-				    for (AuxAfiliado p : BDAfiliados) 
+				    for (AuxAfiliado p : auxAfiliados) 
 				    {
 				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
 				    }
@@ -207,7 +208,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 		txtDato1 =  new SuggestBox(createCountriesOracle());
 		txtDato1.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
-
 				if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER){
 					Buscar();
 				}
@@ -393,12 +393,12 @@ public class CrearPrestacionesLaborales extends Composite   {
 			public void onSuccess(List<AuxBDPuesto> results)
 			{
 				if (!(results.size()==0)) {
-					BDpuestos = results;
+					auxbdPuestos = results;
 		    	}	
 			}
 		});
 
-		FinanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		finanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
 		    }
@@ -407,7 +407,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		    public void onSuccess(List<AuxAfiliado> result)
 		    {
 				if (!(result.size()==0)) {
-					BDAfiliados = result;
+					auxAfiliados = result;
 		    	}
 		    }
 		});
@@ -421,9 +421,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		nuevo = new Prestaciones();
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			agregarFormulario('2',txtDato1.getText(), "","", 
-					"",txtDato1.getText(),txtDato1.getText()
-					,"");
+			agregarFormulario('2',txtDato1.getText(), "","","",txtDato1.getText(),txtDato1.getText(),"");
 			grid.setWidget(1, 0,nuevo);
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 		{
@@ -450,7 +448,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 					segundoNombre =  nombreArray[1];
 					primerApellido =  nombreArray[2];
 					segundoApellido = "";
-					
 					
 					
 					if(agregarFormulario('1',primerNombre, segundoNombre,primerApellido, 

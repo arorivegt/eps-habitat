@@ -29,7 +29,7 @@ public class Desempeno extends Composite  {
      private Grid grid_1;
      private Loading load ;
      private Button button;
-     private Long empleado;
+     private Long idEmpleado;
      private Button btnTest;
 	 private Mensaje mensaje; 
      public  Button btnAgregar;
@@ -38,17 +38,18 @@ public class Desempeno extends Composite  {
      private VerticalPanel panel;
      private FlexTable flextable;
      public  boolean bandera = true;
-     private List<AuxTest> valor = new ArrayList<AuxTest>();
-     public  List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
-     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+     private List<AuxTest> auxTest = new ArrayList<AuxTest>();
+     public  List<AuxBDTest> auxBDTest = new ArrayList<AuxBDTest>();
+     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
      
-    public Desempeno(Long e) {
+    public Desempeno(Long idEmpleadoo) {
 
     	load = new Loading();
-		mensaje = new Mensaje();
         load.Mostrar();
         load.invisible();
-        this.empleado = e;
+        
+		mensaje = new Mensaje();
+        this.idEmpleado = idEmpleadoo;
         
         panel = new VerticalPanel();
         initWidget(panel);
@@ -86,7 +87,7 @@ public class Desempeno extends Composite  {
         	public void onClick(ClickEvent event) {
         		load.visible();
         		
-        		loginService.getTest(empleado, new AsyncCallback<List<AuxTest>>(){
+        		recursosHumanosService.getTest(idEmpleado, new AsyncCallback<List<AuxTest>>(){
                     public void onFailure(Throwable caught) 
                     {
                     }
@@ -94,13 +95,13 @@ public class Desempeno extends Composite  {
     				@Override
                     public void onSuccess(List<AuxTest> result)
                     {
-    					valor  = result;
+    					auxTest  = result;
                     }
 
     	         });
         		try{
 	        		List<AuxTest> hist = new ArrayList<AuxTest> ();
-	        		for(AuxTest h: valor)
+	        		for(AuxTest h: auxTest)
 	        		{
 	        			Date aux = new Date(h.getFecha_test());
 	        			if( (aux.after(dateFecha1.getValue())
@@ -152,7 +153,7 @@ public class Desempeno extends Composite  {
         btnTest.addClickHandler(new ClickHandler() {
         public void onClick(ClickEvent event) {
             	BDTest();
-                agregar_formularios(valor);
+                agregar_formularios(auxTest);
         }
         });
         btnTest.setText("Ver Test");
@@ -174,7 +175,7 @@ public class Desempeno extends Composite  {
         private void agregarFormulario(){
 	        load.visible();
             flextable.clear();
-            flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodo(this,empleado));
+            flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodo(this,idEmpleado));
 	        load.invisible();
         }
         
@@ -182,7 +183,7 @@ public class Desempeno extends Composite  {
 	        load.visible();
             flextable.clear();
             if (!n.equals(null)) {
-                FormularioPruebaPeriodo  fa = new FormularioPruebaPeriodo(this,empleado);
+                FormularioPruebaPeriodo  fa = new FormularioPruebaPeriodo(this,idEmpleado);
                         fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
@@ -201,7 +202,7 @@ public class Desempeno extends Composite  {
             load.visible();
             flextable.clear();
             if (!(results.size() == 0)) {
-            valor = results;
+            auxTest = results;
                 for (AuxTest n : results) {
                     FormularioDesempeno de = new FormularioDesempeno(this, n);
                     flextable.setWidget(flextable.getRowCount(), 0,de);
@@ -214,7 +215,7 @@ public class Desempeno extends Composite  {
         public void EliminarFormulario(final FormularioPruebaPeriodo fa, final Long id_empledo, final Long id){
 
             load.visible();
-                    loginService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
+                    recursosHumanosService.Eliminar_Test(id_empledo, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
 		        load.invisible();
@@ -243,8 +244,8 @@ public class Desempeno extends Composite  {
         
         private void BDTest(){
 
-        	BDresult.clear();
-	    	loginService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
+        	auxBDTest.clear();
+	    	recursosHumanosService.BDTest(new AsyncCallback<List<AuxBDTest>>(){
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -258,7 +259,7 @@ public class Desempeno extends Composite  {
 						{
 							if(a.getTipo_test().equals("1"))
 							{
-								BDresult.add(a);
+								auxBDTest.add(a);
 							}
 						}
 			    	}

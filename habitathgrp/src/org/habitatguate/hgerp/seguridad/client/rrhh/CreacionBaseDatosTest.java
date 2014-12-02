@@ -44,7 +44,7 @@ public class CreacionBaseDatosTest extends Composite{
        private boolean bandera = true;
        private AbsolutePanel rootPanel;
        
-       private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+       private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
        
         public CreacionBaseDatosTest(TestForm test ) 
         {
@@ -185,7 +185,7 @@ public class CreacionBaseDatosTest extends Composite{
             				!txtPregunta7.getText().equals("") && !txtPregunta8.getText().equals("") &&
             				!txtPregunta9.getText().equals("") && !txtPregunta10.getText().equals("") ){
             		if(bandera) {
-    					loginService.Insertar_BDTest(txtNombreTest.getText(),txtPregunta1.getText(), 
+    					recursosHumanosService.Insertar_BDTest(txtNombreTest.getText(),txtPregunta1.getText(), 
     	    					txtPregunta2.getText(), txtPregunta3.getText(), 
     	    					txtPregunta4.getText(), txtPregunta5.getText(), 
     	    					txtPregunta6.getText(), txtPregunta7.getText(), 
@@ -211,7 +211,7 @@ public class CreacionBaseDatosTest extends Composite{
 
                      });
     		}else{
-    			loginService.Actualizar_BDTest(id_prueba, txtNombreTest.getText(),txtPregunta1.getText(), 
+    			recursosHumanosService.Actualizar_BDTest(id_prueba, txtNombreTest.getText(),txtPregunta1.getText(), 
     					txtPregunta2.getText(), txtPregunta3.getText(), 
     					txtPregunta4.getText(), txtPregunta5.getText(), 
     					txtPregunta6.getText(), txtPregunta7.getText(), 

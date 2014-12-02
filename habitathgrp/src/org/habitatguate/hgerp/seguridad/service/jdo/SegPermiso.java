@@ -18,7 +18,7 @@ public class SegPermiso implements Serializable {
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-    private Key id_vacaciones;
+    private Key id_permiso;
 	
 	@Persistent
     private Date fecha1;	
@@ -39,8 +39,8 @@ public class SegPermiso implements Serializable {
 		super();
 	}
     
-	public Long getId_vacaciones() {
-		return id_vacaciones.getId();
+	public Long getId_permiso() {
+		return id_permiso.getId();
 	}
 
 	public Date getFecha1() {
@@ -83,7 +83,7 @@ public class SegPermiso implements Serializable {
 	}
 
 	public void setId_vacaciones(Key id_vacaciones) {
-		this.id_vacaciones = id_vacaciones;
+		this.id_permiso = id_vacaciones;
 	}
 
 	public String getTipoPermisos() {

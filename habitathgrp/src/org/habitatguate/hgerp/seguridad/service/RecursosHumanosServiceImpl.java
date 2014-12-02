@@ -547,7 +547,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	v.setTipoPermisos(tipoPermisos);
 		      	 	v.setEmpleado(e);
 		      	 	e.getVacaciones().add(v);
-				 	valor = v.getId_vacaciones();
+				 	valor = v.getId_permiso();
 				 }finally {  
 					 Persistencia.close();  
 				 }
@@ -940,7 +940,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	v.setFecha2(fecha2);
 						 	v.setDescripcion(descripcionl.toUpperCase());
 						 	v.setTipoPermisos(tipoPermisos);
-						 	valor = v.getId_vacaciones();
+						 	valor = v.getId_permiso();
 						 }finally {  
 							 Persistencia.close();  
 						 }
@@ -1374,7 +1374,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							    for (SegPermiso n9 : results9) {
 
 							    	AuxVacaciones v= new AuxVacaciones();
-							    	v.setId_vacaciones(n9.getId_vacaciones());
+							    	v.setId_vacaciones(n9.getId_permiso());
 							    	v.setFecha1(n9.getFecha1().getTime());
 								 	v.setFecha2(n9.getFecha2().getTime());
 								 	v.setTipoPermisos(n9.getTipoPermisos());
@@ -1642,7 +1642,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						    for (SegPermiso n9 : results9) {
 
 						    	AuxVacaciones v= new AuxVacaciones();
-						    	v.setId_vacaciones(n9.getId_vacaciones());
+						    	v.setId_vacaciones(n9.getId_permiso());
 						    	v.setFecha1(n9.getFecha1().getTime());
 							 	v.setFecha2(n9.getFecha2().getTime());
 							 	v.setDescripcion(n9.getDescripcion());
@@ -2168,7 +2168,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						    for ( SegPermiso n9 : result.getVacaciones()) 
 						    {
 						    	AuxVacaciones v= new AuxVacaciones();
-						    	v.setId_vacaciones(n9.getId_vacaciones());
+						    	v.setId_vacaciones(n9.getId_permiso());
 						    	v.setFecha1(n9.getFecha1().getTime());
 							 	v.setFecha2(n9.getFecha2().getTime());
 							 	v.setTipoPermisos(n9.getTipoPermisos());

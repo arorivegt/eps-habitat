@@ -48,11 +48,11 @@ public class BuscadorEmpleados extends Composite   {
     private SuggestBox txtDato1;
     private ListBox listEstado;
     private AbsolutePanel absolutePanel;
-    private BuscadorEmpleados evaluacionesBuscador;
-	public  List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	public  List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
+    private BuscadorEmpleados buscadorEmpleados;
+	public  List <AuxBDPuesto> bdPuestos = new ArrayList<AuxBDPuesto>();	
+	public  List <AuxAfiliado> bdAfiliados = new ArrayList<AuxAfiliado>();	
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
-    private final SqlServiceAsync service = GWT.create(SqlService.class);
+    private final SqlServiceAsync finanzasService = GWT.create(SqlService.class);
     
     /**
      * constructor
@@ -62,8 +62,10 @@ public class BuscadorEmpleados extends Composite   {
     	load = new Loading();
         load.Mostrar();
         load.invisible();
+        
 		mensaje = new Mensaje();
-		this.evaluacionesBuscador = this;
+		
+		this.buscadorEmpleados = this;
 		grid = new Grid(2, 1);
 		grid.setSize("876px", "100%");
 					
@@ -75,7 +77,6 @@ public class BuscadorEmpleados extends Composite   {
 		txtDato1 = new SuggestBox(createCountriesOracle());
 		txtDato1.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
-
 			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
 			     {
 						busqueda();
@@ -128,7 +129,7 @@ public class BuscadorEmpleados extends Composite   {
 
 					grid.clearCell(1, 0);
 					EmpleadoLista  nuevo = new EmpleadoLista();
-					nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "","", 
+					nuevo.agregarFormulario('2',buscadorEmpleados,txtDato1.getText(), "","", 
 							"",txtDato1.getText(),txtDato1.getText()
 							,"");
 					grid.setWidget(1, 0,nuevo);
@@ -164,7 +165,7 @@ public class BuscadorEmpleados extends Composite   {
 
 					listEstado.clear();
 					listEstado.addItem("seleccione un puesto","0");
-				    for (AuxBDPuesto p : BDpuestos) 
+				    for (AuxBDPuesto p : bdPuestos) 
 				    {
 				    	listEstado.addItem(p.getNombre_puesto(),""+p.getId_puesto());
 				    }
@@ -181,7 +182,7 @@ public class BuscadorEmpleados extends Composite   {
 
 					listEstado.clear();
 					listEstado.addItem("seleccione un afiliado","0");
-				    for (AuxAfiliado p : BDAfiliados) 
+				    for (AuxAfiliado p : bdAfiliados) 
 				    {
 				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
 				    }
@@ -246,12 +247,12 @@ public class BuscadorEmpleados extends Composite   {
 			public void onSuccess(List<AuxBDPuesto> results)
 			{
 				if (!(results.size()==0)) {
-					BDpuestos = results;
+					bdPuestos = results;
 		    	}	
 			}
 		});
     	
-		service.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		finanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
 		    }
@@ -260,7 +261,7 @@ public class BuscadorEmpleados extends Composite   {
 		    public void onSuccess(List<AuxAfiliado> result)
 		    {
 				if (!(result.size()==0)) {
-					BDAfiliados = result;
+					bdAfiliados = result;
 		    	}
 		    }
 		});
@@ -274,7 +275,7 @@ public class BuscadorEmpleados extends Composite   {
 		EmpleadoLista  nuevo = new EmpleadoLista();
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			nuevo.agregarFormulario('2',evaluacionesBuscador,txtDato1.getText(), "","", 
+			nuevo.agregarFormulario('2',buscadorEmpleados,txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,"");
 			grid.setWidget(1, 0,nuevo);
@@ -294,7 +295,7 @@ public class BuscadorEmpleados extends Composite   {
 					primerApellido =  nombreArray[1];
 					segundoApellido = "";
 					
-					nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					nuevo.agregarFormulario('1',buscadorEmpleados,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}else if(nombreArray.length == 3){
@@ -304,7 +305,7 @@ public class BuscadorEmpleados extends Composite   {
 					primerApellido =  nombreArray[2];
 					segundoApellido = "";
 					
-					if(nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, 
+					if(nuevo.agregarFormulario('1',buscadorEmpleados,primerNombre, segundoNombre,primerApellido, 
 							segundoApellido,txtDato1.getText(),txtDato1.getText(),""))
 					{
 						primerNombre = nombreArray[0];
@@ -312,7 +313,7 @@ public class BuscadorEmpleados extends Composite   {
 						primerApellido =  nombreArray[1];
 						segundoApellido = nombreArray[2];
 						
-						nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, 
+						nuevo.agregarFormulario('1',buscadorEmpleados,primerNombre, segundoNombre,primerApellido, 
 								segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
 					}
 					
@@ -325,7 +326,7 @@ public class BuscadorEmpleados extends Composite   {
 					primerApellido =  nombreArray[2];
 					segundoApellido = nombreArray[3];
 					
-					nuevo.agregarFormulario('1',evaluacionesBuscador,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
+					nuevo.agregarFormulario('1',buscadorEmpleados,primerNombre, segundoNombre,primerApellido, segundoApellido,txtDato1.getText(),txtDato1.getText(),"");
 					grid.setWidget(1, 0,nuevo);
 					nuevo.setSize("100%", "648px");
 				}
@@ -339,7 +340,7 @@ public class BuscadorEmpleados extends Composite   {
 		}else if(listBox.getValue(listBox.getSelectedIndex()).equals("Pasaporte"))
 		{
 			if(!txtDato1.getText().equals("") ){
-				nuevo.agregarFormulario('3',evaluacionesBuscador,txtDato1.getText(), "","", 
+				nuevo.agregarFormulario('3',buscadorEmpleados,txtDato1.getText(), "","", 
 						"",txtDato1.getText(),txtDato1.getText()
 						,"");
 				grid.setWidget(1, 0,nuevo);
@@ -353,7 +354,7 @@ public class BuscadorEmpleados extends Composite   {
 		{
 
 			if(!txtDato1.getText().equals("") ){
-				nuevo.agregarFormulario('4',evaluacionesBuscador,txtDato1.getText(), "","", 
+				nuevo.agregarFormulario('4',buscadorEmpleados,txtDato1.getText(), "","", 
 						"",txtDato1.getText(),txtDato1.getText()
 						,"");
 				grid.setWidget(1, 0,nuevo);
@@ -365,21 +366,21 @@ public class BuscadorEmpleados extends Composite   {
     		}
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 		{
-			nuevo.agregarFormulario('5',evaluacionesBuscador,txtDato1.getText(), "","", 
+			nuevo.agregarFormulario('5',buscadorEmpleados,txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,listEstado.getValue(listEstado.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 		{
-			nuevo.agregarFormulario('6',evaluacionesBuscador,txtDato1.getText(), "","", 
+			nuevo.agregarFormulario('6',buscadorEmpleados,txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,listEstado.getValue(listEstado.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
 		{
-			nuevo.agregarFormulario('7',evaluacionesBuscador,txtDato1.getText(), "","", 
+			nuevo.agregarFormulario('7',buscadorEmpleados,txtDato1.getText(), "","", 
 					"",txtDato1.getText(),txtDato1.getText()
 					,listEstado.getValue(listEstado.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);
@@ -394,87 +395,85 @@ public class BuscadorEmpleados extends Composite   {
 	 */
 	public void Empleado_registrado(final Long id_empleado){
         load.visible();
-        
 		grid.clearCell(1, 0);
-		final Empleado e = new Empleado(0);
-		e.id_empleado = id_empleado;
-		e.NuevasPestanas(); 
-		grid.setWidget(1, 0,e);
-        e.setSize("100%", "648px");
+		
+		final Empleado empleado = new Empleado(0);
+		empleado.id_empleado = id_empleado;
+		empleado.NuevasPestanas(); 
+		grid.setWidget(1, 0,empleado);
+        empleado.setSize("100%", "648px");
         
         recursosHumanosService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
         	public void onFailure(Throwable caught) 
         	{
                 load.invisible();
-            	mensaje.setMensaje("alert alert-information alert-block", 
-            			"\nNo hay resultados");
+            	mensaje.setMensaje("alert alert-information alert-block", "\nNo hay resultados");
         	}
 
         	@Override
         	public void onSuccess(AuxEmpleado result)
         	{
-        		System.out.println(result.getAfiliado());
-
+        		//System.out.println(result.getAfiliado());
         		try{
         			
-        			e.setFormularioDatos(result);
+        			empleado.setFormularioDatos(result);
         			
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setAcademico(result.getHistorial_academico());
+        			empleado.setAcademico(result.getHistorial_academico());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setFamilia(result.getFamilia());
+        			empleado.setFamilia(result.getFamilia());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setHistorial(result.getHistorial());
+        			empleado.setHistorial(result.getHistorial());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setIdioma(result.getIdiomas());
-        		}catch(Exception e){
-
-        		}
-        		try{
-        			e.setPuesto(result.getPuestos());
+        			empleado.setIdioma(result.getIdiomas());
         		}catch(Exception e){
 
         		}
         		try{
-        			e.setReferenciaLaboral(result.getReferencia_laboral());
+        			empleado.setPuesto(result.getPuestos());
+        		}catch(Exception e){
+
+        		}
+        		try{
+        			empleado.setReferenciaLaboral(result.getReferencia_laboral());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setReferenciaPersonal(result.getReferencia_personal());
+        			empleado.setReferenciaPersonal(result.getReferencia_personal());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setPermiso(result.getVacaciones());
+        			empleado.setPermiso(result.getVacaciones());
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setFormularioEntrevista(result.getEntrevista().get(0));
+        			empleado.setFormularioEntrevista(result.getEntrevista().get(0));
         		}catch(Exception e){
         			
         		}
         		try{
-        			e.setFormularioTest(result.getTest());
+        			empleado.setFormularioTest(result.getTest());
         		}catch(Exception e){
         			
         		}
 
         		try{
-        			e.setSalario(result.getSalario());
+        			empleado.setSalario(result.getSalario());
         		}catch(Exception e){
         			
         		}

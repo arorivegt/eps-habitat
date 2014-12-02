@@ -38,19 +38,19 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 public class BDpuestos extends Composite  {
 
      private Grid grid_1;
-     private BDpuestos a;
+     private BDpuestos bdPuestos;
      private Loading load;
-     private Button button;
+     private Button btnBuscar;
 	 private Mensaje mensaje; 
      private final Grid grid;
      private TextBox idPuesto;
 	 private Button btnAgregar;
 	 private FlexTable flextable;
      private final Button btnTest;
- 	 private FormularioBDPuestos fa ;
+ 	 private FormularioBDPuestos formularioBaseDatosPuesto ;
      private VerticalPanel panel = new VerticalPanel();
- 	 private List<AuxBDPuesto> bdpuesto = new ArrayList<AuxBDPuesto>();
-     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+ 	 private List<AuxBDPuesto> bdPuesto = new ArrayList<AuxBDPuesto>();
+     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
      
      /**
       * contructor
@@ -97,25 +97,25 @@ public class BDpuestos extends Composite  {
         grid_1.setWidget(0, 0, idPuesto);
         idPuesto.setSize("227px", "34px");
         
-        button = new Button("Agregar");
-        button.addClickHandler(new ClickHandler() {
+        btnBuscar = new Button("Agregar");
+        btnBuscar.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
-        		for ( AuxBDPuesto n2 : bdpuesto) 
+        		for(AuxBDPuesto n2 : bdPuesto) 
 			    {
         			if(n2.getId_puesto() == Long.parseLong(idPuesto.getText()))
         			{
         				flextable.clear();
-        		    	fa = new  FormularioBDPuestos(a);
-        		    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
-        		    	flextable.setWidget(flextable.getRowCount(), 0,fa );
+        		    	formularioBaseDatosPuesto = new  FormularioBDPuestos(bdPuestos);
+        		    	formularioBaseDatosPuesto.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
+        		    	flextable.setWidget(flextable.getRowCount(), 0,formularioBaseDatosPuesto );
         			}
 			    }
         	}
         });
-        button.setText("Buscar");
-        button.setStyleName("sendButton");
-        grid_1.setWidget(0, 1, button);
-        button.setSize("227px", "34px");
+        btnBuscar.setText("Buscar");
+        btnBuscar.setStyleName("sendButton");
+        grid_1.setWidget(0, 1, btnBuscar);
+        btnBuscar.setSize("227px", "34px");
         
         flextable = new FlexTable();
         panel.add(flextable);
@@ -128,7 +128,7 @@ public class BDpuestos extends Composite  {
         btnTest = new Button("Agregar");
         btnTest.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
-        		agregarFormulario_lleno();
+        		agregarFormularioLleno();
         	}
         });
         btnTest.setText("Ver Puestos");
@@ -146,9 +146,8 @@ public class BDpuestos extends Composite  {
         btnAgregar.setSize("227px", "34px");
         grid.setWidget(0, 2, btnAgregar);
         
-
 		scrollPanel.setWidget(panel);
-        agregarFormulario_lleno();
+        agregarFormularioLleno();
         
 	}
     
@@ -156,12 +155,13 @@ public class BDpuestos extends Composite  {
      * agrega un formulario de Base de datos de puestos con datos
      * extraidos del datastore
      */
-    public void agregarFormulario_lleno()
+    public void agregarFormularioLleno()
     {
         load.visible();
     	flextable.clear();
-    	bdpuesto.clear();
-    	loginService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
+    	bdPuesto.clear();
+    	
+    	recursosHumanosService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
     		{
     	        load.invisible();
@@ -175,10 +175,10 @@ public class BDpuestos extends Composite  {
 				{
 				    for ( AuxBDPuesto n2 : results) 
 				    {
-				    	bdpuesto.add(n2);
-				    	fa = new  FormularioBDPuestos(a);
-				    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
-				    	flextable.setWidget(flextable.getRowCount(), 0,fa );
+				    	bdPuesto.add(n2);
+				    	formularioBaseDatosPuesto = new  FormularioBDPuestos(bdPuestos);
+				    	formularioBaseDatosPuesto.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(), n2.getNombre_puesto(),n2.getFunciones());
+				    	flextable.setWidget(flextable.getRowCount(), 0,formularioBaseDatosPuesto );
 				    }
 		    	}	
 		        load.invisible();

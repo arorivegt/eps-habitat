@@ -38,8 +38,8 @@ public class Compartidas extends Composite  {
  	 private Desempeno desempeno = new Desempeno(0L);
      private VerticalPanel panel = new VerticalPanel();
 	 private Evaluacion evaluacion = new Evaluacion(0L);
-     public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
-     private List<AuxTestCompartidos> valor = new ArrayList<AuxTestCompartidos>();
+     public List<AuxBDTest> auxbdTest = new ArrayList<AuxBDTest>();
+     private List<AuxTestCompartidos> auxTestCompartido = new ArrayList<AuxTestCompartidos>();
      private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 
      
@@ -69,7 +69,7 @@ public class Compartidas extends Composite  {
         grid.setWidget(0, 0, btnTest);
         btnTest.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                        agregar_formularios(valor);
+                        agregar_formularios(auxTestCompartido);
                 }
         });
         btnTest.setText("Ver Test");
@@ -77,7 +77,7 @@ public class Compartidas extends Composite  {
         btnTest.setSize("227px", "34px");
     }
 
-    public void agregarFormulario_lleno(AuxTest n,Long idEmpleado, String tipo){
+    public void agregarFormularioLleno(AuxTest n,Long idEmpleado, String tipo){
         flextable.clear();
         if (tipo.equals("1")) 
         {
@@ -100,17 +100,17 @@ public class Compartidas extends Composite  {
         }
     }
             
-    public void agregar_formularios(List<AuxTestCompartidos> results){
+    public void agregar_formularios(List<AuxTestCompartidos> listAuxCompartido){
 
         load.visible();
         flextable.clear();
         
-        if (!(results.size() == 0)) {
-        	valor = results;
+        if (!(listAuxCompartido.size() == 0)) {
+        	auxTestCompartido = listAuxCompartido;
                 
-            for (final AuxTestCompartidos n : results) 
+            for (final AuxTestCompartidos aux : listAuxCompartido) 
             {
-            	recursosHumanosService.getTest(n.getIdTest(),n.getId_empleado(), new AsyncCallback<AuxTest>(){
+            	recursosHumanosService.getTest(aux.getIdTest(),aux.getId_empleado(), new AsyncCallback<AuxTest>(){
                 	
                 	public void onFailure(Throwable caught) 
                 	{
@@ -121,7 +121,7 @@ public class Compartidas extends Composite  {
                 	@Override
                 	public void onSuccess(final AuxTest result)
                 	{
-                		recursosHumanosService.getEmpleado(n.getId_empleado(), new AsyncCallback<AuxEmpleado>(){
+                		recursosHumanosService.getEmpleado(aux.getId_empleado(), new AsyncCallback<AuxEmpleado>(){
                         	
                         	public void onFailure(Throwable caught) 
                         	{
@@ -133,8 +133,8 @@ public class Compartidas extends Composite  {
                         	public void onSuccess(AuxEmpleado resul)
                         	{
                         		nombre = resul.getPrimer_nombre() +" "+ resul.getPrimer_apellido() + " "+resul.getSegundo_apellido();
-                            	FormularioTestCompartido de = new FormularioTestCompartido(result,compartida,n.getId(),nombre);
-                            	de.id_Empleado = n.getId_empleado();
+                            	FormularioTestCompartido de = new FormularioTestCompartido(result,compartida,aux.getId(),nombre);
+                            	de.id_Empleado = aux.getId_empleado();
                                 flextable.setWidget(flextable.getRowCount(), 0,de);
                         		System.out.println("exito"+nombre);
                         	}
@@ -149,7 +149,7 @@ public class Compartidas extends Composite  {
         load.invisible();
     }
          
-    public void DejarCompartir(Long idEmpleadoPrincipal, Long idTestCompartido, final FormularioTestCompartido test){
+    public void DejarCompartir(Long idEmpleadoPrincipal, Long idTestCompartido, final FormularioTestCompartido formularioTestCompartido){
 
         load.visible();
                 
@@ -167,14 +167,14 @@ public class Compartidas extends Composite  {
 		        load.invisible();
         		inicio.setMensaje("alert alert-success",result);
     	        BDTest();
-        		remover(test);
+        		remover(formularioTestCompartido);
         	}
-                });
+        });
         load.invisible();
     }
     
-    public void remover(FormularioTestCompartido test){
-    	flextable.remove(test);
+    public void remover(FormularioTestCompartido formularioTestCompartido){
+    	flextable.remove(formularioTestCompartido);
     }
             
     private void BDTest(){
@@ -190,11 +190,11 @@ public class Compartidas extends Composite  {
 			@Override
 			public void onSuccess(List<AuxBDTest> result) {
 				if (!result.isEmpty()) {
-					for(AuxBDTest a: result )
+					for(AuxBDTest aux: result )
 					{
-						if(a.getTipo_test().equals("1"))
+						if(aux.getTipo_test().equals("1"))
 						{
-							BDresult.add(a);
+							auxbdTest.add(aux);
 						}
 					}
 		    	}

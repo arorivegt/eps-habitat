@@ -480,7 +480,7 @@ public class FormularioPruebaPeriodo extends Composite {
 		absolutePanel.add(lblPregunta10, 47, 879);
 		lblPregunta10.setSize("482px", "34px");
 		
-		for (AuxBDTest p : this.d.BDresult) {
+		for (AuxBDTest p : this.d.auxBDTest) {
 	    	listTest.addItem(""+p.getNombreTest(),""+p.getId_test());
 	    }
 		botonesVisibles(true);
@@ -613,7 +613,7 @@ public class FormularioPruebaPeriodo extends Composite {
 	public void BuscarBDtest(long lg)
 	{
 		this.id_BDprueba = lg;
-		for (AuxBDTest p : d.BDresult ) 
+		for (AuxBDTest p : d.auxBDTest ) 
 		{
 			if(lg == p.getId_test())
 			{

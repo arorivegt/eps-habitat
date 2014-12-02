@@ -85,7 +85,7 @@ public class FormularioTestCompartido extends Composite {
 		Button btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				compartido.agregarFormulario_lleno(getPrueba(), id_Empleado, getPrueba().getTipo_test());
+				compartido.agregarFormularioLleno(getPrueba(), id_Empleado, getPrueba().getTipo_test());
 			}
 		});
 		btnActualizar.setText("Ver");

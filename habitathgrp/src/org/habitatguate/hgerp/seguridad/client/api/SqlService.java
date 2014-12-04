@@ -35,6 +35,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
+	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
 	List<AuxBeneficiario> ConsultaTodosBene();
@@ -56,5 +57,7 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor);
 	Long Actualizar_ProveedorAprobado(Long id);
 	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
+	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
+	Long Actualizar_EstadoVale(Long idVale);
 	
 }

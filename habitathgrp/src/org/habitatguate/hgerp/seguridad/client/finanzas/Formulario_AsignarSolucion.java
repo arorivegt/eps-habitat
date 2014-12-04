@@ -48,10 +48,11 @@ public class Formulario_AsignarSolucion extends Composite{
     public Long correlativo = (long) 1; 
     public boolean banderaTimer = false;
     public boolean banderaWhile = false;
+    public int index = 0;
     
 
     
-    Timer timer = new Timer() {
+    /*Timer timer = new Timer() {
         public void run() {
         	Iterator<AuxDetallePlantillaSolucion> i = e.grid.getListMateriales().iterator();
 			while (i.hasNext() && banderaTimer == false){
@@ -83,9 +84,79 @@ public class Formulario_AsignarSolucion extends Composite{
 		    selectPlant = null;
 		    correlativo = (long) 1; 
         }
-      };
+      };*/
 	
 	public Formulario_AsignarSolucion(){
+		/*Timer timer = new Timer() {
+        public void run() {
+        	Iterator<AuxDetallePlantillaSolucion> i = e.grid.getListMateriales().iterator();
+			while (i.hasNext() && banderaTimer == false){
+					AuxDetallePlantillaSolucion aux = i.next();
+					loginService.Insertar_UnicoDetalleSolucion(idSolucionAlmacenado,aux,
+        			new AsyncCallback<Long>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							System.err.println(caught);
+							
+						}
+
+						@Override
+						public void onSuccess(Long result) {
+
+							
+						}
+        		
+					});
+			}
+			
+			Window.alert("Solucion asignada Correctamente");
+			e.grid.ActualizarList();
+		    costoAcumulado = 0;
+		    idSolucionAlmacenado = 0L;
+		    selectNuevo = null;
+		    selectNuevoBene = null;
+		    selectPlant = null;
+		    correlativo = (long) 1; 
+        }
+      };*/
+		final Timer timer = new Timer() {
+	        public void run() {
+       			if (index < e.grid.getListMateriales().size()){
+						AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
+						loginService.Insertar_UnicoDetalleSolucion(idSolucionAlmacenado,aux,
+	        			new AsyncCallback<Long>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								System.err.println(caught);
+								
+							}
+
+							@Override
+							public void onSuccess(Long result) {
+								index++;
+								
+							}
+	        		
+						});
+       			}
+       			else{
+       				Window.alert("Solucion asignada Correctamente");
+       				e.grid.ActualizarList();
+       			    costoAcumulado = 0;
+       			    idSolucionAlmacenado = 0L;
+       			    selectNuevo = null;
+       			    selectNuevoBene = null;
+       			    selectPlant = null;
+       			    correlativo = (long) 1; 
+    				this.cancel();
+       			}
+				
+
+	        }
+	      };
+		
 		final Grid grid = new Grid(2, 2);
 		final MaterialNameSuggestOracle oracle = new MaterialNameSuggestOracle();
 		final PlantillaNameSuggestOracle plantilla = new PlantillaNameSuggestOracle();
@@ -434,8 +505,8 @@ public class Formulario_AsignarSolucion extends Composite{
 						@Override
 						public void onSuccess(Long result) {
 							idSolucionAlmacenado = result;
-							//Window.alert(String.valueOf(result));
-							timer.schedule(3500);
+		        			index = 0;
+		    				timer.scheduleRepeating(5000);
 						}
 						
 						@Override

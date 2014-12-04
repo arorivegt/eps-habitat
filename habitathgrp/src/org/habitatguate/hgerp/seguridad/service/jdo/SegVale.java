@@ -21,6 +21,8 @@ public class SegVale implements Serializable{
 	private Double totalVale;
 	@Persistent
 	private Date fechaVale;
+	@Persistent
+	private boolean estado;
 	
 	public Long getIdVale() {
 		return idVale;
@@ -39,6 +41,12 @@ public class SegVale implements Serializable{
 	}
 	public void setFechaVale(Date fechaVale) {
 		this.fechaVale = fechaVale;
+	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 	

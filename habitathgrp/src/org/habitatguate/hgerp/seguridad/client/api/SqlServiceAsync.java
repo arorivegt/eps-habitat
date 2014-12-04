@@ -122,6 +122,15 @@ public interface SqlServiceAsync {
 	void ConsultaTodosBene_PorAfiliado(Long idAfiliado,
 			AsyncCallback<List<AuxBeneficiario>> callback);
 
+	void GenerarIdVale(AsyncCallback<Long> callback);
+
+	void Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale,
+			Long idSolucion, AsyncCallback<Long> callback);
+
+	void Actualizar_EstadoVale(Long idVale, AsyncCallback<Long> callback);
+
+
+
 
 
 

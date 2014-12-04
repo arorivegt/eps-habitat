@@ -21,13 +21,17 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
@@ -49,7 +53,7 @@ public class Formulario_CrearVale extends Composite {
     private AuxBeneficiario selectNuevoBene;
     private AuxSolucion selectSolucion;
     private Double costoAcumulado = 0.0;
-    
+    public int index = 0;
     TablaGWT_Vale e = null;
 
 	public Formulario_CrearVale(Long idAfiliadoSession){
@@ -85,7 +89,7 @@ public class Formulario_CrearVale extends Composite {
 				
 			
 
-				
+	
 
 		
 
@@ -93,7 +97,7 @@ public class Formulario_CrearVale extends Composite {
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1025px", "90px");
+		absolutePanel.setSize("1025px", "110px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		Label lblNombreBeneficiario = new Label("Nombre Beneficiario");
@@ -169,6 +173,12 @@ public class Formulario_CrearVale extends Composite {
 		absolutePanel.add(lblFecha, 773, 76);
 		lblFecha.setSize("76px", "13px");
 		
+		Button button = new Button("Send");
+		button.setText("Generar Vale");
+		button.setStyleName("finanButton");
+		absolutePanel.add(button, 785, 100);
+		button.setSize("157px", "30px");
+		
 		Label lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
 		absolutePanel.add(lblAfiliado, 387, 112);
@@ -224,6 +234,7 @@ public class Formulario_CrearVale extends Composite {
                 	if (aux.getVale().getIdVale().compareTo(0L) == 0){
                 		if (aux.getMaterialCostruccion().getProveedor().getIdProveedor().compareTo(selected.getIdProveedor()) == 0){
                 			AuxDetallePlantillaSolucion auxDetalle = new AuxDetallePlantillaSolucion();
+                			auxDetalle.setIdDetallePlantillaSolucion(aux.getIdDetalleSolucion());
                 			auxDetalle.setNomMaterialCostruccion(aux.getMaterialCostruccion().getNomMaterialCostruccion());
                 			auxDetalle.setPrecioUnit(aux.getMaterialCostruccion().getPrecioUnit());
                 			auxDetalle.setCantidad(aux.getCantidad());
@@ -231,7 +242,7 @@ public class Formulario_CrearVale extends Composite {
                 			auxDetalle.setSubTotal(aux.getSubTotal());
                 			auxDetalle.setCostoAcumulado(0.0);
                 			listaDetalleVale.add(auxDetalle);
-                			System.out.println("Material " + aux.getMaterialCostruccion().getProveedor().getIdProveedor());
+                			System.out.println("Material "+ aux.getIdDetalleSolucion());
 
                 		}
                 		
@@ -294,6 +305,76 @@ public class Formulario_CrearVale extends Composite {
 		e = new TablaGWT_Vale(new ArrayList<AuxDetallePlantillaSolucion>());
 		grid.setWidget(1, 0,e);
 		e.setSize("700px", "300px"); 
+		
+		loginService.GenerarIdVale(new AsyncCallback<Long>() {
+			
+			@Override
+			public void onSuccess(Long result) {
+				// TODO Auto-generated method stub
+				textBox_2.setText("" + result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+
+		
+		final Timer timer = new Timer() {
+	        public void run() {
+       			if (index < e.grid.getListMateriales().size()){
+						AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
+						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), Long.valueOf(textBox_2.getText()),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
+							
+							@Override
+							public void onSuccess(Long result) {
+								// TODO Auto-generated method stub
+								index++;
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+							}								
+						);
+       			}
+       			else{
+    				this.cancel();
+    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()), new AsyncCallback<Long>() {
+
+						@Override
+						public void onFailure(Throwable caught) {
+							// TODO Auto-generated method stub
+		       				
+						}
+
+						@Override
+						public void onSuccess(Long result) {
+							// TODO Auto-generated method stub
+							Window.alert("Solucion asignada Correctamente");
+						}
+    					
+					});
+       			}
+				
+
+	        }
+	      };
+	      	button.addClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+									System.out.println("Aqui se actualiza los detalles");
+									index = 0;
+									timer.scheduleRepeating(5000);
+
+				}
+			});
 		
 	}
 }

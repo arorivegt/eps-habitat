@@ -32,6 +32,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegProveedor;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegVale;
 import org.habitatguate.hgerp.util.ConvertDate;
 import org.habitatguate.hgerp.util.PMF;
 
@@ -339,6 +340,23 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 	
 	
 }
+
+public Long GenerarIdVale() throws IllegalArgumentException{
+	 Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	SegVale nuevo = new SegVale();
+	nuevo.setEstado(false);
+	
+	try{
+		gestorPersistencia.makePersistent(nuevo);
+		valor = nuevo.getIdVale();
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+	
+}
+
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
     @Override
     public Long Eliminar_Parametro(Long id) throws IllegalArgumentException {
@@ -787,6 +805,40 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 			 final SegAfiliado e = gestorPersistencia.getObjectById(SegAfiliado.class, idAfiliado);
 			 e.getEmpleados().add(idEmpleado);
 			 valor = idEmpleado;
+		}
+		return valor;
+	}
+	
+	public Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion){
+
+
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		 Key k = new KeyFactory
+			        .Builder(SegSolucion.class.getSimpleName(), idSolucion)
+		 			.addChild(SegDetalleSolucion.class.getSimpleName(), idDetalleSolucion)	
+			        .getKey();
+			System.out.println(k);
+		 final SegDetalleSolucion e = gestorPersistencia.getObjectById(SegDetalleSolucion.class, k);
+		 final SegVale e1 = gestorPersistencia.getObjectById(SegVale.class, idVale);
+		 try {
+			 e.setVale(e1);	
+		}
+		finally{
+			gestorPersistencia.close();
+		}
+		return null;
+	}
+	
+	public Long Actualizar_EstadoVale(Long idVale){
+		Long valor = 0L;
+		if(idVale == null){
+			return valor;
+		}else
+		{
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			 final SegVale e = gestorPersistencia.getObjectById(SegVale.class, idVale);
+			 e.setEstado(true);
+			 valor = idVale;
 		}
 		return valor;
 	}

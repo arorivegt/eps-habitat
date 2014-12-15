@@ -16,7 +16,6 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 
@@ -37,13 +36,9 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
-import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.ValueListBox;
-import com.google.gwt.text.client.IntegerRenderer;
 import com.google.gwt.text.shared.Renderer;
 
 public class Formulario_CrearVale extends Composite {

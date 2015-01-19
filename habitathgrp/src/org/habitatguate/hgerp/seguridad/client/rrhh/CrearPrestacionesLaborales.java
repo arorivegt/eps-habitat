@@ -60,7 +60,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     private DateBox dateFecha;
 
     private Label lbDato1;
-    private Label label;
+    private Label lblFechaRegistro;
     private Label lblCantidad;
     private Label lblElijaElAo;
     private Label lblElijaElTipo;
@@ -74,6 +74,9 @@ public class CrearPrestacionesLaborales extends Composite   {
 	public List <AuxAfiliado> auxAfiliados = new ArrayList<AuxAfiliado>();	
     private final SqlServiceAsync finanzasService = GWT.create(SqlService.class);
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private DateBox dateFecha1;
+    private Label lblFecha;
+    private DateBox dateFecha2;
     
     /**
      * constructor
@@ -202,7 +205,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 19);
 		listBox.setSize("179px", "39px");
 		
 		txtDato1 =  new SuggestBox(createCountriesOracle());
@@ -242,34 +245,14 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listTipoPrestaciones.addItem("Bonificacion", "3");
 		listTipoPrestaciones.addItem("Bono 14", "4");
 		listTipoPrestaciones.addItem("Aguinaldo", "5");
-		//listTipoPrestaciones.addItem("Vacaciones", "6");
+		listTipoPrestaciones.addItem("Vacaciones", "6");
 		listTipoPrestaciones.addItem("Indemnizacion", "7");
 		listTipoPrestaciones.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");
 						
-		absolutePanel.add(Busqueda, 470, 78);
+		absolutePanel.add(Busqueda, 848, 78);
 		Busqueda.setSize("103px", "55px");
-		
-		lbDato1 = new Label("Primer Nombre");
-		lbDato1.setStyleName("label");
-		lbDato1.setSize("368px", "19px");
-		absolutePanel.add(lbDato1, 205, 0);
-		
-		Label lblBusquedaPor = new Label("Busqueda por: ");
-		lblBusquedaPor.setStyleName("label");
-		lblBusquedaPor.setSize("118px", "13px");
-		absolutePanel.add(lblBusquedaPor, 10, 0);
-		
-		lblElijaElTipo = new Label("Elija el tipo de prestaciones a calcular");
-		lblElijaElTipo.setStyleName("label");
-		absolutePanel.add(lblElijaElTipo, 10, 61);
-		lblElijaElTipo.setSize("179px", "13px");
-		
-		lblElijaElAo = new Label("Elija el año para calcular prestaciones");
-		lblElijaElAo.setStyleName("label");
-		absolutePanel.add(lblElijaElAo, 205, 61);
-		lblElijaElAo.setSize("179px", "13px");
 		
 		listAnnio = new ListBox();
 		listAnnio.addItem("2000");
@@ -340,21 +323,11 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(dateFecha, 463, 17);
 		dateFecha.setSize("177px", "41px");
 		
-		label = new Label("Fecha");
-		label.setStyleName("label");
-		absolutePanel.add(label, 463, 0);
-		label.setSize("139px", "13px");
-		
 		txtDescripcion = new TextBox();
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		txtDescripcion.setMaxLength(100);
 		absolutePanel.add(txtDescripcion, 648, 19);
 		txtDescripcion.setSize("177px", "39px");
-		
-		lblDescripcionPequea = new Label("Descripcion Pequeña");
-		lblDescripcionPequea.setStyleName("label");
-		absolutePanel.add(lblDescripcionPequea, 648, 0);
-		lblDescripcionPequea.setSize("157px", "13px");
 		
 		Cantidad = new TextBox();
 		Cantidad.addChangeHandler(new ChangeHandler() {
@@ -378,10 +351,69 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(Cantidad, 846, 19);
 		Cantidad.setSize("145px", "39px");
 		
+		dateFecha1 = new DateBox();
+		dateFecha1.getTextBox().setReadOnly(true);
+		dateFecha1.setValue(new Date());
+		dateFecha1.setFormat(new DateBox.DefaultFormat 
+	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFecha1.getDatePicker().setYearArrowsVisible(true);
+		dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha1.getDatePicker().setVisibleYearCount(100);
+		dateFecha1.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(dateFecha1, 401, 90);
+		dateFecha1.setSize("177px", "41px");
+		
+		dateFecha2 = new DateBox();
+		dateFecha2.getTextBox().setReadOnly(true);
+		dateFecha2.setValue(new Date());
+		dateFecha2.setFormat(new DateBox.DefaultFormat 
+	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFecha2.getDatePicker().setYearArrowsVisible(true);
+		dateFecha2.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha2.getDatePicker().setVisibleYearCount(100);
+		dateFecha2.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(dateFecha2, 593, 90);
+		dateFecha2.setSize("177px", "41px");
+		
+		lbDato1 = new Label("Primer Nombre");
+		lbDato1.setStyleName("label");
+		lbDato1.setSize("368px", "19px");
+		absolutePanel.add(lbDato1, 205, 0);
+		
+		Label lblBusquedaPor = new Label("Busqueda por: ");
+		lblBusquedaPor.setStyleName("label");
+		lblBusquedaPor.setSize("118px", "13px");
+		absolutePanel.add(lblBusquedaPor, 10, 0);
+		
+		lblElijaElTipo = new Label("Elija el tipo de prestaciones a calcular");
+		lblElijaElTipo.setStyleName("label");
+		absolutePanel.add(lblElijaElTipo, 10, 61);
+		lblElijaElTipo.setSize("179px", "13px");
+		
+		lblElijaElAo = new Label("Elija el año para calcular prestaciones");
+		lblElijaElAo.setStyleName("label");
+		absolutePanel.add(lblElijaElAo, 205, 61);
+		lblElijaElAo.setSize("179px", "13px");
+		
+		lblFechaRegistro = new Label("Fecha Registro");
+		lblFechaRegistro.setStyleName("label");
+		absolutePanel.add(lblFechaRegistro, 463, 0);
+		lblFechaRegistro.setSize("139px", "13px");
+		
+		lblDescripcionPequea = new Label("Descripcion(Opcional)");
+		lblDescripcionPequea.setStyleName("label");
+		absolutePanel.add(lblDescripcionPequea, 648, 0);
+		lblDescripcionPequea.setSize("216px", "19px");
+		
 		lblCantidad = new Label("Cantidad");
 		lblCantidad.setStyleName("label");
 		absolutePanel.add(lblCantidad, 846, 0);
 		lblCantidad.setSize("157px", "13px");
+		
+		lblFecha = new Label("Rango de Fecha para calculo de Bono 14 y Aguinaldo");
+		lblFecha.setStyleName("label");
+		absolutePanel.add(lblFecha, 401, 73);
+		lblFecha.setSize("426px", "13px");
 		
     	recursosHumanosService.BDPuesto(new AsyncCallback<List<AuxBDPuesto>>(){
     		public void onFailure(Throwable caught) 
@@ -549,10 +581,41 @@ public class CrearPrestacionesLaborales extends Composite   {
 	            public void onSuccess( List<AuxEmpleado> result)
 	            {
 					bandera = !result.isEmpty();
+					boolean error = true;
+					String msj = "No hay resultados";
+					
 			        load.invisible();
-					if(!result.isEmpty()){
-						Prestaciones(result,listTipoPrestaciones.getValue(listTipoPrestaciones.getSelectedIndex()),
-								listAnnio.getItemText(listAnnio.getSelectedIndex()));
+			        
+			        DateTimeFormat anio = DateTimeFormat.getFormat("yyyy");
+			 		DateTimeFormat mes 	= DateTimeFormat.getFormat("MM");
+			 		
+			        String annio1 		= anio.format(dateFecha1.getValue());
+			        String annio2 		= anio.format(dateFecha2.getValue());
+			        
+			        int meses			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24*30));
+			        int dias			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24)); 
+			        
+			        if(annio1.equals(annio2)){
+			        	error = false;
+			        	msj = "rango de fechas debe ser del mismo año";
+			        }else if(dateFecha2.getValue().getTime() > dateFecha1.getValue().getTime()){
+			        	error = false;
+			        	msj = "fecha 2 debe ser mayor a fecha 1";
+			        }else if(dias <= 0){
+			        	error = false;
+			        	msj = "el calculo debe ser para mas de 1 dia";
+			        }else if(meses <= 6){
+			        	error = false;
+			        	msj = "el calculo de prestaciones, no debe ser para mas de 6 meses";
+			        }
+			        
+			        
+			        
+					if(!result.isEmpty() || error){
+						Prestaciones(result,listTipoPrestaciones.getValue(listTipoPrestaciones.getSelectedIndex()),annio1);
+						
+					}else{
+						mensaje.setMensaje("alert alert-information alert-block", "\n"+msj);
 					}
 	            }
 

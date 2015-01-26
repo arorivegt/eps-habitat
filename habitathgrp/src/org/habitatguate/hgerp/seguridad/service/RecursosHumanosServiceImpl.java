@@ -41,6 +41,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSalario;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegTest;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPermiso;
@@ -91,7 +92,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setCelular("0");
 				em.setNo_licencia("0");
 				em.setBonificacion(0.0f);
-				em.setTotal(0.0f);
+				em.setTotal(26);
 				em.setSalario_base(0.0f);
 				em.setDepto_municipio_residencia("01,0101");
 				em.setDepto_municipio_nacimiento("01,0101");
@@ -108,6 +109,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setPasaporte("0");
 				em.setLicencia("0");
 				em.setAfiliado(0L);
+				em.setJefe_Inmediato(0L);
 				em.setFecha_nacimiento(fecha_nacimiento);
 				em.setFecha_ingreso(new Date());
 				try{ 
@@ -175,7 +177,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, float total,
+            String tipo_planilla, float salario_base, int total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -567,7 +569,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		            String celular, Date fecha_nacimiento, String tipo_licencia,
 		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
-		            String tipo_planilla, float salario_base, float total,
+		            String tipo_planilla, float salario_base, int total,
 		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, 
 		            String licencia, String Etnia,
 		            String NombreEmergencia, String TelefonoEmergencia,
@@ -2391,6 +2393,55 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				System.out.println(session.getAttribute("idJefeInmediato"));
 				return Long.parseLong(id);
 			}
+		}
+
+		@Override
+		public String Insertar_Solicitud_Permiso(Long id_empleado, Date fecha1,
+				Date fecha2, String descripcionl, String tipoPermisos)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			
+			String valor = "Error al guardar datos";
+				 try { 
+					 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
+					 if(e.getJefe_Inmediato() != 0L){
+						 try{
+							 final SegEmpleado jefe 	= Persistencia.getObjectById(SegEmpleado.class,e.getJefe_Inmediato()); 
+
+							 SegSolicitudPermiso v 		= new  SegSolicitudPermiso();
+							 	v.setFecha1(fecha1);
+							 	v.setFecha2(fecha2);
+							 	v.setDescripcion(descripcionl.toUpperCase());
+							 	v.setTipoPermisos(tipoPermisos);
+							 	v.setIdEmpleadoSolicitante(id_empleado);
+							 	v.setJefeInmediatoAceptaSolicitud(false);
+							 	v.setRrhhAceptaSolicitud(false);
+					      	 	v.setEmpleado(jefe);
+					      	 	jefe.getSolicitudPermiso().add(v);
+					      	 	
+						 }catch(Exception ex){
+							 valor = "Error al solicitar permiso a jefe";
+						 }finally {  
+							 Persistencia.close();  
+					 	}	
+						 
+					 }else{
+						 valor = "No tiene jefe asignado";
+						 
+					 }
+			}finally {  
+				 Persistencia.close();  
+		 	}
+		return valor;
+			
+		}
+
+		@Override
+		public String Respuesta_Solicitud(Long id_empleado, Long id_Solicitante,Date fecha1,
+				Date fecha2, String descripcionl, String tipoPermisos,
+				boolean jefe, boolean rrhh) throws IllegalArgumentException {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 		

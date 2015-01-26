@@ -132,6 +132,8 @@ public class AuxEmpleado implements IsSerializable{
   	private List <AuxSalario> salario= new ArrayList<AuxSalario>();
 
     private List<AuxTestCompartidos> testCompartido = new ArrayList<AuxTestCompartidos>();
+    
+    private List<AuxSolicitudPermiso> solicitudPermiso = new ArrayList<AuxSolicitudPermiso>();
   	//datos del patrono
   	
   	private String centro_trabajo;
@@ -155,7 +157,7 @@ public class AuxEmpleado implements IsSerializable{
       private float salario_base;
   	
   	
-      private float total ;
+      private int total ;
   	
   	
       private float bonificacion;
@@ -163,6 +165,16 @@ public class AuxEmpleado implements IsSerializable{
 
 	public AuxEmpleado() {
 		super();
+	}
+
+
+	public List<AuxSolicitudPermiso> getSolicitudPermiso() {
+		return solicitudPermiso;
+	}
+
+
+	public void setSolicitudPermiso(List<AuxSolicitudPermiso> solicitudPermiso) {
+		this.solicitudPermiso = solicitudPermiso;
 	}
 
 
@@ -598,12 +610,12 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public float getTotal() {
+	public int getTotal() {
 		return total;
 	}
 
 
-	public void setTotal(float total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 

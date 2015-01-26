@@ -117,7 +117,7 @@ public class FormularioDatos extends Composite {
     private IntegerBox txtNoPasaporte;
     private TextBox txtSalarioBase ;
     private TextBox txtBonificacion ;
-    private TextBox txtTotal ;
+    private TextBox txtDiasVacaciones ;
     private ListBox listDireccionDepartamento ;
     private ListBox listIVS;
     private FormPanel formPanel;
@@ -1042,27 +1042,26 @@ public class FormularioDatos extends Composite {
 		txtBonificacion.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(txtBonificacion, 311, 1353);
 		//borrar esta parte
-		txtTotal = new TextBox();
-		txtTotal.addChangeHandler(new ChangeHandler() {
+		txtDiasVacaciones = new TextBox();
+		txtDiasVacaciones.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				if(txtTotal.getText().equals("")) {txtTotal.setText("0");}
-				else if(txtTotal.getText().equals(null)) {txtTotal.setText("0");}
+				if(txtDiasVacaciones.getText().equals("")) {txtDiasVacaciones.setText("0");}
+				else if(txtDiasVacaciones.getText().equals(null)) {txtDiasVacaciones.setText("0");}
 				else{
 					try{
-						Float.parseFloat(txtTotal.getText());
+						Integer.parseInt(txtDiasVacaciones.getText());
 					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nTotal no valido");
-						txtTotal.setText("0");
+						mensaje.setMensaje("alert alert-error", "Error !! \nDias no validos");
+						txtDiasVacaciones.setText("0");
 					}
 				}
 			}
 		});
-		txtTotal.setText("0.0");
-		txtTotal.setMaxLength(50);
-		txtTotal.setSize("227px", "34px");
-		txtTotal.setStyleName("gwt-PasswordTextBox");
-		absolutePanel.add(txtTotal, 585, 1353);
+		txtDiasVacaciones.setText("26");
+		txtDiasVacaciones.setMaxLength(50);
+		txtDiasVacaciones.setSize("227px", "34px");
+		txtDiasVacaciones.setStyleName("gwt-PasswordTextBox");
+		absolutePanel.add(txtDiasVacaciones, 585, 1353);
 		
 		txtJefeInmediato = new IntegerBox();
 		txtJefeInmediato.setEnabled(false);
@@ -1119,7 +1118,7 @@ public class FormularioDatos extends Composite {
 								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								Integer.parseInt(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
 								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
@@ -1180,7 +1179,7 @@ public class FormularioDatos extends Composite {
 								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-								Float.parseFloat(txtTotal.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								Integer.parseInt(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
 								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
@@ -1424,7 +1423,7 @@ public class FormularioDatos extends Composite {
 		absolutePanel.add(lblBonificacion, 315, 1328);
 		lblBonificacion.setSize("192px", "19px");
 		
-		lblTotal = new Label("Total");
+		lblTotal = new Label("Dias de Vacaciones");
 		lblTotal.setStyleName("label");
 		absolutePanel.add(lblTotal, 587, 1328);
 		lblTotal.setSize("192px", "19px");
@@ -1479,7 +1478,7 @@ public class FormularioDatos extends Composite {
 		absolutePanel.add(lblTelefono, 672, 1099);
 		lblTelefono.setSize("192px", "19px");
 		
-		lblTelefonoSeEmergencia = new Label("Escribe nombres y Telefonos de emergencia");
+		lblTelefonoSeEmergencia = new Label("Nombres y Telefonos de emergencia");
 		lblTelefonoSeEmergencia.setStyleName("label");
 		absolutePanel.add(lblTelefonoSeEmergencia, 36, 1064);
 		lblTelefonoSeEmergencia.setSize("449px", "19px");
@@ -2025,7 +2024,7 @@ public class FormularioDatos extends Composite {
 		this.txtProfesion.setText(txtProfesion);
 		this.txtTipoPlanilla.setText(txtTipoPlanilla);
 		this.txtSalarioBase.setText(txtSalarioBase);
-		this.txtTotal.setText(txtTotal);
+		this.txtDiasVacaciones.setText(txtTotal);
 		this.txtBonificacion.setText(txtBonificacion);
 		
 		try{
@@ -2202,7 +2201,7 @@ public class FormularioDatos extends Composite {
 		txtTipoPlanilla.setVisible(false);
 		txtSalarioBase.setVisible(false);
 		txtBonificacion.setVisible(false);
-		txtTotal.setVisible(false);
+		txtDiasVacaciones.setVisible(false);
 		listEstado.setVisible(false);
 		btnExportarDatos.setVisible(false);
 		btnImprimir.setVisible(false);

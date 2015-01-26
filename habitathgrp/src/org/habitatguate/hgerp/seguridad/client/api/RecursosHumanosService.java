@@ -115,7 +115,7 @@ public interface RecursosHumanosService extends RemoteService {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, float total,
+            String tipo_planilla, float salario_base, int total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -350,13 +350,19 @@ public interface RecursosHumanosService extends RemoteService {
 	/**
 	 * 
 	 * @param id_empleado
-	 * @param fecha
-	 * @param salario
-	 * @param tipoSalario
-	 * @param Descripcion
+	 * @param fecha1
+	 * @param fecha2
+	 * @param descripcionl
+	 * @param tipoPermisos
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
+	String Insertar_Solicitud_Permiso(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos) throws IllegalArgumentException;
+	
+	String Respuesta_Solicitud(Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos,boolean jefe, boolean rrhh) throws IllegalArgumentException;
+	
 	Long Insertar_Salario(Long id_empleado, Date fecha, float salario, 
 			String tipoSalario, String Descripcion) throws IllegalArgumentException;
 	/**
@@ -435,7 +441,7 @@ public interface RecursosHumanosService extends RemoteService {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, float total,
+            String tipo_planilla, float salario_base, int total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,

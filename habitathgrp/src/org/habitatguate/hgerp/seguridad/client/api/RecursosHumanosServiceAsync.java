@@ -112,7 +112,7 @@ public interface RecursosHumanosServiceAsync {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, float total,
+            String tipo_planilla, float salario_base, int total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -370,6 +370,21 @@ public interface RecursosHumanosServiceAsync {
 	void Insertar_Vacaciones(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
+	/**
+	 * 
+	 * @param id_empleado
+	 * @param fecha1
+	 * @param fecha2
+	 * @param descripcionl
+	 * @param tipoPermisos
+	 * @param callback
+	 * @throws IllegalArgumentException
+	 */
+	void Insertar_Solicitud_Permiso(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos,AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	void Respuesta_Solicitud(Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos,boolean jefe, boolean rrhh, AsyncCallback<String> callback) throws IllegalArgumentException;
 	///metodos para actualizar las entidades
 	/**
 	 * 
@@ -434,7 +449,7 @@ public interface RecursosHumanosServiceAsync {
 	            String celular, Date fecha_nacimiento, String tipo_licencia,
 	            String no_licencia, String centro_trabajo, String ocupacion,
 	            Date fecha_ingreso, String codigo_ingreso, String profesion,
-	            String tipo_planilla, float salario_base, float total,
+	            String tipo_planilla, float salario_base, int total,
 	            float bonificacion,String  URLFile, String KeyFile,String Estado,
 	            String pasaporte, String licencia,String Etnia,
 	            String NombreEmergencia, String TelefonoEmergencia,

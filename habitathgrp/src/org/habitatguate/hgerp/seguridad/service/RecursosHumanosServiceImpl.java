@@ -2447,35 +2447,39 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
 					        .addChild(SegSolicitudPermiso.class.getSimpleName(), id_solicitud)
 					        .getKey();
-				 final SegSolicitudPermiso nuevo = Persistencia.getObjectById(SegSolicitudPermiso.class, k); 
+				 final SegSolicitudPermiso solicitudPermiso = Persistencia.getObjectById(SegSolicitudPermiso.class, k); 
 				 //aun no a modificado las respuestas a la solicitud el jefe como la de recursos humanos
-				 if(nuevo.getBandera_solicitud() >= 0 && nuevo.getBandera_solicitud()<=2){
-					 nuevo.setBandera_solicitud(nuevo.getBandera_solicitud()+1);
-					 nuevo.setJefeInmediatoAceptaSolicitud(jefe);
-					 nuevo.setRrhhAceptaSolicitud(rrhh);
-					 nuevo.setFecha1(fecha1);
-					 nuevo.setFecha2(fecha2);
+				 if(solicitudPermiso.getBandera_solicitud() >= 0 && solicitudPermiso.getBandera_solicitud()<=2){
+					 solicitudPermiso.setBandera_solicitud(solicitudPermiso.getBandera_solicitud()+1);
+					 solicitudPermiso.setJefeInmediatoAceptaSolicitud(jefe);
+					 solicitudPermiso.setRrhhAceptaSolicitud(rrhh);
+					 solicitudPermiso.setFecha1(fecha1);
+					 solicitudPermiso.setFecha2(fecha2);
+					 valor = "aun no se ha validado permiso por jefe o RRHH";
 				 }else{
 					 try{
-			             //JN JEFE DIJO SI A LA SOLICITUD && RN RECURSOS DIJO QUE SI A LA SOLICITUD
-						 if(nuevo.isJefeInmediatoAceptaSolicitud().equals("JS") && nuevo.isRrhhAceptaSolicitud().equals("RS"))
+			             //JN--> JEFE DIJO SI A LA SOLICITUD && RN--> RECURSOS DIJO QUE SI A LA SOLICITUD
+						 if(solicitudPermiso.isJefeInmediatoAceptaSolicitud().equals("JS") && solicitudPermiso.isRrhhAceptaSolicitud().equals("RS"))
 						 {
-							 final SegPermiso nuevo2 = Persistencia.getObjectById(SegPermiso.class, id_Solicitante); 
-							 nuevo2.setDescripcion(descripcionl);
-							 nuevo2.setFecha1(fecha1);
-							 nuevo2.setFecha2(fecha2);
-							 nuevo2.setTipoPermisos(tipoPermisos);
-							 Persistencia.makePersistent(nuevo2); 
-				             Persistencia.deletePersistent(nuevo);  
-				             valor = "se ha decidido dar permiso";
-				             //JN JEFE DIJO NO A LA SOLICITUD && RN RECURSOS DIJO QUE NO A LA SOLICITUD
-						 }else if(nuevo.isJefeInmediatoAceptaSolicitud().equals("JN") && nuevo.isRrhhAceptaSolicitud().equals("RN"))
+							 final SegEmpleado empleado 		= Persistencia.getObjectById(SegEmpleado.class, id_Solicitante); 
+							 SegPermiso permiso = new SegPermiso(); 
+							 permiso.setDescripcion(descripcionl);
+							 permiso.setFecha1(fecha1);
+							 permiso.setFecha2(fecha2);
+							 permiso.setTipoPermisos(tipoPermisos);
+							 permiso.setEmpleado(empleado);
+							 empleado.getVacaciones().add(permiso);
+							 
+				             Persistencia.deletePersistent(solicitudPermiso);  
+				             valor = "se ha decidido dar permiso por jefe y RRHH";                       
+				             //JN-->  JEFE DIJO NO A LA SOLICITUD && RN-->  RECURSOS DIJO QUE NO A LA SOLICITUD
+						 }else if(solicitudPermiso.isJefeInmediatoAceptaSolicitud().equals("JN") && solicitudPermiso.isRrhhAceptaSolicitud().equals("RN"))
 						 {
-							 valor  = "se ha decidido no dar permiso";
-				             Persistencia.deletePersistent(nuevo);  
+							 valor  = "se ha decidido no dar permiso por jefe y RRHH";
+				             Persistencia.deletePersistent(solicitudPermiso);  
 							 
 						 }else{//Aun no se ha decidido ambas repuesta si, o no en todo caso
-							 valor = "aun no se ha decidido validar permiso";
+							 valor = "aun no se ha validado permiso por jefe o RRHH";
 						 }
 					 }catch(Exception e){
 						valor = "Error en la solicitud";									

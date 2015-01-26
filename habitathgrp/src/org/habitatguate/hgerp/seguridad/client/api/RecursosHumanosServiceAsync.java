@@ -383,8 +383,8 @@ public interface RecursosHumanosServiceAsync {
 	void Insertar_Solicitud_Permiso(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos,AsyncCallback<String> callback) throws IllegalArgumentException;
 	
-	void Respuesta_Solicitud(Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
-			String tipoPermisos,boolean jefe, boolean rrhh, AsyncCallback<String> callback) throws IllegalArgumentException;
+	void Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos,String jefe, String rrhh,AsyncCallback<String> callback) throws IllegalArgumentException;
 	///metodos para actualizar las entidades
 	/**
 	 * 

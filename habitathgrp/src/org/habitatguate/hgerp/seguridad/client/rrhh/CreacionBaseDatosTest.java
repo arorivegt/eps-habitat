@@ -68,7 +68,6 @@ public class CreacionBaseDatosTest extends Composite{
             Label lblLleneLoQue = new Label("Ingrese las 10 preguntas, y luego aceptar para poder crear un test de preguntas, que luego podra utilizar en los formularios de test");
             rootPanel.add(lblLleneLoQue, 79, 48);
             lblLleneLoQue.setSize("729px", "4px");
-                    
            
             Label lblIniciarSesion = new Label("Creacion de Base de datos de test");
             rootPanel.add(lblIniciarSesion, 239, 10);

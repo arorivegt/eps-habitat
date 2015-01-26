@@ -23,7 +23,7 @@ import com.google.gwt.user.client.ui.ListBox;
 public class FormularioSolicitudes extends Composite {
 
 	private Empleado empleado;
-	private Long id_vacaciones = 0L;
+	private Long id_solicitud = 0L;
 	private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
@@ -122,7 +122,7 @@ public class FormularioSolicitudes extends Composite {
                         public void onSuccess(Long result)
                         {
 					        load.invisible();
-							id_vacaciones = result;
+							id_solicitud = result;
 							bandera = false;
 							mensaje.setMensaje("alert alert-success", 
                         			"Datos Guardados\n exitosamente!!!");
@@ -130,7 +130,7 @@ public class FormularioSolicitudes extends Composite {
 						});
 				}else{
 
-					loginService.Actualizar_Vacaciones(empleado.id_empleado,id_vacaciones, dateFecha1.getValue(), 
+					loginService.Actualizar_Vacaciones(empleado.id_empleado,id_solicitud, dateFecha1.getValue(), 
 							dateFecha2.getValue(), txtDescripcion.getText(),
 							listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
@@ -190,7 +190,7 @@ public class FormularioSolicitudes extends Composite {
 			bandera = !this.listTipoPermiso.getValue(i).equals(tipoPermiso);
 		    this.listTipoPermiso.setSelectedIndex(i);
 		}
-		this.id_vacaciones = id;
+		this.id_solicitud = id;
 		this.bandera = false;
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));

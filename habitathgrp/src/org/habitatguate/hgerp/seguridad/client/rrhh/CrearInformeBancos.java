@@ -476,7 +476,7 @@ public class CrearInformeBancos extends Composite   {
 			formPanel.submit();
 		}
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
-		{
+		{ 
 			formPanel.setAction("/ExportBancos?tipo="+"7"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())

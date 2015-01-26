@@ -662,7 +662,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	valor =f.getId_familia();
 					  } finally {
 						 	     Persistencia.close();
-						 	  }
+					  }
 					return valor ;
 		        }
 
@@ -2414,8 +2414,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	v.setDescripcion(descripcionl.toUpperCase());
 							 	v.setTipoPermisos(tipoPermisos);
 							 	v.setIdEmpleadoSolicitante(id_empleado);
-							 	v.setJefeInmediatoAceptaSolicitud(false);
-							 	v.setRrhhAceptaSolicitud(false);
+							 	v.setJefeInmediatoAceptaSolicitud("JSR");//JEFE SIN RESPUESTA
+							 	v.setRrhhAceptaSolicitud("RSR"); //RECURSOS SIN RESPUESTA
 					      	 	v.setEmpleado(jefe);
 					      	 	jefe.getSolicitudPermiso().add(v);
 					      	 	
@@ -2437,11 +2437,58 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		}
 
 		@Override
-		public String Respuesta_Solicitud(Long id_empleado, Long id_Solicitante,Date fecha1,
+		public String Respuesta_Solicitud(Long id_solicitud,Long id_empleado, Long id_Solicitante,Date fecha1,
 				Date fecha2, String descripcionl, String tipoPermisos,
-				boolean jefe, boolean rrhh) throws IllegalArgumentException {
-			// TODO Auto-generated method stub
-			return null;
+				String jefe, String rrhh) throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "Error en la solicitud";
+			try{
+				 Key k = new KeyFactory
+					        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
+					        .addChild(SegSolicitudPermiso.class.getSimpleName(), id_solicitud)
+					        .getKey();
+				 final SegSolicitudPermiso nuevo = Persistencia.getObjectById(SegSolicitudPermiso.class, k); 
+				 //aun no a modificado las respuestas a la solicitud el jefe como la de recursos humanos
+				 if(nuevo.getBandera_solicitud() >= 0 && nuevo.getBandera_solicitud()<=2){
+					 nuevo.setBandera_solicitud(nuevo.getBandera_solicitud()+1);
+					 nuevo.setJefeInmediatoAceptaSolicitud(jefe);
+					 nuevo.setRrhhAceptaSolicitud(rrhh);
+					 nuevo.setFecha1(fecha1);
+					 nuevo.setFecha2(fecha2);
+				 }else{
+					 try{
+			             //JN JEFE DIJO SI A LA SOLICITUD && RN RECURSOS DIJO QUE SI A LA SOLICITUD
+						 if(nuevo.isJefeInmediatoAceptaSolicitud().equals("JS") && nuevo.isRrhhAceptaSolicitud().equals("RS"))
+						 {
+							 final SegPermiso nuevo2 = Persistencia.getObjectById(SegPermiso.class, id_Solicitante); 
+							 nuevo2.setDescripcion(descripcionl);
+							 nuevo2.setFecha1(fecha1);
+							 nuevo2.setFecha2(fecha2);
+							 nuevo2.setTipoPermisos(tipoPermisos);
+							 Persistencia.makePersistent(nuevo2); 
+				             Persistencia.deletePersistent(nuevo);  
+				             valor = "se ha decidido dar permiso";
+				             //JN JEFE DIJO NO A LA SOLICITUD && RN RECURSOS DIJO QUE NO A LA SOLICITUD
+						 }else if(nuevo.isJefeInmediatoAceptaSolicitud().equals("JN") && nuevo.isRrhhAceptaSolicitud().equals("RN"))
+						 {
+							 valor  = "se ha decidido no dar permiso";
+				             Persistencia.deletePersistent(nuevo);  
+							 
+						 }else{//Aun no se ha decidido ambas repuesta si, o no en todo caso
+							 valor = "aun no se ha decidido validar permiso";
+						 }
+					 }catch(Exception e){
+						valor = "Error en la solicitud";									
+					}
+				 }//fin else
+				
+			}catch(Exception e){
+				valor = "Error en la solicitud";
+				
+			} finally {
+		 	     Persistencia.close();
+			}
+			return valor;
 		}
 
 		

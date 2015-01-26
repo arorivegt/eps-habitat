@@ -33,10 +33,10 @@ public class SegSolicitudPermiso implements Serializable {
     private String tipoPermisos;
 	
 	@Persistent
-    private boolean JefeInmediatoAceptaSolicitud;
+    private String JefeInmediatoAceptaSolicitud;
 	
 	@Persistent
-    private boolean rrhhAceptaSolicitud;
+    private String rrhhAceptaSolicitud;
 	
 	@Persistent
     private int bandera_solicitud;
@@ -118,19 +118,19 @@ public class SegSolicitudPermiso implements Serializable {
 		this.tipoPermisos = tipoPermisos;
 	}
 
-	public boolean isJefeInmediatoAceptaSolicitud() {
+	public String isJefeInmediatoAceptaSolicitud() {
 		return JefeInmediatoAceptaSolicitud;
 	}
 
-	public void setJefeInmediatoAceptaSolicitud(boolean jefeInmediatoAceptaSolicitud) {
+	public void setJefeInmediatoAceptaSolicitud(String jefeInmediatoAceptaSolicitud) {
 		JefeInmediatoAceptaSolicitud = jefeInmediatoAceptaSolicitud;
 	}
 
-	public boolean isRrhhAceptaSolicitud() {
+	public String isRrhhAceptaSolicitud() {
 		return rrhhAceptaSolicitud;
 	}
 
-	public void setRrhhAceptaSolicitud(boolean rrhhAceptaSolicitud) {
+	public void setRrhhAceptaSolicitud(String rrhhAceptaSolicitud) {
 		this.rrhhAceptaSolicitud = rrhhAceptaSolicitud;
 	}
 

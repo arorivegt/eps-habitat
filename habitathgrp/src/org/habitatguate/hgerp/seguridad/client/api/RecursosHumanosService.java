@@ -360,8 +360,8 @@ public interface RecursosHumanosService extends RemoteService {
 	String Insertar_Solicitud_Permiso(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos) throws IllegalArgumentException;
 	
-	String Respuesta_Solicitud(Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
-			String tipoPermisos,boolean jefe, boolean rrhh) throws IllegalArgumentException;
+	String Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
+			String tipoPermisos,String jefe, String rrhh) throws IllegalArgumentException;
 	
 	Long Insertar_Salario(Long id_empleado, Date fecha, float salario, 
 			String tipoSalario, String Descripcion) throws IllegalArgumentException;

@@ -22,8 +22,8 @@ public class SegTestCompartidos implements Serializable {
 	private Long idTest;
 	
 	@Persistent    
-	private Long id_empleado;
-
+	private Long idEmpleadoCompartido;
+	
 	@Persistent
     private SegEmpleado empleado;
 	
@@ -55,11 +55,11 @@ public class SegTestCompartidos implements Serializable {
 	}
 
 	public Long getId_empleado() {
-		return id_empleado;
+		return idEmpleadoCompartido;
 	}
 
 	public void setId_empleado(Long id_empleado) {
-		this.id_empleado = id_empleado;
+		this.idEmpleadoCompartido = id_empleado;
 	}
 
 	

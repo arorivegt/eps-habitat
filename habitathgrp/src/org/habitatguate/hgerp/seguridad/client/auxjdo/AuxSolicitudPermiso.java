@@ -21,10 +21,10 @@ public class AuxSolicitudPermiso implements IsSerializable{
     private String tipoPermisos;
 	
 	
-    private boolean JefeInmediatoAceptaSolicitud;
+    private String JefeInmediatoAceptaSolicitud;
 	
 	
-    private boolean rrhhAceptaSolicitud;
+    private String rrhhAceptaSolicitud;
 
 	
     private Long idEmpleadoSolicitante;
@@ -87,12 +87,12 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
-	public boolean isJefeInmediatoAceptaSolicitud() {
+	public String isJefeInmediatoAceptaSolicitud() {
 		return JefeInmediatoAceptaSolicitud;
 	}
 
 
-	public void setJefeInmediatoAceptaSolicitud(boolean jefeInmediatoAceptaSolicitud) {
+	public void setJefeInmediatoAceptaSolicitud(String jefeInmediatoAceptaSolicitud) {
 		JefeInmediatoAceptaSolicitud = jefeInmediatoAceptaSolicitud;
 	}
 
@@ -107,12 +107,12 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
-	public boolean isRrhhAceptaSolicitud() {
+	public String isRrhhAceptaSolicitud() {
 		return rrhhAceptaSolicitud;
 	}
 
 
-	public void setRrhhAceptaSolicitud(boolean rrhhAceptaSolicitud) {
+	public void setRrhhAceptaSolicitud(String rrhhAceptaSolicitud) {
 		this.rrhhAceptaSolicitud = rrhhAceptaSolicitud;
 	}
 

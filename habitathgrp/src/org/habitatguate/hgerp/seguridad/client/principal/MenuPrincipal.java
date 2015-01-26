@@ -43,11 +43,6 @@ public class MenuPrincipal extends Composite {
 	public MenuPrincipal(Panel nuevo) {
 		this.nuevo = nuevo;
 
-		final Command cmd = new Command() {
-			public void execute() {
-				System.out.println();
-			}
-		};
 		final  Command cmdrrhh1 = new Command() {
 			public void execute() {
 				rrhh1();
@@ -83,6 +78,11 @@ public class MenuPrincipal extends Composite {
 				rrhh7();
 			}
 		};
+		final Command cmdrrhh8 = new Command() {
+			public void execute() {
+				rrhh8();
+			}
+		};
 
 
 		final Command cmdempleado1 = new Command() {
@@ -93,6 +93,12 @@ public class MenuPrincipal extends Composite {
 		final Command cmdCerrarSesion = new Command() {
 			public void execute() {
 				cerrarSesion();
+			}
+		};
+		
+		final Command cmdempleado2 = new Command() {
+			public void execute() {
+				empleado2();
 			}
 		};
 
@@ -191,6 +197,8 @@ public class MenuPrincipal extends Composite {
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
 		MenuRecursosHumanos.addSeparator();
+		MenuRecursosHumanos.addItem("Solicitud Permisos", cmdrrhh8);
+		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Informes", MenuInforme);
 
 		//finanzas menu
@@ -198,6 +206,8 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.setAutoOpen(true);
 		MenuEmpleados.setAnimationEnabled(true);
 		MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
+		MenuEmpleados.addSeparator();
+		MenuEmpleados.addItem("Solicitud Permisos", cmdempleado2);
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
@@ -389,6 +399,13 @@ public class MenuPrincipal extends Composite {
 		this.nuevo.getGrid().setWidget(1, 0, nuevo);
 
 	}
+	
+	void rrhh8() {
+		CrearInformeBancos nuevo = new CrearInformeBancos();
+		this.nuevo.getGrid().setSize("100%", "100%");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+	}
 	//@UiHandler("empleado1")
 	void empleado1() {
 		Empleado_registrado();
@@ -411,7 +428,9 @@ public class MenuPrincipal extends Composite {
 			}
 		});
 	}
-
+	void empleado2() {
+		
+	}
 
 	//      @UiHandler("empleado3")
 	void empleado3() {

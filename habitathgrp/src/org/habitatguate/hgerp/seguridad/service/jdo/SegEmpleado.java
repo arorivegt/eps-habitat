@@ -183,7 +183,12 @@ public class SegEmpleado implements Serializable {
 	@Persistent(mappedBy = "empleado")
 	@Element(dependent = "true")
 	private List <SegTest> test;
+
+	@Persistent(mappedBy = "empleado")
+	@Element(dependent = "true")
+	private List <SegSolicitudPermiso> solicitudPermiso;
 	
+
 	@ManyToOne
 	private Long afiliado;
 	
@@ -210,7 +215,7 @@ public class SegEmpleado implements Serializable {
     private float salario_base;
 	
 	@Persistent
-    private float total ;
+    private int total ;
 	
 	@Persistent
     private float bonificacion;
@@ -267,6 +272,7 @@ public class SegEmpleado implements Serializable {
 	public String getTipoCuenta() {
 		return tipoCuenta;
 	}
+	
 
 	public void setTipoCuenta(String tipoCuenta) {
 		this.tipoCuenta = tipoCuenta;
@@ -286,6 +292,15 @@ public class SegEmpleado implements Serializable {
 
 	public void setEtnia(String etnia) {
 		Etnia = etnia;
+	}
+
+	 
+	public List<SegSolicitudPermiso> getSolicitudPermiso() {
+		return solicitudPermiso;
+	}
+
+	public void setSolicitudPermiso(List<SegSolicitudPermiso> solicitudPermiso) {
+		this.solicitudPermiso = solicitudPermiso;
 	}
 
 	public List<SegTestCompartidos> getTestCompartido() {
@@ -657,11 +672,11 @@ public class SegEmpleado implements Serializable {
 		this.salario_base = salario_base;
 	}
 
-	public float getTotal() {
+	public int getTotal() {
 		return total;
 	}
 
-	public void setTotal(float total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 

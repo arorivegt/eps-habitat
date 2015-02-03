@@ -14,6 +14,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
@@ -359,10 +360,32 @@ public interface RecursosHumanosService extends RemoteService {
 	 */
 	String Insertar_Solicitud_Permiso(Long id_empleado,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos) throws IllegalArgumentException;
-	
+	/**
+	 * 
+	 * @param id_solicitud
+	 * @param id_empleado
+	 * @param id_Solicitante
+	 * @param fecha1
+	 * @param fecha2
+	 * @param descripcionl
+	 * @param tipoPermisos
+	 * @param jefe
+	 * @param rrhh
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	String Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos,String jefe, String rrhh) throws IllegalArgumentException;
-	
+	/**
+	 * 
+	 * @param id_empleado
+	 * @param fecha
+	 * @param salario
+	 * @param tipoSalario
+	 * @param Descripcion
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
 	Long Insertar_Salario(Long id_empleado, Date fecha, float salario, 
 			String tipoSalario, String Descripcion) throws IllegalArgumentException;
 	/**
@@ -839,6 +862,12 @@ public interface RecursosHumanosService extends RemoteService {
     List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 			String primer_apellido, String segundo_apellido,String DPI, String Pasaporte,
 			String Estado) throws IllegalArgumentException;    
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    List<AuxSolicitudPermiso> BDSolicitudPermiso()throws IllegalArgumentException; 
     /**
      * 
      * @return

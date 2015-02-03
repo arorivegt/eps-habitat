@@ -2416,6 +2416,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	v.setIdEmpleadoSolicitante(id_empleado);
 							 	v.setJefeInmediatoAceptaSolicitud("JSR");//JEFE SIN RESPUESTA
 							 	v.setRrhhAceptaSolicitud("RSR"); //RECURSOS SIN RESPUESTA
+							 	v.setBandera_solicitud(0);
 					      	 	v.setEmpleado(jefe);
 					      	 	jefe.getSolicitudPermiso().add(v);
 					      	 	

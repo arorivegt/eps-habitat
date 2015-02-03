@@ -25,6 +25,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
@@ -2472,15 +2473,15 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 empleado.getVacaciones().add(permiso);
 							 
 				             Persistencia.deletePersistent(solicitudPermiso);  
-				             valor = "se ha decidido dar permiso por jefe y RRHH";                       
+				             valor = "se ha decidido dar permiso por parte del jefe y RRHH";                       
 				             //JN-->  JEFE DIJO NO A LA SOLICITUD && RN-->  RECURSOS DIJO QUE NO A LA SOLICITUD
 						 }else if(solicitudPermiso.isJefeInmediatoAceptaSolicitud().equals("JN") && solicitudPermiso.isRrhhAceptaSolicitud().equals("RN"))
 						 {
-							 valor  = "se ha decidido no dar permiso por jefe y RRHH";
+							 valor  = "se ha decidido no dar permiso por parte del jefe y RRHH";
 				             Persistencia.deletePersistent(solicitudPermiso);  
 							 
 						 }else{//Aun no se ha decidido ambas repuesta si, o no en todo caso
-							 valor = "aun no se ha validado permiso por jefe o RRHH";
+							 valor = "aun no se ha validado permiso por parte del jefe o RRHH";
 						 }
 					 }catch(Exception e){
 						valor = "Error en la solicitud";									
@@ -2492,6 +2493,34 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				
 			} finally {
 		 	     Persistencia.close();
+			}
+			return valor;
+		}
+
+		@Override
+		public List<AuxSolicitudPermiso> BDSolicitudPermiso()throws IllegalArgumentException {
+			
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+			List<AuxSolicitudPermiso> valor = new ArrayList<AuxSolicitudPermiso>();
+			
+			Query q = pm.newQuery(SegSolicitudPermiso.class);
+			List<SegSolicitudPermiso> results = (List<SegSolicitudPermiso>) q.execute();
+			
+			if (!results.isEmpty()) 
+			{          
+			    for (SegSolicitudPermiso n : results) {
+			    	AuxSolicitudPermiso ss = new AuxSolicitudPermiso();
+			    	ss.setId_permiso(n.getId_permiso());
+			    	ss.setFecha1(n.getFecha1().getTime());
+			    	ss.setFecha2(n.getFecha2().getTime());
+			    	ss.setDescripcion(n.getDescripcion());
+			    	ss.setTipoPermisos(n.getTipoPermisos());
+			    	ss.setJefeInmediatoAceptaSolicitud(n.isJefeInmediatoAceptaSolicitud());
+			    	ss.setRrhhAceptaSolicitud(n.isRrhhAceptaSolicitud());
+			    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+			    	ss.setBandera_solicitud(n.getBandera_solicitud());
+				 	valor.add(ss);
+			    }
 			}
 			return valor;
 		}

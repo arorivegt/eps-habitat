@@ -400,6 +400,8 @@ public interface RecursosHumanosServiceAsync {
 	 */
 	void Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
 			String tipoPermisos,String jefe, String rrhh,AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+
 	///metodos para actualizar las entidades
 	/**
 	 * 
@@ -882,6 +884,23 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void BDSolicitudPermiso(
+				AsyncCallback<List<AuxSolicitudPermiso>> callback)throws IllegalArgumentException;
+	    /**
+	     * 
+	     * @param idEmpleadoSolicitante
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void BDSolicitudesEmpleado(Long idEmpleadoSolicitante,
+				AsyncCallback<List<AuxSolicitudPermiso>> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param idEmpleado
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void BDSolicitudesJefe(Long idEmpleado,
 				AsyncCallback<List<AuxSolicitudPermiso>> callback)throws IllegalArgumentException;
 	    
 	    /**

@@ -25,9 +25,9 @@ import com.google.gwt.user.client.ui.TextBox;
 public class FormularioSolicitudPermiso extends Composite {
 
 	private SolicitudPermiso a;
-	private Empleado empleado;
+	private Long id_empleado;
 	private Long id_vacaciones = 0L;
-	private Long id_Empleado_Solicitante = 0L;
+	//private Long id_Empleado_Solicitante = 0L;
 	private boolean bandera = true;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
@@ -40,13 +40,13 @@ public class FormularioSolicitudPermiso extends Composite {
     private TextBox txtNombre;
     private TextBox txtDias;
     
-	public FormularioSolicitudPermiso(SolicitudPermiso a,Empleado e) {
+	public FormularioSolicitudPermiso(SolicitudPermiso a,Long e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();
         load.Mostrar();
         load.invisible();
-		this.empleado = e;
+		this.id_empleado = e;
 		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
@@ -118,7 +118,7 @@ public class FormularioSolicitudPermiso extends Composite {
 					
 				
 					if(bandera) {
-						loginService.Insertar_Solicitud_Permiso(empleado.id_empleado, dateFecha1.getValue(), 
+						loginService.Insertar_Solicitud_Permiso(id_empleado, dateFecha1.getValue(), 
 								dateFecha2.getValue(), txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<String>(){
 	                        public void onFailure(Throwable caught) 
 	                        {
@@ -218,7 +218,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		lblDiasDisponibles.setSize("139px", "13px");
 	}
 	private void EliminarFormulario(){
-        a.EliminarFormulario(this,empleado.id_empleado,id_vacaciones);
+        a.EliminarFormulario(this,this.id_empleado,id_vacaciones);
     }
 	private void EliminarFormularioSinDatos(){
         a.EliminarFormulario(this);
@@ -238,7 +238,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		    this.listTipoPermiso.setSelectedIndex(i);
 		}
 		this.id_vacaciones = id;
-		this.id_Empleado_Solicitante = id_Empleado_Solicitante;
+		//this.id_Empleado_Solicitante = id_Empleado_Solicitante;
 		this.bandera = false;
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));

@@ -127,7 +127,7 @@ public class FormularioPermiso extends Composite {
 	                        {
 						        load.invisible();
 								bandera = false;
-								mensaje.setMensaje("alert alert-success", "Datos Guardados\n exitosamente!!!");
+								mensaje.setMensaje("alert alert-success", result);
 	                        }
 							});
 					}else{
@@ -136,7 +136,7 @@ public class FormularioPermiso extends Composite {
 						
 			      }else{
 						mensaje.setMensaje("alert alert-information alert-block"
-								, "No se puede Exceder mas de 26 dias \n o debe ser mayor a 0 dias para el permiso/vacaciones");
+								, "La solicitud de dias debe ser mayor a 0 dias \n o menor igual a 26 dias para  permiso/vacaciones");
 			    	  
 			      }
 		        load.invisible();

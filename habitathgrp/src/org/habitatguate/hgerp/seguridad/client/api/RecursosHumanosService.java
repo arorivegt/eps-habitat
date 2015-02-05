@@ -868,6 +868,21 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     List<AuxSolicitudPermiso> BDSolicitudPermiso()throws IllegalArgumentException; 
+    
+    /**
+     * 
+     * @param idEmpleadoSolicitante
+     * @return
+     * @throws IllegalArgumentException
+     */
+    List<AuxSolicitudPermiso> BDSolicitudesEmpleado(Long idEmpleadoSolicitante)throws IllegalArgumentException; 
+    /**
+     * 
+     * @param idEmpleado
+     * @return
+     * @throws IllegalArgumentException
+     */
+    List<AuxSolicitudPermiso> BDSolicitudesJefe(Long idEmpleado)throws IllegalArgumentException; 
     /**
      * 
      * @return

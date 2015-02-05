@@ -200,6 +200,14 @@ public class Empleado extends Composite {
 		scrollPanel_9.setSize("100%", "1000px");
 		formularioEntrevista = new FormularioEntrevista(this);
 		scrollPanel_9.setWidget(formularioEntrevista);
+		
+
+		ScrollPanel scrollPanel_11 = new ScrollPanel();
+		scrollPanel_11.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel_11, "Permisos", true);
+		scrollPanel_11.setSize("100%", "1000px");
+		permisos = new Permiso(this);
+		scrollPanel_11.setWidget(permisos);
 	}
 
 	public void EvaluacionesCompartidas()

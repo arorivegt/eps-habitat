@@ -1087,6 +1087,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			public List<AuxEmpleado> Buscar_Empleado(char tipo, String primer_nombre, String segundo_nombre, 
 					String primer_apellido, String segundo_apellido,String DPI, String Pasaporte
 					,String Estado)throws IllegalArgumentException {
+            	
 				final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 				
 				List<AuxEmpleado> valor = new ArrayList<AuxEmpleado>();
@@ -1807,7 +1808,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			
 			Long valor = 0L;
 				 try { 
-					 System.out.println("__________"+ id);
+					 //System.out.println("__________"+ id);
 					 final SegBDTest t = Persistencia.getObjectById(SegBDTest.class, id); 
 					 	t.setNombreTest(nombreTest);
 					 	t.setPregunta1(pregunta1);
@@ -1826,7 +1827,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 Persistencia.close();  
 					 }
 				return valor ;
-		}
+		} 
 
 		@SuppressWarnings("unchecked")
 		@Override
@@ -2318,6 +2319,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			    	nuevo.setTipo_planilla(p.getTipo_planilla());
 			    	nuevo.setTotal(p.getTotal());
 			    
+		 }catch(Exception e){
+			 nuevo = new AuxEmpleado();
 		 }finally {  
 			 Persistencia.close();  
 		 }
@@ -2343,6 +2346,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					 	s.setDescripcion(seg.getDescripcion());
 						salarios.add(s);
 					}
+			}catch(Exception e){
+				salarios = new ArrayList<AuxSalario>();
+				
 			}finally {  
 					 Persistencia.close();  
 			}
@@ -2376,6 +2382,9 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	t.setEvaluador(nuevo.getEvaluador().toUpperCase());
 				 	test.add(t);
 				}
+		}catch(Exception e){
+			test = new ArrayList<AuxTest>();
+			
 		}finally {  
 				 Persistencia.close();  
 		}
@@ -2402,7 +2411,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			
-			String valor = "Error al guardar datos";
+			String valor = "Solicitud enviada Correctamente";
 				 try { 
 					 final SegEmpleado e 	= Persistencia.getObjectById(SegEmpleado.class, id_empleado); 
 					 if(e.getJefe_Inmediato() != 0L){
@@ -2422,13 +2431,13 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					      	 	jefe.getSolicitudPermiso().add(v);
 					      	 	
 						 }catch(Exception ex){
-							 valor = "Error al solicitar permiso a jefe";
+							 valor = "Error en le solicitud";
 						 }finally {  
 							 Persistencia.close();  
 					 	}	
 						 
 					 }else{
-						 valor = "No tiene jefe asignado";
+						 valor = "No tiene jefe asignado, \npor favor solicite que se le asigne uno";
 						 
 					 }
 			}finally {  
@@ -2502,29 +2511,102 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			
 			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 			List<AuxSolicitudPermiso> valor = new ArrayList<AuxSolicitudPermiso>();
+			try{
+				Query q = pm.newQuery(SegSolicitudPermiso.class);
+				@SuppressWarnings("unchecked")
+				List<SegSolicitudPermiso> results = (List<SegSolicitudPermiso>) q.execute();
+				
+				if (!results.isEmpty()) 
+				{          
+				    for (SegSolicitudPermiso n : results) 
+				    {
+				    	AuxSolicitudPermiso ss = new AuxSolicitudPermiso();
+				    	ss.setId_permiso(n.getId_permiso());
+				    	ss.setFecha1(n.getFecha1().getTime());
+				    	ss.setFecha2(n.getFecha2().getTime());
+				    	ss.setDescripcion(n.getDescripcion());
+				    	ss.setTipoPermisos(n.getTipoPermisos());
+				    	ss.setJefeInmediatoAceptaSolicitud(n.isJefeInmediatoAceptaSolicitud());
+				    	ss.setRrhhAceptaSolicitud(n.isRrhhAceptaSolicitud());
+				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setBandera_solicitud(n.getBandera_solicitud());
+					 	valor.add(ss);
+				    }
+				}
+			   }catch(Exception e){
+					valor = new ArrayList<AuxSolicitudPermiso>();
+			  }
+			return valor;
+		}
+
+		@Override
+		public List<AuxSolicitudPermiso> BDSolicitudesEmpleado(Long idEmpleadoSolicitante)
+				throws IllegalArgumentException {
+
+			List<SegSolicitudPermiso> results = new ArrayList<SegSolicitudPermiso>();
+			List<AuxSolicitudPermiso> valor = new ArrayList<AuxSolicitudPermiso>();
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 			
-			Query q = pm.newQuery(SegSolicitudPermiso.class);
-			List<SegSolicitudPermiso> results = (List<SegSolicitudPermiso>) q.execute();
-			
-			if (!results.isEmpty()) 
-			{          
-			    for (SegSolicitudPermiso n : results) {
-			    	AuxSolicitudPermiso ss = new AuxSolicitudPermiso();
-			    	ss.setId_permiso(n.getId_permiso());
-			    	ss.setFecha1(n.getFecha1().getTime());
-			    	ss.setFecha2(n.getFecha2().getTime());
-			    	ss.setDescripcion(n.getDescripcion());
-			    	ss.setTipoPermisos(n.getTipoPermisos());
-			    	ss.setJefeInmediatoAceptaSolicitud(n.isJefeInmediatoAceptaSolicitud());
-			    	ss.setRrhhAceptaSolicitud(n.isRrhhAceptaSolicitud());
-			    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
-			    	ss.setBandera_solicitud(n.getBandera_solicitud());
-				 	valor.add(ss);
-			    }
+			try{
+
+				Query q = pm.newQuery(SegSolicitudPermiso.class, "idEmpleadoSolicitante == '"+idEmpleadoSolicitante);
+			    results = (List<SegSolicitudPermiso>) q.execute();
+				if (!results.isEmpty()) 
+				{          
+				    for (SegSolicitudPermiso n : results) 
+				    {
+				    	AuxSolicitudPermiso ss = new AuxSolicitudPermiso();
+				    	ss.setId_permiso(n.getId_permiso());
+				    	ss.setFecha1(n.getFecha1().getTime());
+				    	ss.setFecha2(n.getFecha2().getTime());
+				    	ss.setDescripcion(n.getDescripcion());
+				    	ss.setTipoPermisos(n.getTipoPermisos());
+				    	ss.setJefeInmediatoAceptaSolicitud(n.isJefeInmediatoAceptaSolicitud());
+				    	ss.setRrhhAceptaSolicitud(n.isRrhhAceptaSolicitud());
+				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setBandera_solicitud(n.getBandera_solicitud());
+					 	valor.add(ss);
+				    }
+				}
+			}catch(Exception e){
+				valor = new ArrayList<AuxSolicitudPermiso>();
 			}
 			return valor;
 		}
 
-		
+		@Override
+		public List<AuxSolicitudPermiso> BDSolicitudesJefe(Long idEmpleado)
+				throws IllegalArgumentException {
+
+			List<SegSolicitudPermiso> results = new ArrayList<SegSolicitudPermiso>();
+			List<AuxSolicitudPermiso> valor = new ArrayList<AuxSolicitudPermiso>();
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+			
+			try{
+
+				 final SegEmpleado e = pm.getObjectById(SegEmpleado.class, idEmpleado); 
+			    results = e.getSolicitudPermiso();
+				if (!results.isEmpty()) 
+				{          
+				    for (SegSolicitudPermiso n : results) 
+				    {
+				    	AuxSolicitudPermiso ss = new AuxSolicitudPermiso();
+				    	ss.setId_permiso(n.getId_permiso());
+				    	ss.setFecha1(n.getFecha1().getTime());
+				    	ss.setFecha2(n.getFecha2().getTime());
+				    	ss.setDescripcion(n.getDescripcion());
+				    	ss.setTipoPermisos(n.getTipoPermisos());
+				    	ss.setJefeInmediatoAceptaSolicitud(n.isJefeInmediatoAceptaSolicitud());
+				    	ss.setRrhhAceptaSolicitud(n.isRrhhAceptaSolicitud());
+				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setBandera_solicitud(n.getBandera_solicitud());
+					 	valor.add(ss);
+				    }
+				}
+			}catch(Exception e){
+				valor = new ArrayList<AuxSolicitudPermiso>();
+			}
+			return valor;
+		}
 
 	}

@@ -25,50 +25,48 @@ public class SolicitudPermiso extends Composite  {
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private SolicitudPermiso solicitudPermiso;
-	 private Empleado empleado;
+	 private Long empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 List<AuxSolicitudPermiso> permiso = new ArrayList<AuxSolicitudPermiso> ();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
-	    private Loading load ;
-		
-	    public SolicitudPermiso(Empleado empleadoo) {
+	 private Loading load ;
+	 private String nombre;
+	 
+    public SolicitudPermiso(Long emplead) {
 
-	    	solicitudPermiso = this;
-        	load = new Loading();
-            load.Mostrar();
-            load.invisible();
-			mensaje = new Mensaje();
-			this.empleado = empleadoo;
-	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-	        initWidget(panel);
-	        panel.setSize("761px", "85px");;
-	        flextable = new FlexTable();
-	        panel.add(flextable);
-	        Button btnAgregar = new Button("Agregar");
-	        panel.add(btnAgregar);
-	        
-	        btnAgregar.setStyleName("sendButton");
-	        btnAgregar.addClickHandler(new ClickHandler() {
-	        	public void onClick(ClickEvent event) {
+    	this.empleado = emplead;
+    	solicitudPermiso = this;
+    	load = new Loading();
+        load.Mostrar();
+        load.invisible();
+		mensaje = new Mensaje();
+        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        initWidget(panel);
+        panel.setSize("761px", "85px");;
+        flextable = new FlexTable();
+        panel.add(flextable);
+        Button btnAgregar = new Button("Agregar");
+        panel.add(btnAgregar);
+        
+        btnAgregar.setStyleName("sendButton");
+        btnAgregar.addClickHandler(new ClickHandler() {
+        	public void onClick(ClickEvent event) {
 
-	        		agregarFormulario();
-	        	}
-	        });
-	        
-	        btnAgregar.setSize("227px", "34px");
-		}
+        		agregarFormulario();
+        	}
+        });
+        
+        btnAgregar.setSize("227px", "34px");
+	}
 	    
-	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioSolicitudPermiso(this,empleado));
-	    }
+    private void agregarFormulario(){
+        flextable.setWidget(flextable.getRowCount(), 0, new FormularioSolicitudPermiso(this,empleado));
+    }
 	    
-	    public void agregarFormulario_lleno(List<AuxSolicitudPermiso> results){
+	    public void agregarFormulario_Jefe(List<AuxSolicitudPermiso> results){
 	        load.visible();
 	    	flextable.clear();
-	    	if (!results.isEmpty()) {
-	    		permiso = results;
-			    for ( final AuxSolicitudPermiso n2 : results) {
-			    	loginService.Empleado_Registrado(n2.getIdEmpleadoSolicitante(), new AsyncCallback<AuxEmpleado>(){
+			    	loginService.BDSolicitudesJefe(empleado,new AsyncCallback<List<AuxSolicitudPermiso>>(){
 		                public void onFailure(Throwable caught) 
 		                {
 		    		        load.invisible();
@@ -76,22 +74,66 @@ public class SolicitudPermiso extends Composite  {
 		                }
 
 						@Override
-		                public void onSuccess(AuxEmpleado result)
+		                public void onSuccess(List<AuxSolicitudPermiso> result)
 		                {
 		    		        load.invisible();
-							String nombre = result.getPrimer_nombre() +" "+result.getPrimer_apellido();
-					    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(solicitudPermiso,empleado);
-					    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
-					    				   n2.getTipoPermisos(),nombre,""+result.getTotal());
-					        flextable.setWidget(flextable.getRowCount(), 0,fa );
+		    		        for(AuxSolicitudPermiso n2:result){
+						    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(solicitudPermiso,empleado);
+						    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
+						    				   n2.getTipoPermisos(),NombreEmpleado(n2.getIdEmpleadoSolicitante()), ""+(n2.getFecha1()-n2.getFecha2()));
+						        flextable.setWidget(flextable.getRowCount(), 0,fa );
+		    		        }
 		                }
 
-			    	});
-			    }
-	    	}	    
+			    	});			    
+	    		   
 	        load.invisible();
 	    }
-	    
+	    public void agregarFormulario_Empleado (){
+	        load.visible();
+	    	flextable.clear();
+			    	loginService.BDSolicitudesEmpleado(empleado, new AsyncCallback<List<AuxSolicitudPermiso>>(){
+		                public void onFailure(Throwable caught) 
+		                {
+		    		        load.invisible();
+		                	mensaje.setMensaje("alert alert-error", "Error !! \nal obtener datos Solicitante");
+		                }
+
+						@Override
+		                public void onSuccess(List<AuxSolicitudPermiso> result)
+		                {
+		    		        load.invisible();
+		    		        for(AuxSolicitudPermiso n2:result){
+						    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(solicitudPermiso,empleado);
+						    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
+						    				   n2.getTipoPermisos(),NombreEmpleado(n2.getIdEmpleadoSolicitante()), ""+(n2.getFecha1()-n2.getFecha2()));
+						        flextable.setWidget(flextable.getRowCount(), 0,fa );
+		    		        }
+		                }
+
+			    	});			    
+	    		   
+	        load.invisible();
+	    }
+
+	    public String NombreEmpleado(Long id){
+        	 nombre = "empleado";
+        	loginService.Empleado_Registrado(id,new AsyncCallback<AuxEmpleado>(){
+                public void onFailure(Throwable caught) 
+                {
+                	mensaje.setMensaje("alert alert-error", "Error !! \nal obtener datos ");
+                }
+
+				@Override
+                public void onSuccess(AuxEmpleado result)
+                {
+					nombre = result.getPrimer_nombre() + " "+result.getSegundo_nombre() + " "+result.getPrimer_apellido() + " "+result.getSegundo_apellido();
+                }
+
+	    	});
+        	return nombre;
+	    	
+	    }
 	    public void EliminarFormulario(final FormularioSolicitudPermiso fa, final Long id_empledo, final Long id){
 
 	        load.visible();

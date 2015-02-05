@@ -20,6 +20,8 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearReporteEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
+import org.habitatguate.hgerp.seguridad.client.rrhh.Permiso;
+import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BusquedaFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBitacora;
@@ -96,11 +98,6 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 		
-		final Command cmdempleado2 = new Command() {
-			public void execute() {
-				empleado2();
-			}
-		};
 
 		final Command cmdempleado3 = new Command() {
 			public void execute() {
@@ -108,6 +105,17 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 
+		final Command cmdsolicitudes1 = new Command() {
+			public void execute() {
+				solicitudes1();
+			}
+		};
+		
+		final Command cmdsolicitudes2 = new Command() {
+			public void execute() {
+				solicitudes2();
+			}
+		};
 
 		final  Command cmdfina2a = new Command() {
 			public void execute() {
@@ -163,11 +171,11 @@ public class MenuPrincipal extends Composite {
 				sce4();
 			}
 		};		     
-		Command cmdsce5 = new Command() {
-			public void execute() {
-				sce5();
-			}
-		};	 
+//		Command cmdsce5 = new Command() {
+//			public void execute() {
+//				sce5();
+//			}
+//		};	 
 		Command cmdsce6 = new Command() {
 			public void execute() {
 				sce6();
@@ -197,29 +205,37 @@ public class MenuPrincipal extends Composite {
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
 		MenuRecursosHumanos.addSeparator();
-		MenuRecursosHumanos.addItem("Solicitud Permisos", cmdrrhh8);
+		MenuRecursosHumanos.addItem("Validar Solicitud de Permisos", cmdrrhh8);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Informes", MenuInforme);
 
+		//finanzas menu
+		final MenuBar MenuSolicitudes = new MenuBar(true);
+		MenuSolicitudes.setAutoOpen(true);
+		MenuSolicitudes.setAnimationEnabled(true);
+		MenuSolicitudes.addItem("Solicitudes realizadas", cmdsolicitudes1);
+		MenuSolicitudes.addSeparator();
+		MenuSolicitudes.addItem("Validar Solicitud de Permisos", cmdsolicitudes2);
+		
 		//finanzas menu
 		final MenuBar MenuEmpleados = new MenuBar(true);
 		MenuEmpleados.setAutoOpen(true);
 		MenuEmpleados.setAnimationEnabled(true);
 		MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
 		MenuEmpleados.addSeparator();
-		MenuEmpleados.addItem("Solicitud Permisos", cmdempleado2);
+		MenuEmpleados.addItem("Solicitudes", MenuSolicitudes);
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
 		//Inventario Activos menu
 		/*      final MenuBar MenuInventarioActivos = new MenuBar(true);
-                    MenuInventarioActivos.setAutoOpen(true);
-                    MenuInventarioActivos.setAnimationEnabled(true);
-                    MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
-                    MenuInventarioActivos.addSeparator();
-                    MenuInventarioActivos.addItem("Gestor de Inventario", cmd);
-                    MenuInventarioActivos.addSeparator();
-                    MenuInventarioActivos.addItem("Generar Conocimiento", cmd); */
+            MenuInventarioActivos.setAutoOpen(true);
+            MenuInventarioActivos.setAnimationEnabled(true);
+            MenuInventarioActivos.addItem("Cuentas y Parametros", cmd);
+            MenuInventarioActivos.addSeparator();
+            MenuInventarioActivos.addItem("Gestor de Inventario", cmd);
+            MenuInventarioActivos.addSeparator();
+            MenuInventarioActivos.addItem("Generar Conocimiento", cmd); */
 
 		//soluciones menu
 		final MenuBar MenuSoluciones = new MenuBar(true);
@@ -401,10 +417,10 @@ public class MenuPrincipal extends Composite {
 	}
 	
 	void rrhh8() {
-		CrearInformeBancos nuevo = new CrearInformeBancos();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+//		SolicitudPermiso nuevo = new SolicitudPermiso();
+//		this.nuevo.getGrid().setSize("100%", "100%");
+//		this.nuevo.getGrid().clearCell(1, 0);
+//		this.nuevo.getGrid().setWidget(1, 0, nuevo);
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {
@@ -428,9 +444,7 @@ public class MenuPrincipal extends Composite {
 			}
 		});
 	}
-	void empleado2() {
-		
-	}
+
 
 	//      @UiHandler("empleado3")
 	void empleado3() {
@@ -455,6 +469,23 @@ public class MenuPrincipal extends Composite {
 		});
 	}
 
+	
+	void solicitudes1(){
+		
+		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		fmc.agregarFormulario_Empleado();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+
+	}
+	void solicitudes2(){
+		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
+	}
+	
 	//@UiHandler("finan2a")
 	void fina2a(){
 		Buscador_Soluciones_Inv fmc = new Buscador_Soluciones_Inv();

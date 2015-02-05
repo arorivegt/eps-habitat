@@ -37,19 +37,18 @@ public class Permiso extends Composite  {
 	 private DateBox dateFecha2;
 	 private final ListBox listTipoPermiso = new ListBox();
 	 private final Button btnBuscar = new Button("Agregar");
-	    private Loading load ;
-		
-	    public Permiso(Empleado empleadoo) {
+	 private Loading load ;
+	 
+	    public Permiso(Empleado emplead) {
 
         	load = new Loading();
             load.Mostrar();
             load.invisible();
 			mensaje = new Mensaje();
-			this.empleado = empleadoo;
 	        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 	        initWidget(panel);
 	        panel.setSize("761px", "85px");
-	        
+	        this.empleado = emplead;
 	        panel.add(grid);
 	        
 	        dateFecha1 = new DateBox();

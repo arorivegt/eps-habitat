@@ -20,7 +20,6 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearReporteEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
-import org.habitatguate.hgerp.seguridad.client.rrhh.Permiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BusquedaFormulario;
@@ -417,10 +416,11 @@ public class MenuPrincipal extends Composite {
 	}
 	
 	void rrhh8() {
-//		SolicitudPermiso nuevo = new SolicitudPermiso();
-//		this.nuevo.getGrid().setSize("100%", "100%");
-//		this.nuevo.getGrid().clearCell(1, 0);
-//		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		fmc.agregarFormularios();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, fmc);
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {
@@ -481,6 +481,7 @@ public class MenuPrincipal extends Composite {
 	}
 	void solicitudes2(){
 		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		fmc.agregarFormulario_Jefe();
 		this.nuevo.getGrid().setWidth("1000");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, fmc);

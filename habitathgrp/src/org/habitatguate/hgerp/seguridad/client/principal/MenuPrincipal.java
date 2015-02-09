@@ -12,6 +12,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
+import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
@@ -30,11 +31,17 @@ import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataEntryFormulari
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_SolucionesConstruidasHabitat;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.MenuBar;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MenuPrincipal extends Composite {
 
@@ -82,6 +89,11 @@ public class MenuPrincipal extends Composite {
 		final Command cmdrrhh8 = new Command() {
 			public void execute() {
 				rrhh8();
+			}
+		};
+		final Command cmdrrhh9 = new Command() {
+			public void execute() {
+				rrhh9();
 			}
 		};
 
@@ -205,6 +217,8 @@ public class MenuPrincipal extends Composite {
 		MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Validar Solicitud de Permisos", cmdrrhh8);
+		MenuRecursosHumanos.addSeparator();
+		MenuRecursosHumanos.addItem("Aumentar Dias Vacaciones", cmdrrhh9);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Informes", MenuInforme);
 
@@ -421,6 +435,30 @@ public class MenuPrincipal extends Composite {
 		this.nuevo.getGrid().setWidth("1000");
 		this.nuevo.getGrid().clearCell(1, 0);
 		this.nuevo.getGrid().setWidget(1, 0, fmc);
+	}
+	void rrhh9() {
+		final DialogBox Registro2 = new DialogBox();
+	    final HTML serverResponseLabel = new HTML();
+	    final Button close= new Button("x");
+	    AsignarDiasVacaciones inicio = new AsignarDiasVacaciones();
+	    VerticalPanel dialogVPanel = new VerticalPanel();
+	    dialogVPanel.add(serverResponseLabel );
+	    dialogVPanel.add(inicio);
+	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+	    dialogVPanel.add(close);
+	    Registro2 .setWidget(dialogVPanel);
+	    Registro2 .setModal(true);
+	    Registro2 .setGlassEnabled(true);
+	    Registro2 .setAnimationEnabled(true);
+	    Registro2 .center();
+	    Registro2 .show();
+	    close.setFocus(true);
+	
+	    close.addClickHandler(new ClickHandler() {
+	    public void onClick(ClickEvent event) {
+	        Registro2.hide();
+	    }
+	    });
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {

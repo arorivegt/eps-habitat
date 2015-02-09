@@ -2615,4 +2615,28 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			return valor;
 		}
 
+		@SuppressWarnings("unchecked")
+		@Override
+		public String Insertar_Dias_Vacaciones(int dia)
+				throws IllegalArgumentException {
+
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+			List<SegEmpleado> results = new ArrayList<SegEmpleado>();
+			String valor = "Asignacion de dias completado";
+			try{
+				Query q = pm.newQuery(SegEmpleado.class);
+			    results = (List<SegEmpleado>) q.execute();
+			    for(SegEmpleado r:results){
+
+					 //final SegEmpleado e = pm.getObjectById(SegEmpleado.class, r.getId_empleado()); 
+			    	 r.setDiasDeVacaciones(r.getDiasDeVacaciones()+dia);
+			    }
+			}catch(Exception e){
+				valor = "Etrror al asignar dias";
+			}finally {
+		 	     pm.close();
+			}
+			return valor;
+		}
+
 	}

@@ -375,7 +375,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	String Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
-			String tipoPermisos,String jefe, String rrhh) throws IllegalArgumentException;
+			String tipoPermisos,String jefe, String rrhh,String solicitante) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado

@@ -25,8 +25,9 @@ public class FormularioSolicitudPermiso extends Composite {
 
 	private Long id_empleado;
 	private Long id_Solicitud = 0L;
-	public Button btnAceptar ;
+	public 	Button btnAceptar ;
 	public 	Button btnNoAceptar ;
+	public 	Button btnEnterado ;
 	private Long id_Empleado_Solicitante = 0L;
 	private String RespuestaJ= "JSR";
 	private String RespuestaR= "JSR";
@@ -98,6 +99,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 106);
 		txtDescripcion.setSize("433px", "95px");
+		
 		btnAceptar = new Button("Send");
 		btnAceptar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -110,7 +112,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		        }
 				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
 						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
-						RespuestaJ,RespuestaR,new AsyncCallback<String>(){
+						RespuestaJ,RespuestaR,"ENE",new AsyncCallback<String>(){
                     public void onFailure(Throwable caught) 
                     {
         		        load.invisible();
@@ -128,6 +130,12 @@ public class FormularioSolicitudPermiso extends Composite {
 		        load.invisible();
 			}
 		});
+
+		btnAceptar.setText("Aceptar");
+		btnAceptar.setStylePrimaryName("sendButton");
+		btnAceptar.setStyleName("sendButton");
+		absolutePanel.add(btnAceptar, 700, 85);
+		btnAceptar.setSize("143px", "34px");
 		
 		txtNombre = new TextBox();
 		txtNombre.setReadOnly(true);
@@ -145,11 +153,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		txtDias.setMaxLength(100);
 		absolutePanel.add(txtDias, 480, 138);
 		txtDias.setSize("89px", "34px");
-		btnAceptar.setText("Aceptar");
-		btnAceptar.setStylePrimaryName("sendButton");
-		btnAceptar.setStyleName("sendButton");
-		absolutePanel.add(btnAceptar, 700, 85);
-		btnAceptar.setSize("143px", "34px");
+		
 		
 		btnNoAceptar = new Button("Send");
 		btnNoAceptar.addClickHandler(new ClickHandler() {
@@ -163,7 +167,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		        }
 				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
 						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
-						RespuestaJ,RespuestaR,new AsyncCallback<String>(){
+						RespuestaJ,RespuestaR,"ENE",new AsyncCallback<String>(){
                     public void onFailure(Throwable caught) 
                     {
         		        load.invisible();
@@ -186,6 +190,38 @@ public class FormularioSolicitudPermiso extends Composite {
 		btnNoAceptar.setStyleName("sendButton");
 		absolutePanel.add(btnNoAceptar, 700, 140);
 		btnNoAceptar.setSize("143px", "34px");
+		
+		//BOTON ENTERADO
+		btnEnterado = new Button("Send");
+		btnEnterado.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+		        load.visible();
+				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
+						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
+						RespuestaJ,RespuestaR,"EE",new AsyncCallback<String>(){
+                    public void onFailure(Throwable caught) 
+                    {
+        		        load.invisible();
+                    	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
+                    }
+
+					@Override
+                    public void onSuccess(String result)
+                    {
+				        load.invisible();
+						mensaje.setMensaje("alert alert-success", result);
+                    }
+					});
+					
+		        load.invisible();
+			}
+		});
+		btnEnterado.setText("No Aceptar");
+		btnEnterado.setStylePrimaryName("sendButton");
+		btnEnterado.setStyleName("sendButton");
+		absolutePanel.add(btnEnterado, 700, 200);
+		btnEnterado.setSize("143px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");

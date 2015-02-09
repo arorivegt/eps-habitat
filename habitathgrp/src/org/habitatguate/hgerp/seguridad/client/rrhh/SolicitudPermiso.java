@@ -67,6 +67,8 @@ public class SolicitudPermiso extends Composite  {
 							    				   n2.getTipoPermisos(),"Empleado", dias,"0",
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
+							    	fa.btnEnterado.setVisible(false);
+							    	fa.btnEnterado.setEnabled(false);
 	    		                }
 
 	    						@Override
@@ -81,6 +83,8 @@ public class SolicitudPermiso extends Composite  {
 							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
+							    	fa.btnEnterado.setVisible(false);
+							    	fa.btnEnterado.setEnabled(false);
 	    		                }
 
 	    			    	}); 
@@ -177,6 +181,8 @@ public class SolicitudPermiso extends Composite  {
 							    				   n2.getTipoPermisos(),"Empleado", dias,"0",
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'0');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
+							    	fa.btnEnterado.setVisible(false);
+							    	fa.btnEnterado.setEnabled(false);
 	    		                }
 
 	    						@Override
@@ -191,6 +197,8 @@ public class SolicitudPermiso extends Composite  {
 							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'0');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
+							    	fa.btnEnterado.setVisible(false);
+							    	fa.btnEnterado.setEnabled(false);
 	    		                }
 
 	    			    	}); 

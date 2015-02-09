@@ -25,7 +25,7 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	
 	
     private String rrhhAceptaSolicitud;
-
+    
 	
     private Long idEmpleadoSolicitante;
     

@@ -296,7 +296,26 @@ public class FormularioSolicitudPermiso extends Composite {
 		this.txtDisponibles.setText(disponibles);
 		this.RespuestaJ 	= RespuestaJ;
 		this.RespuestaR 	= RespuestaR;
-		this.DeQuien 	= DeQuien;
+		this.DeQuien 		= DeQuien;
+		
+		String EstadoRespuestaJ = "";
+		String EstadoRespuestaR = "";
+		
+		if(RespuestaJ.equals("JSR")){
+			EstadoRespuestaJ = "Jefe no ha dado respuesta";
+		}else if(RespuestaJ.equals("JS")){
+			EstadoRespuestaJ = "Jefe ha aprobado la solicitud";
+		}else if(RespuestaJ.equals("JN")){
+			EstadoRespuestaJ = "Jefe No aprobo la solicitud";
+		}
+		
+		if(RespuestaJ.equals("RSR")){
+			EstadoRespuestaJ = "RRHH no ha dado respuesta";
+		}else if(RespuestaJ.equals("RS")){
+			EstadoRespuestaJ = "RRHH ha aprobado la solicitud";
+		}else if(RespuestaJ.equals("RN")){
+			EstadoRespuestaJ = "RRHH No aprobo la solicitud";
+		}
 	}
 	
 }

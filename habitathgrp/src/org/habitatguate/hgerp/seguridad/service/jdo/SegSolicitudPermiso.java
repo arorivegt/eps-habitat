@@ -41,14 +41,15 @@ public class SegSolicitudPermiso implements Serializable {
 
 	@Persistent
     private Long idEmpleadoSolicitante;
-
+	
+	
 	@Persistent
     private SegEmpleado empleado;
 	
 	public SegSolicitudPermiso() {
 		super();
 	}
-    
+
 	public Long getId_permiso() {
 		return id_permiso.getId();
 	}
@@ -57,46 +58,24 @@ public class SegSolicitudPermiso implements Serializable {
 		return fecha1;
 	}
 
-
 	public void setFecha1(Date fecha1) {
 		this.fecha1 = fecha1;
 	}
-
 
 	public Date getFecha2() {
 		return fecha2;
 	}
 
-
 	public void setFecha2(Date fecha2) {
 		this.fecha2 = fecha2;
 	}
-
 
 	public String getDescripcion() {
 		return Descripcion;
 	}
 
-
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
-	}
-
-	public void setId_permiso(Key id_permiso) {
-		this.id_permiso = id_permiso;
-	}
-
-	public SegEmpleado getEmpleado() {
-		return empleado;
-	}
-
-
-	public void setEmpleado(SegEmpleado empleado) {
-		this.empleado = empleado;
-	}
-
-	public void setId_vacaciones(Key id_vacaciones) {
-		this.id_permiso = id_vacaciones;
 	}
 
 	public String getTipoPermisos() {
@@ -107,7 +86,7 @@ public class SegSolicitudPermiso implements Serializable {
 		this.tipoPermisos = tipoPermisos;
 	}
 
-	public String isJefeInmediatoAceptaSolicitud() {
+	public String getJefeInmediatoAceptaSolicitud() {
 		return JefeInmediatoAceptaSolicitud;
 	}
 
@@ -115,7 +94,7 @@ public class SegSolicitudPermiso implements Serializable {
 		JefeInmediatoAceptaSolicitud = jefeInmediatoAceptaSolicitud;
 	}
 
-	public String isRrhhAceptaSolicitud() {
+	public String getRrhhAceptaSolicitud() {
 		return rrhhAceptaSolicitud;
 	}
 
@@ -130,7 +109,14 @@ public class SegSolicitudPermiso implements Serializable {
 	public void setIdEmpleadoSolicitante(Long idEmpleadoSolicitante) {
 		this.idEmpleadoSolicitante = idEmpleadoSolicitante;
 	}
- 
-	 
+	
+	public SegEmpleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(SegEmpleado empleado) {
+		this.empleado = empleado;
+	}
+	
 	
 }

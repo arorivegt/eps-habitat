@@ -407,7 +407,7 @@ public interface RecursosHumanosServiceAsync {
 	 * @throws IllegalArgumentException
 	 */
 	void Respuesta_Solicitud(Long id_solicitud,Long id_empleado,Long id_Solicitante,Date fecha1, Date fecha2, String descripcionl, 
-			String tipoPermisos,String jefe, String rrhh,AsyncCallback<String> callback) throws IllegalArgumentException;
+			String tipoPermisos,String jefe, String rrhh,String solicitante,AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 
 	///metodos para actualizar las entidades

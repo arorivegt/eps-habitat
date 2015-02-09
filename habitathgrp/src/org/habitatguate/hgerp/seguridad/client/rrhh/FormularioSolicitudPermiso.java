@@ -11,7 +11,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -24,11 +23,14 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class FormularioSolicitudPermiso extends Composite {
 
-	private SolicitudPermiso a;
 	private Long id_empleado;
-	private Long id_vacaciones = 0L;
-	//private Long id_Empleado_Solicitante = 0L;
-	private boolean bandera = true;
+	private Long id_Solicitud = 0L;
+	public Button btnAceptar ;
+	public 	Button btnNoAceptar ;
+	private Long id_Empleado_Solicitante = 0L;
+	private String RespuestaJ= "JSR";
+	private String RespuestaR= "JSR";
+	private char DeQuien = '0';
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private TextArea txtDescripcion;
@@ -39,15 +41,16 @@ public class FormularioSolicitudPermiso extends Composite {
     private Loading load ;
     private TextBox txtNombre;
     private TextBox txtDias;
+    private TextBox txtDisponibles;
+    private Label lblDiasDisponibles_1;
     
-	public FormularioSolicitudPermiso(SolicitudPermiso a,Long e) {
+	public FormularioSolicitudPermiso(Long e) {
 
 		mensaje = new Mensaje();
     	load = new Loading();
         load.Mostrar();
         load.invisible();
 		this.id_empleado = e;
-		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -95,54 +98,33 @@ public class FormularioSolicitudPermiso extends Composite {
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 106);
 		txtDescripcion.setSize("433px", "95px");
-		Button txtAceptar = new Button("Send");
-		txtAceptar.addClickHandler(new ClickHandler() {
+		btnAceptar = new Button("Send");
+		btnAceptar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-		        int dias			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24)); 
-		        
 		        load.visible();
+		        if(DeQuien == '0'){
+		        	RespuestaR = "RS";
+		        }else{
+		        	RespuestaJ = "JS";
+		        }
+				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
+						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
+						RespuestaJ,RespuestaR,new AsyncCallback<String>(){
+                    public void onFailure(Throwable caught) 
+                    {
+        		        load.invisible();
+                    	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
+                    }
 
-				try{
-					new Date(dateFecha1.getValue().getTime());
-				}catch(Exception e){
-					dateFecha1.setValue(new Date(1407518124684L));
-				}
-				try{
-					new Date(dateFecha2.getValue().getTime());
-				}catch(Exception e){
-					dateFecha2.setValue(new Date(1407518124684L));
-				}
-			
-				if(dias  <=  26 && dias >= 1){
+					@Override
+                    public void onSuccess(String result)
+                    {
+				        load.invisible();
+						mensaje.setMensaje("alert alert-success", result);
+                    }
+					});
 					
-				
-					if(bandera) {
-						loginService.Insertar_Solicitud_Permiso(id_empleado, dateFecha1.getValue(), 
-								dateFecha2.getValue(), txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<String>(){
-	                        public void onFailure(Throwable caught) 
-	                        {
-	            		        load.invisible();
-	                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
-	                        }
-	
-							@Override
-	                        public void onSuccess(String result)
-	                        {
-						        load.invisible();
-								bandera = false;
-								mensaje.setMensaje("alert alert-success", "Datos Guardados\n exitosamente!!!");
-	                        }
-							});
-					}else{
-						mensaje.setMensaje("alert alert-information alert-block", "Ya ha sido solicitado este permiso");
-					}
-						
-			      }else{
-						mensaje.setMensaje("alert alert-information alert-block"
-								, "No se puede Exceder mas de 26 dias \n o debe ser mayor a 0 dias para el permiso/vacaciones");
-			    	  
-			      }
 		        load.invisible();
 			}
 		});
@@ -153,39 +135,57 @@ public class FormularioSolicitudPermiso extends Composite {
 		txtNombre.setStyleName("gwt-TextBox2");
 		txtNombre.setMaxLength(100);
 		absolutePanel.add(txtNombre, 480, 29);
-		txtNombre.setSize("184px", "34px");
+		txtNombre.setSize("361px", "34px");
 		
 		txtDias = new TextBox();
+		txtDias.setEnabled(false);
 		txtDias.setText("0");
 		txtDias.setStylePrimaryName("gwt-TextBox2");
 		txtDias.setStyleName("gwt-TextBox2");
 		txtDias.setMaxLength(100);
 		absolutePanel.add(txtDias, 480, 138);
-		txtDias.setSize("184px", "34px");
-		txtAceptar.setText("Aceptar");
-		txtAceptar.setStylePrimaryName("sendButton");
-		txtAceptar.setStyleName("sendButton");
-		absolutePanel.add(txtAceptar, 700, 60);
-		txtAceptar.setSize("143px", "34px");
+		txtDias.setSize("89px", "34px");
+		btnAceptar.setText("Aceptar");
+		btnAceptar.setStylePrimaryName("sendButton");
+		btnAceptar.setStyleName("sendButton");
+		absolutePanel.add(btnAceptar, 700, 85);
+		btnAceptar.setSize("143px", "34px");
 		
-		Button btnEliminar = new Button("Send");
-		btnEliminar.addClickHandler(new ClickHandler() {
+		btnNoAceptar = new Button("Send");
+		btnNoAceptar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				if(bandera){
-					EliminarFormularioSinDatos();
-				}else{
-			        load.invisible();
-					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
-						EliminarFormulario();
-				}
+		        load.visible();
+		        if(DeQuien == '0'){
+		        	RespuestaR = "RN";
+		        }else{
+		        	RespuestaJ = "JN";
+		        }
+				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
+						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
+						RespuestaJ,RespuestaR,new AsyncCallback<String>(){
+                    public void onFailure(Throwable caught) 
+                    {
+        		        load.invisible();
+                    	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
+                    }
+
+					@Override
+                    public void onSuccess(String result)
+                    {
+				        load.invisible();
+						mensaje.setMensaje("alert alert-success", result);
+                    }
+					});
+					
+		        load.invisible();
 			}
 		});
-		btnEliminar.setText("No Aceptar");
-		btnEliminar.setStylePrimaryName("sendButton");
-		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 700, 113);
-		btnEliminar.setSize("143px", "34px");
+		btnNoAceptar.setText("No Aceptar");
+		btnNoAceptar.setStylePrimaryName("sendButton");
+		btnNoAceptar.setStyleName("sendButton");
+		absolutePanel.add(btnNoAceptar, 700, 140);
+		btnNoAceptar.setSize("143px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");
@@ -212,17 +212,26 @@ public class FormularioSolicitudPermiso extends Composite {
 		absolutePanel.add(lblNombreSolicitante, 480, 10);
 		lblNombreSolicitante.setSize("139px", "13px");
 		
-		Label lblDiasDisponibles = new Label("Dias disponibles");
+		Label lblDiasDisponibles = new Label("Dias solicitados");
 		lblDiasDisponibles.setStyleName("label");
 		absolutePanel.add(lblDiasDisponibles, 480, 106);
-		lblDiasDisponibles.setSize("139px", "13px");
+		lblDiasDisponibles.setSize("77px", "13px");
+		
+		txtDisponibles = new TextBox();
+		txtDisponibles.setEnabled(false);
+		txtDisponibles.setText("0");
+		txtDisponibles.setStylePrimaryName("gwt-TextBox2");
+		txtDisponibles.setStyleName("gwt-TextBox2");
+		txtDisponibles.setMaxLength(100);
+		absolutePanel.add(txtDisponibles, 590, 138);
+		txtDisponibles.setSize("89px", "34px");
+		
+		lblDiasDisponibles_1 = new Label("Dias disponibles");
+		lblDiasDisponibles_1.setStyleName("label");
+		absolutePanel.add(lblDiasDisponibles_1, 590, 106);
+		lblDiasDisponibles_1.setSize("104px", "13px");
 	}
-	private void EliminarFormulario(){
-        a.EliminarFormulario(this,this.id_empleado,id_vacaciones);
-    }
-	private void EliminarFormularioSinDatos(){
-        a.EliminarFormulario(this);
-    }
+	
 	public void LlenarDatos(Long id, 
 			Long id_Empleado_Solicitante,
 			String txtDescripcion,
@@ -230,21 +239,28 @@ public class FormularioSolicitudPermiso extends Composite {
 		    Long dateFecha2,
 		    String tipoPermiso,
 		    String nombre,
-		    String dias)
+		    String dias,
+		    String disponibles,
+		    String RespuestaJ,
+		    String RespuestaR,
+		    char DeQuien)
 	{
 		boolean bandera = true;
 		for(int i=0; i < this.listTipoPermiso.getItemCount() && bandera; i++){
 			bandera = !this.listTipoPermiso.getValue(i).equals(tipoPermiso);
 		    this.listTipoPermiso.setSelectedIndex(i);
 		}
-		this.id_vacaciones = id;
-		//this.id_Empleado_Solicitante = id_Empleado_Solicitante;
-		this.bandera = false;
+		this.id_Solicitud = id;
+		this.id_Empleado_Solicitante = id_Empleado_Solicitante;
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));
 		this.txtNombre.setText(nombre);
 		this.txtDias.setText(dias);
+		this.txtDisponibles.setText(disponibles);
+		this.RespuestaJ 	= RespuestaJ;
+		this.RespuestaR 	= RespuestaR;
+		this.DeQuien 	= DeQuien;
 	}
 	
 }

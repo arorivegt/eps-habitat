@@ -38,8 +38,6 @@ public class SegSolicitudPermiso implements Serializable {
 	@Persistent
     private String rrhhAceptaSolicitud;
 	
-	@Persistent
-    private int bandera_solicitud;
 
 	@Persistent
     private Long idEmpleadoSolicitante;
@@ -82,15 +80,6 @@ public class SegSolicitudPermiso implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
-	}
-
-
-	public int getBandera_solicitud() {
-		return bandera_solicitud;
-	}
-
-	public void setBandera_solicitud(int bandera_solicitud) {
-		this.bandera_solicitud = bandera_solicitud;
 	}
 
 	public void setId_permiso(Key id_permiso) {

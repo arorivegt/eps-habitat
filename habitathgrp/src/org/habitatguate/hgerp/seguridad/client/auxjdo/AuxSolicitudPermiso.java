@@ -29,7 +29,6 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	
     private Long idEmpleadoSolicitante;
     
-    private int bandera_solicitud;
 
 	
 	public AuxSolicitudPermiso() {
@@ -37,9 +36,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public Long getId_permiso() {
 		return id_permiso;
 	}
+
 
 
 	public void setId_permiso(Long id_permiso) {
@@ -47,9 +48,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public Long getFecha1() {
 		return fecha1;
 	}
+
 
 
 	public void setFecha1(Long fecha1) {
@@ -57,9 +60,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public Long getFecha2() {
 		return fecha2;
 	}
+
 
 
 	public void setFecha2(Long fecha2) {
@@ -67,9 +72,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public String getDescripcion() {
 		return Descripcion;
 	}
+
 
 
 	public void setDescripcion(String descripcion) {
@@ -77,9 +84,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public String getTipoPermisos() {
 		return tipoPermisos;
 	}
+
 
 
 	public void setTipoPermisos(String tipoPermisos) {
@@ -87,9 +96,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
-	public String isJefeInmediatoAceptaSolicitud() {
+
+	public String getJefeInmediatoAceptaSolicitud() {
 		return JefeInmediatoAceptaSolicitud;
 	}
+
 
 
 	public void setJefeInmediatoAceptaSolicitud(String jefeInmediatoAceptaSolicitud) {
@@ -97,19 +108,11 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
-	public int getBandera_solicitud() {
-		return bandera_solicitud;
-	}
 
-
-	public void setBandera_solicitud(int bandera_solicitud) {
-		this.bandera_solicitud = bandera_solicitud;
-	}
-
-
-	public String isRrhhAceptaSolicitud() {
+	public String getRrhhAceptaSolicitud() {
 		return rrhhAceptaSolicitud;
 	}
+
 
 
 	public void setRrhhAceptaSolicitud(String rrhhAceptaSolicitud) {
@@ -117,17 +120,17 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	}
 
 
+
 	public Long getIdEmpleadoSolicitante() {
 		return idEmpleadoSolicitante;
 	}
 
 
+
 	public void setIdEmpleadoSolicitante(Long idEmpleadoSolicitante) {
 		this.idEmpleadoSolicitante = idEmpleadoSolicitante;
 	}
-    
-	
- 
+
 	 
 	
 }

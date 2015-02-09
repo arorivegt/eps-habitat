@@ -93,7 +93,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setCelular("0");
 				em.setNo_licencia("0");
 				em.setBonificacion(0.0f);
-				em.setTotal(26);
+				em.setDiasDeVacaciones(26);
 				em.setSalario_base(0.0f);
 				em.setDepto_municipio_residencia("01,0101");
 				em.setDepto_municipio_nacimiento("01,0101");
@@ -228,7 +228,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	         e.setProfesion(profesion.toUpperCase());
 	         e.setTipo_planilla(tipo_planilla.toUpperCase());
 	         e.setSalario_base(salario_base);
-	         e.setTotal(total);
+	         e.setDiasDeVacaciones(total);
 	         e.setBonificacion(bonificacion);
 	         e.setURLFile(URLFile);
 	         e.setKeyFile(KeyFile);
@@ -617,7 +617,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					         e.setProfesion(profesion.toUpperCase());
 					         e.setTipo_planilla(tipo_planilla.toUpperCase());
 					         e.setSalario_base(salario_base);
-					         e.setTotal(total);
+					         e.setDiasDeVacaciones(total);
 					         e.setBonificacion(bonificacion);
 					         e.setURLFile(URLFile);
 					         e.setKeyFile(KeyFile);
@@ -1371,7 +1371,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	nuevo.setTipo_licencia(p.getTipo_licencia());
 					    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 					    	nuevo.setTipo_planilla(p.getTipo_planilla());
-					    	nuevo.setTotal(p.getTotal());
+					    	nuevo.setTotal(p.getDiasDeVacaciones());
 					    	
 					    	List<SegPermiso> results9 = p.getVacaciones();
 					    	if (!results9.isEmpty()) {
@@ -1639,7 +1639,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	nuevo.setTipo_licencia(p.getTipo_licencia());
 				    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 				    	nuevo.setTipo_planilla(p.getTipo_planilla());
-				    	nuevo.setTotal(p.getTotal());
+				    	nuevo.setTotal(p.getDiasDeVacaciones());
 				    	
 				    	List<SegPermiso> results9 = p.getVacaciones();
 				    	if (!results9.isEmpty()) {
@@ -2317,7 +2317,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			    	nuevo.setTipo_licencia(p.getTipo_licencia());
 			    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 			    	nuevo.setTipo_planilla(p.getTipo_planilla());
-			    	nuevo.setTotal(p.getTotal());
+			    	nuevo.setTotal(p.getDiasDeVacaciones());
 			    
 		 }catch(Exception e){
 			 nuevo = new AuxEmpleado();
@@ -2481,7 +2481,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 permiso.setEmpleado(empleado);
 							 empleado.getVacaciones().add(permiso);
 		    		         int dias = (int) ((fecha2.getTime()-fecha1.getTime()))/(1000*60*60*24);
-							 empleado.setTotal(empleado.getTotal()-dias);
+							 empleado.setDiasDeVacaciones(empleado.getDiasDeVacaciones()-dias);
 				             Persistencia.deletePersistent(solicitudPermiso);  
 				             valor = "se ha decidido dar permiso por parte del jefe y RRHH";                       
 				             //JN-->  JEFE DIJO NO A LA SOLICITUD && RN-->  RECURSOS DIJO QUE NO A LA SOLICITUD

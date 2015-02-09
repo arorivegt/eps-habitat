@@ -386,6 +386,14 @@ public interface RecursosHumanosServiceAsync {
 	
 	/**
 	 * 
+	 * @param dia
+	 * @param callback
+	 * @throws IllegalArgumentException
+	 */
+	void Insertar_Dias_Vacaciones(int dia,AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+	/**
+	 * 
 	 * @param id_solicitud
 	 * @param id_empleado
 	 * @param id_Solicitante

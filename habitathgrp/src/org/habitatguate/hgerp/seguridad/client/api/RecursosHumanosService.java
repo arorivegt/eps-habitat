@@ -399,6 +399,13 @@ public interface RecursosHumanosService extends RemoteService {
 	String InsertarCompartido(String idEmpleado, Long idTest, 
 			Long idEmpleadoCompartido)throws IllegalArgumentException;
 
+	/**
+	 * 
+	 * @param dia
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	String Insertar_Dias_Vacaciones(int dia) throws IllegalArgumentException;
 	//metodos para Actualizar en la base de datos.................................................................................................................
 	/**
 	 * 

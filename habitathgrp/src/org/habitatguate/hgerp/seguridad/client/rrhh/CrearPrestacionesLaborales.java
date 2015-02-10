@@ -606,6 +606,45 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		boolean bNoviembre = true;
 	 		boolean bDiciembre = true;
 	 		
+	 		float eneroUltimoSalario = 0;
+	 		float febreroUltimoSalario = 0;
+	 		float marzoUltimoSalario = 0;
+	 		float abrilUltimoSalario = 0;
+	 		float mayoUltimoSalario = 0;
+	 		float junioUltimoSalario = 0;
+	 		float julioUltimoSalario = 0;
+	 		float agostoUltimoSalario = 0;
+	 		float septiembreUltimoSalario = 0;
+	 		float octubreUltimoSalario = 0;
+	 		float noviembreUltimoSalario = 0;
+	 		float diciembreUltimoSalario = 0;
+	 		
+	 		int eneroAnioUltimo = 0;
+	 		int febreroAnioUltimo = 0;
+	 		int marzoAnioUltimo = 0;
+	 		int abrilAnioUltimo = 0;
+	 		int mayoAnioUltimo = 0;
+	 		int junioAnioUltimo = 0;
+	 		int julioAnioUltimo = 0;
+	 		int agostoAnioUltimo = 0;
+	 		int septiembreAnioUltimo = 0;
+	 		int octubreAnioUltimo = 0;
+	 		int noviembreAnioUltimo = 0;
+	 		int diciembreAnioUltimo = 0;
+	 		
+	 		int eneroMesUltimo = 0;
+	 		int febreroMesUltimo = 0;
+	 		int marzoMesUltimo = 0;
+	 		int abrilMesUltimo = 0;
+	 		int mayoMesUltimo = 0;
+	 		int junioMesUltimo = 0;
+	 		int julioMesUltimo = 0;
+	 		int agostoMesUltimo = 0;
+	 		int septiembreMesUltimo = 0;
+	 		int octubreMesUltimo = 0;
+	 		int noviembreMesUltimo = 0;
+	 		int diciembreMesUltimo = 0;
+	 		
 	 		DateTimeFormat anio = DateTimeFormat.getFormat("yyyy");
 	 		DateTimeFormat mes 	= DateTimeFormat.getFormat("MM");
 
@@ -614,9 +653,6 @@ public class CrearPrestacionesLaborales extends Composite   {
 	        String mes2 		= mes.format(dateFecha2.getValue());
 	 		//DateTimeFormat dia 	= DateTimeFormat.getFormat("dd");
 
-	 		int ultimoAnnio = 0;
-	 		int ultimoMes = 0;
-	 		float ultimoSalario = 0;
 	 		String AuxAnio 	= "";
 	 		String AuxMes 	= "";
 	 		//String formatDia 	= "";
@@ -634,17 +670,97 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				//verifico el ultimo salario que tiene el empleado, si en caso:
 		 				//esto primero verificando que el año del ultimo salario, este no sea de una fecha despues de la que se quiere calcular
 		 				//fecha del salario menor o igual que el año a calcular
-		 				if(Integer.parseInt(AuxAnio) <= Integer.parseInt(listAnio))
+		 				if(Integer.parseInt(AuxAnio) <= Integer.parseInt(listAnio) &&  s.getTipoSalario().equals("0"))
 		 				{
 		 					//luego de lo anterior verifico que el año del salario y el mes del salario a tomar en cuenta
 		 					//es mayor o igual a la fecha del ultimo salario, si es asi, entonces ese salario sera el ultimo
 		 					//y asi hasta encontrar el ultimo entre la fecha a calcular hasta antes de esa fecha
-		 					if(Integer.parseInt(AuxAnio) >= ultimoAnnio && Integer.parseInt(AuxMes) >= ultimoMes)
+		 					System.out.println(AuxMes);
+		 					if(Integer.parseInt(AuxAnio) >= eneroAnioUltimo && Integer.parseInt(AuxMes) >= eneroMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 01)
 		 					{
-		 						ultimoAnnio 	= Integer.parseInt(AuxAnio);
-		 				 		ultimoMes 		= Integer.parseInt(AuxMes);
-		 				 		ultimoSalario 	=  s.getSalario();
+		 						eneroAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						eneroMesUltimo 		= Integer.parseInt(AuxMes);
+		 						eneroUltimoSalario 	= s.getSalario();
 		 					}
+		 					if(Integer.parseInt(AuxAnio) >= febreroAnioUltimo && Integer.parseInt(AuxMes) >= febreroMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 02)
+		 					{
+		 						febreroAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						febreroMesUltimo 		= Integer.parseInt(AuxMes);
+		 						febreroUltimoSalario 	=  s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= marzoAnioUltimo && Integer.parseInt(AuxMes) >= marzoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 03)
+		 					{
+		 						marzoAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						marzoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						marzoUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= abrilAnioUltimo && Integer.parseInt(AuxMes) >= abrilMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 04)
+		 					{
+		 						abrilAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						abrilMesUltimo 		= Integer.parseInt(AuxMes);
+		 						abrilUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= mayoAnioUltimo && Integer.parseInt(AuxMes) >= mayoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 05)
+		 					{
+		 						mayoAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						mayoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						mayoUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= junioAnioUltimo && Integer.parseInt(AuxMes) >= junioMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 06)
+		 					{
+		 						junioAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						junioMesUltimo 		= Integer.parseInt(AuxMes);
+		 						junioUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= julioAnioUltimo && Integer.parseInt(AuxMes) >= julioMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 07)
+		 					{
+		 						julioAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						julioMesUltimo 		= Integer.parseInt(AuxMes);
+		 						julioUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= agostoAnioUltimo && Integer.parseInt(AuxMes) >= agostoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 8)
+		 					{
+		 						agostoAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						agostoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						agostoUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= septiembreAnioUltimo && Integer.parseInt(AuxMes) >= septiembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 9)
+		 					{
+		 						septiembreAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						septiembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						septiembreUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= octubreAnioUltimo && Integer.parseInt(AuxMes) >= octubreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 10)
+		 					{
+		 						octubreAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						octubreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						octubreUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= noviembreAnioUltimo && Integer.parseInt(AuxMes) >= noviembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 11)
+		 					{
+		 						noviembreAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						noviembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						noviembreUltimoSalario 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= diciembreAnioUltimo && Integer.parseInt(AuxMes) >= diciembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 12)
+		 					{
+		 						diciembreAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						diciembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						diciembreUltimoSalario 	= s.getSalario();
+		 					}
+		 					
 		 				}
 		 				//*********************************************************************************
 		 				/**
@@ -654,165 +770,129 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				 * que se le va asignar el ultimo salario, en caso contrario ese mes, tendra salario = 0;
 		 				 */
 		 				//salario de enero
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("01")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("01") && s.getTipoSalario().equals("0"))
 		 				{
 		 					enero = s.getSalario();
 		 					bEnero = false;
-		 				}else if(bEnero && s.getTipoSalario().equals("0") &&
-		 							(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 01 && ultimoAnnio == Integer.parseInt(listAnio)) )
-		 						)
+		 				}else if(bEnero)
 		 				{
-		 					enero = ultimoSalario;
+		 					enero = eneroUltimoSalario;
 		 				}
 		 				
 		 				//salario de febrero
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("02")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("02")&& s.getTipoSalario().equals("0"))
 		 				{
 		 					febrero = s.getSalario();
 		 					bFebrero  = false;
-		 				}else if(bFebrero && s.getTipoSalario().equals("0") &&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 02 && ultimoAnnio == Integer.parseInt(listAnio))) 
-									)
+		 				}else if(bFebrero)
 		 				{
-		 					febrero = ultimoSalario;
+		 					febrero = febreroUltimoSalario;
 		 				}
 		 				
 		 				//salario de marzo
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("03")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("03") && s.getTipoSalario().equals("0"))
 		 				{
 		 					marzo = s.getSalario();
 		 					bMarzo  = false;
-		 				}else if(bMarzo && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 03 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bMarzo)
 		 				{
-		 					marzo = ultimoSalario;
+		 					marzo = marzoUltimoSalario;
 		 				}
 		 				
 		 				//salario de abril
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("04")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("04") && s.getTipoSalario().equals("0"))
 		 				{
 		 					abril = s.getSalario();
 		 					bAbril  = false;
-		 				}else if(bAbril && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 04 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bAbril)
 		 				{
-		 					abril = ultimoSalario;
+		 					abril = abrilUltimoSalario;
 		 				}
 		 				
 		 				//salario de mayo
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("05")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("05") && s.getTipoSalario().equals("0"))
 		 				{
 		 					mayo = s.getSalario();
 		 					bMayo  = false;
-		 				}else if(bMayo && s.getTipoSalario().equals("0") &&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 05 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bMayo)
 		 				{
-		 					mayo = ultimoSalario;
+		 					mayo = mayoUltimoSalario;
 		 				}
 		 				
 		 				//salario de junio
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("06")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("06") && s.getTipoSalario().equals("0"))
 		 				{
 		 					junio = s.getSalario();
 		 					bJunio  = false;
-		 				}else if(bJunio && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 06 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bJunio)
 		 				{
-		 					junio = ultimoSalario;
+		 					junio = junioUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de julio
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("07")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("07") && s.getTipoSalario().equals("0"))
 		 				{
 		 					julio = s.getSalario();
 		 					bJulio  = false;
-		 				}else if(bJulio && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 07 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bJulio)
 		 				{
-		 					julio = ultimoSalario;
+		 					julio = julioUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de agosto
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("08")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("08") && s.getTipoSalario().equals("0"))
 		 				{
 		 					agosto = s.getSalario();
 		 					bAgosto  = false;
-		 				}else if(bAgosto && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 8 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bAgosto)
 		 				{
-		 					agosto = ultimoSalario;
+		 					agosto = agostoUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de septiembre
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("09")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("09")  && s.getTipoSalario().equals("0"))
 		 				{
 		 					septiembre = s.getSalario();
 		 					bSeptiembre  = false;
-		 				}else if(bSeptiembre && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 9 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bSeptiembre)
 		 				{
-		 					septiembre = ultimoSalario;
+		 					septiembre = septiembreUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de Octubre
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("10")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("10") && s.getTipoSalario().equals("0"))
 		 				{
 		 					octubre = s.getSalario();
 		 					bOctubre  = false;
-		 				}else if(bOctubre && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 10 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bOctubre)
 		 				{
-		 					octubre = ultimoSalario;
+		 					octubre = octubreUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de Noviembre
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("11")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("11") && s.getTipoSalario().equals("0"))
 		 				{
 		 					noviembre = s.getSalario();
 		 					bNoviembre  = false;
-		 				}else if(bNoviembre && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 11 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bNoviembre)
 		 				{
-		 					noviembre = ultimoSalario;
+		 					noviembre = noviembreUltimoSalario;
 		 				}
 		 				
 	
 		 				//salario de Diciembre
-		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("12")
-		 				   && s.getTipoSalario().equals("0"))
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("12")  && s.getTipoSalario().equals("0"))
 		 				{
 		 					diciembre = s.getSalario();
 		 					bDiciembre  = false;
-		 				}else if(bDiciembre && s.getTipoSalario().equals("0")&&
-									(ultimoAnnio < Integer.parseInt(listAnio) || (ultimoMes <= 12 && ultimoAnnio == Integer.parseInt(listAnio)))
-									)
+		 				}else if(bDiciembre)
 		 				{
-		 					diciembre = ultimoSalario;
+		 					diciembre = diciembreUltimoSalario;
 		 				}
 		 				
 		 				
@@ -910,7 +990,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			noviembre 	= noviembre + noviembreBono;
 	 			diciembre 	= diciembre + diciembreBono;
 
-	 			
+	 			System.out.println("mes2: "+mes2);
+	 			System.out.println("mes1: "+mes1);
 	 			if(Integer.parseInt(mes2)>= 1 && Integer.parseInt(mes1)<=1){
 	 				salarioBaseCalculo +=enero;
 	 			}if(Integer.parseInt(mes2)>= 2 && Integer.parseInt(mes1)<=2){
@@ -938,7 +1019,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			}
 
 		        int dias			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24)); 
-	 			salarioBaseCalculo=  salarioBaseCalculo / (dias/30);
+	 			System.out.println(salarioBaseCalculo+" / " +mes2);
+	 			salarioBaseCalculo=  salarioBaseCalculo / Integer.parseInt(mes2);
 	 			
 	 			if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
@@ -975,10 +1057,47 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		 bAbril = true;
 	 		 bMayo = true;
 	 		 bJunio = true;
+	 		 
 
-	 		 ultimoAnnio = 0;
-	 		 ultimoMes = 0;
-	 		 ultimoSalario = 0;
+	 		 eneroUltimoSalario = 0;
+	 		 febreroUltimoSalario = 0;
+	 		 marzoUltimoSalario = 0;
+	 		 abrilUltimoSalario = 0;
+	 		 mayoUltimoSalario = 0;
+	 		 junioUltimoSalario = 0;
+	 		 julioUltimoSalario = 0;
+	 		 agostoUltimoSalario = 0;
+	 		 septiembreUltimoSalario = 0;
+	 		 octubreUltimoSalario = 0;
+	 		 noviembreUltimoSalario = 0;
+	 		 diciembreUltimoSalario = 0;
+	 		
+	 		 eneroAnioUltimo = 0;
+	 		 febreroAnioUltimo = 0;
+	 		 marzoAnioUltimo = 0;
+	 		 abrilAnioUltimo = 0;
+	 		 mayoAnioUltimo = 0;
+	 		 junioAnioUltimo = 0;
+	 		 julioAnioUltimo = 0;
+	 		 agostoAnioUltimo = 0;
+	 		 septiembreAnioUltimo = 0;
+	 		 octubreAnioUltimo = 0;
+	 		 noviembreAnioUltimo = 0;
+	 		 diciembreAnioUltimo = 0;
+	 		
+	 		 eneroMesUltimo = 0;
+	 		 febreroMesUltimo = 0;
+	 		 marzoMesUltimo = 0;
+	 		 abrilMesUltimo = 0;
+	 		 mayoMesUltimo = 0;
+	 		 junioMesUltimo = 0;
+	 		 julioMesUltimo = 0;
+	 		 agostoMesUltimo = 0;
+	 		 septiembreMesUltimo = 0;
+	 		 octubreMesUltimo = 0;
+	 		 noviembreMesUltimo = 0;
+	 		 diciembreMesUltimo = 0;
+
 	 		 AuxAnio 	= "";
 	 		 AuxMes 	= "";
 	 		}//fin for empleado

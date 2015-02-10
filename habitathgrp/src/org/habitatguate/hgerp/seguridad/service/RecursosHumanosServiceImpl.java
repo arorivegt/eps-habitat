@@ -2451,7 +2451,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				Date fecha2, String descripcionl, String tipoPermisos,
 				String jefe, String rrhh,String solicitante) throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
-			String valor = "Error en la solicitud";
+			String valor = "Solicitud no procesada";
+			System.out.println(jefe+"_"+rrhh+"_"+solicitante+"_"+id_solicitud+"_"+id_empleado);
 			try{
 				 Key k = new KeyFactory
 					        .Builder(SegEmpleado.class.getSimpleName(), id_empleado)
@@ -2459,13 +2460,15 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					        .getKey();
 				 final SegSolicitudPermiso solicitudPermiso = Persistencia.getObjectById(SegSolicitudPermiso.class, k); 
 				 //aun no a modificado las respuestas a la solicitud el jefe como la de recursos humanos
-				 if(jefe.equals("JSR") || rrhh.equals("RSR") || solicitante.equals("EN")){
+				 if((jefe.equals("JSR") || rrhh.equals("RSR")) && solicitante.equals("EE")){
 					 valor = "aun no se ha validado permiso por jefe o RRHH";
 				 }else{
 					 try{
+							System.out.println(jefe+"_"+rrhh+"_"+solicitante);
 			             //JN--> JEFE DIJO SI A LA SOLICITUD && RN--> RECURSOS DIJO QUE SI A LA SOLICITUD y el EMPLEADO ESTA ENTERADO DE ESO
 						 if(jefe.equals("JS") && rrhh.equals("RS") && solicitante.equals("EE"))
 						 {
+
 							 final SegEmpleado empleado 		= Persistencia.getObjectById(SegEmpleado.class, id_Solicitante); 
 							 SegPermiso permiso = new SegPermiso(); 
 							 permiso.setDescripcion(descripcionl);
@@ -2498,8 +2501,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				             //JN-->  JEFE DIJO NO A LA SOLICITUD && RN-->  RECURSOS DIJO QUE NO A LA SOLICITUD y el EMPLEADO NO ESTA ENTERADO DE ESO
 						 }else if(jefe.equals("JN") && rrhh.equals("RN") && !solicitante.equals("EE"))
 						 {
-							 solicitudPermiso.setJefeInmediatoAceptaSolicitud(jefe);
-							 solicitudPermiso.setRrhhAceptaSolicitud(rrhh);
 							 valor = "permiso negado por jefe y RRHH";
 							 
 						 }else{//Aun no se ha decidido ambas repuesta si, o no en todo caso
@@ -2549,6 +2550,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	ss.setJefeInmediatoAceptaSolicitud(n.getJefeInmediatoAceptaSolicitud());
 				    	ss.setRrhhAceptaSolicitud(n.getRrhhAceptaSolicitud());
 				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setId_Empleado(n.getEmpleado().getId_empleado());
 					 	valor.add(ss);
 				    }
 				}
@@ -2584,6 +2586,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	ss.setJefeInmediatoAceptaSolicitud(n.getJefeInmediatoAceptaSolicitud());
 				    	ss.setRrhhAceptaSolicitud(n.getRrhhAceptaSolicitud());
 				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setId_Empleado(n.getEmpleado().getId_empleado());
 					 	valor.add(ss);
 				    }
 				}
@@ -2618,6 +2621,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	ss.setJefeInmediatoAceptaSolicitud(n.getJefeInmediatoAceptaSolicitud());
 				    	ss.setRrhhAceptaSolicitud(n.getRrhhAceptaSolicitud());
 				    	ss.setIdEmpleadoSolicitante(n.getIdEmpleadoSolicitante());
+				    	ss.setId_Empleado(n.getEmpleado().getId_empleado());
 					 	valor.add(ss);
 				    }
 				}

@@ -29,6 +29,8 @@ public class AuxSolicitudPermiso implements IsSerializable{
 	
     private Long idEmpleadoSolicitante;
     
+    private Long id_Empleado;
+    
 
 	
 	public AuxSolicitudPermiso() {
@@ -129,6 +131,18 @@ public class AuxSolicitudPermiso implements IsSerializable{
 
 	public void setIdEmpleadoSolicitante(Long idEmpleadoSolicitante) {
 		this.idEmpleadoSolicitante = idEmpleadoSolicitante;
+	}
+
+
+
+	public Long getId_Empleado() {
+		return id_Empleado;
+	}
+
+
+
+	public void setId_Empleado(Long id_Empleado) {
+		this.id_Empleado = id_Empleado;
 	}
 
 	 

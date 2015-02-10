@@ -62,7 +62,7 @@ public class SolicitudPermiso extends Composite  {
 	    		                	mensaje.setMensaje("alert alert-error", "Error !! \nnombre ");
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),"Empleado", dias,"0",
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
@@ -78,7 +78,7 @@ public class SolicitudPermiso extends Composite  {
 
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
@@ -117,7 +117,7 @@ public class SolicitudPermiso extends Composite  {
 	    		                	mensaje.setMensaje("alert alert-error", "Error !! \nnombre ");
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),"Empleado", dias,"0",
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
@@ -135,7 +135,7 @@ public class SolicitudPermiso extends Composite  {
 
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
@@ -176,7 +176,7 @@ public class SolicitudPermiso extends Composite  {
 	    		                	mensaje.setMensaje("alert alert-error", "Error !! \nnombre ");
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),"Empleado", dias,"0",
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'0');
@@ -192,7 +192,7 @@ public class SolicitudPermiso extends Composite  {
 
 	    		    		        String dias  = "";
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
-							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(empleado);
+							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'0');

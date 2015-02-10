@@ -44,6 +44,8 @@ public class FormularioSolicitudPermiso extends Composite {
     private TextBox txtDias;
     private TextBox txtDisponibles;
     private Label lblDiasDisponibles_1;
+    private Label lblJefe;
+    private Label lblRRHH;
     
 	public FormularioSolicitudPermiso(Long e) {
 
@@ -55,7 +57,7 @@ public class FormularioSolicitudPermiso extends Composite {
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("773px", "170px");
+		absolutePanel.setSize("773px", "274px");
 		
 		dateFecha1 = new DateBox();
 		dateFecha1.getTextBox().setReadOnly(true);
@@ -130,14 +132,9 @@ public class FormularioSolicitudPermiso extends Composite {
 		        load.invisible();
 			}
 		});
-
-		btnAceptar.setText("Aceptar");
-		btnAceptar.setStylePrimaryName("sendButton");
-		btnAceptar.setStyleName("sendButton");
-		absolutePanel.add(btnAceptar, 700, 85);
-		btnAceptar.setSize("143px", "34px");
 		
 		txtNombre = new TextBox();
+		txtNombre.setEnabled(false);
 		txtNombre.setReadOnly(true);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
@@ -153,6 +150,21 @@ public class FormularioSolicitudPermiso extends Composite {
 		txtDias.setMaxLength(100);
 		absolutePanel.add(txtDias, 480, 138);
 		txtDias.setSize("89px", "34px");
+		
+		txtDisponibles = new TextBox();
+		txtDisponibles.setEnabled(false);
+		txtDisponibles.setText("0");
+		txtDisponibles.setStylePrimaryName("gwt-TextBox2");
+		txtDisponibles.setStyleName("gwt-TextBox2");
+		txtDisponibles.setMaxLength(100);
+		absolutePanel.add(txtDisponibles, 590, 138);
+		txtDisponibles.setSize("89px", "34px");
+
+		btnAceptar.setText("Aceptar");
+		btnAceptar.setStylePrimaryName("sendButton");
+		btnAceptar.setStyleName("sendButton");
+		absolutePanel.add(btnAceptar, 700, 85);
+		btnAceptar.setSize("143px", "34px");
 		
 		
 		btnNoAceptar = new Button("Send");
@@ -197,8 +209,9 @@ public class FormularioSolicitudPermiso extends Composite {
 			public void onClick(ClickEvent event) {
 
 		        load.visible();
-				loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
-						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
+		        loginService.Respuesta_Solicitud(id_Solicitud,id_empleado,id_Empleado_Solicitante,
+						dateFecha1.getValue(),dateFecha2.getValue(),txtDescripcion.getText(),
+						listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()),
 						RespuestaJ,RespuestaR,"EE",new AsyncCallback<String>(){
                     public void onFailure(Throwable caught) 
                     {
@@ -217,10 +230,10 @@ public class FormularioSolicitudPermiso extends Composite {
 		        load.invisible();
 			}
 		});
-		btnEnterado.setText("No Aceptar");
+		btnEnterado.setText("Enterado");
 		btnEnterado.setStylePrimaryName("sendButton");
 		btnEnterado.setStyleName("sendButton");
-		absolutePanel.add(btnEnterado, 700, 200);
+		absolutePanel.add(btnEnterado, 480, 181);
 		btnEnterado.setSize("143px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
@@ -253,19 +266,20 @@ public class FormularioSolicitudPermiso extends Composite {
 		absolutePanel.add(lblDiasDisponibles, 480, 106);
 		lblDiasDisponibles.setSize("77px", "13px");
 		
-		txtDisponibles = new TextBox();
-		txtDisponibles.setEnabled(false);
-		txtDisponibles.setText("0");
-		txtDisponibles.setStylePrimaryName("gwt-TextBox2");
-		txtDisponibles.setStyleName("gwt-TextBox2");
-		txtDisponibles.setMaxLength(100);
-		absolutePanel.add(txtDisponibles, 590, 138);
-		txtDisponibles.setSize("89px", "34px");
-		
 		lblDiasDisponibles_1 = new Label("Dias disponibles");
 		lblDiasDisponibles_1.setStyleName("label");
 		absolutePanel.add(lblDiasDisponibles_1, 590, 106);
 		lblDiasDisponibles_1.setSize("104px", "13px");
+		
+		lblJefe = new Label("respuesta del jefe");
+		lblJefe.setStyleName("label");
+		absolutePanel.add(lblJefe, 10, 236);
+		lblJefe.setSize("437px", "23px");
+		
+		lblRRHH = new Label("respuesta de RRHH");
+		lblRRHH.setStyleName("label");
+		absolutePanel.add(lblRRHH, 10, 265);
+		lblRRHH.setSize("437px", "23px");
 	}
 	
 	public void LlenarDatos(Long id, 
@@ -309,13 +323,16 @@ public class FormularioSolicitudPermiso extends Composite {
 			EstadoRespuestaJ = "Jefe No aprobo la solicitud";
 		}
 		
-		if(RespuestaJ.equals("RSR")){
-			EstadoRespuestaJ = "RRHH no ha dado respuesta";
-		}else if(RespuestaJ.equals("RS")){
-			EstadoRespuestaJ = "RRHH ha aprobado la solicitud";
-		}else if(RespuestaJ.equals("RN")){
-			EstadoRespuestaJ = "RRHH No aprobo la solicitud";
+		if(RespuestaR.equals("RSR")){
+			EstadoRespuestaR = "RRHH no ha dado respuesta";
+		}else if(RespuestaR.equals("RS")){
+			EstadoRespuestaR = "RRHH ha aprobado la solicitud";
+		}else if(RespuestaR.equals("RN")){
+			EstadoRespuestaR = "RRHH No aprobo la solicitud";
 		}
+		
+		lblJefe.setText(EstadoRespuestaJ);
+		lblRRHH.setText(EstadoRespuestaR);
 	}
 	
 }

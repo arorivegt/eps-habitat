@@ -74,45 +74,45 @@ public class Sce_DataEntryBitacoraSolicitud extends Composite {
 		
 	}
 	
-	
-	public void habilitarSegundaSupervision(){
-
-		// 2. Segunda Supervision
-		
-		scrollPanel2 = new ScrollPanel();
-		scrollPanel2.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel2, "Segunda Supervision", true);
-		scrollPanel2.setSize("100%", "100%");
-		fd2 = new Sce_DataEntrySupervisionSegunda(this);
-		scrollPanel2.setWidget(fd2);
-		
-	}
-	
-	public void habilitarTerceraSupervision(){
-
-		// 3. Tercera Supervision
-		
-		scrollPanel3 = new ScrollPanel();
-		scrollPanel3.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel3, "Tercera Supervision", true);
-		scrollPanel3.setSize("100%", "100%");
-		fd3 = new Sce_DataEntrySupervisionTercera(this);
-		scrollPanel3.setWidget(fd3);
-		
-	}
-	
-	public void habilitarCuartaSupervision(){
-
-		// 4. Cuarta Supervision
-		
-		scrollPanel4 = new ScrollPanel();
-		scrollPanel4.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
-		scrollPanel4.setSize("100%", "100%");
-		fd4 = new Sce_DataEntrySupervisionCuarta(this);
-		scrollPanel4.setWidget(fd4);
-		
-	}	
+//	
+//	public void habilitarSegundaSupervision(){
+//
+//		// 2. Segunda Supervision
+//		
+//		scrollPanel2 = new ScrollPanel();
+//		scrollPanel2.setAlwaysShowScrollBars(false);
+//		tabPanel.add(scrollPanel2, "Segunda Supervision", true);
+//		scrollPanel2.setSize("100%", "100%");
+//		fd2 = new Sce_DataEntrySupervisionSegunda(this);
+//		scrollPanel2.setWidget(fd2);
+//		
+//	}
+//	
+//	public void habilitarTerceraSupervision(){
+//
+//		// 3. Tercera Supervision
+//		
+//		scrollPanel3 = new ScrollPanel();
+//		scrollPanel3.setAlwaysShowScrollBars(false);
+//		tabPanel.add(scrollPanel3, "Tercera Supervision", true);
+//		scrollPanel3.setSize("100%", "100%");
+//		fd3 = new Sce_DataEntrySupervisionTercera(this);
+//		scrollPanel3.setWidget(fd3);
+//		
+//	}
+//	
+//	public void habilitarCuartaSupervision(){
+//
+//		// 4. Cuarta Supervision
+//		
+//		scrollPanel4 = new ScrollPanel();
+//		scrollPanel4.setAlwaysShowScrollBars(false);
+//		tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
+//		scrollPanel4.setSize("100%", "100%");
+//		fd4 = new Sce_DataEntrySupervisionCuarta(this);
+//		scrollPanel4.setWidget(fd4);
+//		
+//	}	
 	
 	public void setDataSupervisionPrimera(List<AuxSolicitudSupervisionPrimera> results) {
 		fd1.setDataSupervisionPrimera(results);

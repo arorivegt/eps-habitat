@@ -45,6 +45,12 @@ public class Sce_DataSupervisionSegunda extends Composite {
 	private CheckBox checkNoSatisfactoria;
 	private DateBox txtFechaVisita;
 	private Button btnGuardar;
+	private TextBox txtRepresentante;
+	private Label label;
+	private Label label_1;
+	private Label label_2;
+	private TextBox txtAlbanil;
+	private TextBox txtPromotor;
     
 	public Sce_DataSupervisionSegunda(Sce_DataEntrySupervisionSegunda a, Sce_DataEntryBitacoraSolicitud e) {
 		
@@ -54,7 +60,7 @@ public class Sce_DataSupervisionSegunda extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "455px");
+		absolutePanel.setSize("988px", "600px");
 		
 		txtObservaciones = new TextArea();
 		absolutePanel.add(txtObservaciones, 42, 134);
@@ -158,7 +164,7 @@ public class Sce_DataSupervisionSegunda extends Composite {
 							System.out.println("Valor de NUEVA SEGUNDA Supervision: " + idSupervisionSegunda);
 							bandera = false;
 							
-							formulario.habilitarTerceraSupervision(); // Habilita para 3era Supervision
+							// --- formulario.habilitarTerceraSupervision(); // Habilita para 3era Supervision
 							
 						}
 					});
@@ -192,7 +198,43 @@ public class Sce_DataSupervisionSegunda extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 471, 429);
+		absolutePanel.add(btnGuardar, 453, 578);
+		
+		txtRepresentante = new TextBox();
+		txtRepresentante.setStylePrimaryName("gwt-TextBox2");
+		txtRepresentante.setStyleName("gwt-TextBox2");
+		txtRepresentante.setMaxLength(200);
+		absolutePanel.add(txtRepresentante, 275, 513);
+		txtRepresentante.setSize("386px", "19px");
+		
+		label = new Label("Representante de Familia:");
+		label.setStyleName("label");
+		absolutePanel.add(label, 42, 515);
+		label.setSize("208px", "19px");
+		
+		label_1 = new Label("Albañil:");
+		label_1.setStyleName("label");
+		absolutePanel.add(label_1, 42, 471);
+		label_1.setSize("133px", "19px");
+		
+		label_2 = new Label("Promotor:");
+		label_2.setStyleName("label");
+		absolutePanel.add(label_2, 42, 426);
+		label_2.setSize("133px", "19px");
+		
+		txtAlbanil = new TextBox();
+		txtAlbanil.setStylePrimaryName("gwt-TextBox2");
+		txtAlbanil.setStyleName("gwt-TextBox2");
+		txtAlbanil.setMaxLength(200);
+		absolutePanel.add(txtAlbanil, 275, 469);
+		txtAlbanil.setSize("386px", "19px");
+		
+		txtPromotor = new TextBox();
+		txtPromotor.setStylePrimaryName("gwt-TextBox2");
+		txtPromotor.setStyleName("gwt-TextBox2");
+		txtPromotor.setMaxLength(200);
+		absolutePanel.add(txtPromotor, 275, 424);
+		txtPromotor.setSize("386px", "19px");
 		
 	}
 	

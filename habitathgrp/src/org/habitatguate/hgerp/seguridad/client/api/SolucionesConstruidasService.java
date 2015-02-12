@@ -14,7 +14,8 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 	// DATOS SOLICITANTE		
 	
-	Long ingresarDatosSolicitante(Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
+			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -25,7 +26,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Boolean garantia, Boolean aprobacion, 
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException;
 
-	Long actualizarDatosSolicitante(Long idFormulario,
+	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
 			 String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 				String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
@@ -156,7 +157,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 // SOLUCIONES
     
-    List<AuxSolicitudGeneral> buscarFormulario(char tipo, String nombreSolicitante, String solucionConstruir) throws IllegalArgumentException; 
+    List<AuxSolicitudGeneral> buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir) throws IllegalArgumentException; 
     
     AuxSolicitudGeneral obtenerDataFormularioRegistrado(Long idFormulario) throws IllegalArgumentException;
     

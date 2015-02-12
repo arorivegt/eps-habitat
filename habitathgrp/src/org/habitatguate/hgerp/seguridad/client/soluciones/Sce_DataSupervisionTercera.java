@@ -45,6 +45,12 @@ public class Sce_DataSupervisionTercera extends Composite {
 	private CheckBox checkNoSatisfactoria;
 	private DateBox txtFechaVisita;
 	private Button btnGuardar;
+	private TextBox textBox;
+	private Label label;
+	private Label label_1;
+	private Label label_2;
+	private TextBox textBox_1;
+	private TextBox textBox_2;
     
 	public Sce_DataSupervisionTercera(Sce_DataEntrySupervisionTercera a, Sce_DataEntryBitacoraSolicitud e) {
 		
@@ -54,7 +60,7 @@ public class Sce_DataSupervisionTercera extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "455px");
+		absolutePanel.setSize("988px", "600px");
 		
 		txtObservaciones = new TextArea();
 		absolutePanel.add(txtObservaciones, 42, 134);
@@ -158,7 +164,7 @@ public class Sce_DataSupervisionTercera extends Composite {
 							System.out.println("Valor de NUEVA TERCERA Supervision: " + idSupervisionTercera);
 							bandera = false;
 							
-							formulario.habilitarCuartaSupervision(); // Habilita para 4ta Supervision
+							// --- formulario.habilitarCuartaSupervision(); // Habilita para 4ta Supervision
 							
 						}
 					});
@@ -192,7 +198,43 @@ public class Sce_DataSupervisionTercera extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 471, 429);
+		absolutePanel.add(btnGuardar, 472, 586);
+		
+		textBox = new TextBox();
+		textBox.setStylePrimaryName("gwt-TextBox2");
+		textBox.setStyleName("gwt-TextBox2");
+		textBox.setMaxLength(200);
+		absolutePanel.add(textBox, 275, 510);
+		textBox.setSize("386px", "19px");
+		
+		label = new Label("Representante de Familia:");
+		label.setStyleName("label");
+		absolutePanel.add(label, 42, 512);
+		label.setSize("208px", "19px");
+		
+		label_1 = new Label("Albañil:");
+		label_1.setStyleName("label");
+		absolutePanel.add(label_1, 42, 468);
+		label_1.setSize("133px", "19px");
+		
+		label_2 = new Label("Promotor:");
+		label_2.setStyleName("label");
+		absolutePanel.add(label_2, 42, 423);
+		label_2.setSize("133px", "19px");
+		
+		textBox_1 = new TextBox();
+		textBox_1.setStylePrimaryName("gwt-TextBox2");
+		textBox_1.setStyleName("gwt-TextBox2");
+		textBox_1.setMaxLength(200);
+		absolutePanel.add(textBox_1, 275, 466);
+		textBox_1.setSize("386px", "19px");
+		
+		textBox_2 = new TextBox();
+		textBox_2.setStylePrimaryName("gwt-TextBox2");
+		textBox_2.setStyleName("gwt-TextBox2");
+		textBox_2.setMaxLength(200);
+		absolutePanel.add(textBox_2, 275, 421);
+		textBox_2.setSize("386px", "19px");
 		
 	}
 	

@@ -13,7 +13,8 @@ public interface SolucionesConstruidasServiceAsync {
 	
 // DATOS SOLICITANTE	
 	
-	void ingresarDatosSolicitante(Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	void ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
+			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -25,7 +26,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
-	 void actualizarDatosSolicitante(Long idFormulario,
+	 void actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
 			 String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 				String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
@@ -171,7 +172,7 @@ public interface SolucionesConstruidasServiceAsync {
 	
     // SOLUCIONES
  
-	void buscarFormulario(char tipo, String nombreSolicitante, String solucionConstruir,
+	void buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir,
 			AsyncCallback<List<AuxSolicitudGeneral>> callback) throws IllegalArgumentException;
     
 	 void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;

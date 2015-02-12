@@ -4,6 +4,8 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.*;
 
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -29,8 +31,15 @@ import com.google.gwt.user.client.ui.CheckBox;
 public class Sce_DataFormularioSolicitud extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    
 	private Sce_DataEntryFormularioSolicitud formulario;
+	
+	// Llaves
 	private Long idFormulario = 0L;
+	private Long idEmpleado = 0L;
+	private Long idAfiliado = 0L;
+	
 	private boolean bandera = true;
     private TextBox txtNombreSolicitante;
 	private TextBox txtEdad;
@@ -64,6 +73,33 @@ public class Sce_DataFormularioSolicitud extends Composite {
     
 	public Sce_DataFormularioSolicitud(Sce_DataEntryFormularioSolicitud e) {
 		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+				System.out.println("Id Empleado: " + idEmpleado);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		// Obtener Id Afiliado
+		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idAfiliado = result;
+				System.out.println("Afiliado: " + idAfiliado);	
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+			}
+		});
+		
+		
 		this.formulario = e;
 		mensaje =  new Mensaje();
 		absolutePanel = new AbsolutePanel();
@@ -85,279 +121,22 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		
 		listPais = new ListBox();
 		listPais.addItem("-","-1");
-		listPais.addItem("ABUDABI","1");
-		listPais.addItem("AFGANISTÁN","2");
-		listPais.addItem("ALASKA","143");
-		listPais.addItem("ALBANIA","3");
-		listPais.addItem("ALEMANIA","4");
-		listPais.addItem("ALGERIA","5");
-		listPais.addItem("ALMIRANTES","198");
-		listPais.addItem("ALTO VOLTA","199");
-		listPais.addItem("ANDORRA","6");
-		listPais.addItem("ANGLONORMANDAS","196");
-		listPais.addItem("ANGOLA","7");
-		listPais.addItem("ANGUILLA","8");
-		listPais.addItem("ANTARCTICA","9");
-		listPais.addItem("ANTIGUA Y BARBUDA","10");
-		listPais.addItem("ANTILLAS HOLANDESAS","195");
-		listPais.addItem("ARABIA SAUDITA","11");
-		listPais.addItem("ARGELIA","200");
-		listPais.addItem("ARGENTINA","12");
-		listPais.addItem("ARMENIA","13");
-		listPais.addItem("ARUBA","14");
-		listPais.addItem("AUSTRALIA","15");
-		listPais.addItem("AUSTRIA","16");
-		listPais.addItem("AZERBAIJAN","17");
-		listPais.addItem("AZORES","197");
-		listPais.addItem("BAHAMAS","18");
-		listPais.addItem("BAHREIN","19");
-		listPais.addItem("BANGLADESH","20");
-		listPais.addItem("BARBADOS","21");
-		listPais.addItem("BARBUDA","204");
-		listPais.addItem("BELARUS","22");
-		listPais.addItem("BELAU","203");
-		listPais.addItem("BÉLGICA","23");
-		listPais.addItem("BELIZE","24");
-		listPais.addItem("BENIN","25");
-		listPais.addItem("BERMUDA","26");
-		listPais.addItem("BHUTÁN","27");
-		listPais.addItem("BIRMANIA","202");
-		listPais.addItem("BOLIVIA","28");
-		listPais.addItem("BORNEO","201");
-		listPais.addItem("BOSNIA Y HERZEGOVINA","29");
-		listPais.addItem("BOTSWANA","30");
-		listPais.addItem("BRASIL","31");
-		listPais.addItem("BRUNEI","32");
-		listPais.addItem("BULGARIA","33");
-		listPais.addItem("BURKINA FASO","34");
-		listPais.addItem("BURUNDI","35");
-		listPais.addItem("CAIMAN","206");
-		listPais.addItem("CALPE","207");
-		listPais.addItem("CAMBOYA","36");
-		listPais.addItem("CAMERÚN","37");
-		listPais.addItem("CANADÁ","38");
-		listPais.addItem("CANARIAS","213");
-		listPais.addItem("CAPO VERDE","39");
-		listPais.addItem("CEBELES","215");
-		listPais.addItem("CEILAN","209");
-		listPais.addItem("CEUTA","214");
-		listPais.addItem("CHAD","41");
-		listPais.addItem("CHECOSLOVAQUIA","208");
-		listPais.addItem("CHILE","42");
-		listPais.addItem("CHINA","43");
-		listPais.addItem("CHIPRE","52");
-		listPais.addItem("CLIPPERTON","211");
-		listPais.addItem("COCOS","210");
-		listPais.addItem("COLOMBIA","44");
-		listPais.addItem("COMORO","45");
-		listPais.addItem("CONGO","46");
-		listPais.addItem("COOK","212");
-		listPais.addItem("COREA","48");
-		listPais.addItem("COREA DEL SUR","47");
-		listPais.addItem("COSTA DE MARFIL","50");
-		listPais.addItem("COSTA RICA","49");
-		listPais.addItem("CROATIA","53");
-		listPais.addItem("DINAMARCA","54");
-		listPais.addItem("DJIBOUTI","55");
-		listPais.addItem("DOMINICA","56");
-		listPais.addItem("DUBAI","58");
-		listPais.addItem("ECUADOR","59");
-		listPais.addItem("EGIPTO","60");
-		listPais.addItem("EL SALVADOR","61");
-		listPais.addItem("EMIRATOS ÁRABES UNIDOS","62");
-		listPais.addItem("ERITREA","63");
-		listPais.addItem("ESCOCIA","216");
-		listPais.addItem("ESLOVAQUIA","64");
-		listPais.addItem("ESLOVENIA","65");
-		listPais.addItem("ESOTHO","109");
-		listPais.addItem("ESPAÑA","66");
-		listPais.addItem("ESTADOS UNIDOS DE AMERICA","67");
-		listPais.addItem("ESTONIA","68");
-		listPais.addItem("ETIOPÍA","69");
-		listPais.addItem("FEDERACION DE MALAYSIA","217");
-		listPais.addItem("FEROE","219");
-		listPais.addItem("FIJI","70");
-		listPais.addItem("FILIPINAS","71");
-		listPais.addItem("FINLANDIA","72");
-		listPais.addItem("FORMOSA","218");
-		listPais.addItem("FRANCIA","73");
-		listPais.addItem("GABÓN","74");
-		listPais.addItem("GAMBIA","75");
-		listPais.addItem("GEORGIA","76");
-		listPais.addItem("GHANA","77");
-		listPais.addItem("GIBRALTAR","78");
-		listPais.addItem("GILBERT","223");
-		listPais.addItem("GRAN BRETAÑA","220");
-		listPais.addItem("GRECIA","79");
-		listPais.addItem("GRENADA","81");
-		listPais.addItem("GROENLANDIA","80");
-		listPais.addItem("GUADELUPE","82");
-		listPais.addItem("GUAM","222");
-		listPais.addItem("GUATEMALA","83");
-		listPais.addItem("GUAYANA INGLESA","221");
-		listPais.addItem("GUINEA","84");
-		listPais.addItem("GUINEA ECUATORIAL","85");
-		listPais.addItem("GUINEA PORTUGUESA","224");
-		listPais.addItem("GUYANA","86");
-		listPais.addItem("HAITI","87");
-		listPais.addItem("HAWAI","225");
-		listPais.addItem("HOLANDA","88");
-		listPais.addItem("HONDURAS","89");
-		listPais.addItem("HONG KONG","90");
-		listPais.addItem("HUNGRÍA","91");
-		listPais.addItem("INDIA","93");
-		listPais.addItem("INDONESIA","94");
-		listPais.addItem("INGLATERRA","226");
-		listPais.addItem("IRAN","95");
-		listPais.addItem("IRAQ","96");
-		listPais.addItem("IRIAN JAYA","227");
-		listPais.addItem("IRLANDA","97");
-		listPais.addItem("ISLA HONG KONG","228");
-		listPais.addItem("ISLANDIA","92");
-		listPais.addItem("ISRAEL","98");
-		listPais.addItem("ITALIA","99");
-		listPais.addItem("JAMAICA","100");
-		listPais.addItem("JAPÓN","101");
-		listPais.addItem("JORDANIA","102");
-		listPais.addItem("KATAR","230");
-		listPais.addItem("KAZAKHSTAN","103");
-		listPais.addItem("KENIA","104");
-		listPais.addItem("KOWEIT","229");
-		listPais.addItem("KUWAIT","105");
-		listPais.addItem("KYRGYZSTAN","106");
-		listPais.addItem("LATVIA","107");
-		listPais.addItem("LESHOTO","231");
-		listPais.addItem("LETONIA","110");
-		listPais.addItem("LÍBANO","108");
-		listPais.addItem("LIBERIA","111");
-		listPais.addItem("LIBIA","112");
-		listPais.addItem("LIECHTENSTEIN","113");
-		listPais.addItem("LITUANIA","114");
-		listPais.addItem("LUXEMBURGO","115");
-		listPais.addItem("MACEDONIA","116");
-		listPais.addItem("MACQUARIE","235");
-		listPais.addItem("MADAGASCAR","117");
-		listPais.addItem("MADEITA","236");
-		listPais.addItem("MALASIA","119");
-		listPais.addItem("MALAWI","118");
-		listPais.addItem("MALAYSIA","232");
-		listPais.addItem("MALDIVES","120");
-		listPais.addItem("MALI","121");
-		listPais.addItem("MALTA","122");
-		listPais.addItem("MAN","238");
-		listPais.addItem("MARRUECOS","133");
-		listPais.addItem("MARTINICA","123");
-		listPais.addItem("MAURITANIA","124");
-		listPais.addItem("MAURITIUS","125");
-		listPais.addItem("MAYOTTE","126");
-		listPais.addItem("MELILLA","233");
-		listPais.addItem("MÉXICO","127");
-		listPais.addItem("MICRONESIA","128");
-		listPais.addItem("MIDWAY","237");
-		listPais.addItem("MOLDOVA","129");
-		listPais.addItem("MOLUCA","234");
-		listPais.addItem("MÓNACO","130");
-		listPais.addItem("MONGOLIA","131");
-		listPais.addItem("MONTSERRAT","132");
-		listPais.addItem("MOZAMBIQUE","134");
-		listPais.addItem("NAMIBIA","135");
-		listPais.addItem("NEPAL","136");
-		listPais.addItem("NICARAGUA","138");
-		listPais.addItem("NIGER","139");
-		listPais.addItem("NIGERIA","140");
-		listPais.addItem("NORFOLK","239");
-		listPais.addItem("NORUEGA","141");
-		listPais.addItem("NUEVA CALEDONIA","240");
-		listPais.addItem("NUEVA ZELANDIA","137");
-		listPais.addItem("OMÁN","142");
-		listPais.addItem("PALAU","243");
-		listPais.addItem("PALESTINA","145");
-		listPais.addItem("PANAMÁ","146");
-		listPais.addItem("PAPUA NUEVA GUINEA","147");
-		listPais.addItem("PAQUISTÁN","144");
-		listPais.addItem("PARAGUAY","148");
-		listPais.addItem("PASCUA","244");
-		listPais.addItem("PERÚ","149");
-		listPais.addItem("PITCAIRN","245");
-		listPais.addItem("POLONESIA FRANCESA","246");
-		listPais.addItem("POLONIA","150");
-		listPais.addItem("POPULAR DE CHINA","241");
-		listPais.addItem("POPULAR DE COREA","242");
-		listPais.addItem("PORTUGAL","151");
-		listPais.addItem("PUERTO RICO","152");
-		listPais.addItem("QATAR","153");
-		listPais.addItem("REINO UNIDO","154");
-		listPais.addItem("REPUBLICA ARABE DE EJIPTO","247");
-		listPais.addItem("REPÚBLICA CENTROAFRICANA","40");
-		listPais.addItem("REPÚBLICA CHECA","51");
-		listPais.addItem("REPUBLICA DE AFRICA ECUATORIAL","248");
-		listPais.addItem("REPÚBLICA DOMINICANA","57");
-		listPais.addItem("REUNION","155");
-		listPais.addItem("ROMANIA","156");
-		listPais.addItem("RUSSIA","157");
-		listPais.addItem("RWANDA","158");
-		listPais.addItem("SALOMON DEL SUR","250");
-		listPais.addItem("SAMOA","159");
-		listPais.addItem("SAN MARINO","160");
-		listPais.addItem("SANTA LUCIA","251");
-		listPais.addItem("SAO TOME Y PRÍNCIPE","161");
-		listPais.addItem("SENEGAL","162");
-		listPais.addItem("SEYCHELLES","163");
-		listPais.addItem("SIERRA LEONA","164");
-		listPais.addItem("SINGAPUR","165");
-		listPais.addItem("SIRIA","166");
-		listPais.addItem("SOCOTORRA","249");
-		listPais.addItem("SOMALIA","167");
-		listPais.addItem("SRI LANKA","169");
-		listPais.addItem("SUDÁN","170");
-		listPais.addItem("SUECIA","173");
-		listPais.addItem("SUIZA","174");
-		listPais.addItem("SURÁFRICA","168");
-		listPais.addItem("SURINAME","171");
-		listPais.addItem("SWAZILANDIA","172");
-		listPais.addItem("TAILANDIA","178");
-		listPais.addItem("TAIWÁN","175");
-		listPais.addItem("TAJIKISTAN","176");
-		listPais.addItem("TANZANIA","177");
-		listPais.addItem("TIMOR","252");
-		listPais.addItem("TOGO","179");
-		listPais.addItem("TOKELAU","253");
-		listPais.addItem("TONGA","181");
-		listPais.addItem("TRINIDAD Y TOBAGO","181");
-		listPais.addItem("TÚNEZ","182");
-		listPais.addItem("TURKMENISTAN","184");
-		listPais.addItem("TURQUÍA","183");
-		listPais.addItem("TUVALU","254");
-		listPais.addItem("UCRANIA","185");
-		listPais.addItem("UGANDA","186");
-		listPais.addItem("URUGUAY","187");
-		listPais.addItem("UZBEKISTAN","188");
-		listPais.addItem("VATICANO","257");
-		listPais.addItem("VENEZUELA","189");
-		listPais.addItem("VIETNAM","190");
-		listPais.addItem("VIRGENES AMERICAS","256");
-		listPais.addItem("VIRGENES BRITANICAS","255");
-		listPais.addItem("WAKE","258");
-		listPais.addItem("WALLIS","259");
-		listPais.addItem("YEMEN","191");
-		listPais.addItem("YUGOSLAVIA","192");
-		listPais.addItem("ZAMBIA","183");
-		listPais.addItem("ZIMBABWE","194");	
+		listPais.addItem("Guatemala","1");
+		listPais.addItem("El Salvador","2");
+		listPais.addItem("Bélice","3");
+		listPais.addItem("Honduras","4");
+		listPais.addItem("Nicaragua","5");
+		listPais.addItem("Costa Rica","5");
+		listPais.addItem("Panamá","6");
 		listPais.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPais, 687, 64);
 		listPais.setSize("173px", "27px");
 		
 		listSolucionConstruir = new ListBox();
 		listSolucionConstruir.addItem("-","-1");
-		listSolucionConstruir.addItem("Tipo I","1");
-		listSolucionConstruir.addItem("Tipo II","2");
-		listSolucionConstruir.addItem("Tipo III","3");
-		listSolucionConstruir.addItem("Tipo IV","4");
-		listSolucionConstruir.addItem("Tipo V","5");
-		listSolucionConstruir.addItem("Tipo VI","6");
-		listSolucionConstruir.addItem("Tipo VII","7");
-		listSolucionConstruir.addItem("Tipo VIII","8");
-		listSolucionConstruir.addItem("Tipo IX","9");
+		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listSolucionConstruir, 232, 456);
 		listSolucionConstruir.setSize("148px", "27px");
@@ -853,71 +632,85 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					Boolean segundaSupervision = false;
 					Boolean terceraSupervision = false;
 					Boolean cuartaSupervision = false;
+					
+					if(idEmpleado != 0){
+						System.out.println("Valor Retornado Id Empleado: " + idEmpleado);
 
-					if(bandera){
+						if(idAfiliado != 0){
+							System.out.println("Valor Retornado Id Afiliado: " + idAfiliado);
 
-						Date time=new Date();
-						@SuppressWarnings("deprecation")
-						Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
+							if(bandera){
 
-						solucionesService.ingresarDatosSolicitante(fecrec, nombreSolicitante, estadoCivil, edad, nacionalidad, 
-								profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
-								sabeLeer, sabeEscribir, sabeFirmar, 
-								direccionActual, direccionSolucion,
-								camion, carro, peatonal,
-								lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
-								solucionConstruir, cuotaPagar,
-								nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
-								garantia, aprobacion,
-								primeraSupervision, segundaSupervision, terceraSupervision, cuartaSupervision,
-								new AsyncCallback<Long>() {
+								Date time=new Date();
+								@SuppressWarnings("deprecation")
+								Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
 
-							public void onFailure(Throwable caught) 
-							{
-								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Almacenarse");
+								solucionesService.ingresarDatosSolicitante(idEmpleado, idAfiliado,
+										fecrec, nombreSolicitante, estadoCivil, edad, nacionalidad, 
+										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
+										sabeLeer, sabeEscribir, sabeFirmar, 
+										direccionActual, direccionSolucion,
+										camion, carro, peatonal,
+										lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
+										solucionConstruir, cuotaPagar,
+										nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
+										garantia, aprobacion,
+										primeraSupervision, segundaSupervision, terceraSupervision, cuartaSupervision,
+										new AsyncCallback<Long>() {
+
+									public void onFailure(Throwable caught) 
+									{
+										mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Almacenarse");
+									}
+
+									public void onSuccess(Long result)
+									{	
+										mensaje.setMensaje("alert alert-info", "Registro Almacenado Exitosamente");
+
+										idFormulario = result;
+										formulario.idFormulario = result;
+										System.out.println("Valor de NUEVO Formulario: " + idFormulario + ", ID: " + formulario.idFormulario);
+										bandera = false;
+										formulario.NuevasPestanas();
+									}
+								});
+
+							}else{
+
+								solucionesService.actualizarDatosSolicitante(idFormulario, idEmpleado, idAfiliado, 
+										nombreSolicitante, estadoCivil, edad, nacionalidad, 
+										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
+										sabeLeer, sabeEscribir, sabeFirmar, 
+										direccionActual, direccionSolucion,
+										camion, carro, peatonal,
+										lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
+										solucionConstruir, cuotaPagar,
+										nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
+										new AsyncCallback<Long>() {
+
+									public void onFailure(Throwable caught) 
+									{
+										mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+									}
+
+									public void onSuccess(Long result)
+									{	
+										mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+
+										System.out.println("Valor de Formulario ACTUALIZADO: " + formulario.idFormulario );
+										bandera = false;
+									}
+								});
+
 							}
 
-							public void onSuccess(Long result)
-							{	
-								mensaje.setMensaje("alert alert-info", "Registro Almacenado Exitosamente");
-
-								idFormulario = result;
-								formulario.idFormulario = result;
-								System.out.println("Valor de NUEVO Formulario: " + idFormulario + ", ID: " + formulario.idFormulario);
-								bandera = false;
-								formulario.NuevasPestanas();
-
-							}
-						});
-
+						}else{
+							mensaje.setMensaje("alert alert-error", "El empleado actual no tiene Afiliado");							
+						}
 					}else{
-
-						solucionesService.actualizarDatosSolicitante(idFormulario, nombreSolicitante, estadoCivil, edad, nacionalidad, 
-								profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
-								sabeLeer, sabeEscribir, sabeFirmar, 
-								direccionActual, direccionSolucion,
-								camion, carro, peatonal,
-								lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
-								solucionConstruir, cuotaPagar,
-								nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
-								new AsyncCallback<Long>() {
-
-							public void onFailure(Throwable caught) 
-							{
-								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-							}
-
-							public void onSuccess(Long result)
-							{	
-								mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
-
-								System.out.println("Valor de Formulario ACTUALIZADO: " + formulario.idFormulario );
-								bandera = false;
-
-							}
-						});
-
+						mensaje.setMensaje("alert alert-error", "Error en retornar ID de Empleado");
 					}
+					
 				}
 
 			}

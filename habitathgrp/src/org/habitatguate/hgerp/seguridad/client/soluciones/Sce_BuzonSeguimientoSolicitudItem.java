@@ -83,15 +83,9 @@ public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
 		listSolucionConstruir = new ListBox();
 		listSolucionConstruir.setEnabled(false);
 		listSolucionConstruir.addItem("-","-1");
-		listSolucionConstruir.addItem("Tipo I","1");
-		listSolucionConstruir.addItem("Tipo II","2");
-		listSolucionConstruir.addItem("Tipo III","3");
-		listSolucionConstruir.addItem("Tipo IV","4");
-		listSolucionConstruir.addItem("Tipo V","5");
-		listSolucionConstruir.addItem("Tipo VI","6");
-		listSolucionConstruir.addItem("Tipo VII","7");
-		listSolucionConstruir.addItem("Tipo VIII","8");
-		listSolucionConstruir.addItem("Tipo IX","9");
+		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listSolucionConstruir, 791, 20);
 		listSolucionConstruir.setSize("125px", "34px");;
@@ -107,7 +101,7 @@ public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
 		absolutePanel.add(lblTelefonoTrabajo, 556, 0);
 		lblTelefonoTrabajo.setSize("229px", "13px");
 		
-		Label lblTipoVivienda = new Label("Tipo de Vivienda");
+		Label lblTipoVivienda = new Label("Solucion a Construir");
 		lblTipoVivienda.setStyleName("label");
 		absolutePanel.add(lblTipoVivienda, 791, 0);
 		lblTipoVivienda.setSize("146px", "13px");

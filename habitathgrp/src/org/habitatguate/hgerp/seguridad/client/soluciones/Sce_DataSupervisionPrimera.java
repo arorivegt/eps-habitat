@@ -47,6 +47,12 @@ public class Sce_DataSupervisionPrimera extends Composite {
 	private CheckBox checkNoSatisfactoria;
 	private DateBox txtFechaVisita;
 	private Button btnGuardar;
+	private Label lblPromotor;
+	private Label lblAlbail;
+	private Label lblRepresentanteDeFamilia;
+	private TextBox txtPromotor;
+	private TextBox txtAlbanil;
+	private TextBox txtRepresentanteFamilia;
     
 	public Sce_DataSupervisionPrimera(Sce_DataEntrySupervisionPrimera a, Sce_DataEntryBitacoraSolicitud e) {
 		
@@ -56,7 +62,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "455px");
+		absolutePanel.setSize("988px", "630px");
 		
 		checkSi = new CheckBox("Si");
 		absolutePanel.add(checkSi, 232, 95);
@@ -179,7 +185,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 							System.out.println("Valor de NUEVA Primera Supervision: " + idSupervisionPrimera);
 							bandera = false;
 							
-							formulario.habilitarSegundaSupervision(); // Habilita para 2da Supervision
+							// --- formulario.habilitarSegundaSupervision(); // Habilita para 2da Supervision
 						}
 					});
 
@@ -212,7 +218,43 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 475, 442);
+		absolutePanel.add(btnGuardar, 471, 614);
+		
+		lblPromotor = new Label("Promotor:");
+		lblPromotor.setStyleName("label");
+		absolutePanel.add(lblPromotor, 42, 469);
+		lblPromotor.setSize("133px", "19px");
+		
+		lblAlbail = new Label("Albañil:");
+		lblAlbail.setStyleName("label");
+		absolutePanel.add(lblAlbail, 42, 514);
+		lblAlbail.setSize("133px", "19px");
+		
+		lblRepresentanteDeFamilia = new Label("Representante de Familia:");
+		lblRepresentanteDeFamilia.setStyleName("label");
+		absolutePanel.add(lblRepresentanteDeFamilia, 42, 558);
+		lblRepresentanteDeFamilia.setSize("208px", "19px");
+		
+		txtPromotor = new TextBox();
+		txtPromotor.setStylePrimaryName("gwt-TextBox2");
+		txtPromotor.setStyleName("gwt-TextBox2");
+		txtPromotor.setMaxLength(200);
+		absolutePanel.add(txtPromotor, 275, 467);
+		txtPromotor.setSize("386px", "19px");
+		
+		txtAlbanil = new TextBox();
+		txtAlbanil.setStylePrimaryName("gwt-TextBox2");
+		txtAlbanil.setStyleName("gwt-TextBox2");
+		txtAlbanil.setMaxLength(200);
+		absolutePanel.add(txtAlbanil, 275, 512);
+		txtAlbanil.setSize("386px", "19px");
+		
+		txtRepresentanteFamilia = new TextBox();
+		txtRepresentanteFamilia.setStylePrimaryName("gwt-TextBox2");
+		txtRepresentanteFamilia.setStyleName("gwt-TextBox2");
+		txtRepresentanteFamilia.setMaxLength(200);
+		absolutePanel.add(txtRepresentanteFamilia, 275, 556);
+		txtRepresentanteFamilia.setSize("386px", "19px");
 		
 	}
 	
@@ -238,5 +280,4 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		this.checkNoSatisfactoria.setValue(noSatisfactoria);
 	    
 	}
-	
 }

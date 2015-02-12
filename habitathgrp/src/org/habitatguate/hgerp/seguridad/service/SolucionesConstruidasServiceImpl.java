@@ -39,7 +39,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet implements SolucionesConstruidasService {
 
 	@Override
-	public Long ingresarDatosSolicitante(Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	public Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
+			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -54,6 +55,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		Long valor = 0L;
 
 		SegSolicitudGeneral solicitud = new SegSolicitudGeneral();
+		solicitud.setIdEmpleado(idEmpleado);
+		solicitud.setIdAfiliado(idAfiliado);
 		solicitud.setFecrec(fecrec); 
 		solicitud.setNombreSolicitante(nombreSolicitante);
 		solicitud.setEstadoCivil(estadoCivil);
@@ -466,7 +469,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AuxSolicitudGeneral> buscarFormulario(char tipo, String nombreSolicitante, String solucionConstruir)throws IllegalArgumentException {
+	public List<AuxSolicitudGeneral> buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir)throws IllegalArgumentException {
 		
 		final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 		List<AuxSolicitudGeneral> valor = new ArrayList<AuxSolicitudGeneral>();
@@ -477,14 +480,21 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
 			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"nombreSolicitante == '"+nombreSolicitante+"'");
+					"nombreSolicitante == '"+nombreSolicitante+"'" +
+					" && idAfiliado == " + idAfiliado +
+					" && idEmpleado == " + idEmpleado
+					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}else if(tipo =='2'){
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
-			Query q = pm.newQuery(SegSolicitudGeneral.class);
+			Query q = pm.newQuery(SegSolicitudGeneral.class);			
+//			Query q = pm.newQuery(SegSolicitudGeneral.class,
+//					"idAfiliado == " + idAfiliado +
+//					" && idEmpleado == " + idEmpleado
+//					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}else if(tipo =='3'){
@@ -492,15 +502,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
 			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"solucionConstruir == '"+solucionConstruir+"'");
-			results = (List<SegSolicitudGeneral>) q.execute();
-			
-		}else if(tipo =='4'){
-			
-			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
-			
-			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"ID == "+nombreSolicitante);
+					"solucionConstruir == '"+solucionConstruir+"'" +
+					" && idAfiliado == " + idAfiliado +
+					" && idEmpleado == " + idEmpleado
+					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}
@@ -950,7 +955,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	// DATOS SOLICITANTE
 	
 	@Override
-	public Long actualizarDatosSolicitante(Long idFormulario,
+	public Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
 			String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
@@ -963,6 +968,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			 try {  
 					 final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+					 	solicitud.setIdEmpleado(idEmpleado);
+					 	solicitud.setIdAfiliado(idAfiliado);
 						solicitud.setNombreSolicitante(nombreSolicitante);
 						solicitud.setEstadoCivil(estadoCivil);
 						solicitud.setEdad(edad);

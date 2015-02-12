@@ -45,6 +45,12 @@ public class Sce_DataSupervisionCuarta extends Composite {
 	private CheckBox checkNoSatisfactoria;
 	private DateBox txtFechaVisita;
 	private Button btnGuardar;
+	private TextBox textBox;
+	private Label label;
+	private Label label_1;
+	private Label label_2;
+	private TextBox textBox_1;
+	private TextBox textBox_2;
     
 	public Sce_DataSupervisionCuarta(Sce_DataEntrySupervisionCuarta a, Sce_DataEntryBitacoraSolicitud e) {
 		
@@ -54,7 +60,7 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "455px");
+		absolutePanel.setSize("988px", "600px");
 		
 		txtObservaciones = new TextArea();
 		absolutePanel.add(txtObservaciones, 42, 134);
@@ -190,7 +196,43 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 471, 429);
+		absolutePanel.add(btnGuardar, 471, 594);
+		
+		textBox = new TextBox();
+		textBox.setStylePrimaryName("gwt-TextBox2");
+		textBox.setStyleName("gwt-TextBox2");
+		textBox.setMaxLength(200);
+		absolutePanel.add(textBox, 275, 508);
+		textBox.setSize("386px", "19px");
+		
+		label = new Label("Representante de Familia:");
+		label.setStyleName("label");
+		absolutePanel.add(label, 42, 510);
+		label.setSize("208px", "19px");
+		
+		label_1 = new Label("Albañil:");
+		label_1.setStyleName("label");
+		absolutePanel.add(label_1, 42, 466);
+		label_1.setSize("133px", "19px");
+		
+		label_2 = new Label("Promotor:");
+		label_2.setStyleName("label");
+		absolutePanel.add(label_2, 42, 421);
+		label_2.setSize("133px", "19px");
+		
+		textBox_1 = new TextBox();
+		textBox_1.setStylePrimaryName("gwt-TextBox2");
+		textBox_1.setStyleName("gwt-TextBox2");
+		textBox_1.setMaxLength(200);
+		absolutePanel.add(textBox_1, 275, 464);
+		textBox_1.setSize("386px", "19px");
+		
+		textBox_2 = new TextBox();
+		textBox_2.setStylePrimaryName("gwt-TextBox2");
+		textBox_2.setStyleName("gwt-TextBox2");
+		textBox_2.setMaxLength(200);
+		absolutePanel.add(textBox_2, 275, 419);
+		textBox_2.setSize("386px", "19px");
 		
 	}
 	

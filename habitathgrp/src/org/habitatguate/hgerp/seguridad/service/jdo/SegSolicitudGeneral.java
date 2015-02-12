@@ -36,6 +36,26 @@ public class SegSolicitudGeneral implements Serializable {
 		return idFormulario.getId();
 	}
 	
+	private Long idEmpleado;
+	
+	public Long getIdEmpleado() {
+		return idEmpleado;
+	}
+
+	public void setIdEmpleado(Long idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+
+	private Long idAfiliado;
+	
+	public Long getIdAfiliado() {
+		return idAfiliado;
+	}
+
+	public void setIdAfiliado(Long idAfiliado) {
+		this.idAfiliado = idAfiliado;
+	}
+
 	// Atributos
 	
 	@Persistent    

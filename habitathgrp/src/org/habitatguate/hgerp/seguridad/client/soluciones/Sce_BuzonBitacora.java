@@ -2,6 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -31,6 +33,12 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado; // Por cambiar
 public class Sce_BuzonBitacora extends Composite  {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+	
+	// Llaves
+	private Long idEmpleado = 0L;
+	private Long idAfiliado = 0L;
+	
 	private Sce_BuzonBitacora buzon;
 	private Mensaje mensaje; 
 	private Grid grid;
@@ -49,6 +57,32 @@ public class Sce_BuzonBitacora extends Composite  {
 	
 	public Sce_BuzonBitacora() {
 
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+				System.out.println("Id Empleado: " + idEmpleado);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		// Obtener Id Afiliado
+		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idAfiliado = result;
+				System.out.println("Afiliado: " + idAfiliado);	
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+			}
+		});
+		
 		// ---- VERSION FUNCIONAL EN FIREFOX	
 		
 //    	load = new Loading();
@@ -143,7 +177,7 @@ public class Sce_BuzonBitacora extends Composite  {
 
 					grid.clearCell(1, 0);
 					Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
-					nuevo.agregarFormulario('2', buzon, "", "");
+					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
 					grid.setWidget(1, 0,nuevo);
 			        load.invisible();
 			        
@@ -151,15 +185,9 @@ public class Sce_BuzonBitacora extends Composite  {
 				{
 					listSolucionConstruir.clear();
 					txtNombreSolicitante.setValue("");	
-					listSolucionConstruir.addItem("Tipo I","1");
-					listSolucionConstruir.addItem("Tipo II","2");
-					listSolucionConstruir.addItem("Tipo III","3");
-					listSolucionConstruir.addItem("Tipo IV","4");
-					listSolucionConstruir.addItem("Tipo V","5");
-					listSolucionConstruir.addItem("Tipo VI","6");
-					listSolucionConstruir.addItem("Tipo VII","7");
-					listSolucionConstruir.addItem("Tipo VIII","8");
-					listSolucionConstruir.addItem("Tipo IX","9");
+					listSolucionConstruir.addItem("Nueva","1");
+					listSolucionConstruir.addItem("Mejoramiento","2");
+					listSolucionConstruir.addItem("Adiciones Menores","3");
 					
 					lbDato1.setText("Seleccione segun Solucion a Construir");
 					lbDato1.setVisible(true);
@@ -225,7 +253,7 @@ public class Sce_BuzonBitacora extends Composite  {
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			nuevo.agregarFormulario('2',buzon,txtNombreSolicitante.getText(), "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, txtNombreSolicitante.getText(), "");
 			grid.setWidget(1, 0,nuevo);
 		}
 		
@@ -236,7 +264,7 @@ public class Sce_BuzonBitacora extends Composite  {
 			System.out.println("Formulario de Solicitante: " + nombreSolicitante);
 			
 			if(!txtNombreSolicitante.getText().equals("")){
-				nuevo.agregarFormulario('1',buzon, nombreSolicitante, "");
+				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "");
 				grid.setWidget(1, 0,nuevo);
 				nuevo.setSize("100%", "648px");
 			}
@@ -248,7 +276,7 @@ public class Sce_BuzonBitacora extends Composite  {
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 		{
-			nuevo.agregarFormulario('3', buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -337,7 +365,7 @@ public class Sce_BuzonBitacora extends Composite  {
 	{
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    solucionesService.buscarFormulario('2', "", "", 
+	    solucionesService.buscarFormulario('2', idEmpleado, idAfiliado, "", "", 
 	    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
 		    
 	    	public void onFailure(Throwable caught) 

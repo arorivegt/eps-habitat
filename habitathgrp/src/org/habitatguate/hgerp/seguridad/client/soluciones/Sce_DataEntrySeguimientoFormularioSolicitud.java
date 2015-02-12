@@ -18,9 +18,8 @@ public class Sce_DataEntrySeguimientoFormularioSolicitud extends Composite {
 	public Long idFormulario = 0L;
 
 	private Sce_DataEntryGarantiaHipotecaria fd7;
-	private Sce_DataColindanciasMejoramiento fd8;
-	private Sce_DataMontoInversion fd9;
-	private Sce_DataExclusivoAfiliado fd11;	
+	private Sce_DataEntryGarantiaFiduciaria fd8;
+	private Sce_DataEntryGarantiaSolidario fd9;
 	
     private  Grid grid;
 
@@ -30,16 +29,7 @@ public class Sce_DataEntrySeguimientoFormularioSolicitud extends Composite {
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
 		
-		// 8. Colindancias & Mejoramiento
-
-//		scrollPanel8 = new ScrollPanel();
-//		scrollPanel8.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel8, "Colindancias & Mejoramiento",true);
-//		scrollPanel8.setSize("100%", "100%");
-//		fd8 = new Sce_DataColindanciasMejoramiento(this);
-//		scrollPanel8.setWidget(fd8);		
-		
-		// 7. Documento de propiedad
+		// 1. Garantia Hipotecaria
 
 		scrollPanel7 = new ScrollPanel();
 		scrollPanel7.setAlwaysShowScrollBars(false);
@@ -47,12 +37,40 @@ public class Sce_DataEntrySeguimientoFormularioSolicitud extends Composite {
 		scrollPanel7.setSize("100%", "100%");
 		fd7 = new Sce_DataEntryGarantiaHipotecaria(this);
 		scrollPanel7.setWidget(fd7);	
+
+		
+		// 2. Garantia Fiduciaria
+
+		scrollPanel8 = new ScrollPanel();
+		scrollPanel8.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel8, "Garantia Fiduciaria", true);
+		scrollPanel8.setSize("100%", "100%");
+		fd8 = new Sce_DataEntryGarantiaFiduciaria(this);
+		scrollPanel8.setWidget(fd8);	
+
+		// 3. Garantia Grupo Solidario
+
+		scrollPanel9 = new ScrollPanel();
+		scrollPanel9.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel9, "Grupo Solidario", true);
+		scrollPanel9.setSize("100%", "100%");
+		fd9 = new Sce_DataEntryGarantiaSolidario(this);
+		scrollPanel9.setWidget(fd9);	
 		
 	}	
 	
 	
 	public void NuevasPestanas(){
 
+		// 8. Colindancias & Mejoramiento
+
+//		scrollPanel8 = new ScrollPanel();
+//		scrollPanel8.setAlwaysShowScrollBars(false);
+//		tabPanel.add(scrollPanel8, "Colindancias & Mejoramiento",true);
+//		scrollPanel8.setSize("100%", "100%");
+//		fd8 = new Sce_DataColindanciasMejoramiento(this);
+//		scrollPanel8.setWidget(fd8);				
+		
 		// 9. Monto inversion
 
 //		scrollPanel8 = new ScrollPanel();

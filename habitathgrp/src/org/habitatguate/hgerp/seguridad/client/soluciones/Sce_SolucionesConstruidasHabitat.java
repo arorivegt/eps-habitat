@@ -3,10 +3,13 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,6 +30,13 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 
     private  Grid grid;
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+	
+	// Llaves
+	private Long idEmpleado = 0L;
+	private Long idAfiliado = 0L;
+	
+	private Mensaje mensaje; 
     private ScrollPanel scrollPanel;
     private AbsolutePanel absolutePanel_1;
     private  ListBox listEstado ;
@@ -34,6 +44,33 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
     private List<Sce_DatosSolucionesConstruidas> DATOS;
   	
 	public Sce_SolucionesConstruidasHabitat() {
+		
+		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+				System.out.println("Id Empleado: " + idEmpleado);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		// Obtener Id Afiliado
+		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idAfiliado = result;
+				System.out.println("Afiliado: " + idAfiliado);	
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+			}
+		});
 		
 		grid = new Grid(2, 1);
 		initWidget(grid);
@@ -54,15 +91,9 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 				busqueda();
 			}
 		});
-		listEstado.addItem("Tipo I","1");
-		listEstado.addItem("Tipo II","2");
-		listEstado.addItem("Tipo III","3");
-		listEstado.addItem("Tipo IV","4");
-		listEstado.addItem("Tipo V","5");
-		listEstado.addItem("Tipo VI","6");
-		listEstado.addItem("Tipo VII","7");
-		listEstado.addItem("Tipo VIII","8");
-		listEstado.addItem("Tipo IX","9");
+		listEstado.addItem("Nueva","1");
+		listEstado.addItem("Mejoramiento","2");
+		listEstado.addItem("Adiciones Menores","3");
 		listEstado.addItem("TODOS");
 		listEstado.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstado, 170, 31);
@@ -109,7 +140,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		else
 			tipo = '3';
 
-		solucionesService.buscarFormulario(tipo,"",listEstado.getValue(listEstado.getSelectedIndex()), new AsyncCallback<List<AuxSolicitudGeneral>>(){
+		solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, "",listEstado.getValue(listEstado.getSelectedIndex()), new AsyncCallback<List<AuxSolicitudGeneral>>(){
 
 			public void onFailure(Throwable caught) 
 			{
@@ -153,7 +184,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					
 					empleado.setEdad(""+p.getEdad());
 
-					String valLeer = "";
+					String valLeer = "NO";
 					Boolean leer = false;
 					if(!p.getCheckLeer().equals(null)){
 						leer = p.getCheckLeer();
@@ -165,8 +196,8 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setSabeLeer(valLeer);
 
-//					String valEscribir = "";
-//					Boolean escribir = false;
+					String valEscribir = "NO";
+					Boolean escribir = false;
 //					if(!p.getCheckEscribir().equals(null)){
 //						escribir = p.getCheckEscribir();	
 //					}
@@ -177,7 +208,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 //					}
 					empleado.setSabeEscribir(valLeer);
 
-					String valFirmar = "";
+					String valFirmar = "NO";
 					Boolean firmar = false;
 					if(!p.getCheckFirmar().equals(null)){
 						firmar = p.getCheckFirmar();	
@@ -228,26 +259,11 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					valSolucion = p.getSolucionConstruir();
 					String solucion = "";
 					if(valSolucion.equals("1")){
-						solucion = "TIPO I";
+						solucion = "NUEVA";
 					}else if(valSolucion.equals("2")){
-						solucion = "TIPO II";
+						solucion = "MEJORAMIENTO";
 					}else if(valSolucion.equals("3")){
-						solucion = "TIPO III";
-					}else if(valSolucion.equals("4")){
-						solucion = "TIPO IV";
-					}else if(valSolucion.equals("5")){
-						solucion = "TIPO V";
-					}else if(valSolucion.equals("6")){
-						solucion = "TIPO VI";
-					}
-					else if(valSolucion.equals("7")){
-						solucion = "TIPO VII";
-					}
-					else if(valSolucion.equals("8")){
-						solucion = "TIPO VIII";
-					}
-					else if(valSolucion.equals("9")){
-						solucion = "TIPO IX";
+						solucion = "ADICIONES MENORES";
 					}
 					empleado.setSolucionConstruir(solucion);
 					

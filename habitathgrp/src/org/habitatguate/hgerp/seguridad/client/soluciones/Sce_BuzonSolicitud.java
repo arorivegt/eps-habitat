@@ -2,10 +2,13 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.principal.MenuPrincipal;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -31,6 +34,12 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado; // Por cambiar
 public class Sce_BuzonSolicitud extends Composite  {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+	
+	// Llaves
+	private Long idEmpleado = 0L;
+	private Long idAfiliado = 0L;
+	
 	private Sce_BuzonSolicitud buzon;
 	private Mensaje mensaje; 
 	private Grid grid;
@@ -48,7 +57,35 @@ public class Sce_BuzonSolicitud extends Composite  {
 	private String codigo;
     
 	public Sce_BuzonSolicitud() {
-
+		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+				System.out.println("Id Empleado: " + idEmpleado);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		// Obtener Id Afiliado
+		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idAfiliado = result;
+				System.out.println("Afiliado: " + idAfiliado);	
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+			}
+		});
+		
+		
+		
 // ---- VERSION FUNCIONAL EN FIREFOX		
 		
 //    	load = new Loading();
@@ -86,21 +123,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		txtNombreSolicitante = new SuggestBox(resultadoFormulario());
-		txtNombreSolicitante.addKeyUpHandler(new KeyUpHandler() {
-			public void onKeyUp(KeyUpEvent event) {
-
-			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
-			     {
-						busqueda();
-			     }
-			}
-		});
-		txtNombreSolicitante.setStylePrimaryName("gwt-TextBox2");
-		txtNombreSolicitante.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreSolicitante, 205, 19);
-		txtNombreSolicitante.setSize("250px", "34px");
-		txtNombreSolicitante = new SuggestBox(resultadoFormulario());
+		txtNombreSolicitante = new SuggestBox(resultadoFormulario(idEmpleado, idAfiliado));
 		txtNombreSolicitante.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
 
@@ -142,7 +165,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 
 					grid.clearCell(1, 0);
 					Sce_BuzonSolicitudLista  nuevo = new Sce_BuzonSolicitudLista();
-					nuevo.agregarFormulario('2', buzon, "", "");
+					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
 					grid.setWidget(1, 0,nuevo);
 			        load.invisible();
 			        
@@ -150,15 +173,9 @@ public class Sce_BuzonSolicitud extends Composite  {
 				{
 					listSolucionConstruir.clear();
 					txtNombreSolicitante.setValue("");	
-					listSolucionConstruir.addItem("Tipo I","1");
-					listSolucionConstruir.addItem("Tipo II","2");
-					listSolucionConstruir.addItem("Tipo III","3");
-					listSolucionConstruir.addItem("Tipo IV","4");
-					listSolucionConstruir.addItem("Tipo V","5");
-					listSolucionConstruir.addItem("Tipo VI","6");
-					listSolucionConstruir.addItem("Tipo VII","7");
-					listSolucionConstruir.addItem("Tipo VIII","8");
-					listSolucionConstruir.addItem("Tipo IX","9");
+					listSolucionConstruir.addItem("Nueva","1");
+					listSolucionConstruir.addItem("Mejoramiento","2");
+					listSolucionConstruir.addItem("Adiciones Menores","3");
 					
 					lbDato1.setText("Seleccione segun Solucion a Construir");
 					lbDato1.setVisible(true);
@@ -224,7 +241,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			nuevo.agregarFormulario('2',buzon,txtNombreSolicitante.getText(), "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, txtNombreSolicitante.getText(), "");
 			grid.setWidget(1, 0,nuevo);
 		}
 		
@@ -235,7 +252,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 			System.out.println("Formulario de Solicitante: " + nombreSolicitante);
 			
 			if(!txtNombreSolicitante.getText().equals("")){
-				nuevo.agregarFormulario('1',buzon, nombreSolicitante, "");
+				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "");
 				grid.setWidget(1, 0,nuevo);
 				nuevo.setSize("100%", "648px");
 			}
@@ -247,7 +264,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 		{
-			nuevo.agregarFormulario('3', buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -321,11 +338,20 @@ public class Sce_BuzonSolicitud extends Composite  {
 	
 	// RESULTADO BUSQUEDA
 	
-	MultiWordSuggestOracle resultadoFormulario()
+	MultiWordSuggestOracle resultadoFormulario(Long valIdEmpleado, Long valIdAfiliado)
 	{
+		System.out.println("DEBE ENTRAR AQUI SEGUNDO");
+		
+		Long val1 = 0L;
+		Long val2 = 0L;
+		val1 = valIdEmpleado;
+		val2 = valIdAfiliado;
+		System.out.println("Valores obtenidos: Id Empleado = " + val1 + ", Id Afiliado = " + val2);
+		
+		
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    solucionesService.buscarFormulario('2', "", "", 
+	    solucionesService.buscarFormulario('2', val1, val2, "", "", 
 	    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
 		    
 	    	public void onFailure(Throwable caught) 

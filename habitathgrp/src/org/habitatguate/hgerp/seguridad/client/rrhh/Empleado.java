@@ -300,7 +300,7 @@ public class Empleado extends Composite {
 					auxEmpleado.getCodigo_ingreso(), auxEmpleado.getProfesion(), auxEmpleado.getTipo_planilla(),auxEmpleado.getFecha_ingreso(), 
 					auxEmpleado.getNoCuenta(), auxEmpleado.getTipoCuenta(),auxEmpleado.getNombreBanco(), auxEmpleado.getCui(), auxEmpleado.getTelefono(), auxEmpleado.getCelular(), 
 					auxEmpleado.getNo_licencia(), auxEmpleado.getNit(), auxEmpleado.getNo_pasaporte(), ""+auxEmpleado.getSalario_base(), ""+auxEmpleado.getBonificacion(), 
-					""+auxEmpleado.getTotal(), deptodir, auxEmpleado.getIVS(), auxEmpleado.getURLFile(),auxEmpleado.getKeyFile(), auxEmpleado.getEstado(),auxEmpleado.getPasaporte(),
+					""+auxEmpleado.getDiasDeVacaciones(), deptodir, auxEmpleado.getIVS(), auxEmpleado.getURLFile(),auxEmpleado.getKeyFile(), auxEmpleado.getEstado(),auxEmpleado.getPasaporte(),
 					auxEmpleado.getLicencia(),auxEmpleado.getEtnia(),auxEmpleado.getNombreEmergencia(),auxEmpleado.getTelefonoEmergencia(),auxEmpleado.getNombreEmergencia2(),
 					auxEmpleado.getTelefonoEmergencia2(),deptodir2,munidir2,auxEmpleado.getJefe_Inmediato(),auxEmpleado.getAfiliado());
 	

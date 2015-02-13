@@ -198,30 +198,39 @@ public class MenuPrincipal extends Composite {
 		final MenuBar MenuInforme = new MenuBar(true);
 		MenuInforme.setAutoOpen(true);
 		MenuInforme.setAnimationEnabled(true);
-		MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
+		MenuInforme.addItem("Informe de Prestaciones y Salarios", cmdrrhh3);
 		MenuInforme.addSeparator();
-		MenuInforme.addItem("Informe Bancos", cmdrrhh7);
+		MenuInforme.addItem("Informe del Ministerio de Trabajo", cmdrrhh4);
 		MenuInforme.addSeparator();
 		MenuInforme.addItem("Informe de Empleados", cmdrrhh5);
 		MenuInforme.addSeparator();
-		MenuInforme.addItem("Informe de Salarios", cmdrrhh3);
+		MenuInforme.addItem("Informe Bancos", cmdrrhh7);
 
+		final MenuBar MenuVacaciones = new MenuBar(true);
+		MenuVacaciones.setAutoOpen(true);
+		MenuVacaciones.setAnimationEnabled(true);
+		MenuVacaciones.addSeparator();
+		MenuVacaciones.addItem("Validar Solicitud de Permisos", cmdrrhh8);
+		MenuVacaciones.addSeparator();
+		MenuVacaciones.addItem("Calculo Vacaciones", cmdrrhh9);
+		MenuVacaciones.addSeparator();
+		MenuVacaciones.addItem("Aumentar Dias", cmdrrhh9);
+		
 		//recursos humano menu
 		final MenuBar MenuRecursosHumanos = new MenuBar(true);
 		MenuRecursosHumanos.setAutoOpen(true);
 		MenuRecursosHumanos.setAnimationEnabled(true);
-		MenuRecursosHumanos.addItem("Buscar Empleados", cmdrrhh1);
+		MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Base de Datos de Puestos", cmdrrhh2);
 		MenuRecursosHumanos.addSeparator();
-		MenuRecursosHumanos.addItem("Base de Datos de Evaluacion", cmdrrhh6);
+		MenuRecursosHumanos.addItem("Buscar Empleados", cmdrrhh1);
 		MenuRecursosHumanos.addSeparator();
-		MenuRecursosHumanos.addItem("Validar Solicitud de Permisos", cmdrrhh8);
-		MenuRecursosHumanos.addSeparator();
-		MenuRecursosHumanos.addItem("Aumentar Dias Vacaciones", cmdrrhh9);
+		MenuRecursosHumanos.addItem("Permisos", MenuVacaciones);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Informes", MenuInforme);
 
+		
 		//finanzas menu
 		final MenuBar MenuSolicitudes = new MenuBar(true);
 		MenuSolicitudes.setAutoOpen(true);

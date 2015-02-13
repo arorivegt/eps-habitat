@@ -157,7 +157,7 @@ public class AuxEmpleado implements IsSerializable{
       private float salario_base;
   	
   	
-      private int total ;
+      private int DiasDeVacaciones ;
   	
   	
       private float bonificacion;
@@ -610,13 +610,13 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public int getTotal() {
-		return total;
+	public int getDiasDeVacaciones() {
+		return DiasDeVacaciones;
 	}
 
 
-	public void setTotal(int total) {
-		this.total = total;
+	public void setDiasDeVacaciones(int DiasDeVacaciones) {
+		this.DiasDeVacaciones = DiasDeVacaciones;
 	}
 
 

@@ -1371,7 +1371,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	nuevo.setTipo_licencia(p.getTipo_licencia());
 					    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 					    	nuevo.setTipo_planilla(p.getTipo_planilla());
-					    	nuevo.setTotal(p.getDiasDeVacaciones());
+					    	nuevo.setDiasDeVacaciones(p.getDiasDeVacaciones());
 					    	
 					    	List<SegPermiso> results9 = p.getVacaciones();
 					    	if (!results9.isEmpty()) {
@@ -1639,7 +1639,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	nuevo.setTipo_licencia(p.getTipo_licencia());
 				    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 				    	nuevo.setTipo_planilla(p.getTipo_planilla());
-				    	nuevo.setTotal(p.getDiasDeVacaciones());
+				    	nuevo.setDiasDeVacaciones(p.getDiasDeVacaciones());
 				    	
 				    	List<SegPermiso> results9 = p.getVacaciones();
 				    	if (!results9.isEmpty()) {
@@ -2317,7 +2317,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			    	nuevo.setTipo_licencia(p.getTipo_licencia());
 			    	nuevo.setTipo_pasaporte(p.getTipo_pasaporte());
 			    	nuevo.setTipo_planilla(p.getTipo_planilla());
-			    	nuevo.setTotal(p.getDiasDeVacaciones());
+			    	nuevo.setDiasDeVacaciones(p.getDiasDeVacaciones());
 			    
 		 }catch(Exception e){
 			 nuevo = new AuxEmpleado();

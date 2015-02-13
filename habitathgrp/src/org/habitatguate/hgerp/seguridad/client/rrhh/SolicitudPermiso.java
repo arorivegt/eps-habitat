@@ -80,7 +80,7 @@ public class SolicitudPermiso extends Composite  {
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
 							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
-							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
+							    				   n2.getTipoPermisos(),nombre, dias,""+result.getDiasDeVacaciones(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
 							    	fa.btnEnterado.setVisible(false);
@@ -137,7 +137,7 @@ public class SolicitudPermiso extends Composite  {
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
 							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
-							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
+							    				   n2.getTipoPermisos(),nombre, dias,""+result.getDiasDeVacaciones(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'1');
 							    	fa.btnAceptar.setVisible(false);
 							    	fa.btnAceptar.setEnabled(false);
@@ -194,7 +194,7 @@ public class SolicitudPermiso extends Composite  {
 			    		        	dias = ""+((n2.getFecha2()-n2.getFecha1())/(1000*60*60*24));
 							    	FormularioSolicitudPermiso fa = new  FormularioSolicitudPermiso(n2.getId_Empleado());
 							    	fa.LlenarDatos(n2.getId_permiso(),n2.getIdEmpleadoSolicitante(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
-							    				   n2.getTipoPermisos(),nombre, dias,""+result.getTotal(),
+							    				   n2.getTipoPermisos(),nombre, dias,""+result.getDiasDeVacaciones(),
 							    				   n2.getJefeInmediatoAceptaSolicitud(),n2.getRrhhAceptaSolicitud(),'0');
 							        flextable.setWidget(flextable.getRowCount(), 0,fa );
 							    	fa.btnEnterado.setVisible(false);

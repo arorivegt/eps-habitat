@@ -10,7 +10,6 @@ import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -18,7 +17,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.datepicker.client.DateBox;
 
 public class CreacionBaseDatosTest extends Composite{
         
@@ -26,7 +24,7 @@ public class CreacionBaseDatosTest extends Composite{
        private Loading load;
        private Mensaje inicio;
        private Button btnAceptar;
-       private DateBox dateFecha;
+       private Date dateFecha;
        private TestForm test = null;
        private Long id_prueba = 0L;
        private TextBox txtPregunta1;
@@ -103,14 +101,6 @@ public class CreacionBaseDatosTest extends Composite{
             rootPanel.add(txtPregunta5, 79, 382);
             txtPregunta5.setSize("727px", "49px");
 
-            dateFecha = new DateBox();
-            dateFecha.getTextBox().setReadOnly(true);
-            dateFecha.getDatePicker().setYearArrowsVisible(true);
-            dateFecha.getDatePicker().setYearAndMonthDropdownVisible(true);
-            dateFecha.getDatePicker().setVisibleYearCount(100);
-            dateFecha.setFireNullValues(true);
-            dateFecha.setStyleName("gwt-PasswordTextBox");
-            dateFecha.getElement().setAttribute("placeHolder", "Fecha Nacimiento");
             
             txtPregunta6 = new TextBox();
             txtPregunta6.setStyleName("gwt-PasswordTextBox");
@@ -141,11 +131,6 @@ public class CreacionBaseDatosTest extends Composite{
             txtPregunta10.getElement().setAttribute("placeHolder", "Ingrese una de las preguntas");
             rootPanel.add(txtPregunta10, 79, 715);
             txtPregunta10.setSize("727px", "49px");
-            rootPanel.add(dateFecha, 79, 782);
-            dateFecha.setSize("231px", "49px");
-
-            dateFecha.setFormat(new DateBox.DefaultFormat 
-            	    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
             
 
             lsitTipoTest = new ListBox();
@@ -167,11 +152,6 @@ public class CreacionBaseDatosTest extends Composite{
             	public void onClick(ClickEvent event) 
             	{      
                     load.visible();
-            		try{
-    					new Date(dateFecha.getValue().getTime());
-    				}catch(Exception e){
-    					dateFecha.setValue(new Date(1407518124684L));
-    				}
             		String tipo = "";
             		if( lsitTipoTest.getItemText(lsitTipoTest.getSelectedIndex()).equals("Evaluacion")){
             			tipo = "2";
@@ -189,7 +169,7 @@ public class CreacionBaseDatosTest extends Composite{
     	    					txtPregunta4.getText(), txtPregunta5.getText(), 
     	    					txtPregunta6.getText(), txtPregunta7.getText(), 
     	    					txtPregunta8.getText(), txtPregunta9.getText(), 
-    	    					txtPregunta10.getText(), dateFecha.getValue(), 
+    	    					txtPregunta10.getText(), new Date(), 
     	    					tipo, new AsyncCallback<Long>(){
                             public void onFailure(Throwable caught) 
                             {
@@ -215,7 +195,7 @@ public class CreacionBaseDatosTest extends Composite{
     					txtPregunta4.getText(), txtPregunta5.getText(), 
     					txtPregunta6.getText(), txtPregunta7.getText(), 
     					txtPregunta8.getText(), txtPregunta9.getText(), 
-    					txtPregunta10.getText(), dateFecha.getValue(), 
+    					txtPregunta10.getText(), dateFecha, 
     					tipo, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {
@@ -284,7 +264,7 @@ public class CreacionBaseDatosTest extends Composite{
     		this.txtPregunta8.setText(txtPregunta8);
     		this.txtPregunta9.setText(txtPregunta9);
     		this.txtPregunta10.setText(txtPregunta10);
-    		this.dateFecha.setValue(new Date(dateFecha));
+    		this.dateFecha = new Date(dateFecha);
     		
     	}
     	

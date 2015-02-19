@@ -46,11 +46,11 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class MenuPrincipal extends Composite {
 
-	private Panel nuevo;
+	private Panel panel;
 	private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 
-	public MenuPrincipal(Panel nuevo) {
-		this.nuevo = nuevo;
+	public MenuPrincipal(Panel panel) {
+		this.panel = panel;
 
 		final  Command cmdrrhh1 = new Command() {
 			public void execute() {
@@ -388,67 +388,67 @@ public class MenuPrincipal extends Composite {
 	void rrhh1() {
 		BuscadorEmpleados buscadorEmpleados = new BuscadorEmpleados();
 		buscadorEmpleados.setSize("100%", "100%");
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscadorEmpleados);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, buscadorEmpleados);
 	}
 
 	void rrhh2() {
 		BDpuestos bdPuestos = new BDpuestos();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, bdPuestos);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, bdPuestos);
 
 	}
 
 	//@UiHandler("rrhh3")
 	void rrhh3() {
 		CrearPrestacionesLaborales crearPrestacionesLaborales = new CrearPrestacionesLaborales();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, crearPrestacionesLaborales);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, crearPrestacionesLaborales);
 	}
 
 	//@UiHandler("rrhh4")
 	void rrhh4() {
 		EmpleadosMinisterioTrabajo empleadosMinisterioTrabajo = new EmpleadosMinisterioTrabajo();
-		this.nuevo.getGrid().setHeight("100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, empleadosMinisterioTrabajo);
+		this.panel.getGrid().setHeight("100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, empleadosMinisterioTrabajo);
 	}
 
 	//@UiHandler("rrhh5")
 	void rrhh5() {
 		CrearReporteEmpleados crearReporteEmpleados = new CrearReporteEmpleados();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, crearReporteEmpleados);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, crearReporteEmpleados);
 	}
 	//      @UiHandler("rrhh6")
 	void rrhh6() {
 
 		TestForm testForm = new TestForm();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, testForm);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, testForm);
 	}
 
 
 	//      @UiHandler("rrhh7")
 	void rrhh7() {
 		CrearInformeBancos crearInformes = new CrearInformeBancos();
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, crearInformes);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, crearInformes);
 
 	}
 	
 	void rrhh8() {
-		SolicitudPermiso solicitudPermiso = new SolicitudPermiso(nuevo.getId_empleado());
+		SolicitudPermiso solicitudPermiso = new SolicitudPermiso(panel.getId_empleado());
 		solicitudPermiso.agregarFormularios();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, solicitudPermiso);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, solicitudPermiso);
 	}
 	void rrhh9() {
 		final DialogBox Registro2 = new DialogBox();
@@ -477,9 +477,9 @@ public class MenuPrincipal extends Composite {
 	
 	void rrhh10() {
 		CalculoVacaciones calculoVacaciones = new CalculoVacaciones();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, calculoVacaciones);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, calculoVacaciones);
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {
@@ -508,10 +508,10 @@ public class MenuPrincipal extends Composite {
 	//      @UiHandler("empleado3")
 	void empleado3() {
 		final Compartidas comp = new Compartidas();
-		comp.id_EmpleadoPrincipal = this.nuevo.getId_empleado();
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, comp);
-		loginService.getEvaluacionesCompartidas(this.nuevo.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){
+		comp.id_EmpleadoPrincipal = this.panel.getId_empleado();
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, comp);
+		loginService.getEvaluacionesCompartidas(this.panel.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){
 
 			public void onFailure(Throwable caught) 
 			{
@@ -531,68 +531,68 @@ public class MenuPrincipal extends Composite {
 	
 	void solicitudes1(){
 		
-		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		SolicitudPermiso fmc = new SolicitudPermiso(panel.getId_empleado());
 		fmc.agregarFormulario_Empleado();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}
 	void solicitudes2(){
-		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
+		SolicitudPermiso fmc = new SolicitudPermiso(panel.getId_empleado());
 		fmc.agregarFormulario_Jefe();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 	}
 	
 	//@UiHandler("finan2a")
 	void fina2a(){
 		Buscador_Soluciones_Inv fmc = new Buscador_Soluciones_Inv();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}
 
 	void fina3b(){
 		Buscador_Solucion fmc = new Buscador_Solucion();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}
 	//@UiHandler("finan3b")
 	void fina6b(){
 		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}
 
 	//@UiHandler("finan4")
 	void fina4a(){
 		Buscador_Afiliado fmc = new Buscador_Afiliado();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}       
 	//@UiHandler("finan5")
 	void fina5(){
 		Menu_Proveedores fmc = new Menu_Proveedores();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 
 	}
 
 	void fina3a(){
 		Formulario_GestorVales fgv = new Formulario_GestorVales();
-		this.nuevo.getGrid().setWidth("1000");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fgv);
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fgv);
 	}
 
 	// --- Soluciones Construidas
@@ -600,48 +600,48 @@ public class MenuPrincipal extends Composite {
 	//@UiHandler("sce1")
 	void sce1() {
 		Sce_DataEntryFormularioSolicitud recepcionFormulario = new Sce_DataEntryFormularioSolicitud();
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, recepcionFormulario);
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, recepcionFormulario);
 	}
 	//@UiHandler("sce2")
 	void sce2() {
 		Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud();
 		buzon.setSize("100%", "100%");
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buzon);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, buzon);
 	}	
 	//@UiHandler("sce3")
 	void sce3() {
 		Sce_BuzonSeguimientoSolicitud seguimientoFormulario = new Sce_BuzonSeguimientoSolicitud();
 		seguimientoFormulario.setSize("100%", "100%");
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, seguimientoFormulario);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
 	}	
 	//@UiHandler("sce4")
 	void sce4() {
 		Sce_BuzonBitacora bitacora = new Sce_BuzonBitacora();
 		bitacora.setSize("100%", "100%");
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, bitacora);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, bitacora);
 	}		
 	//@UiHandler("sce4")
 	void sce5() {
 		Sce_BusquedaFormulario busqueda = new Sce_BusquedaFormulario();
 		busqueda.setSize("100%", "100%");
-		this.nuevo.getGrid().setSize("100%", "100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, busqueda);
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, busqueda);
 	}	
 
 	//@UiHandler("rrhh4")
 	void sce6() {
 		Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat();
-		this.nuevo.getGrid().setHeight("100%");
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscador);
+		this.panel.getGrid().setHeight("100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, buscador);
 	}
 
 	// --- Fin        
@@ -651,11 +651,11 @@ public class MenuPrincipal extends Composite {
 		final Empleado e = new Empleado(1);
 		e.NuevasPestanasdos();
 		e.inavilidarDatosYPestanas();
-		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, e);
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, e);
 		e.setSize("100%", "1000px");
 
-		loginService.Empleado_Registrado(this.nuevo.getId_empleado(),new AsyncCallback<AuxEmpleado>(){
+		loginService.Empleado_Registrado(this.panel.getId_empleado(),new AsyncCallback<AuxEmpleado>(){
 
 			public void onFailure(Throwable caught) 
 			{

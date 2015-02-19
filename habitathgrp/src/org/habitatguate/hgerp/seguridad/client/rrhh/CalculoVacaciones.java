@@ -89,8 +89,6 @@ public class CalculoVacaciones extends Composite   {
 		absolutePanel.setSize("100%", "98px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		
-		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Afiliado");
@@ -958,7 +956,7 @@ public class CalculoVacaciones extends Composite   {
 	 			salarioBaseCalculo=  salarioBaseCalculo / Integer.parseInt(mes2);
 	 			
 	 			nuevo.agregarFormulario(e.getId_empleado(), tipo, "Caclulo de Vacaciones",nombre
-	 						,""+salarioBaseCalculo, "30.5",""+e.getDiasDeVacaciones(),dateFecha.getValue());
+	 						,""+salarioBaseCalculo,""+e.getDiasDeVacaciones(),"30.5",dateFecha.getValue());
  			salarioBaseCalculo = 0;
  			enero = 0;
  			febrero = 0;

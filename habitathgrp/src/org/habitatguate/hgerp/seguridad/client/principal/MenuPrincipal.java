@@ -15,6 +15,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
+import org.habitatguate.hgerp.seguridad.client.rrhh.CalculoVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearInformeBancos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
@@ -96,7 +97,11 @@ public class MenuPrincipal extends Composite {
 				rrhh9();
 			}
 		};
-
+		final Command cmdrrhh10 = new Command() {
+			public void execute() {
+				rrhh10();
+			}
+		};
 
 		final Command cmdempleado1 = new Command() {
 			public void execute() {
@@ -212,7 +217,7 @@ public class MenuPrincipal extends Composite {
 		MenuVacaciones.addSeparator();
 		MenuVacaciones.addItem("Validar Solicitud de Permisos", cmdrrhh8);
 		MenuVacaciones.addSeparator();
-		MenuVacaciones.addItem("Calculo Vacaciones", cmdrrhh9);
+		MenuVacaciones.addItem("Calculo Vacaciones", cmdrrhh10);
 		MenuVacaciones.addSeparator();
 		MenuVacaciones.addItem("Aumentar Dias", cmdrrhh9);
 		
@@ -237,7 +242,7 @@ public class MenuPrincipal extends Composite {
 		MenuSolicitudes.setAnimationEnabled(true);
 		MenuSolicitudes.addItem("Solicitudes realizadas", cmdsolicitudes1);
 		MenuSolicitudes.addSeparator();
-		MenuSolicitudes.addItem("Validar Solicitud de Permisos", cmdsolicitudes2);
+		MenuSolicitudes.addItem("Validar Solicitudes", cmdsolicitudes2);
 		
 		//finanzas menu
 		final MenuBar MenuEmpleados = new MenuBar(true);
@@ -245,7 +250,7 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.setAnimationEnabled(true);
 		MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
 		MenuEmpleados.addSeparator();
-		MenuEmpleados.addItem("Solicitudes", MenuSolicitudes);
+		MenuEmpleados.addItem("Permisos", MenuSolicitudes);
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
@@ -381,69 +386,69 @@ public class MenuPrincipal extends Composite {
 	}
 
 	void rrhh1() {
-		BuscadorEmpleados buscador = new BuscadorEmpleados();
-		buscador.setSize("100%", "100%");
+		BuscadorEmpleados buscadorEmpleados = new BuscadorEmpleados();
+		buscadorEmpleados.setSize("100%", "100%");
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscador);
+		this.nuevo.getGrid().setWidget(1, 0, buscadorEmpleados);
 	}
 
 	void rrhh2() {
-		BDpuestos puestos = new BDpuestos();
+		BDpuestos bdPuestos = new BDpuestos();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, puestos);
+		this.nuevo.getGrid().setWidget(1, 0, bdPuestos);
 
 	}
 
 	//@UiHandler("rrhh3")
 	void rrhh3() {
-		CrearPrestacionesLaborales nuevo = new CrearPrestacionesLaborales();
+		CrearPrestacionesLaborales crearPrestacionesLaborales = new CrearPrestacionesLaborales();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+		this.nuevo.getGrid().setWidget(1, 0, crearPrestacionesLaborales);
 	}
 
 	//@UiHandler("rrhh4")
 	void rrhh4() {
-		EmpleadosMinisterioTrabajo buscador = new EmpleadosMinisterioTrabajo();
+		EmpleadosMinisterioTrabajo empleadosMinisterioTrabajo = new EmpleadosMinisterioTrabajo();
 		this.nuevo.getGrid().setHeight("100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscador);
+		this.nuevo.getGrid().setWidget(1, 0, empleadosMinisterioTrabajo);
 	}
 
 	//@UiHandler("rrhh5")
 	void rrhh5() {
-		CrearReporteEmpleados buscador = new CrearReporteEmpleados();
+		CrearReporteEmpleados crearReporteEmpleados = new CrearReporteEmpleados();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscador);
+		this.nuevo.getGrid().setWidget(1, 0, crearReporteEmpleados);
 	}
 	//      @UiHandler("rrhh6")
 	void rrhh6() {
 
-		TestForm buscador = new TestForm();
+		TestForm testForm = new TestForm();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, buscador);
+		this.nuevo.getGrid().setWidget(1, 0, testForm);
 	}
 
 
 	//      @UiHandler("rrhh7")
 	void rrhh7() {
-		CrearInformeBancos nuevo = new CrearInformeBancos();
+		CrearInformeBancos crearInformes = new CrearInformeBancos();
 		this.nuevo.getGrid().setSize("100%", "100%");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, nuevo);
+		this.nuevo.getGrid().setWidget(1, 0, crearInformes);
 
 	}
 	
 	void rrhh8() {
-		SolicitudPermiso fmc = new SolicitudPermiso(nuevo.getId_empleado());
-		fmc.agregarFormularios();
+		SolicitudPermiso solicitudPermiso = new SolicitudPermiso(nuevo.getId_empleado());
+		solicitudPermiso.agregarFormularios();
 		this.nuevo.getGrid().setWidth("1000");
 		this.nuevo.getGrid().clearCell(1, 0);
-		this.nuevo.getGrid().setWidget(1, 0, fmc);
+		this.nuevo.getGrid().setWidget(1, 0, solicitudPermiso);
 	}
 	void rrhh9() {
 		final DialogBox Registro2 = new DialogBox();
@@ -468,6 +473,13 @@ public class MenuPrincipal extends Composite {
 	        Registro2.hide();
 	    }
 	    });
+	}
+	
+	void rrhh10() {
+		CalculoVacaciones calculoVacaciones = new CalculoVacaciones();
+		this.nuevo.getGrid().setWidth("1000");
+		this.nuevo.getGrid().clearCell(1, 0);
+		this.nuevo.getGrid().setWidget(1, 0, calculoVacaciones);
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {

@@ -222,7 +222,6 @@ public class CrearInformeBancos extends Composite   {
 		});
 		
 		listMes = new ListBox();
-		//listMes.addItem("Decreto(78-89)", "1");
 		listMes.addItem("Enero", "1");
 		listMes.addItem("Febrero", "2");
 		listMes.addItem("Marzo", "3");

@@ -261,11 +261,9 @@ public class CrearReporteEmpleados extends Composite   {
 		formPanel = new FormPanel();
 		formPanel.setAction("/CrearReporteEmpleado?tipo="+"0"
 				+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-				+"&annio="+"2000"
 				+"&primer_nombre="+"a"
 				+"&DPI="+"a"
 				+"&Pasaporte="+"a"
-				+"&listMes="+"a"
 				+"&familia="+"1"
 				+"&academico="+"1"
 				+"&reflab="+"1"
@@ -584,11 +582,9 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 			formPanel.setAction("/CrearReporteEmpleado?tipo="+"2"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-					+"&annio="+"2000"
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&listMes="+"a"
 					+"&familia="+"1"
 					+"&academico="+"1"
 					+"&reflab="+"1"
@@ -621,11 +617,9 @@ public class CrearReporteEmpleados extends Composite   {
 
 				formPanel.setAction("/CrearReporteEmpleado?tipo="+"1"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-						+"&annio="+"2000"
-						+"&primer_nombre="+"a"
+						+"&primer_nombre="+nombre
 						+"&DPI="+"a"
 						+"&Pasaporte="+"a"
-						+"&listMes="+"a"
 						+"&familia="+"1"
 						+"&academico="+"1"
 						+"&reflab="+"1"
@@ -660,11 +654,9 @@ public class CrearReporteEmpleados extends Composite   {
 
 				formPanel.setAction("/CrearReporteEmpleado?tipo="+"3"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-						+"&annio="+"2000"
 						+"&primer_nombre="+"a"
 						+"&DPI="+"a"
-						+"&Pasaporte="+"a"
-						+"&listMes="+"a"
+						+"&Pasaporte="+txtDato1.getText()
 						+"&familia="+"1"
 						+"&academico="+"1"
 						+"&reflab="+"1"
@@ -699,11 +691,9 @@ public class CrearReporteEmpleados extends Composite   {
 			if(!txtDato1.getText().equals("") ){
 				formPanel.setAction("/CrearReporteEmpleado?tipo="+"4"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-						+"&annio="+"2000"
 						+"&primer_nombre="+"a"
-						+"&DPI="+"a"
+						+"&DPI="+txtDato1.getText()
 						+"&Pasaporte="+"a"
-						+"&listMes="+"a"
 						+"&familia="+"1"
 						+"&academico="+"1"
 						+"&reflab="+"1"
@@ -737,11 +727,9 @@ public class CrearReporteEmpleados extends Composite   {
 
 			formPanel.setAction("/CrearReporteEmpleado?tipo="+"5"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-					+"&annio="+"2000"
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&listMes="+"a"
 					+"&familia="+"1"
 					+"&academico="+"1"
 					+"&reflab="+"1"
@@ -770,11 +758,9 @@ public class CrearReporteEmpleados extends Composite   {
 
 			formPanel.setAction("/CrearReporteEmpleado?tipo="+"6"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-					+"&annio="+"2000"
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&listMes="+"a"
 					+"&familia="+"1"
 					+"&academico="+"1"
 					+"&reflab="+"1"
@@ -803,11 +789,9 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 			formPanel.setAction("/CrearReporteEmpleado?tipo="+"7"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-					+"&annio="+"2000"
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
-					+"&Pasaporte="+"a"
-					+"&listMes="+"a"
+					+"&Pasaporte="+"a"	
 					+"&familia="+"1"
 					+"&academico="+"1"
 					+"&reflab="+"1"

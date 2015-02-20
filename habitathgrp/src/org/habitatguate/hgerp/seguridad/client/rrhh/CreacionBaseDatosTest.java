@@ -137,14 +137,14 @@ public class CreacionBaseDatosTest extends Composite{
             lsitTipoTest.addItem("Desempeño");
             lsitTipoTest.addItem("Evaluacion");
             lsitTipoTest.setStyleName("gwt-PasswordTextBox");
-            rootPanel.add(lsitTipoTest, 338, 782);
+            rootPanel.add(lsitTipoTest, 79, 785);
             lsitTipoTest.setSize("190px", "51px");
             
             txtNombreTest = new TextBox();
             txtNombreTest.getElement().setAttribute("placeHolder", "Nombre para identifcar test");
             txtNombreTest.setStyleName("gwt-PasswordTextBox");
-            rootPanel.add(txtNombreTest, 567, 782);
-            txtNombreTest.setSize("239px", "49px");
+            rootPanel.add(txtNombreTest, 308, 785);
+            txtNombreTest.setSize("498px", "49px");
             
             btnAceptar = new Button("Send");
             btnAceptar.addClickHandler(new ClickHandler() {

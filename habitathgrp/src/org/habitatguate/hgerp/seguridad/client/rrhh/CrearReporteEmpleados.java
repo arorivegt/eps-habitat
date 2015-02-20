@@ -70,7 +70,7 @@ public class CrearReporteEmpleados extends Composite   {
 	private Label label_4;
 	private Label label_6;
 	private Label label_7;
-	private Label lblCreeElReporte;
+	private Label lblCreeElReporte; 
 	private Label lblSeleccioneLosEmpleados;
 	private SimpleCheckBox simpleCheckBox_5;
 	private Label lblDatosDeEvaluacion;
@@ -259,16 +259,38 @@ public class CrearReporteEmpleados extends Composite   {
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 
 		formPanel = new FormPanel();
-		formPanel.setAction("/ExportBancos?tipo="+"0"
+		formPanel.setAction("/CrearReporteEmpleado?tipo="+"0"
 				+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 				+"&annio="+"2000"
 				+"&primer_nombre="+"a"
-				+"&segundo_nombre="+"a"
-				+"&primer_apellido="+"a"
-				+"&segundo_apellido="+"a"
 				+"&DPI="+"a"
 				+"&Pasaporte="+"a"
-				+"&listMes="+"a");
+				+"&listMes="+"a"
+				+"&familia="+"1"
+				+"&academico="+"1"
+				+"&reflab="+"1"
+				+"&refper="+"1"
+				+"&idiomas="+"1"
+				+"&puesto="+"1"
+				+"&test="+"true"
+				+"&testf1="+dateTestFecha1.getValue().getTime()
+				+"&testf2="+dateTestFecha2.getValue().getTime()
+				+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+				+"&hist="+"true"
+				+"&histf1="+dateHistorialFecha1.getValue().getTime()
+				+"&histf2="+dateHistorialFecha1.getValue().getTime()
+				+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+				+"&perm="+"true"
+				+"&permf1="+datePermisosecha1.getValue().getTime()
+				+"&permf2="+datePermisosecha2.getValue().getTime()
+				+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+				+"&sal="+"true"
+				+"&salf1="+dateSalarioecha1.getValue().getTime()
+				+"&salf2="+dateSalarioecha2.getValue().getTime()
+				+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex())
+				
+				
+				);
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
 		absolutePanel.add(formPanel, 10, 61);
@@ -560,7 +582,35 @@ public class CrearReporteEmpleados extends Composite   {
 	public void buscar(){
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			formPanel.setAction("/ExportBancos?tipo="+"2");
+			formPanel.setAction("/CrearReporteEmpleado?tipo="+"2"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+"2000"
+					+"&primer_nombre="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+"a"
+					+"&familia="+"1"
+					+"&academico="+"1"
+					+"&reflab="+"1"
+					+"&refper="+"1"
+					+"&idiomas="+"1"
+					+"&puesto="+"1"
+					+"&test="+"true"
+					+"&testf1="+dateTestFecha1.getValue().getTime()
+					+"&testf2="+dateTestFecha2.getValue().getTime()
+					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+					+"&hist="+"true"
+					+"&histf1="+dateHistorialFecha1.getValue().getTime()
+					+"&histf2="+dateHistorialFecha1.getValue().getTime()
+					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+					+"&perm="+"true"
+					+"&permf1="+datePermisosecha1.getValue().getTime()
+					+"&permf2="+datePermisosecha2.getValue().getTime()
+					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+					+"&sal="+"true"
+					+"&salf1="+dateSalarioecha1.getValue().getTime()
+					+"&salf2="+dateSalarioecha2.getValue().getTime()
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 			formPanel.submit();
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 		{
@@ -569,7 +619,35 @@ public class CrearReporteEmpleados extends Composite   {
 			System.out.println(nombre);
 			if(!txtDato1.getText().equals("")){
 
-				formPanel.setAction("/ExportBancos?tipo="+"1");
+				formPanel.setAction("/CrearReporteEmpleado?tipo="+"1"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+"2000"
+						+"&primer_nombre="+"a"
+						+"&DPI="+"a"
+						+"&Pasaporte="+"a"
+						+"&listMes="+"a"
+						+"&familia="+"1"
+						+"&academico="+"1"
+						+"&reflab="+"1"
+						+"&refper="+"1"
+						+"&idiomas="+"1"
+						+"&puesto="+"1"
+						+"&test="+"true"
+						+"&testf1="+dateTestFecha1.getValue().getTime()
+						+"&testf2="+dateTestFecha2.getValue().getTime()
+						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+						+"&hist="+"true"
+						+"&histf1="+dateHistorialFecha1.getValue().getTime()
+						+"&histf2="+dateHistorialFecha1.getValue().getTime()
+						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+						+"&perm="+"true"
+						+"&permf1="+datePermisosecha1.getValue().getTime()
+						+"&permf2="+datePermisosecha2.getValue().getTime()
+						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+						+"&sal="+"true"
+						+"&salf1="+dateSalarioecha1.getValue().getTime()
+						+"&salf2="+dateSalarioecha2.getValue().getTime()
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 				formPanel.submit();
 			}
 			else{
@@ -580,7 +658,35 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 			if(!txtDato1.getText().equals("") ){
 
-				formPanel.setAction("/ExportBancos?tipo="+"3");
+				formPanel.setAction("/CrearReporteEmpleado?tipo="+"3"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+"2000"
+						+"&primer_nombre="+"a"
+						+"&DPI="+"a"
+						+"&Pasaporte="+"a"
+						+"&listMes="+"a"
+						+"&familia="+"1"
+						+"&academico="+"1"
+						+"&reflab="+"1"
+						+"&refper="+"1"
+						+"&idiomas="+"1"
+						+"&puesto="+"1"
+						+"&test="+"true"
+						+"&testf1="+dateTestFecha1.getValue().getTime()
+						+"&testf2="+dateTestFecha2.getValue().getTime()
+						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+						+"&hist="+"true"
+						+"&histf1="+dateHistorialFecha1.getValue().getTime()
+						+"&histf2="+dateHistorialFecha1.getValue().getTime()
+						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+						+"&perm="+"true"
+						+"&permf1="+datePermisosecha1.getValue().getTime()
+						+"&permf2="+datePermisosecha2.getValue().getTime()
+						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+						+"&sal="+"true"
+						+"&salf1="+dateSalarioecha1.getValue().getTime()
+						+"&salf2="+dateSalarioecha2.getValue().getTime()
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 				formPanel.submit();
 			}
 			else{
@@ -591,7 +697,35 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 
 			if(!txtDato1.getText().equals("") ){
-				formPanel.setAction("/ExportBancos?tipo="+"4");
+				formPanel.setAction("/CrearReporteEmpleado?tipo="+"4"
+						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+						+"&annio="+"2000"
+						+"&primer_nombre="+"a"
+						+"&DPI="+"a"
+						+"&Pasaporte="+"a"
+						+"&listMes="+"a"
+						+"&familia="+"1"
+						+"&academico="+"1"
+						+"&reflab="+"1"
+						+"&refper="+"1"
+						+"&idiomas="+"1"
+						+"&puesto="+"1"
+						+"&test="+"true"
+						+"&testf1="+dateTestFecha1.getValue().getTime()
+						+"&testf2="+dateTestFecha2.getValue().getTime()
+						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+						+"&hist="+"true"
+						+"&histf1="+dateHistorialFecha1.getValue().getTime()
+						+"&histf2="+dateHistorialFecha1.getValue().getTime()
+						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+						+"&perm="+"true"
+						+"&permf1="+datePermisosecha1.getValue().getTime()
+						+"&permf2="+datePermisosecha2.getValue().getTime()
+						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+						+"&sal="+"true"
+						+"&salf1="+dateSalarioecha1.getValue().getTime()
+						+"&salf2="+dateSalarioecha2.getValue().getTime()
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 				formPanel.submit();
 			}
 			else{
@@ -601,17 +735,101 @@ public class CrearReporteEmpleados extends Composite   {
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 		{
 
-			formPanel.setAction("/ExportBancos?tipo="+"5");
+			formPanel.setAction("/CrearReporteEmpleado?tipo="+"5"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+"2000"
+					+"&primer_nombre="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+"a"
+					+"&familia="+"1"
+					+"&academico="+"1"
+					+"&reflab="+"1"
+					+"&refper="+"1"
+					+"&idiomas="+"1"
+					+"&puesto="+"1"
+					+"&test="+"true"
+					+"&testf1="+dateTestFecha1.getValue().getTime()
+					+"&testf2="+dateTestFecha2.getValue().getTime()
+					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+					+"&hist="+"true"
+					+"&histf1="+dateHistorialFecha1.getValue().getTime()
+					+"&histf2="+dateHistorialFecha1.getValue().getTime()
+					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+					+"&perm="+"true"
+					+"&permf1="+datePermisosecha1.getValue().getTime()
+					+"&permf2="+datePermisosecha2.getValue().getTime()
+					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+					+"&sal="+"true"
+					+"&salf1="+dateSalarioecha1.getValue().getTime()
+					+"&salf2="+dateSalarioecha2.getValue().getTime()
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 			formPanel.submit();
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 		{
 
-			formPanel.setAction("/ExportBancos?tipo="+"6");
+			formPanel.setAction("/CrearReporteEmpleado?tipo="+"6"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+"2000"
+					+"&primer_nombre="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+"a"
+					+"&familia="+"1"
+					+"&academico="+"1"
+					+"&reflab="+"1"
+					+"&refper="+"1"
+					+"&idiomas="+"1"
+					+"&puesto="+"1"
+					+"&test="+"true"
+					+"&testf1="+dateTestFecha1.getValue().getTime()
+					+"&testf2="+dateTestFecha2.getValue().getTime()
+					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+					+"&hist="+"true"
+					+"&histf1="+dateHistorialFecha1.getValue().getTime()
+					+"&histf2="+dateHistorialFecha1.getValue().getTime()
+					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+					+"&perm="+"true"
+					+"&permf1="+datePermisosecha1.getValue().getTime()
+					+"&permf2="+datePermisosecha2.getValue().getTime()
+					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+					+"&sal="+"true"
+					+"&salf1="+dateSalarioecha1.getValue().getTime()
+					+"&salf2="+dateSalarioecha2.getValue().getTime()
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 			formPanel.submit();
 		}
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
 		{
-			formPanel.setAction("/ExportBancos?tipo="+"7");
+			formPanel.setAction("/CrearReporteEmpleado?tipo="+"7"
+					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
+					+"&annio="+"2000"
+					+"&primer_nombre="+"a"
+					+"&DPI="+"a"
+					+"&Pasaporte="+"a"
+					+"&listMes="+"a"
+					+"&familia="+"1"
+					+"&academico="+"1"
+					+"&reflab="+"1"
+					+"&refper="+"1"
+					+"&idiomas="+"1"
+					+"&puesto="+"1"
+					+"&test="+"true"
+					+"&testf1="+dateTestFecha1.getValue().getTime()
+					+"&testf2="+dateTestFecha2.getValue().getTime()
+					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+					+"&hist="+"true"
+					+"&histf1="+dateHistorialFecha1.getValue().getTime()
+					+"&histf2="+dateHistorialFecha1.getValue().getTime()
+					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+					+"&perm="+"true"
+					+"&permf1="+datePermisosecha1.getValue().getTime()
+					+"&permf2="+datePermisosecha2.getValue().getTime()
+					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+					+"&sal="+"true"
+					+"&salf1="+dateSalarioecha1.getValue().getTime()
+					+"&salf2="+dateSalarioecha2.getValue().getTime()
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
 			formPanel.submit();
 		}
 	}

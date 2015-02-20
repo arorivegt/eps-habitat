@@ -33,9 +33,6 @@ public class ExportBancos extends HttpServlet {
 			
 			String tipo 				= request.getParameter("tipo");
 			String primer_nombre 		= request.getParameter("primer_nombre");
-			String segundo_nombre 		= request.getParameter("segundo_nombre");
-			String primer_apellido 		= request.getParameter("primer_apellido");
-			String segundo_apellido 	= request.getParameter("segundo_apellido");
 			String DPI 					= request.getParameter("DPI");
 			String Pasaporte 			= request.getParameter("Pasaporte");
 			String listMes 				= request.getParameter("listMes");
@@ -51,7 +48,7 @@ public class ExportBancos extends HttpServlet {
 										+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 			try{
 				xmlFinal 				= inicio 
-										+ n.Bancos(tipo.charAt(0), primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, DPI, Pasaporte, estado, listMes, listAnio);
+										+ n.Bancos(tipo.charAt(0), primer_nombre, DPI, Pasaporte, estado, listMes, listAnio);
 			}catch(Exception e){
 				xmlFinal 				= inicio;
 			}

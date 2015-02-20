@@ -16,8 +16,7 @@ public class InformBancosXml {
 	    private String xmlInicio 								 = "";
 		private String  xmlFinal 								 = "";
 	
-	 	public String Bancos(char tipo,String  primer_nombre, String segundo_nombre, 
-				 			String primer_apellido, String segundo_apellido,String DPI,
+	 	public String Bancos(char tipo,String  primer_nombre,String DPI,
 				 			String  pasaporte,String estado, 
 				 			String listMes,String listAnio)
 	 	{
@@ -90,8 +89,8 @@ public class InformBancosXml {
 				}
 	 		}
 	 		else{
-	 			result				 	= recusosHumanosService.Buscar_Empleado(tipo, primer_nombre, segundo_nombre, 
-	 																			primer_apellido, segundo_apellido,DPI, 
+	 			result				 	= recusosHumanosService.Buscar_Empleado(tipo, primer_nombre, "", 
+	 																			"", "",DPI, 
 	 																			pasaporte,estado);
 	 		}
         

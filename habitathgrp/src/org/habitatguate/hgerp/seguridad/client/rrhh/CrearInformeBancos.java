@@ -79,8 +79,6 @@ public class CrearInformeBancos extends Composite   {
 		absolutePanel.setSize("100%", "98px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		
-		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Afiliado");
@@ -319,9 +317,6 @@ public class CrearInformeBancos extends Composite   {
 				+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 				+"&annio="+"2000"
 				+"&primer_nombre="+"a"
-				+"&segundo_nombre="+"a"
-				+"&primer_apellido="+"a"
-				+"&segundo_apellido="+"a"
 				+"&DPI="+"a"
 				+"&Pasaporte="+"a"
 				+"&listMes="+"a");
@@ -375,9 +370,6 @@ public class CrearInformeBancos extends Composite   {
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 					+"&primer_nombre="+"a"
-					+"&segundo_nombre="+"a"
-					+"&primer_apellido="+"a"
-					+"&segundo_apellido="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
 					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -393,9 +385,6 @@ public class CrearInformeBancos extends Composite   {
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 						+"&primer_nombre="+nombre
-						+"&segundo_nombre="+"a"
-						+"&primer_apellido="+"a"
-						+"&segundo_apellido="+"a"
 						+"&DPI="+"a"
 						+"&Pasaporte="+"a"
 						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -413,9 +402,6 @@ public class CrearInformeBancos extends Composite   {
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 						+"&primer_nombre="+"a"
-						+"&segundo_nombre="+"a"
-						+"&primer_apellido="+"a"
-						+"&segundo_apellido="+"a"
 						+"&DPI="+"a"
 						+"&Pasaporte="+txtDato1.getText()
 						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -433,9 +419,6 @@ public class CrearInformeBancos extends Composite   {
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 						+"&primer_nombre="+"a"
-						+"&segundo_nombre="+"a"
-						+"&primer_apellido="+"a"
-						+"&segundo_apellido="+"a"
 						+"&DPI="+txtDato1.getText()
 						+"&Pasaporte="+"a"
 						+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -452,9 +435,6 @@ public class CrearInformeBancos extends Composite   {
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 					+"&primer_nombre="+"a"
-					+"&segundo_nombre="+"a"
-					+"&primer_apellido="+"a"
-					+"&segundo_apellido="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
 					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -466,9 +446,6 @@ public class CrearInformeBancos extends Composite   {
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 					+"&primer_nombre="+"a"
-					+"&segundo_nombre="+"a"
-					+"&primer_apellido="+"a"
-					+"&segundo_apellido="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
 					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));
@@ -480,9 +457,6 @@ public class CrearInformeBancos extends Composite   {
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&annio="+listAnnio.getItemText(listAnnio.getSelectedIndex())
 					+"&primer_nombre="+"a"
-					+"&segundo_nombre="+"a"
-					+"&primer_apellido="+"a"
-					+"&segundo_apellido="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
 					+"&listMes="+listMes.getValue(listMes.getSelectedIndex()));

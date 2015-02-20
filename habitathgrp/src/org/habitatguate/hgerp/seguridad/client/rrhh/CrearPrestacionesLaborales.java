@@ -1,4 +1,4 @@
-/**0
+/**
  * Anibal Jose Rodriguez Orive
  * Ingenieria Ciencias y Sistemas
  * Universidad de San Carlos de Guatemala

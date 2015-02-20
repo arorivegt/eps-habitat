@@ -44,8 +44,8 @@ public class CrearReporteEmpleado extends HttpServlet {
     
     private Font redFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD, BaseColor.BLACK);
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
-    
-    private RecursosHumanosServiceImpl recursosHumanosService 	= new  RecursosHumanosServiceImpl();
+
+	private RecursosHumanosServiceImpl recusosHumanosService = new  RecursosHumanosServiceImpl();
     private SimpleDateFormat fecha 								= new SimpleDateFormat("dd/MM/yyyy");
     private DecimalFormat df 									= new DecimalFormat();
     
@@ -53,29 +53,103 @@ public class CrearReporteEmpleado extends HttpServlet {
         
     	response.setContentType("application/pdf");
 
-        char tipo 			= '1';
-		String crear 		= request.getParameter("crear");
-		String estado 		= request.getParameter("estado");
-		String familia 		= request.getParameter("familia");
-		String academico 	= request.getParameter("academico");
-		String refLaboral 	= request.getParameter("reflaboral");
-		String refPersonal 	= request.getParameter("refpersonal");
-		String idioma 		= request.getParameter("idioma");
-		String desempeno 	= request.getParameter("desempeno");
-		String evaluacion 	= request.getParameter("evaluacion");
-		String historial 	= request.getParameter("historial");
-		String vacaciones 	= request.getParameter("vacaciones");
-        
-        if(crear.equals("Todos"))
-        {
-        	tipo = '2';
-		}
-		else if(crear.equals("Estado"))
-		{
-        	tipo = '5';
-		}
-        auxEmpleado 		= recursosHumanosService.Buscar_Empleado(tipo, "", "", "", "","", "",estado);
-        
+        char tipo 				= request.getParameter("tipo").charAt(0);
+		String estado 			= request.getParameter("estado");
+		String primer_nombre 	= request.getParameter("primer_nombre");
+		String DPI 				= request.getParameter("DPI");
+		String Pasaporte 		= request.getParameter("Pasaporte");
+		String familia 			= request.getParameter("familia");
+		String academico 		= request.getParameter("academico");
+		String reflab 			= request.getParameter("reflab");
+		String refper 			= request.getParameter("refper");
+		String idiomas 			= request.getParameter("idiomas");
+		String puesto 			= request.getParameter("puesto");
+		String test 			= request.getParameter("test");
+		String testf1 			= request.getParameter("testf1");
+		String testf2 			= request.getParameter("testf2");
+		String testT 			= request.getParameter("testT");
+		String hist 			= request.getParameter("hist");
+		String histf1 			= request.getParameter("histf1");
+		String histf2 			= request.getParameter("histf2");
+		String histT 			= request.getParameter("histT");
+		String perm 			= request.getParameter("perm");
+		String permf1 			= request.getParameter("permf1");
+		String permf2 			= request.getParameter("permf2");
+		String permT 			= request.getParameter("permT");
+		String sal 				= request.getParameter("sal");
+		String salf1 			= request.getParameter("salf1");
+		String salf2 			= request.getParameter("salf2");
+		String salT 			= request.getParameter("salT");
+
+       
+        if(tipo =='1'){
+
+			String nombreArray[]	= primer_nombre.split(":");
+			String primerNombre 	= "";
+			String segundoNombre 	= "";
+			String segundoApellido 	= "";
+			String primerApellido 	= "";
+
+			try{
+
+				if(nombreArray.length == 2){
+					primerNombre 	= nombreArray[0].trim();
+					segundoNombre 	= "".trim();
+					primerApellido 	= nombreArray[1].trim();
+					segundoApellido = "".trim();
+					
+					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																   			primerApellido,  segundoApellido,DPI, 
+																   			Pasaporte,estado);
+				}else if(nombreArray.length == 3){
+					
+					primerNombre 	= nombreArray[0].trim();
+					segundoNombre 	= nombreArray[1].trim();
+					primerApellido 	= nombreArray[2].trim();
+					segundoApellido = "".trim();
+					
+					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																			primerApellido,  segundoApellido,DPI, 
+																			Pasaporte,estado);
+					if(auxEmpleado.isEmpty())
+					{
+						primerNombre 	= nombreArray[0].trim();
+						segundoNombre 	= nombreArray[1].trim();
+						primerApellido 	= "".trim();
+						segundoApellido = nombreArray[2].trim();
+						
+						auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																			primerApellido,  segundoApellido,DPI, 
+																			Pasaporte,estado);
+					}
+					
+					
+				}else if(nombreArray.length == 4)
+				{
+					primerNombre 	= nombreArray[0].trim();
+					segundoNombre 	= nombreArray[1].trim();
+					primerApellido 	= nombreArray[2].trim();
+					segundoApellido = nombreArray[3].trim();
+					
+					
+					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
+																			primerApellido,  segundoApellido,DPI, 
+																			Pasaporte,estado);
+				}
+				
+			}catch(Exception e)
+			{
+				 primerNombre 		= "";
+				 primerApellido 	= "";
+				 segundoApellido 	= "";
+				 primerApellido 	= "";
+			}
+ 		}
+ 		else{
+ 			auxEmpleado				 	= recusosHumanosService.Buscar_Empleado(tipo, primer_nombre, "", 
+ 																			"", "",DPI, 
+ 																			Pasaporte,estado);
+ 		}
         OutputStream out 	= response.getOutputStream();
        
 	        try {
@@ -124,7 +198,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			            	document.add(CrearAcademico(f));
 		            	}
 		            }
-		           if(refLaboral.equals("true")){
+		           if(reflab.equals("true")){
 		        	   boolean valor = true;
 		            	for(AuxReferenciaLaboral f : p.getReferencia_laboral()) {
 		            		if(valor){
@@ -136,7 +210,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			            	document.add(CrearRefLaboral(f));
 		            	}
 		           }
-		           if(refPersonal.equals("true")){
+		           if(refper.equals("true")){
 		        	   boolean valor = true;
 		            	for(AuxReferenciaPersonal f : p.getReferencia_personal()) {
 		            		if(valor){
@@ -148,7 +222,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			            	document.add(CrearRefPersonal(f));
 		            	}
 		            }
-		            if(idioma.equals("true")){
+		            if(idiomas.equals("true")){
 			        	   boolean valor = true;
 		            	for(AuxIdioma f : p.getIdiomas()) {
 		            		if(valor){
@@ -160,12 +234,31 @@ public class CrearReporteEmpleado extends HttpServlet {
 			            	document.add(CrearIdioma(f));
 		            	}
 		            }
-		            if(desempeno.equals("true")){
+
+		            if(puesto.equals("true")){
 			        	   boolean valor = true;
+		            	for(AuxPuesto f : p.getPuestos()) {
+		            		if(valor){
+		    		            document.add(new Paragraph("Historial de Idiomas",catFont));
+		    		            document.add(new Paragraph(" "));
+		    		            valor = false;
+		            		}
+	    		            document.add(new Paragraph(" "));
+			            	//document.add(CrearIdioma(f));crear puestos
+		            	}
+		            }
+		            if(test.equals("true")){
+			        	   boolean valor = true;
+			        	   Date fecha1 = new Date(Long.parseLong(testf1));
+			        	   Date fecha2 = new Date(Long.parseLong(testf2));
 		            	for(AuxTest f : p.getTest()) {
-		            		if(f.getTipo_test().equals("1")){
+
+		        			Date aux = new Date(f.getFecha_test());
+		            		if((f.getTipo_test().equals(testT) && aux.after(fecha1) && aux.equals(fecha2))			        				
+			        				||
+			        			   (f.getTipo_test().equals(testT) && aux.equals(fecha1)) && aux.equals(fecha2) ){
 			            		if(valor){
-			    		            document.add(new Paragraph("Desempeños",catFont));
+			    		            document.add(new Paragraph("Test",catFont));
 			    		            document.add(new Paragraph(" "));
 			    		            valor = false;
 			            		}
@@ -174,27 +267,11 @@ public class CrearReporteEmpleado extends HttpServlet {
 		            		}
 		            	}
 		            }
-		            if(evaluacion.equals("true")){
-			        	 boolean valor = true;
-		            	for(AuxTest f : p.getTest()) {
-		            		if(f.getTipo_test().equals("2")){
-			            		if(valor){
-			    		            document.add(new Paragraph("Evaluacion",catFont));
-			    		            document.add(new Paragraph(" "));
-			    		            valor = false;
-			            		}
-		    		            document.add(new Paragraph(" "));
-		            			document.add(CrearTest(f));
-		            		}
-		            	}
-		            }
-		            if(historial.equals("true")){
+		            if(hist.equals("true")){
 		            	boolean valor = true;
 		            	for(AuxHistorial f : p.getHistorial()) {
 			            		if(valor){
-			    		            document.add(new Paragraph("Historial Ausencias, "
-			    		            		+ "Permisos, Aciertor y llamadas de atencion",
-			    		            		catFont));
+			    		            document.add(new Paragraph("Historial Aciertos y llamadas de atencion",catFont));
 			    		            document.add(new Paragraph(" "));
 			    		            valor = false;
 			            		}
@@ -203,7 +280,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 		            		
 		            	}
 		            }
-		            if(vacaciones.equals("true")){
+		            if(perm.equals("true")){
 			        	   boolean valor = true;
 		            	for(AuxVacaciones f : p.getVacaciones()) {
 		            		if(valor){
@@ -213,6 +290,18 @@ public class CrearReporteEmpleado extends HttpServlet {
 		            		}
 	    		            document.add(new Paragraph(" "));
 		            		document.add(CrearVacaciones(f));
+		            	}
+		            }
+		            if(sal.equals("true")){
+			        	   boolean valor = true;
+		            	for(AuxSalario f : p.getSalario()) {
+		            		if(valor){
+		    		            document.add(new Paragraph("Historial Vacaciones",catFont));
+		    		            document.add(new Paragraph(" "));
+		    		            valor = false;
+		            		}
+	    		            document.add(new Paragraph(" "));
+		            		//document.add(CrearVacaciones(f));crear salarios
 		            	}
 		            }
 		           }

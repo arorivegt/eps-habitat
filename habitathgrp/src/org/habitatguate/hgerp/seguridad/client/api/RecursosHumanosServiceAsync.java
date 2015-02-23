@@ -922,6 +922,12 @@ public interface RecursosHumanosServiceAsync {
 	     * @param callback
 	     * @throws IllegalArgumentException
 	     */
+	    void NombrePuesto(Long id, AsyncCallback<String> callback)throws IllegalArgumentException;
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
 	    void BDTest(AsyncCallback<List<AuxBDTest>> callback)throws IllegalArgumentException;
 	    /**
 	     * 

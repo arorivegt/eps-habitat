@@ -45,7 +45,7 @@ public class CrearReporteEmpleado extends HttpServlet {
     private Font redFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD, BaseColor.BLACK);
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
 
-	private RecursosHumanosServiceImpl recusosHumanosService = new  RecursosHumanosServiceImpl();
+	private RecursosHumanosServiceImpl recusosHumanosService 	= new  RecursosHumanosServiceImpl();
     private SimpleDateFormat fecha 								= new SimpleDateFormat("dd/MM/yyyy");
     private DecimalFormat df 									= new DecimalFormat();
     
@@ -337,7 +337,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			        			(f.getTipoSalario().equals(salT) && aux.equals(fecha1) && aux.equals(fecha2)))
 			        		{
 		    		            document.add(new Paragraph(" "));
-			            		//document.add(CrearVacaciones(f));crear salarios
+			            		document.add(CrearSalario(f));
 		            		}
 		            	}
 		            }
@@ -578,11 +578,11 @@ public class CrearReporteEmpleado extends HttpServlet {
     public PdfPTable CrearPuesto(AuxPuesto f) {
 		String AnnioPuesto 	= ""+fecha.format(new Date(f.getFecha_puesto()));
     	PdfPTable table 	= new PdfPTable(3);
-
+    	
         table.addCell(new Paragraph("Puesto",redFont));
         table.addCell(new Paragraph("Fecha del Puesto",redFont));
         table.addCell(new Paragraph("Horas por trabajo",redFont));
-        table.addCell(new Paragraph(f.getNombre_puesto(),catFont));
+        table.addCell(new Paragraph(recusosHumanosService.NombrePuesto(Long.parseLong(f.getNombre_puesto())),catFont));
         table.addCell(new Paragraph(AnnioPuesto,catFont));
         table.addCell(new Paragraph(f.getHorasTrabajo(),catFont));
 

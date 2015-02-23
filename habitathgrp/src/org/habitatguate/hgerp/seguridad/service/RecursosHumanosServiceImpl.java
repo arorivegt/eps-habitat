@@ -2655,4 +2655,23 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			return valor;
 		}
 
+		@Override
+		public String NombrePuesto(Long id) throws IllegalArgumentException {
+			SegBDPuesto n5 	= new SegBDPuesto();
+	    	String nombre 	= "no existe";
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+			try{
+
+				Query q = pm.newQuery(SegBDPuesto.class, "id_puesto == "+id);
+			    n5 = (SegBDPuesto) q.execute();
+				if (n5 != null) 
+				{          
+					nombre = n5.getNombre_puesto();
+				}
+			}catch(Exception e){
+				nombre 	= "no existe";
+			}
+			return nombre;
+		}
+
 	}

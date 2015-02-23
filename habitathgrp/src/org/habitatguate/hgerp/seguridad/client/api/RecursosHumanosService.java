@@ -896,6 +896,13 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     List<AuxBDPuesto> BDPuesto()throws IllegalArgumentException;
+
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    String NombrePuesto(Long id)throws IllegalArgumentException;
     /**
      * 
      * @return

@@ -2643,7 +2643,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				Query q = pm.newQuery(SegEmpleado.class);
 			    results = (List<SegEmpleado>) q.execute();
 			    for(SegEmpleado r:results){
-
 					 //final SegEmpleado e = pm.getObjectById(SegEmpleado.class, r.getId_empleado()); 
 			    	 r.setDiasDeVacaciones(r.getDiasDeVacaciones()+dia);
 			    }

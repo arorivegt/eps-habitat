@@ -182,8 +182,8 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            document.add(new Paragraph(" "));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
 			            	document.add(CrearFamilia(f));
+	    		            document.add(new Paragraph(" "));
 		            	}
 		            }
 		           if(academico.equals("true")){
@@ -194,8 +194,8 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
 			            	document.add(CrearAcademico(f));
+	    		            document.add(new Paragraph(" "));
 		            	}
 		            }
 		           if(reflab.equals("true")){
@@ -206,8 +206,8 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
 			            	document.add(CrearRefLaboral(f));
+	    		            document.add(new Paragraph(" "));
 		            	}
 		           }
 		           if(refper.equals("true")){
@@ -218,8 +218,8 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
 			            	document.add(CrearRefPersonal(f));
+	    		            document.add(new Paragraph(" "));
 		            	}
 		            }
 		            if(idiomas.equals("true")){
@@ -230,8 +230,8 @@ public class CrearReporteEmpleado extends HttpServlet {
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
 			            	document.add(CrearIdioma(f));
+	    		            document.add(new Paragraph(" "));
 		            	}
 		            }
 
@@ -239,12 +239,12 @@ public class CrearReporteEmpleado extends HttpServlet {
 			        	   boolean valor = true;
 		            	for(AuxPuesto f : p.getPuestos()) {
 		            		if(valor){
-		    		            document.add(new Paragraph("Historial de Idiomas",catFont));
+		    		            document.add(new Paragraph("Historial de Puestos",catFont));
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
+			            	document.add(CrearPuesto(f));
 	    		            document.add(new Paragraph(" "));
-			            	//document.add(CrearIdioma(f));crear puestos
 		            	}
 		            }
 		            if(test.equals("true")){
@@ -254,54 +254,91 @@ public class CrearReporteEmpleado extends HttpServlet {
 		            	for(AuxTest f : p.getTest()) {
 
 		        			Date aux = new Date(f.getFecha_test());
-		            		if((f.getTipo_test().equals(testT) && aux.after(fecha1) && aux.equals(fecha2))			        				
-			        				||
-			        			   (f.getTipo_test().equals(testT) && aux.equals(fecha1)) && aux.equals(fecha2) ){
-			            		if(valor){
-			    		            document.add(new Paragraph("Test",catFont));
-			    		            document.add(new Paragraph(" "));
-			    		            valor = false;
-			            		}
+		        			if(valor){
+		    		            document.add(new Paragraph("Test",catFont));
 		    		            document.add(new Paragraph(" "));
-		            			document.add(CrearTest(f));
+		    		            valor = false;
+		        			}
+		        			
+		            		if((f.getTipo_test().equals(testT) && aux.after(fecha1) && aux.before(fecha2))			        				
+			        		   ||
+			        		 (f.getTipo_test().equals(testT) && aux.equals(fecha1) && aux.equals(fecha2)))
+		            		{
+			            			document.add(CrearTest(f));
+			    		            document.add(new Paragraph(" "));
 		            		}
+		            		
 		            	}
 		            }
 		            if(hist.equals("true")){
-		            	boolean valor = true;
+			        	   boolean valor = true;
+			        	   Date fecha1 = new Date(Long.parseLong(histf1));
+			        	   Date fecha2 = new Date(Long.parseLong(histf2));
 		            	for(AuxHistorial f : p.getHistorial()) {
-			            		if(valor){
-			    		            document.add(new Paragraph("Historial Aciertos y llamadas de atencion",catFont));
-			    		            document.add(new Paragraph(" "));
-			    		            valor = false;
-			            		}
+		        			Date aux = new Date(f.getFecha());
+		        			
+		        			if(valor){
+		    		            document.add(new Paragraph("Historial Aciertos y llamadas de atencion",catFont));
 		    		            document.add(new Paragraph(" "));
+		    		            valor = false;
+		        			}
+		            		if((f.getTipo_historial().equals(histT) && aux.after(fecha1) && aux.before(fecha2))			        				
+		        				||
+			        			(f.getTipo_historial().equals(histT) && aux.equals(fecha1) && aux.equals(fecha2)))
+			        		{
 		            			document.add(CrearHistorial(f));
+		    		            document.add(new Paragraph(" "));
+		            		}
 		            		
 		            	}
 		            }
 		            if(perm.equals("true")){
 			        	   boolean valor = true;
+			        	   Date fecha1 = new Date(Long.parseLong(permf1));
+			        	   Date fecha2 = new Date(Long.parseLong(permf2));
 		            	for(AuxVacaciones f : p.getVacaciones()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial Vacaciones",catFont));
+		        			Date aux = new Date(f.getFecha1());
+		        			Date aux2 = new Date(f.getFecha2());
+		        			
+		        			if(valor){
+		    		            document.add(new Paragraph("Historial de Permisos",catFont));
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
+		        			}
+		            		if((f.getTipoPermisos().equals(permT) && aux.after(fecha1) && aux.before(fecha2))			        				
+			        			||
+				        	  (f.getTipoPermisos().equals(permT) && aux.equals(fecha1) && aux.equals(fecha2)))
+		            		{
+			            		document.add(CrearPermiso(f));
+		    		            document.add(new Paragraph(" "));
+		            		}else if((f.getTipoPermisos().equals(perm) && aux2.after(fecha1) && aux2.before(fecha2))			        				
+		            				||
+		            				(f.getTipoPermisos().equals(perm) && aux2.equals(fecha1) && aux2.equals(fecha2)))
+		            		{
+		            			document.add(CrearPermiso(f));
+		            			document.add(new Paragraph(" "));
 		            		}
-	    		            document.add(new Paragraph(" "));
-		            		document.add(CrearVacaciones(f));
 		            	}
 		            }
 		            if(sal.equals("true")){
 			        	   boolean valor = true;
+			        	   Date fecha1 = new Date(Long.parseLong(salf1));
+			        	   Date fecha2 = new Date(Long.parseLong(salf2));
 		            	for(AuxSalario f : p.getSalario()) {
 		            		if(valor){
 		    		            document.add(new Paragraph("Historial Vacaciones",catFont));
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
-	    		            document.add(new Paragraph(" "));
-		            		//document.add(CrearVacaciones(f));crear salarios
+
+		        			Date aux = new Date(f.getFecha());
+		            		if((f.getTipoSalario().equals(salT) && aux.after(fecha1) && aux.before(fecha2))			        				
+		        				||
+			        			(f.getTipoSalario().equals(salT) && aux.equals(fecha1) && aux.equals(fecha2)))
+			        		{
+		    		            document.add(new Paragraph(" "));
+			            		//document.add(CrearVacaciones(f));crear salarios
+		            		}
 		            	}
 		            }
 		           }
@@ -422,7 +459,6 @@ public class CrearReporteEmpleado extends HttpServlet {
         
         return table;
     }
-    
     public PdfPTable CrearIdioma(AuxIdioma f) {
     	
     	PdfPTable table = new PdfPTable(2);
@@ -582,7 +618,7 @@ public class CrearReporteEmpleado extends HttpServlet {
         return table;
     }
     
-    public PdfPTable CrearVacaciones(AuxVacaciones f) {
+    public PdfPTable CrearPermiso(AuxVacaciones f) {
  		String Annio1 = ""+fecha.format(new Date(f.getFecha1()));
  		String Annio2 = ""+fecha.format(new Date(f.getFecha2()));
      	PdfPTable table = new PdfPTable(2);

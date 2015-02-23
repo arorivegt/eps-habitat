@@ -80,8 +80,8 @@ public class Historiales extends Composite  {
 	        dateFecha2.setSize("227px", "34px");
 	        
 	        listTipo = new ListBox();
-	        listTipo.addItem("aciertos ","0");
-	        listTipo.addItem("llamadas de atención","1");
+	        listTipo.addItem("acierto ","0");
+	        listTipo.addItem("llamada de atención","1");
 	        listTipo.setStyleName("gwt-TextBox2");
 	        grid.setWidget(0, 2, listTipo);
 	        listTipo.setSize("229px", "36px");

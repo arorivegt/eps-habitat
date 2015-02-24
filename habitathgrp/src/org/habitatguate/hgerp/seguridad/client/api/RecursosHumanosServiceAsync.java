@@ -53,6 +53,23 @@ public interface RecursosHumanosServiceAsync {
 	void login_inicio(String user,String i2, AsyncCallback<ValoresSesion> callback) throws IllegalArgumentException;
 	/**
 	 * 
+	 * @param idUsuario
+	 * @param nuevaContrasena
+	 * @param actualContrasena
+	 * @param callback
+	 * @throws IllegalArgumentException
+	 */
+	void CambiarContrasena(String idUsuario,String nuevaContrasena, String actualContrasena, AsyncCallback<String> callback) throws IllegalArgumentException;
+	/**
+	 * 
+	 * @param idUsuario
+	 * @param nuevaContrasena
+	 * @param callback
+	 * @throws IllegalArgumentException
+	 */
+	void CambiarContrasenaAdmin(String idUsuario,String nuevaContrasena, AsyncCallback<String> callback) throws IllegalArgumentException;
+	/**
+	 * 
 	 * @param afiliacion_igss
 	 * @param estado_civil
 	 * @param sexo
@@ -1037,8 +1054,12 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void obtenerIdRol(AsyncCallback<Long> callback)throws IllegalArgumentException;
-	    
-
+	    /**
+	     * 
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void obtenerUsuario(AsyncCallback<String> callback)throws IllegalArgumentException;
 	    
 	    /**
 	     * 

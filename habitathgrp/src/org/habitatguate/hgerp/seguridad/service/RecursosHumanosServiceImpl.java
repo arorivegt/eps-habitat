@@ -67,10 +67,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	public String Registro(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento,
 						   String Nombre2, String Apellido2) throws IllegalArgumentException {
 
-		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		if(user!=null && pass!=null){
 			try{ 
-				final SegUsuario e = gestorPersistencia.getObjectById(SegUsuario.class, user); 
+				final SegUsuario e = Persistencia.getObjectById(SegUsuario.class, user); 
 				return "El usuario "+e.getUser()+" ya existe" ;
 			}catch(Exception e){
 				SegEmpleado em = new SegEmpleado();
@@ -114,15 +114,15 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setFecha_nacimiento(fecha_nacimiento);
 				em.setFecha_ingreso(new Date());
 				try{ 
-				    gestorPersistencia.makePersistent(em); 
+				    Persistencia.makePersistent(em); 
 				}finally{
 					SegUsuario u = new SegUsuario(user, pass);
 					u.setId_empleado(em.getId_empleado());
 					u.setId_rol(2L);
 					try{ 
-					    gestorPersistencia.makePersistent(u); 
+					    Persistencia.makePersistent(u); 
 					}finally{  
-					    gestorPersistencia.close();  
+					    Persistencia.close();  
 					} 
 					
 				}
@@ -139,11 +139,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		ValoresSesion vs = new ValoresSesion();
 		
 		
-		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		try{ 
-			final SegUsuario e	 			= gestorPersistencia.getObjectById(SegUsuario.class, user);
+			final SegUsuario e	 			= Persistencia.getObjectById(SegUsuario.class, user);
 			if(e.getPassword().equals(md5(password))){
-				final SegEmpleado em 		= gestorPersistencia.getObjectById(SegEmpleado.class, e.getId_empleado());
+				final SegEmpleado em 		= Persistencia.getObjectById(SegEmpleado.class, e.getId_empleado());
 				//si es correcto crea una nueva session para poder manejarlo en toda la aplicacion
 				HttpServletRequest request 	= this.getThreadLocalRequest();
 				HttpSession session 		= request.getSession(true);
@@ -186,7 +186,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             String depto_municipio_nacimiento, Long Jefe_Inmediato,Long afiliado
            ) throws IllegalArgumentException {
 		
-		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
 		
 		
@@ -243,11 +243,11 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	         e.setDepto_municipio_nacimiento(depto_municipio_nacimiento);
 	         e.setJefe_Inmediato(Jefe_Inmediato);
 	         
-	         gestorPersistencia.makePersistent(e); 
+	         Persistencia.makePersistent(e); 
 	         valor = e.getId_empleado();
 	         
 	     }finally {  
-			 gestorPersistencia.close();  
+			 Persistencia.close();  
 		 }
 		 
 		 
@@ -1687,7 +1687,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			public Long Insertar_BDPuesto(Long id,Date fecha_puesto,
 					String nombre_puesto, String funciones)
 					throws IllegalArgumentException {
-				final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
+				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				Long valor = 0L;
 				 try { 
 					 SegBDPuesto p = new SegBDPuesto();
@@ -1695,10 +1695,10 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					 	p.setFecha_puesto(fecha_puesto);
 					 	p.setNombre_puesto(nombre_puesto.toUpperCase());
 					 	p.setFunciones(funciones.toUpperCase());
-			         gestorPersistencia.makePersistent(p); 
+			         Persistencia.makePersistent(p); 
 			         valor = p.getId_puesto();
 			     }finally {  
-					 gestorPersistencia.close();  
+					 Persistencia.close();  
 				 }
 				return valor;
 			}
@@ -2262,6 +2262,21 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			}
 		}
 
+
+		@Override
+		public String obtenerUsuario() throws IllegalArgumentException {
+			HttpServletRequest request = this.getThreadLocalRequest();
+			// dont create a new one -> false
+			HttpSession session = request.getSession(false);
+			String id =  session.getAttribute("usserHabitat").toString();
+			if (session == null || session.getAttribute("usserHabitat") == null){
+				return id;
+			}else{
+				System.out.println(session.getAttribute("usserHabitat"));
+				return id;
+			}
+		}
+		
 		@Override
 		public AuxEmpleado getEmpleado(Long id) throws IllegalArgumentException {
 
@@ -2672,5 +2687,46 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			}
 			return nombre;
 		}
+
+		@Override
+		public String CambiarContrasena(String idUsuario,String nuevaContrasena,
+				String actualContrasena) throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "";
+			try{ 
+				final SegUsuario e = Persistencia.getObjectById(SegUsuario.class, idUsuario); 
+				
+				if(e.getPassword().equals(md5(actualContrasena))){
+					e.setPassword(md5(nuevaContrasena));
+					valor = "Contraseña actualizada correctamente";
+				}else{
+					valor = "La Contraseña Actual no es correcta";
+				}
+			}catch(Exception e){
+				valor = "Hubo un error al actualizar la contraseña";
+			}finally {  
+				 Persistencia.close();  
+			 }
+			return valor;
+		}
+
+		@Override
+		public String CambiarContrasenaAdmin(String idUsuario,String nuevaContrasena)
+				throws IllegalArgumentException {
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "";
+			try{ 
+				final SegUsuario e = Persistencia.getObjectById(SegUsuario.class, idUsuario); 
+					e.setPassword(md5(nuevaContrasena));
+					valor = "Contraseña actualizada correctamente";				
+			}catch(Exception e){
+				valor = "Hubo un error al actualizar la contraseña";
+			}finally {  
+				Persistencia.close();  
+			 }
+			return valor;
+		}
+
 
 	}

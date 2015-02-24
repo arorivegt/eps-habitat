@@ -52,7 +52,25 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	ValoresSesion login_inicio(String user,String password) throws IllegalArgumentException;	
+	ValoresSesion login_inicio(String user,String password) throws IllegalArgumentException;
+	
+	/**
+	 * 
+	 * @param idUsuario
+	 * @param nuevaContrasena
+	 * @param actualContrasena
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	String CambiarContrasena(String idUsuario, String nuevaContrasena, String actualContrasena) throws IllegalArgumentException;
+	/**
+	 * 
+	 * @param idUsuario
+	 * @param nuevaContrasena
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	String CambiarContrasenaAdmin(String idUsuario,String nuevaContrasena) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param afiliacion_igss
@@ -1015,7 +1033,13 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     Long obtenerIdRol()throws IllegalArgumentException;
-    
+
+    /**
+     * 
+     * @return
+     * @throws IllegalArgumentException
+     */
+    String obtenerUsuario()throws IllegalArgumentException;
     /**
      * 
      * @return

@@ -15,14 +15,12 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
 
 public class CambiarContrasena extends Composite{
 	
 	private Loading load ;
     private Mensaje mensaje; 
-    private Button 	btnAsignar;
+    private Button 	btnCambiar;
     private AbsolutePanel rootPanel;
     private TextBox txtContrasenaActual;
     private TextBox txtContrasenaNueva;
@@ -48,54 +46,70 @@ public class CambiarContrasena extends Composite{
         lblNewLabel_1.setSize("205px", "142px");
         
         txtContrasenaActual =new TextBox();
-        txtContrasenaActual.addChangeHandler(new ChangeHandler() {
-        	public void onChange(ChangeEvent event) {
-        		if(txtContrasenaActual.getText().equals("")) {txtContrasenaActual.setText("0");}
-				else if(txtContrasenaActual.getText().equals(null)) {txtContrasenaActual.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtContrasenaActual.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nEdad no valida");
-						txtContrasenaActual.setText("0");
-					}
-				}
-        	}
-        });
-        txtContrasenaActual.setText("26");
+        txtContrasenaActual.setText("");
         txtContrasenaActual.setStyleName("gwt-PasswordTextBox");
-        txtContrasenaActual.getElement().setAttribute("placeHolder", "Ingrese correo");
+        txtContrasenaActual.getElement().setPropertyString("placeHolder", "Ingrese Contraseña Actual");
         rootPanel.add(txtContrasenaActual, 30, 67);
         txtContrasenaActual.setSize("241px", "49px");
         
-        btnAsignar = new Button("Send");
-        btnAsignar.addClickHandler(new ClickHandler() {
+        txtContrasenaNueva =new TextBox();
+        txtContrasenaNueva.setText("");
+        txtContrasenaNueva.setStyleName("gwt-PasswordTextBox");
+        txtContrasenaNueva.getElement().setPropertyString("placeHolder", "Ingrese Contraseña nueva");
+        rootPanel.add(txtContrasenaNueva, 30, 67);
+        txtContrasenaNueva.setSize("241px", "49px");
+        
+        txtContrasenaNuevaRepetida =new TextBox();
+        txtContrasenaNuevaRepetida.setText("");
+        txtContrasenaNuevaRepetida.setStyleName("gwt-PasswordTextBox");
+        txtContrasenaNuevaRepetida.getElement().setPropertyString("placeHolder", "Repetir Contraseña nueva");
+        rootPanel.add(txtContrasenaNuevaRepetida, 30, 67);
+        txtContrasenaNuevaRepetida.setSize("241px", "49px");
+        
+        btnCambiar = new Button("Send");
+        btnCambiar.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
                 load.visible();
-        		recursosHumanosService.Insertar_Dias_Vacaciones(Integer.parseInt(txtContrasenaActual.getText()),new AsyncCallback<String>()
-			    {
-		            public void onFailure(Throwable caught) {
-		                load.invisible();
-		            	mensaje.setMensaje("alert alert-error", "Error !! \nal asignar dias");
-		            }
+                if(txtContrasenaNueva.getText().equals(txtContrasenaNuevaRepetida.getText())){
+	            	mensaje.setMensaje("alert alert-error", "Las contraseñas no coinciden");
+                }else{
 
-					public void onSuccess(String result) {
-			            load.invisible();
-			            mensaje.setMensaje("alert alert-success", result);
-		            }
+                	recursosHumanosService.obtenerUsuario(new AsyncCallback<String>() 
+					{ 
+                		public void onFailure(Throwable caught) {
+                			load.invisible();
+                			mensaje.setMensaje("alert alert-error", "Error !! \nal obtener Usuario");
+                		}
 
-			    });
+						public void onSuccess(String result) {
+		            		recursosHumanosService.CambiarContrasena(result, txtContrasenaNueva.getText(), txtContrasenaActual.getText(),new AsyncCallback<String>()
+		    			    {
+		    		            public void onFailure(Throwable caught) {
+		    		                load.invisible();
+		    		            	mensaje.setMensaje("alert alert-error", "Error !! \nal actualizar contraseña");
+		    		            }
+		    
+		    					public void onSuccess(String result) {
+		    			            load.invisible();
+		    			            mensaje.setMensaje("alert alert-success", result);
+		    		            }
+		    
+		    			    });
+			            }
+
+					});
+                	
+                }
         	}
         });
-        btnAsignar.setText("Aumentar");
-        btnAsignar.setStyleName("sendButton");
-        rootPanel.add(btnAsignar, 30, 124);
-        btnAsignar.setSize("243px", "44px");
+        btnCambiar.setText("Cambiar");
+        btnCambiar.setStyleName("sendButton");
+        rootPanel.add(btnCambiar, 30, 124);
+        btnCambiar.setSize("243px", "44px");
         
         initWidget(rootPanel);
         
-        Label lblNewLabel = new Label("Dias de vacaciones a dar a todo el personal:");
+        Label lblNewLabel = new Label("Cambiar contraseña:");
         rootPanel.add(lblNewLabel, 30, 10);
         lblNewLabel.setSize("243px", "19px");
         

@@ -18,7 +18,6 @@ import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-import org.json.simple.JSONObject;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -1232,60 +1231,10 @@ public class FormularioDatos extends Composite {
 		btnExportarDatos = new Button("Send");
 		btnExportarDatos.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				depto_municipio_dos = listDireccionDepartamento.getItemText(listDireccionDepartamento.getSelectedIndex()) + "," +listDireccionMunicipio.getItemText(listDireccionMunicipio.getSelectedIndex());
-				depto_municipio_uno = listNacimientoDepartamento.getItemText(listNacimientoDepartamento.getSelectedIndex()) + "," +listNacimientoMunicipio.getItemText(listNacimientoMunicipio.getSelectedIndex());
-				
-				JSONObject jsonEmpleado = new JSONObject();		
-				jsonEmpleado.put("id", id_empleado);	
-				jsonEmpleado.put("No IGGS", txtNo_iggs.getText());	
-				jsonEmpleado.put("Estado Civil", listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()));	
-				jsonEmpleado.put("Sexo", listSexo.getValue(listSexo.getSelectedIndex()));
-				jsonEmpleado.put("Primer Apellido", txtPrimerApellido.getText());
-				jsonEmpleado.put("Segundo Apellido", txtSegundoApellido.getText());
-				jsonEmpleado.put("Apellido Casada", txtApellidoCasada.getText());
-				jsonEmpleado.put("Primer Nombre", txtPrimerNombre.getText());
-				jsonEmpleado.put("Segundo Nombre", txtSegundoNombre.getText());
-				jsonEmpleado.put("IVS", listIVS.getValue(listIVS.getSelectedIndex()));
-				jsonEmpleado.put("Pais", listPais.getItemText(listPais.getSelectedIndex()));
-				jsonEmpleado.put("NIT", txtNit.getText());
-				jsonEmpleado.put("No. Dependientes", listNoDependientes.getItemText(listNoDependientes.getSelectedIndex()));
-				jsonEmpleado.put("No. Cuenta", noCuenta.getText());
-				jsonEmpleado.put("Tipo Cuenta", tipoCuenta.getItemText(tipoCuenta.getSelectedIndex()));
-				jsonEmpleado.put("Nombre Banco", nombreBanco.getItemText(nombreBanco.getSelectedIndex()));
-				jsonEmpleado.put("DPI", txtDPI.getText());
-				jsonEmpleado.put("Tipo Pasaporte", txtTipoPasaporte.getText());
-				jsonEmpleado.put("Direccion", txtDireccion.getText());
-				jsonEmpleado.put("Deptartamento_Municipio_Nacimiento", depto_municipio_uno);
-				jsonEmpleado.put("Correo", txtCorreoElectronico.getText());
-				jsonEmpleado.put("Telefono Casa", txtTelefonoCasa.getText());
-				jsonEmpleado.put("Telefono Celular", txtTelefonoCelular.getText());
-				jsonEmpleado.put("Año Nacimiento", dateAnnioNacimiento.getTextBox().getText());
-				jsonEmpleado.put("Tipo Licencia", listTipoLicencia.getItemText(listTipoLicencia.getSelectedIndex()));
-				jsonEmpleado.put("No Licencia", txtNoLicencia.getText());
-				jsonEmpleado.put("Centro de Trabajo",  txtCentroTrabajo.getText());
-				jsonEmpleado.put("Ocupacion",  txtOcupacion.getText());
-				jsonEmpleado.put("Fecha Ingreso",  dateFechaIngreso.getTextBox().getText());
-				jsonEmpleado.put("Codigo Ocupacion",  txt_CodigoOcupacion.getText());
-				jsonEmpleado.put("Profesion",  txtProfesion.getText());
-				jsonEmpleado.put("Planilla",  txtTipoPlanilla.getText());
-				jsonEmpleado.put("Salario",  txtSalarioBase.getText());
-				jsonEmpleado.put("Dias Vacaciones",  txtDiasVacaciones.getText());
-				jsonEmpleado.put("Bonificacion",  txtBonificacion.getText());
-				jsonEmpleado.put("Profesion",  txtProfesion.getText());
-				jsonEmpleado.put("Estado",  listEstado.getValue(listEstado.getSelectedIndex()));
-				jsonEmpleado.put("No. Pasaporte",  txtNoPasaporte.getText());
-				jsonEmpleado.put("listTienePasaporte",  listTienePasaporte.getItemText(listTienePasaporte.getSelectedIndex()));
-				jsonEmpleado.put("Licencia",  listLicencia.getItemText(listLicencia.getSelectedIndex()));
-				jsonEmpleado.put("Etnia",  listEtnia.getItemText(listEtnia.getSelectedIndex()));
-				jsonEmpleado.put("Nombre Emergencia",  txtNombreEmergencia.getText());
-				jsonEmpleado.put("Telefono Emergencia",  txtTelefonoEmergencia.getText());
-				jsonEmpleado.put("Nombre Emergencia2",  txtNombreEmergencia2.getText());
-				jsonEmpleado.put("Telefono Emergencia2",  txtTelefonoEmergencia2.getText());
-				jsonEmpleado.put("Deptartamento_Municipio_Direccion", depto_municipio_dos);
-				
+				Window.open("/ExportarDatos?abracadabra="+id_empleado, "_blank", ""); 
 			}
 		});
-		btnExportarDatos.setVisible(false);
+		btnExportarDatos.setVisible(true);
 		btnExportarDatos.setText("Exportar Datos");
 		btnExportarDatos.setStylePrimaryName("sendButton");
 		btnExportarDatos.setStyleName("sendButton");

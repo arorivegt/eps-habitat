@@ -11,30 +11,39 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-class>org.habitatguate.hgerp.seguridad.service.RecursosHumanosServiceImpl</servlet-class>
   </servlet>
   
-    <servlet>
+  <servlet>
+    <servlet-name>ExportarDatos</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportarDatos</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  	<servlet-name>ExportarDatos</servlet-name>  
+ 	<url-pattern>/ExportarDatos</url-pattern>  
+  </servlet-mapping>  
+  
+  <servlet>
     <servlet-name>ExportAs</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportAs</servlet-class>
   </servlet>
-<servlet-mapping>  
- <servlet-name>ExportAs</servlet-name>  
- <url-pattern>/ExportAs</url-pattern>  
-</servlet-mapping>  
+  <servlet-mapping>  
+  	<servlet-name>ExportAs</servlet-name>  
+ 	<url-pattern>/ExportAs</url-pattern>  
+  </servlet-mapping>  
   
-    <servlet>
+  <servlet>
     <servlet-name>ExportBancos</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportBancos</servlet-class>
   </servlet>
-<servlet-mapping>  
- <servlet-name>ExportBancos</servlet-name>  
- <url-pattern>/ExportBancos</url-pattern>  
-</servlet-mapping> 
+  <servlet-mapping>  
+ 	<servlet-name>ExportBancos</servlet-name>  
+ 	<url-pattern>/ExportBancos</url-pattern>  
+ </servlet-mapping> 
   
   <servlet-mapping>
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/seguridad/login</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+  <servlet>
     <servlet-name>SqlServlet</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.SqlServiceImpl</servlet-class>
   </servlet>
@@ -58,7 +67,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>upload url servlet</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.UploadUrlServiceImpl</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>upload url servlet</servlet-name>
     <url-pattern>/seguridad/uploadUrl</url-pattern>
@@ -68,7 +76,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>Upload</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.Upload</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>Upload</servlet-name>
     <url-pattern>/upload</url-pattern>
@@ -78,28 +85,27 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>Serve</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.Serve</servlet-class>
   </servlet>
- 
   <servlet-mapping>
     <servlet-name>Serve</servlet-name>
     <url-pattern>/serve</url-pattern>
   </servlet-mapping>
   
-  <servlet>  
- <servlet-name>CrearReporteEmpleado</servlet-name>  
- <servlet-class>org.habitatguate.hgerp.seguridad.service.CrearReporteEmpleado</servlet-class>  
+ <servlet>  
+ 	<servlet-name>CrearReporteEmpleado</servlet-name>  
+ 	<servlet-class>org.habitatguate.hgerp.seguridad.service.CrearReporteEmpleado</servlet-class>  
 </servlet>  
 <servlet-mapping>  
- <servlet-name>CrearReporteEmpleado</servlet-name>  
- <url-pattern>/CrearReporte</url-pattern>  
+ 	<servlet-name>CrearReporteEmpleado</servlet-name>  
+ 	<url-pattern>/CrearReporte</url-pattern>  
 </servlet-mapping>  
 
-  <servlet>  
- <servlet-name>ImprimirPerfil</servlet-name>  
- <servlet-class>org.habitatguate.hgerp.seguridad.service.ImprimirPerfil</servlet-class>  
+ <servlet>  
+ 	<servlet-name>ImprimirPerfil</servlet-name>  
+ 	<servlet-class>org.habitatguate.hgerp.seguridad.service.ImprimirPerfil</servlet-class>  
 </servlet>  
 <servlet-mapping>  
- <servlet-name>ImprimirPerfil</servlet-name>  
- <url-pattern>/ImprimirPerfil</url-pattern>  
+ 	<servlet-name>ImprimirPerfil</servlet-name>  
+ 	<url-pattern>/ImprimirPerfil</url-pattern>  
 </servlet-mapping>  
 
   <!-- Default page to serve -->

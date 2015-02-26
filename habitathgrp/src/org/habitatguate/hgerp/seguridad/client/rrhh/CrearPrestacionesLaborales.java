@@ -53,6 +53,7 @@ public class CrearPrestacionesLaborales extends Composite   {
     private Prestaciones nuevo;
     private SuggestBox txtDato1;
     private SimpleCheckBox checkBonificacion;
+    private SimpleCheckBox checkDecreto;
 
     private ListBox listBox;
     private ListBox listEstado;
@@ -314,12 +315,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		dateFecha2.getDatePicker().setYearArrowsVisible(true);
 		dateFecha2.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateFecha2.getDatePicker().setVisibleYearCount(100);
-		
-		checkBonificacion = new SimpleCheckBox();
-		absolutePanel.add(checkBonificacion, 645, 94);
 		dateFecha2.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(dateFecha2, 397, 90);
 		dateFecha2.setSize("177px", "41px");
+		
+		checkBonificacion = new SimpleCheckBox();
+		absolutePanel.add(checkBonificacion, 645, 94);
+		
+
+		checkDecreto = new SimpleCheckBox();
+		absolutePanel.add(checkDecreto, 645, 94);
 		
 		lbDato1 = new Label("Primer Nombre");
 		lbDato1.setStyleName("label");
@@ -356,7 +361,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 		absolutePanel.add(lblFecha, 205, 73);
 		lblFecha.setSize("389px", "13px");
 		
-		Label lblBonificacion = new Label("Bonificacion");
+		Label lblBonificacion = new Label("Extras");
 		lblBonificacion.setStyleName("label");
 		absolutePanel.add(lblBonificacion, 618, 78);
 		lblBonificacion.setSize("94px", "13px");
@@ -593,18 +598,18 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		float noviembre= 0, noviembreBono = 0;
 	 		float diciembre= 0, diciembreBono = 0;
 	 		
-	 		boolean bEnero = true;
-	 		boolean bFebrero = true;
-	 		boolean bMarzo	= true;
-	 		boolean bAbril = true;
-	 		boolean bMayo = true;
-	 		boolean bJunio = true;
-	 		boolean bJulio = true;
-	 		boolean bAgosto = true;
-	 		boolean bSeptiembre = true;
-	 		boolean bOctubre = true;
-	 		boolean bNoviembre = true;
-	 		boolean bDiciembre = true;
+	 		boolean bEnero = true, dEnero = true;
+	 		boolean bFebrero = true, dFebrero = true;
+	 		boolean bMarzo = true, dMarzo = true;
+	 		boolean bAbril = true, dAbril = true;
+	 		boolean bMayo = true, dMayo = true;
+	 		boolean bJunio = true, dJunio = true;
+	 		boolean bJulio = true, dJulio = true;
+	 		boolean bAgosto = true, dAgosto = true;
+	 		boolean bSeptiembre = true, dSeptiembre = true;
+	 		boolean bOctubre = true, dOctubre= true;
+	 		boolean bNoviembre = true, dNoviembre = true;
+	 		boolean bDiciembre = true, dDiciembre = true;
 	 		
 	 		float eneroUltimoSalario = 0;
 	 		float febreroUltimoSalario = 0;
@@ -618,6 +623,33 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		float octubreUltimoSalario = 0;
 	 		float noviembreUltimoSalario = 0;
 	 		float diciembreUltimoSalario = 0;
+	 		
+	 		float eneroUltimoDecreto = 0;
+	 		float febreroUltimoDecreto = 0;
+	 		float marzoUltimoDecreto = 0;
+	 		float abrilUltimoDecreto = 0;
+	 		float mayoUltimoDecreto = 0;
+	 		float junioUltimoDecreto = 0;
+	 		float julioUltimoDecreto = 0;
+	 		float agostoUltimoDecreto = 0;
+	 		float septiembreUltimoDecreto = 0;
+	 		float octubreUltimoDecreto = 0;
+	 		float noviembreUltimoDecreto = 0;
+	 		float diciembreUltimoDecreto = 0;
+	 		
+
+	 		float eneroDecreto = 0;
+	 		float febreroDecreto = 0;
+	 		float marzoDecreto = 0;
+	 		float abrilDecreto = 0;
+	 		float mayoDecreto = 0;
+	 		float junioDecreto = 0;
+	 		float julioDecreto = 0;
+	 		float agostoDecreto = 0;
+	 		float septiembreDecreto = 0;
+	 		float octubreDecreto = 0;
+	 		float noviembreDecreto = 0;
+	 		float diciembreDecreto = 0;
 	 		
 	 		int eneroAnioUltimo = 0;
 	 		int febreroAnioUltimo = 0;
@@ -762,6 +794,99 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					}
 		 					
 		 				}
+		 				
+		 				if(Integer.parseInt(AuxAnio) <= Integer.parseInt(listAnio) &&  s.getTipoSalario().equals("1") && checkBonificacion.isChecked())
+		 				{
+		 					//luego de lo anterior verifico que el año del Decreto y el mes del Decreto a tomar en cuenta
+		 					//es mayor o igual a la fecha del ultimo Decreto, si es asi, entonces ese Decreto sera el ultimo
+		 					//y asi hasta encontrar el ultimo entre la fecha a calcular hasta antes de esa fecha
+		 					System.out.println(AuxMes);
+		 					if(Integer.parseInt(AuxAnio) >= eneroAnioUltimo && Integer.parseInt(AuxMes) >= eneroMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 01)
+		 					{
+		 						eneroAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						eneroMesUltimo 		= Integer.parseInt(AuxMes);
+		 						eneroUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= febreroAnioUltimo && Integer.parseInt(AuxMes) >= febreroMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 02)
+		 					{
+		 						febreroAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						febreroMesUltimo 		= Integer.parseInt(AuxMes);
+		 						febreroUltimoDecreto 	=  s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= marzoAnioUltimo && Integer.parseInt(AuxMes) >= marzoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 03)
+		 					{
+		 						marzoAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						marzoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						marzoUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= abrilAnioUltimo && Integer.parseInt(AuxMes) >= abrilMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 04)
+		 					{
+		 						abrilAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						abrilMesUltimo 		= Integer.parseInt(AuxMes);
+		 						abrilUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= mayoAnioUltimo && Integer.parseInt(AuxMes) >= mayoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 05)
+		 					{
+		 						mayoAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						mayoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						mayoUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= junioAnioUltimo && Integer.parseInt(AuxMes) >= junioMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 06)
+		 					{
+		 						junioAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						junioMesUltimo 		= Integer.parseInt(AuxMes);
+		 						junioUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= julioAnioUltimo && Integer.parseInt(AuxMes) >= julioMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 07)
+		 					{
+		 						julioAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						julioMesUltimo 		= Integer.parseInt(AuxMes);
+		 						julioUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= agostoAnioUltimo && Integer.parseInt(AuxMes) >= agostoMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 8)
+		 					{
+		 						agostoAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						agostoMesUltimo 		= Integer.parseInt(AuxMes);
+		 						agostoUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= septiembreAnioUltimo && Integer.parseInt(AuxMes) >= septiembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 9)
+		 					{
+		 						septiembreAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						septiembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						septiembreUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= octubreAnioUltimo && Integer.parseInt(AuxMes) >= octubreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 10)
+		 					{
+		 						octubreAnioUltimo 		= Integer.parseInt(AuxAnio);
+		 						octubreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						octubreUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= noviembreAnioUltimo && Integer.parseInt(AuxMes) >= noviembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 11)
+		 					{
+		 						noviembreAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						noviembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						noviembreUltimoDecreto 	= s.getSalario();
+		 					}
+		 					if(Integer.parseInt(AuxAnio) >= diciembreAnioUltimo && Integer.parseInt(AuxMes) >= diciembreMesUltimo
+		 							 && Integer.parseInt(AuxMes)<= 12)
+		 					{
+		 						diciembreAnioUltimo 	= Integer.parseInt(AuxAnio);
+		 						diciembreMesUltimo 		= Integer.parseInt(AuxMes);
+		 						diciembreUltimoDecreto 	= s.getSalario();
+		 					}
+		 					
+		 				}
 		 				//*********************************************************************************
 		 				/**
 		 				 * por si cada mes no tuviera un salario en especifico, entonces se le asigna el ultimo salario calculado
@@ -779,6 +904,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					enero = eneroUltimoSalario;
 		 				}
 		 				
+		 				//decreto de enero
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("01") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					eneroDecreto = s.getSalario();
+		 					dEnero = false;
+		 				}else if(dEnero && checkDecreto.isChecked())
+		 				{
+		 					eneroDecreto = eneroUltimoDecreto;
+		 				}
+		 				
 		 				//salario de febrero
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("02")&& s.getTipoSalario().equals("0"))
 		 				{
@@ -789,6 +924,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					febrero = febreroUltimoSalario;
 		 				}
 		 				
+		 				//decreto de febrero
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("02")&& s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					febreroDecreto = s.getSalario();
+		 					dFebrero  = false;
+		 				}else if(dFebrero && checkDecreto.isChecked())
+		 				{
+		 					febreroDecreto = febreroUltimoDecreto;
+		 				}
+		 				
 		 				//salario de marzo
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("03") && s.getTipoSalario().equals("0"))
 		 				{
@@ -797,6 +942,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				}else if(bMarzo)
 		 				{
 		 					marzo = marzoUltimoSalario;
+		 				}
+
+		 				//decreto de marzo
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("03") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					marzoDecreto = s.getSalario();
+		 					dMarzo  = false;
+		 				}else if(dMarzo && checkDecreto.isChecked())
+		 				{
+		 					marzoDecreto = marzoUltimoDecreto;
 		 				}
 		 				
 		 				//salario de abril
@@ -809,6 +964,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					abril = abrilUltimoSalario;
 		 				}
 		 				
+		 				//decreto de abril
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("04") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					abrilDecreto = s.getSalario();
+		 					dAbril  = false;
+		 				}else if(dAbril && checkDecreto.isChecked())
+		 				{
+		 					abrilDecreto = abrilUltimoDecreto;
+		 				}
+		 				
 		 				//salario de mayo
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("05") && s.getTipoSalario().equals("0"))
 		 				{
@@ -819,6 +984,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					mayo = mayoUltimoSalario;
 		 				}
 		 				
+		 				//decreto de mayo
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("05") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					mayoDecreto = s.getSalario();
+		 					dMayo  = false;
+		 				}else if(dMayo && checkDecreto.isChecked())
+		 				{
+		 					mayoDecreto = mayoUltimoDecreto;
+		 				}
+		 				
 		 				//salario de junio
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("06") && s.getTipoSalario().equals("0"))
 		 				{
@@ -827,6 +1002,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				}else if(bJunio)
 		 				{
 		 					junio = junioUltimoSalario;
+		 				}
+		 				
+		 				//decreto de junio
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("06") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					junioDecreto = s.getSalario();
+		 					dJunio  = false;
+		 				}else if(dJunio && checkDecreto.isChecked())
+		 				{
+		 					junioDecreto = junioUltimoDecreto;
 		 				}
 		 				
 	
@@ -840,7 +1025,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					julio = julioUltimoSalario;
 		 				}
 		 				
-	
+		 				//Decreto de julio
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("07") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					julioDecreto = s.getSalario();
+		 					dJulio  = false;
+		 				}else if(dJulio && checkDecreto.isChecked())
+		 				{
+		 					julioDecreto = julioUltimoDecreto;
+		 				}
+		 				
 		 				//salario de agosto
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("08") && s.getTipoSalario().equals("0"))
 		 				{
@@ -851,7 +1045,16 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 					agosto = agostoUltimoSalario;
 		 				}
 		 				
-	
+		 				//Decreto de agosto
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("08") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					agostoDecreto = s.getSalario();
+		 					dAgosto  = false;
+		 				}else if(dAgosto && checkDecreto.isChecked())
+		 				{
+		 					agostoDecreto = agostoUltimoDecreto;
+		 				}
+		 					
 		 				//salario de septiembre
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("09")  && s.getTipoSalario().equals("0"))
 		 				{
@@ -860,6 +1063,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				}else if(bSeptiembre)
 		 				{
 		 					septiembre = septiembreUltimoSalario;
+		 				}
+
+	 					
+		 				//Decreto de septiembre
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("09")  && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					septiembreDecreto = s.getSalario();
+		 					dSeptiembre  = false;
+		 				}else if(dSeptiembre && checkDecreto.isChecked())
+		 				{
+		 					septiembreDecreto = septiembreUltimoDecreto;
 		 				}
 		 				
 	
@@ -874,6 +1088,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				}
 		 				
 	
+		 				//Decreto de Octubre
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("10") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					octubreDecreto = s.getSalario();
+		 					dOctubre  = false;
+		 				}else if(dOctubre && checkDecreto.isChecked())
+		 				{
+		 					octubreDecreto = octubreUltimoDecreto;
+		 				}
+		 				
+	
 		 				//salario de Noviembre
 		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("11") && s.getTipoSalario().equals("0"))
 		 				{
@@ -882,6 +1107,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				}else if(bNoviembre)
 		 				{
 		 					noviembre = noviembreUltimoSalario;
+		 				}
+		 				
+	
+		 				//Decreto de Noviembre
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("11") && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					noviembreDecreto = s.getSalario();
+		 					dNoviembre  = false;
+		 				}else if(dNoviembre && checkDecreto.isChecked())
+		 				{
+		 					noviembreDecreto = noviembreUltimoDecreto;
 		 				}
 		 				
 	
@@ -894,7 +1130,17 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				{
 		 					diciembre = diciembreUltimoSalario;
 		 				}
+
 		 				
+		 				//Decreto de Diciembre
+		 				if(AuxAnio.equals(listAnio) && AuxMes.equals("12")  && s.getTipoSalario().equals("1") && checkDecreto.isChecked())
+		 				{
+		 					diciembreDecreto = s.getSalario();
+		 					dDiciembre  = false;
+		 				}else if(dDiciembre  && checkDecreto.isChecked())
+		 				{
+		 					diciembreDecreto = diciembreUltimoDecreto;
+		 				}
 		 				
 	
 		 				//*********************************************************************************
@@ -977,18 +1223,18 @@ public class CrearPrestacionesLaborales extends Composite   {
 		 				
 		 			}//fin for salario
 		 		}
-	 			enero 		= enero + eneroBono;
-	 			febrero 	= febrero + febreroBono;
-	 			marzo 		= marzo + marzoBono;
-	 			abril 		= abril + abrilBono;
-	 			mayo 		= mayo + mayoBono;
-	 			junio 		= junio + junioBono;
-	 			julio 		= julio + julioBono;
-	 			agosto 		= agosto + agostoBono;
-	 			septiembre 	= septiembre + septiembreBono;
-	 			octubre 	= octubre + octubreBono;
-	 			noviembre 	= noviembre + noviembreBono;
-	 			diciembre 	= diciembre + diciembreBono;
+	 			enero 		= enero + eneroBono + eneroDecreto;
+	 			febrero 	= febrero + febreroBono +febreroDecreto;
+	 			marzo 		= marzo + marzoBono + marzoDecreto;
+	 			abril 		= abril + abrilBono + abrilDecreto;
+	 			mayo 		= mayo + mayoBono + mayoDecreto;
+	 			junio 		= junio + junioBono + junioDecreto;
+	 			julio 		= julio + julioBono + julioDecreto;
+	 			agosto 		= agosto + agostoBono + agostoDecreto;
+	 			septiembre 	= septiembre + septiembreBono + septiembreDecreto;
+	 			octubre 	= octubre + octubreBono + octubreDecreto;
+	 			noviembre 	= noviembre + noviembreBono + noviembreDecreto;
+	 			diciembre 	= diciembre + diciembreBono + diciembreDecreto;
 
 	 			System.out.println("mes2: "+mes2);
 	 			System.out.println("mes1: "+mes1);
@@ -1042,6 +1288,12 @@ public class CrearPrestacionesLaborales extends Composite   {
  			abril = 0;
  			mayo = 0;
  			junio = 0;
+ 			julio = 0;
+ 			agosto = 0;
+ 			septiembre = 0;
+ 			octubre = 0;
+ 			noviembre = 0;
+ 			diciembre = 0;
  			
  			eneroBono = 0;
  			febreroBono = 0;
@@ -1049,6 +1301,12 @@ public class CrearPrestacionesLaborales extends Composite   {
  			abrilBono = 0;
  			mayoBono = 0;
  			junioBono = 0;
+ 			julioBono = 0;
+ 			agostoBono = 0;
+ 			septiembreBono = 0;
+ 			octubreBono = 0;
+ 			noviembreBono = 0;
+ 			diciembreBono = 0;
 	 			
 
 	 		 bEnero = true;
@@ -1057,7 +1315,25 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		 bAbril = true;
 	 		 bMayo = true;
 	 		 bJunio = true;
+	 		 bJulio = true;
+	 		 bAgosto = true;
+	 		 bSeptiembre = true;
+	 		 bOctubre = true;
+	 		 bNoviembre = true;
+	 		 bDiciembre = true;
 	 		 
+	 		 dEnero = true;
+	 		 dFebrero = true;
+	 		 dMarzo	= true;
+	 		 dAbril = true;
+	 		 dMayo = true;
+	 		 dJunio = true;
+	 		 dJulio = true;
+	 		 dAgosto = true;
+	 		 dSeptiembre = true;
+	 		 dOctubre = true;
+	 		 dNoviembre = true;
+	 		 dDiciembre = true;
 
 	 		 eneroUltimoSalario = 0;
 	 		 febreroUltimoSalario = 0;
@@ -1071,6 +1347,19 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 		 octubreUltimoSalario = 0;
 	 		 noviembreUltimoSalario = 0;
 	 		 diciembreUltimoSalario = 0;
+
+	 		 eneroUltimoDecreto = 0;
+	 		 febreroUltimoDecreto = 0;
+	 		 marzoUltimoDecreto = 0;
+	 		 abrilUltimoDecreto = 0;
+	 		 mayoUltimoDecreto = 0;
+	 		 junioUltimoDecreto = 0;
+	 		 julioUltimoDecreto = 0;
+	 		 agostoUltimoDecreto = 0;
+	 		 septiembreUltimoDecreto = 0;
+	 		 octubreUltimoDecreto = 0;
+	 		 noviembreUltimoDecreto = 0;
+	 		 diciembreUltimoDecreto = 0;
 	 		
 	 		 eneroAnioUltimo = 0;
 	 		 febreroAnioUltimo = 0;

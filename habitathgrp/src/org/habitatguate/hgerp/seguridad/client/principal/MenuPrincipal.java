@@ -538,7 +538,6 @@ public class MenuPrincipal extends Composite {
 
 
 	void empleado4() {
-
 		final DialogBox Registro2 = new DialogBox();
 	    final HTML serverResponseLabel = new HTML();
 	    final Button close= new Button("x");
@@ -555,7 +554,6 @@ public class MenuPrincipal extends Composite {
 	    Registro2 .center();
 	    Registro2 .show();
 	    close.setFocus(true);
-	
 	    close.addClickHandler(new ClickHandler() {
 	    public void onClick(ClickEvent event) {
 	        Registro2.hide();
@@ -563,15 +561,14 @@ public class MenuPrincipal extends Composite {
 	    });
 	}
 	
-	void solicitudes1(){
-		
+	void solicitudes1(){	
 		SolicitudPermiso fmc = new SolicitudPermiso(panel.getId_empleado());
 		fmc.agregarFormulario_Empleado();
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fmc);
-
 	}
+	
 	void solicitudes2(){
 		SolicitudPermiso fmc = new SolicitudPermiso(panel.getId_empleado());
 		fmc.agregarFormulario_Jefe();
@@ -586,7 +583,6 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fmc);
-
 	}
 
 	void fina3b(){
@@ -594,15 +590,14 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fmc);
-
 	}
+	
 	//@UiHandler("finan3b")
 	void fina6b(){
 		Formulario_MaterialCostruccion fmc = new Formulario_MaterialCostruccion();
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fmc);
-
 	}
 
 	//@UiHandler("finan4")

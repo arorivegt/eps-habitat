@@ -14,7 +14,7 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 
 public class CambiarContrasena extends Composite{
 	
@@ -22,9 +22,9 @@ public class CambiarContrasena extends Composite{
     private Mensaje mensaje; 
     private Button 	btnCambiar;
     private AbsolutePanel rootPanel;
-    private TextBox txtContrasenaActual;
-    private TextBox txtContrasenaNueva;
-    private TextBox txtContrasenaNuevaRepetida;
+    private PasswordTextBox txtContrasenaActual;
+    private PasswordTextBox txtContrasenaNueva;
+    private PasswordTextBox txtContrasenaNuevaRepetida;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 	
     public CambiarContrasena() 
@@ -45,24 +45,24 @@ public class CambiarContrasena extends Composite{
         rootPanel.add(lblNewLabel_1, 10, 5);
         lblNewLabel_1.setSize("207px", "261px");
         
-        txtContrasenaActual =new TextBox();
+        txtContrasenaActual =new PasswordTextBox();
         txtContrasenaActual.setText("");
         txtContrasenaActual.setStyleName("gwt-PasswordTextBox");
-        txtContrasenaActual.getElement().setPropertyString("placeHolder", "Ingrese Contraseña Actual");
+        txtContrasenaActual.getElement().setAttribute("placeHolder", "Ingrese Contraseña Actual");
         rootPanel.add(txtContrasenaActual, 30, 67);
         txtContrasenaActual.setSize("241px", "49px");
         
-        txtContrasenaNueva =new TextBox();
+        txtContrasenaNueva =new PasswordTextBox();
         txtContrasenaNueva.setText("");
         txtContrasenaNueva.setStyleName("gwt-PasswordTextBox");
-        txtContrasenaNueva.getElement().setPropertyString("placeHolder", "Ingrese Contraseña nueva");
+        txtContrasenaNueva.getElement().setAttribute("placeHolder", "Ingrese Contraseña nueva");
         rootPanel.add(txtContrasenaNueva, 30, 137);
         txtContrasenaNueva.setSize("241px", "49px");
         
-        txtContrasenaNuevaRepetida =new TextBox();
+        txtContrasenaNuevaRepetida =new PasswordTextBox();
         txtContrasenaNuevaRepetida.setText("");
         txtContrasenaNuevaRepetida.setStyleName("gwt-PasswordTextBox");
-        txtContrasenaNuevaRepetida.getElement().setPropertyString("placeHolder", "Repetir Contraseña nueva");
+        txtContrasenaNuevaRepetida.getElement().setAttribute("placeHolder", "Repetir Contraseña nueva");
         rootPanel.add(txtContrasenaNuevaRepetida, 30, 200);
         txtContrasenaNuevaRepetida.setSize("241px", "49px");
         
@@ -70,10 +70,14 @@ public class CambiarContrasena extends Composite{
         btnCambiar.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
                 load.visible();
-                if(txtContrasenaNueva.getText().equals(txtContrasenaNuevaRepetida.getText())){
-	            	mensaje.setMensaje("alert alert-error", "Las contraseñas no coinciden");
+                if(!txtContrasenaNueva.getText().equals(txtContrasenaNuevaRepetida.getText())){
+        			load.invisible();
+	            	mensaje.setMensaje("alert alert-error", "Las contraseñas no coinciden(Repetida Nueva-Nueva)");
+                }
+                else if(!txtContrasenaNueva.getText().equals("") || txtContrasenaNuevaRepetida.getText().equals("") ){
+        			load.invisible();
+	            	mensaje.setMensaje("alert alert-error", "Las contraseñas no pueden ir vacias");
                 }else{
-
                 	recursosHumanosService.obtenerUsuario(new AsyncCallback<String>() 
 					{ 
                 		public void onFailure(Throwable caught) {

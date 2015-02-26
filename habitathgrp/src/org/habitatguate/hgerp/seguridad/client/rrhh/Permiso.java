@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -30,7 +30,7 @@ public class Permiso extends Composite  {
 	 private FlexTable flextable;
 	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
-	 List<AuxVacaciones> permiso = new ArrayList<AuxVacaciones> ();
+	 List<AuxPermiso> permiso = new ArrayList<AuxPermiso> ();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 private final Grid grid = new Grid(1, 4);
 	 private DateBox dateFecha1;
@@ -90,14 +90,14 @@ public class Permiso extends Composite  {
 	        	public void onClick(ClickEvent event) {
 
 	                load.visible();
-	        		loginService.getPermisos(empleado.id_empleado, new AsyncCallback<List<AuxVacaciones>>(){
+	        		loginService.getPermisos(empleado.id_empleado, new AsyncCallback<List<AuxPermiso>>(){
 	        			
 	                    public void onFailure(Throwable caught) 
 	                    {
 	                    }
 
 	    				@Override
-	                    public void onSuccess(List<AuxVacaciones> result)
+	                    public void onSuccess(List<AuxPermiso> result)
 	                    {
 	    					System.out.print(result.isEmpty());
 	    					permiso  = result;
@@ -106,8 +106,8 @@ public class Permiso extends Composite  {
 	    	         });
 	        		try{
 
-		        		List<AuxVacaciones> vacacio = new ArrayList<AuxVacaciones> ();
-	        		for(AuxVacaciones h: permiso)
+		        		List<AuxPermiso> vacacio = new ArrayList<AuxPermiso> ();
+	        		for(AuxPermiso h: permiso)
 	        		{
 	        			Date aux = new Date(h.getFecha1());
 	        			Date aux2 = new Date(h.getFecha2());
@@ -186,12 +186,12 @@ public class Permiso extends Composite  {
 	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPermiso(this,empleado));
 	    }
 	    
-	    public void agregarFormulario_lleno(List<AuxVacaciones> results){
+	    public void agregarFormulario_lleno(List<AuxPermiso> results){
 	        load.visible();
 	    	flextable.clear();
 	    	if (!results.isEmpty()) {
 	    		permiso = results;
-			    for ( AuxVacaciones n2 : results) {
+			    for ( AuxPermiso n2 : results) {
 			    	FormularioPermiso fa = new  FormularioPermiso(this,empleado);
 			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 			    				   n2.getTipoPermisos());

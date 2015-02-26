@@ -23,7 +23,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 
 import com.itextpdf.text.BaseColor;
 // Document Object
@@ -296,7 +296,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			        	   boolean valor = true;
 			        	   Date fecha1 = new Date(Long.parseLong(permf1));
 			        	   Date fecha2 = new Date(Long.parseLong(permf2));
-		            	for(AuxVacaciones f : p.getVacaciones()) {
+		            	for(AuxPermiso f : p.getVacaciones()) {
 		        			Date aux = new Date(f.getFecha1());
 		        			Date aux2 = new Date(f.getFecha2());
 		        			
@@ -618,7 +618,7 @@ public class CrearReporteEmpleado extends HttpServlet {
         return table;
     }
     
-    public PdfPTable CrearPermiso(AuxVacaciones f) {
+    public PdfPTable CrearPermiso(AuxPermiso f) {
  		String Annio1 = ""+fecha.format(new Date(f.getFecha1()));
  		String Annio2 = ""+fecha.format(new Date(f.getFecha2()));
      	PdfPTable table = new PdfPTable(2);

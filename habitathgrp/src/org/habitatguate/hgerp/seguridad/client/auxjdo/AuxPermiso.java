@@ -2,7 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class AuxVacaciones implements IsSerializable{
+public class AuxPermiso implements IsSerializable{
 	
     private Long id_vacaciones;
 	
@@ -18,7 +18,7 @@ public class AuxVacaciones implements IsSerializable{
 
     private String tipoPermisos;
 	
-	public AuxVacaciones() {
+	public AuxPermiso() {
 		super();
 	}
     

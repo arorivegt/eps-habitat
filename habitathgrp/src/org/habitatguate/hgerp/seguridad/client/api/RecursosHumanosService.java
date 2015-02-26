@@ -17,7 +17,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -901,6 +901,16 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     List<AuxSolicitudPermiso> BDSolicitudesEmpleado(Long idEmpleadoSolicitante)throws IllegalArgumentException; 
+
+    /**
+     * 
+     * @param idEmpleadoSolicitante
+     * @param Permiso
+     * @return
+     * @throws IllegalArgumentException
+     */
+    AuxPermiso getPermiso(Long idEmpleado, Long Permiso)throws IllegalArgumentException; 
+    
     /**
      * 
      * @param idEmpleado
@@ -1004,7 +1014,7 @@ public interface RecursosHumanosService extends RemoteService {
      * @return
      * @throws IllegalArgumentException
      */
-    List<AuxVacaciones> getPermisos(Long id)throws IllegalArgumentException;
+    List<AuxPermiso> getPermisos(Long id)throws IllegalArgumentException;
     
     /**
      * 

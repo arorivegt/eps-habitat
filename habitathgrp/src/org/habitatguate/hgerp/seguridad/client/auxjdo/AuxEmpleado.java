@@ -102,7 +102,7 @@ public class AuxEmpleado implements IsSerializable{
 
     private String TelefonoEmergencia2;
     
-    private List <AuxVacaciones> vacaciones = new ArrayList<AuxVacaciones>();
+    private List <AuxPermiso> vacaciones = new ArrayList<AuxPermiso>();
 
     private List <AuxFamilia> familia= new ArrayList<AuxFamilia>();
 
@@ -438,12 +438,12 @@ public class AuxEmpleado implements IsSerializable{
 	}
 
 
-	public List<AuxVacaciones> getVacaciones() {
+	public List<AuxPermiso> getVacaciones() {
 		return vacaciones;
 	}
 
 
-	public void setVacaciones(List<AuxVacaciones> vacaciones) {
+	public void setVacaciones(List<AuxPermiso> vacaciones) {
 		this.vacaciones = vacaciones;
 	}
 

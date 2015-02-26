@@ -16,6 +16,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CalculoVacaciones;
+import org.habitatguate.hgerp.seguridad.client.rrhh.CambiarContrasena;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Compartidas;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearInformeBancos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.CrearPrestacionesLaborales;
@@ -121,6 +122,11 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 
+		final Command cmdempleado4 = new Command() {
+			public void execute() {
+				empleado4();
+			}
+		};
 		final Command cmdsolicitudes1 = new Command() {
 			public void execute() {
 				solicitudes1();
@@ -251,6 +257,8 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.addItem("Mi Perfil", cmdempleado1);
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Permisos", MenuSolicitudes);
+		MenuEmpleados.addSeparator();
+		MenuEmpleados.addItem("Cambiar Contraseña", cmdempleado4);
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
@@ -528,6 +536,32 @@ public class MenuPrincipal extends Composite {
 		});
 	}
 
+
+	void empleado4() {
+
+		final DialogBox Registro2 = new DialogBox();
+	    final HTML serverResponseLabel = new HTML();
+	    final Button close= new Button("x");
+	    CambiarContrasena inicio = new CambiarContrasena();
+	    VerticalPanel dialogVPanel = new VerticalPanel();
+	    dialogVPanel.add(serverResponseLabel );
+	    dialogVPanel.add(inicio);
+	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+	    dialogVPanel.add(close);
+	    Registro2 .setWidget(dialogVPanel);
+	    Registro2 .setModal(true);
+	    Registro2 .setGlassEnabled(true);
+	    Registro2 .setAnimationEnabled(true);
+	    Registro2 .center();
+	    Registro2 .show();
+	    close.setFocus(true);
+	
+	    close.addClickHandler(new ClickHandler() {
+	    public void onClick(ClickEvent event) {
+	        Registro2.hide();
+	    }
+	    });
+	}
 	
 	void solicitudes1(){
 		

@@ -37,13 +37,13 @@ public class CambiarContrasena extends Composite{
 		mensaje = new Mensaje();
 		
     	rootPanel = new AbsolutePanel();
-    	rootPanel.setSize("299px", "199px");
+    	rootPanel.setSize("297px", "323px");
         rootPanel.setStyleName("body");
         
         Label lblNewLabel_1 = new Label("");
         lblNewLabel_1.setStyleName("gwt-Label-new");
         rootPanel.add(lblNewLabel_1, 10, 5);
-        lblNewLabel_1.setSize("205px", "142px");
+        lblNewLabel_1.setSize("207px", "261px");
         
         txtContrasenaActual =new TextBox();
         txtContrasenaActual.setText("");
@@ -56,14 +56,14 @@ public class CambiarContrasena extends Composite{
         txtContrasenaNueva.setText("");
         txtContrasenaNueva.setStyleName("gwt-PasswordTextBox");
         txtContrasenaNueva.getElement().setPropertyString("placeHolder", "Ingrese Contraseña nueva");
-        rootPanel.add(txtContrasenaNueva, 30, 67);
+        rootPanel.add(txtContrasenaNueva, 30, 137);
         txtContrasenaNueva.setSize("241px", "49px");
         
         txtContrasenaNuevaRepetida =new TextBox();
         txtContrasenaNuevaRepetida.setText("");
         txtContrasenaNuevaRepetida.setStyleName("gwt-PasswordTextBox");
         txtContrasenaNuevaRepetida.getElement().setPropertyString("placeHolder", "Repetir Contraseña nueva");
-        rootPanel.add(txtContrasenaNuevaRepetida, 30, 67);
+        rootPanel.add(txtContrasenaNuevaRepetida, 30, 200);
         txtContrasenaNuevaRepetida.setSize("241px", "49px");
         
         btnCambiar = new Button("Send");
@@ -104,14 +104,14 @@ public class CambiarContrasena extends Composite{
         });
         btnCambiar.setText("Cambiar");
         btnCambiar.setStyleName("sendButton");
-        rootPanel.add(btnCambiar, 30, 124);
+        rootPanel.add(btnCambiar, 30, 269);
         btnCambiar.setSize("243px", "44px");
         
         initWidget(rootPanel);
         
         Label lblNewLabel = new Label("Cambiar contraseña:");
-        rootPanel.add(lblNewLabel, 30, 10);
-        lblNewLabel.setSize("243px", "19px");
+        rootPanel.add(lblNewLabel, 59, 5);
+        lblNewLabel.setSize("174px", "19px");
         
 
     }

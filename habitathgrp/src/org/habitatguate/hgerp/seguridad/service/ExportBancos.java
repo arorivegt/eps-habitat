@@ -29,7 +29,7 @@ public class ExportBancos extends HttpServlet {
 			InformBancosXml n 			= new InformBancosXml();
 			
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "inline; Filename=document_name.xls");
+			response.setHeader("Content-Disposition", "inline; Filename=Bancos.xls");
 			
 			String tipo 				= request.getParameter("tipo");
 			String primer_nombre 		= request.getParameter("primer_nombre");

@@ -29,7 +29,7 @@ public class ExportAs extends HttpServlet {
 			InformMinisterioTrabajoXml n = new InformMinisterioTrabajoXml();
 			
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "inline; Filename=document_name.xls");
+			response.setHeader("Content-Disposition", "inline; Filename=Informe_Ministerio_Trabajo.xls");
 			
 			String tipo 		= request.getParameter("tipo");
 			String estado 		= request.getParameter("estado");

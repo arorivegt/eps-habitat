@@ -17,7 +17,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -919,6 +919,17 @@ public interface RecursosHumanosServiceAsync {
 	    void BDSolicitudesEmpleado(Long idEmpleadoSolicitante,
 				AsyncCallback<List<AuxSolicitudPermiso>> callback)throws IllegalArgumentException;
 	    
+
+	    /**
+	     * 
+	     * @param idEmpleadoSolicitante
+	     * @param Permiso
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getPermiso(Long idEmpleado, Long Permiso,
+				AsyncCallback<AuxPermiso> callback)throws IllegalArgumentException;
+	    
 	    /**
 	     * 
 	     * @param idEmpleado
@@ -1024,7 +1035,7 @@ public interface RecursosHumanosServiceAsync {
 	     * @param callback
 	     * @throws IllegalArgumentException
 	     */
-	    void getPermisos(Long id,AsyncCallback<List<AuxVacaciones>> callback)throws IllegalArgumentException;
+	    void getPermisos(Long id,AsyncCallback<List<AuxPermiso>> callback)throws IllegalArgumentException;
 	    
 	    /**
 	     * 

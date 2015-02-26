@@ -20,7 +20,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -260,7 +260,7 @@ public class Empleado extends Composite {
 	public void setReferenciaPersonal(List<AuxReferenciaPersonal> listAuxReferenciaPersonal) {
 		referenciaPersonal.agregarFormulario_lleno(listAuxReferenciaPersonal);
 	}
-	public void setPermiso(List<AuxVacaciones> lsitAuxPermiso) {
+	public void setPermiso(List<AuxPermiso> lsitAuxPermiso) {
 		permisos.agregarFormulario_lleno(lsitAuxPermiso);
 	}
 

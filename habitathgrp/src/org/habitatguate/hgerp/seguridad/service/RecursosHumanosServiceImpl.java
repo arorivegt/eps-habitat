@@ -28,7 +28,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVacaciones;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.ValoresSesion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDPuesto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBDTest;
@@ -1377,7 +1377,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					    	if (!results9.isEmpty()) {
 							    for (SegPermiso n9 : results9) {
 
-							    	AuxVacaciones v= new AuxVacaciones();
+							    	AuxPermiso v= new AuxPermiso();
 							    	v.setId_vacaciones(n9.getId_permiso());
 							    	v.setFecha1(n9.getFecha1().getTime());
 								 	v.setFecha2(n9.getFecha2().getTime());
@@ -1645,7 +1645,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				    	if (!results9.isEmpty()) {
 						    for (SegPermiso n9 : results9) {
 
-						    	AuxVacaciones v= new AuxVacaciones();
+						    	AuxPermiso v= new AuxPermiso();
 						    	v.setId_vacaciones(n9.getId_permiso());
 						    	v.setFecha1(n9.getFecha1().getTime());
 							 	v.setFecha2(n9.getFecha2().getTime());
@@ -2158,20 +2158,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		}
 
 		@Override
-		public List<AuxVacaciones> getPermisos(Long id)
+		public List<AuxPermiso> getPermisos(Long id)
 				throws IllegalArgumentException {
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 
 			 System.out.println("sdadas::"+id);
 				SegEmpleado result; 
-				List<AuxVacaciones> valor = new ArrayList<AuxVacaciones>();
+				List<AuxPermiso> valor = new ArrayList<AuxPermiso>();
 				result = null;
 				try{
 					 result = Persistencia.getObjectById(SegEmpleado.class, id); 
 					 if (!result.getVacaciones().isEmpty()) {
 						    for ( SegPermiso n9 : result.getVacaciones()) 
 						    {
-						    	AuxVacaciones v= new AuxVacaciones();
+						    	AuxPermiso v= new AuxPermiso();
 						    	v.setId_vacaciones(n9.getId_permiso());
 						    	v.setFecha1(n9.getFecha1().getTime());
 							 	v.setFecha2(n9.getFecha2().getTime());
@@ -2726,6 +2726,35 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				Persistencia.close();  
 			 }
 			return valor;
+		}
+
+		@Override
+		public AuxPermiso getPermiso(Long idEmpleado, Long Permiso)
+				throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+	    	AuxPermiso valor= new AuxPermiso();
+				 try { 
+					 Key k = new KeyFactory
+						        .Builder(SegEmpleado.class.getSimpleName(), idEmpleado)
+						        .addChild(SegPermiso.class.getSimpleName(), Permiso)
+						        .getKey();
+					 final SegPermiso n9 = Persistencia.getObjectById(SegPermiso.class, k); 
+
+				    	valor= new AuxPermiso();
+				    	valor.setId_vacaciones(n9.getId_permiso());
+				    	valor.setFecha1(n9.getFecha1().getTime());
+				    	valor.setFecha2(n9.getFecha2().getTime());
+				    	valor.setTipoPermisos(n9.getTipoPermisos());
+				    	valor.setDescripcion(n9.getDescripcion());
+				}catch(Exception e){
+			    	valor= new AuxPermiso();
+				}
+				 finally {  
+				
+						 Persistencia.close();  
+				}
+				return valor;
 		}
 
 

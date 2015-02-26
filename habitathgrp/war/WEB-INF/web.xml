@@ -12,6 +12,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   </servlet>
   
   <servlet>
+    <servlet-name>ImprimirConstanciaPermiso</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ImprimirConstanciaPermiso</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  	<servlet-name>ImprimirConstanciaPermiso</servlet-name>  
+ 	<url-pattern>/ImprimirConstanciaPermiso</url-pattern>  
+  </servlet-mapping>  
+  
+  <servlet>
     <servlet-name>ExportarDatos</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportarDatos</servlet-class>
   </servlet>

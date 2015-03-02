@@ -35,6 +35,7 @@ public class FormularioPermiso extends Composite {
 	private Mensaje mensaje; 
 	private ListBox listTipoPermiso ;
     private Loading load ;
+    private Button btnImprimir;
     
 	public FormularioPermiso(Permiso a,Empleado e) {
 
@@ -145,27 +146,20 @@ public class FormularioPermiso extends Composite {
 		btnActualizar.setText("Solicitar");
 		btnActualizar.setStylePrimaryName("sendButton");
 		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 580, 51);
+		absolutePanel.add(btnActualizar, 580, 48);
 		btnActualizar.setSize("114px", "34px");
 		
-		Button btnEliminar = new Button("Send");
-		btnEliminar.addClickHandler(new ClickHandler() {
+		btnImprimir = new Button("Send");
+		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
-				if(bandera){
-					EliminarFormularioSinDatos();
-				}else{
-			        load.invisible();
-					if(Window.confirm("Esta Seguro de Eliminar el formulario"))
-						EliminarFormulario();
-				}
+				Window.open("/ImprimirConstanciaPermiso?abracadabra="+empleado.id_empleado+"&abracadabra2="+id_vacaciones, "_blank", ""); 
 			}
 		});
-		btnEliminar.setText("Eliminar");
-		btnEliminar.setStylePrimaryName("sendButton");
-		btnEliminar.setStyleName("sendButton");
-		absolutePanel.add(btnEliminar, 580, 124);
-		btnEliminar.setSize("114px", "34px");
+		btnImprimir.setText("Imprimir");
+		btnImprimir.setStylePrimaryName("sendButton");
+		btnImprimir.setStyleName("sendButton");
+		absolutePanel.add(btnImprimir, 580, 125);
+		btnImprimir.setSize("114px", "34px");
 		
 		Label lblNivelAcademico = new Label("Fecha Inicial");
 		lblNivelAcademico.setStyleName("label");
@@ -186,13 +180,9 @@ public class FormularioPermiso extends Composite {
 		lblTipoDePermiso.setStyleName("label");
 		absolutePanel.add(lblTipoDePermiso, 228, 10);
 		lblTipoDePermiso.setSize("139px", "13px");
+
+		btnImprimir.setVisible(false);
 	}
-	private void EliminarFormulario(){
-        a.EliminarFormulario(this,empleado.id_empleado,id_vacaciones);
-    }
-	private void EliminarFormularioSinDatos(){
-        a.EliminarFormulario(this);
-    }
 	public void LlenarDatos(Long id, String txtDescripcion,
 		    Long dateFecha1,
 		    Long dateFecha2,
@@ -205,6 +195,7 @@ public class FormularioPermiso extends Composite {
 		}
 		this.id_vacaciones = id;
 		this.bandera = false;
+		btnImprimir.setVisible(true);
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));

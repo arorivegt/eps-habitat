@@ -310,44 +310,97 @@ public class InformMinisterioTrabajoXml {
 							}else if(f.getJornada().equals("2")){
 								jornada = "Mixta";
 							}
-							
-							if(f.getLunes()){
+
+							if(f.getLunes().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Lunes medio dia";
+								else
+									DescansoSemanal +=","+ "Lunes medio dia";
+							}else if(f.getLunes().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Lunes";
 								else
 									DescansoSemanal +=","+ "Lunes";
-							}if(f.getMartes()){
+							}
+							
+							
+							if(f.getMartes().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Martes medio dia";
+								else
+									DescansoSemanal +=","+  "Martes medio dia";
+							}else if(f.getMartes().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Martes";
 								else
 									DescansoSemanal +=","+ "Martes";
-									
-							}if(f.getMiercoles()){
+							}
+							
+
+							if(f.getMiercoles().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Miercoles medio dia";
+								else
+									DescansoSemanal +=","+  "Miercoles medio dia";
+							}else if(f.getMiercoles().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Miercoles";
 								else
 									DescansoSemanal +=","+ "Miercoles";
-							}if(f.getJueves()){
+							}
+							
+
+							if(f.getJueves().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Jueves medio dia";
+								else
+									DescansoSemanal +=","+  "Jueves medio dia";
+							}else if(f.getJueves().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Jueves";
 								else
 									DescansoSemanal +=","+ "Jueves";
-							}if(f.getViernes()){
+							}
+							
+
+							if(f.getViernes().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Viernes medio dia";
+								else
+									DescansoSemanal +=","+  "Viernes medio dia";
+							}else if(f.getViernes().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Viernes";
 								else
 									DescansoSemanal +=","+ "Viernes";
-							}if(f.getSabado()){
+							}
+							
+
+							if(f.getSabado().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Sabado medio dia";
+								else
+									DescansoSemanal +=","+  "Sabado medio dia";
+							}else if(f.getSabado().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Sabado";
 								else
 									DescansoSemanal +=","+ "Sabado";
-							}if(f.getDomingo()){
+							}
+							
+
+							if(f.getDomingo().equals("1")){
+								if(DescansoSemanal.equals(""))
+									DescansoSemanal +=  "Domingo medio dia";
+								else
+									DescansoSemanal +=","+  "Domingo medio dia";
+							}else if(f.getDomingo().equals("2")){
 								if(DescansoSemanal.equals(""))
 									DescansoSemanal +=  "Domingo";
 								else
 									DescansoSemanal +=","+ "Domingo";
 							}
+							
 							break;
 						}
 					}

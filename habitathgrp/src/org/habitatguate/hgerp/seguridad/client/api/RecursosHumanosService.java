@@ -287,8 +287,8 @@ public interface RecursosHumanosService extends RemoteService {
 	 */
 	Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto, String funciones,
 			String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
-			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
-			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
+			String Lunes, String Martes, String Miercoles, String Jueves, String Viernres,
+			String Sabado,String Domingo)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id
@@ -650,8 +650,8 @@ public interface RecursosHumanosService extends RemoteService {
 	 */
 	Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto, String funciones,
 			String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
-			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
-			boolean Sabado,boolean Domingo)throws IllegalArgumentException;
+			String Lunes, String Martes, String Miercoles, String Jueves, String Viernres,
+			String Sabado,String Domingo)throws IllegalArgumentException;
 
 	/**
 	 * 

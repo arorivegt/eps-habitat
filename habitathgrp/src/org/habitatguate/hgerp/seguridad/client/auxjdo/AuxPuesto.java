@@ -28,25 +28,25 @@ public class AuxPuesto implements IsSerializable{
     
     private boolean activo;
     
-    private boolean Lunes;
+    private String Lunes;
 	
 	
-    private boolean Martes;
+    private String Martes;
 	
 	
-    private boolean Miercoles;
+    private String Miercoles;
 	
 	
-    private boolean Jueves;
+    private String Jueves;
 	
 	
-    private boolean Viernes;
+    private String Viernes;
 	
 	
-    private boolean Sabado;
+    private String Sabado;
 	
 	
-    private boolean Domingo;
+    private String Domingo;
 	
 
 	public AuxPuesto() {
@@ -61,59 +61,59 @@ public class AuxPuesto implements IsSerializable{
 		this.id_puesto = id_puesto;
 	}
 
-	public boolean getLunes() {
+	public String getLunes() {
 		return Lunes;
 	}
 
-	public void setLunes(boolean lunes) {
+	public void setLunes(String lunes) {
 		Lunes = lunes;
 	}
 
-	public boolean getMartes() {
+	public String getMartes() {
 		return Martes;
 	}
 
-	public void setMartes(boolean martes) {
+	public void setMartes(String martes) {
 		Martes = martes;
 	}
 
-	public boolean getMiercoles() {
+	public String getMiercoles() {
 		return Miercoles;
 	}
 
-	public void setMiercoles(boolean miercoles) {
+	public void setMiercoles(String miercoles) {
 		Miercoles = miercoles;
 	}
 
-	public boolean getJueves() {
+	public String getJueves() {
 		return Jueves;
 	}
 
-	public void setJueves(boolean jueves) {
+	public void setJueves(String jueves) {
 		Jueves = jueves;
 	}
 
-	public boolean getViernes() {
+	public String getViernes() {
 		return Viernes;
 	}
 
-	public void setViernes(boolean viernes) {
+	public void setViernes(String viernes) {
 		Viernes = viernes;
 	}
 
-	public boolean getSabado() {
+	public String getSabado() {
 		return Sabado;
 	}
 
-	public void setSabado(boolean sabado) {
+	public void setSabado(String sabado) {
 		Sabado = sabado;
 	}
 
-	public boolean getDomingo() {
+	public String getDomingo() {
 		return Domingo;
 	}
 
-	public void setDomingo(boolean domingo) {
+	public void setDomingo(String domingo) {
 		Domingo = domingo;
 	}
 

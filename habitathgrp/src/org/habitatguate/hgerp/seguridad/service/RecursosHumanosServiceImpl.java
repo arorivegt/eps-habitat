@@ -428,8 +428,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	@Override
 	public Long Insertar_Puesto(Long id_empleado,Date fecha_puesto, String nombre_puesto,
 			String funciones, String motivoPuesto, boolean activo, String jornada, String horasTrabajo,
-			boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
-			boolean Sabado,boolean Domingo)
+			String Lunes, String Martes, String Miercoles, String Jueves, String Viernres,
+			String Sabado,String Domingo)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -816,8 +816,8 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			@Override
 			public Long Actualizar_Puesto(Long id_empleado,Long id,Date fecha_puesto, String nombre_puesto,
 					String funciones, String motivoPuesto, boolean activo,String jornada, String horasTrabajo,
-					boolean Lunes, boolean Martes, boolean Miercoles, boolean Jueves, boolean Viernres,
-					boolean Sabado,boolean Domingo)
+					String Lunes, String Martes, String Miercoles, String Jueves, String Viernres,
+					String Sabado,String Domingo)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				

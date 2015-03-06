@@ -62,6 +62,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <url-pattern>/seguridad/Insertar</url-pattern>
   </servlet-mapping>
 
+<!-- Soluciones Construidas -->
+
   <servlet>
     <servlet-name>RegistroServlet</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.SolucionesConstruidasServiceImpl</servlet-class>
@@ -71,6 +73,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-name>RegistroServlet</servlet-name>
     <url-pattern>/seguridad/Registro</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ExportSolucionDetalle</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportSolucionDetalle</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+  	<servlet-name>ExportSolucionDetalle</servlet-name>  
+ 	<url-pattern>/ExportSolucionDetalle</url-pattern>  
+  </servlet-mapping>  
+
 
   <servlet>
     <servlet-name>upload url servlet</servlet-name>

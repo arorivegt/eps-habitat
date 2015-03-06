@@ -17,12 +17,15 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
@@ -36,6 +39,9 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
 	
+	private Button button;
+	private FormPanel formPanel;
+	private VerticalPanel verticalPanel;
 	private Mensaje mensaje; 
     private ScrollPanel scrollPanel;
     private AbsolutePanel absolutePanel_1;
@@ -99,15 +105,17 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		absolutePanel.add(listEstado, 170, 31);
 		listEstado.setSize("227px", "34px");
 		
-			Image image = new Image("images/ico-lupa.png");
-			image.addClickHandler(new ClickHandler() {
-				public void onClick(ClickEvent event) {
-					busqueda();
-				}
-			});
-			
-					absolutePanel.add(image, 604, 10);
-					image.setSize("103px", "55px");
+		// Imagen de Lupa de Busqueda
+		
+		Image image = new Image("images/ico-lupa.png");
+		image.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				busqueda();
+			}
+		});
+
+		absolutePanel.add(image, 400, 10);
+		image.setSize("103px", "55px");
 		
 		Label lblBusquedaPor = new Label("Segun Solucion a Construir:");
 		lblBusquedaPor.setStyleName("label");
@@ -128,6 +136,40 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		absolutePanel.add(lblEstadoEmpleado, 10, 29);
 		lblEstadoEmpleado.setSize("154px", "13px");
 	
+		// Boton para Exportar Data
+		
+		button = new Button("Send");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				char tipo = '3';
+				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("TODOS"))
+					tipo = '2';
+				else
+					tipo = '3';
+				
+				System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&solucionConstruir="+listEstado.getValue(listEstado.getSelectedIndex()));
+				formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&solucionConstruir="+listEstado.getValue(listEstado.getSelectedIndex()));
+				formPanel.submit();
+			}
+		});
+		button.setText("Exportar");
+		button.setStylePrimaryName("sendButton");
+		button.setStyleName("sendButton");
+		button.setSize("198px", "41px");
+		
+		formPanel = new FormPanel();
+		formPanel.setAction("/ExportAs?tipo="+"0"+"&estado="+listEstado.getValue(listEstado.getSelectedIndex()));
+		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
+		formPanel.setMethod(FormPanel.METHOD_POST);
+		
+		verticalPanel = new VerticalPanel();
+		formPanel.setWidget(verticalPanel);
+		verticalPanel.setSize("208px", "43px");
+        verticalPanel.add(button);
+		absolutePanel.add(formPanel, 508, 21);
+        formPanel.setSize("209px", "44px");
+		
 	}
 	
 	public void busqueda(){

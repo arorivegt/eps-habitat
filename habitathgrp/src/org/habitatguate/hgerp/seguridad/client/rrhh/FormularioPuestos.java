@@ -35,7 +35,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.datepicker.client.DateBox;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 
 public class FormularioPuestos extends Composite {
 
@@ -60,16 +59,16 @@ public class FormularioPuestos extends Composite {
     private Label lblJornada;
     private Label lblDiasDeDescando;
     private Label lblViernes;
-    private SimpleCheckBox checkLunes;
-    private SimpleCheckBox checkMartes;
-    private SimpleCheckBox checkMiercoles;
-    private SimpleCheckBox checkJueves;
-    private SimpleCheckBox checkViernes;
-    private SimpleCheckBox checkSabado;
-    private SimpleCheckBox checkDomingo;
     private Label lblSabado;
     private Label lblDomingo;
     private Loading load ;
+    private ListBox listLunes;
+    private ListBox listMartes;
+    private ListBox listMiercoles;
+    private ListBox listJueves;
+    private ListBox listViernes;
+    private ListBox listSabado;
+    private ListBox listDomingo;
 	
     /**
      * 
@@ -178,7 +177,6 @@ public class FormularioPuestos extends Composite {
 		
 		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
-			@SuppressWarnings("deprecation")
 			public void onClick(ClickEvent event) {
 		        load.visible();
 				try{
@@ -192,8 +190,9 @@ public class FormularioPuestos extends Composite {
 					loginService.Insertar_Puesto(empleado.id_empleado, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
 							txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getValue(listActivo.getSelectedIndex()).equals("1"),
 							listJornada.getValue(listJornada.getSelectedIndex()),listHorasTrabajadas.getValue(listHorasTrabajadas.getSelectedIndex())
-							,checkLunes.isChecked(),checkMartes.isChecked(),checkMiercoles.isChecked(),checkJueves.isChecked(),checkViernes.isChecked(),
-						    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
+							,listLunes.getValue(listLunes.getSelectedIndex()),listMartes.getValue(listMartes.getSelectedIndex()),
+							listMiercoles.getValue(listMiercoles.getSelectedIndex()),listJueves.getValue(listJueves.getSelectedIndex()),listViernes.getValue(listViernes.getSelectedIndex()),
+							listSabado.getValue(listSabado.getSelectedIndex()),listDomingo.getValue(listDomingo.getSelectedIndex()), new AsyncCallback<Long>(){
 				            public void onFailure(Throwable caught) 
 				            {
 						        load.invisible();
@@ -231,8 +230,9 @@ public class FormularioPuestos extends Composite {
 					loginService.Actualizar_Puesto(empleado.id_empleado,id_puesto, dateFecha.getValue(), listPuesto.getValue(listPuesto.getSelectedIndex()), 
 						txtFunciones.getText(), txtMotivoPuesto.getText(), listActivo.getValue(listActivo.getSelectedIndex()).equals("1"),
 						listJornada.getValue(listJornada.getSelectedIndex()),listHorasTrabajadas.getItemText(listHorasTrabajadas.getSelectedIndex())
-						,checkLunes.isChecked(),checkMartes.isChecked(),checkMiercoles.isChecked(),checkJueves.isChecked(),checkViernes.isChecked(),
-					    checkSabado.isChecked(),checkDomingo.isChecked(), new AsyncCallback<Long>(){
+						,listLunes.getValue(listLunes.getSelectedIndex()),listMartes.getValue(listMartes.getSelectedIndex()),
+						listMiercoles.getValue(listMiercoles.getSelectedIndex()),listJueves.getValue(listJueves.getSelectedIndex()),listViernes.getValue(listViernes.getSelectedIndex()),
+						listSabado.getValue(listSabado.getSelectedIndex()),listDomingo.getValue(listDomingo.getSelectedIndex()), new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
 		        load.invisible();
@@ -253,34 +253,6 @@ public class FormularioPuestos extends Composite {
 		        load.invisible();
 			}
 		});
-		
-		checkLunes = new SimpleCheckBox();
-		absolutePanel.add(checkLunes, 235, 199);
-		checkLunes.setSize("22px", "22px");
-		
-		checkMartes = new SimpleCheckBox();
-		absolutePanel.add(checkMartes, 295, 199);
-		checkMartes.setSize("22px", "22px");
-		
-		checkMiercoles = new SimpleCheckBox();
-		absolutePanel.add(checkMiercoles, 364, 199);
-		checkMiercoles.setSize("22px", "22px");
-		
-		checkJueves = new SimpleCheckBox();
-		absolutePanel.add(checkJueves, 425, 199);
-		checkJueves.setSize("22px", "22px");
-		
-		checkViernes = new SimpleCheckBox();
-		absolutePanel.add(checkViernes, 487, 199);
-		checkViernes.setSize("22px", "22px");
-		
-		checkSabado = new SimpleCheckBox();
-		absolutePanel.add(checkSabado, 556, 199);
-		checkSabado.setSize("22px", "22px");
-		
-		checkDomingo = new SimpleCheckBox();
-		absolutePanel.add(checkDomingo, 617, 199);
-		checkDomingo.setSize("22px", "22px");
 		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
@@ -336,6 +308,62 @@ public class FormularioPuestos extends Composite {
 		listActivo.setSize("47px", "34px");
 		absolutePanel.add(listActivo, 924, 67);
 		
+		listLunes = new ListBox();
+		listLunes.addItem("No Trabajado","0");
+		listLunes.addItem("Medio Dia","1");
+		listLunes.addItem("Dia Completo","2");
+		listLunes.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listLunes, 10, 196);
+		listLunes.setSize("118px", "34px");
+		
+		listMartes = new ListBox();
+		listMartes.addItem("No Trabajado","0");
+		listMartes.addItem("Medio Dia","1");
+		listMartes.addItem("Dia Completo","2");
+		listMartes.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listMartes, 141, 196);
+		listMartes.setSize("118px", "34px");
+		
+		listMiercoles = new ListBox();
+		listMiercoles.addItem("No Trabajado","0");
+		listMiercoles.addItem("Medio Dia","1");
+		listMiercoles.addItem("Dia Completo","2");
+		listMiercoles.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listMiercoles, 276, 196);
+		listMiercoles.setSize("118px", "34px");
+		
+		listJueves = new ListBox();
+		listJueves.addItem("No Trabajado","0");
+		listJueves.addItem("Medio Dia","1");
+		listJueves.addItem("Dia Completo","2");
+		listJueves.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listJueves, 408, 196);
+		listJueves.setSize("118px", "34px");
+		
+		listViernes = new ListBox();
+		listViernes.addItem("No Trabajado","0");
+		listViernes.addItem("Medio Dia","1");
+		listViernes.addItem("Dia Completo","2");
+		listViernes.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listViernes, 547, 196);
+		listViernes.setSize("118px", "34px");
+		
+		listSabado = new ListBox();
+		listSabado.addItem("No Trabajado","0");
+		listSabado.addItem("Medio Dia","1");
+		listSabado.addItem("Dia Completo","2");
+		listSabado.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listSabado, 685, 196);
+		listSabado.setSize("118px", "34px");
+		
+		listDomingo = new ListBox();
+		listDomingo.addItem("No Trabajado","0");
+		listDomingo.addItem("Medio Dia","1");
+		listDomingo.addItem("Dia Completo","2");
+		listDomingo.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listDomingo, 821, 196);
+		listDomingo.setSize("118px", "34px");
+		
 		
 		Label lblNivelAcademico = new Label("Puesto");
 		lblNivelAcademico.setStyleName("label");
@@ -374,42 +402,42 @@ public class FormularioPuestos extends Composite {
 		
 		lblDiasDeDescando = new Label("Dias de descando en la semana:");
 		lblDiasDeDescando.setStyleName("label");
-		absolutePanel.add(lblDiasDeDescando, 286, 148);
+		absolutePanel.add(lblDiasDeDescando, 10, 148);
 		lblDiasDeDescando.setSize("484px", "18px");
 		
 		Label lblLunes = new Label("Lunes");
 		lblLunes.setStyleName("label");
-		absolutePanel.add(lblLunes, 225, 172);
+		absolutePanel.add(lblLunes, 10, 172);
 		lblLunes.setSize("52px", "18px");
 		
 		Label lblMartes = new Label("Martes");
 		lblMartes.setStyleName("label");
-		absolutePanel.add(lblMartes, 286, 172);
+		absolutePanel.add(lblMartes, 141, 172);
 		lblMartes.setSize("52px", "18px");
 		
 		Label lblMiercoles = new Label("Miercoles");
 		lblMiercoles.setStyleName("label");
-		absolutePanel.add(lblMiercoles, 344, 172);
+		absolutePanel.add(lblMiercoles, 276, 172);
 		lblMiercoles.setSize("52px", "18px");
 		
 		Label lblJueves = new Label("Jueves");
 		lblJueves.setStyleName("label");
-		absolutePanel.add(lblJueves, 416, 172);
+		absolutePanel.add(lblJueves, 408, 172);
 		lblJueves.setSize("52px", "18px");
 		
 		lblViernes = new Label("Viernes");
 		lblViernes.setStyleName("label");
-		absolutePanel.add(lblViernes, 478, 172);
+		absolutePanel.add(lblViernes, 547, 172);
 		lblViernes.setSize("52px", "18px");
 		
 		lblSabado = new Label("Sabado");
 		lblSabado.setStyleName("label");
-		absolutePanel.add(lblSabado, 536, 172);
+		absolutePanel.add(lblSabado, 685, 172);
 		lblSabado.setSize("52px", "18px");
 		
 		lblDomingo = new Label("Domingo");
 		lblDomingo.setStyleName("label");
-		absolutePanel.add(lblDomingo, 608, 172);
+		absolutePanel.add(lblDomingo, 821, 172);
 		lblDomingo.setSize("52px", "18px");
 
 	    for (AuxBDPuesto p : this.puesto.BDpuestos) 
@@ -449,7 +477,6 @@ public class FormularioPuestos extends Composite {
 	 * @param Sabado
 	 * @param Domingo
 	 */
-	@SuppressWarnings("deprecation")
 	public void LlenarDatos(Long id, Long dateFecha,
 		     String listActivo,
 			 String txtPuesto,
@@ -457,18 +484,11 @@ public class FormularioPuestos extends Composite {
 			 String txtMotivoPuesto,
 			 String listJornada,
 			 String listhorasTrabajadas,
-			 boolean Lunes, boolean Martes, 
-			 boolean Miercoles, boolean Jueves, 
-			 boolean Viernres, boolean Sabado,
-			 boolean Domingo)
+			 String Lunes, String Martes, 
+			 String Miercoles, String Jueves, 
+			 String Viernes, String Sabado,
+			 String Domingo)
 	{
-		checkLunes.setChecked(Lunes);
-		checkMartes.setChecked(Martes);
-		checkMiercoles.setChecked(Miercoles);
-		checkJueves.setChecked(Jueves);
-		checkViernes.setChecked(Viernres);
-	    checkSabado.setChecked(Sabado);
-	    checkDomingo.setChecked(Domingo);
 	    
 		if(listActivo.equals("1"))
 		{
@@ -497,6 +517,43 @@ public class FormularioPuestos extends Composite {
 		for(int i=0; i < this.listHorasTrabajadas.getItemCount() && bandera; i++){
 			bandera = !this.listHorasTrabajadas.getItemText(i).equals(listhorasTrabajadas);
 		    this.listHorasTrabajadas.setSelectedIndex(i);
+		}
+
+		bandera = true;
+		for(int i=0; i < this.listLunes.getItemCount() && bandera; i++){
+			bandera = !this.listLunes.getValue(i).equals(Lunes);
+		    this.listLunes.setSelectedIndex(i);
+		}
+
+		bandera = true;
+		for(int i=0; i < this.listMartes.getItemCount() && bandera; i++){
+			bandera = !this.listMartes.getValue(i).equals(Martes);
+		    this.listMartes.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listMiercoles.getItemCount() && bandera; i++){
+			bandera = !this.listMiercoles.getValue(i).equals(Miercoles);
+		    this.listMiercoles.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listJueves.getItemCount() && bandera; i++){
+			bandera = !this.listJueves.getValue(i).equals(Jueves);
+		    this.listJueves.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listViernes.getItemCount() && bandera; i++){
+			bandera = !this.listViernes.getValue(i).equals(Viernes);
+		    this.listViernes.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listSabado.getItemCount() && bandera; i++){
+			bandera = !this.listSabado.getValue(i).equals(Sabado);
+		    this.listSabado.setSelectedIndex(i);
+		}
+		bandera = true;
+		for(int i=0; i < this.listDomingo.getItemCount() && bandera; i++){
+			bandera = !this.listDomingo.getValue(i).equals(Domingo);
+		    this.listDomingo.setSelectedIndex(i);
 		}
 		this.txtFunciones.setText(txtFunciones);
 		this.txtMotivoPuesto.setText(txtMotivoPuesto);

@@ -42,25 +42,25 @@ public class SegPuesto implements Serializable {
     private String horasTrabajo;
 	
 	@Persistent
-    private boolean Lunes;
+    private String Lunes;
 	
 	@Persistent
-    private boolean Martes;
+    private String Martes;
 	
 	@Persistent
-    private boolean Miercoles;
+    private String Miercoles;
 	
 	@Persistent
-    private boolean Jueves;
+    private String Jueves;
 	
 	@Persistent
-    private boolean Viernes;
+    private String Viernes;
 	
 	@Persistent
-    private boolean Sabado;
+    private String Sabado;
 	
 	@Persistent
-    private boolean Domingo;
+    private String Domingo;
 	
 	@Persistent
     private SegEmpleado empleado;
@@ -77,59 +77,59 @@ public class SegPuesto implements Serializable {
 		return fecha_puesto;
 	}
 
-	public boolean getLunes() {
+	public String getLunes() {
 		return Lunes;
 	}
 
-	public void setLunes(boolean lunes) {
+	public void setLunes(String lunes) {
 		Lunes = lunes;
 	}
 
-	public boolean getMartes() {
+	public String getMartes() {
 		return Martes;
 	}
 
-	public void setMartes(boolean martes) {
+	public void setMartes(String martes) {
 		Martes = martes;
 	}
 
-	public boolean getMiercoles() {
+	public String getMiercoles() {
 		return Miercoles;
 	}
 
-	public void setMiercoles(boolean miercoles) {
+	public void setMiercoles(String miercoles) {
 		Miercoles = miercoles;
 	}
 
-	public boolean getJueves() {
+	public String getJueves() {
 		return Jueves;
 	}
 
-	public void setJueves(boolean jueves) {
+	public void setJueves(String jueves) {
 		Jueves = jueves;
 	}
 
-	public boolean getViernes() {
+	public String getViernes() {
 		return Viernes;
 	}
 
-	public void setViernes(boolean viernes) {
+	public void setViernes(String viernes) {
 		Viernes = viernes;
 	}
 
-	public boolean getSabado() {
+	public String getSabado() {
 		return Sabado;
 	}
 
-	public void setSabado(boolean sabado) {
+	public void setSabado(String sabado) {
 		Sabado = sabado;
 	}
 
-	public boolean getDomingo() {
+	public String getDomingo() {
 		return Domingo;
 	}
 
-	public void setDomingo(boolean domingo) {
+	public void setDomingo(String domingo) {
 		Domingo = domingo;
 	}
 

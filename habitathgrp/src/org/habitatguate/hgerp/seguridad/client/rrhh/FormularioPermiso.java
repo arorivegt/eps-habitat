@@ -23,7 +23,6 @@ import com.google.gwt.user.client.ui.ListBox;
 
 public class FormularioPermiso extends Composite {
 
-	private Permiso a;
 	private Empleado empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
@@ -44,7 +43,6 @@ public class FormularioPermiso extends Composite {
         load.Mostrar();
         load.invisible();
 		this.empleado = e;
-		this.a = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
@@ -96,8 +94,9 @@ public class FormularioPermiso extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
+				
 		        int dias			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24)); 
-		        
+		        int diasDescanso 	= DiasDescando(dateFecha1.getValue().getTime(), dateFecha2.getValue().getTime());
 		        load.visible();
 
 				try{
@@ -199,6 +198,27 @@ public class FormularioPermiso extends Composite {
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));
+	}
+	
+	public int DiasDescando(Long fecha1, Long fecha2){
+		Date f1 = new Date(fecha1);
+		Date f2 = new Date(fecha2);
+		FechaParser parser = new FechaParser();
+		
+		while(f2.before(f1)){
+			DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
+			String dia = dtDia.format(new Date(fecha1));
+			DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
+			String Mes = dtMes.format(new Date(fecha1));
+			DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
+			String Anio = dtAnio.format(new Date(fecha1));
+			
+			String diaLetras = parser.getDia(parser.getDia(Integer.parseInt(Mes), Integer.parseInt(dia), Integer.parseInt(Anio)));
+			
+			fecha1 = fecha1 + 1*24*60*60*1000;
+			f1 = new Date(fecha1);
+		}
+		return 1;
 	}
 	
 }

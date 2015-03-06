@@ -1,4 +1,4 @@
-package org.habitatguate.hgerp.seguridad.client.principal;
+package org.habitatguate.hgerp.seguridad.client.rrhh;
 
 public class FechaParser {
 	

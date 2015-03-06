@@ -16,8 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.json.simple.JSONObject;
 
-import com.itextpdf.text.Paragraph;
-
 /**
  * Servlet implementation class ExportAs
  */
@@ -33,11 +31,11 @@ public class ExportarDatos extends HttpServlet {
         super();
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @SuppressWarnings("unchecked")
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session 			 = request.getSession(false);
  		SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-		String json = "nada";
 		
         if(session.getAttribute("usserHabitat") != null)
         {  

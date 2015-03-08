@@ -37,6 +37,7 @@ public class FormularioPermiso extends Composite {
 	private ListBox listTipoPermiso ;
     private Loading load ;
     private Button btnImprimir;
+    private Button btnActualizar;
     
 	public FormularioPermiso(Permiso a,Empleado e) {
 
@@ -92,7 +93,8 @@ public class FormularioPermiso extends Composite {
 		txtDescripcion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDescripcion, 10, 106);
 		txtDescripcion.setSize("433px", "95px");
-		Button btnActualizar = new Button("Send");
+		
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -269,15 +271,11 @@ public class FormularioPermiso extends Composite {
 		this.id_vacaciones = id;
 		this.bandera = false;
 		btnImprimir.setVisible(true);
+		btnActualizar.setVisible(false);
+		btnActualizar.setEnabled(false);
 		this.txtDescripcion.setText(txtDescripcion);
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));
-	}
-	
-	public float DiasDescando(final Long fecha1, final Long fecha2){
-		
-		
-		return totalDias;
 	}
 	
 }

@@ -2682,8 +2682,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 			try{
 
-				Query q = pm.newQuery(SegBDPuesto.class, "id_puesto == "+id);
-			    n5 = (SegBDPuesto) q.execute();
+				n5 = pm.getObjectById(SegBDPuesto.class, id); 
 				if (n5 != null) 
 				{          
 					nombre = n5.getNombre_puesto();

@@ -117,7 +117,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 </servlet>  
 <servlet-mapping>  
         <servlet-name>CrearReporteEmpleado</servlet-name>  
-        <url-pattern>/CrearReporte</url-pattern>  
+        <url-pattern>/CrearReporteEmpleado</url-pattern>  
 </servlet-mapping>  
 
  <servlet>  

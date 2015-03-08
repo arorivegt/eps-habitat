@@ -26,17 +26,16 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -56,8 +55,6 @@ public class CrearReporteEmpleados extends Composite   {
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
     private Loading load ;
-	private FormPanel formPanel;
-	private VerticalPanel verticalPanel;
 	private AbsolutePanel absolutePanel_1;
 	private SimpleCheckBox cheqFamilia;
 	private SimpleCheckBox cheqAcademicos;
@@ -257,55 +254,15 @@ public class CrearReporteEmpleados extends Composite   {
 		lblBusquedaPor.setStyleName("label");
 		lblBusquedaPor.setSize("179px", "13px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
-
-		formPanel = new FormPanel();
-		formPanel.setAction("/CrearReporteEmpleado?tipo="+"0"
-				+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
-				+"&primer_nombre="+"a"
-				+"&DPI="+"a"
-				+"&Pasaporte="+"a"
-				+"&familia="+"1"
-				+"&academico="+"1"
-				+"&reflab="+"1"
-				+"&refper="+"1"
-				+"&idiomas="+"1"
-				+"&puesto="+"1"
-				+"&test="+"true"
-				+"&testf1="+"0000000"
-				+"&testf2="+"0000000"
-				+"&testT="+"0000000"
-				+"&hist="+"true"
-				+"&histf1="+"0000000"
-				+"&histf2="+"0000000"
-				+"&histT="+"0000000"
-				+"&perm="+"true"
-				+"&permf1="+"0000000"
-				+"&permf2="+"0000000"
-				+"&permT="+"0000000"
-				+"&sal="+"true"
-				+"&salf1="+"0000000"
-				+"&salf2="+"0000000"
-				+"&salT="+"0000000"
-				
-				
-				);
-		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
-		formPanel.setMethod(FormPanel.METHOD_POST);
-		absolutePanel.add(formPanel, 10, 61);
-        formPanel.setSize("209px", "44px");
-        
+		
 		Busqueda = new Image("images/pdf.png");
+		absolutePanel.add(Busqueda, 35, 65);
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				buscar();
 			}
 		});
 		Busqueda.setSize("103px", "78px");
-		
-		verticalPanel = new VerticalPanel();
-		absolutePanel.add(verticalPanel, 20, 61);
-		verticalPanel.setSize("118px", "82px");
-		verticalPanel.add(Busqueda);
 		
 		lblSeleccioneLosEmpleados = new Label("Seleccione los empleados que quiere mostrar en el reporte");
 		lblSeleccioneLosEmpleados.setStyleName("label");
@@ -581,7 +538,7 @@ public class CrearReporteEmpleados extends Composite   {
 	public void buscar(){
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
-			formPanel.setAction("/CrearReporteEmpleado?tipo="+"2"
+			Window.open("/CrearReporteEmpleado?tipo="+"2"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
@@ -607,8 +564,7 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
-					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-			formPanel.submit();
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 		{
 
@@ -616,7 +572,7 @@ public class CrearReporteEmpleados extends Composite   {
 			System.out.println(nombre);
 			if(!txtDato1.getText().equals("")){
 
-				formPanel.setAction("/CrearReporteEmpleado?tipo="+"1"
+				Window.open("/CrearReporteEmpleado?tipo="+"1"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&primer_nombre="+nombre
 						+"&DPI="+"a"
@@ -642,8 +598,8 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
-						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-				formPanel.submit();
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+				
 			}
 			else{
 
@@ -653,7 +609,7 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 			if(!txtDato1.getText().equals("") ){
 
-				formPanel.setAction("/CrearReporteEmpleado?tipo="+"3"
+				Window.open("/CrearReporteEmpleado?tipo="+"3"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&primer_nombre="+"a"
 						+"&DPI="+"a"
@@ -679,8 +635,8 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
-						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-				formPanel.submit();
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+				
 			}
 			else{
 
@@ -690,7 +646,7 @@ public class CrearReporteEmpleados extends Composite   {
 		{
 
 			if(!txtDato1.getText().equals("") ){
-				formPanel.setAction("/CrearReporteEmpleado?tipo="+"4"
+				Window.open("/CrearReporteEmpleado?tipo="+"4"
 						+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 						+"&primer_nombre="+"a"
 						+"&DPI="+txtDato1.getText()
@@ -716,8 +672,8 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
-						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-				formPanel.submit();
+						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+				
 			}
 			else{
 
@@ -726,7 +682,7 @@ public class CrearReporteEmpleados extends Composite   {
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Estado"))
 		{
 
-			formPanel.setAction("/CrearReporteEmpleado?tipo="+"5"
+			Window.open("/CrearReporteEmpleado?tipo="+"5"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
@@ -752,12 +708,12 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
-					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-			formPanel.submit();
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+			
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Puesto"))
 		{
 
-			formPanel.setAction("/CrearReporteEmpleado?tipo="+"6"
+			Window.open("/CrearReporteEmpleado?tipo="+"6"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
@@ -783,12 +739,12 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
-					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-			formPanel.submit();
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+			
 		}
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
 		{
-			formPanel.setAction("/CrearReporteEmpleado?tipo="+"7"
+			Window.open("/CrearReporteEmpleado?tipo="+"7"
 					+"&estado="+listEstado.getValue(listEstado.getSelectedIndex())
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
@@ -814,8 +770,8 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
-					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
-			formPanel.submit();
+					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()), "_blank", ""); 
+			
 		}
 	}
 //	 public void agregarFormulario(final char tipo, final String primer_nombre, String segundo_nombre, 

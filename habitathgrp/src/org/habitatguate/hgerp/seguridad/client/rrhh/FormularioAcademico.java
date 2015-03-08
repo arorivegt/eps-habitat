@@ -57,6 +57,7 @@ public class FormularioAcademico extends Composite {
 	private Long id_historial_academico = 0L;
 	private final UploadUrlServiceAsync uploadUrlService = GWT.create(UploadUrlService.class);
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private Label lblAchivosPdfUnicamente;
 	
 	public FormularioAcademico(Academico academico,Empleado emplead) {
 
@@ -248,6 +249,11 @@ public class FormularioAcademico extends Composite {
 		lblFechaFinal.setStyleName("label");
 		absolutePanel.add(lblFechaFinal, 275, 88);
 		lblFechaFinal.setSize("208px", "13px");
+		
+		lblAchivosPdfUnicamente = new Label("Achivos pdf unicamente 1MB MAX");
+		lblAchivosPdfUnicamente.setStyleName("label");
+		absolutePanel.add(lblAchivosPdfUnicamente, 522, 71);
+		lblAchivosPdfUnicamente.setSize("229px", "13px");
 
 		
 	}
@@ -312,7 +318,7 @@ public class FormularioAcademico extends Composite {
 				public void onSubmit(SubmitEvent event) {
 					if (fileUpload.getFilename().length() == 0 || fileUpload.getFilename().indexOf("pdf") == -1) {
 						mensaje.setMensaje("alert alert-info", 
-	                			"Selecciono un archivo?");
+	                			"Selecciono un archivo o no es de extension pdf?");
 						event.cancel();
 	        }
 				}

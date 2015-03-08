@@ -55,13 +55,13 @@ public class ExportarDatos extends HttpServlet {
     			jsonEmpleado.put("Sexo", "masculino");	
             }
             if(auxEmpleado.getEstado_civil().equals("0")){
-    			jsonEmpleado.put("Sexo", "Soltero(a)");	
+    			jsonEmpleado.put("Estado Civil", "Soltero(a)");	
             }else if(auxEmpleado.getEstado_civil().equals("1")){
-    			jsonEmpleado.put("Sexo", "Casado(a)/Unida(a)");	
+    			jsonEmpleado.put("Estado Civil", "Casado(a)/Unida(a)");	
             }else if(auxEmpleado.getEstado_civil().equals("2")){
-    			jsonEmpleado.put("Sexo", "Viudo(a)");	
+    			jsonEmpleado.put("Estado Civil", "Viudo(a)");	
             }else if(auxEmpleado.getEstado_civil().equals("3")){
-    			jsonEmpleado.put("Sexo", "Divorciado(a)");	            	
+    			jsonEmpleado.put("Estado Civil", "Divorciado(a)");	            	
             }
 			jsonEmpleado.put("Primer Apellido", auxEmpleado.getPrimer_apellido());
 			jsonEmpleado.put("Segundo Apellido", auxEmpleado.getSegundo_apellido());

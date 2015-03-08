@@ -68,7 +68,7 @@ public class Registro extends Composite{
 
             final PasswordTextBox txtPass =new PasswordTextBox();
             txtPass.setSize("325px", "49px");
-            txtPass.getElement().setAttribute("placeHolder", "Password");
+            txtPass.getElement().setAttribute("placeHolder", "contraseña");
             rootPanel.add(txtPass, 543, 254);
             
             final PasswordTextBox txtRepitaPassword = new PasswordTextBox();
@@ -205,9 +205,33 @@ public class Registro extends Composite{
             
             initWidget(rootPanel);
             
-            Label lblLleneLoQue = new Label("Llene lo que a contiuacion se le pide, todos los campos son obligatorios:");
-            rootPanel.add(lblLleneLoQue, 543, 124);
-            lblLleneLoQue.setSize("343px", "4px");
+            Label lblLleneLoQue = new Label("Llene lo que a contiuacion se le pide, todos los campos son obligatorios: (*campos requerido)");
+            rootPanel.add(lblLleneLoQue, 521, 124);
+            lblLleneLoQue.setSize("372px", "4px");
+            
+            Label label = new Label("*");
+            rootPanel.add(label, 506, 188);
+            label.setSize("19px", "4px");
+            
+            Label label_1 = new Label("*");
+            rootPanel.add(label_1, 506, 254);
+            label_1.setSize("19px", "4px");
+            
+            Label label_2 = new Label("*");
+            rootPanel.add(label_2, 506, 317);
+            label_2.setSize("19px", "4px");
+            
+            Label label_3 = new Label("*");
+            rootPanel.add(label_3, 506, 381);
+            label_3.setSize("19px", "4px");
+            
+            Label label_4 = new Label("*");
+            rootPanel.add(label_4, 506, 510);
+            label_4.setSize("19px", "4px");
+            
+            Label label_5 = new Label("*");
+            rootPanel.add(label_5, 506, 649);
+            label_5.setSize("19px", "4px");
             
 
         }

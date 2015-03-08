@@ -62,7 +62,7 @@ public class FormularioBDPuestos extends Composite {
 						Long.parseLong(txtIdPuesto.getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nid no valido");
+                    			"Error !! \nid debe ser un numero correlativo y no existente");
 						txtIdPuesto.setText("0");
 					}
 				}
@@ -172,7 +172,7 @@ public class FormularioBDPuestos extends Composite {
 		btnEliminar.setSize("146px", "34px");
 
 		
-		Label lblNivelAcademico = new Label("Puesto");
+		Label lblNivelAcademico = new Label("Nombre del puesto");
 		lblNivelAcademico.setStyleName("label");
 		absolutePanel.add(lblNivelAcademico, 118, 10);
 		lblNivelAcademico.setSize("192px", "13px");
@@ -189,8 +189,8 @@ public class FormularioBDPuestos extends Composite {
 		
 		Label lblIdPuesto = new Label("Id puesto");
 		lblIdPuesto.setStyleName("label");
-		absolutePanel.add(lblIdPuesto, 10, 44);
-		lblIdPuesto.setSize("76px", "13px");
+		absolutePanel.add(lblIdPuesto, 10, 29);
+		lblIdPuesto.setSize("102px", "13px");
 	}
 	
 	private void EliminarFormularioSinDatos(){

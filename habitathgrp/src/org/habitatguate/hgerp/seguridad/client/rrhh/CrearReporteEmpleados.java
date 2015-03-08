@@ -59,11 +59,11 @@ public class CrearReporteEmpleados extends Composite   {
 	private FormPanel formPanel;
 	private VerticalPanel verticalPanel;
 	private AbsolutePanel absolutePanel_1;
-	private SimpleCheckBox simpleCheckBox;
-	private SimpleCheckBox simpleCheckBox_1;
-	private SimpleCheckBox simpleCheckBox_2;
-	private SimpleCheckBox simpleCheckBox_3;
-	private SimpleCheckBox simpleCheckBox_4;
+	private SimpleCheckBox cheqFamilia;
+	private SimpleCheckBox cheqAcademicos;
+	private SimpleCheckBox cheqReferenciaLaboral;
+	private SimpleCheckBox cheqReferenciaPersonal;
+	private SimpleCheckBox cheqIdiomas;
 	private Label label_1;
 	private Label label_2;
 	private Label label_3;
@@ -72,24 +72,24 @@ public class CrearReporteEmpleados extends Composite   {
 	private Label label_7;
 	private Label lblCreeElReporte; 
 	private Label lblSeleccioneLosEmpleados;
-	private SimpleCheckBox simpleCheckBox_5;
+	private SimpleCheckBox cheqEvaluacion;
 	private Label lblDatosDeEvaluacion;
 	private DateBox dateTestFecha1;
 	private DateBox dateTestFecha2;
 	private ListBox listTipoTest;
-	private SimpleCheckBox simpleCheckBox_6;
+	private SimpleCheckBox cheqHistorial;
 	private Label lblDatosDelHistorial;
 	private DateBox dateHistorialFecha1;
 	private DateBox dateHistorialFecha2;
 	private ListBox listTipoHistorial;
-	private SimpleCheckBox simpleCheckBox_7;
+	private SimpleCheckBox cheqPuesto;
 	private Label lblPuestos;
-	private SimpleCheckBox simpleCheckBox_8;
+	private SimpleCheckBox cheqPermiso;
 	private Label lblDatosDePermiso;
 	private DateBox datePermisosecha1;
 	private DateBox datePermisosecha2;
 	private ListBox listTipoPermiso;
-	private SimpleCheckBox simpleCheckBox_9;
+	private SimpleCheckBox cheqSalario;
 	private Label lblDatosDeSalario;
 	private DateBox dateSalarioecha1;
 	private DateBox dateSalarioecha2;
@@ -271,21 +271,21 @@ public class CrearReporteEmpleados extends Composite   {
 				+"&idiomas="+"1"
 				+"&puesto="+"1"
 				+"&test="+"true"
-				+"&testf1="+dateTestFecha1.getValue().getTime()
-				+"&testf2="+dateTestFecha2.getValue().getTime()
-				+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
+				+"&testf1="+"0000000"
+				+"&testf2="+"0000000"
+				+"&testT="+"0000000"
 				+"&hist="+"true"
-				+"&histf1="+dateHistorialFecha1.getValue().getTime()
-				+"&histf2="+dateHistorialFecha1.getValue().getTime()
-				+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
+				+"&histf1="+"0000000"
+				+"&histf2="+"0000000"
+				+"&histT="+"0000000"
 				+"&perm="+"true"
-				+"&permf1="+datePermisosecha1.getValue().getTime()
-				+"&permf2="+datePermisosecha2.getValue().getTime()
-				+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
+				+"&permf1="+"0000000"
+				+"&permf2="+"0000000"
+				+"&permT="+"0000000"
 				+"&sal="+"true"
-				+"&salf1="+dateSalarioecha1.getValue().getTime()
-				+"&salf2="+dateSalarioecha2.getValue().getTime()
-				+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex())
+				+"&salf1="+"0000000"
+				+"&salf2="+"0000000"
+				+"&salT="+"0000000"
 				
 				
 				);
@@ -348,39 +348,29 @@ public class CrearReporteEmpleados extends Composite   {
 		grid.setWidget(1, 0, absolutePanel_1);
 		absolutePanel_1.setSize("1096px", "550px");
 		
-		simpleCheckBox = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox, 25, 136);
-		simpleCheckBox.setSize("22px", "22px");
+		cheqFamilia = new SimpleCheckBox();
+		absolutePanel_1.add(cheqFamilia, 25, 136);
+		cheqFamilia.setSize("22px", "22px");
 		
-		simpleCheckBox_1 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_1, 25, 183);
-		simpleCheckBox_1.setSize("22px", "22px");
+		cheqAcademicos = new SimpleCheckBox();
+		absolutePanel_1.add(cheqAcademicos, 25, 183);
+		cheqAcademicos.setSize("22px", "22px");
 		
-		simpleCheckBox_2 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_2, 25, 233);
-		simpleCheckBox_2.setSize("22px", "22px");
+		cheqReferenciaLaboral = new SimpleCheckBox();
+		absolutePanel_1.add(cheqReferenciaLaboral, 25, 233);
+		cheqReferenciaLaboral.setSize("22px", "22px");
 		
-		simpleCheckBox_3 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_3, 25, 299);
-		simpleCheckBox_3.setSize("22px", "22px");
+		cheqReferenciaPersonal = new SimpleCheckBox();
+		absolutePanel_1.add(cheqReferenciaPersonal, 25, 299);
+		cheqReferenciaPersonal.setSize("22px", "22px");
 		
-		simpleCheckBox_4 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_4, 25, 361);
-		simpleCheckBox_4.setSize("22px", "22px");
+		cheqIdiomas = new SimpleCheckBox();
+		absolutePanel_1.add(cheqIdiomas, 25, 361);
+		cheqIdiomas.setSize("22px", "22px");
 		
-		label_7 = new Label("A continuacion, seleccione lo que desea ver en el Reporte por Empleado:");
-		label_7.setStyleName("label");
-		absolutePanel_1.add(label_7, 182, 75);
-		label_7.setSize("583px", "13px");
-		
-		lblCreeElReporte = new Label("Cree el Reporte en base a un Empleado Especifico,Por Afiliado, por DPI, por Pasaporte, Por Nombre, Por Estado o a todos los Empleados");
-		lblCreeElReporte.setStyleName("label");
-		absolutePanel_1.add(lblCreeElReporte, 25, 10);
-		lblCreeElReporte.setSize("828px", "13px");
-		
-		simpleCheckBox_5 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_5, 350, 136);
-		simpleCheckBox_5.setSize("22px", "22px");
+		cheqEvaluacion = new SimpleCheckBox();
+		absolutePanel_1.add(cheqEvaluacion, 350, 136);
+		cheqEvaluacion.setSize("22px", "22px");
 		
 		dateTestFecha1 = new DateBox();
 		dateTestFecha1.setValue(new Date());
@@ -389,6 +379,22 @@ public class CrearReporteEmpleados extends Composite   {
 		dateTestFecha1.getDatePicker().setYearArrowsVisible(true);
 		dateTestFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
 		dateTestFecha1.getDatePicker().setVisibleYearCount(100);
+		
+		cheqHistorial = new SimpleCheckBox();
+		absolutePanel_1.add(cheqHistorial, 350, 198);
+		cheqHistorial.setSize("22px", "22px");
+		
+		cheqPermiso = new SimpleCheckBox();
+		absolutePanel_1.add(cheqPermiso, 350, 256);
+		cheqPermiso.setSize("22px", "22px");
+		
+		cheqSalario = new SimpleCheckBox();
+		absolutePanel_1.add(cheqSalario, 350, 311);
+		cheqSalario.setSize("22px", "22px");
+		
+		cheqPuesto = new SimpleCheckBox();
+		absolutePanel_1.add(cheqPuesto, 350, 361);
+		cheqPuesto.setSize("22px", "22px");
 		dateTestFecha1.setStyleName("gwt-TextBox2");
 		absolutePanel_1.add(dateTestFecha1, 558, 124);
 		dateTestFecha1.setSize("88px", "34px");
@@ -410,10 +416,6 @@ public class CrearReporteEmpleados extends Composite   {
 		listTipoTest.setStyleName("gwt-TextBox2");
 		absolutePanel_1.add(listTipoTest, 750, 124);
 		listTipoTest.setSize("180px", "36px");
-		
-		simpleCheckBox_6 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_6, 350, 198);
-		simpleCheckBox_6.setSize("22px", "22px");
 		
 		dateHistorialFecha1 = new DateBox();
 		dateHistorialFecha1.setValue(new Date());
@@ -443,14 +445,6 @@ public class CrearReporteEmpleados extends Composite   {
 		listTipoHistorial.setStyleName("gwt-TextBox2");
 		absolutePanel_1.add(listTipoHistorial, 750, 186);
 		listTipoHistorial.setSize("180px", "36px");
-		
-		simpleCheckBox_7 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_7, 350, 361);
-		simpleCheckBox_7.setSize("22px", "22px");
-		
-		simpleCheckBox_8 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_8, 350, 256);
-		simpleCheckBox_8.setSize("22px", "22px");
 		
 		datePermisosecha1 = new DateBox();
 		datePermisosecha1.setValue(new Date());
@@ -487,10 +481,6 @@ public class CrearReporteEmpleados extends Composite   {
 		absolutePanel_1.add(listTipoPermiso, 750, 244);
 		listTipoPermiso.setSize("180px", "36px");
 		
-		simpleCheckBox_9 = new SimpleCheckBox();
-		absolutePanel_1.add(simpleCheckBox_9, 350, 311);
-		simpleCheckBox_9.setSize("22px", "22px");
-		
 		dateSalarioecha1 = new DateBox();
 		dateSalarioecha1.setValue(new Date());
 		dateSalarioecha1.setFormat(new DateBox.DefaultFormat 
@@ -526,6 +516,16 @@ public class CrearReporteEmpleados extends Composite   {
 		listTipoSalario.setStyleName("gwt-TextBox2");
 		absolutePanel_1.add(listTipoSalario, 750, 299);
 		listTipoSalario.setSize("180px", "36px");
+		
+		label_7 = new Label("A continuacion, seleccione lo que desea ver en el Reporte por Empleado:");
+		label_7.setStyleName("label");
+		absolutePanel_1.add(label_7, 182, 75);
+		label_7.setSize("583px", "13px");
+		
+		lblCreeElReporte = new Label("Cree el Reporte en base a un Empleado Especifico,Por Afiliado, por DPI, por Pasaporte, Por Nombre, Por Estado o a todos los Empleados");
+		lblCreeElReporte.setStyleName("label");
+		absolutePanel_1.add(lblCreeElReporte, 25, 10);
+		lblCreeElReporte.setSize("828px", "13px");
 		
 		lblPuestos = new Label("Puestos");
 		lblPuestos.setStyleName("label");
@@ -577,6 +577,7 @@ public class CrearReporteEmpleados extends Composite   {
 		label_6.setSize("157px", "13px");
 		
 	}
+	@SuppressWarnings("deprecation")
 	public void buscar(){
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
 		{
@@ -585,25 +586,25 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&familia="+"1"
-					+"&academico="+"1"
-					+"&reflab="+"1"
-					+"&refper="+"1"
-					+"&idiomas="+"1"
-					+"&puesto="+"1"
-					+"&test="+"true"
+					+"&familia="+cheqFamilia.isChecked()
+					+"&academico="+cheqAcademicos.isChecked()
+					+"&reflab="+cheqReferenciaLaboral.isChecked()
+					+"&refper="+cheqReferenciaPersonal.isChecked()
+					+"&idiomas="+cheqIdiomas.isChecked()
+					+"&puesto="+cheqPuesto.isChecked()
+					+"&test="+cheqEvaluacion.isChecked()
 					+"&testf1="+dateTestFecha1.getValue().getTime()
 					+"&testf2="+dateTestFecha2.getValue().getTime()
 					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-					+"&hist="+"true"
+					+"&hist="+cheqHistorial.isChecked()
 					+"&histf1="+dateHistorialFecha1.getValue().getTime()
 					+"&histf2="+dateHistorialFecha1.getValue().getTime()
 					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-					+"&perm="+"true"
+					+"&perm="+cheqPermiso.isChecked()
 					+"&permf1="+datePermisosecha1.getValue().getTime()
 					+"&permf2="+datePermisosecha2.getValue().getTime()
 					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-					+"&sal="+"true"
+					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
 					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -620,25 +621,25 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&primer_nombre="+nombre
 						+"&DPI="+"a"
 						+"&Pasaporte="+"a"
-						+"&familia="+"1"
-						+"&academico="+"1"
-						+"&reflab="+"1"
-						+"&refper="+"1"
-						+"&idiomas="+"1"
-						+"&puesto="+"1"
-						+"&test="+"true"
+						+"&familia="+cheqFamilia.isChecked()
+						+"&academico="+cheqAcademicos.isChecked()
+						+"&reflab="+cheqReferenciaLaboral.isChecked()
+						+"&refper="+cheqReferenciaPersonal.isChecked()
+						+"&idiomas="+cheqIdiomas.isChecked()
+						+"&puesto="+cheqPuesto.isChecked()
+						+"&test="+cheqEvaluacion.isChecked()
 						+"&testf1="+dateTestFecha1.getValue().getTime()
 						+"&testf2="+dateTestFecha2.getValue().getTime()
 						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-						+"&hist="+"true"
+						+"&hist="+cheqHistorial.isChecked()
 						+"&histf1="+dateHistorialFecha1.getValue().getTime()
 						+"&histf2="+dateHistorialFecha1.getValue().getTime()
 						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-						+"&perm="+"true"
+						+"&perm="+cheqPermiso.isChecked()
 						+"&permf1="+datePermisosecha1.getValue().getTime()
 						+"&permf2="+datePermisosecha2.getValue().getTime()
 						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-						+"&sal="+"true"
+						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
 						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -657,25 +658,25 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&primer_nombre="+"a"
 						+"&DPI="+"a"
 						+"&Pasaporte="+txtDato1.getText()
-						+"&familia="+"1"
-						+"&academico="+"1"
-						+"&reflab="+"1"
-						+"&refper="+"1"
-						+"&idiomas="+"1"
-						+"&puesto="+"1"
-						+"&test="+"true"
+						+"&familia="+cheqFamilia.isChecked()
+						+"&academico="+cheqAcademicos.isChecked()
+						+"&reflab="+cheqReferenciaLaboral.isChecked()
+						+"&refper="+cheqReferenciaPersonal.isChecked()
+						+"&idiomas="+cheqIdiomas.isChecked()
+						+"&puesto="+cheqPuesto.isChecked()
+						+"&test="+cheqEvaluacion.isChecked()
 						+"&testf1="+dateTestFecha1.getValue().getTime()
 						+"&testf2="+dateTestFecha2.getValue().getTime()
 						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-						+"&hist="+"true"
+						+"&hist="+cheqHistorial.isChecked()
 						+"&histf1="+dateHistorialFecha1.getValue().getTime()
 						+"&histf2="+dateHistorialFecha1.getValue().getTime()
 						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-						+"&perm="+"true"
+						+"&perm="+cheqPermiso.isChecked()
 						+"&permf1="+datePermisosecha1.getValue().getTime()
 						+"&permf2="+datePermisosecha2.getValue().getTime()
 						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-						+"&sal="+"true"
+						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
 						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -694,25 +695,25 @@ public class CrearReporteEmpleados extends Composite   {
 						+"&primer_nombre="+"a"
 						+"&DPI="+txtDato1.getText()
 						+"&Pasaporte="+"a"
-						+"&familia="+"1"
-						+"&academico="+"1"
-						+"&reflab="+"1"
-						+"&refper="+"1"
-						+"&idiomas="+"1"
-						+"&puesto="+"1"
-						+"&test="+"true"
+						+"&familia="+cheqFamilia.isChecked()
+						+"&academico="+cheqAcademicos.isChecked()
+						+"&reflab="+cheqReferenciaLaboral.isChecked()
+						+"&refper="+cheqReferenciaPersonal.isChecked()
+						+"&idiomas="+cheqIdiomas.isChecked()
+						+"&puesto="+cheqPuesto.isChecked()
+						+"&test="+cheqEvaluacion.isChecked()
 						+"&testf1="+dateTestFecha1.getValue().getTime()
 						+"&testf2="+dateTestFecha2.getValue().getTime()
 						+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-						+"&hist="+"true"
+						+"&hist="+cheqHistorial.isChecked()
 						+"&histf1="+dateHistorialFecha1.getValue().getTime()
 						+"&histf2="+dateHistorialFecha1.getValue().getTime()
 						+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-						+"&perm="+"true"
+						+"&perm="+cheqPermiso.isChecked()
 						+"&permf1="+datePermisosecha1.getValue().getTime()
 						+"&permf2="+datePermisosecha2.getValue().getTime()
 						+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-						+"&sal="+"true"
+						+"&sal="+cheqSalario.isChecked()
 						+"&salf1="+dateSalarioecha1.getValue().getTime()
 						+"&salf2="+dateSalarioecha2.getValue().getTime()
 						+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -730,25 +731,25 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&familia="+"1"
-					+"&academico="+"1"
-					+"&reflab="+"1"
-					+"&refper="+"1"
-					+"&idiomas="+"1"
-					+"&puesto="+"1"
-					+"&test="+"true"
+					+"&familia="+cheqFamilia.isChecked()
+					+"&academico="+cheqAcademicos.isChecked()
+					+"&reflab="+cheqReferenciaLaboral.isChecked()
+					+"&refper="+cheqReferenciaPersonal.isChecked()
+					+"&idiomas="+cheqIdiomas.isChecked()
+					+"&puesto="+cheqPuesto.isChecked()
+					+"&test="+cheqEvaluacion.isChecked()
 					+"&testf1="+dateTestFecha1.getValue().getTime()
 					+"&testf2="+dateTestFecha2.getValue().getTime()
 					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-					+"&hist="+"true"
+					+"&hist="+cheqHistorial.isChecked()
 					+"&histf1="+dateHistorialFecha1.getValue().getTime()
 					+"&histf2="+dateHistorialFecha1.getValue().getTime()
 					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-					+"&perm="+"true"
+					+"&perm="+cheqPermiso.isChecked()
 					+"&permf1="+datePermisosecha1.getValue().getTime()
 					+"&permf2="+datePermisosecha2.getValue().getTime()
 					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-					+"&sal="+"true"
+					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
 					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -761,25 +762,25 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"
-					+"&familia="+"1"
-					+"&academico="+"1"
-					+"&reflab="+"1"
-					+"&refper="+"1"
-					+"&idiomas="+"1"
-					+"&puesto="+"1"
-					+"&test="+"true"
+					+"&familia="+cheqFamilia.isChecked()
+					+"&academico="+cheqAcademicos.isChecked()
+					+"&reflab="+cheqReferenciaLaboral.isChecked()
+					+"&refper="+cheqReferenciaPersonal.isChecked()
+					+"&idiomas="+cheqIdiomas.isChecked()
+					+"&puesto="+cheqPuesto.isChecked()
+					+"&test="+cheqEvaluacion.isChecked()
 					+"&testf1="+dateTestFecha1.getValue().getTime()
 					+"&testf2="+dateTestFecha2.getValue().getTime()
 					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-					+"&hist="+"true"
+					+"&hist="+cheqHistorial.isChecked()
 					+"&histf1="+dateHistorialFecha1.getValue().getTime()
 					+"&histf2="+dateHistorialFecha1.getValue().getTime()
 					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-					+"&perm="+"true"
+					+"&perm="+cheqPermiso.isChecked()
 					+"&permf1="+datePermisosecha1.getValue().getTime()
 					+"&permf2="+datePermisosecha2.getValue().getTime()
 					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-					+"&sal="+"true"
+					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
 					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));
@@ -792,25 +793,25 @@ public class CrearReporteEmpleados extends Composite   {
 					+"&primer_nombre="+"a"
 					+"&DPI="+"a"
 					+"&Pasaporte="+"a"	
-					+"&familia="+"1"
-					+"&academico="+"1"
-					+"&reflab="+"1"
-					+"&refper="+"1"
-					+"&idiomas="+"1"
-					+"&puesto="+"1"
-					+"&test="+"true"
+					+"&familia="+cheqFamilia.isChecked()
+					+"&academico="+cheqAcademicos.isChecked()
+					+"&reflab="+cheqReferenciaLaboral.isChecked()
+					+"&refper="+cheqReferenciaPersonal.isChecked()
+					+"&idiomas="+cheqIdiomas.isChecked()
+					+"&puesto="+cheqPuesto.isChecked()
+					+"&test="+cheqEvaluacion.isChecked()
 					+"&testf1="+dateTestFecha1.getValue().getTime()
 					+"&testf2="+dateTestFecha2.getValue().getTime()
 					+"&testT="+listTipoTest.getValue(listTipoTest.getSelectedIndex())
-					+"&hist="+"true"
+					+"&hist="+cheqHistorial.isChecked()
 					+"&histf1="+dateHistorialFecha1.getValue().getTime()
 					+"&histf2="+dateHistorialFecha1.getValue().getTime()
 					+"&histT="+listTipoHistorial.getValue(listTipoHistorial.getSelectedIndex())
-					+"&perm="+"true"
+					+"&perm="+cheqPermiso.isChecked()
 					+"&permf1="+datePermisosecha1.getValue().getTime()
 					+"&permf2="+datePermisosecha2.getValue().getTime()
 					+"&permT="+listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex())
-					+"&sal="+"true"
+					+"&sal="+cheqSalario.isChecked()
 					+"&salf1="+dateSalarioecha1.getValue().getTime()
 					+"&salf2="+dateSalarioecha2.getValue().getTime()
 					+"&salT="+listTipoSalario.getValue(listTipoSalario.getSelectedIndex()));

@@ -428,7 +428,7 @@ public class MenuPrincipal extends Composite {
 	//@UiHandler("rrhh5")
 	void rrhh5() {
 		CrearReporteEmpleados crearReporteEmpleados = new CrearReporteEmpleados();
-		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().setHeight("100%");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, crearReporteEmpleados);
 	}

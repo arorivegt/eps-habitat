@@ -215,7 +215,7 @@ public class SegEmpleado implements Serializable {
     private float salario_base;
 	
 	@Persistent
-    private int DiasDeVacaciones ;
+    private float DiasDeVacaciones ;
 	
 	@Persistent
     private float bonificacion;
@@ -672,11 +672,11 @@ public class SegEmpleado implements Serializable {
 		this.salario_base = salario_base;
 	}
 
-	public int getDiasDeVacaciones() {
+	public float getDiasDeVacaciones() {
 		return DiasDeVacaciones;
 	}
 
-	public void setDiasDeVacaciones(int total) {
+	public void setDiasDeVacaciones(float total) {
 		this.DiasDeVacaciones = total;
 	}
 

@@ -64,7 +64,7 @@ public class FechaParser {
 			dia = "Viernes";
 		}
 		if(x_nDayOfWeek == 6) {
-			dia = "SAbado";
+			dia = "Sabado";
 		}
 
 		return dia;

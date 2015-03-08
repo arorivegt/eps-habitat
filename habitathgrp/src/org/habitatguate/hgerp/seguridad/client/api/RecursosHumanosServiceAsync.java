@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
@@ -130,7 +131,7 @@ public interface RecursosHumanosServiceAsync {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, int total,
+            String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -407,7 +408,7 @@ public interface RecursosHumanosServiceAsync {
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
-	void Insertar_Dias_Vacaciones(int dia,AsyncCallback<String> callback) throws IllegalArgumentException;
+	void Insertar_Dias_Vacaciones(float dia,AsyncCallback<String> callback) throws IllegalArgumentException;
 	
 	/**
 	 * 
@@ -491,7 +492,7 @@ public interface RecursosHumanosServiceAsync {
 	            String celular, Date fecha_nacimiento, String tipo_licencia,
 	            String no_licencia, String centro_trabajo, String ocupacion,
 	            Date fecha_ingreso, String codigo_ingreso, String profesion,
-	            String tipo_planilla, float salario_base, int total,
+	            String tipo_planilla, float salario_base, float total,
 	            float bonificacion,String  URLFile, String KeyFile,String Estado,
 	            String pasaporte, String licencia,String Etnia,
 	            String NombreEmergencia, String TelefonoEmergencia,
@@ -1036,6 +1037,14 @@ public interface RecursosHumanosServiceAsync {
 	     * @throws IllegalArgumentException
 	     */
 	    void getPermisos(Long id,AsyncCallback<List<AuxPermiso>> callback)throws IllegalArgumentException;
+	    
+	    /**
+	     * 
+	     * @param idEmpleado
+	     * @param callback
+	     * @throws IllegalArgumentException
+	     */
+	    void getPuestoActivo(Long idEmpleado,AsyncCallback<AuxPuesto> callback)throws IllegalArgumentException;
 	    
 	    /**
 	     * 

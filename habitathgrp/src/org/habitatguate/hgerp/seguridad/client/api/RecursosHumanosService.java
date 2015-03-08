@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
@@ -134,7 +135,7 @@ public interface RecursosHumanosService extends RemoteService {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, int total,
+            String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -423,7 +424,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @return
 	 * @throws IllegalArgumentException
 	 */
-	String Insertar_Dias_Vacaciones(int dia) throws IllegalArgumentException;
+	String Insertar_Dias_Vacaciones(float dia) throws IllegalArgumentException;
 	//metodos para Actualizar en la base de datos.................................................................................................................
 	/**
 	 * 
@@ -489,7 +490,7 @@ public interface RecursosHumanosService extends RemoteService {
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, int total,
+            String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -1015,6 +1016,15 @@ public interface RecursosHumanosService extends RemoteService {
      * @throws IllegalArgumentException
      */
     List<AuxPermiso> getPermisos(Long id)throws IllegalArgumentException;
+    
+
+    /**
+     * 
+     * @param idEmpleado
+     * @return
+     * @throws IllegalArgumentException
+     */
+    AuxPuesto getPuestoActivo(Long idEmpleado)throws IllegalArgumentException;
     
     /**
      * 

@@ -93,7 +93,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setCelular("0");
 				em.setNo_licencia("0");
 				em.setBonificacion(0.0f);
-				em.setDiasDeVacaciones(26);
+				em.setDiasDeVacaciones((float) 26.00);
 				em.setSalario_base(0.0f);
 				em.setDepto_municipio_residencia("01,0101");
 				em.setDepto_municipio_nacimiento("01,0101");
@@ -178,7 +178,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
             String celular, Date fecha_nacimiento, String tipo_licencia,
             String no_licencia, String centro_trabajo, String ocupacion,
             Date fecha_ingreso, String codigo_ingreso, String profesion,
-            String tipo_planilla, float salario_base, int total,
+            String tipo_planilla, float salario_base, float total,
             float bonificacion,String  URLFile, String KeyFile,String Estado,
             String pasaporte, String licencia,String Etnia,
             String NombreEmergencia, String TelefonoEmergencia,
@@ -570,7 +570,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 		            String celular, Date fecha_nacimiento, String tipo_licencia,
 		            String no_licencia, String centro_trabajo, String ocupacion,
 		            Date fecha_ingreso, String codigo_ingreso, String profesion,
-		            String tipo_planilla, float salario_base, int total,
+		            String tipo_planilla, float salario_base, float total,
 		            float bonificacion,String  URLFile, String KeyFile,String Estado,String pasaporte, 
 		            String licencia, String Etnia,
 		            String NombreEmergencia, String TelefonoEmergencia,
@@ -2516,6 +2516,12 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				             //JN-->  JEFE DIJO NO A LA SOLICITUD && RN-->  RECURSOS DIJO QUE NO A LA SOLICITUD y el EMPLEADO NO ESTA ENTERADO DE ESO
 						 }else if(jefe.equals("JN") && rrhh.equals("RN") && !solicitante.equals("EE"))
 						 {
+							 solicitudPermiso.setJefeInmediatoAceptaSolicitud(jefe);
+							 solicitudPermiso.setRrhhAceptaSolicitud(rrhh);
+							 solicitudPermiso.setFecha1(fecha1);
+							 solicitudPermiso.setFecha2(fecha2);
+							 solicitudPermiso.setDescripcion(descripcionl);
+							 solicitudPermiso.setTipoPermisos(tipoPermisos);
 							 valor = "permiso negado por jefe y RRHH";
 							 
 						 }else{//Aun no se ha decidido ambas repuesta si, o no en todo caso
@@ -2648,7 +2654,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 
 		@SuppressWarnings("unchecked")
 		@Override
-		public String Insertar_Dias_Vacaciones(int dia)
+		public String Insertar_Dias_Vacaciones(float dia)
 				throws IllegalArgumentException {
 
 			final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
@@ -2755,6 +2761,48 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 Persistencia.close();  
 				}
 				return valor;
+		}
+
+		@Override
+		public AuxPuesto getPuestoActivo(Long idEmpleado)
+				throws IllegalArgumentException {
+			final PersistenceManager pm = PMF.get().getPersistenceManager() ;
+			AuxPuesto 		pp 		= new AuxPuesto();
+			try{
+				 final SegEmpleado p = pm.getObjectById(SegEmpleado.class, idEmpleado); 
+				System.out.println("idEmpleado: "+idEmpleado);
+					for(SegPuesto n5 : p.getPuestos())
+					{
+						//verifica en los puestos, si es igual al puesto buscado y lo agregar 
+						//a los empleados que encontro con el puesto indicado
+						if(n5.getActivo())
+						{
+					    	pp.setId_puesto(n5.getId_puesto());
+					    	pp.setFecha_puesto(n5.getFecha_puesto().getTime());
+						 	pp.setNombre_puesto(n5.getNombre_puesto());
+						 	pp.setFunciones(n5.getFunciones());
+						 	pp.setMotivoPuesto(n5.getMotivoPuesto());
+						 	pp.setActivo(n5.getActivo());
+						 	pp.setJornada(n5.getJornada());
+						 	pp.setHorasTrabajo(n5.getHorasTrabajo());
+						 	pp.setLunes(n5.getLunes());
+						 	pp.setMartes(n5.getMartes());
+						 	pp.setMiercoles(n5.getMiercoles());
+						 	pp.setJueves(n5.getJueves());
+						 	pp.setViernes(n5.getViernes());
+						 	pp.setSabado(n5.getSabado());
+						 	pp.setDomingo(n5.getDomingo());
+						}
+					}
+				
+
+				
+			}catch(Exception e){
+
+				pp = new AuxPuesto();
+			}
+			System.out.println("pp: "+pp.getNombre_puesto());
+			return pp;
 		}
 
 

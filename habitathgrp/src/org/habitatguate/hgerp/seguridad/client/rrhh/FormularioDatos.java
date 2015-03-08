@@ -560,8 +560,20 @@ public class FormularioDatos extends Composite {
 		absolutePanel.add(noCuenta, 36, 545);
 
 		nombreBanco = new ListBox();
-		nombreBanco.addItem("G&T Continental","0");
-		nombreBanco.addItem("Banrural","1");
+		nombreBanco.addItem("Antigua","0");
+		nombreBanco.addItem("Azteca","1");
+		nombreBanco.addItem("Agromercantil","2");
+		nombreBanco.addItem("Banrural","3");
+		nombreBanco.addItem("City","4");
+		nombreBanco.addItem("CHN","5");
+		nombreBanco.addItem("G&T Continental","6");
+		nombreBanco.addItem("Guatemala","7");
+		nombreBanco.addItem("Promerica","8");
+		nombreBanco.addItem("Reformador","9");
+		nombreBanco.addItem("Fichosa","10");
+		nombreBanco.addItem("InterBanco","11");
+		nombreBanco.addItem("Inmobiliario","12");
+		nombreBanco.addItem("ViviBanco","13");
 		nombreBanco.setSize("230px", "36px");
 		nombreBanco.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(nombreBanco, 319, 545);
@@ -1045,11 +1057,11 @@ public class FormularioDatos extends Composite {
 		txtDiasVacaciones = new TextBox();
 		txtDiasVacaciones.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				if(txtDiasVacaciones.getText().equals("")) {txtDiasVacaciones.setText("0");}
-				else if(txtDiasVacaciones.getText().equals(null)) {txtDiasVacaciones.setText("0");}
+				if(txtDiasVacaciones.getText().equals("")) {txtDiasVacaciones.setText("0.0");}
+				else if(txtDiasVacaciones.getText().equals(null)) {txtDiasVacaciones.setText("0.0");}
 				else{
 					try{
-						Integer.parseInt(txtDiasVacaciones.getText());
+						Float.parseFloat(txtDiasVacaciones.getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", "Error !! \nDias no validos");
 						txtDiasVacaciones.setText("0");
@@ -1118,7 +1130,7 @@ public class FormularioDatos extends Composite {
 								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-								Integer.parseInt(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								Float.parseFloat(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()),URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
 								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
@@ -1179,7 +1191,7 @@ public class FormularioDatos extends Composite {
 								txtTelefonoCelular.getText(), dateAnnioNacimiento.getValue(), listTipoLicencia.getValue(listTipoLicencia.getSelectedIndex()), 
 								txtNoLicencia.getText(), txtCentroTrabajo.getText(), txtOcupacion.getText(), dateFechaIngreso.getValue(), 
 								txt_CodigoOcupacion.getText(), txtProfesion.getText(), txtTipoPlanilla.getText(), Float.parseFloat(txtSalarioBase.getText()), 
-								Integer.parseInt(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
+								Float.parseFloat(txtDiasVacaciones.getText()), Float.parseFloat(txtBonificacion.getText()), URLFile, KeyFile,listEstado.getValue(listEstado.getSelectedIndex()),
 								listTienePasaporte.getValue(listTienePasaporte.getSelectedIndex()),listLicencia.getValue(listLicencia.getSelectedIndex()),
 								listEtnia.getValue(listEtnia.getSelectedIndex()), txtNombreEmergencia.getText(), txtTelefonoEmergencia.getText(),
 								txtNombreEmergencia2.getText(), txtTelefonoEmergencia2.getText(),depto_municipio_uno, idJefe,
@@ -2079,7 +2091,7 @@ public class FormularioDatos extends Composite {
             bandera = !this.listLicencia.getValue(i).equals(licencia);
             this.listLicencia.setSelectedIndex(i);
         } 
-        if(licencia.equals("No"))
+        if(licencia.equals("1"))
 		{
 			this.listTipoLicencia.setVisible(false);
 			this.txtNoLicencia.setVisible(false);
@@ -2144,7 +2156,7 @@ public class FormularioDatos extends Composite {
             bandera = !this.listTienePasaporte.getValue(i).equals(pasaporte);
             this.listTienePasaporte.setSelectedIndex(i);
         } 
-        if(pasaporte.equals("No"))
+        if(pasaporte.equals("1"))
 		{
 			this.txtTipoPasaporte.setVisible(false);
 			this.txtNoPasaporte.setVisible(false);

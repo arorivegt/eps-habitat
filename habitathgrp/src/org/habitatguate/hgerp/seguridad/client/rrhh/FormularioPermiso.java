@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -26,6 +27,7 @@ public class FormularioPermiso extends Composite {
 	private Empleado empleado;
 	private Long id_vacaciones = 0L;
 	private boolean bandera = true;
+	private static float totalDias = 0;
     private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     
     private TextArea txtDescripcion;
@@ -94,51 +96,123 @@ public class FormularioPermiso extends Composite {
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				
-		        int dias			= (int) ((dateFecha2.getValue().getTime()-dateFecha1.getValue().getTime())/(1000*60*60*24)); 
-		        int diasDescanso 	= DiasDescando(dateFecha1.getValue().getTime(), dateFecha2.getValue().getTime());
-		        load.visible();
 
-				try{
-					new Date(dateFecha1.getValue().getTime());
-				}catch(Exception e){
-					dateFecha1.setValue(new Date(1407518124684L));
-				}
-				try{
-					new Date(dateFecha2.getValue().getTime());
-				}catch(Exception e){
-					dateFecha2.setValue(new Date(1407518124684L));
-				}
-			
-				if(dias  <=  26 && dias >= 1){
-					
-				
-					if(bandera) {
-						loginService.Insertar_Solicitud_Permiso(empleado.id_empleado, dateFecha1.getValue(), 
-								dateFecha2.getValue(), txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<String>(){
-	                        public void onFailure(Throwable caught) 
-	                        {
-	            		        load.invisible();
-	                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
-	                        }
-	
-							@Override
-	                        public void onSuccess(String result)
-	                        {
-						        load.invisible();
-								bandera = false;
-								mensaje.setMensaje("alert alert-success", result);
-	                        }
-							});
-					}else{
-						mensaje.setMensaje("alert alert-information alert-block", "Ya ha sido solicitado este permiso");
-					}
+
+				loginService.getPuestoActivo(empleado.id_empleado, new AsyncCallback<AuxPuesto>(){
+		            public void onFailure(Throwable caught) 
+		            {
+				        load.invisible();
+		            	mensaje.setMensaje("alert alert-error", "Error !! \nal calcular dias de descanso");
+		            }
+
+					@SuppressWarnings("deprecation")
+					@Override
+		            public void onSuccess(AuxPuesto result)
+		            {
+
+				        float dias			= 0.0f;
+				        Date ff1 = new Date(dateFecha1.getValue().getTime());
+				        Date ff2 = new Date(dateFecha2.getValue().getTime());
+				        Long fechh1 = dateFecha1.getValue().getTime();
+
+						while(ff1.before(ff2) || ff1.getTime() == ff2.getTime()){
+							dias = dias + 1f;
+							fechh1 = fechh1 + 1*24*60*60*1000;
+							ff1 = new Date(fechh1);
+						}
 						
-			      }else{
-						mensaje.setMensaje("alert alert-information alert-block"
-								, "La solicitud de dias debe ser mayor a 0 dias \n o menor igual a 26 dias para  permiso/vacaciones");
-			    	  
-			      }
+				        load.invisible();
+				        Long fech1 = dateFecha1.getValue().getTime();
+				        Long fech2 = dateFecha2.getValue().getTime();
+				        
+				        Date f1 = new Date(fech1);
+						Date f2 = new Date(fech2);
+						
+						while(f1.before(f2) || f1.getTime() == f2.getTime()){
+							int diaNumero = f1.getDay();
+							
+							if( result.getDomingo().equals("0") && diaNumero == 0){
+								totalDias =totalDias+1;
+							}else if( result.getDomingo().equals("1") && diaNumero == 0){
+								totalDias =totalDias+0.50f;
+							}else if( result.getLunes().equals("0") && diaNumero == 1){
+								totalDias =totalDias+1;
+							}else if( result.getLunes().equals("1") && diaNumero == 1){
+								totalDias =totalDias+0.50f;
+							}else if( result.getMartes().equals("0") && diaNumero == 2){
+								totalDias =totalDias+1;
+							}else if( result.getMartes().equals("1") && diaNumero == 2){
+								totalDias =totalDias+0.50f;
+							}else if( result.getMiercoles().equals("0") && diaNumero == 3){
+								totalDias =totalDias+1;
+							}else if( result.getMiercoles().equals("1") && diaNumero == 3){
+								totalDias =totalDias+0.50f;
+							}else if( result.getJueves().equals("0") && diaNumero == 4){
+								totalDias =totalDias+1;
+							}else if( result.getJueves().equals("1") && diaNumero == 4){
+								totalDias =totalDias+0.50f;
+							}else if( result.getViernes().equals("0") && diaNumero == 5){
+								totalDias =totalDias+1;
+							}else if( result.getViernes().equals("1") && diaNumero == 5){
+								totalDias =totalDias+0.50f;
+							}else if( result.getSabado().equals("0") && diaNumero == 6){
+								totalDias =totalDias+1;
+							}else if( result.getSabado().equals("1") && diaNumero == 6){
+								totalDias =totalDias+0.50f;
+							}
+							
+							fech1 = fech1 + 1*24*60*60*1000;
+							f1 = new Date(fech1);						
+						}
+
+						dias = dias - totalDias;
+				        load.visible();	
+						try{
+							new Date(dateFecha1.getValue().getTime());
+						}catch(Exception e){
+							dateFecha1.setValue(new Date(1407518124684L));
+						}
+						try{
+							new Date(dateFecha2.getValue().getTime());
+						}catch(Exception e){
+							dateFecha2.setValue(new Date(1407518124684L));
+						}
+
+				        
+						
+						if(dias  <=  26 && dias >= 1){
+							
+						
+							if(bandera) {
+								loginService.Insertar_Solicitud_Permiso(empleado.id_empleado, dateFecha1.getValue(), 
+										dateFecha2.getValue(), txtDescripcion.getText(),listTipoPermiso.getValue(listTipoPermiso.getSelectedIndex()), new AsyncCallback<String>(){
+			                        public void onFailure(Throwable caught) 
+			                        {
+			            		        load.invisible();
+			                        	mensaje.setMensaje("alert alert-error", "Error !! \nal Guardar Datos");
+			                        }
+			
+									@Override
+			                        public void onSuccess(String result)
+			                        {
+								        load.invisible();
+										bandera = false;
+										mensaje.setMensaje("alert alert-success", result);
+			                        }
+									});
+							}else{
+								mensaje.setMensaje("alert alert-information alert-block", "Ya ha sido solicitado este permiso");
+						        load.invisible();
+							}
+								
+					      }else{
+								mensaje.setMensaje("alert alert-information alert-block"
+										, "La solicitud de dias debe ser mayor a 0 dias \n o menor igual a 26 dias para  permiso/vacaciones");
+						        load.invisible();
+					    	  
+					      }
+		            }
+					});
 		        load.invisible();
 			}
 		});
@@ -200,25 +274,10 @@ public class FormularioPermiso extends Composite {
 		this.dateFecha2.setValue(new Date(dateFecha2));
 	}
 	
-	public int DiasDescando(Long fecha1, Long fecha2){
-		Date f1 = new Date(fecha1);
-		Date f2 = new Date(fecha2);
-		FechaParser parser = new FechaParser();
+	public float DiasDescando(final Long fecha1, final Long fecha2){
 		
-		while(f2.before(f1)){
-			DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
-			String dia = dtDia.format(new Date(fecha1));
-			DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
-			String Mes = dtMes.format(new Date(fecha1));
-			DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
-			String Anio = dtAnio.format(new Date(fecha1));
-			
-			String diaLetras = parser.getDia(parser.getDia(Integer.parseInt(Mes), Integer.parseInt(dia), Integer.parseInt(Anio)));
-			
-			fecha1 = fecha1 + 1*24*60*60*1000;
-			f1 = new Date(fecha1);
-		}
-		return 1;
+		
+		return totalDias;
 	}
 	
 }

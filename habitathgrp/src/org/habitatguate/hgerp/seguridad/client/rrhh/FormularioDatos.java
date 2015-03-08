@@ -158,6 +158,7 @@ public class FormularioDatos extends Composite {
     private ListBox listAfiliado;
     private Label lblAfiliado;
     private int tip = 0;
+    private Label lblSeleccioneUnaImagen;
     /**
      * 
      * @param empleadoo
@@ -1520,6 +1521,11 @@ public class FormularioDatos extends Composite {
 		absolutePanel.add(lblAfiliado, 308, 1397);
 		lblAfiliado.setSize("192px", "19px");
 		
+		lblSeleccioneUnaImagen = new Label("Seleccione una imagen no mayor a 1MB");
+		lblSeleccioneUnaImagen.setStyleName("label");
+		absolutePanel.add(lblSeleccioneUnaImagen, 596, 10);
+		lblSeleccioneUnaImagen.setSize("357px", "19px");
+		
 		finanzasService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
 		    public void onFailure(Throwable caught) 
 		    {
@@ -2254,7 +2260,7 @@ public class FormularioDatos extends Composite {
 			// add submit handler
 	    form.addSubmitHandler(new SubmitHandler() {
 				public void onSubmit(SubmitEvent event) {
-					if (fileUpload.getFilename().length() == 0 ) {
+					if (fileUpload.getFilename().length() == 0) {
 						mensaje.setMensaje("alert alert-info", 
 	                			"Selecciono un archivo?");
 						event.cancel();

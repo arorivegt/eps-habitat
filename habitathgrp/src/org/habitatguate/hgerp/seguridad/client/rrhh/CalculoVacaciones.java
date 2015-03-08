@@ -953,7 +953,7 @@ public class CalculoVacaciones extends Composite   {
 	 			}
 
 	 			System.out.println(salarioBaseCalculo+" / " +mes2);
-	 			salarioBaseCalculo=  salarioBaseCalculo / Integer.parseInt(mes2);
+	 			salarioBaseCalculo=  salarioBaseCalculo / Float.parseFloat(mes2);
 	 			
 	 			nuevo.agregarFormulario(e.getId_empleado(), tipo, "Caclulo de Vacaciones",nombre
 	 						,""+salarioBaseCalculo,""+e.getDiasDeVacaciones(),"30.5",dateFecha.getValue());

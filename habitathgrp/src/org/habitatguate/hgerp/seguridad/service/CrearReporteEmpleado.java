@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 
+@WebServlet("/CrearReporteEmpleado")
 public class CrearReporteEmpleado extends HttpServlet {
 
 	private static final long serialVersionUID 	= 1L;
@@ -326,7 +328,7 @@ public class CrearReporteEmpleado extends HttpServlet {
 			        	   Date fecha2 = new Date(Long.parseLong(salf2));
 		            	for(AuxSalario f : p.getSalario()) {
 		            		if(valor){
-		    		            document.add(new Paragraph("Historial Vacaciones",catFont));
+		    		            document.add(new Paragraph("Historial Salario",catFont));
 		    		            document.add(new Paragraph(" "));
 		    		            valor = false;
 		            		}
@@ -578,6 +580,7 @@ public class CrearReporteEmpleado extends HttpServlet {
     public PdfPTable CrearPuesto(AuxPuesto f) {
 		String AnnioPuesto 	= ""+fecha.format(new Date(f.getFecha_puesto()));
     	PdfPTable table 	= new PdfPTable(3);
+    	String jornada = "";
     	
         table.addCell(new Paragraph("Puesto",redFont));
         table.addCell(new Paragraph("Fecha del Puesto",redFont));
@@ -590,7 +593,15 @@ public class CrearReporteEmpleado extends HttpServlet {
         table.addCell(new Paragraph("Jornada",redFont));
         table.addCell(new Paragraph("Puesto Activo",redFont));
         table.addCell(new Paragraph(f.getFunciones(),catFont));
-        table.addCell(new Paragraph(f.getJornada(),catFont));
+
+        if(f.getJornada().equals("0"))
+        	jornada = "Diurna";
+        else if(f.getJornada().equals("1"))
+            	jornada = "Nocturna";
+        else if(f.getJornada().equals("2"))
+        	jornada = "Mixta";
+        
+        table.addCell(new Paragraph(jornada,catFont));
         if(f.isActivo())
         	table.addCell(new Paragraph("Si",catFont));
         else
@@ -951,13 +962,11 @@ public class CrearReporteEmpleado extends HttpServlet {
     }
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
         processRequest(request, response);
     }
 

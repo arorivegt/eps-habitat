@@ -4,19 +4,23 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class DatosMinisterioTrabajo  implements IsSerializable{
 
-	private String NoEmpleado;
-	private String TipoIdentificacion;
-	private String DocumentoIdentificacion;
-	private String PaisOrigen;
-	private String LugarNacimiento;
-	private String NitEmpleado;	
-	private String IGSSEmpleado;
-	private String DeportadoPais;	
+	private String NoEmpleado;	
 	private String Nombre1;	
 	private String Nombre2;	
 	private String Nombre3;
 	private String Apellido1;	
 	private String Apellido2;
+	private String TipoIdentificacion;
+	private String DocumentoIdentificacion;
+	private String InicioLabores;
+	private String Bonificaciones;
+	private String Viaticos;
+	private String Vacaciones;
+	private String PaisOrigen;
+	private String LugarNacimiento;
+	private String NitEmpleado;	
+	private String IGSSEmpleado;
+	private String DeportadoPais;
 	private String EstadoCivil;	
 	private String NumeroHijos;	
 	private String FechaNacimiento;	
@@ -369,6 +373,46 @@ public class DatosMinisterioTrabajo  implements IsSerializable{
 
 	public void setDiasTrabajadosAnnio(String diasTrabajadosAnnio) {
 		DiasTrabajadosAnnio = diasTrabajadosAnnio;
+	}
+
+
+	public String getInicioLabores() {
+		return InicioLabores;
+	}
+
+
+	public void setInicioLabores(String inicioLabores) {
+		InicioLabores = inicioLabores;
+	}
+
+
+	public String getBonificaciones() {
+		return Bonificaciones;
+	}
+
+
+	public void setBonificaciones(String bonificaciones) {
+		Bonificaciones = bonificaciones;
+	}
+
+
+	public String getViaticos() {
+		return Viaticos;
+	}
+
+
+	public void setViaticos(String viaticos) {
+		Viaticos = viaticos;
+	}
+
+
+	public String getVacaciones() {
+		return Vacaciones;
+	}
+
+
+	public void setVacaciones(String vacaciones) {
+		Vacaciones = vacaciones;
 	}
 
 	

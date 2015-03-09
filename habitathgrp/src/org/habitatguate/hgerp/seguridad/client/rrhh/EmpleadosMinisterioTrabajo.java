@@ -232,6 +232,13 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				NumberFormat fmt = NumberFormat.getDecimalFormat();
 				DATOS = new ArrayList<DatosMinisterioTrabajo>();
 				int i = 0;
+
+				DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
+				String dia = "";
+				DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
+				String Mes = "";
+				DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
+				String Anio = "";
 				
 				for (AuxEmpleado itemEmpleado : listAuxEmpleado) {
 					DatosMinisterioTrabajo empleado = new DatosMinisterioTrabajo();
@@ -262,6 +269,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						 if(i1 == 1)
 							 munidir = numerosComoArray2[i1];
 				     }	
+						dia = dtDia.format(new Date(itemEmpleado.getFecha_ingreso()));
+						Mes = dtMes.format(new Date(itemEmpleado.getFecha_ingreso()));
+						Anio = dtAnio.format(new Date(itemEmpleado.getFecha_ingreso()));
+					 empleado.setInicioLabores(dia+"/"+Mes+"/"+Anio);
 					 if(deptodir.equals("01")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("I"+"0"+munidir);
@@ -422,13 +433,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setNumeroHijos(""+NoHijos);
 					
 					//fecha de naicmiento con formato dia/mes/año
-					DateTimeFormat dtDia = DateTimeFormat.getFormat("dd");
-					String dia = dtDia.format(new Date(itemEmpleado.getFecha_nacimiento()));
-					DateTimeFormat dtMes = DateTimeFormat.getFormat("MM");
-					String Mes = dtMes.format(new Date(itemEmpleado.getFecha_nacimiento()));
-					DateTimeFormat dtAnio = DateTimeFormat.getFormat("yyyy");
-					String Anio = dtAnio.format(new Date(itemEmpleado.getFecha_nacimiento()));
-					
+
+					dia = dtDia.format(new Date(itemEmpleado.getFecha_nacimiento()));
+					Mes = dtMes.format(new Date(itemEmpleado.getFecha_nacimiento()));
+					Anio = dtAnio.format(new Date(itemEmpleado.getFecha_nacimiento()));
 					empleado.setFechaNacimiento(dia+"/"+Mes+"/"+Anio);
 					
 					//calculo de edad del empleado
@@ -603,6 +611,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			 		float comisiones = 0;
 			 		float indemnizacion = 0;
 			 		float otrosPagos = 0;
+			 		float viaticos = 0;
+			 		float bonificaciones = 0;
 			 		float salarioMensualNominal = 0;
 			 		float decreto7889 = 0;
 			 		
@@ -642,6 +652,16 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 				{
 		 					otrosPagos += s.getSalario();
 		 				}
+		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("9")) 
+		 				{
+		 					viaticos += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("10")) 
+		 				{
+		 					bonificaciones += s.getSalario();
+		 				}
 		 				
 		 				
 		 				
@@ -657,6 +677,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setAguinaldo(""+fmt.format(aguinaldo));
 					
 					empleado.setBono14(""+fmt.format(bono14));
+					
+					empleado.setViaticos(""+fmt.format(viaticos));
+					
+					empleado.setBonificaciones(""+fmt.format(bonificaciones));
 					
 					empleado.setComisiones(""+fmt.format(comisiones));
 					
@@ -722,6 +746,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 				nuevo.AgregarColumna("37");
 				nuevo.AgregarColumna("38");
 				nuevo.AgregarColumna("39");
+				nuevo.AgregarColumna("40");
+				nuevo.AgregarColumna("41");
+				nuevo.AgregarColumna("42");
+				nuevo.AgregarColumna("43");
 				//nuevo.setSize("1187px", "648px");
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

@@ -19,46 +19,49 @@ public class InformMinisterioTrabajoXml {
     private RecursosHumanosServiceImpl recursosHumanosService 	= new  RecursosHumanosServiceImpl();
 	    private String xmlInicio 							 	= "<table><tbody>"
 																+"<tr>"
-																+"<td>No. de empleado</td>"	
-																+"<td>Tipo Documento Identificación</td>"
-																+"<td>Documento Identificación</td>"	
+																+"<td>Numero de Empleado</td>"	
+																+"<td>Primer Nombre</td>"	
+																+"<td>Segundo Nombre</td>"
+																+"<td>Primer Apellido</td>"	
+																+"<td>Segundo Apellido</td>"	
+																+"<td>Nacionalidad</td>"	
+																+"<td>Estado Civil</td>"	
+																+"<td>Documento Identificación</td>"
+																+"<td>Número de Documento</td>"	
 																+"<td>Pais Origen</td>"	
 																+"<td>Lugar Nacimiento</td>"	
-																+"<td>Nit Empleado</td>"	
-																+"<td>IGSS Empleado</td>"
-																+"<td>Deportado de algún País</td>"	
-																+"<td>Nombre1</td>"	
-																+"<td>Nombre2</td>"	
-																+"<td>Nombre3</td>"	
-																+"<td>Apellido1</td>"	
-																+"<td>Apellido2</td>"	
-																+"<td>Estado Civil</td>"	
-																+"<td>Número Hijos</td>"	
-																+"<td>Fecha Nacimiento</td>"	
-																+"<td>Edad aprox.</td>"	 
+																+"<td>NIT</td>"	
+																+"<td>Número de Afiliación IGSS</td>"
 																+"<td>Sexo (M) O (F)</td>"	
-																+"<td>Tiempo de laborar</td>"	
-																+"<td>Puesto</td>"	 
-																+"<td>Dias Trabajados Año</td>"	
-																+"<td>Descanso Semanal</td>"	
-																+"<td>Jornada</td>"	
-																+"<td>Horas al Día</td>"	
-																+"<td>Salario Mensual Nominal</td>"	
-																+"<td>Decreto 78-89  (Q.250.00)</td>"	
-																+"<td>Total Horas Extras</td>"	
-																+"<td>Valor de Hora Extra </td>"	
-																+"<td>Aguinaldo Decreto 76-78</td>"	
-																+"<td>Bono 14 decreto 42-92</td>"	
-																+"<td>Comisiones</td>"	
+																+"<td>Fecha Nacimiento</td>"	
+																+"<td>Cantidad de Hijos</td>"	
+																+"<td>A trabajado en el extranjero</td>"
+																+"<td>En que forma</td>"
+																+"<td>Pais</td>"
+																+"<td>Motivo de finalización de la relación laboral en el extranjero</td>"
 																+"<td>Nivel Academico</td>"	
 																+"<td>Profesión</td>"
 																+"<td>Etnia</td>"	 
 																+"<td>Idiomas</td>"	
-																+"<td>Permiso Trabajo</td>"	
 																+"<td>Tipo Contrato</td>"	
-																+"<td>Indemnización (Articulo 82)</td>"
-																+"<td>Otros Pagos</td>"
-																+"</tr>";
+																+"<td>Fecha Inicio Labores</td>"
+																+"<td>Fecha Reinicio-labores</td>"
+																+"<td>Fecha Retiro Labores</td>"
+																+"<td>Puesto</td>"	
+																+"<td>Jornada de Trabajo</td>"	
+																+"<td>Dias Laborados en el Año</td>"	
+																+"<td>Permiso Trabajo</td>"	
+																+"<td>Salario Anual Nominal</td>"	
+																+"<td>Bonificación Decreto 78-89 (Q.250.00)</td>"	
+																+"<td>Total Horas Extras Anuales</td>"	
+																+"<td>Valor de Hora Extra</td>"
+																+"<td>Monto Aguinaldo Decreto 76-78</td>"
+																+"<td>Monto Bono 14  Decreto 42-92</td>"
+																+"<td>Retribución por Comisiones</td>"	
+																+"<td>Viaticos</td>"	
+																+"<td>Bonificaciones Adicionales</td>"
+																+"<td>Retribución por vacaciones</td>"
+																+"<td>Retribución por Indemnización (Articulo 82)</td></tr>";
 
 		String  xmlFinal 										= "</tbody></table>";
 	
@@ -75,6 +78,18 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+i+"</td>";
 					
+					xmlInicio += "<td>"+p.getPrimer_nombre()+"</td>";
+					
+					xmlInicio += "<td>"+p.getSegundo_nombre()+"</td>";
+					
+					xmlInicio += "<td>"+p.getPrimer_apellido()+"</td>";
+					
+					xmlInicio += "<td>"+p.getSegundo_apellido()+"</td>";
+					
+					xmlInicio += "<td>"+p.getPais()+"</td>";
+					
+					xmlInicio += "<td>"+p.getEstado_civil()+"</td>";
+					
 					try{
 						if(p.getPais().equals("83")){
 							xmlInicio += "<td>2</td>";
@@ -88,6 +103,7 @@ public class InformMinisterioTrabajoXml {
 						xmlInicio += "<td>2</td>";
 						xmlInicio += "<td>"+p.getCui()+"</td>";
 					}
+					
 					xmlInicio += "<td>"+p.getPais()+"</td>";
 		
 					 String[] numerosComoArray2 = p.getDepto_municipio_nacimiento().split(",");
@@ -236,28 +252,12 @@ public class InformMinisterioTrabajoXml {
 					xmlInicio += "<td>"+p.getNit()+"</td>";
 					
 					xmlInicio += "<td>"+p.getAfiliacion_igss()+"</td>";
-					
-					xmlInicio += "<td>"+""+"</td>";
-					
-					xmlInicio += "<td>"+p.getPrimer_nombre()+"</td>";
-					
-					xmlInicio += "<td>"+p.getSegundo_nombre()+"</td>";
-					
-					//empleado.setNombre3(p.getPrimer_nombre());
-					xmlInicio += "<td>"+""+"</td>";
-					
-					xmlInicio += "<td>"+p.getPrimer_apellido()+"</td>";
-					
-					xmlInicio += "<td>"+p.getSegundo_apellido()+"</td>";
-					
-					xmlInicio += "<td>"+p.getEstado_civil()+"</td>";
-					
-					int NoHijos = 0;
-					for (AuxFamilia f : p.getFamilia()) {
-						if(f.getParentesco().equals("hijo(a)"))
-							NoHijos++;
+
+					if(p.getSexo().equals("0")){
+						xmlInicio += "<td>"+"F"+"</td>";
+					}else{
+						xmlInicio += "<td>"+"M"+"</td>";
 					}
-					xmlInicio += "<td>"+NoHijos+"</td>";
 					//SimpleDateFormat dateFormat = new SimpleDateFormat(formato);
 					//fecha de naicmiento con formato dia/mes/año
 					SimpleDateFormat dtDia = new SimpleDateFormat("dd");
@@ -269,32 +269,57 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+dia+"/"+Mes+"/"+Anio+"</td>";
 					
-					//calculo de edad del empleado
-					//resta del año de actual - año nacimiento, para calcular edad aproximada
-					SimpleDateFormat dtf = new SimpleDateFormat("yyyy");
-					String AnnioNacimiento = dtf.format(new Date(p.getFecha_nacimiento()));
-					String AnnioActual = dtf.format(new Date());
-					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
-					
-					xmlInicio += "<td>"+edadtotal+"</td>";
-		
-					if(p.getSexo().equals("0")){
-						xmlInicio += "<td>"+"F"+"</td>";
-					}else{
-						xmlInicio += "<td>"+"M"+"</td>";
+					int NoHijos = 0;
+					for (AuxFamilia f : p.getFamilia()) {
+						if(f.getParentesco().equals("hijo(a)"))
+							NoHijos++;
 					}
-					 Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
-					 String Anio2 = dtAnio.format(new Date());
-					 
+					xmlInicio += "<td>"+NoHijos+"</td>";
 					
-					long diaslaborados = new Date().getTime()-p.getFecha_ingreso();
-					if(Integer.parseInt(Anio)< Integer.parseInt(Anio2)){
-						xmlInicio += "<td>"+"365"+"</td>";
-					}else{
-						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
-						xmlInicio += "<td>"+dialaboradoss+"</td>";
+					//trabajado en el extranjero
+					xmlInicio += "<td></td>";
+					//en que forma
+					xmlInicio += "<td></td>";
+					//Pais
+					xmlInicio += "<td></td>";
+					
+					//Motivo de finalización de la relación laboral en el extranjero
+					xmlInicio += "<td></td>";
+
+					int nivelAcademico = 0;
+					String profesion = "";
+					for (AuxHistorialAcademico academico : p.getHistorial_academico()) {
+						if(Integer.parseInt(academico.getNivel_academico()) > nivelAcademico){
+							nivelAcademico = Integer.parseInt(academico.getNivel_academico());
+							profesion = academico.getTitulo();
+						}
 					}
-		
+					xmlInicio += "<td>"+nivelAcademico+"</td>";
+					
+					xmlInicio += "<td>"+profesion+"</td>";
+
+					xmlInicio += "<td>"+p.getEtnia()+"</td>";
+
+					String idioma ="";
+					for (AuxIdioma id : p.getIdiomas()) {
+						if(idioma.equals(""))
+							idioma = id.getIdioma();
+						else
+							idioma += ","+id.getIdioma();
+					}
+					xmlInicio += "<td>"+idioma+"</td>";
+					//tipo de contrato
+					xmlInicio += "<td>Indefinido</td>";
+
+					dia = dtDia.format(new Date(p.getFecha_ingreso()));
+					Mes = dtMes.format(new Date(p.getFecha_ingreso()));
+					Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
+					xmlInicio += "<td>"+dia+"/"+Mes+"/"+Anio+"</td>";
+
+					xmlInicio += "<td>"+dia+"/"+Mes+"/"+Anio+"</td>";
+					//fecha de retiro de labores
+					xmlInicio += "<td>"+dia+"/"+Mes+"/"+Anio+"</td>";
+					
 					String DescansoSemanal = "";
 					String jornada = "";
 					String nombre_puesto = "";
@@ -404,35 +429,35 @@ public class InformMinisterioTrabajoXml {
 							break;
 						}
 					}
+					
 
 					xmlInicio += "<td>"+nombre_puesto+"</td>";
 					
-					xmlInicio += "<td>"+"0"+"</td>";//+"<td>Dias Trabajados Año</td>"	aqui va despues del nombre del puesto
-
-					xmlInicio += "<td>"+DescansoSemanal+"</td>";
-					
 					xmlInicio += "<td>"+jornada+"</td>";
 
-					xmlInicio += "<td>"+horas_trabajadas+"</td>";
-					
-					
-					String idioma ="";
-					for (AuxIdioma id : p.getIdiomas()) {
-						if(idioma.equals(""))
-							idioma = id.getIdioma();
-						else
-							idioma += ","+id.getIdioma();
+					 Anio = dtAnio.format(new Date(p.getFecha_ingreso()));
+					 String Anio2 = dtAnio.format(new Date());
+					long diaslaborados = new Date().getTime()-p.getFecha_ingreso();
+					if(Integer.parseInt(Anio)< Integer.parseInt(Anio2)){
+						xmlInicio += "<td>"+"365"+"</td>";
+					}else{
+						int dialaboradoss = (int) (diaslaborados /(1000 * 60 * 60 * 24));
+						xmlInicio += "<td>"+dialaboradoss+"</td>";
 					}
-		
-					int nivelAcademico = 0;
-					String profesion = "";
-					for (AuxHistorialAcademico academico : p.getHistorial_academico()) {
-						if(Integer.parseInt(academico.getNivel_academico()) > nivelAcademico){
-							nivelAcademico = Integer.parseInt(academico.getNivel_academico());
-							profesion = academico.getTitulo();
-						}
-					}
+					
+					//permiso
+					xmlInicio += "<td></td>";
 
+//					
+//					//calculo de edad del empleado
+//					//resta del año de actual - año nacimiento, para calcular edad aproximada
+//					SimpleDateFormat dtf = new SimpleDateFormat("yyyy");
+//					String AnnioNacimiento = dtf.format(new Date(p.getFecha_nacimiento()));
+//					String AnnioActual = dtf.format(new Date());
+//					int edadtotal = Integer.parseInt(AnnioActual)- Integer.parseInt(AnnioNacimiento);
+//					
+//					xmlInicio += "<td>"+edadtotal+"</td>";
+		
 			 		SimpleDateFormat anio = new SimpleDateFormat("yyyy");
 			 		//SimpleDateFormat mes 	= new SimpleDateFormat("MM");
 			 		//SimpleDateFormat diaa 	= new SimpleDateFormat("dd");
@@ -445,6 +470,9 @@ public class InformMinisterioTrabajoXml {
 			 		float comisiones = 0;
 			 		float indemnizacion = 0;
 			 		float otrosPagos = 0;
+			 		float viaticos = 0;
+			 		float bonificaciones = 0;
+			 		float vacaciones = 0;
 			 		float salarioMensualNominal = 0;
 			 		float decreto7889 = 0;
 			 		
@@ -464,6 +492,10 @@ public class InformMinisterioTrabajoXml {
 		 						&& s.getTipoSalario().equals("2"))
 		 				{
 		 					comisiones += s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("2"))
+		 				{
+		 					bonificaciones += s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio) 
 		 						&& s.getTipoSalario().equals("4"))
@@ -473,6 +505,10 @@ public class InformMinisterioTrabajoXml {
 		 						&& s.getTipoSalario().equals("5"))
 		 				{
 		 					aguinaldo = s.getSalario();
+		 				}else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("6"))
+		 				{
+		 					vacaciones = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio) 
 		 						&& s.getTipoSalario().equals("7")) 
@@ -483,6 +519,16 @@ public class InformMinisterioTrabajoXml {
 		 						&& s.getTipoSalario().equals("8")) 
 		 				{
 		 					otrosPagos += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("9")) 
+		 				{
+		 					viaticos += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio) 
+		 						&& s.getTipoSalario().equals("10")) 
+		 				{
+		 					bonificaciones += s.getSalario();
 		 				}
 		 				
 		 				
@@ -499,24 +545,16 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+df.format(bono14)+"</td>";
 					
-					xmlInicio += "<td>"+df.format(comisiones)+"</td>";
+					xmlInicio += "<td>"+df.format(comisiones)+"</td>";	
 					
-					xmlInicio += "<td>"+nivelAcademico+"</td>";
+					xmlInicio += "<td>"+df.format(viaticos)+"</td>";	
 					
-					xmlInicio += "<td>"+profesion+"</td>";
+					xmlInicio += "<td>"+df.format(bonificaciones)+"</td>";	
 					
-					xmlInicio += "<td>"+p.getEtnia()+"</td>";
-
-					xmlInicio += "<td>"+idioma+"</td>";
-
-					xmlInicio += "<td>"+""+"</td>";
-					//private String PermisoTrabajo;
-					
-					xmlInicio += "<td>"+"Indefinido"+"</td>";
+					xmlInicio += "<td>"+df.format(vacaciones)+"</td>";		
 					
 					xmlInicio += "<td>"+df.format(indemnizacion)+"</td>";
 					
-					xmlInicio += "<td>"+df.format(otrosPagos)+"</td></tr>";
 					
 				
 					i++;

@@ -149,6 +149,7 @@ public class FormularioSalario extends Composite {
 		txtTipoSalario.addItem("Vacaciones", "6");
 		txtTipoSalario.addItem("Indemnizacion", "7");
 		txtTipoSalario.addItem("Otros pagos", "8");
+		txtTipoSalario.addItem("Viaticos", "9");
 		txtTipoSalario.setStylePrimaryName("gwt-TextBox2");
 		txtTipoSalario.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTipoSalario, 10, 90);

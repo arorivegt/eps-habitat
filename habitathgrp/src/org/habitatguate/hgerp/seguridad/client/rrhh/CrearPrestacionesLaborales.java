@@ -246,8 +246,8 @@ public class CrearPrestacionesLaborales extends Composite   {
 		listTipoPrestaciones.addItem("Bonificacion", "3");
 		listTipoPrestaciones.addItem("Bono 14", "4");
 		listTipoPrestaciones.addItem("Aguinaldo", "5");
-		//listTipoPrestaciones.addItem("Vacaciones", "6");
-		//listTipoPrestaciones.addItem("Indemnizacion", "7");
+		listTipoPrestaciones.addItem("Indemnizacion", "7");
+		listTipoPrestaciones.addItem("Viaticos", "9");
 		listTipoPrestaciones.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listTipoPrestaciones, 10, 94);
 		listTipoPrestaciones.setSize("179px", "39px");
@@ -1268,7 +1268,7 @@ public class CrearPrestacionesLaborales extends Composite   {
 	 			System.out.println(salarioBaseCalculo+" / " +mes2);
 	 			salarioBaseCalculo=  salarioBaseCalculo / Integer.parseInt(mes2);
 	 			
-	 			if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3")){
+	 			if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3") || tipo.equals("9")){
 	 				nuevo.agregarFormulario(e.getId_empleado(), tipo, txtDescripcion.getText(),nombre
 	 						,""+Cantidad.getText(), "1", "1",dateFecha.getValue());
 	 			}if(tipo.equals("4")){

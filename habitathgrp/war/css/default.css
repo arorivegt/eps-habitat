@@ -122,7 +122,6 @@ box-shadow: inset 0 1px 1px 0 rgba(0,0,0,.14);
 	font-size: 12px;
 	font-family: Oswald, sans-serif;
 	font-weight: bold;
-/* 	line-height: 1.4px; */
 }
 .gwt-Label {
 display: block;
@@ -506,16 +505,16 @@ html>body .gwt-SuggestBoxPopup {
 
 .gwt-MenuBar .gwt-MenuItem {
 	width: 400px;
-	height: 50px;
+	height: 35px;
 	overflow: hidden;
-	background: #51B948;
+	background: #677666;
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 	margin-bottom: 4px;
 	border-left: 10px solid #000;
 	transition: all 300ms ease-in-out;
 }
 .gwt-MenuBar .gwt-MenuItem-selected {
-  background: #E3E8F3;
+  background: #465C8C;
 }
 .gwt-MenuBar-horizontal {
   background: #e3e8f3 ;
@@ -524,7 +523,7 @@ html>body .gwt-SuggestBoxPopup {
 .gwt-MenuBar-horizontal .gwt-MenuItem {
   padding: 5px 10px;
   vertical-align: bottom;
-  color: #000;
+  color: #FFF;
   font-weight: bold;
 }
 .gwt-MenuBar-horizontal .gwt-MenuItemSeparator {
@@ -550,6 +549,7 @@ html>body .gwt-SuggestBoxPopup {
 }
 .gwt-MenuBar-vertical .gwt-MenuItem {
   padding: 2px 40px 2px 1px;
+  color : white;
 }
 .gwt-MenuBar-vertical .gwt-MenuItemSeparator {
   padding: 2px 0px;

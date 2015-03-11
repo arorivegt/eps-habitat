@@ -636,8 +636,11 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					if(idEmpleado != 0){
 						System.out.println("Valor Retornado Id Empleado: " + idEmpleado);
 
-						if(idAfiliado != 0){
-							System.out.println("Valor Retornado Id Afiliado: " + idAfiliado);
+						// Modulo Soluciones //-- CAMBIAR Y QUITAR COMENTARIO AL REALIZAR VALIDACIÓN
+						
+//						if(idAfiliado != 0){
+//							System.out.println("Valor Retornado Id Afiliado: " + idAfiliado);
+							
 
 							if(bandera){
 
@@ -704,9 +707,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 							}
 
-						}else{
-							mensaje.setMensaje("alert alert-error", "El empleado actual no tiene Afiliado");							
-						}
+							// Modulo Soluciones //-- CAMBIAR Y QUITAR COMENTARIO AL REALIZAR VALIDACIÓN
+							
+//						}else{
+//							mensaje.setMensaje("alert alert-error", "El empleado actual no tiene Afiliado");							
+//						}
+					
+					
 					}else{
 						mensaje.setMensaje("alert alert-error", "Error en retornar ID de Empleado");
 					}

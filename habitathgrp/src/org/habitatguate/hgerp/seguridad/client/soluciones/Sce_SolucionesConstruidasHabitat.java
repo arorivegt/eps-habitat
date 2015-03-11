@@ -45,7 +45,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 	private Mensaje mensaje; 
     private ScrollPanel scrollPanel;
     private AbsolutePanel absolutePanel_1;
-    private  ListBox listEstado ;
+    private ListBox listSolucionConstruir ;
     private Loading load ;
     private List<Sce_DatosSolucionesConstruidas> DATOS;
   	
@@ -91,19 +91,19 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		listEstado = new ListBox();
-		listEstado.addChangeHandler(new ChangeHandler() {
+		listSolucionConstruir = new ListBox();
+		listSolucionConstruir.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				busqueda();
 			}
 		});
-		listEstado.addItem("Nueva","1");
-		listEstado.addItem("Mejoramiento","2");
-		listEstado.addItem("Adiciones Menores","3");
-		listEstado.addItem("TODOS");
-		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 170, 31);
-		listEstado.setSize("227px", "34px");
+		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
+		listSolucionConstruir.addItem("TODOS");
+		listSolucionConstruir.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listSolucionConstruir, 170, 31);
+		listSolucionConstruir.setSize("227px", "34px");
 		
 		// Imagen de Lupa de Busqueda
 		
@@ -143,13 +143,13 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 			public void onClick(ClickEvent event) {
 
 				char tipo = '3';
-				if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("TODOS"))
+				if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
 					tipo = '2';
 				else
 					tipo = '3';
 				
-				System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&solucionConstruir="+listEstado.getValue(listEstado.getSelectedIndex()));
-				formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&solucionConstruir="+listEstado.getValue(listEstado.getSelectedIndex()));
+				System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+				formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
 				formPanel.submit();
 			}
 		});
@@ -159,7 +159,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		button.setSize("198px", "41px");
 		
 		formPanel = new FormPanel();
-		formPanel.setAction("/ExportAs?tipo="+"0"+"&estado="+listEstado.getValue(listEstado.getSelectedIndex()));
+		formPanel.setAction("/ExportSolucionDetalle?tipo="+"0"+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
 		
@@ -177,12 +177,12 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		load.visible();
 		char tipo = '3';
 
-		if(listEstado.getItemText(listEstado.getSelectedIndex()).equals("TODOS"))
+		if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
 			tipo = '2';
 		else
 			tipo = '3';
 
-		solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, "",listEstado.getValue(listEstado.getSelectedIndex()), new AsyncCallback<List<AuxSolicitudGeneral>>(){
+		solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()), new AsyncCallback<List<AuxSolicitudGeneral>>(){
 
 			public void onFailure(Throwable caught) 
 			{
@@ -202,10 +202,13 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 
 					// DATA A MOSTRAR EN RESULTADO
 					
+					// 1. Codigo Referencia
 					empleado.setIdFormulario(""+p.getIdFormulario());
 					
+					// 2. Nombre Solicitante
 					empleado.setNombreSolicitante(p.getNombreSolicitante());
 					
+					// 3. Estado Civil
 					String valEstadoCivil = "";
 					valEstadoCivil = p.getEstadoCivil();
 					String estadoCivil = "";
@@ -224,79 +227,10 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setEstadoCivil(estadoCivil);
 					
+					// 4. Edad
 					empleado.setEdad(""+p.getEdad());
 
-					String valLeer = "NO";
-					Boolean leer = false;
-					if(!p.getCheckLeer().equals(null)){
-						leer = p.getCheckLeer();
-					}
-					if(leer){
-						valLeer = "SI";
-					}else{
-						valLeer = "NO";
-					}
-					empleado.setSabeLeer(valLeer);
-
-					String valEscribir = "NO";
-					Boolean escribir = false;
-//					if(!p.getCheckEscribir().equals(null)){
-//						escribir = p.getCheckEscribir();	
-//					}
-//					if(escribir){
-//						valEscribir = "SI";
-//					}else{
-//						valEscribir = "NO";
-//					}
-					empleado.setSabeEscribir(valLeer);
-
-					String valFirmar = "NO";
-					Boolean firmar = false;
-					if(!p.getCheckFirmar().equals(null)){
-						firmar = p.getCheckFirmar();	
-					}
-					if(firmar){
-						valFirmar = "SI";
-					}else{
-						valFirmar = "NO";
-					}
-					empleado.setSabeFirmar(valFirmar);
-
-					empleado.setTelefonoCasaSolicitante(""+p.getTelefonoCasaSolicitante());
-					empleado.setTelefonoTrabajoSolicitante(""+p.getTelefonoTrabajoSolicitante());
-					empleado.setCuotaPagar(""+p.getCuotaPagar());
-					
-					String valCamion = "";
-					Boolean camion = false;
-					camion = p.getCheckCamion();
-					if(camion){
-						valCamion = "SI";
-					}else{
-						valCamion = "NO";
-					}
-					empleado.setCamion(valCamion);
-					
-					String valCarro = "";
-					Boolean carro = false;
-					carro = p.getCheckCarro();
-					if(carro){
-						valCarro = "SI";
-					}else{
-						valCarro = "NO";
-					}
-					empleado.setCarro(valCarro);
-					
-					String valPeatonal = "";
-					Boolean peatonal = false;
-					peatonal = p.getCheckPeatonal();
-					if(peatonal){
-						valPeatonal = "SI";
-					}else{
-						valPeatonal = "NO";
-					}
-					empleado.setPeatonal(valPeatonal);
-					
-
+					// 5. Solucion a construir
 					String valSolucion = "";
 					valSolucion = p.getSolucionConstruir();
 					String solucion = "";
@@ -308,7 +242,47 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 						solucion = "ADICIONES MENORES";
 					}
 					empleado.setSolucionConstruir(solucion);
+
+					// 6. Telefono Casa
+					empleado.setTelefonoCasaSolicitante(""+p.getTelefonoCasaSolicitante());
+
+					// 7. Telefono Trabajo
+					empleado.setTelefonoTrabajoSolicitante(""+p.getTelefonoTrabajoSolicitante());
 					
+					// 8. Inmueble accesible en camion
+					String valCamion = "";
+					Boolean camion = false;
+					camion = p.getCheckCamion();
+					if(camion){
+						valCamion = "SI";
+					}else{
+						valCamion = "NO";
+					}
+					empleado.setCamion(valCamion);
+					
+					// 9. Inmueble accesible en carro
+					String valCarro = "";
+					Boolean carro = false;
+					carro = p.getCheckCarro();
+					if(carro){
+						valCarro = "SI";
+					}else{
+						valCarro = "NO";
+					}
+					empleado.setCarro(valCarro);
+					
+					// 10. Inmueble accesible para peatones
+					String valPeatonal = "";
+					Boolean peatonal = false;
+					peatonal = p.getCheckPeatonal();
+					if(peatonal){
+						valPeatonal = "SI";
+					}else{
+						valPeatonal = "NO";
+					}
+					empleado.setPeatonal(valPeatonal);					
+					
+					// 11. Contiene Garantia
 					String valGarantia = "";
 					Boolean garantia = false;
 					garantia = p.getGarantia();
@@ -319,6 +293,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setGarantia(valGarantia);
 					
+					// 12. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -329,6 +304,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setSupervisionPrimera(valSupervision1);
 					
+					// 13. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -339,6 +315,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setSupervisionSegunda(valSupervision2);
 					
+					// 14. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -349,6 +326,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 					}
 					empleado.setSupervisionTercera(valSupervision3);
 					
+					// 15. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();
@@ -358,10 +336,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 						valSupervision4 = "NO";
 					}
 					empleado.setSupervisionCuarta(valSupervision4);
-					
-					
-					
-					
+							
 					DATOS.add(empleado);
 					i++;
 				}
@@ -382,8 +357,6 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 				nuevo.AgregarColumna("13");
 				nuevo.AgregarColumna("14");
 				nuevo.AgregarColumna("15");
-				nuevo.AgregarColumna("16");
-				nuevo.AgregarColumna("17");
 
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

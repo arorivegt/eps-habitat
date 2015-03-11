@@ -47,36 +47,46 @@ public class Sce_DatosSolucionesConstruidas  implements IsSerializable{
 	public void setEdad(String edad) {
 		this.edad = edad;
 	}
-
-	private String sabeLeer;
-
-	public String getSabeLeer() {
-		return sabeLeer;
-	}
-
-	public void setSabeLeer(String sabeLeer) {
-		this.sabeLeer = sabeLeer;
-	}
 	
-	private String sabeEscribir;	
-
-	public String getSabeEscribir() {
-		return sabeEscribir;
-	}
-
-	public void setSabeEscribir(String sabeEscribir) {
-		this.sabeEscribir = sabeEscribir;
-	}
+	private String solucionConstruir;
 	
-	private String sabeFirmar;	
-
-	public String getSabeFirmar() {
-		return sabeFirmar;
+	public String getSolucionConstruir() {
+		return solucionConstruir;
 	}
 
-	public void setSabeFirmar(String sabeFirmar) {
-		this.sabeFirmar = sabeFirmar;
+	public void setSolucionConstruir(String solucionConstruir) {
+		this.solucionConstruir = solucionConstruir;
 	}
+
+//	private String sabeLeer;
+//
+//	public String getSabeLeer() {
+//		return sabeLeer;
+//	}
+//
+//	public void setSabeLeer(String sabeLeer) {
+//		this.sabeLeer = sabeLeer;
+//	}
+//	
+//	private String sabeEscribir;	
+//
+//	public String getSabeEscribir() {
+//		return sabeEscribir;
+//	}
+//
+//	public void setSabeEscribir(String sabeEscribir) {
+//		this.sabeEscribir = sabeEscribir;
+//	}
+//	
+//	private String sabeFirmar;	
+//
+//	public String getSabeFirmar() {
+//		return sabeFirmar;
+//	}
+//
+//	public void setSabeFirmar(String sabeFirmar) {
+//		this.sabeFirmar = sabeFirmar;
+//	}
 
 	private String telefonoCasaSolicitante;
 	
@@ -136,16 +146,6 @@ public class Sce_DatosSolucionesConstruidas  implements IsSerializable{
 
 	public void setPeatonal(String peatonal) {
 		this.peatonal = peatonal;
-	}
-	
-	private String solucionConstruir;
-	
-	public String getSolucionConstruir() {
-		return solucionConstruir;
-	}
-
-	public void setSolucionConstruir(String solucionConstruir) {
-		this.solucionConstruir = solucionConstruir;
 	}
 
 	private String garantia;

@@ -272,7 +272,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 						dia = dtDia.format(new Date(itemEmpleado.getFecha_ingreso()));
 						Mes = dtMes.format(new Date(itemEmpleado.getFecha_ingreso()));
 						Anio = dtAnio.format(new Date(itemEmpleado.getFecha_ingreso()));
-					 empleado.setInicioLabores(dia+"/"+Mes+"/"+Anio);
+					 empleado.setInicioLabores(01+"/"+01+"/"+listAnnio);
 					 if(deptodir.equals("01")){
 						 if(munidir.length()<4){
 							 empleado.setLugarNacimiento("I"+"0"+munidir);
@@ -615,6 +615,7 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 			 		float bonificaciones = 0;
 			 		float salarioMensualNominal = 0;
 			 		float decreto7889 = 0;
+			 		float vacaciones = 0;
 			 		
 					for (AuxSalario s : itemEmpleado.getSalario()) {
 		 				formatAnio = anio.format(new Date(s.getFecha()));
@@ -641,6 +642,11 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 		 						&& s.getTipoSalario().equals("2"))
 		 				{
 		 					comisiones += s.getSalario();
+		 				}
+		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
+		 						&& s.getTipoSalario().equals("6")) 
+		 				{
+		 					vacaciones = s.getSalario();
 		 				}
 		 				else if(formatAnio.equals(listAnnio.getItemText(listAnnio.getSelectedIndex())) 
 		 						&& s.getTipoSalario().equals("7")) 
@@ -685,6 +691,8 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					empleado.setComisiones(""+fmt.format(comisiones));
 					
 					empleado.setNivelAcademico(""+nivelAcademico);
+					
+					empleado.setVacaciones(""+vacaciones);;
 					
 					empleado.setProfesion(profesion);
 					

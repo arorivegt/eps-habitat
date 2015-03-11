@@ -76,7 +76,7 @@ public class InformMinisterioTrabajoXml {
 				
 				for (AuxEmpleado p : result) {
 					
-					xmlInicio += "<td>"+i+"</td>";
+					xmlInicio += "<tr><td>"+i+"</td>";
 					
 					xmlInicio += "<td>"+p.getPrimer_nombre()+"</td>";
 					
@@ -553,7 +553,7 @@ public class InformMinisterioTrabajoXml {
 					
 					xmlInicio += "<td>"+df.format(vacaciones)+"</td>";		
 					
-					xmlInicio += "<td>"+df.format(indemnizacion)+"</td>";
+					xmlInicio += "<td>"+df.format(indemnizacion)+"</td></tr>";
 					
 					
 				

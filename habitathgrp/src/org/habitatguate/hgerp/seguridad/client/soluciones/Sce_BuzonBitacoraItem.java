@@ -73,10 +73,10 @@ public class Sce_BuzonBitacoraItem extends Composite {
 	       this.listSolucionConstruir.setSelectedIndex(i);
 	    }
 		
-		Label lblTipoVivienda = new Label("Solucion a Construir");
+		Label lblTipoVivienda = new Label("Tipo Solucion");
 		lblTipoVivienda.setStyleName("label");
 		absolutePanel.add(lblTipoVivienda, 350, 0);
-		lblTipoVivienda.setSize("153px", "13px");
+		lblTipoVivienda.setSize("150px", "13px");
 		
 		btnVer = new Button("Send");
 		btnVer.addClickHandler(new ClickHandler() {

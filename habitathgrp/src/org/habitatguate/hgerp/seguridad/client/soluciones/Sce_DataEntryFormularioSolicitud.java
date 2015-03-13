@@ -48,7 +48,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel3 = new ScrollPanel();
 		scrollPanel3.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel3, "Carga Familiares", true);
-		scrollPanel3.setSize("100%", "1000px");
+		scrollPanel3.setSize("100%", "100%");
 		fd3 = new Sce_DataEntryCargasFamiliares(this);
 		scrollPanel3.setWidget(fd3);	
 

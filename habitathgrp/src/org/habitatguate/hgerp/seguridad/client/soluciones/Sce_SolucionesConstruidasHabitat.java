@@ -194,7 +194,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 			public void onSuccess( List<AuxSolicitudGeneral> result)
 			{
 				DATOS = new ArrayList<Sce_DatosSolucionesConstruidas>();
-				int i = 0;
+				int i = 1;
 
 				for (AuxSolicitudGeneral p : result) {
 
@@ -202,8 +202,11 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 
 					// DATA A MOSTRAR EN RESULTADO
 					
-					// 1. Codigo Referencia
-					empleado.setIdFormulario(""+p.getIdFormulario());
+					// 1. Numero Correlativo.
+					empleado.setNumero(""+i);
+					
+//					// 1. Codigo Referencia
+//					empleado.setIdFormulario(""+p.getIdFormulario());
 					
 					// 2. Nombre Solicitante
 					empleado.setNombreSolicitante(p.getNombreSolicitante());

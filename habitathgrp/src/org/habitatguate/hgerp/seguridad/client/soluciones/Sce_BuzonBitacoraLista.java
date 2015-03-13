@@ -82,7 +82,7 @@ public class Sce_BuzonBitacoraLista extends Composite {
         load.invisible();
     }
     
-    public void EliminarFormulario(final Sce_BusquedaFormularioItem a){
+    public void EliminarFormulario(final Sce_BuzonBitacoraItem a){
         load.visible();
     	flexTable.remove(a);
         load.invisible();

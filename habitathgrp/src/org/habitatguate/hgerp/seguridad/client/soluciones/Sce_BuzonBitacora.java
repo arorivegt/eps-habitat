@@ -135,24 +135,11 @@ public class Sce_BuzonBitacora extends Composite  {
 		txtNombreSolicitante.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreSolicitante, 205, 19);
 		txtNombreSolicitante.setSize("250px", "34px");
-		txtNombreSolicitante = new SuggestBox(resultadoFormulario());
-		txtNombreSolicitante.addKeyUpHandler(new KeyUpHandler() {
-			public void onKeyUp(KeyUpEvent event) {
-
-			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
-			     {
-						busqueda();
-			     }
-			}
-		});
-		txtNombreSolicitante.setStylePrimaryName("gwt-TextBox2");
-		txtNombreSolicitante.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreSolicitante, 205, 19);
-		txtNombreSolicitante.setSize("250px", "34px");
 		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Solucion");
+		listBox.addItem("TODOS");		
 		
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -167,20 +154,6 @@ public class Sce_BuzonBitacora extends Composite  {
 					listSolucionConstruir.setVisible(false);
 					absolutePanel.add(Busqueda, 480, 15);
 			        load.invisible();
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-				{
-					lbDato1.setText("Primer Nombre");
-					lbDato1.setVisible(false);
-					txtNombreSolicitante.setVisible(false);
-					listSolucionConstruir.setVisible(false);
-					absolutePanel.add(Busqueda, 205, 16);
-
-					grid.clearCell(1, 0);
-					Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
-					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
-					grid.setWidget(1, 0,nuevo);
-			        load.invisible();
-			        
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 				{
 					listSolucionConstruir.clear();
@@ -196,6 +169,22 @@ public class Sce_BuzonBitacora extends Composite  {
 					absolutePanel.add(Busqueda, 480, 15);
 			        load.invisible();
 			        
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
+				{
+					lbDato1.setText("");
+					lbDato1.setVisible(false);
+					txtNombreSolicitante.setVisible(false);
+					listSolucionConstruir.setVisible(false);
+					absolutePanel.add(Busqueda, 205, 16);
+			        load.invisible();
+
+			        // Realiza la busqueda automatica
+//					grid.clearCell(1, 0);
+//					Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
+//					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
+//					grid.setWidget(1, 0,nuevo);
+//			        load.invisible();
+			        
 				}
 		        
 		        load.invisible();
@@ -207,15 +196,9 @@ public class Sce_BuzonBitacora extends Composite  {
 		listBox.setSize("179px", "39px");
 		
 		listSolucionConstruir = new ListBox();
-		listSolucionConstruir.addItem("Tipo I","1");
-		listSolucionConstruir.addItem("Tipo II","2");
-		listSolucionConstruir.addItem("Tipo III","3");
-		listSolucionConstruir.addItem("Tipo IV","4");
-		listSolucionConstruir.addItem("Tipo V","5");
-		listSolucionConstruir.addItem("Tipo VI","6");
-		listSolucionConstruir.addItem("Tipo VII","7");
-		listSolucionConstruir.addItem("Tipo VIII","8");
-		listSolucionConstruir.addItem("Tipo IX","9");
+		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");
 		listSolucionConstruir.setVisible(false);
 		absolutePanel.add(listSolucionConstruir, 205, 16);
@@ -251,10 +234,11 @@ public class Sce_BuzonBitacora extends Composite  {
 		grid.clearCell(1, 0);
 		Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
 		
-		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
+		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
-			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, txtNombreSolicitante.getText(), "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
 			grid.setWidget(1, 0,nuevo);
+			nuevo.setSize("100%", "648px");
 		}
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
@@ -365,7 +349,7 @@ public class Sce_BuzonBitacora extends Composite  {
 	{
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    solucionesService.buscarFormulario('2', idEmpleado, idAfiliado, "", "", 
+	    solucionesService.buscarFormulario('4', idEmpleado, idAfiliado, "", "", 
 	    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
 		    
 	    	public void onFailure(Throwable caught) 

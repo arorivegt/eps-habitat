@@ -101,10 +101,10 @@ public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
 		absolutePanel.add(lblTelefonoTrabajo, 556, 0);
 		lblTelefonoTrabajo.setSize("229px", "13px");
 		
-		Label lblTipoVivienda = new Label("Solucion a Construir");
+		Label lblTipoVivienda = new Label("Tipo Solucion");
 		lblTipoVivienda.setStyleName("label");
 		absolutePanel.add(lblTipoVivienda, 791, 0);
-		lblTipoVivienda.setSize("146px", "13px");
+		lblTipoVivienda.setSize("155px", "13px");
 		
 		btnVer = new Button("Send");
 		btnVer.addClickHandler(new ClickHandler() {

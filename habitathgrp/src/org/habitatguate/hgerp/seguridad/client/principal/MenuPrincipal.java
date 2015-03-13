@@ -25,7 +25,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
-import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BusquedaFormulario;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBitacora;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSeguimientoSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSolicitud;
@@ -173,11 +173,17 @@ public class MenuPrincipal extends Composite {
 		};
 
 		// -- Soluciones Construidas
-		Command cmdsce1 = new Command() {
+		Command cmdsce1_v1 = new Command() {
 			public void execute() {
-				sce1();
+				sce1_v1();
 			}
 		};
+		Command cmdsce1_v2 = new Command() {
+			public void execute() {
+				sce1_v2();
+			}
+		};	
+		
 		Command cmdsce2 = new Command() {
 			public void execute() {
 				sce2();
@@ -192,12 +198,7 @@ public class MenuPrincipal extends Composite {
 			public void execute() {
 				sce4();
 			}
-		};		     
-//		Command cmdsce5 = new Command() {
-//			public void execute() {
-//				sce5();
-//			}
-//		};	 
+		};		      
 		Command cmdsce6 = new Command() {
 			public void execute() {
 				sce6();
@@ -306,16 +307,15 @@ public class MenuPrincipal extends Composite {
 		// --- Soluciones Construidas    
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
-		MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1);
+		// MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1_v1);
+		MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1_v2);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Verificacion de Solicitud", cmdsce2);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Seguimiento de Garantia de Solicitud", cmdsce3);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Bitacora de Soluciones Construidas", cmdsce4);
-		MenuSolucionesConstruidas.addSeparator();
-//		MenuSolucionesConstruidas.addItem("Busqueda Exacta por Parametro", cmdsce5);	
-//		MenuSolucionesConstruidas.addSeparator();
+		MenuSolucionesConstruidas.addSeparator();										//
 		MenuSolucionesConstruidas.addItem("Detalle Soluciones Construidas", cmdsce6);		
 		// --- Fin
 
@@ -627,11 +627,21 @@ public class MenuPrincipal extends Composite {
 	// --- Soluciones Construidas
 
 	//@UiHandler("sce1")
-	void sce1() {
+	void sce1_v1() {
 		Sce_DataEntryFormularioSolicitud recepcionFormulario = new Sce_DataEntryFormularioSolicitud();
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, recepcionFormulario);
 	}
+	//@UiHandler("sce5")
+	void sce1_v2() {
+		Sce_NuevoFormulario busqueda = new Sce_NuevoFormulario();
+		busqueda.setSize("100%", "100%");
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, busqueda);
+	}	
+	
+	
 	//@UiHandler("sce2")
 	void sce2() {
 		Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud();
@@ -656,16 +666,8 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, bitacora);
 	}		
-	//@UiHandler("sce4")
-	void sce5() {
-		Sce_BusquedaFormulario busqueda = new Sce_BusquedaFormulario();
-		busqueda.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, busqueda);
-	}	
 
-	//@UiHandler("rrhh4")
+	//@UiHandler("sc6")
 	void sce6() {
 		Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat();
 		this.panel.getGrid().setHeight("100%");

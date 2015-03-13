@@ -14,7 +14,7 @@ public class InformeSolucionDetalleXml {
 	    private String xmlInicio 							 	= "<table><tbody>"
 																+"<tr>"
 																+"<td>No.</td>"	
-																+"<td>Codigo Referencia</td>"
+//																+"<td>Codigo Referencia</td>"
 																+"<td>Nombre Solicitante</td>"	
 																+"<td>Estado Civil</td>"	
 																+"<td>Edad</td>"	
@@ -43,13 +43,13 @@ public class InformeSolucionDetalleXml {
 		result = solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, "", solucion);
 
 	    
-				int i = 0;
+				int i = 1;
 				
 				for (AuxSolicitudGeneral p : result) {
 					
 					xmlInicio += "<td>"+i+"</td>";
 					
-					xmlInicio += "<td>"+p.getIdFormulario()+"</td>";
+//					xmlInicio += "<td>"+p.getIdFormulario()+"</td>";
 					
 					xmlInicio += "<td>"+p.getNombreSolicitante()+"</td>";
 					
@@ -159,6 +159,8 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valSupervision4+"</td>";					
 				
+					xmlInicio += "</tr>";
+					
 					i++;
 				}
 

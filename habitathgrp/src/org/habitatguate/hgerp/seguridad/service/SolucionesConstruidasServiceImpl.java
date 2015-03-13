@@ -490,11 +490,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
-			Query q = pm.newQuery(SegSolicitudGeneral.class);			
-//			Query q = pm.newQuery(SegSolicitudGeneral.class,
-//					"idAfiliado == " + idAfiliado +
-//					" && idEmpleado == " + idEmpleado
-//					);
+			Query q = pm.newQuery(SegSolicitudGeneral.class,			// Realiza una busqueda ESPECIFICA
+					"idEmpleado == " + idEmpleado +
+					" && idAfiliado == " + idAfiliado
+					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}else if(tipo =='3'){
@@ -506,6 +505,13 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					" && idAfiliado == " + idAfiliado +
 					" && idEmpleado == " + idEmpleado
 					);
+			results = (List<SegSolicitudGeneral>) q.execute();
+			
+		}else if(tipo =='4'){
+			
+			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
+			
+			Query q = pm.newQuery(SegSolicitudGeneral.class);			// Realiza una busqueda GENERAL
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}

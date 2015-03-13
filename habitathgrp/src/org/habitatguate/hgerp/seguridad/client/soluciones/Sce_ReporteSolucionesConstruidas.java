@@ -63,11 +63,22 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			TextColumn<Sce_DatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_DatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_DatosSolucionesConstruidas object) {
-					return object.getIdFormulario();
+					return object.getNumero();
 				}
 			};
-			cellTable.addColumn(nameColumn, "Codigo Referencia");
+			cellTable.addColumn(nameColumn, "No. Correlativo");
 		}
+		
+//		if(tipo.equals("1"))
+//		{
+//			TextColumn<Sce_DatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_DatosSolucionesConstruidas>() {
+//				@Override
+//				public String getValue(Sce_DatosSolucionesConstruidas object) {
+//					return object.getIdFormulario();
+//				}
+//			};
+//			cellTable.addColumn(nameColumn, "Codigo Referencia");
+//		}
 		
 		if(tipo.equals("2"))
 		{

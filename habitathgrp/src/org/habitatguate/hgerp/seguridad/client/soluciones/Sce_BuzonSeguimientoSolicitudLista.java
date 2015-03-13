@@ -84,7 +84,7 @@ public class Sce_BuzonSeguimientoSolicitudLista extends Composite {
         load.invisible();
     }
     
-    public void EliminarFormulario(final Sce_BusquedaFormularioItem a){
+    public void EliminarFormulario(final Sce_BuzonSolicitudItem a){
         load.visible();
     	flexTable.remove(a);
         load.invisible();

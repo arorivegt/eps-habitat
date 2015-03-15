@@ -119,6 +119,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	void actualizarSupervisionPrimera(Long idFormulario, Long idSupervisionPrimera,
@@ -126,6 +127,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 
 // SUPERVISION SEGUNDA

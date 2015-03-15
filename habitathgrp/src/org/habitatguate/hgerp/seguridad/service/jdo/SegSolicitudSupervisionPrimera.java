@@ -119,9 +119,31 @@ public class SegSolicitudSupervisionPrimera implements Serializable {
 	public void setCheckNoSatisfactoria(Boolean checkNoSatisfactoria) {
 		this.checkNoSatisfactoria = checkNoSatisfactoria;
 	}
-
-	// Llave Foranea
 	
+	@Persistent    
+    private String URLFile;
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	@Persistent    
+    private String KeyFile;
+	
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
+	
+	// Llave Foranea
+
 	private long idFormulario;
 	
 	public long getIdFormulario() {

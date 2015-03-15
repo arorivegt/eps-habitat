@@ -111,13 +111,15 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Date fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;	
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 
 	Long actualizarSupervisionPrimera(Long idFormulario, Long idSupervisionPrimera,
 			Date fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;
 	
 // SUPERVISION SEGUNDA
 

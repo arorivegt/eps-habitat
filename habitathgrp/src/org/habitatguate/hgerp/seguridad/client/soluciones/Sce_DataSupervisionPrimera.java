@@ -252,6 +252,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 							fechaVisita, ayudaMutuaSi, ayudaMutuaNo,
 							observaciones, acciones,
 							checkSatisfactoriaValue, checkNoSatisfactoriaValue,
+							URLFile, KeyFile,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -279,6 +280,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 							fechaVisita, ayudaMutuaSi, ayudaMutuaNo,
 							observaciones, acciones,
 							checkSatisfactoriaValue, checkNoSatisfactoriaValue,
+							URLFile, KeyFile,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -326,7 +328,13 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		this.txtAcciones.setValue(acciones);
 		this.checkSatisfactoria.setValue(satisfactoria);
 		this.checkNoSatisfactoria.setValue(noSatisfactoria);
-	    
+	    	
+		try{
+			image.setUrl(URLFile);
+			Archivo();
+		}catch(Exception e){
+			image.setUrl("images/imagenempresa.png");
+		}
 	}
     
     
@@ -459,6 +467,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		form.setVisible(false);
 		grid = new Grid(1, 2);
 		absolutePanel.add(grid, 580, 109);
+		//absolutePanel.add(grid, 811, 424);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
 		btnEliminar.setStyleName("sendButton");

@@ -320,7 +320,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Date fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria, 
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -337,6 +338,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			primera.setAcciones(acciones);
 			primera.setCheckSatisfactoria(satisfactoria);
 			primera.setCheckNoSatisfactoria(noSatisfactoria);
+			primera.setURLFile(URLFile);
+			primera.setKeyFile(KeyFile);
 			primera.setIdFormulario(idFormulario); // Llave Foranea
 
 			primera.setSolicitud(solicitud); // Relacion
@@ -1229,7 +1232,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Date fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1248,6 +1252,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setAcciones(acciones);
 			f.setCheckSatisfactoria(satisfactoria);
 			f.setCheckNoSatisfactoria(noSatisfactoria);
+			f.setURLFile(URLFile);
+			f.setKeyFile(KeyFile);
 
 			valor = f.getIdSupervisionPrimera();
 

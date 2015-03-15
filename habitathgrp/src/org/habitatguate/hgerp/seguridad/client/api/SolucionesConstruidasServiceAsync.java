@@ -177,5 +177,12 @@ public interface SolucionesConstruidasServiceAsync {
     
 	 void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;
 		
-	
+	 /**
+	  * 
+	  * @param fileURL
+	  * @param callback
+	  * @throws IllegalArgumentException
+	  */
+	 void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;
+
 }

@@ -50,12 +50,8 @@ public class Sce_BuzonSolicitud extends Composite  {
 	private Label lbDato1;
 	private Image Busqueda;
 	private SuggestBox txtNombreSolicitante;
-	private SuggestBox txtCodigoReferencia;
 	private ListBox listSolucionConstruir ;
 	
-	private String nombre;
-	private String codigo;
-    
 	public Sce_BuzonSolicitud() {
 		
 		// Obtener Id Empleado
@@ -63,7 +59,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 			@Override
 			public void onSuccess(Long result) {
 				idEmpleado = result;
-				System.out.println("Id Empleado: " + idEmpleado);
+				System.out.println("Id Empleado - 1: " + idEmpleado);
 			}
 			@Override
 			public void onFailure(Throwable caught) {
@@ -76,7 +72,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 			@Override
 			public void onSuccess(Long result) {
 				idAfiliado = result;
-				System.out.println("Afiliado: " + idAfiliado);	
+				System.out.println("Id Afiliado - 1: " + idAfiliado);	
 			}
 			@Override
 			public void onFailure(Throwable caught) {
@@ -122,8 +118,8 @@ public class Sce_BuzonSolicitud extends Composite  {
 		grid.setWidget(0, 0, absolutePanel);
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
-		
-		txtNombreSolicitante = new SuggestBox(resultadoFormulario(idEmpleado, idAfiliado));
+
+		txtNombreSolicitante = new SuggestBox(resultadoFormulario());
 		txtNombreSolicitante.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
 
@@ -335,38 +331,58 @@ public class Sce_BuzonSolicitud extends Composite  {
 	}
 	
 	// RESULTADO BUSQUEDA
-	
-	MultiWordSuggestOracle resultadoFormulario(Long valIdEmpleado, Long valIdAfiliado)
-	{
-		System.out.println("DEBE ENTRAR AQUI SEGUNDO");
-		
-		Long val1 = 0L;
-		Long val2 = 0L;
-		val1 = valIdEmpleado;
-		val2 = valIdAfiliado;
-		System.out.println("Valores obtenidos: Id Empleado = " + val1 + ", Id Afiliado = " + val2);
-		
-		
+
+	MultiWordSuggestOracle resultadoFormulario()	
+	{	
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    solucionesService.buscarFormulario('4', val1, val2, "", "", 
-	    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
-		    
-	    	public void onFailure(Throwable caught) 
-		    {
-		        load.invisible();
-		    }
-		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
-		    public void onSuccess( List<AuxSolicitudGeneral> result)
-		    {
-				for(AuxSolicitudGeneral p : result) 
-				{
-					oracle.add(p.getNombreSolicitante());
-				}
-		    }
-		
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+			
+				// Obtener Id Afiliado
+				recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+					@Override
+					public void onSuccess(Long result) {
+						idAfiliado = result;
+						
+						System.out.println("Valores obtenidos para realizar busqueda: Id Empleado = " + idEmpleado + ", Id Afiliado = " + idAfiliado);
+						
+					    solucionesService.buscarFormulario('2', idEmpleado, idAfiliado, "", "", 
+					    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
+						    
+					    	public void onFailure(Throwable caught) 
+						    {
+						        load.invisible();
+						    }
+						
+							@Override
+						    public void onSuccess( List<AuxSolicitudGeneral> result)
+						    {
+								for(AuxSolicitudGeneral p : result) 
+								{
+									oracle.add(p.getNombreSolicitante());
+								}
+						    }
+						
+						});						
+						
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+					}
+				});
+				
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
 		});
+	    
 	    return oracle;
     }
 	

@@ -30,6 +30,9 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionSegun
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionTercera;
 import org.habitatguate.hgerp.util.PMF;
 
+import com.google.appengine.api.blobstore.BlobKey;
+import com.google.appengine.api.blobstore.BlobstoreService;
+import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -1349,6 +1352,15 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		}
 		return valor ;
 	}		
+	
+	@Override
+	public String remove(String key)throws IllegalArgumentException {
+		
+	    BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+	    BlobKey blobKey = new BlobKey(key);
+	    blobstoreService.delete(blobKey);
+		return "eliminado";
+	}
 	
 	
 	

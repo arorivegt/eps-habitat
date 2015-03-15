@@ -48,12 +48,8 @@ public class Sce_BuzonBitacora extends Composite  {
 	private ListBox listBox;
 	private Label lbDato1;
 	private Image Busqueda;
-	private SuggestBox txtNombreSolicitante;
-	private SuggestBox txtCodigoReferencia;		
+	private SuggestBox txtNombreSolicitante;	
 	private ListBox listSolucionConstruir ;
-	
-	private String nombre;
-	private String codigo;
 	
 	public Sce_BuzonBitacora() {
 
@@ -345,28 +341,57 @@ public class Sce_BuzonBitacora extends Composite  {
 	
 	// Soluciones
 	
-	MultiWordSuggestOracle resultadoFormulario()
-	{
+	MultiWordSuggestOracle resultadoFormulario()	
+	{	
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
 	    
-	    solucionesService.buscarFormulario('4', idEmpleado, idAfiliado, "", "", 
-	    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
-		    
-	    	public void onFailure(Throwable caught) 
-		    {
-		        load.invisible();
-		    }
-		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
-		    public void onSuccess( List<AuxSolicitudGeneral> result)
-		    {
-				for(AuxSolicitudGeneral p : result) 
-				{
-					oracle.add(p.getNombreSolicitante());
-				}
-		    }
-		
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+			
+				// Obtener Id Afiliado
+				recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
+					@Override
+					public void onSuccess(Long result) {
+						idAfiliado = result;
+						
+						System.out.println("Valores obtenidos para realizar busqueda: Id Empleado = " + idEmpleado + ", Id Afiliado = " + idAfiliado);
+						
+					    solucionesService.buscarFormulario('2', idEmpleado, idAfiliado, "", "", 
+					    		new AsyncCallback<List<AuxSolicitudGeneral>>(){
+						    
+					    	public void onFailure(Throwable caught) 
+						    {
+						        load.invisible();
+						    }
+						
+							@Override
+						    public void onSuccess( List<AuxSolicitudGeneral> result)
+						    {
+								for(AuxSolicitudGeneral p : result) 
+								{
+									oracle.add(p.getNombreSolicitante());
+								}
+						    }
+						
+						});						
+						
+					}
+					@Override
+					public void onFailure(Throwable caught) {
+						mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+					}
+				});
+				
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
 		});
+	    
 	    return oracle;
     }
 	

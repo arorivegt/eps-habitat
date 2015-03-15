@@ -161,5 +161,13 @@ public interface SolucionesConstruidasService extends RemoteService {
     
     AuxSolicitudGeneral obtenerDataFormularioRegistrado(Long idFormulario) throws IllegalArgumentException;
     
+    /**
+     * 
+     * @param fileURL
+     * @return
+     * @throws IllegalArgumentException
+     */
+    String remove(String fileURL)throws IllegalArgumentException;
+    
 }
 

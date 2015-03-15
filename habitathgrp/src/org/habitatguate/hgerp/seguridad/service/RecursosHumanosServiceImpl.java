@@ -118,7 +118,15 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				}finally{
 					SegUsuario u = new SegUsuario(user, pass);
 					u.setId_empleado(em.getId_empleado());
-					u.setId_rol(1L);
+					
+					//u.setId_rol(1L);
+					
+					// MODULO SOLUCIONES - MENU //---
+					
+					//u.setId_rol(2L); // rrhh //---
+					//u.setId_rol(3L); // finanzas //---
+					u.setId_rol(4L); // soluciones construidas //---
+
 					try{ 
 					    Persistencia.makePersistent(u); 
 					}finally{  

@@ -66,9 +66,6 @@ public class Index implements EntryPoint {
                     }
              });
             load.invisible();
-        	
-        	txtuser.setText("anibal@gmail.com"); //---
-        	txtpass.setText("Aqwe123"); //---
 //        	txtuser.setText("jomarrovas@gmail.com");
 //        	txtpass.setText("Prueba1234"); //---
         	
@@ -133,13 +130,13 @@ public class Index implements EntryPoint {
             rootPanel.add(lblNewLabel_1, 489, 98);
             lblNewLabel_1.setSize("346px", "254px");
             txtuser.setStyleName("gwt-PasswordTextBox");
-            txtuser.getElement().setAttribute("placeHolder", "Usuario@habitat.com");
+            txtuser.getElement().setAttribute("placeHolder", "Escriba el Usuario");
             rootPanel.add(txtuser, 545, 152);
             txtuser.setSize("325px", "49px");
             rootPanel.add(txtpass, 545, 218);
             
             txtpass.setSize("325px", "49px");
-            txtpass.getElement().setAttribute("placeHolder", "password");
+            txtpass.getElement().setAttribute("placeHolder", "Escriba la contraseña");
             final Button btnIniciar = new Button("Send");
             rootPanel.add(btnIniciar, 545, 286);
             btnIniciar.setText("Iniciar sesion");

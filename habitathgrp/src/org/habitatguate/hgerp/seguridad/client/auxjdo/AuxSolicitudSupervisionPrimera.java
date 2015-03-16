@@ -102,6 +102,36 @@ public class AuxSolicitudSupervisionPrimera implements IsSerializable {
 	public void setCheckNoSatisfactoria(Boolean checkNoSatisfactoria) {
 		this.checkNoSatisfactoria = checkNoSatisfactoria;
 	}
+	
+    private String promotor;
+	
+	public String getPromotor() {
+		return promotor;
+	}
+
+	public void setPromotor(String promotor) {
+		this.promotor = promotor;
+	}
+
+    private String albanil;
+	
+	public String getAlbanil() {
+		return albanil;
+	}
+
+	public void setAlbanil(String albanil) {
+		this.albanil = albanil;
+	}
+
+    private String representante;
+	
+	public String getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(String representante) {
+		this.representante = representante;
+	}
    
     private String URLFile;
 

@@ -67,6 +67,7 @@ public class Sce_DataEntrySupervisionPrimera extends Composite {
     					n2.getFechaVisita(), n2.getCheckSi(), n2.getCheckNo(),
     					n2.getObservaciones(), n2.getAcciones(),
     					n2.getCheckSatisfactoria(), n2.getCheckNoSatisfactoria(),
+    					n2.getPromotor(), n2.getAlbanil(), n2.getRepresentante(),
     					n2.getURLFile(), n2.getKeyFile());    		
     		
     		}

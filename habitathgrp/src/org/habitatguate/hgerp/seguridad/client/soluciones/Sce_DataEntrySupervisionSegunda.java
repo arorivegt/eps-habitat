@@ -67,7 +67,9 @@ public class Sce_DataEntrySupervisionSegunda extends Composite {
     			data.LlenarDatos(n2.getIdSupervisionSegunda(), 
     					n2.getFechaVisita(),
     					n2.getObservaciones(), n2.getAcciones(),
-    					n2.getCheckSatisfactoria(), n2.getCheckNoSatisfactoria());    		
+    					n2.getCheckSatisfactoria(), n2.getCheckNoSatisfactoria(),
+    					n2.getPromotor(), n2.getAlbanil(), n2.getRepresentante(),
+    					n2.getURLFile(), n2.getKeyFile());		
     		
     		}
     	}

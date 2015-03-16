@@ -10,7 +10,6 @@ import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -20,27 +19,19 @@ import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.datepicker.client.DateBox.DefaultFormat;
 import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitCompleteHandler;
 import com.google.gwt.user.client.ui.FormPanel.SubmitEvent;
 import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
-import com.google.gwt.user.datepicker.client.DatePicker;
 
 public class Sce_DataSupervisionPrimera extends Composite {
 
@@ -65,7 +56,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 	private Label lblRepresentanteDeFamilia;
 	private TextBox txtPromotor;
 	private TextBox txtAlbanil;
-	private TextBox txtRepresentanteFamilia;
+	private TextBox txtRepresentante;
 	
 	private FormPanel form;
 	private FileUpload fileUpload;
@@ -79,7 +70,6 @@ public class Sce_DataSupervisionPrimera extends Composite {
 	private Image image ;
     private Label lblSeleccioneUnaImagen;
 	
-    
 	public Sce_DataSupervisionPrimera(Sce_DataEntrySupervisionPrimera a, Sce_DataEntryBitacoraSolicitud e) {
 		
 		mensaje = new Mensaje();
@@ -103,12 +93,12 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		absolutePanel.add(image, 811, 424);
 		absolutePanel.add(getFormPanel(), 596, 43);
 		
-		// ---
-		
 		lblSeleccioneUnaImagen = new Label("Seleccione una imagen no mayor a 1MB");
 		lblSeleccioneUnaImagen.setStyleName("label");
 		absolutePanel.add(lblSeleccioneUnaImagen, 596, 10);
 		lblSeleccioneUnaImagen.setSize("357px", "19px");
+		
+		// ---
 		
 		checkSi = new CheckBox("Si");
 		absolutePanel.add(checkSi, 232, 95);
@@ -199,12 +189,12 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		absolutePanel.add(txtAlbanil, 275, 512);
 		txtAlbanil.setSize("386px", "19px");
 		
-		txtRepresentanteFamilia = new TextBox();
-		txtRepresentanteFamilia.setStylePrimaryName("gwt-TextBox2");
-		txtRepresentanteFamilia.setStyleName("gwt-TextBox2");
-		txtRepresentanteFamilia.setMaxLength(200);
-		absolutePanel.add(txtRepresentanteFamilia, 275, 556);
-		txtRepresentanteFamilia.setSize("386px", "19px");
+		txtRepresentante = new TextBox();
+		txtRepresentante.setStylePrimaryName("gwt-TextBox2");
+		txtRepresentante.setStyleName("gwt-TextBox2");
+		txtRepresentante.setMaxLength(200);
+		absolutePanel.add(txtRepresentante, 275, 556);
+		txtRepresentante.setSize("386px", "19px");
 		
 		// -- Boton Guardar/Actualizar Informacion
 		
@@ -241,6 +231,26 @@ public class Sce_DataSupervisionPrimera extends Composite {
 					acciones = txtAcciones.getText();
 				}
 				
+				String promotor = "";
+				if(txtPromotor.getText() == null){
+					promotor = "";
+				}else{
+					promotor = txtPromotor.getText();
+				}
+				
+				String albanil = "";
+				if(txtAlbanil.getText() == null){
+					albanil = "";
+				}else{
+					albanil = txtAlbanil.getText();
+				}
+				
+				String representante = "";
+				if(txtRepresentante.getText() == null){
+					representante = "";
+				}else{
+					representante = txtRepresentante.getText();
+				}
 				
 				Date time = new Date();
 				@SuppressWarnings("deprecation")
@@ -252,6 +262,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 							fechaVisita, ayudaMutuaSi, ayudaMutuaNo,
 							observaciones, acciones,
 							checkSatisfactoriaValue, checkNoSatisfactoriaValue,
+							promotor, albanil, representante,
 							URLFile, KeyFile,
 							new AsyncCallback<Long>() {
 
@@ -280,6 +291,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 							fechaVisita, ayudaMutuaSi, ayudaMutuaNo,
 							observaciones, acciones,
 							checkSatisfactoriaValue, checkNoSatisfactoriaValue,
+							promotor, albanil, representante,
 							URLFile, KeyFile,
 							new AsyncCallback<Long>() {
 
@@ -315,6 +327,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String URLFile, String KeyFile)
 	{
     	
@@ -341,9 +354,6 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		}
 	}
     
-    
-    
-	
 	// --- SUBIDA DE ARCHIVOS A BLOBSTORE
 
 	/**
@@ -470,8 +480,8 @@ public class Sce_DataSupervisionPrimera extends Composite {
 
 		form.setVisible(false);
 		grid = new Grid(1, 2);
-		absolutePanel.add(grid, 580, 109);
-		//absolutePanel.add(grid, 811, 424);
+//		absolutePanel.add(grid, 580, 109);
+		absolutePanel.add(grid, 811, 450);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
 		btnEliminar.setStyleName("sendButton");
@@ -528,8 +538,6 @@ public class Sce_DataSupervisionPrimera extends Composite {
 	 */
 		public void setKeyFile(String keyFile) {
 			KeyFile = keyFile;
-		}
-		
-		
+		}		
 		
 }

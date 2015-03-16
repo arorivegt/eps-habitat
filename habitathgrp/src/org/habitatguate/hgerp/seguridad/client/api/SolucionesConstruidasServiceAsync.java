@@ -119,6 +119,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
@@ -127,6 +128,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 
@@ -136,12 +138,16 @@ public interface SolucionesConstruidasServiceAsync {
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	void actualizarSupervisionSegunda(Long idFormulario, Long idSupervisionSegunda,
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 	
 // SUPERVISION TERCERA
@@ -150,12 +156,16 @@ public interface SolucionesConstruidasServiceAsync {
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	void actualizarSupervisionTercera(Long idFormulario, Long idSupervisionTercera,
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 	
 	// SUPERVISION CUARTA
@@ -164,12 +174,16 @@ public interface SolucionesConstruidasServiceAsync {
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	void actualizarSupervisionCuarta(Long idFormulario, Long idSupervisionCuarta,
 			Date fechaVisita,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 	
     // SOLUCIONES

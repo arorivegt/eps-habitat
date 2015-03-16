@@ -901,6 +901,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setAcciones(n0.getAcciones());
 					l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 					l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+					l.setURLFile(n0.getURLFile());
+					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionPrimera().add(l); // Agregado a Entidad Principal
 				}
 			}				

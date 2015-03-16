@@ -275,7 +275,7 @@ public class ReporteMinisterioTrabajo extends Composite  {
 			TextColumn<DatosMinisterioTrabajo> nameColumn = new TextColumn<DatosMinisterioTrabajo>() {
 				@Override
 				public String getValue(DatosMinisterioTrabajo object) {
-					return object.getInicioLabores();
+					return object.getReinicioLabores();
 				}
 			};
 			cellTable.addColumn(nameColumn, "Fecha Reinicio-labores");	

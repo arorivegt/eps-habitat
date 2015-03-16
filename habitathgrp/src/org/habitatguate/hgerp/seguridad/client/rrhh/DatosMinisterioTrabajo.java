@@ -13,6 +13,7 @@ public class DatosMinisterioTrabajo  implements IsSerializable{
 	private String TipoIdentificacion;
 	private String DocumentoIdentificacion;
 	private String InicioLabores;
+	private String reinicioLabores;
 	private String Bonificaciones;
 	private String Viaticos;
 	private String Vacaciones;
@@ -413,6 +414,16 @@ public class DatosMinisterioTrabajo  implements IsSerializable{
 
 	public void setVacaciones(String vacaciones) {
 		Vacaciones = vacaciones;
+	}
+
+
+	public String getReinicioLabores() {
+		return reinicioLabores;
+	}
+
+
+	public void setReinicioLabores(String reinicioLabores) {
+		this.reinicioLabores = reinicioLabores;
 	}
 
 	

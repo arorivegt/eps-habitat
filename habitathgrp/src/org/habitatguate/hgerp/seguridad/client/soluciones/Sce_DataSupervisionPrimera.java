@@ -314,7 +314,8 @@ public class Sce_DataSupervisionPrimera extends Composite {
 			Long fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria)
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String URLFile, String KeyFile)
 	{
     	
 		this.bandera = false;
@@ -328,6 +329,9 @@ public class Sce_DataSupervisionPrimera extends Composite {
 		this.txtAcciones.setValue(acciones);
 		this.checkSatisfactoria.setValue(satisfactoria);
 		this.checkNoSatisfactoria.setValue(noSatisfactoria);
+		
+		this.KeyFile = KeyFile;
+		this.URLFile = URLFile;
 	    	
 		try{
 			image.setUrl(URLFile);

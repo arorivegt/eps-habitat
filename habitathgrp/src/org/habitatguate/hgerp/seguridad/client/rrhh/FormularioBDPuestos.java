@@ -38,9 +38,10 @@ public class FormularioBDPuestos extends Composite {
 	private TextArea txtFunciones;
 	private AbsolutePanel absolutePanel;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
-	
+	private FormularioBDPuestos formularioBDPuestos;
 	public FormularioBDPuestos(BDpuestos bdPuestos) {
 
+		formularioBDPuestos = this;
 		mensaje = new Mensaje();
 		this.bdPuestos = bdPuestos;
     	load = new Loading();
@@ -194,7 +195,7 @@ public class FormularioBDPuestos extends Composite {
 	}
 	
 	private void EliminarFormularioSinDatos(){
-        	bdPuestos.EliminarFormulario(this);
+        	bdPuestos.EliminarFormulario(formularioBDPuestos);
     }
 	
 	public void LlenarDatos(Long id, Long dateFecha,

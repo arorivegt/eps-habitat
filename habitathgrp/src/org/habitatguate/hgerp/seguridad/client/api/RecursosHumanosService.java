@@ -46,6 +46,28 @@ public interface RecursosHumanosService extends RemoteService {
 	 */
 	String Registro(String user,String pass,String Nombre, String Apellido, 
 			        Date fecha_nacimiento,String Nombre2, String Apellido2) throws IllegalArgumentException;
+	
+
+	/**
+	 * 
+	 * @param user
+	 * @param pass
+	 * @param Nombre
+	 * @param Apellido
+	 * @param fecha_nacimiento
+	 * @param Nombre2
+	 * @param Apellido2
+	 * @param DPI
+	 * @param Pais
+	 * @param NIT
+	 * @param IGGS
+	 * @param Sexo
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	Boolean RegistroMasivo(String user,String pass,String Nombre, String Apellido, Date fecha_nacimiento, 
+			String Nombre2, String Apellido2,String DPI, String Pais, String NIT, String IGGS, String Sexo,
+			String EstadoCivil) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param user

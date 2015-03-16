@@ -315,6 +315,9 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		this.txtAcciones.setValue(acciones);
 		this.checkSatisfactoria.setValue(satisfactoria);
 		this.checkNoSatisfactoria.setValue(noSatisfactoria);
+		this.txtPromotor.setValue(promotor);
+		this.txtAlbanil.setValue(albanil);
+		this.txtRepresentante.setValue(representante);
 		
 		this.KeyFile = KeyFile;
 		this.URLFile = URLFile;
@@ -456,7 +459,7 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		form.setVisible(false);
 		grid = new Grid(1, 2);
 //		absolutePanel.add(grid, 580, 109);
-		absolutePanel.add(grid, 811, 450);
+		absolutePanel.add(grid, 811, 600);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
 		btnEliminar.setStyleName("sendButton");

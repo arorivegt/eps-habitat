@@ -581,11 +581,10 @@ public class EmpleadosMinisterioTrabajo extends Composite  {
 					}
 
 
-					empleado.setInicioLabores("01/01/"+listAnnio.getItemText(listAnnio.getSelectedIndex()));
 					dia = dtDia.format(new Date(itemEmpleado.getFecha_ingreso()));
 					Mes = dtMes.format(new Date(itemEmpleado.getFecha_ingreso()));
 					Anio = dtAnio.format(new Date(itemEmpleado.getFecha_ingreso()));
-					empleado.setReinicioLabores(dia+"/"+Mes+"/"+Anio);
+					empleado.setInicioLabores(dia+"/"+Mes+"/"+Anio);
 					
 					empleado.setReinicioLabores("01/01/"+listAnnio.getItemText(listAnnio.getSelectedIndex()));
 					String idioma ="";

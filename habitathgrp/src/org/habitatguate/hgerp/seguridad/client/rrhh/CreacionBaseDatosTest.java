@@ -195,7 +195,7 @@ public class CreacionBaseDatosTest extends Composite{
     					txtPregunta4.getText(), txtPregunta5.getText(), 
     					txtPregunta6.getText(), txtPregunta7.getText(), 
     					txtPregunta8.getText(), txtPregunta9.getText(), 
-    					txtPregunta10.getText(), dateFecha, 
+    					txtPregunta10.getText(), new Date(), 
     					tipo, new AsyncCallback<Long>(){
                     public void onFailure(Throwable caught) 
                     {

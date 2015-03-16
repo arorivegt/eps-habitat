@@ -83,6 +83,11 @@ public class MenuPrincipal extends Composite {
 				rrhh6();
 			}
 		};
+		final Command Carga = new Command() {
+			public void execute() {
+				Carga1();
+			}
+		};
 		final Command cmdrrhh7 = new Command() {
 			public void execute() {
 				rrhh7();
@@ -241,6 +246,8 @@ public class MenuPrincipal extends Composite {
 		MenuRecursosHumanos.addItem("Permisos", MenuVacaciones);
 		MenuRecursosHumanos.addSeparator();
 		MenuRecursosHumanos.addItem("Informes", MenuInforme);
+		MenuRecursosHumanos.addSeparator();
+		MenuRecursosHumanos.addItem("Carga Datos", Carga);
 
 		
 		//finanzas menu
@@ -441,7 +448,14 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidget(1, 0, testForm);
 	}
 
+	void Carga1(){
 
+		SubirDatos subirDatos = new SubirDatos();
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, subirDatos);
+		
+	}
 	//      @UiHandler("rrhh7")
 	void rrhh7() {
 		CrearInformeBancos crearInformes = new CrearInformeBancos();

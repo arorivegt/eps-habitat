@@ -2806,5 +2806,78 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			return pp;
 		}
 
+		@Override
+		public Boolean RegistroMasivo(String user, String pass, String Nombre,
+				String Apellido, Date fecha_nacimiento, String Nombre2,
+				String Apellido2, String DPI, String Pais, String NIT,
+				String IGGS, String Sexo,String EstadoCivil) throws IllegalArgumentException {
+			
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			if(user!=null && pass!=null){
+				try{ 
+					Persistencia.getObjectById(SegUsuario.class, user); 
+					return false;
+				}catch(Exception e){
+					SegEmpleado em = new SegEmpleado();
+					em.setPrimer_nombre(Nombre.toUpperCase().trim());
+					em.setPrimer_apellido(Apellido.toUpperCase().trim());
+					em.setSegundo_apellido(Apellido2.toUpperCase().trim());
+					em.setSegundo_nombre(Nombre2.toUpperCase().trim());
+					em.setEstado("2");
+					em.setIVS("0");
+					em.setCui(DPI);
+					em.setNit(NIT);
+					em.setNoCuenta("0");
+					em.setTipoCuenta("1");
+					em.setNombreBanco("1");
+					em.setEmail(user);
+					em.setNo_Dependientes("0");
+					em.setAfiliacion_igss(IGGS);
+					em.setNo_pasaporte("0");
+					em.setTelefono("0");
+					em.setCelular("0");
+					em.setNo_licencia("0");
+					em.setBonificacion(0.0f);
+					em.setDiasDeVacaciones((float) 26.00);
+					em.setSalario_base(0.0f);
+					em.setDepto_municipio_residencia("01,0101");
+					em.setDepto_municipio_nacimiento("01,0101");
+					em.setJefe_Inmediato(0L);
+					em.setEtnia("1");
+					em.setNombreEmergencia("");
+					em.setTelefonoEmergencia("");
+					em.setNombreEmergencia2("");
+					em.setTelefonoEmergencia2("");
+					em.setEstado_civil(EstadoCivil);
+					em.setPais(Pais);
+					em.setSexo(Sexo);
+					em.setTipo_licencia("0");
+					em.setPasaporte("0");
+					em.setLicencia("0");
+					em.setAfiliado(0L);
+					em.setJefe_Inmediato(0L);
+					em.setFecha_nacimiento(fecha_nacimiento);
+					em.setFecha_ingreso(new Date());
+					try{ 
+					    Persistencia.makePersistent(em); 
+					}finally{
+						SegUsuario u = new SegUsuario(user, pass);
+						u.setId_empleado(em.getId_empleado());
+						u.setId_rol(1L);
+						try{ 
+						    Persistencia.makePersistent(u); 
+						}finally{  
+						    Persistencia.close();  
+						} 
+						
+					}
+				}
+
+				return true;
+			}
+			
+			return false;
+		}
+
 
 	}

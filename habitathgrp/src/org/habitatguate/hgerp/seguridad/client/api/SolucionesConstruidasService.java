@@ -112,6 +112,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 
 	Long actualizarSupervisionPrimera(Long idFormulario, Long idSupervisionPrimera,
@@ -119,6 +120,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile) throws IllegalArgumentException;
 	
 // SUPERVISION SEGUNDA
@@ -126,36 +128,48 @@ public interface SolucionesConstruidasService extends RemoteService {
 	Long ingresarSupervisionSegunda(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;	
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 
 	Long actualizarSupervisionSegunda(Long idFormulario, Long idSupervisionSegunda,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;
 
 // SUPERVISION TERCERA
 
 	Long ingresarSupervisionTercera(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;	
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 
 	Long actualizarSupervisionTercera(Long idFormulario, Long idSupervisionTercera,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;
 	
 	// SUPERVISION CUARTA
 
 	Long ingresarSupervisionCuarta(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;	
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 
 	Long actualizarSupervisionCuarta(Long idFormulario, Long idSupervisionCuarta,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException;	
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 	
 // SOLUCIONES
     

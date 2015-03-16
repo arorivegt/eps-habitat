@@ -320,7 +320,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Date fechaVisita,
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria, 
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
@@ -338,6 +339,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			primera.setAcciones(acciones);
 			primera.setCheckSatisfactoria(satisfactoria);
 			primera.setCheckNoSatisfactoria(noSatisfactoria);
+			primera.setPromotor(promotor);
+			primera.setAlbanil(albanil);
+			primera.setRepresentante(representante);
 			primera.setURLFile(URLFile);
 			primera.setKeyFile(KeyFile);
 			primera.setIdFormulario(idFormulario); // Llave Foranea
@@ -363,7 +367,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long ingresarSupervisionSegunda(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -378,6 +384,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			segunda.setAcciones(acciones);
 			segunda.setCheckSatisfactoria(satisfactoria);
 			segunda.setCheckNoSatisfactoria(noSatisfactoria);
+			segunda.setPromotor(promotor);
+			segunda.setAlbanil(albanil);
+			segunda.setRepresentante(representante);
+			segunda.setURLFile(URLFile);
+			segunda.setKeyFile(KeyFile);
 			segunda.setIdFormulario(idFormulario); // Llave Foranea
 
 			segunda.setSolicitud(solicitud); // Relacion
@@ -401,7 +412,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long ingresarSupervisionTercera(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -416,6 +429,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			tercera.setAcciones(acciones);
 			tercera.setCheckSatisfactoria(satisfactoria);
 			tercera.setCheckNoSatisfactoria(noSatisfactoria);
+			tercera.setPromotor(promotor);
+			tercera.setAlbanil(albanil);
+			tercera.setRepresentante(representante);
+			tercera.setURLFile(URLFile);
+			tercera.setKeyFile(KeyFile);
 			tercera.setIdFormulario(idFormulario); // Llave Foranea
 
 			tercera.setSolicitud(solicitud); // Relacion
@@ -439,7 +457,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long ingresarSupervisionCuarta(Date fecrec, Long idFormulario, 
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -454,6 +474,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			cuarta.setAcciones(acciones);
 			cuarta.setCheckSatisfactoria(satisfactoria);
 			cuarta.setCheckNoSatisfactoria(noSatisfactoria);
+			cuarta.setPromotor(promotor);
+			cuarta.setAlbanil(albanil);
+			cuarta.setRepresentante(representante);
+			cuarta.setURLFile(URLFile);
+			cuarta.setKeyFile(KeyFile);
 			cuarta.setIdFormulario(idFormulario); // Llave Foranea
 
 			cuarta.setSolicitud(solicitud); // Relacion
@@ -679,6 +704,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setAcciones(n0.getAcciones());
 						l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 						l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+						l.setPromotor(n0.getPromotor());
+						l.setAlbanil(n0.getAlbanil());
+						l.setRepresentante(n0.getRepresentante());
+						l.setURLFile(n0.getURLFile());
+						l.setKeyFile(n0.getKeyFile());
 						nuevo.getSupervisionPrimera().add(l); // Agregado a Entidad Principal
 					}
 				}
@@ -695,6 +725,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setAcciones(n0.getAcciones());
 						l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 						l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+						l.setPromotor(n0.getPromotor());
+						l.setAlbanil(n0.getAlbanil());
+						l.setRepresentante(n0.getRepresentante());
+						l.setURLFile(n0.getURLFile());
+						l.setKeyFile(n0.getKeyFile());
 						nuevo.getSupervisionSegunda().add(l); // Agregado a Entidad Principal
 					}
 				}	
@@ -711,6 +746,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setAcciones(n0.getAcciones());
 						l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 						l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+						l.setPromotor(n0.getPromotor());
+						l.setAlbanil(n0.getAlbanil());
+						l.setRepresentante(n0.getRepresentante());
+						l.setURLFile(n0.getURLFile());
+						l.setKeyFile(n0.getKeyFile());
 						nuevo.getSupervisionTercera().add(l); // Agregado a Entidad Principal
 					}
 				}
@@ -727,6 +767,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setAcciones(n0.getAcciones());
 						l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 						l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+						l.setPromotor(n0.getPromotor());
+						l.setAlbanil(n0.getAlbanil());
+						l.setRepresentante(n0.getRepresentante());
+						l.setURLFile(n0.getURLFile());
+						l.setKeyFile(n0.getKeyFile());
 						nuevo.getSupervisionCuarta().add(l); // Agregado a Entidad Principal
 					}
 				}				
@@ -798,9 +843,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}
 			
-			List<SegSolicitudReferenciaFamiliar> results0 = p.getReferenciaFamiliar();
-			if (!results0.isEmpty()) {
-				for (SegSolicitudReferenciaFamiliar n0 : results0) {
+			List<SegSolicitudReferenciaFamiliar> results02 = p.getReferenciaFamiliar();
+			if (!results02.isEmpty()) {
+				for (SegSolicitudReferenciaFamiliar n0 : results02) {
 					AuxSolicitudReferenciaFamiliar l = new AuxSolicitudReferenciaFamiliar();
 					l.setIdReferenciaFamiliar(n0.getIdReferenciaFamiliar());
 					l.setIdFormulario(n0.getIdFormulario());
@@ -812,9 +857,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}
 			
-			List<SegSolicitudDatosVivienda> results02 = p.getDatosVivienda();
-			if (!results0.isEmpty()) {
-				for (SegSolicitudDatosVivienda n0 : results02) {
+			List<SegSolicitudDatosVivienda> results03 = p.getDatosVivienda();
+			if (!results03.isEmpty()) {
+				for (SegSolicitudDatosVivienda n0 : results03) {
 					AuxSolicitudDatosVivienda l = new AuxSolicitudDatosVivienda();
 					l.setIdDatosVivienda(n0.getIdDatosVivienda());
 					l.setIdFormulario(n0.getIdFormulario());
@@ -833,9 +878,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}
 			
-			List<SegSolicitudSituacionEconomica> results03 = p.getSituacionEconomica();
-			if (!results03.isEmpty()) {
-				for (SegSolicitudSituacionEconomica n0 : results03) {
+			List<SegSolicitudSituacionEconomica> results04 = p.getSituacionEconomica();
+			if (!results04.isEmpty()) {
+				for (SegSolicitudSituacionEconomica n0 : results04) {
 					AuxSolicitudSituacionEconomica l = new AuxSolicitudSituacionEconomica();
 					
 					l.setIdSituacionEconomica(n0.getIdSituacionEconomica());
@@ -865,9 +910,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}
 			
-			List<SegSolicitudDocumentoPropiedad> results04 = p.getDocumentoPropiedad();
-			if (!results04.isEmpty()) {
-				for (SegSolicitudDocumentoPropiedad n0 : results04) {
+			List<SegSolicitudDocumentoPropiedad> results05 = p.getDocumentoPropiedad();
+			if (!results05.isEmpty()) {
+				for (SegSolicitudDocumentoPropiedad n0 : results05) {
 					AuxSolicitudDocumentoPropiedad l = new AuxSolicitudDocumentoPropiedad();
 					
 					l.setIdDocumentoPropiedad(n0.getIdDocumentoPropiedad());
@@ -887,9 +932,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}	
 			
-			List<SegSolicitudSupervisionPrimera> results05 = p.getSupervisionPrimera();
-			if (!results05.isEmpty()) {
-				for (SegSolicitudSupervisionPrimera n0 : results05) {
+			List<SegSolicitudSupervisionPrimera> results06 = p.getSupervisionPrimera();
+			if (!results06.isEmpty()) {
+				for (SegSolicitudSupervisionPrimera n0 : results06) {
 					AuxSolicitudSupervisionPrimera l = new AuxSolicitudSupervisionPrimera();
 					
 					l.setIdSupervisionPrimera(n0.getIdSupervisionPrimera());
@@ -901,15 +946,18 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setAcciones(n0.getAcciones());
 					l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 					l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+					l.setPromotor(n0.getPromotor());
+					l.setAlbanil(n0.getAlbanil());
+					l.setRepresentante(n0.getRepresentante());
 					l.setURLFile(n0.getURLFile());
 					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionPrimera().add(l); // Agregado a Entidad Principal
 				}
 			}				
 			
-			List<SegSolicitudSupervisionSegunda> results06 = p.getSupervisionSegunda();
-			if (!results06.isEmpty()) {
-				for (SegSolicitudSupervisionSegunda n0 : results06) {
+			List<SegSolicitudSupervisionSegunda> results07 = p.getSupervisionSegunda();
+			if (!results07.isEmpty()) {
+				for (SegSolicitudSupervisionSegunda n0 : results07) {
 					AuxSolicitudSupervisionSegunda l = new AuxSolicitudSupervisionSegunda();
 					
 					l.setIdSupervisionSegunda(n0.getIdSupervisionSegunda());
@@ -919,13 +967,18 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setAcciones(n0.getAcciones());
 					l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 					l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+					l.setPromotor(n0.getPromotor());
+					l.setAlbanil(n0.getAlbanil());
+					l.setRepresentante(n0.getRepresentante());
+					l.setURLFile(n0.getURLFile());
+					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionSegunda().add(l); // Agregado a Entidad Principal
 				}
 			}	
 			
-			List<SegSolicitudSupervisionTercera> results07 = p.getSupervisionTercera();
-			if (!results07.isEmpty()) {
-				for (SegSolicitudSupervisionTercera n0 : results07) {
+			List<SegSolicitudSupervisionTercera> results08 = p.getSupervisionTercera();
+			if (!results08.isEmpty()) {
+				for (SegSolicitudSupervisionTercera n0 : results08) {
 					AuxSolicitudSupervisionTercera l = new AuxSolicitudSupervisionTercera();
 					
 					l.setIdSupervisionTercera(n0.getIdSupervisionTercera());
@@ -935,13 +988,18 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setAcciones(n0.getAcciones());
 					l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 					l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+					l.setPromotor(n0.getPromotor());
+					l.setAlbanil(n0.getAlbanil());
+					l.setRepresentante(n0.getRepresentante());
+					l.setURLFile(n0.getURLFile());
+					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionTercera().add(l); // Agregado a Entidad Principal
 				}
 			}
 			
-			List<SegSolicitudSupervisionCuarta> results08 = p.getSupervisionCuarta();
-			if (!results08.isEmpty()) {
-				for (SegSolicitudSupervisionCuarta n0 : results08) {
+			List<SegSolicitudSupervisionCuarta> results09 = p.getSupervisionCuarta();
+			if (!results09.isEmpty()) {
+				for (SegSolicitudSupervisionCuarta n0 : results09) {
 					AuxSolicitudSupervisionCuarta l = new AuxSolicitudSupervisionCuarta();
 					
 					l.setIdSupervisionCuarta(n0.getIdSupervisionCuarta());
@@ -951,6 +1009,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setAcciones(n0.getAcciones());
 					l.setCheckSatisfactoria(n0.getCheckSatisfactoria());
 					l.setCheckNoSatisfactoria(n0.getCheckNoSatisfactoria());
+					l.setPromotor(n0.getPromotor());
+					l.setAlbanil(n0.getAlbanil());
+					l.setRepresentante(n0.getRepresentante());
+					l.setURLFile(n0.getURLFile());
+					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionCuarta().add(l); // Agregado a Entidad Principal
 				}
 			}			
@@ -1235,6 +1298,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Boolean checkSi, Boolean checkNo,
 			String observaciones, String acciones,
 			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
@@ -1254,6 +1318,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setAcciones(acciones);
 			f.setCheckSatisfactoria(satisfactoria);
 			f.setCheckNoSatisfactoria(noSatisfactoria);
+			f.setPromotor(promotor);
+			f.setAlbanil(albanil);
+			f.setRepresentante(representante);
 			f.setURLFile(URLFile);
 			f.setKeyFile(KeyFile);
 
@@ -1271,7 +1338,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long actualizarSupervisionSegunda(Long idFormulario, Long idSupervisionSegunda,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1288,6 +1357,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setAcciones(acciones);
 			f.setCheckSatisfactoria(satisfactoria);
 			f.setCheckNoSatisfactoria(noSatisfactoria);
+			f.setPromotor(promotor);
+			f.setAlbanil(albanil);
+			f.setRepresentante(representante);
+			f.setURLFile(URLFile);
+			f.setKeyFile(KeyFile);
 
 			valor = f.getIdSupervisionSegunda();
 
@@ -1303,7 +1377,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long actualizarSupervisionTercera(Long idFormulario, Long idSupervisionTercera,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1320,6 +1396,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setAcciones(acciones);
 			f.setCheckSatisfactoria(satisfactoria);
 			f.setCheckNoSatisfactoria(noSatisfactoria);
+			f.setPromotor(promotor);
+			f.setAlbanil(albanil);
+			f.setRepresentante(representante);
+			f.setURLFile(URLFile);
+			f.setKeyFile(KeyFile);
 
 			valor = f.getIdSupervisionTercera();
 
@@ -1335,7 +1416,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public Long actualizarSupervisionCuarta(Long idFormulario, Long idSupervisionCuarta,
 			Date fechaVisita,
 			String observaciones, String acciones,
-			Boolean satisfactoria, Boolean noSatisfactoria) throws IllegalArgumentException {
+			Boolean satisfactoria, Boolean noSatisfactoria,
+			String promotor, String albanil, String representante,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1352,6 +1435,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setAcciones(acciones);
 			f.setCheckSatisfactoria(satisfactoria);
 			f.setCheckNoSatisfactoria(noSatisfactoria);
+			f.setPromotor(promotor);
+			f.setAlbanil(albanil);
+			f.setRepresentante(representante);
+			f.setURLFile(URLFile);
+			f.setKeyFile(KeyFile);
 
 			valor = f.getIdSupervisionCuarta();
 

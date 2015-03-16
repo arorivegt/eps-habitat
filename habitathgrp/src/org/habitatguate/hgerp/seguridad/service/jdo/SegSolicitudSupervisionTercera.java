@@ -97,6 +97,61 @@ public class SegSolicitudSupervisionTercera implements Serializable {
 	public void setCheckNoSatisfactoria(Boolean checkNoSatisfactoria) {
 		this.checkNoSatisfactoria = checkNoSatisfactoria;
 	}
+	
+	@Persistent
+    private String promotor;
+	
+	public String getPromotor() {
+		return promotor;
+	}
+
+	public void setPromotor(String promotor) {
+		this.promotor = promotor;
+	}
+
+	@Persistent
+    private String albanil;
+	
+	public String getAlbanil() {
+		return albanil;
+	}
+
+	public void setAlbanil(String albanil) {
+		this.albanil = albanil;
+	}
+
+	@Persistent
+    private String representante;
+	
+	public String getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(String representante) {
+		this.representante = representante;
+	}
+
+	@Persistent    
+    private String URLFile;
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	@Persistent    
+    private String KeyFile;
+	
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
 
 	// Llave Foranea
 	

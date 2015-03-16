@@ -120,6 +120,39 @@ public class SegSolicitudSupervisionPrimera implements Serializable {
 		this.checkNoSatisfactoria = checkNoSatisfactoria;
 	}
 	
+	@Persistent
+    private String promotor;
+	
+	public String getPromotor() {
+		return promotor;
+	}
+
+	public void setPromotor(String promotor) {
+		this.promotor = promotor;
+	}
+
+	@Persistent
+    private String albanil;
+	
+	public String getAlbanil() {
+		return albanil;
+	}
+
+	public void setAlbanil(String albanil) {
+		this.albanil = albanil;
+	}
+
+	@Persistent
+    private String representante;
+	
+	public String getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(String representante) {
+		this.representante = representante;
+	}
+
 	@Persistent    
     private String URLFile;
 

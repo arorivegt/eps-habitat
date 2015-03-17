@@ -19,6 +19,8 @@ import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.client.control.LargeMapControl;
+import com.google.gwt.maps.client.control.SmallMapControl;
+import com.google.gwt.maps.client.control.SmallZoomControl;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
@@ -61,14 +63,13 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "630px");
 		
-		/*
-			Maps
-		 */
-		Maps.loadMapsApi("", "2", false, new Runnable() {
-			public void run() {
-				busquedaEspecifica(18.000, 10.000);
-			}
-		});
+		// Actualmente no carga completa de mapa
+		
+//		Maps.loadMapsApi("", "2", false, new Runnable() {
+//			public void run() {
+//				busquedaEspecifica(14.6211, -90.5269);
+//			}
+//		});
 
 		
 		lblLatitud = new Label("Latitud:");
@@ -144,25 +145,54 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 	private void busquedaEspecifica(double latitud, double longitud) {
 		
 		   // Open a map centered on Cawker City, KS USA
-	    LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
+	    LatLng cawkerCity = LatLng.newInstance(latitud, longitud);
 
 	    final MapWidget map = new MapWidget(cawkerCity, 2);
 
 	    // Add some controls for the zoom level
-	    map.addControl(new LargeMapControl());
+//	    map.addControl(new LargeMapControl());
+	    map.addControl(new SmallMapControl());
+	    map.addControl(new SmallZoomControl());
+	    map.setZoomLevel(10);
 
 	    // Add a marker
 	    map.addOverlay(new Marker(cawkerCity));
 
 	    // Add an info window to highlight a point of interest
 	    map.getInfoWindow().open(map.getCenter(),
-	        new InfoWindowContent("World's Largest Ball of Sisal Twine"));
-
+	        new InfoWindowContent("Ubicacion Solucion"));
 
 		absolutePanel.add(map, 42, 50);
 		map.setSize("950px", "450px");
+		
 	}
 	
+	
+	private void buildUi() {
+		// Open a map centered on Cawker City, KS USA
+//		LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
+		LatLng cawkerCity = LatLng.newInstance(14.6211, -90.5269);
+		
+		final MapWidget map = new MapWidget(cawkerCity, 2);
+//		map.setSize("100%", "100%");
+		// Add some controls for the zoom level
+//		map.addControl(new LargeMapControl());
+	    map.addControl(new SmallMapControl());
+	    map.addControl(new SmallZoomControl());
+	    map.setZoomLevel(12);
+
+		// Add a marker
+		map.addOverlay(new Marker(cawkerCity));
+
+		// Add an info window to highlight a point of interest
+		map.getInfoWindow().open(map.getCenter(),
+				new InfoWindowContent("Ubicacion Default"));
+
+		absolutePanel.add(map, 42, 50);
+		map.setSize("950px", "450px");
+		
+	}
+
 	
     // VALIDACION DATA A INGRESAR
     

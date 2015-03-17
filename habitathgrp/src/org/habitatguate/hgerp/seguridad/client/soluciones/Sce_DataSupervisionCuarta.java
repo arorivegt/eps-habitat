@@ -80,7 +80,7 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "600px");
+		absolutePanel.setSize("988px", "630px");
 		
 		// ---
 		
@@ -145,41 +145,43 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		absolutePanel.add(lblIndiqueLosBienes, 42, 109);
 		lblIndiqueLosBienes.setSize("171px", "19px");
 		
-		txtRepresentante = new TextBox();
-		txtRepresentante.setStylePrimaryName("gwt-TextBox2");
-		txtRepresentante.setStyleName("gwt-TextBox2");
-		txtRepresentante.setMaxLength(200);
-		absolutePanel.add(txtRepresentante, 275, 508);
-		txtRepresentante.setSize("386px", "19px");
-		
-		label = new Label("Representante de Familia:");
-		label.setStyleName("label");
-		absolutePanel.add(label, 42, 510);
-		label.setSize("208px", "19px");
+		label_2 = new Label("Promotor:");
+		label_2.setStyleName("label");
+		absolutePanel.add(label_2, 42, 469);
+		label_2.setSize("133px", "19px");
 		
 		label_1 = new Label("Albañil:");
 		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 42, 466);
+		absolutePanel.add(label_1, 42, 514);
 		label_1.setSize("133px", "19px");
 		
-		label_2 = new Label("Promotor:");
-		label_2.setStyleName("label");
-		absolutePanel.add(label_2, 42, 421);
-		label_2.setSize("133px", "19px");
-		
-		txtAlbanil = new TextBox();
-		txtAlbanil.setStylePrimaryName("gwt-TextBox2");
-		txtAlbanil.setStyleName("gwt-TextBox2");
-		txtAlbanil.setMaxLength(200);
-		absolutePanel.add(txtAlbanil, 275, 464);
-		txtAlbanil.setSize("386px", "19px");
+		label = new Label("Representante de Familia:");
+		label.setStyleName("label");
+		absolutePanel.add(label, 42, 558);
+		label.setSize("208px", "19px");
 		
 		txtPromotor = new TextBox();
 		txtPromotor.setStylePrimaryName("gwt-TextBox2");
 		txtPromotor.setStyleName("gwt-TextBox2");
 		txtPromotor.setMaxLength(200);
-		absolutePanel.add(txtPromotor, 275, 419);
+		absolutePanel.add(txtPromotor, 275, 467);
 		txtPromotor.setSize("386px", "19px");
+		
+		txtAlbanil = new TextBox();
+		txtAlbanil.setStylePrimaryName("gwt-TextBox2");
+		txtAlbanil.setStyleName("gwt-TextBox2");
+		txtAlbanil.setMaxLength(200);
+		absolutePanel.add(txtAlbanil, 275, 512);
+		txtAlbanil.setSize("386px", "19px");
+		
+		txtRepresentante = new TextBox();
+		txtRepresentante.setStylePrimaryName("gwt-TextBox2");
+		txtRepresentante.setStyleName("gwt-TextBox2");
+		txtRepresentante.setMaxLength(200);
+		absolutePanel.add(txtRepresentante, 275, 556);
+		txtRepresentante.setSize("386px", "19px");
+		
+		// -- Boton Guardar/Actualizar Informacion
 		
 		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
@@ -292,7 +294,7 @@ public class Sce_DataSupervisionCuarta extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 471, 594);
+		absolutePanel.add(btnGuardar, 471, 614);
 				
 	}
 	

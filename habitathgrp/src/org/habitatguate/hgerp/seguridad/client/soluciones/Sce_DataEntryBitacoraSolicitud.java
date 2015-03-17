@@ -25,6 +25,7 @@ public class Sce_DataEntryBitacoraSolicitud extends Composite {
 	private Sce_DataEntrySupervisionSegunda fd2;
 	private Sce_DataEntrySupervisionTercera fd3;
 	private Sce_DataEntrySupervisionCuarta fd4;
+	private Sce_DataEntrySupervisionUbicacion fd5;
 
 	public Sce_DataEntryBitacoraSolicitud() {
 		
@@ -71,6 +72,15 @@ public class Sce_DataEntryBitacoraSolicitud extends Composite {
 		scrollPanel4.setSize("100%", "100%");
 		fd4 = new Sce_DataEntrySupervisionCuarta(this);
 		scrollPanel4.setWidget(fd4);
+		
+		// 5. Ubicacion Supervision
+		
+		scrollPanel5 = new ScrollPanel();
+		scrollPanel5.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel5, "Ubicacion Supervision", true);
+		scrollPanel5.setSize("100%", "100%");
+		fd5 = new Sce_DataEntrySupervisionUbicacion(this);
+		scrollPanel5.setWidget(fd5);
 		
 	}
 	
@@ -176,6 +186,15 @@ public class Sce_DataEntryBitacoraSolicitud extends Composite {
 		this.scrollPanel4 = scrollPanel4;
 	}
 
-	
+	private ScrollPanel scrollPanel5;
+
+	public ScrollPanel getScrollPanel5() {
+		return scrollPanel5;
+	}
+
+	public void setScrollPanel5(ScrollPanel scrollPanel5) {
+		this.scrollPanel5 = scrollPanel5;
+	}
+
 
 }

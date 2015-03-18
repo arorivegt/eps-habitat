@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 
 public class Sce_DataExclusivoAfiliado extends Composite {
 
-	private Sce_DataEntrySeguimientoFormularioSolicitud entryFormulario;
+	private Sce_DataEntryGarantiaSolicitud entryFormulario;
 	private Long id_empleado = 0L;
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
@@ -34,7 +34,7 @@ public class Sce_DataExclusivoAfiliado extends Composite {
     private final RecursosHumanosServiceAsync RecursosHumanosService = GWT.create(RecursosHumanosService.class);
     private TextBox textBox_direccionActual_sce;
     
-	public Sce_DataExclusivoAfiliado(Sce_DataEntrySeguimientoFormularioSolicitud e) {
+	public Sce_DataExclusivoAfiliado(Sce_DataEntryGarantiaSolicitud e) {
 		this.entryFormulario = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

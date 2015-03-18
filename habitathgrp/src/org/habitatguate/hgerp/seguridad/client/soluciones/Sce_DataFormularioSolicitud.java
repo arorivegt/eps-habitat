@@ -259,6 +259,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		txtLugarTrabajoSolicitante.setSize("601px", "19px");
 		
 		txtTelefonoTrabajoConyuge = new TextBox();
+		txtTelefonoTrabajoConyuge.setMaxLength(8);
 		txtTelefonoTrabajoConyuge.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoTrabajoConyuge.getText().equals("")) {txtTelefonoTrabajoConyuge.setText("0");}
@@ -303,6 +304,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		checkBoxFirmar.setSize("159px", "24px");
 		
 		txtTelefonoCasaSolicitante = new TextBox();
+		txtTelefonoCasaSolicitante.setMaxLength(8);
 		txtTelefonoCasaSolicitante.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoCasaSolicitante.getText().equals("")) {txtTelefonoCasaSolicitante.setText("0");}
@@ -336,6 +338,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		checkBoxPeatonal.setSize("105px", "24px");
 		
 		txtTelefonoTrabajoSolicitante = new TextBox();
+		txtTelefonoTrabajoSolicitante.setMaxLength(8);
 		txtTelefonoTrabajoSolicitante.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoTrabajoSolicitante.getText().equals("")) {txtTelefonoTrabajoSolicitante.setText("0");}
@@ -363,6 +366,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		txtNombreConyuge.setSize("294px", "19px");
 		
 		txtTelefonoConyuge = new TextBox();
+		txtTelefonoConyuge.setMaxLength(8);
 		txtTelefonoConyuge.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoConyuge.getText().equals("")) {txtTelefonoConyuge.setText("0");}

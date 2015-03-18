@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 public class Sce_DataGarantiaFiduciaria extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
-	private Sce_DataEntrySeguimientoFormularioSolicitud formulario;
+	private Sce_DataEntryGarantiaSolicitud formulario;
 	private Sce_DataEntryGarantiaFiduciaria cargaFamiliar;
 	private Long idCargaFamiliar = 0L;
 	private boolean bandera = true;
@@ -45,7 +45,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 	private ListBox listEstadoCivil;
     private ListBox listPais;
 	
-	public Sce_DataGarantiaFiduciaria(Sce_DataEntryGarantiaFiduciaria a, Sce_DataEntrySeguimientoFormularioSolicitud e) {
+	public Sce_DataGarantiaFiduciaria(Sce_DataEntryGarantiaFiduciaria a, Sce_DataEntryGarantiaSolicitud e) {
 
 		mensaje = new Mensaje();
 		this.formulario = e;

@@ -31,7 +31,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 public class Sce_DataGarantiaSolidario extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
-	private Sce_DataEntrySeguimientoFormularioSolicitud formulario;
+	private Sce_DataEntryGarantiaSolicitud formulario;
 	private Sce_DataEntryGarantiaSolidario cargaFamiliar;
 	private Long idCargaFamiliar = 0L;
 	private boolean bandera = true;
@@ -42,7 +42,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 	private TextBox txtEscolaridadFamiliar;
 	private Mensaje mensaje; 
 	
-	public Sce_DataGarantiaSolidario(Sce_DataEntryGarantiaSolidario a, Sce_DataEntrySeguimientoFormularioSolicitud e) {
+	public Sce_DataGarantiaSolidario(Sce_DataEntryGarantiaSolidario a, Sce_DataEntryGarantiaSolicitud e) {
 
 		mensaje = new Mensaje();
 		this.formulario = e;

@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.TextArea;
 
 public class Sce_DataMontoInversion extends Composite {
 
-	private Sce_DataEntrySeguimientoFormularioSolicitud entryFormulario;
+	private Sce_DataEntryGarantiaSolicitud entryFormulario;
 	private Long id_empleado = 0L;
 	private boolean bandera = true;
 	private String depto_municipio_uno="";
 	private String depto_municipio_dos="";
     private final RecursosHumanosServiceAsync RecursosHumanosService = GWT.create(RecursosHumanosService.class);
     
-	public Sce_DataMontoInversion(Sce_DataEntrySeguimientoFormularioSolicitud e) {
+	public Sce_DataMontoInversion(Sce_DataEntryGarantiaSolicitud e) {
 		this.entryFormulario = e;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");

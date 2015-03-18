@@ -419,8 +419,19 @@ public class SegSolicitudGeneral implements Serializable {
 		CuartaSupervision = cuartaSupervision;
 	}
 	
-	// Mapeo de Llave Foranea
+	@Persistent
+    private Boolean UbicacionSupervision;
 
+	public Boolean getUbicacionSupervision() {
+		return UbicacionSupervision;
+	}
+
+	public void setUbicacionSupervision(Boolean ubicacionSupervision) {
+		UbicacionSupervision = ubicacionSupervision;
+	}
+
+	// Mapeo de Llave Foranea
+	
 	@Persistent(mappedBy = "solicitud")
 	@Element(dependent = "true")
 	private List <SegSolicitudCargaFamiliar> cargaFamiliar;
@@ -535,4 +546,19 @@ public class SegSolicitudGeneral implements Serializable {
 			List<SegSolicitudSupervisionCuarta> supervisionCuarta) {
 		this.supervisionCuarta = supervisionCuarta;
 	}
+
+	@Persistent(mappedBy = "solicitud")
+	@Element(dependent = "true")
+	private List <SegSolicitudSupervisionUbicacion> supervisionUbicacion;
+
+	public List<SegSolicitudSupervisionUbicacion> getSupervisionUbicacion() {
+		return supervisionUbicacion;
+	}
+
+	public void setSupervisionUbicacion(
+			List<SegSolicitudSupervisionUbicacion> supervisionUbicacion) {
+		this.supervisionUbicacion = supervisionUbicacion;
+	}
+
+
 }

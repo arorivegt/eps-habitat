@@ -16,16 +16,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
-public class Sce_BuzonBitacoraLista extends Composite {
+public class Sce_BuzonGarantiaLista extends Composite {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private Mensaje mensaje; 
-    private Sce_BuzonBitacoraLista listaFormulario;
+    private Sce_BuzonGarantiaLista listaFormulario;
     private FlexTable flexTable;
     private Loading load ;
     private VerticalPanel verticalPanel;
     
-	public Sce_BuzonBitacoraLista() {
+	public Sce_BuzonGarantiaLista() {
 		
 		this.listaFormulario =this;
 		mensaje = new Mensaje();
@@ -48,11 +48,11 @@ public class Sce_BuzonBitacoraLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonBitacora buscador, final String nombreSolicitante, String solucionConstruir){
+    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonGarantia buscador, String nombreSolicitante, String solucionConstruir){
 
         load.visible();
         
-        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado,
+        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, 
         		nombreSolicitante, solucionConstruir,
         		new AsyncCallback<List<AuxSolicitudGeneral>>(){        	
         	
@@ -69,9 +69,11 @@ public class Sce_BuzonBitacoraLista extends Composite {
             {
 				for(AuxSolicitudGeneral p : result) {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, 
-			        					new Sce_BuzonBitacoraItem(buscador, listaFormulario, 
-			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getSolucionConstruir(),
-			        					p.getPrimeraSupervision(), p.getSegundaSupervision(), p.getTerceraSupervision(), p.getCuartaSupervision())
+			        					new Sce_BuzonGarantiaItem(buscador, listaFormulario, 
+			        					p.getIdFormulario(), p.getNombreSolicitante(), 
+			        					p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
+			        					p.getSolucionConstruir(),
+			        					p.getGarantia())
 			        );
 				}
 		        load.invisible();
@@ -82,7 +84,7 @@ public class Sce_BuzonBitacoraLista extends Composite {
         load.invisible();
     }
     
-    public void EliminarFormulario(final Sce_BuzonBitacoraItem a){
+    public void EliminarFormulario(final Sce_BuzonSolicitudItem a){
         load.visible();
     	flexTable.remove(a);
         load.invisible();

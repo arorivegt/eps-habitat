@@ -13,11 +13,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 
-public class Sce_BuzonBitacoraItem extends Composite {
+public class Sce_BuzonSupervisionItem extends Composite {
 
-	private Sce_BuzonBitacoraLista a;
+	private Sce_BuzonSupervisionLista a;
 	private Long id_Formulario = 0L;
-	private Sce_BuzonBitacora BE;
+	private Sce_BuzonSupervision BE;
     private Loading load ;
     private AbsolutePanel absolutePanel;
     private TextBox txtNombreSolicitante;
@@ -29,7 +29,7 @@ public class Sce_BuzonBitacoraItem extends Composite {
     private SimpleCheckBox checkTerceraSupervision;
     private SimpleCheckBox checkCuartaSupervision;
     
-	public Sce_BuzonBitacoraItem(Sce_BuzonBitacora b, Sce_BuzonBitacoraLista a, 
+	public Sce_BuzonSupervisionItem(Sce_BuzonSupervision b, Sce_BuzonSupervisionLista a, 
 			Long idFormulario, String nombreSolicitante, String solucionConstruir,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) {
 		
@@ -133,11 +133,11 @@ public class Sce_BuzonBitacoraItem extends Composite {
 		
 	}
 	
-	public Sce_BuzonBitacoraLista getA() {
+	public Sce_BuzonSupervisionLista getA() {
 		return a;
 	}
 	
-	public void setA(Sce_BuzonBitacoraLista a) {
+	public void setA(Sce_BuzonSupervisionLista a) {
 		this.a = a;
 	}
 }

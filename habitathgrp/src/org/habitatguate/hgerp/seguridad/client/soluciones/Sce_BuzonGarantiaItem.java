@@ -13,11 +13,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 
-public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
+public class Sce_BuzonGarantiaItem extends Composite {
 
-	private Sce_BuzonSeguimientoSolicitudLista a;
+	private Sce_BuzonGarantiaLista a;
 	private Long id_Formulario = 0L;
-	private Sce_BuzonSeguimientoSolicitud BE;
+	private Sce_BuzonGarantia BE;
     private Loading load ;
     private AbsolutePanel absolutePanel;
     private	TextBox txtTelefonoCasaSolicitante;
@@ -28,7 +28,7 @@ public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
     private Label lblExisteGarantia;
     private SimpleCheckBox checkGarantia;
     
-	public Sce_BuzonSeguimientoSolicitudItem(Sce_BuzonSeguimientoSolicitud b, Sce_BuzonSeguimientoSolicitudLista a, 
+	public Sce_BuzonGarantiaItem(Sce_BuzonGarantia b, Sce_BuzonGarantiaLista a, 
 			Long idFormulario, String nombreSolicitante, int telefonoCasaSolicitante, 
 			int telefonoTrabajoSolicitante, String solucionConstruir,
 			Boolean garantia) {
@@ -130,11 +130,11 @@ public class Sce_BuzonSeguimientoSolicitudItem extends Composite {
 		
 	}
 	
-	public Sce_BuzonSeguimientoSolicitudLista getA() {
+	public Sce_BuzonGarantiaLista getA() {
 		return a;
 	}
 	
-	public void setA(Sce_BuzonSeguimientoSolicitudLista a) {
+	public void setA(Sce_BuzonGarantiaLista a) {
 		this.a = a;
 	}
 }

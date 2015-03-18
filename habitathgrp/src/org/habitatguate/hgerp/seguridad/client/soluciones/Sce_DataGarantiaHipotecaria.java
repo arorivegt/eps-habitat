@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.CheckBox;
 public class Sce_DataGarantiaHipotecaria extends Composite {
 	
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
-	private Sce_DataEntrySeguimientoFormularioSolicitud formulario;
+	private Sce_DataEntryGarantiaSolicitud formulario;
 	private Sce_DataEntryGarantiaHipotecaria garantiaHipotecaria;
     private boolean bandera = true;
 	private Long idGarantiaHipotecaria = 0L;
@@ -53,7 +53,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
     private CheckBox checkBoxNo;
     private Button btnGuardar;
     
-	public Sce_DataGarantiaHipotecaria(Sce_DataEntryGarantiaHipotecaria a, Sce_DataEntrySeguimientoFormularioSolicitud e) {
+	public Sce_DataGarantiaHipotecaria(Sce_DataEntryGarantiaHipotecaria a, Sce_DataEntryGarantiaSolicitud e) {
 		
 		mensaje = new Mensaje();
 		this.formulario = e;

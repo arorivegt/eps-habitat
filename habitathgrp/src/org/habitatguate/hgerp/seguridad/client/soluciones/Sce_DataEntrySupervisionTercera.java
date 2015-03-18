@@ -29,14 +29,14 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Sce_DataEntrySupervisionTercera extends Composite {
 
-	private Sce_DataEntryBitacoraSolicitud formularioSolicitud;
+	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
 	 private FlexTable flextable;
     
 	 private Sce_DataSupervisionTercera data;
 	 
-	public Sce_DataEntrySupervisionTercera(Sce_DataEntryBitacoraSolicitud formulario) {
+	public Sce_DataEntrySupervisionTercera(Sce_DataEntrySupervisionSolicitud formulario) {
 				
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);

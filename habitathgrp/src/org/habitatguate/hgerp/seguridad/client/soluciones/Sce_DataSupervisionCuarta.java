@@ -36,7 +36,7 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 public class Sce_DataSupervisionCuarta extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
-	private Sce_DataEntryBitacoraSolicitud formulario;
+	private Sce_DataEntrySupervisionSolicitud formulario;
 	private Sce_DataEntrySupervisionCuarta supervisionCuarta;
     private boolean bandera = true;
 	private Long idSupervisionCuarta = 0L;
@@ -68,7 +68,7 @@ public class Sce_DataSupervisionCuarta extends Composite {
 	private Image image ;
     private Label lblSeleccioneUnaImagen;
     
-	public Sce_DataSupervisionCuarta(Sce_DataEntrySupervisionCuarta a, Sce_DataEntryBitacoraSolicitud e) {
+	public Sce_DataSupervisionCuarta(Sce_DataEntrySupervisionCuarta a, Sce_DataEntrySupervisionSolicitud e) {
 		
 		mensaje = new Mensaje();
 		this.formulario = e;

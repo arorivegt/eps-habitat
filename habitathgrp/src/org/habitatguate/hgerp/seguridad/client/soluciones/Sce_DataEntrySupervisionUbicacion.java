@@ -8,8 +8,10 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionCuarta;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioFamilia;
 
@@ -28,14 +30,14 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Sce_DataEntrySupervisionUbicacion extends Composite {
 
-	private Sce_DataEntryBitacoraSolicitud formularioSolicitud;
+	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
 	 private FlexTable flextable;
     
 	 private Sce_DataSupervisionUbicacion data;
 	 
-	public Sce_DataEntrySupervisionUbicacion(Sce_DataEntryBitacoraSolicitud formulario) {
+	public Sce_DataEntrySupervisionUbicacion(Sce_DataEntrySupervisionSolicitud formulario) {
 				
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -49,6 +51,20 @@ public class Sce_DataEntrySupervisionUbicacion extends Composite {
         flextable.setWidget(flextable.getRowCount(), 0, data);
 
 	}
+	
+    public void setDataSupervisionUbicacion(List<AuxSolicitudSupervisionUbicacion> results){
+
+    	if (!results.isEmpty()) {
+
+    		for ( AuxSolicitudSupervisionUbicacion n2 : results) {
+
+    			System.out.println("ID Ubicacion Supervison a Cargar: " + n2.getIdSupervisionUbicacion() + ", ID Formulario: " + n2.getIdFormulario());
+    			
+    			data.LlenarDatos(n2.getIdSupervisionUbicacion(), 
+    					n2.getLatitud(), n2.getLongitud());    		
+    		}
+    	}
+    }
 	
     
     

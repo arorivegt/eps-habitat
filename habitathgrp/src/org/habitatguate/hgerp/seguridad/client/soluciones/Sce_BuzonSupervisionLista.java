@@ -16,16 +16,16 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
-public class Sce_BuzonSeguimientoSolicitudLista extends Composite {
+public class Sce_BuzonSupervisionLista extends Composite {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private Mensaje mensaje; 
-    private Sce_BuzonSeguimientoSolicitudLista listaFormulario;
+    private Sce_BuzonSupervisionLista listaFormulario;
     private FlexTable flexTable;
     private Loading load ;
     private VerticalPanel verticalPanel;
     
-	public Sce_BuzonSeguimientoSolicitudLista() {
+	public Sce_BuzonSupervisionLista() {
 		
 		this.listaFormulario =this;
 		mensaje = new Mensaje();
@@ -48,11 +48,11 @@ public class Sce_BuzonSeguimientoSolicitudLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSeguimientoSolicitud buscador, String nombreSolicitante, String solucionConstruir){
+    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSupervision buscador, final String nombreSolicitante, String solucionConstruir){
 
         load.visible();
         
-        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, 
+        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado,
         		nombreSolicitante, solucionConstruir,
         		new AsyncCallback<List<AuxSolicitudGeneral>>(){        	
         	
@@ -69,11 +69,9 @@ public class Sce_BuzonSeguimientoSolicitudLista extends Composite {
             {
 				for(AuxSolicitudGeneral p : result) {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, 
-			        					new Sce_BuzonSeguimientoSolicitudItem(buscador, listaFormulario, 
-			        					p.getIdFormulario(), p.getNombreSolicitante(), 
-			        					p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
-			        					p.getSolucionConstruir(),
-			        					p.getGarantia())
+			        					new Sce_BuzonSupervisionItem(buscador, listaFormulario, 
+			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getSolucionConstruir(),
+			        					p.getPrimeraSupervision(), p.getSegundaSupervision(), p.getTerceraSupervision(), p.getCuartaSupervision())
 			        );
 				}
 		        load.invisible();
@@ -84,7 +82,7 @@ public class Sce_BuzonSeguimientoSolicitudLista extends Composite {
         load.invisible();
     }
     
-    public void EliminarFormulario(final Sce_BuzonSolicitudItem a){
+    public void EliminarFormulario(final Sce_BuzonSupervisionItem a){
         load.visible();
     	flexTable.remove(a);
         load.invisible();

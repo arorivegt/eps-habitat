@@ -30,7 +30,7 @@ import com.google.gwt.user.client.ui.Grid;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado; // Por cambiar
 
-public class Sce_BuzonBitacora extends Composite  {
+public class Sce_BuzonGarantia extends Composite  {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
@@ -39,19 +39,19 @@ public class Sce_BuzonBitacora extends Composite  {
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
 	
-	private Sce_BuzonBitacora buzon;
+	private Sce_BuzonGarantia buzon;
 	private Mensaje mensaje; 
 	private Grid grid;
 	private AbsolutePanel absolutePanel;
 	private Loading load ;
-    
+	
 	private ListBox listBox;
 	private Label lbDato1;
 	private Image Busqueda;
-	private SuggestBox txtNombreSolicitante;	
+	private SuggestBox txtNombreSolicitante;
 	private ListBox listSolucionConstruir ;
-	
-	public Sce_BuzonBitacora() {
+    
+	public Sce_BuzonGarantia() {
 
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
@@ -79,6 +79,7 @@ public class Sce_BuzonBitacora extends Composite  {
 			}
 		});
 		
+		
 		// ---- VERSION FUNCIONAL EN FIREFOX	
 		
 //    	load = new Loading();
@@ -95,15 +96,15 @@ public class Sce_BuzonBitacora extends Composite  {
 //		absolutePanel.setStyleName("gwt-Label-new");
 //		
 //		grid.clearCell(0, 0);
-//		Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
-//		nuevo.agregarFormulario('2', buzon, "", "");
+//		Sce_BuzonSeguimientoSolicitudLista  nuevo = new Sce_BuzonSeguimientoSolicitudLista();
+//		nuevo.agregarFormulario('2', buzon, "", "", "", "", "", "", "");
 //		grid.setWidget(1, 0,nuevo);
 //	    	
 //		initWidget(grid);
-		
+
 		
 // ---- NUEVA VERSION PARA VERIFICAR FUNCIONALIDAD EN CHROME
-		
+
     	load = new Loading();
         load.Mostrar();
         load.invisible();
@@ -135,7 +136,7 @@ public class Sce_BuzonBitacora extends Composite  {
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Solucion");
-		listBox.addItem("TODOS");		
+		listBox.addItem("TODOS");
 		
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -150,6 +151,7 @@ public class Sce_BuzonBitacora extends Composite  {
 					listSolucionConstruir.setVisible(false);
 					absolutePanel.add(Busqueda, 480, 15);
 			        load.invisible();
+			        
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 				{
 					listSolucionConstruir.clear();
@@ -166,7 +168,7 @@ public class Sce_BuzonBitacora extends Composite  {
 			        load.invisible();
 			        
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
-				{
+				{			
 					lbDato1.setText("");
 					lbDato1.setVisible(false);
 					txtNombreSolicitante.setVisible(false);
@@ -176,7 +178,7 @@ public class Sce_BuzonBitacora extends Composite  {
 
 			        // Realiza la busqueda automatica
 //					grid.clearCell(1, 0);
-//					Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
+//					Sce_BuzonSeguimientoSolicitudLista  nuevo = new Sce_BuzonSeguimientoSolicitudLista();
 //					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
 //					grid.setWidget(1, 0,nuevo);
 //			        load.invisible();
@@ -222,13 +224,13 @@ public class Sce_BuzonBitacora extends Composite  {
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 	    	
 		initWidget(grid);
-		
+
 	}
 	
 	public void busqueda(){
 
 		grid.clearCell(1, 0);
-		Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
+		Sce_BuzonGarantiaLista  nuevo = new Sce_BuzonGarantiaLista();
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
@@ -260,26 +262,23 @@ public class Sce_BuzonBitacora extends Composite  {
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
+		
 	}
 	
+	
+	
+	// CARGA DATA A FORMULARIO
 
-	// CARGA DATA A FORMULARIOS
-	
-	// Soluciones
-	
 	public void cargarFormulario(final Long idFormulario){
-		
+        
 		load.visible();        
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntryBitacoraSolicitud bitacoraSolicitud = new Sce_DataEntryBitacoraSolicitud();
+		final Sce_DataEntryGarantiaSolicitud seguimientoSolicitud = new Sce_DataEntryGarantiaSolicitud();
 		
-		bitacoraSolicitud.nuevasPestanas(); // Se habilitan las demas Pestanas
-											// Solucion 2 Aun no propuesta
-		
-		grid.setWidget(1, 0, bitacoraSolicitud);
-		bitacoraSolicitud.setSize("100%", "648px");
-        
+		seguimientoSolicitud.NuevasPestanas();	// Muestra de nuevo las pestanas
+		grid.setWidget(1, 0, seguimientoSolicitud);
+		seguimientoSolicitud.setSize("100%", "648px");
         
         solucionesService.obtenerDataFormularioRegistrado(idFormulario, new AsyncCallback<AuxSolicitudGeneral>(){
         	public void onFailure(Throwable caught) 
@@ -292,51 +291,25 @@ public class Sce_BuzonBitacora extends Composite  {
         	@Override
         	public void onSuccess(AuxSolicitudGeneral result)
         	{	
-
+        		
                 load.invisible();            	
-                bitacoraSolicitud.idFormulario = result.getIdFormulario();
-            	System.out.println("BITACORA DE FORMULARIO: " + bitacoraSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante());
+                seguimientoSolicitud.idFormulario = result.getIdFormulario();
+            	System.out.println("SEGUIMIENTO DE FORMULARIO: " + seguimientoSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante());
         		        		
         		try{
         		
-        			bitacoraSolicitud.setDataSupervisionPrimera(result.getSupervisionPrimera());
-        			
-        		}catch(Exception e){
-        			
-        		}  
-        		
-        		try{
-            		
-        			bitacoraSolicitud.setDataSupervisionSegunda(result.getSupervisionSegunda());
+        			seguimientoSolicitud.setDataDocumentoPropiedad(result.getDocumentoPropiedad());
 
         		}catch(Exception e){
         			
-        		} 
-        		
-        		try{
-            		
-        			bitacoraSolicitud.setDataSupervisionTercera(result.getSupervisionTercera());
-        			
-        		}catch(Exception e){
-        			
-        		} 
+        		}        		
             
-        		try{
-            		
-        			bitacoraSolicitud.setDataSupervisionCuarta(result.getSupervisionCuarta());
-
-        		}catch(Exception e){
-        			
-        		} 
         		
-        		
-                load.invisible();
         	}
 
         });
 	}
 	
-
 	// RESULTADO BUSQUEDA
 	
 	// Soluciones

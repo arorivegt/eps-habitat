@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
 
-public class Sce_DataEntrySeguimientoFormularioSolicitud extends Composite {
+public class Sce_DataEntryGarantiaSolicitud extends Composite {
 
 	private TabPanel tabPanel;
 	public Long idFormulario = 0L;
@@ -23,7 +23,7 @@ public class Sce_DataEntrySeguimientoFormularioSolicitud extends Composite {
 	
     private  Grid grid;
 
-	public Sce_DataEntrySeguimientoFormularioSolicitud() {
+	public Sce_DataEntryGarantiaSolicitud() {
 		
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);

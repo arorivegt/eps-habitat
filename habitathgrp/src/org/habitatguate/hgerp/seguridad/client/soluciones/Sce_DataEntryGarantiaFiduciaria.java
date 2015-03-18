@@ -27,13 +27,13 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 public class Sce_DataEntryGarantiaFiduciaria extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
-	private Sce_DataEntrySeguimientoFormularioSolicitud formularioSolicitud;
+	private Sce_DataEntryGarantiaSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
     
-	public Sce_DataEntryGarantiaFiduciaria(Sce_DataEntrySeguimientoFormularioSolicitud formulario) {
+	public Sce_DataEntryGarantiaFiduciaria(Sce_DataEntryGarantiaSolicitud formulario) {
 		
 		mensaje = new Mensaje();
 		this.formularioSolicitud = formulario;

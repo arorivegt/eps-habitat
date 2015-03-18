@@ -27,14 +27,14 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Sce_DataEntryGarantiaHipotecaria extends Composite {
 
-	private Sce_DataEntrySeguimientoFormularioSolicitud formularioSolicitud;
+	private Sce_DataEntryGarantiaSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
 	 private FlexTable flextable;
     
 	 private Sce_DataGarantiaHipotecaria data;
 	 
-	public Sce_DataEntryGarantiaHipotecaria(Sce_DataEntrySeguimientoFormularioSolicitud formulario) {
+	public Sce_DataEntryGarantiaHipotecaria(Sce_DataEntryGarantiaSolicitud formulario) {
 				
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);

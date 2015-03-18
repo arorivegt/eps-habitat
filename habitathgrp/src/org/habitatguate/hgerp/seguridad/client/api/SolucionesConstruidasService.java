@@ -171,18 +171,23 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String promotor, String albanil, String representante,
 			String  URLFile, String KeyFile) throws IllegalArgumentException;	
 	
-// SOLUCIONES
+	// SUPERVISION UBICACION
+
+	Long ingresarSupervisionUbicacion(Date fecrec, Long idFormulario, 
+			String latitud, String longitud) throws IllegalArgumentException;	
+
+	Long actualizarSupervisionUbicacion(Long idFormulario, Long idSupervisionUbicacion,
+			String latitud, String longitud) throws IllegalArgumentException;	
+	
+	
+	// SOLUCIONES
     
     List<AuxSolicitudGeneral> buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir) throws IllegalArgumentException; 
     
     AuxSolicitudGeneral obtenerDataFormularioRegistrado(Long idFormulario) throws IllegalArgumentException;
     
-    /**
-     * 
-     * @param fileURL
-     * @return
-     * @throws IllegalArgumentException
-     */
+    // Remover imagen de Blobstore
+    
     String remove(String fileURL)throws IllegalArgumentException;
     
 }

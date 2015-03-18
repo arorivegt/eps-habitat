@@ -447,4 +447,15 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.supervisionCuarta = supervisionCuarta;
 	}
 	
+	private List <AuxSolicitudSupervisionUbicacion> supervisionUbicacion = new ArrayList<AuxSolicitudSupervisionUbicacion>();
+
+	public List<AuxSolicitudSupervisionUbicacion> getSupervisionUbicacion() {
+		return supervisionUbicacion;
+	}
+
+	public void setSupervisionUbicacion(
+			List<AuxSolicitudSupervisionUbicacion> supervisionUbicacion) {
+		this.supervisionUbicacion = supervisionUbicacion;
+	}
+	
 }

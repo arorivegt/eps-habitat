@@ -186,6 +186,16 @@ public interface SolucionesConstruidasServiceAsync {
 			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;		
 	
+	// SUPERVISION UBICACION
+
+	void ingresarSupervisionUbicacion(Date fecrec, Long idFormulario, 
+			String latitud, String longitud,
+			AsyncCallback<Long> callback) throws IllegalArgumentException;
+
+	void actualizarSupervisionUbicacion(Long idFormulario, Long idSupervisionUbicacion,
+			String latitud, String longitud,
+			AsyncCallback<Long> callback) throws IllegalArgumentException;		
+	
     // SOLUCIONES
  
 	void buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir,
@@ -193,12 +203,8 @@ public interface SolucionesConstruidasServiceAsync {
     
 	 void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;
 		
-	 /**
-	  * 
-	  * @param fileURL
-	  * @param callback
-	  * @throws IllegalArgumentException
-	  */
+	// Remover imagen de Blobstore
+	 
 	 void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;
 
 }

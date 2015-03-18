@@ -18,6 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionCua
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTercera;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDocumentoPropiedad;
@@ -28,6 +29,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionCuart
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionTercera;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -496,7 +498,39 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return valor ;
 	}	
 	
-	// SOLUCIONES
+	// SUPERVISION UBICACION
+
+	@Override
+	public Long ingresarSupervisionUbicacion(Date fecrec, Long idFormulario, 
+			String latitud, String longitud) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		Long valor = 0L;
+
+		try { 
+			final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+			SegSolicitudSupervisionUbicacion supervision = new  SegSolicitudSupervisionUbicacion();
+
+			supervision.setFecrec(fecrec); 
+			supervision.setLatitud(latitud);
+			supervision.setLongitud(longitud);
+			supervision.setIdFormulario(idFormulario); // Llave Foranea
+
+			supervision.setSolicitud(solicitud); // Relacion
+			solicitud.getSupervisionUbicacion().add(supervision);
+
+			valor = supervision.getIdSupervisionUbicacion();
+
+			System.out.println("DATOS UBICACION SUPERVISION ALMACENADO CORRECTAMENTE EN DATASTORE");
+
+		}finally {  
+			Persistencia.close();  
+		}
+		return valor ;
+	}	
+	
+	
+	// ---------------------------------------- SOLUCIONES ---------------------------------------- //
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -774,7 +808,20 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setKeyFile(n0.getKeyFile());
 						nuevo.getSupervisionCuarta().add(l); // Agregado a Entidad Principal
 					}
-				}				
+				}	
+				
+				List<SegSolicitudSupervisionUbicacion> results09 = p.getSupervisionUbicacion();
+				if (!results09.isEmpty()) {
+					for (SegSolicitudSupervisionUbicacion n0 : results09) {
+						AuxSolicitudSupervisionUbicacion l = new AuxSolicitudSupervisionUbicacion();
+						
+						l.setIdSupervisionUbicacion(n0.getIdSupervisionUbicacion());
+						l.setIdFormulario(n0.getIdFormulario());
+						l.setLatitud(n0.getLatitud());
+						l.setLongitud(n0.getLongitud());
+						nuevo.getSupervisionUbicacion().add(l); // Agregado a Entidad Principal
+					}
+				}
 				
 				
 				
@@ -1016,7 +1063,20 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setKeyFile(n0.getKeyFile());
 					nuevo.getSupervisionCuarta().add(l); // Agregado a Entidad Principal
 				}
-			}			
+			}	
+			
+			List<SegSolicitudSupervisionUbicacion> results10 = p.getSupervisionUbicacion();
+			if (!results10.isEmpty()) {
+				for (SegSolicitudSupervisionUbicacion n0 : results10) {
+					AuxSolicitudSupervisionUbicacion l = new AuxSolicitudSupervisionUbicacion();
+					
+					l.setIdSupervisionUbicacion(n0.getIdSupervisionUbicacion());
+					l.setIdFormulario(n0.getIdFormulario());
+					l.setLatitud(n0.getLatitud());
+					l.setLongitud(n0.getLongitud());
+					nuevo.getSupervisionUbicacion().add(l); // Agregado a Entidad Principal
+				}
+			}
 			
 			
 		}finally {  
@@ -1448,6 +1508,35 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		}
 		return valor ;
 	}		
+	
+	// SUPERVISION CUARTA
+
+	@Override
+	public Long actualizarSupervisionUbicacion(Long idFormulario, Long idSupervisionUbicacion,
+			String latitud, String longitud) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+
+		Long valor = 0L;
+		try { 
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudSupervisionUbicacion.class.getSimpleName(), idSupervisionUbicacion)
+			.getKey();
+
+			SegSolicitudSupervisionUbicacion f = Persistencia.getObjectById(SegSolicitudSupervisionUbicacion.class, k);
+			f.setLatitud(latitud);
+			f.setLongitud(longitud);
+
+			valor = f.getIdSupervisionUbicacion();
+
+		} finally {
+			Persistencia.close();
+		}
+		return valor ;
+	}
+		
+	// Remover imagen de Blobstore
 	
 	@Override
 	public String remove(String key)throws IllegalArgumentException {

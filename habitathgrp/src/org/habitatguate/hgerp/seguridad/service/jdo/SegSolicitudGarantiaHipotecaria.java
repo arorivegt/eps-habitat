@@ -14,9 +14,9 @@ import com.google.appengine.api.datastore.Key;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegSolicitudDocumentoPropiedad implements Serializable {
+public class SegSolicitudGarantiaHipotecaria implements Serializable {
 
-	public SegSolicitudDocumentoPropiedad() {
+	public SegSolicitudGarantiaHipotecaria() {
 		super();
 	}
 	

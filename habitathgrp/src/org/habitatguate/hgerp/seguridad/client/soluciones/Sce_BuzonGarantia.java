@@ -274,11 +274,11 @@ public class Sce_BuzonGarantia extends Composite  {
 		load.visible();        
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntryGarantiaSolicitud seguimientoSolicitud = new Sce_DataEntryGarantiaSolicitud();
+		final Sce_DataEntryGarantiaSolicitud garantiaSolicitud = new Sce_DataEntryGarantiaSolicitud();
 		
-		seguimientoSolicitud.NuevasPestanas();	// Muestra de nuevo las pestanas
-		grid.setWidget(1, 0, seguimientoSolicitud);
-		seguimientoSolicitud.setSize("100%", "648px");
+		garantiaSolicitud.NuevasPestanas();	// Muestra de nuevo las pestanas
+		grid.setWidget(1, 0, garantiaSolicitud);
+		garantiaSolicitud.setSize("100%", "648px");
         
         solucionesService.obtenerDataFormularioRegistrado(idFormulario, new AsyncCallback<AuxSolicitudGeneral>(){
         	public void onFailure(Throwable caught) 
@@ -293,16 +293,20 @@ public class Sce_BuzonGarantia extends Composite  {
         	{	
         		
                 load.invisible();            	
-                seguimientoSolicitud.idFormulario = result.getIdFormulario();
-            	System.out.println("SEGUIMIENTO DE FORMULARIO: " + seguimientoSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante());
+                garantiaSolicitud.idFormulario = result.getIdFormulario();
+            	System.out.println("GARANTIAS DE FORMULARIO: " + garantiaSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante());
         		        		
         		try{
-        		
-        			seguimientoSolicitud.setDataDocumentoPropiedad(result.getDocumentoPropiedad());
-
+        			garantiaSolicitud.setDataGarantiaHipotecaria(result.getGarantiaHipotecaria());
         		}catch(Exception e){
         			
-        		}        		
+        		}    
+        		
+        		try{           		
+        			garantiaSolicitud.setDataGarantiaFiduciaria(result.getGarantiaFiduciaria());
+        		}catch(Exception e){
+        			
+        		} 
             
         		
         	}

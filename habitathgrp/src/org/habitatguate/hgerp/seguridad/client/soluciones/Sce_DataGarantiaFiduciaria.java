@@ -1,32 +1,24 @@
 package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.Date;
-import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
-import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioFamilia;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.CheckBox;
 
@@ -34,13 +26,22 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private Sce_DataEntryGarantiaSolicitud formulario;
-	private Sce_DataEntryGarantiaFiduciaria cargaFamiliar;
-	private Long idCargaFamiliar = 0L;
+	private Sce_DataEntryGarantiaFiduciaria garantiaFiduciaria;
+	private Long idGarantiaFiduciaria = 0L;
 	private boolean bandera = true;
-	
-	private TextBox txtNombreFamiliar;
-	private TextBox txtEdadFamiliar;
 	private Mensaje mensaje; 
+	
+	private TextBox txtNombre;
+	private TextBox txtEdad;
+	private TextBox txtActividad;
+	private TextBox txtDireccionActual;
+	private TextBox txtLugarTrabajo;
+	private TextBox txtTelefonoCasa;
+	private TextBox txtTelefonoTrabajo;
+	
+	private CheckBox checkLeer;
+	private CheckBox checkEscribir;
+	private CheckBox checkFirmar;
 	
 	private ListBox listEstadoCivil;
     private ListBox listPais;
@@ -49,54 +50,245 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 
 		mensaje = new Mensaje();
 		this.formulario = e;
-		this.cargaFamiliar = a;
+		this.garantiaFiduciaria = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("800px", "425px");
 		
-		txtNombreFamiliar = new TextBox();
-		txtNombreFamiliar.setMaxLength(200);
-		txtNombreFamiliar.setStylePrimaryName("gwt-TextBox2");
-		txtNombreFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreFamiliar, 194, 32);
-		txtNombreFamiliar.setSize("461px", "19px");
+		Label lblNombre = new Label("Nombre Completo:");
+		lblNombre.setStyleName("label");
+		absolutePanel.add(lblNombre, 20, 32);
+		lblNombre.setSize("192px", "13px");
 		
-		txtEdadFamiliar = new TextBox();
-		txtEdadFamiliar.addChangeHandler(new ChangeHandler() {
+		Label lblEscolaridad = new Label("Estado Civil:");
+		lblEscolaridad.setStyleName("label");
+		absolutePanel.add(lblEscolaridad, 20, 105);
+		lblEscolaridad.setSize("124px", "13px");
+		
+		Label lblTitulodiploma = new Label("Edad:");
+		lblTitulodiploma.setStyleName("label");
+		absolutePanel.add(lblTitulodiploma, 318, 105);
+		lblTitulodiploma.setSize("58px", "13px");
+		
+		Label label = new Label("Nacionalidad:");
+		label.setStyleName("label");
+		label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		absolutePanel.add(label, 488, 105);
+		label.setSize("110px", "19px");
+		
+		Label label_1 = new Label("Actividad Economica:");
+		label_1.setStyleName("label");
+		absolutePanel.add(label_1, 20, 170);
+		label_1.setSize("179px", "19px");
+		
+		Label label_2 = new Label("Direccion Actual:");
+		label_2.setStyleName("label");
+		absolutePanel.add(label_2, 20, 251);
+		label_2.setSize("181px", "19px");
+		
+		Label label_3 = new Label("Lugar de trabajo:");
+		label_3.setStyleName("label");
+		absolutePanel.add(label_3, 20, 289);
+		label_3.setSize("181px", "19px");
+		
+		Label label_4 = new Label("Telefono de casa:");
+		label_4.setStyleName("label");
+		absolutePanel.add(label_4, 20, 333);
+		label_4.setSize("167px", "19px");
+		
+		Label label_5 = new Label("Telefono de trabajo:");
+		label_5.setStyleName("label");
+		absolutePanel.add(label_5, 442, 333);
+		label_5.setSize("167px", "19px");
+		
+		listEstadoCivil = new ListBox();
+		listEstadoCivil.addItem("-", "-1");
+		listEstadoCivil.addItem("Soltero (a)", "1");
+		listEstadoCivil.addItem("Casado (a)", "2");
+		listEstadoCivil.addItem("Unido (a)", "3");
+		listEstadoCivil.addItem("Separado (a)", "4");
+		listEstadoCivil.addItem("Divorciado (a)", "5");
+		listEstadoCivil.addItem("Viudo (a)", "6");
+		listEstadoCivil.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listEstadoCivil, 127, 97);
+		listEstadoCivil.setSize("148px", "27px");
+		
+		listPais = new ListBox();
+		listPais.addItem("-","-1");
+		listPais.addItem("Guatemala","1");
+		listPais.addItem("El Salvador","2");
+		listPais.addItem("Bélice","3");
+		listPais.addItem("Honduras","4");
+		listPais.addItem("Nicaragua","5");
+		listPais.addItem("Costa Rica","5");
+		listPais.addItem("Panamá","6");
+		listPais.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listPais, 622, 97);
+		listPais.setSize("173px", "27px");
+		
+		txtNombre = new TextBox();
+		txtNombre.setMaxLength(200);
+		txtNombre.setStylePrimaryName("gwt-TextBox2");
+		txtNombre.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNombre, 194, 32);
+		txtNombre.setSize("461px", "19px");
+		
+		txtEdad = new TextBox();
+		txtEdad.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				if(txtEdadFamiliar .getText().equals("")) {txtEdadFamiliar .setText("0");}
-				else if(txtEdadFamiliar .getText().equals(null)) {txtEdadFamiliar .setText("0");}
+				if(txtEdad .getText().equals("")) {txtEdad .setText("0");}
+				else if(txtEdad .getText().equals(null)) {txtEdad .setText("0");}
 				else{
 					try{
-						Integer.parseInt(txtEdadFamiliar .getText());
+						Integer.parseInt(txtEdad .getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nEdad No valida");
-						txtEdadFamiliar .setText("0");
+						txtEdad .setText("0");
 					}
 				}
 			}
 		});
-		txtEdadFamiliar.setText("0");
-		txtEdadFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEdadFamiliar, 382, 97);
-		txtEdadFamiliar.setSize("56px", "19px");
+		txtEdad.setText("0");
+		txtEdad.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEdad, 382, 97);
+		txtEdad.setSize("56px", "19px");
+		
+		txtActividad = new TextBox();
+		txtActividad.setStyleName("gwt-TextBox2");
+		txtActividad.setMaxLength(50);
+		absolutePanel.add(txtActividad, 205, 168);
+		txtActividad.setSize("296px", "19px");
+		
+		checkLeer = new CheckBox("Sabe Leer");
+		absolutePanel.add(checkLeer, 194, 206);
+		checkLeer.setSize("143px", "24px");
+		
+		checkEscribir = new CheckBox("Sabe Escribir");
+		absolutePanel.add(checkEscribir, 357, 206);
+		checkEscribir.setSize("154px", "24px");
+		
+		checkFirmar = new CheckBox("Sabe Firmar");
+		absolutePanel.add(checkFirmar, 539, 206);
+		checkFirmar.setSize("159px", "24px");
+		
+		txtDireccionActual = new TextBox();
+		txtDireccionActual.setStyleName("gwt-TextBox2");
+		txtDireccionActual.setMaxLength(200);
+		absolutePanel.add(txtDireccionActual, 207, 249);
+		txtDireccionActual.setSize("601px", "19px");
+		
+		txtLugarTrabajo = new TextBox();
+		txtLugarTrabajo.setStyleName("gwt-TextBox2");
+		txtLugarTrabajo.setMaxLength(200);
+		absolutePanel.add(txtLugarTrabajo, 207, 289);
+		txtLugarTrabajo.setSize("601px", "19px");
+		
+		txtTelefonoCasa = new TextBox();
+		txtTelefonoCasa.setMaxLength(8);
+		txtTelefonoCasa.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoCasa .getText().equals("")) {txtTelefonoCasa .setText("0");}
+				else if(txtTelefonoCasa .getText().equals(null)) {txtTelefonoCasa .setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoCasa .getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nValor no valido");
+						txtTelefonoCasa .setText("0");
+					}
+				}
+			}
+		});
+		txtTelefonoCasa.setText("0");
+		txtTelefonoCasa.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoCasa, 207, 331);
+		txtTelefonoCasa.setSize("128px", "19px");
+		
+		txtTelefonoTrabajo = new TextBox();
+		txtTelefonoTrabajo.setMaxLength(8);
+		txtTelefonoTrabajo.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoTrabajo .getText().equals("")) {txtTelefonoTrabajo .setText("0");}
+				else if(txtTelefonoTrabajo .getText().equals(null)) {txtTelefonoTrabajo .setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoTrabajo .getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nValor no valido");
+						txtTelefonoTrabajo .setText("0");
+					}
+				}
+			}
+		});
+		txtTelefonoTrabajo.setText("0");
+		txtTelefonoTrabajo.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoTrabajo, 671, 333);
+		txtTelefonoTrabajo.setSize("128px", "17px");
+		
+		// Boton Guardar/Actualizar Informacion
 		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-				String nombreFamiliar = "";		
-				if(txtNombreFamiliar.getText() == null){
-					nombreFamiliar = "";
+				String nombre = "";		
+				if(txtNombre.getText() == null){
+					nombre = "";
 				}else{
-					nombreFamiliar = txtNombreFamiliar.getText();
+					nombre = txtNombre.getText();
 				}
 				
-				String edadFamiliarValue = txtEdadFamiliar.getText();
-				int edadFamiliar = 0;
-				edadFamiliar = Integer.parseInt(edadFamiliarValue);
+				String edadValue = txtEdad.getText();
+				int edad = 0;
+				edad = Integer.parseInt(edadValue);
+				
+				String estadoCivil = "-1";		
+				estadoCivil = listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex());
+				
+				String nacionalidad = "-1";		
+				nacionalidad = listPais.getValue(listPais.getSelectedIndex());	
+				
+				String actividadEconomica = "";		
+				if(txtActividad.getText() == null){
+					actividadEconomica = "";
+				}else{
+					actividadEconomica = txtActividad.getText();
+				}
+				
+				Boolean sabeLeer = false;
+				sabeLeer = checkLeer.getValue();
+				
+				Boolean sabeEscribir = false;
+				sabeEscribir = checkEscribir.getValue();
+				
+				Boolean sabeFirmar = false;
+				sabeFirmar = checkFirmar.getValue();
+				
+				String direccionActual = "";		
+				if(txtDireccionActual.getText() == null){
+					direccionActual = "";
+				}else{
+					direccionActual = txtDireccionActual.getText();
+				}
+				
+				String lugarTrabajo = "";		
+				if(txtLugarTrabajo.getText() == null){
+					lugarTrabajo = "";
+				}else{
+					lugarTrabajo = txtLugarTrabajo.getText();
+				}
+				
+				String telefonoCasaValue = txtTelefonoCasa.getText();
+				int telefonoCasa = 0;
+				telefonoCasa = Integer.parseInt(telefonoCasaValue);
+				
+				String telefonoTrabajoValue = txtTelefonoTrabajo.getText();
+				int telefonoTrabajo = 0;
+				telefonoTrabajo = Integer.parseInt(telefonoTrabajoValue);
 				
 
 				if(bandera){
@@ -105,60 +297,66 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 					@SuppressWarnings("deprecation")
 					Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
 
-//					solucionesService.ingresarCargaFamiliar(fecrec, formulario.idFormulario, 
-//							nombreFamiliar, edadFamiliar, "", "",
-//							new AsyncCallback<Long>() {
-//
-//						public void onFailure(Throwable caught) 
-//						{
-//							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
-//						}
-//
-//						public void onSuccess(Long result)
-//						{
-//							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
-//
-//							idCargaFamiliar = result;
-//							System.out.println("Valor de NUEVO Carga Familiar: " + idCargaFamiliar);
-//							bandera = false;
-//							
-//						}
-//					});
+					solucionesService.ingresarGarantiaFiduciaria(fecrec, formulario.idFormulario, 
+							nombre, estadoCivil, edad, nacionalidad,
+							actividadEconomica,
+							sabeLeer, sabeEscribir, sabeFirmar,
+							direccionActual, lugarTrabajo,
+							telefonoCasa, telefonoTrabajo,
+							new AsyncCallback<Long>() {
+
+						public void onFailure(Throwable caught) 
+						{
+							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+						}
+
+						public void onSuccess(Long result)
+						{
+							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+
+							idGarantiaFiduciaria = result;
+							System.out.println("Valor de NUEVA Garantia Fiduciaria: " + idGarantiaFiduciaria);
+							bandera = false;
+							
+						}
+					});
 
 				}else{
 					
-//					solucionesService.actualizarCargaFamiliar(formulario.idFormulario, idCargaFamiliar, 
-//							nombreFamiliar, edadFamiliar, "", "",
-//							new AsyncCallback<Long>() {
-//
-//						public void onFailure(Throwable caught) 
-//						{
-//							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-//						}
-//
-//						public void onSuccess(Long result)
-//						{	
-//							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
-//							
-//							System.out.println("Valor de Carga Familiar ACTUALIZADO: " + idCargaFamiliar );
-//							bandera = false;
-//
-//						}
-//					});
+					solucionesService.actualizarGarantiaFiduciaria(formulario.idFormulario, idGarantiaFiduciaria, 
+							nombre, estadoCivil, edad, nacionalidad,
+							actividadEconomica,
+							sabeLeer, sabeEscribir, sabeFirmar,
+							direccionActual, lugarTrabajo,
+							telefonoCasa, telefonoTrabajo,
+							new AsyncCallback<Long>() {
+
+						public void onFailure(Throwable caught) 
+						{
+							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+						}
+
+						public void onSuccess(Long result)
+						{	
+							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+							
+							System.out.println("Valor de Garantia Fiduciaria ACTUALIZADO: " + idGarantiaFiduciaria );
+							bandera = false;
+
+						}
+					});
 					
 				}
 				
 			}
 		});
-		
-		
-		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 194, 386);
 		btnGuardar.setSize("227px", "34px");
 		
+		// Boton Eliminar Formulario
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -178,144 +376,58 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		absolutePanel.add(btnEliminar, 471, 386);
 		btnEliminar.setSize("227px", "34px");
 		
-		Label lblNombre = new Label("Nombre Completo:");
-		lblNombre.setStyleName("label");
-		absolutePanel.add(lblNombre, 20, 32);
-		lblNombre.setSize("192px", "13px");
-		
-		Label lblTitulodiploma = new Label("Edad:");
-		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 318, 105);
-		lblTitulodiploma.setSize("58px", "13px");
-		
-		Label lblEscolaridad = new Label("Estado Civil:");
-		lblEscolaridad.setStyleName("label");
-		absolutePanel.add(lblEscolaridad, 20, 105);
-		lblEscolaridad.setSize("124px", "13px");
-		
-		listEstadoCivil = new ListBox();
-		listEstadoCivil.addItem("-", "-1");
-		listEstadoCivil.addItem("Soltero (a)", "1");
-		listEstadoCivil.addItem("Casado (a)", "2");
-		listEstadoCivil.addItem("Unido (a)", "3");
-		listEstadoCivil.addItem("Separado (a)", "4");
-		listEstadoCivil.addItem("Divorciado (a)", "5");
-		listEstadoCivil.addItem("Viudo (a)", "6");
-		listEstadoCivil.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstadoCivil, 127, 97);
-		listEstadoCivil.setSize("148px", "27px");
-		
-		Label label = new Label("Nacionalidad:");
-		label.setStyleName("label");
-		label.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
-		absolutePanel.add(label, 488, 105);
-		label.setSize("110px", "19px");
-		
-		listPais = new ListBox();
-		listPais.addItem("-","-1");
-		listPais.addItem("Guatemala","1");
-		listPais.addItem("El Salvador","2");
-		listPais.addItem("Bélice","3");
-		listPais.addItem("Honduras","4");
-		listPais.addItem("Nicaragua","5");
-		listPais.addItem("Costa Rica","5");
-		listPais.addItem("Panamá","6");
-		listPais.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listPais, 622, 97);
-		listPais.setSize("173px", "27px");
-		
-		Label label_1 = new Label("Actividad Economica:");
-		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 20, 170);
-		label_1.setSize("179px", "19px");
-		
-		TextBox textBox = new TextBox();
-		textBox.setStyleName("gwt-TextBox2");
-		textBox.setMaxLength(50);
-		absolutePanel.add(textBox, 205, 168);
-		textBox.setSize("296px", "19px");
-		
-		CheckBox checkBox = new CheckBox("Sabe Leer");
-		absolutePanel.add(checkBox, 194, 206);
-		checkBox.setSize("143px", "24px");
-		
-		CheckBox checkBox_1 = new CheckBox("Sabe Escribir");
-		absolutePanel.add(checkBox_1, 357, 206);
-		checkBox_1.setSize("154px", "24px");
-		
-		CheckBox checkBox_2 = new CheckBox("Sabe Firmar");
-		absolutePanel.add(checkBox_2, 539, 206);
-		checkBox_2.setSize("159px", "24px");
-		
-		Label label_2 = new Label("Direccion Actual:");
-		label_2.setStyleName("label");
-		absolutePanel.add(label_2, 20, 251);
-		label_2.setSize("181px", "19px");
-		
-		TextBox textBox_1 = new TextBox();
-		textBox_1.setStyleName("gwt-TextBox2");
-		textBox_1.setMaxLength(200);
-		absolutePanel.add(textBox_1, 207, 249);
-		textBox_1.setSize("601px", "19px");
-		
-		Label label_3 = new Label("Lugar de trabajo:");
-		label_3.setStyleName("label");
-		absolutePanel.add(label_3, 20, 289);
-		label_3.setSize("181px", "19px");
-		
-		TextBox textBox_2 = new TextBox();
-		textBox_2.setStyleName("gwt-TextBox2");
-		textBox_2.setMaxLength(200);
-		absolutePanel.add(textBox_2, 207, 289);
-		textBox_2.setSize("601px", "19px");
-		
-		Label label_4 = new Label("Telefono de casa:");
-		label_4.setStyleName("label");
-		absolutePanel.add(label_4, 20, 333);
-		label_4.setSize("167px", "19px");
-		
-		TextBox textBox_3 = new TextBox();
-		textBox_3.setText("0");
-		textBox_3.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_3, 207, 331);
-		textBox_3.setSize("128px", "19px");
-		
-		Label label_5 = new Label("Telefono de trabajo:");
-		label_5.setStyleName("label");
-		absolutePanel.add(label_5, 442, 333);
-		label_5.setSize("167px", "19px");
-		
-		TextBox textBox_4 = new TextBox();
-		textBox_4.setText("0");
-		textBox_4.setStyleName("gwt-TextBox2");
-		absolutePanel.add(textBox_4, 671, 333);
-		textBox_4.setSize("128px", "17px");
 	}
 	
 	private void EliminarFormulario(){
-		cargaFamiliar.EliminarFormulario(this, formulario.idFormulario, idCargaFamiliar);
+		garantiaFiduciaria.EliminarFormulario(this, formulario.idFormulario, idGarantiaFiduciaria);
     }
 	private void EliminarFormularioSinDatos(){
-		cargaFamiliar.EliminarFormulario(this);
+		garantiaFiduciaria.EliminarFormulario(this);
     }
 	
 	// DATA A CARGAR EN REFERENCIAS FAMILIARES
 	
 	public void LlenarDatos(Long id,
-			String nombreFamiliar,
-			int edadFamiliar,
-			String escolaridadFamiliar,
-			String ocupacionFamiliar)
+			String nombre, 
+			String estadoCivil, int edad, String nacionalidad,
+			String actividad,
+			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+			String direccionActual, String lugarTrabajo,
+			int telefonoCasa, int telefonoTrabajo)
 	{
 
 		this.bandera = false;
 		
-		this.idCargaFamiliar = id; // ID
+		this.idGarantiaFiduciaria = id; // ID
 
-		this.txtNombreFamiliar.setText(nombreFamiliar);
-		String edadFamiliarValue = ""+edadFamiliar;
-		this.txtEdadFamiliar.setText(edadFamiliarValue);
+		this.txtNombre.setText(nombre);
+		String edadValue = ""+edad;
+		this.txtEdad.setText(edadValue);
+		this.txtActividad.setText(actividad);
+		this.checkLeer.setValue(sabeLeer);
+		this.checkEscribir.setValue(sabeEscribir);
+		this.checkFirmar.setValue(sabeFirmar);
+		this.txtDireccionActual.setText(direccionActual);
+		this.txtLugarTrabajo.setText(lugarTrabajo);
+		String telefonoCasaValue = ""+telefonoCasa;
+		this.txtTelefonoCasa.setText(telefonoCasaValue);
+		String telefonoTrabajoValue = ""+telefonoTrabajo;
+		this.txtTelefonoTrabajo.setText(telefonoTrabajoValue);
+		
+        boolean bandera = true;
+        for(int i=0; i < this.listEstadoCivil.getItemCount() && bandera; i++){
+            bandera = !this.listEstadoCivil.getValue(i).equals(estadoCivil);
+            this.listEstadoCivil.setSelectedIndex(i);
+       }   
+        
+        bandera = true;
+	    for(int i=0; i < this.listPais.getItemCount() && bandera; i++){
+	       bandera = !this.listPais.getValue(i).equals(nacionalidad);
+	       this.listPais.setSelectedIndex(i);
+	    } 
 
 	
 	}
+	
+	
 }

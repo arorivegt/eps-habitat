@@ -10,7 +10,8 @@ import javax.jdo.Query;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDocumentoPropiedad;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
@@ -21,7 +22,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTer
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDatosVivienda;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDocumentoPropiedad;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaFiduciaria;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSituacionEconomica;
@@ -283,7 +285,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 		try { 
 			final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
-			SegSolicitudDocumentoPropiedad documento = new  SegSolicitudDocumentoPropiedad();
+			SegSolicitudGarantiaHipotecaria documento = new  SegSolicitudGarantiaHipotecaria();
 
 			documento.setFecrec(fecrec); 
 			documento.setEscrituraNoRegistrada(escrituraNoRegistrada);
@@ -301,19 +303,65 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			documento.setIdFormulario(idFormulario); // Llave Foranea
 
 			documento.setSolicitud(solicitud); // Relacion
-			solicitud.getDocumentoPropiedad().add(documento);
+			solicitud.getGarantiaHipotecaria().add(documento);
 			
-			solicitud.setGarantia(actualizacionGarantia); // Actualizacion de Valor
+			solicitud.setGarantia(actualizacionGarantia); // Actualizacion de Valor. Existe Garantia en Solicitud
 			
 			valor = documento.getIdDocumentoPropiedad();
 
-			System.out.println("DATOS DOCUMENTO PROPIEDAD ALMACENADO CORRECTAMENTE EN DATASTORE");
+			System.out.println("DATOS GARANTIA HIPOTECARIA ALMACENADO CORRECTAMENTE EN DATASTORE");
 
 		}finally {  
 			Persistencia.close();  
 		}
 		return valor ;
 	}	
+	
+// GARANTIA FIDUCIARIA	
+	
+		@Override
+		public Long ingresarGarantiaFiduciaria(Date fecrec, Long idFormulario, 
+				String nombre, 
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			Long valor = 0L;
+
+			try { 
+				final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+				SegSolicitudGarantiaFiduciaria fiduciaria = new  SegSolicitudGarantiaFiduciaria();
+
+				fiduciaria.setFecrec(fecrec); 
+				fiduciaria.setNombre(nombre);
+				fiduciaria.setEstadoCivil(estadoCivil);
+				fiduciaria.setEdad(edad);
+				fiduciaria.setNacionalidad(nacionalidad);
+				fiduciaria.setActividadEconomica(actividad);
+				fiduciaria.setCheckLeer(sabeLeer);
+				fiduciaria.setCheckEscribir(sabeEscribir);
+				fiduciaria.setCheckFirmar(sabeFirmar);
+				fiduciaria.setDireccionActual(direccionActual);
+				fiduciaria.setLugarTrabajo(lugarTrabajo);
+				fiduciaria.setTelefonoCasa(telefonoCasa);
+				fiduciaria.setTelefonoTrabajo(telefonoTrabajo);
+				fiduciaria.setIdFormulario(idFormulario); // Llave Foranea
+
+				fiduciaria.setSolicitud(solicitud);	// Relacion
+				solicitud.getGarantiaFiduciaria().add(fiduciaria);
+				valor = fiduciaria.getIdGarantiaFiduciaria();
+
+				System.out.println("GARANTIA FIDUCIARIA ALMACENADA CORRECTAMENTE EN DATASTORE");
+
+			}finally {  
+				Persistencia.close();  
+			}
+			return valor ;
+		}	
+	
 
 	// SUPERVISION PRIMERA
 
@@ -351,7 +399,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			primera.setSolicitud(solicitud); // Relacion
 			solicitud.getSupervisionPrimera().add(primera);
 
-			solicitud.setPrimeraSupervision(true); // Actualizacion de Valor
+			solicitud.setPrimeraSupervision(true); // Actualizacion de Valor. Existe Supervision en Solicitud
 
 			valor = primera.getIdSupervisionPrimera();
 
@@ -396,7 +444,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			segunda.setSolicitud(solicitud); // Relacion
 			solicitud.getSupervisionSegunda().add(segunda);
 
-			solicitud.setSegundaSupervision(true); // Actualizacion de Valor
+			solicitud.setSegundaSupervision(true); // Actualizacion de Valor. Existe Supervision en Solicitud
 
 			valor = segunda.getIdSupervisionSegunda();
 
@@ -441,7 +489,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			tercera.setSolicitud(solicitud); // Relacion
 			solicitud.getSupervisionTercera().add(tercera);
 
-			solicitud.setTerceraSupervision(true); // Actualizacion de Valor
+			solicitud.setTerceraSupervision(true); // Actualizacion de Valor. Existe Supervision en Solicitud
 
 			valor = tercera.getIdSupervisionTercera();
 
@@ -486,7 +534,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			cuarta.setSolicitud(solicitud); // Relacion
 			solicitud.getSupervisionCuarta().add(cuarta);
 
-			solicitud.setCuartaSupervision(true); // Actualizacion de Valor
+			solicitud.setCuartaSupervision(true); // Actualizacion de Valor. Existe Supervision en Solicitud
 
 			valor = cuarta.getIdSupervisionCuarta();
 
@@ -702,12 +750,12 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					}
 				}			
 				
-				List<SegSolicitudDocumentoPropiedad> results04 = p.getDocumentoPropiedad();
+				List<SegSolicitudGarantiaHipotecaria> results04 = p.getGarantiaHipotecaria();
 				if (!results04.isEmpty()) {
-					for (SegSolicitudDocumentoPropiedad n0 : results04) {
-						AuxSolicitudDocumentoPropiedad l = new AuxSolicitudDocumentoPropiedad();
+					for (SegSolicitudGarantiaHipotecaria n0 : results04) {
+						AuxSolicitudGarantiaHipotecaria l = new AuxSolicitudGarantiaHipotecaria();
 						
-						l.setIdDocumentoPropiedad(n0.getIdDocumentoPropiedad());
+						l.setIdGarantiaHipotecaria(n0.getIdDocumentoPropiedad());
 						l.setIdFormulario(n0.getIdFormulario());
 						l.setEscrituraNoRegistrada(n0.getEscrituraNoRegistrada());
 						l.setFolioEscritura(n0.getFolioEscritura());
@@ -720,9 +768,32 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setCheckNo(n0.getCheckNo());
 						l.setNombrePersona(n0.getNombrePersona());
 						l.setTelefonoPersona(n0.getTelefonoPersona());
-						nuevo.getDocumentoPropiedad().add(l); // Agregado a Entidad Principal
+						nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 					}
 				}	
+				
+				List<SegSolicitudGarantiaFiduciaria> resultsFiduciaria = p.getGarantiaFiduciaria();
+				if (!resultsFiduciaria.isEmpty()) {
+					for (SegSolicitudGarantiaFiduciaria n0 : resultsFiduciaria) {
+						AuxSolicitudGarantiaFiduciaria l = new AuxSolicitudGarantiaFiduciaria();
+						
+						l.setIdGarantiaFiduciaria(n0.getIdGarantiaFiduciaria());
+						l.setIdFormulario(n0.getIdFormulario());
+						l.setNombre(n0.getNombre());
+						l.setEstadoCivil(n0.getEstadoCivil());
+						l.setEdad(n0.getEdad());
+						l.setNacionalidad(n0.getNacionalidad());
+						l.setActividadEconomica(n0.getActividadEconomica());
+						l.setCheckLeer(n0.getCheckLeer());
+						l.setCheckEscribir(n0.getCheckEscribir());
+						l.setCheckFirmar(n0.getCheckFirmar());
+						l.setDireccionActual(n0.getDireccionActual());
+						l.setLugarTrabajo(n0.getLugarTrabajo());
+						l.setTelefonoCasa(n0.getTelefonoCasa());
+						l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+						nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
+					}
+				}							
 				
 				List<SegSolicitudSupervisionPrimera> results05 = p.getSupervisionPrimera();
 				if (!results05.isEmpty()) {
@@ -957,12 +1028,12 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				}
 			}
 			
-			List<SegSolicitudDocumentoPropiedad> results05 = p.getDocumentoPropiedad();
+			List<SegSolicitudGarantiaHipotecaria> results05 = p.getGarantiaHipotecaria();
 			if (!results05.isEmpty()) {
-				for (SegSolicitudDocumentoPropiedad n0 : results05) {
-					AuxSolicitudDocumentoPropiedad l = new AuxSolicitudDocumentoPropiedad();
+				for (SegSolicitudGarantiaHipotecaria n0 : results05) {
+					AuxSolicitudGarantiaHipotecaria l = new AuxSolicitudGarantiaHipotecaria();
 					
-					l.setIdDocumentoPropiedad(n0.getIdDocumentoPropiedad());
+					l.setIdGarantiaHipotecaria(n0.getIdDocumentoPropiedad());
 					l.setIdFormulario(n0.getIdFormulario());
 					l.setEscrituraNoRegistrada(n0.getEscrituraNoRegistrada());
 					l.setFolioEscritura(n0.getFolioEscritura());
@@ -975,9 +1046,32 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setCheckNo(n0.getCheckNo());
 					l.setNombrePersona(n0.getNombrePersona());
 					l.setTelefonoPersona(n0.getTelefonoPersona());
-					nuevo.getDocumentoPropiedad().add(l); // Agregado a Entidad Principal
+					nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 				}
 			}	
+			
+			List<SegSolicitudGarantiaFiduciaria> resultsFiduciaria = p.getGarantiaFiduciaria();
+			if (!resultsFiduciaria.isEmpty()) {
+				for (SegSolicitudGarantiaFiduciaria n0 : resultsFiduciaria) {
+					AuxSolicitudGarantiaFiduciaria l = new AuxSolicitudGarantiaFiduciaria();
+					
+					l.setIdGarantiaFiduciaria(n0.getIdGarantiaFiduciaria());
+					l.setIdFormulario(n0.getIdFormulario());
+					l.setNombre(n0.getNombre());
+					l.setEstadoCivil(n0.getEstadoCivil());
+					l.setEdad(n0.getEdad());
+					l.setNacionalidad(n0.getNacionalidad());
+					l.setActividadEconomica(n0.getActividadEconomica());
+					l.setCheckLeer(n0.getCheckLeer());
+					l.setCheckEscribir(n0.getCheckEscribir());
+					l.setCheckFirmar(n0.getCheckFirmar());
+					l.setDireccionActual(n0.getDireccionActual());
+					l.setLugarTrabajo(n0.getLugarTrabajo());
+					l.setTelefonoCasa(n0.getTelefonoCasa());
+					l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+					nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
+				}
+			}				
 			
 			List<SegSolicitudSupervisionPrimera> results06 = p.getSupervisionPrimera();
 			if (!results06.isEmpty()) {
@@ -1153,8 +1247,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), idReferenciaFamiliar)
-			.getKey();
+			.addChild(SegSolicitudCargaFamiliar.class.getSimpleName(), idReferenciaFamiliar).getKey();
 
 			SegSolicitudCargaFamiliar f = Persistencia.getObjectById(SegSolicitudCargaFamiliar.class, k);
 			f.setNombreFamiliar(nombreFamiliar);
@@ -1172,10 +1265,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	@Override
 	public Long eliminarCargaFamiliar(Long idFormulario, Long id)throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
-		Key k = new KeyFactory
-				.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-		.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), id)
-		.getKey();
+		Key k = new KeyFactory.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+		.addChild(SegSolicitudCargaFamiliar.class.getSimpleName(), id).getKey(); // Elimina referencia de Solicitud General
+
 		SegSolicitudCargaFamiliar f = Persistencia.getObjectById(SegSolicitudCargaFamiliar.class, k);
 		Persistencia.deletePersistent(f);
 		return id ;
@@ -1194,8 +1286,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), idReferenciaFamiliar)
-			.getKey();
+			.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), idReferenciaFamiliar).getKey();
 
 			SegSolicitudReferenciaFamiliar f = Persistencia.getObjectById(SegSolicitudReferenciaFamiliar.class, k);
 			f.setNombreFamiliar(nombreFamiliar);
@@ -1213,10 +1304,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	@Override
 	public Long eliminarReferenciaFamiliar(Long idFormulario, Long id)throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
-		Key k = new KeyFactory
-				.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-		.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), id)
-		.getKey();
+		Key k = new KeyFactory.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+		.addChild(SegSolicitudReferenciaFamiliar.class.getSimpleName(), id).getKey(); // Elimina referencia de Solicitud General
+		
 		SegSolicitudReferenciaFamiliar f = Persistencia.getObjectById(SegSolicitudReferenciaFamiliar.class, k);
 		Persistencia.deletePersistent(f);
 		return id ;
@@ -1237,8 +1327,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudDatosVivienda.class.getSimpleName(), idDatosVivienda)
-			.getKey();
+			.addChild(SegSolicitudDatosVivienda.class.getSimpleName(), idDatosVivienda).getKey();
 
 			SegSolicitudDatosVivienda f = Persistencia.getObjectById(SegSolicitudDatosVivienda.class, k);
 			f.setDatoVivienda(datosVivienda);
@@ -1276,8 +1365,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSituacionEconomica.class.getSimpleName(), idSituacionEconomica)
-			.getKey();
+			.addChild(SegSolicitudSituacionEconomica.class.getSimpleName(), idSituacionEconomica).getKey();
 
 			SegSolicitudSituacionEconomica f = Persistencia.getObjectById(SegSolicitudSituacionEconomica.class, k);
 			f.setIngresosSolicitante(ingresosSolicitante);
@@ -1324,10 +1412,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudDocumentoPropiedad.class.getSimpleName(), idGarantiaHipotecaria)
-			.getKey();
+			.addChild(SegSolicitudGarantiaHipotecaria.class.getSimpleName(), idGarantiaHipotecaria).getKey();
 
-			SegSolicitudDocumentoPropiedad f = Persistencia.getObjectById(SegSolicitudDocumentoPropiedad.class, k);
+			SegSolicitudGarantiaHipotecaria f = Persistencia.getObjectById(SegSolicitudGarantiaHipotecaria.class, k);
 			f.setEscrituraNoRegistrada(escrituraNoRegistrada);
 			f.setEscrituraRegistrada(escrituraRegistrada);
 			f.setFolioEscritura(folio);
@@ -1349,6 +1436,57 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return valor ;
 	}
 	
+	// GARANTIA FIDUCIARIA
+
+	@Override
+	public Long actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaFiduciaria,
+			String nombre, 
+			String estadoCivil, int edad, String nacionalidad,
+			String actividad,
+			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+			String direccionActual, String lugarTrabajo,
+			int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+
+		Long valor = 0L;
+		try { 
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudGarantiaFiduciaria.class.getSimpleName(), idGarantiaFiduciaria).getKey();
+
+			SegSolicitudGarantiaFiduciaria f = Persistencia.getObjectById(SegSolicitudGarantiaFiduciaria.class, k);
+			f.setNombre(nombre);
+			f.setEstadoCivil(estadoCivil);
+			f.setEdad(edad);
+			f.setNacionalidad(nacionalidad);
+			f.setActividadEconomica(actividad);
+			f.setCheckLeer(sabeLeer);
+			f.setCheckEscribir(sabeEscribir);
+			f.setCheckFirmar(sabeFirmar);
+			f.setDireccionActual(direccionActual);
+			f.setLugarTrabajo(lugarTrabajo);
+			f.setTelefonoCasa(telefonoCasa);
+			f.setTelefonoTrabajo(telefonoTrabajo);
+			valor = f.getIdGarantiaFiduciaria();
+		} finally {
+			Persistencia.close();
+		}
+		return valor ;
+	}		
+
+
+	@Override
+	public Long eliminarGarantiaFiduciaria(Long idFormulario, Long id)throws IllegalArgumentException {
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+		Key k = new KeyFactory.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+		.addChild(SegSolicitudGarantiaFiduciaria.class.getSimpleName(), id).getKey(); // Elimina referencia de Solicitud General
+		
+		SegSolicitudGarantiaFiduciaria f = Persistencia.getObjectById(SegSolicitudGarantiaFiduciaria.class, k);
+		Persistencia.deletePersistent(f);
+		return id ;
+	}	
+	
 	
 	// SUPERVISION PRIMERA
 
@@ -1367,8 +1505,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSupervisionPrimera.class.getSimpleName(), idSupervisionPrimera)
-			.getKey();
+			.addChild(SegSolicitudSupervisionPrimera.class.getSimpleName(), idSupervisionPrimera).getKey();
 
 			SegSolicitudSupervisionPrimera f = Persistencia.getObjectById(SegSolicitudSupervisionPrimera.class, k);
 			f.setFechaVisita(fechaVisita);
@@ -1408,8 +1545,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSupervisionSegunda.class.getSimpleName(), idSupervisionSegunda)
-			.getKey();
+			.addChild(SegSolicitudSupervisionSegunda.class.getSimpleName(), idSupervisionSegunda).getKey();
 
 			SegSolicitudSupervisionSegunda f = Persistencia.getObjectById(SegSolicitudSupervisionSegunda.class, k);
 			f.setFechaVisita(fechaVisita);
@@ -1447,8 +1583,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSupervisionTercera.class.getSimpleName(), idSupervisionTercera)
-			.getKey();
+			.addChild(SegSolicitudSupervisionTercera.class.getSimpleName(), idSupervisionTercera).getKey();
 
 			SegSolicitudSupervisionTercera f = Persistencia.getObjectById(SegSolicitudSupervisionTercera.class, k);
 			f.setFechaVisita(fechaVisita);
@@ -1486,8 +1621,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSupervisionCuarta.class.getSimpleName(), idSupervisionCuarta)
-			.getKey();
+			.addChild(SegSolicitudSupervisionCuarta.class.getSimpleName(), idSupervisionCuarta).getKey();
 
 			SegSolicitudSupervisionCuarta f = Persistencia.getObjectById(SegSolicitudSupervisionCuarta.class, k);
 			f.setFechaVisita(fechaVisita);
@@ -1509,7 +1643,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return valor ;
 	}		
 	
-	// SUPERVISION CUARTA
+	// SUPERVISION UBICACION
 
 	@Override
 	public Long actualizarSupervisionUbicacion(Long idFormulario, Long idSupervisionUbicacion,
@@ -1521,8 +1655,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		try { 
 			Key k = new KeyFactory
 					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
-			.addChild(SegSolicitudSupervisionUbicacion.class.getSimpleName(), idSupervisionUbicacion)
-			.getKey();
+			.addChild(SegSolicitudSupervisionUbicacion.class.getSimpleName(), idSupervisionUbicacion).getKey();
 
 			SegSolicitudSupervisionUbicacion f = Persistencia.getObjectById(SegSolicitudSupervisionUbicacion.class, k);
 			f.setLatitud(latitud);

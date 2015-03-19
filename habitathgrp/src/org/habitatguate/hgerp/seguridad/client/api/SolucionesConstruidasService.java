@@ -105,6 +105,26 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String nombrePersona, int telefonoPersona)  throws IllegalArgumentException;		
 	
 
+// GARANTIA FIDUCIARIA	
+
+	Long ingresarGarantiaFiduciaria(Date fecrec, Long idFormulario, 
+			String nombre, 
+			String estadoCivil, int edad, String nacionalidad,
+			String actividad,
+			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+			String direccionActual, String lugarTrabajo,
+			int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException;
+
+	Long actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaHipotecaria,
+			String nombre, 
+			String estadoCivil, int edad, String nacionalidad,
+			String actividad,
+			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+			String direccionActual, String lugarTrabajo,
+			int telefonoCasa, int telefonoTrabajo)  throws IllegalArgumentException;
+	
+	Long eliminarGarantiaFiduciaria(Long idFormulario, Long id)throws IllegalArgumentException;		
+	
 // SUPERVISION PRIMERA
 	
 	Long ingresarSupervisionPrimera(Date fecrec, Long idFormulario, 

@@ -4,7 +4,8 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDocumentoPropiedad;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -89,13 +90,16 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 //		fd11 = new Sce_DataExclusivoAfiliado(this);
 //		scrollPanel9.setWidget(fd11);		
 		
-		
-		
-		
 	}
 	
-	public void setDataDocumentoPropiedad(List<AuxSolicitudDocumentoPropiedad> results) {
-		fd7.setDataDocumentosPropiedad(results);
+	// SET DATA GARANTIAS
+	
+	public void setDataGarantiaHipotecaria(List<AuxSolicitudGarantiaHipotecaria> results) {
+		fd7.setDataGarantiaHipotecaria(results);
+	}
+	
+	public void setDataGarantiaFiduciaria(List<AuxSolicitudGarantiaFiduciaria> results) {
+		fd8.setDataGarantiaFiduciaria(results);
 	}
 	
 	

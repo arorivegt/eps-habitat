@@ -4,28 +4,27 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
-public class AuxSolicitudDocumentoPropiedad implements IsSerializable {
+public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 
-	public AuxSolicitudDocumentoPropiedad() {
+	public AuxSolicitudGarantiaHipotecaria() {
 		super();
 	}
 	
 	// Llave Primaria
 	
-    private Long idDocumentoPropiedad;
+    private Long idGarantiaHipotecaria;
 	
-	public Long getIdDocumentoPropiedad() {
-		return idDocumentoPropiedad;
+    public Long getIdGarantiaHipotecaria() {
+		return idGarantiaHipotecaria;
 	}
 
-	public void setIdDocumentoPropiedad(Long idDocumentoPropiedad) {
-		this.idDocumentoPropiedad = idDocumentoPropiedad;
+	public void setIdGarantiaHipotecaria(Long idGarantiaHipotecaria) {
+		this.idGarantiaHipotecaria = idGarantiaHipotecaria;
 	}
 
-	    
 	// Atributos
 	
-    private String escrituraNoRegistrada;
+	private String escrituraNoRegistrada;
 
 	public String getEscrituraNoRegistrada() {
 		return escrituraNoRegistrada;

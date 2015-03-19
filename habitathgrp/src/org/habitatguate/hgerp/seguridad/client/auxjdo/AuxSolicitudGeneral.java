@@ -392,17 +392,28 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.situacionEconomica = situacionEconomica;
 	}
 
-	private List <AuxSolicitudDocumentoPropiedad> documentoPropiedad = new ArrayList<AuxSolicitudDocumentoPropiedad>();
+	private List <AuxSolicitudGarantiaHipotecaria> garantiaHipotecaria = new ArrayList<AuxSolicitudGarantiaHipotecaria>();
 
-	public List<AuxSolicitudDocumentoPropiedad> getDocumentoPropiedad() {
-		return documentoPropiedad;
+	public List<AuxSolicitudGarantiaHipotecaria> getGarantiaHipotecaria() {
+		return garantiaHipotecaria;
 	}
 
-	public void setDocumentoPropiedad(
-			List<AuxSolicitudDocumentoPropiedad> documentoPropiedad) {
-		this.documentoPropiedad = documentoPropiedad;
+	public void setGarantiaHipotecaria(
+			List<AuxSolicitudGarantiaHipotecaria> garantiaHipotecaria) {
+		this.garantiaHipotecaria = garantiaHipotecaria;
 	}
+
+	private List <AuxSolicitudGarantiaFiduciaria> garantiaFiduciaria = new ArrayList<AuxSolicitudGarantiaFiduciaria>();
 	
+	public List<AuxSolicitudGarantiaFiduciaria> getGarantiaFiduciaria() {
+		return garantiaFiduciaria;
+	}
+
+	public void setGarantiaFiduciaria(
+			List<AuxSolicitudGarantiaFiduciaria> garantiaFiduciaria) {
+		this.garantiaFiduciaria = garantiaFiduciaria;
+	}
+
 	private List <AuxSolicitudSupervisionPrimera> supervisionPrimera = new ArrayList<AuxSolicitudSupervisionPrimera>();
 
 	public List<AuxSolicitudSupervisionPrimera> getSupervisionPrimera() {

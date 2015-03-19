@@ -4,7 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDocumentoPropiedad;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionCuarta;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;

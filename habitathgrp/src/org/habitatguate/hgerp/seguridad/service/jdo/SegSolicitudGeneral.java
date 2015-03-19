@@ -484,17 +484,30 @@ public class SegSolicitudGeneral implements Serializable {
 	
 	@Persistent(mappedBy = "solicitud")
 	@Element(dependent = "true")
-	private List <SegSolicitudDocumentoPropiedad> documentoPropiedad;
+	private List <SegSolicitudGarantiaHipotecaria> garantiaHipotecaria;
 
-	public List<SegSolicitudDocumentoPropiedad> getDocumentoPropiedad() {
-		return documentoPropiedad;
+	public List<SegSolicitudGarantiaHipotecaria> getGarantiaHipotecaria() {
+		return garantiaHipotecaria;
 	}
 
-	public void setDocumentoPropiedad(
-			List<SegSolicitudDocumentoPropiedad> documentoPropiedad) {
-		this.documentoPropiedad = documentoPropiedad;
+	public void setGarantiaHipotecaria(
+			List<SegSolicitudGarantiaHipotecaria> garantiaHipotecaria) {
+		this.garantiaHipotecaria = garantiaHipotecaria;
 	}
+
+	@Persistent(mappedBy = "solicitud")
+	@Element(dependent = "true")
+	private List <SegSolicitudGarantiaFiduciaria> garantiaFiduciaria;
 	
+	public List<SegSolicitudGarantiaFiduciaria> getGarantiaFiduciaria() {
+		return garantiaFiduciaria;
+	}
+
+	public void setGarantiaFiduciaria(
+			List<SegSolicitudGarantiaFiduciaria> garantiaFiduciaria) {
+		this.garantiaFiduciaria = garantiaFiduciaria;
+	}
+
 	@Persistent(mappedBy = "solicitud")
 	@Element(dependent = "true")
 	private List <SegSolicitudSupervisionPrimera> supervisionPrimera;

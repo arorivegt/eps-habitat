@@ -829,17 +829,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	    for(int i=0; i < this.listSolucionConstruir.getItemCount() && bandera; i++){
 	       bandera = !this.listSolucionConstruir.getValue(i).equals(solucionConstruir);
 	       this.listSolucionConstruir.setSelectedIndex(i);
-	    } 
-	    
-//		this.KeyFile = KeyFile;
-//		this.URLFile = URLFile;
-//		try{
-//			image.setUrl(URLFile);
-//			Archivo();
-//		}catch(Exception e){
-//			image.setUrl("images/imagenempresa.png");
-//		}
-				  
+	    } 				  
 		
 	}
     
@@ -873,16 +863,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
     		mensaje.setMensaje("alert alert-error", "Debe indicar Nacionalidad de Solicitante");
     		return false;
     	}
-    	
-//    	if(this.txtDireccionActual.getText().equals("")){
-//    		mensaje.setMensaje("alert alert-error", "Debe ingresar Direccion Actual");
-//    		return false;
-//    	}
-//
-//    	if(this.txtDireccionSolucion.getText().equals("")){
-//    		mensaje.setMensaje("alert alert-error", "Debe ingresar Direccion de Solucion");
-//    		return false;
-//    	}
     	
     	String solucionConstruir = "-1";		
     	solucionConstruir = this.listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex());

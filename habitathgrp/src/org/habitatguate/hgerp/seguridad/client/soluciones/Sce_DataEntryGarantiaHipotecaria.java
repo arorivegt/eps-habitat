@@ -6,7 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDocumentoPropiedad;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -50,15 +50,15 @@ public class Sce_DataEntryGarantiaHipotecaria extends Composite {
 	}
 	
     
-    public void setDataDocumentosPropiedad(List<AuxSolicitudDocumentoPropiedad> results){
+    public void setDataGarantiaHipotecaria(List<AuxSolicitudGarantiaHipotecaria> results){
 
     	if (!results.isEmpty()) {
 
-    		for ( AuxSolicitudDocumentoPropiedad n2 : results) {
+    		for ( AuxSolicitudGarantiaHipotecaria n2 : results) {
 
-    			System.out.println("ID Garantia Hipotecaria a Cargar: " + n2.getIdDocumentoPropiedad() + ", ID Formulario: " + n2.getIdFormulario());
+    			System.out.println("ID Garantia Hipotecaria a Cargar: " + n2.getIdGarantiaHipotecaria() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			data.LlenarDatos(n2.getIdDocumentoPropiedad(), 
+    			data.LlenarDatos(n2.getIdGarantiaHipotecaria(), 
     					n2.getEscrituraNoRegistrada(), n2.getEscrituraRegistrada(), n2.getFolioEscritura(), n2.getLibroEscritura(), n2.getFincaEscritura(),
     					n2.getNombreNotario(), n2.getAreaTerreno(), n2.getValorEstimado(), 
     					n2.getCheckSi(), n2.getCheckNo(),

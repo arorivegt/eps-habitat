@@ -26,6 +26,8 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSupervision;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonGarantia;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataEntryFormularioSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_SolucionesConstruidasHabitat;
@@ -738,19 +740,19 @@ public class MenuPrincipal extends Composite {
 	}	
 	//@UiHandler("sce3")
 	void sce3() {
-//		Sce_BuzonSeguimientoSolicitud seguimientoFormulario = new Sce_BuzonSeguimientoSolicitud();
-//		seguimientoFormulario.setSize("100%", "100%");
-//		this.panel.getGrid().setSize("100%", "100%");
-//		this.panel.getGrid().clearCell(1, 0);
-//		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+		Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia();
+		seguimientoFormulario.setSize("100%", "100%");
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
 	}	
 	//@UiHandler("sce4")
 	void sce4() {
-//		Sce_BuzonBitacora bitacora = new Sce_BuzonBitacora();
-//		bitacora.setSize("100%", "100%");
-//		this.panel.getGrid().setSize("100%", "100%");
-//		this.panel.getGrid().clearCell(1, 0);
-//		this.panel.getGrid().setWidget(1, 0, bitacora);
+		Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision();
+		bitacora.setSize("100%", "100%");
+		this.panel.getGrid().setSize("100%", "100%");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, bitacora);
 	}		
 
 	//@UiHandler("sc6")

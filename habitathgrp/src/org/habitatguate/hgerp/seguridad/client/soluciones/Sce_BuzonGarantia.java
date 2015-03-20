@@ -308,6 +308,11 @@ public class Sce_BuzonGarantia extends Composite  {
         			
         		} 
             
+        		try{           		
+        			garantiaSolicitud.setDataGarantiaSolidario(result.getGarantiaSolidario());
+        		}catch(Exception e){
+        			
+        		} 
         		
         	}
 

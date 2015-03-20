@@ -38,17 +38,17 @@ public interface SolucionesConstruidasServiceAsync {
 				AsyncCallback<Long> callback) throws IllegalArgumentException;	
 
 // CARGAS FAMILIARES
-	 
-		void ingresarCargaFamiliar(Date fecrec, Long idFormulario, 
-				String nombreFamiliar, int edadFamiliar, String escolaridadFamiliar, String ocupacionFamiliar,
-				AsyncCallback<Long> callback) throws IllegalArgumentException;
 
-		void actualizarCargaFamiliar(Long idFormulario, Long idReferenciaFamiliar,
-				 String nombreFamiliar, int edadFamiliar, 
-				 String escolaridadFamiliar, String ocupacionFamiliar,
-					AsyncCallback<Long> callback)  throws IllegalArgumentException;	
-		
-		void eliminarCargaFamiliar(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;		 
+	 void ingresarCargaFamiliar(Date fecrec, Long idFormulario, 
+			 String nombreFamiliar, int edadFamiliar, String escolaridadFamiliar, String ocupacionFamiliar,
+			 AsyncCallback<Long> callback) throws IllegalArgumentException;
+
+	 void actualizarCargaFamiliar(Long idFormulario, Long idReferenciaFamiliar,
+			 String nombreFamiliar, int edadFamiliar, 
+			 String escolaridadFamiliar, String ocupacionFamiliar,
+			 AsyncCallback<Long> callback)  throws IllegalArgumentException;	
+
+	 void eliminarCargaFamiliar(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;		 
 	 
 // REFERENCIAS FAMILIARES
 	 
@@ -133,6 +133,19 @@ public interface SolucionesConstruidasServiceAsync {
 			AsyncCallback<Long> callback)  throws IllegalArgumentException;
 	
 	void eliminarGarantiaFiduciaria(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;
+	
+// GARANTIA GRUPO SOLIDARIO
+
+	 void ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
+			 String nombre, int edad, String escolaridad, String ocupacion,
+			 AsyncCallback<Long> callback) throws IllegalArgumentException;
+
+	 void actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
+			 String nombre, int edad, 
+			 String escolaridad, String ocupacion,
+			 AsyncCallback<Long> callback)  throws IllegalArgumentException;	
+
+	 void eliminarGarantiaSolidario(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;	
 	
 // SUPERVISION PRIMERA
 	

@@ -32,95 +32,116 @@ public class Sce_DataGarantiaSolidario extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private Sce_DataEntryGarantiaSolicitud formulario;
-	private Sce_DataEntryGarantiaSolidario cargaFamiliar;
-	private Long idCargaFamiliar = 0L;
+	private Sce_DataEntryGarantiaSolidario garantiaSolidario;
+	private Long idGarantiaSolidario = 0L;
 	private boolean bandera = true;
 	
-	private TextBox txtNombreFamiliar;
-	private TextBox txtOcupacionFamiliar;
-	private TextBox txtEdadFamiliar;
-	private TextBox txtEscolaridadFamiliar;
+	private TextBox txtNombre;
+	private TextBox txtOcupacion;
+	private TextBox txtEdad;
+	private TextBox txtEscolaridad;
 	private Mensaje mensaje; 
 	
 	public Sce_DataGarantiaSolidario(Sce_DataEntryGarantiaSolidario a, Sce_DataEntryGarantiaSolicitud e) {
 
 		mensaje = new Mensaje();
 		this.formulario = e;
-		this.cargaFamiliar = a;
+		this.garantiaSolidario = a;
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "140px");
 		
-		txtNombreFamiliar = new TextBox();
-		txtNombreFamiliar.setMaxLength(200);
-		txtNombreFamiliar.setStylePrimaryName("gwt-TextBox2");
-		txtNombreFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreFamiliar, 20, 51);
-		txtNombreFamiliar.setSize("345px", "19px");
+		Label lblNombre = new Label("Nombres y Apellidos");
+		lblNombre.setStyleName("label");
+		absolutePanel.add(lblNombre, 20, 32);
+		lblNombre.setSize("192px", "13px");
 		
-		txtEdadFamiliar = new TextBox();
-		txtEdadFamiliar.addChangeHandler(new ChangeHandler() {
+		Label lblTitulodiploma = new Label("Edad");
+		lblTitulodiploma.setStyleName("label");
+		absolutePanel.add(lblTitulodiploma, 386, 32);
+		lblTitulodiploma.setSize("58px", "13px");
+		
+		Label lblEscolaridad = new Label("Escolaridad");
+		lblEscolaridad.setStyleName("label");
+		absolutePanel.add(lblEscolaridad, 475, 32);
+		lblEscolaridad.setSize("192px", "13px");
+		
+		Label lblOcupacion = new Label("Ocupacion");
+		lblOcupacion.setStyleName("label");
+		absolutePanel.add(lblOcupacion, 758, 32);
+		lblOcupacion.setSize("132px", "13px");
+		
+		txtNombre = new TextBox();
+		txtNombre.setMaxLength(200);
+		txtNombre.setStylePrimaryName("gwt-TextBox2");
+		txtNombre.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNombre, 20, 51);
+		txtNombre.setSize("345px", "19px");
+		
+		txtEdad = new TextBox();
+		txtEdad.setMaxLength(3);
+		txtEdad.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				if(txtEdadFamiliar .getText().equals("")) {txtEdadFamiliar .setText("0");}
-				else if(txtEdadFamiliar .getText().equals(null)) {txtEdadFamiliar .setText("0");}
+				if(txtEdad .getText().equals("")) {txtEdad .setText("0");}
+				else if(txtEdad .getText().equals(null)) {txtEdad .setText("0");}
 				else{
 					try{
-						Integer.parseInt(txtEdadFamiliar .getText());
+						Integer.parseInt(txtEdad .getText());
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nEdad No valida");
-						txtEdadFamiliar .setText("0");
+						txtEdad .setText("0");
 					}
 				}
 			}
 		});
-		txtEdadFamiliar.setText("0");
-		txtEdadFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEdadFamiliar, 386, 51);
-		txtEdadFamiliar.setSize("56px", "19px");
+		txtEdad.setText("0");
+		txtEdad.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEdad, 386, 51);
+		txtEdad.setSize("56px", "19px");
 		
-		txtEscolaridadFamiliar = new TextBox();
-		txtEscolaridadFamiliar.setMaxLength(200);
-		txtEscolaridadFamiliar.setStylePrimaryName("gwt-TextBox2");
-		txtEscolaridadFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEscolaridadFamiliar, 475, 51);
-		txtEscolaridadFamiliar.setSize("250px", "19px");
+		txtEscolaridad = new TextBox();
+		txtEscolaridad.setMaxLength(200);
+		txtEscolaridad.setStylePrimaryName("gwt-TextBox2");
+		txtEscolaridad.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEscolaridad, 475, 51);
+		txtEscolaridad.setSize("250px", "19px");
 		
-		txtOcupacionFamiliar = new TextBox();
-		txtOcupacionFamiliar.setMaxLength(100);
-		txtOcupacionFamiliar.setStylePrimaryName("gwt-TextBox2");
-		txtOcupacionFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtOcupacionFamiliar, 758, 51);
-		txtOcupacionFamiliar.setSize("271px", "19px");
+		txtOcupacion = new TextBox();
+		txtOcupacion.setMaxLength(100);
+		txtOcupacion.setStylePrimaryName("gwt-TextBox2");
+		txtOcupacion.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtOcupacion, 758, 51);
+		txtOcupacion.setSize("271px", "19px");
 		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-				String nombreFamiliar = "";		
-				if(txtNombreFamiliar.getText() == null){
-					nombreFamiliar = "";
+				String nombre = "";		
+				if(txtNombre.getText() == null){
+					nombre = "";
 				}else{
-					nombreFamiliar = txtNombreFamiliar.getText();
+					nombre = txtNombre.getText();
 				}
 				
-				String edadFamiliarValue = txtEdadFamiliar.getText();
-				int edadFamiliar = 0;
-				edadFamiliar = Integer.parseInt(edadFamiliarValue);
+				String edadValue = txtEdad.getText();
+				int edad = 0;
+				edad = Integer.parseInt(edadValue);
 				
-				String escolaridadFamiliar = "";		
-				if(txtEscolaridadFamiliar.getText() == null){
-					escolaridadFamiliar = "";
+				String escolaridad = "";		
+				if(txtEscolaridad.getText() == null){
+					escolaridad = "";
 				}else{
-					escolaridadFamiliar = txtEscolaridadFamiliar.getText();
+					escolaridad = txtEscolaridad.getText();
 				}
 				
-				String ocupacionFamiliar = "";		
-				if(txtOcupacionFamiliar.getText() == null){
-					ocupacionFamiliar = "";
+				String ocupacion = "";		
+				if(txtOcupacion.getText() == null){
+					ocupacion = "";
 				}else{
-					ocupacionFamiliar = txtOcupacionFamiliar.getText();
+					ocupacion = txtOcupacion.getText();
 				}
 
 				if(bandera){
@@ -129,46 +150,46 @@ public class Sce_DataGarantiaSolidario extends Composite {
 					@SuppressWarnings("deprecation")
 					Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
 
-//					solucionesService.ingresarCargaFamiliar(fecrec, formulario.idFormulario, 
-//							nombreFamiliar, edadFamiliar, escolaridadFamiliar, ocupacionFamiliar,
-//							new AsyncCallback<Long>() {
-//
-//						public void onFailure(Throwable caught) 
-//						{
-//							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
-//						}
-//
-//						public void onSuccess(Long result)
-//						{
-//							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
-//
-//							idCargaFamiliar = result;
-//							System.out.println("Valor de NUEVO Carga Familiar: " + idCargaFamiliar);
-//							bandera = false;
-//							
-//						}
-//					});
+					solucionesService.ingresarGarantiaSolidario(fecrec, formulario.idFormulario, 
+							nombre, edad, escolaridad, ocupacion,
+							new AsyncCallback<Long>() {
+
+						public void onFailure(Throwable caught) 
+						{
+							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+						}
+
+						public void onSuccess(Long result)
+						{
+							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+
+							idGarantiaSolidario = result;
+							System.out.println("Valor de NUEVO Garantia Grupo Solidario: " + idGarantiaSolidario);
+							bandera = false;
+							
+						}
+					});
 
 				}else{
 					
-//					solucionesService.actualizarCargaFamiliar(formulario.idFormulario, idCargaFamiliar, 
-//							nombreFamiliar, edadFamiliar, escolaridadFamiliar, ocupacionFamiliar,
-//							new AsyncCallback<Long>() {
-//
-//						public void onFailure(Throwable caught) 
-//						{
-//							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-//						}
-//
-//						public void onSuccess(Long result)
-//						{	
-//							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
-//							
-//							System.out.println("Valor de Carga Familiar ACTUALIZADO: " + idCargaFamiliar );
-//							bandera = false;
-//
-//						}
-//					});
+					solucionesService.actualizarGarantiaSolidario(formulario.idFormulario, idGarantiaSolidario, 
+							nombre, edad, escolaridad, ocupacion,
+							new AsyncCallback<Long>() {
+
+						public void onFailure(Throwable caught) 
+						{
+							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+						}
+
+						public void onSuccess(Long result)
+						{	
+							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+							
+							System.out.println("Valor de Garantia Grupo Solidario ACTUALIZADO: " + idGarantiaSolidario );
+							bandera = false;
+
+						}
+					});
 					
 				}
 				
@@ -200,52 +221,33 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		absolutePanel.add(btnEliminar, 531, 119);
 		btnEliminar.setSize("227px", "34px");
 		
-		Label lblNombre = new Label("Nombres y Apellidos");
-		lblNombre.setStyleName("label");
-		absolutePanel.add(lblNombre, 20, 32);
-		lblNombre.setSize("192px", "13px");
-		
-		Label lblTitulodiploma = new Label("Edad");
-		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 386, 32);
-		lblTitulodiploma.setSize("58px", "13px");
-		
-		Label lblEscolaridad = new Label("Escolaridad");
-		lblEscolaridad.setStyleName("label");
-		absolutePanel.add(lblEscolaridad, 475, 32);
-		lblEscolaridad.setSize("192px", "13px");
-		
-		Label lblOcupacion = new Label("Ocupacion");
-		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 758, 32);
-		lblOcupacion.setSize("132px", "13px");
 	}
 	
 	private void EliminarFormulario(){
-		cargaFamiliar.EliminarFormulario(this, formulario.idFormulario, idCargaFamiliar);
+		garantiaSolidario.EliminarFormulario(this, formulario.idFormulario, idGarantiaSolidario);
     }
 	private void EliminarFormularioSinDatos(){
-		cargaFamiliar.EliminarFormulario(this);
+		garantiaSolidario.EliminarFormulario(this);
     }
 	
 	// DATA A CARGAR EN REFERENCIAS FAMILIARES
 	
 	public void LlenarDatos(Long id,
-			String nombreFamiliar,
-			int edadFamiliar,
-			String escolaridadFamiliar,
-			String ocupacionFamiliar)
+			String nombre,
+			int edad,
+			String escolaridad,
+			String ocupacion)
 	{
 
 		this.bandera = false;
 		
-		this.idCargaFamiliar = id; // ID
+		this.idGarantiaSolidario = id; // ID
 
-		this.txtNombreFamiliar.setText(nombreFamiliar);
-		String edadFamiliarValue = ""+edadFamiliar;
-		this.txtEdadFamiliar.setText(edadFamiliarValue);
-		this.txtEscolaridadFamiliar.setText(escolaridadFamiliar);
-		this.txtOcupacionFamiliar.setText(ocupacionFamiliar);
+		this.txtNombre.setText(nombre);
+		String edadFamiliarValue = ""+edad;
+		this.txtEdad.setText(edadFamiliarValue);
+		this.txtEscolaridad.setText(escolaridad);
+		this.txtOcupacion.setText(ocupacion);
 	
 	}
 	

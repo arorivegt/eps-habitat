@@ -6,6 +6,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
@@ -100,6 +101,10 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 	
 	public void setDataGarantiaFiduciaria(List<AuxSolicitudGarantiaFiduciaria> results) {
 		fd8.setDataGarantiaFiduciaria(results);
+	}
+	
+	public void setDataGarantiaSolidario(List<AuxSolicitudGarantiaSolidario> results) {
+		fd9.setDataGarantiaSolidario(results);
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
@@ -24,6 +25,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaHipotecaria;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaSolidario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSituacionEconomica;
@@ -362,6 +364,39 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			return valor ;
 		}	
 	
+	// GARANTIA GRUPO SOLIDARIO	
+
+		@Override
+		public Long ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
+				String nombre, int edad, String escolaridad, String ocupacion)
+						throws IllegalArgumentException {
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			Long valor = 0L;
+
+			try { 
+				final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+				SegSolicitudGarantiaSolidario solidario = new  SegSolicitudGarantiaSolidario();
+
+				solidario.setFecrec(fecrec); 
+				solidario.setNombre(nombre);
+				solidario.setEdad(edad);
+				solidario.setEscolaridad(escolaridad);
+				solidario.setOcupacion(ocupacion);
+				solidario.setIdFormulario(idFormulario); // Llave Foranea
+
+				solidario.setSolicitud(solicitud);	// Relacion
+				solicitud.getGarantiaSolidario().add(solidario);
+				valor = solidario.getIdGarantiaSolidario();
+
+				System.out.println("GRUPO SOLIDARIO ALMACENADO CORRECTAMENTE EN DATASTORE");
+
+			}finally {  
+				Persistencia.close();  
+			}
+			return valor ;
+		}			
+		
 
 	// SUPERVISION PRIMERA
 
@@ -793,7 +828,21 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
 						nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
 					}
-				}							
+				}			
+				
+				List<SegSolicitudGarantiaSolidario> resultsSolidario = p.getGarantiaSolidario();
+				if (!resultsSolidario.isEmpty()) {
+					for (SegSolicitudGarantiaSolidario n0 : resultsSolidario) {
+						AuxSolicitudGarantiaSolidario l = new AuxSolicitudGarantiaSolidario();
+						l.setIdGarantiaSolidario(n0.getIdGarantiaSolidario());
+						l.setIdFormulario(n0.getIdFormulario());
+						l.setNombre(n0.getNombre());
+						l.setEdad(n0.getEdad());
+						l.setEscolaridad(n0.getEscolaridad());
+						l.setOcupacion(n0.getOcupacion());
+						nuevo.getGarantiaSolidario().add(l); // Agregado a Entidad Principal
+					}
+				}				
 				
 				List<SegSolicitudSupervisionPrimera> results05 = p.getSupervisionPrimera();
 				if (!results05.isEmpty()) {
@@ -1072,6 +1121,20 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
 				}
 			}				
+			
+			List<SegSolicitudGarantiaSolidario> resultsSolidario = p.getGarantiaSolidario();
+			if (!resultsSolidario.isEmpty()) {
+				for (SegSolicitudGarantiaSolidario n0 : resultsSolidario) {
+					AuxSolicitudGarantiaSolidario l = new AuxSolicitudGarantiaSolidario();
+					l.setIdGarantiaSolidario(n0.getIdGarantiaSolidario());
+					l.setIdFormulario(n0.getIdFormulario());
+					l.setNombre(n0.getNombre());
+					l.setEdad(n0.getEdad());
+					l.setEscolaridad(n0.getEscolaridad());
+					l.setOcupacion(n0.getOcupacion());
+					nuevo.getGarantiaSolidario().add(l); // Agregado a Entidad Principal
+				}
+			}	
 			
 			List<SegSolicitudSupervisionPrimera> results06 = p.getSupervisionPrimera();
 			if (!results06.isEmpty()) {
@@ -1486,6 +1549,45 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		Persistencia.deletePersistent(f);
 		return id ;
 	}	
+	
+	// GARANTIA GRUPO SOLIDARIO	
+
+	@Override
+	public Long actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
+			String nombre, int edad, 
+			String escolaridad, String ocupacion) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+
+		Long valor = 0L;
+		try { 
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudGarantiaSolidario.class.getSimpleName(), idGarantiaSolidario).getKey();
+
+			SegSolicitudGarantiaSolidario f = Persistencia.getObjectById(SegSolicitudGarantiaSolidario.class, k);
+			f.setNombre(nombre);
+			f.setEdad(edad);
+			f.setEscolaridad(escolaridad);
+			f.setOcupacion(ocupacion);
+			valor =f.getIdGarantiaSolidario();
+		} finally {
+			Persistencia.close();
+		}
+		return valor ;
+	}		
+
+
+	@Override
+	public Long eliminarGarantiaSolidario(Long idFormulario, Long id)throws IllegalArgumentException {
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+		Key k = new KeyFactory.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+		.addChild(SegSolicitudGarantiaSolidario.class.getSimpleName(), id).getKey(); // Elimina referencia de Solicitud General
+
+		SegSolicitudGarantiaSolidario f = Persistencia.getObjectById(SegSolicitudGarantiaSolidario.class, k);
+		Persistencia.deletePersistent(f);
+		return id ;
+	}			
 	
 	
 	// SUPERVISION PRIMERA

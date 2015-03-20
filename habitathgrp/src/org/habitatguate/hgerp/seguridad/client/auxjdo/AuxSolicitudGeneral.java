@@ -414,6 +414,17 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.garantiaFiduciaria = garantiaFiduciaria;
 	}
 
+	private List <AuxSolicitudGarantiaSolidario> garantiaSolidario = new ArrayList<AuxSolicitudGarantiaSolidario>();
+	
+	public List<AuxSolicitudGarantiaSolidario> getGarantiaSolidario() {
+		return garantiaSolidario;
+	}
+
+	public void setGarantiaSolidario(
+			List<AuxSolicitudGarantiaSolidario> garantiaSolidario) {
+		this.garantiaSolidario = garantiaSolidario;
+	}
+
 	private List <AuxSolicitudSupervisionPrimera> supervisionPrimera = new ArrayList<AuxSolicitudSupervisionPrimera>();
 
 	public List<AuxSolicitudSupervisionPrimera> getSupervisionPrimera() {

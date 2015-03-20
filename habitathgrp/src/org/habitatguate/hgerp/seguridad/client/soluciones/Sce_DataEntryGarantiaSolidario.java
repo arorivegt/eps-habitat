@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -64,7 +65,7 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
     
     public void EliminarFormulario(final Sce_DataGarantiaSolidario fa, final Long idFormulario, final Long id){
 
-    	solucionesService.eliminarCargaFamiliar(idFormulario, id, new AsyncCallback<Long>(){
+    	solucionesService.eliminarGarantiaSolidario(idFormulario, id, new AsyncCallback<Long>(){
             public void onFailure(Throwable caught) 
             {
             	mensaje.setMensaje("alert alert-error", 
@@ -88,19 +89,19 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
     }
     
     
-    public void setDataCargasFamiliares(List<AuxSolicitudCargaFamiliar> results){
+    public void setDataGarantiaSolidario(List<AuxSolicitudGarantiaSolidario> results){
 
     	//load.visible();
     	if (!results.isEmpty()) {
 
-    		for ( AuxSolicitudCargaFamiliar n2 : results) {
+    		for ( AuxSolicitudGarantiaSolidario n2 : results) {
 
-    			System.out.println("ID Carga Familiar a Cargar: " + n2.getIdCargaFamiliar() + ", ID Formulario: " + n2.getIdFormulario());
+    			System.out.println("ID Garantia Grupo Solidario a Cargar: " + n2.getIdGarantiaSolidario() + ", ID Formulario: " + n2.getIdFormulario());
     			
     			Sce_DataGarantiaSolidario fa = new  Sce_DataGarantiaSolidario(this, formularioSolicitud);
     			
-    			fa.LlenarDatos(n2.getIdCargaFamiliar(), 
-    					n2.getNombreFamiliar(), n2.getEdadFamiliar(), n2.getEscolaridadFamiliar(), n2.getOcupacionFamiliar());
+    			fa.LlenarDatos(n2.getIdGarantiaSolidario(), 
+    					n2.getNombre(), n2.getEdad(), n2.getEscolaridad(), n2.getOcupacion());
     			
     			flextable.setWidget(flextable.getRowCount(), 0, fa );
     		

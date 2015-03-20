@@ -125,6 +125,17 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 	Long eliminarGarantiaFiduciaria(Long idFormulario, Long id)throws IllegalArgumentException;		
 	
+// GARANTIA GRUPO SOLIDARIO	
+	
+		Long ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
+				String nombre, int edad, String escolaridad, String ocupacion) throws IllegalArgumentException;
+	    
+		Long actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
+				 String nombre, int edad, 
+				 String escolaridad, String ocupacion)  throws IllegalArgumentException;	
+		
+		Long eliminarGarantiaSolidario(Long idFormulario, Long id)throws IllegalArgumentException;		
+	
 // SUPERVISION PRIMERA
 	
 	Long ingresarSupervisionPrimera(Date fecrec, Long idFormulario, 

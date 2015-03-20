@@ -510,6 +510,19 @@ public class SegSolicitudGeneral implements Serializable {
 
 	@Persistent(mappedBy = "solicitud")
 	@Element(dependent = "true")
+	private List <SegSolicitudGarantiaSolidario> garantiaSolidario;
+	
+	public List<SegSolicitudGarantiaSolidario> getGarantiaSolidario() {
+		return garantiaSolidario;
+	}
+
+	public void setGarantiaSolidario(
+			List<SegSolicitudGarantiaSolidario> garantiaSolidario) {
+		this.garantiaSolidario = garantiaSolidario;
+	}
+
+	@Persistent(mappedBy = "solicitud")
+	@Element(dependent = "true")
 	private List <SegSolicitudSupervisionPrimera> supervisionPrimera;
 
 	public List<SegSolicitudSupervisionPrimera> getSupervisionPrimera() {

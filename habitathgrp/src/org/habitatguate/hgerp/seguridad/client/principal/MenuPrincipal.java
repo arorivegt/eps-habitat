@@ -26,8 +26,6 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
-import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBitacora;
-import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSeguimientoSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataEntryFormularioSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_SolucionesConstruidasHabitat;
@@ -132,6 +130,37 @@ public class MenuPrincipal extends Composite {
 				empleado4();
 			}
 		};
+		
+
+		final Command MenuContrasena = new Command() {
+			public void execute() {
+				Contrasena();
+			}
+		};
+
+		final Command cmdrol1 = new Command() {
+			public void execute() {
+				rol1();
+			}
+		};
+		
+		final Command cmdrol2 = new Command() {
+			public void execute() {
+				rol2();
+			}
+		};
+		
+		final Command cmdrol3 = new Command() {
+			public void execute() {
+				rol3();
+			}
+		};
+		
+		final Command cmdrol4 = new Command() {
+			public void execute() {
+				rol4();
+			}
+		};
 		final Command cmdsolicitudes1 = new Command() {
 			public void execute() {
 				solicitudes1();
@@ -177,7 +206,7 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 
-		// -- Soluciones Construidas
+		// -- Soluciones Construidas6
 		Command cmdsce1_v1 = new Command() {
 			public void execute() {
 				sce1_v1();
@@ -268,6 +297,32 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Cambiar Contraseña", cmdempleado4);
 		MenuEmpleados.addSeparator();
+		
+
+		
+		final MenuBar MenuRol = new MenuBar(true);
+		MenuRol.setAutoOpen(true);
+		MenuRol.setAnimationEnabled(true);
+		MenuRol.addItem("Editar", cmdrol1);
+		MenuRol.addSeparator();
+		MenuRol.addItem("Eliminar", cmdrol2);
+		MenuRol.addSeparator();
+		MenuRol.addItem("Crear", cmdrol3);
+		MenuRol.addSeparator();
+		MenuRol.addItem("Rol-Usuario", cmdrol4);
+		MenuRol.addSeparator();
+		
+
+		//finanzas menu
+		final MenuBar MenuAdmistracion = new MenuBar(true);
+		MenuAdmistracion.setAutoOpen(true);
+		MenuAdmistracion.setAnimationEnabled(true);
+		MenuAdmistracion.addItem("Cambiar Contraseñas", MenuContrasena);
+		MenuAdmistracion.addSeparator();
+		MenuAdmistracion.addItem("Rol", MenuRol);
+		MenuAdmistracion.addSeparator();
+		
+		
 		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
 		//Inventario Activos menu
@@ -575,6 +630,23 @@ public class MenuPrincipal extends Composite {
 	    });
 	}
 	
+	void Contrasena(){
+		
+	}
+	void rol1(){
+		
+	}
+	void rol2(){
+		
+	}
+	void rol3(){
+		
+	}
+	void rol4(){
+		
+	}
+	
+	
 	void solicitudes1(){	
 		SolicitudPermiso fmc = new SolicitudPermiso(panel.getId_empleado());
 		fmc.agregarFormulario_Empleado();
@@ -666,19 +738,19 @@ public class MenuPrincipal extends Composite {
 	}	
 	//@UiHandler("sce3")
 	void sce3() {
-		Sce_BuzonSeguimientoSolicitud seguimientoFormulario = new Sce_BuzonSeguimientoSolicitud();
-		seguimientoFormulario.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+//		Sce_BuzonSeguimientoSolicitud seguimientoFormulario = new Sce_BuzonSeguimientoSolicitud();
+//		seguimientoFormulario.setSize("100%", "100%");
+//		this.panel.getGrid().setSize("100%", "100%");
+//		this.panel.getGrid().clearCell(1, 0);
+//		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
 	}	
 	//@UiHandler("sce4")
 	void sce4() {
-		Sce_BuzonBitacora bitacora = new Sce_BuzonBitacora();
-		bitacora.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, bitacora);
+//		Sce_BuzonBitacora bitacora = new Sce_BuzonBitacora();
+//		bitacora.setSize("100%", "100%");
+//		this.panel.getGrid().setSize("100%", "100%");
+//		this.panel.getGrid().clearCell(1, 0);
+//		this.panel.getGrid().setWidget(1, 0, bitacora);
 	}		
 
 	//@UiHandler("sc6")

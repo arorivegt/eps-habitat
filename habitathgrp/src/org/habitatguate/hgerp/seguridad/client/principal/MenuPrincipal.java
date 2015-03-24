@@ -158,9 +158,9 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 		
-		final Command cmdrol4 = new Command() {
+		final Command cmdusuario = new Command() {
 			public void execute() {
-				rol4();
+				usuario();
 			}
 		};
 		final Command cmdsolicitudes1 = new Command() {
@@ -281,7 +281,7 @@ public class MenuPrincipal extends Composite {
 		MenuRecursosHumanos.addItem("Carga Datos", Carga);
 
 		
-		//finanzas menu
+		//solicitudes menu
 		final MenuBar MenuSolicitudes = new MenuBar(true);
 		MenuSolicitudes.setAutoOpen(true);
 		MenuSolicitudes.setAnimationEnabled(true);
@@ -289,7 +289,7 @@ public class MenuPrincipal extends Composite {
 		MenuSolicitudes.addSeparator();
 		MenuSolicitudes.addItem("Validar Solicitudes", cmdsolicitudes2);
 		
-		//finanzas menu
+		//empleado menu
 		final MenuBar MenuEmpleados = new MenuBar(true);
 		MenuEmpleados.setAutoOpen(true);
 		MenuEmpleados.setAnimationEnabled(true);
@@ -301,25 +301,25 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.addSeparator();
 		
 
-		
+		//roles menu
 		final MenuBar MenuRol = new MenuBar(true);
 		MenuRol.setAutoOpen(true);
 		MenuRol.setAnimationEnabled(true);
-		MenuRol.addItem("Editar", cmdrol1);
+		MenuRol.addItem("Crear Rol", cmdrol1);
 		MenuRol.addSeparator();
-		MenuRol.addItem("Eliminar", cmdrol2);
+		MenuRol.addItem("Editar Rol", cmdrol2);
 		MenuRol.addSeparator();
-		MenuRol.addItem("Crear", cmdrol3);
-		MenuRol.addSeparator();
-		MenuRol.addItem("Rol-Usuario", cmdrol4);
+		MenuRol.addItem("Asignar Rol", cmdrol3);
 		MenuRol.addSeparator();
 		
 
-		//finanzas menu
+		//administracion menu
 		final MenuBar MenuAdmistracion = new MenuBar(true);
 		MenuAdmistracion.setAutoOpen(true);
 		MenuAdmistracion.setAnimationEnabled(true);
 		MenuAdmistracion.addItem("Cambiar Contraseñas", MenuContrasena);
+		MenuAdmistracion.addSeparator();
+		MenuAdmistracion.addItem("Crear Usuarios", cmdusuario);
 		MenuAdmistracion.addSeparator();
 		MenuAdmistracion.addItem("Rol", MenuRol);
 		MenuAdmistracion.addSeparator();
@@ -644,7 +644,7 @@ public class MenuPrincipal extends Composite {
 	void rol3(){
 		
 	}
-	void rol4(){
+	void usuario(){
 		
 	}
 	

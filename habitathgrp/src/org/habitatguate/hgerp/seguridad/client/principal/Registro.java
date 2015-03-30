@@ -99,6 +99,7 @@ public class Registro extends Composite{
             dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
             dateBox.getDatePicker().setVisibleYearCount(100);
             
+            
             final TextBox txtApellido2 = new TextBox();
             txtApellido2.setStyleName("gwt-PasswordTextBox");
             txtApellido2.getElement().setAttribute("placeHolder", "Segundo Apellido");
@@ -171,19 +172,19 @@ public class Registro extends Composite{
                     	loginService.Registro(txtUser.getText(),md5(txtPass.getText()),txtNombre.getText(), 
                     			txtApellido.getText(),dateBox.getValue(),txtNombre2.getText(), txtApellido2.getText(),
                     			new AsyncCallback<String>() 
-                                {
+                         {
                					 public void onFailure(Throwable caught) 
                                  {
                			            load.invisible();
                			         inicio.setMensaje("alert alert-error", "Hubo un error en el Registro, Intentelo mas tarde");
                					 }
                					 public void onSuccess(String result)
-                                  {
+                                 {
                			            load.invisible();
                						 if(result.equals("no existe")){
                							inicio.setMensaje("alert alert-success", "registro exitoso");
                		        			Window.Location.reload();
-               							}
+               						 }
                						 else if(result.equals("error"))
                							inicio.setMensaje("alert alert-error", "error al registrar");
                						 else
@@ -193,8 +194,8 @@ public class Registro extends Composite{
                                    }
                				});
                				
-               			}
-                    }
+               		}
+                }
             	
             });
             

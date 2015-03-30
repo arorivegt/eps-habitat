@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.administracion;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -24,9 +26,11 @@ public class FormularioRol  extends Composite  {
 
 	private Mensaje mensaje; 
 	private Formulario rol;
-	private Long id_formulario_rol = 0L;
+	private Long id_permiso = 0L;
+	private Long roll = 0L;
+	private Long id_formularioPadre = 0L;
 	private boolean bandera = true;
-    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final AdministracionServiceAsync loginService = GWT.create(AdministracionService.class);
 	
 	private TextBox txtNombreFormulario ;
 	private Button btnActualizar;
@@ -62,54 +66,29 @@ public class FormularioRol  extends Composite  {
 			public void onClick(ClickEvent event) {
 
 		        load.visible();
-				if(bandera) {
-//					loginService.Insertar_Familiar(empleado.id_empleado, txtPrimer_nombre.getText(), 
-//							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
-//							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
-//							new AsyncCallback<Long>(){
-//	                            public void onFailure(Throwable caught) 
-//	                            {
-//	                		        load.invisible();
-//	                            	mensaje.setMensaje("alert alert-error", 
-//	                            			"Error !! \nal Guardar Datos");
-//	                            }
-//
-//								@Override
-//	                            public void onSuccess(Long result)
-//	                            {
-//							        load.invisible();
-//									id_familia = result;
-//									bandera = false;
-//									mensaje.setMensaje("alert alert-success", 
-//		                        			"Datos Guardados\n exitosamente!!!");
-//	                            }
-//
-//	                     });
-				}else{
-//					loginService.Actualizar_Familiar(empleado.id_empleado,id_familia, txtPrimer_nombre.getText(), 
-//							txtSegundo_nombre.getText(), txtPrimer_apellido.getText(),txtSegundo_apellidp.getText(), 
-//							Integer.parseInt(txtEdad.getValue()), txtOcupacion.getText(), txtParentesco.getText(), 
-//							new AsyncCallback<Long>(){
-//	                            public void onFailure(Throwable caught) 
-//	                            {
-//	                		        load.invisible();
-//	                            	mensaje.setMensaje("alert alert-error", 
-//	                            			"Error !! \nal Actualizar Datos");
-//	                                //Window.alert("Error  al Actualizar Datos"+caught);
-//	                            }
-//
-//								@Override
-//	                            public void onSuccess(Long result)
-//	                            {
-//							        load.invisible();
-//									bandera = false;
-//									mensaje.setMensaje("alert alert-success", 
-//				                			"Datos Actualizados\n exitosamente!!!");
-//	                    	//Window.alert("Datos Actualizados exitosamente!!! ");
-//	                            }
-//
-//	                     });
+				if(!bandera) {
+					loginService.ActualizarUsuarioPermiso(id_permiso, roll, txtNombreFormulario.getText(), 
+							id_formularioPadre, listPermiso.getValue(listPermiso.getSelectedIndex()),
+							new AsyncCallback<Long>(){
+	                            public void onFailure(Throwable caught) 
+	                            {
+	                		        load.invisible();
+	                            	mensaje.setMensaje("alert alert-error", 
+	                            			"Error !! \nal Guardar Datos");
+	                            }
+
+								@Override
+	                            public void onSuccess(Long result)
+	                            {
+							        load.invisible();
+									bandera = false;
+									mensaje.setMensaje("alert alert-success", 
+		                        			"Datos Guardados\n exitosamente!!!");
+	                            }
+
+	                     });
 				}
+				
 
 		        load.invisible();
 			}
@@ -155,15 +134,18 @@ public class FormularioRol  extends Composite  {
 		
 	}
 	
-	public void LlenarDatos(Long id,String txtNombreFormulario ,
-			String txtFormularioPadre,
+	public void LlenarDatos(Long id,
+			Long rol,
+			String txtNombreFormulario ,
+			Long id_formularioPadre,
 			String txtPrimer_nombre,
 			String lisPermiso)
 	{
-		this.id_formulario_rol = id;
+		this.id_permiso = id;
+		this.roll = rol;
+		this.id_formularioPadre = id_formularioPadre;
 		this.bandera = false;
 		this.txtNombreFormulario.setText(txtNombreFormulario);
-		this.txtFormularioPadre.setText(txtFormularioPadre);
 
 		boolean bandera = true;
 		for(int i=0; i < this.listPermiso.getItemCount() && bandera; i++){

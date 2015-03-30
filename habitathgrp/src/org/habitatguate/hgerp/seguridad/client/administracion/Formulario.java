@@ -85,8 +85,8 @@ public class Formulario extends Composite  {
 		    		else if(n2.getParentesco().equals("madre")) madre = true;
 		    		else if(n2.getParentesco().equals("conyugue")) conyugue = true;
 		    	 FormularioRol fa = new  FormularioRol(n2.getParentesco(),this);
-		    	  fa.LlenarDatos(n2.getId_familia(),n2.getPrimer_apellido(),n2.getSegundo_apellido(),n2.getPrimer_nombre(),
-		    					 n2.getSegundo_nombre(),n2.getOcupacion(),n2.getParentesco(),""+n2.getEdad());
+		    	 // fa.LlenarDatos(n2.getId_familia(),n2.getPrimer_apellido(),n2.getSegundo_apellido(),n2.getPrimer_nombre(),
+		    		//			 n2.getSegundo_nombre(),n2.getOcupacion(),n2.getParentesco(),""+n2.getEdad());
 		        flextable.setWidget(flextable.getRowCount(), 0,fa );
 		    }
 		    if(!padre){

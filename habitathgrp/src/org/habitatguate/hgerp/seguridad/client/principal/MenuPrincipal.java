@@ -140,11 +140,6 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 
-		final Command cmdrol1 = new Command() {
-			public void execute() {
-				rol1();
-			}
-		};
 		
 		final Command cmdrol2 = new Command() {
 			public void execute() {
@@ -305,8 +300,6 @@ public class MenuPrincipal extends Composite {
 		final MenuBar MenuRol = new MenuBar(true);
 		MenuRol.setAutoOpen(true);
 		MenuRol.setAnimationEnabled(true);
-		MenuRol.addItem("Crear Rol", cmdrol1);
-		MenuRol.addSeparator();
 		MenuRol.addItem("Editar Rol", cmdrol2);
 		MenuRol.addSeparator();
 		MenuRol.addItem("Asignar Rol", cmdrol3);

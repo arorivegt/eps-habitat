@@ -7,9 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
-import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuarioPermiso;
 import org.habitatguate.hgerp.util.PMF;
 

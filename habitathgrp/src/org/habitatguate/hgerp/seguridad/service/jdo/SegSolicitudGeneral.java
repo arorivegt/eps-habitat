@@ -585,6 +585,19 @@ public class SegSolicitudGeneral implements Serializable {
 			List<SegSolicitudSupervisionUbicacion> supervisionUbicacion) {
 		this.supervisionUbicacion = supervisionUbicacion;
 	}
+	
+	@Persistent(mappedBy = "solicitud")
+	@Element(dependent = "true")
+	private List <SegSolicitudEncuestaSatisfaccion> encuestaSatisfaccion;
+
+	public List<SegSolicitudEncuestaSatisfaccion> getEncuestaSatisfaccion() {
+		return encuestaSatisfaccion;
+	}
+
+	public void setEncuestaSatisfaccion(
+			List<SegSolicitudEncuestaSatisfaccion> encuestaSatisfaccion) {
+		this.encuestaSatisfaccion = encuestaSatisfaccion;
+	}
 
 
 }

@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionCuarta;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
@@ -27,6 +28,7 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 	private Sce_DataEntrySupervisionTercera fd3;
 	private Sce_DataEntrySupervisionCuarta fd4;
 	private Sce_DataEntrySupervisionUbicacion fd5;
+	private Sce_DataEntryEncuestaSatisfaccion fd6;
 
 	public Sce_DataEntrySupervisionSolicitud() {
 		
@@ -82,6 +84,15 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		scrollPanel5.setSize("100%", "100%");
 		fd5 = new Sce_DataEntrySupervisionUbicacion(this);
 		scrollPanel5.setWidget(fd5);
+		
+		// 6. Encuesta Satisfaccion
+		
+		scrollPanel6 = new ScrollPanel();
+		scrollPanel6.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
+		scrollPanel6.setSize("100%", "100%");
+		fd6 = new Sce_DataEntryEncuestaSatisfaccion(this);
+		scrollPanel6.setWidget(fd6);
 		
 	}
 	
@@ -144,6 +155,13 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 	public void setDataSupervisionUbicacion(List<AuxSolicitudSupervisionUbicacion> results) {
 		fd5.setDataSupervisionUbicacion(results);
 	}
+
+	public void setDataEncuestaSatisfaccion(List<AuxSolicitudEncuestaSatisfaccion> results) {
+		fd6.setDataEncuestaSatisfaccion(results);
+	}
+	
+	//-------------------
+	
 	
 	private ScrollPanel scrollPanel1;
 
@@ -200,5 +218,14 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		this.scrollPanel5 = scrollPanel5;
 	}
 
+	private ScrollPanel scrollPanel6;
+
+	public ScrollPanel getScrollPanel6() {
+		return scrollPanel6;
+	}
+
+	public void setScrollPanel6(ScrollPanel scrollPanel6) {
+		this.scrollPanel6 = scrollPanel6;
+	}
 
 }

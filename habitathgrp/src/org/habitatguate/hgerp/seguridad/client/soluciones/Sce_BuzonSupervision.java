@@ -327,6 +327,12 @@ public class Sce_BuzonSupervision extends Composite  {
         			
         		} 
         		
+        		try{           		
+        			bitacoraSolicitud.setDataEncuestaSatisfaccion(result.getEncuestaSatisfaccion());
+        		}catch(Exception e){
+        			
+        		} 
+        		
                 load.invisible();
         	}
 

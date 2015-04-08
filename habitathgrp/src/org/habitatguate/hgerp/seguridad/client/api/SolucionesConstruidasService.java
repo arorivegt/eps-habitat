@@ -209,6 +209,21 @@ public interface SolucionesConstruidasService extends RemoteService {
 
 	Long actualizarSupervisionUbicacion(Long idFormulario, Long idSupervisionUbicacion,
 			String latitud, String longitud) throws IllegalArgumentException;	
+
+	// ENCUESTA SATISFACCION
+
+	Long ingresarEncuestaSatisfaccion(Date fecrec, Long idFormulario, 
+			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
+			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
+			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException;
+	
+	Long actualizarEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion,
+			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
+			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
+			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException;
+	
 	
 	
 	// SOLUCIONES

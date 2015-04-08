@@ -480,4 +480,15 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.supervisionUbicacion = supervisionUbicacion;
 	}
 	
+	private List <AuxSolicitudEncuestaSatisfaccion> encuestaSatisfaccion = new ArrayList<AuxSolicitudEncuestaSatisfaccion>();
+
+	public List<AuxSolicitudEncuestaSatisfaccion> getEncuestaSatisfaccion() {
+		return encuestaSatisfaccion;
+	}
+
+	public void setEncuestaSatisfaccion(
+			List<AuxSolicitudEncuestaSatisfaccion> encuestaSatisfaccion) {
+		this.encuestaSatisfaccion = encuestaSatisfaccion;
+	}
+	
 }

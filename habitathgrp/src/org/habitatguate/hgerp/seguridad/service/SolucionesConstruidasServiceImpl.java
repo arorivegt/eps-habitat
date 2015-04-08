@@ -10,6 +10,7 @@ import javax.jdo.Query;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
@@ -23,6 +24,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTer
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDatosVivienda;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGarantiaSolidario;
@@ -612,6 +614,54 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return valor ;
 	}	
 	
+	// ENCUESTA SATISFACCION
+
+	@Override
+	public Long ingresarEncuestaSatisfaccion(Date fecrec, Long idFormulario, 
+			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
+			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
+			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		Long valor = 0L;
+
+		try { 
+			final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+			SegSolicitudEncuestaSatisfaccion encuesta = new  SegSolicitudEncuestaSatisfaccion();
+
+			encuesta.setFecrec(fecrec); 
+			encuesta.setPreguntaNo1(preguntaNo1);
+			encuesta.setPreguntaNo2(preguntaNo2);
+			encuesta.setPreguntaNo3(preguntaNo3);
+			encuesta.setPreguntaNo4(preguntaNo4);
+			encuesta.setPreguntaNo5(preguntaNo5);
+			encuesta.setPreguntaNo6(preguntaNo6);
+			encuesta.setPreguntaNo7(preguntaNo7);
+			encuesta.setPreguntaNo8(preguntaNo8);
+			encuesta.setPreguntaNo9(preguntaNo9);
+			encuesta.setPreguntaNo10(preguntaNo10);
+			encuesta.setPreguntaNo11(preguntaNo11);
+			encuesta.setPreguntaNo12(preguntaNo12);
+			encuesta.setPreguntaNo13(preguntaNo13);
+			encuesta.setPreguntaNo14(preguntaNo14);
+			encuesta.setPreguntaNo15(preguntaNo15);
+			encuesta.setPreguntaNo16(preguntaNo16);
+			encuesta.setIdFormulario(idFormulario); // Llave Foranea
+
+			encuesta.setSolicitud(solicitud); // Relacion
+			solicitud.getEncuestaSatisfaccion().add(encuesta);
+
+			valor = encuesta.getIdEncuestaSatisfaccion();
+
+			System.out.println("DATOS ENCUESTA SATISFACCION ALMACENADO CORRECTAMENTE EN DATASTORE");
+
+		}finally {  
+			Persistencia.close();  
+		}
+		return valor ;
+	}	
+	
 	
 	// ---------------------------------------- SOLUCIONES ---------------------------------------- //
 
@@ -943,6 +993,33 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					}
 				}
 				
+				List<SegSolicitudEncuestaSatisfaccion> resultsEncuesta = p.getEncuestaSatisfaccion();
+				if (!resultsEncuesta.isEmpty()) {
+					for (SegSolicitudEncuestaSatisfaccion n0 : resultsEncuesta) {
+						AuxSolicitudEncuestaSatisfaccion l = new AuxSolicitudEncuestaSatisfaccion();
+						
+						l.setIdEncuestaSatisfaccion(n0.getIdEncuestaSatisfaccion());
+						l.setIdFormulario(n0.getIdFormulario());
+						l.setPreguntaNo1(n0.getPreguntaNo1());
+						l.setPreguntaNo2(n0.getPreguntaNo2());
+						l.setPreguntaNo3(n0.getPreguntaNo3());
+						l.setPreguntaNo4(n0.getPreguntaNo4());
+						l.setPreguntaNo5(n0.getPreguntaNo5());
+						l.setPreguntaNo6(n0.getPreguntaNo6());
+						l.setPreguntaNo7(n0.getPreguntaNo7());
+						l.setPreguntaNo8(n0.getPreguntaNo8());
+						l.setPreguntaNo9(n0.getPreguntaNo9());
+						l.setPreguntaNo10(n0.getPreguntaNo10());
+						l.setPreguntaNo11(n0.getPreguntaNo11());
+						l.setPreguntaNo12(n0.getPreguntaNo12());
+						l.setPreguntaNo13(n0.getPreguntaNo13());
+						l.setPreguntaNo14(n0.getPreguntaNo14());
+						l.setPreguntaNo15(n0.getPreguntaNo15());
+						l.setPreguntaNo16(n0.getPreguntaNo16());
+						nuevo.getEncuestaSatisfaccion().add(l); // Agregado a Entidad Principal
+					}
+				}
+				
 				
 				
 				valor.add(nuevo);
@@ -1232,6 +1309,33 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setLatitud(n0.getLatitud());
 					l.setLongitud(n0.getLongitud());
 					nuevo.getSupervisionUbicacion().add(l); // Agregado a Entidad Principal
+				}
+			}
+			
+			List<SegSolicitudEncuestaSatisfaccion> resultsEncuesta = p.getEncuestaSatisfaccion();
+			if (!resultsEncuesta.isEmpty()) {
+				for (SegSolicitudEncuestaSatisfaccion n0 : resultsEncuesta) {
+					AuxSolicitudEncuestaSatisfaccion l = new AuxSolicitudEncuestaSatisfaccion();
+					
+					l.setIdEncuestaSatisfaccion(n0.getIdEncuestaSatisfaccion());
+					l.setIdFormulario(n0.getIdFormulario());
+					l.setPreguntaNo1(n0.getPreguntaNo1());
+					l.setPreguntaNo2(n0.getPreguntaNo2());
+					l.setPreguntaNo3(n0.getPreguntaNo3());
+					l.setPreguntaNo4(n0.getPreguntaNo4());
+					l.setPreguntaNo5(n0.getPreguntaNo5());
+					l.setPreguntaNo6(n0.getPreguntaNo6());
+					l.setPreguntaNo7(n0.getPreguntaNo7());
+					l.setPreguntaNo8(n0.getPreguntaNo8());
+					l.setPreguntaNo9(n0.getPreguntaNo9());
+					l.setPreguntaNo10(n0.getPreguntaNo10());
+					l.setPreguntaNo11(n0.getPreguntaNo11());
+					l.setPreguntaNo12(n0.getPreguntaNo12());
+					l.setPreguntaNo13(n0.getPreguntaNo13());
+					l.setPreguntaNo14(n0.getPreguntaNo14());
+					l.setPreguntaNo15(n0.getPreguntaNo15());
+					l.setPreguntaNo16(n0.getPreguntaNo16());
+					nuevo.getEncuestaSatisfaccion().add(l); // Agregado a Entidad Principal
 				}
 			}
 			
@@ -1770,6 +1874,51 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		}
 		return valor ;
 	}
+	
+	
+	// ENCUESTA SATISFACCION
+
+	@Override
+	public Long actualizarEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion,
+			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
+			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
+			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
+
+		Long valor = 0L;
+		try { 
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudEncuestaSatisfaccion.class.getSimpleName(), idEncuestaSatisfaccion).getKey();
+
+			SegSolicitudEncuestaSatisfaccion f = Persistencia.getObjectById(SegSolicitudEncuestaSatisfaccion.class, k);
+			f.setPreguntaNo1(preguntaNo1);
+			f.setPreguntaNo2(preguntaNo2);
+			f.setPreguntaNo3(preguntaNo3);
+			f.setPreguntaNo4(preguntaNo4);
+			f.setPreguntaNo5(preguntaNo5);
+			f.setPreguntaNo6(preguntaNo6);
+			f.setPreguntaNo7(preguntaNo7);
+			f.setPreguntaNo8(preguntaNo8);
+			f.setPreguntaNo9(preguntaNo9);
+			f.setPreguntaNo10(preguntaNo10);
+			f.setPreguntaNo11(preguntaNo11);
+			f.setPreguntaNo12(preguntaNo12);
+			f.setPreguntaNo13(preguntaNo13);
+			f.setPreguntaNo14(preguntaNo14);
+			f.setPreguntaNo15(preguntaNo15);
+			f.setPreguntaNo16(preguntaNo16);
+
+			valor = f.getIdEncuestaSatisfaccion();
+
+		} finally {
+			Persistencia.close();
+		}
+		return valor ;
+	}
+	
 		
 	// Remover imagen de Blobstore
 	

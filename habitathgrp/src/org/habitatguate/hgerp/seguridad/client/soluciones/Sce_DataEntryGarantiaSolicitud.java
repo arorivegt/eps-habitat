@@ -39,6 +39,8 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 		scrollPanel7.setSize("100%", "100%");
 		fd7 = new Sce_DataEntryGarantiaHipotecaria(this);
 		scrollPanel7.setWidget(fd7);	
+		
+		tabPanel.selectTab(0); // Carga Tab Inicial
 
 		
 		// 2. Garantia Fiduciaria

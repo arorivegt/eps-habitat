@@ -11,17 +11,20 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.maps.client.InfoWindowContent;
 import com.google.gwt.maps.client.MapWidget;
 import com.google.gwt.maps.client.Maps;
+import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.control.SmallZoomControl;
 import com.google.gwt.maps.client.geom.LatLng;
@@ -70,6 +73,7 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 //			}
 //		});
 
+
 		
 		lblLatitud = new Label("Latitud:");
 		lblLatitud.setStyleName("label");
@@ -104,6 +108,7 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		txtLatitud.setMaxLength(200);
 		absolutePanel.add(txtLatitud, 300, 567);
 		txtLatitud.setSize("95px", "19px");
+		txtLatitud.setTabIndex(1);
 		
 		txtLongitud = new TextBox();
 		txtLongitud.addChangeHandler(new ChangeHandler() {
@@ -128,6 +133,7 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		txtLongitud.setMaxLength(200);
 		absolutePanel.add(txtLongitud, 508, 567);
 		txtLongitud.setSize("95px", "19px");
+		txtLongitud.setTabIndex(2);
 		
 		// -- Boton Visualizar
 		
@@ -139,27 +145,44 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 
 					Maps.loadMapsApi("", "2", false, new Runnable() {
 						public void run() {
-							
-							double latitud = 0;
-							latitud = Double.parseDouble(txtLatitud.getText());
-							
-							double longitud = 0;
-							longitud = Double.parseDouble(txtLongitud.getText());
-							
-							System.out.println("Valores: Latitud: " + latitud + " - Longitud: " + longitud);
 
-							// Busqueda Especifica
-							busquedaEspecifica(latitud, longitud);
-							
+							if(txtLatitud.getText().equals("0") && txtLatitud.getText().equals("0")){
+								String latitudDefault = "14.6211";
+								String longitudDefault = "-90.5269";		
+								iniciarMaps(latitudDefault, longitudDefault);
+								System.out.println("Valores de Mapa Default - 0");
+
+							}else if(txtLatitud.getText().equals(null) && txtLatitud.getText().equals(null)){
+								String latitudDefault = "14.6211";
+								String longitudDefault = "-90.5269";		
+								iniciarMaps(latitudDefault, longitudDefault);
+								System.out.println("Valores de Mapa Default - nulo");
+
+							} else{
+								double latitud = 0;
+								latitud = Double.parseDouble(txtLatitud.getText());
+
+								double longitud = 0;
+								longitud = Double.parseDouble(txtLongitud.getText());
+
+								System.out.println("Valores: Latitud: " + latitud + " - Longitud: " + longitud);
+
+								// Busqueda Especifica
+								busquedaEspecifica(latitud, longitud);
+
+								System.out.println("Valores de Mapa Almacenados");
+							}
+
+
 						}
 					});
 
 				}
 			}
 		});
-		btnVisualizar.setText("Visualizar Ubicacion");
+		btnVisualizar.setText("Visualizar/Refrescar");
 		absolutePanel.add(btnVisualizar, 647, 561);
-		
+		btnVisualizar.setTabIndex(3);
 		
 		// -- Boton Guardar/Actualizar Informacion
 		
@@ -237,22 +260,9 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		});
 		btnGuardar.setText("Guardar");
 		absolutePanel.add(btnGuardar, 471, 614);
+		btnGuardar.setTabIndex(4);
 		
-	}
-	
-	// DATA A CARGAR EN DATOS
-	 
-    public void LlenarDatos(Long id, 
-			String latitud, String longitud)
-	{
-    	
-		this.bandera = false;
 		
-		this.idSupervisionUbicacion = id; // ID Formulario Cargado
-		
-		this.txtLatitud.setValue(latitud);
-		this.txtLongitud.setValue(longitud);
-		  
 	}
     
     //---- Meotodo de Google Maps
@@ -278,6 +288,107 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 
 		absolutePanel.add(map, 42, 50);
 		map.setSize("950px", "450px");
+		
+	}
+
+	// Inicial
+	
+	private void busquedaEspecifica2(String latitud, String longitud) {
+		
+		double latitudValue = 0;
+		latitudValue = Double.parseDouble(latitud);
+		
+		double longitudValue = 0;
+		longitudValue = Double.parseDouble(longitud);
+		
+		// Coordenadas
+	    LatLng coordenadas = LatLng.newInstance(latitudValue, longitudValue);
+
+	    MapWidget map = new MapWidget(coordenadas, 2);
+
+	    // Add some controls for the zoom level
+	    map.addControl(new SmallMapControl());
+	    map.addControl(new SmallZoomControl());
+	    map.setZoomLevel(10);
+
+	    // Add a marker
+	    map.addOverlay(new Marker(coordenadas));
+
+	    // Add an info window to highlight a point of interest
+	    map.getInfoWindow().open(map.getCenter(),
+	        new InfoWindowContent("Ubicacion Default"));
+
+		absolutePanel.add(map, 42, 50);
+		map.setSize("950px", "450px");
+		
+	}
+	
+	public void iniciarMaps(final String latitud, final String longitud){
+		
+		Maps.loadMapsApi("", "2", false, new Runnable() {
+
+			public void run() {
+				// Busqueda Especifica 2
+				busquedaEspecifica2(latitud, longitud);
+			}
+		});
+	}
+
+	private void buildUi2() {
+		// Open a map centered on Cawker City, KS USA
+		LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
+
+		final MapWidget map = new MapWidget(cawkerCity, 2);
+		map.setSize("100%", "100%");
+		// Add some controls for the zoom level
+		map.addControl(new LargeMapControl());
+
+		// Add a marker
+		map.addOverlay(new Marker(cawkerCity));
+
+		// Add an info window to highlight a point of interest
+		map.getInfoWindow().open(map.getCenter(),
+				new InfoWindowContent("World's Largest Ball of Sisal Twine"));
+
+		final DockLayoutPanel dock = new DockLayoutPanel(Unit.PX);
+		dock.addNorth(map, 500);
+
+		// Add the map to the HTML host page
+		RootLayoutPanel.get().add(dock);
+	}
+	
+	
+	// DATA A CARGAR EN DATOS
+	 
+    public void LlenarDatos(Long id, 
+			String latitud, String longitud)
+	{
+    	
+		this.bandera = false;
+		
+		this.idSupervisionUbicacion = id; // ID Formulario Cargado
+		
+		this.txtLatitud.setValue(latitud);
+		this.txtLongitud.setValue(longitud);
+		
+		
+		if(latitud.equals("0") && longitud.equals("0")){
+			String latitudDefault = "14.6211";
+			String longitudDefault = "-90.5269";		
+			iniciarMaps(latitudDefault, longitudDefault);
+			System.out.println("Valores de Mapa Default - 0");
+			
+		}else if(latitud.equals(null) && longitud.equals(null)){
+			String latitudDefault = "14.6211";
+			String longitudDefault = "-90.5269";		
+			iniciarMaps(latitudDefault, longitudDefault);
+			System.out.println("Valores de Mapa Default - nulo");
+			
+		} else{
+			iniciarMaps(latitud, longitud);
+			System.out.println("Valores de Mapa Almacenados");
+		}
+		
 		
 	}
 	

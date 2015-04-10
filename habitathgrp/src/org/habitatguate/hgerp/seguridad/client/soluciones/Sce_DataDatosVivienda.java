@@ -67,6 +67,41 @@ public class Sce_DataDatosVivienda extends Composite {
 		absolutePanel.add(lblEstadoCivil, 42, 10);
 		lblEstadoCivil.setSize("207px", "19px");
 		
+		Label lblExtendidaEn = new Label("Otro, explique:");
+		lblExtendidaEn.setStyleName("label");
+		absolutePanel.add(lblExtendidaEn, 266, 10);
+		lblExtendidaEn.setSize("111px", "19px");
+		
+		Label lblIndiqueLosBienes = new Label("Indique los bienes inmuebles que posee:");
+		lblIndiqueLosBienes.setStyleName("label");
+		absolutePanel.add(lblIndiqueLosBienes, 42, 256);
+		lblIndiqueLosBienes.setSize("379px", "19px");
+		
+		Label lblValor = new Label("En cuanto los valora:");
+		lblValor.setStyleName("label");
+		absolutePanel.add(lblValor, 42, 406);
+		lblValor.setSize("187px", "19px");
+		
+		Label lblServicios = new Label("Servicios basicos:");
+		lblServicios.setStyleName("label");
+		absolutePanel.add(lblServicios, 42, 167);
+		lblServicios.setSize("187px", "19px");
+		
+		Label lblTecho = new Label("Techo de:");
+		lblTecho.setStyleName("label");
+		absolutePanel.add(lblTecho, 43, 88);
+		lblTecho.setSize("207px", "19px");
+		
+		Label lblPared = new Label("Paredes de:");
+		lblPared.setStyleName("label");
+		absolutePanel.add(lblPared, 317, 88);
+		lblPared.setSize("207px", "19px");
+		
+		Label lblCocina = new Label("Cocina de:");
+		lblCocina.setStyleName("label");
+		absolutePanel.add(lblCocina, 594, 88);
+		lblCocina.setSize("207px", "19px");
+		
 		listViviendaActual = new ListBox();
 		listViviendaActual.addItem("-", "-1");
 		listViviendaActual.addItem("Es propia", "1");
@@ -77,47 +112,77 @@ public class Sce_DataDatosVivienda extends Composite {
 		listViviendaActual.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listViviendaActual, 41, 35);
 		listViviendaActual.setSize("148px", "27px");
+		listViviendaActual.setTabIndex(1);
 		
 		txtOtroExplique = new TextBox();
 		txtOtroExplique.setStyleName("gwt-TextBox2");
 		txtOtroExplique.setMaxLength(200);
 		absolutePanel.add(txtOtroExplique, 266, 41);
 		txtOtroExplique.setSize("256px", "19px");
+		txtOtroExplique.setTabIndex(2);
 		
-		Label lblExtendidaEn = new Label("Otro, explique:");
-		lblExtendidaEn.setStyleName("label");
-		absolutePanel.add(lblExtendidaEn, 266, 10);
-		lblExtendidaEn.setSize("111px", "19px");
+		listTecho = new ListBox();
+		listTecho.addItem("-", "-1");
+		listTecho.addItem("Lámina de zinc", "1");
+		listTecho.addItem("Duralita", "2");
+		listTecho.addItem("Terraza", "3");
+		listTecho.addItem("Teja", "4");
+		listTecho.addItem("Palma", "5");
+		listTecho.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listTecho, 42, 113);
+		listTecho.setSize("148px", "27px");
+		listTecho.setTabIndex(3);
+		
+		listPared = new ListBox();
+		listPared.addItem("-", "-1");
+		listPared.addItem("Adobe", "1");
+		listPared.addItem("Block", "2");
+		listPared.addItem("Ladrillo", "3");
+		listPared.addItem("Cartón", "4");
+		listPared.addItem("Madera", "5");
+		listPared.addItem("Varitas", "6");
+		listPared.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listPared, 316, 113);
+		listPared.setSize("148px", "27px");
+		listPared.setTabIndex(4);
+		
+		listCocina = new ListBox();
+		listCocina.addItem("-", "-1");
+		listCocina.addItem("Estufa de gas", "1");
+		listCocina.addItem("Polletón", "2");
+		listCocina.addItem("Fogón", "3");
+		listCocina.addItem("Estufa eléctrica", "4");
+		listCocina.addItem("Fuego abierto", "5");
+		listCocina.addItem("Estufa mejorada", "6");
+		listCocina.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listCocina, 593, 113);
+		listCocina.setSize("148px", "27px");
+		listCocina.setTabIndex(5);
 		
 		checkBoxAgua = new CheckBox("Servicio de agua");
 		absolutePanel.add(checkBoxAgua, 271, 167);
 		checkBoxAgua.setSize("274px", "24px");
+		checkBoxAgua.setTabIndex(6);
 		
 		checkBoxDrenaje = new CheckBox("Servicio de drenaje");
 		absolutePanel.add(checkBoxDrenaje, 583, 170);
 		checkBoxDrenaje.setSize("218px", "21px");
-		
-		checkBoxSanitario = new CheckBox("Servicio Sanitario");
-		absolutePanel.add(checkBoxSanitario, 583, 211);
-		checkBoxSanitario.setSize("218px", "21px");
+		checkBoxDrenaje.setTabIndex(7);
 		
 		checkBoxElectricidad = new CheckBox("Servicio de eletricidad");
 		absolutePanel.add(checkBoxElectricidad, 271, 211);
 		checkBoxElectricidad.setSize("288px", "21px");
+		checkBoxElectricidad.setTabIndex(8);
 		
-		Label lblServicios = new Label("Servicios basicos:");
-		lblServicios.setStyleName("label");
-		absolutePanel.add(lblServicios, 42, 167);
-		lblServicios.setSize("187px", "19px");
+		checkBoxSanitario = new CheckBox("Servicio Sanitario");
+		absolutePanel.add(checkBoxSanitario, 583, 211);
+		checkBoxSanitario.setSize("218px", "21px");
+		checkBoxSanitario.setTabIndex(9);
 		
 		txtAreaBienes = new TextArea();
 		absolutePanel.add(txtAreaBienes, 42, 293);
 		txtAreaBienes.setSize("857px", "69px");
-		
-		Label lblIndiqueLosBienes = new Label("Indique los bienes inmuebles que posee:");
-		lblIndiqueLosBienes.setStyleName("label");
-		absolutePanel.add(lblIndiqueLosBienes, 42, 256);
-		lblIndiqueLosBienes.setSize("379px", "19px");
+		txtAreaBienes.setTabIndex(10);
 		
 		txtValorInmueble = new TextBox();
 		txtValorInmueble.addChangeHandler(new ChangeHandler() {
@@ -144,61 +209,7 @@ public class Sce_DataDatosVivienda extends Composite {
 		txtValorInmueble.setMaxLength(200);
 		absolutePanel.add(txtValorInmueble, 246, 404);
 		txtValorInmueble.setSize("117px", "19px");
-		
-		Label lblValor = new Label("En cuanto los valora:");
-		lblValor.setStyleName("label");
-		absolutePanel.add(lblValor, 42, 406);
-		lblValor.setSize("187px", "19px");
-		
-		listTecho = new ListBox();
-		listTecho.addItem("-", "-1");
-		listTecho.addItem("Lámina de zinc", "1");
-		listTecho.addItem("Duralita", "2");
-		listTecho.addItem("Terraza", "3");
-		listTecho.addItem("Teja", "4");
-		listTecho.addItem("Palma", "5");
-		listTecho.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listTecho, 42, 113);
-		listTecho.setSize("148px", "27px");
-		
-		Label lblTecho = new Label("Techo de:");
-		lblTecho.setStyleName("label");
-		absolutePanel.add(lblTecho, 43, 88);
-		lblTecho.setSize("207px", "19px");
-		
-		Label lblPared = new Label("Paredes de:");
-		lblPared.setStyleName("label");
-		absolutePanel.add(lblPared, 317, 88);
-		lblPared.setSize("207px", "19px");
-		
-		listPared = new ListBox();
-		listPared.addItem("-", "-1");
-		listPared.addItem("Adobe", "1");
-		listPared.addItem("Block", "2");
-		listPared.addItem("Ladrillo", "3");
-		listPared.addItem("Cartón", "4");
-		listPared.addItem("Madera", "5");
-		listPared.addItem("Varitas", "6");
-		listPared.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listPared, 316, 113);
-		listPared.setSize("148px", "27px");
-		
-		listCocina = new ListBox();
-		listCocina.addItem("-", "-1");
-		listCocina.addItem("Estufa de gas", "1");
-		listCocina.addItem("Polletón", "2");
-		listCocina.addItem("Fogón", "3");
-		listCocina.addItem("Estufa eléctrica", "4");
-		listCocina.addItem("Fuego abierto", "5");
-		listCocina.addItem("Estufa mejorada", "6");
-		listCocina.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listCocina, 593, 113);
-		listCocina.setSize("148px", "27px");
-		
-		Label lblCocina = new Label("Cocina de:");
-		lblCocina.setStyleName("label");
-		absolutePanel.add(lblCocina, 594, 88);
-		lblCocina.setSize("207px", "19px");
+		txtValorInmueble.setTabIndex(11);
 		
 		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
@@ -307,6 +318,7 @@ public class Sce_DataDatosVivienda extends Composite {
 		
 		btnGuardar.setText("Guardar");
 		absolutePanel.add(btnGuardar, 475, 442);
+		btnGuardar.setTabIndex(12);
 		
 	}
 	

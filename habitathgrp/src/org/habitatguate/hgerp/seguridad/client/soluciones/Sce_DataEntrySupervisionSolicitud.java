@@ -45,6 +45,8 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		fd1 = new Sce_DataEntrySupervisionPrimera(this);
 		scrollPanel1.setWidget(fd1);	
 		
+		tabPanel.selectTab(0); // Carga Tab Inicial
+		
 	}	
 	
 	public void nuevasPestanas(){

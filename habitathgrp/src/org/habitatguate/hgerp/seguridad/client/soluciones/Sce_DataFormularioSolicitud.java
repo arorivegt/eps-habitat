@@ -25,6 +25,8 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.CheckBox;
 
@@ -44,8 +46,8 @@ public class Sce_DataFormularioSolicitud extends Composite {
     private TextBox txtNombreSolicitante;
 	private TextBox txtEdad;
 	private TextBox txtNumDpi;
-	private TextBox txtNumDpiUnico;
-	private TextBox txtNumDpiReferencia;
+//	private TextBox txtNumDpiUnico;
+//	private TextBox txtNumDpiReferencia;
 	private TextBox txtProfesionOficio;
     private TextBox txtDireccionActual;
 	private TextBox txtActividadEconomica;
@@ -106,307 +108,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "617px");
-		
-		listEstadoCivil = new ListBox();
-		listEstadoCivil.addItem("-", "-1");
-		listEstadoCivil.addItem("Soltero (a)", "1");
-		listEstadoCivil.addItem("Casado (a)", "2");
-		listEstadoCivil.addItem("Unido (a)", "3");
-		listEstadoCivil.addItem("Separado (a)", "4");
-		listEstadoCivil.addItem("Divorciado (a)", "5");
-		listEstadoCivil.addItem("Viudo (a)", "6");
-		listEstadoCivil.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstadoCivil, 148, 64);
-		listEstadoCivil.setSize("148px", "27px");
-		
-		listPais = new ListBox();
-		listPais.addItem("-","-1");
-		listPais.addItem("Guatemala","1");
-		listPais.addItem("El Salvador","2");
-		listPais.addItem("Bélice","3");
-		listPais.addItem("Honduras","4");
-		listPais.addItem("Nicaragua","5");
-		listPais.addItem("Costa Rica","5");
-		listPais.addItem("Panamá","6");
-		listPais.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listPais, 687, 64);
-		listPais.setSize("173px", "27px");
-		
-		listSolucionConstruir = new ListBox();
-		listSolucionConstruir.addItem("-","-1");
-		listSolucionConstruir.addItem("Nueva","1");
-		listSolucionConstruir.addItem("Mejoramiento","2");
-		listSolucionConstruir.addItem("Adiciones Menores","3");
-		listSolucionConstruir.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listSolucionConstruir, 232, 456);
-		listSolucionConstruir.setSize("148px", "27px");
-		
-		txtNombreSolicitante = new TextBox();
-		txtNombreSolicitante.setMaxLength(50);
-		txtNombreSolicitante.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombreSolicitante, 43, 28);
-		txtNombreSolicitante.setSize("851px", "19px");
-		
-		txtDireccionActual = new TextBox();
-		txtDireccionActual.setMaxLength(200);
-		txtDireccionActual.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDireccionActual, 229, 235);
-		txtDireccionActual.setSize("601px", "19px");
-		
-		txtEdad = new TextBox();
-		txtEdad.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
-				else if(txtEdad.getText().equals(null)) {txtEdad.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtEdad.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtEdad.setText("0");
-					}
-				}
-			}
-		});		
-		txtEdad.setText("0");
-		txtEdad.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEdad, 398, 70);
-		txtEdad.setSize("81px", "19px");
-		
-		txtNumDpi = new TextBox();
-		txtNumDpi.setMaxLength(8);
-		txtNumDpi.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtNumDpi.getText().equals("")) {txtNumDpi.setText("0");}
-				else if(txtNumDpi.getText().equals(null)) {txtNumDpi.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtNumDpi.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtNumDpi.setText("0");
-					}
-				}
-			}
-		});
-		txtNumDpi.setText("0");
-		txtNumDpi.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNumDpi, 693, 115);
-		txtNumDpi.setSize("80px", "19px");
-		
-		txtNumDpiUnico = new TextBox();
-		txtNumDpiUnico.setMaxLength(1);
-		txtNumDpiUnico.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtNumDpiUnico.getText().equals("")) {txtNumDpiUnico.setText("0");}
-				else if(txtNumDpiUnico.getText().equals(null)) {txtNumDpiUnico.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtNumDpiUnico.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtNumDpiUnico.setText("0");
-					}
-				}
-			}
-		});	
-		txtNumDpiUnico.setText("0");
-		txtNumDpiUnico.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNumDpiUnico, 781, 115);
-		txtNumDpiUnico.setSize("20px", "19px");
-		
-		txtNumDpiReferencia = new TextBox();
-		txtNumDpiReferencia.setMaxLength(4);
-		txtNumDpiReferencia.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtNumDpiReferencia.getText().equals("")) {txtNumDpiReferencia.setText("0");}
-				else if(txtNumDpiReferencia.getText().equals(null)) {txtNumDpiReferencia.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtNumDpiReferencia.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtNumDpiReferencia.setText("0");
-					}
-				}
-			}
-		});	
-		txtNumDpiReferencia.setText("0");
-		txtNumDpiReferencia.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNumDpiReferencia, 810, 115);
-		txtNumDpiReferencia.setSize("45px", "19px");
-		
-		txtDireccionSolucion = new TextBox();
-		txtDireccionSolucion.setStyleName("gwt-TextBox2");
-		txtDireccionSolucion.setMaxLength(200);
-		absolutePanel.add(txtDireccionSolucion, 229, 273);
-		txtDireccionSolucion.setSize("601px", "19px");
-		
-		txtLugarTrabajoConyuge = new TextBox();
-		txtLugarTrabajoConyuge.setStyleName("gwt-TextBox2");
-		txtLugarTrabajoConyuge.setMaxLength(200);
-		absolutePanel.add(txtLugarTrabajoConyuge, 229, 544);
-		txtLugarTrabajoConyuge.setSize("294px", "19px");
-		
-		txtLugarTrabajoSolicitante = new TextBox();
-		txtLugarTrabajoSolicitante.setStyleName("gwt-TextBox2");
-		txtLugarTrabajoSolicitante.setMaxLength(200);
-		absolutePanel.add(txtLugarTrabajoSolicitante, 229, 371);
-		txtLugarTrabajoSolicitante.setSize("601px", "19px");
-		
-		txtTelefonoTrabajoConyuge = new TextBox();
-		txtTelefonoTrabajoConyuge.setMaxLength(8);
-		txtTelefonoTrabajoConyuge.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoTrabajoConyuge.getText().equals("")) {txtTelefonoTrabajoConyuge.setText("0");}
-				else if(txtTelefonoTrabajoConyuge.getText().equals(null)) {txtTelefonoTrabajoConyuge.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoTrabajoConyuge.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtTelefonoTrabajoConyuge.setText("0");
-					}
-				}
-			}
-		});		
-		txtTelefonoTrabajoConyuge.setText("0");
-		txtTelefonoTrabajoConyuge.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoTrabajoConyuge, 689, 542);
-		txtTelefonoTrabajoConyuge.setSize("128px", "19px");	
-		
-		txtProfesionOficio = new TextBox();
-		txtProfesionOficio.setStyleName("gwt-TextBox2");
-		txtProfesionOficio.setMaxLength(50);
-		absolutePanel.add(txtProfesionOficio, 227, 113);
-		txtProfesionOficio.setSize("296px", "19px");
-		
-		txtActividadEconomica = new TextBox();
-		txtActividadEconomica.setStyleName("gwt-TextBox2");
-		txtActividadEconomica.setMaxLength(50);
-		absolutePanel.add(txtActividadEconomica, 227, 151);
-		txtActividadEconomica.setSize("296px", "19px");
-		
-		checkBoxLeer = new CheckBox("Sabe Leer");
-		absolutePanel.add(checkBoxLeer, 232, 189);
-		
-		checkBoxEscribir = new CheckBox("Sabe Escribir");
-		absolutePanel.add(checkBoxEscribir, 364, 189);
-		checkBoxEscribir.setSize("154px", "24px");
-		
-		checkBoxFirmar = new CheckBox("Sabe Firmar");
-		absolutePanel.add(checkBoxFirmar, 524, 189);
-		checkBoxFirmar.setSize("159px", "24px");
-		
-		txtTelefonoCasaSolicitante = new TextBox();
-		txtTelefonoCasaSolicitante.setMaxLength(8);
-		txtTelefonoCasaSolicitante.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoCasaSolicitante.getText().equals("")) {txtTelefonoCasaSolicitante.setText("0");}
-				else if(txtTelefonoCasaSolicitante.getText().equals(null)) {txtTelefonoCasaSolicitante.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoCasaSolicitante.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtTelefonoCasaSolicitante.setText("0");
-					}
-				}
-			}
-		});			
-		txtTelefonoCasaSolicitante.setText("0");
-		txtTelefonoCasaSolicitante.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoCasaSolicitante, 229, 419);
-		txtTelefonoCasaSolicitante.setSize("128px", "19px");
-		
-		checkBoxCamion = new CheckBox("Camion");
-		absolutePanel.add(checkBoxCamion, 232, 319);
-		checkBoxCamion.setSize("105px", "24px");
-		
-		checkBoxCarro = new CheckBox("Carro");
-		absolutePanel.add(checkBoxCarro, 364, 319);
-		checkBoxCarro.setSize("105px", "24px");
-		
-		checkBoxPeatonal = new CheckBox("Peatonal");
-		absolutePanel.add(checkBoxPeatonal, 524, 319);
-		checkBoxPeatonal.setSize("105px", "24px");
-		
-		txtTelefonoTrabajoSolicitante = new TextBox();
-		txtTelefonoTrabajoSolicitante.setMaxLength(8);
-		txtTelefonoTrabajoSolicitante.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoTrabajoSolicitante.getText().equals("")) {txtTelefonoTrabajoSolicitante.setText("0");}
-				else if(txtTelefonoTrabajoSolicitante.getText().equals(null)) {txtTelefonoTrabajoSolicitante.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoTrabajoSolicitante.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtTelefonoTrabajoSolicitante.setText("0");
-					}
-				}
-			}
-		});			
-		txtTelefonoTrabajoSolicitante.setText("0");
-		txtTelefonoTrabajoSolicitante.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoTrabajoSolicitante, 693, 421);
-		txtTelefonoTrabajoSolicitante.setSize("128px", "17px");
-		
-		txtNombreConyuge = new TextBox();
-		txtNombreConyuge.setStyleName("gwt-TextBox2");
-		txtNombreConyuge.setMaxLength(200);
-		absolutePanel.add(txtNombreConyuge, 229, 502);
-		txtNombreConyuge.setSize("294px", "19px");
-		
-		txtTelefonoConyuge = new TextBox();
-		txtTelefonoConyuge.setMaxLength(8);
-		txtTelefonoConyuge.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtTelefonoConyuge.getText().equals("")) {txtTelefonoConyuge.setText("0");}
-				else if(txtTelefonoConyuge.getText().equals(null)) {txtTelefonoConyuge.setText("0");}
-				else{
-					try{
-						Integer.parseInt(txtTelefonoConyuge.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtTelefonoConyuge.setText("0");
-					}
-				}
-			}
-		});			
-		txtTelefonoConyuge.setText("0");
-		txtTelefonoConyuge.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoConyuge, 689, 500);
-		txtTelefonoConyuge.setSize("128px", "19px");
-		
-		txtCuotaPagar = new TextBox();
-		txtCuotaPagar.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtCuotaPagar.getText().equals("")) {txtCuotaPagar.setText("0.0");}
-				else if(txtCuotaPagar.getText().equals(null)) {txtCuotaPagar.setText("0.0");}
-				else{
-					try{
-						Float.parseFloat(txtCuotaPagar.getText());
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nNumero no valido");
-						txtCuotaPagar.setText("0.0");
-					}
-				}
-			}
-		});			
-		txtCuotaPagar.setText("0.0");
-		txtCuotaPagar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtCuotaPagar, 689, 462);
-		txtCuotaPagar.setSize("128px", "19px");
 		
 		Label lblNombres = new Label("Nombre completo:");
 		lblNombres.setStyleName("label");
@@ -504,6 +205,356 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		absolutePanel.add(lblTelefonoConyuge, 562, 502);
 		lblTelefonoConyuge.setSize("110px", "19px");
 		
+		txtNombreSolicitante = new TextBox();
+		txtNombreSolicitante.setMaxLength(50);
+		txtNombreSolicitante.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNombreSolicitante, 43, 28);
+		txtNombreSolicitante.setSize("851px", "19px");
+		txtNombreSolicitante.setTabIndex(1);
+		
+		listEstadoCivil = new ListBox();
+		listEstadoCivil.addItem("-", "-1");
+		listEstadoCivil.addItem("Soltero (a)", "1");
+		listEstadoCivil.addItem("Casado (a)", "2");
+		listEstadoCivil.addItem("Unido (a)", "3");
+		listEstadoCivil.addItem("Separado (a)", "4");
+		listEstadoCivil.addItem("Divorciado (a)", "5");
+		listEstadoCivil.addItem("Viudo (a)", "6");
+		listEstadoCivil.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listEstadoCivil, 148, 64);
+		listEstadoCivil.setSize("148px", "27px");
+		listEstadoCivil.setTabIndex(2);
+		
+		txtEdad = new TextBox();
+		txtEdad.setMaxLength(3);
+		txtEdad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtEdad.getText().equals("")) {txtEdad.setText("0");}
+				else if(txtEdad.getText().equals(null)) {txtEdad.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtEdad.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtEdad.setText("0");
+					}
+				}
+			}
+		});		
+		txtEdad.setText("0");
+		txtEdad.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEdad, 398, 70);
+		txtEdad.setSize("81px", "19px");
+		txtEdad.setTabIndex(3);
+		
+		listPais = new ListBox();
+		listPais.addItem("-","-1");
+		listPais.addItem("Guatemala","1");
+		listPais.addItem("El Salvador","2");
+		listPais.addItem("Bélice","3");
+		listPais.addItem("Honduras","4");
+		listPais.addItem("Nicaragua","5");
+		listPais.addItem("Costa Rica","5");
+		listPais.addItem("Panamá","6");
+		listPais.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listPais, 687, 64);
+		listPais.setSize("173px", "27px");
+		listPais.setTabIndex(4);
+		
+		txtProfesionOficio = new TextBox();
+		txtProfesionOficio.setStyleName("gwt-TextBox2");
+		txtProfesionOficio.setMaxLength(50);
+		absolutePanel.add(txtProfesionOficio, 227, 113);
+		txtProfesionOficio.setSize("296px", "19px");
+		txtProfesionOficio.setTabIndex(5);
+		
+		txtNumDpi = new TextBox();
+//		txtNumDpi.setMaxLength(8);
+		txtNumDpi.setMaxLength(13);
+//		txtNumDpi.addKeyPressHandler(new KeyPressHandler() {
+//		    @Override
+//		    public void onKeyPress(KeyPressEvent event) {
+//		        String input = txtNumDpi.getText();
+//		        if (!input.matches("[0-9]*")) {
+//		            // show some error
+//					mensaje.setMensaje("alert alert-error", 
+//                			"Error !! \nNumero no valido");
+//					txtNumDpi.setText("0");
+//		        	
+//		            return;
+//		        }
+//		        // do your thang
+//		        System.out.println("Exito");
+//		        
+//		    }
+//		});	
+		txtNumDpi.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {			
+				String input = txtNumDpi.getText();			
+				if(txtNumDpi.getText().equals("")) {txtNumDpi.setText("0");}
+				else if(txtNumDpi.getText().equals(null)) {txtNumDpi.setText("0");}
+				
+				else if (!input.matches("[0-9]*")) {
+	            // show some error
+				mensaje.setMensaje("alert alert-error", 
+            			"Error !! \nNumero no valido");
+				txtNumDpi.setText("0");	      
+				}			
+				else{
+					 System.out.println("Exito");
+				}
+			}
+		});			
+		txtNumDpi.setText("0");
+		txtNumDpi.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNumDpi, 693, 115);
+		txtNumDpi.setSize("116px", "19px");
+		txtNumDpi.setTabIndex(6);
+		
+		// Comentado para validez de no. DPI en un solo campo
+		
+//		txtNumDpiUnico = new TextBox();
+//		txtNumDpiUnico.setMaxLength(1);
+//		txtNumDpiUnico.addChangeHandler(new ChangeHandler() {
+//			public void onChange(ChangeEvent event) {
+//				if(txtNumDpiUnico.getText().equals("")) {txtNumDpiUnico.setText("0");}
+//				else if(txtNumDpiUnico.getText().equals(null)) {txtNumDpiUnico.setText("0");}
+//				else{
+//					try{
+//						Integer.parseInt(txtNumDpiUnico.getText());
+//					}catch(Exception e){
+//						mensaje.setMensaje("alert alert-error", 
+//                    			"Error !! \nNumero no valido");
+//						txtNumDpiUnico.setText("0");
+//					}
+//				}
+//			}
+//		});	
+//		txtNumDpiUnico.setText("0");
+//		txtNumDpiUnico.setStyleName("gwt-TextBox2");
+//		absolutePanel.add(txtNumDpiUnico, 687, 151);
+//		txtNumDpiUnico.setSize("20px", "19px");
+//		
+//		txtNumDpiReferencia = new TextBox();
+//		txtNumDpiReferencia.setMaxLength(4);
+//		txtNumDpiReferencia.addChangeHandler(new ChangeHandler() {
+//			public void onChange(ChangeEvent event) {
+//				if(txtNumDpiReferencia.getText().equals("")) {txtNumDpiReferencia.setText("0");}
+//				else if(txtNumDpiReferencia.getText().equals(null)) {txtNumDpiReferencia.setText("0");}
+//				else{
+//					try{
+//						Integer.parseInt(txtNumDpiReferencia.getText());
+//					}catch(Exception e){
+//						mensaje.setMensaje("alert alert-error", 
+//                    			"Error !! \nNumero no valido");
+//						txtNumDpiReferencia.setText("0");
+//					}
+//				}
+//			}
+//		});	
+//		txtNumDpiReferencia.setText("0");
+//		txtNumDpiReferencia.setStyleName("gwt-TextBox2");
+//		absolutePanel.add(txtNumDpiReferencia, 715, 151);
+//		txtNumDpiReferencia.setSize("45px", "19px");
+		
+		txtActividadEconomica = new TextBox();
+		txtActividadEconomica.setStyleName("gwt-TextBox2");
+		txtActividadEconomica.setMaxLength(50);
+		absolutePanel.add(txtActividadEconomica, 227, 151);
+		txtActividadEconomica.setSize("296px", "19px");
+		txtActividadEconomica.setTabIndex(7);
+		
+		checkBoxLeer = new CheckBox("Sabe Leer");
+		absolutePanel.add(checkBoxLeer, 232, 189);
+		checkBoxLeer.setSize("126px", "24px");
+		checkBoxLeer.setTabIndex(8);
+		
+		checkBoxEscribir = new CheckBox("Sabe Escribir");
+		absolutePanel.add(checkBoxEscribir, 364, 189);
+		checkBoxEscribir.setSize("154px", "24px");
+		checkBoxEscribir.setTabIndex(9);
+		
+		checkBoxFirmar = new CheckBox("Sabe Firmar");
+		absolutePanel.add(checkBoxFirmar, 524, 189);
+		checkBoxFirmar.setSize("159px", "24px");
+		checkBoxFirmar.setTabIndex(10);
+		
+		txtDireccionActual = new TextBox();
+		txtDireccionActual.setMaxLength(200);
+		txtDireccionActual.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtDireccionActual, 229, 235);
+		txtDireccionActual.setSize("601px", "19px");
+		txtDireccionActual.setTabIndex(11);
+		
+		txtDireccionSolucion = new TextBox();
+		txtDireccionSolucion.setStyleName("gwt-TextBox2");
+		txtDireccionSolucion.setMaxLength(200);
+		absolutePanel.add(txtDireccionSolucion, 229, 273);
+		txtDireccionSolucion.setSize("601px", "19px");
+		txtDireccionSolucion.setTabIndex(12);
+		
+		checkBoxCamion = new CheckBox("Camion");
+		absolutePanel.add(checkBoxCamion, 232, 319);
+		checkBoxCamion.setSize("105px", "24px");
+		checkBoxCamion.setTabIndex(13);
+		
+		checkBoxCarro = new CheckBox("Carro");
+		absolutePanel.add(checkBoxCarro, 364, 319);
+		checkBoxCarro.setSize("105px", "24px");
+		checkBoxCarro.setTabIndex(14);
+		
+		checkBoxPeatonal = new CheckBox("Peatonal");
+		absolutePanel.add(checkBoxPeatonal, 524, 319);
+		checkBoxPeatonal.setSize("105px", "24px");
+		checkBoxPeatonal.setTabIndex(15);
+		
+		txtLugarTrabajoSolicitante = new TextBox();
+		txtLugarTrabajoSolicitante.setStyleName("gwt-TextBox2");
+		txtLugarTrabajoSolicitante.setMaxLength(200);
+		absolutePanel.add(txtLugarTrabajoSolicitante, 229, 371);
+		txtLugarTrabajoSolicitante.setSize("601px", "19px");
+		txtLugarTrabajoSolicitante.setTabIndex(16);
+		
+		txtTelefonoCasaSolicitante = new TextBox();
+		txtTelefonoCasaSolicitante.setMaxLength(8);
+		txtTelefonoCasaSolicitante.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoCasaSolicitante.getText().equals("")) {txtTelefonoCasaSolicitante.setText("0");}
+				else if(txtTelefonoCasaSolicitante.getText().equals(null)) {txtTelefonoCasaSolicitante.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoCasaSolicitante.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtTelefonoCasaSolicitante.setText("0");
+					}
+				}
+			}
+		});			
+		txtTelefonoCasaSolicitante.setText("0");
+		txtTelefonoCasaSolicitante.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoCasaSolicitante, 229, 419);
+		txtTelefonoCasaSolicitante.setSize("128px", "19px");
+		txtTelefonoCasaSolicitante.setTabIndex(17);
+		
+		txtTelefonoTrabajoSolicitante = new TextBox();
+		txtTelefonoTrabajoSolicitante.setMaxLength(8);
+		txtTelefonoTrabajoSolicitante.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoTrabajoSolicitante.getText().equals("")) {txtTelefonoTrabajoSolicitante.setText("0");}
+				else if(txtTelefonoTrabajoSolicitante.getText().equals(null)) {txtTelefonoTrabajoSolicitante.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoTrabajoSolicitante.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtTelefonoTrabajoSolicitante.setText("0");
+					}
+				}
+			}
+		});			
+		txtTelefonoTrabajoSolicitante.setText("0");
+		txtTelefonoTrabajoSolicitante.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoTrabajoSolicitante, 693, 421);
+		txtTelefonoTrabajoSolicitante.setSize("128px", "17px");
+		txtTelefonoTrabajoSolicitante.setTabIndex(18);
+		
+		listSolucionConstruir = new ListBox();
+		listSolucionConstruir.addItem("-","-1");
+		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
+		listSolucionConstruir.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listSolucionConstruir, 232, 456);
+		listSolucionConstruir.setSize("148px", "27px");
+		listSolucionConstruir.setTabIndex(19);
+		
+		txtCuotaPagar = new TextBox();
+		txtCuotaPagar.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtCuotaPagar.getText().equals("")) {txtCuotaPagar.setText("0.0");}
+				else if(txtCuotaPagar.getText().equals(null)) {txtCuotaPagar.setText("0.0");}
+				else{
+					try{
+						Float.parseFloat(txtCuotaPagar.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtCuotaPagar.setText("0.0");
+					}
+				}
+			}
+		});			
+		txtCuotaPagar.setText("0.0");
+		txtCuotaPagar.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtCuotaPagar, 689, 462);
+		txtCuotaPagar.setSize("128px", "19px");
+		txtCuotaPagar.setTabIndex(20);;
+		
+		txtNombreConyuge = new TextBox();
+		txtNombreConyuge.setStyleName("gwt-TextBox2");
+		txtNombreConyuge.setMaxLength(200);
+		absolutePanel.add(txtNombreConyuge, 229, 502);
+		txtNombreConyuge.setSize("294px", "19px");
+		txtNombreConyuge.setTabIndex(21);
+		
+		txtTelefonoConyuge = new TextBox();
+		txtTelefonoConyuge.setMaxLength(8);
+		txtTelefonoConyuge.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoConyuge.getText().equals("")) {txtTelefonoConyuge.setText("0");}
+				else if(txtTelefonoConyuge.getText().equals(null)) {txtTelefonoConyuge.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoConyuge.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtTelefonoConyuge.setText("0");
+					}
+				}
+			}
+		});			
+		txtTelefonoConyuge.setText("0");
+		txtTelefonoConyuge.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoConyuge, 689, 500);
+		txtTelefonoConyuge.setSize("128px", "19px");
+		txtTelefonoConyuge.setTabIndex(22);
+		
+		txtLugarTrabajoConyuge = new TextBox();
+		txtLugarTrabajoConyuge.setStyleName("gwt-TextBox2");
+		txtLugarTrabajoConyuge.setMaxLength(200);
+		absolutePanel.add(txtLugarTrabajoConyuge, 229, 544);
+		txtLugarTrabajoConyuge.setSize("294px", "19px");
+		txtLugarTrabajoConyuge.setTabIndex(23);
+		
+		txtTelefonoTrabajoConyuge = new TextBox();
+		txtTelefonoTrabajoConyuge.setMaxLength(8);
+		txtTelefonoTrabajoConyuge.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtTelefonoTrabajoConyuge.getText().equals("")) {txtTelefonoTrabajoConyuge.setText("0");}
+				else if(txtTelefonoTrabajoConyuge.getText().equals(null)) {txtTelefonoTrabajoConyuge.setText("0");}
+				else{
+					try{
+						Integer.parseInt(txtTelefonoTrabajoConyuge.getText());
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nNumero no valido");
+						txtTelefonoTrabajoConyuge.setText("0");
+					}
+				}
+			}
+		});		
+		txtTelefonoTrabajoConyuge.setText("0");
+		txtTelefonoTrabajoConyuge.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoTrabajoConyuge, 689, 542);
+		txtTelefonoTrabajoConyuge.setSize("128px", "19px");	
+		txtTelefonoTrabajoConyuge.setTabIndex(24);
+
+		
 		// --- Boton Guardar - Data Formulario Solicitud
 
 		btnGuardar = new Button("New button");
@@ -540,13 +591,15 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					int dpi = 0;
 					dpi = Integer.parseInt(dpiValue);
 
-					String dpiUnicoValue = txtNumDpiUnico.getText();
+					// Comentado para validez de no. DPI en un solo campo
+					
+//					String dpiUnicoValue = txtNumDpiUnico.getText();
 					int dpiUnico = 0;
-					dpiUnico = Integer.parseInt(dpiUnicoValue);
-
-					String dpiReferenciaValue = txtNumDpiReferencia.getText();
+//					dpiUnico = Integer.parseInt(dpiUnicoValue);
+//
+//					String dpiReferenciaValue = txtNumDpiReferencia.getText();
 					int dpiReferencia = 0;
-					dpiReferencia = Integer.parseInt(dpiReferenciaValue);
+//					dpiReferencia = Integer.parseInt(dpiReferenciaValue);
 
 					String actividadEconomica = "";		
 					if(txtActividadEconomica.getText() == null){
@@ -654,7 +707,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 								solucionesService.ingresarDatosSolicitante(idEmpleado, idAfiliado,
 										fecrec, nombreSolicitante, estadoCivil, edad, nacionalidad, 
-										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
+										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,   // Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 
 										direccionActual, direccionSolucion,
 										camion, carro, peatonal,
@@ -686,7 +739,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 								solucionesService.actualizarDatosSolicitante(idFormulario, idEmpleado, idAfiliado, 
 										nombreSolicitante, estadoCivil, edad, nacionalidad, 
-										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,
+										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,			// Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 
 										direccionActual, direccionSolucion,
 										camion, carro, peatonal,
@@ -728,6 +781,8 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		});
 		btnGuardar.setText("Guardar");
 		absolutePanel.add(btnGuardar, 464, 603);
+		btnGuardar.setTabIndex(25);
+		
 		
 	}
 	
@@ -786,11 +841,12 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		this.txtProfesionOficio.setText(profesionOficio);
 		String dpiValue = ""+dpi;
 		this.txtNumDpi.setText(dpiValue);
-		String dpiUnicoValue = ""+dpiUnico;
-		this.txtNumDpiUnico.setText(dpiUnicoValue);
-		String dpiReferenciaValue = ""+dpiReferencia;
-		this.txtNumDpiReferencia.setText(dpiReferenciaValue);
-		this.txtActividadEconomica.setText(actividadEconomica);
+		// Comentado para validez de no. DPI en un solo campo
+//		String dpiUnicoValue = ""+dpiUnico;
+//		this.txtNumDpiUnico.setText(dpiUnicoValue);
+//		String dpiReferenciaValue = ""+dpiReferencia;
+//		this.txtNumDpiReferencia.setText(dpiReferenciaValue);
+//		this.txtActividadEconomica.setText(actividadEconomica);
 		this.checkBoxLeer.setValue(sabeLeer);
 		this.checkBoxEscribir.setValue(sabeEscribir);
 		this.checkBoxFirmar.setValue(sabeFirmar);

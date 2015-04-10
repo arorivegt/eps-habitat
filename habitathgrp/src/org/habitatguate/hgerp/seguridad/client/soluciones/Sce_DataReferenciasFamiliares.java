@@ -43,14 +43,44 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "140px");
 		
+		Label lblNombre = new Label("Nombre");
+		lblNombre.setStyleName("label");
+		absolutePanel.add(lblNombre, 20, 32);
+		lblNombre.setSize("105px", "13px");
+		
+		Label lblTelefono = new Label("Telefono");
+		lblTelefono.setStyleName("label");
+		absolutePanel.add(lblTelefono, 506, 32);
+		lblTelefono.setSize("58px", "13px");
+		
+		Label lblEscolaridad = new Label("Parentesco");
+		lblEscolaridad.setStyleName("label");
+		absolutePanel.add(lblEscolaridad, 384, 32);
+		lblEscolaridad.setSize("105px", "13px");
+		
+		Label lblOcupacion = new Label("Direccion");
+		lblOcupacion.setStyleName("label");
+		absolutePanel.add(lblOcupacion, 636, 32);
+		lblOcupacion.setSize("132px", "13px");
+		
 		txtNombreFamiliar = new TextBox();
 		txtNombreFamiliar.setMaxLength(200);
 		txtNombreFamiliar.setStylePrimaryName("gwt-TextBox2");
 		txtNombreFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreFamiliar, 20, 51);
 		txtNombreFamiliar.setSize("345px", "19px");
+		txtNombreFamiliar.setTabIndex(1);
+		
+		txtParentescoFamiliar = new TextBox();
+		txtParentescoFamiliar.setMaxLength(200);
+		txtParentescoFamiliar.setStylePrimaryName("gwt-TextBox2");
+		txtParentescoFamiliar.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtParentescoFamiliar, 384, 51);
+		txtParentescoFamiliar.setSize("103px", "19px");
+		txtParentescoFamiliar.setTabIndex(2);
 		
 		txtTelefonoFamiliar = new TextBox();
+		txtTelefonoFamiliar.setMaxLength(8);
 		txtTelefonoFamiliar.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoFamiliar .getText().equals("")) {txtTelefonoFamiliar .setText("0");}
@@ -70,13 +100,7 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		txtTelefonoFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoFamiliar, 506, 51);
 		txtTelefonoFamiliar.setSize("103px", "19px");
-		
-		txtParentescoFamiliar = new TextBox();
-		txtParentescoFamiliar.setMaxLength(200);
-		txtParentescoFamiliar.setStylePrimaryName("gwt-TextBox2");
-		txtParentescoFamiliar.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtParentescoFamiliar, 384, 51);
-		txtParentescoFamiliar.setSize("103px", "19px");
+		txtTelefonoFamiliar.setTabIndex(3);
 		
 		txtDireccionFamiliar = new TextBox();
 		txtDireccionFamiliar.setMaxLength(100);
@@ -84,6 +108,7 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		txtDireccionFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtDireccionFamiliar, 636, 51);
 		txtDireccionFamiliar.setSize("397px", "19px");
+		txtDireccionFamiliar.setTabIndex(4);
 		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
@@ -164,15 +189,13 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 				}
 				
 			}
-		});
-		
-		
-		
+		});		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 232, 119);
 		btnGuardar.setSize("227px", "34px");
+		btnGuardar.setTabIndex(5);
 		
 		
 		Button btnEliminar = new Button("Send");
@@ -192,26 +215,7 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		btnEliminar.setStyleName("sendButton");
 		absolutePanel.add(btnEliminar, 531, 119);
 		btnEliminar.setSize("227px", "34px");
-		
-		Label lblNombre = new Label("Nombre");
-		lblNombre.setStyleName("label");
-		absolutePanel.add(lblNombre, 20, 32);
-		lblNombre.setSize("105px", "13px");
-		
-		Label lblTelefono = new Label("Telefono");
-		lblTelefono.setStyleName("label");
-		absolutePanel.add(lblTelefono, 506, 32);
-		lblTelefono.setSize("58px", "13px");
-		
-		Label lblEscolaridad = new Label("Parentesco");
-		lblEscolaridad.setStyleName("label");
-		absolutePanel.add(lblEscolaridad, 384, 32);
-		lblEscolaridad.setSize("105px", "13px");
-		
-		Label lblOcupacion = new Label("Direccion");
-		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 636, 32);
-		lblOcupacion.setSize("132px", "13px");
+		btnEliminar.setTabIndex(6);
 		
 	
 	}

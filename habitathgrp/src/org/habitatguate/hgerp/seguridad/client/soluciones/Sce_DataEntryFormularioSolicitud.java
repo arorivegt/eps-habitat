@@ -13,6 +13,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
 
+import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -25,6 +26,8 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 	private Sce_DataEntryDatosVivienda fd4;
 	private Sce_DataEntrySituacionEconomica fd5;
 	private Sce_DataEntryReferenciasFamiliares fd6;
+	
+    private AbsolutePanel absolutePanel;
 	
 	public Sce_DataEntryFormularioSolicitud() {
 		
@@ -39,6 +42,8 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel1.setSize("100%", "100%");
 		fd1 = new Sce_DataFormularioSolicitud(this);
 		scrollPanel1.setWidget(fd1);	
+		
+		tabPanel.selectTab(0); // Carga Tab Inicial
 		
 	}
 

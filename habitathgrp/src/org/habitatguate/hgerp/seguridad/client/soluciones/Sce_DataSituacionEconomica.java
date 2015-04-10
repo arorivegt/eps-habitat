@@ -73,6 +73,9 @@ public class Sce_DataSituacionEconomica extends Composite {
 	private float valPagoPrestamos = 0;
 	private float valOtrosGastos1 = 0;
 	private float valOtrosGastos2 = 0;
+	// Data Pagos Buro y Cuota HPHG
+	private float valPagosBuro = 0;
+	private float valCuota = 0;
 
 	
 	public Sce_DataSituacionEconomica(Sce_DataEntrySituacionEconomica a, Sce_DataEntryFormularioSolicitud e) {
@@ -92,6 +95,119 @@ public class Sce_DataSituacionEconomica extends Composite {
 		Label lblCantidad_1 = new Label("CANTIDAD");
 		absolutePanel.add(lblCantidad_1, 835, 52);
 		lblCantidad_1.setSize("119px", "20px");
+		
+		Label lblIngresosFijosDel = new Label("Ingresos fijos del solicitante:");
+		lblIngresosFijosDel.setStyleName("label");
+		absolutePanel.add(lblIngresosFijosDel, 49, 118);
+		lblIngresosFijosDel.setSize("249px", "19px");
+		
+		Label lblOtrosIngresosDel_1 = new Label("Otros ingresos:");
+		lblOtrosIngresosDel_1.setStyleName("label");
+		absolutePanel.add(lblOtrosIngresosDel_1, 49, 171);
+		lblOtrosIngresosDel_1.setSize("249px", "19px");
+		
+		Label lblIngresosDelConyuge = new Label("Ingresos del conyuge:");
+		lblIngresosDelConyuge.setStyleName("label");
+		absolutePanel.add(lblIngresosDelConyuge, 49, 145);
+		lblIngresosDelConyuge.setSize("249px", "19px");
+		
+		Label lblTotalIngresos = new Label("Ingresos totales:");
+		lblTotalIngresos.setStyleName("label");
+		absolutePanel.add(lblTotalIngresos, 49, 197);
+		lblTotalIngresos.setSize("249px", "19px");
+		
+		Label lblAlquilerDeVivienda = new Label("Alquiler de vivienda:");
+		lblAlquilerDeVivienda.setStyleName("label");
+		absolutePanel.add(lblAlquilerDeVivienda, 515, 118);
+		lblAlquilerDeVivienda.setSize("249px", "19px");
+		
+		Label lblAlimentacion = new Label("Alimentacion:");
+		lblAlimentacion.setStyleName("label");
+		absolutePanel.add(lblAlimentacion, 515, 145);
+		lblAlimentacion.setSize("249px", "19px");
+		
+		Label lblRopa = new Label("Ropa:");
+		lblRopa.setStyleName("label");
+		absolutePanel.add(lblRopa, 515, 171);
+		lblRopa.setSize("249px", "19px");
+		
+		Label lblGastosMedicos = new Label("Gastos Medicos:");
+		lblGastosMedicos.setStyleName("label");
+		absolutePanel.add(lblGastosMedicos, 515, 197);
+		lblGastosMedicos.setSize("249px", "19px");
+		
+		Label lblTransporte = new Label("Transporte:");
+		lblTransporte.setStyleName("label");
+		absolutePanel.add(lblTransporte, 515, 223);
+		lblTransporte.setSize("249px", "19px");
+		
+		Label lblEducacion = new Label("Educacion:");
+		lblEducacion.setStyleName("label");
+		absolutePanel.add(lblEducacion, 515, 249);
+		lblEducacion.setSize("249px", "19px");
+		
+		Label lblPagoDeLuz = new Label("Pago de luz y agua:");
+		lblPagoDeLuz.setStyleName("label");
+		absolutePanel.add(lblPagoDeLuz, 515, 275);
+		lblPagoDeLuz.setSize("249px", "19px");
+		
+		Label lblPagoDePrestamos = new Label("Pago de prestamos:");
+		lblPagoDePrestamos.setStyleName("label");
+		absolutePanel.add(lblPagoDePrestamos, 515, 301);
+		lblPagoDePrestamos.setSize("249px", "19px");
+		
+		Label lblOtrosGastos = new Label("Otros gastos:");
+		lblOtrosGastos.setStyleName("label");
+		absolutePanel.add(lblOtrosGastos, 515, 327);
+		lblOtrosGastos.setSize("249px", "19px");
+		
+		Label lblOtrosGastos_1 = new Label("Otros gastos:");
+		lblOtrosGastos_1.setStyleName("label");
+		absolutePanel.add(lblOtrosGastos_1, 515, 353);
+		lblOtrosGastos_1.setSize("249px", "19px");
+		
+		Label lblEgresosTotales = new Label("Egresos totales:");
+		lblEgresosTotales.setStyleName("label");
+		absolutePanel.add(lblEgresosTotales, 515, 379);
+		lblEgresosTotales.setSize("249px", "19px");
+		
+		Label lblIngresosMensuales = new Label("INGRESOS MENSUALES");
+		absolutePanel.add(lblIngresosMensuales, 53, 52);
+		lblIngresosMensuales.setSize("245px", "20px");
+		
+		Label label = new Label("CANTIDAD");
+		absolutePanel.add(label, 332, 52);
+		label.setSize("119px", "20px");
+		
+		Label lblTotalIngresos_1 = new Label("Total ingresos:");
+		lblTotalIngresos_1.setStyleName("label");
+		absolutePanel.add(lblTotalIngresos_1, 49, 249);
+		lblTotalIngresos_1.setSize("249px", "19px");
+		
+		Label lblTotalEgresos = new Label("Total egresos:");
+		lblTotalEgresos.setStyleName("label");
+		absolutePanel.add(lblTotalEgresos, 49, 275);
+		lblTotalEgresos.setSize("249px", "19px");
+		
+		Label lblDiferencia = new Label("Diferencia:");
+		lblDiferencia.setStyleName("label");
+		absolutePanel.add(lblDiferencia, 49, 301);
+		lblDiferencia.setSize("249px", "19px");
+		
+		Label lblPagosBuro = new Label("Pagos buro:");
+		lblPagosBuro.setStyleName("label");
+		absolutePanel.add(lblPagosBuro, 49, 327);
+		lblPagosBuro.setSize("249px", "19px");
+		
+		Label lblCuotaHphg = new Label("Cuota HPHG");
+		lblCuotaHphg.setStyleName("label");
+		absolutePanel.add(lblCuotaHphg, 49, 353);
+		lblCuotaHphg.setSize("249px", "19px");
+		
+		Label lblExcedente = new Label("Excedente:");
+		lblExcedente.setStyleName("label");
+		absolutePanel.add(lblExcedente, 49, 379);
+		lblExcedente.setSize("249px", "19px");
 		
 		txtIngresosSolicitante = new TextBox();
 		txtIngresosSolicitante.addChangeHandler(new ChangeHandler() {
@@ -122,6 +238,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtIngresosSolicitante.setMaxLength(50);
 		absolutePanel.add(txtIngresosSolicitante, 332, 116);
 		txtIngresosSolicitante.setSize("103px", "19px");
+		txtIngresosSolicitante.setTabIndex(1);
 		
 		txtIngresosConyuge = new TextBox();
 		txtIngresosConyuge.addChangeHandler(new ChangeHandler() {
@@ -152,6 +269,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtIngresosConyuge.setMaxLength(50);
 		absolutePanel.add(txtIngresosConyuge, 332, 143);
 		txtIngresosConyuge.setSize("103px", "19px");
+		txtIngresosConyuge.setTabIndex(2);
 		
 		txtOtrosIngresos = new TextBox();
 		txtOtrosIngresos.addChangeHandler(new ChangeHandler() {
@@ -182,7 +300,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtOtrosIngresos.setMaxLength(50);
 		absolutePanel.add(txtOtrosIngresos, 332, 169);
 		txtOtrosIngresos.setSize("103px", "19px");		
-	
+		txtOtrosIngresos.setTabIndex(3);
 		
 		txtAlquilerVivienda = new TextBox();
 		txtAlquilerVivienda.addChangeHandler(new ChangeHandler() {
@@ -213,6 +331,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtAlquilerVivienda.setMaxLength(50);
 		absolutePanel.add(txtAlquilerVivienda, 835, 116);
 		txtAlquilerVivienda.setSize("103px", "19px");
+		txtAlquilerVivienda.setTabIndex(4);
 		
 		txtAlimentacion = new TextBox();
 		txtAlimentacion.addChangeHandler(new ChangeHandler() {
@@ -243,6 +362,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtAlimentacion.setMaxLength(50);
 		absolutePanel.add(txtAlimentacion, 835, 143);
 		txtAlimentacion.setSize("103px", "19px");
+		txtAlimentacion.setTabIndex(5);
 		
 		txtRopa = new TextBox();
 		txtRopa.addChangeHandler(new ChangeHandler() {
@@ -273,6 +393,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtRopa.setMaxLength(50);
 		absolutePanel.add(txtRopa, 835, 169);
 		txtRopa.setSize("103px", "19px");
+		txtRopa.setTabIndex(6);
 		
 		txtGastosMedicos = new TextBox();
 		txtGastosMedicos.addChangeHandler(new ChangeHandler() {
@@ -303,6 +424,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtGastosMedicos.setMaxLength(50);
 		absolutePanel.add(txtGastosMedicos, 835, 195);
 		txtGastosMedicos.setSize("103px", "19px");
+		txtGastosMedicos.setTabIndex(7);
 		
 		txtTransporte = new TextBox();
 		txtTransporte.addChangeHandler(new ChangeHandler() {
@@ -333,6 +455,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtTransporte.setMaxLength(50);
 		absolutePanel.add(txtTransporte, 835, 221);
 		txtTransporte.setSize("103px", "19px");
+		txtTransporte.setTabIndex(8);
 		
 		txtEducacion = new TextBox();
 		txtEducacion.addChangeHandler(new ChangeHandler() {
@@ -363,6 +486,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtEducacion.setMaxLength(50);
 		absolutePanel.add(txtEducacion, 835, 247);
 		txtEducacion.setSize("103px", "19px");
+		txtEducacion.setTabIndex(9);
 		
 		txtPagoLuzAgua = new TextBox();
 		txtPagoLuzAgua.addChangeHandler(new ChangeHandler() {
@@ -393,6 +517,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtPagoLuzAgua.setMaxLength(50);
 		absolutePanel.add(txtPagoLuzAgua, 835, 273);
 		txtPagoLuzAgua.setSize("103px", "19px");
+		txtPagoLuzAgua.setTabIndex(10);
 		
 		txtPagoPrestamos = new TextBox();
 		txtPagoPrestamos.addChangeHandler(new ChangeHandler() {
@@ -423,6 +548,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtPagoPrestamos.setMaxLength(50);
 		absolutePanel.add(txtPagoPrestamos, 835, 299);
 		txtPagoPrestamos.setSize("103px", "19px");
+		txtPagoPrestamos.setTabIndex(11);
 		
 		txtOtrosGastos1 = new TextBox();
 		txtOtrosGastos1.addChangeHandler(new ChangeHandler() {
@@ -453,6 +579,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtOtrosGastos1.setMaxLength(50);
 		absolutePanel.add(txtOtrosGastos1, 835, 325);
 		txtOtrosGastos1.setSize("103px", "19px");
+		txtOtrosGastos1.setTabIndex(12);
 		
 		txtOtrosGastos2 = new TextBox();
 		txtOtrosGastos2.addChangeHandler(new ChangeHandler() {
@@ -483,6 +610,67 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtOtrosGastos2.setMaxLength(50);
 		absolutePanel.add(txtOtrosGastos2, 835, 351);
 		txtOtrosGastos2.setSize("103px", "19px");
+		txtOtrosGastos2.setTabIndex(13);
+		
+		txtPagosBuro = new TextBox();
+		txtPagosBuro.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtPagosBuro .getText().equals("")) {
+					txtPagosBuro .setText("0.0");
+				}
+				else if(txtPagosBuro .getText().equals(null)) {
+					txtPagosBuro .setText("0.0");
+				}
+				else{
+					try{
+						Float.parseFloat(txtPagosBuro.getText());						
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nValor No valido");
+						txtPagosBuro .setText("0.0");
+					}
+				}
+				
+				valPagosBuro = Float.parseFloat(txtPagosBuro.getText()); // Para Excedente
+				actualizarIngresosTotales();	
+			}
+		});				
+		txtPagosBuro.setText("0.0");
+		txtPagosBuro.setStyleName("gwt-TextBox2");
+		txtPagosBuro.setMaxLength(50);
+		absolutePanel.add(txtPagosBuro, 332, 325);
+		txtPagosBuro.setSize("103px", "19px");
+		txtPagosBuro.setTabIndex(14);
+		
+		txtCuota = new TextBox();
+		txtCuota.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtCuota .getText().equals("")) {
+					txtCuota .setText("0.0");
+				}
+				else if(txtCuota .getText().equals(null)) {
+					txtCuota .setText("0.0");
+				}
+				else{
+					try{
+						Float.parseFloat(txtCuota.getText());						
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nValor No valido");
+						txtCuota .setText("0.0");
+					}
+				}
+				
+				valCuota = Float.parseFloat(txtCuota.getText()); // Para Excedente
+				actualizarIngresosTotales();
+			}
+		});			
+		txtCuota.setText("0.0");
+		txtCuota.setStyleName("gwt-TextBox2");
+		txtCuota.setMaxLength(50);
+		absolutePanel.add(txtCuota, 332, 351);
+		txtCuota.setSize("103px", "19px");
+		txtCuota.setTabIndex(15);
 		
 		txtIngresosTotales = new TextBox();
 		txtIngresosTotales.addChangeHandler(new ChangeHandler() {
@@ -619,58 +807,6 @@ public class Sce_DataSituacionEconomica extends Composite {
 		absolutePanel.add(txtDiferencia, 332, 299);
 		txtDiferencia.setSize("103px", "19px");
 		
-		txtPagosBuro = new TextBox();
-		txtPagosBuro.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtPagosBuro .getText().equals("")) {
-					txtPagosBuro .setText("0.0");
-				}
-				else if(txtPagosBuro .getText().equals(null)) {
-					txtPagosBuro .setText("0.0");
-				}
-				else{
-					try{
-						Float.parseFloat(txtPagosBuro.getText());						
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nValor No valido");
-						txtPagosBuro .setText("0.0");
-					}
-				}
-			}
-		});				
-		txtPagosBuro.setText("0.0");
-		txtPagosBuro.setStyleName("gwt-TextBox2");
-		txtPagosBuro.setMaxLength(50);
-		absolutePanel.add(txtPagosBuro, 332, 325);
-		txtPagosBuro.setSize("103px", "19px");
-		
-		txtCuota = new TextBox();
-		txtCuota.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtCuota .getText().equals("")) {
-					txtCuota .setText("0.0");
-				}
-				else if(txtCuota .getText().equals(null)) {
-					txtCuota .setText("0.0");
-				}
-				else{
-					try{
-						Float.parseFloat(txtCuota.getText());						
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nValor No valido");
-						txtCuota .setText("0.0");
-					}
-				}
-			}
-		});			
-		txtCuota.setText("0.0");
-		txtCuota.setStyleName("gwt-TextBox2");
-		txtCuota.setMaxLength(50);
-		absolutePanel.add(txtCuota, 332, 351);
-		txtCuota.setSize("103px", "19px");
-		
 		txtExcedente = new TextBox();
 		txtExcedente.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -694,6 +830,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		txtExcedente.setText("0.0");
 		txtExcedente.setStyleName("gwt-TextBox2");
 		txtExcedente.setMaxLength(50);
+		txtExcedente.setEnabled(false); // No modificable
 		absolutePanel.add(txtExcedente, 332, 377);
 		txtExcedente.setSize("103px", "19px");		
 		
@@ -827,119 +964,8 @@ public class Sce_DataSituacionEconomica extends Composite {
 		
 		btnGuardar.setText("Guardar");
 		absolutePanel.add(btnGuardar, 475, 460);
-		
-		Label lblIngresosFijosDel = new Label("Ingresos fijos del solicitante:");
-		lblIngresosFijosDel.setStyleName("label");
-		absolutePanel.add(lblIngresosFijosDel, 49, 118);
-		lblIngresosFijosDel.setSize("249px", "19px");
-		
-		Label lblOtrosIngresosDel_1 = new Label("Otros ingresos:");
-		lblOtrosIngresosDel_1.setStyleName("label");
-		absolutePanel.add(lblOtrosIngresosDel_1, 49, 171);
-		lblOtrosIngresosDel_1.setSize("249px", "19px");
-		
-		Label lblIngresosDelConyuge = new Label("Ingresos del conyuge:");
-		lblIngresosDelConyuge.setStyleName("label");
-		absolutePanel.add(lblIngresosDelConyuge, 49, 145);
-		lblIngresosDelConyuge.setSize("249px", "19px");
-		
-		Label lblTotalIngresos = new Label("Ingresos totales:");
-		lblTotalIngresos.setStyleName("label");
-		absolutePanel.add(lblTotalIngresos, 49, 197);
-		lblTotalIngresos.setSize("249px", "19px");
-		
-		Label lblAlquilerDeVivienda = new Label("Alquiler de vivienda:");
-		lblAlquilerDeVivienda.setStyleName("label");
-		absolutePanel.add(lblAlquilerDeVivienda, 515, 118);
-		lblAlquilerDeVivienda.setSize("249px", "19px");
-		
-		Label lblAlimentacion = new Label("Alimentacion:");
-		lblAlimentacion.setStyleName("label");
-		absolutePanel.add(lblAlimentacion, 515, 145);
-		lblAlimentacion.setSize("249px", "19px");
-		
-		Label lblRopa = new Label("Ropa:");
-		lblRopa.setStyleName("label");
-		absolutePanel.add(lblRopa, 515, 171);
-		lblRopa.setSize("249px", "19px");
-		
-		Label lblGastosMedicos = new Label("Gastos Medicos:");
-		lblGastosMedicos.setStyleName("label");
-		absolutePanel.add(lblGastosMedicos, 515, 197);
-		lblGastosMedicos.setSize("249px", "19px");
-		
-		Label lblTransporte = new Label("Transporte:");
-		lblTransporte.setStyleName("label");
-		absolutePanel.add(lblTransporte, 515, 223);
-		lblTransporte.setSize("249px", "19px");
-		
-		Label lblEducacion = new Label("Educacion:");
-		lblEducacion.setStyleName("label");
-		absolutePanel.add(lblEducacion, 515, 249);
-		lblEducacion.setSize("249px", "19px");
-		
-		Label lblPagoDeLuz = new Label("Pago de luz y agua:");
-		lblPagoDeLuz.setStyleName("label");
-		absolutePanel.add(lblPagoDeLuz, 515, 275);
-		lblPagoDeLuz.setSize("249px", "19px");
-		
-		Label lblPagoDePrestamos = new Label("Pago de prestamos:");
-		lblPagoDePrestamos.setStyleName("label");
-		absolutePanel.add(lblPagoDePrestamos, 515, 301);
-		lblPagoDePrestamos.setSize("249px", "19px");
-		
-		Label lblOtrosGastos = new Label("Otros gastos:");
-		lblOtrosGastos.setStyleName("label");
-		absolutePanel.add(lblOtrosGastos, 515, 327);
-		lblOtrosGastos.setSize("249px", "19px");
-		
-		Label lblOtrosGastos_1 = new Label("Otros gastos:");
-		lblOtrosGastos_1.setStyleName("label");
-		absolutePanel.add(lblOtrosGastos_1, 515, 353);
-		lblOtrosGastos_1.setSize("249px", "19px");
-		
-		Label lblEgresosTotales = new Label("Egresos totales:");
-		lblEgresosTotales.setStyleName("label");
-		absolutePanel.add(lblEgresosTotales, 515, 379);
-		lblEgresosTotales.setSize("249px", "19px");
-		
-		Label lblIngresosMensuales = new Label("INGRESOS MENSUALES");
-		absolutePanel.add(lblIngresosMensuales, 53, 52);
-		lblIngresosMensuales.setSize("245px", "20px");
-		
-		Label label = new Label("CANTIDAD");
-		absolutePanel.add(label, 332, 52);
-		label.setSize("119px", "20px");
-		
-		Label lblTotalIngresos_1 = new Label("Total ingresos:");
-		lblTotalIngresos_1.setStyleName("label");
-		absolutePanel.add(lblTotalIngresos_1, 49, 249);
-		lblTotalIngresos_1.setSize("249px", "19px");
-		
-		Label lblTotalEgresos = new Label("Total egresos:");
-		lblTotalEgresos.setStyleName("label");
-		absolutePanel.add(lblTotalEgresos, 49, 275);
-		lblTotalEgresos.setSize("249px", "19px");
-		
-		Label lblDiferencia = new Label("Diferencia:");
-		lblDiferencia.setStyleName("label");
-		absolutePanel.add(lblDiferencia, 49, 301);
-		lblDiferencia.setSize("249px", "19px");
-		
-		Label lblPagosBuro = new Label("Pagos buro:");
-		lblPagosBuro.setStyleName("label");
-		absolutePanel.add(lblPagosBuro, 49, 327);
-		lblPagosBuro.setSize("249px", "19px");
-		
-		Label lblCuotaHphg = new Label("Cuota HPHG");
-		lblCuotaHphg.setStyleName("label");
-		absolutePanel.add(lblCuotaHphg, 49, 353);
-		lblCuotaHphg.setSize("249px", "19px");
-		
-		Label lblExcedente = new Label("Excedente:");
-		lblExcedente.setStyleName("label");
-		absolutePanel.add(lblExcedente, 49, 379);
-		lblExcedente.setSize("249px", "19px");
+		btnGuardar.setTabIndex(16);
+
 	
 	}
 	
@@ -950,18 +976,25 @@ public class Sce_DataSituacionEconomica extends Composite {
 		float valIngresosTotales = this.valIngresosSolicitante + this.valIngresosConyuge + this.valOtrosIngresos;
 		String valueIngresosTotales = ""+valIngresosTotales;
 		// Egresos Totales
-		float valEgresosTotales = this.valAlquilerVivienda + this.valAlimentacion + this.valRopa + this.valGastosMedicos + this.valTransporte + this.valTransporte +
+		float valEgresosTotales = this.valAlquilerVivienda + this.valAlimentacion + this.valRopa + this.valGastosMedicos + this.valTransporte +
 									this.valEducacion + this.valPagoLuzAgua + this.valPagoPrestamos + this.valOtrosGastos1 + this.valOtrosGastos2;
 		String valueEgresosTotales = ""+valEgresosTotales;
 		// Diferencia
 		float valDiferencia = valIngresosTotales - valEgresosTotales;
 		String valueDiferencia = ""+valDiferencia;
+		// Pagos Buro + Cuota HPHG
+		float valPagoCuota = this.valPagosBuro + this.valCuota;
+		String valuePagoCuota = ""+valPagoCuota;
+		// Excedente
+		float valExcedente = valDiferencia - valPagoCuota;
+		String valueExcedente = ""+valExcedente; 
 		
 		this.txtIngresosTotales.setText(valueIngresosTotales);
 		this.txtEgresosTotales.setText(valueEgresosTotales);
 		this.txtTotalIngresos.setText(valueIngresosTotales);
 		this.txtTotalEgresos.setText(valueEgresosTotales);
 		this.txtDiferencia.setText(valueDiferencia);
+		this.txtExcedente.setText(valueExcedente);
 		
 	}
 	

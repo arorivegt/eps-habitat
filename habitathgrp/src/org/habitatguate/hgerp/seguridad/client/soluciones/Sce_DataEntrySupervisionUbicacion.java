@@ -59,11 +59,19 @@ public class Sce_DataEntrySupervisionUbicacion extends Composite {
     		for ( AuxSolicitudSupervisionUbicacion n2 : results) {
 
     			System.out.println("ID Ubicacion Supervison a Cargar: " + n2.getIdSupervisionUbicacion() + ", ID Formulario: " + n2.getIdFormulario());
-    			
+
     			data.LlenarDatos(n2.getIdSupervisionUbicacion(), 
-    					n2.getLatitud(), n2.getLongitud());    		
+    					n2.getLatitud(), n2.getLongitud()); 
+
     		}
+    	}else{
+
+    		String latitudDefault = "14.6211";
+    		String longitudDefault = "-90.5269";
+    		data.iniciarMaps(latitudDefault, longitudDefault);
+    		System.out.println("Valores de Mapa Default");
     	}
+ 	
     }
 	
     

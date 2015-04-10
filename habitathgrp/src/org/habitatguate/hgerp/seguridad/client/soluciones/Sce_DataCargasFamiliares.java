@@ -52,14 +52,36 @@ public class Sce_DataCargasFamiliares extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "140px");
 		
+		Label lblNombre = new Label("Nombres y Apellidos");
+		lblNombre.setStyleName("label");
+		absolutePanel.add(lblNombre, 20, 32);
+		lblNombre.setSize("192px", "13px");
+		
+		Label lblTitulodiploma = new Label("Edad");
+		lblTitulodiploma.setStyleName("label");
+		absolutePanel.add(lblTitulodiploma, 386, 32);
+		lblTitulodiploma.setSize("58px", "13px");
+		
+		Label lblEscolaridad = new Label("Escolaridad");
+		lblEscolaridad.setStyleName("label");
+		absolutePanel.add(lblEscolaridad, 475, 32);
+		lblEscolaridad.setSize("192px", "13px");
+		
+		Label lblOcupacion = new Label("Ocupacion");
+		lblOcupacion.setStyleName("label");
+		absolutePanel.add(lblOcupacion, 758, 32);
+		lblOcupacion.setSize("132px", "13px");
+		
 		txtNombreFamiliar = new TextBox();
 		txtNombreFamiliar.setMaxLength(200);
 		txtNombreFamiliar.setStylePrimaryName("gwt-TextBox2");
 		txtNombreFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreFamiliar, 20, 51);
 		txtNombreFamiliar.setSize("345px", "19px");
+		txtNombreFamiliar.setTabIndex(1);
 		
 		txtEdadFamiliar = new TextBox();
+		txtEdadFamiliar.setMaxLength(3);
 		txtEdadFamiliar.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtEdadFamiliar .getText().equals("")) {txtEdadFamiliar .setText("0");}
@@ -79,6 +101,7 @@ public class Sce_DataCargasFamiliares extends Composite {
 		txtEdadFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEdadFamiliar, 386, 51);
 		txtEdadFamiliar.setSize("56px", "19px");
+		txtEdadFamiliar.setTabIndex(2);
 		
 		txtEscolaridadFamiliar = new TextBox();
 		txtEscolaridadFamiliar.setMaxLength(200);
@@ -86,6 +109,7 @@ public class Sce_DataCargasFamiliares extends Composite {
 		txtEscolaridadFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEscolaridadFamiliar, 475, 51);
 		txtEscolaridadFamiliar.setSize("250px", "19px");
+		txtEscolaridadFamiliar.setTabIndex(3);
 		
 		txtOcupacionFamiliar = new TextBox();
 		txtOcupacionFamiliar.setMaxLength(100);
@@ -93,6 +117,7 @@ public class Sce_DataCargasFamiliares extends Composite {
 		txtOcupacionFamiliar.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtOcupacionFamiliar, 758, 51);
 		txtOcupacionFamiliar.setSize("271px", "19px");
+		txtOcupacionFamiliar.setTabIndex(4);
 		
 		Button btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
@@ -174,15 +199,12 @@ public class Sce_DataCargasFamiliares extends Composite {
 				
 			}
 		});
-		
-		
-		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 232, 119);
 		btnGuardar.setSize("227px", "34px");
-		
+		btnGuardar.setTabIndex(5);
 		
 		Button btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
@@ -201,26 +223,8 @@ public class Sce_DataCargasFamiliares extends Composite {
 		btnEliminar.setStyleName("sendButton");
 		absolutePanel.add(btnEliminar, 531, 119);
 		btnEliminar.setSize("227px", "34px");
+		btnEliminar.setTabIndex(6);
 		
-		Label lblNombre = new Label("Nombres y Apellidos");
-		lblNombre.setStyleName("label");
-		absolutePanel.add(lblNombre, 20, 32);
-		lblNombre.setSize("192px", "13px");
-		
-		Label lblTitulodiploma = new Label("Edad");
-		lblTitulodiploma.setStyleName("label");
-		absolutePanel.add(lblTitulodiploma, 386, 32);
-		lblTitulodiploma.setSize("58px", "13px");
-		
-		Label lblEscolaridad = new Label("Escolaridad");
-		lblEscolaridad.setStyleName("label");
-		absolutePanel.add(lblEscolaridad, 475, 32);
-		lblEscolaridad.setSize("192px", "13px");
-		
-		Label lblOcupacion = new Label("Ocupacion");
-		lblOcupacion.setStyleName("label");
-		absolutePanel.add(lblOcupacion, 758, 32);
-		lblOcupacion.setSize("132px", "13px");
 	}
 	
 	private void EliminarFormulario(){

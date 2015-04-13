@@ -16,6 +16,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -27,8 +28,14 @@ import com.google.gwt.maps.client.Maps;
 import com.google.gwt.maps.client.control.LargeMapControl;
 import com.google.gwt.maps.client.control.SmallMapControl;
 import com.google.gwt.maps.client.control.SmallZoomControl;
+import com.google.gwt.maps.client.event.MapDoubleClickHandler;
+import com.google.gwt.maps.client.event.MarkerDragEndHandler;
+import com.google.gwt.maps.client.geocode.Geocoder;
+import com.google.gwt.maps.client.geocode.LocationCallback;
+import com.google.gwt.maps.client.geocode.Placemark;
 import com.google.gwt.maps.client.geom.LatLng;
 import com.google.gwt.maps.client.overlay.Marker;
+import com.google.gwt.maps.client.overlay.MarkerOptions;
 
 
 public class Sce_DataSupervisionUbicacion extends Composite {
@@ -51,6 +58,10 @@ public class Sce_DataSupervisionUbicacion extends Composite {
     private Label lblLatitud;
     private Label lblLongitud;
 	
+    private MapWidget map;
+    private Geocoder fCoder;
+    private Marker fMarker;
+    
 	public Sce_DataSupervisionUbicacion(Sce_DataEntrySupervisionUbicacion a, Sce_DataEntrySupervisionSolicitud e) {
 		
 		mensaje = new Mensaje();
@@ -149,13 +160,13 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 							if(txtLatitud.getText().equals("0") && txtLatitud.getText().equals("0")){
 								String latitudDefault = "14.6211";
 								String longitudDefault = "-90.5269";		
-								iniciarMaps(latitudDefault, longitudDefault);
+								iniciarUbicacionDefault(latitudDefault, longitudDefault);
 								System.out.println("Valores de Mapa Default - 0");
 
 							}else if(txtLatitud.getText().equals(null) && txtLatitud.getText().equals(null)){
 								String latitudDefault = "14.6211";
 								String longitudDefault = "-90.5269";		
-								iniciarMaps(latitudDefault, longitudDefault);
+								iniciarUbicacionDefault(latitudDefault, longitudDefault);
 								System.out.println("Valores de Mapa Default - nulo");
 
 							} else{
@@ -167,8 +178,8 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 
 								System.out.println("Valores: Latitud: " + latitud + " - Longitud: " + longitud);
 
-								// Busqueda Especifica
-								busquedaEspecifica(latitud, longitud);
+								// Busqueda Ubicacion Especifica
+								ubicacionEspecifica(latitud, longitud);
 
 								System.out.println("Valores de Mapa Almacenados");
 							}
@@ -265,35 +276,46 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		
 	}
     
-    //---- Meotodo de Google Maps
+    //---- Metodo de Google Maps
 	
-	private void busquedaEspecifica(double latitud, double longitud) {
+	private void ubicacionEspecifica(double latitud, double longitud) {
 		
 		// Coordenadas
 	    LatLng coordenadas = LatLng.newInstance(latitud, longitud);
 
-	    final MapWidget map = new MapWidget(coordenadas, 2);
-
+	    map = new MapWidget(coordenadas, 6);
+	    map.setSize("950px", "450px");
+	    
 	    // Add some controls for the zoom level
 	    map.addControl(new SmallMapControl());
 	    map.addControl(new SmallZoomControl());
 	    map.setZoomLevel(10);
-
+	    
+	    ///
+	    fCoder = new Geocoder();
+	    
+	    MarkerOptions options = MarkerOptions.newInstance();
+        options.setDraggable(true);
+        fMarker = new Marker(LatLng.newInstance(latitud, longitud), options);
+	    
 	    // Add a marker
-	    map.addOverlay(new Marker(coordenadas));
+	    map.addOverlay(fMarker);
+//	    fMarker.setVisible(false);
+        addHandlers();
 
+        performReverseLookup(coordenadas);
+        
 	    // Add an info window to highlight a point of interest
-	    map.getInfoWindow().open(map.getCenter(),
-	        new InfoWindowContent("Ubicacion Solucion"));
+//	    map.getInfoWindow().open(map.getCenter(), new InfoWindowContent("Ubicacion Solucion"));
 
 		absolutePanel.add(map, 42, 50);
-		map.setSize("950px", "450px");
+		
 		
 	}
 
 	// Inicial
 	
-	private void busquedaEspecifica2(String latitud, String longitud) {
+	private void ubicacionDefault(String latitud, String longitud) {
 		
 		double latitudValue = 0;
 		latitudValue = Double.parseDouble(latitud);
@@ -304,58 +326,100 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		// Coordenadas
 	    LatLng coordenadas = LatLng.newInstance(latitudValue, longitudValue);
 
-	    MapWidget map = new MapWidget(coordenadas, 2);
-
+	    map = new MapWidget(coordenadas, 6);
+	    map.setSize("950px", "450px");
+	    
 	    // Add some controls for the zoom level
 	    map.addControl(new SmallMapControl());
 	    map.addControl(new SmallZoomControl());
 	    map.setZoomLevel(10);
 
+	    ///
+	    fCoder = new Geocoder();
+	    
+	    MarkerOptions options = MarkerOptions.newInstance();
+        options.setDraggable(true);
+        fMarker = new Marker(LatLng.newInstance(latitudValue, longitudValue), options);
+	    
 	    // Add a marker
-	    map.addOverlay(new Marker(coordenadas));
+	    map.addOverlay(fMarker);
+//	    fMarker.setVisible(false);
+        addHandlers();
+        
+        performReverseLookup(coordenadas);
 
 	    // Add an info window to highlight a point of interest
-	    map.getInfoWindow().open(map.getCenter(),
-	        new InfoWindowContent("Ubicacion Default"));
+//	    map.getInfoWindow().open(map.getCenter(), new InfoWindowContent("Ubicacion Default"));
 
 		absolutePanel.add(map, 42, 50);
-		map.setSize("950px", "450px");
+
 		
 	}
 	
-	public void iniciarMaps(final String latitud, final String longitud){
+	public void iniciarUbicacionDefault(final String latitud, final String longitud){
 		
 		Maps.loadMapsApi("", "2", false, new Runnable() {
 
 			public void run() {
-				// Busqueda Especifica 2
-				busquedaEspecifica2(latitud, longitud);
+				// UbicacionDefault
+				ubicacionDefault(latitud, longitud);
 			}
 		});
 	}
 
-	private void buildUi2() {
-		// Open a map centered on Cawker City, KS USA
-		LatLng cawkerCity = LatLng.newInstance(39.509, -98.434);
 
-		final MapWidget map = new MapWidget(cawkerCity, 2);
-		map.setSize("100%", "100%");
-		// Add some controls for the zoom level
-		map.addControl(new LargeMapControl());
+	// ---------------- HANDLERS
+	
+    private void addHandlers() {
+        map.addMapDoubleClickHandler(new MapDoubleClickHandler() {
 
-		// Add a marker
-		map.addOverlay(new Marker(cawkerCity));
+            @Override
+            public void onDoubleClick(MapDoubleClickEvent event) {
+                if (event.getLatLng() != null) {
+                    performReverseLookup(event.getLatLng());
+                }
+            }
 
-		// Add an info window to highlight a point of interest
-		map.getInfoWindow().open(map.getCenter(),
-				new InfoWindowContent("World's Largest Ball of Sisal Twine"));
+        });
 
-		final DockLayoutPanel dock = new DockLayoutPanel(Unit.PX);
-		dock.addNorth(map, 500);
+        fMarker.addMarkerDragEndHandler(new MarkerDragEndHandler() {
 
-		// Add the map to the HTML host page
-		RootLayoutPanel.get().add(dock);
-	}
+            @Override
+            public void onDragEnd(MarkerDragEndEvent event) {
+                LatLng point = event.getSender().getLatLng();
+                if (point != null) {
+                    performReverseLookup(point);
+                }
+            }
+
+        });
+    }
+    
+    private void performReverseLookup(final LatLng point) {
+        fCoder.getLocations(point, new LocationCallback() {
+        	
+            @Override
+            public void onFailure(int statusCode) {}
+
+			@Override
+			public void onSuccess(JsArray<Placemark> locations) {
+                if (locations.length() > 0) {
+                    LatLng point = locations.get(0).getPoint();
+                    fMarker.setLatLng(point);
+//                    fMarker.setVisible(true);
+                    map.getInfoWindow().open(point, new InfoWindowContent(locations.get(0).getAddress()));
+                    
+                    // Se actualiza la informacion en los campos de texto
+                    System.out.println("Coordenada Obtenidas: Latitud " + point.getLatitude() + " Longitud: " + point.getLongitude());
+            		txtLatitud.setValue(""+point.getLatitude());
+            		txtLongitud.setValue(""+point.getLongitude());
+                    
+                }
+				
+			}
+        });
+    }
+	
 	
 	
 	// DATA A CARGAR EN DATOS
@@ -375,17 +439,17 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		if(latitud.equals("0") && longitud.equals("0")){
 			String latitudDefault = "14.6211";
 			String longitudDefault = "-90.5269";		
-			iniciarMaps(latitudDefault, longitudDefault);
+			iniciarUbicacionDefault(latitudDefault, longitudDefault);
 			System.out.println("Valores de Mapa Default - 0");
 			
 		}else if(latitud.equals(null) && longitud.equals(null)){
 			String latitudDefault = "14.6211";
 			String longitudDefault = "-90.5269";		
-			iniciarMaps(latitudDefault, longitudDefault);
+			iniciarUbicacionDefault(latitudDefault, longitudDefault);
 			System.out.println("Valores de Mapa Default - nulo");
 			
 		} else{
-			iniciarMaps(latitud, longitud);
+			iniciarUbicacionDefault(latitud, longitud);
 			System.out.println("Valores de Mapa Almacenados");
 		}
 		

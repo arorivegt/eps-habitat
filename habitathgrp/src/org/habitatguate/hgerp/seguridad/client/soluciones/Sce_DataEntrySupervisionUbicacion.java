@@ -68,8 +68,8 @@ public class Sce_DataEntrySupervisionUbicacion extends Composite {
 
     		String latitudDefault = "14.6211";
     		String longitudDefault = "-90.5269";
-    		data.iniciarMaps(latitudDefault, longitudDefault);
-    		System.out.println("Valores de Mapa Default");
+    		data.iniciarUbicacionDefault(latitudDefault, longitudDefault);
+    		System.out.println("Valores de Mapa Default - Sce_DataEntrySupervisionUbicacion");
     	}
  	
     }

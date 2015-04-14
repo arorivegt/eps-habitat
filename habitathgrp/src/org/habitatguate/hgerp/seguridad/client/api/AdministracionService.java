@@ -79,6 +79,13 @@ public interface AdministracionService extends RemoteService {
 	 * @return
 	 */
     Long EliminarUsuarioPermisoFormularios(Long Rol,Long formularioPadre) throws IllegalArgumentException;
+
+    /**
+     * 
+     * @param nombreFormulario
+     * @return
+     */
+	List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(String nombreFormulario);
 	
     
 }

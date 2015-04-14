@@ -27,7 +27,6 @@ public class FormularioRol  extends Composite  {
     private final AdministracionServiceAsync loginService = GWT.create(AdministracionService.class);
 	
 	private TextBox txtNombreFormulario ;
-	private Button btnActualizar;
 	private AbsolutePanel absolutePanel ;
     private Loading load ;
     private TextBox txtFormularioPadre;
@@ -45,7 +44,7 @@ public class FormularioRol  extends Composite  {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("631px", "40px");
+		absolutePanel.setSize("511px", "40px");
 		
 		txtNombreFormulario = new TextBox();
 		txtNombreFormulario.setEnabled(false);
@@ -62,53 +61,12 @@ public class FormularioRol  extends Composite  {
 		txtFormularioPadre.setSize("168px", "34px");
 		
 		listPermiso = new ListBox();
-		listPermiso.addItem("RWV");
 		listPermiso.addItem("RW");
-		listPermiso.addItem("WV");
-		listPermiso.addItem("RV");
 		listPermiso.addItem("R");
-		listPermiso.addItem("V");
 		listPermiso.addItem("W");
 		listPermiso.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPermiso, 396, 29);
 		listPermiso.setSize("117px", "36px");
-		
-		btnActualizar = new Button("Send");
-		btnActualizar.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-
-		        load.visible();
-				if(!bandera) {
-					loginService.ActualizarUsuarioPermiso(id_permiso, roll, txtNombreFormulario.getText(), 
-							id_formularioPadre, listPermiso.getValue(listPermiso.getSelectedIndex()),new AsyncCallback<Long>(){
-	                            public void onFailure(Throwable caught) 
-	                            {
-	                		        load.invisible();
-	                            	mensaje.setMensaje("alert alert-error", 
-	                            			"Error !! \nal Guardar Datos");
-	                            }
-
-								@Override
-	                            public void onSuccess(Long result)
-	                            {
-							        load.invisible();
-									bandera = false;
-									mensaje.setMensaje("alert alert-success", 
-		                        			"Datos Guardados\n exitosamente!!!");
-	                            }
-
-	                     });
-				}
-				
-
-		        load.invisible();
-			}
-		});
-		btnActualizar.setText("Guardar");
-		btnActualizar.setStylePrimaryName("gwt-TextBox2");
-		btnActualizar.setStyleName("sendButton");
-		absolutePanel.add(btnActualizar, 534, 31);
-		btnActualizar.setSize("117px", "34px");
 		
 		Label lblN = new Label("Nombre Formulario");
 		lblN.setStyleName("label");

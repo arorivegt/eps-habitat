@@ -37,7 +37,9 @@ public class BuscadorRoles extends Composite   {
     private ListBox listRol;
     private AbsolutePanel absolutePanel;
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
-    private Button button;
+    private Button btnEliminar;
+    private Button btnCrear;
+    private Button btnGuardar;
     
     /**
      * constructor
@@ -87,8 +89,34 @@ public class BuscadorRoles extends Composite   {
 		
 		listRol.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listRol, 10, 16);
-		listRol.setSize("179px", "39px");
-						
+		listRol.setSize("67px", "39px");
+		
+		btnEliminar = new Button("Send");
+		btnEliminar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
+				eliminarRol(rol);
+			}
+		});
+		btnEliminar.setText("Eliminar");
+		btnEliminar.setStylePrimaryName("gwt-TextBox2");
+		btnEliminar.setStyleName("sendButton");
+		absolutePanel.add(btnEliminar, 93, 16);
+		btnEliminar.setSize("117px", "34px");
+		
+		btnCrear = new Button("Send");
+		btnCrear.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
+				GuardarPagina(rol, "Datos-Empleado", 0L, "RW");
+			}
+		});
+		btnCrear.setText("Crear");
+		btnCrear.setStylePrimaryName("gwt-TextBox2");
+		btnCrear.setStyleName("sendButton");
+		absolutePanel.add(btnCrear, 229, 16);
+		btnCrear.setSize("117px", "34px");
+		
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -96,8 +124,15 @@ public class BuscadorRoles extends Composite   {
 				busqueda(rol);
 			}
 		});
-						
-		absolutePanel.add(Busqueda, 341, 0);
+		
+		btnGuardar = new Button("Send");
+		btnGuardar.setText("Guardar Cambios");
+		btnGuardar.setStylePrimaryName("gwt-TextBox2");
+		btnGuardar.setStyleName("sendButton");
+		absolutePanel.add(btnGuardar, 365, 16);
+		btnGuardar.setSize("240px", "34px");
+		
+		absolutePanel.add(Busqueda, 611, 0);
 		Busqueda.setSize("103px", "55px");
 		
 		
@@ -105,19 +140,6 @@ public class BuscadorRoles extends Composite   {
 		lblroles.setStyleName("label");
 		lblroles.setSize("118px", "13px");
 		absolutePanel.add(lblroles, 10, 0);
-		
-		button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
-				eliminarRol(rol);
-			}
-		});
-		button.setText("Eliminar");
-		button.setStylePrimaryName("gwt-TextBox2");
-		button.setStyleName("sendButton");
-		absolutePanel.add(button, 207, 16);
-		button.setSize("117px", "34px");
     	
 		
 		initWidget(grid);
@@ -161,4 +183,21 @@ public class BuscadorRoles extends Composite   {
 			}
 		});
 	}
+	
+		public void GuardarPagina(Long rol, String nombreFormulario, Long formularioPadre, String permiso){
+			
+	    	AdministracionService.InsertarUsuarioPermiso(rol, nombreFormulario, formularioPadre, permiso,new AsyncCallback<Long>()
+	    	{
+	    		public void onFailure(Throwable caught) 
+	    		{
+	    			mensaje.setMensaje("alert alert-error", "Error al crear rol\n"+caught);
+	    		}
+	
+				@Override
+				public void onSuccess(Long results)
+				{	
+	    			//mensaje.setMensaje("alert alert-success", "Rol Eliminado");
+				}
+			});
+		}
 }

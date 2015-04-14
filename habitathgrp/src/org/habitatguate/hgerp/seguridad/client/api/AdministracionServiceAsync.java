@@ -60,6 +60,14 @@ public interface AdministracionServiceAsync {
 	void ObtenerUsuarioPermisoFormularios(Long Rol, Long formularioPadre,
 			AsyncCallback<List<AuxUsuarioPermiso>> callback);
 	
+	/**
+	 * 
+	 * @param nombreFormulario
+	 * @param callback
+	 */
+	void ObtenerUsuarioPermisoNombre(String nombreFormulario,
+			AsyncCallback<List<AuxUsuarioPermiso>> callback);
+	
 
 	/**
 	 * 

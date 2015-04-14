@@ -22,7 +22,6 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 	public Long InsertarUsuarioPermiso(Long rol, String nombreFormulario,
 			Long formularioPadre, String permiso)
 			throws IllegalArgumentException {
-
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
 		try{
@@ -31,9 +30,8 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 			usuarioPermiso.setNombreFormulario(nombreFormulario);
 			usuarioPermiso.setFormularioPadre(formularioPadre);
 			usuarioPermiso.setPermiso(permiso);
-
-	         Persistencia.makePersistent(usuarioPermiso); 
-	         valor = usuarioPermiso.getId_permiso().getId();
+	        Persistencia.makePersistent(usuarioPermiso); 
+	        valor = usuarioPermiso.getId_permiso().getId();
 		}finally {  
 			 Persistencia.close();  
 		 }
@@ -148,6 +146,31 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		{
 			valor++;
 			pm.deletePersistent(e);
+		}
+		return valor;
+	}
+
+	@Override
+	public List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(
+			String nombreFormulario) {
+		
+		final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+		
+		List<AuxUsuarioPermiso> valor = new ArrayList<AuxUsuarioPermiso>();
+		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
+
+		Query q = pm.newQuery(SegUsuarioPermiso.class,"nombreFormulario == '"+nombreFormulario+"'");
+		results = (List<SegUsuarioPermiso>) q.execute();
+
+		for(SegUsuarioPermiso e:results)
+		{
+			AuxUsuarioPermiso usuarioPermiso = new AuxUsuarioPermiso();
+			usuarioPermiso.setId_permiso(e.getId_permiso().getId());
+			usuarioPermiso.setRol(e.getRol());
+			usuarioPermiso.setNombreFormulario(e.getNombreFormulario());
+			usuarioPermiso.setFormularioPadre(e.getFormularioPadre());
+			usuarioPermiso.setPermiso(e.getPermiso());	
+			valor.add(usuarioPermiso);
 		}
 		return valor;
 	}

@@ -90,7 +90,7 @@ public class BuscadorRoles extends Composite   {
 		listRol.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listRol, 10, 16);
 		listRol.setSize("67px", "39px");
-		
+		//quitar esto de eliminar, un rol no se va eliminar, sino modificar
 		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -107,8 +107,48 @@ public class BuscadorRoles extends Composite   {
 		btnCrear = new Button("Send");
 		btnCrear.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
+				//se obtiene el ultimo rol, y se suma 1, para crear otro Rol
+				int UltimoRol = listRol.getItemCount();
+				Long rol = UltimoRol + 1L;
+				
+				//estos son los formularios que contiene el modulo de Empleado, para crearlos
 				GuardarPagina(rol, "Datos-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Familia-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Academico-Empleado", 0L, "RW");
+				GuardarPagina(rol, "RefLaboral-Empleado", 0L, "RW");
+				GuardarPagina(rol, "RefPersonal-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Idiomas-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Entrevistas-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Permisos-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Permisos-Solicitudes-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Permisos-Validar-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Cambiar-Contrasena-Empleado", 0L, "RW");
+				GuardarPagina(rol, "Evaluaciones-Compartidas-Empleado", 0L, "RW");
+				
+				//estos son los formularios que contiene el modulo de RRHH
+				GuardarPagina(rol, "Buscar-RRHH", 0L, "RW");
+				GuardarPagina(rol, "BDEvaluacion-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Permisos-Validar-RRHH", 0L, "RW");
+				GuardarPagina(rol, "CalculoV-acaciones-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Informe-Bancos-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Datos-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Familia-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Academico-RRHH", 0L, "RW");
+				GuardarPagina(rol, "RefLaboral-RRHH", 0L, "RW");
+				GuardarPagina(rol, "RefPersonal-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Idiomas-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Desempeno-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Evaluacion-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Puestos-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Salarios-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Historial-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Entrevistas-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Permisos-RRHH", 0L, "RW");
+				GuardarPagina(rol, "Carga-Datos-RRHH", 0L, "RW");
 			}
 		});
 		btnCrear.setText("Crear");

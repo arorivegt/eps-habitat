@@ -63,7 +63,6 @@ public class FormularioRol  extends Composite  {
 		listPermiso = new ListBox();
 		listPermiso.addItem("RW");
 		listPermiso.addItem("R");
-		listPermiso.addItem("W");
 		listPermiso.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPermiso, 396, 29);
 		listPermiso.setSize("117px", "36px");

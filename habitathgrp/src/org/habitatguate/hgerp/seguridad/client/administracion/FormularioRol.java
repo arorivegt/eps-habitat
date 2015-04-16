@@ -1,16 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.administracion;
 
-import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
-import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -19,12 +11,10 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class FormularioRol  extends Composite  {
 
-	private Mensaje mensaje; 
 	private Long id_permiso = 0L;
 	private Long roll = 0L;
 	private Long id_formularioPadre = 0L;
 	private boolean bandera = true;
-    private final AdministracionServiceAsync loginService = GWT.create(AdministracionService.class);
 	
 	private TextBox txtNombreFormulario ;
 	private AbsolutePanel absolutePanel ;
@@ -34,9 +24,6 @@ public class FormularioRol  extends Composite  {
     private Label label;
 	public FormularioRol() {
 
-		
-		
-		mensaje = new Mensaje();
     	load = new Loading();
         load.Mostrar();
         load.invisible();
@@ -98,7 +85,7 @@ public class FormularioRol  extends Composite  {
 
 		boolean bandera = true;
 		for(int i=0; i < this.listPermiso.getItemCount() && bandera; i++){
-			bandera = !this.listPermiso.getValue(i).equals(lisPermiso);
+			bandera = !this.listPermiso.getItemText(i).equals(lisPermiso);
 		    this.listPermiso.setSelectedIndex(i);
 		}
 	}

@@ -6,6 +6,7 @@
  */
 package org.habitatguate.hgerp.seguridad.client.administracion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;

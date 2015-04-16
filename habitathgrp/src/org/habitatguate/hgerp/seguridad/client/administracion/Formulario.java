@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.administracion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
@@ -13,7 +14,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Formulario extends Composite  {
     private Loading load ;
-	private FlexTable flextable;
+	public FlexTable flextable;
+    private List<FormularioRol> formularioROL = new ArrayList<FormularioRol>();
 	
     public Formulario() {
     	
@@ -34,12 +36,15 @@ public class Formulario extends Composite  {
     
     public void agregarFormulario_lleno(List<AuxUsuarioPermiso> results){
         load.visible();
+        formularioROL.clear();
+        
     	if (!results.isEmpty()) {
 		    for ( AuxUsuarioPermiso n2 : results) {
 		    		FormularioRol fa = new  FormularioRol();
 		    		fa.LlenarDatos(n2.getId_permiso(), n2.getRol(),n2.getNombreFormulario(),
 		    					   n2.getFormularioPadre(),n2.getPermiso());
-		        flextable.setWidget(flextable.getRowCount(), 0,fa);
+			    	formularioROL.add(fa);
+			    	flextable.setWidget(flextable.getRowCount(), 0,fa);
 		    }
 		    	
     	}

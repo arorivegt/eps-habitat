@@ -14,8 +14,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 public class Formulario extends Composite  {
     private Loading load ;
-	public FlexTable flextable;
-    private List<FormularioRol> formularioROL = new ArrayList<FormularioRol>();
+	private FlexTable flextable;
+    public List<FormularioRol> formularioROL = new ArrayList<FormularioRol>();
 	
     public Formulario() {
     	

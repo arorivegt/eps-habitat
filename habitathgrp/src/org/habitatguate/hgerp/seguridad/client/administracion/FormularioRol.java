@@ -11,16 +11,15 @@ import com.google.gwt.user.client.ui.TextBox;
 
 public class FormularioRol  extends Composite  {
 
-	private Long id_permiso = 0L;
-	private Long roll = 0L;
-	private Long id_formularioPadre = 0L;
-	private boolean bandera = true;
+	public Long id_permiso = 0L;
+	public Long roll = 0L;
+	public Long id_formularioPadre = 0L;
 	
-	private TextBox txtNombreFormulario ;
+	public TextBox txtNombreFormulario ;
 	private AbsolutePanel absolutePanel ;
     private Loading load ;
-    private TextBox txtFormularioPadre;
-    private ListBox listPermiso;
+    public TextBox txtFormularioPadre;
+    public ListBox listPermiso;
     private Label label;
 	public FormularioRol() {
 
@@ -50,6 +49,7 @@ public class FormularioRol  extends Composite  {
 		listPermiso = new ListBox();
 		listPermiso.addItem("RW");
 		listPermiso.addItem("R");
+		listPermiso.addItem("N");
 		listPermiso.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPermiso, 396, 29);
 		listPermiso.setSize("117px", "36px");

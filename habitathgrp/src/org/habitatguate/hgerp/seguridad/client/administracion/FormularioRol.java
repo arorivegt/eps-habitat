@@ -80,7 +80,6 @@ public class FormularioRol  extends Composite  {
 		this.id_permiso = id;
 		this.roll = rol;
 		this.id_formularioPadre = id_formularioPadre;
-		this.bandera = false;
 		this.txtNombreFormulario.setText(txtNombreFormulario);
 
 		boolean bandera = true;

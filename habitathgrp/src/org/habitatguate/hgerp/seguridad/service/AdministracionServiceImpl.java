@@ -66,10 +66,10 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		
 		List<AuxUsuarioPermiso> valor = new ArrayList<AuxUsuarioPermiso>();
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
-
-		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == '"+Rol+"'");
+		System.out.println("rol == '"+Rol+"'");
+		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == "+Rol+"");
 		results = (List<SegUsuarioPermiso>) q.execute();
-
+		
 		for(SegUsuarioPermiso e:results)
 		{
 			AuxUsuarioPermiso usuarioPermiso = new AuxUsuarioPermiso();
@@ -93,7 +93,7 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		List<AuxUsuarioPermiso> valor = new ArrayList<AuxUsuarioPermiso>();
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
 
-		Query q = pm.newQuery(SegUsuarioPermiso.class, "rol == '"+Rol+"' && formularioPadre == '"+formularioPadre+"'");
+		Query q = pm.newQuery(SegUsuarioPermiso.class, "rol == "+Rol+" && formularioPadre == "+formularioPadre+"");
 		results = (List<SegUsuarioPermiso>) q.execute();
 
 		for(SegUsuarioPermiso e:results)
@@ -118,7 +118,7 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
 		Long valor = 0L;
 
-		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == '"+Rol+"'");
+		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == "+Rol+"");
 		results = (List<SegUsuarioPermiso>) q.execute();
 
 		for(SegUsuarioPermiso e:results)
@@ -139,7 +139,7 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
 		Long valor = 0L;
 
-		Query q = pm.newQuery(SegUsuarioPermiso.class, "rol == '"+Rol+"' && formularioPadre == '"+formularioPadre+"'");
+		Query q = pm.newQuery(SegUsuarioPermiso.class, "rol == "+Rol+" && formularioPadre == "+formularioPadre+"");
 		results = (List<SegUsuarioPermiso>) q.execute();
 
 		for(SegUsuarioPermiso e:results)
@@ -173,6 +173,28 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 			valor.add(usuarioPermiso);
 		}
 		return valor;
+	}
+
+	@Override
+	public Long ObtenerUltimoROl() {
+		
+		final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
+		
+		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
+		Query q = pm.newQuery(SegUsuarioPermiso.class);
+		q.setOrdering("rol desc");
+		results = (List<SegUsuarioPermiso>) q.execute();
+		
+		System.out.println(results.isEmpty());
+		
+		if(!results.isEmpty()){
+			System.out.println("ss: "+ results.get(0).getRol());
+			System.out.println("ss: "+ results.get(results.size()-1).getRol());
+			return results.get(0).getRol();
+		}else{
+			System.out.println("0L");
+			return 0L;
+		}
 	}
 
 

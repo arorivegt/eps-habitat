@@ -11,10 +11,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
     <servlet-class>org.habitatguate.hgerp.seguridad.service.RecursosHumanosServiceImpl</servlet-class>
   </servlet>
   
-    <servlet>
-    <servlet-name>AdministracionServiceImpl</servlet-name>
+  <servlet>
+    <servlet-name>AdmnistracionService</servlet-name>
     <servlet-class>org.habitatguate.hgerp.seguridad.service.AdministracionServiceImpl</servlet-class>
   </servlet>
+  <servlet-mapping>
+    <servlet-name>AdmnistracionService</servlet-name>
+    <url-pattern>/seguridad/Admnistracion</url-pattern>
+  </servlet-mapping>
   
   <servlet>
     <servlet-name>ImprimirConstanciaPermiso</servlet-name>

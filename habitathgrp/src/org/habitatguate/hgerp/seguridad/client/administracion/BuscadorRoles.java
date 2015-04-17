@@ -6,7 +6,6 @@
  */
 package org.habitatguate.hgerp.seguridad.client.administracion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
@@ -22,12 +21,12 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.Button;
 
 public class BuscadorRoles extends Composite   {
 
@@ -38,7 +37,7 @@ public class BuscadorRoles extends Composite   {
     private ListBox listRol;
     private AbsolutePanel absolutePanel;
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
-    private Button btnEliminar;
+   // private Button btnEliminar;
     public Formulario formulario;
     private Button btnCrear;
     private Button btnGuardar;
@@ -62,26 +61,23 @@ public class BuscadorRoles extends Composite   {
 		
 		
 		listRol = new ListBox();
-		listRol.addItem("1");
-		listRol.addItem("2");
-		listRol.addItem("3");
-		listRol.addItem("4");
-		listRol.addItem("5");
-		listRol.addItem("6");
-		listRol.addItem("7");
-		listRol.addItem("8");
-		listRol.addItem("9");
-		listRol.addItem("10");
-		listRol.addItem("11");
-		listRol.addItem("12");
-		listRol.addItem("13");
-		listRol.addItem("14");
-		listRol.addItem("15");
-		listRol.addItem("16");
-		listRol.addItem("17");
-		listRol.addItem("18");
-		listRol.addItem("19");
-		listRol.addItem("20");
+
+		
+    	AdministracionService.ObtenerUltimoROl(new AsyncCallback<Long>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			mensaje.setMensaje("alert alert-success", "Error al obtener rol\n"+caught);
+    		}
+
+			@Override
+			public void onSuccess(Long result)
+			{
+				for(int i = 1; i <= result; i++){
+					listRol.addItem(""+i);
+				}
+			}
+		});
 		listRol.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
@@ -111,8 +107,13 @@ public class BuscadorRoles extends Composite   {
 		btnCrear.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				//se obtiene el ultimo rol, y se suma 1, para crear otro Rol
-				int UltimoRol = listRol.getItemCount();
-				Long rol = UltimoRol + 1L;
+
+				int UltimoRol = 1;
+				Long rol = 1L;
+				if(listRol.getItemCount() > 0){
+					UltimoRol = listRol.getItemCount();
+					rol = UltimoRol + 1L;
+				}
 				//son los modulos que se quieren mostrar
 				GuardarPagina(rol, "RRRH-Menu", null, "N");
 				GuardarPagina(rol, "Finanzas-Menu", null, "N");
@@ -156,6 +157,7 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Entrevistas-RRHH", 0L, "N");
 				GuardarPagina(rol, "Permisos-RRHH", 0L, "N");
 				GuardarPagina(rol, "Carga-Datos-RRHH", 0L, "N");
+				listRol.addItem(""+rol);
 			}
 		});
 		btnCrear.setText("Crear");
@@ -217,9 +219,11 @@ public class BuscadorRoles extends Composite   {
 			@Override
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
+				System.out.println(results.size());
 				if (!(results.size()==0)) {
 					formulario  = new Formulario();
 					formulario.agregarFormulario_lleno(results);
+					grid.setWidget(1, 0, formulario);
 		    	}	
 			}
 		});

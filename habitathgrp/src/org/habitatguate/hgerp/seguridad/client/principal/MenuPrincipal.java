@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.administracion.BuscadorRoles;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
@@ -141,23 +142,18 @@ public class MenuPrincipal extends Composite {
 		};
 
 		
-		final Command cmdrol2 = new Command() {
+		final Command cmdrol1 = new Command() {
 			public void execute() {
-				rol2();
-			}
-		};
-		
-		final Command cmdrol3 = new Command() {
-			public void execute() {
-				rol3();
+				rol1();
 			}
 		};
 		
 		final Command cmdusuario = new Command() {
 			public void execute() {
-				usuario();
+				//usuario();
 			}
 		};
+		
 		final Command cmdsolicitudes1 = new Command() {
 			public void execute() {
 				solicitudes1();
@@ -294,16 +290,7 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Cambiar Contraseña", cmdempleado4);
 		MenuEmpleados.addSeparator();
-		
-
-		//roles menu
-		final MenuBar MenuRol = new MenuBar(true);
-		MenuRol.setAutoOpen(true);
-		MenuRol.setAnimationEnabled(true);
-		MenuRol.addItem("Editar Rol", cmdrol2);
-		MenuRol.addSeparator();
-		MenuRol.addItem("Asignar Rol", cmdrol3);
-		MenuRol.addSeparator();
+	
 		
 
 		//administracion menu
@@ -314,7 +301,7 @@ public class MenuPrincipal extends Composite {
 		MenuAdmistracion.addSeparator();
 		MenuAdmistracion.addItem("Crear Usuarios", cmdusuario);
 		MenuAdmistracion.addSeparator();
-		MenuAdmistracion.addItem("Rol", MenuRol);
+		MenuAdmistracion.addItem("Rol", cmdrol1);
 		MenuAdmistracion.addSeparator();
 		
 		
@@ -402,6 +389,8 @@ public class MenuPrincipal extends Composite {
 								MenuVertical.setHeight("100%");
 								//agregar item para el menu
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
+								MenuVertical.addSeparator();
+								MenuVertical.addItem("Administracion",MenuAdmistracion); 
 								MenuVertical.addSeparator();
 								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
@@ -628,16 +617,12 @@ public class MenuPrincipal extends Composite {
 	void Contrasena(){
 		
 	}
+	
 	void rol1(){
-		
-	}
-	void rol2(){
-		
-	}
-	void rol3(){
-		
-	}
-	void usuario(){
+		BuscadorRoles fmc = new BuscadorRoles();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fmc);
 		
 	}
 	

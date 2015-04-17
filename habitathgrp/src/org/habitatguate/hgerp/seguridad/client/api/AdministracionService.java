@@ -87,6 +87,14 @@ public interface AdministracionService extends RemoteService {
      */
 	List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(String nombreFormulario);
 	
+	
+
+    /**
+     * 
+     * @return
+     */
+	Long ObtenerUltimoROl();
+	
     
 }
 

@@ -85,5 +85,11 @@ public interface AdministracionServiceAsync {
 	 */
 	void EliminarUsuarioPermisoFormularios(Long Rol, Long formularioPadre,
 			AsyncCallback<Long> callback);
+
+	/**
+	 * 
+	 * @param callback
+	 */
+	void ObtenerUltimoROl(AsyncCallback<Long> callback);
 	
 }

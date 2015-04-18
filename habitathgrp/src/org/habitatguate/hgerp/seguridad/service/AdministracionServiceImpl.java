@@ -150,16 +150,17 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		return valor;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(
-			String nombreFormulario) {
+			String nombreFormulario, Long Rol) {
 		
 		final PersistenceManager pm = PMF.get().getPersistenceManager() ; 
 		
 		List<AuxUsuarioPermiso> valor = new ArrayList<AuxUsuarioPermiso>();
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
 
-		Query q = pm.newQuery(SegUsuarioPermiso.class,"nombreFormulario == '"+nombreFormulario+"'");
+		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == "+Rol+" && nombreFormulario == '"+nombreFormulario+"'");
 		results = (List<SegUsuarioPermiso>) q.execute();
 
 		for(SegUsuarioPermiso e:results)
@@ -175,6 +176,7 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		return valor;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long ObtenerUltimoROl() {
 		

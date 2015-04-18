@@ -54,7 +54,7 @@ public interface AdministracionService extends RemoteService {
 	 */
 	List<AuxUsuarioPermiso> ObtenerUsuarioPermiso(Long Rol) throws IllegalArgumentException;
 	
-
+	
 	/**
 	 * 
 	 * @param Rol
@@ -85,7 +85,7 @@ public interface AdministracionService extends RemoteService {
      * @param nombreFormulario
      * @return
      */
-	List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(String nombreFormulario);
+	List<AuxUsuarioPermiso> ObtenerUsuarioPermisoNombre(String nombreFormulario,Long Rol) throws IllegalArgumentException;
 	
 	
 

@@ -5,8 +5,11 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.administracion.BuscadorRoles;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTestCompartidos;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Afiliado;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
@@ -49,10 +52,14 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 public class MenuPrincipal extends Composite {
 
 	private Panel panel;
+	private boolean bandera = true;
+	private Mensaje mensaje; 
 	private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
 
 	public MenuPrincipal(Panel panel) {
 		this.panel = panel;
+		mensaje = new Mensaje();
 
 		final  Command cmdrrhh1 = new Command() {
 			public void execute() {
@@ -200,11 +207,11 @@ public class MenuPrincipal extends Composite {
 		};
 
 		// -- Soluciones Construidas6
-		Command cmdsce1_v1 = new Command() {
-			public void execute() {
-				sce1_v1();
-			}
-		};
+//		Command cmdsce1_v1 = new Command() {
+//			public void execute() {
+//				sce1_v1();
+//			}
+//		};
 		Command cmdsce1_v2 = new Command() {
 			public void execute() {
 				sce1_v2();
@@ -375,60 +382,105 @@ public class MenuPrincipal extends Composite {
 			{
 				if(result){
 					loginService.obtenerIdRol(new AsyncCallback<Long>() 
-							{
+					{
 						public void onFailure(Throwable caught) 
 						{
 						}
 
 						public void onSuccess(Long results)
 						{
-							System.out.println("menu resultado : "+results);
-							//si el rol es 1, entonces es empledo
-							if(results == 1L){
+							//ESTE MENU VIENE POR DEFECTO
+							MenuVertical.setHeight("100%");
+							//agregar item para el menu
+							MenuVertical.addItem("Empleado",MenuEmpleados); 
+							MenuVertical.addSeparator();
+							
+							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE RRHH
+							AdministracionService.ObtenerUsuarioPermisoNombre("RRRH-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
+					    	{
+					    		public void onFailure(Throwable caught) 
+					    		{
+					    			bandera = false;
+					    		}
 
-								MenuVertical.setHeight("100%");
-								//agregar item para el menu
-								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Administracion",MenuAdmistracion); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-								MenuVertical.setAutoOpen(false);
-								MenuVertical.setAnimationEnabled(true);
-
-							}else if(results == 2L){//si el rol es 2, entonces es RRHH
-								MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-								MenuVertical.setAutoOpen(false);
-								MenuVertical.setAnimationEnabled(true);
-
-							}else if(results == 3L){//si el rol es 3, entonces es finanzas
-								//agregar item para el menu
-								MenuVertical.setHeight("100%");
-								MenuVertical.addItem("Finanzas", MenuFinanzas);
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-								MenuVertical.setAutoOpen(false);
-								MenuVertical.setAnimationEnabled(true);
-							}else if(results == 4L){//si el rol es 4, entonces es soluciones construidas
-								//agregar item para el menu
-								MenuVertical.setHeight("100%");
-								MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-								MenuVertical.setAutoOpen(false);
-								MenuVertical.setAnimationEnabled(true);
-							}
-
-						}
+								@Override
+								public void onSuccess(List<AuxUsuarioPermiso> results)
+								{
+									if(!results.get(0).getPermiso().equals("N")){
+										MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
+										MenuVertical.addSeparator();
+									}
+								}
 							});
+
+							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE Finanzas
+							AdministracionService.ObtenerUsuarioPermisoNombre("Finanzas-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
+					    	{
+					    		public void onFailure(Throwable caught) 
+					    		{
+					    			bandera = false;
+					    		}
+
+								@Override
+								public void onSuccess(List<AuxUsuarioPermiso> results)
+								{
+									if(!results.get(0).getPermiso().equals("N")){
+										MenuVertical.addItem("Finanzas", MenuFinanzas);
+										MenuVertical.addSeparator();
+									}
+								}
+							});
+							
+
+							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE Soluciones
+							AdministracionService.ObtenerUsuarioPermisoNombre("Soluciones-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
+					    	{
+					    		public void onFailure(Throwable caught) 
+					    		{
+					    			bandera = false;
+					    		}
+
+								@Override
+								public void onSuccess(List<AuxUsuarioPermiso> results)
+								{
+									if(!results.get(0).getPermiso().equals("N")){
+										MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
+										MenuVertical.addSeparator();
+									}
+								}
+							});
+							
+
+							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE Administracion
+							AdministracionService.ObtenerUsuarioPermisoNombre("Administracion-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
+					    	{
+					    		public void onFailure(Throwable caught) 
+					    		{
+					    			bandera = false;
+					    		}
+
+								@Override
+								public void onSuccess(List<AuxUsuarioPermiso> results)
+								{
+									if(!results.get(0).getPermiso().equals("N")){
+										MenuVertical.addItem("Administracion",MenuAdmistracion); 
+										MenuVertical.addSeparator();
+									}
+								}
+							});
+							
+							//PARTE DEL MENU POR DEFECTP
+							MenuVertical.addItem("Administracion",MenuAdmistracion); 
+							MenuVertical.addSeparator();
+							MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+							MenuVertical.setAutoOpen(false);
+							MenuVertical.setAnimationEnabled(true);
+							
+							if(!bandera){
+				    			mensaje.setMensaje("alert alert-error", "Error al construir Menu Rol");				
+							}
+						}
+					});
 
 				}
 
@@ -742,7 +794,6 @@ public class MenuPrincipal extends Composite {
 	}
 
 	// --- Fin        
-
 	public void Empleado_registrado(){
 
 		final Empleado e = new Empleado(1);
@@ -824,4 +875,5 @@ public class MenuPrincipal extends Composite {
 
 		});
 	}
+	
 }

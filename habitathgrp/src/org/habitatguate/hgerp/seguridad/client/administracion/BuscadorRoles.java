@@ -84,7 +84,6 @@ public class BuscadorRoles extends Composite   {
 		        load.visible();
 				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
 				busqueda(rol);
-
 		        load.invisible();
 			}
 		});
@@ -124,6 +123,7 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Finanzas-Menu", null, "N");
 				GuardarPagina(rol, "Soluciones-Menu", null, "N");
 				GuardarPagina(rol, "Administracion-Menu", null, "N");
+				
 				//estos son los formularios que contiene el modulo de Empleado, para crearlos
 				GuardarPagina(rol, "Datos-Empleado", 0L, "R");
 				GuardarPagina(rol, "Familia-Empleado", 0L, "R");
@@ -143,7 +143,7 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "BDEvaluacion-RRHH", 0L, "N");
 				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 0L, "N");
 				GuardarPagina(rol, "Permisos-Validar-RRHH", 0L, "N");
-				GuardarPagina(rol, "CalculoV-acaciones-RRHH", 0L, "N");
+				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 0L, "N");
 				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 0L, "N");
 				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 0L, "N");
 				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 0L, "N");

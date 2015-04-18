@@ -36,6 +36,7 @@ public class BuscadorRoles extends Composite   {
 	private Mensaje mensaje; 
     private ListBox listRol;
     private AbsolutePanel absolutePanel;
+    private boolean bandera = true;
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
    // private Button btnEliminar;
     public Formulario formulario;
@@ -80,8 +81,11 @@ public class BuscadorRoles extends Composite   {
 		});
 		listRol.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
+		        load.visible();
 				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
 				busqueda(rol);
+
+		        load.invisible();
 			}
 		});
 		
@@ -108,6 +112,7 @@ public class BuscadorRoles extends Composite   {
 			public void onClick(ClickEvent event) {
 				//se obtiene el ultimo rol, y se suma 1, para crear otro Rol
 
+		        load.visible();
 				int UltimoRol = 1;
 				Long rol = 1L;
 				if(listRol.getItemCount() > 0){
@@ -158,13 +163,21 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Permisos-RRHH", 0L, "N");
 				GuardarPagina(rol, "Carga-Datos-RRHH", 0L, "N");
 				listRol.addItem(""+rol);
+
+				if(!bandera){
+	    			mensaje.setMensaje("alert alert-error", "Error al Crear Rol");				
+				}else{
+	    			mensaje.setMensaje("alert alert-success", "Rol creado exitosamente");
+				}
+
+		        load.invisible();
 			}
 		});
-		btnCrear.setText("Crear");
+		btnCrear.setText("Crear Rol");
 		btnCrear.setStylePrimaryName("gwt-TextBox2");
 		btnCrear.setStyleName("sendButton");
-		absolutePanel.add(btnCrear, 229, 16);
-		btnCrear.setSize("117px", "34px");
+		absolutePanel.add(btnCrear, 97, 16);
+		btnCrear.setSize("169px", "34px");
 		
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
@@ -177,22 +190,31 @@ public class BuscadorRoles extends Composite   {
 		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
+
+		        load.visible();
 				if(formulario != null){
 					for(int i = 0; i<formulario.formularioROL.size(); i++){
 						ActualizarPagina(formulario.formularioROL.get(i).id_permiso,formulario.formularioROL.get(i).roll,
 								formulario.formularioROL.get(i).txtNombreFormulario.getText(),null,
-								formulario.formularioROL.get(i).listPermiso.getItemText(formulario.formularioROL.get(i).listPermiso.getItemCount()));
+								formulario.formularioROL.get(i).listPermiso.getItemText(formulario.formularioROL.get(i).listPermiso.getSelectedIndex()));
+					}
+					if(!bandera){
+		    			mensaje.setMensaje("alert alert-error", "Error al Actualizar Rol");				
+					}else{
+		    			mensaje.setMensaje("alert alert-success", "Rol Actualizado exitosamente");
 					}
 				}
+
+		        load.invisible();
 			}
 		});
 		btnGuardar.setText("Guardar Cambios");
 		btnGuardar.setStylePrimaryName("gwt-TextBox2");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 365, 16);
+		absolutePanel.add(btnGuardar, 292, 16);
 		btnGuardar.setSize("240px", "34px");
 		
-		absolutePanel.add(Busqueda, 611, 0);
+		absolutePanel.add(Busqueda, 552, 0);
 		Busqueda.setSize("103px", "55px");
 		
 		
@@ -213,7 +235,7 @@ public class BuscadorRoles extends Composite   {
     	{
     		public void onFailure(Throwable caught) 
     		{
-    			mensaje.setMensaje("alert alert-success", "Error en BD puestos\n"+caught);
+    			bandera = false;
     		}
 
 			@Override
@@ -224,6 +246,7 @@ public class BuscadorRoles extends Composite   {
 					formulario  = new Formulario();
 					formulario.agregarFormulario_lleno(results);
 					grid.setWidget(1, 0, formulario);
+					bandera = true;
 		    	}	
 			}
 		});
@@ -252,31 +275,30 @@ public class BuscadorRoles extends Composite   {
 	    	{
 	    		public void onFailure(Throwable caught) 
 	    		{
-	    			mensaje.setMensaje("alert alert-error", "Error al crear rol\n"+caught);
+	    			bandera = false;
 	    		}
 	
 				@Override
 				public void onSuccess(Long results)
 				{	
-	    			//mensaje.setMensaje("alert alert-success", "Rol Eliminado");
+					bandera = true;
 				}
 			});
 	}
 	
 
 	public void ActualizarPagina(Long id, Long rol, String nombreFormulario, Long formularioPadre, String permiso){
-			
 	    	AdministracionService.ActualizarUsuarioPermiso(id,rol, nombreFormulario, formularioPadre, permiso,new AsyncCallback<Long>()
 	    	{
 	    		public void onFailure(Throwable caught) 
 	    		{
-	    			mensaje.setMensaje("alert alert-error", "Error al actualizar rol\n"+caught);
+	    			bandera = false;
 	    		}
 	
 				@Override
 				public void onSuccess(Long results)
 				{	
-	    			//mensaje.setMensaje("alert alert-success", "Rol Eliminado");
+					bandera = true;
 				}
 			});
 	}

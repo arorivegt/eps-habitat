@@ -37,14 +37,14 @@ public class FormularioRol  extends Composite  {
 		txtNombreFormulario.setMaxLength(100);
 		txtNombreFormulario.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreFormulario, 20, 31);
-		txtNombreFormulario.setSize("168px", "34px");
+		txtNombreFormulario.setSize("348px", "34px");
 		
-		txtFormularioPadre = new TextBox();
-		txtFormularioPadre.setEnabled(false);
-		txtFormularioPadre.setStyleName("gwt-TextBox2");
-		txtFormularioPadre.setMaxLength(100);
-		absolutePanel.add(txtFormularioPadre, 198, 29);
-		txtFormularioPadre.setSize("168px", "34px");
+//		txtFormularioPadre = new TextBox();
+//		txtFormularioPadre.setEnabled(false);
+//		txtFormularioPadre.setStyleName("gwt-TextBox2");
+//		txtFormularioPadre.setMaxLength(100);
+//		absolutePanel.add(txtFormularioPadre, 198, 29);
+//		txtFormularioPadre.setSize("168px", "34px");
 		
 		listPermiso = new ListBox();
 		listPermiso.addItem("RW");
@@ -59,10 +59,10 @@ public class FormularioRol  extends Composite  {
 		absolutePanel.add(lblN, 20, 10);
 		lblN.setSize("157px", "13px");
 		
-		Label lblFormularioPadre = new Label("Formulario Padre");
-		lblFormularioPadre.setStyleName("label");
-		absolutePanel.add(lblFormularioPadre, 198, 10);
-		lblFormularioPadre.setSize("192px", "13px");
+//		Label lblFormularioPadre = new Label("Formulario Padre");
+//		lblFormularioPadre.setStyleName("label");
+//		absolutePanel.add(lblFormularioPadre, 198, 10);
+//		lblFormularioPadre.setSize("192px", "13px");
 		
 		label = new Label("Permiso");
 		label.setStyleName("label");

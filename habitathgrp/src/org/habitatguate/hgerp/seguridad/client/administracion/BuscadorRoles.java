@@ -43,6 +43,7 @@ public class BuscadorRoles extends Composite   {
     private Button btnCrear;
     private Button btnGuardar;
     private ListBox listFormulario;
+    private Label lblElijaTipoDe;
     
     /**
      * constructor
@@ -232,8 +233,13 @@ public class BuscadorRoles extends Composite   {
 		
 		Label lblroles = new Label("roles");
 		lblroles.setStyleName("label");
-		lblroles.setSize("118px", "13px");
+		lblroles.setSize("67px", "13px");
 		absolutePanel.add(lblroles, 10, 0);
+		
+		lblElijaTipoDe = new Label("Elija tipo de formulario");
+		lblElijaTipoDe.setStyleName("label");
+		absolutePanel.add(lblElijaTipoDe, 93, -3);
+		lblElijaTipoDe.setSize("169px", "13px");
     	
 		
 		initWidget(grid);

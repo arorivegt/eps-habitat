@@ -2,7 +2,9 @@ package org.habitatguate.hgerp.seguridad.client.principal;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.administracion.AsignarRol;
 import org.habitatguate.hgerp.seguridad.client.administracion.BuscadorRoles;
+import org.habitatguate.hgerp.seguridad.client.administracion.CambiarContrasenaUsuario;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
@@ -148,6 +150,12 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 
+		final Command cmdAsignar = new Command() {
+			public void execute() {
+				Asignar();
+			}
+		};
+		
 		
 		final Command cmdrol1 = new Command() {
 			public void execute() {
@@ -155,11 +163,6 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 		
-		final Command cmdusuario = new Command() {
-			public void execute() {
-				//usuario();
-			}
-		};
 		
 		final Command cmdsolicitudes1 = new Command() {
 			public void execute() {
@@ -304,11 +307,11 @@ public class MenuPrincipal extends Composite {
 		final MenuBar MenuAdmistracion = new MenuBar(true);
 		MenuAdmistracion.setAutoOpen(true);
 		MenuAdmistracion.setAnimationEnabled(true);
-		MenuAdmistracion.addItem("Cambiar Contraseñas", MenuContrasena);
+		MenuAdmistracion.addItem("Asignar Rol a Usuario", cmdAsignar);
 		MenuAdmistracion.addSeparator();
-		MenuAdmistracion.addItem("Crear Usuarios", cmdusuario);
+		MenuAdmistracion.addItem("Cambiar Contraseña Usuario", MenuContrasena);
 		MenuAdmistracion.addSeparator();
-		MenuAdmistracion.addItem("Rol", cmdrol1);
+		MenuAdmistracion.addItem("Admnistrar Roles", cmdrol1);
 		MenuAdmistracion.addSeparator();
 		
 		
@@ -667,7 +670,52 @@ public class MenuPrincipal extends Composite {
 	}
 	
 	void Contrasena(){
-		
+
+		final DialogBox Registro2 = new DialogBox();
+	    final HTML serverResponseLabel = new HTML();
+	    final Button close= new Button("x");
+	    CambiarContrasenaUsuario inicio = new CambiarContrasenaUsuario();
+	    VerticalPanel dialogVPanel = new VerticalPanel();
+	    dialogVPanel.add(serverResponseLabel );
+	    dialogVPanel.add(inicio);
+	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+	    dialogVPanel.add(close);
+	    Registro2 .setWidget(dialogVPanel);
+	    Registro2 .setModal(true);
+	    Registro2 .setGlassEnabled(true);
+	    Registro2 .setAnimationEnabled(true);
+	    Registro2 .center();
+	    Registro2 .show();
+	    close.setFocus(true);
+	    close.addClickHandler(new ClickHandler() {
+	    public void onClick(ClickEvent event) {
+	        Registro2.hide();
+	    }
+	    });
+	}
+	
+	void Asignar(){
+		final DialogBox Registro2 = new DialogBox();
+	    final HTML serverResponseLabel = new HTML();
+	    final Button close= new Button("x");
+	    AsignarRol inicio = new AsignarRol();
+	    VerticalPanel dialogVPanel = new VerticalPanel();
+	    dialogVPanel.add(serverResponseLabel );
+	    dialogVPanel.add(inicio);
+	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+	    dialogVPanel.add(close);
+	    Registro2 .setWidget(dialogVPanel);
+	    Registro2 .setModal(true);
+	    Registro2 .setGlassEnabled(true);
+	    Registro2 .setAnimationEnabled(true);
+	    Registro2 .center();
+	    Registro2 .show();
+	    close.setFocus(true);
+	    close.addClickHandler(new ClickHandler() {
+	    public void onClick(ClickEvent event) {
+	        Registro2.hide();
+	    }
+	    });
 	}
 	
 	void rol1(){

@@ -2879,5 +2879,24 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			return false;
 		}
 
+		@Override
+		public String CambiarRol(String idUsuario, Long rol)
+				throws IllegalArgumentException {
+		
+
+			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			String valor = "";
+			try{ 
+				final SegUsuario e = Persistencia.getObjectById(SegUsuario.class, idUsuario); 
+					e.setId_rol(rol);
+					valor = "Id Rol actualizada correctamente";				
+			}catch(Exception e){
+					valor = "Hubo un error al actualizar el rol";
+			}finally {  
+					Persistencia.close();  
+			}
+			return valor;
+		}
+
 
 	}

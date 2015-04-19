@@ -91,6 +91,17 @@ public interface RecursosHumanosServiceAsync {
 	 * @throws IllegalArgumentException
 	 */
 	void CambiarContrasenaAdmin(String idUsuario,String nuevaContrasena, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
+
+	/**
+	 * 
+	 * @param idUsuario
+	 * @param rol
+	 * @param callback
+	 * @throws IllegalArgumentException
+	 */
+	void CambiarRol(String idUsuario, Long rol, AsyncCallback<String> callback) throws IllegalArgumentException;
+	
 	/**
 	 * 
 	 * @param afiliacion_igss

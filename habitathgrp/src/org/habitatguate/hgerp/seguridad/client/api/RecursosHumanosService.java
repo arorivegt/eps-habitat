@@ -86,6 +86,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	String CambiarContrasena(String idUsuario, String nuevaContrasena, String actualContrasena) throws IllegalArgumentException;
+	
 	/**
 	 * 
 	 * @param idUsuario
@@ -94,6 +95,15 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	String CambiarContrasenaAdmin(String idUsuario,String nuevaContrasena) throws IllegalArgumentException;
+	
+	/**
+	 * 
+	 * @param idUsuario
+	 * @param rol
+	 * @return
+	 * @throws IllegalArgumentException
+	 */
+	String CambiarRol(String idUsuario,Long rol) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param afiliacion_igss

@@ -42,6 +42,7 @@ public class BuscadorRoles extends Composite   {
     public Formulario formulario;
     private Button btnCrear;
     private Button btnGuardar;
+    private ListBox listFormulario;
     
     /**
      * constructor
@@ -83,7 +84,8 @@ public class BuscadorRoles extends Composite   {
 			public void onChange(ChangeEvent event) {
 		        load.visible();
 				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
-				busqueda(rol);
+				Long formu  = Long.parseLong(listFormulario.getValue(listFormulario.getSelectedIndex()));
+				busqueda(rol,formu);
 		        load.invisible();
 			}
 		});
@@ -119,49 +121,49 @@ public class BuscadorRoles extends Composite   {
 					rol = UltimoRol + 1L;
 				}
 				//son los modulos que se quieren mostrar
-				GuardarPagina(rol, "RRRH-Menu", null, "N");
-				GuardarPagina(rol, "Finanzas-Menu", null, "N");
-				GuardarPagina(rol, "Soluciones-Menu", null, "N");
-				GuardarPagina(rol, "Administracion-Menu", null, "N");
+				GuardarPagina(rol, "RRRH-Menu", 0L, "N");
+				GuardarPagina(rol, "Finanzas-Menu", 0L, "N");
+				GuardarPagina(rol, "Soluciones-Menu", 0L, "N");
+				GuardarPagina(rol, "Administracion-Menu", 0L, "N");
 				
 				//estos son los formularios que contiene el modulo de Empleado, para crearlos
-				GuardarPagina(rol, "Datos-Empleado", 0L, "R");
-				GuardarPagina(rol, "Familia-Empleado", 0L, "R");
-				GuardarPagina(rol, "Academico-Empleado", 0L, "R");
-				GuardarPagina(rol, "RefLaboral-Empleado", 0L, "R");
-				GuardarPagina(rol, "RefPersonal-Empleado", 0L, "R");
-				GuardarPagina(rol, "Idiomas-Empleado", 0L, "R");
-				GuardarPagina(rol, "Entrevistas-Empleado", 0L, "R");
-				GuardarPagina(rol, "Permisos-Empleado", 0L, "R");
-				GuardarPagina(rol, "Permisos-Solicitudes-Empleado", 0L, "R");
-				GuardarPagina(rol, "Permisos-Validar-Empleado", 0L, "R");
-				GuardarPagina(rol, "Cambiar-Contrasena-Empleado", 0L, "R");
-				GuardarPagina(rol, "Evaluaciones-Compartidas-Empleado", 0L, "R");
+				GuardarPagina(rol, "Datos-Empleado", 1L, "R");
+				GuardarPagina(rol, "Familia-Empleado", 1L, "R");
+				GuardarPagina(rol, "Academico-Empleado", 1L, "R");
+				GuardarPagina(rol, "RefLaboral-Empleado", 1L, "R");
+				GuardarPagina(rol, "RefPersonal-Empleado", 1L, "R");
+				GuardarPagina(rol, "Idiomas-Empleado", 1L, "R");
+				GuardarPagina(rol, "Entrevistas-Empleado", 1L, "R");
+				GuardarPagina(rol, "Permisos-Empleado", 1L, "R");
+				GuardarPagina(rol, "Permisos-Solicitudes-Empleado", 1L, "R");
+				GuardarPagina(rol, "Permisos-Validar-Empleado", 1L, "R");
+				GuardarPagina(rol, "Cambiar-Contrasena-Empleado", 1L, "R");
+				GuardarPagina(rol, "Evaluaciones-Compartidas-Empleado", 1L, "R");
 				
 				//estos son los formularios que contiene el modulo de RRHH
-				GuardarPagina(rol, "Buscar-RRHH", 0L, "N");
-				GuardarPagina(rol, "BDEvaluacion-RRHH", 0L, "N");
-				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 0L, "N");
-				GuardarPagina(rol, "Permisos-Validar-RRHH", 0L, "N");
-				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 0L, "N");
-				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 0L, "N");
-				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 0L, "N");
-				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 0L, "N");
-				GuardarPagina(rol, "Informe-Bancos-RRHH", 0L, "N");
-				GuardarPagina(rol, "Datos-RRHH", 0L, "N");
-				GuardarPagina(rol, "Familia-RRHH", 0L, "N");
-				GuardarPagina(rol, "Academico-RRHH", 0L, "N");
-				GuardarPagina(rol, "RefLaboral-RRHH", 0L, "N");
-				GuardarPagina(rol, "RefPersonal-RRHH", 0L, "N");
-				GuardarPagina(rol, "Idiomas-RRHH", 0L, "N");
-				GuardarPagina(rol, "Desempeno-RRHH", 0L, "N");
-				GuardarPagina(rol, "Evaluacion-RRHH", 0L, "N");
-				GuardarPagina(rol, "Puestos-RRHH", 0L, "N");
-				GuardarPagina(rol, "Salarios-RRHH", 0L, "N");
-				GuardarPagina(rol, "Historial-RRHH", 0L, "N");
-				GuardarPagina(rol, "Entrevistas-RRHH", 0L, "N");
-				GuardarPagina(rol, "Permisos-RRHH", 0L, "N");
-				GuardarPagina(rol, "Carga-Datos-RRHH", 0L, "N");
+				GuardarPagina(rol, "Buscar-RRHH", 2L, "N");
+				GuardarPagina(rol, "BDEvaluacion-RRHH", 2L, "N");
+				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 2L, "N");
+				GuardarPagina(rol, "Permisos-Validar-RRHH", 2L, "N");
+				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 2L, "N");
+				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 2L, "N");
+				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 2L, "N");
+				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 2L, "N");
+				GuardarPagina(rol, "Informe-Bancos-RRHH", 2L, "N");
+				GuardarPagina(rol, "Datos-RRHH", 2L, "N");
+				GuardarPagina(rol, "Familia-RRHH", 2L, "N");
+				GuardarPagina(rol, "Academico-RRHH", 2L, "N");
+				GuardarPagina(rol, "RefLaboral-RRHH", 2L, "N");
+				GuardarPagina(rol, "RefPersonal-RRHH", 2L, "N");
+				GuardarPagina(rol, "Idiomas-RRHH", 2L, "N");
+				GuardarPagina(rol, "Desempeno-RRHH", 2L, "N");
+				GuardarPagina(rol, "Evaluacion-RRHH", 2L, "N");
+				GuardarPagina(rol, "Puestos-RRHH", 2L, "N");
+				GuardarPagina(rol, "Salarios-RRHH", 2L, "N");
+				GuardarPagina(rol, "Historial-RRHH", 2L, "N");
+				GuardarPagina(rol, "Entrevistas-RRHH", 2L, "N");
+				GuardarPagina(rol, "Permisos-RRHH", 2L, "N");
+				GuardarPagina(rol, "Carga-Datos-RRHH", 2L, "N");
 				listRol.addItem(""+rol);
 
 				if(!bandera){
@@ -173,17 +175,27 @@ public class BuscadorRoles extends Composite   {
 		        load.invisible();
 			}
 		});
+		
+		listFormulario = new ListBox();
+		listFormulario.addItem("Menu","0");
+		listFormulario.addItem("RRHH","2");
+		listFormulario.addItem("Empleado","1");
+		listFormulario.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listFormulario, 93, 16);
+		
+		listFormulario.setSize("169px", "39px");
 		btnCrear.setText("Crear Rol");
 		btnCrear.setStylePrimaryName("gwt-TextBox2");
 		btnCrear.setStyleName("sendButton");
-		absolutePanel.add(btnCrear, 97, 16);
+		absolutePanel.add(btnCrear, 292, 16);
 		btnCrear.setSize("169px", "34px");
 		
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
-				busqueda(rol);
+				Long formu  = Long.parseLong(listFormulario.getValue(listFormulario.getSelectedIndex()));
+				busqueda(rol,formu);
 			}
 		});
 		
@@ -195,7 +207,7 @@ public class BuscadorRoles extends Composite   {
 				if(formulario != null){
 					for(int i = 0; i<formulario.formularioROL.size(); i++){
 						ActualizarPagina(formulario.formularioROL.get(i).id_permiso,formulario.formularioROL.get(i).roll,
-								formulario.formularioROL.get(i).txtNombreFormulario.getText(),null,
+								formulario.formularioROL.get(i).txtNombreFormulario.getText(),formulario.formularioROL.get(i).id_formularioPadre,
 								formulario.formularioROL.get(i).listPermiso.getItemText(formulario.formularioROL.get(i).listPermiso.getSelectedIndex()));
 					}
 					if(!bandera){
@@ -211,10 +223,10 @@ public class BuscadorRoles extends Composite   {
 		btnGuardar.setText("Guardar Cambios");
 		btnGuardar.setStylePrimaryName("gwt-TextBox2");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 292, 16);
+		absolutePanel.add(btnGuardar, 487, 16);
 		btnGuardar.setSize("240px", "34px");
 		
-		absolutePanel.add(Busqueda, 552, 0);
+		absolutePanel.add(Busqueda, 747, 0);
 		Busqueda.setSize("103px", "55px");
 		
 		
@@ -228,10 +240,10 @@ public class BuscadorRoles extends Composite   {
 		
 	}
 	
-	public void busqueda(Long rol){
+	public void busqueda(Long rol,Long formularioPadre){
 		grid.clearCell(1, 0);
 		
-    	AdministracionService.ObtenerUsuarioPermiso(rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+    	AdministracionService.ObtenerUsuarioPermisoFormularios(rol,formularioPadre,new AsyncCallback<List<AuxUsuarioPermiso>>()
     	{
     		public void onFailure(Throwable caught) 
     		{

@@ -391,9 +391,6 @@ public class MenuPrincipal extends Composite {
 						{
 							//ESTE MENU VIENE POR DEFECTO
 							MenuVertical.setHeight("100%");
-							//agregar item para el menu
-							MenuVertical.addItem("Empleado",MenuEmpleados); 
-							MenuVertical.addSeparator();
 							
 							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE RRHH
 							AdministracionService.ObtenerUsuarioPermisoNombre("RRRH-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
@@ -470,6 +467,9 @@ public class MenuPrincipal extends Composite {
 							});
 							
 							//PARTE DEL MENU POR DEFECTP
+							//agregar item para el menu
+							MenuVertical.addItem("Empleado",MenuEmpleados); 
+							MenuVertical.addSeparator();
 							MenuVertical.addItem("Administracion",MenuAdmistracion); 
 							MenuVertical.addSeparator();
 							MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 

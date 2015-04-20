@@ -277,5 +277,9 @@ public class FormularioPermiso extends Composite {
 		this.dateFecha1.setValue(new Date(dateFecha1));
 		this.dateFecha2.setValue(new Date(dateFecha2));
 	}
-	
+
+	public void btnhinabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
+	}
 }

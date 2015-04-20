@@ -46,6 +46,7 @@ public class Salario extends Composite  {
      private ListBox txtTipoSalario;
 	 private List<AuxSalario> salario = new ArrayList<AuxSalario> ();
      private Button button;
+     boolean valor = true;
 		
 	    public Salario(Empleado empleadoo) {
 
@@ -173,9 +174,11 @@ public class Salario extends Composite  {
 		}
 	    
 	    private void agregarFormulario(String tipo){
-	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioSalario(this,empleado));
-	        load.invisible();
+	    	if(valor){
+		        load.visible();
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioSalario(this,empleado));
+		        load.invisible();
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxSalario> results){
@@ -187,6 +190,7 @@ public class Salario extends Composite  {
 			    {
 			    	FormularioSalario fa = new  FormularioSalario(this,empleado);
 			    	fa.LlenarDatos(n2.getId_Salario(), ""+n2.getSalario(),n2.getFecha(), n2.getTipoSalario(),n2.getDescripcion());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	

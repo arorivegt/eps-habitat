@@ -56,6 +56,7 @@ public class MenuPrincipal extends Composite {
 	private Panel panel;
 	private boolean bandera = true;
 	private Mensaje mensaje; 
+	private Long rol = 0L;
 	private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
 
@@ -375,7 +376,7 @@ public class MenuPrincipal extends Composite {
 
 		final  MenuBar MenuVertical = new MenuBar();
 		loginService.CheqLog(new AsyncCallback<Boolean>() 
-				{
+		{
 
 			public void onFailure(Throwable caught) 
 			{
@@ -394,7 +395,7 @@ public class MenuPrincipal extends Composite {
 						{
 							//ESTE MENU VIENE POR DEFECTO
 							MenuVertical.setHeight("100%");
-							
+							rol = results;
 							//VERIFICO SI TIENE PERMISO PARA MOSTRAR EL MENU DE RRHH
 							AdministracionService.ObtenerUsuarioPermisoNombre("RRRH-Menu",results,new AsyncCallback<List<AuxUsuarioPermiso>>()
 					    	{
@@ -495,107 +496,266 @@ public class MenuPrincipal extends Composite {
 	}
 
 	void rrhh1() {
-		BuscadorEmpleados buscadorEmpleados = new BuscadorEmpleados();
-		buscadorEmpleados.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, buscadorEmpleados);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Buscar-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+	
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					BuscadorEmpleados buscadorEmpleados = new BuscadorEmpleados();
+					buscadorEmpleados.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscadorEmpleados);
+				}
+			}
+		});
 	}
 
 	void rrhh2() {
-		BDpuestos bdPuestos = new BDpuestos();
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, bdPuestos);
+		AdministracionService.ObtenerUsuarioPermisoNombre("BDPuesto-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					BDpuestos bdPuestos = new BDpuestos();
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, bdPuestos);
+					
+				}
+			}
+		});
+		
 
 	}
 
 	//@UiHandler("rrhh3")
 	void rrhh3() {
-		CrearPrestacionesLaborales crearPrestacionesLaborales = new CrearPrestacionesLaborales();
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, crearPrestacionesLaborales);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Informe-Prestaciones-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					CrearPrestacionesLaborales crearPrestacionesLaborales = new CrearPrestacionesLaborales();
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearPrestacionesLaborales);
+				}
+			}
+		});
 	}
 
 	//@UiHandler("rrhh4")
 	void rrhh4() {
-		EmpleadosMinisterioTrabajo empleadosMinisterioTrabajo = new EmpleadosMinisterioTrabajo();
-		this.panel.getGrid().setHeight("100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, empleadosMinisterioTrabajo);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Informe-Miniserio-Trabajo-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					EmpleadosMinisterioTrabajo empleadosMinisterioTrabajo = new EmpleadosMinisterioTrabajo();
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, empleadosMinisterioTrabajo);
+				}
+			}
+		});
 	}
 
 	//@UiHandler("rrhh5")
 	void rrhh5() {
-		CrearReporteEmpleados crearReporteEmpleados = new CrearReporteEmpleados();
-		this.panel.getGrid().setHeight("100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, crearReporteEmpleados);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Informe-Empleado-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					CrearReporteEmpleados crearReporteEmpleados = new CrearReporteEmpleados();
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteEmpleados);
+				}
+			}
+		});
+		
 	}
 	//      @UiHandler("rrhh6")
 	void rrhh6() {
+		AdministracionService.ObtenerUsuarioPermisoNombre("BDEvaluacion-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
-		TestForm testForm = new TestForm();
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, testForm);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					TestForm testForm = new TestForm();
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, testForm);
+				}
+			}
+		});
+		
 	}
 
 	void Carga1(){
+		AdministracionService.ObtenerUsuarioPermisoNombre("Carga-Datos-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
-		SubirDatos subirDatos = new SubirDatos();
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, subirDatos);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					SubirDatos subirDatos = new SubirDatos();
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, subirDatos);
+				}
+			}
+		});
 		
 	}
 	//      @UiHandler("rrhh7")
 	void rrhh7() {
-		CrearInformeBancos crearInformes = new CrearInformeBancos();
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, crearInformes);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Informe-Bancos-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					CrearInformeBancos crearInformes = new CrearInformeBancos();
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearInformes);
+				}
+			}
+		});
+		
 
 	}
 	
 	void rrhh8() {
-		SolicitudPermiso solicitudPermiso = new SolicitudPermiso(panel.getId_empleado());
-		solicitudPermiso.agregarFormularios();
-		this.panel.getGrid().setWidth("1000");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, solicitudPermiso);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Permisos-Validar-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					SolicitudPermiso solicitudPermiso = new SolicitudPermiso(panel.getId_empleado());
+					solicitudPermiso.agregarFormularios();
+					panel.getGrid().setWidth("1000");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, solicitudPermiso);
+				}
+			}
+		});
 	}
-	void rrhh9() {
-		final DialogBox Registro2 = new DialogBox();
-	    final HTML serverResponseLabel = new HTML();
-	    final Button close= new Button("x");
-	    AsignarDiasVacaciones inicio = new AsignarDiasVacaciones();
-	    VerticalPanel dialogVPanel = new VerticalPanel();
-	    dialogVPanel.add(serverResponseLabel );
-	    dialogVPanel.add(inicio);
-	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-	    dialogVPanel.add(close);
-	    Registro2 .setWidget(dialogVPanel);
-	    Registro2 .setModal(true);
-	    Registro2 .setGlassEnabled(true);
-	    Registro2 .setAnimationEnabled(true);
-	    Registro2 .center();
-	    Registro2 .show();
-	    close.setFocus(true);
 	
-	    close.addClickHandler(new ClickHandler() {
-	    public void onClick(ClickEvent event) {
-	        Registro2.hide();
-	    }
-	    });
+	void rrhh9() {
+		AdministracionService.ObtenerUsuarioPermisoNombre("Aumentar-Vacaciones-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					final DialogBox Registro2 = new DialogBox();
+				    final HTML serverResponseLabel = new HTML();
+				    final Button close= new Button("x");
+				    AsignarDiasVacaciones inicio = new AsignarDiasVacaciones();
+				    VerticalPanel dialogVPanel = new VerticalPanel();
+				    dialogVPanel.add(serverResponseLabel );
+				    dialogVPanel.add(inicio);
+				    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+				    dialogVPanel.add(close);
+				    Registro2 .setWidget(dialogVPanel);
+				    Registro2 .setModal(true);
+				    Registro2 .setGlassEnabled(true);
+				    Registro2 .setAnimationEnabled(true);
+				    Registro2 .center();
+				    Registro2 .show();
+				    close.setFocus(true);
+				
+				    close.addClickHandler(new ClickHandler() {
+				    public void onClick(ClickEvent event) {
+				        Registro2.hide();
+				    }
+				    });
+				}
+			}
+		});
+
 	}
 	
 	void rrhh10() {
-		CalculoVacaciones calculoVacaciones = new CalculoVacaciones();
-		this.panel.getGrid().setWidth("1000");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, calculoVacaciones);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Calculo-Vacaciones-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					CalculoVacaciones calculoVacaciones = new CalculoVacaciones();
+					panel.getGrid().setWidth("1000");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, calculoVacaciones);
+				}
+			}
+		});
 	}
 	//@UiHandler("empleado1")
 	void empleado1() {
@@ -844,9 +1004,8 @@ public class MenuPrincipal extends Composite {
 	// --- Fin        
 	public void Empleado_registrado(){
 
-		final Empleado e = new Empleado(1);
-		e.NuevasPestanasdos();
-		e.inavilidarDatosYPestanas();
+		final Empleado e = new Empleado(1,"E",rol);
+		e.NuevasPestanasdos(rol);
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, e);
 		e.setSize("100%", "1000px");

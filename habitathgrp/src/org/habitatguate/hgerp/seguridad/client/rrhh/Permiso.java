@@ -38,6 +38,7 @@ public class Permiso extends Composite  {
 	 private final ListBox listTipoPermiso = new ListBox();
 	 private final Button btnBuscar = new Button("Agregar");
 	 private Loading load ;
+	 boolean valor = true;
 	 
 	    public Permiso(Empleado emplead) {
 
@@ -183,7 +184,9 @@ public class Permiso extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPermiso(this,empleado));
+	    	if(valor){
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPermiso(this,empleado));
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxPermiso> results){
@@ -195,6 +198,7 @@ public class Permiso extends Composite  {
 			    	FormularioPermiso fa = new  FormularioPermiso(this,empleado);
 			    	fa.LlenarDatos(n2.getId_vacaciones(),n2.getDescripcion(),n2.getFecha1(),n2.getFecha2(),
 			    				   n2.getTipoPermisos());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

@@ -45,6 +45,8 @@ public class FormularioReferenciaLaboral extends Composite {
 	private TextBox txtPuestoCandidato;
 	private Mensaje mensaje; 
     private Loading load ;
+    private Button btnActualizar;
+    private Button btnEliminar;
 	
 	public FormularioReferenciaLaboral(ReferenciaLaboral a,Empleado e) {
 
@@ -167,7 +169,7 @@ public class FormularioReferenciaLaboral extends Composite {
 		absolutePanel.add(txtActitudes, 499, 144);
 		txtActitudes.setSize("430px", "61px");
 		
-		Button btnActualizar = new Button("Send");
+		btnActualizar = new Button("Send");
 		btnActualizar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 		        load.visible();
@@ -236,7 +238,7 @@ public class FormularioReferenciaLaboral extends Composite {
 		btnActualizar.setSize("227px", "34px");
 		
 		
-		Button btnEliminar = new Button("Send");
+		btnEliminar = new Button("Send");
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -338,5 +340,11 @@ public class FormularioReferenciaLaboral extends Composite {
 		this.dateFecha2.setValue(new Date(dateFecha2));
 		this.txtSalarioFinal.setText(txtSalarioFinal);
 		this.txtPuestoCandidato.setText(txtPuestoCandidato);
+	}
+	public void btnhinabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
 	}
 }

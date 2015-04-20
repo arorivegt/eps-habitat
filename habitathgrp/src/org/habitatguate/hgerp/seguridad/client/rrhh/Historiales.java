@@ -38,8 +38,10 @@ public class Historiales extends Composite  {
 	 private DateBox dateFecha1;
 	 private ListBox listTipo;
 	 private Button btnBuscar;
-	    private Loading load ;
-		
+	 private Loading load ;
+	 boolean valor = true;
+	 private Button btnAgregar;
+	 
 	    public Historiales(Empleado e) {
 
 			mensaje = new Mensaje();
@@ -146,9 +148,9 @@ public class Historiales extends Composite  {
 	        btnBuscar.setSize("227px", "34px");
 	        flextable = new FlexTable();
 	        panel.add(flextable);
-	        Button btnAgregar = new Button("Agregar");
+	       
+	        btnAgregar = new Button("Agregar");
 	        panel.add(btnAgregar);
-	        
 	        btnAgregar.setStyleName("sendButton");
 	        btnAgregar.addClickHandler(new ClickHandler() {
 	        	public void onClick(ClickEvent event) {
@@ -160,7 +162,9 @@ public class Historiales extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioHistorial(this,empleado));
+	    	if(valor){
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioHistorial(this,empleado));
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxHistorial> results){
@@ -173,6 +177,7 @@ public class Historiales extends Composite  {
 			    for ( AuxHistorial n2 : results) {
 			    	FormularioHistorial fa = new  FormularioHistorial(this,empleado);
 			    	fa.LlenarDatos(n2.getId_historial(),n2.getTipo_historial() ,n2.getFecha(),n2.getDescripcion());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	    

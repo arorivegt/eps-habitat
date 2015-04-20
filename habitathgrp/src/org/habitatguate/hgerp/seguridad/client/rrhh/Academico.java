@@ -37,6 +37,7 @@ public class Academico extends Composite  {
 	 private Button btnAgregar;
 	 private Empleado empleado;
 	 private FlexTable flextable;
+	 boolean valor = true;
      private VerticalPanel panel = new VerticalPanel();
      private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
      
@@ -77,9 +78,11 @@ public class Academico extends Composite  {
       */
 	private void agregarFormulario()
 	{
-        load.visible();
-        flextable.setWidget(flextable.getRowCount(), 0, new FormularioAcademico(this,empleado));
-        load.invisible();
+		if(valor){
+	        load.visible();
+	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioAcademico(this,empleado));
+	        load.invisible();
+	    }
 	}
 	
 	
@@ -98,6 +101,7 @@ public class Academico extends Composite  {
 				fa.LlenarDatos(n2.getId_historial_academico(),n2.getFecha1(), n2.getFecha2(), 
 						       n2.getTitulo(), n2.getEstablecimiento(),n2.getNivel_academico()
 						       ,n2.getURLFile(), n2.getKeyFile());
+				fa.btnhinabilitar(valor);
 			    flextable.setWidget(flextable.getRowCount(), 0,fa );
 			 }
 	    }	  

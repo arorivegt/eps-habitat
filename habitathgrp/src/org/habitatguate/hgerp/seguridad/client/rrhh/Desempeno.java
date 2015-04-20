@@ -41,6 +41,7 @@ public class Desempeno extends Composite  {
      private List<AuxTest> auxTest = new ArrayList<AuxTest>();
      public  List<AuxBDTest> auxBDTest = new ArrayList<AuxBDTest>();
      private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+     boolean valor = true;
      
     public Desempeno(Long idEmpleadoo) {
 
@@ -173,10 +174,12 @@ public class Desempeno extends Composite  {
         }
             
         private void agregarFormulario(){
-	        load.visible();
-            flextable.clear();
-            flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodo(this,idEmpleado));
-	        load.invisible();
+        	if(valor){
+    	        load.visible();
+                flextable.clear();
+                flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodo(this,idEmpleado));
+    	        load.invisible();
+        	}
         }
         
         public void agregarFormulario_lleno(AuxTest n){
@@ -188,6 +191,7 @@ public class Desempeno extends Composite  {
                                         ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                                         ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
                 flextable.setWidget(flextable.getRowCount(), 0,fa );
+                fa.btnhinabilitar(valor);
                 if(bandera){
                 	fa.botonesVisibles(true);
                 }else{

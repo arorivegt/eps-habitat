@@ -27,6 +27,7 @@ public class Idioma extends Composite  {
 	 private VerticalPanel panel = new VerticalPanel();
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
      private Loading load ;
+     boolean valor = true;
 		
 	    public Idioma(Empleado empleado) {
 
@@ -55,9 +56,11 @@ public class Idioma extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioIdiomas(this,empleado));
-	        load.invisible();
+	    	if(valor){
+		        load.visible();
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioIdiomas(this,empleado));
+		        load.invisible();
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxIdioma> results){
@@ -68,6 +71,7 @@ public class Idioma extends Composite  {
 			    	FormularioIdiomas fa = new  FormularioIdiomas(this,empleado);
 			    	fa.LlenarDatos(n2.getId_idioma(),n2.getNivel(),n2.getIdioma(), n2.getURLFile(), n2.getKeyFile());
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
+			        fa.btnhinabilitar(valor);
 			    }
 	    	}	
 	        load.invisible();    

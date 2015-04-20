@@ -33,6 +33,7 @@ public class FormularioPruebaPeriodoDos extends Composite {
 		private Long id_prueba = 0L;
 		private Long id_BDprueba = 0L;
 		private boolean bandera = true;
+		private Button btnGuardar;
 	    private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
 	    private ListBox listPregunta1;
@@ -262,7 +263,7 @@ public class FormularioPruebaPeriodoDos extends Composite {
 		absolutePanel.add(dateFecha, 284, 939);
 		dateFecha.setSize("198px", "34px");
 		
-		Button btnGuardar = new Button("Send");
+		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 		        load.visible();
@@ -632,6 +633,15 @@ public class FormularioPruebaPeriodoDos extends Composite {
           }
           });
       }
+	  
+
+	  public void btnhinabilitar(boolean valor){
+		btnGuardar.setEnabled(valor);
+		btnGuardar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
+	
 	
    
 }

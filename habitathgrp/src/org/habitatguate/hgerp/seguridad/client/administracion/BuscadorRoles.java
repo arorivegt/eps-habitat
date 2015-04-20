@@ -144,12 +144,13 @@ public class BuscadorRoles extends Composite   {
 				//estos son los formularios que contiene el modulo de RRHH
 				GuardarPagina(rol, "Buscar-RRHH", 2L, "N");
 				GuardarPagina(rol, "BDEvaluacion-RRHH", 2L, "N");
+				GuardarPagina(rol, "BDPuesto-RRHH", 2L, "N");
 				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Permisos-Validar-RRHH", 2L, "N");
 				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 2L, "N");
-				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 2L, "N");
+				GuardarPagina(rol, "Informe-Empleado-RRHH", 2L, "N");
 				GuardarPagina(rol, "Informe-Bancos-RRHH", 2L, "N");
 				GuardarPagina(rol, "Datos-RRHH", 2L, "N");
 				GuardarPagina(rol, "Familia-RRHH", 2L, "N");

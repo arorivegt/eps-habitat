@@ -38,6 +38,7 @@ public class Evaluacion extends Composite  {
      private final DateBox dateFecha1;
      private final DateBox dateFecha2;
      public boolean bandera = true;
+     boolean valorr = true;
      private List<AuxTest> valor = new ArrayList<AuxTest>();
      public List<AuxBDTest> BDresult = new ArrayList<AuxBDTest>();
      private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
@@ -171,10 +172,13 @@ public class Evaluacion extends Composite  {
     }
     
     private void agregarFormulario(){
-        load.visible();
-        flextable.clear();
-        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodoDos(this,empleado));
-        load.invisible();
+    	if(valorr){
+            load.visible();
+            flextable.clear();
+            flextable.setWidget(flextable.getRowCount(), 0, new FormularioPruebaPeriodoDos(this,empleado));
+            load.invisible();
+    		
+    	}
     }
     
     public void agregarFormulario_lleno(AuxTest n){
@@ -186,6 +190,7 @@ public class Evaluacion extends Composite  {
             fa.LlenarDatos(n.getId_test(),""+n.getPregunta1(),""+ n.getPregunt2(), ""+n.getPregunta3(),""+ n.getPregunta4(), 
                             ""+n.getPregunta5(), ""+n.getPregunta6(), ""+n.getPregunta7(),""+ n.getPregunta8(),""+n.getPregunta9(), 
                             ""+n.getPregunta10(), n.getEvaluador(),n.getBDtest(), n.getFecha_test());
+            fa.btnhinabilitar(valorr);
 			flextable.setWidget(flextable.getRowCount(), 0,fa );
 			if(bandera){
 				fa.botonesVisibles(true);

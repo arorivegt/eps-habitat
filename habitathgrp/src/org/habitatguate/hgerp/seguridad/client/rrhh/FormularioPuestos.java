@@ -558,4 +558,11 @@ public class FormularioPuestos extends Composite {
 		this.txtFunciones.setText(txtFunciones);
 		this.txtMotivoPuesto.setText(txtMotivoPuesto);
 	}
+	
+	public void btnhinabilitar(boolean valor){
+		btnGuardar.setEnabled(valor);
+		btnGuardar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
 }

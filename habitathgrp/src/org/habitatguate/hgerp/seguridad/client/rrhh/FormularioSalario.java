@@ -249,6 +249,11 @@ public class FormularioSalario extends Composite {
 		this.fecha.setValue(new Date(fecha));
 	}
 	
-	
+	public void btnhinabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
 
 }

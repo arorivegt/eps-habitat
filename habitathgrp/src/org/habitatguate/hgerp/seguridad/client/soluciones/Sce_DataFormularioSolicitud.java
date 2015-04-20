@@ -109,6 +109,8 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "617px");
 		
+		System.out.println("NADA");
+		
 		Label lblNombres = new Label("Nombre completo:");
 		lblNombres.setStyleName("label");
 		absolutePanel.add(lblNombres, 42, 10);

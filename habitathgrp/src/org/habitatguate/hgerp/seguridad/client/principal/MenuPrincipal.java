@@ -783,25 +783,40 @@ public class MenuPrincipal extends Composite {
 
 	//      @UiHandler("empleado3")
 	void empleado3() {
-		final Compartidas comp = new Compartidas();
-		comp.id_EmpleadoPrincipal = this.panel.getId_empleado();
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, comp);
-		loginService.getEvaluacionesCompartidas(this.panel.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){
-
+		AdministracionService.ObtenerUsuarioPermisoNombre("Evaluaciones-Compartidas-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
 			public void onFailure(Throwable caught) 
 			{
-				Window.alert("No hay resultados "+caught);
+				
 			}
 
 			@Override
-			public void onSuccess(List<AuxTestCompartidos> result)
-			{ 
-				if(!result.isEmpty()){
-					comp.agregar_formularios(result);
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(!results.get(0).getPermiso().equals("N")){
+					final Compartidas comp = new Compartidas();
+					comp.id_EmpleadoPrincipal = panel.getId_empleado();
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, comp);
+					loginService.getEvaluacionesCompartidas(panel.getId_empleado(),new AsyncCallback<List<AuxTestCompartidos>>(){
+
+						public void onFailure(Throwable caught) 
+						{
+							Window.alert("No hay resultados "+caught);
+						}
+
+						@Override
+						public void onSuccess(List<AuxTestCompartidos> result)
+						{ 
+							if(!result.isEmpty()){
+								comp.agregar_formularios(result);
+							}
+						}
+					});
 				}
 			}
 		});
+		
 	}
 
 

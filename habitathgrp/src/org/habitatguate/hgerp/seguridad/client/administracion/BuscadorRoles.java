@@ -147,6 +147,7 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "BDPuesto-RRHH", 2L, "N");
 				GuardarPagina(rol, "Aumentar-Vacaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Permisos-Validar-RRHH", 2L, "N");
+				GuardarPagina(rol, "Evaluaciones-Compartidas-RRHH", 2L, "N");
 				GuardarPagina(rol, "Calculo-Vacaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Informe-Prestaciones-RRHH", 2L, "N");
 				GuardarPagina(rol, "Informe-Miniserio-Trabajo-RRHH", 2L, "N");

@@ -26,6 +26,7 @@ public class ReferenciaLaboral extends Composite  {
 	 private Empleado empleado;
      private VerticalPanel panel = new VerticalPanel();
      private Loading load ;
+     boolean valor = true;
      private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
 	    public ReferenciaLaboral(Empleado empleado) {
@@ -55,9 +56,11 @@ public class ReferenciaLaboral extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaLaboral(this,empleado));
-	        load.invisible();
+	    	if(valor){
+		        load.visible();
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaLaboral(this,empleado));
+		        load.invisible();
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxReferenciaLaboral> results){
@@ -69,6 +72,7 @@ public class ReferenciaLaboral extends Composite  {
 			    	fa.LlenarDatos(n2.getId_referencia_laboral(),n2.getNombre_referencia(), n2.getEmpresa_referencia(), n2.getRecomiendo(),
 			    				   n2.getMotivo_retiro(),n2.getActitudes_cualidades(), ""+n2.getTelefono(),
 			    				   n2.getFecha1(), n2.getFecha2(), ""+n2.getSalario_final(), n2.getPuesto_candidato());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	 

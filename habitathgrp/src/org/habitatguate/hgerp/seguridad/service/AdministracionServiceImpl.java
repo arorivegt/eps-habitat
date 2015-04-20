@@ -159,7 +159,7 @@ public class AdministracionServiceImpl extends RemoteServiceServlet implements A
 		
 		List<AuxUsuarioPermiso> valor = new ArrayList<AuxUsuarioPermiso>();
 		List<SegUsuarioPermiso> results = new ArrayList<SegUsuarioPermiso>();
-
+		System.out.println("rol == "+Rol+" && nombreFormulario == '"+nombreFormulario+"'");
 		Query q = pm.newQuery(SegUsuarioPermiso.class,"rol == "+Rol+" && nombreFormulario == '"+nombreFormulario+"'");
 		results = (List<SegUsuarioPermiso>) q.execute();
 

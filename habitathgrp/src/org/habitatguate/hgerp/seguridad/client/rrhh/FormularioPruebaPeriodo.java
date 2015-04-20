@@ -51,6 +51,7 @@ public class FormularioPruebaPeriodo extends Composite {
 		private DoubleBox txtPunteoTotal;
 		private DateBox dateFecha ;
 		private Desempeno d;
+		private Button btnGuardar;
 		
 		private Label lblPregunta1;
 		private Label lblPregunta2;
@@ -255,7 +256,7 @@ public class FormularioPruebaPeriodo extends Composite {
 		absolutePanel.add(dateFecha, 283, 1019);
 		dateFecha.setSize("227px", "32px");
 		
-		Button btnGuardar = new Button("Send");
+		btnGuardar = new Button("Send");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 		        load.visible();
@@ -656,5 +657,11 @@ public class FormularioPruebaPeriodo extends Composite {
         }
         });
     }
-
+	public void btnhinabilitar(boolean valor){
+		btnGuardar.setEnabled(valor);
+		btnGuardar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
+	
 }

@@ -1152,10 +1152,22 @@ public class FormularioDatos extends Composite {
 		                            	id_empleado = result;
 		                            	empleado.id_empleado = result;
 		                            	bandera = false;
-		                            	if(tipo == 0)
-		                            		empleado.NuevasPestanas();
-		                            	else
-		                            		empleado.NuevasPestanasdos();
+		                            	recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() 
+                    					{
+                    						public void onFailure(Throwable caught) 
+                    						{
+                    						}
+
+                    						public void onSuccess(Long results)
+                    						{
+        		                            	if(tipo == 0)
+        		                            		empleado.NuevasPestanas(results);
+        		                            	else
+        		                            		empleado.NuevasPestanasdos(results);
+                    							
+                    						}
+										});
+		                            	
 		                            	empleado.familia_unica();
 		                            	mensaje.setMensaje("alert alert-success", 
 			                        			"Datos Guardados\n exitosamente!!!");
@@ -2478,5 +2490,10 @@ public class FormularioDatos extends Composite {
 	 */
 	public void setIdJefe(Long idJefe) {
 		this.idJefe = idJefe;
+	}
+	
+	public void btnHabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
 	}
 	}

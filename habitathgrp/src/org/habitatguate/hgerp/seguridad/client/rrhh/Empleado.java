@@ -21,11 +21,16 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
 /**
  * 
  * @author anibaljose
@@ -47,167 +52,652 @@ public class Empleado extends Composite {
 	private ReferenciaLaboral referenciaLaboral ;
 	private ReferenciaPersonal referenciaPersonal;
 	private FormularioEntrevista formularioEntrevista ;
-	
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
+	private Empleado emp = null;
 	private TabPanel tabPanel;
 	public Long id_empleado = 0L;
+	private String formulario = "E";
 	
-	public Empleado(int tipo) {
-		
+	public Empleado(final int tipo, String tipoEmpleado, Long rol) {
+		emp = this;
 		tabPanel = new TabPanel();
 		tabPanel.setSize("100%", "100%");
 		initWidget(tabPanel);
 		
-		ScrollPanel scrollPanel = new ScrollPanel();
-		tabPanel.add(scrollPanel, "Datos",true);
-		scrollPanel.setSize("100%", "100%");
-		formularioDatos = new FormularioDatos(this,tipo);
-		scrollPanel.setWidget(formularioDatos);
+		if(tipoEmpleado.equals("E")){
+			formulario = "Datos-Empleado";
+		}else{
+			formulario = "Datos-RRHH";
+		}
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre(formulario,rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			
+    		}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					
+					ScrollPanel scrollPanel = new ScrollPanel();
+					tabPanel.add(scrollPanel, "Datos",true);
+					scrollPanel.setSize("100%", "100%");
+					formularioDatos = new FormularioDatos(emp,tipo);
+					scrollPanel.setWidget(formularioDatos);
+					inavilidarDatosYPestanas();
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel = new ScrollPanel();
+					tabPanel.add(scrollPanel, "Datos",true);
+					scrollPanel.setSize("100%", "100%");
+					formularioDatos = new FormularioDatos(emp,tipo);
+					scrollPanel.setWidget(formularioDatos);
+					formularioDatos.btnHabilitar(false);
+				}
+			}
+		});
 	}	
 	
-	public void NuevasPestanas(){
+	public void NuevasPestanas(Long rol){
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Familia-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			
+    		}
 
-		ScrollPanel scrollPanel_1 = new ScrollPanel();
-		scrollPanel_1.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_1, "Familia",true);
-		scrollPanel_1.setSize("100%", "1000px");
-		familia = new Familia(this);
-		scrollPanel_1.setWidget(familia);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_1 = new ScrollPanel();
+					scrollPanel_1.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_1, "Familia",true);
+					scrollPanel_1.setSize("100%", "1000px");
+					familia = new Familia(emp);
+					scrollPanel_1.setWidget(familia);
+					familia.valor = true;
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_1 = new ScrollPanel();
+					scrollPanel_1.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_1, "Familia",true);
+					scrollPanel_1.setSize("100%", "1000px");
+					familia = new Familia(emp);
+					scrollPanel_1.setWidget(familia);
+					familia.valor = false;
+				}
+			}
+		});
 
 		
-		ScrollPanel scrollPanel_2 = new ScrollPanel();
-		scrollPanel_2.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_2, "Academico", true);
-		scrollPanel_2.setSize("100%", "1000px");
-		academico = new Academico(this);
-		scrollPanel_2.setWidget(academico);
-		
-		ScrollPanel scrollPanel_3 = new ScrollPanel();
-		scrollPanel_3.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
-		scrollPanel_3.setSize("100%", "1000px");
-		referenciaLaboral = new ReferenciaLaboral(this);///
-		scrollPanel_3.setWidget(referenciaLaboral);
-		referenciaLaboral.setHeight("236px");
-		
-		ScrollPanel scrollPanel_5 = new ScrollPanel();
-		scrollPanel_5.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
-		scrollPanel_5.setSize("100%", "1000px");
-		referenciaPersonal = new ReferenciaPersonal(this);///
-		scrollPanel_5.setWidget(referenciaPersonal);
-		
-		ScrollPanel scrollPanel_4 = new ScrollPanel();
-		scrollPanel_4.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_4, "Idiomas", true);
-		scrollPanel_4.setSize("100%", "1000px");
-		setStyleName("");
-		idioma = new Idioma(this);
-		scrollPanel_4.setWidget(idioma);
-		
-		ScrollPanel scrollPanel_6 = new ScrollPanel();
-		scrollPanel_6.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_6, "Desempeño", true);
-		scrollPanel_6.setSize("100%", "1000px");
-		desempeno = new  Desempeno(id_empleado);
-		scrollPanel_6.setWidget(desempeno);
-		
-		ScrollPanel scrollPanel_7 = new ScrollPanel();
-		scrollPanel_7.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_7, "Evaluacion", true);
-		scrollPanel_7.setSize("100%", "1000px");
-		evaluacion = new Evaluacion(id_empleado);
-		scrollPanel_7.setWidget(evaluacion);
-		
-		ScrollPanel scrollPanel_8 = new ScrollPanel();
-		scrollPanel_8.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_8, "Puestos ", true);
-		scrollPanel_8.setSize("100%", "1000px");
-		puesto = new Puestos(this);
-		scrollPanel_8.setWidget(puesto);
-		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Academico-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
-		ScrollPanel scrollPanel_s = new ScrollPanel();
-		scrollPanel_s.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_s, "Salarios", true);
-		scrollPanel_s.setSize("100%", "1000px");
-		salario = new Salario(this);
-		scrollPanel_s.setWidget(salario);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_2 = new ScrollPanel();
+					scrollPanel_2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_2, "Academico", true);
+					scrollPanel_2.setSize("100%", "1000px");
+					academico = new Academico(emp);
+					scrollPanel_2.setWidget(academico);
+					academico.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_2 = new ScrollPanel();
+					scrollPanel_2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_2, "Academico", true);
+					scrollPanel_2.setSize("100%", "1000px");
+					academico = new Academico(emp);
+					scrollPanel_2.setWidget(academico);
+					academico.valor = false;
+				}
+			}
+		});
 		
-		ScrollPanel scrollPanel_9 = new ScrollPanel();
-		scrollPanel_9.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_9, "Entrevista", true);
-		scrollPanel_9.setSize("100%", "1000px");
-		formularioEntrevista = new FormularioEntrevista(this);
-		scrollPanel_9.setWidget(formularioEntrevista);
-		
-		ScrollPanel scrollPanel_10 = new ScrollPanel();
-		scrollPanel_10.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_10, "Historial", true);
-		scrollPanel_10.setSize("100%", "1000px");
-		historial = new Historiales(this);
-		scrollPanel_10.setWidget(historial);
+		AdministracionService.ObtenerUsuarioPermisoNombre("RefLaboral-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
-		ScrollPanel scrollPanel_11 = new ScrollPanel();
-		scrollPanel_11.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_11, "Permisos", true);
-		scrollPanel_11.setSize("100%", "1000px");
-		permisos = new Permiso(this);
-		scrollPanel_11.setWidget(permisos);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_3 = new ScrollPanel();
+					scrollPanel_3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
+					scrollPanel_3.setSize("100%", "1000px");
+					referenciaLaboral = new ReferenciaLaboral(emp);///
+					scrollPanel_3.setWidget(referenciaLaboral);
+					referenciaLaboral.setHeight("236px");
+					referenciaLaboral.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_3 = new ScrollPanel();
+					scrollPanel_3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
+					scrollPanel_3.setSize("100%", "1000px");
+					referenciaLaboral = new ReferenciaLaboral(emp);///
+					scrollPanel_3.setWidget(referenciaLaboral);
+					referenciaLaboral.setHeight("236px");
+					referenciaLaboral.valor = false;
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("RefPersonal-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_5 = new ScrollPanel();
+					scrollPanel_5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_5, "Ref. Personal", true);
+					scrollPanel_5.setSize("100%", "1000px");
+					referenciaPersonal = new ReferenciaPersonal(emp);///
+					scrollPanel_5.setWidget(referenciaPersonal);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_5 = new ScrollPanel();
+					scrollPanel_5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_5, "Ref. Personal", true);
+					scrollPanel_5.setSize("100%", "1000px");
+					referenciaPersonal = new ReferenciaPersonal(emp);///
+					scrollPanel_5.setWidget(referenciaPersonal);
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Idiomas-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_4 = new ScrollPanel();
+					scrollPanel_4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_4, "Idiomas", true);
+					scrollPanel_4.setSize("100%", "1000px");
+					setStyleName("");
+					idioma = new Idioma(emp);
+					scrollPanel_4.setWidget(idioma);
+					idioma.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_4 = new ScrollPanel();
+					scrollPanel_4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_4, "Idiomas", true);
+					scrollPanel_4.setSize("100%", "1000px");
+					setStyleName("");
+					idioma = new Idioma(emp);
+					scrollPanel_4.setWidget(idioma);
+					idioma.valor = false;
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Desempeno-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_6 = new ScrollPanel();
+					scrollPanel_6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_6, "Desempeño", true);
+					scrollPanel_6.setSize("100%", "1000px");
+					desempeno = new  Desempeno(id_empleado);
+					scrollPanel_6.setWidget(desempeno);
+					desempeno.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_6 = new ScrollPanel();
+					scrollPanel_6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_6, "Desempeño", true);
+					scrollPanel_6.setSize("100%", "1000px");
+					desempeno = new  Desempeno(id_empleado);
+					scrollPanel_6.setWidget(desempeno);
+					desempeno.valor = false;
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Evaluacion-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_7 = new ScrollPanel();
+					scrollPanel_7.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_7, "Evaluacion", true);
+					scrollPanel_7.setSize("100%", "1000px");
+					evaluacion = new Evaluacion(id_empleado);
+					scrollPanel_7.setWidget(evaluacion);
+					evaluacion.valorr = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_7 = new ScrollPanel();
+					scrollPanel_7.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_7, "Evaluacion", true);
+					scrollPanel_7.setSize("100%", "1000px");
+					evaluacion = new Evaluacion(id_empleado);
+					scrollPanel_7.setWidget(evaluacion);
+					evaluacion.valorr = false;
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Puestos-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_8 = new ScrollPanel();
+					scrollPanel_8.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_8, "Puestos ", true);
+					scrollPanel_8.setSize("100%", "1000px");
+					puesto = new Puestos(emp);
+					scrollPanel_8.setWidget(puesto);
+					puesto.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_8 = new ScrollPanel();
+					scrollPanel_8.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_8, "Puestos ", true);
+					scrollPanel_8.setSize("100%", "1000px");
+					puesto = new Puestos(emp);
+					scrollPanel_8.setWidget(puesto);
+					puesto.valor = false;
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Salarios-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_s = new ScrollPanel();
+					scrollPanel_s.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_s, "Salarios", true);
+					scrollPanel_s.setSize("100%", "1000px");
+					salario = new Salario(emp);
+					scrollPanel_s.setWidget(salario);
+					salario.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_s = new ScrollPanel();
+					scrollPanel_s.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_s, "Salarios", true);
+					scrollPanel_s.setSize("100%", "1000px");
+					salario = new Salario(emp);
+					scrollPanel_s.setWidget(salario);
+					salario.valor = false;
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Entrevistas-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_9 = new ScrollPanel();
+					scrollPanel_9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_9, "Entrevista", true);
+					scrollPanel_9.setSize("100%", "1000px");
+					formularioEntrevista = new FormularioEntrevista(emp);
+					scrollPanel_9.setWidget(formularioEntrevista);
+					formularioEntrevista.btnhinabilitar(true);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_9 = new ScrollPanel();
+					scrollPanel_9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_9, "Entrevista", true);
+					scrollPanel_9.setSize("100%", "1000px");
+					formularioEntrevista = new FormularioEntrevista(emp);
+					scrollPanel_9.setWidget(formularioEntrevista);
+					formularioEntrevista.btnhinabilitar(false);
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Historial-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_10 = new ScrollPanel();
+					scrollPanel_10.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_10, "Historial", true);
+					scrollPanel_10.setSize("100%", "1000px");
+					historial = new Historiales(emp);
+					scrollPanel_10.setWidget(historial);
+					historial.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_10 = new ScrollPanel();
+					scrollPanel_10.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_10, "Historial", true);
+					scrollPanel_10.setSize("100%", "1000px");
+					historial = new Historiales(emp);
+					scrollPanel_10.setWidget(historial);
+					historial.valor = false;
+				}
+			}
+		});
+		
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Permisos-RRHH",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_11 = new ScrollPanel();
+					scrollPanel_11.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_11, "Permisos", true);
+					scrollPanel_11.setSize("100%", "1000px");
+					permisos = new Permiso(emp);
+					permisos.valor = true;
+					scrollPanel_11.setWidget(permisos);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_11 = new ScrollPanel();
+					scrollPanel_11.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_11, "Permisos", true);
+					scrollPanel_11.setSize("100%", "1000px");
+					permisos = new Permiso(emp);
+					permisos.valor = false;
+					scrollPanel_11.setWidget(permisos);
+				}
+			}
+		});
 	}
-	public void NuevasPestanasdos(){
-		ScrollPanel scrollPanel_1 = new ScrollPanel();
-		scrollPanel_1.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_1, "Familia",true);
-		scrollPanel_1.setSize("100%", "1000px");
-		familia = new Familia(this);
-		scrollPanel_1.setWidget(familia);
+	public void NuevasPestanasdos(Long rol){
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Familia-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			
+    		}
 
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_1 = new ScrollPanel();
+					scrollPanel_1.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_1, "Familia",true);
+					scrollPanel_1.setSize("100%", "1000px");
+					familia = new Familia(emp);
+					scrollPanel_1.setWidget(familia);
+					familia.valor = true;
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_1 = new ScrollPanel();
+					scrollPanel_1.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_1, "Familia",true);
+					scrollPanel_1.setSize("100%", "1000px");
+					familia = new Familia(emp);
+					scrollPanel_1.setWidget(familia);
+					familia.valor = false;
+				}
+			}
+		});
 		
-		ScrollPanel scrollPanel_2 = new ScrollPanel();
-		scrollPanel_2.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_2, "Academico", true);
-		scrollPanel_2.setSize("100%", "1000px");
-		academico = new Academico(this);
-		scrollPanel_2.setWidget(academico);
-		
-		ScrollPanel scrollPanel_3 = new ScrollPanel();
-		scrollPanel_3.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
-		scrollPanel_3.setSize("100%", "1000px");
-		referenciaLaboral = new ReferenciaLaboral(this);///
-		scrollPanel_3.setWidget(referenciaLaboral);
-		referenciaLaboral.setHeight("236px");
-		
-		ScrollPanel scrollPanel_5 = new ScrollPanel();
-		scrollPanel_5.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_5, "Ref. Personal", true);
-		scrollPanel_5.setSize("100%", "1000px");
-		referenciaPersonal = new ReferenciaPersonal(this);///
-		scrollPanel_5.setWidget(referenciaPersonal);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Academico-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_2 = new ScrollPanel();
+					scrollPanel_2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_2, "Academico", true);
+					scrollPanel_2.setSize("100%", "1000px");
+					academico = new Academico(emp);
+					scrollPanel_2.setWidget(academico);
+					academico.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_2 = new ScrollPanel();
+					scrollPanel_2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_2, "Academico", true);
+					scrollPanel_2.setSize("100%", "1000px");
+					academico = new Academico(emp);
+					scrollPanel_2.setWidget(academico);
+					academico.valor = false;
+				}
+			}
+		});
 
-		ScrollPanel scrollPanel_4 = new ScrollPanel();
-		scrollPanel_4.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_4, "Idiomas", true);
-		scrollPanel_4.setSize("100%", "1000px");
-		setStyleName("");
-		idioma = new Idioma(this);
-		scrollPanel_4.setWidget(idioma);
-		
-		ScrollPanel scrollPanel_9 = new ScrollPanel();
-		scrollPanel_9.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_9, "Entrevista", true);
-		scrollPanel_9.setSize("100%", "1000px");
-		formularioEntrevista = new FormularioEntrevista(this);
-		scrollPanel_9.setWidget(formularioEntrevista);
-		
+		AdministracionService.ObtenerUsuarioPermisoNombre("RefLaboral-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
 
-		ScrollPanel scrollPanel_11 = new ScrollPanel();
-		scrollPanel_11.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel_11, "Permisos", true);
-		scrollPanel_11.setSize("100%", "1000px");
-		permisos = new Permiso(this);
-		scrollPanel_11.setWidget(permisos);
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_3 = new ScrollPanel();
+					scrollPanel_3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
+					scrollPanel_3.setSize("100%", "1000px");
+					referenciaLaboral = new ReferenciaLaboral(emp);///
+					scrollPanel_3.setWidget(referenciaLaboral);
+					referenciaLaboral.setHeight("236px");
+					referenciaLaboral.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_3 = new ScrollPanel();
+					scrollPanel_3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_3, "Ref. Laboral", true);
+					scrollPanel_3.setSize("100%", "1000px");
+					referenciaLaboral = new ReferenciaLaboral(emp);///
+					scrollPanel_3.setWidget(referenciaLaboral);
+					referenciaLaboral.setHeight("236px");
+					referenciaLaboral.valor = false;
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("RefPersonal-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_5 = new ScrollPanel();
+					scrollPanel_5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_5, "Ref. Personal", true);
+					scrollPanel_5.setSize("100%", "1000px");
+					referenciaPersonal = new ReferenciaPersonal(emp);///
+					scrollPanel_5.setWidget(referenciaPersonal);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_5 = new ScrollPanel();
+					scrollPanel_5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_5, "Ref. Personal", true);
+					scrollPanel_5.setSize("100%", "1000px");
+					referenciaPersonal = new ReferenciaPersonal(emp);///
+					scrollPanel_5.setWidget(referenciaPersonal);
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Idiomas-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_4 = new ScrollPanel();
+					scrollPanel_4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_4, "Idiomas", true);
+					scrollPanel_4.setSize("100%", "1000px");
+					setStyleName("");
+					idioma = new Idioma(emp);
+					scrollPanel_4.setWidget(idioma);
+					idioma.valor = true;
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_4 = new ScrollPanel();
+					scrollPanel_4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_4, "Idiomas", true);
+					scrollPanel_4.setSize("100%", "1000px");
+					setStyleName("");
+					idioma = new Idioma(emp);
+					scrollPanel_4.setWidget(idioma);
+					idioma.valor = false;
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Entrevistas-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_9 = new ScrollPanel();
+					scrollPanel_9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_9, "Entrevista", true);
+					scrollPanel_9.setSize("100%", "1000px");
+					formularioEntrevista = new FormularioEntrevista(emp);
+					scrollPanel_9.setWidget(formularioEntrevista);
+					formularioEntrevista.btnhinabilitar(true);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_9 = new ScrollPanel();
+					scrollPanel_9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_9, "Entrevista", true);
+					scrollPanel_9.setSize("100%", "1000px");
+					formularioEntrevista = new FormularioEntrevista(emp);
+					scrollPanel_9.setWidget(formularioEntrevista);
+					formularioEntrevista.btnhinabilitar(false);
+				}
+			}
+		});
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Permisos-Empleado",rol,new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					ScrollPanel scrollPanel_11 = new ScrollPanel();
+					scrollPanel_11.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_11, "Permisos", true);
+					scrollPanel_11.setSize("100%", "1000px");
+					permisos = new Permiso(emp);
+					permisos.valor = true;
+					scrollPanel_11.setWidget(permisos);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					ScrollPanel scrollPanel_11 = new ScrollPanel();
+					scrollPanel_11.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel_11, "Permisos", true);
+					scrollPanel_11.setSize("100%", "1000px");
+					permisos = new Permiso(emp);
+					permisos.valor = false;
+					scrollPanel_11.setWidget(permisos);
+				}
+			}
+		});
+		
 	}
 
 	public void EvaluacionesCompartidas()

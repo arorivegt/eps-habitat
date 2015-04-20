@@ -399,5 +399,11 @@ public class FormularioIdiomas extends Composite {
 	public void setKeyFile(String keyFile) {
 		KeyFile = keyFile;
 	}
-
+	
+	public void btnhinabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
 }

@@ -26,6 +26,7 @@ public class ReferenciaPersonal extends Composite  {
 	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 private Loading load ;
+	 boolean valor = true;;
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 		
 	    public ReferenciaPersonal(Empleado empleado) {
@@ -56,9 +57,11 @@ public class ReferenciaPersonal extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaPersonal(this,empleado));
-	        load.invisible();
+	    	if(valor){
+		        load.visible();
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioReferenciaPersonal(this,empleado));
+		        load.invisible();
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxReferenciaPersonal> results){
@@ -69,6 +72,7 @@ public class ReferenciaPersonal extends Composite  {
 			    	FormularioReferenciaPersonal fa = new  FormularioReferenciaPersonal(this,empleado);
 			    	fa.LlenarDatos( n2.getId_referencia_personal(), n2.getNombre_referencia(), n2.getPuesto_candidato(), n2.getRelacion(),
 			    					n2.getActitudes_cualidades(), ""+n2.getTelefono());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	   

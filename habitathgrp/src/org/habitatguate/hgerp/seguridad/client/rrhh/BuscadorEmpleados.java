@@ -396,92 +396,105 @@ public class BuscadorEmpleados extends Composite   {
 	public void Empleado_registrado(final Long id_empleado){
         load.visible();
 		grid.clearCell(1, 0);
-		
-		final Empleado empleado = new Empleado(0);
-		empleado.id_empleado = id_empleado;
-		empleado.NuevasPestanas(); 
-		grid.setWidget(1, 0,empleado);
-        empleado.setSize("100%", "648px");
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() 
+		{
+			public void onFailure(Throwable caught) 
+			{
+			}
+
+			public void onSuccess(Long results)
+			{
+
+				final Empleado empleado = new Empleado(0,"R",0L);
+				empleado.id_empleado = id_empleado;
+				empleado.NuevasPestanas(results); 
+				grid.setWidget(1, 0,empleado);
+		        empleado.setSize("100%", "648px");
+		        
+		        recursosHumanosService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
+		        	public void onFailure(Throwable caught) 
+		        	{
+		                load.invisible();
+		            	mensaje.setMensaje("alert alert-information alert-block", "\nNo hay resultados");
+		        	}
+
+		        	@Override
+		        	public void onSuccess(AuxEmpleado result)
+		        	{
+		        		//System.out.println(result.getAfiliado());
+		        		try{
+		        			
+		        			empleado.setFormularioDatos(result);
+		        			
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setAcademico(result.getHistorial_academico());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setFamilia(result.getFamilia());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setHistorial(result.getHistorial());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setIdioma(result.getIdiomas());
+		        		}catch(Exception e){
+
+		        		}
+		        		try{
+		        			empleado.setPuesto(result.getPuestos());
+		        		}catch(Exception e){
+
+		        		}
+		        		try{
+		        			empleado.setReferenciaLaboral(result.getReferencia_laboral());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setReferenciaPersonal(result.getReferencia_personal());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setPermiso(result.getVacaciones());
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setFormularioEntrevista(result.getEntrevista().get(0));
+		        		}catch(Exception e){
+		        			
+		        		}
+		        		try{
+		        			empleado.setFormularioTest(result.getTest());
+		        		}catch(Exception e){
+		        			
+		        		}
+
+		        		try{
+		        			empleado.setSalario(result.getSalario());
+		        		}catch(Exception e){
+		        			
+		        		}
+
+		                load.invisible();
+		        	}
+
+		        });
+				
+			}
+		});
         
-        recursosHumanosService.Empleado_Registrado(id_empleado,new AsyncCallback<AuxEmpleado>(){
-        	public void onFailure(Throwable caught) 
-        	{
-                load.invisible();
-            	mensaje.setMensaje("alert alert-information alert-block", "\nNo hay resultados");
-        	}
-
-        	@Override
-        	public void onSuccess(AuxEmpleado result)
-        	{
-        		//System.out.println(result.getAfiliado());
-        		try{
-        			
-        			empleado.setFormularioDatos(result);
-        			
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setAcademico(result.getHistorial_academico());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setFamilia(result.getFamilia());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setHistorial(result.getHistorial());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setIdioma(result.getIdiomas());
-        		}catch(Exception e){
-
-        		}
-        		try{
-        			empleado.setPuesto(result.getPuestos());
-        		}catch(Exception e){
-
-        		}
-        		try{
-        			empleado.setReferenciaLaboral(result.getReferencia_laboral());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setReferenciaPersonal(result.getReferencia_personal());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setPermiso(result.getVacaciones());
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setFormularioEntrevista(result.getEntrevista().get(0));
-        		}catch(Exception e){
-        			
-        		}
-        		try{
-        			empleado.setFormularioTest(result.getTest());
-        		}catch(Exception e){
-        			
-        		}
-
-        		try{
-        			empleado.setSalario(result.getSalario());
-        		}catch(Exception e){
-        			
-        		}
-
-                load.invisible();
-        	}
-
-        });
+        
 	}
 	MultiWordSuggestOracle createCountriesOracle()
 	{

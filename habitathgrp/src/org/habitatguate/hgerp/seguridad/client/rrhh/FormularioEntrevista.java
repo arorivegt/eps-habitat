@@ -60,7 +60,7 @@ public class FormularioEntrevista extends Composite {
 	 private DoubleBox txtPretencionSalarial;
      private Loading load ;
      private Button btnGuardar;
-	 
+	 boolean valor = true;
    
 
 	public FormularioEntrevista(Empleado empleadoo) {
@@ -642,5 +642,12 @@ public class FormularioEntrevista extends Composite {
 			
 			
 		}
+	
+	 
+
+	public void btnhinabilitar(boolean valor){
+			btnGuardar.setEnabled(valor);
+			btnGuardar.setVisible(valor);
+	}
 
 }

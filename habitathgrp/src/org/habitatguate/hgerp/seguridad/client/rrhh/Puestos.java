@@ -23,14 +23,14 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Puestos extends Composite  {
 
-	private Mensaje mensaje; 
+	 private Mensaje mensaje; 
 	 private FlexTable flextable;
 	 private Empleado empleado;
 	 private VerticalPanel panel = new VerticalPanel();
 	 private final RecursosHumanosServiceAsync loginService = GWT.create(RecursosHumanosService.class);
 	 public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
-	    private Loading load ;
-	 
+	 private Loading load ;
+	 boolean valor = true;
 	    public Puestos(Empleado empleados) {
 
 			mensaje = new Mensaje();
@@ -59,9 +59,11 @@ public class Puestos extends Composite  {
 		}
 	    
 	    private void agregarFormulario(){
-	        load.visible();
-	        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPuestos(this,empleado));
-	        load.invisible();
+	    	if(valor){
+		        load.visible();
+		        flextable.setWidget(flextable.getRowCount(), 0, new FormularioPuestos(this,empleado));
+		        load.invisible();
+	    	}
 	    }
 	    
 	    public void agregarFormulario_lleno(List<AuxPuesto> results){
@@ -70,12 +72,13 @@ public class Puestos extends Composite  {
 	    		
 			    for ( AuxPuesto n2 : results) {
 			    	FormularioPuestos fa = new  FormularioPuestos(this,empleado);
-			    	String valor = "0";
-			    	if(n2.isActivo()){ valor = "1";}
-			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valor, n2.getNombre_puesto(),
+			    	String valorr = "0";
+			    	if(n2.isActivo()){ valorr = "1";}
+			    	fa.LlenarDatos(n2.getId_puesto(),n2.getFecha_puesto(),valorr, n2.getNombre_puesto(),
 			    					n2.getFunciones(),n2.getMotivoPuesto(),n2.getJornada(),n2.getHorasTrabajo(),
 			    					n2.getLunes(),n2.getMartes(),n2.getMiercoles(),n2.getJueves(),n2.getViernes(),
 			    					n2.getSabado(),n2.getDomingo());
+			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }
 	    	}	  

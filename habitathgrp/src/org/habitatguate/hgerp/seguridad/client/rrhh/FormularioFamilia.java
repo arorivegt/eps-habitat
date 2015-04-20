@@ -267,5 +267,11 @@ public class FormularioFamilia  extends Composite  {
 		this.txtEdad.setText(txtEdad);
 	}
    
+	public void btnhabilitar(boolean valor){
+		btnActualizar.setEnabled(valor);
+		btnActualizar.setVisible(valor);
+		btnEliminar.setEnabled(valor);
+		btnEliminar.setVisible(valor);
+	}
 
 }

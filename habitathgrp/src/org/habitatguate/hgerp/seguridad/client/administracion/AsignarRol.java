@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.administracion;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -27,6 +29,7 @@ public class AsignarRol extends Composite{
     private Button 	btnAsignar;
     private AbsolutePanel rootPanel;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
     private SuggestBox txtUsuario;
     private ListBox listRol;
     private Label lblRol;
@@ -89,6 +92,21 @@ public class AsignarRol extends Composite{
         });
         
         listRol = new ListBox();
+        AdministracionService.ObtenerUltimoROl(new AsyncCallback<Long>()
+    	{
+    		public void onFailure(Throwable caught) 
+    		{
+    			mensaje.setMensaje("alert alert-success", "Error al obtener rol\n"+caught);
+    		}
+
+			@Override
+			public void onSuccess(Long result)
+			{
+				for(int i = 1; i <= result; i++){
+					listRol.addItem(""+i);
+				}
+			}
+		});
         listRol.setStyleName("gwt-TextBox2");
         rootPanel.add(listRol, 111, 149);
         listRol.setSize("67px", "39px");

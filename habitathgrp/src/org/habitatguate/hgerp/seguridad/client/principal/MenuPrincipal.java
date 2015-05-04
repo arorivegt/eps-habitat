@@ -407,9 +407,12 @@ public class MenuPrincipal extends Composite {
 								@Override
 								public void onSuccess(List<AuxUsuarioPermiso> results)
 								{
-									if(!results.get(0).getPermiso().equals("N")){
-										MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
-										MenuVertical.addSeparator();
+									if(!results.isEmpty())
+									{	
+										if(!results.get(0).getPermiso().equals("N")){
+											MenuVertical.addItem("Recursos Humanos", MenuRecursosHumanos);
+											MenuVertical.addSeparator();
+										}
 									}
 								}
 							});
@@ -425,9 +428,12 @@ public class MenuPrincipal extends Composite {
 								@Override
 								public void onSuccess(List<AuxUsuarioPermiso> results)
 								{
-									if(!results.get(0).getPermiso().equals("N")){
-										MenuVertical.addItem("Finanzas", MenuFinanzas);
-										MenuVertical.addSeparator();
+									if(!results.isEmpty())
+									{	
+										if(!results.get(0).getPermiso().equals("N")){
+											MenuVertical.addItem("Finanzas", MenuFinanzas);
+											MenuVertical.addSeparator();
+										}
 									}
 								}
 							});
@@ -444,9 +450,12 @@ public class MenuPrincipal extends Composite {
 								@Override
 								public void onSuccess(List<AuxUsuarioPermiso> results)
 								{
-									if(!results.get(0).getPermiso().equals("N")){
-										MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
-										MenuVertical.addSeparator();
+									if(!results.isEmpty())
+									{	
+										if(!results.get(0).getPermiso().equals("N")){
+											MenuVertical.addItem("Soluciones Construidas",MenuSolucionesConstruidas); 
+											MenuVertical.addSeparator();
+										}
 									}
 								}
 							});
@@ -463,25 +472,29 @@ public class MenuPrincipal extends Composite {
 								@Override
 								public void onSuccess(List<AuxUsuarioPermiso> results)
 								{
-									if(!results.get(0).getPermiso().equals("N")){
-										MenuVertical.addItem("Administracion",MenuAdmistracion); 
-										MenuVertical.addSeparator();
+									if(!results.isEmpty())
+									{	
+										if(!results.get(0).getPermiso().equals("N")){
+											MenuVertical.addItem("Administracion",MenuAdmistracion); 
+											MenuVertical.addSeparator();
+										}
 									}
 								}
 							});
 							
-							//PARTE DEL MENU POR DEFECTP
-							//agregar item para el menu
-							MenuVertical.addItem("Empleado",MenuEmpleados); 
-							MenuVertical.addSeparator();
-							MenuVertical.addItem("Administracion",MenuAdmistracion); 
-							MenuVertical.addSeparator();
-							MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
-							MenuVertical.setAutoOpen(false);
-							MenuVertical.setAnimationEnabled(true);
 							
 							if(!bandera){
 				    			mensaje.setMensaje("alert alert-error", "Error al construir Menu Rol");				
+							}else{
+								//PARTE DEL MENU POR DEFECTP
+								//agregar item para el menu
+								MenuVertical.addItem("Empleado",MenuEmpleados); 
+								MenuVertical.addSeparator();
+								MenuVertical.addItem("Administracion",MenuAdmistracion); 
+								MenuVertical.addSeparator();
+								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+								MenuVertical.setAutoOpen(false);
+								MenuVertical.setAnimationEnabled(true);
 							}
 						}
 					});

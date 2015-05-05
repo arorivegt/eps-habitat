@@ -1,2 +1,0 @@
-serviceClass: org.habitatguate.hgerp.seguridad.client.api.LoginService
-path: 4DC7935ACE42362615A4ED6AE715C08D.gwt.rpc

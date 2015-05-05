@@ -490,8 +490,6 @@ public class MenuPrincipal extends Composite {
 								//agregar item para el menu
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
 								MenuVertical.addSeparator();
-								MenuVertical.addItem("Administracion",MenuAdmistracion); 
-								MenuVertical.addSeparator();
 								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);

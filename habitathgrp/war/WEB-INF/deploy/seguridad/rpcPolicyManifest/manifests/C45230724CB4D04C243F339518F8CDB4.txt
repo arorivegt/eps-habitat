@@ -1,2 +1,0 @@
-serviceClass: org.habitatguate.hgerp.seguridad.client.api.SqlService
-path: C988F4216E0F249FAC9F30DAB9BD802B.gwt.rpc

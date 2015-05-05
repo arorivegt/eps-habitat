@@ -1,2 +1,7 @@
 # Module seguridad
 # RPC service class, partial path of RPC policy file
+org.habitatguate.hgerp.seguridad.client.api.UploadUrlService, AF926C848126BE72DFA5531CD34D98C2.gwt.rpc
+org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService, 2D9B15115C06AAEBF1D8171344403EF2.gwt.rpc
+org.habitatguate.hgerp.seguridad.client.api.AdministracionService, F653E1AF2FE51F81FB9FABEB672F1455.gwt.rpc
+org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService, B839DBC69046D9729207022B81D40AA1.gwt.rpc
+org.habitatguate.hgerp.seguridad.client.api.SqlService, CF5A967F174972AD90BAEC64B052CEF7.gwt.rpc

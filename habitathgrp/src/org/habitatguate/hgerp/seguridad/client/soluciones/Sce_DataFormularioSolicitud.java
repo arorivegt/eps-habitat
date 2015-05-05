@@ -41,6 +41,10 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	private Long idFormulario = 0L;
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
+
+	// Valor Escritura-Lectura
+	boolean valor = true;
 	
 	private boolean bandera = true;
     private TextBox txtNombreSolicitante;
@@ -72,6 +76,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	private Mensaje mensaje;
 	private Button btnGuardar;
 	private ListBox listSolucionConstruir;
+
     
 	public Sce_DataFormularioSolicitud(Sce_DataEntryFormularioSolicitud e) {
 		
@@ -101,6 +106,29 @@ public class Sce_DataFormularioSolicitud extends Composite {
 			}
 		});
 		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		/////////-------------BORRAR
+		
+		System.out.println("NADA");
+		
+		System.out.println("NADA2");
+		
+		System.out.println("NADA3");
+		
+		System.out.println("NADA4");
+		
 		
 		this.formulario = e;
 		mensaje =  new Mensaje();
@@ -108,8 +136,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "617px");
-		
-		System.out.println("NADA");
 		
 		Label lblNombres = new Label("Nombre completo:");
 		lblNombres.setStyleName("label");
@@ -559,6 +585,12 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		
 		// --- Boton Guardar - Data Formulario Solicitud
 
+//		if(valor) {
+//			btnGuardar.setEnabled(true);
+//		}else{
+//			btnGuardar.setEnabled(false);
+//		}
+		
 		btnGuardar = new Button("New button");
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -590,9 +622,9 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					}
 
 					String dpiValue = txtNumDpi.getText();
-					int dpi = 0;
-					dpi = Integer.parseInt(dpiValue);
-
+//					int dpi = 0;
+//					dpi = Integer.parseInt(dpiValue);
+					
 					// Comentado para validez de no. DPI en un solo campo
 					
 //					String dpiUnicoValue = txtNumDpiUnico.getText();
@@ -709,7 +741,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 								solucionesService.ingresarDatosSolicitante(idEmpleado, idAfiliado,
 										fecrec, nombreSolicitante, estadoCivil, edad, nacionalidad, 
-										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,   // Comentado para validez de no. DPI en un solo campo
+										profesionOficio, dpiValue, dpiUnico, dpiReferencia, actividadEconomica,   // Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 
 										direccionActual, direccionSolucion,
 										camion, carro, peatonal,
@@ -733,7 +765,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 										formulario.idFormulario = result;
 										System.out.println("Valor de NUEVO Formulario: " + idFormulario + ", ID: " + formulario.idFormulario);
 										bandera = false;
-										formulario.NuevasPestanas();
+										formulario.NuevasPestanas(idRol);
 									}
 								});
 
@@ -741,7 +773,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 								solucionesService.actualizarDatosSolicitante(idFormulario, idEmpleado, idAfiliado, 
 										nombreSolicitante, estadoCivil, edad, nacionalidad, 
-										profesionOficio, dpi, dpiUnico, dpiReferencia, actividadEconomica,			// Comentado para validez de no. DPI en un solo campo
+										profesionOficio, dpiValue, dpiUnico, dpiReferencia, actividadEconomica,			// Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 
 										direccionActual, direccionSolucion,
 										camion, carro, peatonal,
@@ -824,7 +856,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
  
     public void LlenarDatos(Long idFormulario, 
     		String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
-			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
+			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
 			Boolean camion, Boolean carro, Boolean peatonal,

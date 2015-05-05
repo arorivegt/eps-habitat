@@ -76,17 +76,17 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.profesionOficio = profesionOficio;
 	}
 	
-    private int numDpi;   
+    private String numDpi;   
 
-	public int getNumDpi() {
+    public String getNumDpi() {
 		return numDpi;
 	}
 
-	public void setNumDpi(int numDpi) {
+	public void setNumDpi(String numDpi) {
 		this.numDpi = numDpi;
 	}
-	
-    private int numDpiUnico;
+
+	private int numDpiUnico;
     
     public int getNumDpiUnico() {
 		return numDpiUnico;

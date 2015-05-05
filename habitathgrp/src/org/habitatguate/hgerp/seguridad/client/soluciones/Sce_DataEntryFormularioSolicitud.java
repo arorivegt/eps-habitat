@@ -5,6 +5,10 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
@@ -12,7 +16,13 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
+import org.habitatguate.hgerp.seguridad.client.rrhh.ReferenciaLaboral;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -21,19 +31,42 @@ import com.google.gwt.user.client.ui.TabPanel;
 public class Sce_DataEntryFormularioSolicitud extends Composite {
 
 	public Long idFormulario = 0L;
+	public Long idRol = 0L;
+	
 	private Sce_DataFormularioSolicitud fd1;
 	private Sce_DataEntryCargasFamiliares fd3;
 	private Sce_DataEntryDatosVivienda fd4;
 	private Sce_DataEntrySituacionEconomica fd5;
 	private Sce_DataEntryReferenciasFamiliares fd6;
 	
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    
+    private Sce_DataEntryFormularioSolicitud formulario = null;
     private AbsolutePanel absolutePanel;
+    private Mensaje mensaje;
 	
 	public Sce_DataEntryFormularioSolicitud() {
 		
+		formulario = this;
 		tabPanel = new TabPanel();
 		tabPanel.setSize("100%", "100%");
 		initWidget(tabPanel);
+		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+				
+				habilitarPrincipal();
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
 		
 		// 1. Datos generales solicitante
 		scrollPanel1 = new ScrollPanel();
@@ -45,43 +78,155 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		
 		tabPanel.selectTab(0); // Carga Tab Inicial
 		
+		
+	}
+	
+	public void habilitarPrincipal(){
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Datos-Solicitante-Soluciones", idRol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 1. Datos generales solicitante
+					fd1.valor = true;
+
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 1. Datos generales solicitante
+					fd1.valor = false;
+				}
+			}
+		});
 	}
 
-	public void NuevasPestanas() {
-
-		// 3. Carga Familiares
-		scrollPanel3 = new ScrollPanel();
-		scrollPanel3.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel3, "Carga Familiares", true);
-		scrollPanel3.setSize("100%", "100%");
-		fd3 = new Sce_DataEntryCargasFamiliares(this);
-		scrollPanel3.setWidget(fd3);	
-
-		// 4. Datos Vivienda Actual
-		scrollPanel4 = new ScrollPanel();
-		scrollPanel4.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
-		scrollPanel4.setSize("100%", "100%");
-		fd4 = new Sce_DataEntryDatosVivienda(this);
-		scrollPanel4.setWidget(fd4);
-
-		// 5. Situacion economica familiar
-
-		scrollPanel5 = new ScrollPanel();
-		scrollPanel5.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel5, "Situacion Economica",true);
-		scrollPanel5.setSize("100%", "100%");
-		fd5 = new Sce_DataEntrySituacionEconomica(this);
-		scrollPanel5.setWidget(fd5);	
-
-		// 6. Referencias Familiares
+	public void NuevasPestanas(Long rol) {
 		
-		scrollPanel6 = new ScrollPanel();
-		scrollPanel6.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel6, "Referencias Familiares",true);
-		scrollPanel6.setSize("100%", "100%");
-		fd6 = new Sce_DataEntryReferenciasFamiliares(this);
-		scrollPanel6.setWidget(fd6);	
+		AdministracionService.ObtenerUsuarioPermisoNombre("Cargas-Familiares-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 3. Carga Familiares
+					scrollPanel3 = new ScrollPanel();
+					scrollPanel3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel3, "Carga Familiares", true);
+					scrollPanel3.setSize("100%", "100%");
+					fd3 = new Sce_DataEntryCargasFamiliares(formulario);
+					scrollPanel3.setWidget(fd3);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 3. Carga Familiares
+					scrollPanel3 = new ScrollPanel();
+					scrollPanel3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel3, "Carga Familiares", true);
+					scrollPanel3.setSize("100%", "100%");
+					fd3 = new Sce_DataEntryCargasFamiliares(formulario);
+					scrollPanel3.setWidget(fd3);
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Situacion-Vivienda-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 4. Datos Vivienda Actual
+					scrollPanel4 = new ScrollPanel();
+					scrollPanel4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
+					scrollPanel4.setSize("100%", "100%");
+					fd4 = new Sce_DataEntryDatosVivienda(formulario);
+					scrollPanel4.setWidget(fd4);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 4. Datos Vivienda Actual
+					scrollPanel4 = new ScrollPanel();
+					scrollPanel4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
+					scrollPanel4.setSize("100%", "100%");
+					fd4 = new Sce_DataEntryDatosVivienda(formulario);
+					scrollPanel4.setWidget(fd4);
+				}
+			}
+		});
+		
+		
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Situacion-Economica-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 5. Situacion economica familiar
+					scrollPanel5 = new ScrollPanel();
+					scrollPanel5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel5, "Situacion Economica",true);
+					scrollPanel5.setSize("100%", "100%");
+					fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+					scrollPanel5.setWidget(fd5);	
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 5. Situacion economica familiar
+					scrollPanel5 = new ScrollPanel();
+					scrollPanel5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel5, "Situacion Economica",true);
+					scrollPanel5.setSize("100%", "100%");
+					fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+					scrollPanel5.setWidget(fd5);	
+				}
+			}
+		});
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Referencias-Familiares-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 6. Referencias Familiares
+					scrollPanel6 = new ScrollPanel();
+					scrollPanel6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel6, "Referencias Familiares",true);
+					scrollPanel6.setSize("100%", "100%");
+					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+					scrollPanel6.setWidget(fd6);	
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 6. Referencias Familiares
+					scrollPanel6 = new ScrollPanel();
+					scrollPanel6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel6, "Referencias Familiares",true);
+					scrollPanel6.setSize("100%", "100%");
+					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+					scrollPanel6.setWidget(fd6);		
+				}
+			}
+		});
 
 	}
 	

@@ -125,17 +125,17 @@ public class SegSolicitudGeneral implements Serializable {
 	}
 
 	@Persistent
-    private int numDpi;   
-
-	public int getNumDpi() {
+    private String numDpi;   
+	
+    public String getNumDpi() {
 		return numDpi;
 	}
 
-	public void setNumDpi(int numDpi) {
+	public void setNumDpi(String numDpi) {
 		this.numDpi = numDpi;
 	}
-	
-    private int numDpiUnico;
+
+	private int numDpiUnico;
     
     public int getNumDpiUnico() {
 		return numDpiUnico;

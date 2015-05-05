@@ -21,11 +21,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.ListBox;
-/**
- * 
- * @author Anibal Jose Rodriguez Orive
- *	tppEMarketing
- */
+
 public class AsignarRol extends Composite{
 	
 	private Loading load ;

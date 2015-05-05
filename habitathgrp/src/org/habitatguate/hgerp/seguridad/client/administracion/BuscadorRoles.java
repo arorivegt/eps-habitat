@@ -167,6 +167,19 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Entrevistas-RRHH", 2L, "N");
 				GuardarPagina(rol, "Permisos-RRHH", 2L, "N");
 				GuardarPagina(rol, "Carga-Datos-RRHH", 2L, "N");
+				// Soluciones Construidas
+				GuardarPagina(rol, "Recepcion-Formulario-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Verificacion-Solicitud-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Seguimiento-Garantia-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Bitacora-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Detalle-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Datos-Solicitante-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Cargas-Familiares-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Situacion-Vivienda-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Situacion-Economica-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Referencias-Familiares-Soluciones", 3L, "N");
+				//
+				
 				listRol.addItem(""+rol);
 
 				if(!bandera){
@@ -183,6 +196,10 @@ public class BuscadorRoles extends Composite   {
 		listFormulario.addItem("Menu","0");
 		listFormulario.addItem("RRHH","2");
 		listFormulario.addItem("Empleado","1");
+		// Soluciones Construidas
+		listFormulario.addItem("Soluciones Construidas","3");
+		//
+		
 		listFormulario.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listFormulario, 93, 16);
 		

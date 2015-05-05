@@ -16,7 +16,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 	Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
 			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
-			String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
+			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
 			Boolean camion, Boolean carro, Boolean peatonal,
@@ -28,7 +28,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 
 	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
 			 String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
-				String profesionOficio, int dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
+				String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 				String direccionActual, String direccionSolucion, 
 				Boolean camion, Boolean carro, Boolean peatonal,

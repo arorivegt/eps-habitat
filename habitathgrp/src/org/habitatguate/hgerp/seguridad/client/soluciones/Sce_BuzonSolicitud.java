@@ -39,6 +39,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 	// Llaves
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
 	
 	private Sce_BuzonSolicitud buzon;
 	private Mensaje mensaje; 
@@ -80,6 +81,18 @@ public class Sce_BuzonSolicitud extends Composite  {
 			}
 		});
 		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
 		
 		
 // ---- VERSION FUNCIONAL EN FIREFOX		
@@ -279,7 +292,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		e.idFormulario = idFormulario;
 		
 		System.out.println("ID Formulario enviado en Metodo CargarFormulario - Buzon Solicitudes: " + e.idFormulario);
-		e.NuevasPestanas();	// Muestra de nuevo las pestanas
+		e.NuevasPestanas(idRol);	// Muestra de nuevo las pestanas
 		grid.setWidget(1, 0,e);
         e.setSize("100%", "648px");
         

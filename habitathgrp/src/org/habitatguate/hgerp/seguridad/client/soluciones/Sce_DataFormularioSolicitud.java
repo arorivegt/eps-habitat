@@ -119,6 +119,10 @@ public class Sce_DataFormularioSolicitud extends Composite {
 			}
 		});
 		
+		/////////-------------BORRAR
+		
+		System.out.println("NADA");
+		
 		
 		this.formulario = e;
 		mensaje =  new Mensaje();

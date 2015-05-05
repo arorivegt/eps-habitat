@@ -127,6 +127,8 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		
 		System.out.println("NADA3");
 		
+		System.out.println("NADA4");
+		
 		
 		this.formulario = e;
 		mensaje =  new Mensaje();

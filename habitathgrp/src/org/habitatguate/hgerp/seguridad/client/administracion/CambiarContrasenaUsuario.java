@@ -65,30 +65,20 @@ public class CambiarContrasenaUsuario extends Composite{
         btnCambiar.addClickHandler(new ClickHandler() {
         	public void onClick(ClickEvent event) {
                 load.visible();
-            	recursosHumanosService.obtenerUsuario(new AsyncCallback<String>() 
-				{ 
-            		public void onFailure(Throwable caught) {
-            			load.invisible();
-            			mensaje.setMensaje("alert alert-error", "Error !! \nal obtener Usuario");
-            		}
-
-					public void onSuccess(String result) {
-	            		recursosHumanosService.CambiarContrasenaAdmin(result, txtContrasenaActual.getText(),new AsyncCallback<String>()
-	    			    {
-	    		            public void onFailure(Throwable caught) {
-	    		                load.invisible();
-	    		            	mensaje.setMensaje("alert alert-error", "Error !! \nal actualizar contraseña");
-	    		            }
-	    
-	    					public void onSuccess(String result) {
-	    			            load.invisible();
-	    			            mensaje.setMensaje("alert alert-success", result);
-	    		            }
-	    
-	    			    });
+            	
+        		recursosHumanosService.CambiarContrasenaAdmin(txtUsuario.getText(), txtContrasenaActual.getText(),new AsyncCallback<String>()
+			    {
+		            public void onFailure(Throwable caught) {
+		                load.invisible();
+		            	mensaje.setMensaje("alert alert-error", "Error !! \nal actualizar contraseña");
 		            }
 
-				});
+					public void onSuccess(String result) {
+			            load.invisible();
+			            mensaje.setMensaje("alert alert-success", result);
+		            }
+
+			    });
         	}
         });
         btnCambiar.setText("Cambiar");

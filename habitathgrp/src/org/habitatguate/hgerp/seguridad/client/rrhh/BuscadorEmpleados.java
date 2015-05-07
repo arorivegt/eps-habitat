@@ -405,7 +405,7 @@ public class BuscadorEmpleados extends Composite   {
 			public void onSuccess(Long results)
 			{
 
-				final Empleado empleado = new Empleado(0,"R",0L);
+				final Empleado empleado = new Empleado(0,"R",results);
 				empleado.id_empleado = id_empleado;
 				empleado.NuevasPestanas(results); 
 				grid.setWidget(1, 0,empleado);

@@ -7,7 +7,7 @@
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/jxl.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/json-simple-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="war/WEB-INF/lib/gwt-maps.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>

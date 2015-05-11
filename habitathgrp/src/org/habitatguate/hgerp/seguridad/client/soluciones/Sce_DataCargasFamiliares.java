@@ -42,8 +42,13 @@ public class Sce_DataCargasFamiliares extends Composite {
 	private TextBox txtEscolaridadFamiliar;
 	private Mensaje mensaje; 
 	
-	public Sce_DataCargasFamiliares(Sce_DataEntryCargasFamiliares a, Sce_DataEntryFormularioSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataCargasFamiliares(Sce_DataEntryCargasFamiliares a, Sce_DataEntryFormularioSolicitud e, boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formulario = e;
 		this.cargaFamiliar = a;
@@ -119,7 +124,16 @@ public class Sce_DataCargasFamiliares extends Composite {
 		txtOcupacionFamiliar.setSize("271px", "19px");
 		txtOcupacionFamiliar.setTabIndex(4);
 		
+		// Boton Guardar
+		
 		Button btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -206,7 +220,16 @@ public class Sce_DataCargasFamiliares extends Composite {
 		btnGuardar.setSize("227px", "34px");
 		btnGuardar.setTabIndex(5);
 		
+		// Boton Eliminar
+		
 		Button btnEliminar = new Button("Send");
+	
+		if(this.valor) {
+			btnEliminar.setVisible(true);
+		}else{
+			btnEliminar.setVisible(false);
+		}
+		
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

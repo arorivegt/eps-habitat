@@ -23,9 +23,14 @@ public class Sce_NuevoFormulario extends Composite  {
 	
 	private Sce_DataEntryFormularioSolicitud nuevaSolicitud;
 	
-	public Sce_NuevoFormulario() {
+	// Valor Escritura-Lectura
+	private boolean valor;
+
+	public Sce_NuevoFormulario(boolean valor) {
+				
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
-    	load = new Loading();
+		load = new Loading();
         load.Mostrar();
         load.invisible();
 		grid = new Grid(2, 1);
@@ -35,8 +40,10 @@ public class Sce_NuevoFormulario extends Composite  {
 		grid.setWidget(0, 0, absolutePanel);
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
-	    	
-		nuevaSolicitud = new Sce_DataEntryFormularioSolicitud();
+	    
+		//
+		nuevaSolicitud = new Sce_DataEntryFormularioSolicitud(this.valor);
+		
 		grid.setWidget(1, 0, nuevaSolicitud);
 		nuevaSolicitud.setSize("100%", "100%");
 		

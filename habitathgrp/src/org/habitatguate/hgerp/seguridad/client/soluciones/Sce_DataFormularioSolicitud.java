@@ -43,9 +43,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	private Long idAfiliado = 0L;
 	private Long idRol = 0L;
 
-	// Valor Escritura-Lectura
-	boolean valor = true;
-	
 	private boolean bandera = true;
     private TextBox txtNombreSolicitante;
 	private TextBox txtEdad;
@@ -76,9 +73,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	private Mensaje mensaje;
 	private Button btnGuardar;
 	private ListBox listSolucionConstruir;
-
+	
+	// Valor Escritura-Lectura
+	private boolean valor;
     
-	public Sce_DataFormularioSolicitud(Sce_DataEntryFormularioSolicitud e) {
+	public Sce_DataFormularioSolicitud(Sce_DataEntryFormularioSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
@@ -118,17 +119,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
-		
-		/////////-------------BORRAR
-		
-		System.out.println("NADA");
-		
-		System.out.println("NADA2");
-		
-		System.out.println("NADA3");
-		
-		System.out.println("NADA4");
-		
 		
 		this.formulario = e;
 		mensaje =  new Mensaje();
@@ -584,14 +574,15 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 		
 		// --- Boton Guardar - Data Formulario Solicitud
-
-//		if(valor) {
-//			btnGuardar.setEnabled(true);
-//		}else{
-//			btnGuardar.setEnabled(false);
-//		}
 		
 		btnGuardar = new Button("New button");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

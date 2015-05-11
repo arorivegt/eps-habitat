@@ -45,8 +45,12 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
     private Sce_DataEntryFormularioSolicitud formulario = null;
     private AbsolutePanel absolutePanel;
     private Mensaje mensaje;
-	
-	public Sce_DataEntryFormularioSolicitud() {
+    
+    private boolean valor;
+
+	public Sce_DataEntryFormularioSolicitud(boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		formulario = this;
 		tabPanel = new TabPanel();
@@ -59,8 +63,6 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 			public void onSuccess(Long result) {
 				idRol = result;
 				System.out.println("Id Rol: " + idRol);
-				
-				habilitarPrincipal();
 			}
 			@Override
 			public void onFailure(Throwable caught) {
@@ -73,35 +75,12 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel1, "Datos del solicitante", true);
 		scrollPanel1.setSize("100%", "100%");
-		fd1 = new Sce_DataFormularioSolicitud(this);
+		fd1 = new Sce_DataFormularioSolicitud(this, this.valor);
 		scrollPanel1.setWidget(fd1);	
 		
-		tabPanel.selectTab(0); // Carga Tab Inicial
-		
-		
-	}
+		tabPanel.selectTab(0); 	// Carga Tab Inicial
 	
-	public void habilitarPrincipal(){
-
-		AdministracionService.ObtenerUsuarioPermisoNombre("Datos-Solicitante-Soluciones", idRol, new AsyncCallback<List<AuxUsuarioPermiso>>()
-		{
-			public void onFailure(Throwable caught) 
-			{	
-			}
-
-			@Override
-			public void onSuccess(List<AuxUsuarioPermiso> results)
-			{
-				if(results.get(0).getPermiso().equals("RW")){
-					// 1. Datos generales solicitante
-					fd1.valor = true;
-
-				}else if(results.get(0).getPermiso().equals("R")){
-					// 1. Datos generales solicitante
-					fd1.valor = false;
-				}
-			}
-		});
+		
 	}
 
 	public void NuevasPestanas(Long rol) {
@@ -121,7 +100,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					scrollPanel3.setAlwaysShowScrollBars(false);
 					tabPanel.add(scrollPanel3, "Carga Familiares", true);
 					scrollPanel3.setSize("100%", "100%");
-					fd3 = new Sce_DataEntryCargasFamiliares(formulario);
+					fd3 = new Sce_DataEntryCargasFamiliares(formulario, true);
 					scrollPanel3.setWidget(fd3);
 					
 				}else if(results.get(0).getPermiso().equals("R")){
@@ -130,7 +109,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					scrollPanel3.setAlwaysShowScrollBars(false);
 					tabPanel.add(scrollPanel3, "Carga Familiares", true);
 					scrollPanel3.setSize("100%", "100%");
-					fd3 = new Sce_DataEntryCargasFamiliares(formulario);
+					fd3 = new Sce_DataEntryCargasFamiliares(formulario, false);
 					scrollPanel3.setWidget(fd3);
 				}
 			}
@@ -334,5 +313,6 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 	public void setScrollPanel6(ScrollPanel scrollPanel6) {
 		this.scrollPanel6 = scrollPanel6;
 	}
+	
 	
 }

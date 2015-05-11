@@ -26,14 +26,19 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Sce_DataEntryCargasFamiliares extends Composite {
 
-    private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private Sce_DataEntryFormularioSolicitud formularioSolicitud;
-    private VerticalPanel panel = new VerticalPanel();
+	private VerticalPanel panel = new VerticalPanel();
+
+	private Mensaje mensaje; 
+	private FlexTable flextable;
+
+	// Valor Escritura-Lectura
+	private boolean valor;
     
-	 private Mensaje mensaje; 
-	 private FlexTable flextable;
-    
-	public Sce_DataEntryCargasFamiliares(Sce_DataEntryFormularioSolicitud formulario) {
+	public Sce_DataEntryCargasFamiliares(Sce_DataEntryFormularioSolicitud formulario, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formularioSolicitud = formulario;
@@ -44,7 +49,16 @@ public class Sce_DataEntryCargasFamiliares extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 		
+        // Boton Agregar nuevo Formulario de Carga Familiar
+        
         Button btnAgregar = new Button("Agregar");
+        
+		if(this.valor) {
+			btnAgregar.setVisible(true);
+		}else{
+			btnAgregar.setVisible(false);
+		}
+        
         panel.add(btnAgregar);
         
         btnAgregar.setStyleName("sendButton");
@@ -59,7 +73,7 @@ public class Sce_DataEntryCargasFamiliares extends Composite {
 	}
 
     private void agregarFormulario(){
-        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataCargasFamiliares(this, formularioSolicitud));
+        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataCargasFamiliares(this, formularioSolicitud, this.valor));
     }
     
     public void EliminarFormulario(final Sce_DataCargasFamiliares fa, final Long idFormulario, final Long id){
@@ -97,7 +111,7 @@ public class Sce_DataEntryCargasFamiliares extends Composite {
 
     			System.out.println("ID Carga Familiar a Cargar: " + n2.getIdCargaFamiliar() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			Sce_DataCargasFamiliares fa = new  Sce_DataCargasFamiliares(this, formularioSolicitud);
+    			Sce_DataCargasFamiliares fa = new  Sce_DataCargasFamiliares(this, formularioSolicitud, this.valor);
     			
     			fa.LlenarDatos(n2.getIdCargaFamiliar(), 
     					n2.getNombreFamiliar(), n2.getEdadFamiliar(), n2.getEscolaridadFamiliar(), n2.getOcupacionFamiliar());

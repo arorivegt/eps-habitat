@@ -53,8 +53,13 @@ public class Sce_BuzonSolicitud extends Composite  {
 	private SuggestBox txtNombreSolicitante;
 	private ListBox listSolucionConstruir ;
 	
-	public Sce_BuzonSolicitud() {
+	// Valor Escritura-Lectura
+	private boolean valor;
+
+	public Sce_BuzonSolicitud(boolean valor) {
 		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
@@ -285,13 +290,14 @@ public class Sce_BuzonSolicitud extends Composite  {
 	// Soluciones
 	
 	public void cargarFormulario(final Long idFormulario){
-        load.visible();
-        
+
+		load.visible();
 		grid.clearCell(1, 0);
-		final Sce_DataEntryFormularioSolicitud e = new Sce_DataEntryFormularioSolicitud();
-		e.idFormulario = idFormulario;
 		
+		final Sce_DataEntryFormularioSolicitud e = new Sce_DataEntryFormularioSolicitud(this.valor);
+		e.idFormulario = idFormulario;
 		System.out.println("ID Formulario enviado en Metodo CargarFormulario - Buzon Solicitudes: " + e.idFormulario);
+		
 		e.NuevasPestanas(idRol);	// Muestra de nuevo las pestanas
 		grid.setWidget(1, 0,e);
         e.setSize("100%", "648px");
@@ -398,5 +404,6 @@ public class Sce_BuzonSolicitud extends Composite  {
 	    
 	    return oracle;
     }
+	
 	
 }

@@ -168,16 +168,25 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Permisos-RRHH", 2L, "N");
 				GuardarPagina(rol, "Carga-Datos-RRHH", 2L, "N");
 				// Soluciones Construidas
-				GuardarPagina(rol, "Recepcion-Formulario-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Verificacion-Solicitud-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Seguimiento-Garantia-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Bitacora-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Detalle-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Datos-Solicitante-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Cargas-Familiares-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Situacion-Vivienda-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Situacion-Economica-Soluciones", 3L, "N");
-				GuardarPagina(rol, "Referencias-Familiares-Soluciones", 3L, "N");
+				GuardarPagina(rol, "Recepcion-Formulario-Soluciones", 3L, "N");		// Menu Opcion 1
+				GuardarPagina(rol, "Verificacion-Solicitud-Soluciones", 3L, "N");	// Menu Opcion 2
+				GuardarPagina(rol, "Seguimiento-Garantia-Soluciones", 3L, "N");		// Menu Opcion 3
+				GuardarPagina(rol, "Bitacora-Soluciones", 3L, "N");					// Menu Opcion 4
+				GuardarPagina(rol, "Detalle-Soluciones", 3L, "N");					// Menu Opcion 5
+				GuardarPagina(rol, "Datos-Solicitante-Soluciones", 3L, "N");		// Formulario 1 Menu Opcion 1/2
+				GuardarPagina(rol, "Cargas-Familiares-Soluciones", 3L, "N");		// Formulario 2 Menu Opcion 2
+				GuardarPagina(rol, "Situacion-Vivienda-Soluciones", 3L, "N");		// Formulario 3 Menu Opcion 2
+				GuardarPagina(rol, "Situacion-Economica-Soluciones", 3L, "N");		// Formulario 4 Menu Opcion 2
+				GuardarPagina(rol, "Referencias-Familiares-Soluciones", 3L, "N");	// Formulario 5 Menu Opcion 2
+				GuardarPagina(rol, "Garantia-Hipotecaria-Soluciones", 3L, "N");		// Formulario 1 Menu Opcion 3
+				GuardarPagina(rol, "Garantia-Fiduciaria-Soluciones", 3L, "N");		// Formulario 2 Menu Opcion 3
+				GuardarPagina(rol, "Grupo-Solidario-Soluciones", 3L, "N");			// Formulario 3 Menu Opcion 3
+				GuardarPagina(rol, "Primera-Supervision-Soluciones", 3L, "N");		// Formulario 1 Menu Opcion 4
+				GuardarPagina(rol, "Segunda-Supervision-Soluciones", 3L, "N");		// Formulario 2 Menu Opcion 4
+				GuardarPagina(rol, "Tercera-Supervision-Soluciones", 3L, "N");		// Formulario 3 Menu Opcion 4
+				GuardarPagina(rol, "Cuarta-Supervision-Soluciones", 3L, "N");		// Formulario 4 Menu Opcion 4
+				GuardarPagina(rol, "Ubicacion-Solucion-Soluciones", 3L, "N");		// Formulario 5 Menu Opcion 4
+				GuardarPagina(rol, "Encuesta-Satisfaccion-Soluciones", 3L, "N");	// Formulario 6 Menu Opcion 4
 				//
 				
 				listRol.addItem(""+rol);

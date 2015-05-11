@@ -12,7 +12,6 @@ import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.OneToMany;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.datanucleus.annotations.Unowned;
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -27,11 +26,9 @@ public class SegBeneficiario implements Serializable{
 	@Persistent
 	private int telBeneficiario;
 	@Persistent
-	@Unowned
 	private SegAfiliado afiliado;
 	@Persistent(mappedBy = "beneficiario")
 	@Element(dependent = "true")
-	@Unowned
 	private SegSolucion solucion;
 	
 	public SegBeneficiario(){

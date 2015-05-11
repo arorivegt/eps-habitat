@@ -58,7 +58,7 @@ public class Empleado extends Composite {
 	public Long id_empleado = 0L;
 	private String formulario = "E";
 	
-	public Empleado(final int tipo, String tipoEmpleado, Long rol) {
+	public Empleado(final int tipo,  final String tipoEmpleado, Long rol) {
 		emp = this;
 		tabPanel = new TabPanel();
 		tabPanel.setSize("100%", "100%");
@@ -81,13 +81,11 @@ public class Empleado extends Composite {
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
 				if(results.get(0).getPermiso().equals("RW")){
-					
 					ScrollPanel scrollPanel = new ScrollPanel();
 					tabPanel.add(scrollPanel, "Datos",true);
 					scrollPanel.setSize("100%", "100%");
 					formularioDatos = new FormularioDatos(emp,tipo);
 					scrollPanel.setWidget(formularioDatos);
-					inavilidarDatosYPestanas();
 					
 				}else if(results.get(0).getPermiso().equals("R")){
 					ScrollPanel scrollPanel = new ScrollPanel();
@@ -96,6 +94,14 @@ public class Empleado extends Composite {
 					formularioDatos = new FormularioDatos(emp,tipo);
 					scrollPanel.setWidget(formularioDatos);
 					formularioDatos.btnHabilitar(false);
+				}
+				
+
+				if(tipoEmpleado.equals("E")){
+					formulario = "Datos-Empleado";
+					inavilidarDatosYPestanas();
+				}else{
+					formulario = "Datos-RRHH";
 				}
 			}
 		});

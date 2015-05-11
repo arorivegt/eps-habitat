@@ -9,7 +9,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.datanucleus.annotations.Unowned;
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegDetalleSolucion implements Serializable{
@@ -25,10 +24,8 @@ public class SegDetalleSolucion implements Serializable{
 	@Persistent
 	private Double costoAcumulado;
 	@Persistent
-	@Unowned
     private SegMaterialCostruccion materialCostruccion;
 	@Persistent
-	@Unowned
 	private SegVale vale;
 	
 	private SegSolucion solucion;

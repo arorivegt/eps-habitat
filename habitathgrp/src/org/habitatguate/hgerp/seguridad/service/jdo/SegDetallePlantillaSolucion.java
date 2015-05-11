@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.datanucleus.annotations.Unowned;
 
 
 @SuppressWarnings("serial")
@@ -33,7 +32,6 @@ public class SegDetallePlantillaSolucion implements Serializable{
 	@Persistent
 	private Double costoAcumulado;
 	@Persistent
-	@Unowned
     private SegMaterialCostruccion materialCostruccion;
 	
 	private SegPlantillaSolucion plantillaSolucion;

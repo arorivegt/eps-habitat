@@ -11,8 +11,6 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 import javax.persistence.OneToMany;
 
-import com.google.appengine.datanucleus.annotations.Unowned;
-
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegAfiliado implements Serializable {

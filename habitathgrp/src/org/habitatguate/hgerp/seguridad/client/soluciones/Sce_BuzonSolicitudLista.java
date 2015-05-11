@@ -27,7 +27,7 @@ public class Sce_BuzonSolicitudLista extends Composite {
     
 	public Sce_BuzonSolicitudLista() {
 		
-		this.listaFormulario =this;
+		this.listaFormulario = this;
 		mensaje = new Mensaje();
 
     	load = new Loading();
@@ -48,7 +48,8 @@ public class Sce_BuzonSolicitudLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSolicitud buscador, final String nombreSolicitante, String solucionConstruir){
+    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSolicitud buscador, final String nombreSolicitante, 
+    		final String solucionConstruir, final boolean valVisibilidad){
 
         load.visible();
         
@@ -70,7 +71,7 @@ public class Sce_BuzonSolicitudLista extends Composite {
 				for(AuxSolicitudGeneral p : result) {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, 
 			        					new Sce_BuzonSolicitudItem(buscador, listaFormulario, 
-			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), p.getSolucionConstruir())
+			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), p.getSolucionConstruir(), valVisibilidad)
 			        );
 				}
 		        load.invisible();
@@ -81,11 +82,13 @@ public class Sce_BuzonSolicitudLista extends Composite {
         load.invisible();
     }
     
-    public void EliminarFormulario(final Sce_BuzonSolicitudItem a){
-        load.visible();
-    	flexTable.remove(a);
-        load.invisible();
-    }
+    // Metodo no utilizado
     
+//    public void EliminarFormulario(final Sce_BuzonSolicitudItem a){
+//        load.visible();
+//    	flexTable.remove(a);
+//        load.invisible();
+//    }
+//    
 
 }

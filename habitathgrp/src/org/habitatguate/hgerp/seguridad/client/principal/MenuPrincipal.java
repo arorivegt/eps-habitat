@@ -211,14 +211,10 @@ public class MenuPrincipal extends Composite {
 		};
 
 		// -- Soluciones Construidas6
-//		Command cmdsce1_v1 = new Command() {
-//			public void execute() {
-//				sce1_v1();
-//			}
-//		};
-		Command cmdsce1_v2 = new Command() {
+
+		Command cmdsce1 = new Command() {
 			public void execute() {
-				sce1_v2();
+				sce1();
 			}
 		};	
 		
@@ -363,7 +359,7 @@ public class MenuPrincipal extends Composite {
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
 		// MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1_v1);
-		MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1_v2);
+		MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Verificacion de Solicitud", cmdsce2);
 		MenuSolucionesConstruidas.addSeparator();
@@ -1116,15 +1112,9 @@ public class MenuPrincipal extends Composite {
 	}
 
 	// --- Soluciones Construidas
-
-	//@UiHandler("sce1")
-//	void sce1_v1() {
-//		Sce_DataEntryFormularioSolicitud recepcionFormulario = new Sce_DataEntryFormularioSolicitud();
-//		this.panel.getGrid().clearCell(1, 0);
-//		this.panel.getGrid().setWidget(1, 0, recepcionFormulario);
-//	}
 	
-	void sce1_v2() {
+	//@UiHandler("sce1")
+	void sce1() {
 		AdministracionService.ObtenerUsuarioPermisoNombre("Recepcion-Formulario-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
 		{
 			public void onFailure(Throwable caught) 
@@ -1163,6 +1153,7 @@ public class MenuPrincipal extends Composite {
 		});
 	}
 	
+	//@UiHandler("sce2")
 	void sce2() {	
 		AdministracionService.ObtenerUsuarioPermisoNombre("Verificacion-Solicitud-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
 		{
@@ -1175,38 +1166,28 @@ public class MenuPrincipal extends Composite {
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
 
-					AdministracionService.ObtenerUsuarioPermisoNombre("Datos-Solicitante-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
-					{
-						public void onFailure(Throwable caught) 
-						{	
-						}
+				if(results.get(0).getPermiso().equals("RW")){
 
-						@Override
-						public void onSuccess(List<AuxUsuarioPermiso> results)
-						{
-							if(results.get(0).getPermiso().equals("RW")){
-								
-								Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud(true);
-								System.out.println("Datos Generales Solicitante - Lectura/Escritura");
-								
-								buzon.setSize("100%", "100%");
-								panel.getGrid().setSize("100%", "100%");
-								panel.getGrid().clearCell(1, 0);
-								panel.getGrid().setWidget(1, 0, buzon);
-								
-							}else if(results.get(0).getPermiso().equals("R")){
-								
-								Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud(false);
-								System.out.println("Datos Generales Solicitante - Solo Lectura");
-								
-								buzon.setSize("100%", "100%");
-								panel.getGrid().setSize("100%", "100%");
-								panel.getGrid().clearCell(1, 0);
-								panel.getGrid().setWidget(1, 0, buzon);
+					Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud(true);
+					System.out.println("Verificacion Solicitud - Lectura/Escritura");
 
-							}
-						}
-					});
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_BuzonSolicitud buzon = new Sce_BuzonSolicitud(false);
+					System.out.println("Verificacion Solicitud - Solo Lectura");
+
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}
+
 
 			}
 		});
@@ -1214,31 +1195,92 @@ public class MenuPrincipal extends Composite {
 	
 	//@UiHandler("sce3")
 	void sce3() {
-		Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia();
-		seguimientoFormulario.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Seguimiento-Garantia-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(!results.get(0).getPermiso().equals("N")){
+
+					Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia();
+					seguimientoFormulario.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+
+				}
+
+			}
+		});
+
 	}	
 	
 	//@UiHandler("sce4")
 	void sce4() {
-		Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision();
-		bitacora.setSize("100%", "100%");
-		this.panel.getGrid().setSize("100%", "100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, bitacora);
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Bitacora-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(!results.get(0).getPermiso().equals("N")){
+
+					Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision();
+					bitacora.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, bitacora);
+
+				}
+
+			}
+		});
+		
 	}		
 
 	//@UiHandler("sc6")
 	void sce6() {
-		Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat();
-		this.panel.getGrid().setHeight("100%");
-		this.panel.getGrid().clearCell(1, 0);
-		this.panel.getGrid().setWidget(1, 0, buscador);
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Detalle-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(!results.get(0).getPermiso().equals("N")){
+
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat();
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+
+				}
+
+			}
+		});
+			
 	}
 
-	// --- Fin        
+	// ---   
+	
 	public void Empleado_registrado(){
 
 		loginService.obtenerIdRol(new AsyncCallback<Long>() 

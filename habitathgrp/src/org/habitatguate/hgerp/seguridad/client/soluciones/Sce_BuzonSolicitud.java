@@ -56,7 +56,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 	// Valor Escritura-Lectura
 	private boolean valor;
 
-	public Sce_BuzonSolicitud(boolean valor) {
+	public Sce_BuzonSolicitud(final boolean valor) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 
@@ -143,7 +143,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 
 			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
 			     {
-						busqueda();
+						busqueda(valor);
 			     }
 			}
 		});
@@ -223,7 +223,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				busqueda();
+				busqueda(valor);
 			}
 		});
 						
@@ -245,14 +245,14 @@ public class Sce_BuzonSolicitud extends Composite  {
 		
 	}
 	
-	public void busqueda(){
+	public void busqueda(boolean valVisilidad){
 
 		grid.clearCell(1, 0);
 		Sce_BuzonSolicitudLista  nuevo = new Sce_BuzonSolicitudLista();
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
-			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "", valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -264,7 +264,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 			System.out.println("Formulario de Solicitante: " + nombreSolicitante);
 			
 			if(!txtNombreSolicitante.getText().equals("")){
-				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "");
+				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "", valVisilidad);
 				grid.setWidget(1, 0,nuevo);
 				nuevo.setSize("100%", "648px");
 			}
@@ -276,7 +276,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 		{
-			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()), valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -289,16 +289,16 @@ public class Sce_BuzonSolicitud extends Composite  {
 	
 	// Soluciones
 	
-	public void cargarFormulario(final Long idFormulario){
+	public void cargarFormulario(final Long idFormulario, boolean valVisibilidad){
 
 		load.visible();
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntryFormularioSolicitud e = new Sce_DataEntryFormularioSolicitud(this.valor);
+		final Sce_DataEntryFormularioSolicitud e = new Sce_DataEntryFormularioSolicitud(valVisibilidad);
 		e.idFormulario = idFormulario;
 		System.out.println("ID Formulario enviado en Metodo CargarFormulario - Buzon Solicitudes: " + e.idFormulario);
 		
-		e.NuevasPestanas(idRol);	// Muestra de nuevo las pestanas
+		e.habilitarPestanasFormulario(idRol);	// Muestra de nuevo las pestanas
 		grid.setWidget(1, 0,e);
         e.setSize("100%", "648px");
         

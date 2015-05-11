@@ -83,7 +83,43 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		
 	}
 
-	public void NuevasPestanas(Long rol) {
+	public void habilitarPestanasNuevo() {
+		
+		// 3. Carga Familiares
+		scrollPanel3 = new ScrollPanel();
+		scrollPanel3.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel3, "Carga Familiares", true);
+		scrollPanel3.setSize("100%", "100%");
+		fd3 = new Sce_DataEntryCargasFamiliares(formulario, true);
+		scrollPanel3.setWidget(fd3);
+
+		// 4. Datos Vivienda Actual
+		scrollPanel4 = new ScrollPanel();
+		scrollPanel4.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
+		scrollPanel4.setSize("100%", "100%");
+		fd4 = new Sce_DataEntryDatosVivienda(formulario);
+		scrollPanel4.setWidget(fd4);
+
+		// 5. Situacion economica familiar
+		scrollPanel5 = new ScrollPanel();
+		scrollPanel5.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel5, "Situacion Economica",true);
+		scrollPanel5.setSize("100%", "100%");
+		fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+		scrollPanel5.setWidget(fd5);	
+
+		// 6. Referencias Familiares
+		scrollPanel6 = new ScrollPanel();
+		scrollPanel6.setAlwaysShowScrollBars(false);
+		tabPanel.add(scrollPanel6, "Referencias Familiares",true);
+		scrollPanel6.setSize("100%", "100%");
+		fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+		scrollPanel6.setWidget(fd6);		
+
+	}
+	
+	public void habilitarPestanasFormulario(Long rol) {
 		
 		AdministracionService.ObtenerUsuarioPermisoNombre("Cargas-Familiares-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
 		{

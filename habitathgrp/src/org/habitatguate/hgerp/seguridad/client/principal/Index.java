@@ -66,11 +66,8 @@ public class Index implements EntryPoint {
                     }
              });
             load.invisible();
-//        	txtuser.setText("jomarrovas@gmail.com");
-//        	txtpass.setText("Prueba1234"); //---
-        	
-        	inicio=  new Mensaje();
-         	
+  	
+        	inicio=  new Mensaje();     	
         
             // Add a handler to close the DialogBox
 

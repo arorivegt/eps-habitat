@@ -756,7 +756,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 										formulario.idFormulario = result;
 										System.out.println("Valor de NUEVO Formulario: " + idFormulario + ", ID: " + formulario.idFormulario);
 										bandera = false;
-										formulario.NuevasPestanas(idRol);
+										formulario.habilitarPestanasNuevo();
 									}
 								});
 

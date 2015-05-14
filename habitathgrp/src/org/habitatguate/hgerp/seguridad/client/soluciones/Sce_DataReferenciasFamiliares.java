@@ -33,8 +33,13 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 	private TextBox txtDireccionFamiliar;
 	private Mensaje mensaje; 
     
-	public Sce_DataReferenciasFamiliares(Sce_DataEntryReferenciasFamiliares a, Sce_DataEntryFormularioSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataReferenciasFamiliares(Sce_DataEntryReferenciasFamiliares a, Sce_DataEntryFormularioSolicitud e, boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formulario = e;
 		this.cargaFamiliar = a;
@@ -110,7 +115,16 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		txtDireccionFamiliar.setSize("397px", "19px");
 		txtDireccionFamiliar.setTabIndex(4);
 		
+		// Boton Guardar
+		
 		Button btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -197,8 +211,16 @@ public class Sce_DataReferenciasFamiliares extends Composite {
 		btnGuardar.setSize("227px", "34px");
 		btnGuardar.setTabIndex(5);
 		
+		// Boton Eliminar
 		
 		Button btnEliminar = new Button("Send");
+		
+		if(this.valor) {
+			btnEliminar.setVisible(true);
+		}else{
+			btnEliminar.setVisible(false);
+		}
+		
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

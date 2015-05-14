@@ -35,9 +35,14 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
 	 private FlexTable flextable;
     
 	 private Sce_DataSituacionEconomica data;
+
+	 // Valor Escritura-Lectura
+	 private boolean valor;
 	 
-	public Sce_DataEntrySituacionEconomica(Sce_DataEntryFormularioSolicitud formulario) {
-				
+	public Sce_DataEntrySituacionEconomica(Sce_DataEntryFormularioSolicitud formulario, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
@@ -47,7 +52,7 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 	
-		data = new Sce_DataSituacionEconomica(this, this.formularioSolicitud);
+		data = new Sce_DataSituacionEconomica(this, this.formularioSolicitud, this.valor);
         flextable.setWidget(flextable.getRowCount(), 0, data);
 
 	}
@@ -60,6 +65,8 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
     		for ( AuxSolicitudSituacionEconomica n2 : results) {
 
     			System.out.println("ID Situacion Economica a Cargar: " + n2.getIdSituacionEconomica() + ", ID Formulario: " + n2.getIdFormulario());
+    			
+    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
     			
     			data.LlenarDatos(n2.getIdSituacionEconomica(), 
     					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),

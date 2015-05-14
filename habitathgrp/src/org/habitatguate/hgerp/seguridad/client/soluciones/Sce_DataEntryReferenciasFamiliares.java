@@ -32,7 +32,12 @@ public class Sce_DataEntryReferenciasFamiliares extends Composite {
 	 private Mensaje mensaje; 
 	 private FlexTable flextable;
     
-	public Sce_DataEntryReferenciasFamiliares(Sce_DataEntryFormularioSolicitud formulario) {
+	 // Valor Escritura-Lectura
+	 private boolean valor;	 
+	 
+	public Sce_DataEntryReferenciasFamiliares(Sce_DataEntryFormularioSolicitud formulario, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formularioSolicitud = formulario;
@@ -43,7 +48,16 @@ public class Sce_DataEntryReferenciasFamiliares extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 		
+        // Boton Agregar nuevo Formulario de Referencia Familiar
+        
         Button btnAgregar = new Button("Agregar");
+        
+		if(this.valor) {
+			btnAgregar.setVisible(true);
+		}else{
+			btnAgregar.setVisible(false);
+		}
+        
         panel.add(btnAgregar);
         
         btnAgregar.setStyleName("sendButton");
@@ -58,7 +72,7 @@ public class Sce_DataEntryReferenciasFamiliares extends Composite {
 	}
 
     private void agregarFormulario(){
-        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataReferenciasFamiliares(this, formularioSolicitud));
+        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataReferenciasFamiliares(this, formularioSolicitud, this.valor));
     }
     
     public void EliminarFormulario(final Sce_DataReferenciasFamiliares fa, final Long idFormulario, final Long id){
@@ -96,7 +110,7 @@ public class Sce_DataEntryReferenciasFamiliares extends Composite {
 
     			System.out.println("ID Referencia Familiar a Cargar: " + n2.getIdReferenciaFamiliar() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			Sce_DataReferenciasFamiliares fa = new  Sce_DataReferenciasFamiliares(this, formularioSolicitud);
+    			Sce_DataReferenciasFamiliares fa = new  Sce_DataReferenciasFamiliares(this, formularioSolicitud, this.valor);
     			
     			fa.LlenarDatos(n2.getIdReferenciaFamiliar(), 
     					n2.getNombreFamiliar(), n2.getTelefonoFamiliar(), n2.getParentescoFamiliar(), n2.getDireccionFamiliar());

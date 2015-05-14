@@ -98,7 +98,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel4.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
 		scrollPanel4.setSize("100%", "100%");
-		fd4 = new Sce_DataEntryDatosVivienda(formulario);
+		fd4 = new Sce_DataEntryDatosVivienda(formulario, true);
 		scrollPanel4.setWidget(fd4);
 
 		// 5. Situacion economica familiar
@@ -106,7 +106,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel5.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel5, "Situacion Economica",true);
 		scrollPanel5.setSize("100%", "100%");
-		fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+		fd5 = new Sce_DataEntrySituacionEconomica(formulario,true);
 		scrollPanel5.setWidget(fd5);	
 
 		// 6. Referencias Familiares
@@ -114,7 +114,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		scrollPanel6.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel6, "Referencias Familiares",true);
 		scrollPanel6.setSize("100%", "100%");
-		fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+		fd6 = new Sce_DataEntryReferenciasFamiliares(formulario,true);
 		scrollPanel6.setWidget(fd6);		
 
 	}
@@ -166,7 +166,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					scrollPanel4.setAlwaysShowScrollBars(false);
 					tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
 					scrollPanel4.setSize("100%", "100%");
-					fd4 = new Sce_DataEntryDatosVivienda(formulario);
+					fd4 = new Sce_DataEntryDatosVivienda(formulario, true);
 					scrollPanel4.setWidget(fd4);
 					
 				}else if(results.get(0).getPermiso().equals("R")){
@@ -175,7 +175,7 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					scrollPanel4.setAlwaysShowScrollBars(false);
 					tabPanel.add(scrollPanel4, "Situacion Vivienda Actual", true);
 					scrollPanel4.setSize("100%", "100%");
-					fd4 = new Sce_DataEntryDatosVivienda(formulario);
+					fd4 = new Sce_DataEntryDatosVivienda(formulario, false);
 					scrollPanel4.setWidget(fd4);
 				}
 			}
@@ -196,18 +196,18 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					// 5. Situacion economica familiar
 					scrollPanel5 = new ScrollPanel();
 					scrollPanel5.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel5, "Situacion Economica",true);
+					tabPanel.add(scrollPanel5, "Situacion Economica", true);
 					scrollPanel5.setSize("100%", "100%");
-					fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+					fd5 = new Sce_DataEntrySituacionEconomica(formulario, true);
 					scrollPanel5.setWidget(fd5);	
 					
 				}else if(results.get(0).getPermiso().equals("R")){
 					// 5. Situacion economica familiar
 					scrollPanel5 = new ScrollPanel();
 					scrollPanel5.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel5, "Situacion Economica",true);
+					tabPanel.add(scrollPanel5, "Situacion Economica", true);
 					scrollPanel5.setSize("100%", "100%");
-					fd5 = new Sce_DataEntrySituacionEconomica(formulario);
+					fd5 = new Sce_DataEntrySituacionEconomica(formulario, false);
 					scrollPanel5.setWidget(fd5);	
 				}
 			}
@@ -226,18 +226,18 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 					// 6. Referencias Familiares
 					scrollPanel6 = new ScrollPanel();
 					scrollPanel6.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel6, "Referencias Familiares",true);
+					tabPanel.add(scrollPanel6, "Referencias Familiares", true);
 					scrollPanel6.setSize("100%", "100%");
-					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario, true);
 					scrollPanel6.setWidget(fd6);	
 					
 				}else if(results.get(0).getPermiso().equals("R")){
 					// 6. Referencias Familiares
 					scrollPanel6 = new ScrollPanel();
 					scrollPanel6.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel6, "Referencias Familiares",true);
+					tabPanel.add(scrollPanel6, "Referencias Familiares", true);
 					scrollPanel6.setSize("100%", "100%");
-					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario);
+					fd6 = new Sce_DataEntryReferenciasFamiliares(formulario, false);
 					scrollPanel6.setWidget(fd6);		
 				}
 			}

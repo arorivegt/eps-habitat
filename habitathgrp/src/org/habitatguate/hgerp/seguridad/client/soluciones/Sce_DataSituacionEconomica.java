@@ -77,9 +77,13 @@ public class Sce_DataSituacionEconomica extends Composite {
 	private float valPagosBuro = 0;
 	private float valCuota = 0;
 
+	// Valor Escritura-Lectura
+	private boolean valor;
 	
-	public Sce_DataSituacionEconomica(Sce_DataEntrySituacionEconomica a, Sce_DataEntryFormularioSolicitud e) {
+	public Sce_DataSituacionEconomica(Sce_DataEntrySituacionEconomica a, Sce_DataEntryFormularioSolicitud e, boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formulario = e;
 		this.situacionEconomica = a;
@@ -834,7 +838,16 @@ public class Sce_DataSituacionEconomica extends Composite {
 		absolutePanel.add(txtExcedente, 332, 377);
 		txtExcedente.setSize("103px", "19px");		
 		
+		// Boton Guardar
+		
 		btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -869,7 +882,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 				excedente = Float.parseFloat(txtExcedente.getText());
 
 				float alquilerVivienda = 0;
-				cuota = Float.parseFloat(txtAlquilerVivienda.getText());
+				alquilerVivienda = Float.parseFloat(txtAlquilerVivienda.getText());
 				
 				float alimentacion = 0;
 				alimentacion = Float.parseFloat(txtAlimentacion.getText());

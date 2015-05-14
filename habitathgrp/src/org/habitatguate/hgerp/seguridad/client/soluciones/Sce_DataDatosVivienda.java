@@ -52,7 +52,12 @@ public class Sce_DataDatosVivienda extends Composite {
 	ListBox listCocina;
 	private Button btnGuardar;
     
-	public Sce_DataDatosVivienda(Sce_DataEntryDatosVivienda a, Sce_DataEntryFormularioSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataDatosVivienda(Sce_DataEntryDatosVivienda a, Sce_DataEntryFormularioSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -211,7 +216,16 @@ public class Sce_DataDatosVivienda extends Composite {
 		txtValorInmueble.setSize("117px", "19px");
 		txtValorInmueble.setTabIndex(11);
 		
+		// Boton Guardar
+		
 		btnGuardar = new Button("Send");
+
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				

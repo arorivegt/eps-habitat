@@ -57,7 +57,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 	private boolean valor;
 
 	public Sce_BuzonSolicitud(final boolean valor) {
-		
+
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 
 		// Obtener Id Empleado
@@ -72,7 +72,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
-		
+
 		// Obtener Id Afiliado
 		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
 			@Override
@@ -85,7 +85,7 @@ public class Sce_BuzonSolicitud extends Composite  {
 				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
 			}
 		});
-		
+
 		// Obtener Id Rol
 		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
 			@Override

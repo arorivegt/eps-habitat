@@ -3,11 +3,18 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -23,10 +30,19 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 	private Sce_DataEntryGarantiaFiduciaria fd8;
 	private Sce_DataEntryGarantiaSolidario fd9;
 	
-    private  Grid grid;
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    
+    private Sce_DataEntryGarantiaSolicitud formulario = null;
+    
+	// Valor Escritura-Lectura
+	private boolean valor;
 
-	public Sce_DataEntryGarantiaSolicitud() {
+	public Sce_DataEntryGarantiaSolicitud(boolean valor) {
 		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
+		formulario = this;
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
@@ -37,61 +53,81 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 		scrollPanel7.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel7, "Garantia Hipotecaria", true);
 		scrollPanel7.setSize("100%", "100%");
-		fd7 = new Sce_DataEntryGarantiaHipotecaria(this);
+		fd7 = new Sce_DataEntryGarantiaHipotecaria(this, this.valor);
 		scrollPanel7.setWidget(fd7);	
 		
 		tabPanel.selectTab(0); // Carga Tab Inicial
 
 		
-		// 2. Garantia Fiduciaria
-
-		scrollPanel8 = new ScrollPanel();
-		scrollPanel8.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel8, "Garantia Fiduciaria", true);
-		scrollPanel8.setSize("100%", "100%");
-		fd8 = new Sce_DataEntryGarantiaFiduciaria(this);
-		scrollPanel8.setWidget(fd8);	
-
-		// 3. Garantia Grupo Solidario
-
-		scrollPanel9 = new ScrollPanel();
-		scrollPanel9.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel9, "Grupo Solidario", true);
-		scrollPanel9.setSize("100%", "100%");
-		fd9 = new Sce_DataEntryGarantiaSolidario(this);
-		scrollPanel9.setWidget(fd9);	
-		
 	}	
 	
 	
-	public void NuevasPestanas(){
+	public void habilitarPestanasFormulario(Long rol){
 
-		// 8. Colindancias & Mejoramiento
-
-//		scrollPanel8 = new ScrollPanel();
-//		scrollPanel8.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel8, "Colindancias & Mejoramiento",true);
-//		scrollPanel8.setSize("100%", "100%");
-//		fd8 = new Sce_DataColindanciasMejoramiento(this);
-//		scrollPanel8.setWidget(fd8);				
 		
-		// 9. Monto inversion
+		AdministracionService.ObtenerUsuarioPermisoNombre("Garantia-Fiduciaria-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
 
-//		scrollPanel8 = new ScrollPanel();
-//		scrollPanel8.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel8, "Monto Inversion",true);
-//		scrollPanel8.setSize("100%", "100%");
-//		fd9 = new Sce_DataMontoInversion(this);
-//		scrollPanel8.setWidget(fd9);		
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 2. Garantia Fiduciaria
+					scrollPanel8 = new ScrollPanel();
+					scrollPanel8.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel8, "Garantia Fiduciaria", true);
+					scrollPanel8.setSize("100%", "100%");
+					fd8 = new Sce_DataEntryGarantiaFiduciaria(formulario, true);
+					scrollPanel8.setWidget(fd8);	
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 2. Garantia Fiduciaria
+					scrollPanel8 = new ScrollPanel();
+					scrollPanel8.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel8, "Garantia Fiduciaria", true);
+					scrollPanel8.setSize("100%", "100%");
+					fd8 = new Sce_DataEntryGarantiaFiduciaria(formulario, false);
+					scrollPanel8.setWidget(fd8);	
+				}
+			}
+		});
 		
-		// 11. Solo para exclusivo del Afiliado
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Grupo-Solidario-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
 
-//		scrollPanel9 = new ScrollPanel();
-//		scrollPanel9.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel9, "Exclusivo Afiliado",true);
-//		scrollPanel9.setSize("100%", "100%");
-//		fd11 = new Sce_DataExclusivoAfiliado(this);
-//		scrollPanel9.setWidget(fd11);		
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 3. Garantia Grupo Solidario
+
+					scrollPanel9 = new ScrollPanel();
+					scrollPanel9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel9, "Grupo Solidario", true);
+					scrollPanel9.setSize("100%", "100%");
+					fd9 = new Sce_DataEntryGarantiaSolidario(formulario, true);
+					scrollPanel9.setWidget(fd9);	
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 3. Garantia Grupo Solidario
+
+					scrollPanel9 = new ScrollPanel();
+					scrollPanel9.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel9, "Grupo Solidario", true);
+					scrollPanel9.setSize("100%", "100%");
+					fd9 = new Sce_DataEntryGarantiaSolidario(formulario, false);
+					scrollPanel9.setWidget(fd9);	
+				}
+			}
+		});
+
 		
 	}
 	

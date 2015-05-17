@@ -53,7 +53,12 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
     private CheckBox checkBoxNo;
     private Button btnGuardar;
     
-	public Sce_DataGarantiaHipotecaria(Sce_DataEntryGarantiaHipotecaria a, Sce_DataEntryGarantiaSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;    
+    
+	public Sce_DataGarantiaHipotecaria(Sce_DataEntryGarantiaHipotecaria a, Sce_DataEntryGarantiaSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -255,6 +260,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		lblNoTelfonoPersona.setSize("240px", "19px");
 		
 		txtTelefonoPersona = new TextBox();
+		txtTelefonoPersona.setMaxLength(8);
 		txtTelefonoPersona.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtTelefonoPersona .getText().equals("")) {
@@ -296,7 +302,16 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		absolutePanel.add(txtNombreNotario, 207, 159);
 		txtNombreNotario.setSize("414px", "19px");
 		
+		// --- Boton Guardar
+		
 		btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

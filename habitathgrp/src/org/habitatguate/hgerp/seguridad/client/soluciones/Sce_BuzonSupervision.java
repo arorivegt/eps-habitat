@@ -38,6 +38,7 @@ public class Sce_BuzonSupervision extends Composite  {
 	// Llaves
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
 	
 	private Sce_BuzonSupervision buzon;
 	private Mensaje mensaje; 
@@ -51,8 +52,13 @@ public class Sce_BuzonSupervision extends Composite  {
 	private SuggestBox txtNombreSolicitante;	
 	private ListBox listSolucionConstruir ;
 	
-	public Sce_BuzonSupervision() {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_BuzonSupervision(final boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
@@ -78,6 +84,21 @@ public class Sce_BuzonSupervision extends Composite  {
 				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
 			}
 		});
+		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
+		
 		
 		// ---- VERSION FUNCIONAL EN FIREFOX	
 		
@@ -123,7 +144,7 @@ public class Sce_BuzonSupervision extends Composite  {
 
 			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
 			     {
-						busqueda();
+						busqueda(valor);
 			     }
 			}
 		});
@@ -203,7 +224,7 @@ public class Sce_BuzonSupervision extends Composite  {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				busqueda();
+				busqueda(valor);
 			}
 		});
 						
@@ -225,14 +246,14 @@ public class Sce_BuzonSupervision extends Composite  {
 		
 	}
 	
-	public void busqueda(){
+	public void busqueda(boolean valVisilidad){
 
 		grid.clearCell(1, 0);
 		Sce_BuzonSupervisionLista  nuevo = new Sce_BuzonSupervisionLista();
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
-			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "", valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -244,7 +265,7 @@ public class Sce_BuzonSupervision extends Composite  {
 			System.out.println("Formulario de Solicitante: " + nombreSolicitante);
 			
 			if(!txtNombreSolicitante.getText().equals("")){
-				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "");
+				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "", valVisilidad);
 				grid.setWidget(1, 0,nuevo);
 				nuevo.setSize("100%", "648px");
 			}
@@ -256,7 +277,7 @@ public class Sce_BuzonSupervision extends Composite  {
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 		{
-			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()), valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -267,15 +288,14 @@ public class Sce_BuzonSupervision extends Composite  {
 	
 	// Soluciones
 	
-	public void cargarFormulario(final Long idFormulario){
+	public void cargarFormulario(final Long idFormulario, boolean valVisibilidad){
 		
 		load.visible();        
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntrySupervisionSolicitud bitacoraSolicitud = new Sce_DataEntrySupervisionSolicitud();
+		final Sce_DataEntrySupervisionSolicitud bitacoraSolicitud = new Sce_DataEntrySupervisionSolicitud(valVisibilidad);
 		
-		bitacoraSolicitud.nuevasPestanas(); // Se habilitan las demas Pestanas
-											// Solucion 2 Aun no propuesta
+		bitacoraSolicitud.habilitarPestanasFormulario(idRol); // Se habilitan las demas Pestanas
 		
 		grid.setWidget(1, 0, bitacoraSolicitud);
 		bitacoraSolicitud.setSize("100%", "648px");

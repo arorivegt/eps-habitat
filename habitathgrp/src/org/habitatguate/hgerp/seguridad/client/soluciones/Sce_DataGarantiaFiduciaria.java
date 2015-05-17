@@ -45,9 +45,14 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 	
 	private ListBox listEstadoCivil;
     private ListBox listPais;
+    
+	// Valor Escritura-Lectura
+	private boolean valor;
 	
-	public Sce_DataGarantiaFiduciaria(Sce_DataEntryGarantiaFiduciaria a, Sce_DataEntryGarantiaSolicitud e) {
+	public Sce_DataGarantiaFiduciaria(Sce_DataEntryGarantiaFiduciaria a, Sce_DataEntryGarantiaSolicitud e, boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formulario = e;
 		this.garantiaFiduciaria = a;
@@ -232,6 +237,13 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		// Boton Guardar/Actualizar Informacion
 		
 		Button btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -359,6 +371,13 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		// Boton Eliminar Formulario
 		
 		Button btnEliminar = new Button("Send");
+		
+		if(this.valor) {
+			btnEliminar.setVisible(true);
+		}else{
+			btnEliminar.setVisible(false);
+		}
+		
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

@@ -1147,6 +1147,10 @@ public class MenuPrincipal extends Composite {
 						panel.getGrid().clearCell(1, 0);
 						panel.getGrid().setWidget(1, 0, nuevo);
 						
+					}else if(results.get(0).getPermiso().equals("N")){
+						
+						mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+						
 					}
 
 			}
@@ -1186,6 +1190,10 @@ public class MenuPrincipal extends Composite {
 					panel.getGrid().clearCell(1, 0);
 					panel.getGrid().setWidget(1, 0, buzon);
 
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
 				}
 
 
@@ -1206,16 +1214,33 @@ public class MenuPrincipal extends Composite {
 			@Override
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
+				
+				if(results.get(0).getPermiso().equals("RW")){
 
-				if(!results.get(0).getPermiso().equals("N")){
-
-					Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia();
+					Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia(true);
+					System.out.println("Seguimiento Garantia - Lectura/Escritura");
+					
 					seguimientoFormulario.setSize("100%", "100%");
 					panel.getGrid().setSize("100%", "100%");
 					panel.getGrid().clearCell(1, 0);
 					panel.getGrid().setWidget(1, 0, seguimientoFormulario);
 
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_BuzonGarantia seguimientoFormulario = new Sce_BuzonGarantia(false);
+					System.out.println("Seguimiento Garantia - Solo Lectura");
+					
+					seguimientoFormulario.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
 				}
+				
 
 			}
 		});
@@ -1236,14 +1261,30 @@ public class MenuPrincipal extends Composite {
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
 
-				if(!results.get(0).getPermiso().equals("N")){
+				if(results.get(0).getPermiso().equals("RW")){
 
-					Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision();
+					Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision(true);
+					System.out.println("Bitacora Soluciones - Lectura/Escritura");
+					
 					bitacora.setSize("100%", "100%");
 					panel.getGrid().setSize("100%", "100%");
 					panel.getGrid().clearCell(1, 0);
 					panel.getGrid().setWidget(1, 0, bitacora);
 
+				}else if(results.get(0).getPermiso().equals("R")){
+					
+					Sce_BuzonSupervision bitacora = new Sce_BuzonSupervision(false);
+					System.out.println("Bitacora Soluciones - Solo Lectura");
+					
+					bitacora.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, bitacora);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
 				}
 
 			}
@@ -1265,13 +1306,28 @@ public class MenuPrincipal extends Composite {
 			public void onSuccess(List<AuxUsuarioPermiso> results)
 			{
 
-				if(!results.get(0).getPermiso().equals("N")){
+				if(results.get(0).getPermiso().equals("RW")){
 
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat();
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true);
+					System.out.println("Detalle Soluciones - Lectura/Escritura");
+					
 					panel.getGrid().setHeight("100%");
 					panel.getGrid().clearCell(1, 0);
 					panel.getGrid().setWidget(1, 0, buscador);
 
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false);
+					System.out.println("Detalle Soluciones - Solo Lectura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
 				}
 
 			}
@@ -1279,7 +1335,7 @@ public class MenuPrincipal extends Composite {
 			
 	}
 
-	// ---   
+	// --- Fin     
 	
 	public void Empleado_registrado(){
 

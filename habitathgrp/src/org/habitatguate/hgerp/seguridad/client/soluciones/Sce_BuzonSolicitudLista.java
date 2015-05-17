@@ -71,7 +71,8 @@ public class Sce_BuzonSolicitudLista extends Composite {
 				for(AuxSolicitudGeneral p : result) {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, 
 			        					new Sce_BuzonSolicitudItem(buscador, listaFormulario, 
-			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), p.getSolucionConstruir(), valVisibilidad)
+			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
+			        					p.getSolucionConstruir(), valVisibilidad)
 			        );
 				}
 		        load.invisible();

@@ -48,7 +48,8 @@ public class Sce_BuzonSupervisionLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSupervision buscador, final String nombreSolicitante, String solucionConstruir){
+    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonSupervision buscador, final String nombreSolicitante, 
+    		String solucionConstruir, final boolean valVisibilidad){
 
         load.visible();
         
@@ -71,7 +72,7 @@ public class Sce_BuzonSupervisionLista extends Composite {
 			        flexTable.setWidget(flexTable.getRowCount(), 0, 
 			        					new Sce_BuzonSupervisionItem(buscador, listaFormulario, 
 			        					p.getIdFormulario(), p.getNombreSolicitante(), p.getSolucionConstruir(),
-			        					p.getPrimeraSupervision(), p.getSegundaSupervision(), p.getTerceraSupervision(), p.getCuartaSupervision())
+			        					p.getPrimeraSupervision(), p.getSegundaSupervision(), p.getTerceraSupervision(), p.getCuartaSupervision(), valVisibilidad)
 			        );
 				}
 		        load.invisible();

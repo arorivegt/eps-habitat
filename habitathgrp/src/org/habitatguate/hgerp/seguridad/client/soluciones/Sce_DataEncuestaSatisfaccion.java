@@ -97,7 +97,12 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 	private ListBox listPregunta16;
 	private Label lblObservacion;
 	
-	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntrySupervisionSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -457,6 +462,13 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		// -- Boton Guardar/Actualizar Informacion
 		
 		btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				

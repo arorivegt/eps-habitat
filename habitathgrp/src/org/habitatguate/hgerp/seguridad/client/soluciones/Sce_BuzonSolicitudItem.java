@@ -36,8 +36,6 @@ public class Sce_BuzonSolicitudItem extends Composite {
     private Button btnVer;
     
 	// Llaves
-	private Long idEmpleado = 0L;
-	private Long idAfiliado = 0L;
 	private Long idRol = 0L;
 	
 	private Mensaje mensaje; 
@@ -176,11 +174,7 @@ public class Sce_BuzonSolicitudItem extends Composite {
 						}
 					}
 				});
-				
-				
-				
-				
-				
+						
 			}
 		});
 		btnVer.setText("Ver Solicitud");

@@ -33,12 +33,17 @@ public class Sce_DataEntrySupervisionUbicacion extends Composite {
 	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
-	 private FlexTable flextable;
+    private FlexTable flextable;
+
+    private Sce_DataSupervisionUbicacion data;
+	
+    // Valor Escritura-Lectura
+    private boolean valor;
     
-	 private Sce_DataSupervisionUbicacion data;
-	 
-	public Sce_DataEntrySupervisionUbicacion(Sce_DataEntrySupervisionSolicitud formulario) {
-				
+	public Sce_DataEntrySupervisionUbicacion(Sce_DataEntrySupervisionSolicitud formulario, boolean valor) {
+			
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -47,7 +52,7 @@ public class Sce_DataEntrySupervisionUbicacion extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 	
-		data = new Sce_DataSupervisionUbicacion(this, this.formularioSolicitud);
+		data = new Sce_DataSupervisionUbicacion(this, this.formularioSolicitud, this.valor);
         flextable.setWidget(flextable.getRowCount(), 0, data);
 
 	}

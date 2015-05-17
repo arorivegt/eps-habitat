@@ -48,7 +48,8 @@ public class Sce_BuzonGarantiaLista extends Composite {
 		flexTable.setSize("100%", "100%");
 	}
 
-    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonGarantia buscador, String nombreSolicitante, String solucionConstruir){
+    public void agregarFormulario(final char tipo, Long idEmpleado, Long idAfiliado, final Sce_BuzonGarantia buscador, String nombreSolicitante, 
+    		String solucionConstruir, final boolean valVisibilidad){
 
         load.visible();
         
@@ -73,7 +74,7 @@ public class Sce_BuzonGarantiaLista extends Composite {
 			        					p.getIdFormulario(), p.getNombreSolicitante(), 
 			        					p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
 			        					p.getSolucionConstruir(),
-			        					p.getGarantia())
+			        					p.getGarantia(), valVisibilidad)
 			        );
 				}
 		        load.invisible();

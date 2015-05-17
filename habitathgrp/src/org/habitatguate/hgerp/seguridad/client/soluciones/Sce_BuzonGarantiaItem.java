@@ -1,14 +1,24 @@
 package org.habitatguate.hgerp.seguridad.client.soluciones;
 
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
@@ -28,10 +38,36 @@ public class Sce_BuzonGarantiaItem extends Composite {
     private Label lblExisteGarantia;
     private SimpleCheckBox checkGarantia;
     
+	// Llaves
+	private Long idRol = 0L;
+	
+	private Mensaje mensaje;
+    
+	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
+    
+	// Valor Escritura-Lectura
+	private boolean valor;
+    
 	public Sce_BuzonGarantiaItem(Sce_BuzonGarantia b, Sce_BuzonGarantiaLista a, 
 			Long idFormulario, String nombreSolicitante, int telefonoCasaSolicitante, 
 			int telefonoTrabajoSolicitante, String solucionConstruir,
-			Boolean garantia) {
+			Boolean garantia, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
 		
 		this.id_Formulario = idFormulario;
 		this.BE = b;
@@ -106,10 +142,43 @@ public class Sce_BuzonGarantiaItem extends Composite {
 		absolutePanel.add(lblTipoVivienda, 791, 0);
 		lblTipoVivienda.setSize("155px", "13px");
 		
+		// Boton - Verificar Garantia
+		
 		btnVer = new Button("Send");
+		
+		if(this.valor) {
+			btnVer.setVisible(true);
+		}else{
+			btnVer.setVisible(false);
+		}
+		
 		btnVer.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				BE.cargarFormulario(id_Formulario);
+				
+				AdministracionService.ObtenerUsuarioPermisoNombre("Garantia-Hipotecaria-Soluciones", idRol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+				{
+					public void onFailure(Throwable caught) 
+					{	
+					}
+
+					@Override
+					public void onSuccess(List<AuxUsuarioPermiso> results)
+					{
+						if(results.get(0).getPermiso().equals("RW")){
+
+							BE.cargarFormulario(id_Formulario, true);
+							System.out.println("Garantia Hipotecaria - Lectura/Escritura");
+							
+						}else if(results.get(0).getPermiso().equals("R")){
+							
+							BE.cargarFormulario(id_Formulario, false);
+							System.out.println("Garantia Hipotecaria - Solo Lectura");
+
+						}
+					}
+				});				
+				
+				
 			}
 		});
 		btnVer.setText("Verificar Garantia");

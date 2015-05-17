@@ -31,12 +31,17 @@ public class Sce_DataEntryEncuestaSatisfaccion extends Composite {
 	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
-	 private FlexTable flextable;
-    
-	 private Sce_DataEncuestaSatisfaccion data;
+    private FlexTable flextable;
+
+    private Sce_DataEncuestaSatisfaccion data;
 	 
-	public Sce_DataEntryEncuestaSatisfaccion(Sce_DataEntrySupervisionSolicitud formulario) {
+    // Valor Escritura-Lectura
+    private boolean valor;
+    
+	public Sce_DataEntryEncuestaSatisfaccion(Sce_DataEntrySupervisionSolicitud formulario, boolean valor) {
 				
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -45,7 +50,7 @@ public class Sce_DataEntryEncuestaSatisfaccion extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 	
-		data = new Sce_DataEncuestaSatisfaccion(this, this.formularioSolicitud);
+		data = new Sce_DataEncuestaSatisfaccion(this, this.formularioSolicitud, this.valor);
         flextable.setWidget(flextable.getRowCount(), 0, data);
 
 	}

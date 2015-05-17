@@ -42,8 +42,13 @@ public class Sce_DataGarantiaSolidario extends Composite {
 	private TextBox txtEscolaridad;
 	private Mensaje mensaje; 
 	
-	public Sce_DataGarantiaSolidario(Sce_DataEntryGarantiaSolidario a, Sce_DataEntryGarantiaSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataGarantiaSolidario(Sce_DataEntryGarantiaSolidario a, Sce_DataEntryGarantiaSolicitud e, boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		mensaje = new Mensaje();
 		this.formulario = e;
 		this.garantiaSolidario = a;
@@ -115,7 +120,16 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		absolutePanel.add(txtOcupacion, 758, 51);
 		txtOcupacion.setSize("271px", "19px");
 		
+		// Boton Guardar
+		
 		Button btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -202,8 +216,16 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		absolutePanel.add(btnGuardar, 232, 119);
 		btnGuardar.setSize("227px", "34px");
 		
+		// Boton Eliminar
 		
 		Button btnEliminar = new Button("Send");
+		
+		if(this.valor) {
+			btnEliminar.setVisible(true);
+		}else{
+			btnEliminar.setVisible(false);
+		}
+		
 		btnEliminar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

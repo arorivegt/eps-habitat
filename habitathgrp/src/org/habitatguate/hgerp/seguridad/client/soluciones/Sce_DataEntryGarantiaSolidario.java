@@ -31,10 +31,15 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
 	private Sce_DataEntryGarantiaSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
-	 private Mensaje mensaje; 
-	 private FlexTable flextable;
-    
-	public Sce_DataEntryGarantiaSolidario(Sce_DataEntryGarantiaSolicitud formulario) {
+    private Mensaje mensaje; 
+    private FlexTable flextable;
+
+    // Valor Escritura-Lectura
+    private boolean valor;	 
+	 
+	public Sce_DataEntryGarantiaSolidario(Sce_DataEntryGarantiaSolicitud formulario, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formularioSolicitud = formulario;
@@ -45,7 +50,16 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 		
+        // Boton Agregar nuevo Formulario de Garantia Solidario
+        
         Button btnAgregar = new Button("Agregar");
+        
+		if(this.valor) {
+			btnAgregar.setVisible(true);
+		}else{
+			btnAgregar.setVisible(false);
+		}
+        
         panel.add(btnAgregar);
         
         btnAgregar.setStyleName("sendButton");
@@ -60,7 +74,7 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
 	}
 
     private void agregarFormulario(){
-        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataGarantiaSolidario(this, formularioSolicitud));
+        flextable.setWidget(flextable.getRowCount(), 0, new Sce_DataGarantiaSolidario(this, formularioSolicitud, this.valor));
     }
     
     public void EliminarFormulario(final Sce_DataGarantiaSolidario fa, final Long idFormulario, final Long id){
@@ -98,7 +112,7 @@ public class Sce_DataEntryGarantiaSolidario extends Composite {
 
     			System.out.println("ID Garantia Grupo Solidario a Cargar: " + n2.getIdGarantiaSolidario() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			Sce_DataGarantiaSolidario fa = new  Sce_DataGarantiaSolidario(this, formularioSolicitud);
+    			Sce_DataGarantiaSolidario fa = new  Sce_DataGarantiaSolidario(this, formularioSolicitud, this.valor);
     			
     			fa.LlenarDatos(n2.getIdGarantiaSolidario(), 
     					n2.getNombre(), n2.getEdad(), n2.getEscolaridad(), n2.getOcupacion());

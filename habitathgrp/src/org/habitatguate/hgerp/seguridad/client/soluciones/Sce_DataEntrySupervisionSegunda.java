@@ -31,12 +31,17 @@ public class Sce_DataEntrySupervisionSegunda extends Composite {
 	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
-	 private FlexTable flextable;
+    private FlexTable flextable;
+
+    private Sce_DataSupervisionSegunda data;
+	
+    // Valor Escritura-Lectura
+    private boolean valor;
     
-	 private Sce_DataSupervisionSegunda data;
-	 
-	public Sce_DataEntrySupervisionSegunda(Sce_DataEntrySupervisionSolicitud formulario) {
-				
+	public Sce_DataEntrySupervisionSegunda(Sce_DataEntrySupervisionSolicitud formulario, boolean valor) {
+			
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		this.formularioSolicitud = formulario;
         panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
         panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
@@ -45,7 +50,7 @@ public class Sce_DataEntrySupervisionSegunda extends Composite {
         flextable = new FlexTable();
         panel.add(flextable);
 	
-		data = new Sce_DataSupervisionSegunda(this, this.formularioSolicitud);
+		data = new Sce_DataSupervisionSegunda(this, this.formularioSolicitud, this.valor);
         flextable.setWidget(flextable.getRowCount(), 0, data);
 
 	}

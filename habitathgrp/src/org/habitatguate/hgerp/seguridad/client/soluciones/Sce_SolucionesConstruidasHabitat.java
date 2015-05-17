@@ -49,8 +49,12 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
     private Loading load ;
     private List<Sce_DatosSolucionesConstruidas> DATOS;
   	
-	public Sce_SolucionesConstruidasHabitat() {
+    // Valor Escritura-Lectura
+    private boolean valor;
+    
+	public Sce_SolucionesConstruidasHabitat(boolean valor) {
 		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
@@ -139,6 +143,13 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		// Boton para Exportar Data
 		
 		button = new Button("Send");
+		
+		if(this.valor) {
+			button.setVisible(true);
+		}else{
+			button.setVisible(false);
+		}
+		
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

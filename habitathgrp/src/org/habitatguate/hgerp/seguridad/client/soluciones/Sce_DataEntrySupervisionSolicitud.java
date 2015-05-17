@@ -3,6 +3,10 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
+import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
@@ -11,7 +15,11 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPri
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTercera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -22,6 +30,7 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 
 	private TabPanel tabPanel;
 	public Long idFormulario = 0L;
+	public Long idRol = 0L;
 
 	private Sce_DataEntrySupervisionPrimera fd1;
 	private Sce_DataEntrySupervisionSegunda fd2;
@@ -30,7 +39,32 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 	private Sce_DataEntrySupervisionUbicacion fd5;
 	private Sce_DataEntryEncuestaSatisfaccion fd6;
 
-	public Sce_DataEntrySupervisionSolicitud() {
+    private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
+    
+    private Sce_DataEntrySupervisionSolicitud formulario = null;
+    private Mensaje mensaje;
+    
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_DataEntrySupervisionSolicitud(boolean valor) {
+		
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
 		
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
@@ -42,101 +76,167 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		scrollPanel1.setAlwaysShowScrollBars(false);
 		tabPanel.add(scrollPanel1, "Primera Supervision", true);
 		scrollPanel1.setSize("100%", "100%");
-		fd1 = new Sce_DataEntrySupervisionPrimera(this);
+		fd1 = new Sce_DataEntrySupervisionPrimera(this, this.valor);
 		scrollPanel1.setWidget(fd1);	
 		
 		tabPanel.selectTab(0); // Carga Tab Inicial
 		
 	}	
 	
-	public void nuevasPestanas(){
+	public void habilitarPestanasFormulario(Long rol){
 		
-		// 2. Segunda Supervision
+		AdministracionService.ObtenerUsuarioPermisoNombre("Segunda-Supervision-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 2. Segunda Supervision	
+					scrollPanel2 = new ScrollPanel();
+					scrollPanel2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel2, "Segunda Supervision", true);
+					scrollPanel2.setSize("100%", "100%");
+					fd2 = new Sce_DataEntrySupervisionSegunda(formulario, true);
+					scrollPanel2.setWidget(fd2);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 2. Segunda Supervision		
+					scrollPanel2 = new ScrollPanel();
+					scrollPanel2.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel2, "Segunda Supervision", true);
+					scrollPanel2.setSize("100%", "100%");
+					fd2 = new Sce_DataEntrySupervisionSegunda(formulario, false);
+					scrollPanel2.setWidget(fd2);
+				}
+			}
+		});
 		
-		scrollPanel2 = new ScrollPanel();
-		scrollPanel2.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel2, "Segunda Supervision", true);
-		scrollPanel2.setSize("100%", "100%");
-		fd2 = new Sce_DataEntrySupervisionSegunda(this);
-		scrollPanel2.setWidget(fd2);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Tercera-Supervision-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 3. Tercera Supervision		
+					scrollPanel3 = new ScrollPanel();
+					scrollPanel3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel3, "Tercera Supervision", true);
+					scrollPanel3.setSize("100%", "100%");
+					fd3 = new Sce_DataEntrySupervisionTercera(formulario, true);
+					scrollPanel3.setWidget(fd3);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 3. Tercera Supervision				
+					scrollPanel3 = new ScrollPanel();
+					scrollPanel3.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel3, "Tercera Supervision", true);
+					scrollPanel3.setSize("100%", "100%");
+					fd3 = new Sce_DataEntrySupervisionTercera(formulario, false);
+					scrollPanel3.setWidget(fd3);
+				}
+			}
+		});		
+					
+		AdministracionService.ObtenerUsuarioPermisoNombre("Cuarta-Supervision-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 4. Cuarta Supervision			
+					scrollPanel4 = new ScrollPanel();
+					scrollPanel4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
+					scrollPanel4.setSize("100%", "100%");
+					fd4 = new Sce_DataEntrySupervisionCuarta(formulario, true);
+					scrollPanel4.setWidget(fd4);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 4. Cuarta Supervision					
+					scrollPanel4 = new ScrollPanel();
+					scrollPanel4.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
+					scrollPanel4.setSize("100%", "100%");
+					fd4 = new Sce_DataEntrySupervisionCuarta(formulario, false);
+					scrollPanel4.setWidget(fd4);
+				}
+			}
+		});			
 		
-		// 3. Tercera Supervision
-		
-		scrollPanel3 = new ScrollPanel();
-		scrollPanel3.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel3, "Tercera Supervision", true);
-		scrollPanel3.setSize("100%", "100%");
-		fd3 = new Sce_DataEntrySupervisionTercera(this);
-		scrollPanel3.setWidget(fd3);
-		
-		// 4. Cuarta Supervision
-		
-		scrollPanel4 = new ScrollPanel();
-		scrollPanel4.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
-		scrollPanel4.setSize("100%", "100%");
-		fd4 = new Sce_DataEntrySupervisionCuarta(this);
-		scrollPanel4.setWidget(fd4);
-		
-		// 5. Ubicacion Supervision
-		
-		scrollPanel5 = new ScrollPanel();
-		scrollPanel5.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel5, "Ubicacion Solucion", true);
-		scrollPanel5.setSize("100%", "100%");
-		fd5 = new Sce_DataEntrySupervisionUbicacion(this);
-		scrollPanel5.setWidget(fd5);
-		
-		// 6. Encuesta Satisfaccion
-		
-		scrollPanel6 = new ScrollPanel();
-		scrollPanel6.setAlwaysShowScrollBars(false);
-		tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
-		scrollPanel6.setSize("100%", "100%");
-		fd6 = new Sce_DataEntryEncuestaSatisfaccion(this);
-		scrollPanel6.setWidget(fd6);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Ubicacion-Solucion-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 5. Ubicacion Supervision
+					scrollPanel5 = new ScrollPanel();
+					scrollPanel5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel5, "Ubicacion Solucion", true);
+					scrollPanel5.setSize("100%", "100%");
+					fd5 = new Sce_DataEntrySupervisionUbicacion(formulario, true);
+					scrollPanel5.setWidget(fd5);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 5. Ubicacion Supervision
+					scrollPanel5 = new ScrollPanel();
+					scrollPanel5.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel5, "Ubicacion Solucion", true);
+					scrollPanel5.setSize("100%", "100%");
+					fd5 = new Sce_DataEntrySupervisionUbicacion(formulario, false);
+					scrollPanel5.setWidget(fd5);
+				}
+			}
+		});		
+				
+		AdministracionService.ObtenerUsuarioPermisoNombre("Encuesta-Satisfaccion-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{	
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+				if(results.get(0).getPermiso().equals("RW")){
+					// 6. Encuesta Satisfaccion	
+					scrollPanel6 = new ScrollPanel();
+					scrollPanel6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
+					scrollPanel6.setSize("100%", "100%");
+					fd6 = new Sce_DataEntryEncuestaSatisfaccion(formulario, true);
+					scrollPanel6.setWidget(fd6);
+					
+				}else if(results.get(0).getPermiso().equals("R")){
+					// 6. Encuesta Satisfaccion	
+					scrollPanel6 = new ScrollPanel();
+					scrollPanel6.setAlwaysShowScrollBars(false);
+					tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
+					scrollPanel6.setSize("100%", "100%");
+					fd6 = new Sce_DataEntryEncuestaSatisfaccion(formulario, false);
+					scrollPanel6.setWidget(fd6);
+				}
+			}
+		});	
 		
 	}
 	
-//	
-//	public void habilitarSegundaSupervision(){
-//
-//		// 2. Segunda Supervision
-//		
-//		scrollPanel2 = new ScrollPanel();
-//		scrollPanel2.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel2, "Segunda Supervision", true);
-//		scrollPanel2.setSize("100%", "100%");
-//		fd2 = new Sce_DataEntrySupervisionSegunda(this);
-//		scrollPanel2.setWidget(fd2);
-//		
-//	}
-//	
-//	public void habilitarTerceraSupervision(){
-//
-//		// 3. Tercera Supervision
-//		
-//		scrollPanel3 = new ScrollPanel();
-//		scrollPanel3.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel3, "Tercera Supervision", true);
-//		scrollPanel3.setSize("100%", "100%");
-//		fd3 = new Sce_DataEntrySupervisionTercera(this);
-//		scrollPanel3.setWidget(fd3);
-//		
-//	}
-//	
-//	public void habilitarCuartaSupervision(){
-//
-//		// 4. Cuarta Supervision
-//		
-//		scrollPanel4 = new ScrollPanel();
-//		scrollPanel4.setAlwaysShowScrollBars(false);
-//		tabPanel.add(scrollPanel4, "Cuarta Supervision", true);
-//		scrollPanel4.setSize("100%", "100%");
-//		fd4 = new Sce_DataEntrySupervisionCuarta(this);
-//		scrollPanel4.setWidget(fd4);
-//		
-//	}	
 	
 	public void setDataSupervisionPrimera(List<AuxSolicitudSupervisionPrimera> results) {
 		fd1.setDataSupervisionPrimera(results);

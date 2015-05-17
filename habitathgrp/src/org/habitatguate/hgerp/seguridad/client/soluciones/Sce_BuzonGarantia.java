@@ -38,6 +38,7 @@ public class Sce_BuzonGarantia extends Composite  {
 	// Llaves
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
 	
 	private Sce_BuzonGarantia buzon;
 	private Mensaje mensaje; 
@@ -51,8 +52,13 @@ public class Sce_BuzonGarantia extends Composite  {
 	private SuggestBox txtNombreSolicitante;
 	private ListBox listSolucionConstruir ;
     
-	public Sce_BuzonGarantia() {
+	// Valor Escritura-Lectura
+	private boolean valor;
+	
+	public Sce_BuzonGarantia(final boolean valor) {
 
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
@@ -76,6 +82,19 @@ public class Sce_BuzonGarantia extends Composite  {
 			@Override
 			public void onFailure(Throwable caught) {
 				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
+			}
+		});
+		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
 		
@@ -124,7 +143,7 @@ public class Sce_BuzonGarantia extends Composite  {
 
 			     if(event.getNativeKeyCode()== KeyCodes.KEY_ENTER) 
 			     {
-						busqueda();
+						busqueda(valor);
 			     }
 			}
 		});
@@ -205,7 +224,7 @@ public class Sce_BuzonGarantia extends Composite  {
 		Busqueda = new Image("images/ico-lupa.png");
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				busqueda();
+				busqueda(valor);
 			}
 		});
 						
@@ -227,14 +246,14 @@ public class Sce_BuzonGarantia extends Composite  {
 
 	}
 	
-	public void busqueda(){
+	public void busqueda(boolean valVisilidad){
 
 		grid.clearCell(1, 0);
 		Sce_BuzonGarantiaLista  nuevo = new Sce_BuzonGarantiaLista();
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
-			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
+			nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "", valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -246,7 +265,7 @@ public class Sce_BuzonGarantia extends Composite  {
 			System.out.println("Formulario de Solicitante: " + nombreSolicitante);
 			
 			if(!txtNombreSolicitante.getText().equals("")){
-				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "");
+				nuevo.agregarFormulario('1', idEmpleado, idAfiliado, buzon, nombreSolicitante, "", valVisilidad);
 				grid.setWidget(1, 0,nuevo);
 				nuevo.setSize("100%", "648px");
 			}
@@ -258,7 +277,7 @@ public class Sce_BuzonGarantia extends Composite  {
 		
 		else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 		{
-			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+			nuevo.agregarFormulario('3', idEmpleado, idAfiliado, buzon, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()), valVisilidad);
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
@@ -269,14 +288,14 @@ public class Sce_BuzonGarantia extends Composite  {
 	
 	// CARGA DATA A FORMULARIO
 
-	public void cargarFormulario(final Long idFormulario){
+	public void cargarFormulario(final Long idFormulario, boolean valVisibilidad){
         
 		load.visible();        
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntryGarantiaSolicitud garantiaSolicitud = new Sce_DataEntryGarantiaSolicitud();
+		final Sce_DataEntryGarantiaSolicitud garantiaSolicitud = new Sce_DataEntryGarantiaSolicitud(valVisibilidad);
 		
-		garantiaSolicitud.NuevasPestanas();	// Muestra de nuevo las pestanas
+		garantiaSolicitud.habilitarPestanasFormulario(idRol);	// Muestra de nuevo las pestanas
 		grid.setWidget(1, 0, garantiaSolicitud);
 		garantiaSolicitud.setSize("100%", "648px");
         

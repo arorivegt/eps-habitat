@@ -68,7 +68,12 @@ public class Sce_DataSupervisionSegunda extends Composite {
 	private Image image ;
     private Label lblSeleccioneUnaImagen;
 	
-	public Sce_DataSupervisionSegunda(Sce_DataEntrySupervisionSegunda a, Sce_DataEntrySupervisionSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+    
+	public Sce_DataSupervisionSegunda(Sce_DataEntrySupervisionSegunda a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -184,6 +189,13 @@ public class Sce_DataSupervisionSegunda extends Composite {
 		// -- Boton Guardar/Actualizar Informacion
 		
 		btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
@@ -407,7 +419,17 @@ public class Sce_DataSupervisionSegunda extends Composite {
 	 */
 	private FileUpload getFileUpload() {
 		if (fileUpload == null) {
+			
+			// Boton Browse
+			
 			fileUpload = new FileUpload();
+			
+			if(this.valor) {
+				fileUpload.setVisible(true);
+			}else{
+				fileUpload.setVisible(false);
+			}
+			
 			fileUpload.setWidth("357px");
 			fileUpload.setName("myFile");
 			fileUpload.getElement().setAttribute("accept", "image/*");
@@ -420,7 +442,17 @@ public class Sce_DataSupervisionSegunda extends Composite {
 	 */
 	private Button getButton() {
 		if (button == null) {
+			
+			// Boton Subir
+			
 			button = new Button("Subir");
+			
+			if(this.valor) {
+				button.setVisible(true);
+			}else{
+				button.setVisible(false);
+			}
+			
 			button.setHeight("31px");
 			button.setStyleName("sendButton");
 			button.addClickHandler(new ClickHandler() {
@@ -464,7 +496,17 @@ public class Sce_DataSupervisionSegunda extends Composite {
 //		absolutePanel.add(grid, 580, 109);
 		absolutePanel.add(grid, 811, 600);
 		grid.setSize("357px", "59px");
+		
+		// Boton Eliminar
+		
 		Button btnEliminar = new Button("Eliminar");
+		
+		if(this.valor) {
+			btnEliminar.setVisible(true);
+		}else{
+			btnEliminar.setVisible(false);
+		}
+		
 		btnEliminar.setStyleName("sendButton");
 		btnEliminar.setHeight("27px");
 		grid.setVisible(true);

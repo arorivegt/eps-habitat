@@ -43,19 +43,14 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     
     private Sce_DataEntryFormularioSolicitud formulario = null;
-    private AbsolutePanel absolutePanel;
     private Mensaje mensaje;
     
-    private boolean valor;
+	// Valor Escritura-Lectura
+	private boolean valor;
 
 	public Sce_DataEntryFormularioSolicitud(boolean valor) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
-		
-		formulario = this;
-		tabPanel = new TabPanel();
-		tabPanel.setSize("100%", "100%");
-		initWidget(tabPanel);
 		
 		// Obtener Id Rol
 		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
@@ -69,6 +64,11 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
+		
+		formulario = this;
+		tabPanel = new TabPanel();
+		tabPanel.setSize("100%", "100%");
+		initWidget(tabPanel);
 		
 		// 1. Datos generales solicitante
 		scrollPanel1 = new ScrollPanel();

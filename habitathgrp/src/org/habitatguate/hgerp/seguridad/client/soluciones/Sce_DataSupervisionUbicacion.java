@@ -62,7 +62,12 @@ public class Sce_DataSupervisionUbicacion extends Composite {
     private Geocoder fCoder;
     private Marker fMarker;
     
-	public Sce_DataSupervisionUbicacion(Sce_DataEntrySupervisionUbicacion a, Sce_DataEntrySupervisionSolicitud e) {
+	// Valor Escritura-Lectura
+	private boolean valor;
+    
+	public Sce_DataSupervisionUbicacion(Sce_DataEntrySupervisionUbicacion a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -198,6 +203,13 @@ public class Sce_DataSupervisionUbicacion extends Composite {
 		// -- Boton Guardar/Actualizar Informacion
 		
 		btnGuardar = new Button("Send");
+		
+		if(this.valor) {
+			btnGuardar.setVisible(true);
+		}else{
+			btnGuardar.setVisible(false);
+		}
+		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				

@@ -94,7 +94,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 		
 		Label lblEgresosMensuales = new Label("EGRESOS MENSUALES");
 		absolutePanel.add(lblEgresosMensuales, 515, 52);
-		lblEgresosMensuales.setSize("181px", "20px");
+		lblEgresosMensuales.setSize("225px", "20px");
 		
 		Label lblCantidad_1 = new Label("CANTIDAD");
 		absolutePanel.add(lblCantidad_1, 835, 52);

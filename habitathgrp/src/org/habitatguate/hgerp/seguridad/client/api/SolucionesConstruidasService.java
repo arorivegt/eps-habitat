@@ -224,6 +224,10 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
 			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException;
 	
+	// BURO CREDITO
+	
+	Long actualizarDatosAprobacionBuroCredito(Long idFormulario,
+			Boolean aprobacion) throws IllegalArgumentException;
 	
 	
 	// SOLUCIONES

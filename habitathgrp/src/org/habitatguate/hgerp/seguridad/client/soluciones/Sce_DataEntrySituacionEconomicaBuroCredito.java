@@ -1,0 +1,85 @@
+package org.habitatguate.hgerp.seguridad.client.soluciones;
+
+import java.util.List;
+
+import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
+import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxFamilia;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
+import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.rrhh.FormularioFamilia;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+
+
+public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
+
+    private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+	private Sce_DataEntryBuroCreditoSolicitud formularioSolicitud;
+    private VerticalPanel panel = new VerticalPanel();
+    
+	 private Mensaje mensaje; 
+	 private FlexTable flextable;
+    
+	 private Sce_DataSituacionEconomicaBuroCredito data;
+
+	 // Valor Escritura-Lectura
+	 private boolean valor;
+	 
+	public Sce_DataEntrySituacionEconomicaBuroCredito(Sce_DataEntryBuroCreditoSolicitud formulario, boolean valor) {
+		
+		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
+		mensaje = new Mensaje();
+		this.formularioSolicitud = formulario;
+        panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+        panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+        initWidget(panel);
+        panel.setSize("761px", "79px");
+        flextable = new FlexTable();
+        panel.add(flextable);
+	
+		data = new Sce_DataSituacionEconomicaBuroCredito(this, this.formularioSolicitud, this.valor);
+        flextable.setWidget(flextable.getRowCount(), 0, data);
+
+	}
+	
+    
+    public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, Boolean valor){
+
+    	if (!results.isEmpty()) {
+
+    		for ( AuxSolicitudSituacionEconomica n2 : results) {
+
+    			System.out.println("ID Situacion Economica a Cargar: " + n2.getIdSituacionEconomica() + ", ID Formulario: " + n2.getIdFormulario());
+    			
+    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
+    			
+    			data.LlenarDatos(n2.getIdSituacionEconomica(), 
+    					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),
+    					n2.getTotalIngresos(), n2.getTotalEgresos(), n2.getDiferencia(), n2.getPagosBuro(), n2.getCuota(), n2.getExcedente(),
+    					n2.getAlquilerVivienda(), n2.getAlimentacion(), n2.getRopa(), n2.getGastosMedicos(), n2.getTransporte(), n2.getEducacion(),
+    					n2.getPagoLuzAgua(), n2.getPagoPrestamos(), n2.getOtrosGastos1(), n2.getOtrosGastos2(), n2.getEgresosTotales(), 
+    					valor);  
+    			
+    		}
+    	
+    	}
+    
+    }
+    
+    
+}

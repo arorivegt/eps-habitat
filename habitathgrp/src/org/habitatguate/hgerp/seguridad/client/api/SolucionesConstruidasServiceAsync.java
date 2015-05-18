@@ -240,13 +240,18 @@ public interface SolucionesConstruidasServiceAsync {
 			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;	
 	
-	void actualizarEncuestaSatisfaccion(Long idFormulario, Long idSupervisionUbicacion,
+	void actualizarEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion,
 			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
 			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
+	// BURO CREDITO
+	
+	void actualizarDatosAprobacionBuroCredito(Long idFormulario, 
+			Boolean aprobacion,
+			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
     // SOLUCIONES
  

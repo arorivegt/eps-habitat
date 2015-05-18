@@ -95,12 +95,12 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setTelefonoConyuge(telefonoConyuge);
 		solicitud.setLugarTrabajoConyuge(lugarTrabajoConyuge);
 		solicitud.setTelefonoTrabajoConyuge(telefonoTrabajoConyuge);
-		solicitud.setGarantia(garantia);
-		solicitud.setAprobacion(garantia);
-		solicitud.setPrimeraSupervision(primeraSupervision);
-		solicitud.setSegundaSupervision(segundaSupervision);
-		solicitud.setTerceraSupervision(terceraSupervision);
-		solicitud.setCuartaSupervision(cuartaSupervision);
+		solicitud.setGarantia(garantia);										// Existe Garantia
+		solicitud.setAprobacion(aprobacion);									// Aprobacion Credito Solicitud
+		solicitud.setPrimeraSupervision(primeraSupervision);					// Existe Primera Supervision	
+		solicitud.setSegundaSupervision(segundaSupervision);					// Existe Segunda Supervision
+		solicitud.setTerceraSupervision(terceraSupervision);					// Existe Tercera Supervision
+		solicitud.setCuartaSupervision(cuartaSupervision);						// Existe Cuarta Supervision		
 
 		try { 
 			gestorPersistencia.makePersistent(solicitud); 
@@ -679,23 +679,23 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
 			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"nombreSolicitante == '"+nombreSolicitante+"'" +
+					"nombreSolicitante == '"+nombreSolicitante+"'" +		// Realiza una busqueda ESPECIFICA, segun un el nombre de solicitante
 					" && idAfiliado == " + idAfiliado +
 					" && idEmpleado == " + idEmpleado
 					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
-		}else if(tipo =='2'){
+		}else if(tipo =='2'){												// Obtiene todas las solicitudes de un usuario logeado
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
-			Query q = pm.newQuery(SegSolicitudGeneral.class,			// Realiza una busqueda ESPECIFICA
+			Query q = pm.newQuery(SegSolicitudGeneral.class,			
 					"idEmpleado == " + idEmpleado +
 					" && idAfiliado == " + idAfiliado
 					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
-		}else if(tipo =='3'){
+		}else if(tipo =='3'){												// Obtiene una busqueda ESPECIFICA, segun solucion a Construir
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
@@ -706,11 +706,20 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
-		}else if(tipo =='4'){
+		}else if(tipo =='4'){												// Obtiene todas las solicitudes de todos los usuarios
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
-			Query q = pm.newQuery(SegSolicitudGeneral.class);			// Realiza una busqueda GENERAL
+			Query q = pm.newQuery(SegSolicitudGeneral.class);				
+			results = (List<SegSolicitudGeneral>) q.execute();
+			
+		}else if(tipo =='5'){												// Obtiene todas las solicitudes de todos los usuarios, segun solucion a Construir
+			
+			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
+			
+			Query q = pm.newQuery(SegSolicitudGeneral.class,
+					"solucionConstruir == '"+solucionConstruir+"'"
+					);				
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
 		}
@@ -1920,6 +1929,23 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		}
 		return valor ;
 	}
+	
+	// BURO CREDITO
+	
+	@Override
+	public Long actualizarDatosAprobacionBuroCredito(Long idFormulario, 
+			Boolean aprobacion) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+			 try {  
+					 final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+					 	solicitud.setAprobacion(aprobacion);
+		 }finally {  
+			 Persistencia.close();  
+		 }
+		 
+		return idFormulario;
+	}	
 	
 		
 	// Remover imagen de Blobstore

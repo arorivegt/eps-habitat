@@ -31,6 +31,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBuroCredito;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSupervision;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonGarantia;
@@ -237,7 +238,17 @@ public class MenuPrincipal extends Composite {
 			public void execute() {
 				sce6();
 			}
-		};		     
+		};		
+		Command cmdsceBuroCredito = new Command() {
+			public void execute() {
+				sceBuroCredito();
+			}
+		};		
+		Command cmdsceConsultaGeneral = new Command() {
+			public void execute() {
+				sceConsultaGeneral();
+			}
+		};
 		// --- Fin
 
 		//informes Menu
@@ -358,16 +369,19 @@ public class MenuPrincipal extends Composite {
 		// --- Soluciones Construidas    
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
-		// MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1_v1);
 		MenuSolucionesConstruidas.addItem("Recepcion Formulario de Solicitud", cmdsce1);
 		MenuSolucionesConstruidas.addSeparator();
-		MenuSolucionesConstruidas.addItem("Verificacion de Solicitud", cmdsce2);
+		MenuSolucionesConstruidas.addItem("Verificacion Informacion Solicitudes Ingresadas", cmdsce2);
 		MenuSolucionesConstruidas.addSeparator();
-		MenuSolucionesConstruidas.addItem("Seguimiento de Garantia de Solicitud", cmdsce3);
+		MenuSolucionesConstruidas.addItem("Aprobacion Buro de Credito", cmdsceBuroCredito);
 		MenuSolucionesConstruidas.addSeparator();
-		MenuSolucionesConstruidas.addItem("Bitacora de Soluciones Construidas", cmdsce4);
-		MenuSolucionesConstruidas.addSeparator();										//
-		MenuSolucionesConstruidas.addItem("Detalle Soluciones Construidas", cmdsce6);		
+		MenuSolucionesConstruidas.addItem("Garantia de Solicitudes Ingresadas", cmdsce3);
+		MenuSolucionesConstruidas.addSeparator();
+		MenuSolucionesConstruidas.addItem("Bitacora de Supervision Solicitudes Ingresadas", cmdsce4);
+		MenuSolucionesConstruidas.addSeparator();										
+		MenuSolucionesConstruidas.addItem("Detalle Solicitudes Ingresadas", cmdsce6);	
+		MenuSolucionesConstruidas.addSeparator();										
+		MenuSolucionesConstruidas.addItem("Consulta General Solicitudes", cmdsceConsultaGeneral);	
 		// --- Fin
 
 		final  MenuBar MenuVertical = new MenuBar();
@@ -1308,7 +1322,7 @@ public class MenuPrincipal extends Composite {
 
 				if(results.get(0).getPermiso().equals("RW")){
 
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true);
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true, true);
 					System.out.println("Detalle Soluciones - Lectura/Escritura");
 					
 					panel.getGrid().setHeight("100%");
@@ -1317,7 +1331,95 @@ public class MenuPrincipal extends Composite {
 
 				}else if(results.get(0).getPermiso().equals("R")){
 				
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false);
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false, true);
+					System.out.println("Detalle Soluciones - Solo Lectura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+			}
+		});
+			
+	}
+
+	//@UiHandler("sceBuroCredito")
+	void sceBuroCredito() {
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Buro-Credito-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_BuzonBuroCredito seguimientoFormulario = new Sce_BuzonBuroCredito(true);
+					System.out.println("Buro Credito - Lectura/Escritura");
+					
+					seguimientoFormulario.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_BuzonBuroCredito seguimientoFormulario = new Sce_BuzonBuroCredito(false);
+					System.out.println("Buro Credito - Lectura/Escritura");
+					
+					seguimientoFormulario.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, seguimientoFormulario);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+			}
+		});
+			
+	}
+	
+	//@UiHandler("sceConsultaGeneral")
+	void sceConsultaGeneral() {
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true, false);
+					System.out.println("Detalle Soluciones - Lectura/Escritura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false, false);
 					System.out.println("Detalle Soluciones - Solo Lectura");
 					
 					panel.getGrid().setHeight("100%");

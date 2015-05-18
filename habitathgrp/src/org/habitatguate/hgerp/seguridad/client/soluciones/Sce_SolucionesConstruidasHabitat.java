@@ -38,6 +38,7 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 	// Llaves
 	private Long idEmpleado = 0L;
 	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
 	
 	private Button button;
 	private FormPanel formPanel;
@@ -51,10 +52,13 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
   	
     // Valor Escritura-Lectura
     private boolean valor;
+    // Opcion de busqueda
+    private boolean opcion;
     
-	public Sce_SolucionesConstruidasHabitat(boolean valor) {
+	public Sce_SolucionesConstruidasHabitat(boolean valor, final boolean opcion) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
+	    this.opcion = opcion;				// Variable de opcion de busqueda Especifica|General
 		
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
@@ -82,6 +86,19 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 			}
 		});
 		
+		// Obtener Id Rol
+		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idRol = result;
+				System.out.println("Id Rol: " + idRol);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
+		
 		grid = new Grid(2, 1);
 		initWidget(grid);
 		grid.setWidth("100%");
@@ -98,7 +115,9 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		listSolucionConstruir = new ListBox();
 		listSolucionConstruir.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				busqueda();
+				
+				busqueda();	
+
 			}
 		});
 		listSolucionConstruir.addItem("Nueva","1");
@@ -114,7 +133,9 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		Image image = new Image("images/ico-lupa.png");
 		image.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				busqueda();
+
+				busqueda();	
+				
 			}
 		});
 
@@ -153,15 +174,32 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				char tipo = '3';
-				if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
-					tipo = '2';
-				else
-					tipo = '3';
+				if(opcion){
+					
+					char tipo = '3';
+					if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
+						tipo = '2';
+					else
+						tipo = '3';
+					
+					System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+					formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+					formPanel.submit();	
 				
-				System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
-				formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
-				formPanel.submit();
+				}else{
+					
+					char tipo = '5';
+					if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
+						tipo = '4';
+					else
+						tipo = '5';
+					
+					System.out.println("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+					formPanel.setAction("/ExportSolucionDetalle?tipo="+tipo+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()));
+					formPanel.submit();	
+					
+				}
+				
 			}
 		});
 		button.setText("Exportar");
@@ -186,12 +224,24 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 	public void busqueda(){
 
 		load.visible();
-		char tipo = '3';
 
-		if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
-			tipo = '2';
-		else
+		char tipo = 0;
+
+		if(this.opcion){
 			tipo = '3';
+
+			if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
+				tipo = '2';
+			else
+				tipo = '3';			
+		}else{
+			tipo = '5';
+
+			if(listSolucionConstruir.getItemText(listSolucionConstruir.getSelectedIndex()).equals("TODOS"))
+				tipo = '4';
+			else
+				tipo = '5';	
+		}
 
 		solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, "", listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex()), new AsyncCallback<List<AuxSolicitudGeneral>>(){
 
@@ -381,5 +431,5 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 		load.invisible();
 
 	}
-	
+
 }

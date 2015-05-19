@@ -1,7 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client.soluciones;
 
-
-
 import java.util.*;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -25,8 +23,6 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.KeyPressEvent;
-import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.CheckBox;
 
@@ -224,6 +220,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		lblTelefonoConyuge.setSize("110px", "19px");
 		
 		txtNombreSolicitante = new TextBox();
+		txtNombreSolicitante.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombreSolicitante);
+				
+			}
+		});	
 		txtNombreSolicitante.setMaxLength(50);
 		txtNombreSolicitante.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreSolicitante, 43, 28);
@@ -281,6 +284,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		listPais.setTabIndex(4);
 		
 		txtProfesionOficio = new TextBox();
+		txtProfesionOficio.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtProfesionOficio);
+				
+			}
+		});
 		txtProfesionOficio.setStyleName("gwt-TextBox2");
 		txtProfesionOficio.setMaxLength(50);
 		absolutePanel.add(txtProfesionOficio, 227, 113);
@@ -377,6 +387,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 //		txtNumDpiReferencia.setSize("45px", "19px");
 		
 		txtActividadEconomica = new TextBox();
+		txtActividadEconomica.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtActividadEconomica);
+				
+			}
+		});
 		txtActividadEconomica.setStyleName("gwt-TextBox2");
 		txtActividadEconomica.setMaxLength(50);
 		absolutePanel.add(txtActividadEconomica, 227, 151);
@@ -513,6 +530,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		txtCuotaPagar.setTabIndex(20);;
 		
 		txtNombreConyuge = new TextBox();
+		txtNombreConyuge.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombreConyuge);
+				
+			}
+		});
 		txtNombreConyuge.setStyleName("gwt-TextBox2");
 		txtNombreConyuge.setMaxLength(200);
 		absolutePanel.add(txtNombreConyuge, 229, 502);
@@ -864,14 +888,9 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		String edadValue = ""+edad;
 		this.txtEdad.setText(edadValue);
 		this.txtProfesionOficio.setText(profesionOficio);
+		this.txtActividadEconomica.setText(actividadEconomica);
 		String dpiValue = ""+dpi;
 		this.txtNumDpi.setText(dpiValue);
-		// Comentado para validez de no. DPI en un solo campo
-//		String dpiUnicoValue = ""+dpiUnico;
-//		this.txtNumDpiUnico.setText(dpiUnicoValue);
-//		String dpiReferenciaValue = ""+dpiReferencia;
-//		this.txtNumDpiReferencia.setText(dpiReferenciaValue);
-//		this.txtActividadEconomica.setText(actividadEconomica);
 		this.checkBoxLeer.setValue(sabeLeer);
 		this.checkBoxEscribir.setValue(sabeEscribir);
 		this.checkBoxFirmar.setValue(sabeFirmar);
@@ -967,5 +986,21 @@ public class Sce_DataFormularioSolicitud extends Composite {
     	return true;    		
     }
     
+    public static void firstLetterToUppercase(TextBox input) {
+    	String text = input.getText();
+    	StringBuffer result = new StringBuffer();
+    	char ch;
+    	for (int i = 0; i < text.length(); i++) {
+    		ch = text.charAt(i);
+    		if (Character.isLetter(ch)
+    				&& ((i == 0) || !Character.isLetter(text.charAt(i - 1)))){
+    			result.append(Character.toUpperCase(ch));
+    		} else {
+    			result.append(Character.toLowerCase(ch));
+    		}
+    	}
+//    	System.out.println(result.toString());
+    	input.setText(result.toString());
+    }
     
 }

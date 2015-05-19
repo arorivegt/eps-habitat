@@ -318,7 +318,7 @@ public class Sce_BuzonGarantia extends Composite  {
         		try{
         			garantiaSolicitud.setDataGarantiaHipotecaria(result.getGarantiaHipotecaria());
         		}catch(Exception e){
-        			
+        			System.out.println(e);
         		}    
         		
         		try{           		

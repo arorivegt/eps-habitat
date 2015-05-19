@@ -39,6 +39,8 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 	private AbsolutePanel absolutePanel;
 	private Mensaje mensaje; 
 	
+	private Label lblIndiquePersona;
+	private Label lblNoTelfonoPersona;
 	private TextBox txtFolio;
     private TextBox txtEscrituraRegistrada;
     private TextBox txtNombrePersona;
@@ -50,7 +52,6 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
     private TextBox txtTelefonoPersona;
     private TextBox txtNombreNotario;
     private CheckBox checkBoxSi;
-    private CheckBox checkBoxNo;
     private Button btnGuardar;
     
 	// Valor Escritura-Lectura
@@ -88,6 +89,53 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		absolutePanel.add(lblNumeroDeTelefono, 521, 66);
 		lblNumeroDeTelefono.setSize("117px", "19px");
 		
+		Label lblEstadoCivil = new Label("Escritura p\u00FAblica Registrada n\u00FAmero:");
+		lblEstadoCivil.setStyleName("label");
+		absolutePanel.add(lblEstadoCivil, 42, 101);
+		lblEstadoCivil.setSize("291px", "19px");
+		
+		Label lblProfesionUOficio = new Label("Valor estima del terreno Q.:");
+		lblProfesionUOficio.setStyleName("label");
+		absolutePanel.add(lblProfesionUOficio, 42, 268);
+		lblProfesionUOficio.setSize("240px", "19px");
+		
+		Label lblLugarDeTrabajo = new Label("El terreno est\u00E1 a nombre de otra persona:");
+		lblLugarDeTrabajo.setStyleName("label");
+		absolutePanel.add(lblLugarDeTrabajo, 42, 317);
+		lblLugarDeTrabajo.setSize("323px", "19px");
+		
+		lblIndiquePersona = new Label("Si su respuesta es afirmativa, por favor indique el nombre de la persona:");
+		lblIndiquePersona.setStyleName("label");
+		absolutePanel.add(lblIndiquePersona, 42, 366);
+		lblIndiquePersona.setSize("532px", "19px");
+		
+		Label lblNoDeFinca = new Label("No. de Finca:");
+		lblNoDeFinca.setStyleName("label");
+		absolutePanel.add(lblNoDeFinca, 761, 66);
+		lblNoDeFinca.setSize("118px", "19px");
+		
+		lblNoTelfonoPersona = new Label("No. tel\u00E9fono persona:");
+		lblNoTelfonoPersona.setStyleName("label");
+		absolutePanel.add(lblNoTelfonoPersona, 42, 419);
+		lblNoTelfonoPersona.setSize("240px", "19px");
+		
+		Label lblNotario = new Label("Nombre Notario:");
+		lblNotario.setStyleName("label");
+		absolutePanel.add(lblNotario, 42, 161);
+		lblNotario.setSize("240px", "19px");
+		
+		txtEscrituraNoRegistrada = new TextBox();
+		txtEscrituraNoRegistrada.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEscrituraNoRegistrada, 353, 30);
+		txtEscrituraNoRegistrada.setSize("143px", "19px");
+		txtEscrituraNoRegistrada.setTabIndex(1);
+		
+		txtEscrituraRegistrada = new TextBox();
+		txtEscrituraRegistrada.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtEscrituraRegistrada, 353, 99);
+		txtEscrituraRegistrada.setSize("143px", "19px");
+		txtEscrituraRegistrada.setTabIndex(2);
+		
 		txtFolio = new TextBox();
 		txtFolio.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -112,37 +160,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtFolio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtFolio, 521, 99);
 		txtFolio.setSize("80px", "19px");
-		
-		Label lblEstadoCivil = new Label("Escritura p\u00FAblica Registrada n\u00FAmero:");
-		lblEstadoCivil.setStyleName("label");
-		absolutePanel.add(lblEstadoCivil, 42, 101);
-		lblEstadoCivil.setSize("291px", "19px");
-		
-		txtEscrituraRegistrada = new TextBox();
-		txtEscrituraRegistrada.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEscrituraRegistrada, 353, 99);
-		txtEscrituraRegistrada.setSize("143px", "19px");
-		
-		Label lblProfesionUOficio = new Label("Valor estima del terreno Q.:");
-		lblProfesionUOficio.setStyleName("label");
-		absolutePanel.add(lblProfesionUOficio, 42, 268);
-		lblProfesionUOficio.setSize("240px", "19px");
-		
-		Label lblLugarDeTrabajo = new Label("El terreno est\u00E1 a nombre de otra persona:");
-		lblLugarDeTrabajo.setStyleName("label");
-		absolutePanel.add(lblLugarDeTrabajo, 42, 317);
-		lblLugarDeTrabajo.setSize("323px", "19px");
-		
-		txtNombrePersona = new TextBox();
-		txtNombrePersona.setStyleName("gwt-TextBox2");
-		txtNombrePersona.setMaxLength(200);
-		absolutePanel.add(txtNombrePersona, 580, 366);
-		txtNombrePersona.setSize("425px", "19px");
-		
-		Label lblDreccionDeTrabajo = new Label("Si su respuesta es afirmativa, por favor indique el nombre de la persona:");
-		lblDreccionDeTrabajo.setStyleName("label");
-		absolutePanel.add(lblDreccionDeTrabajo, 42, 366);
-		lblDreccionDeTrabajo.setSize("532px", "19px");
+		txtFolio.setTabIndex(3);
 		
 		txtLibro = new TextBox();
 		txtLibro.addChangeHandler(new ChangeHandler() {
@@ -168,36 +186,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtLibro.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtLibro, 637, 99);
 		txtLibro.setSize("80px", "19px");
-		
-		txtEscrituraNoRegistrada = new TextBox();
-		txtEscrituraNoRegistrada.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtEscrituraNoRegistrada, 353, 30);
-		txtEscrituraNoRegistrada.setSize("143px", "19px");
-		
-		txtAreaTerreno = new TextBox();
-		txtAreaTerreno.addChangeHandler(new ChangeHandler() {
-			public void onChange(ChangeEvent event) {
-				if(txtAreaTerreno .getText().equals("")) {
-					txtAreaTerreno .setText("0");
-				}
-				else if(txtAreaTerreno .getText().equals(null)) {
-					txtAreaTerreno .setText("0");
-				}
-				else{
-					try{
-						Integer.parseInt(txtAreaTerreno.getText());						
-					}catch(Exception e){
-						mensaje.setMensaje("alert alert-error", 
-                    			"Error !! \nValor No valido");
-						txtAreaTerreno .setText("0");
-					}
-				}
-			}
-		});			
-		txtAreaTerreno.setText("0");
-		txtAreaTerreno.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtAreaTerreno, 256, 221);
-		txtAreaTerreno.setSize("90px", "19px");
+		txtLibro.setTabIndex(4);
 		
 		txtFinca = new TextBox();
 		txtFinca.addChangeHandler(new ChangeHandler() {
@@ -223,11 +212,47 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtFinca.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtFinca, 756, 99);
 		txtFinca.setSize("80px", "19px");
+		txtFinca.setTabIndex(5);
 		
-		Label lblNoDeFinca = new Label("No. de Finca:");
-		lblNoDeFinca.setStyleName("label");
-		absolutePanel.add(lblNoDeFinca, 761, 66);
-		lblNoDeFinca.setSize("118px", "19px");
+		txtNombreNotario = new TextBox();
+		txtNombreNotario.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombreNotario);
+				
+			}
+		});
+		txtNombreNotario.setStyleName("gwt-TextBox2");
+		txtNombreNotario.setMaxLength(200);
+		absolutePanel.add(txtNombreNotario, 207, 159);
+		txtNombreNotario.setSize("414px", "19px");
+		txtNombreNotario.setTabIndex(6);
+				
+		txtAreaTerreno = new TextBox();
+		txtAreaTerreno.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				if(txtAreaTerreno .getText().equals("")) {
+					txtAreaTerreno .setText("0");
+				}
+				else if(txtAreaTerreno .getText().equals(null)) {
+					txtAreaTerreno .setText("0");
+				}
+				else{
+					try{
+						Integer.parseInt(txtAreaTerreno.getText());						
+					}catch(Exception e){
+						mensaje.setMensaje("alert alert-error", 
+                    			"Error !! \nValor No valido");
+						txtAreaTerreno .setText("0");
+					}
+				}
+			}
+		});			
+		txtAreaTerreno.setText("0");
+		txtAreaTerreno.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtAreaTerreno, 256, 221);
+		txtAreaTerreno.setSize("90px", "19px");
+		txtAreaTerreno.setTabIndex(7);
 		
 		txtValorTerreno = new TextBox();
 		txtValorTerreno.addChangeHandler(new ChangeHandler() {
@@ -253,11 +278,21 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtValorTerreno.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtValorTerreno, 256, 268);
 		txtValorTerreno.setSize("90px", "19px");
+		txtValorTerreno.setTabIndex(8);
 		
-		Label lblNoTelfonoPersona = new Label("No. tel\u00E9fono persona:");
-		lblNoTelfonoPersona.setStyleName("label");
-		absolutePanel.add(lblNoTelfonoPersona, 42, 419);
-		lblNoTelfonoPersona.setSize("240px", "19px");
+		txtNombrePersona = new TextBox();
+		txtNombrePersona.addChangeHandler(new ChangeHandler(){
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombrePersona);
+				
+			}
+		});
+		txtNombrePersona.setStyleName("gwt-TextBox2");
+		txtNombrePersona.setMaxLength(200);
+		absolutePanel.add(txtNombrePersona, 580, 366);
+		txtNombrePersona.setSize("425px", "19px");
+		txtNombrePersona.setTabIndex(10);
 		
 		txtTelefonoPersona = new TextBox();
 		txtTelefonoPersona.setMaxLength(8);
@@ -284,23 +319,45 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtTelefonoPersona.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoPersona, 207, 417);
 		txtTelefonoPersona.setSize("90px", "19px");
+		txtTelefonoPersona.setTabIndex(11);
 		
-		checkBoxSi = new CheckBox("SI");
+		checkBoxSi = new CheckBox("");
+		checkBoxSi.addClickHandler(new ClickHandler() 
+		{
+		    public void onClick(ClickEvent event) 
+		    {
+		        if(checkBoxSi.isChecked()){
+		        	lblIndiquePersona.setVisible(true);
+		        	lblNoTelfonoPersona.setVisible(true);
+					txtNombrePersona.setVisible(true);
+					txtTelefonoPersona.setVisible(true);
+		        }else{
+		        	lblIndiquePersona.setVisible(false);
+					lblNoTelfonoPersona.setVisible(false);
+					txtNombrePersona.setVisible(false);
+					txtNombrePersona.setValue("");
+					txtTelefonoPersona.setVisible(false);
+					txtTelefonoPersona.setValue("0");
+		        }
+		    }
+		});
 		absolutePanel.add(checkBoxSi, 418, 312);
+		checkBoxSi.setTabIndex(9);
 		
-		checkBoxNo = new CheckBox("NO");
-		absolutePanel.add(checkBoxNo, 475, 312);
-		
-		Label lblNotario = new Label("Nombre Notario:");
-		lblNotario.setStyleName("label");
-		absolutePanel.add(lblNotario, 42, 161);
-		lblNotario.setSize("240px", "19px");
-		
-		txtNombreNotario = new TextBox();
-		txtNombreNotario.setStyleName("gwt-TextBox2");
-		txtNombreNotario.setMaxLength(200);
-		absolutePanel.add(txtNombreNotario, 207, 159);
-		txtNombreNotario.setSize("414px", "19px");
+        if(checkBoxSi.isChecked()){
+        	lblIndiquePersona.setVisible(true);
+        	lblNoTelfonoPersona.setVisible(true);
+			txtNombrePersona.setVisible(true);
+			txtTelefonoPersona.setVisible(true);
+        }else{
+        	lblIndiquePersona.setVisible(false);
+			lblNoTelfonoPersona.setVisible(false);
+			txtNombrePersona.setVisible(false);
+			txtNombrePersona.setValue("");
+			txtTelefonoPersona.setVisible(false);
+			txtTelefonoPersona.setValue("0");
+        }
+        
 		
 		// --- Boton Guardar
 		
@@ -368,7 +425,8 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 				checkSi = checkBoxSi.getValue();
 
 				Boolean checkNo = false;
-				checkNo = checkBoxNo.getValue();
+//				checkNo = checkBoxNo.getValue();
+				checkNo = false;
 
 				String nombrePersona = "";		
 				if(txtNombrePersona.getText() == null){
@@ -442,8 +500,9 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 				
 			}
 		});
-		btnGuardar.setText("Guardar");
+		btnGuardar.setText("Guardar");	
 		absolutePanel.add(btnGuardar, 475, 460);
+		btnGuardar.setTabIndex(12);
 		
 	}
 	
@@ -471,10 +530,41 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		String valValorTerreno = ""+valorTerreno;
 		this.txtValorTerreno.setValue(valValorTerreno);
 		this.checkBoxSi.setValue(checkSi);
-		this.checkBoxNo.setValue(checkNo);
 		this.txtNombrePersona.setValue(nombrePersona);
 		String valueTelefonoPersona = ""+telefonoPersona;
 		this.txtTelefonoPersona.setValue(valueTelefonoPersona);	    
+	
+        if(checkSi){
+        	lblIndiquePersona.setVisible(true);
+        	lblNoTelfonoPersona.setVisible(true);
+			txtNombrePersona.setVisible(true);
+			txtTelefonoPersona.setVisible(true);
+        }else{
+        	lblIndiquePersona.setVisible(false);
+			lblNoTelfonoPersona.setVisible(false);
+			txtNombrePersona.setVisible(false);
+			txtNombrePersona.setValue("");
+			txtTelefonoPersona.setVisible(false);
+			txtTelefonoPersona.setValue("0");
+        }
+		
 	}
+    
+    public static void firstLetterToUppercase(TextBox input) {
+    	String text = input.getText();
+    	StringBuffer result = new StringBuffer();
+    	char ch;
+    	for (int i = 0; i < text.length(); i++) {
+    		ch = text.charAt(i);
+    		if (Character.isLetter(ch)
+    				&& ((i == 0) || !Character.isLetter(text.charAt(i - 1)))){
+    			result.append(Character.toUpperCase(ch));
+    		} else {
+    			result.append(Character.toLowerCase(ch));
+    		}
+    	}
+//    	System.out.println(result.toString());
+    	input.setText(result.toString());
+    }
 	
 }

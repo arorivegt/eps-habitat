@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
@@ -16,7 +13,6 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
@@ -31,7 +27,6 @@ public class Sce_DataEntryGarantiaSolicitud extends Composite {
 	private Sce_DataEntryGarantiaSolidario fd9;
 	
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
-    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     
     private Sce_DataEntryGarantiaSolicitud formulario = null;
     

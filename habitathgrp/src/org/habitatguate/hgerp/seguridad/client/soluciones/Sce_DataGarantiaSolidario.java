@@ -78,11 +78,19 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		lblOcupacion.setSize("132px", "13px");
 		
 		txtNombre = new TextBox();
+		txtNombre.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombre);
+				
+			}
+		});	
 		txtNombre.setMaxLength(200);
 		txtNombre.setStylePrimaryName("gwt-TextBox2");
 		txtNombre.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombre, 20, 51);
 		txtNombre.setSize("345px", "19px");
+		txtNombre.setTabIndex(1);
 		
 		txtEdad = new TextBox();
 		txtEdad.setMaxLength(3);
@@ -105,20 +113,37 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		txtEdad.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEdad, 386, 51);
 		txtEdad.setSize("56px", "19px");
+		txtEdad.setTabIndex(2);
 		
 		txtEscolaridad = new TextBox();
+		txtEscolaridad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtEscolaridad);
+				
+			}
+		});	
 		txtEscolaridad.setMaxLength(200);
 		txtEscolaridad.setStylePrimaryName("gwt-TextBox2");
 		txtEscolaridad.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEscolaridad, 475, 51);
 		txtEscolaridad.setSize("250px", "19px");
+		txtEscolaridad.setTabIndex(3);
 		
 		txtOcupacion = new TextBox();
+		txtOcupacion.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtOcupacion);
+				
+			}
+		});	
 		txtOcupacion.setMaxLength(100);
 		txtOcupacion.setStylePrimaryName("gwt-TextBox2");
 		txtOcupacion.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtOcupacion, 758, 51);
 		txtOcupacion.setSize("271px", "19px");
+		txtOcupacion.setTabIndex(4);
 		
 		// Boton Guardar
 		
@@ -215,6 +240,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 232, 119);
 		btnGuardar.setSize("227px", "34px");
+		btnGuardar.setTabIndex(5);
 		
 		// Boton Eliminar
 		
@@ -242,6 +268,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		btnEliminar.setStyleName("sendButton");
 		absolutePanel.add(btnEliminar, 531, 119);
 		btnEliminar.setSize("227px", "34px");
+		btnEliminar.setTabIndex(6);
 		
 	}
 	
@@ -273,5 +300,21 @@ public class Sce_DataGarantiaSolidario extends Composite {
 	
 	}
 	
+    public static void firstLetterToUppercase(TextBox input) {
+    	String text = input.getText();
+    	StringBuffer result = new StringBuffer();
+    	char ch;
+    	for (int i = 0; i < text.length(); i++) {
+    		ch = text.charAt(i);
+    		if (Character.isLetter(ch)
+    				&& ((i == 0) || !Character.isLetter(text.charAt(i - 1)))){
+    			result.append(Character.toUpperCase(ch));
+    		} else {
+    			result.append(Character.toLowerCase(ch));
+    		}
+    	}
+//    	System.out.println(result.toString());
+    	input.setText(result.toString());
+    }
 	
 }

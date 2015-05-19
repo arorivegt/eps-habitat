@@ -5,23 +5,17 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionService;
 import org.habitatguate.hgerp.seguridad.client.api.AdministracionServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
-import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionCuarta;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPrimera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTercera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxUsuarioPermiso;
-import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
 
@@ -30,7 +24,6 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 
 	private TabPanel tabPanel;
 	public Long idFormulario = 0L;
-	public Long idRol = 0L;
 
 	private Sce_DataEntrySupervisionPrimera fd1;
 	private Sce_DataEntrySupervisionSegunda fd2;
@@ -40,10 +33,8 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 	private Sce_DataEntryEncuestaSatisfaccion fd6;
 
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
-    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     
     private Sce_DataEntrySupervisionSolicitud formulario = null;
-    private Mensaje mensaje;
     
 	// Valor Escritura-Lectura
 	private boolean valor;
@@ -53,19 +44,7 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
-		// Obtener Id Rol
-		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
-			@Override
-			public void onSuccess(Long result) {
-				idRol = result;
-				System.out.println("Id Rol: " + idRol);
-			}
-			@Override
-			public void onFailure(Throwable caught) {
-				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
-			}
-		});
-		
+		formulario = this;
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);

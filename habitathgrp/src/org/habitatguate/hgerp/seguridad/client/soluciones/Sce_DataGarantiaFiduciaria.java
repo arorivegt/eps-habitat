@@ -107,6 +107,21 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		absolutePanel.add(label_5, 442, 333);
 		label_5.setSize("167px", "19px");
 		
+		txtNombre = new TextBox();
+		txtNombre.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtNombre);
+				
+			}
+		});	
+		txtNombre.setMaxLength(200);
+		txtNombre.setStylePrimaryName("gwt-TextBox2");
+		txtNombre.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtNombre, 194, 32);
+		txtNombre.setSize("461px", "19px");
+		txtNombre.setTabIndex(1);
+		
 		listEstadoCivil = new ListBox();
 		listEstadoCivil.addItem("-", "-1");
 		listEstadoCivil.addItem("Soltero (a)", "1");
@@ -118,28 +133,10 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		listEstadoCivil.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstadoCivil, 127, 97);
 		listEstadoCivil.setSize("148px", "27px");
-		
-		listPais = new ListBox();
-		listPais.addItem("-","-1");
-		listPais.addItem("Guatemala","1");
-		listPais.addItem("El Salvador","2");
-		listPais.addItem("Bélice","3");
-		listPais.addItem("Honduras","4");
-		listPais.addItem("Nicaragua","5");
-		listPais.addItem("Costa Rica","5");
-		listPais.addItem("Panamá","6");
-		listPais.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listPais, 622, 97);
-		listPais.setSize("173px", "27px");
-		
-		txtNombre = new TextBox();
-		txtNombre.setMaxLength(200);
-		txtNombre.setStylePrimaryName("gwt-TextBox2");
-		txtNombre.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtNombre, 194, 32);
-		txtNombre.setSize("461px", "19px");
+		listEstadoCivil.setTabIndex(2);
 		
 		txtEdad = new TextBox();
+		txtEdad.setMaxLength(3);
 		txtEdad.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtEdad .getText().equals("")) {txtEdad .setText("0");}
@@ -159,36 +156,64 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		txtEdad.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtEdad, 382, 97);
 		txtEdad.setSize("56px", "19px");
+		txtEdad.setTabIndex(3);
+		
+		listPais = new ListBox();
+		listPais.addItem("-","-1");
+		listPais.addItem("Guatemala","1");
+		listPais.addItem("El Salvador","2");
+		listPais.addItem("Bélice","3");
+		listPais.addItem("Honduras","4");
+		listPais.addItem("Nicaragua","5");
+		listPais.addItem("Costa Rica","5");
+		listPais.addItem("Panamá","6");
+		listPais.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listPais, 622, 97);
+		listPais.setSize("173px", "27px");
+		listPais.setTabIndex(4);
 		
 		txtActividad = new TextBox();
+		txtActividad.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtActividad);
+				
+			}
+		});	
 		txtActividad.setStyleName("gwt-TextBox2");
 		txtActividad.setMaxLength(50);
 		absolutePanel.add(txtActividad, 205, 168);
 		txtActividad.setSize("296px", "19px");
+		txtActividad.setTabIndex(5);
 		
 		checkLeer = new CheckBox("Sabe Leer");
 		absolutePanel.add(checkLeer, 194, 206);
 		checkLeer.setSize("143px", "24px");
+		checkLeer.setTabIndex(6);
 		
 		checkEscribir = new CheckBox("Sabe Escribir");
 		absolutePanel.add(checkEscribir, 357, 206);
 		checkEscribir.setSize("154px", "24px");
+		checkEscribir.setTabIndex(7);
 		
 		checkFirmar = new CheckBox("Sabe Firmar");
 		absolutePanel.add(checkFirmar, 539, 206);
 		checkFirmar.setSize("159px", "24px");
+		checkFirmar.setTabIndex(8);
 		
 		txtDireccionActual = new TextBox();
 		txtDireccionActual.setStyleName("gwt-TextBox2");
 		txtDireccionActual.setMaxLength(200);
 		absolutePanel.add(txtDireccionActual, 207, 249);
 		txtDireccionActual.setSize("601px", "19px");
+		txtDireccionActual.setTabIndex(9);
 		
 		txtLugarTrabajo = new TextBox();
 		txtLugarTrabajo.setStyleName("gwt-TextBox2");
 		txtLugarTrabajo.setMaxLength(200);
 		absolutePanel.add(txtLugarTrabajo, 207, 289);
 		txtLugarTrabajo.setSize("601px", "19px");
+		txtLugarTrabajo.setTabIndex(10);
 		
 		txtTelefonoCasa = new TextBox();
 		txtTelefonoCasa.setMaxLength(8);
@@ -211,6 +236,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		txtTelefonoCasa.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoCasa, 207, 331);
 		txtTelefonoCasa.setSize("128px", "19px");
+		txtTelefonoCasa.setTabIndex(11);
 		
 		txtTelefonoTrabajo = new TextBox();
 		txtTelefonoTrabajo.setMaxLength(8);
@@ -233,6 +259,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		txtTelefonoTrabajo.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtTelefonoTrabajo, 671, 333);
 		txtTelefonoTrabajo.setSize("128px", "17px");
+		txtTelefonoTrabajo.setTabIndex(12);
 		
 		// Boton Guardar/Actualizar Informacion
 		
@@ -367,6 +394,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		btnGuardar.setStyleName("sendButton");
 		absolutePanel.add(btnGuardar, 194, 386);
 		btnGuardar.setSize("227px", "34px");
+		btnGuardar.setTabIndex(13);
 		
 		// Boton Eliminar Formulario
 		
@@ -394,6 +422,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		btnEliminar.setStyleName("sendButton");
 		absolutePanel.add(btnEliminar, 471, 386);
 		btnEliminar.setSize("227px", "34px");
+		btnEliminar.setTabIndex(14);
 		
 	}
 	
@@ -444,9 +473,24 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 	       bandera = !this.listPais.getValue(i).equals(nacionalidad);
 	       this.listPais.setSelectedIndex(i);
 	    } 
-
 	
 	}
 	
+    public static void firstLetterToUppercase(TextBox input) {
+    	String text = input.getText();
+    	StringBuffer result = new StringBuffer();
+    	char ch;
+    	for (int i = 0; i < text.length(); i++) {
+    		ch = text.charAt(i);
+    		if (Character.isLetter(ch)
+    				&& ((i == 0) || !Character.isLetter(text.charAt(i - 1)))){
+    			result.append(Character.toUpperCase(ch));
+    		} else {
+    			result.append(Character.toLowerCase(ch));
+    		}
+    	}
+//    	System.out.println(result.toString());
+    	input.setText(result.toString());
+    }
 	
 }

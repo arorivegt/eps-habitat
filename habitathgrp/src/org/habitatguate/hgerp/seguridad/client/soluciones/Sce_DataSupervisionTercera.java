@@ -24,6 +24,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.user.client.ui.CheckBox;
@@ -46,7 +48,6 @@ public class Sce_DataSupervisionTercera extends Composite {
 	private TextArea txtObservaciones;
 	private TextArea txtAcciones;
 	private CheckBox checkSatisfactoria;
-	private CheckBox checkNoSatisfactoria;
 	private DateBox txtFechaVisita;
 	private Button btnGuardar;
 	private TextBox txtRepresentante;
@@ -103,33 +104,6 @@ public class Sce_DataSupervisionTercera extends Composite {
 		
 		// ---
 		
-		txtObservaciones = new TextArea();
-		absolutePanel.add(txtObservaciones, 42, 134);
-		txtObservaciones.setSize("857px", "69px");
-		
-		txtFechaVisita = new DateBox();
-		txtFechaVisita.setValue(new Date());
-		txtFechaVisita.getTextBox().setReadOnly(true);
-		txtFechaVisita.setFireNullValues(true);
-		txtFechaVisita.setStyleName("gwt-PasswordTextBox");
-		txtFechaVisita.getDatePicker().setYearArrowsVisible(true);
-		txtFechaVisita.getDatePicker().setYearAndMonthDropdownVisible(true);
-		txtFechaVisita.getDatePicker().setVisibleYearCount(100);
-		absolutePanel.add(txtFechaVisita, 232, 36);
-		txtFechaVisita.setFormat(new DateBox.DefaultFormat (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
-		
-		txtAcciones = new TextArea();
-		absolutePanel.add(txtAcciones, 42, 257);
-		txtAcciones.setSize("857px", "69px");
-		
-		checkSatisfactoria = new CheckBox("Satisfactoria");
-		absolutePanel.add(checkSatisfactoria, 232, 361);
-		checkSatisfactoria.setSize("141px", "24px");
-		
-		checkNoSatisfactoria = new CheckBox("No Satisfactoria");
-		absolutePanel.add(checkNoSatisfactoria, 379, 361);
-		checkNoSatisfactoria.setSize("161px", "24px");
-		
 		Label lblFechaDeVisita = new Label("Fecha de Visita III:");
 		lblFechaDeVisita.setStyleName("label");
 		absolutePanel.add(lblFechaDeVisita, 42, 36);
@@ -142,7 +116,7 @@ public class Sce_DataSupervisionTercera extends Composite {
 		
 		Label lblSupervision = new Label("Supervision");
 		lblSupervision.setStyleName("label");
-		absolutePanel.add(lblSupervision, 42, 366);
+		absolutePanel.add(lblSupervision, 42, 410);
 		lblSupervision.setSize("133px", "19px");
 		
 		Label lblIndiqueLosBienes = new Label("Observaciones:");
@@ -165,26 +139,77 @@ public class Sce_DataSupervisionTercera extends Composite {
 		absolutePanel.add(label, 42, 558);
 		label.setSize("208px", "19px");
 		
+		txtFechaVisita = new DateBox();
+		txtFechaVisita.setValue(new Date());
+		txtFechaVisita.getTextBox().setReadOnly(true);
+		txtFechaVisita.setFireNullValues(true);
+		txtFechaVisita.setStyleName("gwt-PasswordTextBox");
+		txtFechaVisita.getDatePicker().setYearArrowsVisible(true);
+		txtFechaVisita.getDatePicker().setYearAndMonthDropdownVisible(true);
+		txtFechaVisita.getDatePicker().setVisibleYearCount(100);
+		absolutePanel.add(txtFechaVisita, 232, 36);
+		txtFechaVisita.setFormat(new DateBox.DefaultFormat (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		txtFechaVisita.setTabIndex(1);
+		
+		txtObservaciones = new TextArea();
+		absolutePanel.add(txtObservaciones, 42, 134);
+		txtObservaciones.setSize("857px", "69px");
+		txtObservaciones.setTabIndex(2);
+		
+		txtAcciones = new TextArea();
+		absolutePanel.add(txtAcciones, 42, 257);
+		txtAcciones.setSize("857px", "69px");
+		txtAcciones.setTabIndex(3);
+		
+		checkSatisfactoria = new CheckBox("Satisfactoria");
+		absolutePanel.add(checkSatisfactoria, 275, 405);
+		checkSatisfactoria.setSize("141px", "24px");
+		checkSatisfactoria.setTabIndex(4);
+		
 		txtPromotor = new TextBox();
+		txtPromotor.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtPromotor);
+				
+			}
+		});
 		txtPromotor.setStylePrimaryName("gwt-TextBox2");
 		txtPromotor.setStyleName("gwt-TextBox2");
 		txtPromotor.setMaxLength(200);
 		absolutePanel.add(txtPromotor, 275, 467);
 		txtPromotor.setSize("386px", "19px");
+		txtPromotor.setTabIndex(5);
 		
 		txtAlbanil = new TextBox();
+		txtAlbanil.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtAlbanil);
+				
+			}
+		});
 		txtAlbanil.setStylePrimaryName("gwt-TextBox2");
 		txtAlbanil.setStyleName("gwt-TextBox2");
 		txtAlbanil.setMaxLength(200);
 		absolutePanel.add(txtAlbanil, 275, 512);
 		txtAlbanil.setSize("386px", "19px");
+		txtAlbanil.setTabIndex(6);
 		
 		txtRepresentante = new TextBox();
+		txtRepresentante.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+			
+				firstLetterToUppercase(txtRepresentante);
+				
+			}
+		});
 		txtRepresentante.setStylePrimaryName("gwt-TextBox2");
 		txtRepresentante.setStyleName("gwt-TextBox2");
 		txtRepresentante.setMaxLength(200);
 		absolutePanel.add(txtRepresentante, 275, 556);
 		txtRepresentante.setSize("386px", "19px");
+		txtRepresentante.setTabIndex(7);
 		
 		// -- Boton Guardar/Actualizar Informacion
 		
@@ -206,7 +231,8 @@ public class Sce_DataSupervisionTercera extends Composite {
 				checkSatisfactoriaValue = checkSatisfactoria.getValue();
 				
 				Boolean checkNoSatisfactoriaValue = false;
-				checkNoSatisfactoriaValue = checkNoSatisfactoria.getValue();
+//				checkNoSatisfactoriaValue = checkNoSatisfactoria.getValue();
+				checkNoSatisfactoriaValue = false;
 				
 				String observaciones = "";		
 				if(txtObservaciones.getText() == null){
@@ -309,6 +335,7 @@ public class Sce_DataSupervisionTercera extends Composite {
 		
 		btnGuardar.setText("Guardar");
 		absolutePanel.add(btnGuardar, 471, 614);
+		btnGuardar.setTabIndex(8);
 		
 	}
 	
@@ -330,7 +357,6 @@ public class Sce_DataSupervisionTercera extends Composite {
 		this.txtObservaciones.setValue(observaciones);
 		this.txtAcciones.setValue(acciones);
 		this.checkSatisfactoria.setValue(satisfactoria);
-		this.checkNoSatisfactoria.setValue(noSatisfactoria);
 		this.txtPromotor.setValue(promotor);
 		this.txtAlbanil.setValue(albanil);
 		this.txtRepresentante.setValue(representante);
@@ -562,5 +588,22 @@ public class Sce_DataSupervisionTercera extends Composite {
 		public void setKeyFile(String keyFile) {
 			KeyFile = keyFile;
 		}	
+		
+		public static void firstLetterToUppercase(TextBox input) {
+			String text = input.getText();
+			StringBuffer result = new StringBuffer();
+			char ch;
+			for (int i = 0; i < text.length(); i++) {
+				ch = text.charAt(i);
+				if (Character.isLetter(ch)
+						&& ((i == 0) || !Character.isLetter(text.charAt(i - 1)))){
+					result.append(Character.toUpperCase(ch));
+				} else {
+					result.append(Character.toLowerCase(ch));
+				}
+			}
+			//	    	System.out.println(result.toString());
+			input.setText(result.toString());
+		}
 		
 }

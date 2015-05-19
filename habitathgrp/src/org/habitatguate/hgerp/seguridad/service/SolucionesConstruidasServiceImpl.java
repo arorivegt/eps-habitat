@@ -853,6 +853,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setIdGarantiaHipotecaria(n0.getIdDocumentoPropiedad());
 						l.setIdFormulario(n0.getIdFormulario());
 						l.setEscrituraNoRegistrada(n0.getEscrituraNoRegistrada());
+						l.setEscrituraRegistrada(n0.getEscrituraRegistrada());
 						l.setFolioEscritura(n0.getFolioEscritura());
 						l.setLibroEscritura(n0.getLibroEscritura());
 						l.setFincaEscritura(n0.getFincaEscritura());
@@ -1172,6 +1173,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setIdGarantiaHipotecaria(n0.getIdDocumentoPropiedad());
 					l.setIdFormulario(n0.getIdFormulario());
 					l.setEscrituraNoRegistrada(n0.getEscrituraNoRegistrada());
+					l.setEscrituraRegistrada(n0.getEscrituraRegistrada());
 					l.setFolioEscritura(n0.getFolioEscritura());
 					l.setLibroEscritura(n0.getLibroEscritura());
 					l.setFincaEscritura(n0.getFincaEscritura());

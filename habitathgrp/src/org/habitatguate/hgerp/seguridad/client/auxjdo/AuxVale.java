@@ -32,6 +32,10 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 
 	private Date fechaVale;
 	
+	private boolean estado;
+	
+	private Double totalPagado;
+	
 	//private List<AuxHistorialPagoProv> lista = new ArrayList<AuxHistorialPagoProv>();
 	
 	public Long getIdVale() {
@@ -56,6 +60,22 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 
 	public void setFechaVale(Date fechaVale) {
 		this.fechaVale = fechaVale;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+	public Double getTotalPagado() {
+		return totalPagado;
+	}
+
+	public void setTotalPagado(Double totalPagado) {
+		this.totalPagado = totalPagado;
 	}
 
 /*	public List<AuxHistorialPagoProv> getLista() {

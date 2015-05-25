@@ -27,6 +27,8 @@ public class SegVale implements Serializable{
 	private Date fechaVale;
 	@Persistent
 	private boolean estado;
+	@Persistent
+	private Double totalPagado;
 	
 	//relacion
 	@Persistent(mappedBy = "vale")
@@ -57,6 +59,18 @@ public class SegVale implements Serializable{
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	public Double getTotalPagado() {
+		return totalPagado;
+	}
+	public void setTotalPagado(Double totalPagado) {
+		this.totalPagado = totalPagado;
+	}
+	public List<SegHistorialPagoProv> getListaPagoProv() {
+		return listaPagoProv;
+	}
+	public void setListaPagoProv(List<SegHistorialPagoProv> listaPagoProv) {
+		this.listaPagoProv = listaPagoProv;
 	}
 	
 	

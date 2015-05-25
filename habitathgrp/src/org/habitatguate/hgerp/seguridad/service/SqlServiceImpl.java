@@ -841,14 +841,37 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 	
 	
 	public List<AuxVale> ConsultarValesPendientes_unProveedor(Long idProveedor){
+		List<AuxVale> response = new ArrayList<AuxVale>();
 		final PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query q = pm.newQuery(SegDetalleEjecucion.class, ":p.contains(materialConstruccion)");
+		Query q = pm.newQuery(SegDetalleEjecucion.class);
+		 try{
+			 List<SegDetalleEjecucion> result = (List<SegDetalleEjecucion>)q.execute();
+			 if (!result.isEmpty()){
+				for (SegDetalleEjecucion auxD : result){
+					Long idProv = auxD.getMaterialCostruccion().getIdMaterialConstruccion().getParent().getId();
+					System.out.println("comparar " + idProv +" contra "+ idProveedor);
+					if (idProv.equals(idProveedor)){
+						System.out.println(auxD.getVale().getIdVale());
+						SegVale auxVale = auxD.getVale();
+						if (auxVale.getTotalVale()-auxVale.getTotalPagado() > 0.0){
+							System.out.println(auxVale.getIdVale());
+							AuxVale auxCumple = new AuxVale();
+							auxCumple.setIdVale(auxVale.getIdVale());
+							auxCumple.setEstado(auxVale.isEstado());
+							auxCumple.setTotalVale(auxVale.getTotalVale());
+							auxCumple.setTotalPagado(auxVale.getTotalPagado());
+							auxCumple.setFechaVale(ConvertDate.g(auxVale.getFechaVale()));
+							response.add(auxCumple);
+						}
+					}
+				}
+			 }
+		 }finally{
+			 q.closeAll();
+		 }
 		
-		List<SegDetalleEjecucion> result = (List<SegDetalleEjecucion>)q.execute("4688317580836864");
 		
-		System.out.println("Numero de resultados de la query "+ result.size());
-		
-		return null;
+		return response;
 	}
 	
 	public AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario){
@@ -1090,6 +1113,7 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 			 e.setEstado(true);
 			 e.setFechaVale(fechaVale);
 			 e.setTotalVale(costoTotal);
+			 e.setTotalPagado(0.0);
 			 System.out.println("Fecha actualizada "+ fechaVale);
 			 valor = idVale;
 		}

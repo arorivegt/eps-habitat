@@ -13,6 +13,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.text.shared.Renderer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -26,15 +28,17 @@ import com.google.gwt.user.client.ui.ValueListBox;
 
 public class Formulario_CuentasXPagar extends Composite  {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+	public long idProveedorActual = 0L;
     TablaGWT_Afiliado e = null;
 	
 	public Formulario_CuentasXPagar(){
+		
+
 		
 		final Grid grid = new Grid(2, 1);
 		initWidget(grid);
 		grid.setWidth("1178px");
 		
-
 
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
@@ -70,6 +74,19 @@ public class Formulario_CuentasXPagar extends Composite  {
 			
 		});
 		
+		valueListBox.addValueChangeHandler(new ValueChangeHandler<AuxProveedor>()
+		        {
+
+					@Override
+					public void onValueChange(
+							ValueChangeEvent<AuxProveedor> event) {
+						 idProveedorActual = event.getValue().getIdProveedor();
+						
+					}
+		        
+		        });
+		
+		
 	/*	Image image = new Image("images/ico-lupa.png");
 		absolutePanel.add(image, 958, 0);
 		image.setSize("103px", "55px");*/
@@ -80,7 +97,7 @@ public class Formulario_CuentasXPagar extends Composite  {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginService.ConsultarValesPendientes_unProveedor(0L, new AsyncCallback<List<AuxVale>>() {
+				loginService.ConsultarValesPendientes_unProveedor(idProveedorActual, new AsyncCallback<List<AuxVale>>() {
 
 					@Override
 					public void onFailure(Throwable caught) {

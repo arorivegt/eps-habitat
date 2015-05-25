@@ -308,8 +308,9 @@ public class MenuPrincipal extends Composite {
 		MenuEmpleados.addSeparator();
 		MenuEmpleados.addItem("Cambiar Contraseña", cmdempleado4);
 		MenuEmpleados.addSeparator();
-	
-		
+		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
+		MenuEmpleados.addSeparator();
+		MenuEmpleados.addItem("Cerrar Sesion",cmdCerrarSesion); 
 
 		//administracion menu
 		final MenuBar MenuAdmistracion = new MenuBar(true);
@@ -322,8 +323,6 @@ public class MenuPrincipal extends Composite {
 		MenuAdmistracion.addItem("Admnistrar Roles", cmdrol1);
 		MenuAdmistracion.addSeparator();
 		
-		
-		MenuEmpleados.addItem("Evaluaciones Compartidas", cmdempleado3);
 
 		//Inventario Activos menu
 		/*      final MenuBar MenuInventarioActivos = new MenuBar(true);
@@ -499,8 +498,8 @@ public class MenuPrincipal extends Composite {
 								//PARTE DEL MENU POR DEFECTP
 								//agregar item para el menu
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
-								MenuVertical.addSeparator();
-								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+//								MenuVertical.addSeparator();
+//								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);
 							}
@@ -1123,8 +1122,102 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fgv);
-	}
+	}  
+	
+	public void Empleado_registrado(){
 
+		loginService.obtenerIdRol(new AsyncCallback<Long>() 
+		{
+			public void onFailure(Throwable caught) 
+			{
+			}
+
+			public void onSuccess(Long results)
+			{
+				final Empleado e = new Empleado(1,"E",results);
+				e.NuevasPestanasdos(results);
+				panel.getGrid().clearCell(1, 0);
+				panel.getGrid().setWidget(1, 0, e);
+				e.setSize("100%", "1000px");
+		
+				loginService.Empleado_Registrado(panel.getId_empleado(),new AsyncCallback<AuxEmpleado>(){
+		
+					public void onFailure(Throwable caught) 
+					{
+						Window.alert("No hay resultados "+caught);
+					}
+		
+					@Override
+					public void onSuccess(AuxEmpleado result)
+					{
+		
+						try{
+							e.setFormularioDatos(result);
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setAcademico(result.getHistorial_academico());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setFamilia(result.getFamilia());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setHistorial(result.getHistorial());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setIdioma(result.getIdiomas());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setPuesto(result.getPuestos());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setReferenciaLaboral(result.getReferencia_laboral());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setReferenciaPersonal(result.getReferencia_personal());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setPermiso(result.getVacaciones());
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setFormularioEntrevista(result.getEntrevista().get(0));
+						}catch(Exception e){
+		
+						}
+						try{
+							e.setFormularioTest(result.getTest());
+						}catch(Exception e){
+		
+						}
+		
+		
+					}
+		
+				});
+
+				
+			}
+
+		});
+	}
+	
 	// --- Soluciones Construidas
 	
 	//@UiHandler("sce1")
@@ -1437,100 +1530,6 @@ public class MenuPrincipal extends Composite {
 			
 	}
 
-	// --- Fin     
-	
-	public void Empleado_registrado(){
-
-		loginService.obtenerIdRol(new AsyncCallback<Long>() 
-		{
-			public void onFailure(Throwable caught) 
-			{
-			}
-
-			public void onSuccess(Long results)
-			{
-				final Empleado e = new Empleado(1,"E",results);
-				e.NuevasPestanasdos(results);
-				panel.getGrid().clearCell(1, 0);
-				panel.getGrid().setWidget(1, 0, e);
-				e.setSize("100%", "1000px");
-		
-				loginService.Empleado_Registrado(panel.getId_empleado(),new AsyncCallback<AuxEmpleado>(){
-		
-					public void onFailure(Throwable caught) 
-					{
-						Window.alert("No hay resultados "+caught);
-					}
-		
-					@Override
-					public void onSuccess(AuxEmpleado result)
-					{
-		
-						try{
-							e.setFormularioDatos(result);
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setAcademico(result.getHistorial_academico());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setFamilia(result.getFamilia());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setHistorial(result.getHistorial());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setIdioma(result.getIdiomas());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setPuesto(result.getPuestos());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setReferenciaLaboral(result.getReferencia_laboral());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setReferenciaPersonal(result.getReferencia_personal());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setPermiso(result.getVacaciones());
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setFormularioEntrevista(result.getEntrevista().get(0));
-						}catch(Exception e){
-		
-						}
-						try{
-							e.setFormularioTest(result.getTest());
-						}catch(Exception e){
-		
-						}
-		
-		
-					}
-		
-				});
-
-				
-			}
-
-		});
-	}
+	// --- Fin   
 	
 }

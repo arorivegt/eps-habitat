@@ -1181,21 +1181,7 @@ public class FormularioDatos extends Composite {
 						{
 							id_afiliado = Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex()));							
 						}
-						if(!listAfiliado.getValue(listAfiliado.getSelectedIndex()).equals("0")){
-							finanzasService.Actualizar_AfiliadoEmpleado(Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),
-									id_empleado,new AsyncCallback<Long>(){
-							    public void onFailure(Throwable caught) 
-							    {
-							    	
-							    }
-							
-								@Override
-							    public void onSuccess(Long result)
-							    {
-									
-							    }
-							});
-						}
+						
 						recursosHumanosService.Actualizar_Emppleado(id_empleado,txtNo_iggs.getText(), listEstadoCivil.getValue(listEstadoCivil.getSelectedIndex()), 
 								listSexo.getValue(listSexo.getSelectedIndex()) , txtPrimerApellido.getText(), txtSegundoApellido.getText(),
 								txtApellidoCasada.getText(), txtPrimerNombre.getText(), txtSegundoNombre.getText(),listIVS.getValue(listIVS.getSelectedIndex()), 
@@ -1228,6 +1214,21 @@ public class FormularioDatos extends Composite {
 		                            }
 	
 		                     });
+							if(!listAfiliado.getValue(listAfiliado.getSelectedIndex()).equals("0")){
+								finanzasService.Actualizar_AfiliadoEmpleado(Long.parseLong(listAfiliado.getValue(listAfiliado.getSelectedIndex())),
+										id_empleado,new AsyncCallback<Long>(){
+								    public void onFailure(Throwable caught) 
+								    {
+								    	
+								    }
+								
+									@Override
+								    public void onSuccess(Long result)
+								    {
+										
+								    }
+								});
+							}
 					}
 					
 				}else{

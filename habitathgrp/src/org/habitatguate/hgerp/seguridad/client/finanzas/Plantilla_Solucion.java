@@ -281,7 +281,7 @@ public class Plantilla_Solucion extends Composite{
 	                	textBox_1.setText("");
 	        			idPlantillaSolucionAlmacenado = result;
 	        			index = 0;
-	    				timer.scheduleRepeating(5000);
+	    				timer.scheduleRepeating(6000);
 	                	
 	                }
 

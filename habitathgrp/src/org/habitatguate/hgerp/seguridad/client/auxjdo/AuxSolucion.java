@@ -1,8 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
@@ -41,7 +41,7 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	private Date fechaInicio;
 	
-	private List<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
+	private ArrayList<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
 
 	private AuxBeneficiario beneficiario;
 	public Long getIdSolucion() {
@@ -132,11 +132,11 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 		this.beneficiario = beneficiario;
 	}
 
-	public List<AuxDetalleSolucion> getLista() {
+	public ArrayList<AuxDetalleSolucion> getLista() {
 		return lista;
 	}
 
-	public void setLista(List<AuxDetalleSolucion> lista) {
+	public void setLista(ArrayList<AuxDetalleSolucion> lista) {
 		this.lista = lista;
 	}
 	

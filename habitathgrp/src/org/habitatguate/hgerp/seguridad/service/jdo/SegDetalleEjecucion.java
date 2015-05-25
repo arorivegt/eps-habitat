@@ -7,51 +7,40 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.datanucleus.annotations.Unowned;
 
-
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegDetallePlantillaSolucion implements Serializable{
+public class SegDetalleEjecucion implements Serializable{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Key idDetallePlantillaSolucion;
-	@Persistent
-	private String nomMaterialCostruccion;
+	private Key idDetalleSolucion;
 	@Persistent
 	private Double cantidad;
-	@Persistent
-	private Double precioUnit;
 	@Persistent
 	private String unidadMetrica;
 	@Persistent
 	private Double subTotal;
 	@Persistent
-	private Double costoAcumulado;
+	private Double precioEjecucion;
 	@Persistent
 	@Unowned
     private SegMaterialCostruccion materialCostruccion;
-	
-	private SegPlantillaSolucion plantillaSolucion;
+	@Persistent
+	@Unowned
+	private SegVale vale;
+	@Persistent
+	@Unowned
+	private SegSolucion solucion2;
 
-	public Key getIdDetallePlantillaSolucion() {
-		return idDetallePlantillaSolucion;
+	public Key getIdDetalleSolucion() {
+		return idDetalleSolucion;
 	}
 
-	public void setIdDetallePlantillaSolucion(Key idDetallePlantillaSolucion) {
-		this.idDetallePlantillaSolucion = idDetallePlantillaSolucion;
-	}
-
-	public String getNomMaterialCostruccion() {
-		return nomMaterialCostruccion;
-	}
-
-	public void setNomMaterialCostruccion(String nomMaterialCostruccion) {
-		this.nomMaterialCostruccion = nomMaterialCostruccion;
+	public void setIdDetalleSolucion(Key idDetalleSolucion) {
+		this.idDetalleSolucion = idDetalleSolucion;
 	}
 
 	public Double getCantidad() {
@@ -60,14 +49,6 @@ public class SegDetallePlantillaSolucion implements Serializable{
 
 	public void setCantidad(Double cantidad) {
 		this.cantidad = cantidad;
-	}
-
-	public Double getPrecioUnit() {
-		return precioUnit;
-	}
-
-	public void setPrecioUnit(Double precioUnit) {
-		this.precioUnit = precioUnit;
 	}
 
 	public String getUnidadMetrica() {
@@ -86,20 +67,12 @@ public class SegDetallePlantillaSolucion implements Serializable{
 		this.subTotal = subTotal;
 	}
 
-	public Double getCostoAcumulado() {
-		return costoAcumulado;
+	public Double getPrecioEjecucion() {
+		return precioEjecucion;
 	}
 
-	public void setCostoAcumulado(Double costoAcumulado) {
-		this.costoAcumulado = costoAcumulado;
-	}
-
-	public SegPlantillaSolucion getPlantillaSolucion() {
-		return plantillaSolucion;
-	}
-
-	public void setPlantillaSolucion(SegPlantillaSolucion plantillaSolucion) {
-		this.plantillaSolucion = plantillaSolucion;
+	public void setPrecioEjecucion(Double costoAcumulado) {
+		this.precioEjecucion = costoAcumulado;
 	}
 
 	public SegMaterialCostruccion getMaterialCostruccion() {
@@ -109,6 +82,20 @@ public class SegDetallePlantillaSolucion implements Serializable{
 	public void setMaterialCostruccion(SegMaterialCostruccion materialCostruccion) {
 		this.materialCostruccion = materialCostruccion;
 	}
-	
-	
+
+	public SegSolucion getSolucion() {
+		return solucion2;
+	}
+
+	public void setSolucion(SegSolucion solucion) {
+		this.solucion2 = solucion;
+	}
+
+	public SegVale getVale() {
+		return vale;
+	}
+
+	public void setVale(SegVale vale) {
+		this.vale = vale;
+	}
 }

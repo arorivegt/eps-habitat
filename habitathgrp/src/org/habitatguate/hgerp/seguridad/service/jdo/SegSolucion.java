@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 
 @SuppressWarnings("serial")
@@ -41,10 +42,14 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private Date fechaInicio;
 	@Persistent
+	@Unowned
 	private SegBeneficiario beneficiario;
 	@Persistent(mappedBy = "solucion")
     @Element(dependent = "true")
 	private List<SegDetalleSolucion> listaDetalle;
+	@Persistent
+    @Unowned
+	private List<SegDetalleEjecucion> listaEjecucion;
 	
 	public Key getIdSolucion() {
 		return idSolucion;
@@ -159,6 +164,20 @@ public class SegSolucion implements Serializable{
 
 	public void setListaDetalle(List<SegDetalleSolucion> listaDetalle) {
 		this.listaDetalle = listaDetalle;
+	}
+
+
+
+
+	public List<SegDetalleEjecucion> getListaEjecucion() {
+		return listaEjecucion;
+	}
+
+
+
+
+	public void setListaEjecucion(List<SegDetalleEjecucion> listaEjecucion) {
+		this.listaEjecucion = listaEjecucion;
 	}
 
 

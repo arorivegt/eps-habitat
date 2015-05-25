@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -9,6 +10,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegDetalleSolucion implements Serializable{
@@ -24,9 +26,13 @@ public class SegDetalleSolucion implements Serializable{
 	@Persistent
 	private Double costoAcumulado;
 	@Persistent
+	private Double cantidadEjecutada;
+	@Persistent
+	@Unowned
     private SegMaterialCostruccion materialCostruccion;
 	@Persistent
-	private SegVale vale;
+	@Unowned
+	private List<SegVale> vale;
 	
 	private SegSolucion solucion;
 
@@ -86,12 +92,20 @@ public class SegDetalleSolucion implements Serializable{
 		this.solucion = solucion;
 	}
 
-	public SegVale getVale() {
+	public List<SegVale> getVale() {
 		return vale;
 	}
 
-	public void setVale(SegVale vale) {
+	public void setVale(List<SegVale> vale) {
 		this.vale = vale;
+	}
+
+	public Double getCantidadEjecutada() {
+		return cantidadEjecutada;
+	}
+
+	public void setCantidadEjecutada(Double cantidadEjecutada) {
+		this.cantidadEjecutada = cantidadEjecutada;
 	}
 
 

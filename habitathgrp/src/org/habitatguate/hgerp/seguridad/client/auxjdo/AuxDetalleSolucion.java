@@ -3,6 +3,11 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 
 
+
+
+
+import java.util.ArrayList;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
@@ -29,11 +34,13 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
 	
 	private Double costoAcumulado;
 	
+	private Double cantidadEjecutada;
+	
     private AuxMaterialCostruccion materialCostruccion;
 	
 	private AuxSolucion solucion;
 	
-	private AuxVale vale;
+	private ArrayList<AuxVale> vale = new ArrayList<AuxVale>();;
 
 	public Long getIdDetalleSolucion() {
 		return idDetalleSolucion;
@@ -91,12 +98,20 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
 		this.solucion = solucion;
 	}
 
-	public AuxVale getVale() {
+	public ArrayList<AuxVale> getVale() {
 		return vale;
 	}
 
-	public void setVale(AuxVale vale) {
+	public void setVale(ArrayList<AuxVale> vale) {
 		this.vale = vale;
+	}
+
+	public Double getCantidadEjecutada() {
+		return cantidadEjecutada;
+	}
+
+	public void setCantidadEjecutada(Double cantidadEjecutada) {
+		this.cantidadEjecutada = cantidadEjecutada;
 	}
 	
 	

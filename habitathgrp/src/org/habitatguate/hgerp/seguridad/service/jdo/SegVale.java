@@ -2,14 +2,18 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
-import com.google.appengine.api.datastore.Key;
+import com.google.appengine.datanucleus.annotations.Unowned;
+
+
 
 @SuppressWarnings("serial")
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
@@ -23,6 +27,12 @@ public class SegVale implements Serializable{
 	private Date fechaVale;
 	@Persistent
 	private boolean estado;
+	
+	//relacion
+	@Persistent(mappedBy = "vale")
+    @Element(dependent = "true")
+	@Unowned
+	private List<SegHistorialPagoProv> listaPagoProv;
 	
 	public Long getIdVale() {
 		return idVale;

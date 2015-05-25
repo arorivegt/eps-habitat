@@ -1,6 +1,9 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+
 import java.util.Date;
+
+
 
 
 
@@ -28,6 +31,9 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 	private Double totalVale;
 
 	private Date fechaVale;
+	
+	//private List<AuxHistorialPagoProv> lista = new ArrayList<AuxHistorialPagoProv>();
+	
 	public Long getIdVale() {
 		return idVale;
 	}
@@ -51,6 +57,14 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 	public void setFechaVale(Date fechaVale) {
 		this.fechaVale = fechaVale;
 	}
+
+/*	public List<AuxHistorialPagoProv> getLista() {
+		return lista;
+	}
+
+	public void setLista(List<AuxHistorialPagoProv> lista) {
+		this.lista = lista;
+	}*/
 	
 	
 

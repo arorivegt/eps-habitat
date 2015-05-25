@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -220,7 +221,7 @@ public class Formulario_AbonarVale extends Composite{
             @Override
             public void onValueChange(ValueChangeEvent<AuxProveedor> event)
             {
-                AuxProveedor selected = event.getValue();
+              /*  AuxProveedor selected = event.getValue();
                 List<AuxDetalleSolucion> listaSolucion = selectNuevoBene.getSolucion().getLista();
                 Iterator<AuxDetalleSolucion> i = listaSolucion.iterator();
                 List<AuxDetallePlantillaSolucion> listaDetalleVale = new ArrayList<AuxDetallePlantillaSolucion>();
@@ -293,7 +294,7 @@ public class Formulario_AbonarVale extends Composite{
 					}
 					
 				}
-				valueListBox.setAcceptableValues(listaProveedor);
+				valueListBox.setAcceptableValues(listaProveedor);*/
 			}
 
 		});
@@ -340,7 +341,7 @@ public class Formulario_AbonarVale extends Composite{
        			}
        			else{
     				this.cancel();
-    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()), new AsyncCallback<Long>() {
+    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()),Date.valueOf(textBox_4.getText()),costoAcumulado, new AsyncCallback<Long>() {
 
 						@Override
 						public void onFailure(Throwable caught) {

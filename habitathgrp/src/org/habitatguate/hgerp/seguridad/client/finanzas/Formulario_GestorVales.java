@@ -22,7 +22,9 @@ public class Formulario_GestorVales extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private Formulario_CrearVale bp;
+	private Formulario_CuentasXPagar fcp;
 	private Long idAfiliadoSession = 0L;
+	private Long idEmpleadoSession = 0L;
     private final RecursosHumanosServiceAsync getSession = GWT.create(RecursosHumanosService.class);
 	
 	public Formulario_GestorVales(){
@@ -44,6 +46,23 @@ public class Formulario_GestorVales extends Composite{
 			}
 		});
 		
+		getSession.obtenerId(new AsyncCallback<Long>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(Long result) {
+				// TODO Auto-generated method stub
+				idEmpleadoSession = result;
+				
+				System.out.println("buscar empleado" + idEmpleadoSession);
+			}
+		});
+		
 		tabPanel = new TabPanel();
 		tabPanel.setVisible(true);
 		initWidget(tabPanel);
@@ -55,7 +74,7 @@ public class Formulario_GestorVales extends Composite{
 		panel1.setAlwaysShowScrollBars(true);
 		
 		tabPanel.add(panel1, "Generar Vales de Solución",true);
-		//tabPanel.add(panel2, "Aprobar Vales",true);
+		tabPanel.add(panel2, "Cuentas por Pagar",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -82,11 +101,12 @@ public class Formulario_GestorVales extends Composite{
 	}
 
 	public void ItemUno(){
-		bp = new Formulario_CrearVale(idAfiliadoSession);
+		bp = new Formulario_CrearVale(idAfiliadoSession,idEmpleadoSession);
 		panel1.setWidget(bp);
 	}
 	
 	public void ItemDos(){
-
+		fcp = new Formulario_CuentasXPagar();
+		panel2.setWidget(fcp);
 	}
 }

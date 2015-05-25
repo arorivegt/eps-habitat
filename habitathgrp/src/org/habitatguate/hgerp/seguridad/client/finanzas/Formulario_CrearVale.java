@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.io.IOException;
+import java.util.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,10 +16,13 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.util.ConvertDate;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -26,6 +30,7 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -48,10 +53,13 @@ public class Formulario_CrearVale extends Composite {
     private AuxBeneficiario selectNuevoBene;
     private AuxSolucion selectSolucion;
     private Double costoAcumulado = 0.0;
+    private Date fechaActual;
     public int index = 0;
     TablaGWT_Vale e = null;
 
-	public Formulario_CrearVale(Long idAfiliadoSession){
+
+	public Formulario_CrearVale(final Long idAfiliadoSession, Long idEmpleadoSession){
+		final long idEmpleado = idEmpleadoSession;
 		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
 		final java.util.Date date= new java.util.Date();
 		final Grid grid = new Grid(2, 2);
@@ -64,7 +72,7 @@ public class Formulario_CrearVale extends Composite {
 					@Override
 					public void onFailure(Throwable caught) {
 						// TODO Auto-generated method stub
-						
+						caught.printStackTrace();
 					}
 
 					@Override
@@ -73,8 +81,12 @@ public class Formulario_CrearVale extends Composite {
 
 						if (!result.isEmpty()){
 							for (AuxBeneficiario p : result){
-								bene.add(new BeneficiarioMultiWordSuggestion(p));	
+								bene.add(new BeneficiarioMultiWordSuggestion(p));
+								System.out.println(p.getNomBeneficiario());
 							}
+						}else
+						{
+							System.out.println("No hay registros");
 						}
 						
 					}
@@ -198,9 +210,9 @@ public class Formulario_CrearVale extends Composite {
 				      // Specify the format for the Strings to display per list item here. In this example, it is 
 				      // 'username (firstname lastname)'
 				      // For example: MTielemans (Mark Tielemans)
-				      s = " "+user.getIdProveedor();
+				      s = " "+user.getNomProveedor();
 				    } else {
-				      s = "Select a user";
+				      s = "Seleccione Proveedor";
 				    }
 				    return s; 
 				  }
@@ -226,16 +238,22 @@ public class Formulario_CrearVale extends Composite {
                 List<AuxDetallePlantillaSolucion> listaDetalleVale = new ArrayList<AuxDetallePlantillaSolucion>();
                 while(i.hasNext()){
                 	AuxDetalleSolucion aux = i.next();
-                	if (aux.getVale().getIdVale().compareTo(0L) == 0){
+                	if ((aux.getCantidad() - aux.getCantidadEjecutada()) > 0.0){
                 		if (aux.getMaterialCostruccion().getProveedor().getIdProveedor().compareTo(selected.getIdProveedor()) == 0){
                 			AuxDetallePlantillaSolucion auxDetalle = new AuxDetallePlantillaSolucion();
                 			auxDetalle.setIdDetallePlantillaSolucion(aux.getIdDetalleSolucion());
                 			auxDetalle.setNomMaterialCostruccion(aux.getMaterialCostruccion().getNomMaterialCostruccion());
                 			auxDetalle.setPrecioUnit(aux.getMaterialCostruccion().getPrecioUnit());
-                			auxDetalle.setCantidad(aux.getCantidad());
+                			auxDetalle.setCantidad(aux.getCantidad()-aux.getCantidadEjecutada());
                 			auxDetalle.setUnidadMetrica(aux.getMaterialCostruccion().getUnidadMetrica());
                 			auxDetalle.setSubTotal(aux.getSubTotal());
                 			auxDetalle.setCostoAcumulado(0.0);
+                			AuxMaterialCostruccion subAux = new AuxMaterialCostruccion();
+                			subAux.setIdMaterialConstruccion(aux.getMaterialCostruccion().getIdMaterialConstruccion());
+                			AuxProveedor subProv = new AuxProveedor();
+                			subProv.setIdProveedor(aux.getMaterialCostruccion().getProveedor().getIdProveedor());
+                			subAux.setProveedor(subProv);
+                			auxDetalle.setMaterialCostruccion(subAux);
                 			listaDetalleVale.add(auxDetalle);
                 			System.out.println("Material "+ aux.getIdDetalleSolucion());
 
@@ -249,6 +267,30 @@ public class Formulario_CrearVale extends Composite {
         		grid.setWidget(1, 0,e);
         		e.setSize("700px", "300px"); 
 				costoAcumulado = e.grid.ActualizarTabla();
+		      	Column<AuxDetallePlantillaSolucion, String> cantidadColumn = (Column<AuxDetallePlantillaSolucion, String>) e.grid.dataGrid.getColumn(3);
+		        
+		        cantidadColumn.setFieldUpdater(new FieldUpdater<AuxDetallePlantillaSolucion, String>() {
+					@Override
+					public void update(int index, AuxDetallePlantillaSolucion object, String value) {
+						System.out.println("Ejecuto");
+						object.setCantidad(Double.valueOf(value));
+						object.setSubTotal(object.getPrecioUnit() * Double.valueOf(value));
+						costoAcumulado = e.grid.ActualizarTabla();
+						
+					}
+		        });
+		        Column<AuxDetallePlantillaSolucion, String> precioColumn = (Column<AuxDetallePlantillaSolucion, String>) e.grid.dataGrid.getColumn(4);
+		        
+		        precioColumn.setFieldUpdater(new FieldUpdater<AuxDetallePlantillaSolucion, String>() {
+					@Override
+					public void update(int index, AuxDetallePlantillaSolucion object, String value) {
+						System.out.println("Ejecuto");
+						object.setPrecioUnit(Double.valueOf(value));
+						object.setSubTotal(object.getCantidad() * Double.valueOf(value));
+						costoAcumulado = e.grid.ActualizarTabla();
+						
+					}
+		        });
             }
 
         });
@@ -264,7 +306,8 @@ public class Formulario_CrearVale extends Composite {
 				textBox_3.setText(selectNuevoBene.getAfiliado().getNomAfiliado());
 				textBox.setText(selectNuevoBene.getSolucion().getDisenio());
 				textBox_1.setText(selectNuevoBene.getDirBeneficiario());
-				textBox_4.setText(String.valueOf(new Timestamp(date.getTime())));
+				fechaActual = new Date(date.getTime());
+				textBox_4.setText(String.valueOf(fechaActual));
 				
 				List<AuxProveedor> listaProveedor = new ArrayList<AuxProveedor>();
 				Iterator<AuxDetalleSolucion> i = selectNuevoBene.getSolucion().getLista().iterator();
@@ -317,17 +360,19 @@ public class Formulario_CrearVale extends Composite {
 		});
 		
 
+
 		
 		final Timer timer = new Timer() {
 	        public void run() {
        			if (index < e.grid.getListMateriales().size()){
-						AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
+						final AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
 						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), Long.valueOf(textBox_2.getText()),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
 							
 							@Override
 							public void onSuccess(Long result) {
 								// TODO Auto-generated method stub
 								index++;
+								costoAcumulado = costoAcumulado + aux.getSubTotal();
 							}
 							
 							@Override
@@ -337,10 +382,25 @@ public class Formulario_CrearVale extends Composite {
 							}
 							}								
 						);
+						loginService.Insertar_UnicoHistorialSolucion(selectNuevoBene.getSolucion().getIdSolucion(),Long.valueOf(textBox_2.getText()), aux, new AsyncCallback<Long>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Long result) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
        			}
        			else{
     				this.cancel();
-    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()), new AsyncCallback<Long>() {
+    				
+    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()),fechaActual,costoAcumulado, new AsyncCallback<Long>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -355,6 +415,7 @@ public class Formulario_CrearVale extends Composite {
 						}
     					
 					});
+    				Window.open("/FinanGenerarPdfVale?idVale="+textBox_2.getText()+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliadoSession+"&idBeneficiario="+selectNuevoBene.getIdBeneficiario(), "_blank", "");
        			}
 				
 
@@ -366,10 +427,13 @@ public class Formulario_CrearVale extends Composite {
 				public void onClick(ClickEvent event) {
 									System.out.println("Aqui se actualiza los detalles");
 									index = 0;
+									costoAcumulado = 0.0;
 									timer.scheduleRepeating(5000);
 
 				}
 			});
+	      	
+
 		
 	}
 }

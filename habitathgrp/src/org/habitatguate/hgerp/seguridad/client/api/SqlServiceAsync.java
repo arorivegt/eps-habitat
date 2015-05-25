@@ -14,6 +14,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -127,7 +128,26 @@ public interface SqlServiceAsync {
 	void Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale,
 			Long idSolucion, AsyncCallback<Long> callback);
 
-	void Actualizar_EstadoVale(Long idVale, AsyncCallback<Long> callback);
+	void Actualizar_EstadoVale(Long idVale, Date fechaVale ,Double costoTotal, AsyncCallback<Long> callback);
+
+
+
+	void ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado,
+			AsyncCallback<List<AuxBeneficiario>> callback);
+
+	void Insertar_UnicoHistorialSolucion(Long idSolucion, Long idVale,
+			AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
+
+	void ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario,
+			AsyncCallback<AuxBeneficiario> callback);
+
+	void ConsultaTodosProveedor_Aprobados(
+			AsyncCallback<List<AuxProveedor>> callback);
+
+	void ConsultarValesPendientes_unProveedor(Long idProveedor,
+			AsyncCallback<List<AuxVale>> callback);
+
+
 
 
 

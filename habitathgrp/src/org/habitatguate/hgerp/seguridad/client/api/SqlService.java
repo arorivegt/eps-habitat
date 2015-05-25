@@ -14,6 +14,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -35,6 +36,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
+	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
@@ -44,7 +46,11 @@ public interface SqlService extends RemoteService{
 	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliado(Long Afiliado);
 	List<AuxProveedor> ConsultaTodosProveedor_SinAprobar(Long Afiliado);
 	List<AuxProveedor> ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado);
+	List<AuxProveedor> ConsultaTodosProveedor_Aprobados();
 	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliado(Long idAfiliado);
+	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado);
+	List<AuxVale> ConsultarValesPendientes_unProveedor(Long idProveedor);
+	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
@@ -58,6 +64,6 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_ProveedorAprobado(Long id);
 	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
 	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
-	Long Actualizar_EstadoVale(Long idVale);
+	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);
 	
 }

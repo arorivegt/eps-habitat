@@ -138,6 +138,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <url-pattern>/ImprimirPerfil</url-pattern>  
 </servlet-mapping>  
 
+ <servlet>  
+        <servlet-name>FinanGenerarPdfVale</servlet-name>  
+        <servlet-class>org.habitatguate.hgerp.seguridad.service.FinanGenerarPdfVale</servlet-class>  
+</servlet>  
+<servlet-mapping>  
+        <servlet-name>FinanGenerarPdfVale</servlet-name>  
+        <url-pattern>/FinanGenerarPdfVale</url-pattern>  
+</servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

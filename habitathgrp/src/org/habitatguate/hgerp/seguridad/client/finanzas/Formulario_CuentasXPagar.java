@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.ValueListBox;
 public class Formulario_CuentasXPagar extends Composite  {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	public long idProveedorActual = 0L;
-    TablaGWT_Afiliado e = null;
+    TablaGWT_ListaVale e = null;
 	
 	public Formulario_CuentasXPagar(){
 		
@@ -81,7 +81,22 @@ public class Formulario_CuentasXPagar extends Composite  {
 					public void onValueChange(
 							ValueChangeEvent<AuxProveedor> event) {
 						 idProveedorActual = event.getValue().getIdProveedor();
-						
+							loginService.ConsultarValesPendientes_unProveedor(idProveedorActual, new AsyncCallback<List<AuxVale>>() {
+
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+									
+								}
+
+								@Override
+								public void onSuccess(List<AuxVale> result) {
+									e = new TablaGWT_ListaVale(result);
+									grid.setWidget(1, 0,e);
+									e.setSize("1000px", "300px");
+									
+								}
+							});
 					}
 		        
 		        });
@@ -97,24 +112,11 @@ public class Formulario_CuentasXPagar extends Composite  {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				loginService.ConsultarValesPendientes_unProveedor(idProveedorActual, new AsyncCallback<List<AuxVale>>() {
 
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void onSuccess(List<AuxVale> result) {
-						// TODO Auto-generated method stub
-						
-					}
-				});
 			}
 		});		
 
-		button.setText("Nuevo Afiliado");
+		button.setText("Realizar Pago Vale");
 		button.setStyleName("finanButton");
 		absolutePanel.add(button, 968, 29);
 		button.setSize("157px", "30px");
@@ -127,10 +129,7 @@ public class Formulario_CuentasXPagar extends Composite  {
 			public void onSuccess(List<AuxProveedor> result) {
 				System.out.println("ya estan todos los proveedores");
 				valueListBox.setAcceptableValues(result);
-				ArrayList<AuxAfiliado> inicial = new ArrayList<AuxAfiliado>();
-				e = new TablaGWT_Afiliado(inicial);
-				grid.setWidget(1, 0,e);
-				e.setSize("1000px", "300px");
+
 		
 				
 			}
@@ -141,6 +140,10 @@ public class Formulario_CuentasXPagar extends Composite  {
 				
 			}
 		});
+		
+		e = new TablaGWT_ListaVale(new ArrayList<AuxVale>());
+		grid.setWidget(1, 0,e);
+		e.setSize("1000px", "300px");
 		
 	}
 }

@@ -850,7 +850,8 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 				for (SegDetalleEjecucion auxD : result){
 					Long idProv = auxD.getMaterialCostruccion().getIdMaterialConstruccion().getParent().getId();
 					System.out.println("comparar " + idProv +" contra "+ idProveedor);
-					if (idProv.equals(idProveedor)){
+					if (idProv.equals(idProveedor)){						
+						if (auxD.getVale() != null){
 						System.out.println(auxD.getVale().getIdVale());
 						SegVale auxVale = auxD.getVale();
 						if (auxVale.getTotalVale()-auxVale.getTotalPagado() > 0.0){
@@ -862,6 +863,8 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 							auxCumple.setTotalPagado(auxVale.getTotalPagado());
 							auxCumple.setFechaVale(ConvertDate.g(auxVale.getFechaVale()));
 							response.add(auxCumple);
+						}
+						
 						}
 					}
 				}

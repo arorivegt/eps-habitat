@@ -2,6 +2,8 @@ package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.Date;
 
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
+import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
@@ -10,6 +12,7 @@ import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -37,14 +40,22 @@ import com.google.gwt.user.client.ui.ListBox;
 public class Sce_DataEncuestaSatisfaccion extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
+    private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
 	private Sce_DataEntrySupervisionSolicitud formulario;
 	private Sce_DataEntryEncuestaSatisfaccion encuestaSatisfaccion;
     private boolean bandera = true;
 	private Long idEncuestaSatisfaccion = 0L;
 	
+	// Llaves
+	private Long idFormulario = 0L;
+	private Long idEmpleado = 0L;
+	private Long idAfiliado = 0L;
+	private Long idRol = 0L;
+	
 	private AbsolutePanel absolutePanel;
 	private Mensaje mensaje; 
 	private Button btnGuardar;
+	private Button btnImprimir;
     private Loading load ;
 
 	private Label lblPregunta1;
@@ -103,6 +114,19 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
+		
+		// Obtener Id Empleado
+		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
+			@Override
+			public void onSuccess(Long result) {
+				idEmpleado = result;
+				System.out.println("Id Empleado: " + idEmpleado);
+			}
+			@Override
+			public void onFailure(Throwable caught) {
+				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
+			}
+		});
 		
 		mensaje = new Mensaje();
 		this.formulario = e;
@@ -581,8 +605,24 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 490, 787);
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		absolutePanel.add(btnGuardar, 368, 773);
+		btnGuardar.setSize("198px", "41px");
 		
+		btnImprimir = new Button("Send");
+		btnImprimir.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				Window.open("/ImprimirEncuestaSatisfaccion?id_Empleado="+idEmpleado, "_blank", "");
+
+			}
+		});
+		btnImprimir.setText("Imprimir");
+		btnImprimir.setStylePrimaryName("sendButton");
+		btnImprimir.setStyleName("sendButton");
+		absolutePanel.add(btnImprimir, 600, 773);
+		btnImprimir.setSize("198px", "41px");
 		
 	}
 	

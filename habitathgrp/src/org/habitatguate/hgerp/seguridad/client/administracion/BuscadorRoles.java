@@ -262,7 +262,7 @@ public class BuscadorRoles extends Composite   {
 		Busqueda.setSize("103px", "55px");
 		
 		
-		Label lblroles = new Label("roles");
+		Label lblroles = new Label("Roles");
 		lblroles.setStyleName("label");
 		lblroles.setSize("67px", "13px");
 		absolutePanel.add(lblroles, 10, 0);
@@ -270,7 +270,7 @@ public class BuscadorRoles extends Composite   {
 		lblElijaTipoDe = new Label("Elija tipo de formulario");
 		lblElijaTipoDe.setStyleName("label");
 		absolutePanel.add(lblElijaTipoDe, 93, -3);
-		lblElijaTipoDe.setSize("169px", "13px");
+		lblElijaTipoDe.setSize("183px", "13px");
     	
 		
 		initWidget(grid);

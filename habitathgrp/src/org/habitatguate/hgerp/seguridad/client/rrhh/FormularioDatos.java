@@ -576,6 +576,7 @@ public class FormularioDatos extends Composite {
 		nombreBanco.addItem("Inmobiliario","12");
 		nombreBanco.addItem("ViviBanco","13");
 		nombreBanco.addItem("Industrial","14");
+		nombreBanco.addItem("Trabajadores","15");
 		nombreBanco.setSize("230px", "36px");
 		nombreBanco.setStyleName("gwt-PasswordTextBox");
 		absolutePanel.add(nombreBanco, 319, 545);

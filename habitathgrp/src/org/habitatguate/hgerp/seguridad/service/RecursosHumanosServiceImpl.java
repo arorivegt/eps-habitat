@@ -348,7 +348,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 	@Override
 	public Long Insertar_Referencia_Personal(Long id_empleado,
 			String nombre_referencia, String telefono, String puesto_candidato,
-			String relacion, String actitudes_cualidades)
+			String relacion, String actitudes_cualidades,Date fecha1)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -361,6 +361,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
 				 	rp.setRelacion(relacion.toUpperCase());
 				 	rp.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
+				 	rp.setFecha1(fecha1);
 		      	 	rp.setEmpleados(e);
 		      	 	e.getReferencia_personal().add(rp);
 				 	valor = rp.getId_referencia_personal();
@@ -733,7 +734,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			@Override
 			public Long Actualizar_Referencia_Personal(Long id_empleado,Long id,
 					String nombre_referencia, String telefono, String puesto_candidato,
-					String relacion, String actitudes_cualidades)
+					String relacion, String actitudes_cualidades,Date fecha1)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -749,6 +750,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	rp.setPuesto_candidato(puesto_candidato.toUpperCase());
 						 	rp.setRelacion(relacion.toUpperCase());
 						 	rp.setActitudes_cualidades(actitudes_cualidades.toUpperCase());
+						 	rp.setFecha1(fecha1);
 						 	valor = rp.getId_referencia_personal();
 						 }finally {  
 							 Persistencia.close();  
@@ -1317,6 +1319,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 								 	rp.setPuesto_candidato(n6.getPuesto_candidato());
 								 	rp.setRelacion(n6.getRelacion());
 								 	rp.setActitudes_cualidades(n6.getActitudes_cualidades());
+								 	rp.setFecha1(n6.getFecha1().getTime());
 								 	nuevo.getReferencia_personal().add(rp);
 							    }
 					    	}
@@ -1585,6 +1588,7 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	rp.setPuesto_candidato(n6.getPuesto_candidato());
 							 	rp.setRelacion(n6.getRelacion());
 							 	rp.setActitudes_cualidades(n6.getActitudes_cualidades());
+							 	rp.setFecha1(n6.getFecha1().getTime());
 							 	nuevo.getReferencia_personal().add(rp);
 						    }
 				    	}

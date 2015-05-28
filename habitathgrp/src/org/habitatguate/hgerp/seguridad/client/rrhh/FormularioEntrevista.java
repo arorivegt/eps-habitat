@@ -47,7 +47,7 @@ public class FormularioEntrevista extends Composite {
 	 private ListBox listJ;
 	 private TextArea txtEnfermedades;
 	 private TextArea txtPresion;
-	 private TextBox txtNombreEmpresa ;
+	 private ListBox txtNombreEmpresa ;
 	 private ListBox listDeudas ;
 	 private ListBox listNoDependientes ;
 	 private ListBox listAlquila ;
@@ -225,8 +225,33 @@ public class FormularioEntrevista extends Composite {
 		absolutePanel.add(txtAmortizacion, 551, 867);
 		txtAmortizacion.setSize("227px", "34px");
 		
-		txtNombreEmpresa = new TextBox();
-		txtNombreEmpresa.setMaxLength(200);
+		txtNombreEmpresa = new ListBox();
+		txtNombreEmpresa.addItem("Antigua","0");
+		txtNombreEmpresa.addItem("Azteca","1");
+		txtNombreEmpresa.addItem("Agromercantil","2");
+		txtNombreEmpresa.addItem("Banrural","3");
+		txtNombreEmpresa.addItem("City","4");
+		txtNombreEmpresa.addItem("CHN","5");
+		txtNombreEmpresa.addItem("G&T Continental","6");
+		txtNombreEmpresa.addItem("Guatemala","7");
+		txtNombreEmpresa.addItem("Promerica","8");
+		txtNombreEmpresa.addItem("Reformador","9");
+		txtNombreEmpresa.addItem("Fichosa","10");
+		txtNombreEmpresa.addItem("InterBanco","11");
+		txtNombreEmpresa.addItem("Inmobiliario","12");
+		txtNombreEmpresa.addItem("ViviBanco","13");
+		txtNombreEmpresa.addItem("Industrial","14");
+		txtNombreEmpresa.addItem("Trabajadores","15");
+		txtNombreEmpresa.addItem("Fundación Hábitat","16");
+		txtNombreEmpresa.addItem("MiCope","17");
+		txtNombreEmpresa.addItem("COOPERATIVA HUNA COOP R.L.","18");
+		txtNombreEmpresa.addItem("COINIPAZ","18");
+		txtNombreEmpresa.addItem("COINACREDE R.L.","19");
+		txtNombreEmpresa.addItem("COOPERATIVA CENDIST, R.L.","20");
+		txtNombreEmpresa.addItem("COOPERATIVA INNOVIC R.L.","21");
+		txtNombreEmpresa.addItem("COOPERATIVA EL MONOLITO R.L.","22");
+		txtNombreEmpresa.addItem("Otras Cooperativas","23");		
+		txtNombreEmpresa.addItem("Otras Instancias financieras","24");
 		txtNombreEmpresa.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtNombreEmpresa, 245, 867);
 		txtNombreEmpresa.setSize("227px", "34px");
@@ -352,7 +377,7 @@ public class FormularioEntrevista extends Composite {
                             listH.getItemText(listH.getSelectedIndex()).equals("Si"), listI.getItemText(listI.getSelectedIndex()).equals("Si"), 
                             listJ.getItemText(listJ.getSelectedIndex()).equals("Si"), txtEntrevisto.getText(), txtEnfermedades.getText(),  
                             Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
-                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getText(),  
+                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
                             listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
 			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
@@ -383,7 +408,7 @@ public class FormularioEntrevista extends Composite {
 	                            listH.getItemText(listH.getSelectedIndex()).equals("Si"), listI.getItemText(listI.getSelectedIndex()).equals("Si"), 
 	                            listJ.getItemText(listJ.getSelectedIndex()).equals("Si"), txtEntrevisto.getText(), txtEnfermedades.getText(),  
 	                            Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
-	                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getText(),  
+	                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
 	                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
 				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
@@ -569,7 +594,13 @@ public class FormularioEntrevista extends Composite {
 		this.txtMetas.setText( txtMetas);
 		this.txtEnfermedades.setText(txtEnfermedades);
 		this.txtPresion.setText(txtPresion);
-		this.txtNombreEmpresa.setText(txtNombreEmpresa);
+		
+		bandera = true;
+	    for(int i=0; i < this.txtNombreEmpresa.getItemCount() && bandera; i++){
+	       bandera = !this.txtNombreEmpresa.getValue(i).equals(txtNombreEmpresa);
+	       this.txtNombreEmpresa.setSelectedIndex(i);
+	    } 
+	    
 		this.txtOtrosIngresos.setText(txtOtrosIngresos);
 		this.txtEntrevisto.setText(txtEntrevisto);
 		this.dateFecha.setValue(new Date(dateFecha));

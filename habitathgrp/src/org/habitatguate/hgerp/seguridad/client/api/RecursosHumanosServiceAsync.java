@@ -235,7 +235,7 @@ public interface RecursosHumanosServiceAsync {
 	 * @throws IllegalArgumentException
 	 */
 	void Insertar_Referencia_Personal(Long id_empleado,String nombre_referencia, String telefono, 
-			String puesto_candidato, String relacion, String actitudes_cualidades, 
+			String puesto_candidato, String relacion, String actitudes_cualidades, Date fecha1, 
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
@@ -600,7 +600,7 @@ public interface RecursosHumanosServiceAsync {
 		 * @throws IllegalArgumentException
 		 */
 		void Actualizar_Referencia_Personal(Long id_empleado,Long id,String nombre_referencia, String telefono, 
-				String puesto_candidato, String relacion, String actitudes_cualidades, 
+				String puesto_candidato, String relacion, String actitudes_cualidades, Date fecha1, 
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 

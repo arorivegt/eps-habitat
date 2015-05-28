@@ -238,7 +238,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	Long Insertar_Referencia_Personal(Long id_empleado,String nombre_referencia, String telefono, 
-			String puesto_candidato, String relacion, String actitudes_cualidades)throws IllegalArgumentException;
+			String puesto_candidato, String relacion, String actitudes_cualidades,Date fecha1)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -597,7 +597,7 @@ public interface RecursosHumanosService extends RemoteService {
 	 * @throws IllegalArgumentException
 	 */
 	Long Actualizar_Referencia_Personal(Long id_empleado,Long id,String nombre_referencia, String telefono, 
-			String puesto_candidato, String relacion, String actitudes_cualidades)throws IllegalArgumentException;
+			String puesto_candidato, String relacion, String actitudes_cualidades,Date fecha1)throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado

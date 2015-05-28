@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -33,6 +34,9 @@ public class SegReferenciaPersonal implements Serializable {
 
 	@Persistent
     private String actitudes_cualidades;
+
+	@Persistent
+    private Date fecha1;
 
 	@Persistent
     private SegEmpleado empleado;
@@ -91,6 +95,14 @@ public class SegReferenciaPersonal implements Serializable {
 
 	public void setEmpleados(SegEmpleado empleado) {
 		this.empleado = empleado;
+	}
+
+	public Date getFecha1() {
+		return fecha1;
+	}
+
+	public void setFecha1(Date fecha1) {
+		this.fecha1 = fecha1;
 	}
 
     

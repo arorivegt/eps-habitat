@@ -19,6 +19,9 @@ public class AuxReferenciaPersonal implements IsSerializable{
 
 	
     private String actitudes_cualidades;
+    
+
+    private Long fecha1;
 	
 
 	public AuxReferenciaPersonal() {
@@ -71,6 +74,20 @@ public class AuxReferenciaPersonal implements IsSerializable{
 
 	public void setActitudes_cualidades(String actitudes_cualidades) {
 		this.actitudes_cualidades = actitudes_cualidades;
+	}
+
+	/**
+	 * @return the fecha1
+	 */
+	public Long getFecha1() {
+		return fecha1;
+	}
+
+	/**
+	 * @param fecha1 the fecha1 to set
+	 */
+	public void setFecha1(Long fecha1) {
+		this.fecha1 = fecha1;
 	}
 
 

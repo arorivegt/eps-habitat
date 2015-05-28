@@ -71,7 +71,7 @@ public class ReferenciaPersonal extends Composite  {
 			    for ( AuxReferenciaPersonal n2 : results) {
 			    	FormularioReferenciaPersonal fa = new  FormularioReferenciaPersonal(this,empleado);
 			    	fa.LlenarDatos( n2.getId_referencia_personal(), n2.getNombre_referencia(), n2.getPuesto_candidato(), n2.getRelacion(),
-			    					n2.getActitudes_cualidades(), ""+n2.getTelefono());
+			    					n2.getActitudes_cualidades(), ""+n2.getTelefono(),n2.getFecha1());
 			    	fa.btnhinabilitar(valor);
 			        flextable.setWidget(flextable.getRowCount(), 0,fa );
 			    }

@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.rrhh;
 
+import java.util.Date;
+
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -10,6 +12,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -19,6 +22,7 @@ import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 public class FormularioReferenciaPersonal extends Composite {
 
@@ -33,6 +37,8 @@ public class FormularioReferenciaPersonal extends Composite {
 	private TextBox txtRelacion;
 	private TextArea txtActitudes;
 	private IntegerBox txtTelefono;
+	private DateBox dateFecha1;
+	private DateBox dateFecha2;
 	private Mensaje mensaje; 
     private Loading load ;
     private Button btnActualizar;
@@ -93,6 +99,18 @@ public class FormularioReferenciaPersonal extends Composite {
 		absolutePanel.add(txtRelacion, 10, 102);
 		txtRelacion.setSize("227px", "34px");
 		
+		dateFecha1 = new DateBox();
+		dateFecha1.getTextBox().setReadOnly(true);
+		dateFecha1.setValue(new Date());
+		dateFecha1.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+		dateFecha1.getDatePicker().setYearArrowsVisible(true);
+		dateFecha1.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFecha1.getDatePicker().setVisibleYearCount(100);
+		dateFecha1.setStyleName("gwt-TextBox2");
+		absolutePanel.add(dateFecha1, 10, 150);
+		dateFecha1.setSize("227px", "34px");
+		
 		txtActitudes = new TextArea();
 		txtActitudes.getElement().setAttribute("maxlength", "500");
 		txtActitudes.setStyleName("gwt-TextBox");
@@ -106,7 +124,7 @@ public class FormularioReferenciaPersonal extends Composite {
 		        load.visible();
 				if(bandera) {
 					loginService.Insertar_Referencia_Personal(empleado.id_empleado, txtNombre.getText(), txtTelefono.getText(), 
-							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
+							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), dateFecha1.getValue(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
             		        load.invisible();
@@ -126,7 +144,7 @@ public class FormularioReferenciaPersonal extends Composite {
 						});
 				}else{
 					loginService.Actualizar_Referencia_Personal(empleado.id_empleado,id_referencia_personal, txtNombre.getText(), txtTelefono.getText(), 
-							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(), new AsyncCallback<Long>(){
+							txtPuestoCandidato.getText(), txtRelacion.getText(), txtActitudes.getText(),dateFecha1.getValue(), new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
             		        load.invisible();
@@ -191,6 +209,12 @@ public class FormularioReferenciaPersonal extends Composite {
 		lblEmpresa.setStyleName("label");
 		absolutePanel.add(lblEmpresa, 10, 83);
 		lblEmpresa.setSize("192px", "13px");
+
+		Label lblFecha = new Label("Fecha");
+		lblFecha.setStyleName("label");
+		absolutePanel.add(lblFecha, 10, 135);
+		lblEmpresa.setSize("192px", "13px");
+		
 		
 		Label lblActitudescualidadesaptitudesObserv = new Label("Actitudes/cualidades/aptitudes observadas");
 		lblActitudescualidadesaptitudesObserv.setStyleName("label");
@@ -209,7 +233,8 @@ public class FormularioReferenciaPersonal extends Composite {
 			 String txtPuestoCandidato,
 			 String txtRelacion,
 			 String txtActitudes,
-			 String txtTelefono)
+			 String txtTelefono,
+			 Long fecha)
 	{
 		this.id_referencia_personal = id;
 		this.bandera = false;
@@ -218,6 +243,7 @@ public class FormularioReferenciaPersonal extends Composite {
 		this.txtRelacion.setText(txtRelacion);
 		this.txtActitudes.setText(txtActitudes);
 		this.txtTelefono.setText(txtTelefono);
+		this.dateFecha1.setValue(new Date(fecha));
 	}
 
 	public void btnhinabilitar(boolean valor){

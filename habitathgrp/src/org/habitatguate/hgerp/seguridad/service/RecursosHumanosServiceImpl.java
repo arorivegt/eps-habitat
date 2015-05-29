@@ -78,7 +78,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setPrimer_apellido(Apellido.toUpperCase().trim());
 				em.setSegundo_apellido(Apellido2.toUpperCase().trim());
 				em.setSegundo_nombre(Nombre2.toUpperCase().trim());
-				em.setEstado("2");
 				em.setIVS("0");
 				em.setCui("0");
 				em.setNit("0");

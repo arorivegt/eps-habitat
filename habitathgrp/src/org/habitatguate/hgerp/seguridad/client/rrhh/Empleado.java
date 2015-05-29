@@ -823,7 +823,7 @@ public class Empleado extends Composite {
         	if(auxEntrevista.getCarta_recomendacion_laboral()){ valorG = "Si";}
         	if(auxEntrevista.getCarta_recomendacion_personal()){ valorH = "Si";}
         	if(auxEntrevista.getVive_con_familia()){ valorI = "Si";}
-        	if(auxEntrevista.getVive_con_familia()){ valorJ = "Si";}
+        	if(auxEntrevista.getCasa_propia()){ valorJ = "Si";}
         	if(auxEntrevista.getTiene_deudas()){ valorDeudas = "Si";}
         	if(auxEntrevista.getAlquila()){ valorAlquila = "Si";}
         	

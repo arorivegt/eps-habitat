@@ -337,7 +337,7 @@ public class FormularioEntrevista extends Composite {
                             Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
                             Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
                             listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
-			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
+			                txtOtrosIngresos.getText(),Float.parseFloat(txtAmortizacion.getText()), txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
 			                txtObservacion1.getText(),txtObservacion2.getText(), txtObservacion3.getText(),txtObservacion4.getText(), txtObservacion5.getText(),
 			           	   dateFechaDeudaInicio.getValue(), dateFechaDeudaFinal.getValue(), motivoDeuda.getText(),listDeudaEn.getValue(listDeudaEn.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
@@ -359,6 +359,7 @@ public class FormularioEntrevista extends Composite {
 
                  });
 					}else{
+						System.out.println(listJ.getItemText(listJ.getSelectedIndex()).equals("Si"));
 						loginService.Actualizar_Entrevista(empleado.id_empleado,id_entrevista, dateFecha.getValue(), txtQueConoces.getText(), 
 								txtPorque_Trabajar.getText(),txtComoDescribe.getText(), txtPresion.getText(), txtMetas.getText(),
 								listA.getItemText(listA.getSelectedIndex()).equals("Si"), 
@@ -370,7 +371,7 @@ public class FormularioEntrevista extends Composite {
 	                            Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
 	                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
 	                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
-				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
+				                txtOtrosIngresos.getText(),Float.parseFloat(txtAmortizacion.getText()),txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
 				                txtObservacion1.getText(),txtObservacion2.getText(), txtObservacion3.getText(),txtObservacion4.getText(), txtObservacion5.getText(),
 					           	   dateFechaDeudaInicio.getValue(), dateFechaDeudaFinal.getValue(), motivoDeuda.getText(),listDeudaEn.getValue(listDeudaEn.getSelectedIndex()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
@@ -810,7 +811,7 @@ public class FormularioEntrevista extends Composite {
 			 String motivoDeuda,
 			 String listDeudaEn) {
 
-		System.out.println("listDeudaEn: "+listDeudaEn);
+		System.out.println("listDeudaEn: "+listJ);
 		this.id_entrevista = id;
 		this.bandera = false;
 		this.txtQueConoces.setText( txtQueConoces);

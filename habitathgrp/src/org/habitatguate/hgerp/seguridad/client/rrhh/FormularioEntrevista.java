@@ -49,7 +49,6 @@ public class FormularioEntrevista extends Composite {
 	 private TextArea txtEnfermedades;
 	 private TextArea txtPresion;
 	 private ListBox txtNombreEmpresa ;
-	 private ListBox listDeudas ;
 	 private ListBox listNoDependientes ;
 	 private ListBox listAlquila ;
 	 private TextArea txtOtrosIngresos ;
@@ -73,6 +72,8 @@ public class FormularioEntrevista extends Composite {
 	 private TextArea txtObservacion5;
 	 private DateBox dateFechaDeudaInicio;
 	 private DateBox dateFechaDeudaFinal;
+	 private TextArea motivoDeuda;
+	 private ListBox listDeudas ;
    
 
 	public FormularioEntrevista(Empleado empleadoo) {
@@ -290,11 +291,25 @@ public class FormularioEntrevista extends Composite {
 		txtAmortizacion.setSize("157px", "34px");
 		
 		dateFechaDeudaInicio = new DateBox();
+		dateFechaDeudaInicio.getTextBox().setReadOnly(true);
+		dateFechaDeudaInicio.setValue(new Date(1407518819070L));
+		dateFechaDeudaInicio.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFechaDeudaInicio.getDatePicker().setYearArrowsVisible(true);
+		dateFechaDeudaInicio.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFechaDeudaInicio.getDatePicker().setVisibleYearCount(100);
 		dateFechaDeudaInicio.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFechaDeudaInicio, 241, 1133);
 		dateFechaDeudaInicio.setSize("148px", "34px");
 		
 		dateFechaDeudaFinal = new DateBox();
+		dateFechaDeudaFinal.getTextBox().setReadOnly(true);
+		dateFechaDeudaFinal.setValue(new Date(1407518819070L));
+		dateFechaDeudaFinal.setFormat(new DateBox.DefaultFormat 
+			    (DateTimeFormat.getFormat("dd/MM/yyyy"))); 
+		dateFechaDeudaFinal.getDatePicker().setYearArrowsVisible(true);
+		dateFechaDeudaFinal.getDatePicker().setYearAndMonthDropdownVisible(true);
+		dateFechaDeudaFinal.getDatePicker().setVisibleYearCount(100);
 		dateFechaDeudaFinal.setStyleName("gwt-TextBox2");
 		absolutePanel.add(dateFechaDeudaFinal, 406, 1133);
 		dateFechaDeudaFinal.setSize("148px", "34px");
@@ -322,7 +337,9 @@ public class FormularioEntrevista extends Composite {
                             Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
                             Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
                             listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
-			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), new AsyncCallback<Long>(){
+			                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()), txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
+			                txtObservacion1.getText(),txtObservacion2.getText(), txtObservacion3.getText(),txtObservacion4.getText(), txtObservacion5.getText(),
+			           	   dateFechaDeudaInicio.getValue(), dateFechaDeudaFinal.getValue(), motivoDeuda.getText(),listDeudaEn.getValue(listDeudaEn.getSelectedIndex()),new AsyncCallback<Long>(){
                         public void onFailure(Throwable caught) 
                         {
             		        load.invisible();
@@ -353,7 +370,9 @@ public class FormularioEntrevista extends Composite {
 	                            Float.parseFloat(txtAporteCasa.getText()),listDeudas.getItemText(listDeudas.getSelectedIndex()).equals("Si"), 
 	                            Integer.parseInt(listNoDependientes.getItemText(listNoDependientes.getSelectedIndex())), txtNombreEmpresa.getValue(txtNombreEmpresa.getSelectedIndex()),  
 	                            listAlquila.getItemText(listAlquila.getSelectedIndex()).equals("Si"),Float.parseFloat(txtPagoMensual.getText()),
-				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),new AsyncCallback<Long>(){
+				                txtOtrosIngresos.getTitle(),Float.parseFloat(txtAmortizacion.getText()),txtEntrevistoB.getText(), txtEntrevistoC.getText(),txtEntrevistoD.getText(),
+				                txtObservacion1.getText(),txtObservacion2.getText(), txtObservacion3.getText(),txtObservacion4.getText(), txtObservacion5.getText(),
+					           	   dateFechaDeudaInicio.getValue(), dateFechaDeudaFinal.getValue(), motivoDeuda.getText(),listDeudaEn.getValue(listDeudaEn.getSelectedIndex()),new AsyncCallback<Long>(){
 	                        public void onFailure(Throwable caught) 
 	                        {
 	            		        load.invisible();
@@ -407,14 +426,16 @@ public class FormularioEntrevista extends Composite {
 		absolutePanel.add(listDeudaEn, 561, 1131);
 		listDeudaEn.setSize("219px", "34px");
 		
-		TextArea textArea = new TextArea();
-		textArea.setStyleName("gwt-TextBox ");
-		absolutePanel.add(textArea, 10, 1203);
-		textArea.setSize("720px", "57px");
+		motivoDeuda = new TextArea();
+		motivoDeuda.setStyleName("gwt-TextBox ");
+		absolutePanel.add(motivoDeuda, 10, 1203);
+		motivoDeuda.setSize("720px", "57px");
+		motivoDeuda.setText("");
+		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 331, 1917);
+		absolutePanel.add(btnGuardar,433, 1750);
 		btnGuardar.setSize("227px", "34px");
 		
 		listNoDependientes = new ListBox();
@@ -775,8 +796,21 @@ public class FormularioEntrevista extends Composite {
 			String txtOtrosIngresos, String txtEntrevisto,
 			Long dateFecha, String txtAporteCasa,
 			String txtAmortizacion, String txtPagoMensual,
-			String txtPretencionSalarial) {
+			String txtPretencionSalarial,
+			 String txtEntrevistoB,
+			 String  txtEntrevistoC,
+			 String  txtEntrevistoD,
+			 String  txtObservacion1,
+			 String  txtObservacion2,
+			 String  txtObservacion3,
+			 String  txtObservacion4,
+			 String  txtObservacion5,
+			 long dateFechaDeudaInicio,
+			 long dateFechaDeudaFinal,
+			 String motivoDeuda,
+			 String listDeudaEn) {
 
+		System.out.println("listDeudaEn: "+listDeudaEn);
 		this.id_entrevista = id;
 		this.bandera = false;
 		this.txtQueConoces.setText( txtQueConoces);
@@ -785,11 +819,32 @@ public class FormularioEntrevista extends Composite {
 		this.txtMetas.setText( txtMetas);
 		this.txtEnfermedades.setText(txtEnfermedades);
 		this.txtPresion.setText(txtPresion);
-		
+
+		 this.txtEntrevistoB.setText(txtEntrevistoB);
+		 this.txtEntrevistoC.setText(txtEntrevistoC);
+		 this.txtEntrevistoD.setText(txtEntrevistoD);
+		 this.txtObservacion1.setText(txtObservacion1);
+		 this.txtObservacion2.setText(txtObservacion2);
+		 this.txtObservacion3.setText(txtObservacion3);
+		 this.txtObservacion4.setText(txtObservacion4);
+		 this.txtObservacion5.setText(txtObservacion5);
+		 this.txtObservacion2.setText(txtObservacion2);
+		 this.dateFechaDeudaInicio.setValue(new Date(dateFechaDeudaInicio));
+		 this.dateFechaDeudaFinal.setValue(new Date(dateFechaDeudaFinal));
+		 this.motivoDeuda.setText(motivoDeuda);
+		 
+		 
+		 
 		bandera = true;
 	    for(int i=0; i < this.txtNombreEmpresa.getItemCount() && bandera; i++){
 	       bandera = !this.txtNombreEmpresa.getValue(i).equals(txtNombreEmpresa);
 	       this.txtNombreEmpresa.setSelectedIndex(i);
+	    } 
+	    
+	    bandera = true;
+	    for(int i=0; i < this.listDeudaEn.getItemCount() && bandera; i++){
+	       bandera = !this.listDeudaEn.getValue(i).equals(listDeudaEn);
+	       this.listDeudaEn.setSelectedIndex(i);
 	    } 
 	    
 		this.txtOtrosIngresos.setText(txtOtrosIngresos);

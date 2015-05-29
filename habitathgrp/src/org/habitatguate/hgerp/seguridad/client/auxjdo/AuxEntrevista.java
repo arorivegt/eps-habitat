@@ -1,4 +1,5 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxEntrevista implements IsSerializable{
@@ -80,6 +81,30 @@ public class AuxEntrevista implements IsSerializable{
 
 	
     private String Otros_Ingresos;
+    
+	private String txtEntrevistoB;
+	
+	private String  txtEntrevistoC;
+	
+	private String  txtEntrevistoD;
+	
+	private String  txtObservacion1;
+	
+	private String  txtObservacion2;
+	
+	private String  txtObservacion3;
+	
+	private String  txtObservacion4;
+	
+	private String  txtObservacion5;
+	
+	private long dateFechaDeudaInicio;
+	
+	private long dateFechaDeudaFinal;
+	
+	private String motivoDeuda;
+	
+	private String listDeudas ;
 
 	
 	public AuxEntrevista() {
@@ -354,6 +379,126 @@ public class AuxEntrevista implements IsSerializable{
 
 	public void setOtros_Ingresos(String otros_Ingresos) {
 		Otros_Ingresos = otros_Ingresos;
+	}
+
+
+	public String getTxtEntrevistoB() {
+		return txtEntrevistoB;
+	}
+
+
+	public void setTxtEntrevistoB(String txtEntrevistoB) {
+		this.txtEntrevistoB = txtEntrevistoB;
+	}
+
+
+	public String getTxtEntrevistoC() {
+		return txtEntrevistoC;
+	}
+
+
+	public void setTxtEntrevistoC(String txtEntrevistoC) {
+		this.txtEntrevistoC = txtEntrevistoC;
+	}
+
+
+	public String getTxtEntrevistoD() {
+		return txtEntrevistoD;
+	}
+
+
+	public void setTxtEntrevistoD(String txtEntrevistoD) {
+		this.txtEntrevistoD = txtEntrevistoD;
+	}
+
+
+	public String getTxtObservacion1() {
+		return txtObservacion1;
+	}
+
+
+	public void setTxtObservacion1(String txtObservacion1) {
+		this.txtObservacion1 = txtObservacion1;
+	}
+
+
+	public String getTxtObservacion2() {
+		return txtObservacion2;
+	}
+
+
+	public void setTxtObservacion2(String txtObservacion2) {
+		this.txtObservacion2 = txtObservacion2;
+	}
+
+
+	public String getTxtObservacion3() {
+		return txtObservacion3;
+	}
+
+
+	public void setTxtObservacion3(String txtObservacion3) {
+		this.txtObservacion3 = txtObservacion3;
+	}
+
+
+	public String getTxtObservacion4() {
+		return txtObservacion4;
+	}
+
+
+	public void setTxtObservacion4(String txtObservacion4) {
+		this.txtObservacion4 = txtObservacion4;
+	}
+
+
+	public String getTxtObservacion5() {
+		return txtObservacion5;
+	}
+
+
+	public void setTxtObservacion5(String txtObservacion5) {
+		this.txtObservacion5 = txtObservacion5;
+	}
+
+
+	public long getDateFechaDeudaInicio() {
+		return dateFechaDeudaInicio;
+	}
+
+
+	public void setDateFechaDeudaInicio(long dateFechaDeudaInicio) {
+		this.dateFechaDeudaInicio = dateFechaDeudaInicio;
+	}
+
+
+	public long getDateFechaDeudaFinal() {
+		return dateFechaDeudaFinal;
+	}
+
+
+	public void setDateFechaDeudaFinal(long dateFechaDeudaFinal) {
+		this.dateFechaDeudaFinal = dateFechaDeudaFinal;
+	}
+
+
+	public String getMotivoDeuda() {
+		return motivoDeuda;
+	}
+
+
+	public void setMotivoDeuda(String motivoDeuda) {
+		this.motivoDeuda = motivoDeuda;
+	}
+
+
+	public String getListDeudas() {
+		return listDeudas;
+	}
+
+
+	public void setListDeudas(String listDeudas) {
+		this.listDeudas = listDeudas;
 	}
 
 	

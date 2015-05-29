@@ -383,6 +383,18 @@ public interface RecursosHumanosServiceAsync {
 	 * @param pago_alquiler
 	 * @param Otros_Ingresos
 	 * @param amortizacion
+	 * @param txtEntrevistoB
+	 * @param txtEntrevistoC
+	 * @param txtEntrevistoD
+	 * @param txtObservacion1
+	 * @param txtObservacion2
+	 * @param txtObservacion3
+	 * @param txtObservacion4
+	 * @param txtObservacion5
+	 * @param dateFechaDeudaInicio
+	 * @param dateFechaDeudaFinal
+	 * @param motivoDeuda
+	 * @param listDeudas
 	 * @param callback
 	 * @throws IllegalArgumentException
 	 */
@@ -397,7 +409,19 @@ public interface RecursosHumanosServiceAsync {
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
 			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos, 
-			float amortizacion,AsyncCallback<Long> callback) throws IllegalArgumentException;
+			float amortizacion,
+			 String txtEntrevistoB,
+			 String  txtEntrevistoC,
+			 String  txtEntrevistoD,
+			 String  txtObservacion1,
+			 String  txtObservacion2,
+			 String  txtObservacion3,
+			 String  txtObservacion4,
+			 String  txtObservacion5,
+			 Date dateFechaDeudaInicio,
+			 Date dateFechaDeudaFinal,
+			 String motivoDeuda,
+			 String listDeudas,AsyncCallback<Long> callback) throws IllegalArgumentException;
 	/**
 	 * 
 	 * @param id_empleado
@@ -739,6 +763,18 @@ public interface RecursosHumanosServiceAsync {
 		 * @param pago_alquiler
 		 * @param Otros_Ingresos
 		 * @param amortizacion
+		 * @param txtEntrevistoB
+		 * @param txtEntrevistoC
+		 * @param txtEntrevistoD
+		 * @param txtObservacion1
+		 * @param txtObservacion2
+		 * @param txtObservacion3
+		 * @param txtObservacion4
+		 * @param txtObservacion5
+		 * @param dateFechaDeudaInicio
+		 * @param dateFechaDeudaFinal
+		 * @param motivoDeuda
+		 * @param listDeudas
 		 * @param callback
 		 * @throws IllegalArgumentException
 		 */
@@ -754,6 +790,18 @@ public interface RecursosHumanosServiceAsync {
 				float aporte_casa, boolean tiene_deudas, int no_dependientes,
 				String empresa_credito, boolean alquila,float pago_alquiler, 
 				String Otros_Ingresos,float amortizacion,
+				 String txtEntrevistoB,
+				 String  txtEntrevistoC,
+				 String  txtEntrevistoD,
+				 String  txtObservacion1,
+				 String  txtObservacion2,
+				 String  txtObservacion3,
+				 String  txtObservacion4,
+				 String  txtObservacion5,
+				 Date dateFechaDeudaInicio,
+				 Date dateFechaDeudaFinal,
+				 String motivoDeuda,
+				 String listDeudas,
 				AsyncCallback<Long> callback) throws IllegalArgumentException;
 		/**
 		 * 

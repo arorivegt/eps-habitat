@@ -23,12 +23,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.ValueListBox;
 
 public class Formulario_CuentasXPagar extends Composite  {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	public long idProveedorActual = 0L;
+	Formulario_PagoVale formularioPago;
     TablaGWT_ListaVale e = null;
 	
 	public Formulario_CuentasXPagar(){
@@ -112,7 +114,8 @@ public class Formulario_CuentasXPagar extends Composite  {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-
+				formularioPago = new Formulario_PagoVale();
+				formularioPago.setMensaje();
 			}
 		});		
 

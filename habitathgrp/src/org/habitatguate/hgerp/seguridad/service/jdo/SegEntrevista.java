@@ -97,6 +97,32 @@ public class SegEntrevista implements Serializable {
 
 	@Persistent
     private String Otros_Ingresos;
+	
+
+	@Persistent
+	private String txtEntrevistoB;
+	@Persistent
+	private String  txtEntrevistoC;
+	@Persistent
+	private String  txtEntrevistoD;
+	@Persistent
+	private String  txtObservacion1;
+	@Persistent
+	private String  txtObservacion2;
+	@Persistent
+	private String  txtObservacion3;
+	@Persistent
+	private String  txtObservacion4;
+	@Persistent
+	private String  txtObservacion5;
+	@Persistent
+	private Date dateFechaDeudaInicio;
+	@Persistent
+	private Date dateFechaDeudaFinal;
+	@Persistent
+	private String motivoDeuda;
+	@Persistent
+	private String listDeudas ;
 
 	@Persistent
     private SegEmpleado empleado;
@@ -330,7 +356,103 @@ public class SegEntrevista implements Serializable {
 	public void setEmpleado(SegEmpleado empleado) {
 		this.empleado = empleado;
 	}
-	 
 
+	public String getTxtEntrevistoB() {
+		return txtEntrevistoB;
+	}
+
+	public void setTxtEntrevistoB(String txtEntrevistoB) {
+		this.txtEntrevistoB = txtEntrevistoB;
+	}
+
+	public String getTxtEntrevistoC() {
+		return txtEntrevistoC;
+	}
+
+	public void setTxtEntrevistoC(String txtEntrevistoC) {
+		this.txtEntrevistoC = txtEntrevistoC;
+	}
+
+	public String getTxtEntrevistoD() {
+		return txtEntrevistoD;
+	}
+
+	public void setTxtEntrevistoD(String txtEntrevistoD) {
+		this.txtEntrevistoD = txtEntrevistoD;
+	}
+
+	public String getTxtObservacion1() {
+		return txtObservacion1;
+	}
+
+	public void setTxtObservacion1(String txtObservacion1) {
+		this.txtObservacion1 = txtObservacion1;
+	}
+
+	public String getTxtObservacion2() {
+		return txtObservacion2;
+	}
+
+	public void setTxtObservacion2(String txtObservacion2) {
+		this.txtObservacion2 = txtObservacion2;
+	}
+
+	public String getTxtObservacion3() {
+		return txtObservacion3;
+	}
+
+	public void setTxtObservacion3(String txtObservacion3) {
+		this.txtObservacion3 = txtObservacion3;
+	}
+
+	public String getTxtObservacion4() {
+		return txtObservacion4;
+	}
+
+	public void setTxtObservacion4(String txtObservacion4) {
+		this.txtObservacion4 = txtObservacion4;
+	}
+
+	public String getTxtObservacion5() {
+		return txtObservacion5;
+	}
+
+	public void setTxtObservacion5(String txtObservacion5) {
+		this.txtObservacion5 = txtObservacion5;
+	}
+
+	public Date getDateFechaDeudaInicio() {
+		return dateFechaDeudaInicio;
+	}
+
+	public void setDateFechaDeudaInicio(Date dateFechaDeudaInicio) {
+		this.dateFechaDeudaInicio = dateFechaDeudaInicio;
+	}
+
+	public Date getDateFechaDeudaFinal() {
+		return dateFechaDeudaFinal;
+	}
+
+	public void setDateFechaDeudaFinal(Date dateFechaDeudaFinal) {
+		this.dateFechaDeudaFinal = dateFechaDeudaFinal;
+	}
+
+	public String getMotivoDeuda() {
+		return motivoDeuda;
+	}
+
+	public void setMotivoDeuda(String motivoDeuda) {
+		this.motivoDeuda = motivoDeuda;
+	}
+
+	public String getListDeudas() {
+		return listDeudas;
+	}
+
+	public void setListDeudas(String listDeudas) {
+		this.listDeudas = listDeudas;
+	}
+	 
+	
 	
 }

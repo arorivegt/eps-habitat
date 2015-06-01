@@ -823,7 +823,7 @@ public class Empleado extends Composite {
         	if(auxEntrevista.getCarta_recomendacion_laboral()){ valorG = "Si";}
         	if(auxEntrevista.getCarta_recomendacion_personal()){ valorH = "Si";}
         	if(auxEntrevista.getVive_con_familia()){ valorI = "Si";}
-        	if(auxEntrevista.getVive_con_familia()){ valorJ = "Si";}
+        	if(auxEntrevista.getCasa_propia()){ valorJ = "Si";}
         	if(auxEntrevista.getTiene_deudas()){ valorDeudas = "Si";}
         	if(auxEntrevista.getAlquila()){ valorAlquila = "Si";}
         	
@@ -831,7 +831,9 @@ public class Empleado extends Composite {
 		    			valorA, valorB, valorC, valorE, valorF, valorG, valorH, valorI, valorJ, auxEntrevista.getEnfermedades(), 
 				auxEntrevista.getTrabajar_por_presion(), auxEntrevista.getEmpresa_credito(), valorDeudas, ""+auxEntrevista.getNo_dependientes(), valorAlquila, 
 				auxEntrevista.getOtros_Ingresos(), auxEntrevista.getEntrevisto(), auxEntrevista.getFecha_entrevista(),""+""+auxEntrevista.getAporte_casa(),""+ auxEntrevista.getAmortizacion(), 
-				""+auxEntrevista.getPago_alquiler(),""+auxEntrevista.getPretencion_salarial_minimo());
+				""+auxEntrevista.getPago_alquiler(),""+auxEntrevista.getPretencion_salarial_minimo(),auxEntrevista.getTxtEntrevistoB(),auxEntrevista.getTxtEntrevistoC(),auxEntrevista.getTxtEntrevistoD(),
+				auxEntrevista.getTxtObservacion1(),auxEntrevista.getTxtObservacion2(),auxEntrevista.getTxtObservacion3(),auxEntrevista.getTxtObservacion4(),auxEntrevista.getTxtObservacion5(),
+				auxEntrevista.getDateFechaDeudaInicio(),auxEntrevista.getDateFechaDeudaInicio(),auxEntrevista.getMotivoDeuda(),auxEntrevista.getListDeudas());
 	
 		    }
 

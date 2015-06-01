@@ -78,7 +78,6 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				em.setPrimer_apellido(Apellido.toUpperCase().trim());
 				em.setSegundo_apellido(Apellido2.toUpperCase().trim());
 				em.setSegundo_nombre(Nombre2.toUpperCase().trim());
-				em.setEstado("2");
 				em.setIVS("0");
 				em.setCui("0");
 				em.setNit("0");
@@ -474,7 +473,19 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 			boolean carta_recomendacion_personal, boolean vive_con_familia,
 			boolean casa_propia, String entrevisto, String enfermedades,
 			float aporte_casa, boolean tiene_deudas, int no_dependientes,
-			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos,float amortizacion)
+			String empresa_credito, boolean alquila,float pago_alquiler,String Otros_Ingresos,float amortizacion,
+			 String txtEntrevistoB,
+			 String  txtEntrevistoC,
+			 String  txtEntrevistoD,
+			 String  txtObservacion1,
+			 String  txtObservacion2,
+			 String  txtObservacion3,
+			 String  txtObservacion4,
+			 String  txtObservacion5,
+			 Date dateFechaDeudaInicio,
+			 Date dateFechaDeudaFinal,
+			 String motivoDeuda,
+			 String listDeudas)
 			throws IllegalArgumentException {
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		
@@ -507,7 +518,19 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 				 	l.setEmpresa_credito(empresa_credito);
 				 	l.setAlquila(alquila);
 				 	l.setOtros_Ingresos(Otros_Ingresos);
-		      	 	l.setEmpleado(e);;
+				 	l.setTxtEntrevistoB(txtEntrevistoB);
+				 	l.setTxtEntrevistoC(txtEntrevistoC);
+				 	l.setTxtEntrevistoD(txtEntrevistoD);
+				 	l.setTxtObservacion1(txtObservacion1);
+				 	l.setTxtObservacion2(txtObservacion2);
+				 	l.setTxtObservacion3(txtObservacion3);
+				 	l.setTxtObservacion4(txtObservacion4);
+				 	l.setTxtObservacion5(txtObservacion5);
+				 	l.setDateFechaDeudaInicio(dateFechaDeudaInicio);
+				 	l.setDateFechaDeudaFinal(dateFechaDeudaFinal);
+				 	l.setMotivoDeuda(motivoDeuda);
+				 	l.setListDeudas(listDeudas);
+		      	 	l.setEmpleado(e);
 		      	 	e.getEntrevista().add(l);
 				 	valor = l.getId_entrevista().getId();
 				 }finally {  
@@ -864,7 +887,19 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 					boolean carta_recomendacion_personal, boolean vive_con_familia,
 					boolean casa_propia, String entrevisto, String enfermedades,
 					float aporte_casa, boolean tiene_deudas, int no_dependientes,
-					String empresa_credito, boolean alquila,float pago_alquiler,String otros_ingresos,float amortizacion)
+					String empresa_credito, boolean alquila,float pago_alquiler,String otros_ingresos,float amortizacion,
+					 String txtEntrevistoB,
+					 String  txtEntrevistoC,
+					 String  txtEntrevistoD,
+					 String  txtObservacion1,
+					 String  txtObservacion2,
+					 String  txtObservacion3,
+					 String  txtObservacion4,
+					 String  txtObservacion5,
+					 Date dateFechaDeudaInicio,
+					 Date dateFechaDeudaFinal,
+					 String motivoDeuda,
+					 String listDeudas)
 					throws IllegalArgumentException {
 				final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 				
@@ -901,6 +936,20 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 						 	l.setEmpresa_credito(empresa_credito);
 						 	l.setAlquila(alquila);
 						 	l.setOtros_Ingresos(otros_ingresos);
+						 	l.setTxtEntrevistoB(txtEntrevistoB);
+						 	l.setTxtEntrevistoC(txtEntrevistoC);
+						 	l.setTxtEntrevistoD(txtEntrevistoD);
+						 	l.setTxtEntrevistoD(txtEntrevistoD);
+						 	l.setTxtEntrevistoD(txtEntrevistoD);
+						 	l.setTxtObservacion1(txtObservacion1);
+						 	l.setTxtObservacion2(txtObservacion2);
+						 	l.setTxtObservacion3(txtObservacion3);
+						 	l.setTxtObservacion4(txtObservacion4);
+						 	l.setTxtObservacion5(txtObservacion5);
+						 	l.setDateFechaDeudaInicio(dateFechaDeudaInicio);
+						 	l.setDateFechaDeudaFinal(dateFechaDeudaFinal);
+						 	l.setMotivoDeuda(motivoDeuda);
+						 	l.setListDeudas(listDeudas);
 						 	valor = l.getId_entrevista().getId();
 						 }finally {  
 							 Persistencia.close();  
@@ -1203,6 +1252,18 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 								 	l.setAlquila(n0.getAlquila());
 								 	l.setOtros_Ingresos(n0.getOtros_Ingresos());
 								 	l.setAmortizacion(n0.getAmortizacion());
+									l.setTxtEntrevistoB(n0.getTxtEntrevistoB());
+									l.setTxtEntrevistoC(n0.getTxtEntrevistoC());
+									l.setTxtEntrevistoD(n0.getTxtEntrevistoD());
+								 	l.setTxtObservacion1(n0.getTxtObservacion1());
+								 	l.setTxtObservacion2(n0.getTxtObservacion2());
+								 	l.setTxtObservacion3(n0.getTxtObservacion3());
+								 	l.setTxtObservacion4(n0.getTxtObservacion4());
+								 	l.setTxtObservacion5(n0.getTxtObservacion5());
+								 	l.setDateFechaDeudaInicio(n0.getDateFechaDeudaInicio().getTime());
+								 	l.setDateFechaDeudaFinal(n0.getDateFechaDeudaFinal().getTime());
+								 	l.setMotivoDeuda(n0.getMotivoDeuda());
+								 	l.setListDeudas(n0.getListDeudas());
 								 	nuevo.getEntrevista().add(l);
 							    }
 					    	}
@@ -1472,6 +1533,18 @@ public class RecursosHumanosServiceImpl extends RemoteServiceServlet implements 
 							 	l.setAlquila(n0.getAlquila());
 							 	l.setOtros_Ingresos(n0.getOtros_Ingresos());
 							 	l.setAmortizacion(n0.getAmortizacion());
+							 	l.setTxtEntrevistoB(n0.getTxtEntrevistoB());
+								l.setTxtEntrevistoC(n0.getTxtEntrevistoC());
+								l.setTxtEntrevistoD(n0.getTxtEntrevistoD());
+							 	l.setTxtObservacion1(n0.getTxtObservacion1());
+							 	l.setTxtObservacion2(n0.getTxtObservacion2());
+							 	l.setTxtObservacion3(n0.getTxtObservacion3());
+							 	l.setTxtObservacion4(n0.getTxtObservacion4());
+							 	l.setTxtObservacion5(n0.getTxtObservacion5());
+							 	l.setDateFechaDeudaInicio(n0.getDateFechaDeudaInicio().getTime());
+							 	l.setDateFechaDeudaFinal(n0.getDateFechaDeudaFinal().getTime());
+							 	l.setMotivoDeuda(n0.getMotivoDeuda());
+							 	l.setListDeudas(n0.getListDeudas());
 							 	nuevo.getEntrevista().add(l);
 						    }
 				    	}

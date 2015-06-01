@@ -114,8 +114,11 @@ public class Formulario_CuentasXPagar extends Composite  {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				formularioPago = new Formulario_PagoVale();
+				AuxVale aux= e.grid.selectionModel.getSelectedObject();
+				if (aux !=null ){
+				formularioPago = new Formulario_PagoVale(aux.getIdVale());
 				formularioPago.setMensaje();
+				}
 			}
 		});		
 

@@ -147,6 +147,9 @@ public interface SqlServiceAsync {
 	void ConsultarValesPendientes_unProveedor(Long idProveedor,
 			AsyncCallback<List<AuxVale>> callback);
 
+	void Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento,
+			String tipoDocumento, Double valorPago, AsyncCallback<Long> callback);
+
 
 
 

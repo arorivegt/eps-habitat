@@ -62,6 +62,12 @@ public class SegHistorialPagoProv implements Serializable {
 	public void setSerieDocumento(String serieDocumento) {
 		this.serieDocumento = serieDocumento;
 	}
+	public SegVale getVale() {
+		return vale;
+	}
+	public void setVale(SegVale vale) {
+		this.vale = vale;
+	}
 	
 
 	

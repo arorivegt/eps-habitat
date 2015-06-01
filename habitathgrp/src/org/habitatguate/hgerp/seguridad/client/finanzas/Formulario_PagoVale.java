@@ -2,9 +2,14 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.Date;
 
+import org.habitatguate.hgerp.seguridad.client.api.SqlService;
+import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
@@ -18,11 +23,15 @@ import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 
 public class Formulario_PagoVale extends Composite{
+    private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+    private Long idVale = 0L;
 	
 	private Label mensaje;
 	final Button close= new Button("x");
 	
-	 public Formulario_PagoVale(){
+	 public Formulario_PagoVale(Long idVale){
+			System.out.println("Vale cargado "+ idVale);
+			this.idVale = idVale;
 		mensaje = new Label("Formulario de Pago");
 		close.addStyleName("close");
 		initWidget(mensaje);
@@ -102,6 +111,28 @@ public class Formulario_PagoVale extends Composite{
         		dialogo.hide();
         	}
         });
+        
+        button.addClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				loginService.Insertar_PagoVale(idVale, dateBox.getValue(), txtRef.getText(), txtUser.getText(), Double.valueOf(txtCantidad.getText()), new AsyncCallback<Long>() {
+					
+					@Override
+					public void onSuccess(Long result) {
+						// TODO Auto-generated method stub
+						dialogo.hide();
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+
+			}
+		});
     }
 
 }

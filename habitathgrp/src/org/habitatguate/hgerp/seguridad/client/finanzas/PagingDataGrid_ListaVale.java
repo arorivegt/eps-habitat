@@ -29,6 +29,7 @@ import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.ProvidesKey;
+import com.google.gwt.view.client.SingleSelectionModel;
 
  
 /**
@@ -44,8 +45,8 @@ public abstract class PagingDataGrid_ListaVale<T> extends Composite {
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
 	//private Button botonEliminar;
-    final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxVale.KEY_PROVIDER);
+    final SingleSelectionModel<T> selectionModel =
+            new SingleSelectionModel<T>((ProvidesKey<T>)AuxVale.KEY_PROVIDER);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	Iterator<T> iter = null;
 	T objectoEliminado = null;

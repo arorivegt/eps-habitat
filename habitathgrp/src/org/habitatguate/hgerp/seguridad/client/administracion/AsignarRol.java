@@ -75,7 +75,7 @@ public class AsignarRol extends Composite{
 					public void onSuccess(String result) {
 
 						Long rol = Long.parseLong(listRol.getItemText(listRol.getSelectedIndex()));
-	            		recursosHumanosService.CambiarRol(result, rol,new AsyncCallback<String>()
+	            		recursosHumanosService.CambiarRol(txtUsuario.getText(), rol,new AsyncCallback<String>()
 	    			    {
 	    		            public void onFailure(Throwable caught) {
 	    		                load.invisible();

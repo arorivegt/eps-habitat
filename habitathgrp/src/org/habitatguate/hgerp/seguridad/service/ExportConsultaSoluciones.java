@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ExportAs
  */
-@WebServlet("/ExportSolucionDetalle")
-public class ExportSolucionDetalle extends HttpServlet {
+@WebServlet("/ExportConsultaSoluciones")
+public class ExportConsultaSoluciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    public ExportSolucionDetalle() {
+    public ExportConsultaSoluciones() {
         super();
     }
 
@@ -26,7 +26,7 @@ public class ExportSolucionDetalle extends HttpServlet {
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-			InformeSolucionDetalleXml n = new InformeSolucionDetalleXml();
+			InformeConsultaSolucionesXml n = new InformeConsultaSolucionesXml();
 			
 			response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "inline; Filename=Detalle_Soluciones_Construidas.xls");

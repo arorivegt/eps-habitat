@@ -7,6 +7,8 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -29,7 +31,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 
-public class Sce_SolucionesConstruidasHabitat extends Composite  {
+public class Sce_ConsultaEncuestasHabitat extends Composite  {
 
     private  Grid grid;
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
@@ -48,14 +50,14 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
     private AbsolutePanel absolutePanel_1;
     private ListBox listSolucionConstruir ;
     private Loading load ;
-    private List<Sce_DatosSolucionesConstruidas> DATOS;
+    private List<Sce_ReporteDatosSolucionesConstruidas> DATOS;
   	
     // Valor Escritura-Lectura
     private boolean valor;
     // Opcion de busqueda
     private boolean opcion;
     
-	public Sce_SolucionesConstruidasHabitat(boolean valor, final boolean opcion) {
+	public Sce_ConsultaEncuestasHabitat(boolean valor, final boolean opcion) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 	    this.opcion = opcion;				// Variable de opcion de busqueda Especifica|General
@@ -254,176 +256,20 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 			@Override
 			public void onSuccess( List<AuxSolicitudGeneral> result)
 			{
-				DATOS = new ArrayList<Sce_DatosSolucionesConstruidas>();
-				int i = 1;
 
 				for (AuxSolicitudGeneral p : result) {
 
-					Sce_DatosSolucionesConstruidas empleado = new Sce_DatosSolucionesConstruidas();
+					try{           	
+						
+						System.out.println("Personas que ingresaron encuestas: " + p.getNombreSolicitante());
+						
+						setDataEncuestaSatisfaccion(p.getEncuestaSatisfaccion(), p.getNombreSolicitante());
+						
+					}catch(Exception e){
 
-					// DATA A MOSTRAR EN RESULTADO
-					
-					// 1. Numero Correlativo.
-					empleado.setNumero(""+i);
-					
-//					// 1. Codigo Referencia
-//					empleado.setIdFormulario(""+p.getIdFormulario());
-					
-					// 2. Nombre Solicitante
-					empleado.setNombreSolicitante(p.getNombreSolicitante());
-					
-					// 3. Estado Civil
-					String valEstadoCivil = "";
-					valEstadoCivil = p.getEstadoCivil();
-					String estadoCivil = "";
-					if(valEstadoCivil.equals("1")){
-						estadoCivil = "Soltero (a)";
-					}else if(valEstadoCivil.equals("2")){
-						estadoCivil = "Casado (a)";
-					}else if(valEstadoCivil.equals("3")){
-						estadoCivil = "Unido (a)";
-					}else if(valEstadoCivil.equals("4")){
-						estadoCivil = "Separado (a)";
-					}else if(valEstadoCivil.equals("5")){
-						estadoCivil = "Divorciado (a)";
-					}else if(valEstadoCivil.equals("6")){
-						estadoCivil = "Viudo (a)";
-					}
-					empleado.setEstadoCivil(estadoCivil);
-					
-					// 4. Edad
-					empleado.setEdad(""+p.getEdad());
+					} 
 
-					// 5. Solucion a construir
-					String valSolucion = "";
-					valSolucion = p.getSolucionConstruir();
-					String solucion = "";
-					if(valSolucion.equals("1")){
-						solucion = "NUEVA";
-					}else if(valSolucion.equals("2")){
-						solucion = "MEJORAMIENTO";
-					}else if(valSolucion.equals("3")){
-						solucion = "ADICIONES MENORES";
-					}
-					empleado.setSolucionConstruir(solucion);
-
-					// 6. Telefono Casa
-					empleado.setTelefonoCasaSolicitante(""+p.getTelefonoCasaSolicitante());
-
-					// 7. Telefono Trabajo
-					empleado.setTelefonoTrabajoSolicitante(""+p.getTelefonoTrabajoSolicitante());
-					
-					// 8. Inmueble accesible en camion
-					String valCamion = "";
-					Boolean camion = false;
-					camion = p.getCheckCamion();
-					if(camion){
-						valCamion = "SI";
-					}else{
-						valCamion = "NO";
-					}
-					empleado.setCamion(valCamion);
-					
-					// 9. Inmueble accesible en carro
-					String valCarro = "";
-					Boolean carro = false;
-					carro = p.getCheckCarro();
-					if(carro){
-						valCarro = "SI";
-					}else{
-						valCarro = "NO";
-					}
-					empleado.setCarro(valCarro);
-					
-					// 10. Inmueble accesible para peatones
-					String valPeatonal = "";
-					Boolean peatonal = false;
-					peatonal = p.getCheckPeatonal();
-					if(peatonal){
-						valPeatonal = "SI";
-					}else{
-						valPeatonal = "NO";
-					}
-					empleado.setPeatonal(valPeatonal);					
-					
-					// 11. Contiene Garantia
-					String valGarantia = "";
-					Boolean garantia = false;
-					garantia = p.getGarantia();
-					if(garantia){
-						valGarantia = "SI";
-					}else{
-						valGarantia = "NO";
-					}
-					empleado.setGarantia(valGarantia);
-					
-					// 12. Primera Supervision
-					String valSupervision1 = "";
-					Boolean supervision1 = false;
-					supervision1 = p.getPrimeraSupervision();
-					if(supervision1){
-						valSupervision1 = "SI";
-					}else{
-						valSupervision1 = "NO";
-					}
-					empleado.setSupervisionPrimera(valSupervision1);
-					
-					// 13. Segunda Supervision
-					String valSupervision2 = "";
-					Boolean supervision2 = false;
-					supervision2 = p.getSegundaSupervision();
-					if(supervision2){
-						valSupervision2 = "SI";
-					}else{
-						valSupervision2 = "NO";
-					}
-					empleado.setSupervisionSegunda(valSupervision2);
-					
-					// 14. Tercera Supervision
-					String valSupervision3 = "";
-					Boolean supervision3 = false;
-					supervision3 = p.getTerceraSupervision();
-					if(supervision3){
-						valSupervision3 = "SI";
-					}else{
-						valSupervision3 = "NO";
-					}
-					empleado.setSupervisionTercera(valSupervision3);
-					
-					// 15. Cuarta Supervision
-					String valSupervision4 = "";
-					Boolean supervision4 = false;
-					supervision4 = p.getCuartaSupervision();
-					if(supervision4){
-						valSupervision4 = "SI";
-					}else{
-						valSupervision4 = "NO";
-					}
-					empleado.setSupervisionCuarta(valSupervision4);
-							
-					DATOS.add(empleado);
-					i++;
 				}
-
-				Sce_ReporteSolucionesConstruidas nuevo = new Sce_ReporteSolucionesConstruidas(DATOS);
-				nuevo.AgregarColumna("1");
-				nuevo.AgregarColumna("2");
-				nuevo.AgregarColumna("3");
-				nuevo.AgregarColumna("4");
-				nuevo.AgregarColumna("5");
-				nuevo.AgregarColumna("6");
-				nuevo.AgregarColumna("7");
-				nuevo.AgregarColumna("8");
-				nuevo.AgregarColumna("9");
-				nuevo.AgregarColumna("10");
-				nuevo.AgregarColumna("11");
-				nuevo.AgregarColumna("12");
-				nuevo.AgregarColumna("13");
-				nuevo.AgregarColumna("14");
-				nuevo.AgregarColumna("15");
-
-				absolutePanel_1.clear();
-				absolutePanel_1.add(nuevo);
 			}
 
 		});
@@ -432,4 +278,89 @@ public class Sce_SolucionesConstruidasHabitat extends Composite  {
 
 	}
 
+	
+	public void setDataEncuestaSatisfaccion(List<AuxSolicitudEncuestaSatisfaccion> results, String nombre){
+
+		DATOS = new ArrayList<Sce_ReporteDatosSolucionesConstruidas>();
+		int i = 1;
+		Sce_ReporteDatosSolucionesConstruidas encuesta = new Sce_ReporteDatosSolucionesConstruidas();
+
+		if (!results.isEmpty()) {
+
+			for ( AuxSolicitudEncuestaSatisfaccion n2 : results) {
+
+				System.out.println("ID Encuesta Satisfaccion: " + n2.getIdEncuestaSatisfaccion() + ", ID Formulario: " + n2.getIdFormulario()); 			
+
+				// DATA A MOSTRAR EN RESULTADO
+
+				// 1. Numero Correlativo.
+				encuesta.setNumero(""+i);
+				// 2. Nombre Solicitante
+				encuesta.setNombreSolicitante(nombre);
+				// 3. Pregunta 1
+				encuesta.setPregunta1(n2.getPreguntaNo1());
+				// 4. Pregunta 2
+				encuesta.setPregunta2(n2.getPreguntaNo2());
+				// 5. Pregunta 3
+				encuesta.setPregunta3(n2.getPreguntaNo3());
+				// 6. Pregunta 4
+				encuesta.setPregunta4(n2.getPreguntaNo4());
+				// 7. Pregunta 5
+				encuesta.setPregunta5(n2.getPreguntaNo5());
+				// 8. Pregunta 6
+				encuesta.setPregunta6(n2.getPreguntaNo6());
+				// 9. Pregunta 7
+				encuesta.setPregunta7(n2.getPreguntaNo7());
+				// 10. Pregunta 8
+				encuesta.setPregunta8(n2.getPreguntaNo8());
+				// 11. Pregunta 9
+				encuesta.setPregunta9(n2.getPreguntaNo9());
+				// 12. Pregunta 10
+				encuesta.setPregunta10(n2.getPreguntaNo10());
+				// 13. Pregunta 11
+				encuesta.setPregunta11(n2.getPreguntaNo11());
+				// 14. Pregunta 12
+				encuesta.setPregunta12(n2.getPreguntaNo12());
+				// 15. Pregunta 13
+				encuesta.setPregunta13(n2.getPreguntaNo13());
+				// 16. Pregunta 14
+				encuesta.setPregunta14(n2.getPreguntaNo14());
+				// 17. Pregunta 15
+				encuesta.setPregunta15(n2.getPreguntaNo15());
+				// 18. Pregunta 16
+				encuesta.setPregunta16(n2.getPreguntaNo16());
+
+				DATOS.add(encuesta);
+				i++;
+
+			}
+
+		}
+
+		Sce_ReporteSolucionesConstruidas nuevo = new Sce_ReporteSolucionesConstruidas(DATOS);
+		nuevo.ConstruirConsultaEncuestas("1");
+		nuevo.ConstruirConsultaEncuestas("2");
+		nuevo.ConstruirConsultaEncuestas("3");
+		nuevo.ConstruirConsultaEncuestas("4");
+		nuevo.ConstruirConsultaEncuestas("5");
+		nuevo.ConstruirConsultaEncuestas("6");
+		nuevo.ConstruirConsultaEncuestas("7");
+		nuevo.ConstruirConsultaEncuestas("8");
+		nuevo.ConstruirConsultaEncuestas("9");
+		nuevo.ConstruirConsultaEncuestas("10");
+		nuevo.ConstruirConsultaEncuestas("11");
+		nuevo.ConstruirConsultaEncuestas("12");
+		nuevo.ConstruirConsultaEncuestas("13");
+		nuevo.ConstruirConsultaEncuestas("14");
+		nuevo.ConstruirConsultaEncuestas("15");
+		nuevo.ConstruirConsultaEncuestas("16");
+		nuevo.ConstruirConsultaEncuestas("17");
+		nuevo.ConstruirConsultaEncuestas("18");
+
+		absolutePanel_1.clear();
+		absolutePanel_1.add(nuevo);
+
+	}
+    
+	
 }

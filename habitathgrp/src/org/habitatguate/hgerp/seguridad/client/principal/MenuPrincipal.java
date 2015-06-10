@@ -32,13 +32,14 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBuroCredito;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_ConsultaEncuestasHabitat;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataFormularioSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSupervision;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonGarantia;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataEntryFormularioSolicitud;
-import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_SolucionesConstruidasHabitat;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_ConsultaSolucionesHabitat;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -237,20 +238,30 @@ public class MenuPrincipal extends Composite {
 			public void execute() {
 				sce4();
 			}
-		};		      
-		Command cmdsce6 = new Command() {
-			public void execute() {
-				sce6();
-			}
 		};	
 		Command cmdsceBuroCredito = new Command() {
 			public void execute() {
 				sceBuroCredito();
 			}
 		};		
-		Command cmdsceConsultaGeneral = new Command() {
+		Command cmdConsultaIngresoSoluciones = new Command() {
 			public void execute() {
-				sceConsultaGeneral();
+				sceConsultaIngresoSoluciones();
+			}
+		};	
+		Command cmdConsultaGeneralSoluciones = new Command() {
+			public void execute() {
+				sceConsultaGeneralSoluciones();
+			}
+		};
+		Command cmdConsultaIngresoEncuestas = new Command() {
+			public void execute() {
+				sceConsultaIngresoEncuestas();
+			}
+		};	
+		Command cmdsceConsultaGeneralEncuestas = new Command() {
+			public void execute() {
+				sceConsultaGeneralEncuestas();
 			}
 		};
 		// --- Fin
@@ -370,9 +381,26 @@ public class MenuPrincipal extends Composite {
 
 
 		// --- Soluciones Construidas    
+		
+		final MenuBar subMenuDetalleIngresadas = new MenuBar(true);
+		subMenuDetalleIngresadas.setAutoOpen(true);
+		subMenuDetalleIngresadas.setAnimationEnabled(true);
+		subMenuDetalleIngresadas.addSeparator();
+		subMenuDetalleIngresadas.addItem("Soluciones Construidas", cmdConsultaIngresoSoluciones);
+		subMenuDetalleIngresadas.addSeparator();
+		subMenuDetalleIngresadas.addItem("Encuesta de Satisfaccion", cmdConsultaIngresoEncuestas);
+
+		final MenuBar subMenuDetalleGeneral = new MenuBar(true);
+		subMenuDetalleGeneral.setAutoOpen(true);
+		subMenuDetalleGeneral.setAnimationEnabled(true);
+		subMenuDetalleGeneral.addSeparator();
+		subMenuDetalleGeneral.addItem("Soluciones Construidas", cmdConsultaGeneralSoluciones);
+		subMenuDetalleGeneral.addSeparator();
+		subMenuDetalleGeneral.addItem("Encuesta de Satisfaccion", cmdsceConsultaGeneralEncuestas);
+		
+		
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
-		
 //		AdministracionService.ObtenerUsuarioPermisoNombre("Recepcion-Formulario-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
 //		{
 //			public void onFailure(Throwable caught) 
@@ -391,7 +419,6 @@ public class MenuPrincipal extends Composite {
 //				}
 //			}
 //		});
-		
 		MenuSolucionesConstruidas.addItem("Verificacion Informacion Solicitudes Ingresadas", cmdsce2);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Aprobacion Buro de Credito", cmdsceBuroCredito);
@@ -400,9 +427,10 @@ public class MenuPrincipal extends Composite {
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Bitacora de Supervision Solicitudes Ingresadas", cmdsce4);
 		MenuSolucionesConstruidas.addSeparator();										
-		MenuSolucionesConstruidas.addItem("Detalle Solicitudes Ingresadas", cmdsce6);	
+		MenuSolucionesConstruidas.addItem("Consulta Solicitudes Ingresadas", subMenuDetalleIngresadas);	
 		MenuSolucionesConstruidas.addSeparator();										
-		MenuSolucionesConstruidas.addItem("Consulta General Solicitudes", cmdsceConsultaGeneral);		
+		MenuSolucionesConstruidas.addItem("Consulta General Solicitudes", subMenuDetalleGeneral);		
+
 		// --- Fin
 
 		final  MenuBar MenuVertical = new MenuBar();
@@ -520,8 +548,10 @@ public class MenuPrincipal extends Composite {
 								//PARTE DEL MENU POR DEFECTP
 								//agregar item para el menu
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
-//								MenuVertical.addSeparator();
-//								MenuVertical.addItem("Administracion",MenuAdmistracion); 
+
+					        	// COMENTAR/ELIIMINAR
+//								MenuVertical.addSeparator(); //--
+//								MenuVertical.addItem("Administracion",MenuAdmistracion); //--
 //								MenuVertical.addSeparator();
 //								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
 								MenuVertical.setAutoOpen(false);
@@ -1271,49 +1301,6 @@ public class MenuPrincipal extends Composite {
 		
 	}		
 
-	//@UiHandler("sc6")
-	void sce6() {
-		
-		AdministracionService.ObtenerUsuarioPermisoNombre("Detalle-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
-		{
-			public void onFailure(Throwable caught) 
-			{
-
-			}
-
-			@Override
-			public void onSuccess(List<AuxUsuarioPermiso> results)
-			{
-
-				if(results.get(0).getPermiso().equals("RW")){
-
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true, true);
-					System.out.println("Detalle Soluciones - Lectura/Escritura");
-					
-					panel.getGrid().setHeight("100%");
-					panel.getGrid().clearCell(1, 0);
-					panel.getGrid().setWidget(1, 0, buscador);
-
-				}else if(results.get(0).getPermiso().equals("R")){
-				
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false, true);
-					System.out.println("Detalle Soluciones - Solo Lectura");
-					
-					panel.getGrid().setHeight("100%");
-					panel.getGrid().clearCell(1, 0);
-					panel.getGrid().setWidget(1, 0, buscador);
-					
-				}else if(results.get(0).getPermiso().equals("N")){
-					
-					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
-					
-				}
-
-			}
-		});
-			
-	}
-
 	//@UiHandler("sceBuroCredito")
 	void sceBuroCredito() {
 		
@@ -1359,10 +1346,10 @@ public class MenuPrincipal extends Composite {
 			
 	}
 	
-	//@UiHandler("sceConsultaGeneral")
-	void sceConsultaGeneral() {
+	//@UiHandler("sc6")
+	void sceConsultaIngresoSoluciones() {
 		
-		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-Ingreso-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
 		{
 			public void onFailure(Throwable caught) 
 			{
@@ -1375,8 +1362,8 @@ public class MenuPrincipal extends Composite {
 
 				if(results.get(0).getPermiso().equals("RW")){
 
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(true, false);
-					System.out.println("Detalle Soluciones - Lectura/Escritura");
+					Sce_ConsultaSolucionesHabitat buscador = new Sce_ConsultaSolucionesHabitat(true, true);
+					System.out.println("Consulta Ingreso Soluciones - Lectura/Escritura");
 					
 					panel.getGrid().setHeight("100%");
 					panel.getGrid().clearCell(1, 0);
@@ -1384,8 +1371,8 @@ public class MenuPrincipal extends Composite {
 
 				}else if(results.get(0).getPermiso().equals("R")){
 				
-					Sce_SolucionesConstruidasHabitat buscador = new Sce_SolucionesConstruidasHabitat(false, false);
-					System.out.println("Detalle Soluciones - Solo Lectura");
+					Sce_ConsultaSolucionesHabitat buscador = new Sce_ConsultaSolucionesHabitat(false, true);
+					System.out.println("Consulta Ingreso Soluciones - Solo Lectura");
 					
 					panel.getGrid().setHeight("100%");
 					panel.getGrid().clearCell(1, 0);
@@ -1402,6 +1389,134 @@ public class MenuPrincipal extends Composite {
 			
 	}
 	
+	//@UiHandler("sceConsultaGeneral")
+	void sceConsultaGeneralSoluciones() {
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_ConsultaSolucionesHabitat buscador = new Sce_ConsultaSolucionesHabitat(true, false);
+					System.out.println("Consulta General Soluciones - Lectura/Escritura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_ConsultaSolucionesHabitat buscador = new Sce_ConsultaSolucionesHabitat(false, false);
+					System.out.println("Consulta General Soluciones - Solo Lectura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+			}
+		});
+			
+	}
+	
+	//@UiHandler("sceConsultaIngresoEncuesta")
+	void sceConsultaIngresoEncuestas() {
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-Ingreso-Encuesta-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_ConsultaEncuestasHabitat buscador = new Sce_ConsultaEncuestasHabitat(true, true);
+					System.out.println("Consulta Ingreso Encuestas - Lectura/Escritura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_ConsultaEncuestasHabitat buscador = new Sce_ConsultaEncuestasHabitat(false, true);
+					System.out.println("Consulta Ingreso Encuestas - Solo Lectura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+			}
+		});
+			
+	}
+	
+	//@UiHandler("sceConsultaGeneralEncuesta")
+	void sceConsultaGeneralEncuestas() {
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-General-Encuesta-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_ConsultaEncuestasHabitat buscador = new Sce_ConsultaEncuestasHabitat(true, false);
+					System.out.println("Consulta General Encuestas - Lectura/Escritura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+				
+					Sce_ConsultaEncuestasHabitat buscador = new Sce_ConsultaEncuestasHabitat(false, false);
+					System.out.println("Consulta General Encuestas - Solo Lectura");
+					
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buscador);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+			}
+		});
+			
+	}
 	// --- Fin   
 	
 }

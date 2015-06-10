@@ -172,9 +172,11 @@ public class BuscadorRoles extends Composite   {
 				GuardarPagina(rol, "Verificacion-Solicitud-Soluciones", 3L, "N");			// Menu Opcion 2
 				GuardarPagina(rol, "Seguimiento-Garantia-Soluciones", 3L, "N");				// Menu Opcion 3
 				GuardarPagina(rol, "Bitacora-Soluciones", 3L, "N");							// Menu Opcion 4
-				GuardarPagina(rol, "Detalle-Soluciones", 3L, "N");							// Menu Opcion 5
-				GuardarPagina(rol, "Buro-Credito-Soluciones", 3L, "N");						// Menu Opcion 6
+				GuardarPagina(rol, "Buro-Credito-Soluciones", 3L, "N");						// Menu Opcion 5
+				GuardarPagina(rol, "Consulta-Ingreso-Soluciones", 3L, "N");					// Menu Opcion 6
 				GuardarPagina(rol, "Consulta-General-Soluciones", 3L, "N");					// Menu Opcion 7
+				GuardarPagina(rol, "Consulta-Ingreso-Encuesta-Soluciones", 3L, "N");		// Menu Opcion 8
+				GuardarPagina(rol, "Consulta-General-Encuesta-Soluciones", 3L, "N");		// Menu Opcion 8				
 				GuardarPagina(rol, "Datos-Solicitante-Soluciones", 3L, "R");				// Formulario 1 Menu Opcion 2
 				GuardarPagina(rol, "Cargas-Familiares-Soluciones", 3L, "N");				// Formulario 2 Menu Opcion 2
 				GuardarPagina(rol, "Situacion-Vivienda-Soluciones", 3L, "N");				// Formulario 3 Menu Opcion 2

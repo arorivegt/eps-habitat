@@ -7,7 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
 
-public class InformeSolucionDetalleXml {
+public class InformeConsultaSolucionesXml {
     
     private SolucionesConstruidasServiceImpl solucionesService = new SolucionesConstruidasServiceImpl();
     
@@ -47,12 +47,16 @@ public class InformeSolucionDetalleXml {
 				
 				for (AuxSolicitudGeneral p : result) {
 					
+					// 1. Numero Correlativo.
 					xmlInicio += "<td>"+i+"</td>";
 					
+//					// 1. Codigo Referencia
 //					xmlInicio += "<td>"+p.getIdFormulario()+"</td>";
 					
+//					// 2. Nombre Solicitante
 					xmlInicio += "<td>"+p.getNombreSolicitante()+"</td>";
 					
+					// 3. Estado Civil
 					String valEstadoCivil = "";
 					valEstadoCivil = p.getEstadoCivil();
 					String estadoCivil = "";
@@ -71,14 +75,29 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+estadoCivil+"</td>";
 					
+					// 4. Edad
 					xmlInicio += "<td>"+p.getEdad()+"</td>";
 					
-					xmlInicio += "<td>"+p.getSolucionConstruir()+"</td>";
+					// 5. Solucion a construir
+					String valSolucion = "";
+					valSolucion = p.getSolucionConstruir();
+					String solucionConstruir = "";
+					if(valSolucion.equals("1")){
+						solucionConstruir = "NUEVA";
+					}else if(valSolucion.equals("2")){
+						solucionConstruir = "MEJORAMIENTO";
+					}else if(valSolucion.equals("3")){
+						solucionConstruir = "ADICIONES MENORES";
+					}
+					xmlInicio += "<td>"+solucionConstruir+"</td>";
 					
+					// 6. Telefono Casa
 					xmlInicio += "<td>"+p.getTelefonoCasaSolicitante()+"</td>";
 					
+					// 7. Telefono Trabajo
 					xmlInicio += "<td>"+p.getTelefonoTrabajoSolicitante()+"</td>";
 					
+					// 8. Inmueble accesible en camion
 					String valCamion = "";
 					Boolean camion = false;
 					camion = p.getCheckCamion();
@@ -89,6 +108,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valCamion+"</td>";
 					
+					// 9. Inmueble accesible en carro
 					String valCarro = "";
 					Boolean carro = false;
 					carro = p.getCheckCarro();
@@ -99,6 +119,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valCarro+"</td>";
 					
+					// 10. Inmueble accesible para peatones
 					String valPeatonal = "";
 					Boolean peatonal = false;
 					peatonal = p.getCheckPeatonal();
@@ -109,6 +130,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valPeatonal+"</td>";
 					
+					// 11. Contiene Garantia
 					String valGarantia = "";
 					Boolean garantia = false;
 					garantia = p.getGarantia();
@@ -119,6 +141,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valGarantia+"</td>";
 					
+					// 12. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -129,6 +152,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valSupervision1+"</td>";
 					
+					// 13. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -139,6 +163,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valSupervision2+"</td>";
 					
+					// 14. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -149,6 +174,7 @@ public class InformeSolucionDetalleXml {
 					}
 					xmlInicio += "<td>"+valSupervision3+"</td>";
 					
+					// 15. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();

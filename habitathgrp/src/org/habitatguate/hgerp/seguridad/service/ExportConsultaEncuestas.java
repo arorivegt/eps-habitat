@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ExportAs
  */
-@WebServlet("/ExportConsultaSoluciones")
-public class ExportConsultaSoluciones extends HttpServlet {
+@WebServlet("/ExportConsultaEncuestas")
+public class ExportConsultaEncuestas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    public ExportConsultaSoluciones() {
+    public ExportConsultaEncuestas() {
         super();
     }
 
@@ -26,10 +26,10 @@ public class ExportConsultaSoluciones extends HttpServlet {
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-			InformeConsultaSolucionesXml n = new InformeConsultaSolucionesXml();
+			InformeConsultaEncuestasXml n = new InformeConsultaEncuestasXml();
 			
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "inline; Filename=Consulta_Soluciones_Habitat.xls");
+			response.setHeader("Content-Disposition", "inline; Filename=Consulta_Encuestas_Habitat.xls");
 			
 			String tipo 		= request.getParameter("tipo");
 			String solucion 	= request.getParameter("solucion");

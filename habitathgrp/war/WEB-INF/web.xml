@@ -84,12 +84,21 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>ExportSolucionDetalle</servlet-name>
-    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportSolucionDetalle</servlet-class>
+    <servlet-name>ExportConsultaSoluciones</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportConsultaSoluciones</servlet-class>
   </servlet>
   <servlet-mapping>  
-        <servlet-name>ExportSolucionDetalle</servlet-name>  
-        <url-pattern>/ExportSolucionDetalle</url-pattern>  
+        <servlet-name>ExportConsultaSoluciones</servlet-name>  
+        <url-pattern>/ExportConsultaSoluciones</url-pattern>  
+  </servlet-mapping>  
+
+  <servlet>
+    <servlet-name>ExportConsultaEncuestas</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportConsultaEncuestas</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportConsultaEncuestas</servlet-name>  
+        <url-pattern>/ExportConsultaEncuestas</url-pattern>  
   </servlet-mapping>  
 
  <servlet>  

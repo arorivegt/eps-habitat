@@ -15,24 +15,25 @@ public class InformeConsultaEncuestasXml {
     
 	    private String xmlInicio 							 	= "<table><tbody>"
 																+"<tr>"
-																+"<td>No.</td>"	
-																+"<td>Nombre Solicitante</td>"	
-																+"<td>Pregunta 1</td>"
-																+"<td>Pregunta 2</td>"
-																+"<td>Pregunta 3</td>"
-																+"<td>Pregunta 4</td>"
-																+"<td>Pregunta 5</td>"
-																+"<td>Pregunta 6</td>"
-																+"<td>Pregunta 7</td>"
-																+"<td>Pregunta 8</td>"
-																+"<td>Pregunta 9</td>"
-																+"<td>Pregunta 10</td>"
-																+"<td>Pregunta 11</td>"
-																+"<td>Pregunta 12</td>"
-																+"<td>Pregunta 13</td>"
-																+"<td>Pregunta 14</td>"
-																+"<td>Pregunta 15</td>"
-																+"<td>Pregunta 16</td>"
+																+"<td>No.</td>"					// 1
+																+"<td>Nombre Solicitante</td>"	// 2
+																+"<td>Departamento</td>"		// 3
+																+"<td>Pregunta 1</td>"			// 4
+																+"<td>Pregunta 2</td>"			// 5
+																+"<td>Pregunta 3</td>"			// 6
+																+"<td>Pregunta 4</td>"			// 7
+																+"<td>Pregunta 5</td>"			// 8
+																+"<td>Pregunta 6</td>"			// 9
+																+"<td>Pregunta 7</td>"			// 10
+																+"<td>Pregunta 8</td>"			// 11
+																+"<td>Pregunta 9</td>"			// 12
+																+"<td>Pregunta 10</td>"			// 13
+																+"<td>Pregunta 11</td>"			// 14
+																+"<td>Pregunta 12</td>"			// 15
+																+"<td>Pregunta 13</td>"			// 16
+																+"<td>Pregunta 14</td>"			// 17
+																+"<td>Pregunta 15</td>"			// 18
+																+"<td>Pregunta 16</td>"			// 19
 																+"</tr>";
 
 		String  xmlFinal 										= "</tbody></table>";
@@ -79,7 +80,58 @@ public class InformeConsultaEncuestasXml {
 			// 2. Nombre Solicitante
 			xmlInicio += "<td>"+nombre+"</td>";
 			
-			// 3. Pregunta 1
+			// 3. Departamento
+			String valDepto = "";
+			valDepto = n2.getDepartamento();
+			String departamento = "";
+			if(valDepto.equals("1")){
+				departamento = "Petén";
+			}else if(valDepto.equals("2")){
+				departamento = "Izabal";
+			}else if(valDepto.equals("3")){
+				departamento = "Alta Verapaz";
+			}else if(valDepto.equals("4")){
+				departamento = "Quiché";
+			}else if(valDepto.equals("5")){
+				departamento = "Huehuetenango";
+			}else if(valDepto.equals("6")){
+				departamento = "Escuintla";
+			}else if(valDepto.equals("7")){
+				departamento = "San Marcos";
+			}else if(valDepto.equals("8")){
+				departamento = "Jutiapa";
+			}else if(valDepto.equals("9")){
+				departamento = "Baja Verapaz";
+			}else if(valDepto.equals("10")){
+				departamento = "Santa Rosa";
+			}else if(valDepto.equals("11")){
+				departamento = "Zacapa";
+			}else if(valDepto.equals("12")){
+				departamento = "Suchitepéquez";
+			}else if(valDepto.equals("13")){
+				departamento = "Chiquimula";
+			}else if(valDepto.equals("14")){
+				departamento = "Guatemala";
+			}else if(valDepto.equals("15")){
+				departamento = "Jalapa";
+			}else if(valDepto.equals("16")){
+				departamento = "Chimaltenango";
+			}else if(valDepto.equals("17")){
+				departamento = "Quetzaltenango";
+			}else if(valDepto.equals("18")){
+				departamento = "El Progreso";
+			}else if(valDepto.equals("19")){
+				departamento = "Retalhuleu";
+			}else if(valDepto.equals("20")){
+				departamento = "Sololá";
+			}else if(valDepto.equals("21")){
+				departamento = "Totonicapán";
+			}else if(valDepto.equals("22")){
+				departamento = "Sacatepéquez";
+			}
+			xmlInicio += "<td>"+departamento+"</td>";
+			
+			// 4. Pregunta 1
 			String valP1 = "";
 			valP1 = n2.getPreguntaNo1();
 			String pregunta1 = "";
@@ -96,7 +148,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta1+"</td>";
 
-			// 4. Pregunta 2
+			// 5. Pregunta 2
 			String valP2 = "";
 			valP2 = n2.getPreguntaNo2();
 			String pregunta2 = "";
@@ -113,7 +165,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta2+"</td>";
 			
-			// 5. Pregunta 3
+			// 6. Pregunta 3
 			String valP3 = "";
 			valP3 = n2.getPreguntaNo3();
 			String pregunta3 = "";
@@ -130,7 +182,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta3+"</td>";
 			
-			// 6. Pregunta 4
+			// 7. Pregunta 4
 			String valP4 = "";
 			valP4 = n2.getPreguntaNo4();
 			String pregunta4 = "";
@@ -147,7 +199,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta4+"</td>";
 			
-			// 7. Pregunta 5
+			// 8. Pregunta 5
 			String valP5 = "";
 			valP5 = n2.getPreguntaNo5();
 			String pregunta5 = "";
@@ -164,7 +216,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta5+"</td>";
 			
-			// 8. Pregunta 6
+			// 9. Pregunta 6
 			String valP6 = "";
 			valP6 = n2.getPreguntaNo6();
 			String pregunta6 = "";
@@ -181,7 +233,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta6+"</td>";
 			
-			// 9. Pregunta 7
+			// 10. Pregunta 7
 			String valP7 = "";
 			valP7 = n2.getPreguntaNo7();
 			String pregunta7 = "";
@@ -198,7 +250,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta7+"</td>";
 			
-			// 10. Pregunta 8
+			// 11. Pregunta 8
 			String valP8 = "";
 			valP8 = n2.getPreguntaNo8();
 			String pregunta8 = "";
@@ -215,7 +267,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta8+"</td>";
 			
-			// 11. Pregunta 9
+			// 12. Pregunta 9
 			String valP9 = "";
 			valP9 = n2.getPreguntaNo9();
 			String pregunta9 = "";
@@ -232,7 +284,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta9+"</td>";
 			
-			// 12. Pregunta 10
+			// 13. Pregunta 10
 			String valP10 = "";
 			valP10 = n2.getPreguntaNo10();
 			String pregunta10 = "";
@@ -249,7 +301,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta10+"</td>";
 			
-			// 13. Pregunta 11
+			// 14. Pregunta 11
 			String valP11 = "";
 			valP11 = n2.getPreguntaNo11();
 			String pregunta11 = "";
@@ -266,7 +318,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta11+"</td>";
 			
-			// 14. Pregunta 12
+			// 15. Pregunta 12
 			String valP12 = "";
 			valP12 = n2.getPreguntaNo12();
 			String pregunta12 = "";
@@ -283,7 +335,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta12+"</td>";
 			
-			// 15. Pregunta 13
+			// 16. Pregunta 13
 			String valP13 = "";
 			valP13 = n2.getPreguntaNo13();
 			String pregunta13 = "";
@@ -300,7 +352,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta13+"</td>";
 			
-			// 16. Pregunta 14
+			// 17. Pregunta 14
 			String valP14 = "";
 			valP14 = n2.getPreguntaNo14();
 			String pregunta14 = "";
@@ -317,7 +369,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta14+"</td>";
 			
-			// 17. Pregunta 15
+			// 18. Pregunta 15
 			String valP15 = "";
 			valP15 = n2.getPreguntaNo15();
 			String pregunta15 = "";
@@ -338,7 +390,7 @@ public class InformeConsultaEncuestasXml {
 			}
 			xmlInicio += "<td>"+pregunta15+"</td>";
 			
-			// 18. Pregunta 16
+			// 19. Pregunta 16
 			xmlInicio += "<td>"+n2.getPreguntaNo16()+"</td>";
 
 			

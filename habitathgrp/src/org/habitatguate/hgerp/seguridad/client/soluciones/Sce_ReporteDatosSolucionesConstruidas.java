@@ -367,6 +367,15 @@ public class Sce_ReporteDatosSolucionesConstruidas  implements IsSerializable{
 	public void setPregunta16(String pregunta16) {
 		this.pregunta16 = pregunta16;
 	}
-	
+
+	private String departamento;
+
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
 	
 }

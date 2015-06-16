@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -238,6 +239,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
 			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;	
 	
 	void actualizarEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion,
@@ -245,6 +247,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
 			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	// BURO CREDITO
@@ -258,7 +261,9 @@ public interface SolucionesConstruidasServiceAsync {
 	void buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir,
 			AsyncCallback<List<AuxSolicitudGeneral>> callback) throws IllegalArgumentException;
     
-	 void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;
+	void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;
+	 
+	void consultaEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion, AsyncCallback<AuxSolicitudEncuestaSatisfaccion> callback)throws IllegalArgumentException;
 		
 	// Remover imagen de Blobstore
 	 

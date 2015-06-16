@@ -825,7 +825,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					}
 					
 				}
-
 			}
 		});
 		btnGuardar.setText("Guardar");

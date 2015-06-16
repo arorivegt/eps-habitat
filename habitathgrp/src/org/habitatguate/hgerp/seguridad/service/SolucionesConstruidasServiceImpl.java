@@ -622,7 +622,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
-			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException {
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -648,6 +649,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			encuesta.setPreguntaNo14(preguntaNo14);
 			encuesta.setPreguntaNo15(preguntaNo15);
 			encuesta.setPreguntaNo16(preguntaNo16);
+			encuesta.setDepartamento(departamento);
 			encuesta.setIdFormulario(idFormulario); // Llave Foranea
 
 			encuesta.setSolicitud(solicitud); // Relacion
@@ -1027,6 +1029,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setPreguntaNo14(n0.getPreguntaNo14());
 						l.setPreguntaNo15(n0.getPreguntaNo15());
 						l.setPreguntaNo16(n0.getPreguntaNo16());
+						l.setDepartamento(n0.getDepartamento());
 						nuevo.getEncuestaSatisfaccion().add(l); // Agregado a Entidad Principal
 					}
 				}
@@ -1347,6 +1350,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setPreguntaNo14(n0.getPreguntaNo14());
 					l.setPreguntaNo15(n0.getPreguntaNo15());
 					l.setPreguntaNo16(n0.getPreguntaNo16());
+					l.setDepartamento(n0.getDepartamento());
 					nuevo.getEncuestaSatisfaccion().add(l); // Agregado a Entidad Principal
 				}
 			}
@@ -1358,6 +1362,49 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 		return nuevo;
 	}    	
+	
+	
+	@Override
+	public AuxSolicitudEncuestaSatisfaccion consultaEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		AuxSolicitudEncuestaSatisfaccion nuevo = new AuxSolicitudEncuestaSatisfaccion();
+		
+		try { 
+			
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudEncuestaSatisfaccion.class.getSimpleName(), idEncuestaSatisfaccion).getKey();
+
+			SegSolicitudEncuestaSatisfaccion p = Persistencia.getObjectById(SegSolicitudEncuestaSatisfaccion.class, k);
+					
+			nuevo.setIdEncuestaSatisfaccion(p.getIdEncuestaSatisfaccion());
+			nuevo.setIdFormulario(p.getIdFormulario());
+			nuevo.setPreguntaNo1(p.getPreguntaNo1());
+			nuevo.setPreguntaNo2(p.getPreguntaNo2());
+			nuevo.setPreguntaNo3(p.getPreguntaNo3());
+			nuevo.setPreguntaNo4(p.getPreguntaNo4());
+			nuevo.setPreguntaNo5(p.getPreguntaNo5());
+			nuevo.setPreguntaNo6(p.getPreguntaNo6());
+			nuevo.setPreguntaNo7(p.getPreguntaNo7());
+			nuevo.setPreguntaNo8(p.getPreguntaNo8());
+			nuevo.setPreguntaNo9(p.getPreguntaNo9());
+			nuevo.setPreguntaNo10(p.getPreguntaNo10());
+			nuevo.setPreguntaNo11(p.getPreguntaNo11());
+			nuevo.setPreguntaNo12(p.getPreguntaNo12());
+			nuevo.setPreguntaNo13(p.getPreguntaNo13());
+			nuevo.setPreguntaNo14(p.getPreguntaNo14());
+			nuevo.setPreguntaNo15(p.getPreguntaNo15());
+			nuevo.setPreguntaNo16(p.getPreguntaNo16());
+			nuevo.setDepartamento(p.getDepartamento());
+			
+			
+		}finally {  
+			Persistencia.close();  
+		}
+
+		return nuevo;
+	}   
 	
 
 // METODOS DE ACTUALIZAR Y ELIMINAR		
@@ -1896,7 +1943,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
-			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException {
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1923,6 +1971,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setPreguntaNo14(preguntaNo14);
 			f.setPreguntaNo15(preguntaNo15);
 			f.setPreguntaNo16(preguntaNo16);
+			f.setDepartamento(departamento);
 
 			valor = f.getIdEncuestaSatisfaccion();
 

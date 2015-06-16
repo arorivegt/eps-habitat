@@ -188,6 +188,16 @@ public class AuxSolicitudEncuestaSatisfaccion implements IsSerializable {
 		this.preguntaNo16 = preguntaNo16;
 	}
 	
+    private String departamento;
+	
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
 	// Llave Foranea
 	
 	private long idFormulario;

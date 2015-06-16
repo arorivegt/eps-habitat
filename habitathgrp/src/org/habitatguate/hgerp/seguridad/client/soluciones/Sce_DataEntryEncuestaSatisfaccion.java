@@ -68,7 +68,8 @@ public class Sce_DataEntryEncuestaSatisfaccion extends Composite {
     					n2.getPreguntaNo1(), n2.getPreguntaNo2(), n2.getPreguntaNo3(), n2.getPreguntaNo4(),
     					n2.getPreguntaNo5(), n2.getPreguntaNo6(), n2.getPreguntaNo7(), n2.getPreguntaNo8(),
     					n2.getPreguntaNo9(), n2.getPreguntaNo10(), n2.getPreguntaNo11(), n2.getPreguntaNo12(),
-    					n2.getPreguntaNo13(), n2.getPreguntaNo14(), n2.getPreguntaNo15(), n2.getPreguntaNo16());    		
+    					n2.getPreguntaNo13(), n2.getPreguntaNo14(), n2.getPreguntaNo15(), n2.getPreguntaNo16(),
+    					n2.getDepartamento());    		
     		
     		}
     	}

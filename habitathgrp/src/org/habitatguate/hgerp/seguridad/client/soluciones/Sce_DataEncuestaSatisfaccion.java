@@ -110,6 +110,9 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 	
 	// Valor Escritura-Lectura
 	private boolean valor;
+	private Label lblDepto;
+	private ListBox listDepartamento;
+	private Button btnExportar;
 	
 	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
 		
@@ -138,7 +141,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "805px");
+		absolutePanel.setSize("988px", "887px");
 		
 		lblNo1 = new Label("1.");
 		lblNo1.setStyleName("label");
@@ -305,6 +308,11 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		absolutePanel.add(lblObservacion, 97, 724);
 		lblObservacion.setSize("416px", "19prx");
 		
+		lblDepto = new Label("Seleccione departamento:");
+		lblDepto.setStyleName("label");
+		absolutePanel.add(lblDepto, 97, 790);
+		lblDepto.setSize("416px", "19px");
+		
 		listPregunta1 = new ListBox();
 		listPregunta1.addItem("-","-1");
 		listPregunta1.addItem("Muy bueno","1");
@@ -315,6 +323,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta1.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta1, 626, 58);
 		listPregunta1.setSize("148px", "27px");
+		listPregunta1.setTabIndex(1);
 		
 		listPregunta2 = new ListBox();
 		listPregunta2.addItem("-","-1");
@@ -326,6 +335,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta2.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta2, 626, 103);
 		listPregunta2.setSize("148px", "27px");
+		listPregunta2.setTabIndex(2);
 		
 		listPregunta3 = new ListBox();
 		listPregunta3.addItem("-","-1");
@@ -337,6 +347,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta3.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta3, 626, 145);
 		listPregunta3.setSize("148px", "27px");
+		listPregunta3.setTabIndex(3);
 		
 		listPregunta4 = new ListBox();
 		listPregunta4.addItem("-","-1");
@@ -348,6 +359,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta4.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta4, 626, 187);
 		listPregunta4.setSize("148px", "27px");
+		listPregunta4.setTabIndex(4);
 		
 		listPregunta5 = new ListBox();
 		listPregunta5.addItem("-","-1");
@@ -359,6 +371,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta5.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta5, 626, 229);
 		listPregunta5.setSize("148px", "27px");
+		listPregunta5.setTabIndex(5);
 		
 		listPregunta6 = new ListBox();
 		listPregunta6.addItem("-","-1");
@@ -370,6 +383,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta6.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta6, 626, 271);
 		listPregunta6.setSize("148px", "27px");
+		listPregunta6.setTabIndex(6);
 		
 		listPregunta7 = new ListBox();
 		listPregunta7.addItem("-","-1");
@@ -381,6 +395,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta7.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta7, 626, 313);
 		listPregunta7.setSize("148px", "27px");
+		listPregunta7.setTabIndex(7);
 		
 		listPregunta8 = new ListBox();
 		listPregunta8.addItem("-","-1");
@@ -392,6 +407,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta8.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta8, 626, 355);
 		listPregunta8.setSize("148px", "27px");
+		listPregunta8.setTabIndex(8);
 		
 		listPregunta9 = new ListBox();
 		listPregunta9.addItem("-","-1");
@@ -403,6 +419,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta9.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta9, 626, 397);
 		listPregunta9.setSize("148px", "27px");
+		listPregunta9.setTabIndex(9);
 		
 		listPregunta10 = new ListBox();
 		listPregunta10.addItem("-","-1");
@@ -414,6 +431,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta10.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta10, 626, 439);
 		listPregunta10.setSize("148px", "27px");
+		listPregunta10.setTabIndex(10);
 		
 		listPregunta11 = new ListBox();
 		listPregunta11.addItem("-","-1");
@@ -425,6 +443,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta11.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta11, 626, 481);
 		listPregunta11.setSize("148px", "27px");
+		listPregunta11.setTabIndex(11);
 		
 		listPregunta12 = new ListBox();
 		listPregunta12.addItem("-","-1");
@@ -436,6 +455,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta12.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta12, 626, 523);
 		listPregunta12.setSize("148px", "27px");
+		listPregunta12.setTabIndex(12);
 		
 		listPregunta13 = new ListBox();
 		listPregunta13.addItem("-","-1");
@@ -447,6 +467,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta13.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta13, 626, 565);
 		listPregunta13.setSize("148px", "27px");
+		listPregunta13.setTabIndex(13);
 		
 		listPregunta14 = new ListBox();
 		listPregunta14.addItem("-","-1");
@@ -458,10 +479,11 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta14.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta14, 626, 607);
 		listPregunta14.setSize("148px", "27px");
+		listPregunta14.setTabIndex(14);
 		
 		listPregunta15 = new ListBox();
 		listPregunta15.addItem("-","-1");
-		listPregunta15.addItem("Television","1");
+		listPregunta15.addItem("Televisión","1");
 		listPregunta15.addItem("Radio","2");
 		listPregunta15.addItem("Prensa/Revista","3");
 		listPregunta15.addItem("Volantes","4");
@@ -471,6 +493,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta15.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta15, 626, 649);
 		listPregunta15.setSize("148px", "27px");
+		listPregunta15.setTabIndex(15);
 		
 		listPregunta16 = new ListBox();
 		listPregunta16.addItem("-","-1");
@@ -482,6 +505,36 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta16.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta16, 626, 691);
 		listPregunta16.setSize("148px", "27px");
+		listPregunta16.setTabIndex(16);
+		
+		listDepartamento = new ListBox();
+		listDepartamento.addItem("-","-1");
+		listDepartamento.addItem("Alta Verapaz","3");
+		listDepartamento.addItem("Baja Verapaz","9");
+		listDepartamento.addItem("Chimaltenango","16");
+		listDepartamento.addItem("Chiquimula","13");
+		listDepartamento.addItem("El Progreso","18");
+		listDepartamento.addItem("Escuintla","6");
+		listDepartamento.addItem("Guatemala","14");
+		listDepartamento.addItem("Huehuetenango","5");
+		listDepartamento.addItem("Izabal","2");
+		listDepartamento.addItem("Jalapa","15");
+		listDepartamento.addItem("Jutiapa","8");
+		listDepartamento.addItem("Petén","1");
+		listDepartamento.addItem("Quezaltenango","17");
+		listDepartamento.addItem("Quiché","4");
+		listDepartamento.addItem("Retalhuleu","19");
+		listDepartamento.addItem("Sacatepéquez","22");
+		listDepartamento.addItem("San Marcos","7");
+		listDepartamento.addItem("Santa Rosa","10");
+		listDepartamento.addItem("Sololá","20");
+		listDepartamento.addItem("Suchitepéquez","12");
+		listDepartamento.addItem("Totonicapán","21");
+		listDepartamento.addItem("Zacapa","11");
+		listDepartamento.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listDepartamento, 626, 779);
+		listDepartamento.setSize("148px", "27px");
+		listDepartamento.setTabIndex(17);
 	
 		// -- Boton Guardar/Actualizar Informacion
 		
@@ -495,134 +548,163 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				
-				String preguntaNo1 = "-1";		
-				preguntaNo1 = listPregunta1.getValue(listPregunta1.getSelectedIndex());	
-				
-				String preguntaNo2 = "-1";		
-				preguntaNo2 = listPregunta2.getValue(listPregunta2.getSelectedIndex());
-				
-				String preguntaNo3 = "-1";		
-				preguntaNo3 = listPregunta3.getValue(listPregunta3.getSelectedIndex());	
-				
-				String preguntaNo4 = "-1";		
-				preguntaNo4 = listPregunta4.getValue(listPregunta4.getSelectedIndex());	
-				
-				String preguntaNo5 = "-1";		
-				preguntaNo5 = listPregunta5.getValue(listPregunta5.getSelectedIndex());	
-				
-				String preguntaNo6 = "-1";		
-				preguntaNo6 = listPregunta6.getValue(listPregunta6.getSelectedIndex());	
-				
-				String preguntaNo7 = "-1";		
-				preguntaNo7 = listPregunta7.getValue(listPregunta7.getSelectedIndex());	
-				
-				String preguntaNo8 = "-1";		
-				preguntaNo8 = listPregunta8.getValue(listPregunta8.getSelectedIndex());	
-				
-				String preguntaNo9 = "-1";		
-				preguntaNo9 = listPregunta9.getValue(listPregunta9.getSelectedIndex());	
-				
-				String preguntaNo10 = "-1";		
-				preguntaNo10 = listPregunta10.getValue(listPregunta10.getSelectedIndex());	
-				
-				String preguntaNo11 = "-1";		
-				preguntaNo11 = listPregunta11.getValue(listPregunta11.getSelectedIndex());	
-				
-				String preguntaNo12 = "-1";		
-				preguntaNo12 = listPregunta12.getValue(listPregunta12.getSelectedIndex());	
-				
-				String preguntaNo13 = "-1";		
-				preguntaNo13 = listPregunta13.getValue(listPregunta13.getSelectedIndex());	
 
-				String preguntaNo14 = "-1";		
-				preguntaNo14 = listPregunta14.getValue(listPregunta14.getSelectedIndex());	
-				
-				String preguntaNo15 = "-1";		
-				preguntaNo15 = listPregunta15.getValue(listPregunta15.getSelectedIndex());	
-				
-				String preguntaNo16 = "-1";		
-				preguntaNo16 = listPregunta16.getValue(listPregunta16.getSelectedIndex());	
-				
-				Date time = new Date();
-				@SuppressWarnings("deprecation")
-				Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
-				
-				if(bandera){
+				if(initRequireData()){
 
-					solucionesService.ingresarEncuestaSatisfaccion(fecrec, formulario.idFormulario, 
-							preguntaNo1, preguntaNo2, preguntaNo3, preguntaNo4,
-							preguntaNo5, preguntaNo6, preguntaNo7, preguntaNo8,
-							preguntaNo9, preguntaNo10, preguntaNo11, preguntaNo12,
-							preguntaNo13, preguntaNo14, preguntaNo15, preguntaNo16,
-							new AsyncCallback<Long>() {
+					String preguntaNo1 = "-1";		
+					preguntaNo1 = listPregunta1.getValue(listPregunta1.getSelectedIndex());	
 
-						public void onFailure(Throwable caught) 
-						{
-							mensaje = new Mensaje();
-							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
-						}
+					String preguntaNo2 = "-1";		
+					preguntaNo2 = listPregunta2.getValue(listPregunta2.getSelectedIndex());
 
-						public void onSuccess(Long result)
-						{
-							mensaje = new Mensaje();
-							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+					String preguntaNo3 = "-1";		
+					preguntaNo3 = listPregunta3.getValue(listPregunta3.getSelectedIndex());	
 
-							idEncuestaSatisfaccion = result;
-							System.out.println("Valor de NUEVA EncuestaSatisfaccion: " + idEncuestaSatisfaccion);
-							bandera = false;
-						
-						}
-					});
+					String preguntaNo4 = "-1";		
+					preguntaNo4 = listPregunta4.getValue(listPregunta4.getSelectedIndex());	
 
-				}else{
-					
-					solucionesService.actualizarEncuestaSatisfaccion(formulario.idFormulario, idEncuestaSatisfaccion, 
-							preguntaNo1, preguntaNo2, preguntaNo3, preguntaNo4,
-							preguntaNo5, preguntaNo6, preguntaNo7, preguntaNo8,
-							preguntaNo9, preguntaNo10, preguntaNo11, preguntaNo12,
-							preguntaNo13, preguntaNo14, preguntaNo15, preguntaNo16,
-							new AsyncCallback<Long>() {
+					String preguntaNo5 = "-1";		
+					preguntaNo5 = listPregunta5.getValue(listPregunta5.getSelectedIndex());	
 
-						public void onFailure(Throwable caught) 
-						{
-							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-						}
+					String preguntaNo6 = "-1";		
+					preguntaNo6 = listPregunta6.getValue(listPregunta6.getSelectedIndex());	
 
-						public void onSuccess(Long result)
-						{	
-							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
-							
-							System.out.println("Valor de DATOS DE ENCUESTA SATISFACCION: " + idEncuestaSatisfaccion );
-							bandera = false;
+					String preguntaNo7 = "-1";		
+					preguntaNo7 = listPregunta7.getValue(listPregunta7.getSelectedIndex());	
 
-						}
-					});
-					
+					String preguntaNo8 = "-1";		
+					preguntaNo8 = listPregunta8.getValue(listPregunta8.getSelectedIndex());	
+
+					String preguntaNo9 = "-1";		
+					preguntaNo9 = listPregunta9.getValue(listPregunta9.getSelectedIndex());	
+
+					String preguntaNo10 = "-1";		
+					preguntaNo10 = listPregunta10.getValue(listPregunta10.getSelectedIndex());	
+
+					String preguntaNo11 = "-1";		
+					preguntaNo11 = listPregunta11.getValue(listPregunta11.getSelectedIndex());	
+
+					String preguntaNo12 = "-1";		
+					preguntaNo12 = listPregunta12.getValue(listPregunta12.getSelectedIndex());	
+
+					String preguntaNo13 = "-1";		
+					preguntaNo13 = listPregunta13.getValue(listPregunta13.getSelectedIndex());	
+
+					String preguntaNo14 = "-1";		
+					preguntaNo14 = listPregunta14.getValue(listPregunta14.getSelectedIndex());	
+
+					String preguntaNo15 = "-1";		
+					preguntaNo15 = listPregunta15.getValue(listPregunta15.getSelectedIndex());	
+
+					String preguntaNo16 = "-1";		
+					preguntaNo16 = listPregunta16.getValue(listPregunta16.getSelectedIndex());	
+
+					String departamento = "-1";		
+					departamento = listDepartamento.getValue(listDepartamento.getSelectedIndex());
+
+					Date time = new Date();
+					@SuppressWarnings("deprecation")
+					Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
+
+					if(bandera){
+
+						solucionesService.ingresarEncuestaSatisfaccion(fecrec, formulario.idFormulario, 
+								preguntaNo1, preguntaNo2, preguntaNo3, preguntaNo4,
+								preguntaNo5, preguntaNo6, preguntaNo7, preguntaNo8,
+								preguntaNo9, preguntaNo10, preguntaNo11, preguntaNo12,
+								preguntaNo13, preguntaNo14, preguntaNo15, preguntaNo16,
+								departamento,
+								new AsyncCallback<Long>() {
+
+							public void onFailure(Throwable caught) 
+							{
+								mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+							}
+
+							public void onSuccess(Long result)
+							{
+								mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+
+								idEncuestaSatisfaccion = result;
+								System.out.println("Valor de NUEVA EncuestaSatisfaccion: " + idEncuestaSatisfaccion);
+								bandera = false;
+
+							}
+						});
+
+					}else{
+
+						solucionesService.actualizarEncuestaSatisfaccion(formulario.idFormulario, idEncuestaSatisfaccion, 
+								preguntaNo1, preguntaNo2, preguntaNo3, preguntaNo4,
+								preguntaNo5, preguntaNo6, preguntaNo7, preguntaNo8,
+								preguntaNo9, preguntaNo10, preguntaNo11, preguntaNo12,
+								preguntaNo13, preguntaNo14, preguntaNo15, preguntaNo16,
+								departamento,
+								new AsyncCallback<Long>() {
+
+							public void onFailure(Throwable caught) 
+							{
+								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+							}
+
+							public void onSuccess(Long result)
+							{	
+								mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+
+								System.out.println("Valor de DATOS DE ENCUESTA SATISFACCION: " + idEncuestaSatisfaccion );
+								bandera = false;
+
+							}
+						});
+
+					}
+
 				}
-				
 			}
 		});
 		
 		btnGuardar.setText("Guardar");
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		absolutePanel.add(btnGuardar, 368, 773);
+		absolutePanel.add(btnGuardar, 455, 854);
 		btnGuardar.setSize("198px", "41px");
+		btnGuardar.setTabIndex(18);
 		
 		btnImprimir = new Button("Send");
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				Window.open("/ImprimirEncuestaSatisfaccion?id_Empleado="+idEmpleado, "_blank", "");
+				String value = "1";
+				
+				Window.open("/ImprimirEncuestaSatisfaccion?id_Empleado="+idEmpleado+"&value_send="+value+"&id_formulario="+formulario.idFormulario+"&id_encuesta="+idEncuestaSatisfaccion, "_blank", "");
 
 			}
 		});
 		btnImprimir.setText("Imprimir");
 		btnImprimir.setStylePrimaryName("sendButton");
 		btnImprimir.setStyleName("sendButton");
-		absolutePanel.add(btnImprimir, 600, 773);
+		absolutePanel.add(btnImprimir, 832, 58);
 		btnImprimir.setSize("198px", "41px");
+		btnImprimir.setTabIndex(19);
+		
+		btnExportar = new Button("Send");
+		btnExportar.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+
+				String value = "2";
+				
+				Window.open("/ImprimirEncuestaSatisfaccion?id_Empleado="+idEmpleado+"&value_send="+value+"&id_formulario="+formulario.idFormulario+"&id_encuesta="+idEncuestaSatisfaccion, "_blank", "");
+
+			}
+		});
+		btnExportar.setText("Exportar Data");
+		btnExportar.setStylePrimaryName("sendButton");
+		btnExportar.setStyleName("sendButton");
+		absolutePanel.add(btnExportar, 832, 146);
+		btnExportar.setSize("198px", "41px");
+		btnExportar.setTabIndex(20);
 		
 	}
 	
@@ -632,7 +714,8 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
     		String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
     		String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
     		String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
-    		String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16)
+    		String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+    		String departamento)
 	{
     	
 		this.bandera = false;
@@ -735,10 +818,31 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 	       this.listPregunta16.setSelectedIndex(i);
 	    } 
 	    
-	    
+        bandera = true;
+	    for(int i=0; i < this.listDepartamento.getItemCount() && bandera; i++){
+	       bandera = !this.listDepartamento.getValue(i).equals(departamento);
+	       this.listDepartamento.setSelectedIndex(i);
+	    } 
 		
 	}
     
 
+    // VALIDACION DATA A INGRESAR
+    
+    public boolean initRequireData()
+    {
+
+    	String departamento = "-1";		
+    	departamento = this.listDepartamento.getValue(listDepartamento.getSelectedIndex());
+    	
+    	if(departamento.equals("-1")){
+    		mensaje.setMensaje("alert alert-error", "Debe indicar Departamento");
+    		return false;
+    	}
+    	
+    	
+    	return true;    		
+    }
+    
 		
 }

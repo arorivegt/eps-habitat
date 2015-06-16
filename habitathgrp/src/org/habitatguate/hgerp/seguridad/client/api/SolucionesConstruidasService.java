@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -216,13 +217,15 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
-			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException;
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento) throws IllegalArgumentException;
 	
 	Long actualizarEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion,
 			String preguntaNo1, String preguntaNo2, String preguntaNo3, String preguntaNo4,
 			String preguntaNo5, String preguntaNo6, String preguntaNo7, String preguntaNo8,
 			String preguntaNo9, String preguntaNo10, String preguntaNo11, String preguntaNo12,
-			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16) throws IllegalArgumentException;
+			String preguntaNo13, String preguntaNo14, String preguntaNo15, String preguntaNo16,
+			String departamento) throws IllegalArgumentException;
 	
 	// BURO CREDITO
 	
@@ -235,6 +238,8 @@ public interface SolucionesConstruidasService extends RemoteService {
     List<AuxSolicitudGeneral> buscarFormulario(char tipo, Long idEmpleado, Long idAfiliado, String nombreSolicitante, String solucionConstruir) throws IllegalArgumentException; 
     
     AuxSolicitudGeneral obtenerDataFormularioRegistrado(Long idFormulario) throws IllegalArgumentException;
+    
+    AuxSolicitudEncuestaSatisfaccion consultaEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion) throws IllegalArgumentException;
     
     // Remover imagen de Blobstore
     

@@ -41,7 +41,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 
     private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
-	private Sce_DataEntrySupervisionSolicitud formulario;
+	private Sce_DataEntryEncuestaSolicitud formulario;
 	private Sce_DataEntryEncuestaSatisfaccion encuestaSatisfaccion;
     private boolean bandera = true;
 	private Long idEncuestaSatisfaccion = 0L;
@@ -114,7 +114,7 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 	private ListBox listDepartamento;
 	private Button btnExportar;
 	
-	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntrySupervisionSolicitud e, boolean valor) {
+	public Sce_DataEncuestaSatisfaccion(Sce_DataEntryEncuestaSatisfaccion a, Sce_DataEntryEncuestaSolicitud e, boolean valor) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
@@ -672,7 +672,16 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		btnGuardar.setSize("198px", "41px");
 		btnGuardar.setTabIndex(18);
 		
+		// Boton IMPRIMIR
+		
 		btnImprimir = new Button("Send");
+		
+		if(this.valor) {
+			btnImprimir.setVisible(true);
+		}else{
+			btnImprimir.setVisible(false);
+		}
+		
 		btnImprimir.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
@@ -689,7 +698,16 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		btnImprimir.setSize("198px", "41px");
 		btnImprimir.setTabIndex(19);
 		
+		// Boton EXPORTAR
+		
 		btnExportar = new Button("Send");
+		
+		if(this.valor) {
+			btnExportar.setVisible(true);
+		}else{
+			btnExportar.setVisible(false);
+		}
+		
 		btnExportar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 

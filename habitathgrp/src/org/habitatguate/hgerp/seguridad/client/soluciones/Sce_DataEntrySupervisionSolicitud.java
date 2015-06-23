@@ -30,7 +30,6 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 	private Sce_DataEntrySupervisionTercera fd3;
 	private Sce_DataEntrySupervisionCuarta fd4;
 	private Sce_DataEntrySupervisionUbicacion fd5;
-	private Sce_DataEntryEncuestaSatisfaccion fd6;
 
     private final AdministracionServiceAsync AdministracionService = GWT.create(AdministracionService.class);
     
@@ -184,35 +183,6 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 			}
 		});		
 				
-		AdministracionService.ObtenerUsuarioPermisoNombre("Encuesta-Satisfaccion-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
-		{
-			public void onFailure(Throwable caught) 
-			{	
-			}
-
-			@Override
-			public void onSuccess(List<AuxUsuarioPermiso> results)
-			{
-				if(results.get(0).getPermiso().equals("RW")){
-					// 6. Encuesta Satisfaccion	
-					scrollPanel6 = new ScrollPanel();
-					scrollPanel6.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
-					scrollPanel6.setSize("100%", "100%");
-					fd6 = new Sce_DataEntryEncuestaSatisfaccion(formulario, true);
-					scrollPanel6.setWidget(fd6);
-					
-				}else if(results.get(0).getPermiso().equals("R")){
-					// 6. Encuesta Satisfaccion	
-					scrollPanel6 = new ScrollPanel();
-					scrollPanel6.setAlwaysShowScrollBars(false);
-					tabPanel.add(scrollPanel6, "Encuesta Satisfaccion", true);
-					scrollPanel6.setSize("100%", "100%");
-					fd6 = new Sce_DataEntryEncuestaSatisfaccion(formulario, false);
-					scrollPanel6.setWidget(fd6);
-				}
-			}
-		});	
 		
 	}
 	
@@ -237,9 +207,6 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		fd5.setDataSupervisionUbicacion(results);
 	}
 
-	public void setDataEncuestaSatisfaccion(List<AuxSolicitudEncuestaSatisfaccion> results) {
-		fd6.setDataEncuestaSatisfaccion(results);
-	}
 	
 	//-------------------
 	
@@ -299,14 +266,5 @@ public class Sce_DataEntrySupervisionSolicitud extends Composite {
 		this.scrollPanel5 = scrollPanel5;
 	}
 
-	private ScrollPanel scrollPanel6;
-
-	public ScrollPanel getScrollPanel6() {
-		return scrollPanel6;
-	}
-
-	public void setScrollPanel6(ScrollPanel scrollPanel6) {
-		this.scrollPanel6 = scrollPanel6;
-	}
 
 }

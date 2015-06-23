@@ -56,7 +56,6 @@ public class InformeConsultaEncuestasXml {
 					try{
 						
 						setDataEncuestaSatisfaccion(p.getEncuestaSatisfaccion(), p.getNombreSolicitante());
-						i++;
 						
 					}catch(Exception e){
 					}
@@ -393,9 +392,9 @@ public class InformeConsultaEncuestasXml {
 			// 19. Pregunta 16
 			xmlInicio += "<td>"+n2.getPreguntaNo16()+"</td>";
 
-			
 			xmlInicio += "</tr>";
 			
+			i++;
 		
 		}
 }

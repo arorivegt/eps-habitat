@@ -28,7 +28,7 @@ import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 public class Sce_DataEntryEncuestaSatisfaccion extends Composite {
 
-	private Sce_DataEntrySupervisionSolicitud formularioSolicitud;
+	private Sce_DataEntryEncuestaSolicitud formularioSolicitud;
     private VerticalPanel panel = new VerticalPanel();
     
     private FlexTable flextable;
@@ -38,7 +38,7 @@ public class Sce_DataEntryEncuestaSatisfaccion extends Composite {
     // Valor Escritura-Lectura
     private boolean valor;
     
-	public Sce_DataEntryEncuestaSatisfaccion(Sce_DataEntrySupervisionSolicitud formulario, boolean valor) {
+	public Sce_DataEntryEncuestaSatisfaccion(Sce_DataEntryEncuestaSolicitud formulario, boolean valor) {
 				
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		

@@ -8,6 +8,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.client.principal.MenuPrincipal;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -30,7 +31,7 @@ import com.google.gwt.user.client.ui.Grid;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado; // Por cambiar
 
-public class Sce_BuzonSupervision extends Composite  {
+public class Sce_BuzonEncuestaSatisfaccion extends Composite  {
 
 	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
 	private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
@@ -40,51 +41,51 @@ public class Sce_BuzonSupervision extends Composite  {
 	private Long idAfiliado = 0L;
 	private Long idRol = 0L;
 	
-	private Sce_BuzonSupervision buzon;
+	private Sce_BuzonEncuestaSatisfaccion buzon;
 	private Mensaje mensaje; 
 	private Grid grid;
 	private AbsolutePanel absolutePanel;
 	private Loading load ;
-    
+	
 	private ListBox listBox;
 	private Label lbDato1;
 	private Image Busqueda;
-	private SuggestBox txtNombreSolicitante;	
+	private SuggestBox txtNombreSolicitante;
 	private ListBox listSolucionConstruir ;
 	
 	// Valor Escritura-Lectura
 	private boolean valor;
-	
-	public Sce_BuzonSupervision(final boolean valor) {
+
+	public Sce_BuzonEncuestaSatisfaccion(final boolean valor) {
 
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
-		
+
 		// Obtener Id Empleado
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
 			public void onSuccess(Long result) {
 				idEmpleado = result;
-				System.out.println("Id Empleado: " + idEmpleado);
+				System.out.println("Id Empleado - 1: " + idEmpleado);
 			}
 			@Override
 			public void onFailure(Throwable caught) {
 				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
-		
+
 		// Obtener Id Afiliado
 		recursosHumanosService.obtenerIdAfiliado(new AsyncCallback<Long>() {
 			@Override
 			public void onSuccess(Long result) {
 				idAfiliado = result;
-				System.out.println("Afiliado: " + idAfiliado);	
+				System.out.println("Id Afiliado - 1: " + idAfiliado);	
 			}
 			@Override
 			public void onFailure(Throwable caught) {
 				mensaje.setMensaje("alert alert-error", "Error no tiene Afiliado asignado Empleado");
 			}
 		});
-		
+
 		// Obtener Id Rol
 		recursosHumanosService.obtenerIdRol(new AsyncCallback<Long>() {
 			@Override
@@ -98,33 +99,6 @@ public class Sce_BuzonSupervision extends Composite  {
 			}
 		});
 		
-		
-		
-		// ---- VERSION FUNCIONAL EN FIREFOX	
-		
-//    	load = new Loading();
-//        load.Mostrar();
-//        load.invisible();
-//		mensaje = new Mensaje();
-//		this.buzon = this;
-//		grid = new Grid(2, 1);
-//		grid.setSize("876px", "100%");
-//		
-//		absolutePanel = new AbsolutePanel();
-//		grid.setWidget(0, 0, absolutePanel);
-//		absolutePanel.setSize("100%", "30px");
-//		absolutePanel.setStyleName("gwt-Label-new");
-//		
-//		grid.clearCell(0, 0);
-//		Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
-//		nuevo.agregarFormulario('2', buzon, "", "");
-//		grid.setWidget(1, 0,nuevo);
-//	    	
-//		initWidget(grid);
-		
-		
-// ---- NUEVA VERSION PARA VERIFICAR FUNCIONALIDAD EN CHROME
-		
     	load = new Loading();
         load.Mostrar();
         load.invisible();
@@ -137,7 +111,7 @@ public class Sce_BuzonSupervision extends Composite  {
 		grid.setWidget(0, 0, absolutePanel);
 		absolutePanel.setSize("100%", "30px");
 		absolutePanel.setStyleName("gwt-Label-new");
-		
+
 		txtNombreSolicitante = new SuggestBox(resultadoFormulario());
 		txtNombreSolicitante.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(KeyUpEvent event) {
@@ -156,7 +130,7 @@ public class Sce_BuzonSupervision extends Composite  {
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
 		listBox.addItem("Solucion");
-		listBox.addItem("TODOS");		
+		listBox.addItem("TODOS");
 		
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -194,13 +168,6 @@ public class Sce_BuzonSupervision extends Composite  {
 					listSolucionConstruir.setVisible(false);
 					absolutePanel.add(Busqueda, 205, 16);
 			        load.invisible();
-
-			        // Realiza la busqueda automatica
-//					grid.clearCell(1, 0);
-//					Sce_BuzonBitacoraLista  nuevo = new Sce_BuzonBitacoraLista();
-//					nuevo.agregarFormulario('2', idEmpleado, idAfiliado, buzon, "", "");
-//					grid.setWidget(1, 0,nuevo);
-//			        load.invisible();
 			        
 				}
 		        
@@ -249,7 +216,7 @@ public class Sce_BuzonSupervision extends Composite  {
 	public void busqueda(boolean valVisilidad){
 
 		grid.clearCell(1, 0);
-		Sce_BuzonSupervisionLista  nuevo = new Sce_BuzonSupervisionLista();
+		Sce_BuzonEncuestaSatisfaccionLista  nuevo = new Sce_BuzonEncuestaSatisfaccionLista();
 		
 		if(listBox.getItemText(listBox.getSelectedIndex()).equals("TODOS"))
 		{
@@ -281,7 +248,9 @@ public class Sce_BuzonSupervision extends Composite  {
 			grid.setWidget(1, 0,nuevo);
 			nuevo.setSize("100%", "648px");
 		}
+		
 	}
+	
 	
 
 	// CARGA DATA A FORMULARIOS
@@ -289,17 +258,16 @@ public class Sce_BuzonSupervision extends Composite  {
 	// Soluciones
 	
 	public void cargarFormulario(final Long idFormulario, boolean valVisibilidad){
-		
-		load.visible();        
+
+		load.visible();
 		grid.clearCell(1, 0);
 		
-		final Sce_DataEntrySupervisionSolicitud bitacoraSolicitud = new Sce_DataEntrySupervisionSolicitud(valVisibilidad);
-		
-		bitacoraSolicitud.habilitarPestanasFormulario(idRol); // Se habilitan las demas Pestanas
-		
-		grid.setWidget(1, 0, bitacoraSolicitud);
-		bitacoraSolicitud.setSize("100%", "648px");
-        
+		final Sce_DataEntryEncuestaSolicitud encuestaSolicitud = new Sce_DataEntryEncuestaSolicitud(valVisibilidad);
+		encuestaSolicitud.idFormulario = idFormulario;
+		System.out.println("ID Formulario enviado en Metodo CargarFormulario - Buzon Encuesta Solicitud: " + encuestaSolicitud.idFormulario);
+	
+		grid.setWidget(1, 0, encuestaSolicitud);
+		encuestaSolicitud.setSize("100%", "648px");
         
         solucionesService.obtenerDataFormularioRegistrado(idFormulario, new AsyncCallback<AuxSolicitudGeneral>(){
         	public void onFailure(Throwable caught) 
@@ -313,36 +281,8 @@ public class Sce_BuzonSupervision extends Composite  {
         	public void onSuccess(AuxSolicitudGeneral result)
         	{	
 
-                load.invisible();            	
-                bitacoraSolicitud.idFormulario = result.getIdFormulario();
-            	System.out.println("BITACORA DE SUPERVISION DE FORMULARIO: " + bitacoraSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante());
-        		        		
-        		try{        		
-        			bitacoraSolicitud.setDataSupervisionPrimera(result.getSupervisionPrimera());     			
-        		}catch(Exception e){
-        			
-        		}  
-        		
-        		try{            		
-        			bitacoraSolicitud.setDataSupervisionSegunda(result.getSupervisionSegunda());
-        		}catch(Exception e){
-        			
-        		} 
-        		
         		try{           		
-        			bitacoraSolicitud.setDataSupervisionTercera(result.getSupervisionTercera());     			
-        		}catch(Exception e){
-        			
-        		} 
-            
-        		try{           		
-        			bitacoraSolicitud.setDataSupervisionCuarta(result.getSupervisionCuarta());
-        		}catch(Exception e){
-        			
-        		} 
-        		
-        		try{           		
-        			bitacoraSolicitud.setDataSupervisionUbicacion(result.getSupervisionUbicacion());
+        			encuestaSolicitud.setDataEncuestaSatisfaccion(result.getEncuestaSatisfaccion());
         		}catch(Exception e){
         			
         		} 
@@ -353,11 +293,8 @@ public class Sce_BuzonSupervision extends Composite  {
         });
 	}
 	
-
 	// RESULTADO BUSQUEDA
-	
-	// Soluciones
-	
+
 	MultiWordSuggestOracle resultadoFormulario()	
 	{	
 	    final MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
@@ -411,5 +348,6 @@ public class Sce_BuzonSupervision extends Composite  {
 	    
 	    return oracle;
     }
+	
 	
 }

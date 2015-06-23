@@ -266,7 +266,6 @@ public class Sce_ConsultaEncuestasHabitat extends Composite  {
 					try{
 						
 						setDataEncuestaSatisfaccion(p.getEncuestaSatisfaccion(), p.getNombreSolicitante());
-						i++;
 						
 					}catch(Exception e){
 					}
@@ -320,7 +319,7 @@ public class Sce_ConsultaEncuestasHabitat extends Composite  {
 
 				// 3. Departamento
 				String valDepto = "";
-				valDepto = n2.getPreguntaNo1();
+				valDepto = n2.getDepartamento();
 				String departamento = "";
 				if(valDepto.equals("1")){
 					departamento = "Petén";
@@ -632,7 +631,7 @@ public class Sce_ConsultaEncuestasHabitat extends Composite  {
 				encuesta.setPregunta16(n2.getPreguntaNo16());
 
 				DATOS.add(encuesta);
-
+				i++;
 			}
 	}
     

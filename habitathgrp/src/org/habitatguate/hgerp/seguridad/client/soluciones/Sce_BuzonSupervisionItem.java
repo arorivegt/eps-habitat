@@ -186,7 +186,6 @@ public class Sce_BuzonSupervisionItem extends Composite {
 		checkTerceraSupervision = new SimpleCheckBox();
 		checkTerceraSupervision.setEnabled(false);
 		absolutePanel.add(checkTerceraSupervision, 936, 20);
-		checkTerceraSupervision.setSize("24px", "24px");
 		checkTerceraSupervision.setValue(terceraSupervision);
 		
 		Label lblCuartaSupervision = new Label("Cuarta Supervision");

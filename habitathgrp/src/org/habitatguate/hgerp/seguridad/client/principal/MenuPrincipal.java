@@ -544,7 +544,9 @@ public class MenuPrincipal extends Composite {
 //								MenuVertical.addSeparator(); //--
 //								MenuVertical.addItem("Administracion",MenuAdmistracion); //--
 //								MenuVertical.addSeparator();
-//								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion); 
+//								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion);
+								//MenuVertical.addItem("Finanzas", MenuFinanzas);
+								//MenuVertical.addSeparator();
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);
 							}

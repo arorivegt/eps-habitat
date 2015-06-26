@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
@@ -149,6 +150,12 @@ public interface SqlServiceAsync {
 
 	void Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento,
 			String tipoDocumento, Double valorPago, AsyncCallback<Long> callback);
+
+	void Insertar_Catalogo(String idMaterial, String nombreMaterial,
+			String categoriaMaterial, AsyncCallback<Long> callback);
+
+	void ConsultaTodosProductosCatalogo(
+			AsyncCallback<List<AuxCatalogoMaterial>> callback);
 
 
 

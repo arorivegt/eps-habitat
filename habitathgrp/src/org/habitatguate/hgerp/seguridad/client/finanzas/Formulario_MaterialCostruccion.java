@@ -30,7 +30,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 	private ScrollPanel panel3;
 	private Buscador_MaterialCostruccion bbs;
 	private Plantilla_Solucion ps;
-	private Formulario_AsignarSolucion fas;
+	private Formulario_CatalogoMaterial fcat;
     
 	public Formulario_MaterialCostruccion(){
 		
@@ -48,7 +48,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 		
 		tabPanel.add(panel1, "Materiales de Construccion",true);
 		tabPanel.add(panel2, "Plantilla Solucion",true);
-		//tabPanel.add(panel3, "Asignar Solucion a beneficiario ",true);
+		tabPanel.add(panel3, "Catalogo de Productos",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -74,8 +74,8 @@ public class Formulario_MaterialCostruccion extends Composite{
    
 	}
 	public void ItemTres(){
-		fas = new Formulario_AsignarSolucion();
-		panel3.setWidget(fas);
+		fcat = new Formulario_CatalogoMaterial();
+		panel3.setWidget(fcat);
 	}
 	public void ItemUno(){
 		bbs = new Buscador_MaterialCostruccion();

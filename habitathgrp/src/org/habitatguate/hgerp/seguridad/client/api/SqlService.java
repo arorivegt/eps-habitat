@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
@@ -38,6 +39,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago);
+	Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial);
 	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
@@ -52,6 +54,7 @@ public interface SqlService extends RemoteService{
 	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado);
 	List<AuxVale> ConsultarValesPendientes_unProveedor(Long idProveedor);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
+	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);

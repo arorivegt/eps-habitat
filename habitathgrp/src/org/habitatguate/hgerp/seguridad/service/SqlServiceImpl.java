@@ -11,6 +11,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
@@ -24,6 +25,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Plantilla_Solucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegBeneficiario;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegDetalleEjecucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegDetalleSolucion;
@@ -435,6 +437,24 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 	
 }
 
+public Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial) throws IllegalArgumentException{
+	Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	SegCatalogoMaterial nuevo = new SegCatalogoMaterial();
+	nuevo.setIdMaterial(idMaterial);
+	nuevo.setNombreMaterial(nombreMaterial);
+	nuevo.setCategoriaMaterial(categoriaMaterial);
+	nuevo.setStatus(1);
+	try{
+		gestorPersistencia.makePersistent(nuevo);
+		System.out.println("CATEGORIA GUARDADO CORRECTAMENTE");
+		valor = nuevo.getIdCatalogoMaterial();
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+}
+
 ///////-------------------------------------------------------ELIMINAR------------------------------------	
     @Override
     public Long Eliminar_Parametro(Long id) throws IllegalArgumentException {
@@ -516,6 +536,25 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 		}
 		return valor;
 	}
+	public List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegCatalogoMaterial.class);
+		query.setFilter("status == 1");
+		List<AuxCatalogoMaterial> valor = new ArrayList<AuxCatalogoMaterial>();
+		List<SegCatalogoMaterial> execute = (List<SegCatalogoMaterial>)query.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for (SegCatalogoMaterial p : execute){
+				AuxCatalogoMaterial n= new AuxCatalogoMaterial();
+				n.setIdCatalogoMaterial(p.getIdCatalogoMaterial());
+				n.setIdMaterial(p.getIdMaterial());
+				n.setCategoriaMaterial(p.getCategoriaMaterial());
+				n.setNombreMaterial(p.getNombreMaterial());
+				valor.add(n);
+			}
+		}
+		return valor;
+	}
+    
 	public List<AuxBeneficiario> ConsultaTodosBene(){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegBeneficiario.class);

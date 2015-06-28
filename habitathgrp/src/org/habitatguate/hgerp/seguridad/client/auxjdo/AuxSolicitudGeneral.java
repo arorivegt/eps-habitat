@@ -4,6 +4,8 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class AuxSolicitudGeneral implements IsSerializable {
@@ -285,7 +287,6 @@ public class AuxSolicitudGeneral implements IsSerializable {
 	public void setTelefonoTrabajoConyuge(int telefonoTrabajoConyuge) {
 		this.telefonoTrabajoConyuge = telefonoTrabajoConyuge;
 	}
-
 	
     private Boolean garantia;
 
@@ -297,17 +298,47 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.garantia = garantia;
 	}
 
-    private Boolean aprobacion;
+    private Boolean creditoAprobado;
 
-	public Boolean getAprobacion() {
-		return aprobacion;
+    public Boolean getCreditoAprobado() {
+		return creditoAprobado;
 	}
 
-	public void setAprobacion(Boolean aprobacion) {
-		this.aprobacion = aprobacion;
+	public void setCreditoAprobado(Boolean creditoAprobado) {
+		this.creditoAprobado = creditoAprobado;
 	}
 	
-    private Boolean PrimeraSupervision;
+    private Boolean creditoNoAprobado;
+
+	public Boolean getCreditoNoAprobado() {
+		return creditoNoAprobado;
+	}
+
+	public void setCreditoNoAprobado(Boolean creditoNoAprobado) {
+		this.creditoNoAprobado = creditoNoAprobado;
+	}
+
+    private float montoAprobado;
+
+	public float getMontoAprobado() {
+		return montoAprobado;
+	}
+
+	public void setMontoAprobado(float montoAprobado) {
+		this.montoAprobado = montoAprobado;
+	}
+
+    private String observacionNoAprobado;
+	
+	public String getObservacionNoAprobado() {
+		return observacionNoAprobado;
+	}
+
+	public void setObservacionNoAprobado(String observacionNoAprobado) {
+		this.observacionNoAprobado = observacionNoAprobado;
+	}
+
+	private Boolean PrimeraSupervision;
 
 	public Boolean getPrimeraSupervision() {
 		return PrimeraSupervision;

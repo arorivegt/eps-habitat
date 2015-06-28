@@ -63,8 +63,11 @@ public class Sce_DataEntryBuroCreditoSolicitud extends Composite {
 	
 	// SET DATA SITUACION ECONOMICA BURO CREDITO
 	
-	public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, Boolean valor) {
-		fd7.setDataSituacionEconomica(results, valor);
+	public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, 
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado) {
+		
+		fd7.setDataSituacionEconomica(results, creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado);
+	
 	}
 	
 	

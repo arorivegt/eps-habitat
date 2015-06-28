@@ -59,7 +59,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean aprobacion, 
+			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
@@ -96,7 +96,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setLugarTrabajoConyuge(lugarTrabajoConyuge);
 		solicitud.setTelefonoTrabajoConyuge(telefonoTrabajoConyuge);
 		solicitud.setGarantia(garantia);										// Existe Garantia
-		solicitud.setAprobacion(aprobacion);									// Aprobacion Credito Solicitud
+		solicitud.setCreditoAprobado(creditoAprobado);							// Credito Aprobado Solicitud
+		solicitud.setCreditoNoAprobado(creditoNoAprobado);						// Credito No Solicitud
+		solicitud.setMontoAprobado(montoAprobado);								// Monto Aprobado
+		solicitud.setObservacionNoAprobado(observacionNoAprobado);				// Observacion No Aprobado
 		solicitud.setPrimeraSupervision(primeraSupervision);					// Existe Primera Supervision	
 		solicitud.setSegundaSupervision(segundaSupervision);					// Existe Segunda Supervision
 		solicitud.setTerceraSupervision(terceraSupervision);					// Existe Tercera Supervision
@@ -759,7 +762,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				nuevo.setLugarTrabajoConyuge(p.getLugarTrabajoConyuge());
 				nuevo.setTelefonoTrabajoConyuge(p.getTelefonoTrabajoConyuge());
 				nuevo.setGarantia(p.getGarantia());
-				nuevo.setAprobacion(p.getAprobacion());
+				nuevo.setCreditoAprobado(p.getCreditoAprobado());
+				nuevo.setCreditoNoAprobado(p.getCreditoNoAprobado());
+				nuevo.setMontoAprobado(p.getMontoAprobado());
+				nuevo.setObservacionNoAprobado(p.getObservacionNoAprobado());
 				nuevo.setPrimeraSupervision(p.getPrimeraSupervision());
 				nuevo.setSegundaSupervision(p.getSegundaSupervision());
 				nuevo.setTerceraSupervision(p.getTerceraSupervision());
@@ -1080,7 +1086,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setLugarTrabajoConyuge(p.getLugarTrabajoConyuge());
 			nuevo.setTelefonoTrabajoConyuge(p.getTelefonoTrabajoConyuge());
 			nuevo.setGarantia(p.getGarantia());
-			nuevo.setAprobacion(p.getAprobacion());
+			nuevo.setCreditoAprobado(p.getCreditoAprobado());
+			nuevo.setCreditoNoAprobado(p.getCreditoNoAprobado());
+			nuevo.setMontoAprobado(p.getMontoAprobado());
+			nuevo.setObservacionNoAprobado(p.getObservacionNoAprobado());
 			nuevo.setPrimeraSupervision(p.getPrimeraSupervision());
 			nuevo.setSegundaSupervision(p.getSegundaSupervision());
 			nuevo.setTerceraSupervision(p.getTerceraSupervision());
@@ -1985,12 +1994,17 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	
 	@Override
 	public Long actualizarDatosAprobacionBuroCredito(Long idFormulario, 
-			Boolean aprobacion) throws IllegalArgumentException {
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			 try {  
 					 final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
-					 	solicitud.setAprobacion(aprobacion);
+					 
+					 	solicitud.setCreditoAprobado(creditoAprobado);
+					 	solicitud.setCreditoNoAprobado(creditoNoAprobado);
+					 	solicitud.setMontoAprobado(montoAprobado);
+					 	solicitud.setObservacionNoAprobado(observacionNoAprobado);
+					 	
 		 }finally {  
 			 Persistencia.close();  
 		 }

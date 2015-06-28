@@ -733,7 +733,10 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					telefonoTrabajoConyuge = Integer.parseInt(telefonoTrabajoConyugeValue);
 					
 					Boolean garantia = false;
-					Boolean aprobacion = false;
+					Boolean creditoAprobado = false;
+					Boolean creditoNoAprobado = false;
+					float montoAprobado = 0;
+					String observacionNoAprobado = "";
 					Boolean primeraSupervision = false;
 					Boolean segundaSupervision = false;
 					Boolean terceraSupervision = false;
@@ -763,7 +766,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 										lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
 										solucionConstruir, cuotaPagar,
 										nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
-										garantia, aprobacion,
+										garantia, creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
 										primeraSupervision, segundaSupervision, terceraSupervision, cuartaSupervision,
 										new AsyncCallback<Long>() {
 

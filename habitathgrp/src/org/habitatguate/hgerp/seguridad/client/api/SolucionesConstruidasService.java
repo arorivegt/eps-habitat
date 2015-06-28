@@ -24,7 +24,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean aprobacion, 
+			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException;
 
 	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
@@ -230,7 +230,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 	// BURO CREDITO
 	
 	Long actualizarDatosAprobacionBuroCredito(Long idFormulario,
-			Boolean aprobacion) throws IllegalArgumentException;
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado) throws IllegalArgumentException;
 	
 	
 	// SOLUCIONES

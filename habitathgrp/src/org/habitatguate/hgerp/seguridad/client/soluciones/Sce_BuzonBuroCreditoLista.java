@@ -74,7 +74,7 @@ public class Sce_BuzonBuroCreditoLista extends Composite {
 			        					p.getIdFormulario(), p.getNombreSolicitante(), 
 			        					p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
 			        					p.getSolucionConstruir(),
-			        					p.getAprobacion(), valVisibilidad)
+			        					p.getCreditoAprobado(), valVisibilidad)
 			        );
 				}
 		        load.invisible();

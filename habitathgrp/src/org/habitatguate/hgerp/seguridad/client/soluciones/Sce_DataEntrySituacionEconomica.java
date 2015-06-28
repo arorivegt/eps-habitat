@@ -66,7 +66,7 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
 
     			System.out.println("ID Situacion Economica a Cargar: " + n2.getIdSituacionEconomica() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
+//    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
     			
     			data.LlenarDatos(n2.getIdSituacionEconomica(), 
     					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),

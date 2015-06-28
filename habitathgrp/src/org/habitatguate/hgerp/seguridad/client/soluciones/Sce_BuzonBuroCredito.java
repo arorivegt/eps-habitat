@@ -313,10 +313,13 @@ public class Sce_BuzonBuroCredito extends Composite  {
                 load.invisible();            	
                 buroCreditoSolicitud.idFormulario = result.getIdFormulario();
             	System.out.println("SITUACION ECONOMICA DE FORMULARIO: " + buroCreditoSolicitud.idFormulario + ", Del Solicitante: " + result.getNombreSolicitante() 
-            			+ ", Estado de Aprobado de Buro Credito: " + result.getAprobacion());
+            			+ ", Estado de Aprobado de Buro Credito: " + result.getCreditoAprobado());
         		        		
         		try{
-        			buroCreditoSolicitud.setDataSituacionEconomica(result.getSituacionEconomica(), result.getAprobacion());
+        			
+        			buroCreditoSolicitud.setDataSituacionEconomica(result.getSituacionEconomica(), 
+        					result.getCreditoAprobado(), result.getCreditoNoAprobado(), result.getMontoAprobado(), result.getObservacionNoAprobado());
+        			
         		}catch(Exception e){
         			
         		}    

@@ -23,7 +23,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean aprobacion, 
+			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
@@ -253,7 +253,7 @@ public interface SolucionesConstruidasServiceAsync {
 	// BURO CREDITO
 	
 	void actualizarDatosAprobacionBuroCredito(Long idFormulario, 
-			Boolean aprobacion,
+			Boolean aprobacion, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
     // SOLUCIONES

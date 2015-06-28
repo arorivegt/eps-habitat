@@ -58,7 +58,8 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
 	}
 	
     
-    public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, Boolean valor){
+    public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, 
+    		Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado){
 
     	if (!results.isEmpty()) {
 
@@ -66,14 +67,14 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
 
     			System.out.println("ID Situacion Economica a Cargar: " + n2.getIdSituacionEconomica() + ", ID Formulario: " + n2.getIdFormulario());
     			
-    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
+//    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
     			
     			data.LlenarDatos(n2.getIdSituacionEconomica(), 
     					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),
     					n2.getTotalIngresos(), n2.getTotalEgresos(), n2.getDiferencia(), n2.getPagosBuro(), n2.getCuota(), n2.getExcedente(),
     					n2.getAlquilerVivienda(), n2.getAlimentacion(), n2.getRopa(), n2.getGastosMedicos(), n2.getTransporte(), n2.getEducacion(),
     					n2.getPagoLuzAgua(), n2.getPagoPrestamos(), n2.getOtrosGastos1(), n2.getOtrosGastos2(), n2.getEgresosTotales(), 
-    					valor);  
+    					creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado);  
     			
     		}
     	

@@ -365,16 +365,49 @@ public class SegSolicitudGeneral implements Serializable {
 	}
 
 	@Persistent
-    private Boolean aprobacion;
+    private Boolean creditoAprobado;
 
-	public Boolean getAprobacion() {
-		return aprobacion;
+	public Boolean getCreditoAprobado() {
+		return creditoAprobado;
 	}
 
-	public void setAprobacion(Boolean aprobacion) {
-		this.aprobacion = aprobacion;
+	public void setCreditoAprobado(Boolean creditoAprobado) {
+		this.creditoAprobado = creditoAprobado;
 	}
 	
+	@Persistent
+    private Boolean creditoNoAprobado;
+
+	public Boolean getCreditoNoAprobado() {
+		return creditoNoAprobado;
+	}
+
+	public void setCreditoNoAprobado(Boolean creditoNoAprobado) {
+		this.creditoNoAprobado = creditoNoAprobado;
+	}
+	
+	@Persistent
+    private float montoAprobado;
+
+	public float getMontoAprobado() {
+		return montoAprobado;
+	}
+
+	public void setMontoAprobado(float montoAprobado) {
+		this.montoAprobado = montoAprobado;
+	}
+
+	@Persistent
+    private String observacionNoAprobado;
+	
+	public String getObservacionNoAprobado() {
+		return observacionNoAprobado;
+	}
+
+	public void setObservacionNoAprobado(String observacionNoAprobado) {
+		this.observacionNoAprobado = observacionNoAprobado;
+	}
+
 	@Persistent
     private Boolean PrimeraSupervision;
 

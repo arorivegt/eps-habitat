@@ -177,7 +177,7 @@ public class Sce_BuzonEncuestaSatisfaccionItem extends Composite {
 						
 			}
 		});
-		btnVer.setText("Ver Solicitud");
+		btnVer.setText("Encuesta");
 		btnVer.setStylePrimaryName("sendButton");
 		btnVer.setStyleName("sendButton");
 		absolutePanel.add(btnVer, 990, 20);

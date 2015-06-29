@@ -584,6 +584,7 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 
 						solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
 								creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+								URLFile, KeyFile,
 								new AsyncCallback<Long>() {
 
 							public void onFailure(Throwable caught) 
@@ -608,6 +609,7 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 
 						solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
 								creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+								URLFile, KeyFile,
 								new AsyncCallback<Long>() {
 
 							public void onFailure(Throwable caught) 

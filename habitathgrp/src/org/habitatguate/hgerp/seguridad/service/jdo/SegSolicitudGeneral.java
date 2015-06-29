@@ -58,6 +58,17 @@ public class SegSolicitudGeneral implements Serializable {
 
 	// Atributos
 	
+	@Persistent
+    private String usrName;
+	
+	public String getUsrName() {
+		return usrName;
+	}
+
+	public void setUsrName(String usrName) {
+		this.usrName = usrName;
+	}
+
 	@Persistent    
     private Date fecrec;
 	
@@ -69,6 +80,17 @@ public class SegSolicitudGeneral implements Serializable {
 		this.fecrec = fecrec;
 	}
 	
+	@Persistent    
+    private Date fecupdate;
+	
+	public Date getFecupdate() {
+		return fecupdate;
+	}
+
+	public void setFecupdate(Date fecupdate) {
+		this.fecupdate = fecupdate;
+	}
+
 	@Persistent
     private String nombreSolicitante;
 	
@@ -461,6 +483,28 @@ public class SegSolicitudGeneral implements Serializable {
 
 	public void setUbicacionSupervision(Boolean ubicacionSupervision) {
 		UbicacionSupervision = ubicacionSupervision;
+	}
+	
+	@Persistent    
+    private String URLFile;
+
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+	@Persistent    
+    private String KeyFile;
+
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
 	}
 
 	// Mapeo de Llave Foranea

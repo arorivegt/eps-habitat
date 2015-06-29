@@ -28,7 +28,17 @@ public class AuxSolicitudGeneral implements IsSerializable {
 	
 	// Atributos
 
-    private String nombreSolicitante;
+    private String usrName;
+	
+    public String getUsrName() {
+		return usrName;
+	}
+
+	public void setUsrName(String usrName) {
+		this.usrName = usrName;
+	}
+
+	private String nombreSolicitante;
 	
 	public String getNombreSolicitante() {
 		return nombreSolicitante;
@@ -377,6 +387,26 @@ public class AuxSolicitudGeneral implements IsSerializable {
 	public void setCuartaSupervision(Boolean cuartaSupervision) {
 		CuartaSupervision = cuartaSupervision;
 	}	
+	
+    private String URLFile;
+    
+	public String getURLFile() {
+		return URLFile;
+	}
+
+	public void setURLFile(String uRLFile) {
+		URLFile = uRLFile;
+	}
+
+    private String KeyFile;
+	
+	public String getKeyFile() {
+		return KeyFile;
+	}
+
+	public void setKeyFile(String keyFile) {
+		KeyFile = keyFile;
+	}
 	
 	
 	// Relacion

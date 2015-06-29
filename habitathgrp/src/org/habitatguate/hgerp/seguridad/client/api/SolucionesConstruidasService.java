@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
@@ -15,8 +16,9 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 	// DATOS SOLICITANTE		
 	
-	Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
-			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado, String usrName,
+			Date fecrec, 
+			String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -27,8 +29,9 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException;
 
-	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
-			 String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado, String usrName,
+				Date fecupdate,
+			 	String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 				String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 				String direccionActual, String direccionSolucion, 
@@ -230,7 +233,8 @@ public interface SolucionesConstruidasService extends RemoteService {
 	// BURO CREDITO
 	
 	Long actualizarDatosAprobacionBuroCredito(Long idFormulario,
-			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado) throws IllegalArgumentException;
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			String  URLFile, String KeyFile) throws IllegalArgumentException;
 	
 	
 	// SOLUCIONES
@@ -240,6 +244,8 @@ public interface SolucionesConstruidasService extends RemoteService {
     AuxSolicitudGeneral obtenerDataFormularioRegistrado(Long idFormulario) throws IllegalArgumentException;
     
     AuxSolicitudEncuestaSatisfaccion consultaEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion) throws IllegalArgumentException;
+    
+    AuxEmpleado consultaEmpleadoRegistrado(Long idEmpleado) throws IllegalArgumentException;
     
     // Remover imagen de Blobstore
     

@@ -6,7 +6,11 @@ import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
+import org.habitatguate.hgerp.seguridad.service.RecursosHumanosServiceImpl;
+import org.habitatguate.hgerp.seguridad.service.SolucionesConstruidasServiceImpl;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -36,6 +40,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 	// Llaves
 	private Long idFormulario = 0L;
 	private Long idEmpleado = 0L;
+	private String usrName = "";
 	private Long idAfiliado = 0L;
 	private Long idRol = 0L;
 
@@ -77,12 +82,28 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
-		// Obtener Id Empleado
+		// Obtener Id Empleado y UserName (eMail)
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
-			public void onSuccess(Long result) {
-				idEmpleado = result;
-				System.out.println("Id Empleado: " + idEmpleado);
+			public void onSuccess(Long result) 
+			{
+				idEmpleado = result;				
+
+				solucionesService.consultaEmpleadoRegistrado(idEmpleado, new AsyncCallback<AuxEmpleado>(){
+					public void onFailure(Throwable caught) 
+					{
+						mensaje.setMensaje("alert alert-information alert-block", 
+								"\nNo hay resultados");
+					}
+
+					@Override
+					public void onSuccess(AuxEmpleado result)
+					{	
+						usrName = result.getEmail();
+						
+						System.out.println("ID Empleado: " + idEmpleado + ", Nombre de Usuario: " + usrName);
+					}
+				});
 			}
 			@Override
 			public void onFailure(Throwable caught) {
@@ -743,7 +764,8 @@ public class Sce_DataFormularioSolicitud extends Composite {
 					Boolean cuartaSupervision = false;
 					
 					if(idEmpleado != 0){
-						System.out.println("Valor Retornado Id Empleado: " + idEmpleado);
+						
+						System.out.println("Valor Retornado Id Empleado: " + idEmpleado + ", Nombre de Usuario: " + usrName);
 
 						// Modulo Soluciones //-- CAMBIAR Y QUITAR COMENTARIO AL REALIZAR VALIDACIÓN
 						
@@ -753,12 +775,13 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 							if(bandera){
 
-								Date time=new Date();
+								Date time = new Date();
 								@SuppressWarnings("deprecation")
 								Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
-
-								solucionesService.ingresarDatosSolicitante(idEmpleado, idAfiliado,
-										fecrec, nombreSolicitante, estadoCivil, edad, nacionalidad, 
+								
+								solucionesService.ingresarDatosSolicitante(idEmpleado, idAfiliado, usrName,
+										fecrec, 
+										nombreSolicitante, estadoCivil, edad, nacionalidad, 
 										profesionOficio, dpiValue, dpiUnico, dpiReferencia, actividadEconomica,   // Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 
 										direccionActual, direccionSolucion,
@@ -789,7 +812,12 @@ public class Sce_DataFormularioSolicitud extends Composite {
 
 							}else{
 
-								solucionesService.actualizarDatosSolicitante(idFormulario, idEmpleado, idAfiliado, 
+								Date time = new Date();
+								@SuppressWarnings("deprecation")
+								Date fecupdate = new Date(time.getYear(),time.getMonth(),time.getDate());
+								
+								solucionesService.actualizarDatosSolicitante(idFormulario, idEmpleado, idAfiliado, usrName,
+										fecupdate,
 										nombreSolicitante, estadoCivil, edad, nacionalidad, 
 										profesionOficio, dpiValue, dpiUnico, dpiReferencia, actividadEconomica,			// Comentado para validez de no. DPI en un solo campo
 										sabeLeer, sabeEscribir, sabeFirmar, 

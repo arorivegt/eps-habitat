@@ -8,6 +8,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
@@ -22,6 +23,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionPri
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionTercera;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSupervisionUbicacion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudCargaFamiliar;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudDatosVivienda;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudEncuestaSatisfaccion;
@@ -50,8 +52,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet implements SolucionesConstruidasService {
 
 	@Override
-	public Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
-			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	public Long ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado, String usrName,
+			Date fecrec, 
+			String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -68,6 +71,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		SegSolicitudGeneral solicitud = new SegSolicitudGeneral();
 		solicitud.setIdEmpleado(idEmpleado);
 		solicitud.setIdAfiliado(idAfiliado);
+		solicitud.setUsrName(usrName);
 		solicitud.setFecrec(fecrec); 
 		solicitud.setNombreSolicitante(nombreSolicitante);
 		solicitud.setEstadoCivil(estadoCivil);
@@ -103,7 +107,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setPrimeraSupervision(primeraSupervision);					// Existe Primera Supervision	
 		solicitud.setSegundaSupervision(segundaSupervision);					// Existe Segunda Supervision
 		solicitud.setTerceraSupervision(terceraSupervision);					// Existe Tercera Supervision
-		solicitud.setCuartaSupervision(cuartaSupervision);						// Existe Cuarta Supervision		
+		solicitud.setCuartaSupervision(cuartaSupervision);						// Existe Cuarta Supervision	
 
 		try { 
 			gestorPersistencia.makePersistent(solicitud); 
@@ -684,7 +688,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
 			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"nombreSolicitante == '"+nombreSolicitante+"'" +		// Realiza una busqueda ESPECIFICA, segun un el nombre de solicitante
+					"nombreSolicitante == '"+nombreSolicitante+"'" +		// Realiza una busqueda ESPECIFICA, segun el nombre de solicitante
 					" && idAfiliado == " + idAfiliado +
 					" && idEmpleado == " + idEmpleado
 					);
@@ -735,6 +739,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				
 				AuxSolicitudGeneral nuevo = new AuxSolicitudGeneral();
 
+				nuevo.setUsrName(p.getUsrName());
 				nuevo.setNombreSolicitante(p.getNombreSolicitante());
 				nuevo.setEstadoCivil(p.getEstadoCivil());
 				nuevo.setEdad(p.getEdad());
@@ -770,6 +775,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				nuevo.setSegundaSupervision(p.getSegundaSupervision());
 				nuevo.setTerceraSupervision(p.getTerceraSupervision());
 				nuevo.setCuartaSupervision(p.getCuartaSupervision());
+				nuevo.setURLFile(p.getURLFile());
+				nuevo.setKeyFile(p.getKeyFile());
 				nuevo.setIdFormulario(p.getIdFormulario());	// ID
 				
 				List<SegSolicitudCargaFamiliar> results01 = p.getCargaFamiliar();
@@ -1059,6 +1066,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			
 			final SegSolicitudGeneral p = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
 			
+			nuevo.setUsrName(p.getUsrName());
 			nuevo.setNombreSolicitante(p.getNombreSolicitante());
 			nuevo.setEstadoCivil(p.getEstadoCivil());
 			nuevo.setEdad(p.getEdad());
@@ -1094,6 +1102,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setSegundaSupervision(p.getSegundaSupervision());
 			nuevo.setTerceraSupervision(p.getTerceraSupervision());
 			nuevo.setCuartaSupervision(p.getCuartaSupervision());
+			nuevo.setURLFile(p.getURLFile());
+			nuevo.setKeyFile(p.getKeyFile());
 			nuevo.setIdFormulario(p.getIdFormulario());	// ID
 			
 			List<SegSolicitudCargaFamiliar> results01 = p.getCargaFamiliar();
@@ -1405,9 +1415,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setPreguntaNo14(p.getPreguntaNo14());
 			nuevo.setPreguntaNo15(p.getPreguntaNo15());
 			nuevo.setPreguntaNo16(p.getPreguntaNo16());
-			nuevo.setDepartamento(p.getDepartamento());
-			
-			
+			nuevo.setDepartamento(p.getDepartamento());			
 		}finally {  
 			Persistencia.close();  
 		}
@@ -1415,13 +1423,38 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return nuevo;
 	}   
 	
+	
+	@Override
+	public AuxEmpleado consultaEmpleadoRegistrado(Long idEmpleado) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		AuxEmpleado nuevo = new AuxEmpleado();
+
+		try { 
+
+			final SegEmpleado p = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
+			nuevo.setBonificacion(p.getBonificacion());
+			nuevo.setCelular(p.getCelular());
+			nuevo.setCentro_trabajo(p.getCentro_trabajo());
+			nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
+			nuevo.setIVS(p.getIVS());
+			nuevo.setCui(p.getCui());
+			nuevo.setEmail(p.getEmail());
+		}finally {  
+			Persistencia.close();  
+		}
+
+		return nuevo;
+	}  
+	
 
 // METODOS DE ACTUALIZAR Y ELIMINAR		
 
 	// DATOS SOLICITANTE
 	
 	@Override
-	public Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
+	public Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado, String usrName,
+			Date fecupdate,
 			String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
@@ -1436,6 +1469,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					 final SegSolicitudGeneral solicitud = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
 					 	solicitud.setIdEmpleado(idEmpleado);
 					 	solicitud.setIdAfiliado(idAfiliado);
+					 	solicitud.setUsrName(usrName);
+					 	solicitud.setFecupdate(fecupdate);
 						solicitud.setNombreSolicitante(nombreSolicitante);
 						solicitud.setEstadoCivil(estadoCivil);
 						solicitud.setEdad(edad);
@@ -1994,7 +2029,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	
 	@Override
 	public Long actualizarDatosAprobacionBuroCredito(Long idFormulario, 
-			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado) throws IllegalArgumentException {
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			String  URLFile, String KeyFile) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			 try {  
@@ -2004,6 +2040,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					 	solicitud.setCreditoNoAprobado(creditoNoAprobado);
 					 	solicitud.setMontoAprobado(montoAprobado);
 					 	solicitud.setObservacionNoAprobado(observacionNoAprobado);
+					 	solicitud.setURLFile(URLFile);
+					 	solicitud.setKeyFile(KeyFile);
 					 	
 		 }finally {  
 			 Persistencia.close();  

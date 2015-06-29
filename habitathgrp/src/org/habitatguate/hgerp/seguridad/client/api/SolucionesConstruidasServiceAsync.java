@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.api;
 import java.util.Date;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
@@ -14,8 +15,9 @@ public interface SolucionesConstruidasServiceAsync {
 	
 // DATOS SOLICITANTE	
 	
-	void ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado,
-			Date fecrec, String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	void ingresarDatosSolicitante(Long idEmpleado, Long idAfiliado, String usrName,
+			Date fecrec, 
+			String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 			String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 			String direccionActual, String direccionSolucion, 
@@ -27,8 +29,9 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
-	 void actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado,
-			 String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
+	 void actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado, String usrName,
+			 	Date fecupdate,
+			 	String nombreSolicitante, String estadoCivil, int edad, String nacionalidad, 
 				String profesionOficio, String dpi, int dpiUnico, int dpiReferencia, String actividadEconomica,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar, 
 				String direccionActual, String direccionSolucion, 
@@ -254,6 +257,7 @@ public interface SolucionesConstruidasServiceAsync {
 	
 	void actualizarDatosAprobacionBuroCredito(Long idFormulario, 
 			Boolean aprobacion, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			String  URLFile, String KeyFile,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
     // SOLUCIONES
@@ -264,7 +268,9 @@ public interface SolucionesConstruidasServiceAsync {
 	void obtenerDataFormularioRegistrado(Long idFormulario, AsyncCallback<AuxSolicitudGeneral> callback)throws IllegalArgumentException;
 	 
 	void consultaEncuestaSatisfaccion(Long idFormulario, Long idEncuestaSatisfaccion, AsyncCallback<AuxSolicitudEncuestaSatisfaccion> callback)throws IllegalArgumentException;
-		
+
+	void consultaEmpleadoRegistrado(Long idEmpleado, AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
+	
 	// Remover imagen de Blobstore
 	 
 	 void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;

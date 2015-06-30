@@ -53,6 +53,8 @@ public interface SqlService extends RemoteService{
 	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliado(Long idAfiliado);
 	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado);
 	List<AuxVale> ConsultarValesPendientes_unProveedor(Long idProveedor);
+	List<AuxSolucion> Consulta_SolucionesGenerales();
+	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
 	Long Eliminar_Parametro(Long id);
@@ -60,6 +62,7 @@ public interface SqlService extends RemoteService{
 	Long Eliminar_Beneficiario(Long id);
 	Long Eliminar_MaterialCostruccion(Long id);
 	Long Eliminar_Proveedor(Long id);
+	Long Eliminar_ProductoCatalogo(Long id);
 	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
 	Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado);
 	Long Actualizar_Beneficiario(Long id,String nomBeneficiario,String dirBeneficiario,int telBeneficiario);

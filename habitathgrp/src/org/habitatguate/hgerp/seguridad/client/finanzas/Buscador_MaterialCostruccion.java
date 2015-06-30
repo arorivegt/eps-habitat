@@ -5,6 +5,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 
@@ -58,6 +59,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	public Buscador_MaterialCostruccion(){
 	final Grid grid = new Grid(2, 2);
 	final ProveedorNameSuggestOracle listaproveedor = new ProveedorNameSuggestOracle();
+	final CatalogoNameSuggestOracle listaProductos = new CatalogoNameSuggestOracle();
 	initWidget(grid);
 	grid.setWidth("1278px");
 	
@@ -83,6 +85,27 @@ public class Buscador_MaterialCostruccion extends Composite{
 		}
 	});
 	
+	loginService.ConsultaTodosProductosCatalogo(new AsyncCallback<List<AuxCatalogoMaterial>>() {
+		
+		@Override
+		public void onSuccess(List<AuxCatalogoMaterial> result) {
+			if (!result.isEmpty()){
+				for (AuxCatalogoMaterial p : result){
+					listaProductos.add(new CatalogoMultiWordSuggestion(p));	
+				}
+			}			
+			
+			
+		}
+		
+		@Override
+		public void onFailure(Throwable caught) {
+			System.out.println(caught);
+			
+		}
+	});
+	
+	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
 	absolutePanel.setSize("1025px", "90px");
@@ -93,18 +116,13 @@ public class Buscador_MaterialCostruccion extends Composite{
 	absolutePanel.add(label, 10, 66);
 	label.setSize("157px", "13px");
 	
-	final TextBox textBox = new TextBox();
-	textBox.setStyleName("gwt-TextBox2");
-	textBox.setMaxLength(100);
-	absolutePanel.add(textBox, 10, 85);
-	textBox.setSize("227px", "34px");
-	
-	textBox.addKeyUpHandler(new KeyUpHandler() {
+		
+	/*textBox.addKeyUpHandler(new KeyUpHandler() {
         @Override
         public void onKeyUp(KeyUpEvent event) {
         	textBox.setText(textBox.getText().toUpperCase());
         }
-    });	
+    });*/	
 	
 	Label label_1 = new Label("Precio Sugerido");
 	label_1.setStyleName("label");
@@ -158,12 +176,16 @@ public class Buscador_MaterialCostruccion extends Composite{
 	absolutePanel.add(suggestBox, 20, 29);
 	suggestBox.setSize("375px", "18px");
 	
+	final SuggestBox suggestBox2 = new SuggestBox(listaProductos);
+	absolutePanel.add(suggestBox2, 10, 85);
+	suggestBox2.setSize("227px", "34px");
+	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			if (!textBox.getText().equals("")){
+			if (!suggestBox2.getText().equals("")){
 				
 
-			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),textBox.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
+			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -175,7 +197,7 @@ public class Buscador_MaterialCostruccion extends Composite{
                 public void onSuccess(Long result)
                 {			
                 	Window.alert("Datos Almacenados Correctamente");
-                	textBox.setText("");
+                	//textBox.setText("");
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	suggestBox.setText("");

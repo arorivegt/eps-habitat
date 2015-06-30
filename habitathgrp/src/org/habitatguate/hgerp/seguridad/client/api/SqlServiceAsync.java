@@ -157,6 +157,13 @@ public interface SqlServiceAsync {
 	void ConsultaTodosProductosCatalogo(
 			AsyncCallback<List<AuxCatalogoMaterial>> callback);
 
+	void Eliminar_ProductoCatalogo(Long id, AsyncCallback<Long> callback);
+
+	void ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario,
+			AsyncCallback<AuxBeneficiario> callback);
+
+	void Consulta_SolucionesGenerales(AsyncCallback<List<AuxSolucion>> callback);
+
 
 
 

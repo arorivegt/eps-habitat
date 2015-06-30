@@ -40,6 +40,32 @@ public class SegProveedor implements Serializable{
 	@Persistent
 	private String observaciones;
 	
+	//nuevos datos
+	@Persistent
+	private String razonSocial;
+	@Persistent
+	private String actividadEcono;
+	@Persistent
+	private String aceptaExencion;
+	@Persistent
+	private String relacionConProv;
+	@Persistent
+	private String tipoProveedor;
+	@Persistent
+	private String productosOfrece;
+	@Persistent
+	private String disponibilidadProd;
+	@Persistent
+	private String tiempoEntrega;
+	@Persistent
+	private String regimenTributario;
+	@Persistent
+	private String aceptaDonacion;
+	@Persistent
+	private int porcentDonacion;
+		
+	//------
+	
 	private SegAfiliado afiliado;
 	
 	@Persistent(mappedBy = "proveedor")

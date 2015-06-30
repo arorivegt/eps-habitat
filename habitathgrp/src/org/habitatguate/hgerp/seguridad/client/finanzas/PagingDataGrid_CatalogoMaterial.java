@@ -94,7 +94,7 @@ public abstract class PagingDataGrid_CatalogoMaterial<T> extends Composite {
             	iter = (Iterator<T>) lista.iterator();
         			while (iter.hasNext()){
         			objectoEliminado = iter.next();	
-        			/*loginService.Eliminar_Afiliado(((AuxAfiliado)objectoEliminado).getIdAfiliado(), new AsyncCallback<Long>() {
+        			loginService.Eliminar_ProductoCatalogo(((AuxCatalogoMaterial)objectoEliminado).getIdCatalogoMaterial(), new AsyncCallback<Long>() {
         				
         				@Override
         				public void onSuccess(Long result) {
@@ -108,7 +108,7 @@ public abstract class PagingDataGrid_CatalogoMaterial<T> extends Composite {
         					System.out.println(caught);
         					
         				}
-        			});*/
+        			});
         			}
         			
 	

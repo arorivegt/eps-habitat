@@ -42,6 +42,8 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private Date fechaInicio;
 	@Persistent
+	private int estadoSolucion;
+	@Persistent
 	@Unowned
 	private SegBeneficiario beneficiario;
 	@Persistent(mappedBy = "solucion")
@@ -64,12 +66,25 @@ public class SegSolucion implements Serializable{
 
 
 
-
 	public SegSolucion(){
 		super();
 	}
 
 	
+
+
+	public int getEstadoSolucion() {
+		return estadoSolucion;
+	}
+
+
+
+
+	public void setEstadoSolucion(int estadoSolucion) {
+		this.estadoSolucion = estadoSolucion;
+	}
+
+
 
 
 	public String getNomSolucion() {

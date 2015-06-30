@@ -165,6 +165,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <url-pattern>/FinanGenerarPdfVale</url-pattern>  
 </servlet-mapping>
 
+<servlet>  
+        <servlet-name>FinanGenerarPdfReporteRecord</servlet-name>  
+        <servlet-class>org.habitatguate.hgerp.seguridad.service.FinanGenerarPdfReporteRecord</servlet-class>  
+</servlet>  
+<servlet-mapping>  
+        <servlet-name>FinanGenerarPdfReporteRecord</servlet-name>  
+        <url-pattern>/FinanGenerarPdfReporteRecord</url-pattern>  
+</servlet-mapping>
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

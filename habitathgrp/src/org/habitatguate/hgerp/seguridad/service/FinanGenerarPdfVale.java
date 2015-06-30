@@ -138,6 +138,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		           table.setHeaderRows(1);
 		           
 		           Iterator<AuxDetalleSolucion> iter = auxBeneficiario.getSolucion().getLista().iterator();
+		           double costoAcumulado = 0.0;
 		            while (iter.hasNext()){
 		            	AuxDetalleSolucion next = iter.next();
 		            	if(next.getVale().get(0).getIdVale() == idVale){
@@ -148,7 +149,8 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            		table.addCell(String.valueOf(next.getCantidad()));
 		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getPrecioUnit()));
 		            		table.addCell(String.valueOf(next.getSubTotal()));
-		            		table.addCell(String.valueOf(next.getSubTotal()));
+		            		costoAcumulado = costoAcumulado + next.getSubTotal();
+		            		table.addCell(String.valueOf(costoAcumulado));
 		            	}
 		            }
 		            

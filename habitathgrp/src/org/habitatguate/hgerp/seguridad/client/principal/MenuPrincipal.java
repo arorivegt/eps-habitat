@@ -18,6 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
@@ -213,6 +214,21 @@ public class MenuPrincipal extends Composite {
 				fina5();
 			}
 		};
+		
+		final Command cmdfinaReporte1 = new Command() {
+			public void execute() {
+				finaReporte1();
+				
+			}
+		};
+		
+		final Command cmdfinaReporte2 = new Command() {
+			public void execute() {
+				
+				
+			}
+		};
+		
 
 		// -- Soluciones Construidas6
 //		Command cmdsce1_v1 = new Command() {
@@ -362,6 +378,12 @@ public class MenuPrincipal extends Composite {
          	 	    MenuSoluciones.addSeparator();*/
 		MenuSoluciones.addItem("Asignar Solucion", cmdfina3b);
 		MenuSoluciones.addItem("Gestor de Vales", cmdfina3a);
+		
+		//Reportes Menu
+		final MenuBar MenuReportesFinanzas = new MenuBar(true);
+		MenuSoluciones.setAnimationEnabled(true);
+		MenuReportesFinanzas.addItem("Reporte Record Credito", cmdfinaReporte1);
+		MenuReportesFinanzas.addItem("Reporte Trimestre", cmdfinaReporte2);
 
 		//soluciones menu
 		final MenuBar MenuInventarioMateriales = new MenuBar(true);
@@ -370,7 +392,7 @@ public class MenuPrincipal extends Composite {
          	 	    MenuInventarioMateriales.addSeparator();*/
 		MenuInventarioMateriales.addItem("Inventario Materiales de Costrucción", cmdfina6b);
 
-		//recursos humano menu
+		//Finanzas menu
 		final MenuBar MenuFinanzas = new MenuBar(true);
 		/*	    MenuFinanzas.setAnimationEnabled(true);
          	 	    MenuFinanzas.addItem("Inventario Activos Fijos", MenuInventarioActivos);*/
@@ -384,6 +406,8 @@ public class MenuPrincipal extends Composite {
 		MenuFinanzas.addItem("Administrador Beneficiario", cmdfina2a);
 		MenuFinanzas.addSeparator();
 		MenuFinanzas.addItem("Soluciones", MenuSoluciones);
+		MenuFinanzas.addSeparator();
+		MenuFinanzas.addItem("Reportes",MenuReportesFinanzas);
 
 
 		// --- Soluciones Construidas    
@@ -545,8 +569,8 @@ public class MenuPrincipal extends Composite {
 //								MenuVertical.addItem("Administracion",MenuAdmistracion); //--
 //								MenuVertical.addSeparator();
 //								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion);
-								//MenuVertical.addItem("Finanzas", MenuFinanzas);
-								//MenuVertical.addSeparator();
+								MenuVertical.addItem("Finanzas", MenuFinanzas);
+								MenuVertical.addSeparator();
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);
 							}
@@ -1030,6 +1054,13 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fgv);
+	}
+	
+	void finaReporte1(){
+		ReporteRecordSoluciones fr1 = new ReporteRecordSoluciones();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr1);
 	}
 	
 	public void Empleado_registrado(){

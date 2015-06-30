@@ -41,6 +41,8 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	private Date fechaInicio;
 	
+	private int estadoSolucion;
+	
 	private ArrayList<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
 
 	private AuxBeneficiario beneficiario;
@@ -54,6 +56,16 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public String getNomSolucion() {
 		return nomSolucion;
+	}
+	
+	
+
+	public int getEstadoSolucion() {
+		return estadoSolucion;
+	}
+
+	public void setEstadoSolucion(int estadoSolucion) {
+		this.estadoSolucion = estadoSolucion;
 	}
 
 	public void setNomSolucion(String nomSolucion) {

@@ -59,7 +59,8 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
 	
     
     public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, 
-    		Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado){
+    		Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+    		String URLFile, String KeyFile){
 
     	if (!results.isEmpty()) {
 
@@ -74,7 +75,8 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
     					n2.getTotalIngresos(), n2.getTotalEgresos(), n2.getDiferencia(), n2.getPagosBuro(), n2.getCuota(), n2.getExcedente(),
     					n2.getAlquilerVivienda(), n2.getAlimentacion(), n2.getRopa(), n2.getGastosMedicos(), n2.getTransporte(), n2.getEducacion(),
     					n2.getPagoLuzAgua(), n2.getPagoPrestamos(), n2.getOtrosGastos1(), n2.getOtrosGastos2(), n2.getEgresosTotales(), 
-    					creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado);  
+    					creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+    					URLFile, KeyFile);  
     			
     		}
     	

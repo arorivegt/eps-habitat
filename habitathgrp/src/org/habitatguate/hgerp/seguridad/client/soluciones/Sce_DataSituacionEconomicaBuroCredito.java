@@ -560,10 +560,14 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 				if(initRequireData()){
 
 					Boolean creditoAprobado = false;
-					creditoAprobado = valCheckAprobado;
+//					creditoAprobado = valCheckAprobado;
+					creditoAprobado = checkAprobado.getValue();
 
 					Boolean creditoNoAprobado = false;
-					creditoNoAprobado = valCheckNoAprobado;
+//					creditoNoAprobado = valCheckNoAprobado;
+					creditoNoAprobado = checkNoAprobado.getValue();
+					
+					System.out.println("Check Aprobado: " + creditoAprobado + ", Check No Aprobado: " + creditoNoAprobado);
 					
 					float montoAprobado = 0;
 					montoAprobado = Float.parseFloat(txtMontoAprobado.getText());
@@ -644,96 +648,106 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 	
 	// DATA A CARGAR EN DATOS
 	 
-    public void LlenarDatos(Long id, 
-    		float ingresosSolicitante, float ingresosConyuge, float otrosIngresos, float ingresosTotales,
+	public void LlenarDatos(Long id, 
+			float ingresosSolicitante, float ingresosConyuge, float otrosIngresos, float ingresosTotales,
 			float totalIngresos, float totalEgresos, float diferencia, float pagosBuro, float cuota, float excedente,
 			float alquilerVivienda, float alimentacion, float ropa, float gastosMedicos, float transporte, float educacion,
 			float pagoLuzAgua, float pagoPrestamos, float otrosGastos1, float otrosGastos2, float egresosTotales,
-			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado)
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			String URLFile, String KeyFile)
 	{
-    	
-    	this.bandera = false;
 
-    	this.idSituacionEconomica = id; // ID Formulario Cargado
+		this.bandera = false;
 
-    	String valorIngresosSolicitante = ""+ingresosSolicitante;
-    	this.txtIngresosSolicitante.setValue(valorIngresosSolicitante);
+		this.idSituacionEconomica = id; // ID Formulario Cargado
 
-    	String valorIngresosConyuge = ""+ingresosConyuge;
-    	this.txtIngresosConyuge.setValue(valorIngresosConyuge);
+		String valorIngresosSolicitante = ""+ingresosSolicitante;
+		this.txtIngresosSolicitante.setValue(valorIngresosSolicitante);
 
-    	String valorOtrosIngresos = ""+otrosIngresos;
-    	this.txtOtrosIngresos.setValue(valorOtrosIngresos);
+		String valorIngresosConyuge = ""+ingresosConyuge;
+		this.txtIngresosConyuge.setValue(valorIngresosConyuge);
 
-    	String valorIngresosTotales = ""+ingresosTotales;
-    	this.txtIngresosTotales.setValue(valorIngresosTotales);
+		String valorOtrosIngresos = ""+otrosIngresos;
+		this.txtOtrosIngresos.setValue(valorOtrosIngresos);
 
-    	String valorTotalIngresos = ""+totalIngresos;
-    	this.txtTotalIngresos.setValue(valorTotalIngresos);
+		String valorIngresosTotales = ""+ingresosTotales;
+		this.txtIngresosTotales.setValue(valorIngresosTotales);
 
-    	String valorTotalEgresos = ""+totalEgresos;
-    	this.txtTotalEgresos.setValue(valorTotalEgresos);
+		String valorTotalIngresos = ""+totalIngresos;
+		this.txtTotalIngresos.setValue(valorTotalIngresos);
 
-    	String valorDiferencia = ""+diferencia;
-    	this.txtDiferencia.setValue(valorDiferencia);
+		String valorTotalEgresos = ""+totalEgresos;
+		this.txtTotalEgresos.setValue(valorTotalEgresos);
 
-    	String valorPagosBuro = ""+pagosBuro;
-    	this.txtPagosBuro.setValue(valorPagosBuro);
+		String valorDiferencia = ""+diferencia;
+		this.txtDiferencia.setValue(valorDiferencia);
 
-    	String valorCuota = ""+cuota;
-    	this.txtCuota.setValue(valorCuota);
+		String valorPagosBuro = ""+pagosBuro;
+		this.txtPagosBuro.setValue(valorPagosBuro);
 
-    	String valorExcedente = ""+excedente;
-    	this.txtExcedente.setValue(valorExcedente);
+		String valorCuota = ""+cuota;
+		this.txtCuota.setValue(valorCuota);
 
-    	String valorAlquilerVivienda = ""+alquilerVivienda;
-    	this.txtAlquilerVivienda.setValue(valorAlquilerVivienda);
+		String valorExcedente = ""+excedente;
+		this.txtExcedente.setValue(valorExcedente);
 
-    	String valorAlimentacion = ""+alimentacion;
-    	this.txtAlimentacion.setValue(valorAlimentacion);
+		String valorAlquilerVivienda = ""+alquilerVivienda;
+		this.txtAlquilerVivienda.setValue(valorAlquilerVivienda);
 
-    	String valorRopa = ""+ropa;
-    	this.txtRopa.setValue(valorRopa);
+		String valorAlimentacion = ""+alimentacion;
+		this.txtAlimentacion.setValue(valorAlimentacion);
 
-    	String valorGastosMedicos = ""+gastosMedicos;
-    	this.txtGastosMedicos.setValue(valorGastosMedicos);
+		String valorRopa = ""+ropa;
+		this.txtRopa.setValue(valorRopa);
 
-    	String valorTransporte = ""+transporte;
-    	this.txtTransporte.setValue(valorTransporte);
+		String valorGastosMedicos = ""+gastosMedicos;
+		this.txtGastosMedicos.setValue(valorGastosMedicos);
 
-    	String valorEducacion = ""+educacion;
-    	this.txtEducacion.setValue(valorEducacion);
+		String valorTransporte = ""+transporte;
+		this.txtTransporte.setValue(valorTransporte);
 
-    	String valorPagoLuzAgua = ""+pagoLuzAgua;
-    	this.txtPagoLuzAgua.setValue(valorPagoLuzAgua);
-    	
-    	String valorPagoPrestamos = ""+pagoPrestamos;
-    	this.txtPagoPrestamos.setValue(valorPagoPrestamos);
-    	
-    	String valorOtrosGastos1 = ""+otrosGastos1;
-    	this.txtOtrosGastos1.setValue(valorOtrosGastos1);
-    	
-    	String valorOtrosGastos2 = ""+otrosGastos2;
-    	this.txtOtrosGastos2.setValue(valorOtrosGastos2);
-    	
-    	String valorEgresosTotales = ""+egresosTotales;
-    	this.txtEgresosTotales.setValue(valorEgresosTotales);
-    	
-    	if(creditoAprobado){
-    		this.lblMontoAprobado.setVisible(true);
-    		this.txtMontoAprobado.setVisible(true);
-    		String cuotaPagarValue = ""+montoAprobado;
-    		this.txtMontoAprobado.setText(cuotaPagarValue);
-    		this.checkAprobado.setValue(creditoAprobado);
-    	}
-    	
-    	if(creditoNoAprobado){
-    		this.lblObservacion.setVisible(true);
-    		this.txtObservacion.setVisible(true);
-    		this.txtObservacion.setText(observacionNoAprobado);
-    		this.checkNoAprobado.setValue(creditoNoAprobado);
-    	}
-    	
+		String valorEducacion = ""+educacion;
+		this.txtEducacion.setValue(valorEducacion);
+
+		String valorPagoLuzAgua = ""+pagoLuzAgua;
+		this.txtPagoLuzAgua.setValue(valorPagoLuzAgua);
+
+		String valorPagoPrestamos = ""+pagoPrestamos;
+		this.txtPagoPrestamos.setValue(valorPagoPrestamos);
+
+		String valorOtrosGastos1 = ""+otrosGastos1;
+		this.txtOtrosGastos1.setValue(valorOtrosGastos1);
+
+		String valorOtrosGastos2 = ""+otrosGastos2;
+		this.txtOtrosGastos2.setValue(valorOtrosGastos2);
+
+		String valorEgresosTotales = ""+egresosTotales;
+		this.txtEgresosTotales.setValue(valorEgresosTotales);
+
+		if(creditoAprobado){
+			this.lblMontoAprobado.setVisible(true);
+			this.txtMontoAprobado.setVisible(true);
+			String cuotaPagarValue = ""+montoAprobado;
+			this.txtMontoAprobado.setText(cuotaPagarValue);
+			this.checkAprobado.setValue(creditoAprobado);
+		}
+
+		if(creditoNoAprobado){
+			this.lblObservacion.setVisible(true);
+			this.txtObservacion.setVisible(true);
+			this.txtObservacion.setText(observacionNoAprobado);
+			this.checkNoAprobado.setValue(creditoNoAprobado);
+		}
+
+		this.KeyFile = KeyFile;
+
+		this.URLFile = URLFile;
+
+		System.out.println("Datos cargados y obtenidos URLFile: " + URLFile + ", KeyFile: " + KeyFile);
+
+		if(!URLFile.equals("") || !URLFile.equals(null))
+			Archivo();
+
 	}
     
     // VALIDACION DATA A INGRESAR
@@ -855,7 +869,8 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 
 		form.setVisible(false);
 		grid = new Grid(1, 2);
-		absolutePanel.add(grid, 522, 108);
+//		absolutePanel.add(grid, 522, 108);
+		absolutePanel.add(grid, 49, 650);
 		grid.setSize("357px", "59px");
 		Button btnEliminar = new Button("Eliminar");
 		btnEliminar.setStyleName("sendButton");

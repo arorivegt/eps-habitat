@@ -18,7 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
-import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
+//import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BuscadorEmpleados;
@@ -32,6 +32,7 @@ import org.habitatguate.hgerp.seguridad.client.rrhh.Empleado;
 import org.habitatguate.hgerp.seguridad.client.rrhh.EmpleadosMinisterioTrabajo;
 import org.habitatguate.hgerp.seguridad.client.rrhh.SolicitudPermiso;
 import org.habitatguate.hgerp.seguridad.client.rrhh.TestForm;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonAsignacionSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBuroCredito;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_ConsultaEncuestasHabitat;
@@ -230,12 +231,8 @@ public class MenuPrincipal extends Composite {
 		};
 		
 
-		// -- Soluciones Construidas6
-//		Command cmdsce1_v1 = new Command() {
-//			public void execute() {
-//				sce1_v1();
-//			}
-//		};
+		// -- Soluciones Construidas
+
 		final Command cmdsce1 = new Command() {
 			public void execute() {
 				sce1();
@@ -284,6 +281,16 @@ public class MenuPrincipal extends Composite {
 		Command cmdsceConsultaGeneralEncuestas = new Command() {
 			public void execute() {
 				sceConsultaGeneralEncuestas();
+			}
+		};
+		Command cmdsceAsignacionIngresadas = new Command() {
+			public void execute() {
+				sceAsignacionIngresadas();
+			}
+		};
+		Command cmdsceAsignacionGeneral = new Command() {
+			public void execute() {
+				sceAsignacionGeneral();
 			}
 		};
 		// --- Fin
@@ -428,6 +435,12 @@ public class MenuPrincipal extends Composite {
 		subMenuDetalleGeneral.addSeparator();
 		subMenuDetalleGeneral.addItem("Encuesta de Satisfaccion", cmdsceConsultaGeneralEncuestas);
 		
+		final MenuBar subMenuAsignacion = new MenuBar(true);
+		subMenuAsignacion.setAutoOpen(true);
+		subMenuAsignacion.setAnimationEnabled(true);
+		subMenuAsignacion.addSeparator();
+		subMenuAsignacion.addItem("Solicitudes Ingresadas", cmdsceAsignacionIngresadas);
+		subMenuAsignacion.addItem("Solicitudes En General", cmdsceAsignacionGeneral);
 		
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
@@ -445,7 +458,9 @@ public class MenuPrincipal extends Composite {
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Consulta Solicitudes Ingresadas", subMenuDetalleIngresadas);	
 		MenuSolucionesConstruidas.addSeparator();										
-		MenuSolucionesConstruidas.addItem("Consulta General Solicitudes", subMenuDetalleGeneral);		
+		MenuSolucionesConstruidas.addItem("Consulta General Solicitudes", subMenuDetalleGeneral);	
+		MenuSolucionesConstruidas.addSeparator();										
+		MenuSolucionesConstruidas.addItem("Asignacion Solicitudes", subMenuAsignacion);
 
 		// --- Fin
 
@@ -565,7 +580,7 @@ public class MenuPrincipal extends Composite {
 								MenuVertical.addItem("Empleado",MenuEmpleados); 
 
 					        	// COMENTAR/ELIIMINAR
-//								MenuVertical.addSeparator(); //--
+								MenuVertical.addSeparator(); //--
 //								MenuVertical.addItem("Administracion",MenuAdmistracion); //--
 //								MenuVertical.addSeparator();
 //								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion);
@@ -970,12 +985,12 @@ public class MenuPrincipal extends Composite {
 	    dialogVPanel.add(inicio);
 	    dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
 	    dialogVPanel.add(close);
-	    Registro2 .setWidget(dialogVPanel);
-	    Registro2 .setModal(true);
-	    Registro2 .setGlassEnabled(true);
-	    Registro2 .setAnimationEnabled(true);
-	    Registro2 .center();
-	    Registro2 .show();
+	    Registro2.setWidget(dialogVPanel);
+	    Registro2.setModal(true);
+	    Registro2.setGlassEnabled(true);
+	    Registro2.setAnimationEnabled(true);
+	    Registro2.center();
+	    Registro2.show();
 	    close.setFocus(true);
 	    close.addClickHandler(new ClickHandler() {
 	    public void onClick(ClickEvent event) {
@@ -1414,7 +1429,7 @@ public class MenuPrincipal extends Composite {
 		});
 	}
 	
-	//@UiHandler("sc6")
+	//@UiHandler("sceConsultaIngresoSoluciones")
 	void sceConsultaIngresoSoluciones() {
 		
 		AdministracionService.ObtenerUsuarioPermisoNombre("Consulta-Ingreso-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
@@ -1585,6 +1600,97 @@ public class MenuPrincipal extends Composite {
 		});
 			
 	}
+	
+	//@UiHandler("sceAsignacionIngresadas")
+	void sceAsignacionIngresadas() {	
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Asignacion-Ingreso-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_BuzonAsignacionSolicitud buzon = new Sce_BuzonAsignacionSolicitud(true, true);
+					System.out.println("Buzon Asignacion Solicitud Ingresadas - Lectura/Escritura");
+
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_BuzonAsignacionSolicitud buzon = new Sce_BuzonAsignacionSolicitud(false, true);
+					System.out.println("Buzon Asignacion Solicitud Ingresadas - Solo Lectura");
+
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+
+			}
+		});
+	}
+
+	//@UiHandler("sceAsignacionGeneral")
+	void sceAsignacionGeneral() {	
+		
+		AdministracionService.ObtenerUsuarioPermisoNombre("Asignacion-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_BuzonAsignacionSolicitud buzon = new Sce_BuzonAsignacionSolicitud(true, false);
+					System.out.println("Buzon Asignacion Solicitud En General - Lectura/Escritura");
+
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_BuzonAsignacionSolicitud buzon = new Sce_BuzonAsignacionSolicitud(false, false);
+					System.out.println("Buzon Asignacion Solicitud En General - Solo Lectura");
+
+					buzon.setSize("100%", "100%");
+					panel.getGrid().setSize("100%", "100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, buzon);
+
+				}else if(results.get(0).getPermiso().equals("N")){
+					
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+					
+				}
+
+
+			}
+		});
+	}	
+	
 	// --- Fin   
 	
 }

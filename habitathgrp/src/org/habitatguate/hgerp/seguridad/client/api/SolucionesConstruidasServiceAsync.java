@@ -271,6 +271,10 @@ public interface SolucionesConstruidasServiceAsync {
 
 	void consultaEmpleadoRegistrado(Long idEmpleado, AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
 	
+	void consultaEmpleadoAsignacion(String idEmpleado, AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
+	
+	void asignarSolicitud(Long idFormulario, Long idEmpleado, String usrName, AsyncCallback<String> callback)throws IllegalArgumentException;
+	
 	// Remover imagen de Blobstore
 	 
 	 void remove(String fileURL,AsyncCallback<String> callback)throws IllegalArgumentException;

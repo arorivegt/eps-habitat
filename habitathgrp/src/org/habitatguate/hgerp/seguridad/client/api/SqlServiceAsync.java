@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
@@ -174,6 +175,12 @@ public interface SqlServiceAsync {
 			String tiempoEntrega, String regimenTributario,
 			String aceptaDonacion, double porcentDonacion,
 			AsyncCallback<Long> callback);
+
+	void Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago,
+			AsyncCallback<Long> callback);
+
+	void Consultar_SolicitudPagoVales(Long idHistorialPagoProv,
+			AsyncCallback<AuxHistorialPagoProv> callback);
 
 
 

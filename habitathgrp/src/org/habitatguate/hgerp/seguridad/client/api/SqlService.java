@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
@@ -45,6 +46,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago);
 	Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial);
+	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
 	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
@@ -61,6 +63,7 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_SolucionesGenerales();
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
+	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
 	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);

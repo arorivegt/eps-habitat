@@ -15,6 +15,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
@@ -467,28 +468,40 @@ public Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetal
 
 public Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago) throws IllegalArgumentException{
 	 Long valor = 0L;
-	 SegVale vale = null;
+	 
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	try{
 		//System.out.println("Plantilla de la que viene " + idPlantillaSolucion);
-		vale = gestorPersistencia.getObjectById(SegVale.class,idVale);
+		//
 		SegHistorialPagoProv auxPago = new SegHistorialPagoProv();
 		  auxPago.setFechaVale(fechaVale);
 		  auxPago.setSerieDocumento(serieDocumento);
 		  auxPago.setTipoDocumento(tipoDocumento);
 		  auxPago.setValorPago(valorPago);
-		  auxPago.setVale(vale);
-		  vale.getListaPagoProv().add(auxPago);
-		  vale.setTotalPagado(vale.getTotalPagado() + valorPago);
+		  gestorPersistencia.makePersistent(auxPago);
 	      valor = auxPago.getIdHistorialPagoProv();
-	       gestorPersistencia.makePersistent(auxPago);
-	       gestorPersistencia.makePersistent(vale);
+	      return valor;
 	}	finally{
 		gestorPersistencia.close();
 	}
-	return valor;
 	
 	
+}
+
+
+public Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago) throws IllegalArgumentException {
+	SegVale vale = null;
+	SegHistorialPagoProv  pagoHistorico= null;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	pagoHistorico = gestorPersistencia.getObjectById(SegHistorialPagoProv.class,idHistorialPagoProv);
+	vale = gestorPersistencia.getObjectById(SegVale.class,idVale);
+	
+	pagoHistorico.getVale().add(vale);
+	vale.getListaPagoProv().add(pagoHistorico);
+	vale.setTotalPagado(vale.getTotalPagado()+totalPago);
+	
+	
+	return 0L;
 }
 
 public Long GenerarIdVale() throws IllegalArgumentException{
@@ -1227,6 +1240,30 @@ public Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String cat
 		}
 		
 		
+		return valor;
+	}
+	
+	
+	public AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv){
+		AuxHistorialPagoProv valor = new AuxHistorialPagoProv();
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		final SegHistorialPagoProv query = gestorPersistencia.getObjectById(SegHistorialPagoProv.class,idHistorialPagoProv);
+		valor.setIdHistorialPagoProv(query.getIdHistorialPagoProv());
+		valor.setSerieDocumento(query.getSerieDocumento());
+		valor.setTipoDocumento(query.getTipoDocumento());
+		valor.setValorPago(query.getValorPago());
+		valor.setFechaVale(ConvertDate.g(query.getFechaVale()));
+		List<AuxVale> listaVales = new ArrayList<AuxVale>();
+		for (SegVale segVale : query.getVale()){
+			AuxVale auxVale = new AuxVale();
+			auxVale.setIdVale(segVale.getIdVale());
+			auxVale.setEstado(segVale.isEstado());
+			auxVale.setTotalPagado(segVale.getTotalPagado());
+			auxVale.setTotalVale(segVale.getTotalPagado());
+			auxVale.setFechaVale(ConvertDate.g(segVale.getFechaVale()));
+			listaVales.add(auxVale);
+		}
+		valor.setVale(listaVales);	
 		return valor;
 	}
 	

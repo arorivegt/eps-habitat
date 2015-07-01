@@ -7,10 +7,12 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
@@ -23,6 +25,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.sun.java.swing.plaf.windows.resources.windows;
 
 public class Formulario_PagoVale extends Composite{
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -30,12 +33,14 @@ public class Formulario_PagoVale extends Composite{
 	private double total = 0.0;
 	private Label mensaje;
 	final Button close= new Button("x");
+	private Set<AuxVale> listaVales;
 	
 	 public Formulario_PagoVale(Set<AuxVale> vales){
+		 this.listaVales = vales;
 		 for(AuxVale aux : vales){
 				System.out.println("Vale por :"+ aux.getTotalVale());
 				total = total + aux.getTotalVale();
-			}
+		 }
 		System.out.println("formulario cargado por un total de  "+ total);
 		//this.idVale = idVale;
 		mensaje = new Label("Formulario de Pago");
@@ -123,12 +128,30 @@ public class Formulario_PagoVale extends Composite{
 			
 			@Override
 			public void onClick(ClickEvent event) {
+				
 				loginService.Insertar_PagoVale(idVale, dateBox.getValue(), txtRef.getText(), txtUser.getText(), Double.valueOf(txtCantidad.getText()), new AsyncCallback<Long>() {
 					
 					@Override
 					public void onSuccess(Long result) {
 						// TODO Auto-generated method stub
+						 for(AuxVale aux : listaVales){
+								loginService.Insertar_ValePagado(result, aux.getIdVale(),aux.getTotalVale(), new AsyncCallback<Long>() {
+								
+										@Override
+										public void onFailure(Throwable caught) {
+											// TODO Auto-generated method stub
+											
+										}
+		
+										@Override
+										public void onSuccess(Long result) {
+											// TODO Auto-generated method stub
+											
+										}
+								});
+						 }
 						dialogo.hide();
+						Window.open("/FinanGenerarSolicitudCheque?idPago="+result,"_blank", "");
 					}
 					
 					@Override

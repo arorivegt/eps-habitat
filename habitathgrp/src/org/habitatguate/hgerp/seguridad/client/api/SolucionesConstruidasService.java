@@ -247,6 +247,10 @@ public interface SolucionesConstruidasService extends RemoteService {
     
     AuxEmpleado consultaEmpleadoRegistrado(Long idEmpleado) throws IllegalArgumentException;
     
+    AuxEmpleado consultaEmpleadoAsignacion(String idEmpleado) throws IllegalArgumentException;
+    
+    String asignarSolicitud(Long idFormulario, Long idEmpleado, String usrName)throws IllegalArgumentException;
+    
     // Remover imagen de Blobstore
     
     String remove(String fileURL)throws IllegalArgumentException;

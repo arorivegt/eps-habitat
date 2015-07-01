@@ -38,6 +38,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionPrime
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionSegunda;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionTercera;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudSupervisionUbicacion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegUsuario;
 import org.habitatguate.hgerp.util.PMF;
 
 import com.google.appengine.api.blobstore.BlobKey;
@@ -688,7 +689,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
 			Query q = pm.newQuery(SegSolicitudGeneral.class,
-					"nombreSolicitante == '"+nombreSolicitante+"'" +		// Realiza una busqueda ESPECIFICA, segun el nombre de solicitante
+					"nombreSolicitante == '"+nombreSolicitante+"'" +		// Realiza una busqueda ESPECIFICA, segun el nombre de solicitante de un usuario logeado
 					" && idAfiliado == " + idAfiliado +
 					" && idEmpleado == " + idEmpleado
 					);
@@ -715,7 +716,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					);
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
-		}else if(tipo =='4'){												// Obtiene todas las solicitudes de todos los usuarios
+		}else if(tipo =='4'){												// Obtiene todas las solicitudes de TODOS los usuarios
 			
 			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
 			
@@ -731,6 +732,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					);				
 			results = (List<SegSolicitudGeneral>) q.execute();
 			
+		}else if(tipo=='6'){
+			
+			System.out.println("ENTRO EN BUSQUEDA: " + tipo);
+			
+			Query q = pm.newQuery(SegSolicitudGeneral.class,
+					"nombreSolicitante == '"+nombreSolicitante+"'"			// Realiza una busqueda General, segun el nombre de solicitante en TODOS los usuarios
+					);
+			results = (List<SegSolicitudGeneral>) q.execute();			
 		}
 		
 		if(!results.isEmpty())
@@ -1428,18 +1437,17 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	public AuxEmpleado consultaEmpleadoRegistrado(Long idEmpleado) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		
 		AuxEmpleado nuevo = new AuxEmpleado();
 
 		try { 
 
 			final SegEmpleado p = Persistencia.getObjectById(SegEmpleado.class, idEmpleado); 
-			nuevo.setBonificacion(p.getBonificacion());
-			nuevo.setCelular(p.getCelular());
-			nuevo.setCentro_trabajo(p.getCentro_trabajo());
-			nuevo.setCodigo_ingreso(p.getCodigo_ingreso());
-			nuevo.setIVS(p.getIVS());
+			
+			nuevo.setId_empleado(p.getId_empleado());
 			nuevo.setCui(p.getCui());
 			nuevo.setEmail(p.getEmail());
+
 		}finally {  
 			Persistencia.close();  
 		}
@@ -1447,7 +1455,54 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return nuevo;
 	}  
 	
+	@Override
+	public AuxEmpleado consultaEmpleadoAsignacion(String usuario) throws IllegalArgumentException {
 
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		
+		AuxEmpleado nuevo = new AuxEmpleado();
+
+		try { 
+
+			final SegUsuario p = Persistencia.getObjectById(SegUsuario.class, usuario); 
+			
+			nuevo.setId_empleado(p.getId_empleado());
+			nuevo.setEmail(p.getUser());
+
+		}finally {  
+			Persistencia.close();  
+		}
+
+		return nuevo;
+	}  
+	
+	@Override
+	public String asignarSolicitud(Long idFormulario, Long idEmpleado, String usrName) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		
+		String valor = "";
+		
+		try{ 
+			final SegSolicitudGeneral e = Persistencia.getObjectById(SegSolicitudGeneral.class, idFormulario); 
+			
+				e.setIdEmpleado(idEmpleado);
+				e.setUsrName(usrName);
+				
+				valor = "Solicitud asignada correctamente";	
+				
+		}catch(Exception e){
+			
+				valor = "Hubo un error al asignar solicitud";
+				
+		}finally {  
+				Persistencia.close();  
+		}
+		return valor;
+	}
+	
+	
+	
 // METODOS DE ACTUALIZAR Y ELIMINAR		
 
 	// DATOS SOLICITANTE

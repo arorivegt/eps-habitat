@@ -27,7 +27,10 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
 			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
-			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException;
+			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,			
+			String aldeaDireccionActual, String aldeaDireccionSolucion,
+			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
+			String direccionLugarTrabajoSolicitante, String direccionLugarTrabajoConyuge) throws IllegalArgumentException;
 
 	Long actualizarDatosSolicitante(Long idFormulario, Long idEmpleado, Long idAfiliado, String usrName,
 				Date fecupdate,
@@ -38,7 +41,10 @@ public interface SolucionesConstruidasService extends RemoteService {
 				Boolean camion, Boolean carro, Boolean peatonal,
 				String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 				String solucionConstruir, float cuotaPagar,
-				String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge)  throws IllegalArgumentException;	
+				String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
+				String aldeaDireccionActual, String aldeaDireccionSolucion,
+				String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
+				String direccionLugarTrabajoSolicitante, String direccionLugarTrabajoConyuge) throws IllegalArgumentException;	
 	
 // CARGAS FAMILIARES 	
 	
@@ -97,14 +103,14 @@ public interface SolucionesConstruidasService extends RemoteService {
 	
 	Long ingresarGarantiaHipotecaria(Date fecrec, Long idFormulario, 
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
-			String nombreNotario, int areaTerreno, float valorTerreno,
+			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia) throws IllegalArgumentException;
 	
 	Long actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
-			String nombreNotario, int areaTerreno, float valorTerreno,
+			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona)  throws IllegalArgumentException;		
 	

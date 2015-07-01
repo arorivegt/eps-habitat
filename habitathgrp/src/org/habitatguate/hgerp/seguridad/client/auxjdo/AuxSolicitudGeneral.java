@@ -408,6 +408,68 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		KeyFile = keyFile;
 	}
 	
+    private String departamentoMunicipioDireccionActual;
+
+	public String getDepartamentoMunicipioDireccionActual() {
+		return departamentoMunicipioDireccionActual;
+	}
+
+	public void setDepartamentoMunicipioDireccionActual(
+			String departamentoMunicipioDireccionActual) {
+		this.departamentoMunicipioDireccionActual = departamentoMunicipioDireccionActual;
+	}
+
+    private String departamentoMunicipioDireccionSolucion;
+	
+	public String getDepartamentoMunicipioDireccionSolucion() {
+		return departamentoMunicipioDireccionSolucion;
+	}
+
+	public void setDepartamentoMunicipioDireccionSolucion(
+			String departamentoMunicipioDireccionSolucion) {
+		this.departamentoMunicipioDireccionSolucion = departamentoMunicipioDireccionSolucion;
+	}
+	
+    private String aldeaDireccionActual;
+	
+	public String getAldeaDireccionActual() {
+		return aldeaDireccionActual;
+	}
+
+	public void setAldeaDireccionActual(String aldeaDireccionActual) {
+		this.aldeaDireccionActual = aldeaDireccionActual;
+	}
+
+    private String aldeaDireccionSolucion;
+	
+	public String getAldeaDireccionSolucion() {
+		return aldeaDireccionSolucion;
+	}
+
+	public void setAldeaDireccionSolucion(String aldeaDireccionSolucion) {
+		this.aldeaDireccionSolucion = aldeaDireccionSolucion;
+	}
+
+    private String direccionLugarTrabajoSolicitante;
+	
+	public String getDireccionLugarTrabajoSolicitante() {
+		return direccionLugarTrabajoSolicitante;
+	}
+
+	public void setDireccionLugarTrabajoSolicitante(
+			String direccionLugarTrabajoSolicitante) {
+		this.direccionLugarTrabajoSolicitante = direccionLugarTrabajoSolicitante;
+	}
+
+    private String direccionLugarTrabajoConyuge;
+
+	public String getDireccionLugarTrabajoConyuge() {
+		return direccionLugarTrabajoConyuge;
+	}
+
+	public void setDireccionLugarTrabajoConyuge(String direccionLugarTrabajoConyuge) {
+		this.direccionLugarTrabajoConyuge = direccionLugarTrabajoConyuge;
+	}
 	
 	// Relacion
 	

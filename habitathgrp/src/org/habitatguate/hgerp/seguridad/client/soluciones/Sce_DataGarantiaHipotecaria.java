@@ -232,22 +232,22 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtAreaTerreno.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 				if(txtAreaTerreno .getText().equals("")) {
-					txtAreaTerreno .setText("0");
+					txtAreaTerreno .setText("0.0");
 				}
 				else if(txtAreaTerreno .getText().equals(null)) {
-					txtAreaTerreno .setText("0");
+					txtAreaTerreno .setText("0.0");
 				}
 				else{
 					try{
-						Integer.parseInt(txtAreaTerreno.getText());						
+						Float.parseFloat(txtAreaTerreno.getText());						
 					}catch(Exception e){
 						mensaje.setMensaje("alert alert-error", 
                     			"Error !! \nValor No valido");
-						txtAreaTerreno .setText("0");
+						txtAreaTerreno .setText("0.0");
 					}
 				}
 			}
-		});			
+		});					
 		txtAreaTerreno.setText("0");
 		txtAreaTerreno.setStyleName("gwt-TextBox2");
 		absolutePanel.add(txtAreaTerreno, 256, 221);
@@ -414,10 +414,9 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 					nombreNotario = txtNombreNotario.getText();
 				}
 
-				String areaTerrenoValue = txtAreaTerreno.getText();
-				int areaTerreno = 0;
-				areaTerreno = Integer.parseInt(areaTerrenoValue);
-
+				float areaTerreno = 0;
+				areaTerreno = Float.parseFloat(txtAreaTerreno.getText());
+				
 				float valorTerreno = 0;
 				valorTerreno = Float.parseFloat(txtValorTerreno.getText());
 
@@ -510,7 +509,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 	 
     public void LlenarDatos(Long id, 
     		String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
-			String nombreNotario, int areaTerreno, float valorTerreno,
+			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona)
 	{

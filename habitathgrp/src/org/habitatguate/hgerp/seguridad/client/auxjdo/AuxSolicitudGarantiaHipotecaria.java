@@ -90,13 +90,13 @@ public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 	}
 
 	
-    private int areaTerreno;
+    private float areaTerreno;
 	
-	public int getAreaTerreno() {
+	public float getAreaTerreno() {
 		return areaTerreno;
 	}
 
-	public void setAreaTerreno(int areaTerreno) {
+	public void setAreaTerreno(float areaTerreno) {
 		this.areaTerreno = areaTerreno;
 	}
 

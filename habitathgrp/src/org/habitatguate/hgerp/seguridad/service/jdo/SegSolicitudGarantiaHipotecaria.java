@@ -110,13 +110,13 @@ public class SegSolicitudGarantiaHipotecaria implements Serializable {
 	}
 
 	@Persistent
-    private int areaTerreno;
+    private float areaTerreno;
 	
-	public int getAreaTerreno() {
+	public float getAreaTerreno() {
 		return areaTerreno;
 	}
 
-	public void setAreaTerreno(int areaTerreno) {
+	public void setAreaTerreno(float areaTerreno) {
 		this.areaTerreno = areaTerreno;
 	}
 

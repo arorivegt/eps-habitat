@@ -176,7 +176,7 @@ public class Sce_BuzonAsignacionSolicitud extends Composite  {
 				{
 					listSolucionConstruir.clear();
 					txtNombreSolicitante.setValue("");	
-					listSolucionConstruir.addItem("Nueva","1");
+					listSolucionConstruir.addItem("Casa Nueva","1");
 					listSolucionConstruir.addItem("Mejoramiento","2");
 					listSolucionConstruir.addItem("Adiciones Menores","3");
 					
@@ -207,7 +207,7 @@ public class Sce_BuzonAsignacionSolicitud extends Composite  {
 		listBox.setSize("179px", "39px");
 		
 		listSolucionConstruir = new ListBox();
-		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Casa Nueva","1");
 		listSolucionConstruir.addItem("Mejoramiento","2");
 		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");

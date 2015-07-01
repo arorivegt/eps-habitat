@@ -249,6 +249,30 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 	
 	public void setDataSolicitud(AuxSolicitudGeneral r) {
 
+		 String deptoDireccionActual  = "";
+		 String municipioDireccionActual   = "";
+		 
+		 String deptoDireccionSolucion  = "";
+		 String municipioDireccionSolucion   = "";
+		 
+
+		 String[] numerosComoArray2  = r.getDepartamentoMunicipioDireccionActual().split(",");
+		 for (int i = 0; i < numerosComoArray2.length; i++) {
+			 if(i == 0)
+				 deptoDireccionActual = numerosComoArray2[i];
+			 if(i == 1)
+				 municipioDireccionActual = numerosComoArray2[i];
+	     }	
+		 
+		 String[] numerosComoArray1  = r.getDepartamentoMunicipioDireccionSolucion().split(",");
+		 for (int i = 0; i < numerosComoArray1.length; i++) {
+			 if(i == 0)
+				 deptoDireccionSolucion = numerosComoArray1[i];
+			 if(i == 1)
+				 municipioDireccionSolucion = numerosComoArray1[i];
+	     }
+		
+		
 		this.idFormulario = r.getIdFormulario();
 		fd1.LlenarDatos(r.getIdFormulario(), 
 				r.getNombreSolicitante(), r.getEstadoCivil(), r.getEdad(), r.getNacionalidad(),
@@ -258,7 +282,10 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 				r.getCheckCamion(), r.getCheckCarro(), r.getCheckPeatonal(),
 				r.getLugarTrabajoSolicitante(), r.getTelefonoCasaSolicitante(), r.getTelefonoTrabajoSolicitante(),
 				r.getSolucionConstruir(), r.getCuotaPagar(),
-				r.getNombreConyuge(), r.getTelefonoConyuge(), r.getLugarTrabajoConyuge(), r.getTelefonoTrabajoConyuge()
+				r.getNombreConyuge(), r.getTelefonoConyuge(), r.getLugarTrabajoConyuge(), r.getTelefonoTrabajoConyuge(),
+				r.getAldeaDireccionActual(), r.getAldeaDireccionSolucion(),
+				deptoDireccionActual, municipioDireccionActual, deptoDireccionSolucion, municipioDireccionSolucion,
+				r.getDireccionLugarTrabajoSolicitante(), r.getDireccionLugarTrabajoConyuge()
 				);
 	}
 	

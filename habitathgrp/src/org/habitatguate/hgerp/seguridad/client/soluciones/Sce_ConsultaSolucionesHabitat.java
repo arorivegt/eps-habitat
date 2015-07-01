@@ -120,7 +120,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 
 			}
 		});
-		listSolucionConstruir.addItem("Nueva","1");
+		listSolucionConstruir.addItem("Casa Nueva","1");
 		listSolucionConstruir.addItem("Mejoramiento","2");
 		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.addItem("TODOS");
@@ -299,7 +299,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					valSolucion = p.getSolucionConstruir();
 					String solucion = "";
 					if(valSolucion.equals("1")){
-						solucion = "NUEVA";
+						solucion = "CASA NUEVA";
 					}else if(valSolucion.equals("2")){
 						solucion = "MEJORAMIENTO";
 					}else if(valSolucion.equals("3")){

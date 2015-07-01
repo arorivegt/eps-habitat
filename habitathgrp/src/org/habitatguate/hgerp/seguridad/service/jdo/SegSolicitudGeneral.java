@@ -507,6 +507,76 @@ public class SegSolicitudGeneral implements Serializable {
 		KeyFile = keyFile;
 	}
 
+	@Persistent
+    private String departamentoMunicipioDireccionActual;
+
+	public String getDepartamentoMunicipioDireccionActual() {
+		return departamentoMunicipioDireccionActual;
+	}
+
+	public void setDepartamentoMunicipioDireccionActual(
+			String departamentoMunicipioDireccionActual) {
+		this.departamentoMunicipioDireccionActual = departamentoMunicipioDireccionActual;
+	}
+
+	@Persistent
+    private String departamentoMunicipioDireccionSolucion;
+	
+	public String getDepartamentoMunicipioDireccionSolucion() {
+		return departamentoMunicipioDireccionSolucion;
+	}
+
+	public void setDepartamentoMunicipioDireccionSolucion(
+			String departamentoMunicipioDireccionSolucion) {
+		this.departamentoMunicipioDireccionSolucion = departamentoMunicipioDireccionSolucion;
+	}
+	
+	@Persistent
+    private String aldeaDireccionActual;
+	
+	public String getAldeaDireccionActual() {
+		return aldeaDireccionActual;
+	}
+
+	public void setAldeaDireccionActual(String aldeaDireccionActual) {
+		this.aldeaDireccionActual = aldeaDireccionActual;
+	}
+
+	@Persistent
+    private String aldeaDireccionSolucion;
+	
+	public String getAldeaDireccionSolucion() {
+		return aldeaDireccionSolucion;
+	}
+
+	public void setAldeaDireccionSolucion(String aldeaDireccionSolucion) {
+		this.aldeaDireccionSolucion = aldeaDireccionSolucion;
+	}
+
+	@Persistent    
+    private String direccionLugarTrabajoSolicitante;
+	
+	public String getDireccionLugarTrabajoSolicitante() {
+		return direccionLugarTrabajoSolicitante;
+	}
+
+	public void setDireccionLugarTrabajoSolicitante(
+			String direccionLugarTrabajoSolicitante) {
+		this.direccionLugarTrabajoSolicitante = direccionLugarTrabajoSolicitante;
+	}
+
+	@Persistent    
+    private String direccionLugarTrabajoConyuge;
+
+	public String getDireccionLugarTrabajoConyuge() {
+		return direccionLugarTrabajoConyuge;
+	}
+
+	public void setDireccionLugarTrabajoConyuge(String direccionLugarTrabajoConyuge) {
+		this.direccionLugarTrabajoConyuge = direccionLugarTrabajoConyuge;
+	}
+
+	
 	// Mapeo de Llave Foranea
 	
 	@Persistent(mappedBy = "solicitud")

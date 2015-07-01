@@ -64,7 +64,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
 			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
-			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision) throws IllegalArgumentException {
+			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,
+			String aldeaDireccionActual, String aldeaDireccionSolucion,
+			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
+			String direccionLugarTrabajoSolicitante, String direccionLugarTrabajoConyuge) throws IllegalArgumentException {
 
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -109,6 +112,13 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setSegundaSupervision(segundaSupervision);					// Existe Segunda Supervision
 		solicitud.setTerceraSupervision(terceraSupervision);					// Existe Tercera Supervision
 		solicitud.setCuartaSupervision(cuartaSupervision);						// Existe Cuarta Supervision	
+		
+		solicitud.setAldeaDireccionActual(aldeaDireccionActual);
+		solicitud.setAldeaDireccionSolucion(aldeaDireccionSolucion);
+		solicitud.setDepartamentoMunicipioDireccionActual(departamentoMunicipioDireccionActual);
+		solicitud.setDepartamentoMunicipioDireccionSolucion(departamentoMunicipioDireccionSolucion);
+		solicitud.setDireccionLugarTrabajoSolicitante(direccionLugarTrabajoSolicitante);
+		solicitud.setDireccionLugarTrabajoConyuge(direccionLugarTrabajoConyuge);
 
 		try { 
 			gestorPersistencia.makePersistent(solicitud); 
@@ -288,7 +298,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	@Override
 	public Long ingresarGarantiaHipotecaria(Date fecrec, Long idFormulario, 
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
-			String nombreNotario, int areaTerreno, float valorTerreno,
+			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia) throws IllegalArgumentException {
@@ -786,6 +796,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				nuevo.setCuartaSupervision(p.getCuartaSupervision());
 				nuevo.setURLFile(p.getURLFile());
 				nuevo.setKeyFile(p.getKeyFile());
+				
+				nuevo.setAldeaDireccionActual(p.getAldeaDireccionActual());
+				nuevo.setAldeaDireccionSolucion(p.getAldeaDireccionSolucion());
+				nuevo.setDepartamentoMunicipioDireccionActual(p.getDepartamentoMunicipioDireccionActual());
+				nuevo.setDepartamentoMunicipioDireccionSolucion(p.getDepartamentoMunicipioDireccionSolucion());
+				nuevo.setDireccionLugarTrabajoSolicitante(p.getDireccionLugarTrabajoSolicitante());
+				nuevo.setDireccionLugarTrabajoConyuge(p.getDireccionLugarTrabajoConyuge());
+				
 				nuevo.setIdFormulario(p.getIdFormulario());	// ID
 				
 				List<SegSolicitudCargaFamiliar> results01 = p.getCargaFamiliar();
@@ -1113,6 +1131,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setCuartaSupervision(p.getCuartaSupervision());
 			nuevo.setURLFile(p.getURLFile());
 			nuevo.setKeyFile(p.getKeyFile());
+			
+			nuevo.setAldeaDireccionActual(p.getAldeaDireccionActual());
+			nuevo.setAldeaDireccionSolucion(p.getAldeaDireccionSolucion());
+			nuevo.setDepartamentoMunicipioDireccionActual(p.getDepartamentoMunicipioDireccionActual());
+			nuevo.setDepartamentoMunicipioDireccionSolucion(p.getDepartamentoMunicipioDireccionSolucion());
+			nuevo.setDireccionLugarTrabajoSolicitante(p.getDireccionLugarTrabajoSolicitante());
+			nuevo.setDireccionLugarTrabajoConyuge(p.getDireccionLugarTrabajoConyuge());
+			
 			nuevo.setIdFormulario(p.getIdFormulario());	// ID
 			
 			List<SegSolicitudCargaFamiliar> results01 = p.getCargaFamiliar();
@@ -1517,7 +1543,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Boolean camion, Boolean carro, Boolean peatonal,
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
-			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge) throws IllegalArgumentException {
+			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
+			String aldeaDireccionActual, String aldeaDireccionSolucion,
+			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
+			String direccionLugarTrabajoSolicitante, String direccionLugarTrabajoConyuge) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			 try {  
@@ -1552,6 +1581,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						solicitud.setTelefonoConyuge(telefonoConyuge);
 						solicitud.setLugarTrabajoConyuge(lugarTrabajoConyuge);
 						solicitud.setTelefonoTrabajoConyuge(telefonoTrabajoConyuge); 
+						
+						solicitud.setAldeaDireccionActual(aldeaDireccionActual);
+						solicitud.setAldeaDireccionSolucion(aldeaDireccionSolucion);
+						solicitud.setDepartamentoMunicipioDireccionActual(departamentoMunicipioDireccionActual);
+						solicitud.setDepartamentoMunicipioDireccionSolucion(departamentoMunicipioDireccionSolucion);
+						solicitud.setDireccionLugarTrabajoSolicitante(direccionLugarTrabajoSolicitante);
+						solicitud.setDireccionLugarTrabajoConyuge(direccionLugarTrabajoConyuge);
+						
 		 }finally {  
 			 Persistencia.close();  
 		 }
@@ -1728,7 +1765,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	@Override
 	public Long actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
-			String nombreNotario, int areaTerreno, float valorTerreno,
+			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona) throws IllegalArgumentException {
 

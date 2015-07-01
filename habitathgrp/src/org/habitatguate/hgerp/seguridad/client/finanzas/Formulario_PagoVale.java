@@ -1,9 +1,11 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -25,13 +27,17 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 public class Formulario_PagoVale extends Composite{
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     private Long idVale = 0L;
-	
+	private double total = 0.0;
 	private Label mensaje;
 	final Button close= new Button("x");
 	
-	 public Formulario_PagoVale(Long idVale){
-			System.out.println("Vale cargado "+ idVale);
-			this.idVale = idVale;
+	 public Formulario_PagoVale(Set<AuxVale> vales){
+		 for(AuxVale aux : vales){
+				System.out.println("Vale por :"+ aux.getTotalVale());
+				total = total + aux.getTotalVale();
+			}
+		System.out.println("formulario cargado por un total de  "+ total);
+		//this.idVale = idVale;
 		mensaje = new Label("Formulario de Pago");
 		close.addStyleName("close");
 		initWidget(mensaje);
@@ -58,6 +64,7 @@ public class Formulario_PagoVale extends Composite{
         
         txtCantidad.setStyleName("gwt-PasswordTextBox");
         txtCantidad.getElement().setAttribute("placeHolder", "Total de Pago");
+        txtCantidad.setText(""+total);
         txtCantidad.setSize("200px", "25px");
         
         

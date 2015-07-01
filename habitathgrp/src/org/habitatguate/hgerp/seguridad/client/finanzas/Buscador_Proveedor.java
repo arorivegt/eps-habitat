@@ -85,7 +85,7 @@ public class Buscador_Proveedor extends Composite{
 	absolutePanel.add(button, 914, 28);
 	button.setSize("160px", "27px");*/
 	
-	loginService.ConsultaTodosProveedor_PorAfiliado(0L,new AsyncCallback<List<AuxProveedor>>() {
+	loginService.ConsultaTodosProveedor_PorAfiliadoAprobados(0L,new AsyncCallback<List<AuxProveedor>>() {
 		
 		@Override
 		public void onSuccess(List<AuxProveedor> result) {

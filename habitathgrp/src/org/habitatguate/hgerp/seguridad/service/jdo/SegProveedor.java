@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.service.jdo;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.annotations.Element;
@@ -52,7 +53,7 @@ public class SegProveedor implements Serializable{
 	@Persistent
 	private String tipoProveedor;
 	@Persistent
-	private String productosOfrece;
+	private String productosfrece;
 	@Persistent
 	private String disponibilidadProd;
 	@Persistent
@@ -62,7 +63,13 @@ public class SegProveedor implements Serializable{
 	@Persistent
 	private String aceptaDonacion;
 	@Persistent
-	private int porcentDonacion;
+	private double porcentDonacion;
+	
+	@Persistent
+    private List <Long> contactoProveedor = new ArrayList<Long>();
+	
+	@Persistent
+	private List <Long> cuentaBancaria = new ArrayList<Long>();
 		
 	//------
 	
@@ -70,9 +77,24 @@ public class SegProveedor implements Serializable{
 	
 	@Persistent(mappedBy = "proveedor")
     @Element(dependent = "true")
-	private List <SegMaterialCostruccion> materialCostruccion;
+	private List <SegMaterialCostruccion> materialCostruccion =  new ArrayList<SegMaterialCostruccion>();
+	
+
 	
 	
+	
+	public List<Long> getContactoProveedor() {
+		return contactoProveedor;
+	}
+	public void setContactoProveedor(List<Long> contactoProveedor) {
+		this.contactoProveedor = contactoProveedor;
+	}
+	public List<Long> getCuentaBancaria() {
+		return cuentaBancaria;
+	}
+	public void setCuentaBancaria(List<Long> cuentaBancaria) {
+		this.cuentaBancaria = cuentaBancaria;
+	}
 	public Key getIdProveedor() {
 		return idProveedor;
 	}
@@ -152,6 +174,73 @@ public class SegProveedor implements Serializable{
 			List<SegMaterialCostruccion> materialCostruccion) {
 		this.materialCostruccion = materialCostruccion;
 	}
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+	public String getActividadEcono() {
+		return actividadEcono;
+	}
+	public void setActividadEcono(String actividadEcono) {
+		this.actividadEcono = actividadEcono;
+	}
+	public String getAceptaExencion() {
+		return aceptaExencion;
+	}
+	public void setAceptaExencion(String aceptaExencion) {
+		this.aceptaExencion = aceptaExencion;
+	}
+	public String getRelacionConProv() {
+		return relacionConProv;
+	}
+	public void setRelacionConProv(String relacionConProv) {
+		this.relacionConProv = relacionConProv;
+	}
+	public String getTipoProveedor() {
+		return tipoProveedor;
+	}
+	public void setTipoProveedor(String tipoProveedor) {
+		this.tipoProveedor = tipoProveedor;
+	}
+	public String getProductosfrece() {
+		return productosfrece;
+	}
+	public void setProductosfrece(String productosfrece) {
+		this.productosfrece = productosfrece;
+	}
+	public String getDisponibilidadProd() {
+		return disponibilidadProd;
+	}
+	public void setDisponibilidadProd(String disponibilidadProd) {
+		this.disponibilidadProd = disponibilidadProd;
+	}
+	public String getTiempoEntrega() {
+		return tiempoEntrega;
+	}
+	public void setTiempoEntrega(String tiempoEntrega) {
+		this.tiempoEntrega = tiempoEntrega;
+	}
+	public String getRegimenTributario() {
+		return regimenTributario;
+	}
+	public void setRegimenTributario(String regimenTributario) {
+		this.regimenTributario = regimenTributario;
+	}
+	public String getAceptaDonacion() {
+		return aceptaDonacion;
+	}
+	public void setAceptaDonacion(String aceptaDonacion) {
+		this.aceptaDonacion = aceptaDonacion;
+	}
+	public double getPorcentDonacion() {
+		return porcentDonacion;
+	}
+	public void setPorcentDonacion(double porcentDonacion) {
+		this.porcentDonacion = porcentDonacion;
+	}
+	
 	
 	
 }

@@ -52,6 +52,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
+import javax.jdo.annotations.Persistent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -260,11 +261,75 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 	}
 	return valor;
 }
+
+public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
+		String dirProveedor,
+		Date fechaIngreso,
+		String nomProveedor,
+		String numeroNit,
+		String paginaWeb,
+		String personaJuridica,
+		Boolean servicioEntrega,
+		String telProveedor,
+		String observaciones,
+		
+		String razonSocial,
+		String actividadEcono,
+		String aceptaExencion,
+		String relacionConProv,
+		String tipoProveedor,
+		String productosfrece,
+		String disponibilidadProd,
+		String tiempoEntrega,
+		String regimenTributario,
+		String aceptaDonacion,
+		double porcentDonacion		
+		) throws IllegalArgumentException{
+	 Long valor = 0L;
+	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	SegProveedor nuevo = new SegProveedor();
+	nuevo.setAprobadoComision(aprobadoComision);
+	nuevo.setDirProveedor(dirProveedor);
+	Calendar c = Calendar.getInstance();
+	nuevo.setFechaIngreso(new java.sql.Date(c.getTimeInMillis()));
+	nuevo.setNomProveedor(nomProveedor);
+	nuevo.setNumeroNit(numeroNit);
+	nuevo.setPaginaWeb(paginaWeb);
+	nuevo.setPersonaJuridica(personaJuridica);
+	nuevo.setServicioEntrega(servicioEntrega);
+	nuevo.setTelProveedor(telProveedor);
+	nuevo.setObservaciones(observaciones);
+	
+	//nuevos valores
+	nuevo.setRazonSocial(razonSocial);
+	nuevo.setActividadEcono(actividadEcono);
+	nuevo.setAceptaExencion(aceptaExencion);
+	nuevo.setRelacionConProv(relacionConProv);
+	nuevo.setTipoProveedor(tipoProveedor);
+	nuevo.setProductosfrece(productosfrece);
+	nuevo.setDisponibilidadProd(disponibilidadProd);
+	nuevo.setTiempoEntrega(tiempoEntrega);
+	nuevo.setRegimenTributario(regimenTributario);
+	nuevo.setAceptaDonacion(aceptaDonacion);
+	nuevo.setPorcentDonacion(porcentDonacion);
+	
+	
+	try{
+		gestorPersistencia.makePersistent(nuevo);
+		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
+		valor = nuevo.getIdProveedor().getId();
+	}finally{
+		gestorPersistencia.close();
+	}
+	return valor;
+}
+
 public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	try{
 	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
+	System.out.println("encontrado prov:"+ prov.getNomProveedor());
 	SegMaterialCostruccion nuevo = new SegMaterialCostruccion();
 	nuevo.setNomMaterialCostruccion(nomMaterialCostruccion);
 	nuevo.setPrecioUnit(precioUnitario);
@@ -273,9 +338,11 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 	Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 	nuevo.setFechaIngreso(today);
 	nuevo.setProveedor(prov);
+	
 	prov.getMaterialCostruccion().add(nuevo);
+	gestorPersistencia.makePersistent(nuevo);
 	valor = nuevo.getIdMaterialConstruccion().getId();
-	//gestorPersistencia.makePersistent(nuevo);
+	//
 	//gestorPersistencia.makePersistent(prov);
 		System.out.println("MATERIAL ALMACENADO SATISFACTORIAMENTE");
 	

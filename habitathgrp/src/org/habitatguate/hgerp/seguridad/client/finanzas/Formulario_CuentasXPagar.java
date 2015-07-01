@@ -3,6 +3,7 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
@@ -114,9 +115,9 @@ public class Formulario_CuentasXPagar extends Composite  {
 		Button button = new Button("Send");
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				AuxVale aux= e.grid.selectionModel.getSelectedObject();
-				if (aux !=null ){
-				formularioPago = new Formulario_PagoVale(aux.getIdVale());
+				Set<AuxVale> total= e.grid.selectionModel.getSelectedSet();
+				if (!total.isEmpty()){
+				formularioPago = new Formulario_PagoVale(total);
 				formularioPago.setMensaje();
 				}
 			}

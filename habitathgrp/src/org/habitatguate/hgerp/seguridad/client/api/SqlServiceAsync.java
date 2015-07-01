@@ -164,6 +164,17 @@ public interface SqlServiceAsync {
 
 	void Consulta_SolucionesGenerales(AsyncCallback<List<AuxSolucion>> callback);
 
+	void Insertar_ProveedorCompleto(Boolean aprobadoComision,
+			String dirProveedor, Date fechaIngreso, String nomProveedor,
+			String numeroNit, String paginaWeb, String personaJuridica,
+			Boolean servicioEntrega, String telProveedor, String observaciones,
+			String razonSocial, String actividadEcono, String aceptaExencion,
+			String relacionConProv, String tipoProveedor,
+			String productosfrece, String disponibilidadProd,
+			String tiempoEntrega, String regimenTributario,
+			String aceptaDonacion, double porcentDonacion,
+			AsyncCallback<Long> callback);
+
 
 
 

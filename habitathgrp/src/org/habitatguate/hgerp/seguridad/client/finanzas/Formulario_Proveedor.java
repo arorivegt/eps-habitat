@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.ListBox;
 
 
 public class Formulario_Proveedor extends Composite{
@@ -35,16 +36,24 @@ public class Formulario_Proveedor extends Composite{
 	
 
 	public Formulario_Proveedor(){
-	final Grid grid = new Grid(2, 2);
+	final Grid grid = new Grid(3, 1);
 	initWidget(grid);
 	grid.setWidth("1278px");
+	
+			
+		
+		//-----------------------------	---------------------------------
+	
+	/*Image image = new Image("images/ico-lupa.png");
+	absolutePanel.add(image, 958, 0);
+	image.setSize("103px", "55px");*/
 	
 	//------------------------------primera fila
 
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
-	grid.setWidget(0, 0, absolutePanel);
-	absolutePanel.setSize("1025px", "900px");
+	grid.setWidget(2, 0, absolutePanel);
+	absolutePanel.setSize("1025px", "1381px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
 	Label lblNombreProveedor = new Label("Nombre Proveedor");
@@ -79,17 +88,9 @@ public class Formulario_Proveedor extends Composite{
 	textBox_1.setSize("227px", "34px");
 	
 	Label lblTelefonoProveedor = new Label("Telefono Proveedor");
-		lblTelefonoProveedor.setStyleName("label");
-		absolutePanel.add(lblTelefonoProveedor, 10, 201);
+	lblTelefonoProveedor.setStyleName("label");
+	absolutePanel.add(lblTelefonoProveedor, 10, 201);
 	lblTelefonoProveedor.setSize("157px", "19px");
-	
-			
-		
-		//-----------------------------	---------------------------------
-	
-	/*Image image = new Image("images/ico-lupa.png");
-	absolutePanel.add(image, 958, 0);
-	image.setSize("103px", "55px");*/
 	
 	
 	
@@ -140,12 +141,12 @@ public class Formulario_Proveedor extends Composite{
 	textBox_4.setSize("227px", "34px");
 	
 	final TextArea textArea = new TextArea();
-	absolutePanel.add(textArea, 193, 481);
+	absolutePanel.add(textArea, 193, 1061);
 	textArea.setSize("224px", "113px");
 	
 	Label lblObservaciones = new Label("observaciones");
 	lblObservaciones.setStyleName("label");
-	absolutePanel.add(lblObservaciones, 10, 484);
+	absolutePanel.add(lblObservaciones, 10, 1064);
 	lblObservaciones.setSize("157px", "19px");
 	
 	Label lblFormularioParaEl = new Label("FORMULARIO PARA EL INGRESO DE UN NUEVO PROVEEDOR");
@@ -158,15 +159,151 @@ public class Formulario_Proveedor extends Composite{
 
 	button.setText("Nuevo Proveedor");
 	button.setStyleName("finanButton");
-	absolutePanel.add(button, 47, 653);
+	absolutePanel.add(button, 219, 1236);
 	button.setSize("157px", "40px");
+	
+	Label razonSocial = new Label("Razon Social");
+	razonSocial.setStyleName("label");
+	absolutePanel.add(razonSocial, 10, 475);
+	razonSocial.setSize("157px", "19px");
+	
+	Label lblActividadEconomica = new Label("Actividad Economica");
+	lblActividadEconomica.setStyleName("label");
+	absolutePanel.add(lblActividadEconomica, 10, 527);
+	lblActividadEconomica.setSize("157px", "19px");
+	
+	final TextBox txtRazonSocial = new TextBox();
+	txtRazonSocial.setStyleName("gwt-TextBox2");
+	txtRazonSocial.setMaxLength(100);
+	absolutePanel.add(txtRazonSocial, 198, 464);
+	txtRazonSocial.setSize("227px", "34px");
+	
+	final TextBox txtActividadEco = new TextBox();
+	txtActividadEco.setStyleName("gwt-TextBox2");
+	txtActividadEco.setMaxLength(100);
+	absolutePanel.add(txtActividadEco, 198, 515);
+	txtActividadEco.setSize("227px", "34px");
+	
+	Label lblAceptaExencionIva = new Label("Acepta Exencion IVA");
+	lblAceptaExencionIva.setStyleName("label");
+	absolutePanel.add(lblAceptaExencionIva, 10, 576);
+	lblAceptaExencionIva.setSize("157px", "19px");
+	
+	final TextBox txtAceptaExencion = new TextBox();
+	txtAceptaExencion.setStyleName("gwt-TextBox2");
+	txtAceptaExencion.setMaxLength(100);
+	absolutePanel.add(txtAceptaExencion, 198, 565);
+	txtAceptaExencion.setSize("227px", "34px");
+	
+	Label lblRelacionConEl = new Label("Relacion con el proveedor");
+	lblRelacionConEl.setStyleName("label");
+	absolutePanel.add(lblRelacionConEl, 10, 618);
+	lblRelacionConEl.setSize("157px", "19px");
+	
+	final TextBox txtRelacionProv = new TextBox();
+	txtRelacionProv.setStyleName("gwt-TextBox2");
+	txtRelacionProv.setMaxLength(100);
+	absolutePanel.add(txtRelacionProv, 198, 615);
+	txtRelacionProv.setSize("227px", "34px");
+	
+	Label lblTipoProveedor = new Label("Tipo Proveedor");
+	lblTipoProveedor.setStyleName("label");
+	absolutePanel.add(lblTipoProveedor, 10, 681);
+	lblTipoProveedor.setSize("157px", "19px");
+	
+	final TextBox txtTipoProv = new TextBox();
+	txtTipoProv.setStyleName("gwt-TextBox2");
+	txtTipoProv.setMaxLength(100);
+	absolutePanel.add(txtTipoProv, 198, 670);
+	txtTipoProv.setSize("227px", "34px");
+	
+	Label lblProductosQOfrece = new Label("Productos q ofrece");
+	lblProductosQOfrece.setStyleName("label");
+	absolutePanel.add(lblProductosQOfrece, 10, 736);
+	lblProductosQOfrece.setSize("157px", "19px");
+	
+	final TextBox txtProductOfrece = new TextBox();
+	txtProductOfrece.setStyleName("gwt-TextBox2");
+	txtProductOfrece.setMaxLength(100);
+	absolutePanel.add(txtProductOfrece, 198, 725);
+	txtProductOfrece.setSize("227px", "34px");
+	
+	Label lblDisponibilidadProductos = new Label("Disponibilidad Productos");
+	lblDisponibilidadProductos.setStyleName("label");
+	absolutePanel.add(lblDisponibilidadProductos, 10, 792);
+	lblDisponibilidadProductos.setSize("157px", "19px");
+	
+	final TextBox txtDisponibilidadPro = new TextBox();
+	txtDisponibilidadPro.setStyleName("gwt-TextBox2");
+	txtDisponibilidadPro.setMaxLength(100);
+	absolutePanel.add(txtDisponibilidadPro, 198, 781);
+	txtDisponibilidadPro.setSize("227px", "34px");
+	
+	Label lblTiempoDeEntrega = new Label("Tiempo de entrega");
+	lblTiempoDeEntrega.setStyleName("label");
+	absolutePanel.add(lblTiempoDeEntrega, 10, 844);
+	lblTiempoDeEntrega.setSize("157px", "19px");
+	
+	final TextBox txtTiempoEntrega = new TextBox();
+	txtTiempoEntrega.setStyleName("gwt-TextBox2");
+	txtTiempoEntrega.setMaxLength(100);
+	absolutePanel.add(txtTiempoEntrega, 198, 833);
+	txtTiempoEntrega.setSize("227px", "34px");
+	
+	Label lblRegimenTributario = new Label("Regimen tributario");
+	lblRegimenTributario.setStyleName("label");
+	absolutePanel.add(lblRegimenTributario, 10, 899);
+	lblRegimenTributario.setSize("157px", "19px");
+	
+	final TextBox txtRegimenTribu = new TextBox();
+	txtRegimenTribu.setStyleName("gwt-TextBox2");
+	txtRegimenTribu.setMaxLength(100);
+	absolutePanel.add(txtRegimenTribu, 198, 888);
+	txtRegimenTribu.setSize("227px", "34px");
+	
+	Label label_5 = new Label("Acepta Exencion IVA");
+	label_5.setStyleName("label");
+	absolutePanel.add(label_5, 10, 943);
+	label_5.setSize("157px", "19px");
+	
+	final TextBox txtAceptaExencion_1 = new TextBox();
+	txtAceptaExencion_1.setStyleName("gwt-TextBox2");
+	txtAceptaExencion_1.setMaxLength(100);
+	absolutePanel.add(txtAceptaExencion_1, 198, 932);
+	txtAceptaExencion_1.setSize("227px", "34px");
+	
+	Label lblOtorgaDonacion = new Label("Otorga Donacion");
+	lblOtorgaDonacion.setStyleName("label");
+	absolutePanel.add(lblOtorgaDonacion, 10, 990);
+	lblOtorgaDonacion.setSize("157px", "19px");
+	
+	final SimpleCheckBox checkOtorgaDonacion = new SimpleCheckBox();
+	absolutePanel.add(checkOtorgaDonacion, 198, 990);
+	
+	Label lblPorcentajeDeDonacion = new Label("Porcentaje de Donacion");
+	lblPorcentajeDeDonacion.setStyleName("label");
+	absolutePanel.add(lblPorcentajeDeDonacion, 10, 1023);
+	lblPorcentajeDeDonacion.setSize("157px", "19px");
+	
+		
+	final ListBox comboDonacion = new ListBox();
+	comboDonacion.addItem("Seleccione Porcentaje","0");
+	comboDonacion.addItem("1%","1");
+	comboDonacion.addItem("1.5%","1.5");
+	comboDonacion.addItem("2%","2");
+	comboDonacion.addItem("4%","4");
+	comboDonacion.addItem("5%","5");
+	;
+	absolutePanel.add(comboDonacion, 198, 1025);
 	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 				Date time=new Date();
 				Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
-				loginService.Insertar_Proveedor(false, textBox_1.getText(), today, textBox.getText(), textBox_3.getText(), textBox_2.getText(), textBox_4.getText(), simpleCheckBox.getValue(), integerBox.getText(),textArea.getText(),
+				
+			
+			/*	loginService.Insertar_Proveedor(false, textBox_1.getText(), today, textBox.getText(), textBox_3.getText(), textBox_2.getText(), textBox_4.getText(), simpleCheckBox.getValue(), integerBox.getText(),textArea.getText(),
 						new AsyncCallback<Long>() {
 							
 							@Override
@@ -192,9 +329,46 @@ public class Formulario_Proveedor extends Composite{
 								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
 								
 							}
-						});
+						});*/
 
-
+				loginService.Insertar_ProveedorCompleto(false, textBox_1.getText(), today, textBox.getText(), textBox_3.getText(), textBox_2.getText(), textBox_4.getText(), simpleCheckBox.getValue(), integerBox.getText(),textArea.getText(),
+						txtRazonSocial.getText(),
+						txtActividadEco.getText(),
+						txtAceptaExencion.getText(),
+						txtRelacionProv.getText(),
+						txtTipoProv.getText(),
+						txtProductOfrece.getText(),
+						txtDisponibilidadPro.getText(),
+						txtTiempoEntrega.getText(),
+						txtRegimenTribu.getText(),
+						checkOtorgaDonacion.getValue().toString(),
+						Double.valueOf(comboDonacion.getValue(comboDonacion.getSelectedIndex())),								
+						new AsyncCallback<Long>() {
+							
+							@Override
+							public void onSuccess(Long result) {
+								// TODO Auto-generated method stub
+								Mensaje mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+								textArea.setText("");
+								textBox.setText("");
+								textBox_1.setText("");
+								textBox_2.setText("");
+								textBox_3.setText("");
+								textBox_4.setText("");
+								integerBox.setText("");
+								simpleCheckBox.setValue(false);
+								
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								Mensaje mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+								
+							}
+				});
 
 		}
 		

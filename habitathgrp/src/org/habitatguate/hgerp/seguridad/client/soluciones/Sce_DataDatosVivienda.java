@@ -43,7 +43,7 @@ public class Sce_DataDatosVivienda extends Composite {
 	private TextBox txtOtroExplique;
 	private CheckBox checkBoxAgua;
 	private CheckBox checkBoxDrenaje;
-	private	CheckBox checkBoxSanitario;
+//	private	CheckBox checkBoxSanitario;
 	private CheckBox checkBoxElectricidad;
 	private TextArea txtAreaBienes;
 	private TextBox txtValorInmueble;
@@ -179,10 +179,10 @@ public class Sce_DataDatosVivienda extends Composite {
 		checkBoxElectricidad.setSize("288px", "21px");
 		checkBoxElectricidad.setTabIndex(8);
 		
-		checkBoxSanitario = new CheckBox("Servicio Sanitario");
-		absolutePanel.add(checkBoxSanitario, 583, 211);
-		checkBoxSanitario.setSize("218px", "21px");
-		checkBoxSanitario.setTabIndex(9);
+//		checkBoxSanitario = new CheckBox("Servicio Sanitario");
+//		absolutePanel.add(checkBoxSanitario, 583, 211);
+//		checkBoxSanitario.setSize("218px", "21px");
+//		checkBoxSanitario.setTabIndex(9);
 		
 		txtAreaBienes = new TextArea();
 		absolutePanel.add(txtAreaBienes, 42, 293);
@@ -258,7 +258,7 @@ public class Sce_DataDatosVivienda extends Composite {
 				servicioElectricidad = checkBoxElectricidad.getValue();
 				
 				Boolean servicioSanitario = false;
-				servicioSanitario = checkBoxSanitario.getValue();
+//				servicioSanitario = checkBoxSanitario.getValue();
 				
 				String bienesInmuebles = "";		
 				if(txtAreaBienes.getText() == null){
@@ -354,7 +354,7 @@ public class Sce_DataDatosVivienda extends Composite {
 		this.checkBoxAgua.setValue(servicioAgua);
 		this.checkBoxDrenaje.setValue(servicioDrenaje);
 		this.checkBoxElectricidad.setValue(servicioElectricidad);
-		this.checkBoxSanitario.setValue(servicioSanitario);
+//		this.checkBoxSanitario.setValue(servicioSanitario);
 		this.txtAreaBienes.setValue(bienesInmuebles);
 		String valorInmueblesValue = ""+valorInmuebles;
 		this.txtValorInmueble.setValue(valorInmueblesValue);

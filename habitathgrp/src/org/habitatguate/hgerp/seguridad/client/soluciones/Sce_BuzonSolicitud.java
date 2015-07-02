@@ -338,7 +338,7 @@ public class Sce_BuzonSolicitud extends Composite  {
         		}        		
 
         		try{
-        			e.setDataSituacionEconomica(result.getSituacionEconomica());
+        			e.setDataSituacionEconomica(result.getSituacionEconomica(), result.getSolucionConstruir());
         		}catch(Exception e){
         			
         		}  

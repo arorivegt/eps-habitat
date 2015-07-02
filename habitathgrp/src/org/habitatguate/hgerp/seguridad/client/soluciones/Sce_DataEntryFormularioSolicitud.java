@@ -297,8 +297,8 @@ public class Sce_DataEntryFormularioSolicitud extends Composite {
 		fd4.setDataDatosVivienda(results);
 	}
 
-	public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results) {
-		fd5.setDataSituacionEconomica(results);
+	public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, String solucionConstruir) {
+		fd5.setDataSituacionEconomica(results, solucionConstruir);
 	}
 	
 	public void setDataReferenciaFamiliar(List<AuxSolicitudReferenciaFamiliar> results) {

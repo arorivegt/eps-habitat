@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -58,24 +60,26 @@ public class Sce_DataSituacionEconomica extends Composite {
 	private TextBox txtExcedente;
 	private Button btnGuardar;
 	
-	// Data Ingresos
-	private float valIngresosSolicitante = 0;
-	private float valIngresosConyuge = 0;
-	private float valOtrosIngresos = 0;
-	// Data Egresos
-	private float valAlquilerVivienda = 0;
-	private float valAlimentacion = 0;
-	private float valRopa = 0;
-	private float valGastosMedicos = 0;
-	private float valTransporte = 0;
-	private float valEducacion = 0;
-	private float valPagoLuzAgua = 0;
-	private float valPagoPrestamos = 0;
-	private float valOtrosGastos1 = 0;
-	private float valOtrosGastos2 = 0;
-	// Data Pagos Buro y Cuota HPHG
-	private float valPagosBuro = 0;
-	private float valCuota = 0;
+//	// Data Ingresos
+//	private float valIngresosSolicitante = 0;
+//	private float valIngresosConyuge = 0;
+//	private float valOtrosIngresos = 0;
+//	// Data Egresos
+//	private float valAlquilerVivienda = 0;
+//	private float valAlimentacion = 0;
+//	private float valRopa = 0;
+//	private float valGastosMedicos = 0;
+//	private float valTransporte = 0;
+//	private float valEducacion = 0;
+//	private float valPagoLuzAgua = 0;
+//	private float valPagoPrestamos = 0;
+//	private float valOtrosGastos1 = 0;
+//	private float valOtrosGastos2 = 0;
+//	// Data Pagos Buro y Cuota HPHG
+//	private float valPagosBuro = 0;
+//	private float valCuota = 0;
+	
+	private String solucionConstruir = "";
 
 	// Valor Escritura-Lectura
 	private boolean valor;
@@ -91,6 +95,25 @@ public class Sce_DataSituacionEconomica extends Composite {
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
 		absolutePanel.setSize("988px", "455px");
+
+		
+        solucionesService.obtenerDataFormularioRegistrado(this.formulario.idFormulario, new AsyncCallback<AuxSolicitudGeneral>(){
+        	public void onFailure(Throwable caught) 
+        	{
+            	mensaje.setMensaje("alert alert-information alert-block", 
+            			"\nNo hay resultados");
+        	}
+
+        	@Override
+        	public void onSuccess(AuxSolicitudGeneral result)
+        	{	
+        		
+        		solucionConstruir = result.getSolucionConstruir();
+        		
+        	}
+
+        });
+		
 		
 		Label lblEgresosMensuales = new Label("EGRESOS MENSUALES");
 		absolutePanel.add(lblEgresosMensuales, 515, 52);
@@ -232,7 +255,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valIngresosSolicitante = Float.parseFloat(txtIngresosSolicitante.getText()); // Para Ingreso Total
+//				valIngresosSolicitante = Float.parseFloat(txtIngresosSolicitante.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -263,7 +286,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valIngresosConyuge = Float.parseFloat(txtIngresosConyuge.getText()); // Para Ingreso Total
+//				valIngresosConyuge = Float.parseFloat(txtIngresosConyuge.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -294,7 +317,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valOtrosIngresos = Float.parseFloat(txtOtrosIngresos.getText()); // Para Ingreso Total
+//				valOtrosIngresos = Float.parseFloat(txtOtrosIngresos.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -325,7 +348,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valAlquilerVivienda = Float.parseFloat(txtAlquilerVivienda.getText()); // Para Ingreso Total
+//				valAlquilerVivienda = Float.parseFloat(txtAlquilerVivienda.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -356,7 +379,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valAlimentacion = Float.parseFloat(txtAlimentacion.getText()); // Para Ingreso Total
+//				valAlimentacion = Float.parseFloat(txtAlimentacion.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -387,7 +410,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valRopa = Float.parseFloat(txtRopa.getText()); // Para Ingreso Total
+//				valRopa = Float.parseFloat(txtRopa.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -418,7 +441,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valGastosMedicos = Float.parseFloat(txtGastosMedicos.getText()); // Para Ingreso Total
+//				valGastosMedicos = Float.parseFloat(txtGastosMedicos.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -449,7 +472,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valTransporte = Float.parseFloat(txtTransporte.getText()); // Para Ingreso Total
+//				valTransporte = Float.parseFloat(txtTransporte.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -480,7 +503,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valEducacion = Float.parseFloat(txtEducacion.getText()); // Para Ingreso Total
+//				valEducacion = Float.parseFloat(txtEducacion.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -511,7 +534,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valPagoLuzAgua = Float.parseFloat(txtPagoLuzAgua.getText()); // Para Ingreso Total
+//				valPagoLuzAgua = Float.parseFloat(txtPagoLuzAgua.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -542,7 +565,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valPagoPrestamos = Float.parseFloat(txtPagoPrestamos.getText()); // Para Ingreso Total
+//				valPagoPrestamos = Float.parseFloat(txtPagoPrestamos.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -573,7 +596,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valOtrosGastos1 = Float.parseFloat(txtOtrosGastos1.getText()); // Para Ingreso Total
+//				valOtrosGastos1 = Float.parseFloat(txtOtrosGastos1.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -604,7 +627,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valOtrosGastos2 = Float.parseFloat(txtOtrosGastos2.getText()); // Para Ingreso Total
+//				valOtrosGastos2 = Float.parseFloat(txtOtrosGastos2.getText()); // Para Ingreso Total
 				actualizarIngresosTotales();
 				
 			}
@@ -635,7 +658,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valPagosBuro = Float.parseFloat(txtPagosBuro.getText()); // Para Excedente
+//				valPagosBuro = Float.parseFloat(txtPagosBuro.getText()); // Para Excedente
 				actualizarIngresosTotales();	
 			}
 		});				
@@ -665,7 +688,7 @@ public class Sce_DataSituacionEconomica extends Composite {
 					}
 				}
 				
-				valCuota = Float.parseFloat(txtCuota.getText()); // Para Excedente
+//				valCuota = Float.parseFloat(txtCuota.getText()); // Para Excedente
 				actualizarIngresosTotales();
 			}
 		});			
@@ -841,137 +864,141 @@ public class Sce_DataSituacionEconomica extends Composite {
 		// Boton Guardar
 		
 		btnGuardar = new Button("Send");
-		
+
 		if(this.valor) {
 			btnGuardar.setVisible(true);
 		}else{
 			btnGuardar.setVisible(false);
 		}
-		
+
 		btnGuardar.addClickHandler(new ClickHandler() {
+
 			public void onClick(ClickEvent event) {
-				
-				float ingresosSolicitante = 0;
-				ingresosSolicitante = Float.parseFloat(txtIngresosSolicitante.getText());
-				
-				float ingresosConyuge = 0;
-				ingresosConyuge = Float.parseFloat(txtIngresosConyuge.getText());
-				
-				float otrosIngresos = 0;
-				otrosIngresos = Float.parseFloat(txtOtrosIngresos.getText());
-				
-				float ingresosTotales = 0;
-				ingresosTotales = Float.parseFloat(txtIngresosTotales.getText());
-				
-				float totalIngresos = 0;
-				totalIngresos = Float.parseFloat(txtTotalIngresos.getText());
-				
-				float totalEgresos = 0;
-				totalEgresos = Float.parseFloat(txtTotalEgresos.getText());
-				
-				float diferencia = 0;
-				diferencia = Float.parseFloat(txtDiferencia.getText());
-				
-				float pagosBuro = 0;
-				pagosBuro = Float.parseFloat(txtPagosBuro.getText());
-				
-				float cuota = 0;
-				cuota = Float.parseFloat(txtCuota.getText());
-				
-				float excedente = 0;
-				excedente = Float.parseFloat(txtExcedente.getText());
 
-				float alquilerVivienda = 0;
-				alquilerVivienda = Float.parseFloat(txtAlquilerVivienda.getText());
-				
-				float alimentacion = 0;
-				alimentacion = Float.parseFloat(txtAlimentacion.getText());
-				
-				float ropa = 0;
-				ropa = Float.parseFloat(txtRopa.getText());
-				
-				float gastosMedicos = 0;
-				gastosMedicos = Float.parseFloat(txtGastosMedicos.getText());
+				if(validarExcedente()){
 
-				float transporte = 0;
-				transporte = Float.parseFloat(txtTransporte.getText());
-				
-				float educacion = 0;
-				educacion = Float.parseFloat(txtEducacion.getText());
-				
-				float pagoLuzAgua = 0;
-				pagoLuzAgua = Float.parseFloat(txtPagoLuzAgua.getText());
-				
-				float pagoPrestamos = 0;
-				pagoPrestamos = Float.parseFloat(txtPagoPrestamos.getText());
+					float ingresosSolicitante = 0;
+					ingresosSolicitante = Float.parseFloat(txtIngresosSolicitante.getText());
 
-				float otrosGastos1 = 0;
-				otrosGastos1 = Float.parseFloat(txtOtrosGastos1.getText());
-				
-				float otrosGastos2 = 0;
-				otrosGastos2 = Float.parseFloat(txtOtrosGastos2.getText());
-				
-				float egresosTotales = 0;
-				egresosTotales = Float.parseFloat(txtEgresosTotales.getText());
-				
-				
-				if(bandera){
+					float ingresosConyuge = 0;
+					ingresosConyuge = Float.parseFloat(txtIngresosConyuge.getText());
 
-					Date time = new Date();
-					@SuppressWarnings("deprecation")
-					Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
+					float otrosIngresos = 0;
+					otrosIngresos = Float.parseFloat(txtOtrosIngresos.getText());
 
-					solucionesService.ingresarSituacionEconomica(fecrec, formulario.idFormulario, 
-							ingresosSolicitante, ingresosConyuge, otrosIngresos, ingresosTotales, 
-							totalIngresos, totalEgresos, diferencia, pagosBuro, cuota, excedente,
-							alquilerVivienda, alimentacion, ropa, gastosMedicos, transporte, educacion,
-							pagoLuzAgua, pagoPrestamos, otrosGastos1, otrosGastos2, egresosTotales,
-							new AsyncCallback<Long>() {
+					float ingresosTotales = 0;
+					ingresosTotales = Float.parseFloat(txtIngresosTotales.getText());
 
-						public void onFailure(Throwable caught) 
-						{
-							mensaje = new Mensaje();
-							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
-						}
+					float totalIngresos = 0;
+					totalIngresos = Float.parseFloat(txtTotalIngresos.getText());
 
-						public void onSuccess(Long result)
-						{
-							mensaje = new Mensaje();
-							mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+					float totalEgresos = 0;
+					totalEgresos = Float.parseFloat(txtTotalEgresos.getText());
 
-							idSituacionEconomica = result;
-							System.out.println("Valor de NUEVA Situacion Economica: " + idSituacionEconomica);
-							bandera = false;
-							
-						}
-					});
+					float diferencia = 0;
+					diferencia = Float.parseFloat(txtDiferencia.getText());
 
-				}else{
-					
-					solucionesService.actualizarSituacionEconomica(formulario.idFormulario, idSituacionEconomica, 
-							ingresosSolicitante, ingresosConyuge, otrosIngresos, ingresosTotales, 
-							totalIngresos, totalEgresos, diferencia, pagosBuro, cuota, excedente,
-							alquilerVivienda, alimentacion, ropa, gastosMedicos, transporte, educacion,
-							pagoLuzAgua, pagoPrestamos, otrosGastos1, otrosGastos2, egresosTotales,
-							new AsyncCallback<Long>() {
+					float pagosBuro = 0;
+					pagosBuro = Float.parseFloat(txtPagosBuro.getText());
 
-						public void onFailure(Throwable caught) 
-						{
-							mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-						}
+					float cuota = 0;
+					cuota = Float.parseFloat(txtCuota.getText());
 
-						public void onSuccess(Long result)
-						{	
-							mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
-							
-							System.out.println("Valor de Datos SITUACION ECONOMICA ACTUALIZADO: " + idSituacionEconomica );
-							bandera = false;
+					float excedente = 0;
+					excedente = Float.parseFloat(txtExcedente.getText());
 
-						}
-					});
-					
-				}
-				
+					float alquilerVivienda = 0;
+					alquilerVivienda = Float.parseFloat(txtAlquilerVivienda.getText());
+
+					float alimentacion = 0;
+					alimentacion = Float.parseFloat(txtAlimentacion.getText());
+
+					float ropa = 0;
+					ropa = Float.parseFloat(txtRopa.getText());
+
+					float gastosMedicos = 0;
+					gastosMedicos = Float.parseFloat(txtGastosMedicos.getText());
+
+					float transporte = 0;
+					transporte = Float.parseFloat(txtTransporte.getText());
+
+					float educacion = 0;
+					educacion = Float.parseFloat(txtEducacion.getText());
+
+					float pagoLuzAgua = 0;
+					pagoLuzAgua = Float.parseFloat(txtPagoLuzAgua.getText());
+
+					float pagoPrestamos = 0;
+					pagoPrestamos = Float.parseFloat(txtPagoPrestamos.getText());
+
+					float otrosGastos1 = 0;
+					otrosGastos1 = Float.parseFloat(txtOtrosGastos1.getText());
+
+					float otrosGastos2 = 0;
+					otrosGastos2 = Float.parseFloat(txtOtrosGastos2.getText());
+
+					float egresosTotales = 0;
+					egresosTotales = Float.parseFloat(txtEgresosTotales.getText());
+
+
+					if(bandera){
+
+						Date time = new Date();
+						@SuppressWarnings("deprecation")
+						Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
+
+						solucionesService.ingresarSituacionEconomica(fecrec, formulario.idFormulario, 
+								ingresosSolicitante, ingresosConyuge, otrosIngresos, ingresosTotales, 
+								totalIngresos, totalEgresos, diferencia, pagosBuro, cuota, excedente,
+								alquilerVivienda, alimentacion, ropa, gastosMedicos, transporte, educacion,
+								pagoLuzAgua, pagoPrestamos, otrosGastos1, otrosGastos2, egresosTotales,
+								new AsyncCallback<Long>() {
+
+							public void onFailure(Throwable caught) 
+							{
+								mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+							}
+
+							public void onSuccess(Long result)
+							{
+								mensaje = new Mensaje();
+								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+
+								idSituacionEconomica = result;
+								System.out.println("Valor de NUEVA Situacion Economica: " + idSituacionEconomica);
+								bandera = false;
+
+							}
+						});
+
+					}else{
+
+						solucionesService.actualizarSituacionEconomica(formulario.idFormulario, idSituacionEconomica, 
+								ingresosSolicitante, ingresosConyuge, otrosIngresos, ingresosTotales, 
+								totalIngresos, totalEgresos, diferencia, pagosBuro, cuota, excedente,
+								alquilerVivienda, alimentacion, ropa, gastosMedicos, transporte, educacion,
+								pagoLuzAgua, pagoPrestamos, otrosGastos1, otrosGastos2, egresosTotales,
+								new AsyncCallback<Long>() {
+
+							public void onFailure(Throwable caught) 
+							{
+								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+							}
+
+							public void onSuccess(Long result)
+							{	
+								mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+
+								System.out.println("Valor de Datos SITUACION ECONOMICA ACTUALIZADO: " + idSituacionEconomica );
+								bandera = false;
+
+							}
+						});
+
+					}
+
+				}	
 			}
 		});		
 		
@@ -979,25 +1006,51 @@ public class Sce_DataSituacionEconomica extends Composite {
 		absolutePanel.add(btnGuardar, 475, 460);
 		btnGuardar.setTabIndex(16);
 
-	
+    	// ACTUALIZACION DATA
+		actualizarIngresosTotales();
+		
 	}
 	
 
 	private void actualizarIngresosTotales(){
 	
+		float valIngresosSolicitante = Float.parseFloat(this.txtIngresosSolicitante.getText()); 	// Para Ingreso Total
+		float valIngresosConyuge = Float.parseFloat(this.txtIngresosConyuge.getText()); 			// Para Ingreso Total
+		float valOtrosIngresos = Float.parseFloat(this.txtOtrosIngresos.getText()); 				// Para Ingreso Total
+		float valAlquilerVivienda = Float.parseFloat(this.txtAlquilerVivienda.getText()); 		// Para Ingreso Total
+		float valAlimentacion = Float.parseFloat(this.txtAlimentacion.getText()); 				// Para Ingreso Total
+		float valRopa = Float.parseFloat(this.txtRopa.getText()); 								// Para Ingreso Total
+		float valGastosMedicos = Float.parseFloat(this.txtGastosMedicos.getText()); 				// Para Ingreso Total
+		float valTransporte = Float.parseFloat(this.txtTransporte.getText()); 					// Para Ingreso Total
+		float valEducacion = Float.parseFloat(this.txtEducacion.getText()); 						// Para Ingreso Total
+		float valPagoLuzAgua = Float.parseFloat(this.txtPagoLuzAgua.getText()); 					// Para Ingreso Total
+		float valPagoPrestamos = Float.parseFloat(this.txtPagoPrestamos.getText()); 				// Para Ingreso Total
+		float valOtrosGastos1 = Float.parseFloat(this.txtOtrosGastos1.getText()); 				// Para Ingreso Total
+		float valOtrosGastos2 = Float.parseFloat(this.txtOtrosGastos2.getText()); 				// Para Ingreso Total
+		float valPagosBuro = Float.parseFloat(this.txtPagosBuro.getText()); 						// Para Excedente
+		float valCuota = Float.parseFloat(this.txtCuota.getText()); 								// Para Excedente
+		
+		
 		// Ingresos Totales
-		float valIngresosTotales = this.valIngresosSolicitante + this.valIngresosConyuge + this.valOtrosIngresos;
+//		float valIngresosTotales = this.valIngresosSolicitante + this.valIngresosConyuge + this.valOtrosIngresos;
+		float valIngresosTotales = valIngresosSolicitante + valIngresosConyuge + valOtrosIngresos;
 		String valueIngresosTotales = ""+valIngresosTotales;
+		
 		// Egresos Totales
-		float valEgresosTotales = this.valAlquilerVivienda + this.valAlimentacion + this.valRopa + this.valGastosMedicos + this.valTransporte +
-									this.valEducacion + this.valPagoLuzAgua + this.valPagoPrestamos + this.valOtrosGastos1 + this.valOtrosGastos2;
+//		float valEgresosTotales = this.valAlquilerVivienda + this.valAlimentacion + this.valRopa + this.valGastosMedicos + this.valTransporte +
+//									this.valEducacion + this.valPagoLuzAgua + this.valPagoPrestamos + this.valOtrosGastos1 + this.valOtrosGastos2;
+		float valEgresosTotales = valAlquilerVivienda + valAlimentacion + valRopa + valGastosMedicos + valTransporte +
+				valEducacion + valPagoLuzAgua + valPagoPrestamos + valOtrosGastos1 + valOtrosGastos2;
 		String valueEgresosTotales = ""+valEgresosTotales;
+		
 		// Diferencia
 		float valDiferencia = valIngresosTotales - valEgresosTotales;
 		String valueDiferencia = ""+valDiferencia;
+		
 		// Pagos Buro + Cuota HPHG
-		float valPagoCuota = this.valPagosBuro + this.valCuota;
-		String valuePagoCuota = ""+valPagoCuota;
+//		float valPagoCuota = this.valPagosBuro + this.valCuota;
+		float valPagoCuota = valPagosBuro + valCuota;
+		
 		// Excedente
 		float valExcedente = valDiferencia - valPagoCuota;
 		String valueExcedente = ""+valExcedente; 
@@ -1009,6 +1062,24 @@ public class Sce_DataSituacionEconomica extends Composite {
 		this.txtDiferencia.setText(valueDiferencia);
 		this.txtExcedente.setText(valueExcedente);
 		
+		if(solucionConstruir.equals("1")){
+
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "CASA NUEVA. Excedente se encuentra en Negativo. Favor revisar información.");
+			}
+
+		}
+
+		if(solucionConstruir.equals("2")){
+
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "MEJORAMIENTO. Excedente se encuentra en Negativo. Favor revisar información.");
+			}
+
+		}
+		
+//		System.out.println("Valores data Situacion Economica - Ingresos Totales: " + valIngresosTotales + ", Excedente: " + valExcedente);
+		
 	}
 	
 	
@@ -1018,7 +1089,8 @@ public class Sce_DataSituacionEconomica extends Composite {
     		float ingresosSolicitante, float ingresosConyuge, float otrosIngresos, float ingresosTotales,
 			float totalIngresos, float totalEgresos, float diferencia, float pagosBuro, float cuota, float excedente,
 			float alquilerVivienda, float alimentacion, float ropa, float gastosMedicos, float transporte, float educacion,
-			float pagoLuzAgua, float pagoPrestamos, float otrosGastos1, float otrosGastos2, float egresosTotales)
+			float pagoLuzAgua, float pagoPrestamos, float otrosGastos1, float otrosGastos2, float egresosTotales,
+			String solucionConstruir)
 	{
     	
     	this.bandera = false;
@@ -1088,6 +1160,56 @@ public class Sce_DataSituacionEconomica extends Composite {
     	String valorEgresosTotales = ""+egresosTotales;
     	this.txtEgresosTotales.setValue(valorEgresosTotales);
 	
+    	// ACTUALIZACION DATA
+    	actualizarIngresosTotales();
+    	
+    	float valExcedente = Float.parseFloat(valorExcedente);
+    	
+//    	System.out.println("Verificar data - valor Excendente: " + valExcedente + ", Solucion: " + solucionConstruir);
+    	
+		if(solucionConstruir.equals("1")){
+
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "CASA NUEVA. Excedente se encuentra en Negativo. Favor revisar información.");
+			}
+
+		}
+		
+		if(solucionConstruir.equals("2")){
+
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "MEJORAMIENTO. Excedente se encuentra en Negativo. Favor revisar información.");
+			}
+
+		}
+    	
 	}
+    
+    
+    public boolean validarExcedente()
+    {
+
+		float valExcedente = Float.parseFloat(this.txtExcedente.getText());
+    	
+		if(solucionConstruir.equals("1")){
+		
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "CASA NUEVA. Excedente se encuentra en Negativo. Favor revisar información.");
+				return false;
+			}
+
+		}
+		
+		if(solucionConstruir.equals("2")){
+			
+			if(valExcedente < 0){
+				mensaje.setMensaje("alert alert-error", "MEJORAMIENTO. Excedente se encuentra en Negativo. Favor revisar información.");
+				return false;
+			}
+
+		}
+		
+    	return true;    		
+    }
 
 }

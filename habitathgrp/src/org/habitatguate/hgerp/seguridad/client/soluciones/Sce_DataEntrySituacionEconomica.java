@@ -58,7 +58,7 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
 	}
 	
     
-    public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results){
+    public void setDataSituacionEconomica(List<AuxSolicitudSituacionEconomica> results, String solucionConstruir){
 
     	if (!results.isEmpty()) {
 
@@ -72,7 +72,8 @@ public class Sce_DataEntrySituacionEconomica extends Composite {
     					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),
     					n2.getTotalIngresos(), n2.getTotalEgresos(), n2.getDiferencia(), n2.getPagosBuro(), n2.getCuota(), n2.getExcedente(),
     					n2.getAlquilerVivienda(), n2.getAlimentacion(), n2.getRopa(), n2.getGastosMedicos(), n2.getTransporte(), n2.getEducacion(),
-    					n2.getPagoLuzAgua(), n2.getPagoPrestamos(), n2.getOtrosGastos1(), n2.getOtrosGastos2(), n2.getEgresosTotales());  
+    					n2.getPagoLuzAgua(), n2.getPagoPrestamos(), n2.getOtrosGastos1(), n2.getOtrosGastos2(), n2.getEgresosTotales(),
+    					solucionConstruir);  
     			
     		}
     	

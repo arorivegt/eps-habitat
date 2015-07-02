@@ -78,32 +78,10 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		absolutePanel.add(label, 37, 513);
 		label.setSize("167px", "19px");
 		
-		txtNumeroCelular = new TextBox();
-		txtNumeroCelular.setText("0");
-		txtNumeroCelular.setTabIndex(11);
-		txtNumeroCelular.setStyleName("gwt-TextBox2");
-		txtNumeroCelular.setMaxLength(8);
-		absolutePanel.add(txtNumeroCelular, 224, 511);
-		txtNumeroCelular.setSize("128px", "19px");
-		
 		Label label_1 = new Label("Telefono Internacional:");
 		label_1.setStyleName("label");
 		absolutePanel.add(label_1, 459, 513);
 		label_1.setSize("192px", "19px");
-		
-		txtTelefonoInternacional = new TextBox();
-		txtTelefonoInternacional.setText("0");
-		txtTelefonoInternacional.setTabIndex(11);
-		txtTelefonoInternacional.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoInternacional, 688, 511);
-		txtTelefonoInternacional.setSize("131px", "19px");
-		
-		txtProfesionOficio = new TextBox();
-		txtProfesionOficio.setTabIndex(5);
-		txtProfesionOficio.setStyleName("gwt-TextBox2");
-		txtProfesionOficio.setMaxLength(50);
-		absolutePanel.add(txtProfesionOficio, 222, 220);
-		txtProfesionOficio.setSize("296px", "19px");
 		
 		Label label_2 = new Label("Profesion u Oficio:");
 		label_2.setStyleName("label");
@@ -114,20 +92,6 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		label_3.setStyleName("label");
 		absolutePanel.add(label_3, 37, 433);
 		label_3.setSize("181px", "19px");
-		
-		txtCorreoElectronico = new TextBox();
-		txtCorreoElectronico.setTabIndex(10);
-		txtCorreoElectronico.setStyleName("gwt-TextBox2");
-		txtCorreoElectronico.setMaxLength(200);
-		absolutePanel.add(txtCorreoElectronico, 224, 433);
-		txtCorreoElectronico.setSize("223px", "19px");
-		
-		txtDireccionLugarTrabajo = new TextBox();
-		txtDireccionLugarTrabajo.setTabIndex(10);
-		txtDireccionLugarTrabajo.setStyleName("gwt-TextBox2");
-		txtDireccionLugarTrabajo.setMaxLength(200);
-		absolutePanel.add(txtDireccionLugarTrabajo, 252, 389);
-		txtDireccionLugarTrabajo.setSize("573px", "19px");
 		
 		Label lblDireccionLugarTrabajo = new Label("Direccion Lugar de Trabajo:");
 		lblDireccionLugarTrabajo.setStyleName("label");
@@ -341,6 +305,76 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		txtActividadEconomica.setMaxLength(50);
 		absolutePanel.add(txtActividadEconomica, 222, 179);
 		txtActividadEconomica.setSize("296px", "19px");
+		
+		txtProfesionOficio = new TextBox();
+		txtProfesionOficio.setTabIndex(5);
+		txtProfesionOficio.setStyleName("gwt-TextBox2");
+		txtProfesionOficio.setMaxLength(50);
+		absolutePanel.add(txtProfesionOficio, 222, 220);
+		txtProfesionOficio.setSize("296px", "19px");
+		
+		txtCorreoElectronico = new TextBox();
+		txtCorreoElectronico.setTabIndex(10);
+		txtCorreoElectronico.setStyleName("gwt-TextBox2");
+		txtCorreoElectronico.setMaxLength(200);
+		absolutePanel.add(txtCorreoElectronico, 224, 433);
+		txtCorreoElectronico.setSize("223px", "19px");
+		
+		txtDireccionLugarTrabajo = new TextBox();
+		txtDireccionLugarTrabajo.setTabIndex(10);
+		txtDireccionLugarTrabajo.setStyleName("gwt-TextBox2");
+		txtDireccionLugarTrabajo.setMaxLength(200);
+		absolutePanel.add(txtDireccionLugarTrabajo, 252, 389);
+		txtDireccionLugarTrabajo.setSize("573px", "19px");
+		
+		txtTelefonoInternacional = new TextBox();
+		txtTelefonoInternacional.setText("0");
+		txtTelefonoInternacional.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {			
+				String input = txtTelefonoInternacional.getText();			
+				if(txtTelefonoInternacional.getText().equals("")) {txtTelefonoInternacional.setText("0");}
+				else if(txtTelefonoInternacional.getText().equals(null)) {txtTelefonoInternacional.setText("0");}
+				
+				else if (!input.matches("[0-9]*")) {
+	            // show some error
+				mensaje.setMensaje("alert alert-error", 
+            			"Error !! \nNumero no valido");
+				txtTelefonoInternacional.setText("0");	      
+				}			
+				else{
+					 System.out.println("Exito");
+				}
+			}
+		});
+		txtTelefonoInternacional.setTabIndex(11);
+		txtTelefonoInternacional.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoInternacional, 688, 511);
+		txtTelefonoInternacional.setSize("131px", "19px");
+		
+		txtNumeroCelular = new TextBox();
+		txtNumeroCelular.setText("0");
+		txtNumeroCelular.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {			
+				String input = txtNumeroCelular.getText();			
+				if(txtNumeroCelular.getText().equals("")) {txtNumeroCelular.setText("0");}
+				else if(txtNumeroCelular.getText().equals(null)) {txtNumeroCelular.setText("0");}
+				
+				else if (!input.matches("[0-9]*")) {
+	            // show some error
+				mensaje.setMensaje("alert alert-error", 
+            			"Error !! \nNumero no valido");
+				txtNumeroCelular.setText("0");	      
+				}			
+				else{
+					 System.out.println("Exito");
+				}
+			}
+		});
+		txtNumeroCelular.setTabIndex(11);
+		txtNumeroCelular.setStyleName("gwt-TextBox2");
+		txtNumeroCelular.setMaxLength(8);
+		absolutePanel.add(txtNumeroCelular, 224, 511);
+		txtNumeroCelular.setSize("128px", "19px");
 		
 		listEstadoCivil = new ListBox();
 		listEstadoCivil.addItem("-", "-1");
@@ -719,8 +753,6 @@ public class Sce_DataGarantiaSolidario extends Composite {
 				numeroCelular = Integer.parseInt(numeroCelularValue);
 				
 				String telefonoInternacionalValue = txtTelefonoInternacional.getText();
-				int telefonoInternacional = 0;
-				telefonoInternacional = Integer.parseInt(telefonoInternacionalValue);
 
 				if(bandera){
 
@@ -736,7 +768,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 							direccionActual, lugarTrabajo,
 							telefonoCasa, telefonoTrabajo,
 							profesionOficio, direccionLugarTrabajo, correoElectronico,
-							numeroCelular, telefonoInternacional,
+							numeroCelular, telefonoInternacionalValue,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -765,7 +797,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 							direccionActual, lugarTrabajo,
 							telefonoCasa, telefonoTrabajo,
 							profesionOficio, direccionLugarTrabajo, correoElectronico,
-							numeroCelular, telefonoInternacional,
+							numeroCelular, telefonoInternacionalValue,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -842,7 +874,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-			int numeroCelular, int telefonoInternacional)
+			int numeroCelular, String telefonoInternacional)
 	{
 
 		this.bandera = false;
@@ -869,8 +901,7 @@ public class Sce_DataGarantiaSolidario extends Composite {
 		this.txtCorreoElectronico.setText(correoElectronico);
 		String numeroCelularValue = ""+numeroCelular;
 		this.txtNumeroCelular.setText(numeroCelularValue);
-		String telefonoInternacionalValue = ""+telefonoInternacional;
-		this.txtTelefonoInternacional.setText(telefonoInternacionalValue);
+		this.txtTelefonoInternacional.setText(telefonoInternacional);
 		
         boolean bandera = true;
         for(int i=0; i < this.listEstadoCivil.getItemCount() && bandera; i++){

@@ -18,15 +18,15 @@ public class Sce_ReporteDatosSolucionesConstruidas  implements IsSerializable{
 		this.numero = numero;
 	}
 
-//	private String idFormulario;
-//	
-//	public String getIdFormulario() {
-//		return idFormulario;
-//	}
-//
-//	public void setIdFormulario(String idFormulario) {
-//		this.idFormulario = idFormulario;
-//	}
+	private String usrName;
+
+	public String getUsrName() {
+		return usrName;
+	}
+
+	public void setUsrName(String usrName) {
+		this.usrName = usrName;
+	}
 
 	private String nombreSolicitante;
 	

@@ -231,14 +231,13 @@ public class SegSolicitudGarantiaFiduciaria implements Serializable {
 	}
 
 	@Persistent
-    private int telefonoInternacional;
-
+    private String telefonoInternacional;
 	
-	public int getTelefonoInternacional() {
+	public String getTelefonoInternacional() {
 		return telefonoInternacional;
 	}
 
-	public void setTelefonoInternacional(int telefonoInternacional) {
+	public void setTelefonoInternacional(String telefonoInternacional) {
 		this.telefonoInternacional = telefonoInternacional;
 	}
 

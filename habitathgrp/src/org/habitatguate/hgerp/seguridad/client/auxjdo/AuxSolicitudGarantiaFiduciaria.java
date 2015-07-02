@@ -196,17 +196,16 @@ public class AuxSolicitudGarantiaFiduciaria implements IsSerializable {
 		this.numeroCelular = numeroCelular;
 	}
 
-    private int telefonoInternacional;
-
+    private String telefonoInternacional;
 	
-	public int getTelefonoInternacional() {
+	public String getTelefonoInternacional() {
 		return telefonoInternacional;
 	}
 
-	public void setTelefonoInternacional(int telefonoInternacional) {
+	public void setTelefonoInternacional(String telefonoInternacional) {
 		this.telefonoInternacional = telefonoInternacional;
 	}
-	
+
 	// Llave Foranea
 	
 	private long idFormulario;

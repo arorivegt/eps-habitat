@@ -259,18 +259,15 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 
 				for (AuxSolicitudGeneral p : result) {
 
-					Sce_ReporteDatosSolucionesConstruidas empleado = new Sce_ReporteDatosSolucionesConstruidas();
+					Sce_ReporteDatosSolucionesConstruidas solucionData = new Sce_ReporteDatosSolucionesConstruidas();
 
 					// DATA A MOSTRAR EN RESULTADO
 					
 					// 1. Numero Correlativo.
-					empleado.setNumero(""+i);
-					
-//					// 1. Codigo Referencia
-//					empleado.setIdFormulario(""+p.getIdFormulario());
+					solucionData.setNumero(""+i);
 					
 					// 2. Nombre Solicitante
-					empleado.setNombreSolicitante(p.getNombreSolicitante());
+					solucionData.setNombreSolicitante(p.getNombreSolicitante());
 					
 					// 3. Estado Civil
 					String valEstadoCivil = "";
@@ -289,10 +286,10 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else if(valEstadoCivil.equals("6")){
 						estadoCivil = "Viudo (a)";
 					}
-					empleado.setEstadoCivil(estadoCivil);
+					solucionData.setEstadoCivil(estadoCivil);
 					
 					// 4. Edad
-					empleado.setEdad(""+p.getEdad());
+					solucionData.setEdad(""+p.getEdad());
 
 					// 5. Solucion a construir
 					String valSolucion = "";
@@ -305,15 +302,18 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else if(valSolucion.equals("3")){
 						solucion = "ADICIONES MENORES";
 					}
-					empleado.setSolucionConstruir(solucion);
+					solucionData.setSolucionConstruir(solucion);
 
-					// 6. Telefono Casa
-					empleado.setTelefonoCasaSolicitante(""+p.getTelefonoCasaSolicitante());
-
-					// 7. Telefono Trabajo
-					empleado.setTelefonoTrabajoSolicitante(""+p.getTelefonoTrabajoSolicitante());
+					// 6. Usuario responsable
+					solucionData.setUsrName(p.getUsrName());
 					
-					// 8. Inmueble accesible en camion
+					// 7. Telefono Casa
+					solucionData.setTelefonoCasaSolicitante(""+p.getTelefonoCasaSolicitante());
+
+					// 8. Telefono Trabajo
+					solucionData.setTelefonoTrabajoSolicitante(""+p.getTelefonoTrabajoSolicitante());
+					
+					// 9. Inmueble accesible en camion
 					String valCamion = "";
 					Boolean camion = false;
 					camion = p.getCheckCamion();
@@ -322,9 +322,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valCamion = "NO";
 					}
-					empleado.setCamion(valCamion);
+					solucionData.setCamion(valCamion);
 					
-					// 9. Inmueble accesible en carro
+					// 10. Inmueble accesible en carro
 					String valCarro = "";
 					Boolean carro = false;
 					carro = p.getCheckCarro();
@@ -333,9 +333,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valCarro = "NO";
 					}
-					empleado.setCarro(valCarro);
+					solucionData.setCarro(valCarro);
 					
-					// 10. Inmueble accesible para peatones
+					// 11. Inmueble accesible para peatones
 					String valPeatonal = "";
 					Boolean peatonal = false;
 					peatonal = p.getCheckPeatonal();
@@ -344,9 +344,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valPeatonal = "NO";
 					}
-					empleado.setPeatonal(valPeatonal);					
+					solucionData.setPeatonal(valPeatonal);					
 					
-					// 11. Contiene Garantia
+					// 12. Contiene Garantia
 					String valGarantia = "";
 					Boolean garantia = false;
 					garantia = p.getGarantia();
@@ -355,9 +355,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valGarantia = "NO";
 					}
-					empleado.setGarantia(valGarantia);
+					solucionData.setGarantia(valGarantia);
 					
-					// 12. Primera Supervision
+					// 13. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -366,9 +366,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valSupervision1 = "NO";
 					}
-					empleado.setSupervisionPrimera(valSupervision1);
+					solucionData.setSupervisionPrimera(valSupervision1);
 					
-					// 13. Segunda Supervision
+					// 14. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -377,9 +377,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valSupervision2 = "NO";
 					}
-					empleado.setSupervisionSegunda(valSupervision2);
+					solucionData.setSupervisionSegunda(valSupervision2);
 					
-					// 14. Tercera Supervision
+					// 15. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -388,9 +388,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valSupervision3 = "NO";
 					}
-					empleado.setSupervisionTercera(valSupervision3);
+					solucionData.setSupervisionTercera(valSupervision3);
 					
-					// 15. Cuarta Supervision
+					// 16. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();
@@ -399,9 +399,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}else{
 						valSupervision4 = "NO";
 					}
-					empleado.setSupervisionCuarta(valSupervision4);
+					solucionData.setSupervisionCuarta(valSupervision4);
 							
-					DATOS.add(empleado);
+					DATOS.add(solucionData);
 					i++;
 				}
 
@@ -421,6 +421,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 				nuevo.ConstruirConsultaSoluciones("13");
 				nuevo.ConstruirConsultaSoluciones("14");
 				nuevo.ConstruirConsultaSoluciones("15");
+				nuevo.ConstruirConsultaSoluciones("16");
 
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

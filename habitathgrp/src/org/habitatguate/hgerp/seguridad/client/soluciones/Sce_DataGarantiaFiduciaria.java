@@ -588,21 +588,6 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		txtTelefonoTrabajo.setSize("128px", "17px");
 		txtTelefonoTrabajo.setTabIndex(12);
 		
-		txtNumeroCelular = new TextBox();
-		txtNumeroCelular.setText("0");
-		txtNumeroCelular.setTabIndex(11);
-		txtNumeroCelular.setStyleName("gwt-TextBox2");
-		txtNumeroCelular.setMaxLength(8);
-		absolutePanel.add(txtNumeroCelular, 207, 496);
-		txtNumeroCelular.setSize("128px", "19px");
-		
-		txtTelefonoInternacional = new TextBox();
-		txtTelefonoInternacional.setText("0");
-		txtTelefonoInternacional.setTabIndex(11);
-		txtTelefonoInternacional.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoInternacional, 645, 498);
-		txtTelefonoInternacional.setSize("131px", "19px");
-		
 		txtDireccionLugarTrabajo = new TextBox();
 		txtDireccionLugarTrabajo.setTabIndex(10);
 		txtDireccionLugarTrabajo.setStyleName("gwt-TextBox2");
@@ -623,6 +608,55 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		txtProfesionOficio.setMaxLength(50);
 		absolutePanel.add(txtProfesionOficio, 213, 199);
 		txtProfesionOficio.setSize("296px", "19px");
+		
+		txtNumeroCelular = new TextBox();
+		txtNumeroCelular.setText("0");
+		txtNumeroCelular.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {			
+				String input = txtNumeroCelular.getText();			
+				if(txtNumeroCelular.getText().equals("")) {txtNumeroCelular.setText("0");}
+				else if(txtNumeroCelular.getText().equals(null)) {txtNumeroCelular.setText("0");}
+				
+				else if (!input.matches("[0-9]*")) {
+	            // show some error
+				mensaje.setMensaje("alert alert-error", 
+            			"Error !! \nNumero no valido");
+				txtNumeroCelular.setText("0");	      
+				}			
+				else{
+					 System.out.println("Exito");
+				}
+			}
+		});
+		txtNumeroCelular.setTabIndex(11);
+		txtNumeroCelular.setStyleName("gwt-TextBox2");
+		txtNumeroCelular.setMaxLength(8);
+		absolutePanel.add(txtNumeroCelular, 207, 496);
+		txtNumeroCelular.setSize("128px", "19px");
+		
+		txtTelefonoInternacional = new TextBox();
+		txtTelefonoInternacional.setText("0");
+		txtTelefonoInternacional.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {			
+				String input = txtTelefonoInternacional.getText();			
+				if(txtTelefonoInternacional.getText().equals("")) {txtTelefonoInternacional.setText("0");}
+				else if(txtTelefonoInternacional.getText().equals(null)) {txtTelefonoInternacional.setText("0");}
+				
+				else if (!input.matches("[0-9]*")) {
+	            // show some error
+				mensaje.setMensaje("alert alert-error", 
+            			"Error !! \nNumero no valido");
+				txtTelefonoInternacional.setText("0");	      
+				}			
+				else{
+					 System.out.println("Exito");
+				}
+			}
+		});
+		txtTelefonoInternacional.setTabIndex(11);
+		txtTelefonoInternacional.setStyleName("gwt-TextBox2");
+		absolutePanel.add(txtTelefonoInternacional, 645, 498);
+		txtTelefonoInternacional.setSize("131px", "19px");
 		
 		// Boton Guardar/Actualizar Informacion
 		
@@ -720,8 +754,6 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 				numeroCelular = Integer.parseInt(numeroCelularValue);
 				
 				String telefonoInternacionalValue = txtTelefonoInternacional.getText();
-				int telefonoInternacional = 0;
-				telefonoInternacional = Integer.parseInt(telefonoInternacionalValue);
 
 				if(bandera){
 
@@ -737,7 +769,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 							direccionActual, lugarTrabajo,
 							telefonoCasa, telefonoTrabajo,
 							profesionOficio, direccionLugarTrabajo, correoElectronico,
-							numeroCelular, telefonoInternacional,
+							numeroCelular, telefonoInternacionalValue,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -766,7 +798,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 							direccionActual, lugarTrabajo,
 							telefonoCasa, telefonoTrabajo,
 							profesionOficio, direccionLugarTrabajo, correoElectronico,
-							numeroCelular, telefonoInternacional,
+							numeroCelular, telefonoInternacionalValue,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -842,7 +874,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-			int numeroCelular, int telefonoInternacional)
+			int numeroCelular, String telefonoInternacional)
 	{
 
 		this.bandera = false;
@@ -869,8 +901,7 @@ public class Sce_DataGarantiaFiduciaria extends Composite {
 		this.txtCorreoElectronico.setText(correoElectronico);
 		String numeroCelularValue = ""+numeroCelular;
 		this.txtNumeroCelular.setText(numeroCelularValue);
-		String telefonoInternacionalValue = ""+telefonoInternacional;
-		this.txtTelefonoInternacional.setText(telefonoInternacionalValue);
+		this.txtTelefonoInternacional.setText(telefonoInternacional);
 		
 		
         boolean bandera = true;

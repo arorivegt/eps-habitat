@@ -490,6 +490,8 @@ public class Sce_DataEncuestaSatisfaccion extends Composite {
 		listPregunta15.addItem("Perifoneo","5");
 		listPregunta15.addItem("Ferias","6");
 		listPregunta15.addItem("Ferreterias","7");
+		listPregunta15.addItem("Por medio de un familiar","8");
+		listPregunta15.addItem("Por medio de un conocido","9");
 		listPregunta15.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listPregunta15, 626, 649);
 		listPregunta15.setSize("148px", "27px");

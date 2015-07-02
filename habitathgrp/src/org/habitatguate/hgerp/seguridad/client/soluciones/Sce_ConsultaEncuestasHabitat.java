@@ -624,6 +624,10 @@ public class Sce_ConsultaEncuestasHabitat extends Composite  {
 					pregunta15 = "Ferias";
 				}else if(valP15.equals("7")){
 					pregunta15 = "Ferreterias";
+				}else if(valP15.equals("8")){
+					pregunta15 = "Por medio de un familiar";
+				}else if(valP15.equals("9")){
+					pregunta15 = "Por medio de un conocido";
 				}
 				encuesta.setPregunta15(pregunta15);
 				

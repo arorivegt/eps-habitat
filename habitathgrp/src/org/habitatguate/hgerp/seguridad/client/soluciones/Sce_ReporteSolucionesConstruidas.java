@@ -69,17 +69,6 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "No. Correlativo");
 		}
 		
-//		if(tipo.equals("1"))
-//		{
-//			TextColumn<Sce_DatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_DatosSolucionesConstruidas>() {
-//				@Override
-//				public String getValue(Sce_DatosSolucionesConstruidas object) {
-//					return object.getIdFormulario();
-//				}
-//			};
-//			cellTable.addColumn(nameColumn, "Codigo Referencia");
-//		}
-		
 		if(tipo.equals("2"))
 		{
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
@@ -121,26 +110,17 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Solucion a Construir");	
 		}
 		
-//		else if(tipo.equals("5")){
-//			TextColumn<Sce_DatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_DatosSolucionesConstruidas>() {
-//				@Override
-//				public String getValue(Sce_DatosSolucionesConstruidas object) {
-//					return object.getSabeLeer();
-//				}
-//			};
-//			cellTable.addColumn(nameColumn, "Sabe Leer");	
-//		}
-//		else if(tipo.equals("6")){
-//			TextColumn<Sce_DatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_DatosSolucionesConstruidas>() {
-//				@Override
-//				public String getValue(Sce_DatosSolucionesConstruidas object) {
-//					return object.getSabeEscribir();
-//				}
-//			};
-//			cellTable.addColumn(nameColumn, "Sabe Escribir");	
-//		}
-		
 		else if(tipo.equals("6")){
+			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
+				@Override
+				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
+					return object.getSolucionConstruir();
+				}
+			};
+			cellTable.addColumn(nameColumn, "Usuario Responsable");	
+		}
+		
+		else if(tipo.equals("7")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -150,7 +130,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Telefono Casa");	
 		}
 		
-		else if(tipo.equals("7")){
+		else if(tipo.equals("8")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -159,7 +139,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			};
 			cellTable.addColumn(nameColumn, "Telefono Trabajo");	
 		}
-		else if(tipo.equals("8")){
+		else if(tipo.equals("9")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -169,7 +149,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Inmueble accesible en camion");	
 		}
 		
-		else if(tipo.equals("9")){
+		else if(tipo.equals("10")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -179,7 +159,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Inmueble accesible en carro");	
 		}
 		
-		else if(tipo.equals("10")){
+		else if(tipo.equals("11")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -189,7 +169,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Inmueble accesible para peatones");	
 		}
 		
-		else if(tipo.equals("11")){
+		else if(tipo.equals("12")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -199,7 +179,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Contiene Garantia");	
 		}	
 		
-		else if(tipo.equals("12")){
+		else if(tipo.equals("13")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -209,7 +189,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Contiene Primera Supervision");	
 		}	
 		
-		else if(tipo.equals("13")){
+		else if(tipo.equals("14")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -219,7 +199,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Contiene Segunda Supervision");	
 		}
 		
-		else if(tipo.equals("14")){
+		else if(tipo.equals("15")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {
@@ -229,7 +209,7 @@ public class Sce_ReporteSolucionesConstruidas extends Composite  {
 			cellTable.addColumn(nameColumn, "Contiene Tercera Supervision");	
 		}
 		
-		else if(tipo.equals("15")){
+		else if(tipo.equals("16")){
 			TextColumn<Sce_ReporteDatosSolucionesConstruidas> nameColumn = new TextColumn<Sce_ReporteDatosSolucionesConstruidas>() {
 				@Override
 				public String getValue(Sce_ReporteDatosSolucionesConstruidas object) {

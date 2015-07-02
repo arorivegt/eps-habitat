@@ -357,7 +357,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-				int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
+				int numeroCelular, String telefonoInternacional) throws IllegalArgumentException {
 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			Long valor = 0L;
@@ -411,7 +411,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-				int numeroCelular, int telefonoInternacional)
+				int numeroCelular, String telefonoInternacional)
 						throws IllegalArgumentException {
 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
@@ -1900,7 +1900,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
+			int numeroCelular, String telefonoInternacional) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1960,7 +1960,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
-			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
+			int numeroCelular, String telefonoInternacional) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 

@@ -127,7 +127,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correo,
-			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException;
+			int numeroCelular, String telefonoInternacional) throws IllegalArgumentException;
 
 	Long actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaHipotecaria,
 			String nombre, String numDpi, 
@@ -137,7 +137,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correo,
-			int numeroCelular, int telefonoInternacional)  throws IllegalArgumentException;
+			int numeroCelular, String telefonoInternacional)  throws IllegalArgumentException;
 	
 	Long eliminarGarantiaFiduciaria(Long idFormulario, Long id)throws IllegalArgumentException;		
 	
@@ -151,7 +151,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correo,
-				int numeroCelular, int telefonoInternacional) throws IllegalArgumentException;
+				int numeroCelular, String telefonoInternacional) throws IllegalArgumentException;
 	    
 		Long actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
 				String nombre, String numDpi, 
@@ -161,7 +161,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correo,
-				int numeroCelular, int telefonoInternacional)  throws IllegalArgumentException;	
+				int numeroCelular, String telefonoInternacional)  throws IllegalArgumentException;	
 		
 		Long eliminarGarantiaSolidario(Long idFormulario, Long id)throws IllegalArgumentException;		
 	

@@ -134,7 +134,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correo,
-			int numeroCelular, int telefonoInternacional,
+			int numeroCelular, String telefonoInternacional,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	void actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaHipotecaria,
@@ -145,7 +145,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
 			String profesionOficio, String direccionLugarTrabajo, String correo,
-			int numeroCelular, int telefonoInternacional,
+			int numeroCelular, String telefonoInternacional,
 			AsyncCallback<Long> callback)  throws IllegalArgumentException;
 	
 	void eliminarGarantiaFiduciaria(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;
@@ -160,7 +160,7 @@ public interface SolucionesConstruidasServiceAsync {
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correo,
-				int numeroCelular, int telefonoInternacional,
+				int numeroCelular, String telefonoInternacional,
 			 AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	 void actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
@@ -171,7 +171,7 @@ public interface SolucionesConstruidasServiceAsync {
 				String direccionActual, String lugarTrabajo,
 				int telefonoCasa, int telefonoTrabajo,
 				String profesionOficio, String direccionLugarTrabajo, String correo,
-				int numeroCelular, int telefonoInternacional,
+				int numeroCelular, String telefonoInternacional,
 			 AsyncCallback<Long> callback)  throws IllegalArgumentException;	
 
 	 void eliminarGarantiaSolidario(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;	

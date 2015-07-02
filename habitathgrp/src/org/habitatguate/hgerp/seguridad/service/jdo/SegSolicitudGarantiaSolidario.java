@@ -231,19 +231,18 @@ public class SegSolicitudGarantiaSolidario implements Serializable {
 	}
 
 	@Persistent
-    private int telefonoInternacional;
+    private String telefonoInternacional;
 
-	
-	public int getTelefonoInternacional() {
+	public String getTelefonoInternacional() {
 		return telefonoInternacional;
 	}
 
-	public void setTelefonoInternacional(int telefonoInternacional) {
+	public void setTelefonoInternacional(String telefonoInternacional) {
 		this.telefonoInternacional = telefonoInternacional;
 	}
-	
-	// Llave Foranea
 
+	// Llave Foranea
+	
 	@Persistent
     private long idFormulario;
 	

@@ -106,43 +106,62 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			Boolean actualizacionGarantia) throws IllegalArgumentException;
+			Boolean actualizacionGarantia,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException;
 	
 	Long actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
-			String nombrePersona, int telefonoPersona)  throws IllegalArgumentException;		
+			String nombrePersona, int telefonoPersona,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException;		
 	
 
 // GARANTIA FIDUCIARIA	
 
 	Long ingresarGarantiaFiduciaria(Date fecrec, Long idFormulario, 
-			String nombre, 
+			String nombre, String numDpi,
 			String estadoCivil, int edad, String nacionalidad,
 			String actividad,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 			String direccionActual, String lugarTrabajo,
-			int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException;
+			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correo,
+			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException;
 
 	Long actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaHipotecaria,
-			String nombre, 
+			String nombre, String numDpi, 
 			String estadoCivil, int edad, String nacionalidad,
 			String actividad,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 			String direccionActual, String lugarTrabajo,
-			int telefonoCasa, int telefonoTrabajo)  throws IllegalArgumentException;
+			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correo,
+			int numeroCelular, int telefonoInternacional)  throws IllegalArgumentException;
 	
 	Long eliminarGarantiaFiduciaria(Long idFormulario, Long id)throws IllegalArgumentException;		
 	
 // GARANTIA GRUPO SOLIDARIO	
 	
 		Long ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
-				String nombre, int edad, String escolaridad, String ocupacion) throws IllegalArgumentException;
+				String nombre, String numDpi,
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correo,
+				int numeroCelular, int telefonoInternacional) throws IllegalArgumentException;
 	    
 		Long actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
-				 String nombre, int edad, 
-				 String escolaridad, String ocupacion)  throws IllegalArgumentException;	
+				String nombre, String numDpi, 
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correo,
+				int numeroCelular, int telefonoInternacional)  throws IllegalArgumentException;	
 		
 		Long eliminarGarantiaSolidario(Long idFormulario, Long id)throws IllegalArgumentException;		
 	

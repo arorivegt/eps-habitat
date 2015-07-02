@@ -301,7 +301,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			Boolean actualizacionGarantia) throws IllegalArgumentException {
+			Boolean actualizacionGarantia,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -323,6 +324,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			documento.setCheckNo(checkNo);
 			documento.setNombrePersona(nombrePersona);
 			documento.setTelefonoPersona(telefonoPersona);
+			documento.setNumDpiPersona(numDpiPersona);
+			documento.setDireccionTerrenoPersona(direccionTerrenoPersona);
+			documento.setAldeaPersona(aldeaPersona);
+			documento.setDepartamentoMunicipioDireccionPersona(departamentoMunicipioDireccionPersona);
+			
 			documento.setIdFormulario(idFormulario); // Llave Foranea
 
 			documento.setSolicitud(solicitud); // Relacion
@@ -344,12 +350,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 	
 		@Override
 		public Long ingresarGarantiaFiduciaria(Date fecrec, Long idFormulario, 
-				String nombre, 
+				String nombre, String numDpi,
 				String estadoCivil, int edad, String nacionalidad,
 				String actividad,
 				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 				String direccionActual, String lugarTrabajo,
-				int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException {
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
+				int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 			Long valor = 0L;
@@ -360,6 +368,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 				fiduciaria.setFecrec(fecrec); 
 				fiduciaria.setNombre(nombre);
+				fiduciaria.setNumDpi(numDpi);
 				fiduciaria.setEstadoCivil(estadoCivil);
 				fiduciaria.setEdad(edad);
 				fiduciaria.setNacionalidad(nacionalidad);
@@ -371,6 +380,12 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				fiduciaria.setLugarTrabajo(lugarTrabajo);
 				fiduciaria.setTelefonoCasa(telefonoCasa);
 				fiduciaria.setTelefonoTrabajo(telefonoTrabajo);
+				fiduciaria.setProfesionOficio(profesionOficio);
+				fiduciaria.setDireccionLugarTrabajo(direccionLugarTrabajo);
+				fiduciaria.setCorreoElectronico(correoElectronico);
+				fiduciaria.setNumeroCelular(numeroCelular);
+				fiduciaria.setTelefonoInternacional(telefonoInternacional);
+				
 				fiduciaria.setIdFormulario(idFormulario); // Llave Foranea
 
 				fiduciaria.setSolicitud(solicitud);	// Relacion
@@ -389,7 +404,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 		@Override
 		public Long ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
-				String nombre, int edad, String escolaridad, String ocupacion)
+				String nombre, String numDpi,
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
+				int numeroCelular, int telefonoInternacional)
 						throws IllegalArgumentException {
 
 			final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
@@ -401,9 +423,24 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 				solidario.setFecrec(fecrec); 
 				solidario.setNombre(nombre);
+				solidario.setNumDpi(numDpi);
+				solidario.setEstadoCivil(estadoCivil);
 				solidario.setEdad(edad);
-				solidario.setEscolaridad(escolaridad);
-				solidario.setOcupacion(ocupacion);
+				solidario.setNacionalidad(nacionalidad);
+				solidario.setActividadEconomica(actividad);
+				solidario.setCheckLeer(sabeLeer);
+				solidario.setCheckEscribir(sabeEscribir);
+				solidario.setCheckFirmar(sabeFirmar);
+				solidario.setDireccionActual(direccionActual);
+				solidario.setLugarTrabajo(lugarTrabajo);
+				solidario.setTelefonoCasa(telefonoCasa);
+				solidario.setTelefonoTrabajo(telefonoTrabajo);
+				solidario.setProfesionOficio(profesionOficio);
+				solidario.setDireccionLugarTrabajo(direccionLugarTrabajo);
+				solidario.setCorreoElectronico(correoElectronico);
+				solidario.setNumeroCelular(numeroCelular);
+				solidario.setTelefonoInternacional(telefonoInternacional);
+				
 				solidario.setIdFormulario(idFormulario); // Llave Foranea
 
 				solidario.setSolicitud(solicitud);	// Relacion
@@ -906,6 +943,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setCheckNo(n0.getCheckNo());
 						l.setNombrePersona(n0.getNombrePersona());
 						l.setTelefonoPersona(n0.getTelefonoPersona());
+						l.setNumDpiPersona(n0.getNumDpiPersona());
+						l.setDireccionTerrenoPersona(n0.getDireccionTerrenoPersona());
+						l.setAldeaPersona(n0.getAldeaPersona());
+						l.setDepartamentoMunicipioDireccionPersona(n0.getDepartamentoMunicipioDireccionPersona());
 						nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 					}
 				}	
@@ -918,6 +959,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setIdGarantiaFiduciaria(n0.getIdGarantiaFiduciaria());
 						l.setIdFormulario(n0.getIdFormulario());
 						l.setNombre(n0.getNombre());
+						l.setNumDpi(n0.getNumDpi());
 						l.setEstadoCivil(n0.getEstadoCivil());
 						l.setEdad(n0.getEdad());
 						l.setNacionalidad(n0.getNacionalidad());
@@ -929,6 +971,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setLugarTrabajo(n0.getLugarTrabajo());
 						l.setTelefonoCasa(n0.getTelefonoCasa());
 						l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+						l.setProfesionOficio(n0.getProfesionOficio());
+						l.setDireccionLugarTrabajo(n0.getDireccionLugarTrabajo());
+						l.setCorreoElectronico(n0.getCorreoElectronico());
+						l.setNumeroCelular(n0.getNumeroCelular());
+						l.setTelefonoInternacional(n0.getTelefonoInternacional());
 						nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
 					}
 				}			
@@ -940,9 +987,23 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setIdGarantiaSolidario(n0.getIdGarantiaSolidario());
 						l.setIdFormulario(n0.getIdFormulario());
 						l.setNombre(n0.getNombre());
+						l.setNumDpi(n0.getNumDpi());
+						l.setEstadoCivil(n0.getEstadoCivil());
 						l.setEdad(n0.getEdad());
-						l.setEscolaridad(n0.getEscolaridad());
-						l.setOcupacion(n0.getOcupacion());
+						l.setNacionalidad(n0.getNacionalidad());
+						l.setActividadEconomica(n0.getActividadEconomica());
+						l.setCheckLeer(n0.getCheckLeer());
+						l.setCheckEscribir(n0.getCheckEscribir());
+						l.setCheckFirmar(n0.getCheckFirmar());
+						l.setDireccionActual(n0.getDireccionActual());
+						l.setLugarTrabajo(n0.getLugarTrabajo());
+						l.setTelefonoCasa(n0.getTelefonoCasa());
+						l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+						l.setProfesionOficio(n0.getProfesionOficio());
+						l.setDireccionLugarTrabajo(n0.getDireccionLugarTrabajo());
+						l.setCorreoElectronico(n0.getCorreoElectronico());
+						l.setNumeroCelular(n0.getNumeroCelular());
+						l.setTelefonoInternacional(n0.getTelefonoInternacional());
 						nuevo.getGarantiaSolidario().add(l); // Agregado a Entidad Principal
 					}
 				}				
@@ -1241,6 +1302,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setCheckNo(n0.getCheckNo());
 					l.setNombrePersona(n0.getNombrePersona());
 					l.setTelefonoPersona(n0.getTelefonoPersona());
+					l.setNumDpiPersona(n0.getNumDpiPersona());
+					l.setDireccionTerrenoPersona(n0.getDireccionTerrenoPersona());
+					l.setAldeaPersona(n0.getAldeaPersona());
+					l.setDepartamentoMunicipioDireccionPersona(n0.getDepartamentoMunicipioDireccionPersona());
 					nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 				}
 			}	
@@ -1253,6 +1318,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setIdGarantiaFiduciaria(n0.getIdGarantiaFiduciaria());
 					l.setIdFormulario(n0.getIdFormulario());
 					l.setNombre(n0.getNombre());
+					l.setNumDpi(n0.getNumDpi());
 					l.setEstadoCivil(n0.getEstadoCivil());
 					l.setEdad(n0.getEdad());
 					l.setNacionalidad(n0.getNacionalidad());
@@ -1264,6 +1330,11 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setLugarTrabajo(n0.getLugarTrabajo());
 					l.setTelefonoCasa(n0.getTelefonoCasa());
 					l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+					l.setProfesionOficio(n0.getProfesionOficio());
+					l.setDireccionLugarTrabajo(n0.getDireccionLugarTrabajo());
+					l.setCorreoElectronico(n0.getCorreoElectronico());
+					l.setNumeroCelular(n0.getNumeroCelular());
+					l.setTelefonoInternacional(n0.getTelefonoInternacional());
 					nuevo.getGarantiaFiduciaria().add(l); // Agregado a Entidad Principal
 				}
 			}				
@@ -1275,9 +1346,23 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setIdGarantiaSolidario(n0.getIdGarantiaSolidario());
 					l.setIdFormulario(n0.getIdFormulario());
 					l.setNombre(n0.getNombre());
+					l.setNumDpi(n0.getNumDpi());
+					l.setEstadoCivil(n0.getEstadoCivil());
 					l.setEdad(n0.getEdad());
-					l.setEscolaridad(n0.getEscolaridad());
-					l.setOcupacion(n0.getOcupacion());
+					l.setNacionalidad(n0.getNacionalidad());
+					l.setActividadEconomica(n0.getActividadEconomica());
+					l.setCheckLeer(n0.getCheckLeer());
+					l.setCheckEscribir(n0.getCheckEscribir());
+					l.setCheckFirmar(n0.getCheckFirmar());
+					l.setDireccionActual(n0.getDireccionActual());
+					l.setLugarTrabajo(n0.getLugarTrabajo());
+					l.setTelefonoCasa(n0.getTelefonoCasa());
+					l.setTelefonoTrabajo(n0.getTelefonoTrabajo());
+					l.setProfesionOficio(n0.getProfesionOficio());
+					l.setDireccionLugarTrabajo(n0.getDireccionLugarTrabajo());
+					l.setCorreoElectronico(n0.getCorreoElectronico());
+					l.setNumeroCelular(n0.getNumeroCelular());
+					l.setTelefonoInternacional(n0.getTelefonoInternacional());
 					nuevo.getGarantiaSolidario().add(l); // Agregado a Entidad Principal
 				}
 			}	
@@ -1767,7 +1852,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
-			String nombrePersona, int telefonoPersona) throws IllegalArgumentException {
+			String nombrePersona, int telefonoPersona,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1790,6 +1876,10 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setCheckNo(checkNo);
 			f.setNombrePersona(nombrePersona);
 			f.setTelefonoPersona(telefonoPersona);
+			f.setNumDpiPersona(numDpiPersona);
+			f.setDireccionTerrenoPersona(direccionTerrenoPersona);
+			f.setAldeaPersona(aldeaPersona);
+			f.setDepartamentoMunicipioDireccionPersona(departamentoMunicipioDireccionPersona);
 
 			valor = f.getIdDocumentoPropiedad();
 
@@ -1803,12 +1893,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 	@Override
 	public Long actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaFiduciaria,
-			String nombre, 
+			String nombre, String numDpi,
 			String estadoCivil, int edad, String nacionalidad,
 			String actividad,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 			String direccionActual, String lugarTrabajo,
-			int telefonoCasa, int telefonoTrabajo) throws IllegalArgumentException {
+			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
+			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1820,6 +1912,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 			SegSolicitudGarantiaFiduciaria f = Persistencia.getObjectById(SegSolicitudGarantiaFiduciaria.class, k);
 			f.setNombre(nombre);
+			f.setNumDpi(numDpi);
 			f.setEstadoCivil(estadoCivil);
 			f.setEdad(edad);
 			f.setNacionalidad(nacionalidad);
@@ -1831,6 +1924,12 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setLugarTrabajo(lugarTrabajo);
 			f.setTelefonoCasa(telefonoCasa);
 			f.setTelefonoTrabajo(telefonoTrabajo);
+			f.setProfesionOficio(profesionOficio);
+			f.setDireccionLugarTrabajo(direccionLugarTrabajo);
+			f.setCorreoElectronico(correoElectronico);
+			f.setNumeroCelular(numeroCelular);
+			f.setTelefonoInternacional(telefonoInternacional);
+			
 			valor = f.getIdGarantiaFiduciaria();
 		} finally {
 			Persistencia.close();
@@ -1854,8 +1953,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 	@Override
 	public Long actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
-			String nombre, int edad, 
-			String escolaridad, String ocupacion) throws IllegalArgumentException {
+			String nombre, String numDpi,
+			String estadoCivil, int edad, String nacionalidad,
+			String actividad,
+			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+			String direccionActual, String lugarTrabajo,
+			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correoElectronico,
+			int numeroCelular, int telefonoInternacional) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1867,9 +1972,24 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 			SegSolicitudGarantiaSolidario f = Persistencia.getObjectById(SegSolicitudGarantiaSolidario.class, k);
 			f.setNombre(nombre);
+			f.setNumDpi(numDpi);
+			f.setEstadoCivil(estadoCivil);
 			f.setEdad(edad);
-			f.setEscolaridad(escolaridad);
-			f.setOcupacion(ocupacion);
+			f.setNacionalidad(nacionalidad);
+			f.setActividadEconomica(actividad);
+			f.setCheckLeer(sabeLeer);
+			f.setCheckEscribir(sabeEscribir);
+			f.setCheckFirmar(sabeFirmar);
+			f.setDireccionActual(direccionActual);
+			f.setLugarTrabajo(lugarTrabajo);
+			f.setTelefonoCasa(telefonoCasa);
+			f.setTelefonoTrabajo(telefonoTrabajo);
+			f.setProfesionOficio(profesionOficio);
+			f.setDireccionLugarTrabajo(direccionLugarTrabajo);
+			f.setCorreoElectronico(correoElectronico);
+			f.setNumeroCelular(numeroCelular);
+			f.setTelefonoInternacional(telefonoInternacional);
+			
 			valor =f.getIdGarantiaSolidario();
 		} finally {
 			Persistencia.close();

@@ -113,6 +113,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	void actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
@@ -120,26 +121,31 @@ public interface SolucionesConstruidasServiceAsync {
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
 			AsyncCallback<Long> callback)  throws IllegalArgumentException;
 	
 	// GARANTIA FIDUCIARIA
 
 	void ingresarGarantiaFiduciaria(Date fecrec, Long idFormulario, 
-			String nombre, 
+			String nombre, String numDpi, 
 			String estadoCivil, int edad, String nacionalidad,
 			String actividad,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correo,
+			int numeroCelular, int telefonoInternacional,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	void actualizarGarantiaFiduciaria(Long idFormulario, Long idGarantiaHipotecaria,
-			String nombre, 
+			String nombre, String numDpi, 
 			String estadoCivil, int edad, String nacionalidad,
 			String actividad,
 			Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
 			String direccionActual, String lugarTrabajo,
 			int telefonoCasa, int telefonoTrabajo,
+			String profesionOficio, String direccionLugarTrabajo, String correo,
+			int numeroCelular, int telefonoInternacional,
 			AsyncCallback<Long> callback)  throws IllegalArgumentException;
 	
 	void eliminarGarantiaFiduciaria(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;
@@ -147,12 +153,25 @@ public interface SolucionesConstruidasServiceAsync {
 // GARANTIA GRUPO SOLIDARIO
 
 	 void ingresarGarantiaSolidario(Date fecrec, Long idFormulario, 
-			 String nombre, int edad, String escolaridad, String ocupacion,
+			 String nombre, String numDpi, 
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correo,
+				int numeroCelular, int telefonoInternacional,
 			 AsyncCallback<Long> callback) throws IllegalArgumentException;
 
 	 void actualizarGarantiaSolidario(Long idFormulario, Long idGarantiaSolidario,
-			 String nombre, int edad, 
-			 String escolaridad, String ocupacion,
+			 String nombre, String numDpi, 
+				String estadoCivil, int edad, String nacionalidad,
+				String actividad,
+				Boolean sabeLeer, Boolean sabeEscribir, Boolean sabeFirmar,
+				String direccionActual, String lugarTrabajo,
+				int telefonoCasa, int telefonoTrabajo,
+				String profesionOficio, String direccionLugarTrabajo, String correo,
+				int numeroCelular, int telefonoInternacional,
 			 AsyncCallback<Long> callback)  throws IllegalArgumentException;	
 
 	 void eliminarGarantiaSolidario(Long idFormulario, Long id, AsyncCallback<Long> callback) throws IllegalArgumentException;	

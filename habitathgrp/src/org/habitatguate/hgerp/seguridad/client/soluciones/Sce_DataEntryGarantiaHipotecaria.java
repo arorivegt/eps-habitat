@@ -55,24 +55,38 @@ public class Sce_DataEntryGarantiaHipotecaria extends Composite {
 	}
 	
     
-    public void setDataGarantiaHipotecaria(List<AuxSolicitudGarantiaHipotecaria> results){
+	public void setDataGarantiaHipotecaria(List<AuxSolicitudGarantiaHipotecaria> results){
 
-    	if (!results.isEmpty()) {
+		if (!results.isEmpty()) {
 
-    		for ( AuxSolicitudGarantiaHipotecaria n2 : results) {
+			for ( AuxSolicitudGarantiaHipotecaria n2 : results) {
 
-    			System.out.println("ID Garantia Hipotecaria a Cargar: " + n2.getIdGarantiaHipotecaria() + ", ID Formulario: " + n2.getIdFormulario());
-    			
-    			data.LlenarDatos(n2.getIdGarantiaHipotecaria(), 
-    					n2.getEscrituraNoRegistrada(), n2.getEscrituraRegistrada(), n2.getFolioEscritura(), n2.getLibroEscritura(), n2.getFincaEscritura(),
-    					n2.getNombreNotario(), n2.getAreaTerreno(), n2.getValorEstimado(), 
-    					n2.getCheckSi(), n2.getCheckNo(),
-    					n2.getNombrePersona(), n2.getTelefonoPersona());  
-    			
-    		}
-    	}
-    
-    }
+				System.out.println("ID Garantia Hipotecaria a Cargar: " + n2.getIdGarantiaHipotecaria() + ", ID Formulario: " + n2.getIdFormulario());
+
+				String deptoDireccionPersona  = "";
+				String municipioDireccionPersona   = "";			 
+
+				String[] numerosComoArray2  = n2.getDepartamentoMunicipioDireccionPersona().split(",");
+				for (int i = 0; i < numerosComoArray2.length; i++) {
+					if(i == 0)
+						deptoDireccionPersona = numerosComoArray2[i];
+					if(i == 1)
+						municipioDireccionPersona = numerosComoArray2[i];
+				}	
+
+
+				data.LlenarDatos(n2.getIdGarantiaHipotecaria(), 
+						n2.getEscrituraNoRegistrada(), n2.getEscrituraRegistrada(), n2.getFolioEscritura(), n2.getLibroEscritura(), n2.getFincaEscritura(),
+						n2.getNombreNotario(), n2.getAreaTerreno(), n2.getValorEstimado(), 
+						n2.getCheckSi(), n2.getCheckNo(),
+						n2.getNombrePersona(), n2.getTelefonoPersona(),
+						n2.getNumDpiPersona(), n2.getDireccionTerrenoPersona(), n2.getAldeaPersona(),
+						deptoDireccionPersona, municipioDireccionPersona);  
+
+			}
+		}
+
+	}
     
     
 }

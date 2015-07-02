@@ -163,6 +163,51 @@ public class SegSolicitudGarantiaHipotecaria implements Serializable {
 	public void setNombrePersona(String nombrePersona) {
 		this.nombrePersona = nombrePersona;
 	}
+	
+	@Persistent
+    private String numDpiPersona;
+	
+	public String getNumDpiPersona() {
+		return numDpiPersona;
+	}
+
+	public void setNumDpiPersona(String numDpiPersona) {
+		this.numDpiPersona = numDpiPersona;
+	}
+
+	@Persistent    
+    private String aldeaPersona;
+
+	public String getAldeaPersona() {
+		return aldeaPersona;
+	}
+
+	public void setAldeaPersona(String aldeaPersona) {
+		this.aldeaPersona = aldeaPersona;
+	}
+
+	@Persistent    
+    private String direccionTerrenoPersona;
+	
+	public String getDireccionTerrenoPersona() {
+		return direccionTerrenoPersona;
+	}
+
+	public void setDireccionTerrenoPersona(String direccionTerrenoPersona) {
+		this.direccionTerrenoPersona = direccionTerrenoPersona;
+	}
+
+	@Persistent
+    private String departamentoMunicipioDireccionPersona;
+	
+	public String getDepartamentoMunicipioDireccionPersona() {
+		return departamentoMunicipioDireccionPersona;
+	}
+
+	public void setDepartamentoMunicipioDireccionPersona(
+			String departamentoMunicipioDireccionPersona) {
+		this.departamentoMunicipioDireccionPersona = departamentoMunicipioDireccionPersona;
+	}
 
 	@Persistent
     private int telefonoPersona;

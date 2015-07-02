@@ -1,6 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
@@ -133,7 +135,6 @@ public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 		this.checkNo = checkNo;
 	}
 	
-	
     private String nombrePersona;
 	
 	public String getNombrePersona() {
@@ -144,6 +145,46 @@ public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 		this.nombrePersona = nombrePersona;
 	}
 
+    private String numDpiPersona;
+	
+	public String getNumDpiPersona() {
+		return numDpiPersona;
+	}
+
+	public void setNumDpiPersona(String numDpiPersona) {
+		this.numDpiPersona = numDpiPersona;
+	}
+
+    private String aldeaPersona;
+
+	public String getAldeaPersona() {
+		return aldeaPersona;
+	}
+
+	public void setAldeaPersona(String aldeaPersona) {
+		this.aldeaPersona = aldeaPersona;
+	}
+
+    private String direccionTerrenoPersona;
+	
+	public String getDireccionTerrenoPersona() {
+		return direccionTerrenoPersona;
+	}
+
+	public void setDireccionTerrenoPersona(String direccionTerrenoPersona) {
+		this.direccionTerrenoPersona = direccionTerrenoPersona;
+	}
+
+    private String departamentoMunicipioDireccionPersona;
+	
+	public String getDepartamentoMunicipioDireccionPersona() {
+		return departamentoMunicipioDireccionPersona;
+	}
+
+	public void setDepartamentoMunicipioDireccionPersona(
+			String departamentoMunicipioDireccionPersona) {
+		this.departamentoMunicipioDireccionPersona = departamentoMunicipioDireccionPersona;
+	}
 	
     private int telefonoPersona;
 	

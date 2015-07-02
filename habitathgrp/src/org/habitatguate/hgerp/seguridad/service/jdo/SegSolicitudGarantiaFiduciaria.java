@@ -55,6 +55,17 @@ public class SegSolicitudGarantiaFiduciaria implements Serializable {
 	}
 
 	@Persistent
+    private String numDpi;  
+	
+	public String getNumDpi() {
+		return numDpi;
+	}
+
+	public void setNumDpi(String numDpi) {
+		this.numDpi = numDpi;
+	}
+
+	@Persistent
     private String estadoCivil;
 	
 	public String getEstadoCivil() {
@@ -163,7 +174,7 @@ public class SegSolicitudGarantiaFiduciaria implements Serializable {
 	public void setTelefonoCasa(int telefonoCasa) {
 		this.telefonoCasa = telefonoCasa;
 	}
-
+	
 	@Persistent
     private int telefonoTrabajo;
 
@@ -175,6 +186,61 @@ public class SegSolicitudGarantiaFiduciaria implements Serializable {
 		this.telefonoTrabajo = telefonoTrabajo;
 	}
 	
+	@Persistent
+    private String profesionOficio;
+
+	public String getProfesionOficio() {
+		return profesionOficio;
+	}
+
+	public void setProfesionOficio(String profesionOficio) {
+		this.profesionOficio = profesionOficio;
+	}
+
+	@Persistent
+    private String direccionLugarTrabajo;
+	
+	public String getDireccionLugarTrabajo() {
+		return direccionLugarTrabajo;
+	}
+
+	public void setDireccionLugarTrabajo(String direccionLugarTrabajo) {
+		this.direccionLugarTrabajo = direccionLugarTrabajo;
+	}
+
+	@Persistent
+    private String correoElectronico;
+	
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+	@Persistent
+    private int numeroCelular;
+	
+	public int getNumeroCelular() {
+		return numeroCelular;
+	}
+
+	public void setNumeroCelular(int numeroCelular) {
+		this.numeroCelular = numeroCelular;
+	}
+
+	@Persistent
+    private int telefonoInternacional;
+
+	
+	public int getTelefonoInternacional() {
+		return telefonoInternacional;
+	}
+
+	public void setTelefonoInternacional(int telefonoInternacional) {
+		this.telefonoInternacional = telefonoInternacional;
+	}
 
 	// Llave Foranea
 	

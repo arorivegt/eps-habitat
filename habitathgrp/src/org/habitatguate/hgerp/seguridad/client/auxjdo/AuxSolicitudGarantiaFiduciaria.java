@@ -35,7 +35,17 @@ public class AuxSolicitudGarantiaFiduciaria implements IsSerializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+    private String numDpi;  
+	
+	public String getNumDpi() {
+		return numDpi;
+	}
 
+	public void setNumDpi(String numDpi) {
+		this.numDpi = numDpi;
+	}
+	
     private String estadoCivil;
 	
 	public String getEstadoCivil() {
@@ -146,6 +156,57 @@ public class AuxSolicitudGarantiaFiduciaria implements IsSerializable {
 		this.telefonoTrabajo = telefonoTrabajo;
 	}
 
+    private String profesionOficio;
+
+	public String getProfesionOficio() {
+		return profesionOficio;
+	}
+
+	public void setProfesionOficio(String profesionOficio) {
+		this.profesionOficio = profesionOficio;
+	}
+
+    private String direccionLugarTrabajo;
+	
+	public String getDireccionLugarTrabajo() {
+		return direccionLugarTrabajo;
+	}
+
+	public void setDireccionLugarTrabajo(String direccionLugarTrabajo) {
+		this.direccionLugarTrabajo = direccionLugarTrabajo;
+	}
+
+    private String correoElectronico;
+	
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+    private int numeroCelular;
+	
+	public int getNumeroCelular() {
+		return numeroCelular;
+	}
+
+	public void setNumeroCelular(int numeroCelular) {
+		this.numeroCelular = numeroCelular;
+	}
+
+    private int telefonoInternacional;
+
+	
+	public int getTelefonoInternacional() {
+		return telefonoInternacional;
+	}
+
+	public void setTelefonoInternacional(int telefonoInternacional) {
+		this.telefonoInternacional = telefonoInternacional;
+	}
+	
 	// Llave Foranea
 	
 	private long idFormulario;

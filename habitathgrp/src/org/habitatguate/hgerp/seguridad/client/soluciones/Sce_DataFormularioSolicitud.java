@@ -194,7 +194,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		absolutePanel.add(lblDireccionSolucion, 42, 326);
 		lblDireccionSolucion.setSize("181px", "19px");
 		
-		Label lblProfesionUOficio = new Label("Profesion u oficio:");
+		Label lblProfesionUOficio = new Label("Profesion u Oficio:");
 		lblProfesionUOficio.setStyleName("label");
 		absolutePanel.add(lblProfesionUOficio, 42, 112);
 		lblProfesionUOficio.setSize("136px", "19px");
@@ -644,7 +644,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		txtProfesionOficio.setTabIndex(5);
 		
 		txtNumDpi = new TextBox();
-//		txtNumDpi.setMaxLength(8);
 		txtNumDpi.setMaxLength(13);
 //		txtNumDpi.addKeyPressHandler(new KeyPressHandler() {
 //		    @Override
@@ -1965,8 +1964,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		}else if(Departamento.equals("-")){
 			valor = valor + "," + "-";
 		}
-			
-		
+	
 		return valor;
 	}
     

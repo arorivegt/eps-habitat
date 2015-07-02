@@ -55,8 +55,30 @@ public class SegSolicitudGarantiaSolidario implements Serializable {
 	}
 
 	@Persistent
-    private int edad;
+    private String numDpi;  
+	
+	public String getNumDpi() {
+		return numDpi;
+	}
 
+	public void setNumDpi(String numDpi) {
+		this.numDpi = numDpi;
+	}
+
+	@Persistent
+    private String estadoCivil;
+	
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	@Persistent
+    private int edad;   
+	
 	public int getEdad() {
 		return edad;
 	}
@@ -66,25 +88,158 @@ public class SegSolicitudGarantiaSolidario implements Serializable {
 	}
 
 	@Persistent
-    private String escolaridad;
+    private String nacionalidad;
 	
-	public String getEscolaridad() {
-		return escolaridad;
+	public String getNacionalidad() {
+		return nacionalidad;
 	}
 
-	public void setEscolaridad(String escolaridad) {
-		this.escolaridad = escolaridad;
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+	
+	@Persistent
+    private String actividadEconomica;
+
+	public String getActividadEconomica() {
+		return actividadEconomica;
+	}
+
+	public void setActividadEconomica(String actividadEconomica) {
+		this.actividadEconomica = actividadEconomica;
 	}
 
 	@Persistent
-    private String ocupacion;
-
-	public String getOcupacion() {
-		return ocupacion;
+    private Boolean checkLeer;
+	
+	public Boolean getCheckLeer() {
+		return checkLeer;
 	}
 
-	public void setOcupacion(String ocupacion) {
-		this.ocupacion = ocupacion;
+	public void setCheckLeer(Boolean checkLeer) {
+		this.checkLeer = checkLeer;
+	}
+
+	@Persistent
+    private Boolean checkEscribir;
+
+	public Boolean getCheckEscribir() {
+		return checkEscribir;
+	}
+
+	public void setCheckEscribir(Boolean checkEscribir) {
+		this.checkEscribir = checkEscribir;
+	}
+
+	@Persistent
+    private Boolean checkFirmar;
+	
+	public Boolean getCheckFirmar() {
+		return checkFirmar;
+	}
+
+	public void setCheckFirmar(Boolean checkFirmar) {
+		this.checkFirmar = checkFirmar;
+	}
+	
+	@Persistent
+    private String direccionActual;
+	
+	public String getDireccionActual() {
+		return direccionActual;
+	}
+
+	public void setDireccionActual(String direccionActual) {
+		this.direccionActual = direccionActual;
+	}
+
+	@Persistent
+    private String lugarTrabajo;
+	
+	public String getLugarTrabajo() {
+		return lugarTrabajo;
+	}
+
+	public void setLugarTrabajo(String lugarTrabajo) {
+		this.lugarTrabajo = lugarTrabajo;
+	}
+
+	@Persistent
+    private int telefonoCasa;
+
+	public int getTelefonoCasa() {
+		return telefonoCasa;
+	}
+
+	public void setTelefonoCasa(int telefonoCasa) {
+		this.telefonoCasa = telefonoCasa;
+	}
+
+	@Persistent
+    private int telefonoTrabajo;
+
+	public int getTelefonoTrabajo() {
+		return telefonoTrabajo;
+	}
+
+	public void setTelefonoTrabajo(int telefonoTrabajo) {
+		this.telefonoTrabajo = telefonoTrabajo;
+	}
+	
+	@Persistent
+    private String profesionOficio;
+
+	public String getProfesionOficio() {
+		return profesionOficio;
+	}
+
+	public void setProfesionOficio(String profesionOficio) {
+		this.profesionOficio = profesionOficio;
+	}
+
+	@Persistent
+    private String direccionLugarTrabajo;
+	
+	public String getDireccionLugarTrabajo() {
+		return direccionLugarTrabajo;
+	}
+
+	public void setDireccionLugarTrabajo(String direccionLugarTrabajo) {
+		this.direccionLugarTrabajo = direccionLugarTrabajo;
+	}
+
+	@Persistent
+    private String correoElectronico;
+	
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+	@Persistent
+    private int numeroCelular;
+	
+	public int getNumeroCelular() {
+		return numeroCelular;
+	}
+
+	public void setNumeroCelular(int numeroCelular) {
+		this.numeroCelular = numeroCelular;
+	}
+
+	@Persistent
+    private int telefonoInternacional;
+
+	
+	public int getTelefonoInternacional() {
+		return telefonoInternacional;
+	}
+
+	public void setTelefonoInternacional(int telefonoInternacional) {
+		this.telefonoInternacional = telefonoInternacional;
 	}
 	
 	// Llave Foranea

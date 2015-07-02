@@ -115,11 +115,14 @@ public class Sce_DataEntryGarantiaFiduciaria extends Composite {
     			Sce_DataGarantiaFiduciaria fa = new  Sce_DataGarantiaFiduciaria(this, formularioSolicitud, this.valor);
     			
     			fa.LlenarDatos(n2.getIdGarantiaFiduciaria(), 
-    					n2.getNombre(), n2.getEstadoCivil(), n2.getEdad(), n2.getNacionalidad(),
+    					n2.getNombre(), n2.getNumDpi(), 
+    					n2.getEstadoCivil(), n2.getEdad(), n2.getNacionalidad(),
     					n2.getActividadEconomica(),
     					n2.getCheckLeer(), n2.getCheckEscribir(), n2.getCheckFirmar(),
     					n2.getDireccionActual(), n2.getLugarTrabajo(),
-    					n2.getTelefonoCasa(), n2.getTelefonoTrabajo());
+    					n2.getTelefonoCasa(), n2.getTelefonoTrabajo(),
+    					n2.getProfesionOficio(), n2.getDireccionLugarTrabajo(), n2.getCorreoElectronico(),
+    					n2.getNumeroCelular(), n2.getTelefonoInternacional());
     			
     			flextable.setWidget(flextable.getRowCount(), 0, fa );
     		

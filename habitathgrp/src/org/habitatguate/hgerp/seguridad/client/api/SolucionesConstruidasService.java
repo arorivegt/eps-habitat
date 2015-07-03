@@ -107,14 +107,16 @@ public interface SolucionesConstruidasService extends RemoteService {
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia,
-			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException;
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException;
 	
 	Long actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
 			String escrituraNoRegistrada, String escrituraRegistrada, String folio, String libro, String finca,
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException;		
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException;		
 	
 
 // GARANTIA FIDUCIARIA	

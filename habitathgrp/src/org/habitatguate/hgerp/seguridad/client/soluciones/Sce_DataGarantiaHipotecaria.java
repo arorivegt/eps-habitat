@@ -66,9 +66,18 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 	private Label lblNumDpiPersona;
     
 	private String deptoMunicipioDireccionPersona = "";
+	private String deptoMunicipioDireccionGarantia = "";
     
 	// Valor Escritura-Lectura
 	private boolean valor;    
+	private Label lblDireccionTerrenoGarantia;
+	private TextBox txtDireccionTerrenoGarantia;
+	private TextBox txtAldeaGarantia;
+	private Label lblAldeaGarantia;
+	private ListBox listDepartamentoGarantia;
+	private Label lblDepartamentoGarantia;
+	private ListBox listMunicipioGarantia;
+	private Label lblMunicipioGarantia;
     
 	public Sce_DataGarantiaHipotecaria(Sce_DataEntryGarantiaHipotecaria a, Sce_DataEntryGarantiaSolicitud e, boolean valor) {
 		
@@ -80,7 +89,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1135px", "525px");
+		absolutePanel.setSize("1135px", "621px");
 		
 		Label lblNombres = new Label("Escritura p\u00FAblica NO registrada n\u00FAmero:");
 		lblNombres.setStyleName("label");
@@ -114,12 +123,12 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		
 		Label lblLugarDeTrabajo = new Label("El terreno est\u00E1 a nombre de otra persona:");
 		lblLugarDeTrabajo.setStyleName("label");
-		absolutePanel.add(lblLugarDeTrabajo, 42, 317);
+		absolutePanel.add(lblLugarDeTrabajo, 42, 375);
 		lblLugarDeTrabajo.setSize("323px", "19px");
 		
 		lblIndiquePersona = new Label("Si su respuesta es afirmativa, por favor indique el nombre de la persona:");
 		lblIndiquePersona.setStyleName("label");
-		absolutePanel.add(lblIndiquePersona, 42, 366);
+		absolutePanel.add(lblIndiquePersona, 42, 424);
 		lblIndiquePersona.setSize("550px", "19px");
 		
 		Label lblNoDeFinca = new Label("No. de Finca:");
@@ -129,7 +138,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		
 		lblNoTelefonoPersona = new Label("No. tel\u00E9fono persona:");
 		lblNoTelefonoPersona.setStyleName("label");
-		absolutePanel.add(lblNoTelefonoPersona, 42, 419);
+		absolutePanel.add(lblNoTelefonoPersona, 42, 477);
 		lblNoTelefonoPersona.setSize("240px", "19px");
 		
 		Label lblNotario = new Label("Nombre Notario:");
@@ -139,28 +148,48 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		
 		lblAldeaPersona = new Label("Aldea:");
 		lblAldeaPersona.setStyleName("label");
-		absolutePanel.add(lblAldeaPersona, 632, 433);
+		absolutePanel.add(lblAldeaPersona, 632, 491);
 		lblAldeaPersona.setSize("83px", "19px");
 		
 		lblDepartamentoPersona = new Label("Departamento:");
 		lblDepartamentoPersona.setStyleName("label");
-		absolutePanel.add(lblDepartamentoPersona, 811, 433);
+		absolutePanel.add(lblDepartamentoPersona, 811, 491);
 		lblDepartamentoPersona.setSize("130px", "19px");
 		
 		lblMunicipioPersona = new Label("Municipio:");
 		lblMunicipioPersona.setStyleName("label");
-		absolutePanel.add(lblMunicipioPersona, 996, 431);
+		absolutePanel.add(lblMunicipioPersona, 996, 489);
 		lblMunicipioPersona.setSize("101px", "19px");
 		
 		lblDireccionTerrenoPersona = new Label("Direccion Terreno:");
 		lblDireccionTerrenoPersona.setStyleName("label");
-		absolutePanel.add(lblDireccionTerrenoPersona, 42, 464);
+		absolutePanel.add(lblDireccionTerrenoPersona, 42, 522);
 		lblDireccionTerrenoPersona.setSize("181px", "19px");
 		
 		lblNumDpiPersona = new Label("Num. DPI:");
 		lblNumDpiPersona.setStyleName("label");
-		absolutePanel.add(lblNumDpiPersona, 1047, 339);
+		absolutePanel.add(lblNumDpiPersona, 1047, 397);
 		lblNumDpiPersona.setSize("101px", "19px");
+		
+		lblDireccionTerrenoGarantia = new Label("Direccion Terreno:");
+		lblDireccionTerrenoGarantia.setStyleName("label");
+		absolutePanel.add(lblDireccionTerrenoGarantia, 42, 328);
+		lblDireccionTerrenoGarantia.setSize("181px", "19px");
+		
+		lblAldeaGarantia = new Label("Aldea:");
+		lblAldeaGarantia.setStyleName("label");
+		absolutePanel.add(lblAldeaGarantia, 632, 297);
+		lblAldeaGarantia.setSize("83px", "19px");
+
+		lblDepartamentoGarantia = new Label("Departamento:");
+		lblDepartamentoGarantia.setStyleName("label");
+		absolutePanel.add(lblDepartamentoGarantia, 811, 297);
+		lblDepartamentoGarantia.setSize("130px", "19px");
+
+		lblMunicipioGarantia = new Label("Municipio:");
+		lblMunicipioGarantia.setStyleName("label");
+		absolutePanel.add(lblMunicipioGarantia, 996, 295);
+		lblMunicipioGarantia.setSize("101px", "19px");
 		
 		txtEscrituraNoRegistrada = new TextBox();
 		txtEscrituraNoRegistrada.setStyleName("gwt-TextBox2");
@@ -328,7 +357,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		});
 		txtNombrePersona.setStyleName("gwt-TextBox2");
 		txtNombrePersona.setMaxLength(200);
-		absolutePanel.add(txtNombrePersona, 580, 366);
+		absolutePanel.add(txtNombrePersona, 580, 424);
 		txtNombrePersona.setSize("425px", "19px");
 		txtNombrePersona.setTabIndex(10);
 		
@@ -355,14 +384,14 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		});			
 		txtTelefonoPersona.setText("0");
 		txtTelefonoPersona.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtTelefonoPersona, 207, 417);
+		absolutePanel.add(txtTelefonoPersona, 207, 475);
 		txtTelefonoPersona.setSize("90px", "19px");
 		txtTelefonoPersona.setTabIndex(11);
 		
 		txtAldeaPersona = new TextBox();
 		txtAldeaPersona.setStyleName("gwt-TextBox2");
 		txtAldeaPersona.setMaxLength(200);
-		absolutePanel.add(txtAldeaPersona, 632, 464);
+		absolutePanel.add(txtAldeaPersona, 632, 522);
 		txtAldeaPersona.setSize("152px", "19px");
 		
 		listDepartamentoPersona = new ListBox();
@@ -403,20 +432,20 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		listDepartamentoPersona.addItem("Quiche","14");
 		listDepartamentoPersona.addItem("Peten","17");
 		listDepartamentoPersona.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listDepartamentoPersona, 811, 458);
+		absolutePanel.add(listDepartamentoPersona, 811, 516);
 		listDepartamentoPersona.setSize("145px", "27px");
 		
 		listMunicipioPersona = new ListBox();
 		listMunicipioPersona.addItem("-","-1");
 		listMunicipioPersona.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listMunicipioPersona, 996, 456);
+		absolutePanel.add(listMunicipioPersona, 996, 514);
 		listMunicipioPersona.setSize("145px", "27px");
 		
 		txtDireccionTerrenoPersona = new TextBox();
 		txtDireccionTerrenoPersona.setTabIndex(11);
 		txtDireccionTerrenoPersona.setStyleName("gwt-TextBox2");
 		txtDireccionTerrenoPersona.setMaxLength(200);
-		absolutePanel.add(txtDireccionTerrenoPersona, 204, 464);
+		absolutePanel.add(txtDireccionTerrenoPersona, 204, 522);
 		txtDireccionTerrenoPersona.setSize("398px", "19px");
 		
 		txtNumDpiPersona = new TextBox();
@@ -442,8 +471,68 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		txtNumDpiPersona.setTabIndex(6);
 		txtNumDpiPersona.setStyleName("gwt-TextBox2");
 		txtNumDpiPersona.setMaxLength(13);
-		absolutePanel.add(txtNumDpiPersona, 1047, 364);
+		absolutePanel.add(txtNumDpiPersona, 1047, 422);
 		txtNumDpiPersona.setSize("116px", "19px");
+		
+		txtDireccionTerrenoGarantia = new TextBox();
+		txtDireccionTerrenoGarantia.setTabIndex(11);
+		txtDireccionTerrenoGarantia.setStyleName("gwt-TextBox2");
+		txtDireccionTerrenoGarantia.setMaxLength(200);
+		absolutePanel.add(txtDireccionTerrenoGarantia, 204, 328);
+		txtDireccionTerrenoGarantia.setSize("398px", "19px");
+		
+		txtAldeaGarantia = new TextBox();
+		txtAldeaGarantia.setStyleName("gwt-TextBox2");
+		txtAldeaGarantia.setMaxLength(200);
+		absolutePanel.add(txtAldeaGarantia, 632, 328);
+		txtAldeaGarantia.setSize("152px", "19px");
+		
+		listDepartamentoGarantia = new ListBox();
+		listDepartamentoGarantia.addItem("-","-1");
+		listDepartamentoGarantia.addChangeHandler(new ChangeHandler() {
+			public void onChange(ChangeEvent event) {
+				listMunicipioGarantia.clear();
+		        String[] numerosComoArray = Depto_Municipio(listDepartamentoGarantia.getItemText(listDepartamentoGarantia.getSelectedIndex())).split(",");
+		        int correlativo = Integer.parseInt(listDepartamentoGarantia.getValue(listDepartamentoGarantia.getSelectedIndex())+"01");
+		        for (int i = 1; i < numerosComoArray.length; i++) {
+		        	listMunicipioGarantia.addItem(numerosComoArray[i],String.valueOf(correlativo));
+		        	correlativo++;
+		        }
+
+		        listMunicipioGarantia.setSelectedIndex(2);
+			}
+		});
+		listDepartamentoGarantia.addItem("Guatemala","01");
+		listDepartamentoGarantia.addItem("Baja Verapaz","15");
+		listDepartamentoGarantia.addItem("Alta Verapaz","16");
+		listDepartamentoGarantia.addItem("El Progreso","02");
+		listDepartamentoGarantia.addItem("Izabal","18");
+		listDepartamentoGarantia.addItem("Zacapa","19");
+		listDepartamentoGarantia.addItem("Chiquimula","20");
+		listDepartamentoGarantia.addItem("Santa Rosa","06");
+		listDepartamentoGarantia.addItem("Jalapa","21");
+		listDepartamentoGarantia.addItem("Jutiapa","22");
+		listDepartamentoGarantia.addItem("Sacatepequez","03");
+		listDepartamentoGarantia.addItem("Chimaltenango","04");
+		listDepartamentoGarantia.addItem("Escuintla","05");
+		listDepartamentoGarantia.addItem("Solola","07");
+		listDepartamentoGarantia.addItem("Totonicapan","08");
+		listDepartamentoGarantia.addItem("Quezaltenango","09");
+		listDepartamentoGarantia.addItem("Suchitepequez","10");
+		listDepartamentoGarantia.addItem("Retalhuleu","11");
+		listDepartamentoGarantia.addItem("San Marcos","12");
+		listDepartamentoGarantia.addItem("Huehuetenango","13");
+		listDepartamentoGarantia.addItem("Quiche","14");
+		listDepartamentoGarantia.addItem("Peten","17");
+		listDepartamentoGarantia.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listDepartamentoGarantia, 811, 322);
+		listDepartamentoGarantia.setSize("145px", "27px");
+		
+		listMunicipioGarantia = new ListBox();
+		listMunicipioGarantia.addItem("-","-1");
+		listMunicipioGarantia.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listMunicipioGarantia, 996, 320);
+		listMunicipioGarantia.setSize("145px", "27px");
 		
 		
 		checkBoxSi = new CheckBox("");
@@ -491,7 +580,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		        }
 		    }
 		});
-		absolutePanel.add(checkBoxSi, 418, 312);
+		absolutePanel.add(checkBoxSi, 418, 370);
 		checkBoxSi.setTabIndex(9);
 		
         if(checkBoxSi.isChecked()){
@@ -630,7 +719,23 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 					aldeaPersona = txtAldeaPersona.getText();
 				}
 				
+				String direccionTerrenoGarantia = "";		
+				if(txtDireccionTerrenoGarantia.getText() == null){
+					direccionTerrenoGarantia = "";
+				}else{
+					direccionTerrenoGarantia = txtDireccionTerrenoGarantia.getText();
+				}
+				
+				String aldeaGarantia = "";		
+				if(txtAldeaGarantia.getText() == null){
+					aldeaGarantia = "";
+				}else{
+					aldeaGarantia = txtAldeaGarantia.getText();
+				}
+				
 				deptoMunicipioDireccionPersona = listDepartamentoPersona.getValue(listDepartamentoPersona.getSelectedIndex()) + "," +listMunicipioPersona.getValue(listMunicipioPersona.getSelectedIndex());
+
+				deptoMunicipioDireccionGarantia = listDepartamentoGarantia.getValue(listDepartamentoGarantia.getSelectedIndex()) + "," +listMunicipioGarantia.getValue(listMunicipioGarantia.getSelectedIndex());
 				
 				if(bandera){
 
@@ -647,6 +752,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 							nombrePersona, telefonoPersona, 
 							actualizacionGarantia,
 							dpiValue, direccionTerrenoPersona, aldeaPersona, deptoMunicipioDireccionPersona,
+							direccionTerrenoGarantia, aldeaGarantia, deptoMunicipioDireccionGarantia,
 							new AsyncCallback<Long>() {
 
 
@@ -674,6 +780,7 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 							checkSi, checkNo, 
 							nombrePersona, telefonoPersona,
 							dpiValue, direccionTerrenoPersona, aldeaPersona, deptoMunicipioDireccionPersona,
+							direccionTerrenoGarantia, aldeaGarantia, deptoMunicipioDireccionGarantia,
 							new AsyncCallback<Long>() {
 
 						public void onFailure(Throwable caught) 
@@ -699,8 +806,10 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
 		btnGuardar.setSize("198px", "41px");
-		absolutePanel.add(btnGuardar, 488, 509);
+		absolutePanel.add(btnGuardar, 493, 587);
 		btnGuardar.setTabIndex(12);
+		
+
 		
 	}
 	
@@ -711,8 +820,11 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, 
-			String deptoDireccionPersona, String municipioDireccionPersona)
+			String numDpiPersona, 
+			String direccionTerrenoPersona, String aldeaPersona, 
+			String deptoDireccionPersona, String municipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, 
+			String deptoDireccionGarantia, String municipioDireccionGarantia)
 	{
     	
 		this.bandera = false;
@@ -760,6 +872,32 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
         } 
 		
 		
+		this.txtDireccionTerrenoGarantia.setText(direccionTerrenoGarantia);
+		this.txtAldeaGarantia.setText(aldeaGarantia);
+		
+		bandera = true;
+        for(int i=0; i < this.listDepartamentoGarantia.getItemCount() && bandera; i++){
+            bandera = !this.listDepartamentoGarantia.getValue(i).equals(deptoDireccionGarantia);
+            this.listDepartamentoGarantia.setSelectedIndex(i);
+        } 
+		
+        this.listMunicipioGarantia.clear();
+        String[] numerosComoArray2 = Depto_Municipio(this.listDepartamentoGarantia.getItemText(this.listDepartamentoGarantia.getSelectedIndex())).split(",");
+        correlativo = Integer.parseInt(this.listDepartamentoGarantia.getValue(this.listDepartamentoGarantia.getSelectedIndex())+"01");
+        for (int i = 1; i < numerosComoArray2.length; i++) {
+        	
+        	this.listMunicipioGarantia.addItem(numerosComoArray2[i],String.valueOf(correlativo));
+        	correlativo++;
+        }
+
+        bandera = true;
+        for(int i=0; i < this.listMunicipioGarantia.getItemCount() && bandera; i++){
+            bandera = !this.listMunicipioGarantia.getValue(i).equals(municipioDireccionGarantia);
+            this.listMunicipioGarantia.setSelectedIndex(i);
+        } 
+        
+		
+        
         if(checkSi){
         	lblIndiquePersona.setVisible(true);
         	lblNoTelefonoPersona.setVisible(true);

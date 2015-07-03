@@ -144,6 +144,16 @@ public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 	public void setNombrePersona(String nombrePersona) {
 		this.nombrePersona = nombrePersona;
 	}
+	
+    private int telefonoPersona;
+	
+	public int getTelefonoPersona() {
+		return telefonoPersona;
+	}
+
+	public void setTelefonoPersona(int telefonoPersona) {
+		this.telefonoPersona = telefonoPersona;
+	}
 
     private String numDpiPersona;
 	
@@ -186,15 +196,39 @@ public class AuxSolicitudGarantiaHipotecaria implements IsSerializable {
 		this.departamentoMunicipioDireccionPersona = departamentoMunicipioDireccionPersona;
 	}
 	
-    private int telefonoPersona;
-	
-	public int getTelefonoPersona() {
-		return telefonoPersona;
+    private String aldeaGarantia;
+
+
+	public String getAldeaGarantia() {
+		return aldeaGarantia;
 	}
 
-	public void setTelefonoPersona(int telefonoPersona) {
-		this.telefonoPersona = telefonoPersona;
+	public void setAldeaGarantia(String aldeaGarantia) {
+		this.aldeaGarantia = aldeaGarantia;
 	}
+
+    private String direccionTerrenoGarantia;	
+
+	public String getDireccionTerrenoGarantia() {
+		return direccionTerrenoGarantia;
+	}
+
+	public void setDireccionTerrenoGarantia(String direccionTerrenoGarantia) {
+		this.direccionTerrenoGarantia = direccionTerrenoGarantia;
+	}
+
+    private String departamentoMunicipioDireccionGarantia;
+	
+	public String getDepartamentoMunicipioDireccionGarantia() {
+		return departamentoMunicipioDireccionGarantia;
+	}
+
+	public void setDepartamentoMunicipioDireccionGarantia(
+			String departamentoMunicipioDireccionGarantia) {
+		this.departamentoMunicipioDireccionGarantia = departamentoMunicipioDireccionGarantia;
+	}
+	
+	
 
 	// Llave Foranea
 	

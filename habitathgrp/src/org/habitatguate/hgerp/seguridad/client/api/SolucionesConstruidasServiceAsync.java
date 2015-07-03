@@ -114,6 +114,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia,
 			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
 	
 	void actualizarGarantiaHipotecaria(Long idFormulario, Long idGarantiaHipotecaria,
@@ -122,6 +123,7 @@ public interface SolucionesConstruidasServiceAsync {
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia,
 			AsyncCallback<Long> callback)  throws IllegalArgumentException;
 	
 	// GARANTIA FIDUCIARIA

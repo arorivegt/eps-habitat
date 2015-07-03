@@ -304,7 +304,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
 			Boolean actualizacionGarantia,
-			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException {
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
 		Long valor = 0L;
@@ -330,6 +331,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			documento.setDireccionTerrenoPersona(direccionTerrenoPersona);
 			documento.setAldeaPersona(aldeaPersona);
 			documento.setDepartamentoMunicipioDireccionPersona(departamentoMunicipioDireccionPersona);
+			documento.setDireccionTerrenoGarantia(direccionTerrenoGarantia);
+			documento.setAldeaGarantia(aldeaGarantia);
+			documento.setDepartamentoMunicipioDireccionGarantia(departamentoMunicipioDireccionGarantia);
 			
 			documento.setIdFormulario(idFormulario); // Llave Foranea
 
@@ -960,6 +964,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 						l.setDireccionTerrenoPersona(n0.getDireccionTerrenoPersona());
 						l.setAldeaPersona(n0.getAldeaPersona());
 						l.setDepartamentoMunicipioDireccionPersona(n0.getDepartamentoMunicipioDireccionPersona());
+						l.setDireccionTerrenoGarantia(n0.getDireccionTerrenoGarantia());
+						l.setAldeaGarantia(n0.getAldeaGarantia());
+						l.setDepartamentoMunicipioDireccionGarantia(n0.getDepartamentoMunicipioDireccionGarantia());
 						nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 					}
 				}	
@@ -1319,6 +1326,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					l.setDireccionTerrenoPersona(n0.getDireccionTerrenoPersona());
 					l.setAldeaPersona(n0.getAldeaPersona());
 					l.setDepartamentoMunicipioDireccionPersona(n0.getDepartamentoMunicipioDireccionPersona());
+					l.setDireccionTerrenoGarantia(n0.getDireccionTerrenoGarantia());
+					l.setAldeaGarantia(n0.getAldeaGarantia());
+					l.setDepartamentoMunicipioDireccionGarantia(n0.getDepartamentoMunicipioDireccionGarantia());
 					nuevo.getGarantiaHipotecaria().add(l); // Agregado a Entidad Principal
 				}
 			}	
@@ -1866,7 +1876,8 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona) throws IllegalArgumentException {
+			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
+			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException {
 
 		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ; 
 
@@ -1893,6 +1904,9 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			f.setDireccionTerrenoPersona(direccionTerrenoPersona);
 			f.setAldeaPersona(aldeaPersona);
 			f.setDepartamentoMunicipioDireccionPersona(departamentoMunicipioDireccionPersona);
+			f.setDireccionTerrenoGarantia(direccionTerrenoGarantia);
+			f.setAldeaGarantia(aldeaGarantia);
+			f.setDepartamentoMunicipioDireccionGarantia(departamentoMunicipioDireccionGarantia);
 
 			valor = f.getIdDocumentoPropiedad();
 

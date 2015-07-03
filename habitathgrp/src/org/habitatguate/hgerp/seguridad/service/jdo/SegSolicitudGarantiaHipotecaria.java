@@ -165,6 +165,17 @@ public class SegSolicitudGarantiaHipotecaria implements Serializable {
 	}
 	
 	@Persistent
+    private int telefonoPersona;
+	
+	public int getTelefonoPersona() {
+		return telefonoPersona;
+	}
+
+	public void setTelefonoPersona(int telefonoPersona) {
+		this.telefonoPersona = telefonoPersona;
+	}
+	
+	@Persistent
     private String numDpiPersona;
 	
 	public String getNumDpiPersona() {
@@ -208,16 +219,41 @@ public class SegSolicitudGarantiaHipotecaria implements Serializable {
 			String departamentoMunicipioDireccionPersona) {
 		this.departamentoMunicipioDireccionPersona = departamentoMunicipioDireccionPersona;
 	}
-
-	@Persistent
-    private int telefonoPersona;
 	
-	public int getTelefonoPersona() {
-		return telefonoPersona;
+	@Persistent    
+    private String aldeaGarantia;
+
+
+	public String getAldeaGarantia() {
+		return aldeaGarantia;
 	}
 
-	public void setTelefonoPersona(int telefonoPersona) {
-		this.telefonoPersona = telefonoPersona;
+	public void setAldeaGarantia(String aldeaGarantia) {
+		this.aldeaGarantia = aldeaGarantia;
+	}
+
+	@Persistent    
+    private String direccionTerrenoGarantia;
+	
+
+	public String getDireccionTerrenoGarantia() {
+		return direccionTerrenoGarantia;
+	}
+
+	public void setDireccionTerrenoGarantia(String direccionTerrenoGarantia) {
+		this.direccionTerrenoGarantia = direccionTerrenoGarantia;
+	}
+
+	@Persistent
+    private String departamentoMunicipioDireccionGarantia;
+	
+	public String getDepartamentoMunicipioDireccionGarantia() {
+		return departamentoMunicipioDireccionGarantia;
+	}
+
+	public void setDepartamentoMunicipioDireccionGarantia(
+			String departamentoMunicipioDireccionGarantia) {
+		this.departamentoMunicipioDireccionGarantia = departamentoMunicipioDireccionGarantia;
 	}
 
 	// Llave Foranea

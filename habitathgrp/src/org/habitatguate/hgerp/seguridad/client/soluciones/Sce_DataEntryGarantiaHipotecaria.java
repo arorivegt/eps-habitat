@@ -73,6 +73,17 @@ public class Sce_DataEntryGarantiaHipotecaria extends Composite {
 					if(i == 1)
 						municipioDireccionPersona = numerosComoArray2[i];
 				}	
+				
+				String deptoDireccionGarantia  = "";
+				String municipioDireccionGarantia  = "";			 
+
+				String[] numerosComoArray3  = n2.getDepartamentoMunicipioDireccionGarantia().split(",");
+				for (int i = 0; i < numerosComoArray3.length; i++) {
+					if(i == 0)
+						deptoDireccionGarantia = numerosComoArray3[i];
+					if(i == 1)
+						municipioDireccionGarantia = numerosComoArray3[i];
+				}
 
 
 				data.LlenarDatos(n2.getIdGarantiaHipotecaria(), 
@@ -80,8 +91,11 @@ public class Sce_DataEntryGarantiaHipotecaria extends Composite {
 						n2.getNombreNotario(), n2.getAreaTerreno(), n2.getValorEstimado(), 
 						n2.getCheckSi(), n2.getCheckNo(),
 						n2.getNombrePersona(), n2.getTelefonoPersona(),
-						n2.getNumDpiPersona(), n2.getDireccionTerrenoPersona(), n2.getAldeaPersona(),
-						deptoDireccionPersona, municipioDireccionPersona);  
+						n2.getNumDpiPersona(), 
+						n2.getDireccionTerrenoPersona(), n2.getAldeaPersona(),
+						deptoDireccionPersona, municipioDireccionPersona,
+						n2.getDireccionTerrenoGarantia(), n2.getAldeaGarantia(),
+						deptoDireccionGarantia, municipioDireccionGarantia);  
 
 			}
 		}

@@ -582,10 +582,10 @@ public class MenuPrincipal extends Composite {
 
 					        	// COMENTAR/ELIIMINAR
 								MenuVertical.addSeparator(); //--
-//								MenuVertical.addItem("Administracion",MenuAdmistracion); //--
-//								MenuVertical.addSeparator();
+								//MenuVertical.addItem("Administracion",MenuAdmistracion); //--
+								//MenuVertical.addSeparator();
 //								MenuVertical.addItem("Cerrar Sesion",cmdCerrarSesion);
-								//MenuVertical.addItem("Finanzas", MenuFinanzas);
+							//	MenuVertical.addItem("Finanzas", MenuFinanzas);
 								//MenuVertical.addSeparator();
 								MenuVertical.setAutoOpen(false);
 								MenuVertical.setAnimationEnabled(true);

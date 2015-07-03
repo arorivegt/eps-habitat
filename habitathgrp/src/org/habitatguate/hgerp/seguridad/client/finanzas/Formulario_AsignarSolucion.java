@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
+import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 
 import com.google.gwt.cell.client.FieldUpdater;
@@ -38,10 +42,11 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
 public class Formulario_AsignarSolucion extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+	private final SolucionesConstruidasServiceAsync solucionesService = GWT.create(SolucionesConstruidasService.class);
     TablaGWT_PlantillaSolucion e = null;
     
     public AuxMaterialCostruccion selectNuevo = null;
-    public AuxBeneficiario selectNuevoBene = null;
+    public AuxSolicitudGeneral selectNuevoBene = null;
     public AuxPlantillaSolucion selectPlant = null;
     public double costoAcumulado = 0;
     public Long idSolucionAlmacenado = 0L;
@@ -209,7 +214,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			}
 		});
 		
-		loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+	/*	loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
 			
 			@Override
 			public void onSuccess(List<AuxBeneficiario> result) {
@@ -226,7 +231,28 @@ public class Formulario_AsignarSolucion extends Composite{
 				System.out.println(caught);
 				
 			}
-		});
+		});*/
+		
+		solucionesService.buscarFormulario('7', 0L, 0l, "FINANZAS", "", 
+		new AsyncCallback<List<AuxSolicitudGeneral>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxSolicitudGeneral> result) {
+				// TODO Auto-generated method stub
+				if (!result.isEmpty()){
+					for (AuxSolicitudGeneral p : result){
+						bene.add(new BeneficiarioMultiWordSuggestion(p));	
+					}
+				}
+			}
+		}
+				);
 
 		//------------------------------primera fila
 		
@@ -391,7 +417,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			absolutePanel_2.add(textBox, 19, 64);
 			textBox.setSize("227px", "19px");
 			
-			Label lblAfiliado = new Label("Afiliado");
+			Label lblAfiliado = new Label("Dirección Solución");
 			lblAfiliado.setStyleName("label");
 			absolutePanel_2.add(lblAfiliado, 0, 90);
 			lblAfiliado.setSize("157px", "13px");
@@ -416,6 +442,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			textBox_3.setMaxLength(100);
 			absolutePanel_3.add(textBox_3, 173, 10);
 			textBox_3.setSize("176px", "19px");
+			textBox_3.setEnabled(false);
 			
 			
 			final TextBox textBox_4 = new TextBox();
@@ -453,8 +480,11 @@ public class Formulario_AsignarSolucion extends Composite{
 					// TODO Auto-generated method stub
 					BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
 					selectNuevoBene = select.getAfiliado();
-					textBox.setText(selectNuevoBene.getDirBeneficiario());
-					textBox_2.setText(selectNuevoBene.getAfiliado().getNomAfiliado());
+					textBox.setText(selectNuevoBene.getDireccionActual());
+					textBox_2.setText(selectNuevoBene.getDireccionSolucion());
+					textBox_3.setText(""+selectNuevoBene.getMontoAprobado());
+					double dif = Double.valueOf(textBox_3.getText()) - costoAcumulado; 
+					textBox_4.setText(" " +dif);
 				}
 			});
 			
@@ -490,31 +520,52 @@ public class Formulario_AsignarSolucion extends Composite{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					AuxSolucion auxS = new AuxSolucion();
-					auxS.setNomSolucion(selectPlant.getNomPlantillaSolucion());
-					auxS.setCostoAdministrativo(0.0);
-					auxS.setCostoDirecto(0.0);
-					auxS.setCostoMaterial(0.0);
-					auxS.setCostoTotal(costoAcumulado);
-					auxS.setDisenio(selectPlant.getTipo());
-					auxS.setNotaDebito(0);
-					auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
-					auxS.setBeneficiario(selectNuevoBene);
-					loginService.Insertar_Solucion(auxS, costoAcumulado, new AsyncCallback<Long>() {
-						
+					loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),"", 0000,selectNuevoBene.getIdFormulario(),
+							new AsyncCallback<Long>(){
+						@Override		
+		                public void onFailure(Throwable caught) 
+		                {
+		                    Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
+		                }
+
 						@Override
-						public void onSuccess(Long result) {
-							idSolucionAlmacenado = result;
-		        			index = 0;
-		    				timer.scheduleRepeating(5000);
-						}
-						
-						@Override
-						public void onFailure(Throwable caught) {
-							// TODO Auto-generated method stub
-							
-						}
-					});
+		                public void onSuccess(Long result)
+		                {			
+							System.out.println("Solicitud que se va inclur" + result);
+							AuxSolucion auxS = new AuxSolucion();
+							auxS.setNomSolucion(selectPlant.getNomPlantillaSolucion());
+							auxS.setCostoAdministrativo(0.0);
+							auxS.setCostoDirecto(0.0);
+							auxS.setCostoMaterial(0.0);
+							auxS.setCostoTotal(costoAcumulado);
+							auxS.setDisenio(selectPlant.getTipo());
+							auxS.setNotaDebito(0);
+							auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
+							AuxBeneficiario auxBene = new AuxBeneficiario();
+							auxBene.setIdBeneficiario(result);
+							auxS.setBeneficiario(auxBene);
+							loginService.Insertar_Solucion(auxS, costoAcumulado, new AsyncCallback<Long>() {
+								
+								@Override
+								public void onSuccess(Long result) {
+									idSolucionAlmacenado = result;
+				        			index = 0;
+				    				timer.scheduleRepeating(5000);
+								}
+								
+								@Override
+								public void onFailure(Throwable caught) {
+									// TODO Auto-generated method stub
+									
+								}
+							});
+		                }
+
+		         });
+					
+					
+					
+
 					
 				}
 			});

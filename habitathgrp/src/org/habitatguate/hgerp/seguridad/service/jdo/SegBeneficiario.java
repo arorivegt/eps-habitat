@@ -32,6 +32,9 @@ public class SegBeneficiario implements Serializable{
 	@Element(dependent = "true")
 	@Unowned
 	private SegSolucion solucion;
+	@Persistent
+	@Unowned
+	private SegSolicitudGeneral solicitud;
 	
 	public SegBeneficiario(){
 		super();
@@ -48,6 +51,16 @@ public class SegBeneficiario implements Serializable{
 		return idBeneficiario;
 	}
 
+
+
+	public SegSolicitudGeneral getSolicitud() {
+		return solicitud;
+	}
+
+
+	public void setSolicitud(SegSolicitudGeneral solicitud) {
+		this.solicitud = solicitud;
+	}
 
 
 	public void setIdBeneficiario(Key idBeneficiario) {

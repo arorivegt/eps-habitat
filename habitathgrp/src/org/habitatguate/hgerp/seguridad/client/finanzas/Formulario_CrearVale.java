@@ -60,7 +60,7 @@ public class Formulario_CrearVale extends Composite {
 
 	public Formulario_CrearVale(final Long idAfiliadoSession, Long idEmpleadoSession){
 		final long idEmpleado = idEmpleadoSession;
-		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
+		final BeneNameSuggestOracle bene = new BeneNameSuggestOracle();
 		final java.util.Date date= new java.util.Date();
 		final Grid grid = new Grid(2, 2);
 		initWidget(grid);
@@ -81,7 +81,7 @@ public class Formulario_CrearVale extends Composite {
 
 						if (!result.isEmpty()){
 							for (AuxBeneficiario p : result){
-								bene.add(new BeneficiarioMultiWordSuggestion(p));
+								bene.add(new BeneMultiWordSuggestion(p));
 								System.out.println(p.getNomBeneficiario());
 							}
 						}else
@@ -300,7 +300,7 @@ public class Formulario_CrearVale extends Composite {
 			
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> event) {
-				BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
+				BeneMultiWordSuggestion select = (BeneMultiWordSuggestion)event.getSelectedItem();
 				//beneficiario
 				selectNuevoBene = select.getAfiliado();
 				textBox_3.setText(selectNuevoBene.getAfiliado().getNomAfiliado());

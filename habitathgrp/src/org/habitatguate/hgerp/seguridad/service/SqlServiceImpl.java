@@ -38,6 +38,7 @@ import org.habitatguate.hgerp.seguridad.service.jdo.SegMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegParametro;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegProveedor;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegSolicitudGeneral;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegVale;
 import org.habitatguate.hgerp.util.ConvertDate;
@@ -355,9 +356,12 @@ public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,Strin
 
 public Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal) throws IllegalArgumentException{
 	Long valor = 0L;
+	HttpServletRequest request = this.getThreadLocalRequest();
+	HttpSession session = request.getSession(false);
+	long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	 Key k = new KeyFactory
-		        .Builder(SegAfiliado.class.getSimpleName(), auxS.getBeneficiario().getAfiliado().getIdAfiliado())
+		        .Builder(SegAfiliado.class.getSimpleName(), idAfi)
 	 			.addChild(SegBeneficiario.class.getSimpleName(), auxS.getBeneficiario().getIdBeneficiario())	
 		        .getKey();
 	SegBeneficiario bene = gestorPersistencia.getObjectById(SegBeneficiario.class, k);
@@ -1444,15 +1448,19 @@ public Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String cat
 	
 	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{
 		 Long valor = 0L;
+			HttpServletRequest request = this.getThreadLocalRequest();
+			HttpSession session = request.getSession(false);
+			long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-		SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
+		SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfi);
+		SegSolicitudGeneral solicitud = gestorPersistencia.getObjectById(SegSolicitudGeneral.class,idAfiliado);
 		SegBeneficiario nuevo = new SegBeneficiario();
 		nuevo.setNomBeneficiario(nomBeneficiario);
 		nuevo.setDirBeneficiario(dirBeneficiario);
 		nuevo.setTelBeneficiario(telBeneficiario);
 		nuevo.setAfiliado(selectB);
+		nuevo.setSolicitud(solicitud);
 		selectB.getSolucion().add(nuevo);
-		
 		try{
 			gestorPersistencia.makePersistent(nuevo);
 			System.out.println("BENEFICIARIO GUARDADO CORRECTAMENTE");

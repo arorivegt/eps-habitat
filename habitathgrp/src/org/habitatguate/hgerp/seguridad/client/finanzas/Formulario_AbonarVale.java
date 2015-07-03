@@ -53,7 +53,7 @@ public class Formulario_AbonarVale extends Composite{
     TablaGWT_Vale e = null;
 
 	public Formulario_AbonarVale(Long idAfiliadoSession){
-		final BeneficiarioNameSuggestOracle bene = new BeneficiarioNameSuggestOracle();
+		final BeneNameSuggestOracle bene = new BeneNameSuggestOracle();
 		final java.util.Date date= new java.util.Date();
 		final Grid grid = new Grid(2, 2);
 		initWidget(grid);
@@ -74,7 +74,7 @@ public class Formulario_AbonarVale extends Composite{
 
 						if (!result.isEmpty()){
 							for (AuxBeneficiario p : result){
-								bene.add(new BeneficiarioMultiWordSuggestion(p));	
+								bene.add(new BeneMultiWordSuggestion(p));	
 							}
 						}
 						

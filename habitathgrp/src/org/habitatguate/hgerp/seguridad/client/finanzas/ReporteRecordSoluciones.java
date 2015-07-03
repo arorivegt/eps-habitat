@@ -67,7 +67,7 @@ public class ReporteRecordSoluciones extends Composite   {
 	
 	private long idBeneficiario;
 	TablaGWT_SolucionGeneral e = null;
-	private BeneficiarioNameSuggestOracle bene;
+	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     
@@ -89,7 +89,7 @@ public class ReporteRecordSoluciones extends Composite   {
 		absolutePanel.setSize("100%", "50px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
-		bene = new BeneficiarioNameSuggestOracle();
+		bene = new BeneNameSuggestOracle();
 		
 		listBox = new ListBox();
 		listBox.addItem("Beneficiario");
@@ -146,7 +146,7 @@ public class ReporteRecordSoluciones extends Composite   {
 			public void onSuccess(List<AuxBeneficiario> result) {
 				if (!result.isEmpty()){
 					for (AuxBeneficiario p : result){
-						bene.add(new BeneficiarioMultiWordSuggestion(p));	
+						bene.add(new BeneMultiWordSuggestion(p));	
 					}
 				}
 
@@ -178,7 +178,7 @@ public class ReporteRecordSoluciones extends Composite   {
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> event) {
 				// TODO Auto-generated method stub
-				BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
+				BeneMultiWordSuggestion select = (BeneMultiWordSuggestion)event.getSelectedItem();
 				idBeneficiario = select.getAfiliado().getIdBeneficiario();
 				
 			}

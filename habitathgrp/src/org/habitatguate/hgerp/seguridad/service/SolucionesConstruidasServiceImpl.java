@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
@@ -787,6 +789,17 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 					"nombreSolicitante == '"+nombreSolicitante+"'"			// Realiza una busqueda General, segun el nombre de solicitante en TODOS los usuarios
 					);
 			results = (List<SegSolicitudGeneral>) q.execute();			
+		}else if(tipo=='7'){
+			//Consulta para Nelson
+			System.out.println("ENTRO EN BUSQUEDA DE NELSON: " + tipo);
+			HttpServletRequest request = this.getThreadLocalRequest();
+			HttpSession session = request.getSession(false);
+			long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
+			Query q = pm.newQuery(SegSolicitudGeneral.class,
+					"creditoAprobado == true" +
+					" && idAfiliado == " + idAfi
+					);
+			results = (List<SegSolicitudGeneral>) q.execute();
 		}
 		
 		if(!results.isEmpty())

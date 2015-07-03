@@ -17,6 +17,8 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 	private AuxAfiliado afiliado;
 	
 	private AuxSolucion solucion;
+	
+	private AuxSolicitudGeneral solicitud;
 	/**
 
      * El KEY_PROVIDER es el que provee el ID de un contacto.
@@ -78,6 +80,14 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 
 	public void setSolucion(AuxSolucion solucion) {
 		this.solucion = solucion;
+	}
+
+	public AuxSolicitudGeneral getSolicitud() {
+		return solicitud;
+	}
+
+	public void setSolicitud(AuxSolicitudGeneral solicitud) {
+		this.solicitud = solicitud;
 	}
 	
 	

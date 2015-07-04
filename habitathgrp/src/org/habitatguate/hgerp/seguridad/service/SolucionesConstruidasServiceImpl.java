@@ -850,13 +850,13 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				nuevo.setCuartaSupervision(p.getCuartaSupervision());
 				nuevo.setURLFile(p.getURLFile());
 				nuevo.setKeyFile(p.getKeyFile());
-				
 				nuevo.setAldeaDireccionActual(p.getAldeaDireccionActual());
 				nuevo.setAldeaDireccionSolucion(p.getAldeaDireccionSolucion());
 				nuevo.setDepartamentoMunicipioDireccionActual(p.getDepartamentoMunicipioDireccionActual());
 				nuevo.setDepartamentoMunicipioDireccionSolucion(p.getDepartamentoMunicipioDireccionSolucion());
 				nuevo.setDireccionLugarTrabajoSolicitante(p.getDireccionLugarTrabajoSolicitante());
 				nuevo.setDireccionLugarTrabajoConyuge(p.getDireccionLugarTrabajoConyuge());
+				nuevo.setEnConstruccion(p.getEnConstruccion());
 				
 				nuevo.setIdFormulario(p.getIdFormulario());	// ID
 				
@@ -1212,13 +1212,13 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setCuartaSupervision(p.getCuartaSupervision());
 			nuevo.setURLFile(p.getURLFile());
 			nuevo.setKeyFile(p.getKeyFile());
-			
 			nuevo.setAldeaDireccionActual(p.getAldeaDireccionActual());
 			nuevo.setAldeaDireccionSolucion(p.getAldeaDireccionSolucion());
 			nuevo.setDepartamentoMunicipioDireccionActual(p.getDepartamentoMunicipioDireccionActual());
 			nuevo.setDepartamentoMunicipioDireccionSolucion(p.getDepartamentoMunicipioDireccionSolucion());
 			nuevo.setDireccionLugarTrabajoSolicitante(p.getDireccionLugarTrabajoSolicitante());
-			nuevo.setDireccionLugarTrabajoConyuge(p.getDireccionLugarTrabajoConyuge());
+			nuevo.setDireccionLugarTrabajoConyuge(p.getDireccionLugarTrabajoConyuge());			
+			nuevo.setEnConstruccion(p.getEnConstruccion());
 			
 			nuevo.setIdFormulario(p.getIdFormulario());	// ID
 			

@@ -471,6 +471,17 @@ public class AuxSolicitudGeneral implements IsSerializable {
 		this.direccionLugarTrabajoConyuge = direccionLugarTrabajoConyuge;
 	}
 	
+    private Boolean enConstruccion;
+	
+	public Boolean getEnConstruccion() {
+		return enConstruccion;
+	}
+
+	public void setEnConstruccion(Boolean enConstruccion) {
+		this.enConstruccion = enConstruccion;
+	}
+	
+	
 	// Relacion
 	
 	private List <AuxSolicitudCargaFamiliar> cargaFamiliar = new ArrayList<AuxSolicitudCargaFamiliar>();

@@ -575,8 +575,18 @@ public class SegSolicitudGeneral implements Serializable {
 	public void setDireccionLugarTrabajoConyuge(String direccionLugarTrabajoConyuge) {
 		this.direccionLugarTrabajoConyuge = direccionLugarTrabajoConyuge;
 	}
-
 	
+	@Persistent
+    private Boolean enConstruccion;
+	
+	public Boolean getEnConstruccion() {
+		return enConstruccion;
+	}
+
+	public void setEnConstruccion(Boolean enConstruccion) {
+		this.enConstruccion = enConstruccion;
+	}
+
 	// Mapeo de Llave Foranea
 	
 	@Persistent(mappedBy = "solicitud")

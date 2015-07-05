@@ -346,7 +346,19 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setPeatonal(valPeatonal);					
 					
-					// 12. Primera Supervision
+					// 12. Credito Aprobado
+					String valCreditoAprobado = "";
+					Boolean creditoAprobado = false;
+					creditoAprobado = p.getCreditoAprobado();
+					if(creditoAprobado){
+						valCreditoAprobado = "SI";
+					}else{
+						valCreditoAprobado = "NO";
+					}
+					solucionData.setCreditoAprobado(valCreditoAprobado);
+					
+					
+					// 13. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -357,7 +369,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionPrimera(valSupervision1);
 					
-					// 13. Segunda Supervision
+					// 14. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -368,7 +380,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionSegunda(valSupervision2);
 					
-					// 14. Tercera Supervision
+					// 15. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -379,7 +391,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionTercera(valSupervision3);
 					
-					// 15. Cuarta Supervision
+					// 16. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();
@@ -389,7 +401,9 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 						valSupervision4 = "NO";
 					}
 					solucionData.setSupervisionCuarta(valSupervision4);
-							
+				
+					
+					
 					DATOS.add(solucionData);
 					i++;
 				}
@@ -410,6 +424,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 				nuevo.ConstruirConsultaSoluciones("13");
 				nuevo.ConstruirConsultaSoluciones("14");
 				nuevo.ConstruirConsultaSoluciones("15");
+				nuevo.ConstruirConsultaSoluciones("16");
 
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

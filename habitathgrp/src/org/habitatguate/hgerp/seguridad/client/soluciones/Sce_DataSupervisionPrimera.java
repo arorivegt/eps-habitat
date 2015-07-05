@@ -95,7 +95,7 @@ public class Sce_DataSupervisionPrimera extends Composite {
 
 		image = new Image("images/imagenempresa.png");
 		image.setSize("300px", "158px");
-		absolutePanel.add(image, 735, 424);
+		absolutePanel.add(image, 723, 424);
 		absolutePanel.add(getFormPanel(), 596, 43);
 		
 		lblSeleccioneUnaImagen = new Label("Seleccione una imagen no mayor a 1MB");

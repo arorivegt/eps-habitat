@@ -208,6 +208,16 @@ public class Sce_ReporteDatosSolucionesConstruidas  implements IsSerializable{
 		this.supervisionCuarta = supervisionCuarta;
 	}
 	
+	private String creditoAprobado;
+	
+	public String getCreditoAprobado() {
+		return creditoAprobado;
+	}
+
+	public void setCreditoAprobado(String creditoAprobado) {
+		this.creditoAprobado = creditoAprobado;
+	}
+
 	private String pregunta1;
 	
 	public String getPregunta1() {

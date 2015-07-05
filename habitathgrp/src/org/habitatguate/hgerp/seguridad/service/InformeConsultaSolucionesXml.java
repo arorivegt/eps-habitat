@@ -14,7 +14,6 @@ public class InformeConsultaSolucionesXml {
 	    private String xmlInicio 							 	= "<table><tbody>"
 																+"<tr>"
 																+"<td>No.</td>"	
-//																+"<td>Codigo Referencia</td>"
 																+"<td>Nombre Solicitante</td>"	
 																+"<td>Estado Civil</td>"	
 																+"<td>Edad</td>"	
@@ -25,6 +24,7 @@ public class InformeConsultaSolucionesXml {
 																+"<td>Inmueble accesible en camion</td>"
 																+"<td>Inmueble accesible en carro</td>"
 																+"<td>Inmueble accesible para peatones</td>"
+																+"<td>Credito Aprobado</td>"
 																+"<td>Contiene Primera Supervision</td>"
 																+"<td>Contiene Segunda Supervision</td>"
 																+"<td>Contiene Tercera Supervision</td>"
@@ -50,10 +50,7 @@ public class InformeConsultaSolucionesXml {
 					// 1. Numero Correlativo.
 					xmlInicio += "<td>"+i+"</td>";
 					
-//					// 1. Codigo Referencia
-//					xmlInicio += "<td>"+p.getIdFormulario()+"</td>";
-					
-//					// 2. Nombre Solicitante
+					// 2. Nombre Solicitante
 					xmlInicio += "<td>"+p.getNombreSolicitante()+"</td>";
 					
 					// 3. Estado Civil
@@ -133,7 +130,18 @@ public class InformeConsultaSolucionesXml {
 					}
 					xmlInicio += "<td>"+valPeatonal+"</td>";
 					
-					// 12. Primera Supervision
+					// 12. Credito Aprobado
+					String valCreditoAprobado = "";
+					Boolean creditoAprobado = false;
+					creditoAprobado = p.getCreditoAprobado();
+					if(creditoAprobado){
+						valCreditoAprobado = "SI";
+					}else{
+						valCreditoAprobado = "NO";
+					}
+					xmlInicio += "<td>"+valCreditoAprobado+"</td>";
+					
+					// 13. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -144,7 +152,7 @@ public class InformeConsultaSolucionesXml {
 					}
 					xmlInicio += "<td>"+valSupervision1+"</td>";
 					
-					// 13. Segunda Supervision
+					// 14. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -155,7 +163,7 @@ public class InformeConsultaSolucionesXml {
 					}
 					xmlInicio += "<td>"+valSupervision2+"</td>";
 					
-					// 14. Tercera Supervision
+					// 15. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -166,7 +174,7 @@ public class InformeConsultaSolucionesXml {
 					}
 					xmlInicio += "<td>"+valSupervision3+"</td>";
 					
-					// 15. Cuarta Supervision
+					// 16. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();

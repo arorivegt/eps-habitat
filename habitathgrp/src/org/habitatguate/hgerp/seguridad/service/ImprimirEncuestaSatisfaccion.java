@@ -80,7 +80,7 @@ public class ImprimirEncuestaSatisfaccion extends HttpServlet {
     				document.open();
 
     				image1.setAlignment(Element.ALIGN_CENTER);
-    				image1.scaleAbsolute(50.0f, 50.0f);
+    				image1.scaleAbsolute(120.0f, 50.0f);
     				document.add(image1);
 
     				document.add(new Paragraph("\t",catFont));
@@ -185,7 +185,7 @@ public class ImprimirEncuestaSatisfaccion extends HttpServlet {
     					document.open();
 
     					image1.setAlignment(Element.ALIGN_CENTER);
-    					image1.scaleAbsolute(50.0f, 50.0f);
+    					image1.scaleAbsolute(120.0f, 50.0f);
     					document.add(image1);
 
     					document.add(new Paragraph("\t",catFont));

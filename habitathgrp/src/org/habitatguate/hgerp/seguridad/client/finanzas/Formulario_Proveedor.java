@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.IntegerBox;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
@@ -32,10 +33,9 @@ import com.google.gwt.user.client.ui.ListBox;
 
 public class Formulario_Proveedor extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
-
 	
 
-	public Formulario_Proveedor(){
+	Formulario_Proveedor(final Menu_Proveedores tabPanel){
 	final Grid grid = new Grid(3, 1);
 	initWidget(grid);
 	grid.setWidth("1278px");
@@ -349,16 +349,9 @@ public class Formulario_Proveedor extends Composite{
 							public void onSuccess(Long result) {
 								// TODO Auto-generated method stub
 								Mensaje mensaje = new Mensaje();
-								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
-								textArea.setText("");
-								textBox.setText("");
-								textBox_1.setText("");
-								textBox_2.setText("");
-								textBox_3.setText("");
-								textBox_4.setText("");
-								integerBox.setText("");
-								simpleCheckBox.setValue(false);
-								
+								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente con id "+result);
+								tabPanel.ItemCuatro(result);
+								tabPanel.tabPanel.selectTab(1);
 							}
 							
 							@Override

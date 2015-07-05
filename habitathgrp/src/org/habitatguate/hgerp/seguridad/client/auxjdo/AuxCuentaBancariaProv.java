@@ -1,85 +1,83 @@
-package org.habitatguate.hgerp.seguridad.service.jdo;
+package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
-import java.io.Serializable;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.IdentityType;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 
-@SuppressWarnings("serial")
-@PersistenceCapable(identityType = IdentityType.APPLICATION)
-public class SegCuentaBancariaProv implements Serializable{
-	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
+import com.google.gwt.user.client.rpc.IsSerializable;
+import com.google.gwt.view.client.ProvidesKey;
+
+public class AuxCuentaBancariaProv  implements Comparable<AuxCuentaBancariaProv>,IsSerializable{
+	
+    public static final ProvidesKey<AuxCuentaBancariaProv> KEY_PROVIDER = new ProvidesKey<AuxCuentaBancariaProv>() {
+        @Override
+        public Object getKey(AuxCuentaBancariaProv item) {
+          return item == null ? null : item.getIdCuentaBancariaProv();
+        }
+      };
+      @Override
+      public int compareTo(AuxCuentaBancariaProv o) {
+        return (o == null || o.idCuentaBancariaProv == null) ? -1 : -o.idCuentaBancariaProv.compareTo(idCuentaBancariaProv);
+      }
+	
 	private Long idCuentaBancariaProv;
-	@Persistent
+	
 	private String tipoPago;
-	@Persistent
+	
 	private String tipoCuentaBancaria;
-	@Persistent
+	
 	private String numeroCuentaBancaria;
-	@Persistent
+	
 	private String bancoCuentaBancaria;
-	@Persistent
+	
 	private String nombrePropietario;
-	@Persistent
-	private Long idProveedor;
-	@Persistent
-	private int status;
 
-	
-	
-	public Long getIdProveedor() {
-		return idProveedor;
-	}
-	public void setIdProveedor(Long idProveedor) {
-		this.idProveedor = idProveedor;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
 	public Long getIdCuentaBancariaProv() {
 		return idCuentaBancariaProv;
 	}
+
 	public void setIdCuentaBancariaProv(Long idCuentaBancariaProv) {
 		this.idCuentaBancariaProv = idCuentaBancariaProv;
 	}
+
 	public String getTipoPago() {
 		return tipoPago;
 	}
+
 	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
+
 	public String getTipoCuentaBancaria() {
 		return tipoCuentaBancaria;
 	}
+
 	public void setTipoCuentaBancaria(String tipoCuentaBancaria) {
 		this.tipoCuentaBancaria = tipoCuentaBancaria;
 	}
+
 	public String getNumeroCuentaBancaria() {
 		return numeroCuentaBancaria;
 	}
+
 	public void setNumeroCuentaBancaria(String numeroCuentaBancaria) {
 		this.numeroCuentaBancaria = numeroCuentaBancaria;
 	}
+
 	public String getBancoCuentaBancaria() {
 		return bancoCuentaBancaria;
 	}
+
 	public void setBancoCuentaBancaria(String bancoCuentaBancaria) {
 		this.bancoCuentaBancaria = bancoCuentaBancaria;
 	}
+
 	public String getNombrePropietario() {
 		return nombrePropietario;
 	}
+
 	public void setNombrePropietario(String nombrePropietario) {
 		this.nombrePropietario = nombrePropietario;
 	}
-	
-	
 
+	
+	
 }

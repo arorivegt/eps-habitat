@@ -21,10 +21,12 @@ public class Formulario_GestorVales extends Composite{
 	public Long id_empleado = 0L;
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
+	private ScrollPanel panel3;
 	private Formulario_CrearVale bp;
 	private Formulario_CuentasXPagar fcp;
 	private Long idAfiliadoSession = 0L;
 	private Long idEmpleadoSession = 0L;
+	private Formulario_AprobarCompra fac;
     private final RecursosHumanosServiceAsync getSession = GWT.create(RecursosHumanosService.class);
 	
 	public Formulario_GestorVales(){
@@ -68,6 +70,8 @@ public class Formulario_GestorVales extends Composite{
 		initWidget(tabPanel);
 		tabPanel.setWidth("782px");
 
+		panel3 = new ScrollPanel();
+		panel3.setAlwaysShowScrollBars(true);
 		panel2 = new ScrollPanel();
 		panel2.setAlwaysShowScrollBars(true);
 		panel1 = new ScrollPanel();
@@ -75,6 +79,7 @@ public class Formulario_GestorVales extends Composite{
 		
 		tabPanel.add(panel1, "Generar Vales de Solución",true);
 		tabPanel.add(panel2, "Cuentas por Pagar",true);
+		tabPanel.add(panel3, "Aprobar Solicitudes Compra",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -91,6 +96,8 @@ public class Formulario_GestorVales extends Composite{
 				   ItemDos();
 			       break;
 			   case 2:
+				   ItemTres();
+				   break;
 
 			   }
 
@@ -98,6 +105,12 @@ public class Formulario_GestorVales extends Composite{
 			});
 	
    
+	}
+
+	protected void ItemTres() {
+		// TODO Auto-generated method stub
+		fac = new Formulario_AprobarCompra(idAfiliadoSession,idEmpleadoSession);
+		panel3.setWidget(fac);
 	}
 
 	public void ItemUno(){

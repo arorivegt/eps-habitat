@@ -8,6 +8,9 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoProducto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxContactoProv;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCuentaBancariaProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
@@ -17,6 +20,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -101,7 +105,7 @@ public interface SqlServiceAsync {
 
 	void Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,
 			String nomMaterialCostruccion, String unidadMetrica,
-			Double precioUnitario, AsyncCallback<Long> callback);
+			Double precioUnitario, String idProducto, AsyncCallback<Long> callback);
 
 	void Eliminar_Proveedor(Long id, AsyncCallback<Long> callback);
 
@@ -181,6 +185,33 @@ public interface SqlServiceAsync {
 
 	void Consultar_SolicitudPagoVales(Long idHistorialPagoProv,
 			AsyncCallback<AuxHistorialPagoProv> callback);
+
+	void Insertar_ContactoProveedor(Long idProveedor, String nomContacto,
+			String dirContacto, String telContacto, String correoContacto,
+			String cellphoneContacto, AsyncCallback<Long> callback);
+
+	void Insertar_FormaPagoProv(Long idProveedor, String tipoPago,
+			String tipoCuentaBancaria, String bancoCuentaBancaria,
+			String numeroCuentaBancaria, String nombrePropietario,
+			AsyncCallback<Long> callback);
+
+	void Consultar_FormasPago(Long idProveedor,
+			AsyncCallback<List<AuxCuentaBancariaProv>> callback);
+
+	void Consultar_ContactosProv(Long idProveedor,
+			AsyncCallback<List<AuxContactoProv>> callback);
+
+	void Insertar_CatalogoProducto(String idProducto,
+			String descripcionProducto, AsyncCallback<String> callback);
+
+	void Consultar_CatalogoProductos(
+			AsyncCallback<List<AuxCatalogoProducto>> callback);
+
+	void ConsultarValesPendientes_Aprobar(Long idAfiliado,
+			AsyncCallback<List<AuxValeBeneficiario>> callback);
+
+	void Actualizar_StatusValeAprobado(Long idVale, int status,
+			AsyncCallback<Long> callback);
 
 
 

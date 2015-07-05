@@ -28,9 +28,11 @@ public class Formulario_MaterialCostruccion extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private ScrollPanel panel3;
+	private ScrollPanel panel4;
 	private Buscador_MaterialCostruccion bbs;
 	private Plantilla_Solucion ps;
 	private Formulario_CatalogoMaterial fcat;
+	private Formulario_CatalogoProductos fcp;
     
 	public Formulario_MaterialCostruccion(){
 		
@@ -45,10 +47,12 @@ public class Formulario_MaterialCostruccion extends Composite{
 		panel2.setAlwaysShowScrollBars(true);
 		panel1 = new ScrollPanel();
 		panel1.setAlwaysShowScrollBars(true);
+		panel4 = new ScrollPanel();
 		
 		tabPanel.add(panel1, "Materiales de Construccion",true);
 		tabPanel.add(panel2, "Plantilla Solucion",true);
-		tabPanel.add(panel3, "Catalogo de Productos",true);
+		tabPanel.add(panel3, "Items de Construccion",true);
+		tabPanel.add(panel4, "Catalogo de Productos",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -66,12 +70,21 @@ public class Formulario_MaterialCostruccion extends Composite{
 			       break;
 			   case 2:
 				   ItemTres();
+				   break;
+			   case 3:
+				   ItemCuatro();
+				   break;
 			   }
 
 			 }
 			});
 	
    
+	}
+	protected void ItemCuatro() {
+		// TODO Auto-generated method stub
+		fcp = new Formulario_CatalogoProductos();
+		panel4.setWidget(fcp);
 	}
 	public void ItemTres(){
 		fcat = new Formulario_CatalogoMaterial();

@@ -8,6 +8,9 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoProducto;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxContactoProv;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCuentaBancariaProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
@@ -17,6 +20,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -40,13 +44,16 @@ public interface SqlService extends RemoteService{
 			String telProveedor,String observaciones,			
 			String razonSocial,	String actividadEcono,String aceptaExencion,String relacionConProv,	String tipoProveedor,
 			String productosfrece,String disponibilidadProd,String tiempoEntrega,String regimenTributario,String aceptaDonacion,double porcentDonacion); 
-	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario);
+	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago);
 	Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial);
 	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
+	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto);
+	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario);
+	String Insertar_CatalogoProducto(String idProducto, String descripcionProducto);
 	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
@@ -61,10 +68,14 @@ public interface SqlService extends RemoteService{
 	List<AuxBeneficiario> ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado);
 	List<AuxVale> ConsultarValesPendientes_unProveedor(Long idProveedor);
 	List<AuxSolucion> Consulta_SolucionesGenerales();
+	List<AuxCuentaBancariaProv> Consultar_FormasPago(Long idProveedor);
+	List<AuxContactoProv> Consultar_ContactosProv(Long idProveedor);
+	List<AuxCatalogoProducto> Consultar_CatalogoProductos();
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
 	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
+	List<AuxValeBeneficiario> ConsultarValesPendientes_Aprobar(Long idAfiliado);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
@@ -80,5 +91,6 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
 	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
 	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);
+	Long Actualizar_StatusValeAprobado(Long idVale,int status);
 	
 }

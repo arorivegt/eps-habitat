@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoProducto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 
@@ -26,6 +27,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.SuggestBox;
@@ -111,10 +113,20 @@ public class Buscador_MaterialCostruccion extends Composite{
 	absolutePanel.setSize("1025px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
+	Label labelProductos = new Label("Tipo de Producto");
+	labelProductos.setStyleName("label");
+	absolutePanel.add(labelProductos, 10, 66);
+	labelProductos.setSize("157px", "13px");
+	
+	final ListBox listaProducto = new ListBox();
+	listaProducto.setStyleName("label");
+	absolutePanel.add(listaProducto,10,85);
+	listaProducto.setSize("200px", "25px");
+	
 	Label label = new Label("Nombre Material Costruccion");
 	label.setStyleName("label");
-	absolutePanel.add(label, 10, 66);
-	label.setSize("157px", "13px");
+	absolutePanel.add(label, 226, 66);
+	label.setSize("250px", "13px");
 	
 		
 	/*textBox.addKeyUpHandler(new KeyUpHandler() {
@@ -126,7 +138,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	Label label_1 = new Label("Precio Sugerido");
 	label_1.setStyleName("label");
-	absolutePanel.add(label_1, 247, 66);
+	absolutePanel.add(label_1, 484, 66);
 	label_1.setSize("192px", "13px");
 	
 
@@ -134,19 +146,19 @@ public class Buscador_MaterialCostruccion extends Composite{
 	final TextBox textBox_1 = new TextBox();
 	textBox_1.setStyleName("gwt-TextBox2");
 	textBox_1.setMaxLength(100);
-	absolutePanel.add(textBox_1, 247, 85);
+	absolutePanel.add(textBox_1, 484, 85);
 	textBox_1.setSize("227px", "34px");
 	
 	Label label_2 = new Label("Unidad Medida");
 		label_2.setStyleName("label");
-		absolutePanel.add(label_2, 484, 66);
+		absolutePanel.add(label_2, 725, 66);
 	label_2.setSize("157px", "19px");
 	
 	final TextBox textBox_2 = new TextBox();
 	textBox_2.setStylePrimaryName("gwt-TextBox2");
 	textBox_2.setStyleName("gwt-TextBox2");
 	textBox_2.setMaxLength(100);
-	absolutePanel.add(textBox_2, 484, 85);
+	absolutePanel.add(textBox_2, 725, 85);
 	textBox_2.setSize("227px", "34px");
 	
 			
@@ -164,7 +176,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 
 	button.setText("Nuevo Material Costr.");
 	button.setStyleName("finanButton");
-	absolutePanel.add(button, 725, 85);
+	absolutePanel.add(button, 900, 85);
 	button.setSize("157px", "40px");
 	
 	Label lblProveedor = new Label("Proveedor");
@@ -173,19 +185,19 @@ public class Buscador_MaterialCostruccion extends Composite{
 	lblProveedor.setSize("157px", "13px");
 	
 	final SuggestBox suggestBox = new SuggestBox(listaproveedor);
-	absolutePanel.add(suggestBox, 20, 29);
-	suggestBox.setSize("375px", "18px");
+	absolutePanel.add(suggestBox, 10, 29);
+	suggestBox.setSize("375px", "13px");
 	
 	final SuggestBox suggestBox2 = new SuggestBox(listaProductos);
-	absolutePanel.add(suggestBox2, 10, 85);
-	suggestBox2.setSize("227px", "34px");
+	absolutePanel.add(suggestBox2, 226, 85);
+	suggestBox2.setSize("227px", "13px");
 	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!suggestBox2.getText().equals("")){
 				
-
-			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),
+				
+			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),listaProducto.getValue(listaProducto.getSelectedIndex()),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -245,6 +257,24 @@ public class Buscador_MaterialCostruccion extends Composite{
 		@Override
 		public void onFailure(Throwable caught) {
 			System.out.println(caught);
+			
+		}
+	});
+	
+	loginService.Consultar_CatalogoProductos(new AsyncCallback<List<AuxCatalogoProducto>>() {
+
+		@Override
+		public void onFailure(Throwable caught) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onSuccess(List<AuxCatalogoProducto> result) {
+			// TODO Auto-generated method stub
+			for (AuxCatalogoProducto aux : result){
+				listaProducto.addItem(aux.getDescripcionProducto(), aux.getIdProducto());
+			}
 			
 		}
 	});

@@ -24,6 +24,8 @@ public class SegMaterialCostruccion {
 	private String unidadMetrica;
 	@Persistent
 	private Date fechaIngreso;
+	@Persistent
+	private String idProducto;
 	
 	private SegProveedor proveedor;
 	
@@ -62,6 +64,12 @@ public class SegMaterialCostruccion {
 	}
 	public void setProveedor(SegProveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+	public String getIdProducto() {
+		return idProducto;
+	}
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
 	}
 	
 	

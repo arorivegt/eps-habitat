@@ -36,10 +36,22 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 	
 	private Double totalPagado;
 	
+	private int aprobado;
+	
 	//private List<AuxHistorialPagoProv> lista = new ArrayList<AuxHistorialPagoProv>();
+	
+	
 	
 	public Long getIdVale() {
 		return idVale;
+	}
+
+	public int getAprobado() {
+		return aprobado;
+	}
+
+	public void setAprobado(int aprobado) {
+		this.aprobado = aprobado;
 	}
 
 	public void setIdVale(Long idVale) {

@@ -29,6 +29,8 @@ public class SegVale implements Serializable{
 	private boolean estado;
 	@Persistent
 	private Double totalPagado;
+	@Persistent
+	private int aprobado;
 	
 	//relacion
 	@Persistent(mappedBy = "vale")
@@ -36,6 +38,15 @@ public class SegVale implements Serializable{
 	@Unowned
 	private List<SegHistorialPagoProv> listaPagoProv;
 	
+	
+	
+	
+	public int getAprobado() {
+		return aprobado;
+	}
+	public void setAprobado(int aprobado) {
+		this.aprobado = aprobado;
+	}
 	public Long getIdVale() {
 		return idVale;
 	}

@@ -374,17 +374,6 @@ public class SegSolicitudGeneral implements Serializable {
 	public void setTelefonoTrabajoConyuge(int telefonoTrabajoConyuge) {
 		this.telefonoTrabajoConyuge = telefonoTrabajoConyuge;
 	}
-	
-	@Persistent
-    private Boolean garantia;
-
-	public Boolean getGarantia() {
-		return garantia;
-	}
-
-	public void setGarantia(Boolean garantia) {
-		this.garantia = garantia;
-	}
 
 	@Persistent
     private Boolean creditoAprobado;

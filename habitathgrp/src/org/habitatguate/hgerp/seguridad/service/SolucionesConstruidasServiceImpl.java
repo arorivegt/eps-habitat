@@ -65,7 +65,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,
 			String aldeaDireccionActual, String aldeaDireccionSolucion,
 			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
@@ -105,15 +105,14 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setTelefonoConyuge(telefonoConyuge);
 		solicitud.setLugarTrabajoConyuge(lugarTrabajoConyuge);
 		solicitud.setTelefonoTrabajoConyuge(telefonoTrabajoConyuge);
-		solicitud.setGarantia(garantia);										// Existe Garantia
-		solicitud.setCreditoAprobado(creditoAprobado);							// Credito Aprobado Solicitud
-		solicitud.setCreditoNoAprobado(creditoNoAprobado);						// Credito No Solicitud
-		solicitud.setMontoAprobado(montoAprobado);								// Monto Aprobado
-		solicitud.setObservacionNoAprobado(observacionNoAprobado);				// Observacion No Aprobado
-		solicitud.setPrimeraSupervision(primeraSupervision);					// Existe Primera Supervision	
-		solicitud.setSegundaSupervision(segundaSupervision);					// Existe Segunda Supervision
-		solicitud.setTerceraSupervision(terceraSupervision);					// Existe Tercera Supervision
-		solicitud.setCuartaSupervision(cuartaSupervision);						// Existe Cuarta Supervision	
+		solicitud.setCreditoAprobado(creditoAprobado);										// Credito Aprobado Solicitud
+		solicitud.setCreditoNoAprobado(creditoNoAprobado);									// Credito No Solicitud
+		solicitud.setMontoAprobado(montoAprobado);											// Monto Aprobado
+		solicitud.setObservacionNoAprobado(observacionNoAprobado);							// Observacion No Aprobado
+		solicitud.setPrimeraSupervision(primeraSupervision);								// Existe Primera Supervision	
+		solicitud.setSegundaSupervision(segundaSupervision);								// Existe Segunda Supervision
+		solicitud.setTerceraSupervision(terceraSupervision);								// Existe Tercera Supervision
+		solicitud.setCuartaSupervision(cuartaSupervision);									// Existe Cuarta Supervision	
 		
 		solicitud.setAldeaDireccionActual(aldeaDireccionActual);
 		solicitud.setAldeaDireccionSolucion(aldeaDireccionSolucion);
@@ -303,7 +302,6 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			Boolean actualizacionGarantia,
 			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
 			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException {
 
@@ -339,8 +337,6 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 
 			documento.setSolicitud(solicitud); // Relacion
 			solicitud.getGarantiaHipotecaria().add(documento);
-			
-			solicitud.setGarantia(actualizacionGarantia); // Actualizacion de Valor. Existe Garantia en Solicitud
 			
 			valor = documento.getIdDocumentoPropiedad();
 
@@ -839,7 +835,6 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 				nuevo.setTelefonoConyuge(p.getTelefonoConyuge());
 				nuevo.setLugarTrabajoConyuge(p.getLugarTrabajoConyuge());
 				nuevo.setTelefonoTrabajoConyuge(p.getTelefonoTrabajoConyuge());
-				nuevo.setGarantia(p.getGarantia());
 				nuevo.setCreditoAprobado(p.getCreditoAprobado());
 				nuevo.setCreditoNoAprobado(p.getCreditoNoAprobado());
 				nuevo.setMontoAprobado(p.getMontoAprobado());
@@ -1201,7 +1196,6 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 			nuevo.setTelefonoConyuge(p.getTelefonoConyuge());
 			nuevo.setLugarTrabajoConyuge(p.getLugarTrabajoConyuge());
 			nuevo.setTelefonoTrabajoConyuge(p.getTelefonoTrabajoConyuge());
-			nuevo.setGarantia(p.getGarantia());
 			nuevo.setCreditoAprobado(p.getCreditoAprobado());
 			nuevo.setCreditoNoAprobado(p.getCreditoNoAprobado());
 			nuevo.setMontoAprobado(p.getMontoAprobado());
@@ -1635,6 +1629,30 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		return valor;
 	}
 	
+	
+	@Override
+	public AuxSolicitudSituacionEconomica consultaSituacionEconomica(Long idFormulario, Long idSituacionEconomica) throws IllegalArgumentException {
+
+		final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
+		AuxSolicitudSituacionEconomica nuevo = new AuxSolicitudSituacionEconomica();
+		
+		try { 
+			
+			Key k = new KeyFactory
+					.Builder(SegSolicitudGeneral.class.getSimpleName(), idFormulario)
+			.addChild(SegSolicitudSituacionEconomica.class.getSimpleName(), idSituacionEconomica).getKey();
+
+			SegSolicitudSituacionEconomica p = Persistencia.getObjectById(SegSolicitudSituacionEconomica.class, k);
+					
+			nuevo.setIdSituacionEconomica(p.getIdSituacionEconomica());
+			nuevo.setIdFormulario(p.getIdFormulario());
+		
+		}finally {  
+			Persistencia.close();  
+		}
+
+		return nuevo;
+	}  
 	
 	
 // METODOS DE ACTUALIZAR Y ELIMINAR		

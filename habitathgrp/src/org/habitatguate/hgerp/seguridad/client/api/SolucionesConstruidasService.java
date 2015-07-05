@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
@@ -26,7 +27,7 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision,			
 			String aldeaDireccionActual, String aldeaDireccionSolucion,
 			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
@@ -106,7 +107,6 @@ public interface SolucionesConstruidasService extends RemoteService {
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			Boolean actualizacionGarantia,
 			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
 			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia) throws IllegalArgumentException;
 	
@@ -277,6 +277,8 @@ public interface SolucionesConstruidasService extends RemoteService {
     AuxEmpleado consultaEmpleadoAsignacion(String idEmpleado) throws IllegalArgumentException;
     
     String asignarSolicitud(Long idFormulario, Long idEmpleado, String usrName)throws IllegalArgumentException;
+
+    AuxSolicitudSituacionEconomica consultaSituacionEconomica(Long idFormulario, Long idSituacionEconomica) throws IllegalArgumentException;
     
     // Remover imagen de Blobstore
     

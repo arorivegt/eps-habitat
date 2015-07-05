@@ -346,18 +346,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setPeatonal(valPeatonal);					
 					
-					// 12. Contiene Garantia
-					String valGarantia = "";
-					Boolean garantia = false;
-					garantia = p.getGarantia();
-					if(garantia){
-						valGarantia = "SI";
-					}else{
-						valGarantia = "NO";
-					}
-					solucionData.setGarantia(valGarantia);
-					
-					// 13. Primera Supervision
+					// 12. Primera Supervision
 					String valSupervision1 = "";
 					Boolean supervision1 = false;
 					supervision1 = p.getPrimeraSupervision();
@@ -368,7 +357,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionPrimera(valSupervision1);
 					
-					// 14. Segunda Supervision
+					// 13. Segunda Supervision
 					String valSupervision2 = "";
 					Boolean supervision2 = false;
 					supervision2 = p.getSegundaSupervision();
@@ -379,7 +368,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionSegunda(valSupervision2);
 					
-					// 15. Tercera Supervision
+					// 14. Tercera Supervision
 					String valSupervision3 = "";
 					Boolean supervision3 = false;
 					supervision3 = p.getTerceraSupervision();
@@ -390,7 +379,7 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 					}
 					solucionData.setSupervisionTercera(valSupervision3);
 					
-					// 16. Cuarta Supervision
+					// 15. Cuarta Supervision
 					String valSupervision4 = "";
 					Boolean supervision4 = false;
 					supervision4 = p.getCuartaSupervision();
@@ -421,7 +410,6 @@ public class Sce_ConsultaSolucionesHabitat extends Composite  {
 				nuevo.ConstruirConsultaSoluciones("13");
 				nuevo.ConstruirConsultaSoluciones("14");
 				nuevo.ConstruirConsultaSoluciones("15");
-				nuevo.ConstruirConsultaSoluciones("16");
 
 				absolutePanel_1.clear();
 				absolutePanel_1.add(nuevo);

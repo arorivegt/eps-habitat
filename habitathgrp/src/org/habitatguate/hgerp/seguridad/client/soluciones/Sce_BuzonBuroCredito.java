@@ -97,32 +97,6 @@ public class Sce_BuzonBuroCredito extends Composite  {
 				mensaje.setMensaje("alert alert-error", "Error devolviendo ID de Usuario");
 			}
 		});
-		
-		
-		// ---- VERSION FUNCIONAL EN FIREFOX	
-		
-//    	load = new Loading();
-//        load.Mostrar();
-//        load.invisible();
-//		mensaje = new Mensaje();
-//		this.buzon = this;
-//		grid = new Grid(2, 1);
-//		grid.setSize("876px", "100%");
-//		
-//		absolutePanel = new AbsolutePanel();
-//		grid.setWidget(0, 0, absolutePanel);
-//		absolutePanel.setSize("100%", "30px");
-//		absolutePanel.setStyleName("gwt-Label-new");
-//		
-//		grid.clearCell(0, 0);
-//		Sce_BuzonSeguimientoSolicitudLista  nuevo = new Sce_BuzonSeguimientoSolicitudLista();
-//		nuevo.agregarFormulario('2', buzon, "", "", "", "", "", "", "");
-//		grid.setWidget(1, 0,nuevo);
-//	    	
-//		initWidget(grid);
-
-		
-// ---- NUEVA VERSION PARA VERIFICAR FUNCIONALIDAD EN CHROME
 
     	load = new Loading();
         load.Mostrar();

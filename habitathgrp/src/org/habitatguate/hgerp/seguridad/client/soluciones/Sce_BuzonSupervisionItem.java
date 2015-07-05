@@ -85,6 +85,31 @@ public class Sce_BuzonSupervisionItem extends Composite {
 		absolutePanel.add(lblNombreSolicitante, 10, 0);
 		lblNombreSolicitante.setSize("192px", "13px");
 		
+		Label lblTipoVivienda = new Label("Tipo Solucion");
+		lblTipoVivienda.setStyleName("label");
+		absolutePanel.add(lblTipoVivienda, 350, 0);
+		lblTipoVivienda.setSize("150px", "13px");
+		
+		lblPrimeraSupervision = new Label("Primera Supervision");
+		lblPrimeraSupervision.setStyleName("label");
+		absolutePanel.add(lblPrimeraSupervision, 509, 0);
+		lblPrimeraSupervision.setSize("153px", "13px");
+		
+		Label lblSegundaSupervision = new Label("Segunda Supervision");
+		lblSegundaSupervision.setStyleName("label");
+		absolutePanel.add(lblSegundaSupervision, 687, 0);
+		lblSegundaSupervision.setSize("153px", "13px");
+		
+		Label lblTerceraSupervision = new Label("Tercera Supervision");
+		lblTerceraSupervision.setStyleName("label");
+		absolutePanel.add(lblTerceraSupervision, 875, 0);
+		lblTerceraSupervision.setSize("153px", "13px");
+		
+		Label lblCuartaSupervision = new Label("Cuarta Supervision");
+		lblCuartaSupervision.setStyleName("label");
+		absolutePanel.add(lblCuartaSupervision, 1060, 0);
+		lblCuartaSupervision.setSize("153px", "13px");
+		
 		txtNombreSolicitante = new TextBox();
 		txtNombreSolicitante.setEnabled(false);
 		txtNombreSolicitante.setStyleName("gwt-TextBox2");
@@ -109,10 +134,25 @@ public class Sce_BuzonSupervisionItem extends Composite {
 	       this.listSolucionConstruir.setSelectedIndex(i);
 	    }
 		
-		Label lblTipoVivienda = new Label("Tipo Solucion");
-		lblTipoVivienda.setStyleName("label");
-		absolutePanel.add(lblTipoVivienda, 350, 0);
-		lblTipoVivienda.setSize("150px", "13px");
+		checkPrimeraSupervision = new SimpleCheckBox();
+		checkPrimeraSupervision.setEnabled(false);
+		absolutePanel.add(checkPrimeraSupervision, 561, 20);
+		checkPrimeraSupervision.setValue(primeraSupervision);
+		
+		checkSegundaSupervision = new SimpleCheckBox();
+		checkSegundaSupervision.setEnabled(false);
+		absolutePanel.add(checkSegundaSupervision, 745, 20);
+		checkSegundaSupervision.setValue(segundaSupervision);
+		
+		checkTerceraSupervision = new SimpleCheckBox();
+		checkTerceraSupervision.setEnabled(false);
+		absolutePanel.add(checkTerceraSupervision, 936, 20);
+		checkTerceraSupervision.setValue(terceraSupervision);
+		
+		checkCuartaSupervision = new SimpleCheckBox();
+		checkCuartaSupervision.setEnabled(false);
+		absolutePanel.add(checkCuartaSupervision, 1125, 20);
+		checkCuartaSupervision.setValue(cuartaSupervision);
 		
 		// Boton - Ver Solicitud
 		
@@ -157,46 +197,6 @@ public class Sce_BuzonSupervisionItem extends Composite {
 		btnVer.setStyleName("sendButton");
 		absolutePanel.add(btnVer, 1287, 20);
 		btnVer.setSize("253px", "34px");
-		
-		lblPrimeraSupervision = new Label("Primera Supervision");
-		lblPrimeraSupervision.setStyleName("label");
-		absolutePanel.add(lblPrimeraSupervision, 509, 0);
-		lblPrimeraSupervision.setSize("153px", "13px");
-		
-		checkPrimeraSupervision = new SimpleCheckBox();
-		checkPrimeraSupervision.setEnabled(false);
-		absolutePanel.add(checkPrimeraSupervision, 561, 20);
-		checkPrimeraSupervision.setValue(primeraSupervision);
-		
-		Label lblSegundaSupervision = new Label("Segunda Supervision");
-		lblSegundaSupervision.setStyleName("label");
-		absolutePanel.add(lblSegundaSupervision, 687, 0);
-		lblSegundaSupervision.setSize("153px", "13px");
-		
-		checkSegundaSupervision = new SimpleCheckBox();
-		checkSegundaSupervision.setEnabled(false);
-		absolutePanel.add(checkSegundaSupervision, 745, 20);
-		checkSegundaSupervision.setValue(segundaSupervision);
-		
-		Label lblTerceraSupervision = new Label("Tercera Supervision");
-		lblTerceraSupervision.setStyleName("label");
-		absolutePanel.add(lblTerceraSupervision, 875, 0);
-		lblTerceraSupervision.setSize("153px", "13px");
-		
-		checkTerceraSupervision = new SimpleCheckBox();
-		checkTerceraSupervision.setEnabled(false);
-		absolutePanel.add(checkTerceraSupervision, 936, 20);
-		checkTerceraSupervision.setValue(terceraSupervision);
-		
-		Label lblCuartaSupervision = new Label("Cuarta Supervision");
-		lblCuartaSupervision.setStyleName("label");
-		absolutePanel.add(lblCuartaSupervision, 1060, 0);
-		lblCuartaSupervision.setSize("153px", "13px");
-		
-		checkCuartaSupervision = new SimpleCheckBox();
-		checkCuartaSupervision.setEnabled(false);
-		absolutePanel.add(checkCuartaSupervision, 1125, 20);
-		checkCuartaSupervision.setValue(cuartaSupervision);
 		
 	}
 	

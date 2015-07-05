@@ -68,8 +68,6 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
 
     			System.out.println("ID Situacion Economica a Cargar: " + n2.getIdSituacionEconomica() + ", ID Formulario: " + n2.getIdFormulario());
     			
-//    			System.out.println("Ingreso Total Obtenido: " + n2.getTotalIngresos());
-    			
     			data.LlenarDatos(n2.getIdSituacionEconomica(), 
     					n2.getIngresosSolicitante(), n2.getIngresosConyuge(), n2.getOtrosIngresos(), n2.getIngresosTotales(),
     					n2.getTotalIngresos(), n2.getTotalEgresos(), n2.getDiferencia(), n2.getPagosBuro(), n2.getCuota(), n2.getExcedente(),
@@ -78,10 +76,15 @@ public class Sce_DataEntrySituacionEconomicaBuroCredito extends Composite {
     					creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
     					URLFile, KeyFile);  
     			
+    			data.validarDataSolicitud(true);
+    			
     		}
     	
     	}
-    
+    	
+    	// Mensaje de Error notificando que no existe información almacenada.
+    	data.validarDataSolicitud(false);
+    	
     }
     
     

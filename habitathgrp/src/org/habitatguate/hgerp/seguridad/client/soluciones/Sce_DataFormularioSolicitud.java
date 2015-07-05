@@ -1231,7 +1231,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 						direccionLugarTrabajoConyuge = txtDireccionLugarTrabajoConyuge.getText();
 					}
 					
-					Boolean garantia = false;
 					Boolean creditoAprobado = false;
 					Boolean creditoNoAprobado = false;
 					float montoAprobado = 0;
@@ -1267,7 +1266,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 										lugarTrabajoSolicitante, telefonoCasaSolicitante, telefonoTrabajoSolicitante,
 										solucionConstruir, cuotaPagar,
 										nombreConyuge, telefonoConyuge, lugarTrabajoConyuge, telefonoTrabajoConyuge,
-										garantia, creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+										creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
 										primeraSupervision, segundaSupervision, terceraSupervision, cuartaSupervision,
 										aldeaDireccionActual, aldeaDireccionSolucion,
 										deptoMunicipioDireccionActual, deptoMunicipioDireccionSolucion,

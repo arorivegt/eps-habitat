@@ -1003,7 +1003,10 @@ public class Sce_DataSituacionEconomica extends Composite {
 		});		
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 475, 460);
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		btnGuardar.setSize("198px", "41px");
+		absolutePanel.add(btnGuardar, 438, 430);
 		btnGuardar.setTabIndex(16);
 
     	// ACTUALIZACION DATA

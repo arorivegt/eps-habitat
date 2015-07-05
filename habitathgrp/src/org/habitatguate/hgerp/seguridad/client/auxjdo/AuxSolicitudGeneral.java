@@ -297,18 +297,8 @@ public class AuxSolicitudGeneral implements IsSerializable {
 	public void setTelefonoTrabajoConyuge(int telefonoTrabajoConyuge) {
 		this.telefonoTrabajoConyuge = telefonoTrabajoConyuge;
 	}
-	
-    private Boolean garantia;
 
-	public Boolean getGarantia() {
-		return garantia;
-	}
-
-	public void setGarantia(Boolean garantia) {
-		this.garantia = garantia;
-	}
-
-    private Boolean creditoAprobado;
+	private Boolean creditoAprobado;
 
     public Boolean getCreditoAprobado() {
 		return creditoAprobado;

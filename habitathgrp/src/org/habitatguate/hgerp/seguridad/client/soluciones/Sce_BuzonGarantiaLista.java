@@ -14,6 +14,9 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaFiduciaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaSolidario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
 public class Sce_BuzonGarantiaLista extends Composite {
@@ -24,6 +27,10 @@ public class Sce_BuzonGarantiaLista extends Composite {
     private FlexTable flexTable;
     private Loading load ;
     private VerticalPanel verticalPanel;
+    
+    private boolean garantiaHipotecariaExistente = false;
+    private boolean garantiaFiduciariaExistente = false;
+    private boolean garantiaGrupoSolidarioExistente = false;
     
 	public Sce_BuzonGarantiaLista() {
 		
@@ -53,9 +60,7 @@ public class Sce_BuzonGarantiaLista extends Composite {
 
         load.visible();
         
-        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, 
-        		nombreSolicitante, solucionConstruir,
-        		new AsyncCallback<List<AuxSolicitudGeneral>>(){        	
+        solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, nombreSolicitante, solucionConstruir, new AsyncCallback<List<AuxSolicitudGeneral>>(){        	
         	
             public void onFailure(Throwable caught) 
             {
@@ -65,18 +70,48 @@ public class Sce_BuzonGarantiaLista extends Composite {
                // Window.alert("No hay resultados "+caught);
             }
 
-			@Override
+            @Override
             public void onSuccess( List<AuxSolicitudGeneral> result)
-            {
-				for(AuxSolicitudGeneral p : result) {
-			        flexTable.setWidget(flexTable.getRowCount(), 0, 
-			        					new Sce_BuzonGarantiaItem(buscador, listaFormulario, 
-			        					p.getIdFormulario(), p.getNombreSolicitante(), 
-			        					p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
-			        					p.getSolucionConstruir(),
-			        					p.getGarantia(), valVisibilidad)
-			        );
-				}
+            {	
+
+            	for(AuxSolicitudGeneral p : result) {
+            		
+            		if(dataGarantiaHipotecaria(p.getGarantiaHipotecaria())) {
+            			garantiaHipotecariaExistente = true;
+            			System.out.println("SI existe Data de Garantia Hipotecaria");
+            			
+            		}else{
+            			garantiaHipotecariaExistente = false;
+            			System.out.println("NO existe Data de Garantia Hipotecaria");
+            		}
+            		
+            		if(dataGarantiaFiduciaria(p.getGarantiaFiduciaria())) {
+            			garantiaFiduciariaExistente = true;
+            			System.out.println("SI existe Data de Garantia Fiduciaria");
+            		}else{
+            			garantiaFiduciariaExistente = false;
+            			System.out.println("NO existe Data de Garantia Fiduciaria");
+            		}
+            		
+            		if(dataGarantiaGrupoSolidario(p.getGarantiaSolidario())) {
+            			garantiaGrupoSolidarioExistente = true;
+            			System.out.println("SI existe Data de Garantia Grupo Solidario");
+            		}else{
+            			garantiaGrupoSolidarioExistente = false;
+            			System.out.println("NO existe Data de Garantia Grupo Solidario");
+            		}
+
+            		flexTable.setWidget(flexTable.getRowCount(), 0, 
+            				new Sce_BuzonGarantiaItem(buscador, listaFormulario, 
+            						p.getIdFormulario(), p.getNombreSolicitante(), 
+            						p.getTelefonoCasaSolicitante(), p.getTelefonoTrabajoSolicitante(), 
+            						p.getSolucionConstruir(),
+            						garantiaHipotecariaExistente, garantiaFiduciariaExistente, garantiaGrupoSolidarioExistente,
+            						valVisibilidad)
+            				);
+            	}
+				
+				
 		        load.invisible();
             }
 
@@ -89,6 +124,36 @@ public class Sce_BuzonGarantiaLista extends Composite {
         load.visible();
     	flexTable.remove(a);
         load.invisible();
+    }
+    
+    // VALIDACION EXISTENCIA GARANTIAS
+    
+    
+    public boolean dataGarantiaHipotecaria(List<AuxSolicitudGarantiaHipotecaria> results) {
+
+    	if (!results.isEmpty()) {
+    		return true;
+    	}
+
+    	return false;
+    }
+    
+    public boolean dataGarantiaFiduciaria(List<AuxSolicitudGarantiaFiduciaria> results) {
+
+    	if (!results.isEmpty()) {
+    		return true;
+    	}
+
+    	return false;
+    }
+ 
+    public boolean dataGarantiaGrupoSolidario(List<AuxSolicitudGarantiaSolidario> results) {
+
+    	if (!results.isEmpty()) {
+    		return true;
+    	}
+
+    	return false;
     }
     
 

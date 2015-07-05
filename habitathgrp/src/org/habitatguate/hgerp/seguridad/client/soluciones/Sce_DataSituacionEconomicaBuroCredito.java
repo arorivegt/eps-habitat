@@ -1,11 +1,15 @@
 package org.habitatguate.hgerp.seguridad.client.soluciones;
 
 import java.util.Date;
+import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasService;
 import org.habitatguate.hgerp.seguridad.client.api.SolucionesConstruidasServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlService;
 import org.habitatguate.hgerp.seguridad.client.api.UploadUrlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGarantiaHipotecaria;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -45,8 +49,11 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
     private Sce_DataEntryBuroCreditoSolicitud formulario;
 	private Sce_DataEntrySituacionEconomicaBuroCredito situacionEconomica;
     private boolean bandera = true;
-	private Long idSituacionEconomica = 0L;
+	
+    private Long idFormulario = 0L;
+    private Long idSituacionEconomica = 0L;
     
+	
 	private AbsolutePanel absolutePanel;
 	private Mensaje mensaje; 
 	
@@ -79,8 +86,6 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 	private Label lblObservacion;
 	private TextBox txtMontoAprobado;
 	private TextArea txtObservacion;
-	private Boolean valCheckAprobado = false;
-	private Boolean valCheckNoAprobado = false;
 	
 	private FormPanel form;
 	private Grid grid;
@@ -90,6 +95,9 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 	private String URLFile ="";
 	private String KeyFile ="";
 	private Label lblAchivosPdfUnicamente;
+	
+	// Variable de validacion Data Situacion Economica
+	private boolean validar = false;
 	
 	// Valor Escritura-Lectura
 	private boolean valor;
@@ -498,7 +506,6 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 				if(checked==true)
 				{
 					System.out.println("Seleccion de Check Aprobado");
-					valCheckAprobado = true;
 					lblMontoAprobado.setVisible(true);
 					txtMontoAprobado.setVisible(true);
 					lblObservacion.setVisible(false);
@@ -509,7 +516,6 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 				else if(checked==false)
 				{
 					System.out.println("Des-seleccion de Check Aprobado");
-					valCheckAprobado = false;
 					lblMontoAprobado.setVisible(false);
 					txtMontoAprobado.setVisible(false);
 					txtMontoAprobado.setText("0.0");
@@ -524,7 +530,6 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 				boolean checked = checkNoAprobado.getValue();
 				if(checked==true)
 				{
-					valCheckNoAprobado = true;
 					System.out.println("Seleccion de Check No Aprobado");
 					lblObservacion.setVisible(true);
 					txtObservacion.setVisible(true);
@@ -536,7 +541,6 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 				else if(checked==false)
 				{
 					System.out.println("Des-seleccion de Check No Aprobado");
-					valCheckNoAprobado = false;
 					lblObservacion.setVisible(false);
 					txtObservacion.setVisible(false);
 					txtObservacion.setText("");
@@ -557,94 +561,127 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
 		btnGuardar.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 
-				if(initRequireData()){
+				// Validacion Data Existe Situacion Economica				
+				
+        		if(dataSituacionEconomica(idSituacionEconomica)) {
+        			validar = true;
+        			System.out.println("SI existe Data de Situacion Economica");
+        			
+        		}else{
+        			validar = false;
+        			System.out.println("NO existe Data de Situacion Economica");
+        		}
+				
+				
+				if(validar){
+					if(initRequireData()){
 
-					Boolean creditoAprobado = false;
-//					creditoAprobado = valCheckAprobado;
-					creditoAprobado = checkAprobado.getValue();
+						Boolean creditoAprobado = false;
+						creditoAprobado = checkAprobado.getValue();
 
-					Boolean creditoNoAprobado = false;
-//					creditoNoAprobado = valCheckNoAprobado;
-					creditoNoAprobado = checkNoAprobado.getValue();
-					
-					System.out.println("Check Aprobado: " + creditoAprobado + ", Check No Aprobado: " + creditoNoAprobado);
-					
-					float montoAprobado = 0;
-					montoAprobado = Float.parseFloat(txtMontoAprobado.getText());
-					
-					String observacionNoAprobado = "";		
-					if(txtObservacion.getText() == null){
-						observacionNoAprobado = "";
-					}else{
-						observacionNoAprobado = txtObservacion.getText();
-					}	
-					
+						Boolean creditoNoAprobado = false;
+						creditoNoAprobado = checkNoAprobado.getValue();
 
-					if(bandera){
+						System.out.println("Check Aprobado: " + creditoAprobado + ", Check No Aprobado: " + creditoNoAprobado);
 
-						Date time = new Date();
-						@SuppressWarnings("deprecation")
-						Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
+						float montoAprobado = 0;
+						montoAprobado = Float.parseFloat(txtMontoAprobado.getText());
 
-						solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
-								creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
-								URLFile, KeyFile,
-								new AsyncCallback<Long>() {
+						String observacionNoAprobado = "";		
+						if(txtObservacion.getText() == null){
+							observacionNoAprobado = "";
+						}else{
+							observacionNoAprobado = txtObservacion.getText();
+						}	
 
-							public void onFailure(Throwable caught) 
-							{
-								mensaje = new Mensaje();
-								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
-							}
 
-							public void onSuccess(Long result)
-							{
-								mensaje = new Mensaje();
-								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
+						if(bandera){
 
-								idSituacionEconomica = result;
-								System.out.println("Valor de Aprobacion Buro Credito: " + idSituacionEconomica);
-								bandera = false;
+							Date time = new Date();
+							@SuppressWarnings("deprecation")
+							Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
 
-							}
-						});
+							solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
+									creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+									URLFile, KeyFile,
+									new AsyncCallback<Long>() {
 
-					}else{
+								public void onFailure(Throwable caught) 
+								{
+									mensaje = new Mensaje();
+									mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden almacenarse");
+								}
 
-						solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
-								creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
-								URLFile, KeyFile,
-								new AsyncCallback<Long>() {
+								public void onSuccess(Long result)
+								{
+									mensaje = new Mensaje();
+									mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente");
 
-							public void onFailure(Throwable caught) 
-							{
-								mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
-							}
+									idSituacionEconomica = result;
+									System.out.println("Valor de Aprobacion Buro Credito: " + idSituacionEconomica);
+									bandera = false;
 
-							public void onSuccess(Long result)
-							{	
-								mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+								}
+							});
 
-								System.out.println("Valor de Aprobacion Buro Credito ACTUALIZADO: " + idSituacionEconomica );
-								bandera = false;
+						}else{
 
-							}
-						});
+							solucionesService.actualizarDatosAprobacionBuroCredito(formulario.idFormulario, 
+									creditoAprobado, creditoNoAprobado, montoAprobado, observacionNoAprobado,
+									URLFile, KeyFile,
+									new AsyncCallback<Long>() {
+
+								public void onFailure(Throwable caught) 
+								{
+									mensaje.setMensaje("alert alert-error", "Se produjo un error los datos no pueden Actualizarse");
+								}
+
+								public void onSuccess(Long result)
+								{	
+									mensaje.setMensaje("alert alert-info", "Registro Actualizado Exitosamente");
+
+									System.out.println("Valor de Aprobacion Buro Credito ACTUALIZADO: " + idSituacionEconomica );
+									bandera = false;
+
+								}
+							});
+
+						}
 
 					}
 
+				}else{	
+					mensaje.setMensaje("alert alert-error", "No existe Data existente. Favor revisar información.");
 				}
+
+				
+				
+				
 			}
 		});		
 
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 461, 740);
+		btnGuardar.setStylePrimaryName("sendButton");
 		btnGuardar.setStyleName("sendButton");
-		btnGuardar.setHeight("30px");
+		btnGuardar.setSize("198px", "41px");
+		absolutePanel.add(btnGuardar, 397, 731);
 		btnGuardar.setTabIndex(16);
 
 	}
 	
+	
+    public boolean dataSituacionEconomica(Long idSituacionEconomica) {
+
+    	System.out.println("FORMULARIO SITUACION ECONOMICA - BURO CREDITO: " + idSituacionEconomica);
+
+    	String valor = ""+idSituacionEconomica;
+    	
+    	if(valor.equals("0")){
+    		return false;
+    	}
+
+    	return true;
+    }
 	
 	// DATA A CARGAR EN DATOS
 	 
@@ -762,8 +799,20 @@ public class Sce_DataSituacionEconomicaBuroCredito extends Composite {
     	return true;    		
     }
 
-    // SUBIR ARCHIVOS .PDF
+    // VALIDACION EXISTENCIA DE DATA
     
+    public void validarDataSolicitud(boolean validado){
+    	
+    	if(!validado){
+    		mensaje.setMensaje("alert alert-error", "No existe Data existente. Favor revisar información.");    		
+    	}
+    	
+    }
+    
+    
+	
+    // SUBIR ARCHIVOS .PDF
+
 	private FormPanel getFormPanel() {
 		if (form == null) {
 			form = new FormPanel();

@@ -158,14 +158,14 @@ public class Sce_ReporteDatosSolucionesConstruidas  implements IsSerializable{
 		this.peatonal = peatonal;
 	}
 
-	private String garantia;
+	private String garantiaHipotecariaExistente;
 	
-	public String getGarantia() {
-		return garantia;
+	public String getGarantiaHipotecariaExistente() {
+		return garantiaHipotecariaExistente;
 	}
 
-	public void setGarantia(String garantia) {
-		this.garantia = garantia;
+	public void setGarantiaHipotecariaExistente(String garantiaHipotecariaExistente) {
+		this.garantiaHipotecariaExistente = garantiaHipotecariaExistente;
 	}
 
 	private String supervisionPrimera;

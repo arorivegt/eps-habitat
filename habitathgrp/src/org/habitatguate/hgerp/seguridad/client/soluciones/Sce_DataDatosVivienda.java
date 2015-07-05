@@ -65,7 +65,7 @@ public class Sce_DataDatosVivienda extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("988px", "455px");
+		absolutePanel.setSize("922px", "455px");
 		
 		Label lblEstadoCivil = new Label("Datos de la vivienda:");
 		lblEstadoCivil.setStyleName("label");
@@ -331,7 +331,10 @@ public class Sce_DataDatosVivienda extends Composite {
 		});
 		
 		btnGuardar.setText("Guardar");
-		absolutePanel.add(btnGuardar, 475, 442);
+		btnGuardar.setStylePrimaryName("sendButton");
+		btnGuardar.setStyleName("sendButton");
+		btnGuardar.setSize("198px", "41px");
+		absolutePanel.add(btnGuardar, 423, 434);
 		btnGuardar.setTabIndex(12);
 		
 	}

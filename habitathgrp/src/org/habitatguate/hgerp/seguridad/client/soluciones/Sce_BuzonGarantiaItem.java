@@ -35,8 +35,8 @@ public class Sce_BuzonGarantiaItem extends Composite {
     private TextBox txtNombreSolicitante;
     private ListBox listSolucionConstruir;
     private Button btnVer;
-    private Label lblExisteGarantia;
-    private SimpleCheckBox checkGarantia;
+    private Label lblGarantiaHipotecaria;
+    private SimpleCheckBox checkGarantiaHipotecaria;
     
 	// Llaves
 	private Long idRol = 0L;
@@ -48,11 +48,16 @@ public class Sce_BuzonGarantiaItem extends Composite {
     
 	// Valor Escritura-Lectura
 	private boolean valor;
+	private Label lblFiduciaria;
+	private Label lblGrupoSolidario;
+	private SimpleCheckBox checkGarantiaFiduciaria;
+	private SimpleCheckBox checkGrupoSolidario;
     
 	public Sce_BuzonGarantiaItem(Sce_BuzonGarantia b, Sce_BuzonGarantiaLista a, 
 			Long idFormulario, String nombreSolicitante, int telefonoCasaSolicitante, 
 			int telefonoTrabajoSolicitante, String solucionConstruir,
-			Boolean garantia, boolean valor) {
+			Boolean garantiaHipotecariaExistente, Boolean garantiaFiduciariaExistente, Boolean garantiaGrupoSolidarioExistente,
+			boolean valor) {
 		
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 		
@@ -78,7 +83,7 @@ public class Sce_BuzonGarantiaItem extends Composite {
 		absolutePanel = new AbsolutePanel();
 		absolutePanel.setStyleName("gwt-Label-new");
 		initWidget(absolutePanel);
-		absolutePanel.setSize("1320px", "20px");
+		absolutePanel.setSize("1544px", "20px");
 		
 		Label lblNombreSolicitante = new Label("Nombre Solicitante");
 		lblNombreSolicitante.setStyleName("label");
@@ -89,6 +94,31 @@ public class Sce_BuzonGarantiaItem extends Composite {
 		lblTelefonoCasa.setStyleName("label");
 		absolutePanel.add(lblTelefonoCasa, 345, 0);
 		lblTelefonoCasa.setSize("227px", "13px");
+		
+		Label lblTelefonoTrabajo = new Label("Telefono Trabajo Solicitante");
+		lblTelefonoTrabajo.setStyleName("label");
+		absolutePanel.add(lblTelefonoTrabajo, 556, 0);
+		lblTelefonoTrabajo.setSize("229px", "13px");
+		
+		Label lblTipoVivienda = new Label("Tipo Solucion");
+		lblTipoVivienda.setStyleName("label");
+		absolutePanel.add(lblTipoVivienda, 791, 0);
+		lblTipoVivienda.setSize("155px", "13px");
+		
+		lblGarantiaHipotecaria = new Label("Hipotecaria");
+		lblGarantiaHipotecaria.setStyleName("label");
+		absolutePanel.add(lblGarantiaHipotecaria, 943, 0);
+		lblGarantiaHipotecaria.setSize("108px", "13px");
+		
+		lblFiduciaria = new Label("Fiduciaria");
+		lblFiduciaria.setStyleName("label");
+		absolutePanel.add(lblFiduciaria, 1057, 0);
+		lblFiduciaria.setSize("91px", "13px");
+		
+		lblGrupoSolidario = new Label("Grupo Solidario");
+		lblGrupoSolidario.setStyleName("label");
+		absolutePanel.add(lblGrupoSolidario, 1171, 0);
+		lblGrupoSolidario.setSize("135px", "13px");
 		
 		txtTelefonoCasaSolicitante = new TextBox();
 		txtTelefonoCasaSolicitante.setEnabled(false);
@@ -124,23 +154,28 @@ public class Sce_BuzonGarantiaItem extends Composite {
 		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listSolucionConstruir, 791, 20);
-		listSolucionConstruir.setSize("125px", "34px");;
+		listSolucionConstruir.setSize("125px", "34px");
+		
+		checkGarantiaHipotecaria = new SimpleCheckBox();
+		absolutePanel.add(checkGarantiaHipotecaria, 967, 20);
+		checkGarantiaHipotecaria.setEnabled(false);
+		checkGarantiaHipotecaria.setValue(garantiaHipotecariaExistente);
+		
+		checkGarantiaFiduciaria = new SimpleCheckBox();
+		absolutePanel.add(checkGarantiaFiduciaria, 1083, 20);
+		checkGarantiaFiduciaria.setEnabled(false);
+		checkGarantiaFiduciaria.setValue(garantiaFiduciariaExistente);
+		
+		checkGrupoSolidario = new SimpleCheckBox();
+		absolutePanel.add(checkGrupoSolidario, 1211, 20);
+		checkGrupoSolidario.setEnabled(false);
+		checkGrupoSolidario.setValue(garantiaGrupoSolidarioExistente);
 		
         Boolean bandera = true;
 	    for(int i=0; i < this.listSolucionConstruir.getItemCount() && bandera; i++){
 	       bandera = !this.listSolucionConstruir.getValue(i).equals(solucionConstruir);
 	       this.listSolucionConstruir.setSelectedIndex(i);
 	    } 
-	
-		Label lblTelefonoTrabajo = new Label("Telefono Trabajo Solicitante");
-		lblTelefonoTrabajo.setStyleName("label");
-		absolutePanel.add(lblTelefonoTrabajo, 556, 0);
-		lblTelefonoTrabajo.setSize("229px", "13px");
-		
-		Label lblTipoVivienda = new Label("Tipo Solucion");
-		lblTipoVivienda.setStyleName("label");
-		absolutePanel.add(lblTipoVivienda, 791, 0);
-		lblTipoVivienda.setSize("155px", "13px");
 		
 		// Boton - Verificar Garantia
 		
@@ -184,18 +219,8 @@ public class Sce_BuzonGarantiaItem extends Composite {
 		btnVer.setText("Verificar Garantia");
 		btnVer.setStylePrimaryName("sendButton");
 		btnVer.setStyleName("sendButton");
-		absolutePanel.add(btnVer, 1099, 20);
+		absolutePanel.add(btnVer, 1306, 20);
 		btnVer.setSize("276px", "34px");
-		
-		lblExisteGarantia = new Label("Existe Garantia");
-		lblExisteGarantia.setStyleName("label");
-		absolutePanel.add(lblExisteGarantia, 943, 0);
-		lblExisteGarantia.setSize("146px", "13px");
-		
-		checkGarantia = new SimpleCheckBox();
-		absolutePanel.add(checkGarantia, 978, 20);
-		checkGarantia.setEnabled(false);
-		checkGarantia.setValue(garantia);
 		
 	}
 	

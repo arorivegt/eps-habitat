@@ -739,8 +739,6 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 				
 				if(bandera){
 
-					Boolean actualizacionGarantia = true;
-
 					Date time = new Date();
 					@SuppressWarnings("deprecation")
 					Date fecrec = new Date(time.getYear(),time.getMonth(),time.getDate());
@@ -750,7 +748,6 @@ public class Sce_DataGarantiaHipotecaria extends Composite {
 							nombreNotario, areaTerreno, valorTerreno, 
 							checkSi, checkNo, 
 							nombrePersona, telefonoPersona, 
-							actualizacionGarantia,
 							dpiValue, direccionTerrenoPersona, aldeaPersona, deptoMunicipioDireccionPersona,
 							direccionTerrenoGarantia, aldeaGarantia, deptoMunicipioDireccionGarantia,
 							new AsyncCallback<Long>() {

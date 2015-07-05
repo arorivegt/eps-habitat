@@ -72,7 +72,7 @@ public class Sce_DataEntryBuroCreditoSolicitud extends Composite {
 	
 	}
 	
-	
+
 	
 	private ScrollPanel scrollPanel7;
 

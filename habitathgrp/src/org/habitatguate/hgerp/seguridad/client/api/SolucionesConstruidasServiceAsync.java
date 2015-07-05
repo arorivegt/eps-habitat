@@ -7,6 +7,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudSituacionEconomica;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -25,7 +26,7 @@ public interface SolucionesConstruidasServiceAsync {
 			String lugarTrabajoSolicitante, int telefonoCasaSolicitante, int telefonoTrabajoSolicitante,
 			String solucionConstruir, float cuotaPagar,
 			String nombreConyuge, int telefonoConyuge, String lugarTrabajoConyuge, int telefonoTrabajoConyuge,
-			Boolean garantia, Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
+			Boolean creditoAprobado, Boolean creditoNoAprobado, float montoAprobado, String observacionNoAprobado,
 			Boolean primeraSupervision, Boolean segundaSupervision, Boolean terceraSupervision, Boolean cuartaSupervision, 
 			String aldeaDireccionActual, String aldeaDireccionSolucion,
 			String departamentoMunicipioDireccionActual, String departamentoMunicipioDireccionSolucion,
@@ -112,7 +113,6 @@ public interface SolucionesConstruidasServiceAsync {
 			String nombreNotario, float areaTerreno, float valorTerreno,
 			Boolean checkSi, Boolean checkNo,
 			String nombrePersona, int telefonoPersona,
-			Boolean actualizacionGarantia,
 			String numDpiPersona, String direccionTerrenoPersona, String aldeaPersona, String departamentoMunicipioDireccionPersona,
 			String direccionTerrenoGarantia, String aldeaGarantia, String departamentoMunicipioDireccionGarantia,
 			AsyncCallback<Long> callback) throws IllegalArgumentException;
@@ -301,6 +301,8 @@ public interface SolucionesConstruidasServiceAsync {
 	void consultaEmpleadoAsignacion(String idEmpleado, AsyncCallback<AuxEmpleado> callback)throws IllegalArgumentException;
 	
 	void asignarSolicitud(Long idFormulario, Long idEmpleado, String usrName, AsyncCallback<String> callback)throws IllegalArgumentException;
+	
+	void consultaSituacionEconomica(Long idFormulario, Long idSituacionEconomica, AsyncCallback<AuxSolicitudSituacionEconomica> callback)throws IllegalArgumentException;
 	
 	// Remover imagen de Blobstore
 	 

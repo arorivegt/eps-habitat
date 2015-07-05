@@ -23,9 +23,13 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaLaboral;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReferenciaPersonal;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudCargaFamiliar;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudReferenciaFamiliar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTest;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPermiso;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.itextpdf.text.BaseColor;
 // Document Object
 import com.itextpdf.text.Document;
@@ -41,13 +45,15 @@ import com.itextpdf.text.pdf.PdfWriter;
 @WebServlet("/CrearReporteSolucionesHabitat")
 public class CrearReporteSolucionesHabitat extends HttpServlet {
 
-	private static final long serialVersionUID 	= 1L;
-    private List<AuxEmpleado> auxEmpleado 		= new ArrayList<AuxEmpleado>();
+	private static final long serialVersionUID 				= 1L;
+    private List<AuxEmpleado> auxEmpleado 					= new ArrayList<AuxEmpleado>();
+    private List<AuxSolicitudGeneral> auxSolicitudGeneral 	= new ArrayList<AuxSolicitudGeneral>();
     
-    private Font redFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD, BaseColor.BLACK);
-    private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
+    private Font redFont 									= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD, BaseColor.BLACK);
+    private Font catFont 									= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
 
 	private RecursosHumanosServiceImpl recusosHumanosService 	= new  RecursosHumanosServiceImpl();
+	private SolucionesConstruidasServiceImpl solucionesService 	= new  SolucionesConstruidasServiceImpl();
     private SimpleDateFormat fecha 								= new SimpleDateFormat("dd/MM/yyyy");
     private DecimalFormat df 									= new DecimalFormat();
     
@@ -55,306 +61,169 @@ public class CrearReporteSolucionesHabitat extends HttpServlet {
         
     	response.setContentType("application/pdf");
 
-        char tipo 				= request.getParameter("tipo").charAt(0);
-		String estado 			= request.getParameter("estado");
-		String primer_nombre 	= request.getParameter("primer_nombre");
-		String DPI 				= request.getParameter("DPI");
-		String Pasaporte 		= request.getParameter("Pasaporte");
-		String familia 			= request.getParameter("familia");
+        char tipo 					= request.getParameter("tipo").charAt(0);
+		String solucionConstruir 	= request.getParameter("solucion");
+		String nombreSolicitante 	= request.getParameter("nombre");
+		long idEmpleado 			= Long.parseLong(request.getParameter("idEmpleado"));
+		long idAfiliado 			= Long.parseLong(request.getParameter("idAfiliado"));
+
+		String cargaFamiliar 	= request.getParameter("cargaFamiliar");
 		String academico 		= request.getParameter("academico");
 		String reflab 			= request.getParameter("reflab");
 		String refper 			= request.getParameter("refper");
 		String idiomas 			= request.getParameter("idiomas");
-		String puesto 			= request.getParameter("puesto");
-		String test 			= request.getParameter("test");
-		String testf1 			= request.getParameter("testf1");
-		String testf2 			= request.getParameter("testf2");
-		String testT 			= request.getParameter("testT");
-		String hist 			= request.getParameter("hist");
-		String histf1 			= request.getParameter("histf1");
-		String histf2 			= request.getParameter("histf2");
-		String histT 			= request.getParameter("histT");
-		String perm 			= request.getParameter("perm");
-		String permf1 			= request.getParameter("permf1");
-		String permf2 			= request.getParameter("permf2");
-		String permT 			= request.getParameter("permT");
-		String sal 				= request.getParameter("sal");
-		String salf1 			= request.getParameter("salf1");
-		String salf2 			= request.getParameter("salf2");
-		String salT 			= request.getParameter("salT");
 
-       
-        if(tipo =='1'){
+		System.out.println("DATOS ENVIADOS PARA REPORTE - Tipo: " + tipo + ", solucionConstruir: " + solucionConstruir + ", Nombre Solicitante: " + nombreSolicitante
+				+ ", ID Empleado: " + idEmpleado + ", ID Afiliado: " + idAfiliado);
 
-			String nombreArray[]	= primer_nombre.split(":");
-			String primerNombre 	= "";
-			String segundoNombre 	= "";
-			String segundoApellido 	= "";
-			String primerApellido 	= "";
+		auxSolicitudGeneral = solucionesService.buscarFormulario(tipo, idEmpleado, idAfiliado, nombreSolicitante, solucionConstruir);
 
-			try{
+		OutputStream out 	= response.getOutputStream();
 
-				if(nombreArray.length == 2){
-					primerNombre 	= nombreArray[0].trim();
-					segundoNombre 	= "".trim();
-					primerApellido 	= nombreArray[1].trim();
-					segundoApellido = "".trim();
-					
-					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-																   			primerApellido,  segundoApellido,DPI, 
-																   			Pasaporte,estado);
-				}else if(nombreArray.length == 3){
-					
-					primerNombre 	= nombreArray[0].trim();
-					segundoNombre 	= nombreArray[1].trim();
-					primerApellido 	= nombreArray[2].trim();
-					segundoApellido = "".trim();
-					
-					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-																			primerApellido,  segundoApellido,DPI, 
-																			Pasaporte,estado);
-					if(auxEmpleado.isEmpty())
-					{
-						primerNombre 	= nombreArray[0].trim();
-						segundoNombre 	= nombreArray[1].trim();
-						primerApellido 	= "".trim();
-						segundoApellido = nombreArray[2].trim();
-						
-						auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-																			primerApellido,  segundoApellido,DPI, 
-																			Pasaporte,estado);
-					}
-					
-					
-				}else if(nombreArray.length == 4)
-				{
-					primerNombre 	= nombreArray[0].trim();
-					segundoNombre 	= nombreArray[1].trim();
-					primerApellido 	= nombreArray[2].trim();
-					segundoApellido = nombreArray[3].trim();
-					
-					
-					auxEmpleado 			= recusosHumanosService.Buscar_Empleado(tipo, primerNombre, segundoNombre, 
-																			primerApellido,  segundoApellido,DPI, 
-																			Pasaporte,estado);
+		try {
+
+			Document document = new Document();
+			PdfWriter.getInstance(document, out);
+			document.open();
+
+//			for(AuxEmpleado p : auxEmpleado) {
+			for(AuxSolicitudGeneral p : auxSolicitudGeneral) {
+				
+				//titulo es el Nombre del Empleado + algunos datos
+				document.add(new Paragraph("........................................................"
+						+ "......................................................"
+						+ "........................................................",catFont));
+				
+				//document.add(new Paragraph("Nombre:"+" "+p.getPrimer_nombre()+" "+p.getSegundo_nombre()+", "+p.getPrimer_apellido()+" "+p.getSegundo_apellido(), redFont));
+				document.add(new Paragraph("Nombre Solicitante: "+" "+p.getNombreSolicitante(), redFont));			
+				
+				if(p.getEstadoCivil().equals("1")){ 
+					document.add(new Paragraph("Estado Civil: "+" "+"Soltero (a)", redFont));
+				}else if(p.getEstadoCivil().equals("2")){
+					document.add(new Paragraph("Estado Civil: "+" "+"Casado (a)", redFont));
+				}else if(p.getEstadoCivil().equals("3")){
+					document.add(new Paragraph("Estado Civil: "+" "+"Unido (a)", redFont));
+				}else if(p.getEstadoCivil().equals("4")){
+					document.add(new Paragraph("Estado Civil: "+" "+"Separado (a)", redFont));
+				}else if(p.getEstadoCivil().equals("5")){
+					document.add(new Paragraph("Estado Civil: "+" "+"Divorciado (a)", redFont));
+				}else if(p.getEstadoCivil().equals("6")){
+					document.add(new Paragraph("Estado Civil: "+" "+"Viudo (a)", redFont));
 				}
 				
-			}catch(Exception e)
-			{
-				 primerNombre 		= "";
-				 primerApellido 	= "";
-				 segundoApellido 	= "";
-				 primerApellido 	= "";
+				document.add(new Paragraph("Pais: "+" "+getPais(p.getNacionalidad()), redFont));
+				document.add(new Paragraph("Usuario Responsable: "+" "+p.getUsrName(), redFont));
+				
+				document.add(new Paragraph(" "));
+
+				if(cargaFamiliar.equals("true") ){
+					boolean valor = true;
+					for(AuxSolicitudCargaFamiliar f : p.getCargaFamiliar()) {
+						if(valor){
+							document.add(new Paragraph("Carga Familiar",catFont));
+							document.add(new Paragraph(" "));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+							valor = false;
+						}
+//						document.add(AuxSolicitudCargaFamiliar(f));
+//						document.add(new Paragraph(" "));
+						document.add(new Paragraph(" "));
+						document.add(CrearCargaFamiliar(f));
+					}
+				}
+				
+//				if(familia.equals("true") ){
+//					boolean valor = true;
+//					for(AuxFamilia f : p.getFamilia()) {
+//						if(valor){
+//							document.add(new Paragraph("Historial Familiar",catFont));
+//							document.add(new Paragraph(" "));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+//							valor = false;
+//						}
+//						document.add(CrearFamilia(f));
+//						document.add(new Paragraph(" "));
+//					}
+//				}
+//				if(academico.equals("true")){
+//					boolean valor = true;
+//					for(AuxHistorialAcademico f : p.getHistorial_academico()) {
+//						if(valor){
+//							document.add(new Paragraph("Historial Academico",catFont));
+//							document.add(new Paragraph(" "));
+//							valor = false;
+//						}
+//						document.add(CrearAcademico(f));
+//						document.add(new Paragraph(" "));
+//					}
+//				}
+//				if(reflab.equals("true")){
+//					boolean valor = true;
+//					for(AuxReferenciaLaboral f : p.getReferencia_laboral()) {
+//						if(valor){
+//							document.add(new Paragraph("Referencia Laboral",catFont));
+//							document.add(new Paragraph(" "));
+//							valor = false;
+//						}
+//						document.add(CrearRefLaboral(f));
+//						document.add(new Paragraph(" "));
+//					}
+//				}
+//				if(refper.equals("true")){
+//					boolean valor = true;
+//					for(AuxReferenciaPersonal f : p.getReferencia_personal()) {
+//						if(valor){
+//							document.add(new Paragraph("Referencia Personal",catFont));
+//							document.add(new Paragraph(" "));
+//							valor = false;
+//						}
+//						document.add(CrearRefPersonal(f));
+//						document.add(new Paragraph(" "));
+//					}
+//				}
+//				if(idiomas.equals("true")){
+//					boolean valor = true;
+//					for(AuxIdioma f : p.getIdiomas()) {
+//						if(valor){
+//							document.add(new Paragraph("Historial de Idiomas",catFont));
+//							document.add(new Paragraph(" "));
+//							valor = false;
+//						}
+//						//			            	document.add(CrearIdioma(f));
+//						//	    		            document.add(new Paragraph(" "));
+//						document.add(new Paragraph(" "));
+//						document.add(CrearIdioma(f));
+//					}
+//				}
+
 			}
- 		}
- 		else{
- 			auxEmpleado				 	= recusosHumanosService.Buscar_Empleado(tipo, primer_nombre, "", 
- 																			"", "",DPI, 
- 																			Pasaporte,estado);
- 		}
-        OutputStream out 	= response.getOutputStream();
-       
-	        try {
-	        	
-	            Document document = new Document();
-	            PdfWriter.getInstance(document, out);
-	            document.open();
-	            
-	            for(AuxEmpleado p : auxEmpleado) {
-	            	//titulo es el Nombre del Empleado + algunos datos
-		            document.add(new Paragraph("........................................................"
-		            						 + "......................................................"
-		            						 + "........................................................",catFont));
-		            document.add(new Paragraph("Nombre:"+" "+p.getPrimer_nombre()+" "+p.getSegundo_nombre()+","+p.getPrimer_apellido()+" "+p.getSegundo_apellido(), redFont));
+			document.close();
+		}
+		catch (DocumentException exc){
+			throw new IOException(exc.getMessage());
+		}
+		finally {            
+			out.close();
+		}
 
-		            if(p.getSexo().equals("0")){ 
-		            	document.add(new Paragraph("Sexo:"+" "+"femenino", redFont));
-		            }else if(p.getSexo().equals("1")){
-		            	document.add(new Paragraph("Sexo:"+" "+"masculino", redFont));
-		            }
-		            document.add(new Paragraph("Email:"+" "+p.getEmail(), redFont));
-		            document.add(new Paragraph("Pais:"+" "+getPais(p.getPais()), redFont));
-		            document.add(new Paragraph(" "));
-	            
-		           if(familia.equals("true") ){
-		        	   boolean valor = true;
-		            	for(AuxFamilia f : p.getFamilia()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial Familiar",catFont));
-		    		            document.add(new Paragraph(" "));                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-		    		            valor = false;
-		            		}
-			            	document.add(CrearFamilia(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		            }
-		           if(academico.equals("true")){
-		        	   boolean valor = true;
-		            	for(AuxHistorialAcademico f : p.getHistorial_academico()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial Academico",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-			            	document.add(CrearAcademico(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		            }
-		           if(reflab.equals("true")){
-		        	   boolean valor = true;
-		            	for(AuxReferenciaLaboral f : p.getReferencia_laboral()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Referencia Laboral",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-			            	document.add(CrearRefLaboral(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		           }
-		           if(refper.equals("true")){
-		        	   boolean valor = true;
-		            	for(AuxReferenciaPersonal f : p.getReferencia_personal()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Referencia Personal",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-			            	document.add(CrearRefPersonal(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		            }
-		            if(idiomas.equals("true")){
-			        	   boolean valor = true;
-		            	for(AuxIdioma f : p.getIdiomas()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial de Idiomas",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-			            	document.add(CrearIdioma(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		            }
 
-		            if(puesto.equals("true")){
-			        	   boolean valor = true;
-		            	for(AuxPuesto f : p.getPuestos()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial de Puestos",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-			            	document.add(CrearPuesto(f));
-	    		            document.add(new Paragraph(" "));
-		            	}
-		            }
-		            if(test.equals("true")){
-			        	   boolean valor = true;
-			        	   Date fecha1 = new Date(Long.parseLong(testf1));
-			        	   Date fecha2 = new Date(Long.parseLong(testf2));
-		            	for(AuxTest f : p.getTest()) {
-
-		        			Date aux = new Date(f.getFecha_test());
-		        			if(valor){
-		    		            document.add(new Paragraph("Test",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		        			}
-		        			
-		            		if((f.getTipo_test().equals(testT) && aux.after(fecha1) && aux.before(fecha2))			        				
-			        		   ||
-			        		 (f.getTipo_test().equals(testT) && aux.equals(fecha1) && aux.equals(fecha2)))
-		            		{
-			            			document.add(CrearTest(f));
-			    		            document.add(new Paragraph(" "));
-		            		}
-		            		
-		            	}
-		            }
-		            if(hist.equals("true")){
-			        	   boolean valor = true;
-			        	   Date fecha1 = new Date(Long.parseLong(histf1));
-			        	   Date fecha2 = new Date(Long.parseLong(histf2));
-		            	for(AuxHistorial f : p.getHistorial()) {
-		        			Date aux = new Date(f.getFecha());
-		        			
-		        			if(valor){
-		    		            document.add(new Paragraph("Historial Aciertos y llamadas de atencion",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		        			}
-		            		if((f.getTipo_historial().equals(histT) && aux.after(fecha1) && aux.before(fecha2))			        				
-		        				||
-			        			(f.getTipo_historial().equals(histT) && aux.equals(fecha1) && aux.equals(fecha2)))
-			        		{
-		            			document.add(CrearHistorial(f));
-		    		            document.add(new Paragraph(" "));
-		            		}
-		            		
-		            	}
-		            }
-		            if(perm.equals("true")){
-			        	   boolean valor = true;
-			        	   Date fecha1 = new Date(Long.parseLong(permf1));
-			        	   Date fecha2 = new Date(Long.parseLong(permf2));
-		            	for(AuxPermiso f : p.getVacaciones()) {
-		        			Date aux = new Date(f.getFecha1());
-		        			Date aux2 = new Date(f.getFecha2());
-		        			
-		        			if(valor){
-		    		            document.add(new Paragraph("Historial de Permisos",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		        			}
-		            		if((f.getTipoPermisos().equals(permT) && aux.after(fecha1) && aux.before(fecha2))			        				
-			        			||
-				        	  (f.getTipoPermisos().equals(permT) && aux.equals(fecha1) && aux.equals(fecha2)))
-		            		{
-			            		document.add(CrearPermiso(f));
-		    		            document.add(new Paragraph(" "));
-		            		}else if((f.getTipoPermisos().equals(perm) && aux2.after(fecha1) && aux2.before(fecha2))			        				
-		            				||
-		            				(f.getTipoPermisos().equals(perm) && aux2.equals(fecha1) && aux2.equals(fecha2)))
-		            		{
-		            			document.add(CrearPermiso(f));
-		            			document.add(new Paragraph(" "));
-		            		}
-		            	}
-		            }
-		            if(sal.equals("true")){
-			        	   boolean valor = true;
-			        	   Date fecha1 = new Date(Long.parseLong(salf1));
-			        	   Date fecha2 = new Date(Long.parseLong(salf2));
-		            	for(AuxSalario f : p.getSalario()) {
-		            		if(valor){
-		    		            document.add(new Paragraph("Historial Salario",catFont));
-		    		            document.add(new Paragraph(" "));
-		    		            valor = false;
-		            		}
-
-		        			Date aux = new Date(f.getFecha());
-		            		if((f.getTipoSalario().equals(salT) && aux.after(fecha1) && aux.before(fecha2))			        				
-		        				||
-			        			(f.getTipoSalario().equals(salT) && aux.equals(fecha1) && aux.equals(fecha2)))
-			        		{
-		    		            document.add(new Paragraph(" "));
-			            		document.add(CrearSalario(f));
-		            		}
-		            	}
-		            }
-		           }
-	            document.close();
-	        }
-	        catch (DocumentException exc){
-	        	throw new IOException(exc.getMessage());
-	        }
-	        finally {            
-	            out.close();
-	        }
-		
-        
     }
+    
+    public PdfPTable CrearCargaFamiliar(AuxSolicitudCargaFamiliar f) {
+    	PdfPTable table = new PdfPTable(4);
+    	
+        table.addCell(new Paragraph("Nombres y Apellidos", redFont));
+        table.addCell(new Paragraph("Edad", redFont));
+        table.addCell(new Paragraph("Escolaridad", redFont));
+        table.addCell(new Paragraph("Ocupacion", redFont));
+        table.addCell(new Paragraph(f.getNombreFamiliar(), catFont));
+        table.addCell(new Paragraph(""+f.getEdadFamiliar(), catFont));
+        table.addCell(new Paragraph(f.getEscolaridadFamiliar(), catFont));
+        table.addCell(new Paragraph(f.getOcupacionFamiliar(), catFont));
+        
+        table.setHeaderRows(1);
+
+        return table;
+    }
+    
     public PdfPTable CrearFamilia(AuxFamilia f) {
     	PdfPTable table = new PdfPTable(3);
     	
@@ -381,6 +250,7 @@ public class CrearReporteSolucionesHabitat extends HttpServlet {
 
         return table;
     }
+    
     public PdfPTable CrearAcademico(AuxHistorialAcademico f) {
     	PdfPTable table = new PdfPTable(3);
 
@@ -553,149 +423,6 @@ public class CrearReporteSolucionesHabitat extends HttpServlet {
         return table;
     }
     
-    public PdfPTable CrearTest(AuxTest f) {
-		String AnnioTest 	=  ""+fecha.format(fecha.format(new Date(f.getFecha_test())));
-		int valor 			= f.getPregunta1() + f.getPregunt2() + f.getPregunta3()
-							+f.getPregunta4()+f.getPregunta5() +f.getPregunta6()
-							+f.getPregunta7()+f.getPregunta8()+f.getPregunta9()
-							+f.getPregunta10();
-		
-    	PdfPTable table = new PdfPTable(3);
-        table.addCell(new Paragraph("Evaluador",redFont));
-        table.addCell(new Paragraph("Fecha",redFont));
-        table.addCell(new Paragraph("Punteo",redFont));
-        table.addCell(new Paragraph("Tipo Test",redFont));
-        table.addCell(new Paragraph(f.getEvaluador(),catFont));
-        table.addCell(new Paragraph(AnnioTest,catFont));
-        table.addCell(new Paragraph(""+valor,catFont));
-        if(f.getTipo_test().equals("1")){
-            table.addCell(new Paragraph("Desempeño"));
-        }else{
-            table.addCell(new Paragraph("Evaluacion"));
-        }
-        table.setHeaderRows(1);
-        return table;
-    }
-    
-    public PdfPTable CrearPuesto(AuxPuesto f) {
-		String AnnioPuesto 	= ""+fecha.format(new Date(f.getFecha_puesto()));
-    	PdfPTable table 	= new PdfPTable(3);
-    	String jornada = "";
-    	
-        table.addCell(new Paragraph("Puesto",redFont));
-        table.addCell(new Paragraph("Fecha del Puesto",redFont));
-        table.addCell(new Paragraph("Horas por trabajo",redFont));
-        table.addCell(new Paragraph(recusosHumanosService.NombrePuesto(Long.parseLong(f.getNombre_puesto())),catFont));
-        table.addCell(new Paragraph(AnnioPuesto,catFont));
-        table.addCell(new Paragraph(f.getHorasTrabajo(),catFont));
-
-        table.addCell(new Paragraph("Funciones",redFont));
-        table.addCell(new Paragraph("Jornada",redFont));
-        table.addCell(new Paragraph("Puesto Activo",redFont));
-        table.addCell(new Paragraph(f.getFunciones(),catFont));
-
-        if(f.getJornada().equals("0"))
-        	jornada = "Diurna";
-        else if(f.getJornada().equals("1"))
-            	jornada = "Nocturna";
-        else if(f.getJornada().equals("2"))
-        	jornada = "Mixta";
-        
-        table.addCell(new Paragraph(jornada,catFont));
-        if(f.isActivo())
-        	table.addCell(new Paragraph("Si",catFont));
-        else
-        	table.addCell(new Paragraph("No",catFont));
-    	
-        table.setHeaderRows(1);
-
-        return table;
-    }
-    public PdfPTable CrearHistorial(AuxHistorial f) {
-    	
- 		String Annio = ""+fecha.format(new Date(f.getFecha()));
-     	PdfPTable table = new PdfPTable(2);
-     	
-        table.addCell(new Paragraph("Descripcion",redFont));
-        table.addCell(new Paragraph("Tipo Historial",redFont));
-        table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        if(f.getTipo_historial().equals("0"))
-        	table.addCell(new Paragraph("aciertos",catFont));
-        else if(f.getTipo_historial().equals("1"))
-        	table.addCell(new Paragraph("llamadas de atención",catFont));
-        
-        table.addCell(new Paragraph("Fecha Creacion",redFont));
-        table.addCell(new Paragraph(Annio,catFont));
-        return table;
-    }
-    
-    public PdfPTable CrearPermiso(AuxPermiso f) {
- 		String Annio1 = ""+fecha.format(new Date(f.getFecha1()));
- 		String Annio2 = ""+fecha.format(new Date(f.getFecha2()));
-     	PdfPTable table = new PdfPTable(2);
-
-        table.addCell(new Paragraph("Descripcion",redFont));
-        table.addCell(new Paragraph("Tipo Permiso",redFont));
-		
-        table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        if(f.getTipoPermisos().equals("0")){
-            table.addCell(new Paragraph("Vacaciones con goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("1")){
-            table.addCell(new Paragraph("Vacaciones sin goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("2")){
-            table.addCell(new Paragraph("Permiso con goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("3")){
-            table.addCell(new Paragraph("Permiso sin goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("4")){
-            table.addCell(new Paragraph("Suspension con goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("5")){
-            table.addCell(new Paragraph("Suspension sin goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("6")){
-            table.addCell(new Paragraph("Ausencia con goce salaria",catFont));
-        }else if(f.getTipoPermisos().equals("7")){
-            table.addCell(new Paragraph("Ausencia sin goce salaria",catFont));
-        	
-        }
-        
-        table.addCell(new Paragraph("Fecha de Permiso",redFont));
-        table.addCell(new Paragraph(Annio1+" al "+Annio2,catFont));
-       
-         return table;
-     }
-    
-    public PdfPTable CrearSalario(AuxSalario f) {
- 		String Annio = ""+fecha.format(new Date(f.getFecha()));
-     	PdfPTable table = new PdfPTable(2);
-
-        table.addCell(new Paragraph("Descripcion",redFont));
-        table.addCell(new Paragraph("Tipo Salario",redFont));
-        table.addCell(new Paragraph(f.getDescripcion(),catFont));
-        if(f.getTipoSalario().equals("0"))
-        	table.addCell(new Paragraph("Salario Base"));
-		else if(f.getTipoSalario().equals("1"))
-        	table.addCell(new Paragraph("Decreto(78-89)"));
-		else if(f.getTipoSalario().equals("2"))
-        	table.addCell(new Paragraph("Comisiones"));
-		else if(f.getTipoSalario().equals("3"))
-        	table.addCell(new Paragraph("Bonificacion"));
-		else if(f.getTipoSalario().equals("4"))
-        	table.addCell(new Paragraph("Bono 14"));
-		else if(f.getTipoSalario().equals("5"))
-        	table.addCell(new Paragraph("Aguinaldo"));
-		else if(f.getTipoSalario().equals("6"))
-        	table.addCell(new Paragraph("Vacaciones"));
-		else if(f.getTipoSalario().equals("7"))
-        	table.addCell(new Paragraph("Indemnizacion"));
-		else if(f.getTipoSalario().equals("8"))
-        	table.addCell(new Paragraph("Otros pagos"));
-        
-        table.addCell(new Paragraph("Fecha",redFont));
-        table.addCell(new Paragraph("Monto",redFont));
-        table.addCell(new Paragraph(Annio,catFont));
-        table.addCell(new Paragraph(""+f.getSalario(),catFont));
-       
-         return table;
-     }
     private String getPais(String codigoPais){
     	String pais = "GUATEMALA";
     	if(codigoPais.equals("1")){pais =  "ABUDABI"; }

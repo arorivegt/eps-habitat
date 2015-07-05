@@ -38,15 +38,6 @@ public class SegVale implements Serializable{
 	@Unowned
 	private List<SegHistorialPagoProv> listaPagoProv;
 	
-	
-	
-	
-	public int getAprobado() {
-		return aprobado;
-	}
-	public void setAprobado(int aprobado) {
-		this.aprobado = aprobado;
-	}
 	public Long getIdVale() {
 		return idVale;
 	}
@@ -83,7 +74,11 @@ public class SegVale implements Serializable{
 	public void setListaPagoProv(List<SegHistorialPagoProv> listaPagoProv) {
 		this.listaPagoProv = listaPagoProv;
 	}
-	
-	
-	
+	public int getAprobado() {
+		return aprobado;
+	}
+	public void setAprobado(int aprobado) {
+		this.aprobado = aprobado;
+	}
+		
 }

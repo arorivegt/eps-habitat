@@ -108,7 +108,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
  <servlet-mapping>  
         <servlet-name>ImprimirEncuestaSatisfaccion</servlet-name>  
         <url-pattern>/ImprimirEncuestaSatisfaccion</url-pattern>  
- </servlet-mapping>  
+ </servlet-mapping>
+ 
+ <servlet>  
+        <servlet-name>CrearReporteSolucionesHabitat</servlet-name>  
+        <servlet-class>org.habitatguate.hgerp.seguridad.service.CrearReporteSolucionesHabitat</servlet-class>  
+</servlet>  
+<servlet-mapping>  
+        <servlet-name>CrearReporteSolucionesHabitat</servlet-name>  
+        <url-pattern>/CrearReporteSolucionesHabitat</url-pattern>  
+</servlet-mapping> 
 
 
   <servlet>

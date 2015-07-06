@@ -40,6 +40,7 @@ import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonAsignacionSol
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonBuroCredito;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonEncuestaSatisfaccion;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_ConsultaEncuestasHabitat;
+import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_CrearReporteSolucionesHabitat;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_DataFormularioSolicitud;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_NuevoFormulario;
 import org.habitatguate.hgerp.seguridad.client.soluciones.Sce_BuzonSupervision;
@@ -270,12 +271,12 @@ public class MenuPrincipal extends Composite {
 				sce4();
 			}
 		};	
-		Command cmdsceBuroCredito = new Command() {
+		Command cmdBuroCredito = new Command() {
 			public void execute() {
 				sceBuroCredito();
 			}
 		};		
-		Command cmdsceEncuestaSatisfaccion = new Command() {
+		Command cmdEncuestaSatisfaccion = new Command() {
 			public void execute() {
 				sceEncuestaSatisfaccion();
 			}
@@ -295,19 +296,29 @@ public class MenuPrincipal extends Composite {
 				sceConsultaIngresoEncuestas();
 			}
 		};	
-		Command cmdsceConsultaGeneralEncuestas = new Command() {
+		Command cmdConsultaGeneralEncuestas = new Command() {
 			public void execute() {
 				sceConsultaGeneralEncuestas();
 			}
 		};
-		Command cmdsceAsignacionIngresadas = new Command() {
+		Command cmdAsignacionIngresadas = new Command() {
 			public void execute() {
 				sceAsignacionIngresadas();
 			}
 		};
-		Command cmdsceAsignacionGeneral = new Command() {
+		Command cmdAsignacionGeneral = new Command() {
 			public void execute() {
 				sceAsignacionGeneral();
+			}
+		};
+		Command cmdReporteSolucionesIngresadas = new Command() {
+			public void execute() {
+				sceReporteSolucionesIngresadas();
+			}
+		};
+		Command cmdReporteSolucionesGeneral = new Command() {
+			public void execute() {
+				sceReporteSolucionesGeneral();
 			}
 		};
 		// --- Fin
@@ -445,6 +456,8 @@ public class MenuPrincipal extends Composite {
 		subMenuDetalleIngresadas.addItem("Soluciones Construidas", cmdConsultaIngresoSoluciones);
 		subMenuDetalleIngresadas.addSeparator();
 		subMenuDetalleIngresadas.addItem("Encuesta de Satisfaccion", cmdConsultaIngresoEncuestas);
+		subMenuDetalleIngresadas.addSeparator();
+		subMenuDetalleIngresadas.addItem("Reporte Soluciones Construidas", cmdReporteSolucionesIngresadas);
 
 		final MenuBar subMenuDetalleGeneral = new MenuBar(true);
 		subMenuDetalleGeneral.setAutoOpen(true);
@@ -452,14 +465,16 @@ public class MenuPrincipal extends Composite {
 		subMenuDetalleGeneral.addSeparator();
 		subMenuDetalleGeneral.addItem("Soluciones Construidas", cmdConsultaGeneralSoluciones);
 		subMenuDetalleGeneral.addSeparator();
-		subMenuDetalleGeneral.addItem("Encuesta de Satisfaccion", cmdsceConsultaGeneralEncuestas);
+		subMenuDetalleGeneral.addItem("Encuesta de Satisfaccion", cmdConsultaGeneralEncuestas);
+		subMenuDetalleGeneral.addSeparator();
+		subMenuDetalleGeneral.addItem("Reporte Soluciones Construidas", cmdReporteSolucionesGeneral);
 		
 		final MenuBar subMenuAsignacion = new MenuBar(true);
 		subMenuAsignacion.setAutoOpen(true);
 		subMenuAsignacion.setAnimationEnabled(true);
 		subMenuAsignacion.addSeparator();
-		subMenuAsignacion.addItem("Solicitudes Ingresadas", cmdsceAsignacionIngresadas);
-		subMenuAsignacion.addItem("Solicitudes En General", cmdsceAsignacionGeneral);
+		subMenuAsignacion.addItem("Solicitudes Ingresadas", cmdAsignacionIngresadas);
+		subMenuAsignacion.addItem("Solicitudes En General", cmdAsignacionGeneral);
 		
 		final MenuBar MenuSolucionesConstruidas = new MenuBar(true);
 		MenuSolucionesConstruidas.setAnimationEnabled(true);
@@ -467,13 +482,13 @@ public class MenuPrincipal extends Composite {
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Verificacion Informacion Solicitudes Ingresadas", cmdsce2);
 		MenuSolucionesConstruidas.addSeparator();
-		MenuSolucionesConstruidas.addItem("Aprobacion Buro de Credito", cmdsceBuroCredito);
+		MenuSolucionesConstruidas.addItem("Aprobacion Buro de Credito", cmdBuroCredito);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Garantia de Solicitudes Ingresadas", cmdsce3);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Bitacora de Supervision Solicitudes Ingresadas", cmdsce4);
 		MenuSolucionesConstruidas.addSeparator();						
-		MenuSolucionesConstruidas.addItem("Encuesta de Satisfaccion", cmdsceEncuestaSatisfaccion);
+		MenuSolucionesConstruidas.addItem("Encuesta de Satisfaccion", cmdEncuestaSatisfaccion);
 		MenuSolucionesConstruidas.addSeparator();
 		MenuSolucionesConstruidas.addItem("Consulta Solicitudes Ingresadas", subMenuDetalleIngresadas);	
 		MenuSolucionesConstruidas.addSeparator();										
@@ -1731,6 +1746,85 @@ public class MenuPrincipal extends Composite {
 			}
 		});
 	}	
+	
+	//@UiHandler("sceReporteSolucionesIngresadas")
+	void sceReporteSolucionesIngresadas() {
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Reportes-Ingreso-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(true, true);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(false, true);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+
+				}
+
+			}
+
+		});
+
+	}
+	
+	void sceReporteSolucionesGeneral() {
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Reportes-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(true, false);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(false, false);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+
+				}
+
+			}
+
+		});
+
+	}
 	
 	// --- Fin   
 	

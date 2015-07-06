@@ -90,7 +90,6 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		this.valor = valor;					// Variable de valor de Lectura/Escritura
 	    this.opcion = opcion;				// Variable de opcion de busqueda Especifica|General
 		
-		
 		// Obtener Id Empleado y UserName (eMail)
 		recursosHumanosService.obtenerId(new AsyncCallback<Long>() {
 			@Override
@@ -289,6 +288,13 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		listSolucionConstruir.setSize("179px", "39px");
 		
 		Busqueda = new Image("images/pdf.png");
+		
+		if(this.valor) {
+			Busqueda.setVisible(true);
+		}else{
+			Busqueda.setVisible(false);
+		}
+		
 		absolutePanel.add(Busqueda, 35, 65);
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -327,62 +333,122 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 	}
 	@SuppressWarnings("deprecation")
 	public void buscar(){
-		if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos"))
-		{
-			Window.open("/CrearReporteSolucionesHabitat?tipo="+"2"
-					+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
-					+"&nombre="+"a"
-					+"&idEmpleado="+idEmpleado
-					+"&idAfiliado="+idAfiliado
+		
+		if(this.opcion){
 
-					+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
-					+"&situacionVivienda="+checkSituacionVivienda.isChecked()
-					+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
-					+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
-					+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
-					+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
-
-		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
-		{
-
-			String nombreSolicitante = txtNombreSolicitante.getText();
-			System.out.println("Data del solicitante para Crear Reporte: " + nombreSolicitante);
-			
-			if(!txtNombreSolicitante.getText().equals("")){
-
-				Window.open("/CrearReporteSolucionesHabitat?tipo="+"1"
+			if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos")){
+				Window.open("/CrearReporteSolucionesHabitat?tipo="+"2"
 						+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
-						+"&nombre="+nombreSolicitante
+						+"&nombre="+"a"
 						+"&idEmpleado="+idEmpleado
 						+"&idAfiliado="+idAfiliado
-						
+
 						+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
 						+"&situacionVivienda="+checkSituacionVivienda.isChecked()
 						+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
 						+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
 						+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
 						+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+			}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres")){
+
+				String nombreSolicitante = txtNombreSolicitante.getText();
+				System.out.println("Data del solicitante para Crear Reporte: " + nombreSolicitante);
+
+				if(!txtNombreSolicitante.getText().equals("")){
+
+					Window.open("/CrearReporteSolucionesHabitat?tipo="+"1"
+							+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
+							+"&nombre="+nombreSolicitante
+							+"&idEmpleado="+idEmpleado
+							+"&idAfiliado="+idAfiliado
+
+							+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+							+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+							+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+							+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+							+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+							+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+				}else{
+
+					mensaje.setMensaje("alert alert-info", "Debe escribir el nombre del solicitante");
+				}
 				
-			}
-			else{
+			}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion")){
 
-    			mensaje.setMensaje("alert alert-info", "Debe escribir el nombre del solicitante");
-			}
-		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
-		{
+				Window.open("/CrearReporteSolucionesHabitat?tipo="+"3"
+						+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
+						+"&nombre="+"a"
+						+"&idEmpleado="+idEmpleado
+						+"&idAfiliado="+idAfiliado
 
-			Window.open("/CrearReporteSolucionesHabitat?tipo="+"3"
-					+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
-					+"&nombre="+"a"
-					+"&idEmpleado="+idEmpleado
-					+"&idAfiliado="+idAfiliado
-					
-					+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
-					+"&situacionVivienda="+checkSituacionVivienda.isChecked()
-					+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
-					+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
-					+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
-					+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+						+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+						+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+						+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+						+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+						+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+						+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+			}
+			
+		}else{
+
+			if(listBox.getItemText(listBox.getSelectedIndex()).equals("Todos")){
+				Window.open("/CrearReporteSolucionesHabitat?tipo="+"4"
+						+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
+						+"&nombre="+"a"
+						+"&idEmpleado="+idEmpleado
+						+"&idAfiliado="+idAfiliado
+
+						+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+						+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+						+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+						+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+						+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+						+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+			}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres")){
+
+				String nombreSolicitante = txtNombreSolicitante.getText();
+				System.out.println("Data del solicitante para Crear Reporte: " + nombreSolicitante);
+
+				if(!txtNombreSolicitante.getText().equals("")){
+
+					Window.open("/CrearReporteSolucionesHabitat?tipo="+"6"
+							+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
+							+"&nombre="+nombreSolicitante
+							+"&idEmpleado="+idEmpleado
+							+"&idAfiliado="+idAfiliado
+
+							+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+							+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+							+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+							+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+							+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+							+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+				}else{
+
+					mensaje.setMensaje("alert alert-info", "Debe escribir el nombre del solicitante");
+				}
+				
+			}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion")){
+
+				Window.open("/CrearReporteSolucionesHabitat?tipo="+"5"
+						+"&solucion="+listSolucionConstruir.getValue(listSolucionConstruir.getSelectedIndex())
+						+"&nombre="+"a"
+						+"&idEmpleado="+idEmpleado
+						+"&idAfiliado="+idAfiliado
+
+						+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+						+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+						+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+						+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+						+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+						+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
+
+			}
 			
 		}
 		

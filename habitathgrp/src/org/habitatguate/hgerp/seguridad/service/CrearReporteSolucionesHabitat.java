@@ -114,7 +114,17 @@ public class CrearReporteSolucionesHabitat extends HttpServlet {
 					document.add(new Paragraph("Estado Civil: "+" "+"Viudo (a)", redFont));
 				}
 				
-				document.add(new Paragraph("Pais: "+" "+getPais(p.getNacionalidad()), redFont));
+				document.add(new Paragraph("No. de DPI: "+" "+p.getNumDpi(), redFont));
+				document.add(new Paragraph("Nacionalidad: "+" "+getPais(p.getNacionalidad()), redFont));
+
+				if(p.getSolucionConstruir().equals("1")){
+					document.add(new Paragraph("Tipo de Solucion: "+" "+"CASA NUEVA", redFont));
+				}else if(p.getSolucionConstruir().equals("2")){
+					document.add(new Paragraph("Tipo de Solucion: "+" "+"MEJORAMIENTO", redFont));
+				}else if(p.getSolucionConstruir().equals("3")){
+					document.add(new Paragraph("Tipo de Solucion: "+" "+"ADICIONES MENORES", redFont));
+				}
+				
 				document.add(new Paragraph("Usuario Responsable: "+" "+p.getUsrName(), redFont));
 				
 				document.add(new Paragraph(" "));

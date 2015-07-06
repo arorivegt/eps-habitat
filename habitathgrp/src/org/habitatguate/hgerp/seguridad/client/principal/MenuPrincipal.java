@@ -295,9 +295,14 @@ public class MenuPrincipal extends Composite {
 				sceAsignacionGeneral();
 			}
 		};
-		Command cmdReporteSolucionesHabitat = new Command() {
+		Command cmdReporteSolucionesIngresadas = new Command() {
 			public void execute() {
-				sceReporteSolucionesHabitat();
+				sceReporteSolucionesIngresadas();
+			}
+		};
+		Command cmdReporteSolucionesGeneral = new Command() {
+			public void execute() {
+				sceReporteSolucionesGeneral();
 			}
 		};
 		// --- Fin
@@ -434,7 +439,7 @@ public class MenuPrincipal extends Composite {
 		subMenuDetalleIngresadas.addSeparator();
 		subMenuDetalleIngresadas.addItem("Encuesta de Satisfaccion", cmdConsultaIngresoEncuestas);
 		subMenuDetalleIngresadas.addSeparator();
-		subMenuDetalleIngresadas.addItem("Reporte Soluciones Construidas", cmdReporteSolucionesHabitat);
+		subMenuDetalleIngresadas.addItem("Reporte Soluciones Construidas", cmdReporteSolucionesIngresadas);
 
 		final MenuBar subMenuDetalleGeneral = new MenuBar(true);
 		subMenuDetalleGeneral.setAutoOpen(true);
@@ -443,6 +448,8 @@ public class MenuPrincipal extends Composite {
 		subMenuDetalleGeneral.addItem("Soluciones Construidas", cmdConsultaGeneralSoluciones);
 		subMenuDetalleGeneral.addSeparator();
 		subMenuDetalleGeneral.addItem("Encuesta de Satisfaccion", cmdConsultaGeneralEncuestas);
+		subMenuDetalleGeneral.addSeparator();
+		subMenuDetalleGeneral.addItem("Reporte Soluciones Construidas", cmdReporteSolucionesGeneral);
 		
 		final MenuBar subMenuAsignacion = new MenuBar(true);
 		subMenuAsignacion.setAutoOpen(true);
@@ -1700,13 +1707,82 @@ public class MenuPrincipal extends Composite {
 		});
 	}	
 	
-	//@UiHandler("sceReporteSolucionesHabitat")
-	void sceReporteSolucionesHabitat() {
+	//@UiHandler("sceReporteSolucionesIngresadas")
+	void sceReporteSolucionesIngresadas() {
 
-		Sce_CrearReporteSolucionesHabitat crearReporteEmpleados = new Sce_CrearReporteSolucionesHabitat(true, true);
-		panel.getGrid().setHeight("100%");
-		panel.getGrid().clearCell(1, 0);
-		panel.getGrid().setWidget(1, 0, crearReporteEmpleados);
+		AdministracionService.ObtenerUsuarioPermisoNombre("Reportes-Ingreso-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(true, true);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(false, true);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+
+				}
+
+			}
+
+		});
+
+	}
+	
+	void sceReporteSolucionesGeneral() {
+
+		AdministracionService.ObtenerUsuarioPermisoNombre("Reportes-General-Soluciones", rol, new AsyncCallback<List<AuxUsuarioPermiso>>()
+		{
+			public void onFailure(Throwable caught) 
+			{
+
+			}
+
+			@Override
+			public void onSuccess(List<AuxUsuarioPermiso> results)
+			{
+
+				if(results.get(0).getPermiso().equals("RW")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(true, false);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+
+				}else if(results.get(0).getPermiso().equals("R")){
+
+					Sce_CrearReporteSolucionesHabitat crearReporteSoluciones = new Sce_CrearReporteSolucionesHabitat(false, false);
+					panel.getGrid().setHeight("100%");
+					panel.getGrid().clearCell(1, 0);
+					panel.getGrid().setWidget(1, 0, crearReporteSoluciones);
+					
+				}else if(results.get(0).getPermiso().equals("N")){
+
+					mensaje.setMensaje("alert alert-error", "No tiene privilegios para acceder a esta opción del Menú.");	
+
+				}
+
+			}
+
+		});
 
 	}
 	

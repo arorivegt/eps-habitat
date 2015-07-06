@@ -31,10 +31,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
 public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_SolucionGeneral<T>{
-    int actual; 
+    static Integer actual;
+    static Integer cantProduct;
+    static List<String> namesColumns;
+    static boolean showplani = false;
+    int contador = 0;
+    int contadorInterno = -1;
+    
     public MyPaginationDataGrid_SolucionGeneral(List<T> dataList) {
 		super(dataList);
-		actual = 0;
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -63,6 +69,17 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         };
         dataGrid.addColumn(nomParamColumn, "Num. Solucion");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
+        
+        
+        Column<T, String> nombreBene = new Column<T, String>(
+                new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getBeneficiario().getNomBeneficiario());
+            }
+        };
+        dataGrid.addColumn(nombreBene, "Beneficiario");        
+        dataGrid.setColumnWidth(nombreBene, 20, Unit.PCT);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {
@@ -115,7 +132,40 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoMaterial());
             }
         };
-        dataGrid.addColumn(costoMaterial, "Costo Material");
+        
+        for(int x =0; x < cantProduct;x++){
+        	contador = x;
+            Column<T, String> columnProduct= new Column<T, String>(new TextCell()) {
+                @Override
+                public String getValue(T object) {
+                	//este hay que modificarlo
+                	contadorInterno ++;
+                	if (contadorInterno == cantProduct){
+                		contadorInterno = 0;
+                	}
+                	System.out.println("el valor de contador es " +contadorInterno +" y su resultado es "+((AuxSolucion) object).getCostoProducto().get(contadorInterno));
+                    return String.valueOf(((AuxSolucion) object).getCostoProducto().get(contadorInterno));
+                }
+            };
+            System.out.println("Nombre Column:"+namesColumns.get(contador));
+            dataGrid.addColumn(columnProduct,namesColumns.get(contador));
+            dataGrid.setColumnWidth(columnProduct, 20, Unit.PCT);
+            
+            if (showplani){
+            	Column<T, String> columnProductPlani= new Column<T, String>(new TextCell()) {
+                    @Override
+                    public String getValue(T object) {
+                    	//este hay que modificarlo
+                    	return String.valueOf(((AuxSolucion) object).getCostoProductoPlani().get(contadorInterno));
+                    }
+                };
+                System.out.println("Nombre Column:"+namesColumns.get(contador));
+                dataGrid.addColumn(columnProductPlani,"Planificado " +namesColumns.get(contador));
+                dataGrid.setColumnWidth(columnProductPlani, 20, Unit.PCT);
+            }
+        }
+        
+        /*dataGrid.addColumn(costoMaterial, "Costo Material");
         dataGrid.setColumnWidth(costoMaterial, 20, Unit.PCT);
         
         Column<T, String> costoManoObra = new Column<T, String>(new TextCell()) {
@@ -157,6 +207,8 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         dataGrid.addColumn(costoAdmin, "Costo Admin.");
         dataGrid.setColumnWidth(costoAdmin, 20, Unit.PCT);
         
+        */
+        
         Column<T, String> costoTotal = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
@@ -175,7 +227,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         dataGrid.addColumn(valorContrato, "Valor Contrato");
         dataGrid.setColumnWidth(valorContrato, 20, Unit.PCT);
         
-        Column<T, String> notaDeb= new Column<T, String>(new TextCell()) {
+       Column<T, String> notaDeb= new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
                 return String.valueOf(((AuxSolucion) object).getCostoTotal()-((AuxSolucion) object).getCostoMaterial());
@@ -193,7 +245,10 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
             }
         };
         dataGrid.addColumn(cuentaXPagar, "Cuentas por Pagar");
-        dataGrid.setColumnWidth(cuentaXPagar, 20, Unit.PCT);
+        dataGrid.setColumnWidth(cuentaXPagar, 20, Unit.PCT);        
+       
+        
+        
         
     }
     

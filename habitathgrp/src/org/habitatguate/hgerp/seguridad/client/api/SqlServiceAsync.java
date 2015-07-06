@@ -213,6 +213,14 @@ public interface SqlServiceAsync {
 	void Actualizar_StatusValeAprobado(Long idVale, int status,
 			AsyncCallback<Long> callback);
 
+	void Consulta_ComparativoPlaniEjecucionSolucion(
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_PagosRealizados(Long idBeneficiario,AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consultar_infoProveedor(Long idProveedor,
+			AsyncCallback<AuxProveedor> callback);
+
 
 
 

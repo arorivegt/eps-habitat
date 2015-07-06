@@ -18,7 +18,10 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoSolucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReportePagosRealizados;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteResumenCréditos;
 //import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
@@ -226,7 +229,20 @@ public class MenuPrincipal extends Composite {
 		
 		final Command cmdfinaReporte2 = new Command() {
 			public void execute() {
+				finaReporte2();
 				
+			}
+		};
+		final Command cmdfinaReporte3 = new Command() {
+			public void execute() {
+				finaReporte3();
+				
+			}
+		};
+		
+		final Command cmdfinaReporte4 = new Command() {
+			public void execute() {
+				finaReporte4();
 				
 			}
 		};
@@ -391,7 +407,9 @@ public class MenuPrincipal extends Composite {
 		final MenuBar MenuReportesFinanzas = new MenuBar(true);
 		MenuSoluciones.setAnimationEnabled(true);
 		MenuReportesFinanzas.addItem("Reporte Record Credito", cmdfinaReporte1);
-		MenuReportesFinanzas.addItem("Reporte Trimestre", cmdfinaReporte2);
+		MenuReportesFinanzas.addItem("Reporte Resumen de Creditos", cmdfinaReporte2);
+		MenuReportesFinanzas.addItem("Comparativo entre lo planificado y ejecutado", cmdfinaReporte3);
+		MenuReportesFinanzas.addItem("Reporte de Pagos realizados", cmdfinaReporte4);
 
 		//soluciones menu
 		final MenuBar MenuInventarioMateriales = new MenuBar(true);
@@ -600,6 +618,22 @@ public class MenuPrincipal extends Composite {
 
 		initWidget(MenuVertical);
 
+	}
+
+	protected void finaReporte4() {
+		// TODO Auto-generated method stub
+		ReportePagosRealizados fr4 = new ReportePagosRealizados();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr4);
+	}
+
+	protected void finaReporte3() {
+		ReporteComparativoSolucion fr3 = new ReporteComparativoSolucion();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr3);
+		
 	}
 
 	void rrhh1() {
@@ -1077,6 +1111,12 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fr1);
+	}
+	void finaReporte2(){
+		ReporteResumenCréditos fr2 = new ReporteResumenCréditos();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr2);
 	}
 	
 	public void Empleado_registrado(){

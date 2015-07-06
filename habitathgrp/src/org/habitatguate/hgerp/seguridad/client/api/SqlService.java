@@ -74,8 +74,11 @@ public interface SqlService extends RemoteService{
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
+	AuxProveedor Consultar_infoProveedor(Long idProveedor);
 	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
 	List<AuxValeBeneficiario> ConsultarValesPendientes_Aprobar(Long idAfiliado);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion();
+	List<AuxSolucion> Consulta_PagosRealizados(Long idBeneficiario);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);

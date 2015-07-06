@@ -494,6 +494,10 @@ public Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento
 		  auxPago.setSerieDocumento(serieDocumento);
 		  auxPago.setTipoDocumento(tipoDocumento);
 		  auxPago.setValorPago(valorPago);
+		  auxPago.setValorCancelado(0.0);
+		  auxPago.setRetenidoIva(0.0);
+		  auxPago.setRetenidoDonacion(0.0);
+		  auxPago.setIdProveedor(0L);
 		  gestorPersistencia.makePersistent(auxPago);
 	      valor = auxPago.getIdHistorialPagoProv();
 	      return valor;
@@ -1335,7 +1339,9 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		query.setFilter("estadoSolucion == 1");
 		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
 		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
-		
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
 		if (!execute.isEmpty()){
 			for(SegSolucion p : execute ){
 				AuxSolucion auxSolucion = new AuxSolucion();
@@ -1365,7 +1371,184 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setAfiliado(aux);
 				auxSolucion.setBeneficiario(n);
 				
-				valor.add(auxSolucion);				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+				
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProducto().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+						}
+					}
+					auxSolucion.getCostoProducto().add(totalProducto);
+				}
+				valor.add(auxSolucion);
+			}
+		}
+		
+		
+		return valor;
+	}
+	
+	public List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion(){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("estadoSolucion == 1");
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegSolucion p : execute ){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoDirecto(p.getCostoDirecto());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setCostoTotal(p.getCostoTotal());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
+				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
+				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getBeneficiario().getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getBeneficiario().getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getBeneficiario().getAfiliado().getNomAfiliado());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);
+				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+				
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProducto().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+						}
+					}
+					auxSolucion.getCostoProducto().add(totalProducto);
+				}
+				
+				List<SegDetalleSolucion> planificacion = p.getListaDetalle();
+				
+				
+				
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProductoPlani().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleSolucion ejecutado : planificacion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+						}
+					}
+					auxSolucion.getCostoProductoPlani().add(totalProducto);
+				}
+				
+				
+				valor.add(auxSolucion);
+			}
+		}
+		
+		
+		return valor;
+	}
+	
+	public List<AuxSolucion> Consulta_PagosRealizados(Long idBeneficiario){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegBeneficiario.class);
+		//query.setFilter("estadoSolucion == 1");
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<SegBeneficiario> execute = (List<SegBeneficiario>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegHistorialPagoProv.class);
+		List<SegHistorialPagoProv> execute2 = (List<SegHistorialPagoProv>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegBeneficiario beneficiario : execute ){
+				SegSolucion p = beneficiario.getSolucion();
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoDirecto(p.getCostoDirecto());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setCostoTotal(p.getCostoTotal());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(beneficiario.getIdBeneficiario().getId());
+				n.setNomBeneficiario(beneficiario.getNomBeneficiario());
+				n.setDirBeneficiario(beneficiario.getDirBeneficiario());
+				n.setTelBeneficiario(beneficiario.getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(beneficiario.getAfiliado().getIdAfiliado());
+				aux.setDepartamento(beneficiario.getAfiliado().getDepartamento());
+				aux.setDirAfiliado(beneficiario.getAfiliado().getDirAfiliado());
+				aux.setMunicipio(beneficiario.getAfiliado().getMunicipio());
+				aux.setNomAfiliado(beneficiario.getAfiliado().getNomAfiliado());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);		
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						SegVale vale = ejecutado.getVale();
+						for (SegHistorialPagoProv cadaHistorial : execute2){
+							for (SegVale cadaValePagado : cadaHistorial.getVale()){
+								if (vale.getIdVale().equals(cadaValePagado.getIdVale())){
+									AuxVale nuevoVale = new AuxVale();
+									nuevoVale.setIdVale(cadaValePagado.getIdVale());
+									nuevoVale.setTotalVale(cadaValePagado.getTotalVale());
+									nuevoVale.setTotalPagado(cadaValePagado.getTotalPagado());
+									nuevoVale.setFechaVale(ConvertDate.g(cadaValePagado.getFechaVale()));
+									nuevoVale.setAprobado(cadaValePagado.getAprobado());
+									auxSolucion.setVale(nuevoVale);
+									SegProveedor prov = ejecutado.getMaterialCostruccion().getProveedor();
+									AuxProveedor nuevoProv = new AuxProveedor();
+									nuevoProv.setNomProveedor(prov.getNomProveedor());
+									auxSolucion.setProveedor(nuevoProv);
+									System.out.println("encontrado "+prov.getNomProveedor() +" "+ cadaValePagado.getIdVale() );
+									valor.add(auxSolucion);	
+								}
+							}
+							
+							
+						}
+							
+						
+					}
+				
 			}
 		}
 		
@@ -1459,6 +1642,33 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		}
 		return valor;
 		
+	}
+	
+	public AuxProveedor Consultar_infoProveedor(Long idProveedor){
+		AuxProveedor valor = new AuxProveedor();
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegCuentaBancariaProv.class);
+		query.setFilter("idProveedor == "+idProveedor);
+		List<SegCuentaBancariaProv> execute = (List<SegCuentaBancariaProv>)query.execute("Google App Engine");
+		SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class, idProveedor);
+		valor.setIdProveedor(prov.getIdProveedor().getId());
+		valor.setNomProveedor(prov.getNomProveedor());
+		valor.setAceptaDonacion(prov.getAceptaDonacion());
+		valor.setAceptaExencion(prov.getAceptaExencion());
+		valor.setPorcentDonacion(prov.getPorcentDonacion());
+		for (SegCuentaBancariaProv cuenta : execute){
+			AuxCuentaBancariaProv aux = new AuxCuentaBancariaProv();
+			aux.setIdCuentaBancariaProv(cuenta.getIdCuentaBancariaProv());
+			aux.setBancoCuentaBancaria(cuenta.getBancoCuentaBancaria());
+			aux.setNombrePropietario(cuenta.getNombrePropietario());
+			aux.setNumeroCuentaBancaria(cuenta.getNumeroCuentaBancaria());
+			aux.setTipoCuentaBancaria(cuenta.getTipoCuentaBancaria());
+			aux.setTipoPago(cuenta.getTipoPago());
+			valor.getLista().add(aux);
+		}
+		
+		
+		return valor;
 	}
 	
 	

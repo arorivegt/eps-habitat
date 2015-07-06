@@ -44,8 +44,56 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	private int estadoSolucion;
 	
 	private ArrayList<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
+	
+	private ArrayList<String> nombreProducto = new ArrayList<String>();
+	
+	private ArrayList<Double> costoProducto = new ArrayList<Double>();
+	
+	private ArrayList<String> nombreProductoPlani = new ArrayList<String>();
+	
+	private ArrayList<Double> costoProductoPlani = new ArrayList<Double>();
 
 	private AuxBeneficiario beneficiario;
+	
+	private AuxVale vale;
+	
+	private AuxProveedor proveedor;
+	
+	
+	
+	
+	public AuxProveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(AuxProveedor proveedor) {
+		this.proveedor = proveedor;
+	}
+
+	public AuxVale getVale() {
+		return vale;
+	}
+
+	public void setVale(AuxVale vale) {
+		this.vale = vale;
+	}
+
+	public ArrayList<String> getNombreProductoPlani() {
+		return nombreProductoPlani;
+	}
+
+	public void setNombreProductoPlani(ArrayList<String> nombreProductoPlani) {
+		this.nombreProductoPlani = nombreProductoPlani;
+	}
+
+	public ArrayList<Double> getCostoProductoPlani() {
+		return costoProductoPlani;
+	}
+
+	public void setCostoProductoPlani(ArrayList<Double> costoProductoPlani) {
+		this.costoProductoPlani = costoProductoPlani;
+	}
+
 	public Long getIdSolucion() {
 		return idSolucion;
 	}
@@ -150,6 +198,22 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public void setLista(ArrayList<AuxDetalleSolucion> lista) {
 		this.lista = lista;
+	}
+
+	public ArrayList<String> getNombreProducto() {
+		return nombreProducto;
+	}
+
+	public void setNombreProducto(ArrayList<String> nombreProducto) {
+		this.nombreProducto = nombreProducto;
+	}
+
+	public ArrayList<Double> getCostoProducto() {
+		return costoProducto;
+	}
+
+	public void setCostoProducto(ArrayList<Double> costoProducto) {
+		this.costoProducto = costoProducto;
 	}
 	
 	

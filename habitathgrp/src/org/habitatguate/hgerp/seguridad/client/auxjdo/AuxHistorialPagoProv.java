@@ -3,6 +3,8 @@ package org.habitatguate.hgerp.seguridad.client.auxjdo;
 import java.util.Date;
 import java.util.List;
 
+import javax.jdo.annotations.Persistent;
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
@@ -31,8 +33,50 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 	private String TipoDocumento;
 
 	private String serieDocumento;
+	
+	private Double valorCancelado;
+	
+	private Double retenidoDonacion;
+	
+	private Double retenidoIva;
+	
+	private Long idProveedor;
 
 	private List<AuxVale> vale;
+
+	
+	
+	public Double getValorCancelado() {
+		return valorCancelado;
+	}
+
+	public void setValorCancelado(Double valorCancelado) {
+		this.valorCancelado = valorCancelado;
+	}
+
+	public Double getRetenidoDonacion() {
+		return retenidoDonacion;
+	}
+
+	public void setRetenidoDonacion(Double retenidoDonacion) {
+		this.retenidoDonacion = retenidoDonacion;
+	}
+
+	public Double getRetenidoIva() {
+		return retenidoIva;
+	}
+
+	public void setRetenidoIva(Double retenidoIva) {
+		this.retenidoIva = retenidoIva;
+	}
+
+	public Long getIdProveedor() {
+		return idProveedor;
+	}
+
+	public void setIdProveedor(Long idProveedor) {
+		this.idProveedor = idProveedor;
+	}
 
 	public Long getIdHistorialPagoProv() {
 		return idHistorialPagoProv;

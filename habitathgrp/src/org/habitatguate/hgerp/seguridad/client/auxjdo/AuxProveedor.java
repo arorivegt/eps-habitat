@@ -1,6 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+import java.util.ArrayList;
 import java.util.Date;
+
 
 
 import com.google.gwt.user.client.rpc.IsSerializable;
@@ -42,6 +44,134 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	private String personaJuridica;
 	
 	private String observaciones;
+	
+	//nuevos elementos
+	
+
+	private String razonSocial;
+
+	private String actividadEcono;
+
+	private String aceptaExencion;
+
+	private String relacionConProv;
+
+	private String tipoProveedor;
+
+	private String productosfrece;
+
+	private String disponibilidadProd;
+
+	private String tiempoEntrega;
+
+	private String regimenTributario;
+
+	private String aceptaDonacion;
+
+	private double porcentDonacion;
+	
+	
+	
+	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
+
+	
+	
+	
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getActividadEcono() {
+		return actividadEcono;
+	}
+
+	public void setActividadEcono(String actividadEcono) {
+		this.actividadEcono = actividadEcono;
+	}
+
+	public String getAceptaExencion() {
+		return aceptaExencion;
+	}
+
+	public void setAceptaExencion(String aceptaExencion) {
+		this.aceptaExencion = aceptaExencion;
+	}
+
+	public String getRelacionConProv() {
+		return relacionConProv;
+	}
+
+	public void setRelacionConProv(String relacionConProv) {
+		this.relacionConProv = relacionConProv;
+	}
+
+	public String getTipoProveedor() {
+		return tipoProveedor;
+	}
+
+	public void setTipoProveedor(String tipoProveedor) {
+		this.tipoProveedor = tipoProveedor;
+	}
+
+	public String getProductosfrece() {
+		return productosfrece;
+	}
+
+	public void setProductosfrece(String productosfrece) {
+		this.productosfrece = productosfrece;
+	}
+
+	public String getDisponibilidadProd() {
+		return disponibilidadProd;
+	}
+
+	public void setDisponibilidadProd(String disponibilidadProd) {
+		this.disponibilidadProd = disponibilidadProd;
+	}
+
+	public String getTiempoEntrega() {
+		return tiempoEntrega;
+	}
+
+	public void setTiempoEntrega(String tiempoEntrega) {
+		this.tiempoEntrega = tiempoEntrega;
+	}
+
+	public String getRegimenTributario() {
+		return regimenTributario;
+	}
+
+	public void setRegimenTributario(String regimenTributario) {
+		this.regimenTributario = regimenTributario;
+	}
+
+	public String getAceptaDonacion() {
+		return aceptaDonacion;
+	}
+
+	public void setAceptaDonacion(String aceptaDonacion) {
+		this.aceptaDonacion = aceptaDonacion;
+	}
+
+	public double getPorcentDonacion() {
+		return porcentDonacion;
+	}
+
+	public void setPorcentDonacion(double porcentDonacion) {
+		this.porcentDonacion = porcentDonacion;
+	}
+
+	public ArrayList<AuxCuentaBancariaProv> getLista() {
+		return lista;
+	}
+
+	public void setLista(ArrayList<AuxCuentaBancariaProv> lista) {
+		this.lista = lista;
+	}
 
 	public Long getIdProveedor() {
 		return idProveedor;

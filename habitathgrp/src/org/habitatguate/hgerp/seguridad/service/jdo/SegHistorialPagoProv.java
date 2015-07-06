@@ -30,9 +30,44 @@ public class SegHistorialPagoProv implements Serializable {
 	@Persistent
 	private String serieDocumento;
 	@Persistent
+	private Double valorCancelado;
+	@Persistent
+	private Double retenidoDonacion;
+	@Persistent
+	private Double retenidoIva;
+	@Persistent
+	private Long idProveedor;
+	@Persistent
 	@Unowned
 	private List<SegVale> vale;
 	
+	
+	
+	
+	public Double getValorCancelado() {
+		return valorCancelado;
+	}
+	public void setValorCancelado(Double valorCancelado) {
+		this.valorCancelado = valorCancelado;
+	}
+	public Double getRetenidoDonacion() {
+		return retenidoDonacion;
+	}
+	public void setRetenidoDonacion(Double retenidoDonacion) {
+		this.retenidoDonacion = retenidoDonacion;
+	}
+	public Double getRetenidoIva() {
+		return retenidoIva;
+	}
+	public void setRetenidoIva(Double retenidoIva) {
+		this.retenidoIva = retenidoIva;
+	}
+	public Long getIdProveedor() {
+		return idProveedor;
+	}
+	public void setIdProveedor(Long idProveedor) {
+		this.idProveedor = idProveedor;
+	}
 	public Long getIdHistorialPagoProv() {
 		return idHistorialPagoProv;
 	}

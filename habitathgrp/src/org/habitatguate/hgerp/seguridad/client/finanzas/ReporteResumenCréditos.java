@@ -49,7 +49,7 @@ import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class ReporteRecordSoluciones extends Composite   {
+public class ReporteResumenCréditos extends Composite   {
 
 	private Mensaje mensaje; 
     private  Grid grid;
@@ -74,7 +74,7 @@ public class ReporteRecordSoluciones extends Composite   {
     /**
      * constructor
      */
-	public ReporteRecordSoluciones() {
+	public ReporteResumenCréditos() {
 
     	load = new Loading();
         load.Mostrar();
@@ -92,8 +92,7 @@ public class ReporteRecordSoluciones extends Composite   {
 		bene = new BeneNameSuggestOracle();
 		
 		listBox = new ListBox();
-		listBox.addItem("Beneficiario");
-		listBox.addItem("Afiliado");
+		listBox.addItem("Seleccione Criterio");
 		listBox.addItem("General");
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -256,7 +255,9 @@ public class ReporteRecordSoluciones extends Composite   {
 		grid.setWidget(1, 0, absolutePanel_1);
 		absolutePanel_1.setSize("1096px", "550px");
 		
+		lbDato1.setVisible(false);
 		
+		txtDato1.setVisible(false);
 
 		
 		
@@ -304,9 +305,6 @@ public class ReporteRecordSoluciones extends Composite   {
 			@Override
 			public void onSuccess(List<AuxSolucion> result) {
 				// TODO Auto-generated method stub
-				for (Double cantidad : result.get(0).getCostoProducto()){
-					System.out.println("la cantidad es:"+ cantidad);
-				}
 				e = new TablaGWT_SolucionGeneral(result);
 				grid.setWidget(1, 0,e);
 				e.setSize("1700px", "300px");

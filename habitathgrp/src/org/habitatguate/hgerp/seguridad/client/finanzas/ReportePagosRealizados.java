@@ -1,13 +1,6 @@
-/**0
- * Anibal Jose Rodriguez Orive
- * Ingenieria Ciencias y Sistemas
- * Universidad de San Carlos de Guatemala
- * Modulo Recursos Humanos
- */
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
@@ -17,8 +10,6 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -29,6 +20,10 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -37,20 +32,11 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
-import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.logical.shared.SelectionEvent;
-import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.i18n.client.DateTimeFormat;
-import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
-import com.google.gwt.user.datepicker.client.DateBox;
 
-public class ReporteRecordSoluciones extends Composite   {
-
+public class ReportePagosRealizados extends Composite{
 	private Mensaje mensaje; 
     private  Grid grid;
     private ListBox listBox;
@@ -66,7 +52,7 @@ public class ReporteRecordSoluciones extends Composite   {
 	private Label lblSeleccioneLosEmpleados;
 	
 	private long idBeneficiario;
-	TablaGWT_SolucionGeneral e = null;
+	TablaGWT_PagosRealizados e = null;
 	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -74,7 +60,9 @@ public class ReporteRecordSoluciones extends Composite   {
     /**
      * constructor
      */
-	public ReporteRecordSoluciones() {
+	
+	
+	public ReportePagosRealizados() {
 
     	load = new Loading();
         load.Mostrar();
@@ -92,7 +80,9 @@ public class ReporteRecordSoluciones extends Composite   {
 		bene = new BeneNameSuggestOracle();
 		
 		listBox = new ListBox();
+		listBox.addItem("Seleccione Criterio");
 		listBox.addItem("Beneficiario");
+		listBox.addItem("Proveedor");
 		listBox.addItem("Afiliado");
 		listBox.addItem("General");
 		listBox.addChangeHandler(new ChangeHandler() {
@@ -256,7 +246,9 @@ public class ReporteRecordSoluciones extends Composite   {
 		grid.setWidget(1, 0, absolutePanel_1);
 		absolutePanel_1.setSize("1096px", "550px");
 		
+		lbDato1.setVisible(false);
 		
+		txtDato1.setVisible(false);
 
 		
 		
@@ -293,7 +285,7 @@ public class ReporteRecordSoluciones extends Composite   {
 	
 	public void BuscarGeneral(){
 		System.out.println("General");
-		loginService.Consulta_SolucionesGenerales(new AsyncCallback<List<AuxSolucion>>() {
+		loginService.Consulta_PagosRealizados(0L,new AsyncCallback<List<AuxSolucion>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -304,10 +296,7 @@ public class ReporteRecordSoluciones extends Composite   {
 			@Override
 			public void onSuccess(List<AuxSolucion> result) {
 				// TODO Auto-generated method stub
-				for (Double cantidad : result.get(0).getCostoProducto()){
-					System.out.println("la cantidad es:"+ cantidad);
-				}
-				e = new TablaGWT_SolucionGeneral(result);
+				e = new TablaGWT_PagosRealizados(result);
 				grid.setWidget(1, 0,e);
 				e.setSize("1700px", "300px");
 				
@@ -318,9 +307,5 @@ public class ReporteRecordSoluciones extends Composite   {
 	public void BuscarAfiliado(){
 		System.out.println("Afiliado");
 	}
-
-	
-	
-
 
 }

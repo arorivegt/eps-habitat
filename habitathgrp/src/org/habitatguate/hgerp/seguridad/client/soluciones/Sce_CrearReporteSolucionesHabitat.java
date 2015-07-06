@@ -55,15 +55,15 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
     private Loading load ;
 	private AbsolutePanel absolutePanel_1;
 	private SimpleCheckBox checkCargaFamiliar;
-	private SimpleCheckBox cheqAcademicos;
-	private SimpleCheckBox cheqReferenciaLaboral;
-	private SimpleCheckBox cheqReferenciaPersonal;
-	private SimpleCheckBox cheqIdiomas;
-	private Label lblCargaFamiliar;
-	private Label label_2;
-	private Label label_3;
-	private Label label_4;
-	private Label label_6;
+	private SimpleCheckBox checkSituacionVivienda;
+	private SimpleCheckBox checkReferenciaFamiliar;
+	private SimpleCheckBox checkGarantiaHipotecaria;
+	private SimpleCheckBox checkGarantiaFiduciaria;
+	private Label lblDatosCargaFamiliar;
+	private Label lblDatosSituacionVivienda;
+	private Label lblDatosGarantiaHipotecaria;
+	private Label lblReferenciasFamiliares;
+	private Label lblDatosGarantiaFiduaciaria;
 	private Label lblAContinuacionSeleccione;
 	private Label lblCreeElReporte; 
 	private Label lblSeleccioneLosEmpleados;
@@ -82,6 +82,8 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 	private boolean valor;
     // Opcion de busqueda
     private boolean opcion;
+    private SimpleCheckBox checkGarantiaGrupoSolidario;
+    private Label lblDatosGarantiaGrupoSolidario;
 	
 	public Sce_CrearReporteSolucionesHabitat(final boolean valor, final boolean opcion) {
 
@@ -171,29 +173,30 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		absolutePanel_1.add(lblCreeElReporte, 25, 10);
 		lblCreeElReporte.setSize("828px", "13px");
 		
-		lblCargaFamiliar = new Label("Datos de Carga Familiares");
-		lblCargaFamiliar.setStyleName("label");
-		absolutePanel_1.add(lblCargaFamiliar, 138, 137);
-		lblCargaFamiliar.setSize("222px", "13px");
+		lblDatosCargaFamiliar = new Label("Datos de Carga Familiares");
+		lblDatosCargaFamiliar.setStyleName("label");
+		absolutePanel_1.add(lblDatosCargaFamiliar, 138, 137);
+		lblDatosCargaFamiliar.setSize("261px", "13px");
 		
-		label_2 = new Label("Datos Academicos");
-		label_2.setStyleName("label");
-		absolutePanel_1.add(label_2, 138, 186);
-		label_2.setSize("157px", "13px");
+		lblDatosSituacionVivienda = new Label("Datos de Situacion Vivienda Actual");
+		lblDatosSituacionVivienda.setStyleName("label");
+		absolutePanel_1.add(lblDatosSituacionVivienda, 138, 186);
+		lblDatosSituacionVivienda.setSize("261px", "13px");
 		
-		label_4 = new Label("Datos Referencia Laboral");
-		label_4.setStyleName("label");
-		absolutePanel_1.add(label_4, 138, 244);
-		label_4.setSize("198px", "13px");
+		lblReferenciasFamiliares = new Label("Datos de Referencias Familiares");
+		lblReferenciasFamiliares.setStyleName("label");
+		absolutePanel_1.add(lblReferenciasFamiliares, 138, 244);
+		lblReferenciasFamiliares.setSize("261px", "13px");
 		
-		label_3 = new Label("Datos Referencia Personal");
-		absolutePanel_1.add(label_3, 138, 300);
-		label_3.setStyleName("label");
+		lblDatosGarantiaHipotecaria = new Label("Datos de Garantia Hipotecaria");
+		absolutePanel_1.add(lblDatosGarantiaHipotecaria, 138, 300);
+		lblDatosGarantiaHipotecaria.setSize("261px", "16px");
+		lblDatosGarantiaHipotecaria.setStyleName("label");
 		
-		label_6 = new Label("Idiomas Hablados");
-		label_6.setStyleName("label");
-		absolutePanel_1.add(label_6, 138, 362);
-		label_6.setSize("157px", "13px");
+		lblDatosGarantiaFiduaciaria = new Label("Datos de Garantia Fiduciaria");
+		lblDatosGarantiaFiduaciaria.setStyleName("label");
+		absolutePanel_1.add(lblDatosGarantiaFiduaciaria, 138, 354);
+		lblDatosGarantiaFiduaciaria.setSize("261px", "13px");
 	
 		lbDato1 = new Label("Escriba el nombre del solicitante:");
 		lbDato1.setStyleName("label");
@@ -209,6 +212,11 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		lblSeleccioneLosEmpleados.setStyleName("label");
 		absolutePanel.add(lblSeleccioneLosEmpleados, 225, 92);
 		lblSeleccioneLosEmpleados.setSize("495px", "13px");
+		
+		lblDatosGarantiaGrupoSolidario = new Label("Datos de Garantia Grupo Solidario");
+		lblDatosGarantiaGrupoSolidario.setStyleName("label");
+		absolutePanel_1.add(lblDatosGarantiaGrupoSolidario, 138, 411);
+		lblDatosGarantiaGrupoSolidario.setSize("261px", "13px");
 		
 		listBox = new ListBox();
 		listBox.addItem("Nombres");
@@ -238,9 +246,9 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Solucion"))
 				{
 					listSolucionConstruir.clear();
-					listSolucionConstruir.addItem("Casa Nueva","0");
-					listSolucionConstruir.addItem("Mejoramiento","1");
-					listSolucionConstruir.addItem("Adiciones Menores","2");
+					listSolucionConstruir.addItem("Casa Nueva","1");
+					listSolucionConstruir.addItem("Mejoramiento","2");
+					listSolucionConstruir.addItem("Adiciones Menores","3");
 					
 					lbDato1.setText("Seleccione segun Solucion");
 
@@ -272,9 +280,9 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		txtNombreSolicitante.setSize("250px", "34px");
 		
 		listSolucionConstruir = new ListBox();
-		listSolucionConstruir.addItem("Casa Nueva","0");
-		listSolucionConstruir.addItem("Mejoramiento","1");
-		listSolucionConstruir.addItem("Adiciones Menores","2");
+		listSolucionConstruir.addItem("Casa Nueva","1");
+		listSolucionConstruir.addItem("Mejoramiento","2");
+		listSolucionConstruir.addItem("Adiciones Menores","3");
 		listSolucionConstruir.setStyleName("gwt-TextBox2");
 		listSolucionConstruir.setVisible(false);
 		absolutePanel.add(listSolucionConstruir, 205, 16);
@@ -295,21 +303,25 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 		absolutePanel_1.add(checkCargaFamiliar, 93, 137);
 		checkCargaFamiliar.setSize("22px", "22px");
 		
-		cheqAcademicos = new SimpleCheckBox();
-		absolutePanel_1.add(cheqAcademicos, 93, 186);
-		cheqAcademicos.setSize("22px", "22px");
+		checkSituacionVivienda = new SimpleCheckBox();
+		absolutePanel_1.add(checkSituacionVivienda, 93, 186);
+		checkSituacionVivienda.setSize("22px", "22px");
 		
-		cheqReferenciaLaboral = new SimpleCheckBox();
-		absolutePanel_1.add(cheqReferenciaLaboral, 93, 244);
-		cheqReferenciaLaboral.setSize("22px", "22px");
+		checkReferenciaFamiliar = new SimpleCheckBox();
+		absolutePanel_1.add(checkReferenciaFamiliar, 93, 244);
+		checkReferenciaFamiliar.setSize("22px", "22px");
 		
-		cheqReferenciaPersonal = new SimpleCheckBox();
-		absolutePanel_1.add(cheqReferenciaPersonal, 93, 300);
-		cheqReferenciaPersonal.setSize("22px", "22px");
+		checkGarantiaHipotecaria = new SimpleCheckBox();
+		absolutePanel_1.add(checkGarantiaHipotecaria, 93, 300);
+		checkGarantiaHipotecaria.setSize("22px", "22px");
 		
-		cheqIdiomas = new SimpleCheckBox();
-		absolutePanel_1.add(cheqIdiomas, 93, 362);
-		cheqIdiomas.setSize("22px", "22px");
+		checkGarantiaFiduciaria = new SimpleCheckBox();
+		absolutePanel_1.add(checkGarantiaFiduciaria, 93, 354);
+		checkGarantiaFiduciaria.setSize("22px", "22px");
+		
+		checkGarantiaGrupoSolidario = new SimpleCheckBox();
+		absolutePanel_1.add(checkGarantiaGrupoSolidario, 93, 411);
+		checkGarantiaGrupoSolidario.setSize("22px", "22px");
 		
 		
 	}
@@ -323,11 +335,12 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 					+"&idEmpleado="+idEmpleado
 					+"&idAfiliado="+idAfiliado
 
-					+"&familia="+checkCargaFamiliar.isChecked()
-					+"&academico="+cheqAcademicos.isChecked()
-					+"&reflab="+cheqReferenciaLaboral.isChecked()
-					+"&refper="+cheqReferenciaPersonal.isChecked()
-					+"&idiomas="+cheqIdiomas.isChecked(), "_blank", ""); 
+					+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+					+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+					+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+					+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+					+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+					+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
 
 		}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Nombres"))
 		{
@@ -343,11 +356,12 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 						+"&idEmpleado="+idEmpleado
 						+"&idAfiliado="+idAfiliado
 						
-						+"&familia="+checkCargaFamiliar.isChecked()
-						+"&academico="+cheqAcademicos.isChecked()
-						+"&reflab="+cheqReferenciaLaboral.isChecked()
-						+"&refper="+cheqReferenciaPersonal.isChecked()
-						+"&idiomas="+cheqIdiomas.isChecked(), "_blank", "");
+						+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
+						+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+						+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+						+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+						+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+						+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
 				
 			}
 			else{
@@ -364,10 +378,11 @@ public class Sce_CrearReporteSolucionesHabitat extends Composite   {
 					+"&idAfiliado="+idAfiliado
 					
 					+"&cargaFamiliar="+checkCargaFamiliar.isChecked()
-					+"&academico="+cheqAcademicos.isChecked()
-					+"&reflab="+cheqReferenciaLaboral.isChecked()
-					+"&refper="+cheqReferenciaPersonal.isChecked()
-					+"&idiomas="+cheqIdiomas.isChecked(), "_blank", "");
+					+"&situacionVivienda="+checkSituacionVivienda.isChecked()
+					+"&referenciaFamiliar="+checkReferenciaFamiliar.isChecked()
+					+"&garantiaHipotecaria="+checkGarantiaHipotecaria.isChecked()
+					+"&garantiaFiduciaria="+checkGarantiaFiduciaria.isChecked()
+					+"&garantiaGrupoSolidario="+checkGarantiaGrupoSolidario.isChecked(), "_blank", ""); 
 			
 		}
 		

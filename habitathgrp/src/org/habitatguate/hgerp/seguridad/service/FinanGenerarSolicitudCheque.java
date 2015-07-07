@@ -13,10 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -37,6 +40,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 	private static final long serialVersionUID 	= 1L;
 	
 	private AuxHistorialPagoProv auxHistoroial	= new AuxHistorialPagoProv();
+	private SegAfiliado auxAfi					= new SegAfiliado();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
     
@@ -59,7 +63,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
         {  
         	long idPagoRealizado 			= Long.parseLong(request.getParameter("idPago"));
         	auxHistoroial					= finanzasService.Consultar_SolicitudPagoVales(idPagoRealizado);
-	        
+        	auxAfi							= finanzasService.getAfiliado(auxHistoroial.getIdAfiliado());
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
@@ -82,13 +86,12 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 
 		            
 		            
-		            document.add(new Paragraph("SOLICITUD DE TRANSFERENCIA O CHEQUE ",catFont2));
-		            document.add(new Paragraph("NO. DE CH O TRASFER",catFont));
-		            document.add(new Paragraph("NO. DE SOLICITUD",catFont));
-		            document.add(new Paragraph("FECHA DE SOLICITUD",catFont));
+		            document.add(new Paragraph("SOLICITUD DE " +auxHistoroial.getTipoOperacion(),catFont2));
+		            document.add(new Paragraph("NO. DE SOLICITUD: "+auxHistoroial.getIdHistorialPagoProv(),catFont));
+		            document.add(new Paragraph("FECHA DE SOLICITUD: "+auxHistoroial.getFechaSolicitud(),catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("CHEQUE A NOMBRE DE : WFB William Franklin Barrios",catFont));
-		            document.add(new Paragraph("AFILIADO QUIEN LO SOLICITA",catFont));
+		            document.add(new Paragraph("CHEQUE A NOMBRE DE: "+auxHistoroial.getChequeNombre(),catFont));
+		            document.add(new Paragraph("AFILIADO QUIEN LO SOLICITA: " + auxAfi.getNomAfiliado() ,catFont));
 		            document.add(new Paragraph("DESCRIPCION DEL GASTO "+idPagoRealizado,catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            
@@ -129,9 +132,20 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 
 		            document.add(table);
 		          
+		            document.add(new Paragraph("FECHA EN LA QUE NECESITA LA OPERACION: "+auxHistoroial.getFechadeTransaccion(),catFont));
 		            document.add(new Paragraph("\t",catFont));
+		            String vales = "";
+		            int x = 0;
+		            for (AuxVale vale : auxHistoroial.getVale()){
+		            	if (x == 0)
+		            		vales = vales + vale.getIdVale() ;
+		            	else
+		            		vales = vales + " , "  + vale.getIdVale() ;
+		            	x++;
+		            }
+		            document.add(new Paragraph("VALES A CANCELAR: "+vales ,catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("FACTURAS A CANCELAR: "+ auxHistoroial.getSeriesDocumento(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
@@ -140,13 +154,13 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("SOLICITADO POR: WILLIAM FRANKLIN BARRIOS                                         F:________________________________",catFont));
+		            document.add(new Paragraph("APROBADO POR:   VICTOR VELASQUEZ   		                                         F:________________________________",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("DEPARTAMENTO DE ADMINISTRACIÓN Y FINANZAS                                           ",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("REVISADO POR : ODILY ESCOBAR                                        F:________________________________",catFont));
+		            document.add(new Paragraph("REVISADO POR : ODILY ESCOBAR                                                    F:________________________________",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));

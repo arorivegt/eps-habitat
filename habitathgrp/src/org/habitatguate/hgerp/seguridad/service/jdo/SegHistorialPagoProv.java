@@ -24,11 +24,23 @@ public class SegHistorialPagoProv implements Serializable {
 	@Persistent
 	private Double valorPago;
 	@Persistent
-	private Date fechaVale;
+	private Date FechadeTransaccion;
 	@Persistent
-	private String TipoDocumento;
+	private Date FechaSolicitud;
 	@Persistent
-	private String serieDocumento;
+	private String chequeNombre;
+	@Persistent
+	private String numeroCuenta;
+	@Persistent
+	private String Banco;
+	@Persistent
+	private Long idAfiliado;
+	@Persistent
+	private int statusPago;
+	@Persistent
+	private String tipoOperacion;
+	@Persistent
+	private String seriesDocumento;
 	@Persistent
 	private Double valorCancelado;
 	@Persistent
@@ -80,23 +92,59 @@ public class SegHistorialPagoProv implements Serializable {
 	public void setValorPago(Double valorPago) {
 		this.valorPago = valorPago;
 	}
-	public Date getFechaVale() {
-		return fechaVale;
+	public Date getFechadeTransaccion() {
+		return FechadeTransaccion;
 	}
-	public void setFechaVale(Date fechaVale) {
-		this.fechaVale = fechaVale;
+	public void setFechadeTransaccion(Date fechadeTransaccion) {
+		FechadeTransaccion = fechadeTransaccion;
 	}
-	public String getTipoDocumento() {
-		return TipoDocumento;
+	public Date getFechaSolicitud() {
+		return FechaSolicitud;
 	}
-	public void setTipoDocumento(String tipoDocumento) {
-		TipoDocumento = tipoDocumento;
+	public void setFechaSolicitud(Date fechaSolicitud) {
+		FechaSolicitud = fechaSolicitud;
 	}
-	public String getSerieDocumento() {
-		return serieDocumento;
+	public String getChequeNombre() {
+		return chequeNombre;
 	}
-	public void setSerieDocumento(String serieDocumento) {
-		this.serieDocumento = serieDocumento;
+	public void setChequeNombre(String chequeNombre) {
+		this.chequeNombre = chequeNombre;
+	}
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+	public String getBanco() {
+		return Banco;
+	}
+	public void setBanco(String banco) {
+		Banco = banco;
+	}
+	public Long getIdAfiliado() {
+		return idAfiliado;
+	}
+	public void setIdAfiliado(Long idAfiliado) {
+		this.idAfiliado = idAfiliado;
+	}
+	public int getStatusPago() {
+		return statusPago;
+	}
+	public void setStatusPago(int statusPago) {
+		this.statusPago = statusPago;
+	}
+	public String getTipoOperacion() {
+		return tipoOperacion;
+	}
+	public void setTipoOperacion(String tipoOperacion) {
+		this.tipoOperacion = tipoOperacion;
+	}
+	public String getSeriesDocumento() {
+		return seriesDocumento;
+	}
+	public void setSeriesDocumento(String seriesDocumento) {
+		this.seriesDocumento = seriesDocumento;
 	}
 	public List<SegVale> getVale() {
 		return vale;

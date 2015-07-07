@@ -27,25 +27,96 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 	private Long idHistorialPagoProv;
 
 	private Double valorPago;
-
-	private Date fechaVale;
-
-	private String TipoDocumento;
-
-	private String serieDocumento;
-	
+	private Date FechadeTransaccion;
+	private Date FechaSolicitud;
+	private String chequeNombre;
+	private String numeroCuenta;
+	private String Banco;
+	private Long idAfiliado;
+	private int statusPago;
+	private String tipoOperacion;
+	private String seriesDocumento;
 	private Double valorCancelado;
-	
 	private Double retenidoDonacion;
-	
 	private Double retenidoIva;
-	
 	private Long idProveedor;
 
 	private List<AuxVale> vale;
 
 	
 	
+	public Date getFechadeTransaccion() {
+		return FechadeTransaccion;
+	}
+
+	public void setFechadeTransaccion(Date fechadeTransaccion) {
+		FechadeTransaccion = fechadeTransaccion;
+	}
+
+	public Date getFechaSolicitud() {
+		return FechaSolicitud;
+	}
+
+	public void setFechaSolicitud(Date fechaSolicitud) {
+		FechaSolicitud = fechaSolicitud;
+	}
+
+	public String getChequeNombre() {
+		return chequeNombre;
+	}
+
+	public void setChequeNombre(String chequeNombre) {
+		this.chequeNombre = chequeNombre;
+	}
+
+	public String getNumeroCuenta() {
+		return numeroCuenta;
+	}
+
+	public void setNumeroCuenta(String numeroCuenta) {
+		this.numeroCuenta = numeroCuenta;
+	}
+
+	public String getBanco() {
+		return Banco;
+	}
+
+	public void setBanco(String banco) {
+		Banco = banco;
+	}
+
+	public Long getIdAfiliado() {
+		return idAfiliado;
+	}
+
+	public void setIdAfiliado(Long idAfiliado) {
+		this.idAfiliado = idAfiliado;
+	}
+
+	public int getStatusPago() {
+		return statusPago;
+	}
+
+	public void setStatusPago(int statusPago) {
+		this.statusPago = statusPago;
+	}
+
+	public String getTipoOperacion() {
+		return tipoOperacion;
+	}
+
+	public void setTipoOperacion(String tipoOperacion) {
+		this.tipoOperacion = tipoOperacion;
+	}
+
+	public String getSeriesDocumento() {
+		return seriesDocumento;
+	}
+
+	public void setSeriesDocumento(String seriesDocumento) {
+		this.seriesDocumento = seriesDocumento;
+	}
+
 	public Double getValorCancelado() {
 		return valorCancelado;
 	}
@@ -94,29 +165,6 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 		this.valorPago = valorPago;
 	}
 
-	public Date getFechaVale() {
-		return fechaVale;
-	}
-
-	public void setFechaVale(Date fechaVale) {
-		this.fechaVale = fechaVale;
-	}
-
-	public String getTipoDocumento() {
-		return TipoDocumento;
-	}
-
-	public void setTipoDocumento(String tipoDocumento) {
-		TipoDocumento = tipoDocumento;
-	}
-
-	public String getSerieDocumento() {
-		return serieDocumento;
-	}
-
-	public void setSerieDocumento(String serieDocumento) {
-		this.serieDocumento = serieDocumento;
-	}
 
 	public List<AuxVale> getVale() {
 		return vale;

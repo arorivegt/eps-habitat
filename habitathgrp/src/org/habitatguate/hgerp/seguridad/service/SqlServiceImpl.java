@@ -482,22 +482,32 @@ public Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetal
 	
 }
 
-public Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago) throws IllegalArgumentException{
-	 Long valor = 0L;
-	 
+public Long Insertar_PagoVale(Date fechaSolicitud,String banco, String chequeNombre, Date fechadeTransaccion, 
+		Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
+		String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago) throws IllegalArgumentException{
+	 Long valor = 0L; 
+	 HttpServletRequest request = this.getThreadLocalRequest();
+		HttpSession session = request.getSession(false);
+		Long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	try{
 		//System.out.println("Plantilla de la que viene " + idPlantillaSolucion);
 		//
 		SegHistorialPagoProv auxPago = new SegHistorialPagoProv();
-		  auxPago.setFechaVale(fechaVale);
-		  auxPago.setSerieDocumento(serieDocumento);
-		  auxPago.setTipoDocumento(tipoDocumento);
+		  auxPago.setFechaSolicitud(fechaSolicitud);
+		  auxPago.setBanco(banco);
+		  auxPago.setChequeNombre(chequeNombre);
+		  auxPago.setFechadeTransaccion(fechadeTransaccion);
+		  auxPago.setIdAfiliado(idAfi);
+		  auxPago.setIdProveedor(idProveedor);
+		  auxPago.setNumeroCuenta(numeroCuenta);
+		  auxPago.setRetenidoDonacion(retenidoDonacion);
+		  auxPago.setRetenidoIva(retenidoIva);
+		  auxPago.setSeriesDocumento(seriesDocumento);
+		  auxPago.setStatusPago(0);
+		  auxPago.setTipoOperacion(tipoOperacion);
+		  auxPago.setValorCancelado(valorCancelado);
 		  auxPago.setValorPago(valorPago);
-		  auxPago.setValorCancelado(0.0);
-		  auxPago.setRetenidoIva(0.0);
-		  auxPago.setRetenidoDonacion(0.0);
-		  auxPago.setIdProveedor(0L);
 		  gestorPersistencia.makePersistent(auxPago);
 	      valor = auxPago.getIdHistorialPagoProv();
 	      return valor;
@@ -1562,10 +1572,20 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		final SegHistorialPagoProv query = gestorPersistencia.getObjectById(SegHistorialPagoProv.class,idHistorialPagoProv);
 		valor.setIdHistorialPagoProv(query.getIdHistorialPagoProv());
-		valor.setSerieDocumento(query.getSerieDocumento());
-		valor.setTipoDocumento(query.getTipoDocumento());
+		valor.setBanco(query.getBanco());
+		valor.setChequeNombre(query.getChequeNombre());
+		valor.setFechadeTransaccion(ConvertDate.g(query.getFechadeTransaccion()));
+		valor.setIdAfiliado(query.getIdAfiliado());
+		valor.setIdProveedor(query.getIdProveedor());
+		valor.setNumeroCuenta(query.getNumeroCuenta());
+		valor.setRetenidoDonacion(query.getRetenidoDonacion());
+		valor.setRetenidoIva(query.getRetenidoIva());
+		valor.setStatusPago(query.getStatusPago());
+		valor.setValorCancelado(query.getValorCancelado());
+		valor.setSeriesDocumento(query.getSeriesDocumento());
+		valor.setTipoOperacion(query.getTipoOperacion());
 		valor.setValorPago(query.getValorPago());
-		valor.setFechaVale(ConvertDate.g(query.getFechaVale()));
+		valor.setFechaSolicitud(ConvertDate.g(query.getFechaSolicitud()));
 		List<AuxVale> listaVales = new ArrayList<AuxVale>();
 		for (SegVale segVale : query.getVale()){
 			AuxVale auxVale = new AuxVale();
@@ -1883,5 +1903,20 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		}
 		return valor;
 }
+	
+	
+	//CONSULTAS PARA LOS REPORTES
+	
+	
+	public SegAfiliado getAfiliado(Long idAfiliado){
+		SegAfiliado selectB = null;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
+		return selectB; 
+	}
+	
+	
+	
+	
 	
 }

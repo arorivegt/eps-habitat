@@ -41,6 +41,7 @@ public class Formulario_PagoVale extends Composite{
 	final Button close= new Button("x");
 	private Set<AuxVale> listaVales;
 	private AuxProveedor proveedorSelect;
+	private String tipoOperacion = "";
 	
 	 public Formulario_PagoVale(Set<AuxVale> vales, Long idProveedor){
 		 
@@ -188,6 +189,26 @@ public class Formulario_PagoVale extends Composite{
         dateBox.setFormat(new DateBox.DefaultFormat 
         	    (DateTimeFormat.getFormat("dd/MM/yyyy")));
         
+        final Label label6 = new Label("Fecha para realizar Operacion");
+        label1.setSize("200px", "25px");
+        
+        final DateBox dateBox2 = new DateBox();
+        dateBox2.setValue(new Date());
+        dateBox2.getTextBox().setReadOnly(true);
+        dateBox2.setFireNullValues(true);
+        dateBox2.setStyleName("gwt-PasswordTextBox");
+        dateBox2.getElement().setAttribute("placeHolder", "Fecha de Pago");
+        
+        dateBox2.getDatePicker().setYearArrowsVisible(true);
+        dateBox2.getDatePicker().setYearAndMonthDropdownVisible(true);
+        dateBox2.getDatePicker().setVisibleYearCount(100);
+        
+        dateBox2.setSize("200px", "25px");
+
+        dateBox2.setFormat(new DateBox.DefaultFormat 
+        	    (DateTimeFormat.getFormat("dd/MM/yyyy")));
+        
+        
         Button button = new Button("");
         button.setText("Realizar");
         button.setStyleName("sendButton");
@@ -218,7 +239,8 @@ public class Formulario_PagoVale extends Composite{
         dialogVPanel.add(txtCantidad);
         dialogVPanel.add(label5);
         dialogVPanel.add(dateBox);
-        
+        dialogVPanel.add(label6);
+        dialogVPanel.add(dateBox2);
         dialogVPanel.add(label2);
         dialogVPanel.add(txtporcentaje);
         dialogVPanel.add(label3);
@@ -246,7 +268,9 @@ public class Formulario_PagoVale extends Composite{
 					txtBanco.setText("");
 					txtNombre.setText("");
 					txtNumero.setText("");
+					tipoOperacion = "";
 				}else{
+					
 				txtBanco.setText(proveedorSelect.getLista().get(select).getBancoCuentaBancaria());
 				txtNombre.setText(proveedorSelect.getLista().get(select).getNombrePropietario());
 				txtNumero.setText(proveedorSelect.getLista().get(select).getNumeroCuentaBancaria());
@@ -259,8 +283,8 @@ public class Formulario_PagoVale extends Composite{
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				
-				/*loginService.Insertar_PagoVale(idVale, dateBox.getValue(), txtRef.getText(), txtUser.getText(), Double.valueOf(txtCantidad.getText()), new AsyncCallback<Long>() {
+				loginService.Insertar_PagoVale(dateBox.getValue(),txtBanco.getText(),txtNombre.getText(),dateBox2.getValue(),0L,
+						proveedorSelect.getIdProveedor(),txtNumero.getText(),Double.valueOf(txtporcentaje.getText()),0.0,txtRef.getText(), txtUser.getItemText(txtUser.getSelectedIndex()), Double.valueOf(txtCancelar.getText()), Double.valueOf(txtCantidad.getText()), new AsyncCallback<Long>() {
 					
 					@Override
 					public void onSuccess(Long result) {
@@ -282,7 +306,7 @@ public class Formulario_PagoVale extends Composite{
 								});
 						 }
 						dialogo.hide();
-						Window.open("/FinanGenerarSolicitudCheque?idPago="+result,"_blank", "");
+						//Window.open("/FinanGenerarSolicitudCheque?idPago="+result,"_blank", "");
 					}
 					
 					@Override
@@ -290,7 +314,8 @@ public class Formulario_PagoVale extends Composite{
 						// TODO Auto-generated method stub
 						
 					}
-				});*/
+				});
+			
 
 			}
 		});

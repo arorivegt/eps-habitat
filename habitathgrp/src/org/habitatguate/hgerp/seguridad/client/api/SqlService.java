@@ -48,7 +48,9 @@ public interface SqlService extends RemoteService{
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
-	Long Insertar_PagoVale(Long idVale, Date fechaVale, String serieDocumento, String tipoDocumento, Double valorPago);
+	Long Insertar_PagoVale(Date fechaSolicitud,String banco, String chequeNombre, Date fechadeTransaccion, 
+			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
+			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago);
 	Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial);
 	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
 	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto);

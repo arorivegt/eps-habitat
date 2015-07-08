@@ -23,6 +23,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegCatalogoProducto;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegDetalleEjecucion;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -44,9 +46,14 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 	
 	private AuxHistorialPagoProv auxHistoroial	= new AuxHistorialPagoProv();
 	private SegAfiliado auxAfi					= new SegAfiliado();
-	private List<AuxCatalogoProducto> auxCatalogo		= new ArrayList<AuxCatalogoProducto>();
+	private List<SegDetalleEjecucion> auxdetalle= new ArrayList<SegDetalleEjecucion>();
+	private List<AuxCatalogoProducto> catProductos = new ArrayList<AuxCatalogoProducto>();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
+    
+    private List<String> nombreProduct = new ArrayList<String>();
+    private List<Double> valor = new ArrayList<Double>();
+    private List<String> codigo = new ArrayList<String>();
     
     private SqlServiceImpl finanzasService = new  SqlServiceImpl();
 	/**
@@ -68,7 +75,8 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
         	long idPagoRealizado 			= Long.parseLong(request.getParameter("idPago"));
         	auxHistoroial					= finanzasService.Consultar_SolicitudPagoVales(idPagoRealizado);
         	auxAfi							= finanzasService.getAfiliado(auxHistoroial.getIdAfiliado());
-        //	auxCatalogo						= finanzasService.Consultar_CatalogoProductos();
+            auxdetalle						= finanzasService.Consultar_DetalleEjecucionPorPagoProv(idPagoRealizado);
+            catProductos					= finanzasService.Consultar_CatalogoProductos();
         	
 	        OutputStream out 			= response.getOutputStream();
 	       
@@ -92,6 +100,18 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 
 		            
 		            
+		            for(AuxCatalogoProducto catalogo : catProductos){
+		            	codigo.add(catalogo.getIdProducto());
+						nombreProduct.add(catalogo.getDescripcionProducto());
+						Double totalProducto = 0.0;
+						for(SegDetalleEjecucion ejecutado : auxdetalle){
+							if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+								totalProducto = totalProducto + ejecutado.getSubTotal();
+							}
+						}
+						valor.add(totalProducto);
+					}
+		            
 		            document.add(new Paragraph("SOLICITUD DE " +auxHistoroial.getTipoOperacion(),catFont2));
 		            document.add(new Paragraph("NO. DE SOLICITUD: "+auxHistoroial.getIdHistorialPagoProv(),catFont));
 		            document.add(new Paragraph("FECHA DE SOLICITUD: "+auxHistoroial.getFechaSolicitud(),catFont));
@@ -104,16 +124,13 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            //Tabla del vale
 		            PdfPTable table 	= new PdfPTable(7);
 		        	PdfPCell c1;
-		        	c1 = new PdfPCell(new Phrase("Codigo",catFont2));
-		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("CODIGO",catFont2));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("DESCRIPCION",catFont2));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("LOCAL DONANTE",catFont2));
+		           c1 = new PdfPCell(new Phrase("FONDO LOCAL ",catFont2));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("PROYECTO",catFont2));
@@ -131,8 +148,55 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		           
 		           table.setHeaderRows(1);
 		           
-		                     
-		            
+		           for (int x = 0; x < nombreProduct.size();x++){
+	            		table.addCell(codigo.get(x));
+	            		table.addCell(nombreProduct.get(x));
+	            		table.addCell(" ");
+	            		table.addCell(" ");
+	            		table.addCell("" +valor.get(x));
+	            		table.addCell(" ");
+	            		table.addCell(" ");
+		           }
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           
+		           table.addCell(" ");
+		           table.addCell("DONACION DE MATERIAL Y ACTIVO ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(""+auxHistoroial.getRetenidoDonacion());
+		           
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell("TOTAL DE LA SOLICITUD ");
+		           table.addCell(""+auxHistoroial.getValorPago());
+		           table.addCell(" ");
+		           
+		           table.addCell(" ");
+		           table.addCell("DONACION DE MATERIAL Y ACTIVO ");
+		           table.addCell(" ");
+		           table.addCell(" ");
+		           table.addCell("TOTAL A PAGAR ");
+		           table.addCell(""+auxHistoroial.getValorCancelado());
+		           table.addCell(" ");
+		           
 	
 			 		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -154,10 +218,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.add(new Paragraph("FACTURAS A CANCELAR: "+ auxHistoroial.getSeriesDocumento(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("SOLICITADO POR: WILLIAM FRANKLIN BARRIOS                                         F:________________________________",catFont));
-		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("APROBADO POR:   VICTOR VELASQUEZ   		                                              F:________________________________",catFont));
@@ -167,7 +228,6 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("REVISADO POR : ODILY ESCOBAR                                                          F:________________________________",catFont));
-		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("CHEQUE ELABORADO POR: __________________                                        F:________________________________",catFont));

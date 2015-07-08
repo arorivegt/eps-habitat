@@ -1691,6 +1691,8 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return valor;
 	}
 	
+
+	
 	
 	//------------------------------------------MODIFICAR------------------------------------
     @Override
@@ -1848,6 +1850,21 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return null;
 	}
 	
+	public Long Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion){
+		Long valor = 0L;
+		if(idDetalleEjecucion == null){
+			return valor;
+		}else
+		{
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			final SegVale e = gestorPersistencia.getObjectById(SegVale.class, idVale);
+			final SegDetalleEjecucion ejecucion = gestorPersistencia.getObjectById(SegDetalleEjecucion.class, idDetalleEjecucion);
+			 e.getListadetalle().add(ejecucion);
+			 valor = idVale;
+		}
+		return valor;
+	}
+	
 	public Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal){
 		Long valor = 0L;
 		if(idVale == null){
@@ -1855,7 +1872,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		}else
 		{
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-			 final SegVale e = gestorPersistencia.getObjectById(SegVale.class, idVale);
+			final SegVale e = gestorPersistencia.getObjectById(SegVale.class, idVale);
 			 e.setEstado(true);
 			 e.setFechaVale(fechaVale);
 			 e.setTotalVale(costoTotal);
@@ -1915,7 +1932,21 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return selectB; 
 	}
 	
-	
+	public List<SegDetalleEjecucion> Consultar_DetalleEjecucionPorPagoProv(Long idPagoProv){
+		List<SegDetalleEjecucion> valor = new ArrayList<SegDetalleEjecucion>();
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		final SegHistorialPagoProv query = gestorPersistencia.getObjectById(SegHistorialPagoProv.class,idPagoProv);
+		List<SegVale> valesPagados = query.getVale();
+		
+		for(SegVale vale : valesPagados){
+			List<SegDetalleEjecucion> materialesComprados = vale.getListadetalle();
+			for (SegDetalleEjecucion material : materialesComprados){
+				valor.add(material);
+			}
+		}
+		
+		return valor;
+	}
 	
 	
 	

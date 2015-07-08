@@ -222,6 +222,9 @@ public interface SqlServiceAsync {
 	void Consultar_infoProveedor(Long idProveedor,
 			AsyncCallback<AuxProveedor> callback);
 
+	void Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion,
+			AsyncCallback<Long> callback);
+
 
 
 

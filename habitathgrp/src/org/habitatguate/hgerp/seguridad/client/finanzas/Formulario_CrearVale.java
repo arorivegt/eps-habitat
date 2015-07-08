@@ -393,6 +393,21 @@ public class Formulario_CrearVale extends Composite {
 							@Override
 							public void onSuccess(Long result) {
 								// TODO Auto-generated method stub
+								System.out.println("ejecucion agregado al vale"+result);
+								loginService.Agregar_DetalleEjecucionVale(Long.valueOf(textBox_2.getText()), result, new AsyncCallback<Long>() {
+
+									@Override
+									public void onFailure(Throwable caught) {
+										// TODO Auto-generated method stub
+										
+									}
+
+									@Override
+									public void onSuccess(Long result) {
+										// TODO Auto-generated method stub
+										
+									}
+								});
 								
 							}
 						});

@@ -56,6 +56,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto);
 	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario);
 	String Insertar_CatalogoProducto(String idProducto, String descripcionProducto);
+	Long Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion);
 	Long GenerarIdVale();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();

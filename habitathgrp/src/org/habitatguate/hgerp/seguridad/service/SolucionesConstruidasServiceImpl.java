@@ -120,6 +120,7 @@ public class SolucionesConstruidasServiceImpl extends RemoteServiceServlet imple
 		solicitud.setDepartamentoMunicipioDireccionSolucion(departamentoMunicipioDireccionSolucion);
 		solicitud.setDireccionLugarTrabajoSolicitante(direccionLugarTrabajoSolicitante);
 		solicitud.setDireccionLugarTrabajoConyuge(direccionLugarTrabajoConyuge);
+		solicitud.setEnConstruccion(false);
 
 		try { 
 			gestorPersistencia.makePersistent(solicitud); 

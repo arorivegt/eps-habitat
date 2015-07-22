@@ -7,8 +7,10 @@ import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.PagingDataGrid_MaterialCostruccion.TablaResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -32,7 +34,7 @@ import com.google.gwt.view.client.ProvidesKey;
  * Clase abstracta PaggingDataGrid para establecer la simple pagina inicial del DataGrid  con ListDataProvider
  * 
  */
-public abstract class PagingDataGrid_Proveedor<T> extends Composite {
+public abstract class PagingDataGrid_ReporteCuentaPorPagar<T> extends Composite {
  
     private DataGrid<T> dataGrid;
     private SimplePager pager;
@@ -40,51 +42,56 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
     private ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
-//	private Button botonEliminar;
-	//private Button botonRefresh;
-    final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxProveedor.KEY_PROVIDER);
-    private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+	
 	Iterator<T> iter = null;
 	T objectoEliminado = null;
-    public PagingDataGrid_Proveedor() {
+	
+
+    public PagingDataGrid_ReporteCuentaPorPagar(List<T> dataList) {
+    	this.dataList = dataList;
+    	MyPaginationDataGrid_ReporteCuentaPorPagar.actual = 0;
+    	MyPaginationDataGrid_ReporteCuentaPorPagar.cantProduct = ((AuxReporteCuentasPorPagar)dataList.get(0)).getListaProveedores().size();
+    	MyPaginationDataGrid_ReporteCuentaPorPagar.namesProveedor = ((AuxReporteCuentasPorPagar)dataList.get(0)).getListaProveedores();
+    	
         initWidget(dock);
         dataGrid = new DataGrid<T>(30,
                 GWT.<TablaResources> create(TablaResources.class));
-        dataGrid.setSize("1100px", "300px");
+        dataGrid.setWidth("100%");
 
         SimplePager.Resources pagerResources = GWT
                 .create(SimplePager.Resources.class);
         pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0,
                 true);
         pager.setDisplay(dataGrid);
+
+        
         
         dataProvider = new ListDataProvider<T>();
         dataProvider.setList(new ArrayList<T>());
         dataGrid.setEmptyTableWidget(new HTML("No existen datos a mostrar"));
         ListHandler<T> sortHandler = new ListHandler<T>(dataProvider.getList());
-        dataGrid.setSelectionModel(selectionModel, DefaultSelectionEventManager
-                .<T> createCheckboxManager());
+
+        
+        List<T> list = dataProvider.getList();
+        list.addAll(this.dataList);
+        dataProvider.refresh();
+        
         initTableColumns(dataGrid, sortHandler);
  
         dataGrid.addColumnSortHandler(sortHandler);
  
         dataProvider.addDataDisplay(dataGrid);
         
-  //      botonEliminar = new Button("Eliminar MaterialCostruccion");
-   //     botonRefresh = new Button("Refresh Datos");
+       
         pager.setVisible(true);
         dataGrid.setVisible(true);
-    //    botonEliminar.setVisible(true);
         dock.add(dataGrid, DockPanel.CENTER);
         dock.add(pager, DockPanel.SOUTH);
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
-     //   dock.add(botonRefresh,DockPanel.EAST);
-      //  dock.add(botonEliminar,DockPanel.EAST);
-      
-
+      //  dock.add(botonRefresh,DockPanel.EAST);
+       
     }
  
     public void setEmptyTableWidget() {
@@ -105,60 +112,6 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
         return height;
     }
  
-    public void EliminarFila(){
-    	Set<T> lista = selectionModel.getSelectedSet();
-    	iter = (Iterator<T>) lista.iterator();
-			while (iter.hasNext()){
-					objectoEliminado = iter.next();	
-					loginService.Eliminar_Proveedor(((AuxProveedor)objectoEliminado).getIdProveedor(), 
-							new AsyncCallback<Long>() {
-								
-								@Override
-								public void onSuccess(Long result) {
-				         			dataProvider.getList().remove(objectoEliminado);
-									
-								}
-								
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-					}
-							);
-
-			}
-    }
-    
-    public void AprobarProveedor(){
-    	Set<T> lista = selectionModel.getSelectedSet();
-    	iter = (Iterator<T>) lista.iterator();
-			while (iter.hasNext()){
-					objectoEliminado = iter.next();	
-					//System.out.println(((AuxProveedor)objectoEliminado).getAuxAfiliado().getIdAfiliado());
-					loginService.Actualizar_ProveedorAprobado(((AuxProveedor)objectoEliminado).getIdProveedor(),
-							((AuxProveedor)objectoEliminado).getAuxAfiliado().getIdAfiliado(),
-							new AsyncCallback<Long>() {
-								
-								@Override
-								public void onSuccess(Long result) {
-										dataProvider.getList().remove(objectoEliminado);
-								}
-								
-								@Override
-								public void onFailure(Throwable caught) {
-									// TODO Auto-generated method stub
-									
-								}
-					}
-							);
-
-			}
-    }
-    
-    public void ActualizarTabla(){
-    	dataProvider.refresh();
-    }
     public void setHeight(String height) {
         this.height = height;
         dataGrid.setHeight(height);
@@ -186,11 +139,11 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
     public void setDataProvider(ListDataProvider<T> dataProvider) {
         this.dataProvider = dataProvider;
     }
- 
     public interface TablaResources extends DataGrid.Resources {
-    	  interface Style extends DataGrid.Style { }
+    	  @Override
+    	    @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGrid2.css"})
+    	    DataGrid.Style dataGridStyle();
+      }
 
-    	  @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGrid2.css"})
-    	  public Style dataGridStyle();
-    }
+    
 }

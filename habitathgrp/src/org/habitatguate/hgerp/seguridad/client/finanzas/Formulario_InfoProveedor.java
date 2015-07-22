@@ -10,6 +10,8 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxContactoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCuentaBancariaProv;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
@@ -28,6 +30,7 @@ public class Formulario_InfoProveedor extends Composite{
     TablaGWT_ContactoProv e = null;
     TablaGWT_FormasPago e2 = null;
     Long idProveedor = 0L;
+    Long idAfiliado = 0L;
     Timer timer2 = new Timer(){
   	  public void run() {
 			loginService.Consultar_ContactosProv(idProveedor,new AsyncCallback<List<AuxContactoProv>>() {
@@ -66,8 +69,9 @@ public class Formulario_InfoProveedor extends Composite{
 
     	  }
       };
-	Formulario_InfoProveedor(final Long idProveedor){
+	Formulario_InfoProveedor(final Long idProveedor, final Long idAfiliado){
 	this.idProveedor = idProveedor;
+	this.idAfiliado = idAfiliado;
 	System.out.println(idProveedor);
 		
 	final Grid grid = new Grid(4, 1);
@@ -155,7 +159,7 @@ public class Formulario_InfoProveedor extends Composite{
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 
-			loginService.Insertar_ContactoProveedor(idProveedor,textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),textBox_4.getText(),
+			loginService.Insertar_ContactoProveedor(idProveedor,textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),textBox_4.getText(),idAfiliado,
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -230,14 +234,12 @@ public class Formulario_InfoProveedor extends Composite{
 	absolutePanel2.add(listTipoCuenta, 257, 29);
 	listTipoCuenta.setSize("227px", "34px");
 	
-	Label labelBancoCuenta = new Label("Banco Cuenta Bancaria");
+	Label labelBancoCuenta = new Label("Banco Emisor de Cuenta");
 	labelBancoCuenta.setStyleName("label");
 	absolutePanel2.add(labelBancoCuenta, 494, 10);
-	labelBancoCuenta.setSize("157px", "19px");
+	labelBancoCuenta.setSize("220px", "19px");
 	
-	final ListBox listBancos = new ListBox();
-	listBancos.addItem("GT Continental", "Industrial");
-	listBancos.addItem("Industrial", "Industrial");
+	final TextBox listBancos = new TextBox();
 	listBancos.setStylePrimaryName("gwt-TextBox2");
 	listBancos.setStyleName("gwt-TextBox2");
 	absolutePanel2.add(listBancos, 494, 29);
@@ -267,12 +269,25 @@ public class Formulario_InfoProveedor extends Composite{
 	absolutePanel2.add(labelTitular, 960, 10);
 	labelTitular.setSize("200px", "13px");
 	
+	listTipoTransaccion.addChangeHandler(new ChangeHandler() {
+		public void onChange(ChangeEvent event) {
+			int select = Integer.valueOf(listTipoTransaccion.getValue(listTipoTransaccion.getSelectedIndex()));
+			if (select == 1){
+				numeroCuenta.setVisible(true);
+				listBancos.setVisible(true);
+			}else{
+				numeroCuenta.setVisible(false);
+				listBancos.setVisible(false);
+			}
+		}
+    });
+	
 	Button button2 = new Button("Send");
 	button2.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!numeroCuenta.getText().equals("")){
 
-			loginService.Insertar_FormaPagoProv(idProveedor, listTipoTransaccion.getValue(listTipoTransaccion.getSelectedIndex()), listTipoCuenta.getValue(listTipoCuenta.getSelectedIndex()), listBancos.getValue(listBancos.getSelectedIndex()), numeroCuenta.getText(), titular.getText(),
+			loginService.Insertar_FormaPagoProv(idProveedor, listTipoTransaccion.getValue(listTipoTransaccion.getSelectedIndex()), listTipoCuenta.getValue(listTipoCuenta.getSelectedIndex()), listBancos.getText(), numeroCuenta.getText(), titular.getText(),idAfiliado,
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 

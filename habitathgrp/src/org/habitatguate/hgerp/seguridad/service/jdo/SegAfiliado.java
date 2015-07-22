@@ -96,6 +96,22 @@ public class SegAfiliado implements Serializable {
 		this.empleados = empleados;
 	}
 
+	public List<SegBeneficiario> getBeneficiario() {
+		return beneficiario;
+	}
+
+	public void setBeneficiario(List<SegBeneficiario> beneficiario) {
+		this.beneficiario = beneficiario;
+	}
+
+	public List<SegProveedor> getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(List<SegProveedor> proveedor) {
+		this.proveedor = proveedor;
+	}
+
 	
 	
 

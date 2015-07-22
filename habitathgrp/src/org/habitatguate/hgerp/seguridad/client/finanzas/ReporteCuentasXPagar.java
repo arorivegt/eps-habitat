@@ -10,6 +10,8 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
@@ -36,7 +38,7 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 
-public class ReportePagosRealizados extends Composite{
+public class ReporteCuentasXPagar extends Composite{
 	private Mensaje mensaje; 
     private  Grid grid;
     private ListBox listBox;
@@ -52,7 +54,7 @@ public class ReportePagosRealizados extends Composite{
 	private Label lblSeleccioneLosEmpleados;
 	
 	private long idBeneficiario;
-	TablaGWT_PagosRealizados e = null;
+	TablaGWT_ReporteCuentaPorPagar e = null;
 	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -62,7 +64,7 @@ public class ReportePagosRealizados extends Composite{
      */
 	
 	
-	public ReportePagosRealizados() {
+	public ReporteCuentasXPagar() {
 
     	load = new Loading();
         load.Mostrar();
@@ -260,32 +262,13 @@ public class ReportePagosRealizados extends Composite{
 	
 
 	public void buscar(){
-		System.out.println("beneficiario "+ idBeneficiario);
-		/*loginService.ConsultaRecord_Beneficiario(0L, idBeneficiario, new AsyncCallback<AuxBeneficiario>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(AuxBeneficiario result) {
-				// TODO Auto-generated method stub
-				
-				System.out.println("Se obtuvo el siguiente beneficiario:" + result.getNomBeneficiario());
-				
-
-				
-			}
-		});*/
-		Window.open("/FinanGenerarPdfReporteRecord?idBeneficiario="+idBeneficiario, "_blank", "");
 		
 	}
 	
 	public void BuscarGeneral(){
 		System.out.println("General");
-		loginService.Consulta_PagosRealizados(0L,new AsyncCallback<List<AuxSolucion>>() {
+		loginService.ConsultarCuentasXPagar_PorProveedores(new AsyncCallback<List<AuxReporteCuentasPorPagar>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -294,11 +277,19 @@ public class ReportePagosRealizados extends Composite{
 			}
 
 			@Override
-			public void onSuccess(List<AuxSolucion> result) {
+			public void onSuccess(List<AuxReporteCuentasPorPagar> result) {
 				// TODO Auto-generated method stub
-				e = new TablaGWT_PagosRealizados(result);
+				
+				e = new TablaGWT_ReporteCuentaPorPagar(result);
 				grid.setWidget(1, 0,e);
 				e.setSize("1700px", "300px");
+			/*	for (AuxReporteCuentasPorPagar auxReporte : result){
+					System.out.println(auxReporte.getAuxSolucion().getIdSolucion());
+					for(AuxProveedor auxProv : auxReporte.getListaProveedores()){
+						System.out.println(auxProv.getTotalCuentaPorPagar());
+					}
+				}*/
+
 				
 			}
 		});

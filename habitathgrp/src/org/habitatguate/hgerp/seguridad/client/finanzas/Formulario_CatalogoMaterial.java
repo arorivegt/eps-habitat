@@ -6,6 +6,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoProducto;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,6 +19,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 
 public class Formulario_CatalogoMaterial extends Composite{
@@ -58,26 +60,36 @@ public class Formulario_CatalogoMaterial extends Composite{
 		
 		//----------------------------primera fila---------------------------------
 		
-		Label label = new Label("Codigo Producto");
+		Label labelProductos = new Label("Tipo de Producto");
+		labelProductos.setStyleName("label");
+		absolutePanel.add(labelProductos, 10, 10);
+		labelProductos.setSize("157px", "13px");
+		
+		final ListBox listaProducto = new ListBox();
+		listaProducto.setStyleName("label");
+		absolutePanel.add(listaProducto,10,29);
+		listaProducto.setSize("200px", "25px");
+		
+		Label label = new Label("Codigo Item");
 		label.setStyleName("label");
-		absolutePanel.add(label, 20, 10);
+		absolutePanel.add(label, 230, 10);
 		label.setSize("157px", "13px");
 		
-		Label label_1 = new Label("Categoria Producto");
+		Label label_1 = new Label("Subtipo Item");
 		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 257, 10);
+		absolutePanel.add(label_1, 750, 10);
 		label_1.setSize("192px", "13px");
 		
 		final TextBox textBox = new TextBox();
 		textBox.setStyleName("gwt-TextBox2");
 		textBox.setMaxLength(100);
-		absolutePanel.add(textBox, 20, 29);
+		absolutePanel.add(textBox, 230, 29);
 		textBox.setSize("227px", "34px");
 		
 		final TextBox textBox_1 = new TextBox();
 		textBox_1.setStyleName("gwt-TextBox2");
 		textBox_1.setMaxLength(100);
-		absolutePanel.add(textBox_1, 257, 29);
+		absolutePanel.add(textBox_1, 750, 29);
 		textBox_1.setSize("227px", "34px");
 		
 		Label label_2 = new Label("Nombre Producto");
@@ -105,8 +117,8 @@ public class Formulario_CatalogoMaterial extends Composite{
 			public void onClick(ClickEvent event) {
 				if (!textBox.getText().equals("")){
 
-				loginService.Insertar_Catalogo(textBox.getText(), textBox_2.getText(), textBox_1.getText(),
-						new AsyncCallback<Long>(){
+				loginService.Insertar_Catalogo(textBox.getText(), textBox_2.getText(), textBox_1.getText(),listaProducto.getValue(listaProducto.getSelectedIndex()),
+						new AsyncCallback<String>(){
 					@Override		
 	                public void onFailure(Throwable caught) 
 	                {
@@ -114,7 +126,7 @@ public class Formulario_CatalogoMaterial extends Composite{
 	                }
 
 					@Override
-	                public void onSuccess(Long result)
+	                public void onSuccess(String result)
 	                {	
 	                	timer2.schedule(2000);	
 	                	Window.alert("Nuevo Catalogo Material con el codigo: "+ result);
@@ -138,7 +150,7 @@ public class Formulario_CatalogoMaterial extends Composite{
 
 		button.setText("Nuevo Producto");
 		button.setStyleName("finanButton");
-		absolutePanel.add(button, 968, 29);
+		absolutePanel.add(button, 1000, 29);
 		button.setSize("157px", "30px");
 		
 		
@@ -161,6 +173,25 @@ public class Formulario_CatalogoMaterial extends Composite{
 				
 			}
 		});	
+		
+		
+		loginService.Consultar_CatalogoProductos(new AsyncCallback<List<AuxCatalogoProducto>>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccess(List<AuxCatalogoProducto> result) {
+				// TODO Auto-generated method stub
+				for (AuxCatalogoProducto aux : result){
+					listaProducto.addItem(aux.getDescripcionProducto(), aux.getIdProducto());
+				}
+				
+			}
+		});
 	}
 	
 	

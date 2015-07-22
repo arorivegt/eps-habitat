@@ -38,6 +38,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     TablaGWT_MaterialCostruccion e = null;
     public AuxProveedor selectProveedor = null;
+    public AuxCatalogoMaterial selectMaterial = null;
     Timer timer2 = new Timer(){
   	  public void run() {
 			loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
@@ -113,15 +114,6 @@ public class Buscador_MaterialCostruccion extends Composite{
 	absolutePanel.setSize("1025px", "90px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
-	Label labelProductos = new Label("Tipo de Producto");
-	labelProductos.setStyleName("label");
-	absolutePanel.add(labelProductos, 10, 66);
-	labelProductos.setSize("157px", "13px");
-	
-	final ListBox listaProducto = new ListBox();
-	listaProducto.setStyleName("label");
-	absolutePanel.add(listaProducto,10,85);
-	listaProducto.setSize("200px", "25px");
 	
 	Label label = new Label("Nombre Material Costruccion");
 	label.setStyleName("label");
@@ -197,7 +189,8 @@ public class Buscador_MaterialCostruccion extends Composite{
 			if (!suggestBox2.getText().equals("")){
 				
 				
-			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),listaProducto.getValue(listaProducto.getSelectedIndex()),
+			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),selectMaterial.getIdProducto(),
+					selectProveedor.getAuxAfiliado().getIdAfiliado(),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -242,6 +235,21 @@ public class Buscador_MaterialCostruccion extends Composite{
 		}
 	});
 	
+	suggestBox2.addSelectionHandler(new SelectionHandler<SuggestOracle.Suggestion>() {
+		
+		@Override
+		public void onSelection(SelectionEvent<Suggestion> event) {
+			// TODO Auto-generated method stub
+			CatalogoMultiWordSuggestion select = (CatalogoMultiWordSuggestion)event.getSelectedItem();
+			selectMaterial = select.getAfiliado();
+			System.out.println(selectMaterial.getIdProducto());
+			
+		}
+	});
+	
+	
+	
+	
 	loginService.ConsultaTodosMaterialCostruccion(new AsyncCallback<List<AuxMaterialCostruccion>>() {
 		
 		@Override
@@ -257,24 +265,6 @@ public class Buscador_MaterialCostruccion extends Composite{
 		@Override
 		public void onFailure(Throwable caught) {
 			System.out.println(caught);
-			
-		}
-	});
-	
-	loginService.Consultar_CatalogoProductos(new AsyncCallback<List<AuxCatalogoProducto>>() {
-
-		@Override
-		public void onFailure(Throwable caught) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void onSuccess(List<AuxCatalogoProducto> result) {
-			// TODO Auto-generated method stub
-			for (AuxCatalogoProducto aux : result){
-				listaProducto.addItem(aux.getDescripcionProducto(), aux.getIdProducto());
-			}
 			
 		}
 	});

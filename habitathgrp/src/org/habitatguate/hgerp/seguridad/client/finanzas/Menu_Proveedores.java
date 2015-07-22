@@ -79,8 +79,8 @@ public class Menu_Proveedores extends Composite{
 		panel3.setWidget(bpa);
 	}
 	
-	public void ItemCuatro(Long idProveedor){
-		fip = new Formulario_InfoProveedor(idProveedor);
+	public void ItemCuatro(Long idProveedor, Long idAfiliado){
+		fip = new Formulario_InfoProveedor(idProveedor,idAfiliado);
 		panel4.setWidget(fip);
 	}
 	

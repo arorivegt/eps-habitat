@@ -23,25 +23,15 @@ public class SegProveedor implements Serializable{
 	@Persistent
 	private String nomProveedor;
 	@Persistent
+	private String numeroNit;
+	@Persistent
 	private String dirProveedor;
 	@Persistent
 	private String telProveedor;
 	@Persistent
-	private Boolean servicioEntrega;	
-	@Persistent
-	private Date fechaIngreso;
-	@Persistent
-	private Boolean aprobadoComision;
-	@Persistent
 	private String paginaWeb;
 	@Persistent
-	private String numeroNit;
-	@Persistent
 	private String personaJuridica;
-	@Persistent
-	private String observaciones;
-	
-	//nuevos datos
 	@Persistent
 	private String razonSocial;
 	@Persistent
@@ -53,17 +43,50 @@ public class SegProveedor implements Serializable{
 	@Persistent
 	private String tipoProveedor;
 	@Persistent
+	private String tiempoDeTrabajarConHG;
+	
+	private SegAfiliado afiliado;
+	
+	@Persistent
+	private String Departamentos;
+	@Persistent
+	private String Municipios;
+	@Persistent
+	private String ubicacionSucursales;
+	@Persistent
 	private String productosfrece;
 	@Persistent
 	private String disponibilidadProd;
+	@Persistent
+	private Boolean servicioEntrega;
 	@Persistent
 	private String tiempoEntrega;
 	@Persistent
 	private String regimenTributario;
 	@Persistent
+	private String observaciones;
+	@Persistent
 	private String aceptaDonacion;
 	@Persistent
+	private String formaDonacion;
+	@Persistent
 	private double porcentDonacion;
+	@Persistent
+	private String frecuenciaDonacion;
+	@Persistent
+	private Boolean contribuyeEventos;
+	@Persistent
+	private String cualesyComoEventos;
+	@Persistent
+	private Boolean aceptaCredito;
+	@Persistent
+	private double montoMaximo;
+	@Persistent
+	private int tiempoMaximo;
+	@Persistent
+	private Date fechaIngreso;
+	@Persistent
+	private Boolean aprobadoComision;
 	
 	@Persistent
     private List <Long> contactoProveedor = new ArrayList<Long>();
@@ -73,7 +96,7 @@ public class SegProveedor implements Serializable{
 		
 	//------
 	
-	private SegAfiliado afiliado;
+	
 	
 	@Persistent(mappedBy = "proveedor")
     @Element(dependent = "true")
@@ -240,6 +263,74 @@ public class SegProveedor implements Serializable{
 	public void setPorcentDonacion(double porcentDonacion) {
 		this.porcentDonacion = porcentDonacion;
 	}
+	public String getTiempoDeTrabajarConHG() {
+		return tiempoDeTrabajarConHG;
+	}
+	public void setTiempoDeTrabajarConHG(String tiempoDeTrabajarConHG) {
+		this.tiempoDeTrabajarConHG = tiempoDeTrabajarConHG;
+	}
+	public String getDepartamentos() {
+		return Departamentos;
+	}
+	public void setDepartamentos(String departamentos) {
+		Departamentos = departamentos;
+	}
+	public String getMunicipios() {
+		return Municipios;
+	}
+	public void setMunicipios(String municipios) {
+		Municipios = municipios;
+	}
+	public String getUbicacionSucursales() {
+		return ubicacionSucursales;
+	}
+	public void setUbicacionSucursales(String ubicacionSucursales) {
+		this.ubicacionSucursales = ubicacionSucursales;
+	}
+	public String getFormaDonacion() {
+		return formaDonacion;
+	}
+	public void setFormaDonacion(String formaDonacion) {
+		this.formaDonacion = formaDonacion;
+	}
+	public String getFrecuenciaDonacion() {
+		return frecuenciaDonacion;
+	}
+	public void setFrecuenciaDonacion(String frecuenciaDonacion) {
+		this.frecuenciaDonacion = frecuenciaDonacion;
+	}
+	public Boolean getContribuyeEventos() {
+		return contribuyeEventos;
+	}
+	public void setContribuyeEventos(Boolean contribuyeEventos) {
+		this.contribuyeEventos = contribuyeEventos;
+	}
+	public String getCualesyComoEventos() {
+		return cualesyComoEventos;
+	}
+	public void setCualesyComoEventos(String cualesyComoEventos) {
+		this.cualesyComoEventos = cualesyComoEventos;
+	}
+	public Boolean getAceptaCredito() {
+		return aceptaCredito;
+	}
+	public void setAceptaCredito(Boolean aceptaCredito) {
+		this.aceptaCredito = aceptaCredito;
+	}
+	public double getMontoMaximo() {
+		return montoMaximo;
+	}
+	public void setMontoMaximo(double montoMaximo) {
+		this.montoMaximo = montoMaximo;
+	}
+	public int getTiempoMaximo() {
+		return tiempoMaximo;
+	}
+	public void setTiempoMaximo(int tiempoMaximo) {
+		this.tiempoMaximo = tiempoMaximo;
+	}
+	
+	
 	
 	
 	

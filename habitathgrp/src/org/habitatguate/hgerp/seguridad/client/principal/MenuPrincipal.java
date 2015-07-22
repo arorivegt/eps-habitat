@@ -19,6 +19,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoSolucion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteCuentasXPagar;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReportePagosRealizados;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteResumenCréditos;
@@ -248,6 +249,13 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 		
+		final Command cmdfinaReporte5 = new Command() {
+			public void execute() {
+				finaReporte5();
+				
+			}
+		};
+		
 
 		// -- Soluciones Construidas
 
@@ -421,6 +429,7 @@ public class MenuPrincipal extends Composite {
 		MenuReportesFinanzas.addItem("Reporte Resumen de Creditos", cmdfinaReporte2);
 		MenuReportesFinanzas.addItem("Comparativo entre lo planificado y ejecutado", cmdfinaReporte3);
 		MenuReportesFinanzas.addItem("Reporte de Pagos realizados", cmdfinaReporte4);
+		MenuReportesFinanzas.addItem("Reporte Cuentas Por Pagar", cmdfinaReporte5);
 
 		//soluciones menu
 		final MenuBar MenuInventarioMateriales = new MenuBar(true);
@@ -633,6 +642,15 @@ public class MenuPrincipal extends Composite {
 
 		initWidget(MenuVertical);
 
+	}
+
+	protected void finaReporte5() {
+		// TODO Auto-generated method stub
+		ReporteCuentasXPagar fr5 = new ReporteCuentasXPagar();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr5);
+		
 	}
 
 	protected void finaReporte4() {

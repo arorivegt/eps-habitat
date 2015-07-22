@@ -18,6 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
@@ -40,21 +41,50 @@ public interface SqlService extends RemoteService{
 	Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado);
 	Long Insertar_Proveedor(Boolean aprobadoComision,String dirProveedor,Date fechaIngreso,String nomProveedor,String numeroNit,String paginaWeb,String personaJuridica,Boolean servicioEntrega,String telProveedor,String observaciones);
 	Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
-			String dirProveedor,Date fechaIngreso,String nomProveedor,String numeroNit,String paginaWeb,String personaJuridica,Boolean servicioEntrega,
-			String telProveedor,String observaciones,			
-			String razonSocial,	String actividadEcono,String aceptaExencion,String relacionConProv,	String tipoProveedor,
-			String productosfrece,String disponibilidadProd,String tiempoEntrega,String regimenTributario,String aceptaDonacion,double porcentDonacion); 
-	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto);
+			String nomProveedor,
+			 String numeroNit,
+			 String dirProveedor,
+			 String telProveedor,
+			 String paginaWeb,
+			 String personaJuridica,
+			 String razonSocial,
+			 String actividadEcono,
+			 String aceptaExencion,
+			 String relacionConProv,
+			 String tipoProveedor,
+			 String tiempoDeTrabajarConHG,
+			 String Departamentos,
+			 String Municipios,
+			 String ubicacionSucursales,
+			 String productosfrece,
+			 String disponibilidadProd,
+			 Boolean servicioEntrega,
+			 String tiempoEntrega,
+			 String regimenTributario,
+			 String observaciones,
+			 String aceptaDonacion,
+			 String formaDonacion,
+			 double porcentDonacion,
+			 String frecuenciaDonacion,
+			 Boolean contribuyeEventos,
+			 String cualesyComoEventos,
+			 Boolean aceptaCredito,
+			 double montoMaximo,
+			 int tiempoMaximo,
+			 Date fechaIngreso,
+			 Long idAfiliado
+			); 
+	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_PagoVale(Date fechaSolicitud,String banco, String chequeNombre, Date fechadeTransaccion, 
 			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
 			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago);
-	Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial);
+	String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto);
 	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
-	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto);
-	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario);
+	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto, Long idAfiliado);
+	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario, Long idAfiliado);
 	String Insertar_CatalogoProducto(String idProducto, String descripcionProducto);
 	Long Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion);
 	Long GenerarIdVale();
@@ -77,23 +107,24 @@ public interface SqlService extends RemoteService{
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
-	AuxProveedor Consultar_infoProveedor(Long idProveedor);
+	AuxProveedor Consultar_infoProveedor(Long idProveedor,Long idAfiliado);
 	List<AuxCatalogoMaterial> ConsultaTodosProductosCatalogo();
 	List<AuxValeBeneficiario> ConsultarValesPendientes_Aprobar(Long idAfiliado);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion();
 	List<AuxSolucion> Consulta_PagosRealizados(Long idBeneficiario);
+	List<AuxReporteCuentasPorPagar> ConsultarCuentasXPagar_PorProveedores();
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
 	Long Eliminar_MaterialCostruccion(Long id);
 	Long Eliminar_Proveedor(Long id);
-	Long Eliminar_ProductoCatalogo(Long id);
+	Long Eliminar_ProductoCatalogo(String id);
 	Long Actualizar_Parametro(Long id,String nomParam,int codContable,int codUno, int codDos);
 	Long Actualizar_Afiliado(Long id,String nomAfiliado,String dirAfiliado,String depAfiliado, String munAfiliado);
 	Long Actualizar_Beneficiario(Long id,String nomBeneficiario,String dirBeneficiario,int telBeneficiario);
 	Long Actualizar_MaterialCostruccion(Long id,String nomMaterialCostruccion,Double precioUnitario,String unidadMetrica);
 	Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor);
-	Long Actualizar_ProveedorAprobado(Long id);
+	Long Actualizar_ProveedorAprobado(Long id,Long idAfiliado);
 	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
 	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
 	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);

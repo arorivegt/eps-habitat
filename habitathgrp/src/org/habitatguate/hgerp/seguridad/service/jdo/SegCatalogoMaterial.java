@@ -16,14 +16,14 @@ import javax.persistence.OneToMany;
 
 public class SegCatalogoMaterial implements Serializable {
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long idCatalogoMaterial;
 	@Persistent
-	private String idMaterial;
+	private String idCatalogoMaterial;
 	@Persistent
 	private String nombreMaterial;
 	@Persistent
-	private String categoriaMaterial;
+	private String tipoMaterial;
+	@Persistent
+	private String idProducto;
 	@Persistent
 	private int status;
 	
@@ -39,32 +39,12 @@ public class SegCatalogoMaterial implements Serializable {
 		this.status = status;
 	}
 
-	public String getCategoriaMaterial() {
-		return categoriaMaterial;
-	}
-
-	public void setCategoriaMaterial(String categoriaMaterial) {
-		this.categoriaMaterial = categoriaMaterial;
-	}
-
-	public SegCatalogoMaterial(){
-		super();
-	}
-
-	public Long getIdCatalogoMaterial() {
+	public String getIdCatalogoMaterial() {
 		return idCatalogoMaterial;
 	}
 
-	public void setIdCatalogoMaterial(Long idCatalogoMaterial) {
+	public void setIdCatalogoMaterial(String idCatalogoMaterial) {
 		this.idCatalogoMaterial = idCatalogoMaterial;
-	}
-
-	public String getIdMaterial() {
-		return idMaterial;
-	}
-
-	public void setIdMaterial(String idMaterial) {
-		this.idMaterial = idMaterial;
 	}
 
 	public String getNombreMaterial() {
@@ -74,6 +54,24 @@ public class SegCatalogoMaterial implements Serializable {
 	public void setNombreMaterial(String nombreMaterial) {
 		this.nombreMaterial = nombreMaterial;
 	}
+
+	public String getTipoMaterial() {
+		return tipoMaterial;
+	}
+
+	public void setTipoMaterial(String tipoMaterial) {
+		this.tipoMaterial = tipoMaterial;
+	}
+
+	public String getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	
 	
 	
 }

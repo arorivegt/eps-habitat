@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.ValueListBox;
 public class Formulario_CuentasXPagar extends Composite  {
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	public long idProveedorActual = 0L;
+	public long idAfiliadoProv = 0L;
 	Formulario_PagoVale formularioPago;
     TablaGWT_ListaVale e = null;
 	
@@ -84,6 +85,8 @@ public class Formulario_CuentasXPagar extends Composite  {
 					public void onValueChange(
 							ValueChangeEvent<AuxProveedor> event) {
 						 idProveedorActual = event.getValue().getIdProveedor();
+						 idAfiliadoProv = event.getValue().getAuxAfiliado().getIdAfiliado();
+						 System.out.println(idAfiliadoProv);
 							loginService.ConsultarValesPendientes_unProveedor(idProveedorActual, new AsyncCallback<List<AuxVale>>() {
 
 								@Override
@@ -117,7 +120,7 @@ public class Formulario_CuentasXPagar extends Composite  {
 			public void onClick(ClickEvent event) {
 				Set<AuxVale> total= e.grid.selectionModel.getSelectedSet();
 				if (!total.isEmpty()){
-				formularioPago = new Formulario_PagoVale(total,idProveedorActual);
+				formularioPago = new Formulario_PagoVale(total,idProveedorActual,idAfiliadoProv);
 			//	formularioPago.setMensaje();
 				}
 			}

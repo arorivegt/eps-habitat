@@ -93,8 +93,8 @@ public class ReporteRecordSoluciones extends Composite   {
 		
 		listBox = new ListBox();
 		listBox.addItem("Beneficiario");
-		listBox.addItem("Afiliado");
-		listBox.addItem("General");
+		//listBox.addItem("Afiliado");
+		//listBox.addItem("General");
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 

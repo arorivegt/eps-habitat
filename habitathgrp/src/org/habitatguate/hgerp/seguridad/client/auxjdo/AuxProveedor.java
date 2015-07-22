@@ -70,13 +70,26 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 
 	private double porcentDonacion;
 	
+	private AuxAfiliado auxAfiliado;
+	
+	private double totalCuentaPorPagar;
 	
 	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
 
 	
+	public AuxProveedor() {
+		auxAfiliado = new AuxAfiliado();
+	}
 	
-	
+	public AuxAfiliado getAuxAfiliado() {
+		return auxAfiliado;
+	}
+
+	public void setAuxAfiliado(AuxAfiliado auxAfiliado) {
+		this.auxAfiliado = auxAfiliado;
+	}
+
 	public String getRazonSocial() {
 		return razonSocial;
 	}
@@ -260,6 +273,16 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
+	public double getTotalCuentaPorPagar() {
+		return totalCuentaPorPagar;
+	}
+
+	public void setTotalCuentaPorPagar(double totalCuentaPorPagar) {
+		this.totalCuentaPorPagar = totalCuentaPorPagar;
+	}
+	
+	
 
 	
 }

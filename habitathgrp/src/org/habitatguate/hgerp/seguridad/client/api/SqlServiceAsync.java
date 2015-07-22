@@ -18,6 +18,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
@@ -105,14 +106,14 @@ public interface SqlServiceAsync {
 
 	void Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,
 			String nomMaterialCostruccion, String unidadMetrica,
-			Double precioUnitario, String idProducto, AsyncCallback<Long> callback);
+			Double precioUnitario, String idProducto,Long idAfiliado, AsyncCallback<Long> callback);
 
 	void Eliminar_Proveedor(Long id, AsyncCallback<Long> callback);
 
 	void ConsultaTodosProveedor_SinAprobar(Long Afiliado,
 			AsyncCallback<List<AuxProveedor>> callback);
 
-	void Actualizar_ProveedorAprobado(Long id, AsyncCallback<Long> callback);
+	void Actualizar_ProveedorAprobado(Long id,Long idAfiliado, AsyncCallback<Long> callback);
 
 	void ConsultaTodosProveedor_PorAfiliadoAprobados(Long Afiliado,
 			AsyncCallback<List<AuxProveedor>> callback);
@@ -157,13 +158,12 @@ public interface SqlServiceAsync {
 			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
 			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago, AsyncCallback<Long> callback);
 
-	void Insertar_Catalogo(String idMaterial, String nombreMaterial,
-			String categoriaMaterial, AsyncCallback<Long> callback);
+	void Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,AsyncCallback<String> callback);
 
 	void ConsultaTodosProductosCatalogo(
 			AsyncCallback<List<AuxCatalogoMaterial>> callback);
 
-	void Eliminar_ProductoCatalogo(Long id, AsyncCallback<Long> callback);
+	void Eliminar_ProductoCatalogo(String id, AsyncCallback<Long> callback);
 
 	void ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario,
 			AsyncCallback<AuxBeneficiario> callback);
@@ -171,14 +171,38 @@ public interface SqlServiceAsync {
 	void Consulta_SolucionesGenerales(AsyncCallback<List<AuxSolucion>> callback);
 
 	void Insertar_ProveedorCompleto(Boolean aprobadoComision,
-			String dirProveedor, Date fechaIngreso, String nomProveedor,
-			String numeroNit, String paginaWeb, String personaJuridica,
-			Boolean servicioEntrega, String telProveedor, String observaciones,
-			String razonSocial, String actividadEcono, String aceptaExencion,
-			String relacionConProv, String tipoProveedor,
-			String productosfrece, String disponibilidadProd,
-			String tiempoEntrega, String regimenTributario,
-			String aceptaDonacion, double porcentDonacion,
+			String nomProveedor,
+			 String numeroNit,
+			 String dirProveedor,
+			 String telProveedor,
+			 String paginaWeb,
+			 String personaJuridica,
+			 String razonSocial,
+			 String actividadEcono,
+			 String aceptaExencion,
+			 String relacionConProv,
+			 String tipoProveedor,
+			 String tiempoDeTrabajarConHG,
+			 String Departamentos,
+			 String Municipios,
+			 String ubicacionSucursales,
+			 String productosfrece,
+			 String disponibilidadProd,
+			 Boolean servicioEntrega,
+			 String tiempoEntrega,
+			 String regimenTributario,
+			 String observaciones,
+			 String aceptaDonacion,
+			 String formaDonacion,
+			 double porcentDonacion,
+			 String frecuenciaDonacion,
+			 Boolean contribuyeEventos,
+			 String cualesyComoEventos,
+			 Boolean aceptaCredito,
+			 double montoMaximo,
+			 int tiempoMaximo,
+			 Date fechaIngreso
+			,Long idAfiliado,
 			AsyncCallback<Long> callback);
 
 	void Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago,
@@ -189,11 +213,11 @@ public interface SqlServiceAsync {
 
 	void Insertar_ContactoProveedor(Long idProveedor, String nomContacto,
 			String dirContacto, String telContacto, String correoContacto,
-			String cellphoneContacto, AsyncCallback<Long> callback);
+			String cellphoneContacto, Long idAfiliado, AsyncCallback<Long> callback);
 
 	void Insertar_FormaPagoProv(Long idProveedor, String tipoPago,
 			String tipoCuentaBancaria, String bancoCuentaBancaria,
-			String numeroCuentaBancaria, String nombrePropietario,
+			String numeroCuentaBancaria, String nombrePropietario, Long idAfiliado,
 			AsyncCallback<Long> callback);
 
 	void Consultar_FormasPago(Long idProveedor,
@@ -219,11 +243,14 @@ public interface SqlServiceAsync {
 
 	void Consulta_PagosRealizados(Long idBeneficiario,AsyncCallback<List<AuxSolucion>> callback);
 
-	void Consultar_infoProveedor(Long idProveedor,
+	void Consultar_infoProveedor(Long idProveedor,Long idAfiliado,
 			AsyncCallback<AuxProveedor> callback);
 
 	void Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion,
 			AsyncCallback<Long> callback);
+
+	void ConsultarCuentasXPagar_PorProveedores(
+			AsyncCallback<List<AuxReporteCuentasPorPagar>> callback);
 
 
 

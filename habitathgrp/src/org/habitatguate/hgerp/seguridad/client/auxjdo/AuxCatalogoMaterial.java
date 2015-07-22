@@ -1,5 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.auxjdo;
 
+
+
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
@@ -21,16 +23,15 @@ public class AuxCatalogoMaterial implements Comparable<AuxCatalogoMaterial>,IsSe
 	
 	
 	
-	private Long idCatalogoMaterial;
-
-	private String idMaterial;
-
+    private String idCatalogoMaterial;
+	
 	private String nombreMaterial;
 	
-	private String categoriaMaterial;
+	private String tipoMaterial;
+	
+	private String idProducto;
 	
 	private int status;
-	
 	
 	
 	
@@ -43,28 +44,12 @@ public class AuxCatalogoMaterial implements Comparable<AuxCatalogoMaterial>,IsSe
 		this.status = status;
 	}
 
-	public String getCategoriaMaterial() {
-		return categoriaMaterial;
-	}
-
-	public void setCategoriaMaterial(String categoriaMaterial) {
-		this.categoriaMaterial = categoriaMaterial;
-	}
-
-	public Long getIdCatalogoMaterial() {
+	public String getIdCatalogoMaterial() {
 		return idCatalogoMaterial;
 	}
 
-	public void setIdCatalogoMaterial(Long idCatalogoMaterial) {
+	public void setIdCatalogoMaterial(String idCatalogoMaterial) {
 		this.idCatalogoMaterial = idCatalogoMaterial;
-	}
-
-	public String getIdMaterial() {
-		return idMaterial;
-	}
-
-	public void setIdMaterial(String idMaterial) {
-		this.idMaterial = idMaterial;
 	}
 
 	public String getNombreMaterial() {
@@ -74,8 +59,23 @@ public class AuxCatalogoMaterial implements Comparable<AuxCatalogoMaterial>,IsSe
 	public void setNombreMaterial(String nombreMaterial) {
 		this.nombreMaterial = nombreMaterial;
 	}
-	
-	
+
+	public String getTipoMaterial() {
+		return tipoMaterial;
+	}
+
+	public void setTipoMaterial(String tipoMaterial) {
+		this.tipoMaterial = tipoMaterial;
+	}
+
+	public String getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(String idProducto) {
+		this.idProducto = idProducto;
+	}
+
 	
 	
 }

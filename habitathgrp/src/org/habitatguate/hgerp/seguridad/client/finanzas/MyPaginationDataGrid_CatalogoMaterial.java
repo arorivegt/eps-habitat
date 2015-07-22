@@ -49,7 +49,7 @@ public class MyPaginationDataGrid_CatalogoMaterial<T> extends PagingDataGrid_Cat
         Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxCatalogoMaterial) object).getIdCatalogoMaterial());
+                return String.valueOf(((AuxCatalogoMaterial) object).getIdProducto());
             }
         };
         dataGrid.addColumn(codContableColumn, "Codigo Producto");
@@ -60,18 +60,18 @@ public class MyPaginationDataGrid_CatalogoMaterial<T> extends PagingDataGrid_Cat
                 new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return ((AuxCatalogoMaterial) object).getIdMaterial();
+                return ((AuxCatalogoMaterial) object).getIdCatalogoMaterial();
             }
         };
-        nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
+        /*nomParamColumn.setFieldUpdater(new FieldUpdater<T, String>() {
 			@Override
 			public void update(int index, T object, String value) {
 				
 				((AuxAfiliado) object).setNomAfiliado(value);
 				
 			}
-        	});
-        dataGrid.addColumn(nomParamColumn, "Codigo Catalogo");        
+        	});*/
+        dataGrid.addColumn(nomParamColumn, "Codigo Item");        
         dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
@@ -105,16 +105,16 @@ public class MyPaginationDataGrid_CatalogoMaterial<T> extends PagingDataGrid_Cat
                         ((ContactInfo) o2).getLastName());
             }
         });*/
-        dataGrid.addColumn(codUnoColumn, "Nombre Producto");
+        dataGrid.addColumn(codUnoColumn, "Nombre Material");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
         
         Column<T, String> codDosColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxCatalogoMaterial) object).getCategoriaMaterial());
+                return String.valueOf(((AuxCatalogoMaterial) object).getTipoMaterial());
             }
         };
-        dataGrid.addColumn(codDosColumn, "Categoria Producto");
+        dataGrid.addColumn(codDosColumn, "Subtipo Material");
         dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
         
         

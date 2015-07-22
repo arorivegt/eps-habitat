@@ -43,7 +43,7 @@ public class Formulario_PagoVale extends Composite{
 	private AuxProveedor proveedorSelect;
 	private String tipoOperacion = "";
 	
-	 public Formulario_PagoVale(Set<AuxVale> vales, Long idProveedor){
+	 public Formulario_PagoVale(Set<AuxVale> vales, Long idProveedor,Long idAfiliadoProv){
 		 
 		 //TIPO DE PAGO
 		 // 1. TRANSACCION
@@ -63,7 +63,7 @@ public class Formulario_PagoVale extends Composite{
 		close.addStyleName("close");
 		initWidget(mensaje);
 		mensaje.setSize("250px", "20px");
-		loginService.Consultar_infoProveedor(idProveedor, new AsyncCallback<AuxProveedor>() {
+		loginService.Consultar_infoProveedor(idProveedor,idAfiliadoProv, new AsyncCallback<AuxProveedor>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -167,7 +167,7 @@ public class Formulario_PagoVale extends Composite{
         final TextBox txtCancelar =new TextBox();
         
         txtCancelar.setStyleName("gwt-PasswordTextBox");
-        txtCancelar.setText(""+(total-(total*proveedorSelect.getPorcentDonacion())));
+        txtCancelar.setText(""+(total-(total*(proveedorSelect.getPorcentDonacion()/100))));
         txtCancelar.setSize("200px", "25px");
         
         final Label label5 = new Label("Fecha solicitud");
@@ -306,7 +306,7 @@ public class Formulario_PagoVale extends Composite{
 								});
 						 }
 						dialogo.hide();
-						//Window.open("/FinanGenerarSolicitudCheque?idPago="+result,"_blank", "");
+						Window.open("/FinanGenerarSolicitudCheque?idPago="+result,"_blank", "");
 					}
 					
 					@Override

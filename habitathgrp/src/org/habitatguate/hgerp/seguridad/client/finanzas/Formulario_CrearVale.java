@@ -252,6 +252,7 @@ public class Formulario_CrearVale extends Composite {
                 			subAux.setIdMaterialConstruccion(aux.getMaterialCostruccion().getIdMaterialConstruccion());
                 			AuxProveedor subProv = new AuxProveedor();
                 			subProv.setIdProveedor(aux.getMaterialCostruccion().getProveedor().getIdProveedor());
+                			subProv.getAuxAfiliado().setIdAfiliado(aux.getMaterialCostruccion().getProveedor().getAuxAfiliado().getIdAfiliado());
                 			subAux.setProveedor(subProv);
                 			auxDetalle.setMaterialCostruccion(subAux);
                 			listaDetalleVale.add(auxDetalle);

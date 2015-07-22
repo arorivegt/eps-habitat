@@ -24,6 +24,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
@@ -216,7 +217,8 @@ public Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxD
 		//System.out.println("Plantilla de la que viene " + idPlantillaSolucion);
 		plantilla = gestorPersistencia.getObjectById(SegPlantillaSolucion.class,idPlantillaSolucion);
 		 Key k = new KeyFactory
-			        .Builder(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
+			        .Builder(SegAfiliado.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getAuxAfiliado().getIdAfiliado())
+		 			.addChild(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
 		 			.addChild(SegMaterialCostruccion.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion())	
 			        .getKey();
 		materialCos = gestorPersistencia.getObjectById(SegMaterialCostruccion.class,k);
@@ -276,30 +278,42 @@ public Long Insertar_Proveedor(Boolean aprobadoComision,
 }
 
 public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
-		String dirProveedor,
-		Date fechaIngreso,
 		String nomProveedor,
-		String numeroNit,
-		String paginaWeb,
-		String personaJuridica,
-		Boolean servicioEntrega,
-		String telProveedor,
-		String observaciones,
-		
-		String razonSocial,
-		String actividadEcono,
-		String aceptaExencion,
-		String relacionConProv,
-		String tipoProveedor,
-		String productosfrece,
-		String disponibilidadProd,
-		String tiempoEntrega,
-		String regimenTributario,
-		String aceptaDonacion,
-		double porcentDonacion		
+		 String numeroNit,
+		 String dirProveedor,
+		 String telProveedor,
+		 String paginaWeb,
+		 String personaJuridica,
+		 String razonSocial,
+		 String actividadEcono,
+		 String aceptaExencion,
+		 String relacionConProv,
+		 String tipoProveedor,
+		 String tiempoDeTrabajarConHG,
+		 String Departamentos,
+		 String Municipios,
+		 String ubicacionSucursales,
+		 String productosfrece,
+		 String disponibilidadProd,
+		 Boolean servicioEntrega,
+		 String tiempoEntrega,
+		 String regimenTributario,
+		 String observaciones,
+		 String aceptaDonacion,
+		 String formaDonacion,
+		 double porcentDonacion,
+		 String frecuenciaDonacion,
+		 Boolean contribuyeEventos,
+		 String cualesyComoEventos,
+		 Boolean aceptaCredito,
+		 double montoMaximo,
+		 int tiempoMaximo,
+		 Date fechaIngreso,
+		 Long idAfiliado
 		) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	SegAfiliado afi = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
 	SegProveedor nuevo = new SegProveedor();
 	nuevo.setAprobadoComision(aprobadoComision);
 	nuevo.setDirProveedor(dirProveedor);
@@ -325,7 +339,27 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 	nuevo.setRegimenTributario(regimenTributario);
 	nuevo.setAceptaDonacion(aceptaDonacion);
 	nuevo.setPorcentDonacion(porcentDonacion);
-	
+	nuevo.setTiempoDeTrabajarConHG(tiempoDeTrabajarConHG);
+	nuevo.setDepartamentos(Departamentos);
+	nuevo.setMunicipios(Municipios);
+	nuevo.setUbicacionSucursales(ubicacionSucursales);
+	nuevo.setProductosfrece(productosfrece);
+	nuevo.setDisponibilidadProd(disponibilidadProd);
+	nuevo.setServicioEntrega(servicioEntrega);
+	nuevo.setTiempoEntrega(tiempoEntrega);
+	nuevo.setRegimenTributario(regimenTributario);
+	nuevo.setObservaciones(observaciones);
+	nuevo.setAceptaDonacion(aceptaDonacion);
+	nuevo.setFormaDonacion(formaDonacion);
+	nuevo.setPorcentDonacion(porcentDonacion);
+	nuevo.setFrecuenciaDonacion(frecuenciaDonacion);
+	nuevo.setContribuyeEventos(contribuyeEventos);
+	nuevo.setCualesyComoEventos(cualesyComoEventos);
+	nuevo.setAceptaCredito(aceptaCredito);
+	nuevo.setMontoMaximo(montoMaximo);
+	nuevo.setTiempoMaximo(tiempoMaximo);
+	nuevo.setAfiliado(afi);
+	afi.getProveedor().add(nuevo);
 	
 	try{
 		gestorPersistencia.makePersistent(nuevo);
@@ -337,11 +371,15 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 	return valor;
 }
 
-public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto) throws IllegalArgumentException{
+public Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	try{
-	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
+		Key k = new KeyFactory
+		        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+	 			.addChild(SegProveedor.class.getSimpleName(), idProveedor)	
+		        .getKey();
+	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,k);
 	System.out.println("encontrado prov:"+ prov.getNomProveedor());
 	SegMaterialCostruccion nuevo = new SegMaterialCostruccion();
 	nuevo.setNomMaterialCostruccion(nomMaterialCostruccion);
@@ -410,7 +448,8 @@ public Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSol
 	//	System.out.println("Plantilla de la que viene " + auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion());
 		plantilla = gestorPersistencia.getObjectById(SegSolucion.class,idSolucion);
 		 Key k = new KeyFactory
-			        .Builder(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
+			        .Builder(SegAfiliado.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getAuxAfiliado().getIdAfiliado())
+		 			.addChild(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
 		 			.addChild(SegMaterialCostruccion.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion())	
 			        .getKey();
 		materialCos = gestorPersistencia.getObjectById(SegMaterialCostruccion.class,k);
@@ -444,7 +483,8 @@ public Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetal
 	//	System.out.println("Plantilla de la que viene " + auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion());
 		plantilla = gestorPersistencia.getObjectById(SegSolucion.class,idSolucion);
 		 Key k = new KeyFactory
-			        .Builder(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
+			        .Builder(SegAfiliado.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getAuxAfiliado().getIdAfiliado())
+		 			.addChild(SegProveedor.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getProveedor().getIdProveedor())
 		 			.addChild(SegMaterialCostruccion.class.getSimpleName(), auxDetalle.getMaterialCostruccion().getIdMaterialConstruccion())	
 			        .getKey();
 		materialCos = gestorPersistencia.getObjectById(SegMaterialCostruccion.class,k);
@@ -550,13 +590,14 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 	
 }
 
-public Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String categoriaMaterial) throws IllegalArgumentException{
-	Long valor = 0L;
+public String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto) throws IllegalArgumentException{
+	String valor = "";
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	SegCatalogoMaterial nuevo = new SegCatalogoMaterial();
-	nuevo.setIdMaterial(idMaterial);
+	nuevo.setIdCatalogoMaterial(idMaterial);
+	nuevo.setIdProducto(idProducto);
 	nuevo.setNombreMaterial(nombreMaterial);
-	nuevo.setCategoriaMaterial(categoriaMaterial);
+	nuevo.setTipoMaterial(tipoMaterial);
 	nuevo.setStatus(1);
 	try{
 		gestorPersistencia.makePersistent(nuevo);
@@ -568,10 +609,14 @@ public Long Insertar_Catalogo(String idMaterial,String nombreMaterial,String cat
 	return valor;
 }
 
-public Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto) throws IllegalArgumentException{
+public Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto, Long idAfiliado) throws IllegalArgumentException{
 	Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
+	Key k = new KeyFactory
+	        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+ 			.addChild(SegProveedor.class.getSimpleName(), idProveedor)	
+	        .getKey();
+	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,k);
 	SegContactoProv nuevoContact = new SegContactoProv();
 	nuevoContact.setNomContacto(nomContacto);
 	nuevoContact.setPuestoContacto(dirContacto);
@@ -586,10 +631,14 @@ public Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,Strin
 	return valor;	
 }
 
-public Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario) throws IllegalArgumentException{
+public Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario, Long idAfiliado) throws IllegalArgumentException{
 	Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,idProveedor);
+	Key k = new KeyFactory
+	        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+ 			.addChild(SegProveedor.class.getSimpleName(), idProveedor)	
+	        .getKey();
+	SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class,k);
 	SegCuentaBancariaProv nuevaForma = new SegCuentaBancariaProv();
 	nuevaForma.setTipoCuentaBancaria(tipoCuentaBancaria);
 	nuevaForma.setTipoPago(tipoPago);
@@ -656,7 +705,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
         Persistencia.deletePersistent(e);         
         return id;
     }
-    public Long Eliminar_ProductoCatalogo(Long id) throws IllegalArgumentException {
+    public Long Eliminar_ProductoCatalogo(String id) throws IllegalArgumentException {
     	
     	final PersistenceManager Persistencia = PMF.get().getPersistenceManager() ;
     	final SegCatalogoMaterial e = Persistencia.getObjectById(SegCatalogoMaterial.class, id);
@@ -665,7 +714,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
     	}finally{
     		Persistencia.close();
     	}
-        return id;
+        return 0L;
     }
 	
 //------------------------------------------------------CONSULTAS--------------------------------------------------	
@@ -718,8 +767,8 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 			for (SegCatalogoMaterial p : execute){
 				AuxCatalogoMaterial n= new AuxCatalogoMaterial();
 				n.setIdCatalogoMaterial(p.getIdCatalogoMaterial());
-				n.setIdMaterial(p.getIdMaterial());
-				n.setCategoriaMaterial(p.getCategoriaMaterial());
+				n.setIdProducto(p.getIdProducto());
+				n.setTipoMaterial(p.getTipoMaterial());
 				n.setNombreMaterial(p.getNombreMaterial());
 				n.setStatus(p.getStatus());
 				valor.add(n);
@@ -767,6 +816,8 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setFechaIngreso(ConvertDate.g(p.getFechaIngreso()));
 				n.setIdProducto(p.getIdProducto());
 				n.getProveedor().setIdProveedor(p.getProveedor().getIdProveedor().getId());
+				
+				n.getProveedor().getAuxAfiliado().setIdAfiliado(p.getProveedor().getAfiliado().getIdAfiliado());
 				valor.add(n);
 			}
 		}
@@ -800,6 +851,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 					auxd.setUnidadMetrica(aux.getUnidadMetrica());
 					auxd.getMaterialCostruccion().setIdMaterialConstruccion(aux.getMaterialCostruccion().getIdMaterialConstruccion().getId());
 					auxd.getMaterialCostruccion().getProveedor().setIdProveedor(aux.getMaterialCostruccion().getProveedor().getIdProveedor().getId());
+					auxd.getMaterialCostruccion().getProveedor().getAuxAfiliado().setIdAfiliado(aux.getMaterialCostruccion().getProveedor().getAfiliado().getIdAfiliado());
 					n.getListaDetalle().add(auxd);
 				}
 				valor.add(n);
@@ -827,6 +879,9 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setPersonaJuridica(p.getPersonaJuridica());
 				aux.setServicioEntrega(p.getServicioEntrega());
 				aux.setTelProveedor(p.getTelProveedor());
+				AuxAfiliado auxAfi = new AuxAfiliado();
+				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				aux.setAuxAfiliado(auxAfi);
 				valor.add(aux);
 			}
 		}
@@ -852,6 +907,9 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setPersonaJuridica(p.getPersonaJuridica());
 				aux.setServicioEntrega(p.getServicioEntrega());
 				aux.setTelProveedor(p.getTelProveedor());
+				AuxAfiliado auxAfi = new AuxAfiliado();
+				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				aux.setAuxAfiliado(auxAfi);
 				valor.add(aux);
 			}
 		}
@@ -878,6 +936,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setPersonaJuridica(p.getPersonaJuridica());
 				aux.setServicioEntrega(p.getServicioEntrega());
 				aux.setTelProveedor(p.getTelProveedor());
+				aux.getAuxAfiliado().setIdAfiliado(p.getAfiliado().getIdAfiliado());
 				valor.add(aux);
 			}
 		}
@@ -904,6 +963,9 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setPersonaJuridica(p.getPersonaJuridica());
 				aux.setServicioEntrega(p.getServicioEntrega());
 				aux.setTelProveedor(p.getTelProveedor());
+				AuxAfiliado auxAfi = new AuxAfiliado();
+				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				aux.setAuxAfiliado(auxAfi);
 				valor.add(aux);
 			}
 		}
@@ -969,6 +1031,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 					AuxProveedor auxP = new AuxProveedor();
 					auxP.setIdProveedor(i3.getIdProveedor().getId());
 					auxP.setNomProveedor(i3.getNomProveedor());
+					auxP.getAuxAfiliado().setIdAfiliado(i3.getAfiliado().getIdAfiliado());
 					auxMat.setProveedor(auxP);
 					auxDetalle2.setMaterialCostruccion(auxMat);
 					//fin Material Construccion
@@ -1127,6 +1190,44 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		 }
 		
 		
+		return response;
+	}
+	
+	public List<AuxReporteCuentasPorPagar> ConsultarCuentasXPagar_PorProveedores(){
+		List<AuxReporteCuentasPorPagar> response = new ArrayList<AuxReporteCuentasPorPagar>();
+		List<AuxProveedor> responseProv = new ArrayList<AuxProveedor>();
+		final PersistenceManager pm = PMF.get().getPersistenceManager();
+		Query queryProv = pm.newQuery(SegProveedor.class);
+		queryProv.setFilter("aprobadoComision == true");
+		List<SegProveedor> resultProv = (List<SegProveedor>)queryProv.execute();
+		for (SegProveedor auxProveedor : resultProv){
+			AuxProveedor auxProv = new AuxProveedor();
+			auxProv.setIdProveedor(auxProveedor.getIdProveedor().getId());
+			auxProv.setNomProveedor(auxProveedor.getNomProveedor());
+			auxProv.setTotalCuentaPorPagar(0.0);
+			responseProv.add(auxProv);
+		}
+		Query q = pm.newQuery(SegSolucion.class);
+		List<SegSolucion> result = (List<SegSolucion>)q.execute();
+		for (SegSolucion auxSegSolucion : result){
+			AuxReporteCuentasPorPagar auxReporte = new AuxReporteCuentasPorPagar();
+			auxReporte.getAuxSolucion().setIdSolucion(auxSegSolucion.getIdSolucion().getId());
+			auxReporte.setListaProveedores(responseProv);
+			List<SegDetalleEjecucion> detalleEjecucion = auxSegSolucion.getListaEjecucion();
+			for (SegDetalleEjecucion auxDetalleEjecucion : detalleEjecucion){
+				if (auxDetalleEjecucion.getVale().getListaPagoProv().isEmpty()){
+					SegProveedor prov = auxDetalleEjecucion.getMaterialCostruccion().getProveedor();
+					int size = auxReporte.getListaProveedores().size();
+					for (int x = 0; x < size; x++){
+						if(auxReporte.getListaProveedores().get(x).getIdProveedor().equals(prov.getIdProveedor().getId())){
+							double total = auxReporte.getListaProveedores().get(x).getTotalCuentaPorPagar();
+							auxReporte.getListaProveedores().get(x).setTotalCuentaPorPagar(total+ auxDetalleEjecucion.getSubTotal());
+						}
+					}
+				}
+			}
+			response.add(auxReporte);
+		}
 		return response;
 	}
 	
@@ -1664,13 +1765,17 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		
 	}
 	
-	public AuxProveedor Consultar_infoProveedor(Long idProveedor){
+	public AuxProveedor Consultar_infoProveedor(Long idProveedor,Long idAfiliado){
 		AuxProveedor valor = new AuxProveedor();
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegCuentaBancariaProv.class);
 		query.setFilter("idProveedor == "+idProveedor);
 		List<SegCuentaBancariaProv> execute = (List<SegCuentaBancariaProv>)query.execute("Google App Engine");
-		SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class, idProveedor);
+		Key k = new KeyFactory
+		        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+	 			.addChild(SegProveedor.class.getSimpleName(), idProveedor)	
+		        .getKey();
+		SegProveedor prov = gestorPersistencia.getObjectById(SegProveedor.class, k);
 		valor.setIdProveedor(prov.getIdProveedor().getId());
 		valor.setNomProveedor(prov.getNomProveedor());
 		valor.setAceptaDonacion(prov.getAceptaDonacion());
@@ -1798,12 +1903,16 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return id;
 	}
 	
-	public Long Actualizar_ProveedorAprobado(Long id) throws IllegalArgumentException {
+	public Long Actualizar_ProveedorAprobado(Long id,Long idAfiliado) throws IllegalArgumentException {
 		//System.out.println("user: "+user+" pass: "+password);
 		if(id!=null){	
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 			try{
-				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,id);
+				Key k = new KeyFactory
+				        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+			 			.addChild(SegProveedor.class.getSimpleName(), id)	
+				        .getKey();
+				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,k);
 				 e.setAprobadoComision(true);	 
 				 
 			}finally{

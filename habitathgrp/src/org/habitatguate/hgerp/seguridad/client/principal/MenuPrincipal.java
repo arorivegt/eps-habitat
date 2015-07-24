@@ -17,6 +17,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Solucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Buscador_Soluciones_Inv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Afiliados;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoSolucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteCuentasXPagar;
@@ -1117,7 +1118,7 @@ public class MenuPrincipal extends Composite {
 
 	//@UiHandler("finan4")
 	void fina4a(){
-		Buscador_Afiliado fmc = new Buscador_Afiliado();
+		Menu_Afiliados fmc = new Menu_Afiliados();
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fmc);

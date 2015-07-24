@@ -140,7 +140,7 @@ public class Formulario_PagoVale extends Composite{
         final TextBox txtRef =new TextBox();
         
         txtRef.setStyleName("gwt-PasswordTextBox");
-        txtRef.getElement().setAttribute("placeHolder", "No. de referencia");
+        txtRef.getElement().setAttribute("placeHolder", "Ingrese No. de Facturas");
         txtRef.setSize("200px", "25px");
 
         final Label label4 = new Label("Sub Total");
@@ -151,6 +151,7 @@ public class Formulario_PagoVale extends Composite{
         txtCantidad.setStyleName("gwt-PasswordTextBox");
         txtCantidad.setText(""+total);
         txtCantidad.setSize("200px", "25px");
+        txtCantidad.setEnabled(false);
         
         final Label label2 = new Label("Porcentaje Donación");
         label1.setSize("200px", "25px");
@@ -160,6 +161,7 @@ public class Formulario_PagoVale extends Composite{
         txtporcentaje.setStyleName("gwt-PasswordTextBox");
         txtporcentaje.setText(""+proveedorSelect.getPorcentDonacion());
         txtporcentaje.setSize("200px", "25px");
+        txtporcentaje.setEnabled(false);
         
         final Label label3 = new Label("Total a Cancelar");
         label1.setSize("200px", "25px");
@@ -169,6 +171,7 @@ public class Formulario_PagoVale extends Composite{
         txtCancelar.setStyleName("gwt-PasswordTextBox");
         txtCancelar.setText(""+(total-(total*(proveedorSelect.getPorcentDonacion()/100))));
         txtCancelar.setSize("200px", "25px");
+        txtCancelar.setEnabled(false);
         
         final Label label5 = new Label("Fecha solicitud");
         label1.setSize("200px", "25px");

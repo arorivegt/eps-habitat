@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPersonalAfiliado;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.itextpdf.text.Image;
@@ -37,6 +38,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 	private static final long serialVersionUID 	= 1L;
 	private AuxEmpleado auxEmpleado 			= new AuxEmpleado();
 	private AuxBeneficiario auxBeneficiario		= new AuxBeneficiario();
+	private SegPersonalAfiliado auxPersonal		= new SegPersonalAfiliado();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
     
@@ -64,6 +66,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
         	long idBeneficiario		= Long.parseLong(request.getParameter("idBeneficiario"));
 	        auxEmpleado 				= recursosHumanosService.Empleado_Registrado(idEmpleado);
 	        auxBeneficiario				= finanzasService.ConsultaBene_PorAfiliado(idAfiliado, idBeneficiario);
+	        auxPersonal					= finanzasService.GetPersonalAfiliado(idAfiliado);
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
@@ -82,6 +85,9 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            Date fecha = null;
 		            String proveedor = "";
 		            double total = 0.0;
+		            String nameAfiliado = auxBeneficiario.getAfiliado().getNomAfiliado();
+		            String telAfiliado = "12345680";
+		            int trimestre = auxBeneficiario.getSolucion().getTrimestre();
 		            Iterator<AuxDetalleSolucion> datos = auxBeneficiario.getSolucion().getLista().iterator();
 		            while (datos.hasNext()){
 		            	AuxDetalleSolucion next = datos.next();
@@ -94,20 +100,23 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            }
 		            
 		            
+		            String newFecha = new SimpleDateFormat("dd/MM/yyyy").format(fecha);
+
+		            
 		            document.add(new Paragraph("Fundación Habitat para la Humanidad Guatemala",catFont2));
 		            document.add(new Paragraph("Av. Las Americas 9-50 zona 3, oficna No.3. 3er nivel Edificio Supercom Delco Quetzaltenango, Quetzaltenango",catFont));
-		            document.add(new Paragraph("Telefono aqui va el telefono del afi",catFont));
+		            document.add(new Paragraph("Telefono: 7761-5578" ,catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("AFILIADO:  Nombre de afiliado",catFont));
-		            document.add(new Paragraph("Telefono aqui va el telefono del afi",catFont));
+		            document.add(new Paragraph("AFILIADO: " + nameAfiliado,catFont));
+		            document.add(new Paragraph("Telefono Afiliado: " + telAfiliado,catFont));
 		            document.add(new Paragraph("No. de vale: "+idVale,catFont));
-		            document.add(new Paragraph("Fecha "+fecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
+		            document.add(new Paragraph("Fecha "+newFecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
 		            document.add(new Paragraph("VALE AL PRESTATARIO:"+auxBeneficiario.getNomBeneficiario() +" "+"Telefono Prestatario:"+auxBeneficiario.getTelBeneficiario() ,catFont));
-		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: 12345678" ,catFont));
-		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN:  Nombre de afiliado",catFont));
+		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+trimestre ,catFont));
+		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN: "+ auxBeneficiario.getDirBeneficiario(),catFont));
 		            document.add(new Paragraph("NOMBRE DEL PROVEEDOR: "+proveedor,catFont));
-		            document.add(new Paragraph("POR LA CANTIDAD DE :  "+ total,catFont));
-		            document.add(new Paragraph("Nombre del asistente Administrativo: xxxxxxxxxxxx  "+" No. Telefono Supervisor:   12345678",catFont));
+		            document.add(new Paragraph("POR LA CANTIDAD DE :  "+ NumberToLetterConverter.convertNumberToLetter(""+total),catFont));
+		            document.add(new Paragraph("Nombre del asistente: "+auxPersonal.getNombreAsistenteAdmin()+" No. Telefono Supervisor:   12345678",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            
 		            //Tabla del vale
@@ -168,7 +177,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("            F:____________________________________                          F:_________________________________________",catFont));
-		            document.add(new Paragraph("              Recibi conforme: Nombre beneficiario                           Elaborador por: Asistente Administrativo",catFont));
+		            document.add(new Paragraph("              Recibi conforme: "+auxBeneficiario.getNomBeneficiario() +"                           Elaborador por: "+auxPersonal.getNombreAsistenteAdmin(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
@@ -177,7 +186,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("                                                   F: _______________________________",catFont));
-		            document.add(new Paragraph("                                                      Autorizado por:  xxxxxxxxxx xxxxxxxxxxx xxxxxxxx",catFont));
+		            document.add(new Paragraph("                                                      Autorizado por: "+auxPersonal.getNombreAdministrador(),catFont));
 		            
 		            document.close();
 		        }catch (DocumentException exc){

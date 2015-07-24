@@ -78,8 +78,9 @@ public class Formulario_GestorVales extends Composite{
 		panel1.setAlwaysShowScrollBars(true);
 		
 		tabPanel.add(panel1, "Generar Vales de Solución",true);
-		tabPanel.add(panel2, "Cuentas por Pagar",true);
+		
 		tabPanel.add(panel3, "Aprobar Solicitudes Compra",true);
+		tabPanel.add(panel2, "Cuentas por Pagar",true);
 		panel1.setSize("100%", "480px");
 
 		
@@ -93,10 +94,10 @@ public class Formulario_GestorVales extends Composite{
 				   ItemUno();
 			       break;
 			   case 1: 
-				   ItemDos();
+				   ItemTres();
 			       break;
 			   case 2:
-				   ItemTres();
+				   ItemDos();
 				   break;
 
 			   }

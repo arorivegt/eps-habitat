@@ -52,7 +52,7 @@ public class Formulario_MaterialCostruccion extends Composite{
 		tabPanel.add(panel1, "Materiales de Construccion",true);
 		tabPanel.add(panel2, "Plantilla Solucion",true);
 		tabPanel.add(panel3, "Items de Construccion",true);
-		tabPanel.add(panel4, "Catalogo de Productos",true);
+		tabPanel.add(panel4, "Categoria de Productos",true);
 		panel1.setSize("100%", "480px");
 
 		

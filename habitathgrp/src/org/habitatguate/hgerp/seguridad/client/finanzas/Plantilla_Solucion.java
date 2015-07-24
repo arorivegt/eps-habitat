@@ -8,6 +8,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTipoSolucion;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
 
 import com.google.gwt.cell.client.FieldUpdater;
@@ -26,6 +27,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
@@ -169,18 +171,17 @@ public class Plantilla_Solucion extends Composite{
 
 		
 		
-		Label label_1 = new Label("Tipo");
+		Label label_1 = new Label("Tipo de Solución");
 		label_1.setStyleName("label");
 		absolutePanel.add(label_1, 242, 10);
 		label_1.setSize("192px", "13px");
 		
-
-		final TextBox textBox_1 = new TextBox();
-		textBox_1.setStyleName("gwt-TextBox2");
-		textBox_1.setMaxLength(100);
-		absolutePanel.add(textBox_1, 242, 29);
-		textBox_1.setSize("227px", "34px");
+		final ListBox listaTipoSolucion = new ListBox();
+		absolutePanel.add(listaTipoSolucion,242,29);
+		listaTipoSolucion.setSize("227", "30px");
 		
+
+			
 			
 			//-----------------------------	---------------------------------
 		
@@ -263,9 +264,9 @@ public class Plantilla_Solucion extends Composite{
 		btnGestionarPlantilla.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				
-				if (!textBox_1.getText().equals("")){
+				if (!textBox.getText().equals("")){
 
-				loginService.Insertar_PlantillaSolucion(textBox.getText(), textBox_1.getText(), costoAcumulado,
+				loginService.Insertar_PlantillaSolucion(textBox.getText(), listaTipoSolucion.getValue(listaTipoSolucion.getSelectedIndex()), costoAcumulado,
 						new AsyncCallback<Long>(){
 					@Override		
 	                public void onFailure(Throwable caught) 
@@ -278,7 +279,7 @@ public class Plantilla_Solucion extends Composite{
 	                {			
 	                	//Window.alert("Datos Almacenados Correctamente " + result);             	
 	                	textBox.setText("");
-	                	textBox_1.setText("");
+	                	
 	        			idPlantillaSolucionAlmacenado = result;
 	        			index = 0;
 	    				timer.scheduleRepeating(6000);
@@ -317,6 +318,26 @@ public class Plantilla_Solucion extends Composite{
 		eliminar.setStyleName("finanButton");
 		absolutePanel_1.add(eliminar,0,10);
 		eliminar.setSize("145px", "38px");
+		
+		loginService.Consultar_TipoSolucion(new AsyncCallback<List<AuxTipoSolucion>>() {
+			
+			@Override
+			public void onSuccess(List<AuxTipoSolucion> result) {
+				System.out.println("ya estan todos los afiliados");
+				for (AuxTipoSolucion auxTipo : result){
+					listaTipoSolucion.addItem(auxTipo.getIdTipoSolucion(),auxTipo.getIdTipoSolucion());
+				}
+				
+		
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				System.out.println(caught);
+				
+			}
+		});
 	
 
         Column<AuxDetallePlantillaSolucion, String> nomParamColumn = (Column<AuxDetallePlantillaSolucion, String>) e.grid.dataGrid.getColumn(4);

@@ -16,10 +16,12 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPersonalAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxPlantillaSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxReporteCuentasPorPagar;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTipoSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPlantillaSolucion;
@@ -251,6 +253,18 @@ public interface SqlServiceAsync {
 
 	void ConsultarCuentasXPagar_PorProveedores(
 			AsyncCallback<List<AuxReporteCuentasPorPagar>> callback);
+
+	void Insertar_TipoSolucion(String nomTipoSolucion, String descripcion,
+			AsyncCallback<String> callback);
+
+	void Insertar_PersonalAfiliado(Long idAfiliado, String nomAdmin,
+			String nomAsistente, String nomContador,
+			String nomEncargadoCheques, AsyncCallback<Long> callback);
+
+	void Consultar_TipoSolucion(AsyncCallback<List<AuxTipoSolucion>> callback);
+
+	void Consultar_PersonalAfiliado(
+			AsyncCallback<List<AuxPersonalAfiliado>> callback);
 
 
 

@@ -41,6 +41,10 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	private Date fechaInicio;
 	
+	private Date fechaFin;
+	
+	private int trimestre;
+	
 	private int estadoSolucion;
 	
 	private ArrayList<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
@@ -214,6 +218,22 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public void setCostoProducto(ArrayList<Double> costoProducto) {
 		this.costoProducto = costoProducto;
+	}
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public int getTrimestre() {
+		return trimestre;
+	}
+
+	public void setTrimestre(int trimestre) {
+		this.trimestre = trimestre;
 	}
 	
 	

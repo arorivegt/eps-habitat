@@ -25,6 +25,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegAfiliado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegCatalogoProducto;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegDetalleEjecucion;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegPersonalAfiliado;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -46,6 +47,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 	
 	private AuxHistorialPagoProv auxHistoroial	= new AuxHistorialPagoProv();
 	private SegAfiliado auxAfi					= new SegAfiliado();
+	private SegPersonalAfiliado auxPersonal 	= new SegPersonalAfiliado();
 	private List<SegDetalleEjecucion> auxdetalle= new ArrayList<SegDetalleEjecucion>();
 	private List<AuxCatalogoProducto> catProductos = new ArrayList<AuxCatalogoProducto>();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
@@ -77,6 +79,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
         	auxAfi							= finanzasService.getAfiliado(auxHistoroial.getIdAfiliado());
             auxdetalle						= finanzasService.Consultar_DetalleEjecucionPorPagoProv(idPagoRealizado);
             catProductos					= finanzasService.Consultar_CatalogoProductos();
+            auxPersonal						= finanzasService.GetPersonalAfiliado(auxHistoroial.getIdAfiliado());
         	
 	        OutputStream out 			= response.getOutputStream();
 	       
@@ -111,14 +114,16 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 						}
 						valor.add(totalProducto);
 					}
+		            String fechaSolicitud = new SimpleDateFormat("dd/MM/yyyy").format(auxHistoroial.getFechaSolicitud());
+		            String fechaParaCancelar = new SimpleDateFormat("dd/MM/yyyy").format(auxHistoroial.getFechadeTransaccion());
 		            
 		            document.add(new Paragraph("SOLICITUD DE " +auxHistoroial.getTipoOperacion(),catFont2));
 		            document.add(new Paragraph("NO. DE SOLICITUD: "+auxHistoroial.getIdHistorialPagoProv(),catFont));
-		            document.add(new Paragraph("FECHA DE SOLICITUD: "+auxHistoroial.getFechaSolicitud(),catFont));
+		            document.add(new Paragraph("FECHA DE SOLICITUD: "+fechaSolicitud,catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("CHEQUE A NOMBRE DE: "+auxHistoroial.getChequeNombre(),catFont));
+		            document.add(new Paragraph(auxHistoroial.getTipoOperacion()+" A NOMBRE DE: "+auxHistoroial.getChequeNombre(),catFont));
 		            document.add(new Paragraph("AFILIADO QUIEN LO SOLICITA: " + auxAfi.getNomAfiliado() ,catFont));
-		            document.add(new Paragraph("DESCRIPCION DEL GASTO",catFont));
+		            document.add(new Paragraph("DESCRIPCION DE LA SOLICITUD ",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            
 		            //Tabla del vale
@@ -149,6 +154,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		           table.setHeaderRows(1);
 		           
 		           for (int x = 0; x < nombreProduct.size();x++){
+		        	   	if (valor.get(x) > 0.0){
 	            		table.addCell(codigo.get(x));
 	            		table.addCell(nombreProduct.get(x));
 	            		table.addCell(" ");
@@ -156,6 +162,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 	            		table.addCell("" +valor.get(x));
 	            		table.addCell(" ");
 	            		table.addCell(" ");
+		        	   	}
 		           }
 		           table.addCell(" ");
 		           table.addCell(" ");
@@ -202,7 +209,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 
 		            document.add(table);
 		          
-		            document.add(new Paragraph("FECHA EN LA QUE NECESITA LA OPERACION: "+auxHistoroial.getFechadeTransaccion(),catFont));
+		            document.add(new Paragraph("FECHA EN LA QUE NECESITA LA OPERACION: "+fechaParaCancelar,catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            String vales = "";
 		            int x = 0;
@@ -218,19 +225,19 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.add(new Paragraph("FACTURAS A CANCELAR: "+ auxHistoroial.getSeriesDocumento(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("SOLICITADO POR: WILLIAM FRANKLIN BARRIOS                                         F:________________________________",catFont));
+		            document.add(new Paragraph("SOLICITADO POR: "+auxPersonal.getNombreAsistenteAdmin()+"                                        F:________________________________",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("APROBADO POR:   VICTOR VELASQUEZ   		                                              F:________________________________",catFont));
+		            document.add(new Paragraph("APROBADO POR: "+auxPersonal.getNombreAdministrador()+"   		                                              F:________________________________",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("DEPARTAMENTO DE ADMINISTRACIÓN Y FINANZAS                                           ",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("REVISADO POR : ODILY ESCOBAR                                                          F:________________________________",catFont));
+		            document.add(new Paragraph("REVISADO POR : "+auxPersonal.getNombreContadorRegion()+"                                                          F:________________________________",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("CHEQUE ELABORADO POR: __________________                                        F:________________________________",catFont));
+		            document.add(new Paragraph("CHEQUE ELABORADO POR: "+auxPersonal.getNombreEncargadoCheques()+"                                        F:________________________________",catFont));
 		            
 		            document.close();
 		        }catch (DocumentException exc){

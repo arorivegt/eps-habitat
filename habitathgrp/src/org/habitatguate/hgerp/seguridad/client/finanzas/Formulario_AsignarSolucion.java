@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
@@ -432,15 +433,29 @@ public class Formulario_AsignarSolucion extends Composite{
 			absolutePanel.add(absolutePanel_3, 914, 0);
 			absolutePanel_3.setSize("387px", "130px");
 			
+			
+			Label lblTrimestre = new Label("Trimestre");
+			lblTrimestre.setStyleName("label");
+			absolutePanel_3.add(lblTrimestre, 10, 10);
+			lblTrimestre.setSize("157px", "13px");
+			
+			final ListBox listTrimestre = new ListBox();
+			absolutePanel_3.add(listTrimestre,173,10);
+			listTrimestre.setSize("157px", "25px");
+			listTrimestre.addItem("Trismestre 1", "1");
+			listTrimestre.addItem("Trismestre 2", "2");
+			listTrimestre.addItem("Trismestre 3", "3");
+			listTrimestre.addItem("Trismestre 4", "4");
+			
 			Label lblMontoAutorizado = new Label("Monto Autorizado");
 			lblMontoAutorizado.setStyleName("label");
-			absolutePanel_3.add(lblMontoAutorizado, 10, 10);
+			absolutePanel_3.add(lblMontoAutorizado, 10, 40);
 			lblMontoAutorizado.setSize("157px", "13px");
 			
 			final TextBox textBox_3 = new TextBox();
 			textBox_3.setStyleName("gwt-TextBox2");
 			textBox_3.setMaxLength(100);
-			absolutePanel_3.add(textBox_3, 173, 10);
+			absolutePanel_3.add(textBox_3, 173, 40);
 			textBox_3.setSize("176px", "19px");
 			textBox_3.setEnabled(false);
 			
@@ -448,19 +463,19 @@ public class Formulario_AsignarSolucion extends Composite{
 			final TextBox textBox_4 = new TextBox();
 			textBox_4.setStyleName("gwt-TextBox2");
 			textBox_4.setMaxLength(100);
-			absolutePanel_3.add(textBox_4, 173, 37);
+			absolutePanel_3.add(textBox_4, 173, 75);
 			textBox_4.setSize("176px", "19px");
 			textBox_4.setEnabled(false);
 			
 			Label lblDiferencia = new Label("Diferencia");
 			lblDiferencia.setStyleName("label");
-			absolutePanel_3.add(lblDiferencia, 10, 37);
+			absolutePanel_3.add(lblDiferencia, 10, 75);
 			lblDiferencia.setSize("157px", "13px");
 			
 			Button btnAsignarSolucion = new Button("Asignar Solucion");
 			btnAsignarSolucion.setText("Asignar Solucion");
 			btnAsignarSolucion.setStyleName("finanButton");
-			absolutePanel_3.add(btnAsignarSolucion, 217, 86);
+			absolutePanel_3.add(btnAsignarSolucion, 217, 100);
 			btnAsignarSolucion.setSize("134px", "22px");
 			
 			textBox_3.addChangeHandler(new ChangeHandler() {
@@ -520,7 +535,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),"", 0000,selectNuevoBene.getIdFormulario(),
+					loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),selectNuevoBene.getDireccionSolucion(), selectNuevoBene.getTelefonoCasaSolicitante(),selectNuevoBene.getIdFormulario(),
 							new AsyncCallback<Long>(){
 						@Override		
 		                public void onFailure(Throwable caught) 
@@ -541,6 +556,7 @@ public class Formulario_AsignarSolucion extends Composite{
 							auxS.setDisenio(selectPlant.getTipo());
 							auxS.setNotaDebito(0);
 							auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
+							auxS.setTrimestre(Integer.valueOf(listTrimestre.getValue(listTrimestre.getSelectedIndex())));
 							AuxBeneficiario auxBene = new AuxBeneficiario();
 							auxBene.setIdBeneficiario(result);
 							auxS.setBeneficiario(auxBene);

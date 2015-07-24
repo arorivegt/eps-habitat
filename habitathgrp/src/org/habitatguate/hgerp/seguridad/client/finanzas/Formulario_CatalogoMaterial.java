@@ -60,7 +60,7 @@ public class Formulario_CatalogoMaterial extends Composite{
 		
 		//----------------------------primera fila---------------------------------
 		
-		Label labelProductos = new Label("Tipo de Producto");
+		Label labelProductos = new Label("Categoria de Producto");
 		labelProductos.setStyleName("label");
 		absolutePanel.add(labelProductos, 10, 10);
 		labelProductos.setSize("157px", "13px");

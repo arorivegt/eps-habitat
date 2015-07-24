@@ -42,6 +42,10 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private Date fechaInicio;
 	@Persistent
+	private Date fechaFin;
+	@Persistent
+	private int trimestre;
+	@Persistent
 	private int estadoSolucion;
 	@Persistent
 	@Unowned
@@ -196,6 +200,34 @@ public class SegSolucion implements Serializable{
 	}
 
 
+
+
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+
+
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+
+
+
+	public int getTrimestre() {
+		return trimestre;
+	}
+
+
+
+
+	public void setTrimestre(int trimestre) {
+		this.trimestre = trimestre;
+	}
+
+	
 	
 	
 	

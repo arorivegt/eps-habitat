@@ -55,7 +55,7 @@ public class Formulario_CatalogoMaterial extends Composite{
 		
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1130px", "20px");
+		absolutePanel.setSize("1325px", "20px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		//----------------------------primera fila---------------------------------
@@ -77,7 +77,7 @@ public class Formulario_CatalogoMaterial extends Composite{
 		
 		Label label_1 = new Label("Subtipo Item");
 		label_1.setStyleName("label");
-		absolutePanel.add(label_1, 750, 10);
+		absolutePanel.add(label_1, 700, 10);
 		label_1.setSize("192px", "13px");
 		
 		final TextBox textBox = new TextBox();
@@ -89,19 +89,19 @@ public class Formulario_CatalogoMaterial extends Composite{
 		final TextBox textBox_1 = new TextBox();
 		textBox_1.setStyleName("gwt-TextBox2");
 		textBox_1.setMaxLength(100);
-		absolutePanel.add(textBox_1, 750, 29);
+		absolutePanel.add(textBox_1, 700, 29);
 		textBox_1.setSize("227px", "34px");
 		
 		Label label_2 = new Label("Nombre Producto");
 		label_2.setStyleName("label");
-		absolutePanel.add(label_2, 494, 10);
+		absolutePanel.add(label_2, 465, 10);
 		label_2.setSize("157px", "19px");
 		
 		final TextBox textBox_2 = new TextBox();
 		textBox_2.setStylePrimaryName("gwt-TextBox2");
 		textBox_2.setStyleName("gwt-TextBox2");
 		textBox_2.setMaxLength(100);
-		absolutePanel.add(textBox_2, 494, 29);
+		absolutePanel.add(textBox_2, 465, 29);
 		textBox_2.setSize("227px", "34px");
 		
 
@@ -113,45 +113,23 @@ public class Formulario_CatalogoMaterial extends Composite{
 		
 		
 		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				if (!textBox.getText().equals("")){
-
-				loginService.Insertar_Catalogo(textBox.getText(), textBox_2.getText(), textBox_1.getText(),listaProducto.getValue(listaProducto.getSelectedIndex()),
-						new AsyncCallback<String>(){
-					@Override		
-	                public void onFailure(Throwable caught) 
-	                {
-	                    Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
-	                }
-
-					@Override
-	                public void onSuccess(String result)
-	                {	
-	                	timer2.schedule(2000);	
-	                	Window.alert("Nuevo Catalogo Material con el codigo: "+ result);
-	                	textBox.setText("");
-	                	textBox_1.setText("");
-	                	textBox_2.setText("");
-
-	                	
-	                }
-
-	         });
-				
-
-			}
 			
-			else{
-				Window.alert("Debe completar el formulario");
-			}
-			}
-		});		
 
 		button.setText("Nuevo Producto");
 		button.setStyleName("finanButton");
-		absolutePanel.add(button, 1000, 29);
+		absolutePanel.add(button, 1184, 29);
 		button.setSize("157px", "30px");
+		
+		final TextBox textBox_3 = new TextBox();
+		textBox_3.setStyleName("gwt-TextBox2");
+		textBox_3.setMaxLength(100);
+		absolutePanel.add(textBox_3, 935, 29);
+		textBox_3.setSize("227px", "34px");
+		
+		Label lblUnidadDeMedida = new Label("Unidad de Medida");
+		lblUnidadDeMedida.setStyleName("label");
+		absolutePanel.add(lblUnidadDeMedida, 935, 10);
+		lblUnidadDeMedida.setSize("192px", "13px");
 		
 		
 
@@ -190,6 +168,41 @@ public class Formulario_CatalogoMaterial extends Composite{
 					listaProducto.addItem(aux.getDescripcionProducto(), aux.getIdProducto());
 				}
 				
+			}
+		});
+		
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				if (!textBox.getText().equals("")){
+
+				loginService.Insertar_Catalogo(textBox.getText(), textBox_2.getText(), textBox_1.getText(),listaProducto.getValue(listaProducto.getSelectedIndex()),textBox_3.getText(),
+						new AsyncCallback<String>(){
+					@Override		
+	                public void onFailure(Throwable caught) 
+	                {
+	                    Window.alert("Hubó un error al intentar guardar los datos, intentelo de nuevo"+caught);
+	                }
+
+					@Override
+	                public void onSuccess(String result)
+	                {	
+	                	timer2.schedule(2000);	
+	                	Window.alert("Nuevo Catalogo Material con el codigo: "+ result);
+	                	textBox.setText("");
+	                	textBox_1.setText("");
+	                	textBox_2.setText("");
+
+	                	
+	                }
+
+	         });
+				
+
+			}
+			
+			else{
+				Window.alert("Debe completar el formulario");
+			}
 			}
 		});
 	}

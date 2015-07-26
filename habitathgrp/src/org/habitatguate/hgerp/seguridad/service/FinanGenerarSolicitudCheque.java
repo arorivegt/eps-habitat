@@ -100,6 +100,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            Date fecha = null;
 		            String proveedor = "";
 		            double total = 0.0;
+		            
 
 		            
 		            

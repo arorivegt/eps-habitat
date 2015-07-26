@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tools.ant.taskdefs.Concat;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
@@ -88,6 +89,8 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            String nameAfiliado = auxBeneficiario.getAfiliado().getNomAfiliado();
 		            String telAfiliado = "12345680";
 		            int trimestre = auxBeneficiario.getSolucion().getTrimestre();
+		            String cadenaTrimestre = "";
+		            String elaboradoPor = auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido();
 		            Iterator<AuxDetalleSolucion> datos = auxBeneficiario.getSolucion().getLista().iterator();
 		            while (datos.hasNext()){
 		            	AuxDetalleSolucion next = datos.next();
@@ -100,19 +103,37 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            }
 		            
 		            
+		            switch (trimestre) {
+					case 1:
+						cadenaTrimestre = "Enero a Marzo";
+						break;
+					case 2:
+						cadenaTrimestre = "Abril a Junio";
+						break;
+					case 3:
+						cadenaTrimestre = "Julio a Septiembre";
+						break;
+					case 4:
+						cadenaTrimestre = "Octubre a Diciembre";
+						break;
+					default:
+						break;
+					}
+		            
+		            
 		            String newFecha = new SimpleDateFormat("dd/MM/yyyy").format(fecha);
 
 		            
 		            document.add(new Paragraph("Fundación Habitat para la Humanidad Guatemala",catFont2));
 		            document.add(new Paragraph("Av. Las Americas 9-50 zona 3, oficna No.3. 3er nivel Edificio Supercom Delco Quetzaltenango, Quetzaltenango",catFont));
-		            document.add(new Paragraph("Telefono: 7761-5578" ,catFont));
+		            document.add(new Paragraph("Telefono: 79313131" ,catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("AFILIADO: " + nameAfiliado,catFont));
 		            document.add(new Paragraph("Telefono Afiliado: " + telAfiliado,catFont));
 		            document.add(new Paragraph("No. de vale: "+idVale,catFont));
 		            document.add(new Paragraph("Fecha "+newFecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
 		            document.add(new Paragraph("VALE AL PRESTATARIO:"+auxBeneficiario.getNomBeneficiario() +" "+"Telefono Prestatario:"+auxBeneficiario.getTelBeneficiario() ,catFont));
-		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+trimestre ,catFont));
+		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+cadenaTrimestre ,catFont));
 		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN: "+ auxBeneficiario.getDirBeneficiario(),catFont));
 		            document.add(new Paragraph("NOMBRE DEL PROVEEDOR: "+proveedor,catFont));
 		            document.add(new Paragraph("POR LA CANTIDAD DE :  "+ NumberToLetterConverter.convertNumberToLetter(""+total),catFont));
@@ -177,7 +198,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("            F:____________________________________                          F:_________________________________________",catFont));
-		            document.add(new Paragraph("              Recibi conforme: "+auxBeneficiario.getNomBeneficiario() +"                           Elaborador por: "+auxPersonal.getNombreAsistenteAdmin(),catFont));
+		            document.add(new Paragraph("       Recibi conforme: "+auxBeneficiario.getNomBeneficiario() +"       Elaborador por: "+elaboradoPor,catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));

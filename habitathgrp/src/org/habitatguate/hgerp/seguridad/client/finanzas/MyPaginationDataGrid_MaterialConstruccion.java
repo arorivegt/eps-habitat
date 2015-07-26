@@ -113,7 +113,7 @@ public class MyPaginationDataGrid_MaterialConstruccion<T> extends PagingDataGrid
                 return String.valueOf(((AuxMaterialCostruccion) object).getUnidadMetrica());
             }
         };
-        dataGrid.addColumn(unidadMetrica, "Precio Unitario");
+        dataGrid.addColumn(unidadMetrica, "Unidad de Medida");
         dataGrid.setColumnWidth(unidadMetrica, 20, Unit.PCT);
         unidadMetrica.setSortable(true);
         sortHandler.setComparator(unidadMetrica, new Comparator<T>() {

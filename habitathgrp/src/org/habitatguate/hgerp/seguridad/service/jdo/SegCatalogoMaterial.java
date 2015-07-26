@@ -25,12 +25,22 @@ public class SegCatalogoMaterial implements Serializable {
 	@Persistent
 	private String idProducto;
 	@Persistent
+	private String unidadMedida;
+	@Persistent
 	private int status;
 	
 	
 	
 	
 	
+	public String getUnidadMedida() {
+		return unidadMedida;
+	}
+
+	public void setUnidadMedida(String unidadMedida) {
+		this.unidadMedida = unidadMedida;
+	}
+
 	public int getStatus() {
 		return status;
 	}

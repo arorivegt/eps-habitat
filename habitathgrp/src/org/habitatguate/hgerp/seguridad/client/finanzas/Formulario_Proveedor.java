@@ -303,9 +303,13 @@ public class Formulario_Proveedor extends Composite{
 		
 	final ListBox comboDonacion = new ListBox();
 	comboDonacion.addItem("Seleccione Porcentaje","0");
-	comboDonacion.addItem("1%","1");
+	comboDonacion.addItem("0.5%","0.5");
+	comboDonacion.addItem("1%","1.0");
 	comboDonacion.addItem("1.5%","1.5");
-	comboDonacion.addItem("2%","2");
+	comboDonacion.addItem("2%","2.0");
+	comboDonacion.addItem("2.5%","2.5");
+	comboDonacion.addItem("3%","3.0");
+	comboDonacion.addItem("3%","3.5");
 	comboDonacion.addItem("4%","4");
 	comboDonacion.addItem("5%","5");
 	comboDonacion.setEnabled(false);

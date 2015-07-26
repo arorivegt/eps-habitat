@@ -442,10 +442,10 @@ public class Formulario_AsignarSolucion extends Composite{
 			final ListBox listTrimestre = new ListBox();
 			absolutePanel_3.add(listTrimestre,173,10);
 			listTrimestre.setSize("157px", "25px");
-			listTrimestre.addItem("Trismestre 1", "1");
-			listTrimestre.addItem("Trismestre 2", "2");
-			listTrimestre.addItem("Trismestre 3", "3");
-			listTrimestre.addItem("Trismestre 4", "4");
+			listTrimestre.addItem("Trimestre 1", "1");
+			listTrimestre.addItem("Trimestre 2", "2");
+			listTrimestre.addItem("Trimestre 3", "3");
+			listTrimestre.addItem("Trimestre 4", "4");
 			
 			Label lblMontoAutorizado = new Label("Monto Autorizado");
 			lblMontoAutorizado.setStyleName("label");

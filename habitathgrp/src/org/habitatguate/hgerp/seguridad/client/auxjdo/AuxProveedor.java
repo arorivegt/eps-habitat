@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 import com.google.gwt.view.client.ProvidesKey;
 
@@ -73,6 +72,24 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	private AuxAfiliado auxAfiliado;
 	
 	private double totalCuentaPorPagar;
+	
+	private String Departamentos;
+	
+	private String Municipios;
+	
+	private String ubicacionSucursales;
+	
+	private String formaDonacion;
+	
+	private String frecuenciaDonacion;
+	
+	private Boolean contribuyeEventos;
+	
+	private String cualesyComoEventos;
+	
+	private Boolean aceptaCredito;
+	
+	private double montoMaximo;
 	
 	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
@@ -281,6 +298,79 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	public void setTotalCuentaPorPagar(double totalCuentaPorPagar) {
 		this.totalCuentaPorPagar = totalCuentaPorPagar;
 	}
+
+	public String getDepartamentos() {
+		return Departamentos;
+	}
+
+	public void setDepartamentos(String departamentos) {
+		Departamentos = departamentos;
+	}
+
+	public String getMunicipios() {
+		return Municipios;
+	}
+
+	public void setMunicipios(String municipios) {
+		Municipios = municipios;
+	}
+
+	public String getUbicacionSucursales() {
+		return ubicacionSucursales;
+	}
+
+	public void setUbicacionSucursales(String ubicacionSucursales) {
+		this.ubicacionSucursales = ubicacionSucursales;
+	}
+
+	public String getFormaDonacion() {
+		return formaDonacion;
+	}
+
+	public void setFormaDonacion(String formaDonacion) {
+		this.formaDonacion = formaDonacion;
+	}
+
+	public String getFrecuenciaDonacion() {
+		return frecuenciaDonacion;
+	}
+
+	public void setFrecuenciaDonacion(String frecuenciaDonacion) {
+		this.frecuenciaDonacion = frecuenciaDonacion;
+	}
+
+	public Boolean getContribuyeEventos() {
+		return contribuyeEventos;
+	}
+
+	public void setContribuyeEventos(Boolean contribuyeEventos) {
+		this.contribuyeEventos = contribuyeEventos;
+	}
+
+	public String getCualesyComoEventos() {
+		return cualesyComoEventos;
+	}
+
+	public void setCualesyComoEventos(String cualesyComoEventos) {
+		this.cualesyComoEventos = cualesyComoEventos;
+	}
+
+	public Boolean getAceptaCredito() {
+		return aceptaCredito;
+	}
+
+	public void setAceptaCredito(Boolean aceptaCredito) {
+		this.aceptaCredito = aceptaCredito;
+	}
+
+	public double getMontoMaximo() {
+		return montoMaximo;
+	}
+
+	public void setMontoMaximo(double montoMaximo) {
+		this.montoMaximo = montoMaximo;
+	}
+	
 	
 	
 

@@ -31,6 +31,8 @@ public class AuxCatalogoMaterial implements Comparable<AuxCatalogoMaterial>,IsSe
 	
 	private String idProducto;
 	
+	private String unidadMedida;
+	
 	private int status;
 	
 	
@@ -74,6 +76,14 @@ public class AuxCatalogoMaterial implements Comparable<AuxCatalogoMaterial>,IsSe
 
 	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	public String getUnidadMedida() {
+		return unidadMedida;
+	}
+
+	public void setUnidadMedida(String unidadMedida) {
+		this.unidadMedida = unidadMedida;
 	}
 
 	

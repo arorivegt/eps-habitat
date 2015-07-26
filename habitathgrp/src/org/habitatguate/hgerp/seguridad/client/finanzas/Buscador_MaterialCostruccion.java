@@ -117,7 +117,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	Label label = new Label("Nombre Material Costruccion");
 	label.setStyleName("label");
-	absolutePanel.add(label, 226, 66);
+	absolutePanel.add(label, 10, 70);
 	label.setSize("250px", "13px");
 	
 		
@@ -130,7 +130,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 	
 	Label label_1 = new Label("Precio Sugerido");
 	label_1.setStyleName("label");
-	absolutePanel.add(label_1, 484, 66);
+	absolutePanel.add(label_1, 268, 70);
 	label_1.setSize("192px", "13px");
 	
 
@@ -138,20 +138,10 @@ public class Buscador_MaterialCostruccion extends Composite{
 	final TextBox textBox_1 = new TextBox();
 	textBox_1.setStyleName("gwt-TextBox2");
 	textBox_1.setMaxLength(100);
-	absolutePanel.add(textBox_1, 484, 85);
+	absolutePanel.add(textBox_1, 268, 89);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Unidad Medida");
-		label_2.setStyleName("label");
-		absolutePanel.add(label_2, 725, 66);
-	label_2.setSize("157px", "19px");
-	
-	final TextBox textBox_2 = new TextBox();
-	textBox_2.setStylePrimaryName("gwt-TextBox2");
-	textBox_2.setStyleName("gwt-TextBox2");
-	textBox_2.setMaxLength(100);
-	absolutePanel.add(textBox_2, 725, 85);
-	textBox_2.setSize("227px", "34px");
+
 	
 			
 		
@@ -168,7 +158,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 
 	button.setText("Nuevo Material Costr.");
 	button.setStyleName("finanButton");
-	absolutePanel.add(button, 900, 85);
+	absolutePanel.add(button, 535, 89);
 	button.setSize("157px", "40px");
 	
 	Label lblProveedor = new Label("Proveedor");
@@ -181,15 +171,15 @@ public class Buscador_MaterialCostruccion extends Composite{
 	suggestBox.setSize("375px", "13px");
 	
 	final SuggestBox suggestBox2 = new SuggestBox(listaProductos);
-	absolutePanel.add(suggestBox2, 226, 85);
-	suggestBox2.setSize("227px", "13px");
+	absolutePanel.add(suggestBox2, 10, 89);
+	suggestBox2.setSize("227px", "24px");
 	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!suggestBox2.getText().equals("")){
 				
 				
-			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),textBox_2.getText(), Double.valueOf(textBox_1.getText()),selectMaterial.getIdProducto(),
+			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),selectMaterial.getUnidadMedida(), Double.valueOf(textBox_1.getText()),selectMaterial.getIdProducto(),
 					selectProveedor.getAuxAfiliado().getIdAfiliado(),
 					new AsyncCallback<Long>(){
 				@Override		
@@ -204,7 +194,6 @@ public class Buscador_MaterialCostruccion extends Composite{
                 	Window.alert("Datos Almacenados Correctamente");
                 	//textBox.setText("");
                 	textBox_1.setText("");
-                	textBox_2.setText("");
                 	suggestBox.setText("");
                 	selectProveedor = null;
                 	timer2.schedule(1500);

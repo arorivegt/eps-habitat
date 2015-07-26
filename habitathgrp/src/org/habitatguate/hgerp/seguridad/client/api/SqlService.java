@@ -83,7 +83,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_PagoVale(Date fechaSolicitud,String banco, String chequeNombre, Date fechadeTransaccion, 
 			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
 			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago);
-	String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto);
+	String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,String unidadMedida);
 	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
 	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto, Long idAfiliado);
 	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario, Long idAfiliado);
@@ -108,6 +108,7 @@ public interface SqlService extends RemoteService{
 	List<AuxCuentaBancariaProv> Consultar_FormasPago(Long idProveedor);
 	List<AuxContactoProv> Consultar_ContactosProv(Long idProveedor);
 	List<AuxCatalogoProducto> Consultar_CatalogoProductos();
+	List<AuxSolucion> Consultar_SolucionesEnCostruccion_PorAfiliado(Long idAfiliado);
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
@@ -135,5 +136,7 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
 	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);
 	Long Actualizar_StatusValeAprobado(Long idVale,int status);
+	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion);
+	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre);
 	
 }

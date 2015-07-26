@@ -108,6 +108,12 @@ public class Formulario_PagoVale extends Composite{
         	x++;
         }
         
+        double donacionFinal = 0.0;
+       if (proveedorSelect.equals("Se deduce del cheque")){
+    	   donacionFinal = proveedorSelect.getPorcentDonacion();
+       }
+        
+        
         
         
         final Label labelBanco = new Label("Banco");
@@ -159,7 +165,7 @@ public class Formulario_PagoVale extends Composite{
         final TextBox txtporcentaje =new TextBox();
         
         txtporcentaje.setStyleName("gwt-PasswordTextBox");
-        txtporcentaje.setText(""+proveedorSelect.getPorcentDonacion());
+        txtporcentaje.setText(""+donacionFinal);
         txtporcentaje.setSize("200px", "25px");
         txtporcentaje.setEnabled(false);
         
@@ -169,7 +175,7 @@ public class Formulario_PagoVale extends Composite{
         final TextBox txtCancelar =new TextBox();
         
         txtCancelar.setStyleName("gwt-PasswordTextBox");
-        txtCancelar.setText(""+(total-(total*(proveedorSelect.getPorcentDonacion()/100))));
+        txtCancelar.setText(""+(total-(total*(donacionFinal/100))));
         txtCancelar.setSize("200px", "25px");
         txtCancelar.setEnabled(false);
         

@@ -160,7 +160,7 @@ public interface SqlServiceAsync {
 			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
 			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago, AsyncCallback<Long> callback);
 
-	void Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,AsyncCallback<String> callback);
+	void Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,String unidadMedida,AsyncCallback<String> callback);
 
 	void ConsultaTodosProductosCatalogo(
 			AsyncCallback<List<AuxCatalogoMaterial>> callback);
@@ -265,6 +265,15 @@ public interface SqlServiceAsync {
 
 	void Consultar_PersonalAfiliado(
 			AsyncCallback<List<AuxPersonalAfiliado>> callback);
+
+	void Consultar_SolucionesEnCostruccion_PorAfiliado(Long idAfiliado,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Actualizar_EstadoFinalizadoSolucion(Long idSolucion,
+			AsyncCallback<Long> callback);
+
+	void Actualizar_TrimestreSolucion(Long idSolucion, int trimestre,
+			AsyncCallback<Long> callback);
 
 
 

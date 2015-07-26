@@ -633,7 +633,7 @@ public Long GenerarIdVale() throws IllegalArgumentException{
 	
 }
 
-public String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto) throws IllegalArgumentException{
+public String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,String unidadMedida) throws IllegalArgumentException{
 	String valor = "";
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 	SegCatalogoMaterial nuevo = new SegCatalogoMaterial();
@@ -641,6 +641,7 @@ public String Insertar_Catalogo(String idMaterial,String nombreMaterial,String t
 	nuevo.setIdProducto(idProducto);
 	nuevo.setNombreMaterial(nombreMaterial);
 	nuevo.setTipoMaterial(tipoMaterial);
+	nuevo.setUnidadMedida(unidadMedida);
 	nuevo.setStatus(1);
 	try{
 		gestorPersistencia.makePersistent(nuevo);
@@ -813,6 +814,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setIdProducto(p.getIdProducto());
 				n.setTipoMaterial(p.getTipoMaterial());
 				n.setNombreMaterial(p.getNombreMaterial());
+				n.setUnidadMedida(p.getUnidadMedida());
 				n.setStatus(p.getStatus());
 				valor.add(n);
 			}
@@ -1879,6 +1881,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		valor.setAceptaDonacion(prov.getAceptaDonacion());
 		valor.setAceptaExencion(prov.getAceptaExencion());
 		valor.setPorcentDonacion(prov.getPorcentDonacion());
+		valor.setFormaDonacion(prov.getFormaDonacion());
 		for (SegCuentaBancariaProv cuenta : execute){
 			AuxCuentaBancariaProv aux = new AuxCuentaBancariaProv();
 			aux.setIdCuentaBancariaProv(cuenta.getIdCuentaBancariaProv());
@@ -1892,6 +1895,59 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		
 		
 		return valor;
+	}
+	
+	public List<AuxSolucion> Consultar_SolucionesEnCostruccion_PorAfiliado(Long idAfiliado){
+		List<AuxSolucion> response = new ArrayList<AuxSolucion>();
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("estadoSolucion == 1");
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		
+		
+		for(SegSolucion segSolucion : execute){
+			if (segSolucion.getBeneficiario().getAfiliado().getIdAfiliado().equals(idAfiliado)){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(segSolucion.getCostoAdministrativo());
+				auxSolucion.setCostoDirecto(segSolucion.getCostoDirecto());
+				auxSolucion.setCostoMaterial(segSolucion.getCostoMaterial());
+				auxSolucion.setCostoTotal(segSolucion.getCostoTotal());
+				auxSolucion.setDisenio(segSolucion.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(segSolucion.getFechaInicio()));
+				auxSolucion.setIdSolucion(segSolucion.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(segSolucion.getNomSolucion());
+				auxSolucion.setNotaDebito(segSolucion.getNotaDebito());
+				auxSolucion.setValorContrato(segSolucion.getValorContrato());
+				auxSolucion.setEstadoSolucion(segSolucion.getEstadoSolucion());
+				auxSolucion.setTrimestre(segSolucion.getTrimestre());
+				//System.out.println(p.getSolucion().getListaDetalle().get(0).getMaterialCostruccion().getProveedor().getNomProveedor());
+				ArrayList<AuxDetalleSolucion> listaDetalle = new ArrayList<AuxDetalleSolucion>();
+				Iterator<SegDetalleSolucion> i1 = segSolucion.getListaDetalle().iterator();
+				while(i1.hasNext()){
+					SegDetalleSolucion auxDetalle = i1.next();
+					AuxDetalleSolucion auxDetalle2 = new AuxDetalleSolucion();
+					auxDetalle2.setCantidad(auxDetalle.getCantidad());
+					auxDetalle2.setCostoAcumulado(auxDetalle.getCostoAcumulado());
+					auxDetalle2.setIdDetalleSolucion(auxDetalle.getIdDetalleSolucion().getId());
+					auxDetalle2.setSubTotal(auxDetalle.getSubTotal());
+					auxDetalle2.setUnidadMetrica(auxDetalle.getUnidadMetrica());
+					auxDetalle2.setCantidadEjecutada(auxDetalle.getCantidadEjecutada());
+					
+					listaDetalle.add(auxDetalle2);
+				}
+				auxSolucion.setLista(listaDetalle);
+				
+				AuxBeneficiario auxBene = new AuxBeneficiario();
+				auxBene.setIdBeneficiario(segSolucion.getBeneficiario().getIdBeneficiario().getId());
+				auxBene.setNomBeneficiario(segSolucion.getBeneficiario().getNomBeneficiario());
+				
+				auxSolucion.setBeneficiario(auxBene);
+				response.add(auxSolucion);
+				
+			}
+		}
+		
+		return response;
 	}
 	
 
@@ -1963,7 +2019,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 			try{
 				 final SegMaterialCostruccion e = gestorPersistencia.getObjectById(SegMaterialCostruccion.class, id);
-				 e.setNomMaterialCostruccion(nomMaterialCostruccion);;
+				 e.setNomMaterialCostruccion(nomMaterialCostruccion);
 				 e.setPrecioUnit(precioUnitario);
 				 e.setUnidadMetrica(unidadMetrica);
 				 
@@ -2055,6 +2111,30 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 			gestorPersistencia.close();
 		}
 		return null;
+	}
+	
+	public Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		try{
+			 SegSolucion e = gestorPersistencia.getObjectById(SegSolucion.class, idSolucion);
+			 e.setEstadoSolucion(2);			 
+			 
+		}finally{
+			gestorPersistencia.close();
+		}
+		return 0L;
+	}
+	
+	public Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		try{
+			 SegSolucion e = gestorPersistencia.getObjectById(SegSolucion.class, idSolucion);
+			 e.setTrimestre(trimestre);;			 
+			 
+		}finally{
+			gestorPersistencia.close();
+		}
+		return 0L;
 	}
 	
 	public Long Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion){

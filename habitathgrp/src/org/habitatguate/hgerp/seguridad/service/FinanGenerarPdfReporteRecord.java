@@ -75,7 +75,7 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		        try {
 		            Document document 	= new Document(PageSize.LETTER,5,5,5,35);
 		            final PdfWriter write = PdfWriter.getInstance(document, out);
-		            write.setPageEvent(new PageStamper());
+		            write.setPageEvent(new PageStamper(auxBeneficiario.getSolucion().getNumeroSolucion()));
 		            
 		            Image image1 		= null ;
 		            
@@ -185,6 +185,18 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            		table.addCell(new Phrase(String.valueOf(next.getVale().get(0).getIdVale()), catFont3));
 		            	
 		            }
+		            
+		            table.addCell(new Phrase("", catFont3));
+            		table.addCell(new Phrase("Costo Administrativo", catFont3));
+            		table.addCell(new Phrase("", catFont3));
+            		table.addCell(new Phrase("1", catFont3));
+            		table.addCell(new Phrase("", catFont3));
+            		table.addCell(new Phrase(String.valueOf(auxBeneficiario.getSolucion().getCostoAdministrativo()), catFont3));
+            		costoAcumulado = costoAcumulado + auxBeneficiario.getSolucion().getCostoAdministrativo();
+            		table.addCell(new Phrase(String.valueOf(costoAcumulado), catFont3));
+            		table.addCell(new Phrase(String.valueOf(montoAutorizado-costoAcumulado), catFont3));
+            		table.addCell(new Phrase("", catFont3));
+		            
 	
 			 		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
 

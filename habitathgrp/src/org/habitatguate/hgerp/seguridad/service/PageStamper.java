@@ -8,8 +8,14 @@ import java.io.IOException;
 
 public class PageStamper extends PdfPageEventHelper {
 	 String header;
+	 int noSolucion;
      /** The template with the total number of pages. */
      PdfTemplate total;
+     
+     
+     public PageStamper(int noSolucion){
+    	 this.noSolucion = noSolucion;
+     }
 
      /**
       * Allows us to change the content of the header.
@@ -37,19 +43,20 @@ public class PageStamper extends PdfPageEventHelper {
  
 
     public void onEndPage(PdfWriter writer, Document document) {
-    	 PdfPTable table = new PdfPTable(3);
+    	 PdfPTable table = new PdfPTable(4);
          try {
-             table.setWidths(new int[]{24, 24, 2});
+             table.setWidths(new int[]{25, 10, 16,24});
              table.setTotalWidth(527);
              table.setLockedWidth(true);
              table.getDefaultCell().setFixedHeight(20);
              table.getDefaultCell().setBorder(Rectangle.BOTTOM);
              table.addCell(header);
-             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
+             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
              table.addCell(String.format("Pagina %d de", writer.getPageNumber()));
              PdfPCell cell = new PdfPCell(Image.getInstance(total));
              cell.setBorder(Rectangle.BOTTOM);
              table.addCell(cell);
+             table.addCell("Solución No. "+noSolucion);
              table.writeSelectedRows(0, -1, 34, 35, writer.getDirectContent());
          }
          catch(DocumentException de) {

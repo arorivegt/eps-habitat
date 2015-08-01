@@ -1378,6 +1378,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		auxSolucion.setValorContrato(bene.getSolucion().getValorContrato());
 		auxSolucion.setEstadoSolucion(bene.getSolucion().getEstadoSolucion());
 		auxSolucion.setTrimestre(bene.getSolucion().getTrimestre());
+		auxSolucion.setNumeroSolucion(bene.getSolucion().getNumeroSolucion());
 		
 		ArrayList<AuxDetalleSolucion> listaEjecucion = new ArrayList<AuxDetalleSolucion>();
 		Iterator<SegDetalleEjecucion> i1 = bene.getSolucion().getListaEjecucion().iterator();

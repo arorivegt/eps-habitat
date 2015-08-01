@@ -52,6 +52,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 	private List<AuxCatalogoProducto> catProductos = new ArrayList<AuxCatalogoProducto>();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
+    private Font catFont3 						= new Font(Font.FontFamily.TIMES_ROMAN, 8,Font.NORMAL,BaseColor.BLACK);
     
     private List<String> nombreProduct = new ArrayList<String>();
     private List<Double> valor = new ArrayList<Double>();
@@ -156,13 +157,14 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		           
 		           for (int x = 0; x < nombreProduct.size();x++){
 		        	   	if (valor.get(x) > 0.0){
-	            		table.addCell(codigo.get(x));
-	            		table.addCell(nombreProduct.get(x));
-	            		table.addCell(" ");
-	            		table.addCell(" ");
-	            		table.addCell("" +valor.get(x));
-	            		table.addCell(" ");
-	            		table.addCell(" ");
+		        	   		
+	            		table.addCell(new Paragraph(codigo.get(x),catFont3));
+	            		table.addCell(new Paragraph(nombreProduct.get(x),catFont3));
+	            		table.addCell(new Paragraph(" ",catFont3));
+	            		table.addCell(new Paragraph(" ",catFont3));
+	            		table.addCell(new Paragraph("" +valor.get(x),catFont3));
+	            		table.addCell(new Paragraph(" ",catFont3));
+	            		table.addCell(new Paragraph(" ",catFont3));
 		        	   	}
 		           }
 		           table.addCell(" ");
@@ -181,28 +183,30 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		           table.addCell(" ");
 		           table.addCell(" ");
 		           
+		           if (auxHistoroial.getRetenidoDonacion() > 0.0){
 		           table.addCell(" ");
-		           table.addCell("DONACION DE MATERIAL Y ACTIVO ");
+		           table.addCell(new Paragraph("DONACION DE MATERIAL Y ACTIVO ",catFont3));
 		           table.addCell(" ");
 		           table.addCell(" ");
 		           table.addCell(" ");
 		           table.addCell(" ");
-		           table.addCell(""+auxHistoroial.getRetenidoDonacion());
+		           table.addCell(new Paragraph(""+auxHistoroial.getRetenidoDonacion(),catFont3));
+		           }
 		           
 		           table.addCell(" ");
 		           table.addCell(" ");
 		           table.addCell(" ");
 		           table.addCell(" ");
-		           table.addCell("TOTAL DE LA SOLICITUD ");
-		           table.addCell(""+auxHistoroial.getValorPago());
+		           table.addCell(new Paragraph("TOTAL DE LA SOLICITUD ",catFont3));
+		           table.addCell(new Paragraph(""+auxHistoroial.getValorPago(),catFont3));
 		           table.addCell(" ");
 		           
 		           table.addCell(" ");
-		           table.addCell("DONACION DE MATERIAL Y ACTIVO ");
 		           table.addCell(" ");
 		           table.addCell(" ");
-		           table.addCell("TOTAL A PAGAR ");
-		           table.addCell(""+auxHistoroial.getValorCancelado());
+		           table.addCell(" ");
+		           table.addCell(new Paragraph("TOTAL A PAGAR ",catFont3));
+		           table.addCell(new Paragraph(""+auxHistoroial.getValorCancelado(),catFont3));
 		           table.addCell(" ");
 		           
 	

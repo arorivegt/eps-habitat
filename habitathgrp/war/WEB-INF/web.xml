@@ -192,6 +192,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <url-pattern>/FinanGenerarSolicitudCheque</url-pattern>  
 </servlet-mapping>
 
+
+  <servlet>
+    <servlet-name>ExportComparativoPrecios</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportComparativoPrecios</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportComparativoPrecios</servlet-name>  
+        <url-pattern>/ExportComparativoPrecios</url-pattern>  
+ </servlet-mapping> 
+
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

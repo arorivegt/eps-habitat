@@ -93,6 +93,8 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	
 	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
+	
+	private ArrayList<AuxMaterialCostruccion> listaMateriales = new ArrayList<AuxMaterialCostruccion>();
 
 	
 	public AuxProveedor() {
@@ -369,6 +371,14 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 
 	public void setMontoMaximo(double montoMaximo) {
 		this.montoMaximo = montoMaximo;
+	}
+
+	public ArrayList<AuxMaterialCostruccion> getListaMateriales() {
+		return listaMateriales;
+	}
+
+	public void setListaMateriales(ArrayList<AuxMaterialCostruccion> listaMateriales) {
+		this.listaMateriales = listaMateriales;
 	}
 	
 	

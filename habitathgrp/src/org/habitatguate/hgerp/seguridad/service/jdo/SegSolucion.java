@@ -42,11 +42,15 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private Date fechaInicio;
 	@Persistent
+	private int anio;
+	@Persistent
 	private Date fechaFin;
 	@Persistent
 	private int trimestre;
 	@Persistent
 	private int estadoSolucion;
+	@Persistent
+	private int numeroSolucion;
 	@Persistent
 	@Unowned
 	private SegBeneficiario beneficiario;
@@ -225,6 +229,34 @@ public class SegSolucion implements Serializable{
 
 	public void setTrimestre(int trimestre) {
 		this.trimestre = trimestre;
+	}
+
+
+
+
+	public int getAnio() {
+		return anio;
+	}
+
+
+
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+
+
+
+	public int getNumeroSolucion() {
+		return numeroSolucion;
+	}
+
+
+
+
+	public void setNumeroSolucion(int numeroSolucion) {
+		this.numeroSolucion = numeroSolucion;
 	}
 
 	

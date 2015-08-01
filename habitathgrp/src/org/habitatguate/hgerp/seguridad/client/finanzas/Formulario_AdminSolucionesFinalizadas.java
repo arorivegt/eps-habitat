@@ -25,15 +25,14 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 
-public class Formulario_AdminSolucionesEnCostruccion extends Composite{
+public class Formulario_AdminSolucionesFinalizadas extends Composite{
 	
 	 private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 		public long idProveedorActual = 0L;
 		Formulario_CambioTrimestre formularioPago;
-		Formulario_FinalizarSolucion formularioFinal;
 	    TablaGWT_AdminSoluciones e = null;
 	    
-	    public Formulario_AdminSolucionesEnCostruccion() {
+	    public Formulario_AdminSolucionesFinalizadas() {
 			// TODO Auto-generated constructor stub
 			
 
@@ -63,17 +62,29 @@ public class Formulario_AdminSolucionesEnCostruccion extends Composite{
 			image.setSize("103px", "55px");*/
 			
 			
-			Button button = new Button("Send");
+			/*Button button = new Button("Send");
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {
-					
-					AuxSolucion aux = e.grid.selectionModel.getSelectedObject();
-					if (aux != null){
-						formularioFinal = new Formulario_FinalizarSolucion(aux.getIdSolucion());
-					}else{
-						Window.alert("Debes de Seleccionar una Solucion");
-					}
+					AuxSolucion total= e.grid.selectionModel.getSelectedObject();
+					if (total != null){
+						loginService.Actualizar_EstadoFinalizadoSolucion(total.getIdSolucion(), new AsyncCallback<Long>() {
 
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Long result) {
+								// TODO Auto-generated method stub
+								Window.alert("La solución ha sido finalizado exitosamente");
+							}
+						});
+					
+					}else{
+						Window.alert("Debes de seleccionar una solucion");
+					}
 					
 				}
 			});		
@@ -81,7 +92,7 @@ public class Formulario_AdminSolucionesEnCostruccion extends Composite{
 			button.setText("Finalizar Solución");
 			button.setStyleName("finanButton");
 			absolutePanel.add(button, 650, 29);
-			button.setSize("157px", "30px");
+			button.setSize("157px", "30px");*/
 			
 			Button button2 = new Button("Send");
 			button2.addClickHandler(new ClickHandler() {
@@ -114,7 +125,7 @@ public class Formulario_AdminSolucionesEnCostruccion extends Composite{
 		 		@Override
 				public void onChange(ChangeEvent event) {	 			
 		 			if (!comboBox.getValue(comboBox.getSelectedIndex()).equals("-1")){
-		 				loginService.Consultar_SolucionesEnCostruccion_PorAfiliado(Long.valueOf(comboBox.getValue(comboBox.getSelectedIndex())),
+		 				loginService.Consultar_SolucionesFinalizadas_PorAfiliado(Long.valueOf(comboBox.getValue(comboBox.getSelectedIndex())),
 		 						new AsyncCallback<List<AuxSolucion>>() {	 	        		
 		 	        		@Override
 		 	        		public void onFailure(Throwable caught) {

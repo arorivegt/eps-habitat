@@ -87,6 +87,15 @@ public class MyPaginationDataGrid_AdminSoluciones<T> extends PagingDataGrid_Admi
         dataGrid.addColumn(codUnoColumn, "Beneficiario");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
         
+        Column<T, String> codDosColumn2 = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getAnio());
+            }
+        };
+        dataGrid.addColumn(codDosColumn2, "Año");
+        dataGrid.setColumnWidth(codDosColumn2, 20, Unit.PCT);
+        
         Column<T, String> codDosColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {

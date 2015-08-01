@@ -34,6 +34,8 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
 	
 	private Double costoAcumulado;
 	
+	private Double precioUnitario;
+	
 	private Double cantidadEjecutada;
 	
     private AuxMaterialCostruccion materialCostruccion;
@@ -112,6 +114,14 @@ public class AuxDetalleSolucion implements Comparable<AuxDetalleSolucion>,IsSeri
 
 	public void setCantidadEjecutada(Double cantidadEjecutada) {
 		this.cantidadEjecutada = cantidadEjecutada;
+	}
+
+	public Double getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	public void setPrecioUnitario(Double precioUnitario) {
+		this.precioUnitario = precioUnitario;
 	}
 	
 	

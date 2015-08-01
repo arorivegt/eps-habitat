@@ -53,7 +53,7 @@ public class Buscador_Afiliado extends Composite {
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
-	absolutePanel.setSize("1130px", "20px");
+	absolutePanel.setSize("1321px", "20px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
 	//----------------------------primera fila---------------------------------
@@ -104,6 +104,17 @@ public class Buscador_Afiliado extends Composite {
 	absolutePanel.add(label_3, 731, 10);
 	label_3.setSize("157px", "13px");
 	
+	Label lblTelfono = new Label("Teléfono");
+	lblTelfono.setStyleName("label");
+	absolutePanel.add(lblTelfono, 966, 10);
+	lblTelfono.setSize("157px", "13px");
+	
+	final TextBox textBox_4 = new TextBox();
+	textBox_4.setStylePrimaryName("gwt-TextBox2");
+	textBox_4.setStyleName("gwt-TextBox2");
+	textBox_4.setMaxLength(100);
+	absolutePanel.add(textBox_4, 966, 29);
+	textBox_4.setSize("227px", "34px");
 	
 	
 /*	Image image = new Image("images/ico-lupa.png");
@@ -117,7 +128,7 @@ public class Buscador_Afiliado extends Composite {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 
-			loginService.Insertar_Afiliado(textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),
+			loginService.Insertar_Afiliado(textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),textBox_4.getText(),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -151,8 +162,10 @@ public class Buscador_Afiliado extends Composite {
 
 	button.setText("Nuevo Afiliado");
 	button.setStyleName("finanButton");
-	absolutePanel.add(button, 968, 29);
+	absolutePanel.add(button, 1224, 29);
 	button.setSize("157px", "30px");
+	
+	
 	
 	
 

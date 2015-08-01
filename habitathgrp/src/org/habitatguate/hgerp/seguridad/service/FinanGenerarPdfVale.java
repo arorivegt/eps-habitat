@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -42,6 +43,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 	private SegPersonalAfiliado auxPersonal		= new SegPersonalAfiliado();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
+    private Font catFont3 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.RED);
     
     private RecursosHumanosServiceImpl recursosHumanosService = new  RecursosHumanosServiceImpl();
     private SqlServiceImpl finanzasService = new  SqlServiceImpl();
@@ -80,14 +82,16 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            document.open();
 		            
 		            image1.setAlignment(Element.ALIGN_LEFT);
-		            image1.scaleAbsolute(50.0f, 50.0f);
+		            image1.scaleAbsolute(120.0f, 50.0f);
 		            document.add(image1);
 		            
 		            Date fecha = null;
 		            String proveedor = "";
+		            
 		            double total = 0.0;
+		            int status = 0;
 		            String nameAfiliado = auxBeneficiario.getAfiliado().getNomAfiliado();
-		            String telAfiliado = "12345680";
+		            String telAfiliado = auxBeneficiario.getAfiliado().getTelefono();
 		            int trimestre = auxBeneficiario.getSolucion().getTrimestre();
 		            String cadenaTrimestre = "";
 		            String elaboradoPor = auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido();
@@ -99,6 +103,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            		proveedor = next.getMaterialCostruccion().getProveedor().getNomProveedor();
 		            		fecha = next.getVale().get(0).getFechaVale();
 		            		total = total + next.getSubTotal();
+		            		status = next.getVale().get(0).getAprobado();
 		            	}
 		            }
 		            
@@ -131,13 +136,28 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            document.add(new Paragraph("AFILIADO: " + nameAfiliado,catFont));
 		            document.add(new Paragraph("Telefono Afiliado: " + telAfiliado,catFont));
 		            document.add(new Paragraph("No. de vale: "+idVale,catFont));
+		            if (status == 0){
+		            	Chunk c = new Chunk("Estado Vale: ", catFont);
+		            	Chunk c2 = new Chunk("PENDIENTE APROBADO ",catFont3);
+		            	Paragraph p = new Paragraph();
+		            	p.add(c);
+		            	p.add(c2);
+		            	document.add(p);
+		            }else if (status == 1){
+		            	Chunk c = new Chunk("Estado Vale: ", catFont);
+		            	Chunk c2 = new Chunk("APROBADO ",catFont2);
+		            	Paragraph p = new Paragraph();
+		            	p.add(c);
+		            	p.add(c2);
+		            	document.add(p);
+		            }
 		            document.add(new Paragraph("Fecha "+newFecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
 		            document.add(new Paragraph("VALE AL PRESTATARIO:"+auxBeneficiario.getNomBeneficiario() +" "+"Telefono Prestatario:"+auxBeneficiario.getTelBeneficiario() ,catFont));
 		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+cadenaTrimestre ,catFont));
 		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN: "+ auxBeneficiario.getDirBeneficiario(),catFont));
 		            document.add(new Paragraph("NOMBRE DEL PROVEEDOR: "+proveedor,catFont));
 		            document.add(new Paragraph("POR LA CANTIDAD DE :  "+ NumberToLetterConverter.convertNumberToLetter(""+total),catFont));
-		            document.add(new Paragraph("Nombre del asistente: "+auxPersonal.getNombreAsistenteAdmin()+" No. Telefono Supervisor:   12345678",catFont));
+		            document.add(new Paragraph("Documento elaborado por : "+auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            
 		            //Tabla del vale
@@ -149,7 +169,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont2));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Unidad Metrica",catFont2));
+		           c1 = new PdfPCell(new Phrase("Unidad de Medida",catFont2));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("Cantidad",catFont2));
@@ -177,7 +197,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            		table.addCell(next.getMaterialCostruccion().getNomMaterialCostruccion());
 		            		table.addCell(next.getMaterialCostruccion().getUnidadMetrica());
 		            		table.addCell(String.valueOf(next.getCantidad()));
-		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getPrecioUnit()));
+		            		table.addCell(String.valueOf(next.getPrecioUnitario()));
 		            		table.addCell(String.valueOf(next.getSubTotal()));
 		            		costoAcumulado = costoAcumulado + next.getSubTotal();
 		            		table.addCell(String.valueOf(costoAcumulado));

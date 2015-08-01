@@ -209,6 +209,24 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         
         */
         
+        Column<T, String> costodirecto = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getCostoDirecto());
+            }
+        };
+        dataGrid.addColumn(costodirecto, "Costo Directo");
+        dataGrid.setColumnWidth(costodirecto, 20, Unit.PCT);
+        
+        Column<T, String> costoAdmin = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getCostoAdministrativo());
+            }
+        };
+        dataGrid.addColumn(costoAdmin, "Costo Administrativo");
+        dataGrid.setColumnWidth(costoAdmin, 20, Unit.PCT);
+        
         Column<T, String> costoTotal = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
@@ -218,22 +236,23 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         dataGrid.addColumn(costoTotal, "Costo Total");
         dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
         
+        
         Column<T, String> valorContrato= new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
                 return String.valueOf(((AuxSolucion) object).getValorContrato());
             }
         };
-        dataGrid.addColumn(valorContrato, "Valor Contrato");
+        dataGrid.addColumn(valorContrato, "Monto Autorizado");
         dataGrid.setColumnWidth(valorContrato, 20, Unit.PCT);
         
        Column<T, String> notaDeb= new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getCostoTotal()-((AuxSolucion) object).getCostoMaterial());
+                return String.valueOf(((AuxSolucion) object).getValorContrato()-((AuxSolucion) object).getCostoTotal());
             }
         };
-        dataGrid.addColumn(notaDeb, "Nota Debito / Nota Credito");
+        dataGrid.addColumn(notaDeb, "(+-) Costo Total y Monto Autorizado");
         dataGrid.setColumnWidth(notaDeb, 20, Unit.PCT);
         
         
@@ -241,7 +260,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
             @Override
             public String getValue(T object) {
             	//este hay que modificarlo
-                return String.valueOf(((AuxSolucion) object).getCostoTotal());
+                return String.valueOf(((AuxSolucion) object).getCostoMaterial());
             }
         };
         dataGrid.addColumn(cuentaXPagar, "Cuentas por Pagar");

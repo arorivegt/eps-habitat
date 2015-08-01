@@ -25,6 +25,8 @@ public class SegAfiliado implements Serializable {
 	private String municipio;
 	@Persistent
 	private String departamento;
+	@Persistent
+	private String telefono;
 	@Persistent(mappedBy = "afiliado")
     @Element(dependent = "true")
 	private List <SegBeneficiario> beneficiario;
@@ -110,6 +112,14 @@ public class SegAfiliado implements Serializable {
 
 	public void setProveedor(List<SegProveedor> proveedor) {
 		this.proveedor = proveedor;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	

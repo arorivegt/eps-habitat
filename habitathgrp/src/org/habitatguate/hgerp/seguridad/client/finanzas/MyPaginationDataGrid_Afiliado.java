@@ -125,6 +125,15 @@ public class MyPaginationDataGrid_Afiliado<T> extends PagingDataGrid_Afiliado<T>
         dataGrid.addColumn(depAfiliado, "Departamemto");
         dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
         
+        Column<T, String> telAfiliado = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxAfiliado) object).getTelefono());
+            }
+        };
+        dataGrid.addColumn(telAfiliado, "Teléfono Afiliado");
+        dataGrid.setColumnWidth(telAfiliado, 20, Unit.PCT);
+        
         // ActionCell.
         ActionCell<T> reListCell = new ActionCell<T>("Modificar",
         	    new ActionCell.Delegate<T>() {

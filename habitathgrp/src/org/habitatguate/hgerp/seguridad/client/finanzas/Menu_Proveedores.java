@@ -4,6 +4,7 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.TabPanel;
@@ -15,7 +16,7 @@ public class Menu_Proveedores extends Composite{
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private ScrollPanel panel3;
-	private ScrollPanel panel4;
+	ScrollPanel panel4;
 	private Formulario_Proveedor bp;
 	private Buscador_Proveedor fp;
     private Buscador_ProveedorAprobar bpa;
@@ -51,6 +52,9 @@ public class Menu_Proveedores extends Composite{
 			   case 0:
 				   ItemUno();
 			       break;
+			   case 1:
+				   ItemCuatro();
+			       break;
 			   case 2:
 				   ItemDos();
 				   break;
@@ -79,9 +83,10 @@ public class Menu_Proveedores extends Composite{
 		panel3.setWidget(bpa);
 	}
 	
-	public void ItemCuatro(Long idProveedor, Long idAfiliado){
-		fip = new Formulario_InfoProveedor(idProveedor,idAfiliado);
-		panel4.setWidget(fip);
+	public void ItemCuatro(){
+		if (panel4.getWidget() == null){
+			Window.alert("Ingrese o seleccione un proveedor");
+		}
 	}
 	
 	

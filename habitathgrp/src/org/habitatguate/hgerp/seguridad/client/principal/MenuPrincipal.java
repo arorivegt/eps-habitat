@@ -19,6 +19,7 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_GestorVales;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Formulario_MaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Afiliados;
 import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoPrecios;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoSolucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteCuentasXPagar;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReportePagosRealizados;
@@ -257,6 +258,12 @@ public class MenuPrincipal extends Composite {
 			}
 		};
 		
+		final Command cmdfinaReporte6 = new Command() {
+			public void execute() {
+				finaReporte6();
+				
+			}
+		};
 
 		// -- Soluciones Construidas
 
@@ -431,6 +438,7 @@ public class MenuPrincipal extends Composite {
 		MenuReportesFinanzas.addItem("Comparativo entre lo planificado y ejecutado", cmdfinaReporte3);
 		MenuReportesFinanzas.addItem("Reporte de Pagos realizados", cmdfinaReporte4);
 		MenuReportesFinanzas.addItem("Reporte Cuentas Por Pagar", cmdfinaReporte5);
+		MenuReportesFinanzas.addItem("Reporte Comparativo Precios", cmdfinaReporte6);
 
 		//soluciones menu
 		final MenuBar MenuInventarioMateriales = new MenuBar(true);
@@ -651,6 +659,15 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fr5);
+		
+	}
+	
+	protected void finaReporte6() {
+		// TODO Auto-generated method stub
+		ReporteComparativoPrecios fr6 = new ReporteComparativoPrecios();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr6);
 		
 	}
 

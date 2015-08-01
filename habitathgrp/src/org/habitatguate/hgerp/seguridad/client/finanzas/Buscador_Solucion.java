@@ -22,9 +22,11 @@ public class Buscador_Solucion extends Composite {
 	private ScrollPanel panel1;
 	private ScrollPanel panel2;
 	private ScrollPanel panel3;
+	private ScrollPanel panel4;
 	private Formulario_AsignarSolucion bbs;
 	private Formulario_AdminSolucionesEnCostruccion fase;
 	private Formulario_TipoSolucion fts;
+	private Formulario_AdminSolucionesFinalizadas fasf;
 
 	
 	public Buscador_Solucion() {
@@ -39,12 +41,17 @@ public class Buscador_Solucion extends Composite {
 		panel2 = new ScrollPanel();
 		panel2.setAlwaysShowScrollBars(true);
 		panel3 = new ScrollPanel();
+		panel3.setAlwaysShowScrollBars(true);
+		panel4 = new ScrollPanel();
+		panel4.setAlwaysShowScrollBars(true);
 		tabPanel.add(panel1, "Asignar Solucion",true);
 		tabPanel.add(panel2,"Mantenimiento Tipo Solución",true);
 		tabPanel.add(panel3,"Soluciones en Costruccion",true);
-		panel1.setSize("100%", "480px");
-		panel2.setSize("100%", "480px");
-		panel3.setSize("100%", "480px");
+		tabPanel.add(panel4,"Soluciones Finalizadas",true);
+		panel1.setSize("100%", "580px");
+		panel2.setSize("100%", "580px");
+		panel3.setSize("100%", "580px");
+		panel4.setSize("100%", "580px");
 
 		
 
@@ -62,6 +69,9 @@ public class Buscador_Solucion extends Composite {
 			   case 2:
 				   ItemTres();
 				   break;
+			   case 3:
+				   ItemCuatro();
+				   break;
 			   
 			   }
 			   
@@ -69,6 +79,13 @@ public class Buscador_Solucion extends Composite {
 			});
 	}	
 	
+	protected void ItemCuatro() {
+		// TODO Auto-generated method stub
+		fasf = new Formulario_AdminSolucionesFinalizadas();
+		panel4.setWidget(fasf);
+		
+	}
+
 	protected void ItemTres() {
 		// TODO Auto-generated method stub
 		fase = new Formulario_AdminSolucionesEnCostruccion();

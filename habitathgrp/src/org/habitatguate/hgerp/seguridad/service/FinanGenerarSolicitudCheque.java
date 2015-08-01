@@ -94,7 +94,7 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.open();
 		            
 		            image1.setAlignment(Element.ALIGN_LEFT);
-		            image1.scaleAbsolute(50.0f, 50.0f);
+		            image1.scaleAbsolute(120.0f, 50.0f);
 		            document.add(image1);
 		            
 		            Date fecha = null;
@@ -226,19 +226,19 @@ public class FinanGenerarSolicitudCheque extends HttpServlet{
 		            document.add(new Paragraph("FACTURAS A CANCELAR: "+ auxHistoroial.getSeriesDocumento(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("SOLICITADO POR: "+auxPersonal.getNombreAsistenteAdmin()+"                                        F:________________________________",catFont));
+		            document.add(new Paragraph("SOLICITADO POR: "+auxPersonal.getNombreAsistenteAdmin()+"                                        F:________________________________",catFont2));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("APROBADO POR: "+auxPersonal.getNombreAdministrador()+"   		                                              F:________________________________",catFont));
+		            document.add(new Paragraph("APROBADO POR: "+auxPersonal.getNombreAdministrador()+"   		                                              F:________________________________",catFont2));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("DEPARTAMENTO DE ADMINISTRACIÓN Y FINANZAS                                           ",catFont));
+		            document.add(new Paragraph("								DEPARTAMENTO DE ADMINISTRACIÓN Y FINANZAS                                           ",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("REVISADO POR : "+auxPersonal.getNombreContadorRegion()+"                                                          F:________________________________",catFont));
+		            document.add(new Paragraph("REVISADO POR : "+auxPersonal.getNombreContadorRegion()+"                                                          F:________________________________",catFont2));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("CHEQUE ELABORADO POR: "+auxPersonal.getNombreEncargadoCheques()+"                                        F:________________________________",catFont));
+		            document.add(new Paragraph("CHEQUE ELABORADO POR: "+auxPersonal.getNombreEncargadoCheques()+"                                        F:________________________________",catFont2));
 		            
 		            document.close();
 		        }catch (DocumentException exc){

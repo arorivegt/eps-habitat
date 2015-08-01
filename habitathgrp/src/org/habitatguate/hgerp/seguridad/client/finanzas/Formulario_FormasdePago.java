@@ -127,7 +127,7 @@ public class Formulario_FormasdePago extends Composite{
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("")){
 
-			loginService.Insertar_Afiliado(textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),
+	/*		loginService.Insertar_Afiliado(textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 
@@ -148,7 +148,7 @@ public class Formulario_FormasdePago extends Composite{
                 	
                 }
 
-         });
+         });*/
 			
 
 		}

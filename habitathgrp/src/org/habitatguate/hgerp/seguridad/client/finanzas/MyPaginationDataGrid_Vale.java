@@ -68,7 +68,7 @@ public class MyPaginationDataGrid_Vale<T> extends PagingDataGrid_Vale<T>{
             }
         };
 
-        dataGrid.addColumn(unidadMetrica, "Unidad Metrica");        
+        dataGrid.addColumn(unidadMetrica, "Unidad de Medida");        
         dataGrid.setColumnWidth(unidadMetrica, 20, Unit.PCT);
        
  

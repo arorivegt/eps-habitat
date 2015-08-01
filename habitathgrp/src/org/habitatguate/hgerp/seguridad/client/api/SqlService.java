@@ -34,7 +34,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("Insertar")
 public interface SqlService extends RemoteService{
 	String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException;
-	Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento);
+	Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento,String numeroTelefono);
 	Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado);
 	Long Insertar_MaterialCostruccion(String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario);
 	Long Insertar_PlantillaSolucion(String nomPlantilla,String tipo,Double costoFinal);
@@ -109,6 +109,7 @@ public interface SqlService extends RemoteService{
 	List<AuxContactoProv> Consultar_ContactosProv(Long idProveedor);
 	List<AuxCatalogoProducto> Consultar_CatalogoProductos();
 	List<AuxSolucion> Consultar_SolucionesEnCostruccion_PorAfiliado(Long idAfiliado);
+	List<AuxSolucion> Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado);
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
@@ -120,6 +121,7 @@ public interface SqlService extends RemoteService{
 	List<AuxReporteCuentasPorPagar> ConsultarCuentasXPagar_PorProveedores();
 	List<AuxTipoSolucion> Consultar_TipoSolucion();
 	List<AuxPersonalAfiliado> Consultar_PersonalAfiliado();
+	List<AuxAfiliado> Consulta_ComparativoPrecios(String idItemCostruccion);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
@@ -136,7 +138,7 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
 	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);
 	Long Actualizar_StatusValeAprobado(Long idVale,int status);
-	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion);
-	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre);
+	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion,int numeroSolucion);
+	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre,int anio);
 	
 }

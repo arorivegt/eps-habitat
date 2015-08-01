@@ -613,6 +613,7 @@ public class Formulario_Proveedor extends Composite{
 		@Override
 		public void onSuccess(List<AuxAfiliado> result) {
 			System.out.println("ya estan todos los afiliados");
+			listAfiliados.addItem("[Seleccione Afiliado]","0L");
 			for (AuxAfiliado aux : result){
 				listAfiliados.addItem(aux.getNomAfiliado(),String.valueOf(aux.getIdAfiliado()));
 			}
@@ -677,14 +678,14 @@ public class Formulario_Proveedor extends Composite{
 			contribuyeEventos= simpleCheckBox_2.getValue();
 			 cualesyComoEventos= textArea_1.getText();
 			aceptaCredito= simpleCheckBox_3.getValue();
-			montoMaximo= Double.valueOf(textBox_11.getText());
-			tiempoMaximo= Integer.valueOf(textBox_12.getText());
-			idafiliado = Long.valueOf(listAfiliados.getValue(listAfiliados.getSelectedIndex()));
+			montoMaximo= textBox_11.getText().equals("") ? 0.0 : Double.valueOf(textBox_11.getText());
+			tiempoMaximo= textBox_12.getText().equals("") ? 0 : Integer.valueOf(textBox_12.getText());
+			idafiliado = listAfiliados.getValue(listAfiliados.getSelectedIndex()).equals("0L") ? 0L : Long.valueOf(listAfiliados.getValue(listAfiliados.getSelectedIndex()));
 			
 			
 			
 			
-			if (!textBox.getText().equals("")){
+			if (!nomProveedor.equals("") && !numeroNit.equals("") && !dirProveedor.equals("") && !telProveedor.equalsIgnoreCase("") && !idafiliado.equals(0L)){
 				Date time=new Date();
 				Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 				
@@ -697,7 +698,8 @@ public class Formulario_Proveedor extends Composite{
 								// TODO Auto-generated method stub
 								Mensaje mensaje = new Mensaje();
 								mensaje.setMensaje("alert alert-info", "Registro almacenado exitosamente con id "+result);
-								tabPanel.ItemCuatro(result,idafiliado);
+								Formulario_InfoProveedor fip = new Formulario_InfoProveedor(result,idafiliado);
+								tabPanel.panel4.setWidget(fip);
 								tabPanel.tabPanel.selectTab(1);
 							}
 							
@@ -713,7 +715,7 @@ public class Formulario_Proveedor extends Composite{
 		}
 		
 		else{
-			Window.alert("Debe completar el formulario");
+			Window.alert("Debe completar los campos de Nombre, Dirección, Número de NIT, Teléfono, Afiliado que distribuye");
 		}
 		}
 	});	

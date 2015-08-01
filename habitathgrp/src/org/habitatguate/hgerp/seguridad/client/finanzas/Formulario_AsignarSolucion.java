@@ -1,6 +1,8 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -24,6 +26,8 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
@@ -262,7 +266,7 @@ public class Formulario_AsignarSolucion extends Composite{
 	    
 		
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("1241px", "90px");
+		absolutePanel.setSize("1241px", "110px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 	//------------------------- NUEVO MATERIAL DE COSTRUCCION----------------------------------
@@ -431,7 +435,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			
 			AbsolutePanel absolutePanel_3 = new AbsolutePanel();
 			absolutePanel.add(absolutePanel_3, 914, 0);
-			absolutePanel_3.setSize("387px", "130px");
+			absolutePanel_3.setSize("387px", "160px");
 			
 			
 			Label lblTrimestre = new Label("Trimestre");
@@ -442,11 +446,11 @@ public class Formulario_AsignarSolucion extends Composite{
 			final ListBox listTrimestre = new ListBox();
 			absolutePanel_3.add(listTrimestre,173,10);
 			listTrimestre.setSize("157px", "25px");
-			listTrimestre.addItem("Trimestre 1", "1");
-			listTrimestre.addItem("Trimestre 2", "2");
-			listTrimestre.addItem("Trimestre 3", "3");
-			listTrimestre.addItem("Trimestre 4", "4");
-			
+			listTrimestre.addItem("Enero a Marzo", "1");
+			listTrimestre.addItem("Abril a Junio", "2");
+			listTrimestre.addItem("Julio a Septiembre", "3");
+			listTrimestre.addItem("Octubre a Diciembre", "4");
+						
 			Label lblMontoAutorizado = new Label("Monto Autorizado");
 			lblMontoAutorizado.setStyleName("label");
 			absolutePanel_3.add(lblMontoAutorizado, 10, 40);
@@ -463,19 +467,70 @@ public class Formulario_AsignarSolucion extends Composite{
 			final TextBox textBox_4 = new TextBox();
 			textBox_4.setStyleName("gwt-TextBox2");
 			textBox_4.setMaxLength(100);
-			absolutePanel_3.add(textBox_4, 173, 75);
+			absolutePanel_3.add(textBox_4, 173, 95);
 			textBox_4.setSize("176px", "19px");
 			textBox_4.setEnabled(false);
 			
+			Label lblAdmin = new Label("Costo Administrativo");
+			lblAdmin.setStyleName("label");
+			absolutePanel_3.add(lblAdmin, 10, 65);
+			lblAdmin.setSize("157px", "13px");
+			
+			final ListBox listaCostoAdmin = new ListBox();
+			absolutePanel_3.add(listaCostoAdmin,173,65);
+			listaCostoAdmin.setSize("50px", "25px");
+			listaCostoAdmin.addItem("[]","-1");
+			listaCostoAdmin.addItem("7%","7");
+			listaCostoAdmin.addItem("6.5%","6.5");
+			listaCostoAdmin.addItem("6%","6");
+			listaCostoAdmin.addItem("5.5%","5.5");
+			listaCostoAdmin.addItem("5%","5");
+			listaCostoAdmin.addItem("4.5%","4.5");
+			listaCostoAdmin.addItem("4%","4");
+			listaCostoAdmin.addItem("3.5%","3.5");
+			listaCostoAdmin.addItem("3%","3");
+			listaCostoAdmin.addItem("2.5%","2.5");
+			listaCostoAdmin.addItem("2%","2");
+			listaCostoAdmin.addItem("1.5%","1.5");
+			listaCostoAdmin.addItem("1%","1");
+			listaCostoAdmin.addItem("0.5%","0.5");
+			listaCostoAdmin.addItem("0%","0");
+			
+						
+			final TextBox textAdmin = new TextBox();
+			textAdmin.setStyleName("gwt-TextBox2");
+			textAdmin.setMaxLength(100);
+			absolutePanel_3.add(textAdmin, 220, 65);
+			textAdmin.setSize("135px", "19px");
+			textAdmin.setEnabled(false);
+			
 			Label lblDiferencia = new Label("Diferencia");
 			lblDiferencia.setStyleName("label");
-			absolutePanel_3.add(lblDiferencia, 10, 75);
+			absolutePanel_3.add(lblDiferencia, 10, 95);
 			lblDiferencia.setSize("157px", "13px");
+			
+			listaCostoAdmin.addChangeHandler(new ChangeHandler() {
+
+		 		@Override
+				public void onChange(ChangeEvent event) {
+		 			String opcion = listaCostoAdmin.getValue(listaCostoAdmin.getSelectedIndex());
+		 			if (opcion.equals("-1")){
+		 				textAdmin.setText("0.0");
+		 			}else{
+		 				double opcion2 = Double.valueOf(opcion);
+		 				double calculo = Double.valueOf(textBox_3.getText())*(opcion2/100);
+		 				//DecimalFormat df = new DecimalFormat("#.##");
+		 				String formatted = NumberFormat.getFormat("##.##").format(calculo);
+		 				textAdmin.setText(String.valueOf(formatted));
+		 			}
+				}
+		    });
+
 			
 			Button btnAsignarSolucion = new Button("Asignar Solucion");
 			btnAsignarSolucion.setText("Asignar Solucion");
 			btnAsignarSolucion.setStyleName("finanButton");
-			absolutePanel_3.add(btnAsignarSolucion, 217, 100);
+			absolutePanel_3.add(btnAsignarSolucion, 217, 120);
 			btnAsignarSolucion.setSize("134px", "22px");
 			
 			textBox_3.addChangeHandler(new ChangeHandler() {
@@ -547,9 +602,11 @@ public class Formulario_AsignarSolucion extends Composite{
 		                public void onSuccess(Long result)
 		                {			
 							System.out.println("Solicitud que se va inclur" + result);
+							Date fecha = new Date();
+							String formatted = DateTimeFormat.getFormat("yyyy").format(fecha);
 							AuxSolucion auxS = new AuxSolucion();
 							auxS.setNomSolucion(selectPlant.getNomPlantillaSolucion());
-							auxS.setCostoAdministrativo(0.0);
+							auxS.setCostoAdministrativo(Double.valueOf(textAdmin.getText()));
 							auxS.setCostoDirecto(0.0);
 							auxS.setCostoMaterial(0.0);
 							auxS.setCostoTotal(costoAcumulado);
@@ -557,6 +614,7 @@ public class Formulario_AsignarSolucion extends Composite{
 							auxS.setNotaDebito(0);
 							auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
 							auxS.setTrimestre(Integer.valueOf(listTrimestre.getValue(listTrimestre.getSelectedIndex())));
+							auxS.setAnio(Integer.valueOf(formatted));
 							AuxBeneficiario auxBene = new AuxBeneficiario();
 							auxBene.setIdBeneficiario(result);
 							auxS.setBeneficiario(auxBene);

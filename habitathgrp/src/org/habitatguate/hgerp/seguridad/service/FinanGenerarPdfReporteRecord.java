@@ -41,6 +41,8 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 	private SegPersonalAfiliado auxPersonal		= new SegPersonalAfiliado();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
+    private Font catFont3 						= new Font(Font.FontFamily.TIMES_ROMAN, 8,Font.NORMAL,BaseColor.BLACK);
+    private Font catFont4 						= new Font(Font.FontFamily.TIMES_ROMAN, 8,Font.BOLD,BaseColor.BLACK);
     
     private RecursosHumanosServiceImpl recursosHumanosService = new  RecursosHumanosServiceImpl();
     private SqlServiceImpl finanzasService = new  SqlServiceImpl();
@@ -55,6 +57,7 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
         response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; Filename=RecordNo-123456.pdf");
 
 		HttpSession session = request.getSession(false);
 		
@@ -70,8 +73,10 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
-		            Document document 	= new Document(PageSize.LETTER,5,5,5,5);
-		            PdfWriter.getInstance(document, out);
+		            Document document 	= new Document(PageSize.LETTER,5,5,5,35);
+		            final PdfWriter write = PdfWriter.getInstance(document, out);
+		            write.setPageEvent(new PageStamper());
+		            
 		            Image image1 		= null ;
 		            
 	            	image1 			= Image.getInstance("images/imagenempresa.png");
@@ -79,15 +84,18 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            document.open();
 		            
 		            image1.setAlignment(Element.ALIGN_LEFT);
-		            image1.scaleAbsolute(50.0f, 50.0f);
+		            image1.scaleAbsolute(120.0f, 50.0f);
 		            document.add(image1);
 		            
-		            Date fecha = null;
+		            Date fecha = new Date();
+		            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		            String proveedor = "";
 		            double total = 0.0;
 		            String cadenaTrimestre = "";
 		            String elaboradoPor = auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido();
 		            
+		            
+		            total = auxBeneficiario.getSolucion().getValorContrato();
 		            switch (auxBeneficiario.getSolucion().getTrimestre()) {
 					case 1:
 						cadenaTrimestre = "Enero a Marzo";
@@ -111,14 +119,14 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            document.add(new Paragraph("Av. Las Americas 9-50 zona 3, oficna No.3. 3er nivel Edificio Supercom Delco Quetzaltenango, Quetzaltenango",catFont));
 		            document.add(new Paragraph("Telefono: 79313131",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("AFILIADO:  Nombre de afiliado",catFont));
-		            document.add(new Paragraph("Telefono aqui va el telefono del afi",catFont));
+		            document.add(new Paragraph("AFILIADO: "+ auxBeneficiario.getAfiliado().getNomAfiliado(),catFont));
+		            document.add(new Paragraph("Telefono: "+ auxBeneficiario.getAfiliado().getTelefono(),catFont));
 		           
-		            document.add(new Paragraph("Fecha "+fecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
+		            document.add(new Paragraph("Fecha "+sdf.format(fecha)+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
 		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+cadenaTrimestre ,catFont));
-		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN:  Nombre de afiliado",catFont));
+		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN: "+auxBeneficiario.getDirBeneficiario(),catFont));
 		            document.add(new Paragraph("MONTO AUTORIZADO :  "+ total,catFont));
-		            document.add(new Paragraph("Nombre del asistente Administrativo: xxxxxxxxxxxx  "+" No. Telefono Supervisor:   12345678",catFont));
+		            document.add(new Paragraph("Documento elaborado por : "+auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido(),catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("RECORD DE BENEFICIARIO",catFont));
 		            document.add(new Paragraph("\t",catFont));
@@ -129,31 +137,31 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            //Tabla del vale
 		            PdfPTable table 	= new PdfPTable(9);
 		        	PdfPCell c1;
-		        	c1 = new PdfPCell(new Phrase("Codigo",catFont2));
+		        	c1 = new PdfPCell(new Phrase("Codigo",catFont4));
 		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont2));
+		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Unidad Metrica",catFont2));
+		           c1 = new PdfPCell(new Phrase("Unidad de Medida",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Cantidad",catFont2));
+		           c1 = new PdfPCell(new Phrase("Cantidad",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Precio Unitario Q.",catFont2));
+		           c1 = new PdfPCell(new Phrase("Precio Unitario Q.",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Sub Total Q.",catFont2));
+		           c1 = new PdfPCell(new Phrase("Sub Total Q.",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Total Acumulado Q.",catFont2));
+		           c1 = new PdfPCell(new Phrase("Total Acumulado Q.",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Saldo Prestamo",catFont2));
+		           c1 = new PdfPCell(new Phrase("Saldo Prestamo",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Segun Vale",catFont2));
+		           c1 = new PdfPCell(new Phrase("Segun Vale",catFont4));
 		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           
@@ -165,16 +173,16 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            while (iter.hasNext()){
 		            	AuxDetalleSolucion next = iter.next();
 		            	System.out.println("Se escribe en el vale");
-		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getIdMaterialConstruccion()));
-		            		table.addCell(next.getMaterialCostruccion().getNomMaterialCostruccion());
-		            		table.addCell(next.getMaterialCostruccion().getUnidadMetrica());
-		            		table.addCell(String.valueOf(next.getCantidad()));
-		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getPrecioUnit()));
-		            		table.addCell(String.valueOf(next.getSubTotal()));
+		            		table.addCell(new Phrase(String.valueOf(next.getMaterialCostruccion().getIdMaterialConstruccion()), catFont3));
+		            		table.addCell(new Phrase(next.getMaterialCostruccion().getNomMaterialCostruccion(), catFont3));
+		            		table.addCell(new Phrase(next.getMaterialCostruccion().getUnidadMetrica(), catFont3));
+		            		table.addCell(new Phrase(String.valueOf(next.getCantidad()), catFont3));
+		            		table.addCell(new Phrase(String.valueOf(next.getMaterialCostruccion().getPrecioUnit()), catFont3));
+		            		table.addCell(new Phrase(String.valueOf(next.getSubTotal()), catFont3));
 		            		costoAcumulado = costoAcumulado + next.getSubTotal();
-		            		table.addCell(String.valueOf(costoAcumulado));
-		            		table.addCell(String.valueOf(montoAutorizado-costoAcumulado));
-		            		table.addCell(String.valueOf(next.getVale().get(0).getIdVale()));
+		            		table.addCell(new Phrase(String.valueOf(costoAcumulado), catFont3));
+		            		table.addCell(new Phrase(String.valueOf(montoAutorizado-costoAcumulado), catFont3));
+		            		table.addCell(new Phrase(String.valueOf(next.getVale().get(0).getIdVale()), catFont3));
 		            	
 		            }
 	
@@ -182,9 +190,7 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 
 		            document.add(table);
 		          
-		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("\t",catFont));
+		           
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));

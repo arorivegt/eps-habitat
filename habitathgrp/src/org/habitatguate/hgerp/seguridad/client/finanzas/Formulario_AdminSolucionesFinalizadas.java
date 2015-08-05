@@ -1,6 +1,7 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
@@ -24,6 +26,8 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.DateLabel;
+import com.google.gwt.user.datepicker.client.DateBox;
 
 public class Formulario_AdminSolucionesFinalizadas extends Composite{
 	
@@ -53,7 +57,7 @@ public class Formulario_AdminSolucionesFinalizadas extends Composite{
 			Label label = new Label("Seleccione Afiliado");
 			label.setStyleName("label");
 			absolutePanel.add(label, 20, 10);
-			label.setSize("275px", "18px");
+			label.setSize("157px", "18px");
 			
 					
 			
@@ -120,12 +124,50 @@ public class Formulario_AdminSolucionesFinalizadas extends Composite{
 			absolutePanel.add(comboBox, 20, 29);
 			comboBox.addItem("Seleccione Afiliado", "-1");
 			
-			comboBox.addChangeHandler(new ChangeHandler() {
-
-		 		@Override
-				public void onChange(ChangeEvent event) {	 			
-		 			if (!comboBox.getValue(comboBox.getSelectedIndex()).equals("-1")){
+			Label lblSeleccioneTrimestre = new Label("Seleccione Trimestre");
+			lblSeleccioneTrimestre.setStyleName("label");
+			absolutePanel.add(lblSeleccioneTrimestre, 201, 10);
+			lblSeleccioneTrimestre.setSize("191px", "18px");
+			
+			final ListBox listBox = new ListBox();
+			absolutePanel.add(listBox, 201, 29);
+			listBox.setSize("191px", "30px");
+			listBox.addItem("Enero a Marzo", "1");
+			listBox.addItem("Abril a Junio", "2");
+			listBox.addItem("Julio a Septiembre", "3");
+			listBox.addItem("Octubre a Diciembre", "4");
+			
+			Label label_1 = new Label("Seleccione Trimestre");
+			label_1.setStyleName("label");
+			absolutePanel.add(label_1, 408, 10);
+			label_1.setSize("191px", "18px");
+			
+			final DateBox dateBox = new DateBox();
+			dateBox.setSize("100px", "25px");
+			absolutePanel.add(dateBox, 407, 25);
+			
+			dateBox.setFormat(new DateBox.DefaultFormat 
+	        		(DateTimeFormat.getFormat("yyyy")));
+	        dateBox.setValue(new Date());
+	        dateBox.getTextBox().setReadOnly(true);
+	        dateBox.setFireNullValues(true);
+	        
+	        dateBox.getDatePicker().setVisibleYearCount(100);
+	        dateBox.getDatePicker().setYearArrowsVisible(true);
+	        dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
+			
+			final Button button = new Button("Send");
+			button.setText("Buscar Solución");
+			button.setStyleName("finanButton");
+			absolutePanel.add(button, 671, 29);
+			button.setSize("157px", "30px");
+			
+			
+			button.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {				
+					if (!comboBox.getValue(comboBox.getSelectedIndex()).equals("-1")){
 		 				loginService.Consultar_SolucionesFinalizadas_PorAfiliado(Long.valueOf(comboBox.getValue(comboBox.getSelectedIndex())),
+		 						listBox.getValue(listBox.getSelectedIndex()),dateBox.getTextBox().getText(),
 		 						new AsyncCallback<List<AuxSolucion>>() {	 	        		
 		 	        		@Override
 		 	        		public void onFailure(Throwable caught) {
@@ -144,9 +186,13 @@ public class Formulario_AdminSolucionesFinalizadas extends Composite{
 							}
 		 	        	});
 		 			}
-		 			
-				}
-		    });
+					
+						}
+
+					
+					
+				
+			});
 			
 			
 			loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>() {

@@ -109,7 +109,7 @@ public interface SqlService extends RemoteService{
 	List<AuxContactoProv> Consultar_ContactosProv(Long idProveedor);
 	List<AuxCatalogoProducto> Consultar_CatalogoProductos();
 	List<AuxSolucion> Consultar_SolucionesEnCostruccion_PorAfiliado(Long idAfiliado);
-	List<AuxSolucion> Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado);
+	List<AuxSolucion> Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado, String trimestre,String anio);
 	AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario);
 	AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario);
 	AuxHistorialPagoProv Consultar_SolicitudPagoVales(Long idHistorialPagoProv);
@@ -122,6 +122,14 @@ public interface SqlService extends RemoteService{
 	List<AuxTipoSolucion> Consultar_TipoSolucion();
 	List<AuxPersonalAfiliado> Consultar_PersonalAfiliado();
 	List<AuxAfiliado> Consulta_ComparativoPrecios(String idItemCostruccion);
+	List<AuxSolucion> Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado(Long idAfiliado);
+	List<AuxSolucion> Consulta_SolucionesGeneralesRango(double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_TipoSolucion(String tipoSolucion);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_RangoMontos(double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Afiliado(Long idAfiliado);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Opcion1(String anio, String trimestre);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);

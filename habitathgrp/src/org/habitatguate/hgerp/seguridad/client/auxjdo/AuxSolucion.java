@@ -30,10 +30,14 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	private double costoMaterial;
 
 	private double costoDirecto;
+	
+	private double costoDirectoPlani;
 
 	private double costoAdministrativo;
 
 	private double costoTotal;
+	
+	private double costoTotalPlani;
 
 	private double valorContrato;
 
@@ -254,6 +258,22 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public void setNumeroSolucion(int numeroSolucion) {
 		this.numeroSolucion = numeroSolucion;
+	}
+
+	public double getCostoDirectoPlani() {
+		return costoDirectoPlani;
+	}
+
+	public void setCostoDirectoPlani(double costoDirectoPlani) {
+		this.costoDirectoPlani = costoDirectoPlani;
+	}
+
+	public double getCostoTotalPlani() {
+		return costoTotalPlani;
+	}
+
+	public void setCostoTotalPlani(double costoTotalPlani) {
+		this.costoTotalPlani = costoTotalPlani;
 	}
 	
 	

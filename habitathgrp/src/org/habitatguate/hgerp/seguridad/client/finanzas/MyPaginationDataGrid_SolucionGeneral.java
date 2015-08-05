@@ -148,7 +148,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 }
             };
             System.out.println("Nombre Column:"+namesColumns.get(contador));
-            dataGrid.addColumn(columnProduct,namesColumns.get(contador));
+            dataGrid.addColumn(columnProduct,"Ejecutado "+namesColumns.get(contador));
             dataGrid.setColumnWidth(columnProduct, 20, Unit.PCT);
             
             if (showplani){
@@ -215,8 +215,19 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoDirecto());
             }
         };
-        dataGrid.addColumn(costodirecto, "Costo Directo");
+        dataGrid.addColumn(costodirecto, "Ejecutado Costo Directo");
         dataGrid.setColumnWidth(costodirecto, 20, Unit.PCT);
+       
+        if (showplani){
+        	Column<T, String> costodirectopla = new Column<T, String>(new TextCell()) {
+                @Override
+                public String getValue(T object) {
+                    return String.valueOf(((AuxSolucion) object).getCostoDirectoPlani());
+                }
+            };
+            dataGrid.addColumn(costodirectopla, "Planificado Costo Directo");
+            dataGrid.setColumnWidth(costodirectopla, 20, Unit.PCT);
+        }
         
         Column<T, String> costoAdmin = new Column<T, String>(new TextCell()) {
             @Override
@@ -233,8 +244,19 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoTotal());
             }
         };
-        dataGrid.addColumn(costoTotal, "Costo Total");
+        dataGrid.addColumn(costoTotal, "Costo Total Ejecutado");
         dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
+        
+        if (showplani){
+        	Column<T, String> costoTotalplani = new Column<T, String>(new TextCell()) {
+                @Override
+                public String getValue(T object) {
+                    return String.valueOf(((AuxSolucion) object).getCostoTotalPlani());
+                }
+            };
+            dataGrid.addColumn(costoTotalplani, "Costo Total Planificado");
+            dataGrid.setColumnWidth(costoTotalplani, 20, Unit.PCT);
+        }
         
         
         Column<T, String> valorContrato= new Column<T, String>(new TextCell()) {

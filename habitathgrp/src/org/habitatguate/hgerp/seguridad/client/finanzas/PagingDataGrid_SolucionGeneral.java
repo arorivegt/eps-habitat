@@ -53,12 +53,17 @@ public abstract class PagingDataGrid_SolucionGeneral<T> extends Composite {
     public PagingDataGrid_SolucionGeneral(List<T> dataList) {
     	this.dataList = dataList;
     	MyPaginationDataGrid_SolucionGeneral.actual = 0;
+    	if (!dataList.isEmpty()){
     	MyPaginationDataGrid_SolucionGeneral.cantProduct = ((AuxSolucion)dataList.get(0)).getCostoProducto().size();
     	MyPaginationDataGrid_SolucionGeneral.namesColumns = ((AuxSolucion)dataList.get(0)).getNombreProducto();
     	int plani = ((AuxSolucion)dataList.get(0)).getCostoProductoPlani().size();
     	if (plani > 0){
     		MyPaginationDataGrid_SolucionGeneral.showplani = true;
+    	}else{
+    		MyPaginationDataGrid_SolucionGeneral.showplani = false;
     	}
+    	}
+    	
         initWidget(dock);
         dataGrid = new DataGrid<T>(30,
                 GWT.<TablaResources> create(TablaResources.class));

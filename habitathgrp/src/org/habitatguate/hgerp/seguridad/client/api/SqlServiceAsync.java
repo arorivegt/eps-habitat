@@ -278,8 +278,32 @@ public interface SqlServiceAsync {
 	void Consulta_ComparativoPrecios(String idItemCostruccion,
 			AsyncCallback<List<AuxAfiliado>> callback);
 
-	void Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado,
+	void Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado, String trimestre,String anio,
 			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado(Long idAfiliado,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesRango(double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionSolucion_TipoSolucion(
+			String tipoSolucion, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionSolucion_RangoMontos(double minimo,
+			double maximos, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionSolucion_Afiliado(Long idAfiliado,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionSolucion_Opcion1(String anio,
+			String trimestre, AsyncCallback<List<AuxSolucion>> callback);
 
 
 

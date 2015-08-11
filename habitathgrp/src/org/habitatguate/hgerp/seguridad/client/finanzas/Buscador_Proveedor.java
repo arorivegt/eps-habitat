@@ -1,5 +1,6 @@
 package org.habitatguate.hgerp.seguridad.client.finanzas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
@@ -63,6 +64,29 @@ public class Buscador_Proveedor extends Composite{
 	absolutePanel.setSize("1025px", "20px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
+	
+	Button button = new Button("Send");
+	
+
+	button.setText("Imprimir Información Proveedor");
+	button.setStyleName("finanButton");
+	absolutePanel.add(button, 700, 5);
+	button.setSize("250px", "40px");
+	
+	
+	
+	button.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			List<AuxProveedor> total= new ArrayList<AuxProveedor>(e.grid.selectionModel.getSelectedSet());
+			Long idProveedor = total.get(0).getIdProveedor();
+			Window.open("/FinanInformacionProveedorPDF?idProveedor="+idProveedor, "_blank", "");
+			
+			
+		}
+	});
 			
 		//-----------------------------	---------------------------------
 	

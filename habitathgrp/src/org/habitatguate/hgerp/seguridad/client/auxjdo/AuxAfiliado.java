@@ -39,6 +39,10 @@ public class AuxAfiliado implements Comparable<AuxAfiliado>,IsSerializable{
 	
 	private String telefono;
 	
+	private String codigoAfiliado;
+	
+	private int correlativoVale;
+	
 	private List<AuxBeneficiario> listaBene;
 	
 	private List<AuxProveedor> listaProveedores = new ArrayList<AuxProveedor>();
@@ -106,6 +110,24 @@ public class AuxAfiliado implements Comparable<AuxAfiliado>,IsSerializable{
 	public void setListaProveedores(List<AuxProveedor> listaProveedores) {
 		this.listaProveedores = listaProveedores;
 	}
+
+	public String getCodigoAfiliado() {
+		return codigoAfiliado;
+	}
+
+	public void setCodigoAfiliado(String codigoAfiliado) {
+		this.codigoAfiliado = codigoAfiliado;
+	}
+
+	public int getCorrelativoVale() {
+		return correlativoVale;
+	}
+
+	public void setCorrelativoVale(int correlativoVale) {
+		this.correlativoVale = correlativoVale;
+	}
+	
+	
 	
 	
 	

@@ -38,7 +38,7 @@ public class Menu_Proveedores extends Composite{
 		panel4.setAlwaysShowScrollBars(true);
 		tabPanel.add(panel1, "Formulario nuevo proveedor",true);
 		tabPanel.add(panel4,"Información Contactos",true);
-		tabPanel.add(panel2, "Gestor de proveedores",true);
+		tabPanel.add(panel2, "Información Proveedores Aprobados",true);
 		tabPanel.add(panel3,"Aprobar Proveedor",true);
 		panel1.setSize("100%", "480px");
 

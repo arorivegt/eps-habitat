@@ -32,7 +32,7 @@ public interface SqlServiceAsync {
 			throws IllegalArgumentException;
 	
 	void Insertar_Afiliado(String nomAfiliado, String dirAfiliado,
-			String municipio, String departamento,String numeroTelefono, AsyncCallback<Long> callback);
+			String municipio, String departamento,String numeroTelefono,String codigoAfiliado, AsyncCallback<Long> callback);
 	
 	void Eliminar_Parametro(Long id, AsyncCallback<Long> callback)
 			throws IllegalArgumentException;
@@ -304,6 +304,13 @@ public interface SqlServiceAsync {
 
 	void Consulta_ComparativoPlaniEjecucionSolucion_Opcion1(String anio,
 			String trimestre, AsyncCallback<List<AuxSolucion>> callback);
+
+	void ConsultarValesAprobados(Long idAfiliado, Long idBeneficiario,
+			AsyncCallback<List<AuxValeBeneficiario>> callback);
+
+	void ConsultarValesAprobados_PorTrimestreAnio(Long idAfiliado,
+			String trimestre, int anio,
+			AsyncCallback<List<AuxValeBeneficiario>> callback);
 
 
 

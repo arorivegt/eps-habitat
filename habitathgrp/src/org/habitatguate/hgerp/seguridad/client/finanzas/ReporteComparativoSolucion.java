@@ -30,6 +30,7 @@ import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
@@ -332,10 +333,25 @@ public class ReporteComparativoSolucion extends Composite{
 		});
 		Busqueda.setSize("103px", "78px");
 		
-		lblSeleccioneLosEmpleados = new Label("Seleccione los empleados que quiere mostrar en el reporte");
+		/*lblSeleccioneLosEmpleados = new Label("Seleccione los empleados que quiere mostrar en el reporte");
 		lblSeleccioneLosEmpleados.setStyleName("label");
 		absolutePanel.add(lblSeleccioneLosEmpleados, 700, 5);
-		lblSeleccioneLosEmpleados.setSize("828px", "13px");
+		lblSeleccioneLosEmpleados.setSize("828px", "13px");*/
+		
+		Button button = new Button("Send");
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				List<AuxSolucion> total= new ArrayList<AuxSolucion>(e.grid.selectionModel.getSelectedSet());
+				Long idBeneficiario = total.get(0).getBeneficiario().getIdBeneficiario();
+				Window.open("/FinanGenerarPdfReporteRecord?idBeneficiario="+idBeneficiario, "_blank", "");
+			}
+		});		
+
+		button.setText("Imprimir Record");
+		button.setStyleName("finanButton");
+		absolutePanel.add(button, 850, 40);
+		button.setSize("157px", "30px");
+		
 		
 		
 

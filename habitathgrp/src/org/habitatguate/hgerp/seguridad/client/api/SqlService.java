@@ -34,7 +34,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("Insertar")
 public interface SqlService extends RemoteService{
 	String[] Insertar(String nomParam,int codContable,int codUno, int codDos) throws IllegalArgumentException;
-	Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento,String numeroTelefono);
+	Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento,String numeroTelefono,String codigoAfiliado);
 	Long Insertar_Beneficiario(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado);
 	Long Insertar_MaterialCostruccion(String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario);
 	Long Insertar_PlantillaSolucion(String nomPlantilla,String tipo,Double costoFinal);
@@ -130,6 +130,8 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_RangoMontos(double minimo, double maximos);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Afiliado(Long idAfiliado);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Opcion1(String anio, String trimestre);
+	List<AuxValeBeneficiario> ConsultarValesAprobados(Long idAfiliado, Long idBeneficiario);
+	List<AuxValeBeneficiario> ConsultarValesAprobados_PorTrimestreAnio(Long idAfiliado, String trimestre, int anio);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);

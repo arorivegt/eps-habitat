@@ -119,16 +119,16 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            document.add(new Paragraph("Av. Las Americas 9-50 zona 3, oficna No.3. 3er nivel Edificio Supercom Delco Quetzaltenango, Quetzaltenango",catFont));
 		            document.add(new Paragraph("Telefono: 79313131",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("AFILIADO: "+ auxBeneficiario.getAfiliado().getNomAfiliado(),catFont));
+		            document.add(new Paragraph("Afiliado: "+ auxBeneficiario.getAfiliado().getNomAfiliado(),catFont));
 		            document.add(new Paragraph("Telefono: "+ auxBeneficiario.getAfiliado().getTelefono(),catFont));
 		           
 		            document.add(new Paragraph("Fecha "+sdf.format(fecha)+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
-		            document.add(new Paragraph("TIPO DE SOLUCION: "+auxBeneficiario.getSolucion().getDisenio() +"                    TRIMESTRE: "+cadenaTrimestre ,catFont));
-		            document.add(new Paragraph("DIRECCION DEL SITIO EN COSTRUCCIÓN: "+auxBeneficiario.getDirBeneficiario(),catFont));
-		            document.add(new Paragraph("MONTO AUTORIZADO :  "+ total,catFont));
+		            document.add(new Paragraph("Tipo de Solución: "+auxBeneficiario.getSolucion().getDisenio() +"                    Trimestre: "+cadenaTrimestre ,catFont));
+		            document.add(new Paragraph("Dirección Sitio de Construcción: "+auxBeneficiario.getDirBeneficiario(),catFont));
+		            document.add(new Paragraph("Monto Autorizado:  "+ total,catFont));
 		            document.add(new Paragraph("Documento elaborado por : "+auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido(),catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("RECORD DE BENEFICIARIO",catFont));
+		            document.add(new Paragraph("Record de Beneficiario",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("Detalle",catFont));
 		            document.add(new Paragraph("\t",catFont));

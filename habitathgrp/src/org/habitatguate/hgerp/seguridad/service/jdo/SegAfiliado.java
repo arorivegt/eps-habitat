@@ -27,6 +27,10 @@ public class SegAfiliado implements Serializable {
 	private String departamento;
 	@Persistent
 	private String telefono;
+	@Persistent
+	private String codigoAfiliado;
+	@Persistent
+	private int correlativoVale;
 	@Persistent(mappedBy = "afiliado")
     @Element(dependent = "true")
 	private List <SegBeneficiario> beneficiario;
@@ -120,6 +124,22 @@ public class SegAfiliado implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getCodigoAfiliado() {
+		return codigoAfiliado;
+	}
+
+	public void setCodigoAfiliado(String codigoAfiliado) {
+		this.codigoAfiliado = codigoAfiliado;
+	}
+
+	public int getCorrelativoVale() {
+		return correlativoVale;
+	}
+
+	public void setCorrelativoVale(int correlativoVale) {
+		this.correlativoVale = correlativoVale;
 	}
 
 	

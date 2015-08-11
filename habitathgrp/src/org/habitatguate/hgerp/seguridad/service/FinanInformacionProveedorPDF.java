@@ -19,6 +19,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.service.jdo.SegPersonalAfiliado;
+import org.habitatguate.hgerp.seguridad.service.jdo.SegProveedor;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.itextpdf.text.Image;
@@ -35,17 +36,14 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable; 
 
-@WebServlet("/FinanGenerarPdfVale")
-public class FinanGenerarPdfVale extends HttpServlet{
+@WebServlet("/FinanInformacionProveedorPDF")
+public class FinanInformacionProveedorPDF extends HttpServlet{
 	private static final long serialVersionUID 	= 1L;
-	private AuxEmpleado auxEmpleado 			= new AuxEmpleado();
-	private AuxBeneficiario auxBeneficiario		= new AuxBeneficiario();
-	private SegPersonalAfiliado auxPersonal		= new SegPersonalAfiliado();
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
     private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
     private Font catFont3 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.RED);
     
-    private RecursosHumanosServiceImpl recursosHumanosService = new  RecursosHumanosServiceImpl();
+    private SegProveedor auxProv = new SegProveedor();
     private SqlServiceImpl finanzasService = new  SqlServiceImpl();
 	/**
 	 * Metodo para crear el pdf del perfil de la persona en cuestion
@@ -63,17 +61,13 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-        	long idVale 			= Long.parseLong(request.getParameter("idVale"));
-        	long idEmpleado			= Long.parseLong(request.getParameter("idEmpleado"));
-        	long idAfiliado			= Long.parseLong(request.getParameter("idAfiliado"));
-        	long idBeneficiario		= Long.parseLong(request.getParameter("idBeneficiario"));
-	        auxEmpleado 				= recursosHumanosService.Empleado_Registrado(idEmpleado);
-	        auxBeneficiario				= finanzasService.ConsultaBene_PorAfiliado(idAfiliado, idBeneficiario);
-	        auxPersonal					= finanzasService.GetPersonalAfiliado(idAfiliado);
+    		long idAfiliado 			= Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
+        	long idProveedor			= Long.valueOf(request.getParameter("idProveedor"));
+        	auxProv						= finanzasService.GetInfoProveedor(idProveedor,idAfiliado);
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
-		            Document document 	= new Document(PageSize.LETTER,5,5,5,5);
+		            Document document 	= new Document(PageSize.LETTER,15,15,15,15);
 		            PdfWriter.getInstance(document, out);
 		            Image image1 		= null ;
 		            
@@ -85,149 +79,81 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            image1.scaleAbsolute(120.0f, 50.0f);
 		            document.add(image1);
 		            
-		            Date fecha = null;
 		            String proveedor = "";
 		            
-		            double total = 0.0;
-		            int status = 0;
-		            String nameAfiliado = auxBeneficiario.getAfiliado().getNomAfiliado();
-		            String telAfiliado = auxBeneficiario.getAfiliado().getTelefono();
-		            int trimestre = auxBeneficiario.getSolucion().getTrimestre();
-		            String cadenaTrimestre = "";
-		            String elaboradoPor = auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido();
-		            Iterator<AuxDetalleSolucion> datos = auxBeneficiario.getSolucion().getLista().iterator();
-		            while (datos.hasNext()){
-		            	AuxDetalleSolucion next = datos.next();
-		            	if(next.getVale().get(0).getIdVale() == idVale){
-		            		System.out.println("Se escribe en el vale");
-		            		proveedor = next.getMaterialCostruccion().getProveedor().getNomProveedor();
-		            		fecha = next.getVale().get(0).getFechaVale();
-		            		total = total + next.getSubTotal();
-		            		status = next.getVale().get(0).getAprobado();
-		            	}
-		            }
 		            
+	            
 		            
-		            switch (trimestre) {
-					case 1:
-						cadenaTrimestre = "Enero a Marzo";
-						break;
-					case 2:
-						cadenaTrimestre = "Abril a Junio";
-						break;
-					case 3:
-						cadenaTrimestre = "Julio a Septiembre";
-						break;
-					case 4:
-						cadenaTrimestre = "Octubre a Diciembre";
-						break;
-					default:
-						break;
-					}
-		            
-		            
-		            String newFecha = new SimpleDateFormat("dd/MM/yyyy").format(fecha);
 
 		            
 		            document.add(new Paragraph("Fundación Habitat para la Humanidad Guatemala",catFont2));
 		            document.add(new Paragraph("Av. Las Americas 9-50 zona 3, oficna No.3. 3er nivel Edificio Supercom Delco Quetzaltenango, Quetzaltenango",catFont));
 		            document.add(new Paragraph("Telefono: 79313131" ,catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("Afiliado: " + nameAfiliado,catFont));
-		            document.add(new Paragraph("Telefono Afiliado: " + telAfiliado,catFont));
-		            document.add(new Paragraph("No. de vale: "+idVale,catFont));
-		            document.add(new Paragraph("Fecha "+newFecha+"                          "+"Código de Comercio DECRETO NUMERO 2-70 Articulo 607 " ,catFont));
-		            document.add(new Paragraph("Vale al Prestatario:"+auxBeneficiario.getNomBeneficiario() +" "+"Telefono Prestatario:"+auxBeneficiario.getTelBeneficiario() ,catFont));
-		            document.add(new Paragraph("Tipo de Solución: "+auxBeneficiario.getSolucion().getDisenio() +"                    Trimestre: "+cadenaTrimestre ,catFont));
-		            document.add(new Paragraph("Dirección Sitio de Costrucción: "+ auxBeneficiario.getDirBeneficiario(),catFont));
-		            document.add(new Paragraph("Nombre del Proveedor: "+proveedor,catFont));
-		            document.add(new Paragraph("Por la cantidad de:  "+ NumberToLetterConverter.convertNumberToLetter(""+total),catFont));
-		            document.add(new Paragraph("Documento elaborado por : "+auxEmpleado.getPrimer_nombre()+" "+auxEmpleado.getSegundo_nombre()+" "+auxEmpleado.getPrimer_apellido()+" "+auxEmpleado.getSegundo_apellido(),catFont));
-		            document.add(new Paragraph("\t",catFont));
+
 		            
-		            //Tabla del vale
-		            PdfPTable table 	= new PdfPTable(7);
-		        	PdfPCell c1;
-		        	c1 = new PdfPCell(new Phrase("Codigo",catFont2));
-		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Unidad de Medida",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Cantidad",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Precio Unitario Q.",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Sub Total Q.",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           c1 = new PdfPCell(new Phrase("Total Acumulado Q.",catFont2));
-		           c1.setHorizontalAlignment(Element.ALIGN_LEFT);
-		           table.addCell(c1);
-		           
-		           table.setHeaderRows(1);
-		           
-		           Iterator<AuxDetalleSolucion> iter = auxBeneficiario.getSolucion().getLista().iterator();
-		           double costoAcumulado = 0.0;
-		            while (iter.hasNext()){
-		            	AuxDetalleSolucion next = iter.next();
-		            	if(next.getVale().get(0).getIdVale() == idVale){
-		            		System.out.println("Se escribe en el vale");
-		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getIdMaterialConstruccion()));
-		            		table.addCell(next.getMaterialCostruccion().getNomMaterialCostruccion());
-		            		table.addCell(next.getMaterialCostruccion().getUnidadMetrica());
-		            		table.addCell(String.valueOf(next.getCantidad()));
-		            		table.addCell(String.valueOf(next.getPrecioUnitario()));
-		            		table.addCell(String.valueOf(next.getSubTotal()));
-		            		costoAcumulado = costoAcumulado + next.getSubTotal();
-		            		table.addCell(String.valueOf(costoAcumulado));
-		            	}
-		            }
-		            
-		            
+		            //Tabla del vale                       
 	
 			 		SimpleDateFormat fechaFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-		            document.add(table);
-		          
+
+			 		document.add(new Paragraph("Nombre: "+auxProv.getNomProveedor()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Dirección "+auxProv.getDirProveedor()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Teléfono :"+auxProv.getTelProveedor()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Número de NIT: "+auxProv.getNumeroNit()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Página Web: "+auxProv.getPaginaWeb()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Persona Jurídica: "+auxProv.getPersonaJuridica()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Regimen Tributario: "+auxProv.getRegimenTributario()));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("            F:____________________________________                          F:_________________________________________",catFont));
-		            document.add(new Paragraph("            Recibi conforme: "+auxBeneficiario.getNomBeneficiario() +"       Elaborador por: "+elaboradoPor,catFont));
+		            document.add(new Paragraph("Departamentos donde distribuye: "+auxProv.getDepartamentos()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Municipios donde distribuye: "+auxProv.getMunicipios()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Afiliado donde distribuye: "+auxProv.getAfiliado().getNomAfiliado()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Razón Social: "+auxProv.getRazonSocial()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Productos que ofrece: "+auxProv.getProductosfrece()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Tipo de Proveedor"+auxProv.getTipoProveedor()));
 		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Relación con el proveedor: "+auxProv.getRelacionConProv()));
 		            document.add(new Paragraph("\t",catFont));
-		            document.add(new Paragraph("                                                   F: _______________________________",catFont));
-		            document.add(new Paragraph("                                                      Autorizado por: "+auxPersonal.getNombreAdministrador(),catFont));
-		            if (status == 0){
-		            	
-		            Chunk c2 = new Chunk("                                                            VALE PENDIENTE DE APROBACIÓN",catFont3);
-		            	Paragraph p = new Paragraph();
-		            	
-		            	p.add(c2);
-		            document.add(p);
-		            }else if (status == 1){
-		            	
-		            Chunk c2 = new Chunk("                                                            VALE APROBADO ",catFont2);
-		            	Paragraph p = new Paragraph();
-		            	
-		            	p.add(c2);
-		            document.add(p);
-		            }
+		            document.add(new Paragraph("Ubicación de sus sucursales: "+auxProv.getUbicacionSucursales()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Disponibilidad de productos: "+auxProv.getDisponibilidadProd()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Acepta Exención: "+auxProv.getAceptaExencion()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Tiempo de trabajar con Habitat: "+auxProv.getTiempoDeTrabajarConHG()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Observaciones"+auxProv.getObservaciones()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Acepta otorgar Donación: "+auxProv.getAceptaDonacion()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Porcentaje Donación: "+auxProv.getPorcentDonacion()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Forma de donación: "+auxProv.getFormaDonacion()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Frecuencia de donación: "+auxProv.getFrecuenciaDonacion()));
+		            
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Posee servicio de entrega: "+auxProv.getServicioEntrega()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Acepta crédito: "+auxProv.getAceptaCredito()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Monto Máximo: "+auxProv.getMontoMaximo()));
+		            document.add(new Paragraph("\t",catFont));
+		            document.add(new Paragraph("Tiempo Máximo: "+auxProv.getTiempoMaximo()));
+		            
+		            
+		            
 		            
 		            document.close();
 		        }catch (DocumentException exc){
@@ -519,7 +445,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
     }
 	
 	
-	public FinanGenerarPdfVale(){
+	public FinanInformacionProveedorPDF(){
 		
 	}
 	

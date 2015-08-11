@@ -50,7 +50,20 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
     public void initTableColumns(final DataGrid<T> dataGrid,
             ListHandler<T> sortHandler) {
 
-        Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
+        
+    	Column<T, Boolean> checkColumn =
+                new Column<T, Boolean>(new CheckboxCell(true, false)) {
+                  @Override
+                  public Boolean getValue(T object) {
+                    // obtiene el valor del select model
+                    return selectionModel.isSelected(object);
+                  }
+                };
+        dataGrid.addColumn(checkColumn,"Selección");
+        dataGrid.setColumnWidth(checkColumn, 70, Unit.PX);
+    	
+    	
+    	Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
                 return String.valueOf(++actual);

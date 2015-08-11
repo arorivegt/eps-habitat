@@ -97,7 +97,7 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 		return null;
 	}
 	@Override
-	public Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento,String numeroTelefono) throws IllegalArgumentException{
+	public Long Insertar_Afiliado(String nomAfiliado,String dirAfiliado,String municipio,String departamento,String numeroTelefono,String codigoAfiliado) throws IllegalArgumentException{
 			 Long valor = 0L;
 			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 			SegAfiliado nuevo = new SegAfiliado();
@@ -106,6 +106,8 @@ public class SqlServiceImpl extends RemoteServiceServlet implements SqlService{
 			nuevo.setMunicipio(municipio);
 			nuevo.setDepartamento(departamento);
 			nuevo.setTelefono(numeroTelefono);
+			nuevo.setCodigoAfiliado(codigoAfiliado);
+			nuevo.setCorrelativoVale(0);
 			
 			try{
 				gestorPersistencia.makePersistent(nuevo);
@@ -1341,6 +1343,128 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		
 		return response;
 	}
+	
+	public List<AuxValeBeneficiario> ConsultarValesAprobados(Long idAfiliado, Long idBeneficiario){
+		HttpServletRequest request = this.getThreadLocalRequest();
+		HttpSession session = request.getSession(false);
+		Long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		final PersistenceManager pm = PMF.get().getPersistenceManager();
+		Query q = pm.newQuery(SegDetalleEjecucion.class);
+		 try{
+			 List<SegDetalleEjecucion> result = (List<SegDetalleEjecucion>)q.execute();
+			 if (!result.isEmpty()){
+				for (SegDetalleEjecucion auxD : result){					
+					if(idBeneficiario.equals(auxD.getSolucion().getBeneficiario().getIdBeneficiario().getId())){
+						boolean flagVale = true;
+						for(AuxValeBeneficiario auxValeFlag : response){
+							//System.out.println("Comparar: " + auxD.getVale().getIdVale()+ " "+ auxValeFlag.getIdVale());
+							if(auxD.getVale().getIdVale().equals(auxValeFlag.getVale().getIdVale())){
+								flagVale = false;
+								break;
+								
+							}
+						}
+						if (auxD.getVale() != null && flagVale && auxD.getVale().getAprobado() == 1){
+						System.out.println(auxD.getVale().getIdVale());
+						SegVale auxVale = auxD.getVale();
+						if (auxVale.getTotalVale()-auxVale.getTotalPagado() > 0.0){
+							AuxValeBeneficiario sucess = new AuxValeBeneficiario();
+							AuxVale auxCumple = new AuxVale();
+							auxCumple.setIdVale(auxVale.getIdVale());
+							auxCumple.setEstado(auxVale.isEstado());
+							auxCumple.setTotalVale(auxVale.getTotalVale());
+							auxCumple.setTotalPagado(auxVale.getTotalPagado());
+							auxCumple.setFechaVale(ConvertDate.g(auxVale.getFechaVale()));
+							auxCumple.setAprobado(auxVale.getAprobado());
+							sucess.setVale(auxCumple);
+							
+							AuxBeneficiario bene = new AuxBeneficiario();
+							bene.setNomBeneficiario(auxD.getSolucion().getBeneficiario().getNomBeneficiario());
+							bene.setIdBeneficiario(auxD.getSolucion().getBeneficiario().getIdBeneficiario().getId());
+							sucess.setBeneficiario(bene);
+							AuxProveedor prov = new AuxProveedor();
+							prov.setNomProveedor(auxD.getMaterialCostruccion().getProveedor().getNomProveedor());
+							sucess.setProveedor(prov);
+							
+							response.add(sucess);
+						}
+						
+						}
+					}
+				}
+			 }
+		 }finally{
+			 q.closeAll();
+		 }
+		
+		
+		return response;
+	}
+	
+	
+	public List<AuxValeBeneficiario> ConsultarValesAprobados_PorTrimestreAnio(Long idAfiliado, String trimestre, int anio){
+		HttpServletRequest request = this.getThreadLocalRequest();
+		HttpSession session = request.getSession(false);
+		Long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		final PersistenceManager pm = PMF.get().getPersistenceManager();
+		Query q = pm.newQuery(SegDetalleEjecucion.class);
+		 try{
+			 List<SegDetalleEjecucion> result = (List<SegDetalleEjecucion>)q.execute();
+			 if (!result.isEmpty()){
+				for (SegDetalleEjecucion auxD : result){	
+					System.out.println(idAfiliado +" "+ trimestre + " "+ anio);
+					System.out.println(auxD.getSolucion().getTrimestre()+ " "+ auxD.getSolucion().getAnio() + " "+auxD.getSolucion().getBeneficiario().getAfiliado().getIdAfiliado());
+					if(Integer.valueOf(trimestre) == auxD.getSolucion().getTrimestre() && anio == auxD.getSolucion().getAnio() && idAfiliado.equals(auxD.getSolucion().getBeneficiario().getAfiliado().getIdAfiliado())){
+						System.out.println("entro");
+						boolean flagVale = true;
+						for(AuxValeBeneficiario auxValeFlag : response){
+							//System.out.println("Comparar: " + auxD.getVale().getIdVale()+ " "+ auxValeFlag.getIdVale());
+							if(auxD.getVale().getIdVale().equals(auxValeFlag.getVale().getIdVale())){
+								flagVale = false;
+								break;
+								
+							}
+						}
+						if (auxD.getVale() != null && flagVale && auxD.getVale().getAprobado() == 1){
+						System.out.println(auxD.getVale().getIdVale());
+						SegVale auxVale = auxD.getVale();
+						if (auxVale.getTotalVale()-auxVale.getTotalPagado() > 0.0){
+							AuxValeBeneficiario sucess = new AuxValeBeneficiario();
+							AuxVale auxCumple = new AuxVale();
+							auxCumple.setIdVale(auxVale.getIdVale());
+							auxCumple.setEstado(auxVale.isEstado());
+							auxCumple.setTotalVale(auxVale.getTotalVale());
+							auxCumple.setTotalPagado(auxVale.getTotalPagado());
+							auxCumple.setFechaVale(ConvertDate.g(auxVale.getFechaVale()));
+							auxCumple.setAprobado(auxVale.getAprobado());
+							sucess.setVale(auxCumple);
+							
+							AuxBeneficiario bene = new AuxBeneficiario();
+							bene.setNomBeneficiario(auxD.getSolucion().getBeneficiario().getNomBeneficiario());
+							bene.setIdBeneficiario(auxD.getSolucion().getBeneficiario().getIdBeneficiario().getId());
+							sucess.setBeneficiario(bene);
+							AuxProveedor prov = new AuxProveedor();
+							prov.setNomProveedor(auxD.getMaterialCostruccion().getProveedor().getNomProveedor());
+							sucess.setProveedor(prov);
+							
+							response.add(sucess);
+						}
+						
+						}
+					}
+				}
+			 }
+		 }finally{
+			 q.closeAll();
+		 }
+		
+		
+		return response;
+	}
+	
+	
 	
 	public AuxBeneficiario ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario){
 		System.out.println("Datos " + idAfiliado + " " +idBeneficiario);
@@ -3022,6 +3146,17 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		selectB = gestorPersistencia.getObjectById(SegPersonalAfiliado.class,idAfiliado);
 		return selectB;
+	}
+	
+	public SegProveedor GetInfoProveedor(Long idProveedor, Long idAfiliado){
+		SegProveedor prov = null;
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Key k = new KeyFactory
+		        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+	 			.addChild(SegProveedor.class.getSimpleName(), idProveedor)	
+		        .getKey();
+		prov = gestorPersistencia.getObjectById(SegProveedor.class,k);
+		return prov;
 	}
 	
 	

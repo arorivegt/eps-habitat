@@ -26,7 +26,7 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
      return (o == null || o.idVale == null) ? -1 : -o.idVale.compareTo(idVale);
    }
 	
-	private Long idVale;
+	private String idVale;
 
 	private Double totalVale;
 
@@ -42,7 +42,7 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 	
 	
 	
-	public Long getIdVale() {
+	public String getIdVale() {
 		return idVale;
 	}
 
@@ -54,7 +54,7 @@ public class AuxVale implements Comparable<AuxVale>,IsSerializable{
 		this.aprobado = aprobado;
 	}
 
-	public void setIdVale(Long idVale) {
+	public void setIdVale(String idVale) {
 		this.idVale = idVale;
 	}
 

@@ -63,7 +63,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-        	long idVale 			= Long.parseLong(request.getParameter("idVale"));
+        	String idVale 			= request.getParameter("idVale");
         	long idEmpleado			= Long.parseLong(request.getParameter("idEmpleado"));
         	long idAfiliado			= Long.parseLong(request.getParameter("idAfiliado"));
         	long idBeneficiario		= Long.parseLong(request.getParameter("idBeneficiario"));
@@ -98,7 +98,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            Iterator<AuxDetalleSolucion> datos = auxBeneficiario.getSolucion().getLista().iterator();
 		            while (datos.hasNext()){
 		            	AuxDetalleSolucion next = datos.next();
-		            	if(next.getVale().get(0).getIdVale() == idVale){
+		            	if(next.getVale().get(0).getIdVale().equals(idVale)){
 		            		System.out.println("Se escribe en el vale");
 		            		proveedor = next.getMaterialCostruccion().getProveedor().getNomProveedor();
 		            		fecha = next.getVale().get(0).getFechaVale();
@@ -176,7 +176,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		           double costoAcumulado = 0.0;
 		            while (iter.hasNext()){
 		            	AuxDetalleSolucion next = iter.next();
-		            	if(next.getVale().get(0).getIdVale() == idVale){
+		            	if(next.getVale().get(0).getIdVale().equals(idVale)){
 		            		System.out.println("Se escribe en el vale");
 		            		table.addCell(String.valueOf(next.getMaterialCostruccion().getIdMaterialConstruccion()));
 		            		table.addCell(next.getMaterialCostruccion().getNomMaterialCostruccion());

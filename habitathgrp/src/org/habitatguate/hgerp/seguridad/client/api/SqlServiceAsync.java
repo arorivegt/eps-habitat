@@ -132,20 +132,18 @@ public interface SqlServiceAsync {
 	void ConsultaTodosBene_PorAfiliado(Long idAfiliado,
 			AsyncCallback<List<AuxBeneficiario>> callback);
 
-	void GenerarIdVale(AsyncCallback<Long> callback);
+	void GenerarIdVale(String idVale,AsyncCallback<String> callback);
 
-	void Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale,
-			Long idSolucion, AsyncCallback<Long> callback);
+	void Actualizar_DetalleSolucion(Long idDetalleSolucion, String idVale, Long idSolucion, AsyncCallback<Long> callback);
 
-	void Actualizar_EstadoVale(Long idVale, Date fechaVale ,Double costoTotal, AsyncCallback<Long> callback);
+	void Actualizar_EstadoVale(String idVale, Date fechaVale ,Double costoTotal, AsyncCallback<String> callback);
 
 
 
 	void ConsultaTodosBene_PorAfiliadoDos(Long idAfiliado,
 			AsyncCallback<List<AuxBeneficiario>> callback);
 
-	void Insertar_UnicoHistorialSolucion(Long idSolucion, Long idVale,
-			AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
+	void Insertar_UnicoHistorialSolucion(Long idSolucion,String idVale,AuxDetallePlantillaSolucion auxDetalle, AsyncCallback<Long> callback);
 
 	void ConsultaBene_PorAfiliado(Long idAfiliado, Long idBeneficiario,
 			AsyncCallback<AuxBeneficiario> callback);
@@ -207,7 +205,7 @@ public interface SqlServiceAsync {
 			,Long idAfiliado,
 			AsyncCallback<Long> callback);
 
-	void Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago,
+	void Insertar_ValePagado(Long idHistorialPagoProv, String idVale,Double totalPago,
 			AsyncCallback<Long> callback);
 
 	void Consultar_SolicitudPagoVales(Long idHistorialPagoProv,
@@ -237,8 +235,8 @@ public interface SqlServiceAsync {
 	void ConsultarValesPendientes_Aprobar(Long idAfiliado,
 			AsyncCallback<List<AuxValeBeneficiario>> callback);
 
-	void Actualizar_StatusValeAprobado(Long idVale, int status,
-			AsyncCallback<Long> callback);
+	void Actualizar_StatusValeAprobado(String idVale, int status,
+			AsyncCallback<String> callback);
 
 	void Consulta_ComparativoPlaniEjecucionSolucion(
 			AsyncCallback<List<AuxSolucion>> callback);
@@ -248,8 +246,8 @@ public interface SqlServiceAsync {
 	void Consultar_infoProveedor(Long idProveedor,Long idAfiliado,
 			AsyncCallback<AuxProveedor> callback);
 
-	void Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion,
-			AsyncCallback<Long> callback);
+	void Agregar_DetalleEjecucionVale(String idVale, Long idDetalleEjecucion,
+			AsyncCallback<String> callback);
 
 	void ConsultarCuentasXPagar_PorProveedores(
 			AsyncCallback<List<AuxReporteCuentasPorPagar>> callback);
@@ -281,16 +279,16 @@ public interface SqlServiceAsync {
 	void Consultar_SolucionesFinalizadas_PorAfiliado(Long idAfiliado, String trimestre,String anio,
 			AsyncCallback<List<AuxSolucion>> callback);
 
-	void Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre,
+	void Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre,String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
 
-	void Consulta_SolucionesGeneralesAfiliado(Long idAfiliado,
+	void Consulta_SolucionesGeneralesAfiliado(Long idAfiliado, String anio, String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
 
-	void Consulta_SolucionesGeneralesRango(double minimo, double maximos,
+	void Consulta_SolucionesGeneralesRango(double minimo, double maximos, String anio, String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
 
-	void Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion,
+	void Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion, String anio, String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
 
 	void Consulta_ComparativoPlaniEjecucionSolucion_TipoSolucion(
@@ -311,6 +309,127 @@ public interface SqlServiceAsync {
 	void ConsultarValesAprobados_PorTrimestreAnio(Long idAfiliado,
 			String trimestre, int anio,
 			AsyncCallback<List<AuxValeBeneficiario>> callback);
+
+	void GenerarIdVale2(AsyncCallback<String> callback);
+
+	void Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_TipoSolucion(Long idAfiliado,
+			String anio, String anioFin, String tipoSolucion,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			String trimestre, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre_Montos(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			String trimestre, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesTrimestre_TipoSolucion_Montos(String anio,
+			String trimestre, String anioFin, String tipoSolucion,
+			double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesTrimestre_TipoSolucion(String anio,
+			String trimestre, String anioFin, String tipoSolucion,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesTrimestre_Montos(String anio,
+			String trimestre, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_Trimestre(Long idAfiliado,
+			String anio, String anioFin, String trimestre,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_Trimestre_Montos(Long idAfiliado,
+			String anio, String anioFin, String trimestre, double minimo,
+			double maximos, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Montos(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesAfiliado_Montos(Long idAfiliado,
+			String anio, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_SolucionesGeneralesTipoSolucion_Montos(String anio,
+			String tipoSolucion, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionPorAnio(String anio, String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Trimestre(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			String trimestre, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Trimestre_Montos(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			String trimestre, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionTrimestre_TipoSolucion(String anio,
+			String trimestre, String anioFin, String tipoSolucion,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionTrimestre_TipoSolucion_Montos(
+			String anio, String trimestre, String anioFin, String tipoSolucion,
+			double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionTrimestre_Montos(String anio,
+			String trimestre, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_Trimestre(Long idAfiliado,
+			String anio, String anioFin, String trimestre,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_Trimestre_Montos(
+			Long idAfiliado, String anio, String anioFin, String trimestre,
+			double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Montos(
+			Long idAfiliado, String anio, String anioFin, String tipoSolucion,
+			double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado_Montos(Long idAfiliado,
+			String anio, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionTipoSolucion_Montos(String anio,
+			String tipoSolucion, String anioFin, double minimo, double maximos,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionOpcion1(String anio,
+			String trimestre, String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionRango(double minimo, double maximos,
+			String anio, String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionAfiliado(Long idAfiliado,
+			String anio, String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionTipoSolucion(String tipoSolucion,
+			String anio, String anioFin,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+
 
 
 

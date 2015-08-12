@@ -345,12 +345,12 @@ public class Formulario_CrearVale extends Composite {
 		grid.setWidget(1, 0,e);
 		e.setSize("700px", "300px"); 
 		
-		loginService.GenerarIdVale(new AsyncCallback<Long>() {
+		loginService.GenerarIdVale2(new AsyncCallback<String>() {
 			
 			@Override
-			public void onSuccess(Long result) {
+			public void onSuccess(String result) {
 				// TODO Auto-generated method stub
-				textBox_2.setText("" + result);
+				textBox_2.setText(result);
 			}
 			
 			@Override
@@ -367,7 +367,7 @@ public class Formulario_CrearVale extends Composite {
 	        public void run() {
        			if (index < e.grid.getListMateriales().size()){
 						final AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
-						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), Long.valueOf(textBox_2.getText()),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
+						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), textBox_2.getText(),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
 							
 							@Override
 							public void onSuccess(Long result) {
@@ -383,7 +383,7 @@ public class Formulario_CrearVale extends Composite {
 							}
 							}								
 						);
-						loginService.Insertar_UnicoHistorialSolucion(selectNuevoBene.getSolucion().getIdSolucion(),Long.valueOf(textBox_2.getText()), aux, new AsyncCallback<Long>() {
+						loginService.Insertar_UnicoHistorialSolucion(selectNuevoBene.getSolucion().getIdSolucion(),textBox_2.getText(), aux, new AsyncCallback<Long>() {
 
 							@Override
 							public void onFailure(Throwable caught) {
@@ -395,7 +395,7 @@ public class Formulario_CrearVale extends Composite {
 							public void onSuccess(Long result) {
 								// TODO Auto-generated method stub
 								System.out.println("ejecucion agregado al vale"+result);
-								loginService.Agregar_DetalleEjecucionVale(Long.valueOf(textBox_2.getText()), result, new AsyncCallback<Long>() {
+								loginService.Agregar_DetalleEjecucionVale(textBox_2.getText(), result, new AsyncCallback<String>() {
 
 									@Override
 									public void onFailure(Throwable caught) {
@@ -404,7 +404,7 @@ public class Formulario_CrearVale extends Composite {
 									}
 
 									@Override
-									public void onSuccess(Long result) {
+									public void onSuccess(String result) {
 										// TODO Auto-generated method stub
 										
 									}
@@ -416,7 +416,7 @@ public class Formulario_CrearVale extends Composite {
        			else{
     				this.cancel();
     				
-    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()),fechaActual,costoAcumulado, new AsyncCallback<Long>() {
+    				loginService.Actualizar_EstadoVale(textBox_2.getText(),fechaActual,costoAcumulado, new AsyncCallback<String>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -425,7 +425,7 @@ public class Formulario_CrearVale extends Composite {
 						}
 
 						@Override
-						public void onSuccess(Long result) {
+						public void onSuccess(String result) {
 							// TODO Auto-generated method stub
 							Window.alert("Solucion asignada Correctamente");
 						}
@@ -444,7 +444,22 @@ public class Formulario_CrearVale extends Composite {
 									System.out.println("Aqui se actualiza los detalles");
 									index = 0;
 									costoAcumulado = 0.0;
-									timer.scheduleRepeating(5000);
+									loginService.GenerarIdVale(textBox_2.getText(),new AsyncCallback<String>() {
+										
+										@Override
+										public void onSuccess(String result) {
+											// TODO Auto-generated method stub
+											System.out.println("Se guardo el vale: "+result);
+											timer.scheduleRepeating(5000);
+										}
+										
+										@Override
+										public void onFailure(Throwable caught) {
+											// TODO Auto-generated method stub
+											
+										}
+									});
+									
 
 				}
 			});

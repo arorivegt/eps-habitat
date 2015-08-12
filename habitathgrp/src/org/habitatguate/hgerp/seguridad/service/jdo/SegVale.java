@@ -19,8 +19,8 @@ import com.google.appengine.datanucleus.annotations.Unowned;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class SegVale implements Serializable{
 	@PrimaryKey
-	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
-	private Long idVale;
+	@Persistent
+	private String idVale;
 	@Persistent
 	private Double totalVale;
 	@Persistent
@@ -42,10 +42,16 @@ public class SegVale implements Serializable{
 	@Unowned
 	private List<SegDetalleEjecucion> listadetalle;
 	
-	public Long getIdVale() {
+	
+	public SegVale(String idVale){
+		this.idVale = idVale;
+	}
+	
+	
+	public String getIdVale() {
 		return idVale;
 	}
-	public void setIdVale(Long idVale) {
+	public void setIdVale(String idVale) {
 		this.idVale = idVale;
 	}
 	public Double getTotalVale() {

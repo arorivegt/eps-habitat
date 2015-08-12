@@ -79,19 +79,20 @@ public interface SqlService extends RemoteService{
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
-	Long Insertar_UnicoHistorialSolucion(Long idSolucion,Long idVale,AuxDetallePlantillaSolucion auxDetalle);
+	Long Insertar_UnicoHistorialSolucion(Long idSolucion,String idVale,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_PagoVale(Date fechaSolicitud,String banco, String chequeNombre, Date fechadeTransaccion, 
 			Long idAfiliado,Long idProveedor, String numeroCuenta, Double retenidoDonacion, Double retenidoIva, 
 			String seriesDocumento, String tipoOperacion, Double valorCancelado, Double valorPago);
 	String Insertar_Catalogo(String idMaterial,String nombreMaterial,String tipoMaterial,String idProducto,String unidadMedida);
-	Long Insertar_ValePagado(Long idHistorialPagoProv, Long idVale,Double totalPago);
+	Long Insertar_ValePagado(Long idHistorialPagoProv, String idVale,Double totalPago);
 	Long Insertar_ContactoProveedor(Long idProveedor,String nomContacto,String dirContacto, String telContacto, String correoContacto, String cellphoneContacto, Long idAfiliado);
 	Long Insertar_FormaPagoProv(Long idProveedor,String tipoPago,String tipoCuentaBancaria, String bancoCuentaBancaria, String numeroCuentaBancaria, String nombrePropietario, Long idAfiliado);
 	String Insertar_CatalogoProducto(String idProducto, String descripcionProducto);
 	String Insertar_TipoSolucion(String nomTipoSolucion,String descripcion);
 	Long Insertar_PersonalAfiliado(Long idAfiliado,String nomAdmin,String nomAsistente,String nomContador,String nomEncargadoCheques);
-	Long Agregar_DetalleEjecucionVale(Long idVale, Long idDetalleEjecucion);
-	Long GenerarIdVale();
+	String Agregar_DetalleEjecucionVale(String idVale, Long idDetalleEjecucion);
+	String GenerarIdVale(String idVale);
+	String GenerarIdVale2();
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
 	List<AuxBeneficiario> ConsultaTodosBene();
@@ -122,10 +123,10 @@ public interface SqlService extends RemoteService{
 	List<AuxTipoSolucion> Consultar_TipoSolucion();
 	List<AuxPersonalAfiliado> Consultar_PersonalAfiliado();
 	List<AuxAfiliado> Consulta_ComparativoPrecios(String idItemCostruccion);
-	List<AuxSolucion> Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre);
-	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado(Long idAfiliado);
-	List<AuxSolucion> Consulta_SolucionesGeneralesRango(double minimo, double maximos);
-	List<AuxSolucion> Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion);
+	List<AuxSolucion> Consulta_SolucionesGeneralesOpcion1(String anio, String trimestre, String anioFin);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado(Long idAfiliado, String anio, String anioFin);
+	List<AuxSolucion> Consulta_SolucionesGeneralesRango(double minimo, double maximos, String anio, String anioFin);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTipoSolucion(String tipoSolucion, String anio, String anioFin);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_TipoSolucion(String tipoSolucion);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_RangoMontos(double minimo, double maximos);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Afiliado(Long idAfiliado);
@@ -145,10 +146,45 @@ public interface SqlService extends RemoteService{
 	Long Actualizar_Proveedor(Long id,Boolean aprobadoComision, String dirProveedor,Long fechaIngreso, String nomProveedor,String numeroNit, String observaciones, String paginaWeb, String personaJuridica, Boolean servicioEntrega, String telProveedor);
 	Long Actualizar_ProveedorAprobado(Long id,Long idAfiliado);
 	Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado);
-	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, Long idVale, Long idSolucion);
-	Long Actualizar_EstadoVale(Long idVale, java.util.Date fechaVale, Double costoTotal);
-	Long Actualizar_StatusValeAprobado(Long idVale,int status);
+	Long Actualizar_DetalleSolucion(Long idDetalleSolucion, String idVale, Long idSolucion);
+	String Actualizar_EstadoVale(String idVale, java.util.Date fechaVale, Double costoTotal);
+	String Actualizar_StatusValeAprobado(String idVale,int status);
 	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion,int numeroSolucion);
 	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre,int anio);
+	
+	
+	List<AuxSolucion> Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_TipoSolucion(Long idAfiliado, String anio, String anioFin,String tipoSolucion);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre(Long idAfiliado, String anio, String anioFin,String tipoSolucion,String trimestre);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre_Montos(Long idAfiliado, String anio, String anioFin,String tipoSolucion,String trimestre,double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTrimestre_TipoSolucion_Montos(String anio, String trimestre, String anioFin,String tipoSolucion, double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTrimestre_TipoSolucion(String anio, String trimestre, String anioFin,String tipoSolucion);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTrimestre_Montos(String anio, String trimestre, String anioFin, double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_Trimestre(Long idAfiliado, String anio, String anioFin, String trimestre);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_Trimestre_Montos(Long idAfiliado, String anio, String anioFin, String trimestre, double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Montos(Long idAfiliado, String anio, String anioFin, String tipoSolucion, double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesAfiliado_Montos(Long idAfiliado, String anio, String anioFin, double minimo, double maximos);
+	List<AuxSolucion> Consulta_SolucionesGeneralesTipoSolucion_Montos(String anio, String tipoSolucion, String anioFin, double minimo, double maximos);
+	
+	
+	
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionPorAnio(String anio,String anioFin);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion(Long idAfiliado, String anio, String anioFin,String tipoSolucion);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Trimestre(Long idAfiliado, String anio, String anioFin,String tipoSolucion,String trimestre);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Trimestre_Montos(Long idAfiliado, String anio, String anioFin,String tipoSolucion,String trimestre,double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTrimestre_TipoSolucion_Montos(String anio, String trimestre, String anioFin,String tipoSolucion, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTrimestre_TipoSolucion(String anio, String trimestre, String anioFin,String tipoSolucion);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTrimestre_Montos(String anio, String trimestre, String anioFin, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_Trimestre(Long idAfiliado, String anio, String anioFin, String trimestre);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_Trimestre_Montos(Long idAfiliado, String anio, String anioFin, String trimestre, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_TipoSolucion_Montos(Long idAfiliado, String anio, String anioFin, String tipoSolucion, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado_Montos(Long idAfiliado, String anio, String anioFin, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTipoSolucion_Montos(String anio, String tipoSolucion, String anioFin, double minimo, double maximos);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionOpcion1(String anio, String trimestre, String anioFin);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado(Long idAfiliado, String anio, String anioFin);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionRango(double minimo, double maximos, String anio, String anioFin);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTipoSolucion(String tipoSolucion, String anio, String anioFin);
+	
+	
 	
 }

@@ -128,10 +128,11 @@ public class Formulario_ValesAprobados extends Composite{
 				
 				List<AuxValeBeneficiario> total= new ArrayList<AuxValeBeneficiario>(e.grid.selectionModel.getSelectedSet());
 				System.out.println("Seleccionado "+ total.size());
-				Long idVale = total.get(0).getVale().getIdVale();
+				String idVale = total.get(0).getVale().getIdVale();
 				Long idBeneficiario = total.get(0).getBeneficiario().getIdBeneficiario();
 				System.out.println("/FinanGenerarPdfVale?idVale="+idVale+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&idBeneficiario="+idBeneficiario);
 				Window.open("/FinanGenerarPdfVale?idVale="+idVale+"&idEmpleado="+idEmpleado+"&idAfiliado="+idAfiliado+"&idBeneficiario="+idBeneficiario, "_blank", "");
+				
 			}
 		});		
 

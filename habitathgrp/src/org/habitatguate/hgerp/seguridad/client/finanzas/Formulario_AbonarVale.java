@@ -302,7 +302,7 @@ public class Formulario_AbonarVale extends Composite{
 		grid.setWidget(1, 0,e);
 		e.setSize("700px", "300px"); 
 		
-		loginService.GenerarIdVale(new AsyncCallback<Long>() {
+		/*loginService.GenerarIdVale(new AsyncCallback<Long>() {
 			
 			@Override
 			public void onSuccess(Long result) {
@@ -315,7 +315,7 @@ public class Formulario_AbonarVale extends Composite{
 				// TODO Auto-generated method stub
 				
 			}
-		});
+		});*/
 		
 
 		
@@ -323,7 +323,7 @@ public class Formulario_AbonarVale extends Composite{
 	        public void run() {
        			if (index < e.grid.getListMateriales().size()){
 						AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
-						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), Long.valueOf(textBox_2.getText()),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
+						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), textBox_2.getText(),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
 							
 							@Override
 							public void onSuccess(Long result) {
@@ -341,7 +341,7 @@ public class Formulario_AbonarVale extends Composite{
        			}
        			else{
     				this.cancel();
-    				loginService.Actualizar_EstadoVale(Long.valueOf(textBox_2.getText()),Date.valueOf(textBox_4.getText()),costoAcumulado, new AsyncCallback<Long>() {
+    				loginService.Actualizar_EstadoVale(textBox_2.getText(),Date.valueOf(textBox_4.getText()),costoAcumulado, new AsyncCallback<String>() {
 
 						@Override
 						public void onFailure(Throwable caught) {
@@ -350,7 +350,7 @@ public class Formulario_AbonarVale extends Composite{
 						}
 
 						@Override
-						public void onSuccess(Long result) {
+						public void onSuccess(String result) {
 							// TODO Auto-generated method stub
 							Window.alert("Solucion asignada Correctamente");
 						}

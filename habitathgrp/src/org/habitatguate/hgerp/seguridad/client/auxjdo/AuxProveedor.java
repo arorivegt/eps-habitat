@@ -91,6 +91,15 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	
 	private double montoMaximo;
 	
+	private String motivoInactivo;
+	
+	private String KeyFileRTU;
+	
+	private String KeyFileConvenio;
+	
+	private String URLFileConvenio;
+	
+	private String URLFileRTU;
 	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
 	
@@ -380,6 +389,50 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	public void setListaMateriales(ArrayList<AuxMaterialCostruccion> listaMateriales) {
 		this.listaMateriales = listaMateriales;
 	}
+
+	public String getMotivoInactivo() {
+		return motivoInactivo;
+	}
+
+	public void setMotivoInactivo(String motivoInactivo) {
+		this.motivoInactivo = motivoInactivo;
+	}
+
+	public String getKeyFileRTU() {
+		return KeyFileRTU;
+	}
+
+	public void setKeyFileRTU(String keyFileRTU) {
+		KeyFileRTU = keyFileRTU;
+	}
+
+	public String getKeyFileConvenio() {
+		return KeyFileConvenio;
+	}
+
+	public void setKeyFileConvenio(String keyFileConvenio) {
+		KeyFileConvenio = keyFileConvenio;
+	}
+
+	public String getURLFileConvenio() {
+		return URLFileConvenio;
+	}
+
+	public void setURLFileConvenio(String uRLFileConvenio) {
+		URLFileConvenio = uRLFileConvenio;
+	}
+
+	public String getURLFileRTU() {
+		return URLFileRTU;
+	}
+
+	public void setURLFileRTU(String uRLFileRTU) {
+		URLFileRTU = uRLFileRTU;
+	}
+	
+	
+	
+	
 	
 	
 	

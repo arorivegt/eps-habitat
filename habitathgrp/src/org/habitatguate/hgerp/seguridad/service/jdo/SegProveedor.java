@@ -87,6 +87,17 @@ public class SegProveedor implements Serializable{
 	private Date fechaIngreso;
 	@Persistent
 	private Boolean aprobadoComision;
+	@Persistent
+	private String motivoInactivo;
+	@Persistent    
+    private String URLFileRTU;
+	@Persistent    
+    private String KeyFileRTU;
+	@Persistent    
+    private String URLFileConvenio;
+	@Persistent    
+    private String KeyFileConvenio;
+	
 	
 	@Persistent
     private List <Long> contactoProveedor = new ArrayList<Long>();
@@ -329,6 +340,39 @@ public class SegProveedor implements Serializable{
 	public void setTiempoMaximo(int tiempoMaximo) {
 		this.tiempoMaximo = tiempoMaximo;
 	}
+	public String getMotivoInactivo() {
+		return motivoInactivo;
+	}
+	public void setMotivoInactivo(String motivoInactivo) {
+		this.motivoInactivo = motivoInactivo;
+	}
+	public String getURLFileRTU() {
+		return URLFileRTU;
+	}
+	public void setURLFileRTU(String uRLFileRTU) {
+		URLFileRTU = uRLFileRTU;
+	}
+	public String getKeyFileRTU() {
+		return KeyFileRTU;
+	}
+	public void setKeyFileRTU(String keyFileRTU) {
+		KeyFileRTU = keyFileRTU;
+	}
+	public String getURLFileConvenio() {
+		return URLFileConvenio;
+	}
+	public void setURLFileConvenio(String uRLFileConvenio) {
+		URLFileConvenio = uRLFileConvenio;
+	}
+	public String getKeyFileConvenio() {
+		return KeyFileConvenio;
+	}
+	public void setKeyFileConvenio(String keyFileConvenio) {
+		KeyFileConvenio = keyFileConvenio;
+	}
+	
+	
+	
 	
 	
 	

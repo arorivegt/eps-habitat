@@ -74,7 +74,9 @@ public interface SqlService extends RemoteService{
 			 double montoMaximo,
 			 int tiempoMaximo,
 			 Date fechaIngreso,
-			 Long idAfiliado
+			 Long idAfiliado,
+			 String KeyFileRTU,
+			 String URLRTU
 			); 
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
@@ -92,7 +94,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_PersonalAfiliado(Long idAfiliado,String nomAdmin,String nomAsistente,String nomContador,String nomEncargadoCheques);
 	String Agregar_DetalleEjecucionVale(String idVale, Long idDetalleEjecucion);
 	String GenerarIdVale(String idVale);
-	String GenerarIdVale2();
+	String GenerarIdVale2(Long idAfiliado);
 	List<AuxParametro> ConsultaTodosParam();
 	List<AuxAfiliado> ConsultaTodosAfiliados();
 	List<AuxBeneficiario> ConsultaTodosBene();
@@ -119,6 +121,7 @@ public interface SqlService extends RemoteService{
 	List<AuxValeBeneficiario> ConsultarValesPendientes_Aprobar(Long idAfiliado);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion();
 	List<AuxSolucion> Consulta_PagosRealizados(Long idBeneficiario);
+	AuxBeneficiario ConsultaBene_PorNoSolucion(String noSolucion);
 	List<AuxReporteCuentasPorPagar> ConsultarCuentasXPagar_PorProveedores();
 	List<AuxTipoSolucion> Consultar_TipoSolucion();
 	List<AuxPersonalAfiliado> Consultar_PersonalAfiliado();
@@ -151,6 +154,8 @@ public interface SqlService extends RemoteService{
 	String Actualizar_StatusValeAprobado(String idVale,int status);
 	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion,int numeroSolucion);
 	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre,int anio);
+	Long Actualizar_ProveedorInactivo(Long id,Long idAfiliado, String motivo);
+	Long Actualizar_ProveedorConvenio(Long id,Long idAfiliado, String KeyFile, String URLFile);
 	
 	
 	List<AuxSolucion> Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin);
@@ -186,5 +191,7 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTipoSolucion(String tipoSolucion, String anio, String anioFin);
 	
 	
-	
+	List<AuxSolucion> Consulta_SolucionesGeneralesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
+	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
+	List<AuxValeBeneficiario> Consulta_ComprasProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
 }

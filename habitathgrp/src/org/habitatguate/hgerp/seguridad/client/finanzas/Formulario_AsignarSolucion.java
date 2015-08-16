@@ -479,7 +479,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			final ListBox listaCostoAdmin = new ListBox();
 			absolutePanel_3.add(listaCostoAdmin,173,65);
 			listaCostoAdmin.setSize("50px", "25px");
-			listaCostoAdmin.addItem("[]","-1");
+			listaCostoAdmin.addItem("[%]","-1");
 			listaCostoAdmin.addItem("7%","7");
 			listaCostoAdmin.addItem("6.5%","6.5");
 			listaCostoAdmin.addItem("6%","6");
@@ -615,7 +615,11 @@ public class Formulario_AsignarSolucion extends Composite{
 							auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
 							auxS.setTrimestre(Integer.valueOf(listTrimestre.getValue(listTrimestre.getSelectedIndex())));
 							auxS.setAnio(Integer.valueOf(formatted));
+							String ubicacion = selectNuevoBene.getDepartamentoMunicipioDireccionSolucion();
+							String[] ubicaciones = ubicacion.split(",");
 							AuxBeneficiario auxBene = new AuxBeneficiario();
+							auxS.setDepartamentoSolucion(ubicaciones[0]);
+							auxS.setMunicipioSolucion(ubicaciones[1]);
 							auxBene.setIdBeneficiario(result);
 							auxS.setBeneficiario(auxBene);
 							loginService.Insertar_Solucion(auxS, costoAcumulado, new AsyncCallback<Long>() {

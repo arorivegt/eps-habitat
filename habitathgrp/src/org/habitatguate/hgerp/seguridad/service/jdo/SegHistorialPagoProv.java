@@ -48,6 +48,8 @@ public class SegHistorialPagoProv implements Serializable {
 	@Persistent
 	private Double retenidoIva;
 	@Persistent
+	private String docLegalPago;
+	@Persistent
 	private Long idProveedor;
 	@Persistent
 	@Unowned
@@ -152,8 +154,14 @@ public class SegHistorialPagoProv implements Serializable {
 	public void setVale(List<SegVale> vale) {
 		this.vale = vale;
 	}
+	public String getDocLegalPago() {
+		return docLegalPago;
+	}
+	public void setDocLegalPago(String docLegalPago) {
+		this.docLegalPago = docLegalPago;
+	}
 	
-
+	
 	
 	
 }

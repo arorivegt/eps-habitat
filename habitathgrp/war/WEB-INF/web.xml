@@ -209,6 +209,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <servlet-name>ExportComparativoPrecios</servlet-name>  
         <url-pattern>/ExportComparativoPrecios</url-pattern>  
  </servlet-mapping> 
+ 
+    <servlet>
+    <servlet-name>ExportResumenCreditos</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportResumenCreditos</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportResumenCreditos</servlet-name>  
+        <url-pattern>/ExportResumenCreditos</url-pattern>  
+ </servlet-mapping> 
 
   <!-- Default page to serve -->
   <welcome-file-list>

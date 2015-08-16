@@ -8,12 +8,12 @@ import java.io.IOException;
 
 public class PageStamper extends PdfPageEventHelper {
 	 String header;
-	 int noSolucion;
+	 String noSolucion;
      /** The template with the total number of pages. */
      PdfTemplate total;
      
      
-     public PageStamper(int noSolucion){
+     public PageStamper(String noSolucion){
     	 this.noSolucion = noSolucion;
      }
 
@@ -56,7 +56,7 @@ public class PageStamper extends PdfPageEventHelper {
              PdfPCell cell = new PdfPCell(Image.getInstance(total));
              cell.setBorder(Rectangle.BOTTOM);
              table.addCell(cell);
-             table.addCell("Solución No. "+noSolucion);
+             table.addCell(noSolucion);
              table.writeSelectedRows(0, -1, 34, 35, writer.getDirectContent());
          }
          catch(DocumentException de) {

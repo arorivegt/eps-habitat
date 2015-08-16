@@ -64,6 +64,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gwt.i18n.server.testing.Child;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java_cup.internal_error;
 
@@ -354,7 +355,9 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 		 double montoMaximo,
 		 int tiempoMaximo,
 		 Date fechaIngreso,
-		 Long idAfiliado
+		 Long idAfiliado,
+		 String KeyFileRTU,
+		 String URLRTU
 		) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -403,7 +406,10 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 	nuevo.setAceptaCredito(aceptaCredito);
 	nuevo.setMontoMaximo(montoMaximo);
 	nuevo.setTiempoMaximo(tiempoMaximo);
+	nuevo.setMotivoInactivo("");
 	nuevo.setAfiliado(afi);
+	nuevo.setKeyFileRTU(KeyFileRTU);
+	nuevo.setURLFileRTU(URLRTU);
 	afi.getProveedor().add(nuevo);
 	
 	try{
@@ -469,6 +475,8 @@ public Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal) throws Illegal
 	nuevo.setNomSolucion(auxS.getNomSolucion());
 	nuevo.setValorContrato(auxS.getValorContrato());
 	nuevo.setTrimestre(auxS.getTrimestre());
+	nuevo.setDepartamentoSolucion(auxS.getDepartamentoSolucion());
+	nuevo.setMunicipioSolucion(auxS.getMunicipioSolucion());
 	nuevo.setAnio(auxS.getAnio());
 	nuevo.setEstadoSolucion(1);
 	Date time=new Date();
@@ -637,13 +645,13 @@ public String GenerarIdVale(String idVale) throws IllegalArgumentException{
 	
 }
 
-public String GenerarIdVale2() throws IllegalArgumentException{
+public String GenerarIdVale2(Long idAfiliado) throws IllegalArgumentException{
 	 String valor = "";
 	HttpServletRequest request = this.getThreadLocalRequest();
 	HttpSession session = request.getSession(false);
 	long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
-	SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfi);
+	SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfiliado);
 	int correlativo = selectB.getCorrelativoVale();
 	valor = selectB.getCodigoAfiliado()+"-" +correlativo;
 	return valor;
@@ -1056,6 +1064,8 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setMunicipio(p.getAfiliado().getMunicipio());
 				aux.setNomAfiliado(p.getAfiliado().getNomAfiliado());
 				aux.setTelefono(p.getAfiliado().getTelefono());
+				aux.setCorrelativoVale(p.getAfiliado().getCorrelativoVale());
+				aux.setCodigoAfiliado(p.getAfiliado().getCodigoAfiliado());
 				n.setAfiliado(aux);
 				AuxSolucion auxSolucion = new AuxSolucion();
 				//--Validación cuando se elimino un beneficiario
@@ -1565,6 +1575,94 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		
 	}
 	
+	public AuxBeneficiario ConsultaBene_PorNoSolucion(String noSolucion){
+		System.out.println("Datos " + noSolucion);
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("numeroSolucion == "+noSolucion);
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		
+		SegBeneficiario bene = execute.get(0).getBeneficiario();
+		
+		AuxBeneficiario resultado = new  AuxBeneficiario();
+		resultado.setIdBeneficiario(bene.getIdBeneficiario().getId());
+		resultado.setDirBeneficiario(bene.getDirBeneficiario());
+		resultado.setNomBeneficiario(bene.getNomBeneficiario());
+		resultado.setTelBeneficiario(bene.getTelBeneficiario());
+		
+		
+		AuxAfiliado auxAfi = new AuxAfiliado();
+		auxAfi.setIdAfiliado(bene.getAfiliado().getIdAfiliado());
+		auxAfi.setNomAfiliado(bene.getAfiliado().getNomAfiliado());
+		auxAfi.setTelefono(bene.getAfiliado().getTelefono());
+		resultado.setAfiliado(auxAfi);
+		
+		AuxSolucion auxSolucion = new AuxSolucion();
+		//--Validación cuando se elimino un beneficiario
+
+		auxSolucion.setCostoAdministrativo(bene.getSolucion().getCostoAdministrativo());
+		auxSolucion.setCostoDirecto(bene.getSolucion().getCostoDirecto());
+		auxSolucion.setCostoMaterial(bene.getSolucion().getCostoMaterial());
+		auxSolucion.setCostoTotal(bene.getSolucion().getCostoTotal());
+		auxSolucion.setDisenio(bene.getSolucion().getDisenio());
+		auxSolucion.setFechaInicio(ConvertDate.g(bene.getSolucion().getFechaInicio()));
+		auxSolucion.setIdSolucion(bene.getSolucion().getIdSolucion().getId());
+		auxSolucion.setNomSolucion(bene.getSolucion().getNomSolucion());
+		auxSolucion.setNotaDebito(bene.getSolucion().getNotaDebito());
+		auxSolucion.setValorContrato(bene.getSolucion().getValorContrato());
+		auxSolucion.setEstadoSolucion(bene.getSolucion().getEstadoSolucion());
+		auxSolucion.setTrimestre(bene.getSolucion().getTrimestre());
+		auxSolucion.setNumeroSolucion(bene.getSolucion().getNumeroSolucion());
+		
+		ArrayList<AuxDetalleSolucion> listaEjecucion = new ArrayList<AuxDetalleSolucion>();
+		Iterator<SegDetalleEjecucion> i1 = bene.getSolucion().getListaEjecucion().iterator();
+		while(i1.hasNext()){
+			SegDetalleEjecucion auxDetalle = i1.next();
+			AuxDetalleSolucion auxDetalle2 = new AuxDetalleSolucion();
+			auxDetalle2.setCantidad(auxDetalle.getCantidad());
+			auxDetalle2.setIdDetalleSolucion(auxDetalle.getIdDetalleSolucion().getId());
+			auxDetalle2.setSubTotal(auxDetalle.getSubTotal());
+			auxDetalle2.setUnidadMetrica(auxDetalle.getUnidadMetrica());
+			auxDetalle2.setPrecioUnitario(auxDetalle.getPrecioEjecucion());
+			SegMaterialCostruccion i2 = auxDetalle.getMaterialCostruccion();
+			//
+			AuxMaterialCostruccion auxMat = new AuxMaterialCostruccion();
+			auxMat.setFechaIngreso(ConvertDate.g(i2.getFechaIngreso()));
+			auxMat.setIdMaterialConstruccion(i2.getIdMaterialConstruccion().getId());
+			auxMat.setNomMaterialCostruccion(i2.getNomMaterialCostruccion());
+			auxMat.setPrecioUnit(i2.getPrecioUnit());
+			auxMat.setUnidadMetrica(i2.getUnidadMetrica());
+			auxMat.setIdProducto(i2.getIdProducto());
+			SegProveedor i3 = i2.getProveedor();
+			AuxProveedor auxP = new AuxProveedor();
+			auxP.setIdProveedor(i3.getIdProveedor().getId());
+			auxP.setNomProveedor(i3.getNomProveedor());
+			auxMat.setProveedor(auxP);
+			auxDetalle2.setMaterialCostruccion(auxMat);
+			//fin Material Construccion
+			
+			//Inicio  vale
+			SegVale iterVale = auxDetalle.getVale();
+			ArrayList<AuxVale> listaVales = new ArrayList<AuxVale>();
+				AuxVale auxVale = new AuxVale();
+				auxVale.setIdVale(iterVale.getIdVale());
+				auxVale.setTotalVale(iterVale.getTotalVale());
+				auxVale.setFechaVale(ConvertDate.g(iterVale.getFechaVale()));
+				auxVale.setAprobado(iterVale.getAprobado());
+				listaVales.add(auxVale);
+			auxDetalle2.setVale(listaVales);
+
+			//fin vale
+			listaEjecucion.add(auxDetalle2);
+		}
+		auxSolucion.setLista(listaEjecucion);
+		resultado.setSolucion(auxSolucion);
+		return resultado;
+
+		
+	}
+	
+	
 	public AuxBeneficiario ConsultaRecord_Beneficiario(Long idAfiliado, Long idBeneficiario){
 		
 		HttpServletRequest request = this.getThreadLocalRequest();
@@ -1716,6 +1814,354 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 	}
 	
 	//---------------------------CONSULTAS DE LOS REPORTES DE RESUMEN DE RECORD-----------------------------------------------
+
+	
+	//CONSULTA GENERICA--------------------------
+	
+	public List<AuxSolucion> Consulta_SolucionesGeneralesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("anio >= "+anio+ " && "+"anio <= "+anioFin + filter);
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegSolucion p : execute ){
+			if (p.getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) || idAfiliado.equals("0")){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				auxSolucion.setTrimestre(p.getTrimestre());
+				auxSolucion.setDepartamentoSolucion(p.getDepartamentoSolucion());
+				auxSolucion.setMunicipioSolucion(p.getMunicipioSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
+				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
+				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getBeneficiario().getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getBeneficiario().getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getBeneficiario().getAfiliado().getNomAfiliado());
+				aux.setTelefono(p.getBeneficiario().getAfiliado().getTelefono());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);
+				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+				double costoTotalCategorias = 0.0;
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProducto().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+							
+						}
+					}
+					costoTotalCategorias = costoTotalCategorias + totalProducto;
+					auxSolucion.getCostoProducto().add(totalProducto);
+				}
+				auxSolucion.setCostoDirecto(costoTotalCategorias);
+				auxSolucion.setCostoTotal(auxSolucion.getCostoAdministrativo()+auxSolucion.getCostoDirecto());
+				if (maximos-minimo == 0.0 || (auxSolucion.getCostoTotal() >= minimo && auxSolucion.getCostoTotal() <= maximos)){
+					valor.add(auxSolucion);
+				}
+			}
+			}
+		}
+		
+		
+		return valor;
+	}
+	
+	public List<AuxSolucion> Consulta_ComparativoPlaniEjecucionGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("anio >= "+anio+ " && "+"anio <= "+anioFin + filter);
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegSolucion p : execute ){
+			if (p.getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) || idAfiliado.equals("0")){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				auxSolucion.setTrimestre(p.getTrimestre());
+				auxSolucion.setDepartamentoSolucion(p.getDepartamentoSolucion());
+				auxSolucion.setMunicipioSolucion(p.getMunicipioSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
+				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
+				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getBeneficiario().getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getBeneficiario().getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getBeneficiario().getAfiliado().getNomAfiliado());
+				aux.setTelefono(p.getBeneficiario().getAfiliado().getTelefono());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);
+				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+				double costoTotalCategorias = 0.0;
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProducto().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+							
+						}
+					}
+					costoTotalCategorias = costoTotalCategorias + totalProducto;
+					auxSolucion.getCostoProducto().add(totalProducto);
+				}
+				
+				
+				
+				auxSolucion.setCostoDirecto(costoTotalCategorias);
+				auxSolucion.setCostoTotal(auxSolucion.getCostoAdministrativo()+auxSolucion.getCostoDirecto());
+				
+				List<SegDetalleSolucion> planificacion = p.getListaDetalle();
+				
+				
+				double costoTotalCategoriasPlani = 0.0;
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProductoPlani().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleSolucion ejecutado : planificacion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+						}
+					}
+					costoTotalCategoriasPlani = costoTotalCategoriasPlani + totalProducto;
+					auxSolucion.getCostoProductoPlani().add(totalProducto);
+				}
+				
+				auxSolucion.setCostoDirectoPlani(costoTotalCategoriasPlani);
+				auxSolucion.setCostoTotalPlani(auxSolucion.getCostoAdministrativo()+auxSolucion.getCostoDirectoPlani());
+				
+				
+				if (maximos-minimo == 0.0 || (auxSolucion.getCostoTotal() >= minimo && auxSolucion.getCostoTotal() <= maximos)){
+					valor.add(auxSolucion);
+				}
+			}
+			}
+		}
+		
+		
+		return valor;
+	}
+	
+	public List<AuxSolucion> Consulta_ComprasProvGenerica(String idAfiliado, Date minimo, Date maximos, String filter,String estado,String idProveedor, String checkRange){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter(filter);
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegSolucion p : execute ){
+			if (p.getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) || idAfiliado.equals("0")){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				auxSolucion.setTrimestre(p.getTrimestre());
+				auxSolucion.setDepartamentoSolucion(p.getDepartamentoSolucion());
+				auxSolucion.setMunicipioSolucion(p.getMunicipioSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
+				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
+				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getBeneficiario().getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getBeneficiario().getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getBeneficiario().getAfiliado().getNomAfiliado());
+				aux.setTelefono(p.getBeneficiario().getAfiliado().getTelefono());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);
+				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getVale().getAprobado() == 1  || ejecutado.getVale().getAprobado() == -1 ){
+							System.out.println("Entro aprobado");
+							if (ejecutado.getMaterialCostruccion().getProveedor().getIdProveedor().getId() == Long.valueOf(idProveedor) || idProveedor.equals("0")){
+								System.out.println("Entro proveedor");
+								if (checkRange.equals("0") || isWithinRange(ejecutado.getVale().getFechaVale(), minimo, maximos)){
+									System.out.println("Entro rango");
+								}
+								
+							}
+							
+						}
+					}
+				
+					valor.add(auxSolucion);
+			}
+			}
+		}
+		
+		
+		return valor;
+	
+	
+	}
+	
+	
+	public List<AuxValeBeneficiario> Consulta_ComprasProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegVale.class);
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		List<SegVale> execute;
+		if (!estado.equals("-1") && checkRange){
+			query.setFilter("aprobado == :status && fechaVale > :dateTime  && fechaVale < :dateTime2");
+			execute = (List<SegVale>)query.execute(new Integer(estado),new Date(fechaInicio),new Date(fechaFIn));
+		}else if (estado.equals("-1") && checkRange){
+			query.setFilter("fechaVale > :dateTime  && fechaVale < :dateTime2");
+			execute = (List<SegVale>)query.execute(new Date(fechaInicio),new Date(fechaFIn));
+		}else if (!estado.equals("-1") && !checkRange){
+			query.setFilter("aprobado == :status");
+			execute = (List<SegVale>)query.execute(new Integer(estado));
+		}else{
+			execute = (List<SegVale>)query.execute();
+		}
+		
+		
+		if (!execute.isEmpty()){
+			for(SegVale p : execute ){
+				AuxValeBeneficiario nuevo = new AuxValeBeneficiario();
+				List<SegDetalleEjecucion> compras = p.getListadetalle();
+				for (SegDetalleEjecucion detalleCompra : compras){
+					if(detalleCompra.getSolucion().getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) ||  idAfiliado.equals("0")){
+						if(detalleCompra.getMaterialCostruccion().getProveedor().getIdProveedor().getId() == Long.valueOf(idProveedor)|| idProveedor.equals("0"))  {
+							if (detalleCompra.getSolucion().getAnio() == Integer.valueOf(anio) || anio.equals("0")){
+								if (detalleCompra.getSolucion().getTrimestre() == Integer.valueOf(trimestre) || trimestre.equals("0")){
+									System.out.println("Vale:"+p.getIdVale() +" ID SOLUCIO "+detalleCompra.getSolucion().getIdSolucion()+ " ID DETALLE "+detalleCompra.getIdDetalleSolucion());
+									AuxVale auxCumple = new AuxVale();
+									auxCumple.setIdVale(p.getIdVale());
+									auxCumple.setEstado(p.isEstado());
+									auxCumple.setTotalVale(p.getTotalVale());
+									auxCumple.setTotalPagado(p.getTotalPagado());
+									auxCumple.setFechaVale(ConvertDate.g(p.getFechaVale()));
+									auxCumple.setAprobado(p.getAprobado());
+									nuevo.setVale(auxCumple);
+									
+									SegSolucion p1 = detalleCompra.getSolucion();
+									
+									AuxSolucion auxSolucion = new AuxSolucion();
+									auxSolucion.setCostoAdministrativo(p1.getCostoAdministrativo());
+									auxSolucion.setCostoMaterial(p1.getCostoMaterial());
+									auxSolucion.setDisenio(p1.getDisenio());
+									auxSolucion.setFechaInicio(ConvertDate.g(p1.getFechaInicio()));
+									auxSolucion.setIdSolucion(p1.getIdSolucion().getId());
+									auxSolucion.setNomSolucion(p1.getNomSolucion());
+									auxSolucion.setNotaDebito(p1.getNotaDebito());
+									auxSolucion.setValorContrato(p1.getValorContrato());
+									auxSolucion.setEstadoSolucion(p1.getEstadoSolucion());
+									auxSolucion.setTrimestre(p1.getTrimestre());
+									auxSolucion.setDepartamentoSolucion(p1.getDepartamentoSolucion());
+									auxSolucion.setMunicipioSolucion(p1.getMunicipioSolucion());
+									
+									AuxBeneficiario n= new AuxBeneficiario();
+									n.setIdBeneficiario(p1.getBeneficiario().getIdBeneficiario().getId());
+									n.setNomBeneficiario(p1.getBeneficiario().getNomBeneficiario());
+									n.setDirBeneficiario(p1.getBeneficiario().getDirBeneficiario());
+									n.setTelBeneficiario(p1.getBeneficiario().getTelBeneficiario());
+									AuxAfiliado aux = new AuxAfiliado();
+									aux.setIdAfiliado(p1.getBeneficiario().getAfiliado().getIdAfiliado());
+									aux.setDepartamento(p1.getBeneficiario().getAfiliado().getDepartamento());
+									aux.setDirAfiliado(p1.getBeneficiario().getAfiliado().getDirAfiliado());
+									aux.setMunicipio(p1.getBeneficiario().getAfiliado().getMunicipio());
+									aux.setNomAfiliado(p1.getBeneficiario().getAfiliado().getNomAfiliado());
+									aux.setTelefono(p1.getBeneficiario().getAfiliado().getTelefono());
+									n.setAfiliado(aux);
+									auxSolucion.setBeneficiario(n);
+									
+									nuevo.setSolucion(auxSolucion);
+									
+									AuxProveedor prov = new AuxProveedor();
+									prov.setNomProveedor(detalleCompra.getMaterialCostruccion().getProveedor().getNomProveedor());
+									
+									nuevo.setProveedor(prov);
+									
+									response.add(nuevo);
+									break;
+								}
+							}
+							
+						}
+					}
+				}
+				
+			}
+		}
+		
+		
+		return response;
+	}
+	
+	
 	
 	public List<AuxSolucion> Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -5342,6 +5788,49 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 	}
 	
 	
+	public Long Actualizar_ProveedorInactivo(Long id,Long idAfiliado, String motivo) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(id!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				Key k = new KeyFactory
+				        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+			 			.addChild(SegProveedor.class.getSimpleName(), id)	
+				        .getKey();
+				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,k);
+				 e.setMotivoInactivo(motivo);
+				 e.setAprobadoComision(false);	 
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	
+	public Long Actualizar_ProveedorConvenio(Long id,Long idAfiliado, String KeyFile, String URLFile) throws IllegalArgumentException {
+		//System.out.println("user: "+user+" pass: "+password);
+		if(id!=null){	
+			final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+			try{
+				Key k = new KeyFactory
+				        .Builder(SegAfiliado.class.getSimpleName(), idAfiliado)
+			 			.addChild(SegProveedor.class.getSimpleName(), id)	
+				        .getKey();
+				 final SegProveedor e = gestorPersistencia.getObjectById(SegProveedor.class,k);
+				 e.setKeyFileConvenio(KeyFile);
+				 e.setURLFileConvenio(URLFile);
+				 
+			}finally{
+				gestorPersistencia.close();
+			}
+		}
+		
+		return id;
+	}
+	
+	
 	public Long Actualizar_AfiliadoEmpleado(Long idAfiliado, Long idEmpleado){
 		System.out.println("id afiliado "+idAfiliado + " id empleado "+idEmpleado);
 		Long valor = 0L;
@@ -5523,6 +6012,10 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		        .getKey();
 		prov = gestorPersistencia.getObjectById(SegProveedor.class,k);
 		return prov;
+	}
+	
+	public boolean isWithinRange(Date testDate, Date startDate, Date endDate) {
+		return testDate.after(startDate) && testDate.before(endDate);
 	}
 	
 	

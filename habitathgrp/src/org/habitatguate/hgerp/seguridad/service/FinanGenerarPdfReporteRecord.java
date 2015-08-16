@@ -65,9 +65,16 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
         {  
         	long idEmpleado			= Long.parseLong(session.getAttribute("idEmpleadoHabitat").toString());
         	long idAfiliado			= Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
-        	long idBeneficiario		= Long.parseLong(request.getParameter("idBeneficiario"));
+        	String idBeneficiario		= request.getParameter("idBeneficiario");
+        	String noSolucion			= request.getParameter("noSolucion");
 	        auxEmpleado 				= recursosHumanosService.Empleado_Registrado(idEmpleado);
-	        auxBeneficiario				= finanzasService.ConsultaBene_PorAfiliado(idAfiliado, idBeneficiario);
+	        
+	        if (idBeneficiario != null){
+	        	auxBeneficiario				= finanzasService.ConsultaBene_PorAfiliado(idAfiliado, Long.valueOf(idBeneficiario));
+	        }else{
+	        	System.out.println("Por No. de Solucion"+ noSolucion);
+	        	auxBeneficiario				= finanzasService.ConsultaBene_PorNoSolucion(noSolucion);
+	        }
 	        auxPersonal 				= finanzasService.GetPersonalAfiliado(idAfiliado);
 	        
 	        OutputStream out 			= response.getOutputStream();
@@ -75,7 +82,7 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		        try {
 		            Document document 	= new Document(PageSize.LETTER,5,5,5,35);
 		            final PdfWriter write = PdfWriter.getInstance(document, out);
-		            write.setPageEvent(new PageStamper(auxBeneficiario.getSolucion().getNumeroSolucion()));
+		            write.setPageEvent(new PageStamper("Solución No. "+auxBeneficiario.getSolucion().getNumeroSolucion()));
 		            
 		            Image image1 		= null ;
 		            
@@ -137,7 +144,7 @@ public class FinanGenerarPdfReporteRecord extends HttpServlet{
 		            //Tabla del vale
 		            PdfPTable table 	= new PdfPTable(9);
 		        	PdfPCell c1;
-		        	c1 = new PdfPCell(new Phrase("Codigo",catFont4));
+		        	c1 = new PdfPCell(new Phrase("Codigo Material",catFont4));
 		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont4));

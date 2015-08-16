@@ -40,6 +40,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle;
+import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -57,7 +58,7 @@ public class ReporteRecordSoluciones extends Composite   {
     private Label lbDato1;
     private Image Busqueda;
     private SuggestBox txtDato1;
-    private  ListBox listEstado ;
+    private  TextBox listEstado ;
     private AbsolutePanel absolutePanel;
 	public List <AuxBDPuesto> BDpuestos = new ArrayList<AuxBDPuesto>();	
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
@@ -93,7 +94,7 @@ public class ReporteRecordSoluciones extends Composite   {
 		
 		listBox = new ListBox();
 		listBox.addItem("Beneficiario");
-		//listBox.addItem("Afiliado");
+		listBox.addItem("No. Solución");
 		//listBox.addItem("General");
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
@@ -106,37 +107,18 @@ public class ReporteRecordSoluciones extends Composite   {
 					
 					txtDato1.setVisible(true);
 					listEstado.setVisible(false);
+					txtDato1.setText("");
 					//absolutePanel.add(Busqueda, 420, 19);
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("General"))
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("No. Solución"))
 				{
-					lbDato1.setText("Escriba los nombres:");
-
-					lbDato1.setVisible(false);
-					
-					txtDato1.setVisible(false);
-					listEstado.setVisible(false);
-
-					//grid.clearCell(1, 0);
-//					agregarFormulario('2',txtDato1.getText(), "","", 
-//							"",txtDato1.getText(),txtDato1.getText()
-//							,"");
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
-				{
-
-					listEstado.clear();
-					listEstado.addItem("seleccione un afiliado","0");
-				    for (AuxAfiliado p : BDAfiliados) 
-				    {
-				    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
-				    }
-					lbDato1.setText("Seleccione el Afiliado");
+					lbDato1.setText("Escriba el No. de Solución");
 
 					lbDato1.setVisible(true);
 					
 					txtDato1.setVisible(false);
 					listEstado.setVisible(true);
-					//absolutePanel.add(Busqueda, 390, 19);
-			        load.invisible();
+					txtDato1.setText("");
+					//absolutePanel.add(Busqueda, 420, 19);
 				}
 			}	
 		});
@@ -188,12 +170,7 @@ public class ReporteRecordSoluciones extends Composite   {
 		absolutePanel.add(txtDato1, 205, 19);
 		txtDato1.setSize("250px", "34px");
 		
-		listEstado = new ListBox();
-		listEstado.addItem("empleado activo","0");
-		listEstado.addItem("empleado inactivo","1");
-		listEstado.addItem("posible empleado","2");
-		listEstado.addItem("practicante","3");
-		listEstado.addItem("interino","4");
+		listEstado = new TextBox();
 		listEstado.setStyleName("gwt-TextBox2");
 		listEstado.setVisible(false);
 		absolutePanel.add(listEstado, 205, 16);
@@ -220,9 +197,9 @@ public class ReporteRecordSoluciones extends Composite   {
 				{
 					BuscarGeneral();
 					
-				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("Afiliado"))
+				}else if(listBox.getItemText(listBox.getSelectedIndex()).equals("No. Solución"))
 				{
-					BuscarAfiliado();
+					BuscarNoSolucion();
 				}
 				
 			}
@@ -292,31 +269,13 @@ public class ReporteRecordSoluciones extends Composite   {
 	}
 	
 	public void BuscarGeneral(){
-		System.out.println("General");
-		loginService.Consulta_SolucionesGenerales(new AsyncCallback<List<AuxSolucion>>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onSuccess(List<AuxSolucion> result) {
-				// TODO Auto-generated method stub
-				for (Double cantidad : result.get(0).getCostoProducto()){
-					System.out.println("la cantidad es:"+ cantidad);
-				}
-				e = new TablaGWT_SolucionGeneral(result);
-				grid.setWidget(1, 0,e);
-				e.setSize("1700px", "300px");
-				
-			}
-		});
 	}
 	
-	public void BuscarAfiliado(){
-		System.out.println("Afiliado");
+	public void BuscarNoSolucion(){
+		System.out.println("No. Solucion");
+		String noSolucion = listEstado.getText();
+		Window.open("/FinanGenerarPdfReporteRecord?noSolucion="+noSolucion, "_blank", "");
 	}
 
 	

@@ -74,7 +74,8 @@ public class FinanGenerarPdfVale extends HttpServlet{
 	       
 		        try {
 		            Document document 	= new Document(PageSize.LETTER,5,5,5,5);
-		            PdfWriter.getInstance(document, out);
+		            final PdfWriter write = PdfWriter.getInstance(document, out);
+		            write.setPageEvent(new PageStamper(auxBeneficiario.getNomBeneficiario()));
 		            Image image1 		= null ;
 		            
 	            	image1 			= Image.getInstance("images/imagenempresa.png");
@@ -148,7 +149,7 @@ public class FinanGenerarPdfVale extends HttpServlet{
 		            //Tabla del vale
 		            PdfPTable table 	= new PdfPTable(7);
 		        	PdfPCell c1;
-		        	c1 = new PdfPCell(new Phrase("Codigo",catFont2));
+		        	c1 = new PdfPCell(new Phrase("Codigo Material",catFont2));
 		            c1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		           table.addCell(c1);
 		           c1 = new PdfPCell(new Phrase("Nombre Material Costrucción",catFont2));

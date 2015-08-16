@@ -998,7 +998,7 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		listDeptoDireccionActual.setSize("130px", "27px");
 		
 		listMunicipioDireccionActual = new ListBox();
-		listMunicipioDireccionActual.addItem("-","-1");
+		listMunicipioDireccionActual.addItem("[-]","0");
 		listMunicipioDireccionActual.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listMunicipioDireccionActual, 982, 246);
 		listMunicipioDireccionActual.setSize("130px", "27px");
@@ -1016,8 +1016,6 @@ public class Sce_DataFormularioSolicitud extends Composite {
 		        	listMunicipioDireccionSolucion.addItem(numerosComoArray[i],String.valueOf(correlativo));
 		        	correlativo++;
 		        }
-
-		        listMunicipioDireccionSolucion.setSelectedIndex(2);
 			}
 		});
 		listDeptoDireccionSolucion.addItem("Guatemala","01");

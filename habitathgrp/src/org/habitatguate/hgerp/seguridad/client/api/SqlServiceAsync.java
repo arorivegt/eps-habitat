@@ -203,6 +203,8 @@ public interface SqlServiceAsync {
 			 int tiempoMaximo,
 			 Date fechaIngreso
 			,Long idAfiliado,
+			 String KeyFileRTU,
+			 String URLRTU,
 			AsyncCallback<Long> callback);
 
 	void Insertar_ValePagado(Long idHistorialPagoProv, String idVale,Double totalPago,
@@ -310,7 +312,7 @@ public interface SqlServiceAsync {
 			String trimestre, int anio,
 			AsyncCallback<List<AuxValeBeneficiario>> callback);
 
-	void GenerarIdVale2(AsyncCallback<String> callback);
+	void GenerarIdVale2(Long idAfiliado,AsyncCallback<String> callback);
 
 	void Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
@@ -428,6 +430,27 @@ public interface SqlServiceAsync {
 	void Consulta_ComparativoPlaniEjecucionTipoSolucion(String tipoSolucion,
 			String anio, String anioFin,
 			AsyncCallback<List<AuxSolucion>> callback);
+
+	void ConsultaBene_PorNoSolucion(String noSolucion,
+			AsyncCallback<AuxBeneficiario> callback);
+
+	void Consulta_SolucionesGeneralesGenerica(String idAfiliado, String anio,
+			String anioFin, double minimo, double maximos, String filter,
+			AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComparativoPlaniEjecucionGenerica(String idAfiliado,
+			String anio, String anioFin, double minimo, double maximos,
+			String filter, AsyncCallback<List<AuxSolucion>> callback);
+
+	void Consulta_ComprasProvGenerica2(String idAfiliado, String filter,
+			String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange,
+			AsyncCallback<List<AuxValeBeneficiario>> callback);
+
+	void Actualizar_ProveedorInactivo(Long id, Long idAfiliado, String motivo,
+			AsyncCallback<Long> callback);
+
+	void Actualizar_ProveedorConvenio(Long id, Long idAfiliado, String KeyFile,
+			String URLFile, AsyncCallback<Long> callback);
 
 
 

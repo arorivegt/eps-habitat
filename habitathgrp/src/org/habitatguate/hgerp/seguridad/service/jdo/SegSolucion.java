@@ -52,6 +52,10 @@ public class SegSolucion implements Serializable{
 	@Persistent
 	private int numeroSolucion;
 	@Persistent
+	private String departamentoSolucion;
+	@Persistent
+	private String municipioSolucion;
+	@Persistent
 	@Unowned
 	private SegBeneficiario beneficiario;
 	@Persistent(mappedBy = "solucion")
@@ -258,6 +262,38 @@ public class SegSolucion implements Serializable{
 	public void setNumeroSolucion(int numeroSolucion) {
 		this.numeroSolucion = numeroSolucion;
 	}
+
+
+
+
+	public String getDepartamentoSolucion() {
+		return departamentoSolucion;
+	}
+
+
+
+
+	public void setDepartamentoSolucion(String departamentoSolucion) {
+		this.departamentoSolucion = departamentoSolucion;
+	}
+
+
+
+
+	public String getMunicipioSolucion() {
+		return municipioSolucion;
+	}
+
+
+
+
+	public void setMunicipioSolucion(String municipioSolucion) {
+		this.municipioSolucion = municipioSolucion;
+	}
+	
+	
+	
+	
 
 	
 	

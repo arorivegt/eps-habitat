@@ -10,6 +10,10 @@ public class AuxValeBeneficiario implements IsSerializable{
 	AuxVale vale;
 	
 	AuxProveedor proveedor;
+	
+	AuxMaterialCostruccion materialCostruccion;
+	
+	AuxSolucion solucion;
 
 	
 	
@@ -36,6 +40,25 @@ public class AuxValeBeneficiario implements IsSerializable{
 	public void setVale(AuxVale vale) {
 		this.vale = vale;
 	}
+
+	public AuxMaterialCostruccion getMaterialCostruccion() {
+		return materialCostruccion;
+	}
+
+	public void setMaterialCostruccion(AuxMaterialCostruccion materialCostruccion) {
+		this.materialCostruccion = materialCostruccion;
+	}
+
+	public AuxSolucion getSolucion() {
+		return solucion;
+	}
+
+	public void setSolucion(AuxSolucion solucion) {
+		this.solucion = solucion;
+	}
+	
+	
+	
 	
 	
 }

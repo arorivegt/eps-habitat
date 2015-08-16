@@ -8,17 +8,19 @@ import java.util.Set;
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
-import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetallePlantillaSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.seguridad.client.finanzas.PagingDataGrid_MaterialCostruccion.TablaResources;
 
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
+import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.cellview.client.SimplePager;
 import com.google.gwt.user.cellview.client.SimplePager.TextLocation;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockPanel;
@@ -27,55 +29,39 @@ import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.MultiSelectionModel;
 import com.google.gwt.view.client.ProvidesKey;
+import com.google.gwt.view.client.SingleSelectionModel;
 
  
 /**
  * Clase abstracta PaggingDataGrid para establecer la simple pagina inicial del DataGrid  con ListDataProvider
  * 
  */
-public abstract class PagingDataGrid_SolucionGeneral<T> extends Composite {
+public abstract class PagingDataGrid_ReporteCompras<T> extends Composite {
  
-    private DataGrid<T> dataGrid;
+    public DataGrid<T> dataGrid;
     private SimplePager pager;
     private String height;
     private ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
-	private Button botonEliminar;
-	//private Button botonRefresh;
+	//private Button botonEliminar;
     final MultiSelectionModel<T> selectionModel =
-            new MultiSelectionModel<T>((ProvidesKey<T>)AuxSolucion.KEY_PROVIDER);
+            new MultiSelectionModel<T>();
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
 	Iterator<T> iter = null;
 	T objectoEliminado = null;
-	
-
-    public PagingDataGrid_SolucionGeneral(List<T> dataList) {
-    	this.dataList = dataList;
-    	MyPaginationDataGrid_SolucionGeneral.actual = 0;
-    	if (!dataList.isEmpty()){
-    	MyPaginationDataGrid_SolucionGeneral.cantProduct = ((AuxSolucion)dataList.get(0)).getCostoProducto().size();
-    	MyPaginationDataGrid_SolucionGeneral.namesColumns = ((AuxSolucion)dataList.get(0)).getNombreProducto();
-    	int plani = ((AuxSolucion)dataList.get(0)).getCostoProductoPlani().size();
-    	if (plani > 0){
-    		MyPaginationDataGrid_SolucionGeneral.showplani = true;
-    	}else{
-    		MyPaginationDataGrid_SolucionGeneral.showplani = false;
-    	}
-    	}
-    	
+    public PagingDataGrid_ReporteCompras() {
         initWidget(dock);
-        dataGrid = new DataGrid<T>(dataList.size(),
+        dataGrid = new DataGrid<T>(30,
                 GWT.<TablaResources> create(TablaResources.class));
-        dataGrid.setWidth("100%");
+    //    dataGrid.setWidth("100%");
+        dataGrid.setSize("1100px", "300px");
 
         SimplePager.Resources pagerResources = GWT
                 .create(SimplePager.Resources.class);
         pager = new SimplePager(TextLocation.CENTER, pagerResources, false, 0,
                 true);
         pager.setDisplay(dataGrid);
-
-        
         
         dataProvider = new ListDataProvider<T>();
         dataProvider.setList(new ArrayList<T>());
@@ -83,27 +69,25 @@ public abstract class PagingDataGrid_SolucionGeneral<T> extends Composite {
         ListHandler<T> sortHandler = new ListHandler<T>(dataProvider.getList());
         dataGrid.setSelectionModel(selectionModel, DefaultSelectionEventManager
                 .<T> createCheckboxManager());
-        
-        List<T> list = dataProvider.getList();
-        list.addAll(this.dataList);
-        dataProvider.refresh();
-        
         initTableColumns(dataGrid, sortHandler);
  
         dataGrid.addColumnSortHandler(sortHandler);
  
         dataProvider.addDataDisplay(dataGrid);
         
-       
+        //botonEliminar = new Button("Eliminar Fila");
+        
         pager.setVisible(true);
         dataGrid.setVisible(true);
+       // botonEliminar.setVisible(true);
         dock.add(dataGrid, DockPanel.CENTER);
         dock.add(pager, DockPanel.SOUTH);
         dock.setWidth("100%");
         dock.setCellWidth(dataGrid, "100%");
         dock.setCellWidth(pager, "100%");
-      //  dock.add(botonRefresh,DockPanel.EAST);
-       
+        
+
+
     }
  
     public void setEmptyTableWidget() {
@@ -151,11 +135,37 @@ public abstract class PagingDataGrid_SolucionGeneral<T> extends Composite {
     public void setDataProvider(ListDataProvider<T> dataProvider) {
         this.dataProvider = dataProvider;
     }
-    public interface TablaResources extends DataGrid.Resources {
-    	  @Override
-    	    @Source(value = {DataGrid.Style.DEFAULT_CSS, "DataGrid2.css"})
-    	    DataGrid.Style dataGridStyle();
-      }
-
     
+    public void NuevoMaterial(AuxVale nuevo){
+
+    	dataProvider.getList().add((T) nuevo);
+    }
+    
+    public List<T> getListMateriales(){
+    	return this.dataProvider.getList();
+    }
+    
+    
+    public void EliminarFila(){
+    	Set<T> lista = selectionModel.getSelectedSet();
+    	iter = (Iterator<T>) lista.iterator();
+			while (iter.hasNext()){
+					objectoEliminado = iter.next();	
+         			dataProvider.getList().remove(objectoEliminado);
+
+			}
+    }
+    
+ /*   public Double ActualizarTabla(){
+    	Double total = 0.0;
+    	Iterator<T> lista = dataProvider.getList().iterator();
+    		while (lista.hasNext()){
+    				AuxDetallePlantillaSolucion aux = (AuxDetallePlantillaSolucion)lista.next();
+    				total = total + aux.getSubTotal();
+    				aux.setCostoAcumulado(total);
+    		}
+    		dataProvider.refresh();
+    	return total;
+    }*/
+ 
 }

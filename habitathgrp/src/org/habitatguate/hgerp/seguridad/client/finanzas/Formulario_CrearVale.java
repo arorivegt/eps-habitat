@@ -82,7 +82,7 @@ public class Formulario_CrearVale extends Composite {
 						if (!result.isEmpty()){
 							for (AuxBeneficiario p : result){
 								bene.add(new BeneMultiWordSuggestion(p));
-								System.out.println(p.getNomBeneficiario());
+								System.out.println("Datos beneficiario:"+p.getNomBeneficiario()+" datos afiliado:"+p.getAfiliado().getIdAfiliado());
 							}
 						}else
 						{
@@ -338,6 +338,25 @@ public class Formulario_CrearVale extends Composite {
 					
 				}
 				valueListBox.setAcceptableValues(listaProveedor);
+				
+				System.out.println("Afiliado del beneficiario Selecccionado:"+ selectNuevoBene.getAfiliado().getIdAfiliado());
+				
+				loginService.GenerarIdVale2(selectNuevoBene.getAfiliado().getIdAfiliado(),new AsyncCallback<String>() {
+					
+					@Override
+					public void onSuccess(String result) {
+						// TODO Auto-generated method stub
+						textBox_2.setText(result);
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+						
+					}
+				});
+				
+				
 			}
 
 		});
@@ -345,20 +364,7 @@ public class Formulario_CrearVale extends Composite {
 		grid.setWidget(1, 0,e);
 		e.setSize("700px", "300px"); 
 		
-		loginService.GenerarIdVale2(new AsyncCallback<String>() {
-			
-			@Override
-			public void onSuccess(String result) {
-				// TODO Auto-generated method stub
-				textBox_2.setText(result);
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+
 		
 
 

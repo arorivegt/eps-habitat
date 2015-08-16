@@ -55,6 +55,10 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	
 	private int numeroSolucion;
 	
+	private String departamentoSolucion;
+	
+	private String municipioSolucion;
+	
 	private ArrayList<AuxDetalleSolucion> lista = new ArrayList<AuxDetalleSolucion>();
 	
 	private ArrayList<String> nombreProducto = new ArrayList<String>();
@@ -275,6 +279,24 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	public void setCostoTotalPlani(double costoTotalPlani) {
 		this.costoTotalPlani = costoTotalPlani;
 	}
+
+	public String getDepartamentoSolucion() {
+		return departamentoSolucion;
+	}
+
+	public void setDepartamentoSolucion(String departamentoSolucion) {
+		this.departamentoSolucion = departamentoSolucion;
+	}
+
+	public String getMunicipioSolucion() {
+		return municipioSolucion;
+	}
+
+	public void setMunicipioSolucion(String municipioSolucion) {
+		this.municipioSolucion = municipioSolucion;
+	}
+	
+	
 	
 	
 	

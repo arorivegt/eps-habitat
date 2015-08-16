@@ -37,7 +37,7 @@ public abstract class PagingDataGrid_Proveedor<T> extends Composite {
     private DataGrid<T> dataGrid;
     private SimplePager pager;
     private String height;
-    private ListDataProvider<T> dataProvider;
+    public ListDataProvider<T> dataProvider;
     private List<T> dataList;
     private DockPanel dock = new DockPanel();
 //	private Button botonEliminar;

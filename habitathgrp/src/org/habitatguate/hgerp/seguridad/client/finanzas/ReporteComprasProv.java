@@ -19,8 +19,10 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxTipoSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
 import org.habitatguate.hgerp.seguridad.client.principal.Mensaje;
 
@@ -48,12 +50,14 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.datepicker.client.DateBox;
 
-public class ReporteResumenCréditos extends Composite   {
+public class ReporteComprasProv extends Composite   {
 
 	private Mensaje mensaje; 
     private  Grid grid;
@@ -63,7 +67,6 @@ public class ReporteResumenCréditos extends Composite   {
     private Label lbDato2;
     private Image Busqueda;
     private TextBox txt1;
-    private TextBox txt2;
     private SuggestBox txtDato1;
     private  ListBox listEstado ;
     private DateBox dateBox;
@@ -74,9 +77,10 @@ public class ReporteResumenCréditos extends Composite   {
     private Loading load ;
 	private AbsolutePanel absolutePanel_1;
 	private Label lblSeleccioneLosEmpleados;
+	private SimpleCheckBox simpleCheckBox;
 	
 	private long idBeneficiario;
-	TablaGWT_SolucionGeneral e = null;
+	TablaGWT_ReporteCompras e = null;
 	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
@@ -88,14 +92,13 @@ public class ReporteResumenCréditos extends Composite   {
     private Label lblAlAo;
     private Label lblSeleccioneDepartamento;
     private ListBox listBox_2;
-    private Label lblMunicipio;
-    private ListBox listBox_3;
     private Button button_1;
+    private Label lblRangoDeFechas;
     
     /**
      * constructor
      */
-	public ReporteResumenCréditos() {
+	public ReporteComprasProv() {
 
     	load = new Loading();
         load.Mostrar();
@@ -115,18 +118,16 @@ public class ReporteResumenCréditos extends Composite   {
 
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
-		absolutePanel.add(formPanel, 420, 21);
+		absolutePanel.add(formPanel, 959, 22);
         formPanel.setSize("209px", "44px");
 		
 		bene = new BeneNameSuggestOracle();
 		
 		listBox = new ListBox();
 		listBox.addItem("Seleccione Criterio");
-		listBox.addItem("Afiliado");
-		listBox.addItem("Trimestre y Año");
-		listBox.addItem("Rango de Monto Ejecutado");
-		listBox.addItem("Tipo de Solución");
-		listBox.addItem("General");
+		listBox.addItem("Por Filtros");
+		listBox.addItem("Beneficiario");
+		listBox.addItem("No. Vale");
 		listBox.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
 
@@ -196,7 +197,9 @@ public class ReporteResumenCréditos extends Composite   {
 		txtDato1.setSize("177px", "25px");
 		
 		listEstado = new ListBox();
-		listEstado.addItem("Todos los Tipos","0");
+		listEstado.addItem("[Seleccione Estado]","-1");
+		listEstado.addItem("Aprobado","1");
+		listEstado.addItem("Sin Aprobar","0");
 		listEstado.setStyleName("gwt-TextBox2");
 		absolutePanel.add(listEstado, 205, 65);
 		listEstado.setSize("179px", "30px");
@@ -204,7 +207,7 @@ public class ReporteResumenCréditos extends Composite   {
 		
 		listaTrimestre = new ListBox();
 		listaTrimestre.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listaTrimestre, 401, 16);
+		absolutePanel.add(listaTrimestre, 401, 22);
 		listaTrimestre.setSize("168px", "23px");
 		listaTrimestre.addItem("Todos los Trimestres", "0");
 		listaTrimestre.addItem("Enero a Marzo", "1");
@@ -214,15 +217,15 @@ public class ReporteResumenCréditos extends Composite   {
 		
 		
 		lbDato2 = new Label();
-		lbDato2.setText("Buscar por Rango Montos");
+		lbDato2.setText("Año");
 		
 		lbDato2.setStyleName("label");
-		absolutePanel.add(lbDato2, 575, 12);
-		lbDato2.setSize("146px", "27px");
+		absolutePanel.add(lbDato2, 587, 0);
+		lbDato2.setSize("32px", "19px");
 		
 		dateBox = new DateBox();
 		dateBox.setFormat(new DateBox.DefaultFormat 
-        		(DateTimeFormat.getFormat("yyyy")));
+        		(DateTimeFormat.getFormat("dd/MM/yyyy")));
         dateBox.setValue(new Date());
         dateBox.getTextBox().setReadOnly(true);
         dateBox.setFireNullValues(true);
@@ -231,25 +234,19 @@ public class ReporteResumenCréditos extends Composite   {
         dateBox.getDatePicker().setVisibleYearCount(100);
         dateBox.getDatePicker().setYearArrowsVisible(true);
         dateBox.getDatePicker().setYearAndMonthDropdownVisible(true);
+        dateBox.setVisible(false);
 		
         
-		absolutePanel.add(dateBox, 401, 68);
-		dateBox.setSize("56px", "25px");
+		absolutePanel.add(dateBox, 575, 68);
+		dateBox.setSize("83px", "25px");
 		
 		
 		txt1 = new TextBox();
 		txt1.setStylePrimaryName("gwt-TextBox2");
 		txt1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txt1, 585, 43);
-		txt1.setSize("131px", "21px");
-		txt1.getElement().setAttribute("placeHolder", "Monto Mínimo");
+		absolutePanel.add(txt1, 586, 22);
+		txt1.setSize("44px", "21px");
 		
-		txt2 = new TextBox();
-		txt2.setStylePrimaryName("gwt-TextBox2");
-		txt2.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txt2, 585, 72);
-		txt2.setSize("131px", "21px");
-		txt2.getElement().setAttribute("placeHolder", "Monto Máximo");
 		
 		lbDato1 = new Label("Seleccione Trimestre");
 		lbDato1.setStyleName("label");
@@ -297,19 +294,7 @@ public class ReporteResumenCréditos extends Composite   {
 		absolutePanel.add(lblSeleccioneLosEmpleados, 800, 5);
 		lblSeleccioneLosEmpleados.setSize("828px", "13px");*/
 		
-		Button button = new Button("Send");
-		button.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				List<AuxSolucion> total= new ArrayList<AuxSolucion>(e.grid.selectionModel.getSelectedSet());
-				Long idBeneficiario = total.get(0).getBeneficiario().getIdBeneficiario();
-				Window.open("/FinanGenerarPdfReporteRecord?idBeneficiario="+idBeneficiario, "_blank", "");
-			}
-		});		
 
-		button.setText("Imprimir Record");
-		button.setStyleName("finanButton");
-		absolutePanel.add(button, 1019, 53);
-		button.setSize("157px", "30px");
 		
 		lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
@@ -321,36 +306,37 @@ public class ReporteResumenCréditos extends Composite   {
 		absolutePanel.add(listBox_1, 10, 72);
 		listBox_1.setSize("179px", "23px");
 		
-		lblTipoSolucin = new Label("Tipo Solución");
+		lblTipoSolucin = new Label("Estado Compra");
 		lblTipoSolucin.setStyleName("label");
 		absolutePanel.add(lblTipoSolucin, 205, 46);
 		lblTipoSolucin.setSize("179px", "13px");
 		
-		lblAo = new Label("Del Año");
+		lblAo = new Label("Desde");
 		lblAo.setStyleName("label");
-		absolutePanel.add(lblAo, 400, 52);
-		lblAo.setSize("59px", "13px");
+		absolutePanel.add(lblAo, 582, 51);
+		lblAo.setSize("121px", "14px");
 		
 		dateBox_1 = new DateBox();
 		dateBox_1.setFormat(new DateBox.DefaultFormat 
-        		(DateTimeFormat.getFormat("yyyy")));
+        		(DateTimeFormat.getFormat("dd/MM/yyyy")));
         dateBox_1.setValue(new Date());
         dateBox_1.getTextBox().setReadOnly(true);
         dateBox_1.setFireNullValues(true);
         dateBox_1.setStyleName("gwt-PasswordTextBox");
+        dateBox_1.setVisible(false);
         
         dateBox_1.getDatePicker().setVisibleYearCount(100);
         dateBox_1.getDatePicker().setYearArrowsVisible(true);
         dateBox_1.getDatePicker().setYearAndMonthDropdownVisible(true);
-		absolutePanel.add(dateBox_1, 484, 68);
-		dateBox_1.setSize("56px", "25px");
+		absolutePanel.add(dateBox_1, 666, 67);
+		dateBox_1.setSize("83px", "25px");
 		
-		lblAlAo = new Label("Al Año");
+		lblAlAo = new Label("Hasta");
 		lblAlAo.setStyleName("label");
-		absolutePanel.add(lblAlAo, 483, 52);
+		absolutePanel.add(lblAlAo, 666, 52);
 		lblAlAo.setSize("59px", "13px");
 		
-		lblSeleccioneDepartamento = new Label("Departamento");
+		lblSeleccioneDepartamento = new Label("Proveedor");
 		lblSeleccioneDepartamento.setStyleName("label");
 		absolutePanel.add(lblSeleccioneDepartamento, 727, 0);
 		lblSeleccioneDepartamento.setSize("168px", "19px");
@@ -361,55 +347,15 @@ public class ReporteResumenCréditos extends Composite   {
 		listBox_2.setSize("168px", "23px");
 		
 		listBox_2.addItem("[Todos]","0");
-		listBox_2.addItem("Guatemala","01");
-		listBox_2.addItem("Baja Verapaz","15");
-		listBox_2.addItem("Alta Verapaz","16");
-		listBox_2.addItem("El Progreso","02");
-		listBox_2.addItem("Izabal","18");
-		listBox_2.addItem("Zacapa","19");
-		listBox_2.addItem("Chiquimula","20");
-		listBox_2.addItem("Santa Rosa","06");
-		listBox_2.addItem("Jalapa","21");
-		listBox_2.addItem("Jutiapa","22");
-		listBox_2.addItem("Sacatepequez","03");
-		listBox_2.addItem("Chimaltenango","04");
-		listBox_2.addItem("Escuintla","05");
-		listBox_2.addItem("Solola","07");
-		listBox_2.addItem("Totonicapan","08");
-		listBox_2.addItem("Quezaltenango","09");
-		listBox_2.addItem("Suchitepequez","10");
-		listBox_2.addItem("Retalhuleu","11");
-		listBox_2.addItem("San Marcos","12");
-		listBox_2.addItem("Huehuetenango","13");
-		listBox_2.addItem("Quiche","14");
-		listBox_2.addItem("Peten","17");
+		
 		
 		
 		listBox_2.addChangeHandler(new ChangeHandler() {
 			public void onChange(ChangeEvent event) {
-				listBox_3.clear();
-				listBox_3.addItem("[Todos]","0");
-		        String[] numerosComoArray = Depto_Municipio(listBox_2.getItemText(listBox_2.getSelectedIndex())).split(",");
-		        int correlativo = Integer.parseInt(listBox_2.getValue(listBox_2.getSelectedIndex())+"01");
-		        for (int i = 1; i < numerosComoArray.length; i++) {
-		        	listBox_3.addItem(numerosComoArray[i],String.valueOf(correlativo));
-		        	correlativo++;
-		        }
+
 
 			}
 		});
-		
-		lblMunicipio = new Label("Municipio");
-		lblMunicipio.setStyleName("label");
-		absolutePanel.add(lblMunicipio, 724, 43);
-		lblMunicipio.setSize("168px", "19px");
-		
-		
-		listBox_3 = new ListBox();
-		listBox_3.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_3, 724, 59);
-		listBox_3.setSize("168px", "23px");
-		listBox_3.addItem("[Todos]","0");
 		
 		
 		
@@ -419,6 +365,37 @@ public class ReporteResumenCréditos extends Composite   {
 		button_1.setStyleName("finanButton");
 		absolutePanel.add(button_1, 1019, 16);
 		button_1.setSize("157px", "30px");
+		
+		lblRangoDeFechas = new Label("Rango de Fechas");
+		lblRangoDeFechas.setStyleName("label");
+		absolutePanel.add(lblRangoDeFechas, 401, 51);
+		lblRangoDeFechas.setSize("168px", "19px");
+		
+		simpleCheckBox = new SimpleCheckBox();
+		absolutePanel.add(simpleCheckBox, 471, 72);
+		
+		
+		simpleCheckBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
+			   @Override
+			   public void onValueChange(ValueChangeEvent<Boolean> event) {
+				   System.out.println(event.getValue());
+				   if (event.getValue()){
+					   dateBox.setVisible(true);
+					   dateBox_1.setVisible(true);
+					   txt1.setVisible(false);
+					   txt1.setText("");
+					   
+				   }else{
+					   dateBox.setVisible(false);
+					   dateBox_1.setVisible(false);
+					   txt1.setVisible(true);
+				   }
+			   }
+
+
+		});
+		
+		
 		
 		button_1.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -432,7 +409,7 @@ public class ReporteResumenCréditos extends Composite   {
 				String anio = dateBox.getTextBox().getText();
 				String anioFin = dateBox_1.getTextBox().getText();
 				String montoMin = txt1.getText().equals("") ? "0.0" : txt1.getText();
-				String montoMax = txt2.getText().equals("") ? "0.0" : txt2.getText();
+/*				String montoMax = txt2.getText().equals("") ? "0.0" : txt2.getText();
 				
 				
 				String codDep = listBox_2.getValue(listBox_2.getSelectedIndex());
@@ -444,7 +421,7 @@ public class ReporteResumenCréditos extends Composite   {
 				System.out.println("el filtro quedo: "+filter );
 				
 				formPanel.setAction("/ExportResumenCreditos?idAfiliado="+idAfiliado+"&tipoSolucion="+tipoSolucion+"&trimestre="+trimestre+"&anio="+anio+"&anioFin="+anioFin+"&montoMin="+montoMin+"&montoMax="+montoMax+"&codDep="+codDep+"&codMun="+codMun+"&tipoConsulta=1");
-				formPanel.submit();
+				formPanel.submit();*/
 			}
 		});
 
@@ -467,14 +444,15 @@ public class ReporteResumenCréditos extends Composite   {
 		    }
 		});
 		
-		loginService.Consultar_TipoSolucion(new AsyncCallback<List<AuxTipoSolucion>>() {
+		
+		loginService.ConsultaTodosProveedor_PorAfiliadoAprobados(0L,new AsyncCallback<List<AuxProveedor>>() {
 			
 			@Override
-			public void onSuccess(List<AuxTipoSolucion> result) {
-				listEstado.addItem("CASA COMPLETA","CASA COMPLETA");
-				for (AuxTipoSolucion p : result) 
+			public void onSuccess(List<AuxProveedor> result) {
+				System.out.println("ya estan todos los afiliados");			
+				for (AuxProveedor p : result) 
 			    {
-			    	listEstado.addItem(p.getIdTipoSolucion(),p.getIdTipoSolucion());
+			    	listBox_2.addItem(p.getNomProveedor(),""+p.getIdProveedor());
 			    }
 				
 			}
@@ -485,6 +463,7 @@ public class ReporteResumenCréditos extends Composite   {
 				
 			}
 		});
+		
 		initWidget(grid);
 		
 		absolutePanel_1 = new AbsolutePanel();
@@ -511,513 +490,45 @@ public class ReporteResumenCréditos extends Composite   {
 		String filter = "";
 		
 		String idAfiliado = listBox_1.getValue(listBox_1.getSelectedIndex());
-		String tipoSolucion = listEstado.getValue(listEstado.getSelectedIndex());
+		String estado = listEstado.getValue(listEstado.getSelectedIndex());
 		String trimestre = listaTrimestre.getValue(listaTrimestre.getSelectedIndex());
-		String anio = dateBox.getTextBox().getText();
-		String anioFin = dateBox_1.getTextBox().getText();
-		String montoMin = txt1.getText().equals("") ? "0.0" : txt1.getText();
-		String montoMax = txt2.getText().equals("") ? "0.0" : txt2.getText();
+		String fechaInicio = dateBox.getTextBox().getText();
+		String fechaFIn = dateBox_1.getTextBox().getText();
+		String anio = txt1.getText().equals("") ? "0" : txt1.getText();
+		String idProveedor = listBox_2.getValue(listBox_2.getSelectedIndex());
+		boolean checkRange =  simpleCheckBox.getValue();	
 		
-		double montoFinal = Double.valueOf(montoMax)-Double.valueOf(montoMin);
+		System.out.println("fecha ini"+fechaInicio+" fin: "+fechaFIn+" check"+checkRange+" estado"+estado+ " los valores de la siguiente: "+ idAfiliado + " "+ trimestre + " "+anio + " "+idProveedor);
 		
-		String codDep = listBox_2.getValue(listBox_2.getSelectedIndex());
-		String codMun = listBox_3.getValue(listBox_3.getSelectedIndex());
-		
-		if (!tipoSolucion.equals("0")){
-			filter = filter + " && disenio =='"+tipoSolucion+"' ";
+		loginService.Consulta_ComprasProvGenerica2(idAfiliado, filter, idProveedor, anio, trimestre,fechaInicio,fechaFIn,estado,checkRange, new AsyncCallback<List<AuxValeBeneficiario> >() {
 			
-		}
-		if (!trimestre.equals("0")){
-			filter = filter + " && trimestre =="+trimestre;
-		}
-		
-		if (!codDep.equals("0") && codMun.equals("0")){
-			filter = filter + " && departamentoSolucion == '"+codDep+"'";
-		}else if (!codDep.equals("0") && !codMun.equals("0")){
-			filter = filter + " && departamentoSolucion == '"+codDep + "' && municipioSolucion == '"+codMun+"'";
-		}
-		
-		
-		System.out.println("el filtro quedo: "+filter );
-		
-		loginService.Consulta_SolucionesGeneralesGenerica(idAfiliado, anio, anioFin, Double.valueOf(montoMin), Double.valueOf(montoMax), filter,new AsyncCallback<List<AuxSolucion>>() {
-
+			@Override
+			public void onSuccess(List<AuxValeBeneficiario>  result) {
+				// TODO Auto-generated method stub
+				System.out.println(result.size());
+				
+				if(!result.isEmpty()){
+					e = new TablaGWT_ReporteCompras(result);
+					grid.setWidget(1, 0,e);
+					e.setSize("1700px", "300px");
+					}else{
+						e = new TablaGWT_ReporteCompras(new ArrayList<AuxValeBeneficiario>());
+						grid.setWidget(1, 0,e);
+						e.setSize("1700px", "300px");
+					}
+			}
+			
 			@Override
 			public void onFailure(Throwable caught) {
 				// TODO Auto-generated method stub
 				
 			}
-
-			@Override
-			public void onSuccess(List<AuxSolucion> result) {
-				// TODO Auto-generated method stub
-				
-				if(!result.isEmpty()){
-				e = new TablaGWT_SolucionGeneral(result);
-				grid.setWidget(1, 0,e);
-				e.setSize("1700px", "300px");
-				}else{
-					e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-				}
-				
-			}
 		});
 		
 		
-		/*if (idAfiliado.equals("0") && tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda solo por añio");
-/*			loginService.Consulta_SolucionesGeneralesPorAnio(anio,anioFin,new AsyncCallback<List<AuxSolucion>>() {
+		
+		
 
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-			
-			loginService.Consulta_SolucionesGeneralesGenerica(idAfiliado, anio, anioFin, Double.valueOf(montoMin), Double.valueOf(montoMax), "",new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-			
-			
-			
-		}else if (!idAfiliado.equals("0") && tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda solo Afiliado");
-			System.out.println("Afiliado: "+ idAfiliado);
-				loginService.Consulta_SolucionesGeneralesAfiliado(Long.valueOf(idAfiliado),anio,anioFin,new AsyncCallback<List<AuxSolucion>>() {
-
-					@Override
-					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override	
-					public void onSuccess(List<AuxSolucion> result) {
-						// TODO Auto-generated method stub
-						
-						if(!result.isEmpty()){
-						e = new TablaGWT_SolucionGeneral(result);
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-						}else{
-							e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-							grid.setWidget(1, 0,e);
-							e.setSize("1700px", "300px");
-						}
-						
-					}
-				});
-			
-		}else if (idAfiliado.equals("0") && !tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda solo TipoSolucion");
-			loginService.Consulta_SolucionesGeneralesTipoSolucion(tipoSolucion,anio,anioFin,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (idAfiliado.equals("0") && tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda por trimestre y año");
-			System.out.println("Trimestre y Año"+ trimestre+ " año" + anio);
-			loginService.Consulta_SolucionesGeneralesOpcion1(anio,trimestre,anioFin,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (idAfiliado.equals("0") && tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda solo por rango de montos");
-			System.out.println("Rango: "+ montoMin+" "+montoMax);
-			loginService.Consulta_SolucionesGeneralesRango(Double.valueOf(montoMin),Double.valueOf(montoMax),anio,anioFin,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && !tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda por afiliado y tipos solucion");
-			loginService.Consulta_SolucionesGeneralesAfiliado_TipoSolucion(Long.valueOf(idAfiliado),anio,anioFin,tipoSolucion,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && !tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda por afiliado y tipos solucion y trimestre");
-			loginService.Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre(Long.valueOf(idAfiliado),anio,anioFin,tipoSolucion,trimestre,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && !tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por afiliado y tipos solucion trimestre y montos ");
-			loginService.Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Trimestre_Montos(Long.valueOf(idAfiliado),anio,anioFin,tipoSolucion,trimestre,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if  (idAfiliado.equals("0") && !tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda por tipos solucion y trimestre");
-			loginService.Consulta_SolucionesGeneralesTrimestre_TipoSolucion(anio,trimestre,anioFin,tipoSolucion,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (idAfiliado.equals("0") && !tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por tipo solucion trimestre y montos");
-			loginService.Consulta_SolucionesGeneralesTrimestre_TipoSolucion_Montos(anio,trimestre,anioFin,tipoSolucion,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (idAfiliado.equals("0") && tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por trimestre y montos");
-			loginService.Consulta_SolucionesGeneralesTrimestre_Montos(anio,trimestre,anioFin,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal == 0.0){
-			System.out.println("Busqueda por trimestre y afiliado");
-			
-			loginService.Consulta_SolucionesGeneralesAfiliado_Trimestre(Long.valueOf(idAfiliado),anio,anioFin,trimestre,new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-
-		}else if (!idAfiliado.equals("0") && tipoSolucion.equals("0") && !trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por trimestre y montos y afiliados ");
-			loginService.Consulta_SolucionesGeneralesAfiliado_Trimestre_Montos(Long.valueOf(idAfiliado),anio,anioFin,trimestre,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && !tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por afiliado tipo solucion y montos");
-			loginService.Consulta_SolucionesGeneralesAfiliado_TipoSolucion_Montos(Long.valueOf(idAfiliado),anio,anioFin,tipoSolucion,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (idAfiliado.equals("0") && !tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por tipo solucion y montos");
-			loginService.Consulta_SolucionesGeneralesTipoSolucion_Montos(anio,tipoSolucion,anioFin,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-		}else if (!idAfiliado.equals("0") && tipoSolucion.equals("0") && trimestre.equals("0") && montoFinal != 0.0){
-			System.out.println("Busqueda por afiliado y montos");
-			loginService.Consulta_SolucionesGeneralesAfiliado_Montos(Long.valueOf(idAfiliado),anio,anioFin,Double.valueOf(montoMin),Double.valueOf(montoMax),new AsyncCallback<List<AuxSolucion>>() {
-
-				@Override
-				public void onFailure(Throwable caught) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override	
-				public void onSuccess(List<AuxSolucion> result) {
-					// TODO Auto-generated method stub
-					
-					if(!result.isEmpty()){
-					e = new TablaGWT_SolucionGeneral(result);
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-					}else{
-						e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-						grid.setWidget(1, 0,e);
-						e.setSize("1700px", "300px");
-					}
-					
-				}
-			});
-
-		}*/
 		
 		
 	}
@@ -1066,15 +577,7 @@ public class ReporteResumenCréditos extends Composite   {
 			public void onSuccess(List<AuxSolucion> result) {
 				// TODO Auto-generated method stub
 				
-				if(!result.isEmpty()){
-				e = new TablaGWT_SolucionGeneral(result);
-				grid.setWidget(1, 0,e);
-				e.setSize("1700px", "300px");
-				}else{
-					e = new TablaGWT_SolucionGeneral(new ArrayList<AuxSolucion>());
-					grid.setWidget(1, 0,e);
-					e.setSize("1700px", "300px");
-				}
+				
 				
 			}
 		});
@@ -1478,9 +981,4 @@ public class ReporteResumenCréditos extends Composite   {
 	
 		return valor;
 	}
-
-	
-	
-
-
 }

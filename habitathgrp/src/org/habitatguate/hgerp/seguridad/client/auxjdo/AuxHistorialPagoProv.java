@@ -39,6 +39,7 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 	private Double valorCancelado;
 	private Double retenidoDonacion;
 	private Double retenidoIva;
+	private String docLegalPago;
 	private Long idProveedor;
 
 	private List<AuxVale> vale;
@@ -172,6 +173,14 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 
 	public void setVale(List<AuxVale> vale) {
 		this.vale = vale;
+	}
+
+	public String getDocLegalPago() {
+		return docLegalPago;
+	}
+
+	public void setDocLegalPago(String docLegalPago) {
+		this.docLegalPago = docLegalPago;
 	}
 
 	

@@ -110,10 +110,10 @@ public class Formulario_InfoProveedor extends Composite{
 	absolutePanel.add(textBox_1, 257, 29);
 	textBox_1.setSize("227px", "34px");
 	
-	Label label_2 = new Label("Telefono Oficina");
-	label_2.setStyleName("label");
-	absolutePanel.add(label_2, 494, 10);
-	label_2.setSize("157px", "19px");
+	Label lblTelfonoYExt = new Label("Teléfono y Ext.");
+	lblTelfonoYExt.setStyleName("label");
+	absolutePanel.add(lblTelfonoYExt, 494, 10);
+	lblTelfonoYExt.setSize("157px", "19px");
 	
 	final TextBox textBox_2 = new TextBox();
 	textBox_2.setStylePrimaryName("gwt-TextBox2");
@@ -157,7 +157,7 @@ public class Formulario_InfoProveedor extends Composite{
 	Button button = new Button("Send");
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			if (!textBox.getText().equals("")){
+			if (!textBox.getText().equals("") && !textBox_1.getText().equals("") && !textBox_2.getText().equals("")){
 
 			loginService.Insertar_ContactoProveedor(idProveedor,textBox.getText(), textBox_1.getText(), textBox_2.getText(), textBox_3.getText(),textBox_4.getText(),idAfiliado,
 					new AsyncCallback<Long>(){
@@ -176,6 +176,7 @@ public class Formulario_InfoProveedor extends Composite{
                 	textBox_1.setText("");
                 	textBox_2.setText("");
                 	textBox_3.setText("");
+                	textBox_4.setText("");
 
                 	
                 }
@@ -228,45 +229,45 @@ public class Formulario_InfoProveedor extends Composite{
 	listTipoTransaccion.setSize("227px", "34px");
 	
 	final ListBox listTipoCuenta = new ListBox();
-	listTipoCuenta.addItem("Ahorro", "Ahorro");
 	listTipoCuenta.addItem("Monetaria", "Monetaria");
+	listTipoCuenta.addItem("Ahorro", "Ahorro");
 	listTipoCuenta.setStyleName("gwt-TextBox2");
 	absolutePanel2.add(listTipoCuenta, 257, 29);
 	listTipoCuenta.setSize("227px", "34px");
 	
 	Label labelBancoCuenta = new Label("Banco Emisor de Cuenta");
 	labelBancoCuenta.setStyleName("label");
-	absolutePanel2.add(labelBancoCuenta, 494, 10);
+	absolutePanel2.add(labelBancoCuenta, 721, 10);
 	labelBancoCuenta.setSize("220px", "19px");
 	
 	final TextBox listBancos = new TextBox();
 	listBancos.setStylePrimaryName("gwt-TextBox2");
 	listBancos.setStyleName("gwt-TextBox2");
-	absolutePanel2.add(listBancos, 494, 29);
+	absolutePanel2.add(listBancos, 721, 27);
 	listBancos.setSize("227px", "34px");
 	
 	final TextBox numeroCuenta = new TextBox();
 	numeroCuenta.setStylePrimaryName("gwt-TextBox2");
 	numeroCuenta.setStyleName("gwt-TextBox2");
 	numeroCuenta.setMaxLength(100);
-	absolutePanel2.add(numeroCuenta, 731, 29);
+	absolutePanel2.add(numeroCuenta, 965, 29);
 	numeroCuenta.setSize("227px", "34px");
 	
 	Label labelNumeroCuenta = new Label("Numero de Cuenta");
 	labelNumeroCuenta.setStyleName("label");
-	absolutePanel2.add(labelNumeroCuenta, 731, 10);
+	absolutePanel2.add(labelNumeroCuenta, 965, 10);
 	labelNumeroCuenta.setSize("157px", "13px");
 	
 	final TextBox titular = new TextBox();
 	titular.setStylePrimaryName("gwt-TextBox2");
 	titular.setStyleName("gwt-TextBox2");
 	titular.setMaxLength(100);
-	absolutePanel2.add(titular, 960, 29);
+	absolutePanel2.add(titular, 490, 27);
 	titular.setSize("227px", "34px");
 	
 	Label labelTitular = new Label("Nombre Titular Cuenta");
 	labelTitular.setStyleName("label");
-	absolutePanel2.add(labelTitular, 960, 10);
+	absolutePanel2.add(labelTitular, 490, 8);
 	labelTitular.setSize("200px", "13px");
 	
 	listTipoTransaccion.addChangeHandler(new ChangeHandler() {
@@ -285,7 +286,7 @@ public class Formulario_InfoProveedor extends Composite{
 	Button button2 = new Button("Send");
 	button2.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
-			if (!numeroCuenta.getText().equals("")){
+			if (!titular.getText().equals("")){
 
 			loginService.Insertar_FormaPagoProv(idProveedor, listTipoTransaccion.getValue(listTipoTransaccion.getSelectedIndex()), listTipoCuenta.getValue(listTipoCuenta.getSelectedIndex()), listBancos.getText(), numeroCuenta.getText(), titular.getText(),idAfiliado,
 					new AsyncCallback<Long>(){
@@ -300,10 +301,10 @@ public class Formulario_InfoProveedor extends Composite{
                 {	
                 	timer1.schedule(2000);	
                 	Window.alert("Nuevo forma de pago"+ result);
-                	textBox.setText("");
-                	textBox_1.setText("");
-                	textBox_2.setText("");
-                	textBox_3.setText("");
+                	titular.setText("");
+                	listBancos.setText("");
+                	numeroCuenta.setText("");
+                	
 
                 	
                 }

@@ -53,6 +53,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
     private List<AuxContactoProv> auxContact = new ArrayList<AuxContactoProv>();
     private List<AuxCuentaBancariaProv> auxPago = new ArrayList<AuxCuentaBancariaProv>();
     private SqlServiceImpl finanzasService = new  SqlServiceImpl();
+    private SegPersonalAfiliado auxPersonal		= new SegPersonalAfiliado();
 	/**
 	 * Metodo para crear el pdf del perfil de la persona en cuestion
 	 * @param request
@@ -69,11 +70,17 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
 		
         if(session.getAttribute("usserHabitat") != null)
         {  
-    		long idAfiliado 			= Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
+    		long idAfiliado 			= Long.parseLong(request.getParameter("idAfiliado"));
         	long idProveedor			= Long.valueOf(request.getParameter("idProveedor"));
+        	String nomGerente 			= request.getParameter("nomGerente");
+        	String puestoGerente 			= request.getParameter("puestoGerente");
+        	String nomCompras 			= request.getParameter("nomCompras");
+        	String nomDesarrollo 			= request.getParameter("nomDesarrollo");
+        	String nomOpe 			= request.getParameter("nomOpe");
         	auxProv						= finanzasService.GetInfoProveedor(idProveedor,idAfiliado);
 			auxContact					= finanzasService.Consultar_ContactosProv(auxProv.getIdProveedor().getId());
 			auxPago 					= finanzasService.Consultar_FormasPago(auxProv.getIdProveedor().getId());
+			auxPersonal					= finanzasService.GetPersonalAfiliado(idAfiliado);
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
@@ -131,11 +138,11 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            table = createTable8(auxProv);
+		            table = createTable8(auxProv,nomGerente,puestoGerente);
 		            document.add(table);
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
-		            table = createTable9(auxProv);
+		            table = createTable9(auxProv,nomCompras,nomDesarrollo,nomOpe,auxPersonal.getNombreAdministrador());
 		            document.add(table);
 		            
 		            
@@ -440,13 +447,13 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         table.addCell("SI");
         table.addCell("NO");
         table.addCell("Copia RTU");
-        table.addCell(aux.getKeyFileRTU().equals("")? "X": "" );
-        table.addCell(aux.getKeyFileRTU().equals("")? "": "X");
+        table.addCell(aux.getKeyFileRTU().equals("")? "": "X" );
+        table.addCell(aux.getKeyFileRTU().equals("")? "X": "");
         return table;
     }
     
     
-    public static PdfPTable createTable8(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable8(SegProveedor aux,String nomGerente,String puestoGerente) throws DocumentException {
     	PdfPTable tbl = new PdfPTable(2);
         tbl.setWidthPercentage(500 / 5.23f);
         tbl.setWidths(new int[]{1,1});
@@ -463,7 +470,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.disableBorderSide(Rectangle.BOX);
         tbl.addCell(cell);
-        cell = new PdfPCell(new Phrase("Nombre"));
+        cell = new PdfPCell(new Phrase(nomGerente));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.disableBorderSide(Rectangle.BOX);
         tbl.addCell(cell);
@@ -471,7 +478,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
         cell.disableBorderSide(Rectangle.BOX);
         tbl.addCell(cell);
-        cell = new PdfPCell(new Phrase("Puesto"));
+        cell = new PdfPCell(new Phrase(puestoGerente));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);
         cell.disableBorderSide(Rectangle.BOX);
         tbl.addCell(cell);
@@ -486,7 +493,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         return tbl;
     }
     
-    public static PdfPTable createTable9(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable9(SegProveedor aux,String nomCompras, String nomDesarrollo, String nomOpe, String adminAfi) throws DocumentException {
     	PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{1, 1, 1});
@@ -500,7 +507,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("William Franklin Barrios"));
+        cell = new PdfPCell(new Phrase(nomCompras));
         cell.disableBorderSide(Rectangle.BOX);
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
@@ -515,7 +522,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Carlos Alfredo Mejia Leiva"));
+        cell = new PdfPCell(new Phrase(nomDesarrollo));
         cell.disableBorderSide(Rectangle.BOX);
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
@@ -530,7 +537,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Nombre"));
+        cell = new PdfPCell(new Phrase(nomOpe));
         cell.disableBorderSide(Rectangle.BOX);
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
@@ -545,7 +552,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);
         table.addCell(cell);
-        cell = new PdfPCell(new Phrase("Nombre"));
+        cell = new PdfPCell(new Phrase(adminAfi));
         cell.disableBorderSide(Rectangle.BOX);
         cell.setFixedHeight(45f);
         cell.setVerticalAlignment(Element.ALIGN_BOTTOM);

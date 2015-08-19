@@ -14,6 +14,8 @@ public class AuxValeBeneficiario implements IsSerializable{
 	AuxMaterialCostruccion materialCostruccion;
 	
 	AuxSolucion solucion;
+	
+	Double totalPagar;
 
 	
 	
@@ -55,6 +57,14 @@ public class AuxValeBeneficiario implements IsSerializable{
 
 	public void setSolucion(AuxSolucion solucion) {
 		this.solucion = solucion;
+	}
+
+	public Double getTotalPagar() {
+		return totalPagar;
+	}
+
+	public void setTotalPagar(Double totalPagar) {
+		this.totalPagar = totalPagar;
 	}
 	
 	

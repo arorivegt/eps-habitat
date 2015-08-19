@@ -591,6 +591,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				@Override
 				public void onClick(ClickEvent event) {
 					loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),selectNuevoBene.getDireccionSolucion(), selectNuevoBene.getTelefonoCasaSolicitante(),selectNuevoBene.getIdFormulario(),
+							selectNuevoBene.getNumDpi(),
 							new AsyncCallback<Long>(){
 						@Override		
 		                public void onFailure(Throwable caught) 

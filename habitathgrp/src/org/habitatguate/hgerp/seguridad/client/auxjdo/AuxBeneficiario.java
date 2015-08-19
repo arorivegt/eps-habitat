@@ -19,6 +19,8 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 	private AuxSolucion solucion;
 	
 	private AuxSolicitudGeneral solicitud;
+	
+	private String DPI;
 	/**
 
      * El KEY_PROVIDER es el que provee el ID de un contacto.
@@ -88,6 +90,14 @@ public class AuxBeneficiario implements Comparable<AuxBeneficiario>,IsSerializab
 
 	public void setSolicitud(AuxSolicitudGeneral solicitud) {
 		this.solicitud = solicitud;
+	}
+
+	public String getDPI() {
+		return DPI;
+	}
+
+	public void setDPI(String dPI) {
+		DPI = dPI;
 	}
 	
 	

@@ -42,9 +42,20 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 	private String docLegalPago;
 	private Long idProveedor;
 
+	//extras---------------
+	
+	private String nombreAfiliado;
+	
+	private String nombreProveedor;
+	
+	
+	//-----------------
+	
+	
 	private List<AuxVale> vale;
 
 	
+
 	
 	public Date getFechadeTransaccion() {
 		return FechadeTransaccion;
@@ -181,6 +192,22 @@ public class AuxHistorialPagoProv implements Comparable<AuxHistorialPagoProv>,Is
 
 	public void setDocLegalPago(String docLegalPago) {
 		this.docLegalPago = docLegalPago;
+	}
+
+	public String getNombreAfiliado() {
+		return nombreAfiliado;
+	}
+
+	public void setNombreAfiliado(String nombreAfiliado) {
+		this.nombreAfiliado = nombreAfiliado;
+	}
+
+	public String getNombreProveedor() {
+		return nombreProveedor;
+	}
+
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
 	}
 
 	

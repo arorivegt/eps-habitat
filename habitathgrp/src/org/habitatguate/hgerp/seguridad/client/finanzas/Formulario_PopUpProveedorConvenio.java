@@ -176,8 +176,8 @@ public class Formulario_PopUpProveedorConvenio extends Composite{
 					try{
 						int i = results.indexOf("key=");
 						int j = results.indexOf("src=");
-						//KeyFile = results.substring(i+4, results.length()-2);
-						KeyFile = results.substring(i+4, j-1);
+						KeyFile = results.substring(i+4, results.length()-2);
+						//KeyFile = results.substring(i+4, j-1);
 						i = results.indexOf("http");
 						URLFile = results.substring(i, results.length()-2);
 						//Window.alert(URLFile);

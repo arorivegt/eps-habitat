@@ -33,6 +33,7 @@ public class Buscador_Proveedor extends Composite{
     TablaGWT_Proveedor e = null;
     Formulario_PopUpProveedorInactivo formInactivo;
     Formulario_PopUpProveedorConvenio formConvenio;
+    Formulario_NombresConvenio formNombres;
 	
     Timer timer2 = new Timer(){
   	  public void run() {
@@ -64,7 +65,7 @@ public class Buscador_Proveedor extends Composite{
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
-	absolutePanel.setSize("1025px", "40px");
+	absolutePanel.setSize("1289px", "40px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
 	
@@ -79,14 +80,26 @@ public class Buscador_Proveedor extends Composite{
 	Button button_1 = new Button("Send");
 	button_1.setText("Cambiar Inactivo");
 	button_1.setStyleName("finanButton");
-	absolutePanel.add(button_1, 649, 45);
+	absolutePanel.add(button_1, 1109, -1);
 	button_1.setSize("214px", "40px");
 	
 	Button button_2 = new Button("Send");
 	button_2.setText("Subir Convenio Aprobado");
 	button_2.setStyleName("finanButton");
-	absolutePanel.add(button_2, 869, -1);
+	absolutePanel.add(button_2, 876, -1);
 	button_2.setSize("214px", "40px");
+	
+	Button button_3 = new Button("Send");
+	button_3.setText("Ver RTU ");
+	button_3.setStyleName("finanButton");
+	absolutePanel.add(button_3, 649, 45);
+	button_3.setSize("214px", "40px");
+	
+	Button button_4 = new Button("Send");
+	button_4.setText("Ver Convenio Aprobado");
+	button_4.setStyleName("finanButton");
+	absolutePanel.add(button_4, 876, 45);
+	button_4.setSize("214px", "40px");
 	
 	
 	
@@ -97,7 +110,9 @@ public class Buscador_Proveedor extends Composite{
 			// TODO Auto-generated method stub
 			List<AuxProveedor> total= new ArrayList<AuxProveedor>(e.grid.selectionModel.getSelectedSet());
 			Long idProveedor = total.get(0).getIdProveedor();
-			Window.open("/FinanInformacionProveedorPDF?idProveedor="+idProveedor, "_blank", "");
+			Long idAfiliado = total.get(0).getAuxAfiliado().getIdAfiliado();
+			formNombres = new Formulario_NombresConvenio(idProveedor, idAfiliado);
+			//Window.open("/FinanInformacionProveedorPDF?idProveedor="+idProveedor, "_blank", "");
 			
 			
 		}
@@ -141,7 +156,41 @@ public class Buscador_Proveedor extends Composite{
 		}
 	});
 	
+	button_3.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			final List<AuxProveedor> total= new ArrayList<AuxProveedor>(e.grid.selectionModel.getSelectedSet());
+			String url = total.get(0).getURLFileRTU();
+			
+			if (!url.equals("")){
+				Window.open(url, "_black_", "");
+			}else{
+				Window.alert("El proveedor no tiene ingresado el RTU");
+			}
+			
+			
+		}
+	});
 	
+	button_4.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			final List<AuxProveedor> total= new ArrayList<AuxProveedor>(e.grid.selectionModel.getSelectedSet());
+			String url = total.get(0).getURLFileConvenio();
+			
+			if (!url.equals("")){
+				Window.open(url, "_black_", "");
+			}else{
+				Window.alert("El proveedor aun no tiene convenio subido");
+			}
+			
+			
+		}
+	});
 			
 		//-----------------------------	---------------------------------
 	

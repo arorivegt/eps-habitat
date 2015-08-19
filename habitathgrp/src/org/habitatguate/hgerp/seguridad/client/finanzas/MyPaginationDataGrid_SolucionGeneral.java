@@ -149,6 +149,15 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         dataGrid.addColumn(codDep, "Departamento");
         dataGrid.setColumnWidth(codDep, 20, Unit.PCT);
         
+        Column<T, String> codMun = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getMunicipioSolucion());
+            }
+        };
+        dataGrid.addColumn(codMun, "Municipio");
+        dataGrid.setColumnWidth(codMun, 20, Unit.PCT);
+        
         Column<T, String> depAfiliado = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {

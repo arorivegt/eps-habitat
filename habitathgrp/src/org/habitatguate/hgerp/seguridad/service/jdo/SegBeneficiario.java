@@ -25,6 +25,8 @@ public class SegBeneficiario implements Serializable{
 	@Persistent
 	private String dirBeneficiario;
 	@Persistent
+	private String DPI;
+	@Persistent
 	private int telBeneficiario;
 	@Persistent
 	private SegAfiliado afiliado;
@@ -127,6 +129,16 @@ public class SegBeneficiario implements Serializable{
 
 	public void setAfiliado(SegAfiliado afiliado) {
 		this.afiliado = afiliado;
+	}
+
+
+	public String getDPI() {
+		return DPI;
+	}
+
+
+	public void setDPI(String dPI) {
+		DPI = dPI;
 	}
 	
 

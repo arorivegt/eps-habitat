@@ -101,6 +101,8 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	
 	private String URLFileRTU;
 	
+	private String observacionDistribucion;
+	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
 	
 	private ArrayList<AuxMaterialCostruccion> listaMateriales = new ArrayList<AuxMaterialCostruccion>();
@@ -428,6 +430,14 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 
 	public void setURLFileRTU(String uRLFileRTU) {
 		URLFileRTU = uRLFileRTU;
+	}
+
+	public String getObservacionDistribucion() {
+		return observacionDistribucion;
+	}
+
+	public void setObservacionDistribucion(String observacionDistribucion) {
+		this.observacionDistribucion = observacionDistribucion;
 	}
 	
 	

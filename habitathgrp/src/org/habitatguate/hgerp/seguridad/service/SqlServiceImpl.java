@@ -1,12 +1,15 @@
 package org.habitatguate.hgerp.seguridad.service;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
@@ -64,6 +67,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.gwt.i18n.server.testing.Child;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.ibm.icu.impl.CalendarAstronomer;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import java_cup.internal_error;
@@ -357,7 +361,8 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 		 Date fechaIngreso,
 		 Long idAfiliado,
 		 String KeyFileRTU,
-		 String URLRTU
+		 String URLRTU,
+		 String observacionDistri
 		) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -410,6 +415,7 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 	nuevo.setAfiliado(afi);
 	nuevo.setKeyFileRTU(KeyFileRTU);
 	nuevo.setURLFileRTU(URLRTU);
+	nuevo.setObservacionDistribucion(observacionDistri);
 	afi.getProveedor().add(nuevo);
 	
 	try{
@@ -979,6 +985,10 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setPersonaJuridica(p.getPersonaJuridica());
 				aux.setServicioEntrega(p.getServicioEntrega());
 				aux.setTelProveedor(p.getTelProveedor());
+				aux.setURLFileConvenio(p.getURLFileConvenio());
+				aux.setKeyFileConvenio(p.getKeyFileConvenio());
+				aux.setURLFileRTU(p.getURLFileRTU());
+				aux.setKeyFileRTU(p.getKeyFileRTU());
 				AuxAfiliado auxAfi = new AuxAfiliado();
 				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
 				aux.setAuxAfiliado(auxAfi);
@@ -1893,6 +1903,81 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return valor;
 	}
 	
+	public List<AuxSolucion> Consulta_SolucionesHabitacionalesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegSolucion.class);
+		query.setFilter("anio >= "+anio+ " && "+"anio <= "+anioFin + filter);
+		List<AuxSolucion> valor = new ArrayList<AuxSolucion>();
+		List<SegSolucion> execute = (List<SegSolucion>)query.execute("Google App Engine");
+		Query query2 = gestorPersistencia.newQuery(SegCatalogoProducto.class);
+		query.setFilter("statusProducto == 1");
+		List<SegCatalogoProducto> execute2 = (List<SegCatalogoProducto>)query2.execute("Google App Engine");
+		if (!execute.isEmpty()){
+			for(SegSolucion p : execute ){
+			if (p.getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) || idAfiliado.equals("0")){
+				AuxSolucion auxSolucion = new AuxSolucion();
+				auxSolucion.setCostoAdministrativo(p.getCostoAdministrativo());
+				auxSolucion.setCostoMaterial(p.getCostoMaterial());
+				auxSolucion.setDisenio(p.getDisenio());
+				auxSolucion.setFechaInicio(ConvertDate.g(p.getFechaInicio()));
+				auxSolucion.setIdSolucion(p.getIdSolucion().getId());
+				auxSolucion.setNomSolucion(p.getNomSolucion());
+				auxSolucion.setNotaDebito(p.getNotaDebito());
+				auxSolucion.setValorContrato(p.getValorContrato());
+				auxSolucion.setEstadoSolucion(p.getEstadoSolucion());
+				auxSolucion.setTrimestre(p.getTrimestre());
+				auxSolucion.setDepartamentoSolucion(p.getDepartamentoSolucion());
+				auxSolucion.setMunicipioSolucion(p.getMunicipioSolucion());
+				
+				AuxBeneficiario n= new AuxBeneficiario();
+				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
+				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
+				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
+				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				AuxAfiliado aux = new AuxAfiliado();
+				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
+				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
+				aux.setDirAfiliado(p.getBeneficiario().getAfiliado().getDirAfiliado());
+				aux.setMunicipio(p.getBeneficiario().getAfiliado().getMunicipio());
+				aux.setNomAfiliado(p.getBeneficiario().getAfiliado().getNomAfiliado());
+				aux.setTelefono(p.getBeneficiario().getAfiliado().getTelefono());
+				n.setAfiliado(aux);
+				auxSolucion.setBeneficiario(n);
+				
+				
+				
+				
+				//Obtener Valores de la construnccion
+				List<SegDetalleEjecucion> ejecucion = p.getListaEjecucion();
+				
+				
+				double costoTotalCategorias = 0.0;
+				for(SegCatalogoProducto catalogo : execute2){
+					System.out.println(catalogo.getIdProducto());
+					auxSolucion.getNombreProducto().add(catalogo.getDescripcionProducto());
+					Double totalProducto = 0.0;
+					for(SegDetalleEjecucion ejecutado : ejecucion){
+						if(ejecutado.getMaterialCostruccion().getIdProducto().equals(catalogo.getIdProducto())){
+							totalProducto = totalProducto + ejecutado.getSubTotal();
+							
+						}
+					}
+					costoTotalCategorias = costoTotalCategorias + totalProducto;
+					auxSolucion.getCostoProducto().add(totalProducto);
+				}
+				auxSolucion.setCostoDirecto(costoTotalCategorias);
+				auxSolucion.setCostoTotal(auxSolucion.getCostoAdministrativo()+auxSolucion.getCostoDirecto());
+				if (maximos-minimo == 0.0 || (auxSolucion.getCostoTotal() >= minimo && auxSolucion.getCostoTotal() <= maximos)){
+					valor.add(auxSolucion);
+				}
+			}
+			}
+		}
+		
+		
+		return valor;
+	}
+	
 	public List<AuxSolucion> Consulta_ComparativoPlaniEjecucionGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegSolucion.class);
@@ -2070,23 +2155,33 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 	
 	
 	public List<AuxValeBeneficiario> Consulta_ComprasProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange){
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		List<SegVale> execute = null;
+		try {
+			cal.setTime(sdf.parse(fechaInicio));
+			cal2.setTime(sdf.parse(fechaFIn));
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		Query query = gestorPersistencia.newQuery(SegVale.class);
-		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
-		List<SegVale> execute;
+		
 		if (!estado.equals("-1") && checkRange){
-			query.setFilter("aprobado == :status && fechaVale > :dateTime  && fechaVale < :dateTime2");
-			execute = (List<SegVale>)query.execute(new Integer(estado),new Date(fechaInicio),new Date(fechaFIn));
+			query.setFilter("aprobado == :status && fechaVale >= :dateTime  && fechaVale <= :dateTime2");
+			execute = (List<SegVale>)query.execute(new Integer(estado),cal.getTime(),cal2.getTime());
 		}else if (estado.equals("-1") && checkRange){
-			query.setFilter("fechaVale > :dateTime  && fechaVale < :dateTime2");
-			execute = (List<SegVale>)query.execute(new Date(fechaInicio),new Date(fechaFIn));
+			query.setFilter("fechaVale >= :dateTime  && fechaVale <= :dateTime2");
+			execute = (List<SegVale>)query.execute(cal.getTime(),cal2.getTime());
 		}else if (!estado.equals("-1") && !checkRange){
 			query.setFilter("aprobado == :status");
 			execute = (List<SegVale>)query.execute(new Integer(estado));
 		}else{
 			execute = (List<SegVale>)query.execute();
 		}
-		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		if (!execute.isEmpty()){
 			for(SegVale p : execute ){
@@ -2161,6 +2256,247 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return response;
 	}
 	
+	
+	public List<AuxValeBeneficiario> Consulta_CuentaAPagarProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange){
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		List<AuxValeBeneficiario> response = new ArrayList<AuxValeBeneficiario>();
+		List<SegVale> execute = null;
+		try {
+			cal.setTime(sdf.parse(fechaInicio));
+			cal2.setTime(sdf.parse(fechaFIn));
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegVale.class);
+		
+		if (!estado.equals("-1") && checkRange){
+			query.setFilter("aprobado == 1  && totalPagado == 0.0 && fechaVale >= :dateTime  && fechaVale <= :dateTime2");
+			execute = (List<SegVale>)query.execute(cal.getTime(),cal2.getTime());
+		}else if (estado.equals("-1") && checkRange){
+			query.setFilter("aprobado == 1 && totalPagado == 0.0 && fechaVale >= :dateTime  && fechaVale <= :dateTime2");
+			execute = (List<SegVale>)query.execute(cal.getTime(),cal2.getTime());
+		}else if (!estado.equals("-1") && !checkRange){
+			query.setFilter("aprobado == 1 && totalPagado == 0.0");
+			execute = (List<SegVale>)query.execute();
+		}else{
+			query.setFilter("aprobado == 1 && totalPagado == 0.0");
+			execute = (List<SegVale>)query.execute();
+		}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!execute.isEmpty()){
+			for(SegVale p : execute ){
+				AuxValeBeneficiario nuevo = new AuxValeBeneficiario();
+				List<SegDetalleEjecucion> compras = p.getListadetalle();
+				for (SegDetalleEjecucion detalleCompra : compras){
+					if(detalleCompra.getSolucion().getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) ||  idAfiliado.equals("0")){
+						if(detalleCompra.getMaterialCostruccion().getProveedor().getIdProveedor().getId() == Long.valueOf(idProveedor)|| idProveedor.equals("0"))  {
+							if (detalleCompra.getSolucion().getAnio() == Integer.valueOf(anio) || anio.equals("0")){
+								if (detalleCompra.getSolucion().getTrimestre() == Integer.valueOf(trimestre) || trimestre.equals("0")){
+									System.out.println("Vale:"+p.getIdVale() +" ID SOLUCIO "+detalleCompra.getSolucion().getIdSolucion()+ " ID DETALLE "+detalleCompra.getIdDetalleSolucion());
+									AuxVale auxCumple = new AuxVale();
+									auxCumple.setIdVale(p.getIdVale());
+									auxCumple.setEstado(p.isEstado());
+									auxCumple.setTotalVale(p.getTotalVale());
+									auxCumple.setTotalPagado(p.getTotalPagado());
+									auxCumple.setFechaVale(ConvertDate.g(p.getFechaVale()));
+									auxCumple.setAprobado(p.getAprobado());
+									nuevo.setVale(auxCumple);
+									
+									SegSolucion p1 = detalleCompra.getSolucion();
+									
+									AuxSolucion auxSolucion = new AuxSolucion();
+									auxSolucion.setCostoAdministrativo(p1.getCostoAdministrativo());
+									auxSolucion.setCostoMaterial(p1.getCostoMaterial());
+									auxSolucion.setDisenio(p1.getDisenio());
+									auxSolucion.setFechaInicio(ConvertDate.g(p1.getFechaInicio()));
+									auxSolucion.setIdSolucion(p1.getIdSolucion().getId());
+									auxSolucion.setNomSolucion(p1.getNomSolucion());
+									auxSolucion.setNotaDebito(p1.getNotaDebito());
+									auxSolucion.setValorContrato(p1.getValorContrato());
+									auxSolucion.setEstadoSolucion(p1.getEstadoSolucion());
+									auxSolucion.setTrimestre(p1.getTrimestre());
+									auxSolucion.setDepartamentoSolucion(p1.getDepartamentoSolucion());
+									auxSolucion.setMunicipioSolucion(p1.getMunicipioSolucion());
+									
+									AuxBeneficiario n= new AuxBeneficiario();
+									n.setIdBeneficiario(p1.getBeneficiario().getIdBeneficiario().getId());
+									n.setNomBeneficiario(p1.getBeneficiario().getNomBeneficiario());
+									n.setDirBeneficiario(p1.getBeneficiario().getDirBeneficiario());
+									n.setTelBeneficiario(p1.getBeneficiario().getTelBeneficiario());
+									AuxAfiliado aux = new AuxAfiliado();
+									aux.setIdAfiliado(p1.getBeneficiario().getAfiliado().getIdAfiliado());
+									aux.setDepartamento(p1.getBeneficiario().getAfiliado().getDepartamento());
+									aux.setDirAfiliado(p1.getBeneficiario().getAfiliado().getDirAfiliado());
+									aux.setMunicipio(p1.getBeneficiario().getAfiliado().getMunicipio());
+									aux.setNomAfiliado(p1.getBeneficiario().getAfiliado().getNomAfiliado());
+									aux.setTelefono(p1.getBeneficiario().getAfiliado().getTelefono());
+									n.setAfiliado(aux);
+									auxSolucion.setBeneficiario(n);
+									
+									nuevo.setSolucion(auxSolucion);
+									
+									AuxProveedor prov = new AuxProveedor();
+									prov.setIdProveedor(detalleCompra.getMaterialCostruccion().getProveedor().getIdProveedor().getId());
+									prov.setNomProveedor(detalleCompra.getMaterialCostruccion().getProveedor().getNomProveedor());
+									
+									nuevo.setProveedor(prov);
+									
+									nuevo.setTotalPagar(detalleCompra.getSubTotal());
+									
+									boolean flagProv = false;
+									
+									for (AuxValeBeneficiario exists : response){
+										if (exists.getProveedor().getIdProveedor().equals(nuevo.getProveedor().getIdProveedor()) 
+												&& exists.getSolucion().getBeneficiario().getIdBeneficiario().equals(nuevo.getSolucion().getBeneficiario().getIdBeneficiario())){
+												flagProv = true;
+												exists.setTotalPagar(exists.getTotalPagar() + nuevo.getTotalPagar());
+												break;
+										}
+									}
+									if (!flagProv)
+										response.add(nuevo);
+									
+								
+								}
+							}
+							
+						}
+					}
+				
+				}
+				
+			}
+		}
+		
+		
+		return response;
+	}
+	
+	
+	public List<AuxHistorialPagoProv> Consulta_PagosProvGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange){
+		Calendar cal = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		List<AuxHistorialPagoProv> response = new ArrayList<AuxHistorialPagoProv>();
+		List<SegHistorialPagoProv> execute = null;
+		try {
+			cal.setTime(sdf.parse(fechaInicio));
+			cal2.setTime(sdf.parse(fechaFIn));
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		Query query = gestorPersistencia.newQuery(SegHistorialPagoProv.class);
+		
+		if (!estado.equals("-1") && checkRange){
+			query.setFilter("aprobado == :status && FechaSolicitud >= :dateTime  && FechaSolicitud <= :dateTime2");
+			execute = (List<SegHistorialPagoProv>)query.execute(new Integer(estado),cal.getTime(),cal2.getTime());
+		}else if (estado.equals("-1") && checkRange){
+			query.setFilter("FechaSolicitud >= :dateTime  && FechaSolicitud <= :dateTime2");
+			execute = (List<SegHistorialPagoProv>)query.execute(cal.getTime(),cal2.getTime());
+		}else if (!estado.equals("-1") && !checkRange){
+			query.setFilter("aprobado == :status");
+			execute = (List<SegHistorialPagoProv>)query.execute(new Integer(estado));
+		}else{
+			execute = (List<SegHistorialPagoProv>)query.execute();
+		}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!execute.isEmpty()){
+			for(SegHistorialPagoProv p : execute ){
+				for (SegVale p1 : p.getVale()){
+				AuxHistorialPagoProv nuevo = new AuxHistorialPagoProv();
+				List<SegDetalleEjecucion> compras = p1.getListadetalle();
+				for (SegDetalleEjecucion detalleCompra : compras){
+					if(detalleCompra.getSolucion().getBeneficiario().getAfiliado().getIdAfiliado().equals(Long.valueOf(idAfiliado)) ||  idAfiliado.equals("0")){
+						if(detalleCompra.getMaterialCostruccion().getProveedor().getIdProveedor().getId() == Long.valueOf(idProveedor)|| idProveedor.equals("0"))  {
+							if (detalleCompra.getSolucion().getAnio() == Integer.valueOf(anio) || anio.equals("0")){
+								if (detalleCompra.getSolucion().getTrimestre() == Integer.valueOf(trimestre) || trimestre.equals("0")){
+									System.out.println("Vale:"+p1.getIdVale() +" ID SOLUCIO "+detalleCompra.getSolucion().getIdSolucion()+ " ID DETALLE "+detalleCompra.getIdDetalleSolucion());
+									/*AuxVale auxCumple = new AuxVale();
+									auxCumple.setIdVale(p1.getIdVale());
+									auxCumple.setEstado(p1.isEstado());
+									auxCumple.setTotalVale(p1.getTotalVale());
+									auxCumple.setTotalPagado(p1.getTotalPagado());
+									auxCumple.setFechaVale(ConvertDate.g(p1.getFechaVale()));
+									auxCumple.setAprobado(p1.getAprobado());
+									nuevo.setVale(auxCumple);
+									
+									SegSolucion p2 = detalleCompra.getSolucion();
+									
+									AuxSolucion auxSolucion = new AuxSolucion();
+									auxSolucion.setCostoAdministrativo(p2.getCostoAdministrativo());
+									auxSolucion.setCostoMaterial(p2.getCostoMaterial());
+									auxSolucion.setDisenio(p2.getDisenio());
+									auxSolucion.setFechaInicio(ConvertDate.g(p2.getFechaInicio()));
+									auxSolucion.setIdSolucion(p2.getIdSolucion().getId());
+									auxSolucion.setNomSolucion(p2.getNomSolucion());
+									auxSolucion.setNotaDebito(p2.getNotaDebito());
+									auxSolucion.setValorContrato(p2.getValorContrato());
+									auxSolucion.setEstadoSolucion(p2.getEstadoSolucion());
+									auxSolucion.setTrimestre(p2.getTrimestre());
+									auxSolucion.setDepartamentoSolucion(p2.getDepartamentoSolucion());
+									auxSolucion.setMunicipioSolucion(p2.getMunicipioSolucion());
+									
+									AuxBeneficiario n= new AuxBeneficiario();
+									n.setIdBeneficiario(p2.getBeneficiario().getIdBeneficiario().getId());
+									n.setNomBeneficiario(p2.getBeneficiario().getNomBeneficiario());
+									n.setDirBeneficiario(p2.getBeneficiario().getDirBeneficiario());
+									n.setTelBeneficiario(p2.getBeneficiario().getTelBeneficiario());
+									AuxAfiliado aux = new AuxAfiliado();
+									aux.setIdAfiliado(p2.getBeneficiario().getAfiliado().getIdAfiliado());
+									aux.setDepartamento(p2.getBeneficiario().getAfiliado().getDepartamento());
+									aux.setDirAfiliado(p2.getBeneficiario().getAfiliado().getDirAfiliado());
+									aux.setMunicipio(p2.getBeneficiario().getAfiliado().getMunicipio());
+									aux.setNomAfiliado(p2.getBeneficiario().getAfiliado().getNomAfiliado());
+									aux.setTelefono(p2.getBeneficiario().getAfiliado().getTelefono());
+									n.setAfiliado(aux);
+									auxSolucion.setBeneficiario(n);
+									
+									nuevo.setSolucion(auxSolucion);
+									
+									AuxProveedor prov = new AuxProveedor();
+									prov.setNomProveedor(detalleCompra.getMaterialCostruccion().getProveedor().getNomProveedor());
+									
+									nuevo.setProveedor(prov);*/
+									nuevo.setIdHistorialPagoProv(p.getIdHistorialPagoProv());
+									nuevo.setBanco(p.getBanco());
+									nuevo.setChequeNombre(p.getChequeNombre());
+									nuevo.setDocLegalPago(p.getDocLegalPago());
+									nuevo.setFechadeTransaccion(ConvertDate.g(p.getFechadeTransaccion()));
+									nuevo.setFechaSolicitud(ConvertDate.g(p.getFechaSolicitud()));
+									nuevo.setIdAfiliado(p.getIdAfiliado());
+									nuevo.setIdProveedor(p.getIdProveedor());
+									nuevo.setNumeroCuenta(p.getNumeroCuenta());
+									nuevo.setRetenidoDonacion(p.getRetenidoDonacion());
+									nuevo.setRetenidoIva(p.getRetenidoIva());
+									nuevo.setSeriesDocumento(p.getSeriesDocumento());
+									nuevo.setStatusPago(p.getStatusPago());
+									nuevo.setTipoOperacion(p.getTipoOperacion());
+									nuevo.setValorCancelado(p.getValorCancelado());
+									nuevo.setValorPago(p.getValorPago());
+									nuevo.setNombreAfiliado(detalleCompra.getSolucion().getBeneficiario().getAfiliado().getNomAfiliado());
+									nuevo.setNombreProveedor(detalleCompra.getMaterialCostruccion().getProveedor().getNomProveedor());
+									
+									response.add(nuevo);
+									break;
+								}
+							}
+							
+						}
+					}
+				}
+			}	
+			}
+		}
+		
+		
+		return response;
+	}
 	
 	
 	public List<AuxSolucion> Consulta_SolucionesGeneralesPorAnio(String anio,String anioFin){
@@ -5879,6 +6215,18 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return 0L;
 	}
 	
+	public Long Actualizar_EstadoEnConstruccionSolucion(Long idSolucion){
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+		try{
+			 SegSolucion e = gestorPersistencia.getObjectById(SegSolucion.class, idSolucion);
+			 e.setEstadoSolucion(1);
+			 
+		}finally{
+			gestorPersistencia.close();
+		}
+		return 0L;
+	}
+	
 	public Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre,int anio){
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		try{
@@ -5944,7 +6292,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return valor;
 	}
 	
-	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado) throws IllegalArgumentException{
+	public Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado,String numDPI) throws IllegalArgumentException{
 		 Long valor = 0L;
 			HttpServletRequest request = this.getThreadLocalRequest();
 			HttpSession session = request.getSession(false);
@@ -5956,6 +6304,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		nuevo.setNomBeneficiario(nomBeneficiario);
 		nuevo.setDirBeneficiario(dirBeneficiario);
 		nuevo.setTelBeneficiario(telBeneficiario);
+		nuevo.setDPI(numDPI);
 		nuevo.setAfiliado(selectB);
 		nuevo.setSolicitud(solicitud);
 		selectB.getSolucion().add(nuevo);

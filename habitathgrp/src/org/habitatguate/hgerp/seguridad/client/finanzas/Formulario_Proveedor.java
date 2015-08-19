@@ -88,6 +88,7 @@ public class Formulario_Proveedor extends Composite{
 	private String URLFile ="";
 	private String KeyFile ="";
 	private Mensaje mensaje;
+	private String observacionDistri;
 	
 	private FormPanel form;
 	private VerticalPanel formElements;
@@ -180,11 +181,11 @@ public class Formulario_Proveedor extends Composite{
 	absolutePanel.add(integerBox, 198, 212);
 	integerBox.setSize("223px", "25px");
 	final SimpleCheckBox simpleCheckBox = new SimpleCheckBox();
-	absolutePanel.add(simpleCheckBox, 237, 1249);
+	absolutePanel.add(simpleCheckBox, 201, 1225);
 	
 	Label lblServicioDeDistribucion = new Label("Check: Si tiene servicio de distribución");
 	lblServicioDeDistribucion.setStyleName("label");
-	absolutePanel.add(lblServicioDeDistribucion, 18, 1250);
+	absolutePanel.add(lblServicioDeDistribucion, 21, 1213);
 	lblServicioDeDistribucion.setSize("157px", "19px");
 	
 	Label lblPaginaWeb = new Label("Pagina Web");
@@ -205,13 +206,13 @@ public class Formulario_Proveedor extends Composite{
 	lblPersonaJuridica.setSize("157px", "19px");
 	
 	final TextArea textArea = new TextArea();
-	absolutePanel.add(textArea, 193, 1353);
+	absolutePanel.add(textArea, 198, 1356);
 	textArea.setSize("456px", "113px");
 	
-	Label lblObservaciones = new Label("Observaciones");
+	Label lblObservaciones = new Label("Observaciones Generales del Proveedor");
 	lblObservaciones.setStyleName("label");
 	absolutePanel.add(lblObservaciones, 10, 1356);
-	lblObservaciones.setSize("157px", "19px");
+	lblObservaciones.setSize("157px", "59px");
 	
 	Label lblFormularioParaEl = new Label("FORMULARIO PARA EL INGRESO DE UN NUEVO PROVEEDOR");
 	lblFormularioParaEl.setStyleName("label");
@@ -290,24 +291,24 @@ public class Formulario_Proveedor extends Composite{
 	
 	Label lblDisponibilidadProductos = new Label("Disponibilidad de Productos");
 	lblDisponibilidadProductos.setStyleName("label");
-	absolutePanel.add(lblDisponibilidadProductos, 10, 1207);
+	absolutePanel.add(lblDisponibilidadProductos, 10, 1171);
 	lblDisponibilidadProductos.setSize("157px", "19px");
 	
 	final TextBox txtDisponibilidadPro = new TextBox();
 	txtDisponibilidadPro.setStyleName("gwt-TextBox2");
 	txtDisponibilidadPro.setMaxLength(100);
-	absolutePanel.add(txtDisponibilidadPro, 198, 1207);
+	absolutePanel.add(txtDisponibilidadPro, 198, 1171);
 	txtDisponibilidadPro.setSize("227px", "34px");
 	
 	Label lblTiempoDeEntrega = new Label("Tiempo de entrega");
 	lblTiempoDeEntrega.setStyleName("label");
-	absolutePanel.add(lblTiempoDeEntrega, 10, 1311);
+	absolutePanel.add(lblTiempoDeEntrega, 10, 1274);
 	lblTiempoDeEntrega.setSize("157px", "19px");
 	
 	final TextBox txtTiempoEntrega = new TextBox();
 	txtTiempoEntrega.setStyleName("gwt-TextBox2");
 	txtTiempoEntrega.setMaxLength(100);
-	absolutePanel.add(txtTiempoEntrega, 198, 1300);
+	absolutePanel.add(txtTiempoEntrega, 198, 1263);
 	txtTiempoEntrega.setSize("227px", "34px");
 	
 	Label lblRegimenTributario = new Label("Regimen tributario");
@@ -656,6 +657,15 @@ public class Formulario_Proveedor extends Composite{
 	absolutePanel.add(lblLosCamposMarcados, 10, 23);
 	lblLosCamposMarcados.setSize("547px", "19px");
 	
+	Label lblObservacionesDeDistribucin = new Label("Observaciones de Distribución");
+	lblObservacionesDeDistribucin.setStyleName("label");
+	absolutePanel.add(lblObservacionesDeDistribucin, 10, 1310);
+	lblObservacionesDeDistribucin.setSize("157px", "19px");
+	
+	final TextArea textArea_2 = new TextArea();
+	absolutePanel.add(textArea_2, 198, 1305);
+	textArea_2.setSize("451px", "34px");
+	
 	listBox.addClickHandler(new ClickHandler() {
 
         @Override
@@ -743,6 +753,8 @@ public class Formulario_Proveedor extends Composite{
 	buttonGuardar.addClickHandler(new ClickHandler() {
 		
 		
+		
+
 		public void onClick(ClickEvent event) {
 			 nomProveedor = textBox.getText();
 			 numeroNit= textBox_3.getText();
@@ -775,6 +787,7 @@ public class Formulario_Proveedor extends Composite{
 			montoMaximo= textBox_11.getText().equals("") ? 0.0 : Double.valueOf(textBox_11.getText());
 			tiempoMaximo= textBox_12.getText().equals("") ? 0 : Integer.valueOf(textBox_12.getText());
 			idafiliado = listAfiliados.getValue(listAfiliados.getSelectedIndex()).equals("0L") ? 0L : Long.valueOf(listAfiliados.getValue(listAfiliados.getSelectedIndex()));
+			observacionDistri = textArea_2.getText();
 			
 			
 			
@@ -784,7 +797,7 @@ public class Formulario_Proveedor extends Composite{
 				Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 				
 			
-			loginService.Insertar_ProveedorCompleto(false, nomProveedor, numeroNit, dirProveedor, telProveedor, paginaWeb, personaJuridica, razonSocial, actividadEcono, aceptaExencion, relacionConProv, tipoProveedor, tiempoDeTrabajarConHG, Departamentos, Municipios, ubicacionSucursales, productosfrece, disponibilidadProd, servicioEntrega, tiempoEntrega, regimenTributario, observaciones, aceptaDonacion, formaDonacion, porcentDonacion, frecuenciaDonacion, contribuyeEventos, cualesyComoEventos, aceptaCredito, montoMaximo, tiempoMaximo, today,idafiliado,KeyFile,URLFile,								
+			loginService.Insertar_ProveedorCompleto(false, nomProveedor, numeroNit, dirProveedor, telProveedor, paginaWeb, personaJuridica, razonSocial, actividadEcono, aceptaExencion, relacionConProv, tipoProveedor, tiempoDeTrabajarConHG, Departamentos, Municipios, ubicacionSucursales, productosfrece, disponibilidadProd, servicioEntrega, tiempoEntrega, regimenTributario, observaciones, aceptaDonacion, formaDonacion, porcentDonacion, frecuenciaDonacion, contribuyeEventos, cualesyComoEventos, aceptaCredito, montoMaximo, tiempoMaximo, today,idafiliado,KeyFile,URLFile,observacionDistri,								
 						new AsyncCallback<Long>() {
 							
 							@Override
@@ -849,8 +862,8 @@ public class Formulario_Proveedor extends Composite{
 					try{
 						int i = results.indexOf("key=");
 						int j = results.indexOf("src=");
-						//KeyFile = results.substring(i+4, results.length()-2);
-						KeyFile = results.substring(i+4, j-1);
+						KeyFile = results.substring(i+4, results.length()-2);
+						//KeyFile = results.substring(i+4, j-1);
 						i = results.indexOf("http");
 						URLFile = results.substring(i, results.length()-2);
 						//Window.alert(URLFile);

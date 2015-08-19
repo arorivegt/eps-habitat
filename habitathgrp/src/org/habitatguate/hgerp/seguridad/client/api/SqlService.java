@@ -40,7 +40,7 @@ public interface SqlService extends RemoteService{
 	Long Insertar_PlantillaSolucion(String nomPlantilla,String tipo,Double costoFinal);
 	Long Insertar_DetallePlantillaSolucion(Long idPlantillaSolucion,List<AuxDetallePlantillaSolucion> listaDetallePlantilla);
 	Long Insertar_UnicoDetallePlantillaSolucion(Long idPlantillaSolucion,AuxDetallePlantillaSolucion auxDetalle);
-	Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado);
+	Long Insertar_Bene(String nomBeneficiario,String dirBeneficiario,int telBeneficiario,Long idAfiliado,String numDPI);
 	Long Insertar_Proveedor(Boolean aprobadoComision,String dirProveedor,Date fechaIngreso,String nomProveedor,String numeroNit,String paginaWeb,String personaJuridica,Boolean servicioEntrega,String telProveedor,String observaciones);
 	Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 			String nomProveedor,
@@ -76,7 +76,8 @@ public interface SqlService extends RemoteService{
 			 Date fechaIngreso,
 			 Long idAfiliado,
 			 String KeyFileRTU,
-			 String URLRTU
+			 String URLRTU,
+			 String observacionDistri
 			); 
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
@@ -153,6 +154,7 @@ public interface SqlService extends RemoteService{
 	String Actualizar_EstadoVale(String idVale, java.util.Date fechaVale, Double costoTotal);
 	String Actualizar_StatusValeAprobado(String idVale,int status);
 	Long Actualizar_EstadoFinalizadoSolucion(Long idSolucion,int numeroSolucion);
+	Long Actualizar_EstadoEnConstruccionSolucion(Long idSolucion);
 	Long Actualizar_TrimestreSolucion(Long idSolucion,int trimestre,int anio);
 	Long Actualizar_ProveedorInactivo(Long id,Long idAfiliado, String motivo);
 	Long Actualizar_ProveedorConvenio(Long id,Long idAfiliado, String KeyFile, String URLFile);
@@ -194,4 +196,7 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_SolucionesGeneralesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
 	List<AuxValeBeneficiario> Consulta_ComprasProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
+	List<AuxHistorialPagoProv> Consulta_PagosProvGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
+	List<AuxSolucion> Consulta_SolucionesHabitacionalesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
+	List<AuxValeBeneficiario> Consulta_CuentaAPagarProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
 }

@@ -97,6 +97,8 @@ public class SegProveedor implements Serializable{
     private String URLFileConvenio;
 	@Persistent    
     private String KeyFileConvenio;
+	@Persistent    
+    private String observacionDistribucion;
 	
 	
 	@Persistent
@@ -370,6 +372,15 @@ public class SegProveedor implements Serializable{
 	public void setKeyFileConvenio(String keyFileConvenio) {
 		KeyFileConvenio = keyFileConvenio;
 	}
+	public String getObservacionDistribucion() {
+		return observacionDistribucion;
+	}
+	public void setObservacionDistribucion(String observacionDistribucion) {
+		this.observacionDistribucion =  observacionDistribucion;
+	}
+	
+	
+	
 	
 	
 	

@@ -185,6 +185,7 @@ public class Buscador_Soluciones_Inv extends Composite {
 			if (!textBox.getText().equals("") && selectNuevo != null){
 
 			loginService.Insertar_Bene(textBox.getText(),textBox_1.getText(), Integer.parseInt(textBox_2.getText()),selectNuevo.getIdAfiliado(),
+					"DPI",
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 

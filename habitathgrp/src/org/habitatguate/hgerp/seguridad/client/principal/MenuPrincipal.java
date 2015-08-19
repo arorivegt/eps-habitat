@@ -22,10 +22,13 @@ import org.habitatguate.hgerp.seguridad.client.finanzas.Menu_Proveedores;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoPrecios;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComparativoSolucion;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteComprasProv;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteCuentasAPagar;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteCuentasXPagar;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReportePagosProv;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReportePagosRealizados;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteResumenCréditos;
+import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteSolucionesHab;
 //import org.habitatguate.hgerp.seguridad.client.finanzas.ReporteRecordSoluciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.AsignarDiasVacaciones;
 import org.habitatguate.hgerp.seguridad.client.rrhh.BDpuestos;
@@ -272,6 +275,12 @@ public class MenuPrincipal extends Composite {
 				
 			}
 		};
+		final Command cmdfinaReporte9 = new Command() {
+			public void execute() {
+				finaReporte9();
+				
+			}
+		};
 
 		// -- Soluciones Construidas
 
@@ -446,6 +455,7 @@ public class MenuPrincipal extends Composite {
 		MenuReportesFinanzas.addItem("Comparativo entre lo planificado y ejecutado", cmdfinaReporte3);
 		MenuReportesFinanzas.addItem("Reporte Compras realizadas", cmdfinaReporte8);
 		MenuReportesFinanzas.addItem("Reporte de Pagos realizados", cmdfinaReporte4);
+		MenuReportesFinanzas.addItem("Reporte Soluciones Habitacionales", cmdfinaReporte9);
 		MenuReportesFinanzas.addItem("Reporte Cuentas Por Pagar", cmdfinaReporte5);
 		MenuReportesFinanzas.addItem("Reporte Comparativo Precios", cmdfinaReporte6);
 
@@ -664,7 +674,7 @@ public class MenuPrincipal extends Composite {
 
 	protected void finaReporte5() {
 		// TODO Auto-generated method stub
-		ReporteCuentasXPagar fr5 = new ReporteCuentasXPagar();
+		ReporteCuentasAPagar fr5 = new ReporteCuentasAPagar();
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fr5);
@@ -688,10 +698,19 @@ public class MenuPrincipal extends Composite {
 		this.panel.getGrid().setWidget(1, 0, fr8);
 		
 	}
+	
+	protected void finaReporte9() {
+		// TODO Auto-generated method stub
+		ReporteSolucionesHab fr9 = new ReporteSolucionesHab();
+		this.panel.getGrid().setWidth("1000");
+		this.panel.getGrid().clearCell(1, 0);
+		this.panel.getGrid().setWidget(1, 0, fr9);
+		
+	}
 
 	protected void finaReporte4() {
 		// TODO Auto-generated method stub
-		ReportePagosRealizados fr4 = new ReportePagosRealizados();
+		ReportePagosProv fr4 = new ReportePagosProv();
 		this.panel.getGrid().setWidth("1000");
 		this.panel.getGrid().clearCell(1, 0);
 		this.panel.getGrid().setWidget(1, 0, fr4);

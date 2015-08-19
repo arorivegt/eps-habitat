@@ -39,7 +39,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
-public class MyPaginationDataGrid_ReporteCompras<T> extends PagingDataGrid_ReporteCompras<T>{
+public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid_ReporteCuentasAPagar<T>{
      
     private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
@@ -56,27 +56,14 @@ public class MyPaginationDataGrid_ReporteCompras<T> extends PagingDataGrid_Repor
         dataGrid.addColumn(checkColumn,"Select");
         dataGrid.setColumnWidth(checkColumn, 70, Unit.PX);
  
-        Column<T, String> nomMaterial = new Column<T, String>(new TextCell()) {
+        Column<T, String> column5 = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxValeBeneficiario) object).getVale().getIdVale());
+                return String.valueOf(((AuxValeBeneficiario) object).getProveedor().getNomProveedor());
             }
         };
-        dataGrid.addColumn(nomMaterial, "Id Vale");
-        dataGrid.setColumnWidth(nomMaterial, 20, Unit.PCT); 
-
-        
-        Column<T, String> aprobado = new Column<T, String>(
-                new EditTextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxValeBeneficiario) object).getVale().getAprobado());
-            }
-        };
-
-        dataGrid.addColumn(aprobado, "Estado Vale");        
-        dataGrid.setColumnWidth(aprobado, 20, Unit.PCT);
-
+        dataGrid.addColumn(column5, "Proveedor");
+        dataGrid.setColumnWidth(column5, 20, Unit.PCT);
         
         Column<T, String> nomAfiliado = new Column<T, String>(
                 new EditTextCell()) {
@@ -103,15 +90,7 @@ public class MyPaginationDataGrid_ReporteCompras<T> extends PagingDataGrid_Repor
        
  
         // Codigo Uno.
-        Column<T, String> cantidad = new Column<T, String>(new EditTextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxValeBeneficiario) object).getVale().getFechaVale());
-            }
-        };
-        dataGrid.addColumn(cantidad, "Fecha Vale");
-        dataGrid.setColumnWidth(cantidad, 20, Unit.PCT);
-        
+               
         
         Column<T, String> precioUnitario = new Column<T, String>(new EditTextCell()) {
             @Override
@@ -119,17 +98,10 @@ public class MyPaginationDataGrid_ReporteCompras<T> extends PagingDataGrid_Repor
                 return String.valueOf(((AuxValeBeneficiario) object).getVale().getTotalVale());
             }
         };
-        dataGrid.addColumn(precioUnitario, "Total Vale");
+        dataGrid.addColumn(precioUnitario, "Total a Pagar");
         dataGrid.setColumnWidth(precioUnitario, 20, Unit.PCT);
         
-        Column<T, String> column5 = new Column<T, String>(new EditTextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxValeBeneficiario) object).getProveedor().getNomProveedor());
-            }
-        };
-        dataGrid.addColumn(column5, "Proveedor");
-        dataGrid.setColumnWidth(column5, 20, Unit.PCT);
+        
         
        /* Column<T, String> columna5 = new Column<T, String>(new EditTextCell()) {
             @Override

@@ -162,6 +162,12 @@ public class Formulario_AdminSolucionesFinalizadas extends Composite{
 			absolutePanel.add(button, 671, 29);
 			button.setSize("157px", "30px");
 			
+			Button button_1 = new Button("Send");
+			button_1.setText("Activar Construcción");
+			button_1.setStyleName("finanButton");
+			absolutePanel.add(button_1, 1033, 29);
+			button_1.setSize("157px", "30px");
+			
 			
 			button.addClickHandler(new ClickHandler() {
 				public void onClick(ClickEvent event) {				
@@ -217,5 +223,36 @@ public class Formulario_AdminSolucionesFinalizadas extends Composite{
 			e = new TablaGWT_AdminSoluciones(new ArrayList<AuxSolucion>());
 			grid.setWidget(1, 0,e);
 			e.setSize("1000px", "300px");
+			
+			
+			
+			button2.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent event) {				
+					AuxSolucion aux = e.grid.selectionModel.getSelectedObject();
+					if (aux != null){
+						loginService.Actualizar_EstadoEnConstruccionSolucion(aux.getIdSolucion(), new AsyncCallback<Long>() {
+
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Long result) {
+								// TODO Auto-generated method stub
+								Window.alert("La solución ha cambiado de estado exitosamente");
+							}
+						});
+					}else{
+						Window.alert("Debes de Seleccionar una Solucion");
+					}
+					
+					}
+
+					
+					
+				
+			});
 		}
 }

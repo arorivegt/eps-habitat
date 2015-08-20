@@ -16,6 +16,8 @@ public class AuxValeBeneficiario implements IsSerializable{
 	AuxSolucion solucion;
 	
 	Double totalPagar;
+	
+	Double cantidadMat;
 
 	
 	
@@ -65,6 +67,14 @@ public class AuxValeBeneficiario implements IsSerializable{
 
 	public void setTotalPagar(Double totalPagar) {
 		this.totalPagar = totalPagar;
+	}
+
+	public Double getCantidadMat() {
+		return cantidadMat;
+	}
+
+	public void setCantidadMat(Double cantidadMat) {
+		this.cantidadMat = cantidadMat;
 	}
 	
 	

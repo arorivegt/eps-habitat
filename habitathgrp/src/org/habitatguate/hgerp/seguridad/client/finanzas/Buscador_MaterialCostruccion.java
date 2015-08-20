@@ -181,6 +181,7 @@ public class Buscador_MaterialCostruccion extends Composite{
 				
 			loginService.Insertar_MaterialCostruccionAfiliadoProveedor(selectProveedor.getIdProveedor(),suggestBox2.getText(),selectMaterial.getUnidadMedida(), Double.valueOf(textBox_1.getText()),selectMaterial.getIdProducto(),
 					selectProveedor.getAuxAfiliado().getIdAfiliado(),
+					selectMaterial.getIdCatalogoMaterial(),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 

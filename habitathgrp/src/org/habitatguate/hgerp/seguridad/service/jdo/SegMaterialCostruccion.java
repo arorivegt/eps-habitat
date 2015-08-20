@@ -26,6 +26,8 @@ public class SegMaterialCostruccion {
 	private Date fechaIngreso;
 	@Persistent
 	private String idProducto;
+	@Persistent
+	private String idCatalogoMaterial;
 	
 	private SegProveedor proveedor;
 	
@@ -71,6 +73,13 @@ public class SegMaterialCostruccion {
 	public void setIdProducto(String idProducto) {
 		this.idProducto = idProducto;
 	}
+	public String getIdCatalogoMaterial() {
+		return idCatalogoMaterial;
+	}
+	public void setIdCatalogoMaterial(String idCatalogoMaterial) {
+		this.idCatalogoMaterial = idCatalogoMaterial;
+	}
+	
 	
 	
 }

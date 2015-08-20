@@ -11,6 +11,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.cell.client.CheckboxCell;
@@ -71,7 +72,21 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                 };
         dataGrid.addColumn(checkColumn,"Selección");
         dataGrid.setColumnWidth(checkColumn, 70, Unit.PX);
-    	
+        
+        Header<String> cantidadTotal = new Header<String>(new TextCell()) {
+            @Override
+            public String getValue() {
+              List<AuxSolucion> items = (List<AuxSolucion>) dataGrid.getVisibleItems();
+              
+              if (items.size() == 0) {
+                return "";
+              } else {
+                double totalAge = items.size();
+                             
+                return "Tot:" + totalAge;
+              }
+            }
+          };
     	
     	Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
             @Override
@@ -79,7 +94,7 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                 return String.valueOf(++actual);
             }
         };
-        dataGrid.addColumn(codContableColumn, "Correlativo");
+        dataGrid.addColumn(codContableColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Correlativo")), cantidadTotal);
         dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
         
         

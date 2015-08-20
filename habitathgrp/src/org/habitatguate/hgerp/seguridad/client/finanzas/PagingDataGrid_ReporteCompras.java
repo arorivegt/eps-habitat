@@ -52,7 +52,7 @@ public abstract class PagingDataGrid_ReporteCompras<T> extends Composite {
 	T objectoEliminado = null;
     public PagingDataGrid_ReporteCompras() {
         initWidget(dock);
-        dataGrid = new DataGrid<T>(30,
+        dataGrid = new DataGrid<T>(10000000,
                 GWT.<TablaResources> create(TablaResources.class));
     //    dataGrid.setWidth("100%");
         dataGrid.setSize("1100px", "300px");

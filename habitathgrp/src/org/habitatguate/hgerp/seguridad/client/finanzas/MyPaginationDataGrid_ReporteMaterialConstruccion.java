@@ -40,7 +40,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  * MyPaginationDataGrid extends  para agregar columnas dentro del grid para implementación del  metodo initTableColumns()
  */
-public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid_ReporteCuentasAPagar<T>{
+public class MyPaginationDataGrid_ReporteMaterialConstruccion<T> extends PagingDataGrid_ReporteMaterialConstruccion<T>{
      
     private final SqlServiceAsync loginService = GWT.create(SqlService.class); 
     @Override
@@ -56,7 +56,7 @@ public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid
                 };
         dataGrid.addColumn(checkColumn,"Select");
         dataGrid.setColumnWidth(checkColumn, 70, Unit.PX);
- 
+        
         Column<T, String> column5 = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
@@ -76,8 +76,26 @@ public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid
 
         dataGrid.addColumn(nomAfiliado, "Afiliado");        
         dataGrid.setColumnWidth(nomAfiliado, 20, Unit.PCT);
-
         
+        Column<T, String> idMaterial = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxValeBeneficiario) object).getMaterialCostruccion().getIdCatalogoMaterial());
+            }
+        };
+        dataGrid.addColumn(idMaterial, "Codigo Catalogo Material");
+        dataGrid.setColumnWidth(idMaterial, 20, Unit.PCT);
+        
+ 
+        Column<T, String> nomMaterial = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxValeBeneficiario) object).getVale().getIdVale());
+            }
+        };
+        dataGrid.addColumn(nomMaterial, "Codigo Vale");
+        dataGrid.setColumnWidth(nomMaterial, 20, Unit.PCT); 
+     
         Column<T, String> unidadMetrica = new Column<T, String>(
                 new EditTextCell()) {
             @Override
@@ -91,9 +109,25 @@ public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid
        
  
         // Codigo Uno.
-               
+        Column<T, String> cantidad = new Column<T, String>(new EditTextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxValeBeneficiario) object).getVale().getFechaVale());
+            }
+        };
+        dataGrid.addColumn(cantidad, "Fecha Vale");
+        dataGrid.setColumnWidth(cantidad, 20, Unit.PCT);
+
         
-        Header<String> totalAPagar = new Header<String>(new TextCell()) {
+        Column<T, String> aprobado = new Column<T, String>(
+                new EditTextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxValeBeneficiario) object).getMaterialCostruccion().getPrecioUnit());
+            }
+        };
+        
+        Header<String> promPrecio = new Header<String>(new TextCell()) {
             @Override
             public String getValue() {
               List<AuxValeBeneficiario> items = (List<AuxValeBeneficiario>) dataGrid.getVisibleItems();
@@ -101,24 +135,78 @@ public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid
               if (items.size() == 0) {
                 return "";
               } else {
-            	  double totalAge = 0.0;
-                  
-                  for (AuxValeBeneficiario item : items) {  	
-                    totalAge += item.getVale().getTotalVale();
-                  }
-                             
-                return "Tot:" + totalAge;
+                double totalAge = 0.0;
+                
+                for (AuxValeBeneficiario item : items) {  	
+                  totalAge += item.getMaterialCostruccion().getPrecioUnit();
+                }
+                
+                return "" + totalAge/ items.size();
               }
             }
           };
         
+        
+
+        dataGrid.addColumn(aprobado,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario")), promPrecio);
+        dataGrid.setColumnWidth(aprobado, 20, Unit.PCT);
+        
+        Header<String> cantidadTotal = new Header<String>(new TextCell()) {
+            @Override
+            public String getValue() {
+              List<AuxValeBeneficiario> items = (List<AuxValeBeneficiario>) dataGrid.getVisibleItems();
+              
+              if (items.size() == 0) {
+                return "";
+              } else {
+                double totalAge = 0.0;
+                
+                for (AuxValeBeneficiario item : items) {  	
+                  totalAge += item.getCantidadMat();
+                }
+                
+                return "" + totalAge;
+              }
+            }
+          };
+        
+        Column<T, String> cantidad1 = new Column<T, String>(new EditTextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxValeBeneficiario) object).getCantidadMat());
+            }
+        };
+        dataGrid.addColumn(cantidad1,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Cantidad")), cantidadTotal);
+        dataGrid.setColumnWidth(cantidad1, 20, Unit.PCT);
+        
+        
+        Header<String> costoTotal = new Header<String>(new TextCell()) {
+            @Override
+            public String getValue() {
+              List<AuxValeBeneficiario> items = (List<AuxValeBeneficiario>) dataGrid.getVisibleItems();
+              
+              if (items.size() == 0) {
+                return "";
+              } else {
+                double totalAge = 0.0;
+                
+                for (AuxValeBeneficiario item : items) {  	
+                  totalAge += item.getTotalPagar();
+                }
+                
+                return "" + totalAge;
+              }
+            }
+          };
+        
+        
         Column<T, String> precioUnitario = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxValeBeneficiario) object).getVale().getTotalVale());
+                return String.valueOf(((AuxValeBeneficiario) object).getTotalPagar());
             }
         };
-        dataGrid.addColumn(precioUnitario, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total A Pagar")), totalAPagar);
+        dataGrid.addColumn(precioUnitario,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total Compra")), costoTotal);
         dataGrid.setColumnWidth(precioUnitario, 20, Unit.PCT);
         
         

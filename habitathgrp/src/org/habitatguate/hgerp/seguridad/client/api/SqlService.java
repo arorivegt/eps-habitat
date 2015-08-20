@@ -79,7 +79,7 @@ public interface SqlService extends RemoteService{
 			 String URLRTU,
 			 String observacionDistri
 			); 
-	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado);
+	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado,String idCatalogoMaterial);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);
 	Long Insertar_UnicoDetalleSolucion(Long idSolucion,AuxDetallePlantillaSolucion auxDetalle);
 	Long Insertar_UnicoHistorialSolucion(Long idSolucion,String idVale,AuxDetallePlantillaSolucion auxDetalle);
@@ -199,4 +199,6 @@ public interface SqlService extends RemoteService{
 	List<AuxHistorialPagoProv> Consulta_PagosProvGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
 	List<AuxSolucion> Consulta_SolucionesHabitacionalesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
 	List<AuxValeBeneficiario> Consulta_CuentaAPagarProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
+	List<AuxValeBeneficiario> Consulta_MaterialCostruccionGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial, boolean checkRange);
+	
 }

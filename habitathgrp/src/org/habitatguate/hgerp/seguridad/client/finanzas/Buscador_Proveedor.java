@@ -165,7 +165,10 @@ public class Buscador_Proveedor extends Composite{
 			String url = total.get(0).getURLFileRTU();
 			
 			if (!url.equals("")){
-				Window.open(url, "_black_", "");
+				int fin = url.indexOf("type=");
+				String urlFinal = url.substring(0, fin-2);
+				Window.open(urlFinal, "_blank", "");
+				
 			}else{
 				Window.alert("El proveedor no tiene ingresado el RTU");
 			}
@@ -183,7 +186,9 @@ public class Buscador_Proveedor extends Composite{
 			String url = total.get(0).getURLFileConvenio();
 			
 			if (!url.equals("")){
-				Window.open(url, "_black_", "");
+				int fin = url.indexOf("type=");
+				String urlFinal = url.substring(0, fin-2);
+				Window.open(urlFinal, "_blank", "");
 			}else{
 				Window.alert("El proveedor aun no tiene convenio subido");
 			}

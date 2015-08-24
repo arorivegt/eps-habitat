@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ExportAs
  */
-@WebServlet("/ExportComparativoPrecios")
-public class ExportComparativoPrecios extends HttpServlet {
+@WebServlet("/ExportRerporteDeMateriales")
+public class ExportReporteDeMateriales extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    public ExportComparativoPrecios() {
+    public ExportReporteDeMateriales() {
         super();
     }
 
@@ -29,10 +29,19 @@ public class ExportComparativoPrecios extends HttpServlet {
 			InfoComparativoPreciosXml n = new  InfoComparativoPreciosXml();
 			
 			response.setContentType("application/vnd.ms-excel");
-			response.setHeader("Content-Disposition", "inline; Filename=ComparativoPrecios.xls");
+			response.setHeader("Content-Disposition", "inline; Filename=ReporteComprasProv.xls");
 			
-			String itemConstruccion 				= request.getParameter("itemConstruccion");
 			String idAfiliado 				= request.getParameter("idAfiliado");
+			String filter 				= request.getParameter("filter");
+			String idProveedor 				= request.getParameter("idProveedor");
+			String anioFin 				= request.getParameter("anioFin");
+			String trimestre 				= request.getParameter("trimestre");
+			String fechaInicio 				= request.getParameter("fechaInicio");
+			String fechaFIn 				= request.getParameter("fechaFIn");
+			String checkRange 				= request.getParameter("checkRange");
+			String idMaterialConstruccion 	= request.getParameter("idMaterialConstruccion");
+
+			
 			
 
 			String  xmlFinal 			= "";
@@ -44,9 +53,17 @@ public class ExportComparativoPrecios extends HttpServlet {
 										+ "</x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets>"
 										+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 			try{
-				xmlFinal 				= inicio
-										+ n.Bancos(itemConstruccion,idAfiliado);
+				
+				
+				
+				
+				
+					xmlFinal 				= inicio
+							+ n.ReporteDeMateriales(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idMaterialConstruccion, Boolean.valueOf(checkRange));
+				
+				
 			}catch(Exception e){
+				System.out.println(e.toString());
 				xmlFinal 				= inicio;
 			}
 			

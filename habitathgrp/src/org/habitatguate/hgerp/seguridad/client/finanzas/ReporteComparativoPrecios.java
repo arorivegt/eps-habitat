@@ -29,6 +29,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FormPanel;
 import com.google.gwt.user.client.ui.Grid;
@@ -63,6 +64,7 @@ public class ReporteComparativoPrecios extends Composite {
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
     private Label lblProveedor;
+    private Button button_1;
     
     
     public ReporteComparativoPrecios(){
@@ -178,6 +180,11 @@ public class ReporteComparativoPrecios extends Composite {
 		lblBusquedaPor.setSize("179px", "13px");
 		absolutePanel.add(lblBusquedaPor, 10, 10);
 		
+		button_1 = new Button("Send");
+		button_1.setText("Exportar Excel");
+		button_1.setStyleName("finanButton");
+		absolutePanel.add(button_1, 1019, 16);
+		button_1.setSize("157px", "30px");
 		
 		formPanel = new FormPanel();
 
@@ -205,6 +212,9 @@ public class ReporteComparativoPrecios extends Composite {
 				
 			}
 		});
+		
+		
+		
 		Busqueda.setSize("103px", "78px");
 		
 		lblProveedor = new Label("afiliado");
@@ -213,6 +223,19 @@ public class ReporteComparativoPrecios extends Composite {
 		lblProveedor.setSize("278px", "19px");
 		
 	
+		button_1.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				String itemConstruccion = listItems.getValue(listItems.getSelectedIndex());
+				String idAfiliado		= listEstado.getValue(listEstado.getSelectedIndex());
+				System.out.println("nelson "+ itemConstruccion + idAfiliado);
+				
+				
+				
+				formPanel.setAction("/ExportComparativoPrecios?idAfiliado="+idAfiliado+"&itemConstruccion="+itemConstruccion);
+				formPanel.submit();
+			}
+		});
+		
 		loginService.ConsultaTodosProductosCatalogo(new AsyncCallback<List<AuxCatalogoMaterial>>() {
     		@Override
     		public void onSuccess(List<AuxCatalogoMaterial> result) {

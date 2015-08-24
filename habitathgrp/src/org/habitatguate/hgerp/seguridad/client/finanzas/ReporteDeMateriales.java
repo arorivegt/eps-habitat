@@ -397,29 +397,22 @@ public class ReporteDeMateriales extends Composite   {
 		
 		button_1.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//List<AuxSolucion> exportar = e.grid.getDataList();
-				//System.out.println(exportar.size());
 				String filter = "";
 				
 				String idAfiliado = listBox_1.getValue(listBox_1.getSelectedIndex());
-				String tipoSolucion = listEstado.getValue(listEstado.getSelectedIndex());
+				String idMaterialConstruccion = listEstado.getValue(listEstado.getSelectedIndex());
 				String trimestre = listaTrimestre.getValue(listaTrimestre.getSelectedIndex());
-				String anio = dateBox.getTextBox().getText();
-				String anioFin = dateBox_1.getTextBox().getText();
-				String montoMin = txt1.getText().equals("") ? "0.0" : txt1.getText();
-/*				String montoMax = txt2.getText().equals("") ? "0.0" : txt2.getText();
+				String fechaInicio = dateBox.getTextBox().getText();
+				String fechaFIn = dateBox_1.getTextBox().getText();
+				String anio = txt1.getText().equals("") ? "0" : txt1.getText();
+				String idProveedor = listBox_2.getValue(listBox_2.getSelectedIndex());
+				boolean checkRange =  simpleCheckBox.getValue();	
 				
+				System.out.println("fecha ini"+fechaInicio+" fin: "+fechaFIn+" check"+checkRange+" estado"+idMaterialConstruccion+ " los valores de la siguiente: "+ idAfiliado + " "+ trimestre + " "+anio + " "+idProveedor);
 				
-				String codDep = listBox_2.getValue(listBox_2.getSelectedIndex());
-				String codMun = listBox_3.getValue(listBox_3.getSelectedIndex());
-				
-				
-				
-				
-				System.out.println("el filtro quedo: "+filter );
-				
-				formPanel.setAction("/ExportResumenCreditos?idAfiliado="+idAfiliado+"&tipoSolucion="+tipoSolucion+"&trimestre="+trimestre+"&anio="+anio+"&anioFin="+anioFin+"&montoMin="+montoMin+"&montoMax="+montoMax+"&codDep="+codDep+"&codMun="+codMun+"&tipoConsulta=1");
-				formPanel.submit();*/
+				formPanel.setAction("/ExportReporteDeMateriales?idAfiliado="+idAfiliado+"&idMaterialConstruccion="+idMaterialConstruccion+"&trimestre="+trimestre+"&fechaInicio="
+				+fechaInicio+"&fechaFIn="+fechaFIn+"&anioFin="+anio+"&idProveedor="+idProveedor+"&checkRange="+checkRange+"&filter="+filter);
+				formPanel.submit();
 			}
 		});
 

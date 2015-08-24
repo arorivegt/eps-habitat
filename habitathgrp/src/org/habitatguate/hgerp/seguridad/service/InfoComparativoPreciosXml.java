@@ -9,6 +9,7 @@ import java.util.List;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
@@ -23,7 +24,7 @@ public class InfoComparativoPreciosXml {
 		private String  CuerpoEncabezado 								 = "";
 		private String  CuerpoTabla 								 = "";
 	
-	 	public String Bancos(String idItemMaterial )
+	 	public String Bancos(String idItemCostruccion, String afiliado )
 	 	{
 	 		String mesPlanilla 			=	"";
 			DecimalFormat df 			= new DecimalFormat();
@@ -35,21 +36,29 @@ public class InfoComparativoPreciosXml {
 
 	 		xmlFinal = "</tbody></table></body></html>";	
 	 		
-	 		List<AuxAfiliado>result =  finanzasService.Consulta_ComparativoPrecios(idItemMaterial);
+	 		List<AuxMaterialCostruccion>result =  finanzasService.Consulta_ComparativoPreciosGenerica(idItemCostruccion, afiliado);
 
  			
-	 			CuerpoEncabezado+= "<td>"+"Proveedor-Afiliado"+"</td>"
-			 					+ "<td>"+"Precio"+"</td>";
+	 			CuerpoEncabezado+= "<td>"+"Codigo Material"+"</td>"
+			 					+ "<td>"+"Nombre Material"+"</td>"
+			 					+ "<td>"+"Proveedor"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Precio Unitario"+"</td>"
+			 					+ "<td>"+"Unidad de medida"+"</td>";
 
 	 		
 	 		//Tabla
 	 		System.out.println("Afiliados"+ result.size());
-	 		for(AuxAfiliado e:result)
+	 		for(AuxMaterialCostruccion e:result)
 	 		{
 	 			
 	 			CuerpoTabla += "<tr>"
-	 							+ "<td>"+e.getNomAfiliado()+ " - "+e.getListaProveedores().get(0).getNomProveedor()+"</td>"
-			 					+ "<td>"+e.getListaProveedores().get(0).getListaMateriales().get(0).getPrecioUnit()+"</td>"
+	 							+ "<td>"+e.getIdMaterialConstruccion()+"</td>"
+			 					+ "<td>"+e.getNomMaterialCostruccion()+"</td>"
+			 					+ "<td>"+e.getProveedor().getNomProveedor()+"</td>"
+			 					+ "<td>"+e.getProveedor().getAuxAfiliado().getNomAfiliado()+"</td>"
+			 					+ "<td>"+e.getPrecioUnit()+"</td>"
+			 					+ "<td>"+e.getUnidadMetrica()+"</td>"
 			 					+ "</tr>";
 	 		}
 	 		
@@ -411,6 +420,62 @@ public class InfoComparativoPreciosXml {
 	 							+ "<td>"+e.getSolucion().getBeneficiario().getAfiliado().getNomAfiliado()+"</td>"
 	 							+ "<td>"+e.getSolucion().getBeneficiario().getNomBeneficiario()+"</td>"
 	 							+ "<td>"+e.getVale().getTotalVale()+"</td>"
+			 					+ "</tr>";
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	public String ReporteDeMateriales(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial, boolean checkRange )
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxValeBeneficiario> result2 = finanzasService.Consulta_MaterialCostruccionGenerica(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idCatalogoMaterial, checkRange);
+ 			
+	 		System.out.println("Datos"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Proveedor"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Codigo Catálogo Material"+"</td>"
+			 					+ "<td>"+"Codigo Vale"+"</td>"
+			 					+ "<td>"+"Beneficiario"+"</td>"
+			 					+ "<td>"+"Fecha Vale"+"</td>"		
+			 					+ "<td>"+"Precio Unitario"+"</td>"
+			 					+ "<td>"+"Cantidad"+"</td>"
+			 					+ "<td>"+"Total Compra"+"</td>";
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxValeBeneficiario e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>"+e.getProveedor().getNomProveedor()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getAfiliado().getNomAfiliado()+"</td>"
+	 							+ "<td>"+e.getMaterialCostruccion().getIdCatalogoMaterial()+"</td>"
+	 							+ "<td>"+e.getVale().getIdVale()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getNomBeneficiario()+"</td>"
+	 							+ "<td>"+e.getVale().getFechaVale()+"</td>"
+	 							+ "<td>"+e.getMaterialCostruccion().getPrecioUnit()+"</td>"
+	 							+ "<td>"+e.getCantidadMat()+"</td>"
+	 							+ "<td>"+e.getTotalPagar()+"</td>"
 			 					+ "</tr>";
 	 			correlativo++;
 	 		}

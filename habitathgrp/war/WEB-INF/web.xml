@@ -254,6 +254,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
         <servlet-name>ExportReporteCuentasAPagar</servlet-name>  
         <url-pattern>/ExportReporteCuentasAPagar</url-pattern>  
  </servlet-mapping>
+ 
+    <servlet>
+    <servlet-name>ExportReporteDeMateriales</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportReporteDeMateriales</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportReporteDeMateriales</servlet-name>  
+        <url-pattern>/ExportReporteDeMateriales</url-pattern>  
+ </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

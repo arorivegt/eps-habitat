@@ -217,7 +217,43 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <servlet-mapping>  
         <servlet-name>ExportResumenCreditos</servlet-name>  
         <url-pattern>/ExportResumenCreditos</url-pattern>  
- </servlet-mapping> 
+ </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>ExportReporteComprasProv</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportReporteComprasProv</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportReporteComprasProv</servlet-name>  
+        <url-pattern>/ExportReporteComprasProv</url-pattern>  
+ </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>ExportReportePagosProv</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportReportePagosProv</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportReportePagosProv</servlet-name>  
+        <url-pattern>/ExportReportePagosProv</url-pattern>  
+ </servlet-mapping>
+ 
+    <servlet>
+    <servlet-name>ExportReporteSolucionesHab</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportReporteSolucionesHab</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportReporteSolucionesHab</servlet-name>  
+        <url-pattern>/ExportReporteSolucionesHab</url-pattern>  
+ </servlet-mapping>
+ 
+  <servlet>
+    <servlet-name>ExportReporteCuentasAPagar</servlet-name>
+    <servlet-class>org.habitatguate.hgerp.seguridad.service.ExportReporteCuentasAPagar</servlet-class>
+  </servlet>
+  <servlet-mapping>  
+        <servlet-name>ExportReporteCuentasAPagar</servlet-name>  
+        <url-pattern>/ExportReporteCuentasAPagar</url-pattern>  
+ </servlet-mapping>
 
   <!-- Default page to serve -->
   <welcome-file-list>

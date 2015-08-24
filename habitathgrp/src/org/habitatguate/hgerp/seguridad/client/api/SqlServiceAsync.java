@@ -478,6 +478,10 @@ public interface SqlServiceAsync {
 			boolean checkRange,
 			AsyncCallback<List<AuxValeBeneficiario>> callback);
 
+	void Consulta_ComparativoPreciosGenerica(String idItemCostruccion,
+			String afiliado,
+			AsyncCallback<List<AuxMaterialCostruccion>> callback);
+
 
 
 

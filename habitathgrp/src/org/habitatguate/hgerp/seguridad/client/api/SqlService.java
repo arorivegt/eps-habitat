@@ -191,6 +191,7 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionAfiliado(Long idAfiliado, String anio, String anioFin);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionRango(double minimo, double maximos, String anio, String anioFin);
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionTipoSolucion(String tipoSolucion, String anio, String anioFin);
+	List<AuxMaterialCostruccion> Consulta_ComparativoPreciosGenerica(String idItemCostruccion,String afiliado);
 	
 	
 	List<AuxSolucion> Consulta_SolucionesGeneralesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);

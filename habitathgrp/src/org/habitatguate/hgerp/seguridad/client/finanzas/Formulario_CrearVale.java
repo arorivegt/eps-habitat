@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosService;
 import org.habitatguate.hgerp.seguridad.client.api.RecursosHumanosServiceAsync;
@@ -20,6 +21,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxDetalleSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxVale;
 import org.habitatguate.hgerp.util.ConvertDate;
 
 import com.google.gwt.cell.client.FieldUpdater;
@@ -55,6 +57,7 @@ public class Formulario_CrearVale extends Composite {
     private Double costoAcumulado = 0.0;
     private Date fechaActual;
     public int index = 0;
+    public int checkSelect = 0;
     TablaGWT_Vale e = null;
 
 
@@ -373,6 +376,7 @@ public class Formulario_CrearVale extends Composite {
 	        public void run() {
        			if (index < e.grid.getListMateriales().size()){
 						final AuxDetallePlantillaSolucion aux = e.grid.getListMateriales().get(index);
+						if (e.grid.selectionModel.isSelected(aux)){
 						loginService.Actualizar_DetalleSolucion(aux.getIdDetallePlantillaSolucion(), textBox_2.getText(),selectNuevoBene.getSolucion().getIdSolucion(), new AsyncCallback<Long>() {
 							
 							@Override
@@ -418,6 +422,7 @@ public class Formulario_CrearVale extends Composite {
 								
 							}
 						});
+						}
        			}
        			else{
     				this.cancel();
@@ -451,7 +456,7 @@ public class Formulario_CrearVale extends Composite {
 									index = 0;
 									costoAcumulado = 0.0;
 									loginService.GenerarIdVale(textBox_2.getText(),new AsyncCallback<String>() {
-										
+									
 										@Override
 										public void onSuccess(String result) {
 											// TODO Auto-generated method stub

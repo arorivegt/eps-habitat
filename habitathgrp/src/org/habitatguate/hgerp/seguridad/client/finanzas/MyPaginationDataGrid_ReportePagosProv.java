@@ -140,7 +140,7 @@ public class MyPaginationDataGrid_ReportePagosProv<T> extends PagingDataGrid_Rep
         Column<T, String> depAfiliado = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxHistorialPagoProv) object).getValorPago());
+                return String.valueOf(((AuxHistorialPagoProv) object).getValorCancelado());
             }
         };
         dataGrid.addColumn(depAfiliado, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total Cancelado")), totalCancelado);

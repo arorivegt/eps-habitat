@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
 
 
 public class InfoComparativoPreciosXml {
@@ -199,6 +201,216 @@ public class InfoComparativoPreciosXml {
 	 							+ "<td>"+e.getValorContrato()+"</td>"
 	 							+ "<td>"+String.valueOf(e.getValorContrato() - e.getCostoTotal())+"</td>"
 	 							+ "<td>"+e.getCostoMaterial()+"</td>"
+			 					+ "</tr>";
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	
+	 	public String ReporteComprasProv(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange )
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxValeBeneficiario> result2 = finanzasService.Consulta_ComprasProvGenerica2(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, estado, checkRange);
+ 			
+	 		System.out.println("Datos"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Id Vale"+"</td>"
+			 					+ "<td>"+"Estado Vale"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Beneficiario"+"</td>"
+			 					+ "<td>"+"Fecha Vale"+"</td>"
+			 					+ "<td>"+"Total Vale"+"</td>"		
+			 					+ "<td>"+"Proveedor"+"</td>";
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxValeBeneficiario e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>"+e.getVale().getIdVale()+"</td>"
+	 							+ "<td>"+e.getVale().getAprobado()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getAfiliado().getNomAfiliado()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getNomBeneficiario()+"</td>"
+	 							+ "<td>"+e.getVale().getFechaVale()+"</td>"
+	 							+ "<td>"+e.getVale().getTotalVale()+"</td>"
+	 							+ "<td>"+e.getProveedor().getNomProveedor()+"</td>"
+			 					+ "</tr>";
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	public String ReportePagosProv(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange )
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxHistorialPagoProv> result2 = finanzasService.Consulta_PagosProvGenerica(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, estado, checkRange);
+ 			
+	 		System.out.println("Datos"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Codigo Pago"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Proveedor"+"</td>"
+			 					+ "<td>"+"Tipo de Operación"+"</td>"
+			 					+ "<td>"+"Fecha Pago"+"</td>"
+			 					+ "<td>"+"Total Cancelado"+"</td>"		
+			 					+ "<td>"+"Retenido por donación"+"</td>";
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxHistorialPagoProv e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>'"+e.getIdHistorialPagoProv()+"</td>"
+	 							+ "<td>"+e.getNombreAfiliado()+"</td>"
+	 							+ "<td>"+e.getNombreProveedor()+"</td>"
+	 							+ "<td>"+e.getTipoOperacion()+"</td>"
+	 							+ "<td>"+e.getFechaSolicitud()+"</td>"
+	 							+ "<td>"+e.getValorCancelado()+"</td>"
+	 							+ "<td>"+e.getRetenidoDonacion()+"</td>"
+			 					+ "</tr>";
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	public String SolucionesHab(String idAfiliado,String anio, String anioFin, String minimo, String maximos, String filter )
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxSolucion> result2 = finanzasService.Consulta_SolucionesHabitacionalesGenerica(idAfiliado, anio, anioFin, Double.valueOf(minimo), Double.valueOf(maximos), filter);
+ 			
+	 		System.out.println("Datos"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Numero Solución"+"</td>"
+			 					+ "<td>"+"Beneficiario"+"</td>"
+			 					+ "<td>"+"Diseño"+"</td>"
+			 					+ "<td>"+"Dirección"+"</td>"
+			 					+ "<td>"+"Departamento"+"</td>"
+			 					+ "<td>"+"Teléfono"+"</td>";
+			 						 		
+	 			CuerpoEncabezado += "<td>"+"Costo Total Sumatoria"+"</td>"
+	 					+ "<td>"+"Costo Total Promedio"+"</td>";
+
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxSolucion e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>'"+e.getIdSolucion()+"</td>"
+	 							+ "<td>"+e.getBeneficiario().getNomBeneficiario()+"</td>"
+	 							+ "<td>"+e.getDisenio()+"</td>"
+	 							+ "<td>"+e.getBeneficiario().getDirBeneficiario()+"</td>"
+	 							+ "<td>"+e.getDepartamentoSolucion()+"</td>"
+	 							+ "<td>"+e.getBeneficiario().getTelBeneficiario()+"</td>";
+	 			
+	 			
+	 			CuerpoTabla +=  "<td>"+e.getCostoTotal()+"</td>"
+	 					      +"<td>"+e.getCostoTotal()+"</td>";
+	 							
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	public String ReporteCuentasAPagar(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange )
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxValeBeneficiario> result2 = finanzasService.Consulta_CuentaAPagarProvGenerica2(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, estado, checkRange);
+ 			
+	 		System.out.println("Datos"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Proveedor"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Beneficiario"+"</td>"
+			 					+ "<td>"+"Total a Pagar"+"</td>";
+
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxValeBeneficiario e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>"+e.getProveedor().getNomProveedor()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getAfiliado().getNomAfiliado()+"</td>"
+	 							+ "<td>"+e.getSolucion().getBeneficiario().getNomBeneficiario()+"</td>"
+	 							+ "<td>"+e.getVale().getTotalVale()+"</td>"
 			 					+ "</tr>";
 	 			correlativo++;
 	 		}

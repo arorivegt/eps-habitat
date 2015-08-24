@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBDPuesto;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCatalogoMaterial;
 import org.habitatguate.hgerp.seguridad.client.principal.Loading;
@@ -55,13 +56,13 @@ public class ReporteComparativoPrecios extends Composite {
 	public List <AuxAfiliado> BDAfiliados = new ArrayList<AuxAfiliado>();	
     private Loading load ;
 	private AbsolutePanel absolutePanel_1;
-	private Label lblSeleccioneLosEmpleados;
 	
 	private long idBeneficiario;
-	TablaGWT_SolucionGeneral e = null;
+	TablaGWT_ComparativoPrecios e = null;
 	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+    private Label lblProveedor;
     
     
     public ReporteComparativoPrecios(){
@@ -144,7 +145,7 @@ public class ReporteComparativoPrecios extends Composite {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 29);
 		listBox.setSize("179px", "39px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -157,42 +158,37 @@ public class ReporteComparativoPrecios extends Composite {
 		
 		
 		listItems = new ListBox();
-		absolutePanel.add(listItems, 205, 19);
+		absolutePanel.add(listItems, 195, 34);
 		listItems.setSize("250px", "34px");
 		listItems.setVisible(true);
 		
 		listEstado = new ListBox();
-		listEstado.addItem("empleado activo","0");
-		listEstado.addItem("empleado inactivo","1");
-		listEstado.addItem("posible empleado","2");
-		listEstado.addItem("practicante","3");
-		listEstado.addItem("interino","4");
 		listEstado.setStyleName("gwt-TextBox2");
-		listEstado.setVisible(false);
-		absolutePanel.add(listEstado, 205, 16);
+		listEstado.setVisible(true);
+		absolutePanel.add(listEstado, 479, 29);
 		listEstado.setSize("179px", "39px");
 		
 		lbDato1 = new Label("Nombre del Material de Construcción");
 		lbDato1.setStyleName("label");
-		lbDato1.setSize("368px", "19px");
-		absolutePanel.add(lbDato1, 205, 0);
+		lbDato1.setSize("278px", "19px");
+		absolutePanel.add(lbDato1, 195, 4);
 		
 		Label lblBusquedaPor = new Label("Busqueda Por");
 		lblBusquedaPor.setStyleName("label");
 		lblBusquedaPor.setSize("179px", "13px");
-		absolutePanel.add(lblBusquedaPor, 10, 0);
+		absolutePanel.add(lblBusquedaPor, 10, 10);
 		
 		
 		formPanel = new FormPanel();
 
 		formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
 		formPanel.setMethod(FormPanel.METHOD_POST);
-		absolutePanel.add(formPanel, 420, 21);
+		absolutePanel.add(formPanel, 365, 41);
         formPanel.setSize("209px", "44px");
 		
 		
 		Busqueda = new Image("images/pdf.png");
-		absolutePanel.add(Busqueda, 600, 5);
+		absolutePanel.add(Busqueda, 820, 10);
 		Busqueda.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				if(listBox.getItemText(listBox.getSelectedIndex()).equals("Material de Construcción"))
@@ -211,10 +207,10 @@ public class ReporteComparativoPrecios extends Composite {
 		});
 		Busqueda.setSize("103px", "78px");
 		
-		lblSeleccioneLosEmpleados = new Label("Click en el icono para visualizar el reporte");
-		lblSeleccioneLosEmpleados.setStyleName("label");
-		absolutePanel.add(lblSeleccioneLosEmpleados, 700, 5);
-		lblSeleccioneLosEmpleados.setSize("828px", "13px");
+		lblProveedor = new Label("afiliado");
+		lblProveedor.setStyleName("label");
+		absolutePanel.add(lblProveedor, 479, 4);
+		lblProveedor.setSize("278px", "19px");
 		
 	
 		loginService.ConsultaTodosProductosCatalogo(new AsyncCallback<List<AuxCatalogoMaterial>>() {
@@ -222,7 +218,7 @@ public class ReporteComparativoPrecios extends Composite {
     		public void onSuccess(List<AuxCatalogoMaterial> result) {
 			
     			for(AuxCatalogoMaterial aux : result){
-    				listItems.addItem(aux.getNombreMaterial(), aux.getIdCatalogoMaterial());
+    				listItems.addItem(aux.getIdCatalogoMaterial()+" " +aux.getNombreMaterial(), aux.getIdCatalogoMaterial());
     			}
     		}
     		
@@ -232,6 +228,25 @@ public class ReporteComparativoPrecios extends Composite {
     			
     		}
     	});
+		
+		loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+		    public void onFailure(Throwable caught) 
+		    {
+		    }
+		
+			@Override
+		    public void onSuccess(List<AuxAfiliado> result)
+		    {
+				if (!(result.size()==0)) {
+					 listEstado.addItem("Todos los afiliados","0");
+					 for (AuxAfiliado p : result) 
+					    {
+					    	listEstado.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
+					    }
+		    	}
+				
+		    }
+		});
 		
 		initWidget(grid);
 		
@@ -252,17 +267,24 @@ public class ReporteComparativoPrecios extends Composite {
 	
 
 	public void buscar(){
-		System.out.println("idItem "+ listItems.getValue(listItems.getSelectedIndex()));
 		
-	/*	loginService.Consulta_ComparativoPrecios(listItems.getValue(listItems.getSelectedIndex()), new AsyncCallback<List<AuxAfiliado>>() {
+		String itemConstruccion = listItems.getValue(listItems.getSelectedIndex());
+		String idAfiliado		= listEstado.getValue(listEstado.getSelectedIndex());
+		System.out.println("nelson "+ itemConstruccion + idAfiliado);
+		loginService.Consulta_ComparativoPreciosGenerica(itemConstruccion,idAfiliado, new AsyncCallback<List<AuxMaterialCostruccion>>() {
 			
 			@Override
-			public void onSuccess(List<AuxAfiliado> result) {
+			public void onSuccess(List<AuxMaterialCostruccion> result) {
 				// TODO Auto-generated method stub
-				
-				for (AuxAfiliado aux : result){
-					System.out.println(aux.getNomAfiliado());
-				}
+				if(!result.isEmpty()){
+					e = new TablaGWT_ComparativoPrecios(result);
+					grid.setWidget(1, 0,e);
+					e.setSize("1700px", "300px");
+					}else{
+						e = new TablaGWT_ComparativoPrecios(new ArrayList<AuxMaterialCostruccion>());
+						grid.setWidget(1, 0,e);
+						e.setSize("1700px", "300px");
+					}
 				
 			}
 			
@@ -271,10 +293,10 @@ public class ReporteComparativoPrecios extends Composite {
 				// TODO Auto-generated method stub
 				
 			}
-		});*/
+		});
 	//	Window.open("/ExportComparativoPrecios?idItemMaterial="+listItems.getValue(listItems.getSelectedIndex()), "_blank", "");
-		formPanel.setAction("/ExportComparativoPrecios?idItemMaterial="+listItems.getValue(listItems.getSelectedIndex()));
-		formPanel.submit();
+		//formPanel.setAction("/ExportComparativoPrecios?idItemMaterial="+listItems.getValue(listItems.getSelectedIndex()));
+		//formPanel.submit();
 
 		
 	}

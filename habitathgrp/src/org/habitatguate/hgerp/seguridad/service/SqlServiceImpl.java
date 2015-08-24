@@ -6105,6 +6105,43 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		return listaResponse;
 	}
 	
+	public List<AuxMaterialCostruccion> Consulta_ComparativoPreciosGenerica(String idItemCostruccion,String afiliado){
+		List<AuxMaterialCostruccion> listaResponse = new  ArrayList<AuxMaterialCostruccion>();
+		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
+	
+		Query query2 = gestorPersistencia.newQuery(SegMaterialCostruccion.class);
+		query2.setFilter("idCatalogoMaterial == :mat");
+		List<SegMaterialCostruccion> execute2 = (List<SegMaterialCostruccion>)query2.execute(idItemCostruccion);
+		System.out.println("tamaño:"+execute2.size());
+		
+		for(SegMaterialCostruccion aux : execute2){
+			if (aux.getProveedor().getAfiliado().getIdAfiliado().equals(Long.valueOf(afiliado)) || afiliado.equals("0")){
+				AuxMaterialCostruccion nuevo = new AuxMaterialCostruccion();
+				nuevo.setIdMaterialConstruccion(aux.getIdMaterialConstruccion().getId());
+				nuevo.setIdCatalogoMaterial(aux.getIdCatalogoMaterial());
+				nuevo.setNomMaterialCostruccion(aux.getNomMaterialCostruccion());
+				nuevo.setPrecioUnit(aux.getPrecioUnit());
+				nuevo.setUnidadMetrica(aux.getUnidadMetrica());
+				AuxProveedor prov = new AuxProveedor();
+				prov.setIdProveedor(aux.getProveedor().getIdProveedor().getId());
+				prov.setNomProveedor(aux.getProveedor().getNomProveedor());
+				AuxAfiliado afi = new AuxAfiliado();
+				afi.setIdAfiliado(aux.getProveedor().getAfiliado().getIdAfiliado());
+				afi.setNomAfiliado(aux.getProveedor().getAfiliado().getNomAfiliado());
+				prov.setAuxAfiliado(afi);
+				nuevo.setProveedor(prov);
+				listaResponse.add(nuevo);
+				 
+			}
+		}
+		
+		
+		
+
+		
+		
+		return listaResponse;
+	}
 
 	
 	

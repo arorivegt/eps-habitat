@@ -182,12 +182,7 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         dataGrid.addColumn(depAfiliado, "Telefono");
         dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
         
-        Column<T, String> costoMaterial = new Column<T, String>(new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getCostoMaterial());
-            }
-        };
+        
 
           
        

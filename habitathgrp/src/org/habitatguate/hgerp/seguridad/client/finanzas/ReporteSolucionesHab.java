@@ -438,8 +438,8 @@ public class ReporteSolucionesHab extends Composite   {
 		
 		button_1.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
-				//List<AuxSolucion> exportar = e.grid.getDataList();
-				//System.out.println(exportar.size());
+				// TODO Auto-generated method stub
+				
 				String filter = "";
 				
 				String idAfiliado = listBox_1.getValue(listBox_1.getSelectedIndex());
@@ -449,18 +449,19 @@ public class ReporteSolucionesHab extends Composite   {
 				String anioFin = dateBox_1.getTextBox().getText();
 				String montoMin = txt1.getText().equals("") ? "0.0" : txt1.getText();
 				String montoMax = txt2.getText().equals("") ? "0.0" : txt2.getText();
+				String estadoSolucion = listBox_4.getValue(listBox_4.getSelectedIndex());
 				
+				double montoFinal = Double.valueOf(montoMax)-Double.valueOf(montoMin);
 				
 				String codDep = listBox_2.getValue(listBox_2.getSelectedIndex());
 				String codMun = listBox_3.getValue(listBox_3.getSelectedIndex());
 				
 				
-				
-				
-				System.out.println("el filtro quedo: "+filter );
-				
-				formPanel.setAction("/ExportResumenCreditos?idAfiliado="+idAfiliado+"&tipoSolucion="+tipoSolucion+"&trimestre="+trimestre+"&anio="+anio+"&anioFin="+anioFin+"&montoMin="+montoMin+"&montoMax="+montoMax+"&codDep="+codDep+"&codMun="+codMun+"&tipoConsulta=1");
+				formPanel.setAction("/ExportReporteSolucionesHab?idAfiliado="+idAfiliado+"&tipoSolucion="+tipoSolucion+"&trimestre="+trimestre+"&anio="+anio+"&anioFin="+anioFin+"&montoMin="+montoMin+"&montoMax="+montoMax+"&codDep="+codDep+"&codMun="+codMun+"&estadoSolucion="+estadoSolucion);
 				formPanel.submit();
+				
+				
+				
 			}
 		});
 

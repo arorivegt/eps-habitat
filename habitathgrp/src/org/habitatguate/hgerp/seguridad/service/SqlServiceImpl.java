@@ -362,7 +362,8 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 		 Long idAfiliado,
 		 String KeyFileRTU,
 		 String URLRTU,
-		 String observacionDistri
+		 String observacionDistri,
+		 String tipoProveedorGeneral
 		) throws IllegalArgumentException{
 	 Long valor = 0L;
 	final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
@@ -416,6 +417,7 @@ public Long Insertar_ProveedorCompleto(Boolean aprobadoComision,
 	nuevo.setKeyFileRTU(KeyFileRTU);
 	nuevo.setURLFileRTU(URLRTU);
 	nuevo.setObservacionDistribucion(observacionDistri);
+	nuevo.setTipoProveedorGeneral(tipoProveedorGeneral);
 	afi.getProveedor().add(nuevo);
 	
 	try{
@@ -1860,6 +1862,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
 				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
 				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				n.setDPI(p.getBeneficiario().getDPI());
 				AuxAfiliado aux = new AuxAfiliado();
 				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
 				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
@@ -1935,6 +1938,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
 				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
 				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				n.setDPI(p.getBeneficiario().getDPI());
 				AuxAfiliado aux = new AuxAfiliado();
 				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
 				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
@@ -2010,6 +2014,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
 				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
 				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				n.setDPI(p.getBeneficiario().getDPI());
 				AuxAfiliado aux = new AuxAfiliado();
 				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
 				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
@@ -2111,6 +2116,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				n.setNomBeneficiario(p.getBeneficiario().getNomBeneficiario());
 				n.setDirBeneficiario(p.getBeneficiario().getDirBeneficiario());
 				n.setTelBeneficiario(p.getBeneficiario().getTelBeneficiario());
+				n.setDPI(p.getBeneficiario().getDPI());
 				AuxAfiliado aux = new AuxAfiliado();
 				aux.setIdAfiliado(p.getBeneficiario().getAfiliado().getIdAfiliado());
 				aux.setDepartamento(p.getBeneficiario().getAfiliado().getDepartamento());
@@ -2224,6 +2230,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 									n.setNomBeneficiario(p1.getBeneficiario().getNomBeneficiario());
 									n.setDirBeneficiario(p1.getBeneficiario().getDirBeneficiario());
 									n.setTelBeneficiario(p1.getBeneficiario().getTelBeneficiario());
+									n.setDPI(p1.getBeneficiario().getDPI());
 									AuxAfiliado aux = new AuxAfiliado();
 									aux.setIdAfiliado(p1.getBeneficiario().getAfiliado().getIdAfiliado());
 									aux.setDepartamento(p1.getBeneficiario().getAfiliado().getDepartamento());
@@ -2329,6 +2336,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 									n.setNomBeneficiario(p1.getBeneficiario().getNomBeneficiario());
 									n.setDirBeneficiario(p1.getBeneficiario().getDirBeneficiario());
 									n.setTelBeneficiario(p1.getBeneficiario().getTelBeneficiario());
+									n.setDPI(p1.getBeneficiario().getDPI());
 									AuxAfiliado aux = new AuxAfiliado();
 									aux.setIdAfiliado(p1.getBeneficiario().getAfiliado().getIdAfiliado());
 									aux.setDepartamento(p1.getBeneficiario().getAfiliado().getDepartamento());

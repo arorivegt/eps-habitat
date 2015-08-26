@@ -99,6 +99,9 @@ public class SegProveedor implements Serializable{
     private String KeyFileConvenio;
 	@Persistent    
     private String observacionDistribucion;
+	@Persistent    
+    private String tipoProveedorGeneral;
+	
 	
 	
 	@Persistent
@@ -377,6 +380,12 @@ public class SegProveedor implements Serializable{
 	}
 	public void setObservacionDistribucion(String observacionDistribucion) {
 		this.observacionDistribucion =  observacionDistribucion;
+	}
+	public String getTipoProveedorGeneral() {
+		return tipoProveedorGeneral;
+	}
+	public void setTipoProveedorGeneral(String tipoProveedorGeneral) {
+		this.tipoProveedorGeneral = tipoProveedorGeneral;
 	}
 	
 	

@@ -91,7 +91,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
             }
         };
         dataGrid.addColumn(nomParamColumn, "Num. Solucion");        
-        dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
+        dataGrid.setColumnWidth(nomParamColumn, 150, Unit.PX);
         
         
         Column<T, String> nombreBene = new Column<T, String>(
@@ -103,6 +103,16 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
         };
         dataGrid.addColumn(nombreBene, "Beneficiario");        
         dataGrid.setColumnWidth(nombreBene, 20, Unit.PCT);
+        
+        Column<T, String> dpiBene = new Column<T, String>(
+                new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getBeneficiario().getDPI());
+            }
+        };
+        dataGrid.addColumn(dpiBene, "DPI Beneficiario");        
+        dataGrid.setColumnWidth(dpiBene, 150, Unit.PX);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {

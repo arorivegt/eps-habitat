@@ -89,6 +89,7 @@ public class Formulario_Proveedor extends Composite{
 	private String KeyFile ="";
 	private Mensaje mensaje;
 	private String observacionDistri;
+	private String tipoProveedorGeneral;
 	
 	private FormPanel form;
 	private VerticalPanel formElements;
@@ -262,18 +263,18 @@ public class Formulario_Proveedor extends Composite{
 	
 	Label lblRelacionConEl = new Label("Relación con el proveedor");
 	lblRelacionConEl.setStyleName("label");
-	absolutePanel.add(lblRelacionConEl, 10, 588);
+	absolutePanel.add(lblRelacionConEl, 10, 615);
 	lblRelacionConEl.setSize("157px", "19px");
 	
-	Label lblTipoProveedor = new Label("En caso que se le compre actualmente? Que tipo de proveedor es:");
+	Label lblTipoProveedor = new Label("En caso que se le compre actualmente?");
 	lblTipoProveedor.setStyleName("label");
-	absolutePanel.add(lblTipoProveedor, 10, 640);
+	absolutePanel.add(lblTipoProveedor, 10, 661);
 	lblTipoProveedor.setSize("157px", "19px");
 	
 	final TextBox txtTipoProv = new TextBox();
 	txtTipoProv.setStyleName("gwt-TextBox2");
 	txtTipoProv.setMaxLength(100);
-	absolutePanel.add(txtTipoProv, 426, 652);
+	absolutePanel.add(txtTipoProv, 426, 661);
 	txtTipoProv.setSize("227px", "34px");
 	txtTipoProv.setEnabled(false);
 	
@@ -512,18 +513,21 @@ public class Formulario_Proveedor extends Composite{
 	comboBox.addItem("Sociedad", "Sociedad");
 	
 	final ListBox listBox_1 = new ListBox();
-	absolutePanel.add(listBox_1, 200, 598);
+	absolutePanel.add(listBox_1, 198, 615);
 	listBox_1.setSize("211px", "26px");
 	listBox_1.addItem("Se le compra actualmente", "Se le compra actualmente");
 	listBox_1.addItem("Se le ha comprado", "Se le ha comprado");
+	listBox_1.addItem("Periodo de prueba", "Periodo de prueba");
 	listBox_1.addItem("Es nuevo", "Es nuevo");
+	
 	
 
 	final ListBox listBox_2 = new ListBox();
-	absolutePanel.add(listBox_2, 198, 662);
+	absolutePanel.add(listBox_2, 198, 671);
 	listBox_2.setSize("211px", "26px");
 	listBox_2.addItem("Proveedor constante", "Proveedor constante");
 	listBox_2.addItem("Proveedor eventual", "Proveedor eventual");
+	listBox_2.addItem("Presta servicios actualmente", "Presta servicios actualmente");
 	listBox_2.addItem("Otro", "-1");
 	
 	listBox_2.addChangeHandler(new ChangeHandler() {
@@ -666,6 +670,19 @@ public class Formulario_Proveedor extends Composite{
 	absolutePanel.add(textArea_2, 198, 1305);
 	textArea_2.setSize("451px", "34px");
 	
+	final ListBox listBox_7 = new ListBox();
+	absolutePanel.add(listBox_7, 198, 583);
+	listBox_7.setSize("211px", "26px");
+	listBox_7.addItem("Material de Construcción", "1");
+	listBox_7.addItem("Mano de Obra", "2");
+	listBox_7.addItem("Activos Fijos", "3");
+	listBox_7.addItem("Suministro de Oficina", "4");
+	
+	Label lblTipoDeProveedor = new Label("Tipo de Proveedor");
+	lblTipoDeProveedor.setStyleName("label");
+	absolutePanel.add(lblTipoDeProveedor, 10, 589);
+	lblTipoDeProveedor.setSize("157px", "19px");
+	
 	listBox.addClickHandler(new ClickHandler() {
 
         @Override
@@ -788,6 +805,7 @@ public class Formulario_Proveedor extends Composite{
 			tiempoMaximo= textBox_12.getText().equals("") ? 0 : Integer.valueOf(textBox_12.getText());
 			idafiliado = listAfiliados.getValue(listAfiliados.getSelectedIndex()).equals("0L") ? 0L : Long.valueOf(listAfiliados.getValue(listAfiliados.getSelectedIndex()));
 			observacionDistri = textArea_2.getText();
+			tipoProveedorGeneral = listBox_7.getValue(listBox_7.getSelectedIndex());
 			
 			
 			
@@ -797,7 +815,8 @@ public class Formulario_Proveedor extends Composite{
 				Date today=new Date(time.getYear(),time.getMonth(),time.getDate());
 				
 			
-			loginService.Insertar_ProveedorCompleto(false, nomProveedor, numeroNit, dirProveedor, telProveedor, paginaWeb, personaJuridica, razonSocial, actividadEcono, aceptaExencion, relacionConProv, tipoProveedor, tiempoDeTrabajarConHG, Departamentos, Municipios, ubicacionSucursales, productosfrece, disponibilidadProd, servicioEntrega, tiempoEntrega, regimenTributario, observaciones, aceptaDonacion, formaDonacion, porcentDonacion, frecuenciaDonacion, contribuyeEventos, cualesyComoEventos, aceptaCredito, montoMaximo, tiempoMaximo, today,idafiliado,KeyFile,URLFile,observacionDistri,								
+			loginService.Insertar_ProveedorCompleto(false, nomProveedor, numeroNit, dirProveedor, telProveedor, paginaWeb, personaJuridica, razonSocial, actividadEcono, aceptaExencion, relacionConProv, tipoProveedor, tiempoDeTrabajarConHG, Departamentos, Municipios, ubicacionSucursales, productosfrece, disponibilidadProd, servicioEntrega, tiempoEntrega, regimenTributario, observaciones, aceptaDonacion, formaDonacion, porcentDonacion, frecuenciaDonacion, contribuyeEventos, cualesyComoEventos, aceptaCredito, montoMaximo, tiempoMaximo, today,idafiliado,KeyFile,URLFile,observacionDistri
+					,tipoProveedorGeneral,
 						new AsyncCallback<Long>() {
 							
 							@Override

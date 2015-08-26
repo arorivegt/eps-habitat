@@ -77,7 +77,8 @@ public interface SqlService extends RemoteService{
 			 Long idAfiliado,
 			 String KeyFileRTU,
 			 String URLRTU,
-			 String observacionDistri
+			 String observacionDistri,
+			 String tipoProveedorGeneral
 			); 
 	Long Insertar_MaterialCostruccionAfiliadoProveedor(Long idProveedor,String nomMaterialCostruccion,String unidadMetrica, Double precioUnitario, String idProducto,Long idAfiliado,String idCatalogoMaterial);
 	Long Insertar_Solucion(AuxSolucion auxS,Double costoFinal);

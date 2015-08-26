@@ -206,6 +206,7 @@ public interface SqlServiceAsync {
 			 String KeyFileRTU,
 			 String URLRTU,
 			 String observacionDistri,
+			 String tipoProveedorGeneral,
 			AsyncCallback<Long> callback);
 
 	void Insertar_ValePagado(Long idHistorialPagoProv, String idVale,Double totalPago,

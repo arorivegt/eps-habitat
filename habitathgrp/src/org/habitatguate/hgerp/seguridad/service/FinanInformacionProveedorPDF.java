@@ -46,8 +46,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 public class FinanInformacionProveedorPDF extends HttpServlet{
 	private static final long serialVersionUID 	= 1L;
     private Font catFont 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.NORMAL,BaseColor.BLACK);
-    private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
+    private Font catFont2 						= new Font(Font.FontFamily.TIMES_ROMAN, 12,Font.BOLD,BaseColor.BLACK);
     private Font catFont3 						= new Font(Font.FontFamily.TIMES_ROMAN, 8,Font.NORMAL,BaseColor.BLACK);
+    private Font catFont4 						= new Font(Font.FontFamily.TIMES_ROMAN, 10,Font.BOLD,BaseColor.BLACK);
     
     private SegProveedor auxProv = new SegProveedor();
     private List<AuxContactoProv> auxContact = new ArrayList<AuxContactoProv>();
@@ -84,7 +85,7 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
 	        OutputStream out 			= response.getOutputStream();
 	       
 		        try {
-		            Document document 	= new Document(PageSize.LETTER,15,15,15,15);
+		            Document document 	= new Document(PageSize.LETTER,15,15,15,35);
 		            final PdfWriter write = PdfWriter.getInstance(document, out);
 		            write.setPageEvent(new PageStamper(auxProv.getNomProveedor()));
 		            Image image1 		= null ;
@@ -105,36 +106,36 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
 		            
 
 		            
-		            document.add(new Paragraph("FUNDACIÓN HABITAT PARA LA HUMANIDAD GUATEMALA",catFont2));
+		            document.add(new Paragraph("FUNDACIÓN HABITAT PARA LA HUMANIDAD GUATEMALA",catFont4));
 		            document.add(new Paragraph("FORMULARIO DE APROBACIÓN DE PROVEEDORES",catFont));
 		            document.add(new Paragraph("Fecha: "+fechaFormat.format(new Date()) ,catFont));
 		            document.add(new Paragraph("\t",catFont));
 
-		            PdfPTable table = createTable1(auxProv);
+		            PdfPTable table = createTable1(auxProv,catFont2);
 		            document.add(table);
-		            table = createTable2(auxContact);
+		            table = createTable2(auxContact,catFont2);
 		            table.setSpacingBefore(5);
 		            table.setSpacingAfter(5);
 		            document.add(table);
-		            table = createTable3(auxProv);
+		            table = createTable3(auxProv,catFont2);
 		            document.add(table);
-		            table = createTable4(auxPago);
+		            table = createTable4(auxPago,catFont2);
 		            table.setSpacingBefore(5);
 		            table.setSpacingAfter(5);
 		            document.add(table);
-		            table = createTable5(auxProv);
+		            table = createTable5(auxProv,catFont2);
 		            table.setSpacingBefore(5);
 		            table.setSpacingAfter(5);
 		            document.add(table);
-		            table = createTable6(auxProv);
+		            table = createTable6(auxProv,catFont2);
 		            table.setSpacingBefore(5);
 		            table.setSpacingAfter(5);
 		            document.add(table);
-		            table = createTable7(auxProv);
+		            table = createTable7(auxProv,catFont2);
 		            table.setSpacingBefore(5);
 		            table.setSpacingAfter(5);
 		            document.add(table);
-		            document.add(new Paragraph("El presente convenio es por tiempo indefinido, existiendo el compromiso de ambas partes en el cumplimiento de los términos antes descritos; pudiéndose dar por terminado en cualquier momento por cualquiera de las partes o por mutuo consentimiento, derivado del incumplimiento total o parcial de lo convenido.",catFont3));
+		            document.add(new Paragraph("El presente convenio es por tiempo indefinido, existiendo el compromiso de ambas partes en el cumplimiento de los términos antes descritos; pudiéndose dar por terminado en cualquier momento por cualquiera de las partes o por mutuo consentimiento.",catFont3));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
 		            document.add(new Paragraph("\t",catFont));
@@ -245,41 +246,64 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
      * @return a PdfPTable
      * @throws DocumentException
      */
-    public static PdfPTable createTable1(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable1(SegProveedor aux, Font font) throws DocumentException {
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{1, 2, 1,1});
         PdfPCell cell;
-        cell = new PdfPCell(new Phrase("1. DATOS GENERALES DE LA EMPRESA"));
+        cell = new PdfPCell(new Phrase("1. DATOS GENERALES DE LA EMPRESA",font));
         cell.setColspan(4);
+        cell.setBackgroundColor(BaseColor.GRAY);
         table.addCell(cell);
         //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
         //cell.setRowspan(2);
         //table.addCell(cell);
-        table.addCell("Nombre de la Empresa:");
-        table.addCell(aux.getNomProveedor());
-        table.addCell("Estado del proveedor");
-        table.addCell(aux.getAprobadoComision() == true ? "Activo": "Inactivo");
-        table.addCell("Razón Social ");
-        table.addCell(aux.getRazonSocial());
-        table.addCell("NIT");
-        table.addCell(aux.getNumeroNit());
-        table.addCell("Dirección");
-        cell = new PdfPCell(new Phrase(aux.getDirProveedor()));
-        cell.setColspan(3);
+        cell = new PdfPCell(new Phrase("Nombre de la Empresa:"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
         table.addCell(cell);
-        table.addCell("Pagina Web");
-        table.addCell(aux.getPaginaWeb());
-        table.addCell("Personeria Jurídica");
-        table.addCell(aux.getPersonaJuridica());
-        table.addCell("Actividad Comercial o Categorización");
-        table.addCell(aux.getActividadEcono());
-        table.addCell("Teléfono");
-        table.addCell(aux.getTelProveedor());
-        table.addCell("Régimen Tributario");
-        table.addCell(aux.getRegimenTributario());
-        table.addCell("Acepta Exencion de IVA");
-        table.addCell(aux.getAceptaExencion());
+        table.addCell(aux.getNomProveedor().equals("") ? "--------------" : aux.getNomProveedor());
+        cell = new PdfPCell(new Phrase("Estado del proveedor"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getAprobadoComision() == true ? "Activo": "Inactivo");
+        cell = new PdfPCell(new Phrase("Razón Social "));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getRazonSocial().equals("") ? "-------------------" : aux.getRazonSocial());
+        cell = new PdfPCell(new Phrase("NIT"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getNumeroNit().equals("") ? "-------------------" : aux.getNumeroNit());
+        cell = new PdfPCell(new Phrase("Dirección"));
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase(aux.getDirProveedor().equals("") ? "-------------------" : aux.getDirProveedor()));
+        cell.setColspan(3);
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        cell = new PdfPCell(new Phrase("Pagina Web"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getPaginaWeb().equals("") ? "-------------------" : aux.getPaginaWeb());
+        cell = new PdfPCell(new Phrase("Personeria Jurídica"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getPersonaJuridica().equals("") ? "-------------------" : aux.getPersonaJuridica());
+        cell = new PdfPCell(new Phrase("Actividad Comercial o Categorización"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getActividadEcono().equals("") ? "-------------------" : aux.getActividadEcono());
+        cell = new PdfPCell(new Phrase("Teléfono"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getTelProveedor().equals("") ? "-------------------" : aux.getTelProveedor());
+        cell = new PdfPCell(new Phrase("Régimen Tributario"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getRegimenTributario().equals("") ? "-------------------" : aux.getRegimenTributario());
+        cell = new PdfPCell(new Phrase("Acepta Exencion de IVA"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getAceptaExencion().equals("") ? "-------------------" : aux.getAceptaExencion());
         return table;
     }
  
@@ -288,26 +312,35 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
      * @return a PdfPTable
      * @throws DocumentException
      */
-    public static PdfPTable createTable2(List<AuxContactoProv> aux) throws DocumentException {
+    public static PdfPTable createTable2(List<AuxContactoProv> aux, Font font) throws DocumentException {
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{1, 2, 1,1});
         PdfPCell cell;
-        cell = new PdfPCell(new Phrase("2. DATOS DEL CONTACTO"));
+        cell = new PdfPCell(new Phrase("2. DATOS DEL CONTACTO",font));
         cell.setColspan(4);
+        cell.setBackgroundColor(BaseColor.GRAY);
         table.addCell(cell);
         //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
         //cell.setRowspan(2);
         //table.addCell(cell);
         for (AuxContactoProv escribir : aux){
-        	table.addCell("Nombre Contacto Directo");
-            table.addCell(escribir.getNomContacto());
-            table.addCell("Puesto que ocupa");
-            table.addCell(escribir.getPuestoContacto());
-            table.addCell("Correo Electrónico");
-            table.addCell(escribir.getCorreoContacto());
-            table.addCell("Celular");
-            table.addCell(escribir.getCellphoneContacto());
+        	cell = new PdfPCell(new Phrase("Nombre Contacto Directo"));
+        	cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+            table.addCell(escribir.getNomContacto().equals("") ? "-------------------" : escribir.getNomContacto());
+            cell = new PdfPCell(new Phrase("Puesto que ocupa"));
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+            table.addCell(escribir.getPuestoContacto().equals("") ? "-------------------" : escribir.getPuestoContacto());
+            cell = new PdfPCell(new Phrase("Correo Electrónico"));
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+            table.addCell(escribir.getCorreoContacto().equals("") ? "-------------------" : escribir.getCorreoContacto());
+            cell = new PdfPCell(new Phrase("Celular"));
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
+            table.addCell(escribir.getCellphoneContacto().equals("") ? "-------------------" : escribir.getCellphoneContacto());
         }
         return table;
     }
@@ -317,38 +350,65 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
      * @return a PdfPTable
      * @throws DocumentException
      */
-    public static PdfPTable createTable3(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable3(SegProveedor aux, Font font) throws DocumentException {
     	  PdfPTable table = new PdfPTable(4);
           table.setWidthPercentage(500 / 5.23f);
           table.setWidths(new int[]{1, 2, 1,1});
           PdfPCell cell;
-          cell = new PdfPCell(new Phrase("3. INFORMACIÓN DE LA RELACIÓN CON EL PROVEEDOR"));
+          cell = new PdfPCell(new Phrase("3. INFORMACIÓN DE LA RELACIÓN CON EL PROVEEDOR",font));
           cell.setColspan(4);
+          cell.setBackgroundColor(BaseColor.GRAY);
           table.addCell(cell);
           //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
           //cell.setRowspan(2);
           //table.addCell(cell);
-          table.addCell("Relación con el proveedor");
-          table.addCell(aux.getRelacionConProv());
-          table.addCell("Tiempo de tener la relación comercial");
-          table.addCell(aux.getTiempoDeTrabajarConHG());
-          table.addCell("Afiliado que atiende");
-          table.addCell(aux.getAfiliado().getNomAfiliado());
-          table.addCell("Ofrece Distribución");
+          cell = new PdfPCell(new Phrase("Relación con el proveedor"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getRelacionConProv().equals("") ? "-------------------" : aux.getRelacionConProv());
+          cell = new PdfPCell(new Phrase("Tiempo de tener la relación comercial"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getTiempoDeTrabajarConHG().equals("") ? "-------------------" : aux.getTiempoDeTrabajarConHG());
+          cell = new PdfPCell(new Phrase("Afiliado que atiende"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getAfiliado().getNomAfiliado().equals("") ? "-------------------" : aux.getAfiliado().getNomAfiliado());
+          cell = new PdfPCell(new Phrase("Ofrece Distribución"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
           table.addCell(aux.getServicioEntrega() == true ? "Si" : "No");
-          table.addCell("Sucursales");
-          cell = new PdfPCell(new Phrase(aux.getUbicacionSucursales()));
+          cell = new PdfPCell(new Phrase("Sucursales"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          cell = new PdfPCell(new Phrase(aux.getUbicacionSucursales().equals("") ?  "--------------" : aux.getUbicacionSucursales()));
           cell.setColspan(3);
           table.addCell(cell);
-          table.addCell("Productos que ofrece");
-          table.addCell(aux.getProductosfrece());
-          table.addCell("Disponibilidad de productos");
-          table.addCell(aux.getDisponibilidadProd());
-          table.addCell("Tiempo de entrega");
-          table.addCell(aux.getTiempoEntrega());
-          table.addCell("Observaciones");
-          table.addCell(aux.getObservaciones());
-          
+          cell = new PdfPCell(new Phrase("Productos que ofrece"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getProductosfrece().equals("") ? "-------------------" : aux.getProductosfrece());
+          cell = new PdfPCell(new Phrase("Disponibilidad de productos"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getDisponibilidadProd().equals("") ? "-------------------" : aux.getDisponibilidadProd());
+          cell = new PdfPCell(new Phrase("Tiempo de entrega"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          table.addCell(aux.getTiempoEntrega().equals("") ? "-------------------" : aux.getTiempoEntrega());
+          cell = new PdfPCell(new Phrase("Observaciones de Distribución"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          if (aux.getObservacionDistribucion() != null)
+        	  table.addCell(aux.getObservacionDistribucion().equals("") ? "-------------------" : aux.getObservacionDistribucion());
+          else
+        	  table.addCell("----------------------");
+          cell = new PdfPCell(new Phrase("Observaciones Generales"));
+          cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+          table.addCell(cell);
+          cell = new PdfPCell(new Phrase(aux.getObservaciones().equals("") ?  "--------------" : aux.getObservaciones()));
+          cell.setColspan(3);
+          table.addCell(cell);
           return table;
     }
  
@@ -357,26 +417,35 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
      * @return a PdfPTable
      * @throws DocumentException
      */
-    public static PdfPTable createTable4(List<AuxCuentaBancariaProv> aux) throws DocumentException {
+    public static PdfPTable createTable4(List<AuxCuentaBancariaProv> aux, Font font) throws DocumentException {
     	 PdfPTable table = new PdfPTable(4);
          table.setWidthPercentage(500 / 5.23f);
          table.setWidths(new int[]{1, 2, 1,1});
          PdfPCell cell;
-         cell = new PdfPCell(new Phrase("4. FORMAS DE PAGO"));
+         cell = new PdfPCell(new Phrase("4. FORMAS DE PAGO",font));
          cell.setColspan(4);
+         cell.setBackgroundColor(BaseColor.GRAY);
          table.addCell(cell);
          //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
          //cell.setRowspan(2);
          //table.addCell(cell);
          for (AuxCuentaBancariaProv escribir : aux){
-         	table.addCell("Forma de Pago");
+         	cell = new PdfPCell(new Phrase("Forma de Pago"));
+         	cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            table.addCell(cell);
              table.addCell(escribir.getTipoPago().equals("1")? "Cheque" : "Transferencia");
-             table.addCell("Numero de Cuenta para transferencia");
+             cell = new PdfPCell(new Phrase("Numero de Cuenta para transferencia"));
+             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+             table.addCell(cell);
              table.addCell(escribir.getTipoPago().equals("1")?  "Ninguno":escribir.getNumeroCuentaBancaria());
-             table.addCell("Nombre de la cuenta");
-             table.addCell(escribir.getNombrePropietario());
-             table.addCell("Banco Emisor");
-             table.addCell(escribir.getBancoCuentaBancaria());
+             cell = new PdfPCell(new Phrase("Nombre de la cuenta"));
+             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+             table.addCell(cell);
+             table.addCell(escribir.getNombrePropietario().equals("") ? "-------------------" : escribir.getNombrePropietario());
+             cell = new PdfPCell(new Phrase("Banco Emisor"));
+             cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+             table.addCell(cell);
+             table.addCell(escribir.getBancoCuentaBancaria().equals("") ? "-------------------" : escribir.getBancoCuentaBancaria());
          }
          return table;
     }
@@ -386,67 +455,92 @@ public class FinanInformacionProveedorPDF extends HttpServlet{
      * @return a PdfPTable
      * @throws DocumentException
      */
-    public static PdfPTable createTable5(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable5(SegProveedor aux, Font font) throws DocumentException {
     	PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{1, 1, 1,2});
         PdfPCell cell;
-        cell = new PdfPCell(new Phrase("5. DESARROLLO DE RECURSOS"));
+        cell = new PdfPCell(new Phrase("5. DESARROLLO DE RECURSOS",font));
         cell.setColspan(4);
+        cell.setBackgroundColor(BaseColor.GRAY);
         table.addCell(cell);
         //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
         //cell.setRowspan(2);
         //table.addCell(cell);
-        table.addCell("Contribuye con el desarrollo de recursos");
+        cell = new PdfPCell(new Phrase("Contribuye con el desarrollo de recursos"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(aux.getAceptaDonacion().equals("true")? "Si" : "No");
-        table.addCell("Forma de realizar donaciones");
-        table.addCell(aux.getFormaDonacion());
-        table.addCell("Porcentaje de donación");
+        cell = new PdfPCell(new Phrase("Forma de realizar donaciones"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getFormaDonacion().equals("") ? "-------------------" : aux.getFormaDonacion());
+        cell = new PdfPCell(new Phrase("Porcentaje de donación"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(""+aux.getPorcentDonacion()+"%");
-        table.addCell("Fecuencia de donación");
-        table.addCell(aux.getFrecuenciaDonacion());;
-        table.addCell("Contribuirá con eventos especiales");
+        cell = new PdfPCell(new Phrase("Fecuencia de donación"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getFrecuenciaDonacion().equals("") ? "-------------------" : aux.getFrecuenciaDonacion());;
+        cell = new PdfPCell(new Phrase("Contribuirá con eventos especiales"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(aux.getContribuyeEventos() == true ? "Si": "No");
-        table.addCell("Cúales y de que forma");
-        table.addCell(aux.getCualesyComoEventos());
+        cell = new PdfPCell(new Phrase("Cúales y de que forma"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
+        table.addCell(aux.getCualesyComoEventos().equals("") ? "-------------------" : aux.getCualesyComoEventos());
         return table;
     }
     
-    public static PdfPTable createTable6(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable6(SegProveedor aux, Font font) throws DocumentException {
     	PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{1, 1, 1,1,1,1});
         PdfPCell cell;
-        cell = new PdfPCell(new Phrase("6. CREDITO"));
+        cell = new PdfPCell(new Phrase("6. CREDITO",font));
         cell.setColspan(6);
+        cell.setBackgroundColor(BaseColor.GRAY);
         table.addCell(cell);
         //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
         //cell.setRowspan(2);
         //table.addCell(cell);
-        table.addCell("Ofrece acceso a Crédito");
+        cell = new PdfPCell(new Phrase("Ofrece acceso a Crédito"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(aux.getAceptaCredito() == true ? "Si" : "No");
-        table.addCell("Monto");
+        cell = new PdfPCell(new Phrase("Monto"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell("Q"+aux.getMontoMaximo());
-        table.addCell("Tiempo de Crédito");
+        cell = new PdfPCell(new Phrase("Tiempo de Crédito"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(""+aux.getTiempoMaximo()+" dias");
         return table;
     }
     
-    public static PdfPTable createTable7(SegProveedor aux) throws DocumentException {
+    public static PdfPTable createTable7(SegProveedor aux, Font font) throws DocumentException {
     	PdfPTable table = new PdfPTable(3);
         table.setWidthPercentage(500 / 5.23f);
         table.setWidths(new int[]{3, 1, 1});
         PdfPCell cell;
-        cell = new PdfPCell(new Phrase("7. DOCUMENTOS REQUERIDOS"));
+        cell = new PdfPCell(new Phrase("7. DOCUMENTOS REQUERIDOS",font));
         cell.setColspan(3);
+        cell.setBackgroundColor(BaseColor.GRAY);
         table.addCell(cell);
         //cell = new PdfPCell(new Phrase("Cell with rowspan 2"));
         //cell.setRowspan(2);
         //table.addCell(cell);
-        table.addCell("Descripción");
+        cell = new PdfPCell(new Phrase("Descripción"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell("SI");
         table.addCell("NO");
-        table.addCell("Copia RTU");
+        cell = new PdfPCell(new Phrase("Copia RTU"));
+        cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+        table.addCell(cell);
         table.addCell(aux.getKeyFileRTU().equals("")? "": "X" );
         table.addCell(aux.getKeyFileRTU().equals("")? "X": "");
         return table;

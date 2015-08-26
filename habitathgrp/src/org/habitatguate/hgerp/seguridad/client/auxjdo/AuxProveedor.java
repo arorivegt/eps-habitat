@@ -103,6 +103,8 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 	
 	private String observacionDistribucion;
 	
+	private String tipoProveedorGeneral;
+	
 	private ArrayList<AuxCuentaBancariaProv> lista = new ArrayList<AuxCuentaBancariaProv>();
 	
 	private ArrayList<AuxMaterialCostruccion> listaMateriales = new ArrayList<AuxMaterialCostruccion>();
@@ -438,6 +440,14 @@ public class AuxProveedor implements Comparable<AuxProveedor>,IsSerializable{
 
 	public void setObservacionDistribucion(String observacionDistribucion) {
 		this.observacionDistribucion = observacionDistribucion;
+	}
+
+	public String getTipoProveedorGeneral() {
+		return tipoProveedorGeneral;
+	}
+
+	public void setTipoProveedorGeneral(String tipoProveedorGeneral) {
+		this.tipoProveedorGeneral = tipoProveedorGeneral;
 	}
 	
 	

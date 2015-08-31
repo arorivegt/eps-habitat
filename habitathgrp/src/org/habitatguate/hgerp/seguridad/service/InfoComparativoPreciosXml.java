@@ -534,6 +534,7 @@ public class InfoComparativoPreciosXml {
 			 					+ "<td>"+"Porcentaje de Donación"+"</td>"
 			 					+ "<td>"+"Frecuencia de Donación"+"</td>"
 			 					+ "<td>"+"Contribuye Eventos"+"</td>"
+			 					+ "<td>"+"Cuales y de que forma"+"</td>"
 			 					+ "<td>"+"Acepta Crédito"+"</td>"
 			 					+ "<td>"+"Monto Máximo Crédito"+"</td>"
 			 					+ "<td>"+"Tiempo Maximo Credito"+"</td>"

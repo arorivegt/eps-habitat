@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.habitatguate.hgerp.seguridad.client.api.SqlService;
 import org.habitatguate.hgerp.seguridad.client.api.SqlServiceAsync;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxParametro;
@@ -26,6 +27,8 @@ import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.FormPanel;
 
 
 public class Buscador_Proveedor extends Composite{
@@ -65,7 +68,7 @@ public class Buscador_Proveedor extends Composite{
 	
 	AbsolutePanel absolutePanel = new AbsolutePanel();
 	grid.setWidget(0, 0, absolutePanel);
-	absolutePanel.setSize("1289px", "40px");
+	absolutePanel.setSize("1289px", "70px");
 	absolutePanel.setStyleName("gwt-Label-new");
 	
 	
@@ -92,14 +95,61 @@ public class Buscador_Proveedor extends Composite{
 	Button button_3 = new Button("Send");
 	button_3.setText("Ver RTU ");
 	button_3.setStyleName("finanButton");
-	absolutePanel.add(button_3, 649, 45);
+	absolutePanel.add(button_3, 876, 45);
 	button_3.setSize("214px", "40px");
 	
 	Button button_4 = new Button("Send");
 	button_4.setText("Ver Convenio Aprobado");
 	button_4.setStyleName("finanButton");
-	absolutePanel.add(button_4, 876, 45);
+	absolutePanel.add(button_4, 1109, 45);
 	button_4.setSize("214px", "40px");
+	
+	final ListBox comboBox = new ListBox();
+	absolutePanel.add(comboBox, 10, 27);
+	comboBox.setSize("216px", "26px");
+	
+	final ListBox listBox = new ListBox();
+	absolutePanel.add(listBox, 10, 79);
+	listBox.setSize("216px", "26px");
+	listBox.addItem("[Todos los Tipos]", "0");
+	listBox.addItem("Material de Construcción", "1");
+	listBox.addItem("Mano de Obra", "2");
+	listBox.addItem("Activos Fijos", "3");
+	listBox.addItem("Suministro de Oficina", "4");
+	
+	final ListBox listBox_1 = new ListBox();
+	absolutePanel.add(listBox_1, 271, 27);
+	listBox_1.setSize("216px", "26px");
+	listBox_1.addItem("[Todos los estados]", "0");
+	listBox_1.addItem("Aprobado", "true");
+	listBox_1.addItem("Sin Aprobar", "false");
+	
+	Label lblAfiliado = new Label("Afiliado");
+	lblAfiliado.setStyleName("label");
+	absolutePanel.add(lblAfiliado, 10, 2);
+	lblAfiliado.setSize("168px", "19px");
+	
+	Label lblTipoProveedor = new Label("Tipo Proveedor");
+	lblTipoProveedor.setStyleName("label");
+	absolutePanel.add(lblTipoProveedor, 10, 59);
+	lblTipoProveedor.setSize("168px", "19px");
+	
+	Label lblEstado = new Label("Estado");
+	lblEstado.setStyleName("label");
+	absolutePanel.add(lblEstado, 270, 2);
+	lblEstado.setSize("168px", "19px");
+	
+	Button button_5 = new Button("Send");
+	button_5.setText("Exportar Información a excel");
+	button_5.setStyleName("finanButton");
+	absolutePanel.add(button_5, 649, 45);
+	button_5.setSize("214px", "40px");
+	
+	final FormPanel formPanel = new FormPanel();
+	formPanel.setMethod(FormPanel.METHOD_POST);
+	formPanel.setEncoding(FormPanel.ENCODING_MULTIPART);
+	absolutePanel.add(formPanel, 434, 59);
+	formPanel.setSize("209px", "44px");
 	
 	
 	
@@ -196,6 +246,26 @@ public class Buscador_Proveedor extends Composite{
 			
 		}
 	});
+	
+	button_5.addClickHandler(new ClickHandler() {
+		
+		@Override
+		public void onClick(ClickEvent event) {
+			// TODO Auto-generated method stub
+			
+			String afiliado = comboBox.getValue(comboBox.getSelectedIndex());
+			String tipo = listBox.getValue(listBox.getSelectedIndex());
+			String estado = listBox_1.getValue(listBox_1.getSelectedIndex());
+			
+			System.out.println("afiliado "+ afiliado+ " tipo "+ tipo + " estado "+ estado );
+			
+			formPanel.setAction("/ExportDatosProv?idAfiliado="+afiliado+"&estado="+estado+"&tipo="+tipo);
+			formPanel.submit();
+			
+			
+			
+		}
+	});
 			
 		//-----------------------------	---------------------------------
 	
@@ -237,11 +307,28 @@ public class Buscador_Proveedor extends Composite{
 		}
 	});
 	
+	
+	loginService.ConsultaTodosAfiliados(new AsyncCallback<List<AuxAfiliado>>(){
+	    public void onFailure(Throwable caught) 
+	    {
+	    }
+	
+		@Override
+	    public void onSuccess(List<AuxAfiliado> result)
+	    {
+			if (!(result.size()==0)) {
+				 comboBox.addItem("Todos los afiliados","0");
+				 for (AuxAfiliado p : result) 
+				    {
+				    	comboBox.addItem(p.getNomAfiliado(),""+p.getIdAfiliado());
+				    }
+	    	}
+			
+	    }
+	});
+	
 
 	
    
 }
-	
-	
-	
 }

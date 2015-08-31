@@ -32,7 +32,13 @@ public class ExportComparativoPrecios extends HttpServlet {
 			response.setHeader("Content-Disposition", "inline; Filename=ComparativoPrecios.xls");
 			
 			String itemConstruccion 				= request.getParameter("itemConstruccion");
-			String idAfiliado 				= request.getParameter("idAfiliado");
+			String idAfiliado 				        = request.getParameter("idAfiliado");
+			String filter 				= request.getParameter("filter");
+			String anioFin 				= request.getParameter("anio");
+			String trimestre 				= request.getParameter("trimestre");
+			String fechaInicio 				= request.getParameter("fechaInicio");
+			String fechaFIn 				= request.getParameter("fechaFin");
+			String checkRange 				= request.getParameter("checkRange");
 			
 
 			String  xmlFinal 			= "";
@@ -45,7 +51,7 @@ public class ExportComparativoPrecios extends HttpServlet {
 										+ "</x:ExcelWorkbook></xml><![endif]--></head><body>";
 			try{
 				xmlFinal 				= inicio
-										+ n.Bancos(itemConstruccion,idAfiliado);
+										+ n.Bancos(itemConstruccion,idAfiliado, filter,anioFin,  trimestre, fechaInicio,fechaFIn,  checkRange );
 			}catch(Exception e){
 				xmlFinal 				= inicio;
 			}

@@ -138,6 +138,7 @@ public interface SqlService extends RemoteService{
 	List<AuxSolucion> Consulta_ComparativoPlaniEjecucionSolucion_Opcion1(String anio, String trimestre);
 	List<AuxValeBeneficiario> ConsultarValesAprobados(Long idAfiliado, Long idBeneficiario);
 	List<AuxValeBeneficiario> ConsultarValesAprobados_PorTrimestreAnio(Long idAfiliado, String trimestre, int anio);
+	List<AuxProveedor> ConsultaDatosProveedor_Generico(String afiliado, String estado, String tipo);
 	Long Eliminar_Parametro(Long id);
 	Long Eliminar_Afiliado(Long id);
 	Long Eliminar_Beneficiario(Long id);
@@ -201,6 +202,7 @@ public interface SqlService extends RemoteService{
 	List<AuxHistorialPagoProv> Consulta_PagosProvGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
 	List<AuxSolucion> Consulta_SolucionesHabitacionalesGenerica(String idAfiliado, String anio, String anioFin, double minimo, double maximos, String filter);
 	List<AuxValeBeneficiario> Consulta_CuentaAPagarProvGenerica2(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String estado, boolean checkRange);
-	List<AuxValeBeneficiario> Consulta_MaterialCostruccionGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial, boolean checkRange);
+	List<AuxValeBeneficiario> Consulta_MaterialCostruccionGenerica(String idAfiliado, String filter,String idProveedor, String anio, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial,String idCatalogoMaterial2, boolean checkRange);
+	List<AuxMaterialCostruccion> Consulta_ComparativoPrecios_Generica2(String idAfiliado, String filter,String idItemConstruccion, String anio, String trimestre, String fechaInicio, String fechaFIn, boolean checkRange);
 	
 }

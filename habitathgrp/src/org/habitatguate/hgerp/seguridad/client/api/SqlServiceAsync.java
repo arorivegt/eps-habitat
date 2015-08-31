@@ -475,12 +475,21 @@ public interface SqlServiceAsync {
 
 	void Consulta_MaterialCostruccionGenerica(String idAfiliado, String filter,
 			String idProveedor, String anio, String trimestre,
-			String fechaInicio, String fechaFIn, String idCatalogoMaterial,
+			String fechaInicio, String fechaFIn, String idCatalogoMaterial,String idCatalogoMaterial2,
 			boolean checkRange,
 			AsyncCallback<List<AuxValeBeneficiario>> callback);
 
 	void Consulta_ComparativoPreciosGenerica(String idItemCostruccion,
 			String afiliado,
+			AsyncCallback<List<AuxMaterialCostruccion>> callback);
+
+	void ConsultaDatosProveedor_Generico(String afiliado, String estado,
+			String tipo, AsyncCallback<List<AuxProveedor>> callback);
+
+	void Consulta_ComparativoPrecios_Generica2(String idAfiliado,
+			String filter, String idItemConstruccion, String anio,
+			String trimestre, String fechaInicio, String fechaFIn,
+			boolean checkRange,
 			AsyncCallback<List<AuxMaterialCostruccion>> callback);
 
 

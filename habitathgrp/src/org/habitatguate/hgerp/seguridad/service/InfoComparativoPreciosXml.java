@@ -10,6 +10,7 @@ import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxProveedor;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSalario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolucion;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxValeBeneficiario;
@@ -24,7 +25,7 @@ public class InfoComparativoPreciosXml {
 		private String  CuerpoEncabezado 								 = "";
 		private String  CuerpoTabla 								 = "";
 	
-	 	public String Bancos(String idItemCostruccion, String afiliado )
+	 	public String Bancos(String idItemCostruccion, String afiliado, String filter, String anio, String trimestre, String fechaInicio, String fechaFIn, String checkRange )
 	 	{
 	 		String mesPlanilla 			=	"";
 			DecimalFormat df 			= new DecimalFormat();
@@ -36,7 +37,7 @@ public class InfoComparativoPreciosXml {
 
 	 		xmlFinal = "</tbody></table></body></html>";	
 	 		
-	 		List<AuxMaterialCostruccion>result =  finanzasService.Consulta_ComparativoPreciosGenerica(idItemCostruccion, afiliado);
+	 		List<AuxMaterialCostruccion>result =  finanzasService.Consulta_ComparativoPrecios_Generica2(afiliado, filter, idItemCostruccion,anio, trimestre, fechaInicio, fechaFIn, Boolean.valueOf(checkRange));
 
  			
 	 			CuerpoEncabezado+= "<td>"+"Codigo Material"+"</td>"
@@ -57,7 +58,7 @@ public class InfoComparativoPreciosXml {
 			 					+ "<td>"+e.getNomMaterialCostruccion()+"</td>"
 			 					+ "<td>"+e.getProveedor().getNomProveedor()+"</td>"
 			 					+ "<td>"+e.getProveedor().getAuxAfiliado().getNomAfiliado()+"</td>"
-			 					+ "<td>"+e.getPrecioUnit()+"</td>"
+			 					+ "<td>"+e.getPrecioUnit()/e.getCantidadMaterial()+"</td>"
 			 					+ "<td>"+e.getUnidadMetrica()+"</td>"
 			 					+ "</tr>";
 	 		}
@@ -431,7 +432,7 @@ public class InfoComparativoPreciosXml {
 	 		return xmlInicio;
 	 	}
 	 	
-	 	public String ReporteDeMateriales(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial, boolean checkRange )
+	 	public String ReporteDeMateriales(String idAfiliado, String filter, String idProveedor, String anioFin, String trimestre, String fechaInicio, String fechaFIn, String idCatalogoMaterial,String idCatalogoMaterial2, boolean checkRange )
 	 	{
 	 		String mesPlanilla 			=	"";
 			DecimalFormat df 			= new DecimalFormat();
@@ -444,7 +445,7 @@ public class InfoComparativoPreciosXml {
 	 		xmlFinal = "</tbody></table></body></html>";	
 	 		
 	 		
-	 		List<AuxValeBeneficiario> result2 = finanzasService.Consulta_MaterialCostruccionGenerica(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idCatalogoMaterial, checkRange);
+	 		List<AuxValeBeneficiario> result2 = finanzasService.Consulta_MaterialCostruccionGenerica(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idCatalogoMaterial,idCatalogoMaterial2, checkRange);
  			
 	 		System.out.println("Datos"+ result2.size());
 	 		
@@ -477,6 +478,121 @@ public class InfoComparativoPreciosXml {
 	 							+ "<td>"+e.getMaterialCostruccion().getPrecioUnit()+"</td>"
 	 							+ "<td>"+e.getCantidadMat()+"</td>"
 	 							+ "<td>"+e.getTotalPagar()+"</td>"
+			 					+ "</tr>";
+	 			correlativo++;
+	 		}
+	 		
+	 		
+	 		xmlInicio 		= xmlInicio+CuerpoEncabezado+xmlFinEncabezado + CuerpoTabla+xmlFinal;
+	 		
+	 		return xmlInicio;
+	 	}
+	 	
+	 	public String ReporteDatosProv(String afiliado, String estado, String tipo)
+	 	{
+	 		String mesPlanilla 			=	"";
+			DecimalFormat df 			= new DecimalFormat();
+			df.setMaximumFractionDigits(2);
+        
+	 		String nombre 				= "";
+	 		xmlInicio 					+= "<table><tbody><tr>";
+			xmlFinEncabezado		 					+= "</tr>";
+
+	 		xmlFinal = "</tbody></table></body></html>";	
+	 		
+	 		
+	 		List<AuxProveedor> result2 = finanzasService.ConsultaDatosProveedor_Generico(afiliado, estado, tipo);
+ 			
+	 		System.out.println("Datos Provvedores"+ result2.size());
+	 		
+	 			CuerpoEncabezado+= "<td>"+"Correlativo"+"</td>"
+			 					+ "<td>"+"Codigo Proveedor"+"</td>"
+			 					+ "<td>"+"Nombre Proveedor"+"</td>"
+			 					+ "<td>"+"Numero de Nit"+"</td>"
+			 					+ "<td>"+"Direccion Proveedor"+"</td>"
+			 					+ "<td>"+"Teléfono Proveedor"+"</td>"
+			 					+ "<td>"+"Pagina Web"+"</td>"
+			 					+ "<td>"+"Persona Jurídica"+"</td>"
+			 					+ "<td>"+"Razón Social"+"</td>"
+			 					+ "<td>"+"Actividad Económica"+"</td>"
+			 					+ "<td>"+"Acepta Exencion"+"</td>"
+			 					+ "<td>"+"Relación con Proveedor"+"</td>"
+			 					+ "<td>"+"Tipo de Proveedor"+"</td>"
+			 					+ "<td>"+"Tiempo de trabajar con HG"+"</td>"
+			 					+ "<td>"+"Afiliado"+"</td>"
+			 					+ "<td>"+"Departamentos donde labora"+"</td>"
+			 					+ "<td>"+"Municipios donde labora"+"</td>"
+			 					+ "<td>"+"Ubicación Sucursales"+"</td>"
+			 					+ "<td>"+"Productos que ofrece"+"</td>"
+			 					+ "<td>"+"Disponibilidad de productos"+"</td>"
+			 					+ "<td>"+"Servicio de entrega"+"</td>"
+			 					+ "<td>"+"Tiempo máximo de entrega"+"</td>"
+			 					+ "<td>"+"Regimen Tributario"+"</td>"
+			 					+ "<td>"+"Observaciones Generales"+"</td>"
+			 					+ "<td>"+"Acepta Donación"+"</td>"
+			 					+ "<td>"+"Forma de Donación"+"</td>"
+			 					+ "<td>"+"Porcentaje de Donación"+"</td>"
+			 					+ "<td>"+"Frecuencia de Donación"+"</td>"
+			 					+ "<td>"+"Contribuye Eventos"+"</td>"
+			 					+ "<td>"+"Acepta Crédito"+"</td>"
+			 					+ "<td>"+"Monto Máximo Crédito"+"</td>"
+			 					+ "<td>"+"Tiempo Maximo Credito"+"</td>"
+			 					+ "<td>"+"fecha de Ingreso"+"</td>"
+			 					+ "<td>"+"Estado del Proveedor"+"</td>"
+			 					+ "<td>"+"Motivo de Inactivo"+"</td>"
+			 					+ "<td>"+"URL RTU"+"</td>"
+			 					+ "<td>"+"URL Convenio Aprobado"+"</td>"
+			 					+ "<td>"+"Obsevaciones de Distribución"+"</td>"
+			 					+ "<td>"+"Tipo General de Proveedor"+"</td>";
+
+	 		
+	 		//Tabla
+	 		
+	 		int correlativo = 1;
+	 		for(AuxProveedor e:result2)
+	 		{
+	 			
+	 			CuerpoTabla += "<tr>"
+	 							+ "<td>"+correlativo+"</td>"
+	 							+ "<td>'"+e.getIdProveedor()+"</td>"
+	 							+ "<td>"+e.getNomProveedor()+"</td>"
+	 							+ "<td>"+e.getNumeroNit()+"</td>"
+	 							+ "<td>"+e.getDirProveedor()+"</td>"
+	 							+ "<td>"+e.getTelProveedor()+"</td>"
+	 							+ "<td>"+e.getPaginaWeb()+"</td>"
+	 							+ "<td>"+e.getPersonaJuridica()+"</td>"
+	 							+ "<td>"+e.getRazonSocial()+"</td>"
+	 							+ "<td>"+e.getActividadEcono()+"</td>"
+	 							+ "<td>"+e.getAceptaExencion()+"</td>"
+	 							+ "<td>"+e.getRelacionConProv()+"</td>"
+	 							+ "<td>"+e.getTipoProveedor()+"</td>"
+	 							+ "<td>"+"No hay dato"+"</td>"
+	 							+ "<td>'"+e.getAuxAfiliado().getIdAfiliado()+"</td>"
+	 							+ "<td>"+e.getDepartamentos()+"</td>"
+	 							+ "<td>"+e.getMunicipios()+"</td>"
+	 							+ "<td>"+e.getUbicacionSucursales()+"</td>"
+	 							+ "<td>"+e.getProductosfrece()+"</td>"
+	 							+ "<td>"+e.getDisponibilidadProd()+"</td>"
+	 							+ "<td>"+e.getServicioEntrega()+"</td>"
+	 							+ "<td>"+e.getTiempoEntrega()+"</td>"
+	 							+ "<td>"+e.getRegimenTributario()+"</td>"
+	 							+ "<td>"+e.getObservaciones()+"</td>"
+	 							+ "<td>"+e.getAceptaDonacion()+"</td>"
+	 							+ "<td>"+e.getFormaDonacion()+"</td>"
+	 							+ "<td>"+e.getPorcentDonacion()+"</td>"
+	 							+ "<td>"+e.getFrecuenciaDonacion()+"</td>"
+	 							+ "<td>"+e.getContribuyeEventos()+"</td>"
+	 							+ "<td>"+e.getCualesyComoEventos()+"</td>"
+	 							+ "<td>"+e.getAceptaCredito()+"</td>"
+	 							+ "<td>"+e.getMontoMaximo()+"</td>"
+	 							+ "<td>"+"tiempo maximo"+"</td>"
+	 							+ "<td>"+e.getFechaIngreso()+"</td>"
+	 							+ "<td>"+e.getAprobadoComision()+"</td>"
+	 							+ "<td>"+e.getMotivoInactivo()+"</td>"
+	 							+ "<td>"+e.getURLFileRTU()+"</td>"
+	 							+ "<td>"+e.getURLFileConvenio()+"</td>"
+	 							+ "<td>"+e.getObservacionDistribucion()+"</td>"
+	 							+ "<td>"+e.getTipoProveedorGeneral()+"</td>"
 			 					+ "</tr>";
 	 			correlativo++;
 	 		}

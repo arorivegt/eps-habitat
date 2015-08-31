@@ -143,7 +143,7 @@ public class MyPaginationDataGrid_ReportePagosProv<T> extends PagingDataGrid_Rep
                 return String.valueOf(((AuxHistorialPagoProv) object).getValorCancelado());
             }
         };
-        dataGrid.addColumn(depAfiliado, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total Cancelado")), totalCancelado);
+        dataGrid.addColumn(depAfiliado, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total Cancelado (Q)")), totalCancelado);
         dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
         
         Header<String> totalDonacion = new Header<String>(new TextCell()) {

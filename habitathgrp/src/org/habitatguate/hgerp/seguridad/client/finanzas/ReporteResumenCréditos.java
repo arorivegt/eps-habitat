@@ -107,7 +107,7 @@ public class ReporteResumenCréditos extends Composite   {
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "50px");
+		absolutePanel.setSize("100%", "70px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		
@@ -167,7 +167,7 @@ public class ReporteResumenCréditos extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 42);
 		listBox.setSize("179px", "23px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -192,13 +192,13 @@ public class ReporteResumenCréditos extends Composite   {
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDato1, 205, 0);
+		absolutePanel.add(txtDato1, 205, 38);
 		txtDato1.setSize("177px", "25px");
 		
 		listEstado = new ListBox();
 		listEstado.addItem("Todos los Tipos","0");
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 205, 65);
+		absolutePanel.add(listEstado, 205, 85);
 		listEstado.setSize("179px", "30px");
 		
 		
@@ -258,9 +258,9 @@ public class ReporteResumenCréditos extends Composite   {
 		
 
 		
-		Label lblBusquedaPor = new Label("Busqueda Por");
+		Label lblBusquedaPor = new Label("REPORTE RESUMEN DE CRÉDITOS");
 		lblBusquedaPor.setStyleName("label");
-		lblBusquedaPor.setSize("179px", "13px");
+		lblBusquedaPor.setSize("309px", "32px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
 		Busqueda = new Image("images/pdf.png");
@@ -313,17 +313,17 @@ public class ReporteResumenCréditos extends Composite   {
 		
 		lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
-		absolutePanel.add(lblAfiliado, 10, 53);
+		absolutePanel.add(lblAfiliado, 10, 73);
 		lblAfiliado.setSize("179px", "13px");
 		
 		listBox_1 = new ListBox();
 		listBox_1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_1, 10, 72);
+		absolutePanel.add(listBox_1, 10, 92);
 		listBox_1.setSize("179px", "23px");
 		
 		lblTipoSolucin = new Label("Tipo Solución");
 		lblTipoSolucin.setStyleName("label");
-		absolutePanel.add(lblTipoSolucin, 205, 46);
+		absolutePanel.add(lblTipoSolucin, 205, 66);
 		lblTipoSolucin.setSize("179px", "13px");
 		
 		lblAo = new Label("Del Año");

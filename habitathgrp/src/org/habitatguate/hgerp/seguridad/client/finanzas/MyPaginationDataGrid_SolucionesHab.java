@@ -97,27 +97,6 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         dataGrid.addColumn(codContableColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Correlativo")), cantidadTotal);
         dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
         
-        
-        Column<T, String> nomParamColumn = new Column<T, String>(
-                new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getIdSolucion());
-            }
-        };
-        dataGrid.addColumn(nomParamColumn, "Num. Solucion");        
-        dataGrid.setColumnWidth(nomParamColumn, 20, Unit.PCT);
-        
-        
-        Column<T, String> nombreBene = new Column<T, String>(
-                new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getBeneficiario().getNomBeneficiario());
-            }
-        };
-        dataGrid.addColumn(nombreBene, "Beneficiario");        
-        dataGrid.setColumnWidth(nombreBene, 20, Unit.PCT);
         /*firstNameColumn.setSortable(true);
         sortHandler.setComparator(firstNameColumn, new Comparator<T>() {
             public int compare(T o1, T o2) {
@@ -126,7 +105,15 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
             }
         });*/
  
-        
+        // Codigo Uno.
+        Column<T, String> afiColumn = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxSolucion) object).getBeneficiario().getAfiliado().getNomAfiliado());
+            }
+        };
+        dataGrid.addColumn(afiColumn, "Afiliado.");
+        dataGrid.setColumnWidth(afiColumn, 20, Unit.PCT);
  
         // Codigo Uno.
         Column<T, String> codUnoColumn = new Column<T, String>(new TextCell()) {
@@ -143,17 +130,9 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                         ((ContactInfo) o2).getLastName());
             }
         });*/
-        dataGrid.addColumn(codUnoColumn, "Diseño");
+        dataGrid.addColumn(codUnoColumn, "Tipo de Solución Hab.");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
         
-        Column<T, String> codDosColumn = new Column<T, String>(new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getBeneficiario().getDirBeneficiario());
-            }
-        };
-        dataGrid.addColumn(codDosColumn, "Direccion");
-        dataGrid.setColumnWidth(codDosColumn, 20, Unit.PCT);
         
         Column<T, String> codDep = new Column<T, String>(new TextCell()) {
             @Override
@@ -183,14 +162,7 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         dataGrid.addColumn(codMun, "Municipio");
         dataGrid.setColumnWidth(codMun, 20, Unit.PCT);
         
-        Column<T, String> depAfiliado = new Column<T, String>(new TextCell()) {
-            @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getBeneficiario().getTelBeneficiario());
-            }
-        };
-        dataGrid.addColumn(depAfiliado, "Telefono");
-        dataGrid.setColumnWidth(depAfiliado, 20, Unit.PCT);
+        
         
         
 
@@ -250,7 +222,7 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                 return String.valueOf(((AuxSolucion) object).getCostoTotal());
             }
         };
-        dataGrid.addColumn(costoTotal2,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total ")), costoTotalHeader2);
+        dataGrid.addColumn(costoTotal2,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Promedio ")), costoTotalHeader2);
         dataGrid.setColumnWidth(costoTotal2, 20, Unit.PCT);
         
        

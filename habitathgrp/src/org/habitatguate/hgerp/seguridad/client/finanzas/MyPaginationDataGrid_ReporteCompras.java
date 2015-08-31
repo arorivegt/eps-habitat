@@ -154,13 +154,30 @@ public class MyPaginationDataGrid_ReporteCompras<T> extends PagingDataGrid_Repor
         dataGrid.setColumnWidth(cantidad, 20, Unit.PCT);
         
         
+        Header<String> sumatoria = new Header<String>(new TextCell()) {
+            @Override
+            public String getValue() {
+              List<AuxValeBeneficiario> items = (List<AuxValeBeneficiario>) dataGrid.getVisibleItems();
+              if (items.size() == 0) {
+                return "";
+              } else {
+                double totalAge = 0.0;
+                for (AuxValeBeneficiario item : items) {
+                  totalAge += item.getVale().getTotalVale();
+                }
+                return "Total Saldo: " + totalAge;
+              }
+            }
+          };        
+        
+        
         Column<T, String> precioUnitario = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
                 return "Q "+String.valueOf(((AuxValeBeneficiario) object).getVale().getTotalVale());
             }
         };
-        dataGrid.addColumn(precioUnitario, "Total Vale");
+        dataGrid.addColumn(precioUnitario,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total Vale (Q)")), sumatoria);
         dataGrid.setColumnWidth(precioUnitario, 20, Unit.PCT);
         
         Column<T, String> column5 = new Column<T, String>(new EditTextCell()) {

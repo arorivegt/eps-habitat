@@ -40,6 +40,7 @@ public class ExportReporteDeMateriales extends HttpServlet {
 			String fechaFIn 				= request.getParameter("fechaFIn");
 			String checkRange 				= request.getParameter("checkRange");
 			String idMaterialConstruccion 	= request.getParameter("idMaterialConstruccion");
+			String idMaterialConstruccion2 	= request.getParameter("idMaterialConstruccion2");
 
 			
 			
@@ -59,7 +60,7 @@ public class ExportReporteDeMateriales extends HttpServlet {
 				
 				
 					xmlFinal 				= inicio
-							+ n.ReporteDeMateriales(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idMaterialConstruccion, Boolean.valueOf(checkRange));
+							+ n.ReporteDeMateriales(idAfiliado, filter, idProveedor, anioFin, trimestre, fechaInicio, fechaFIn, idMaterialConstruccion,idMaterialConstruccion2, Boolean.valueOf(checkRange));
 				
 				
 			}catch(Exception e){

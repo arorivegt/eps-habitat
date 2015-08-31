@@ -112,12 +112,14 @@ public class MyPaginationDataGrid_ComparativoPrecios<T> extends PagingDataGrid_C
                 return "";
               } else {
             	  double totalAge = 0.0;
+            	  int totalCantidad = 0;
                   
                   for (AuxMaterialCostruccion item : items) {  	
                     totalAge += item.getPrecioUnit();
+                    totalCantidad += item.getCantidadMaterial();
                   }
                              
-                return "AVG: " + totalAge/items.size();
+                return "AVG: " + totalAge/totalCantidad;
               }
             }
           };
@@ -127,10 +129,10 @@ public class MyPaginationDataGrid_ComparativoPrecios<T> extends PagingDataGrid_C
         Column<T, String> codUnoColumn = new Column<T, String>(new EditTextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxMaterialCostruccion) object).getPrecioUnit());
+                return String.valueOf(((AuxMaterialCostruccion) object).getPrecioUnit()/((AuxMaterialCostruccion) object).getCantidadMaterial() );
             }
         };
-        dataGrid.addColumn(codUnoColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario")), totalAPagar);
+        dataGrid.addColumn(codUnoColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario (Q)")), totalAPagar);
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
 
         

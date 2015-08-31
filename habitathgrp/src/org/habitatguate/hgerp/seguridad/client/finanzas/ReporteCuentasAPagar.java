@@ -110,7 +110,7 @@ public class ReporteCuentasAPagar extends Composite   {
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "50px");
+		absolutePanel.setSize("100%", "70px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		
@@ -168,7 +168,7 @@ public class ReporteCuentasAPagar extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 38);
 		listBox.setSize("179px", "23px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -193,7 +193,7 @@ public class ReporteCuentasAPagar extends Composite   {
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDato1, 205, 0);
+		absolutePanel.add(txtDato1, 205, 38);
 		txtDato1.setSize("177px", "25px");
 		
 		listEstado = new ListBox();
@@ -201,7 +201,7 @@ public class ReporteCuentasAPagar extends Composite   {
 		listEstado.addItem("Aprobado","1");
 		listEstado.addItem("Sin Aprobar","0");
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 205, 65);
+		absolutePanel.add(listEstado, 205, 87);
 		listEstado.setSize("179px", "30px");
 		listEstado.setVisible(false);
 		
@@ -256,9 +256,9 @@ public class ReporteCuentasAPagar extends Composite   {
 		
 
 		
-		Label lblBusquedaPor = new Label("Busqueda Por");
+		Label lblBusquedaPor = new Label("REPORTE CUENTAS POR PAGAR");
 		lblBusquedaPor.setStyleName("label");
-		lblBusquedaPor.setSize("179px", "13px");
+		lblBusquedaPor.setSize("374px", "23px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
 		Busqueda = new Image("images/pdf.png");
@@ -299,17 +299,17 @@ public class ReporteCuentasAPagar extends Composite   {
 		
 		lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
-		absolutePanel.add(lblAfiliado, 10, 53);
+		absolutePanel.add(lblAfiliado, 10, 75);
 		lblAfiliado.setSize("179px", "13px");
 		
 		listBox_1 = new ListBox();
 		listBox_1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_1, 10, 72);
+		absolutePanel.add(listBox_1, 10, 94);
 		listBox_1.setSize("179px", "23px");
 		
 		lblTipoSolucin = new Label("Estado Compra");
 		lblTipoSolucin.setStyleName("label");
-		absolutePanel.add(lblTipoSolucin, 205, 46);
+		absolutePanel.add(lblTipoSolucin, 205, 68);
 		lblTipoSolucin.setSize("179px", "13px");
 		lblTipoSolucin.setVisible(false);
 		

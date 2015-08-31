@@ -148,7 +148,7 @@ public class MyPaginationDataGrid_ReporteMaterialConstruccion<T> extends PagingD
         
         
 
-        dataGrid.addColumn(aprobado,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario")), promPrecio);
+        dataGrid.addColumn(aprobado,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario (Q)")), promPrecio);
         dataGrid.setColumnWidth(aprobado, 20, Unit.PCT);
         
         Header<String> cantidadTotal = new Header<String>(new TextCell()) {

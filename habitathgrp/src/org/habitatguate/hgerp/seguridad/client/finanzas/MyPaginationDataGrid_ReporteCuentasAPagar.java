@@ -118,7 +118,7 @@ public class MyPaginationDataGrid_ReporteCuentasAPagar<T> extends PagingDataGrid
                 return String.valueOf(((AuxValeBeneficiario) object).getVale().getTotalVale());
             }
         };
-        dataGrid.addColumn(precioUnitario, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total A Pagar")), totalAPagar);
+        dataGrid.addColumn(precioUnitario, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Total A Pagar (Q)")), totalAPagar);
         dataGrid.setColumnWidth(precioUnitario, 20, Unit.PCT);
         
         

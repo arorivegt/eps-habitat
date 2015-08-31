@@ -109,7 +109,7 @@ public class ReporteSolucionesHab extends Composite   {
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "50px");
+		absolutePanel.setSize("100%", "70px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		
@@ -169,7 +169,7 @@ public class ReporteSolucionesHab extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 49);
 		listBox.setSize("179px", "23px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -194,13 +194,13 @@ public class ReporteSolucionesHab extends Composite   {
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDato1, 10, 12);
+		absolutePanel.add(txtDato1, 10, 45);
 		txtDato1.setSize("177px", "25px");
 		
 		listEstado = new ListBox();
 		listEstado.addItem("Todos los Tipos","0");
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 205, 65);
+		absolutePanel.add(listEstado, 205, 85);
 		listEstado.setSize("179px", "30px");
 		
 		
@@ -260,9 +260,9 @@ public class ReporteSolucionesHab extends Composite   {
 		
 
 		
-		Label lblBusquedaPor = new Label("Busqueda Por");
+		Label lblBusquedaPor = new Label("REPORTE SOLUCIONES HABITACINALES");
 		lblBusquedaPor.setStyleName("label");
-		lblBusquedaPor.setSize("179px", "13px");
+		lblBusquedaPor.setSize("340px", "19px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
 		Busqueda = new Image("images/pdf.png");
@@ -315,17 +315,17 @@ public class ReporteSolucionesHab extends Composite   {
 		
 		lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
-		absolutePanel.add(lblAfiliado, 10, 53);
+		absolutePanel.add(lblAfiliado, 10, 73);
 		lblAfiliado.setSize("179px", "13px");
 		
 		listBox_1 = new ListBox();
 		listBox_1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_1, 10, 72);
+		absolutePanel.add(listBox_1, 10, 92);
 		listBox_1.setSize("179px", "23px");
 		
 		lblTipoSolucin = new Label("Tipo Solución");
 		lblTipoSolucin.setStyleName("label");
-		absolutePanel.add(lblTipoSolucin, 205, 46);
+		absolutePanel.add(lblTipoSolucin, 205, 66);
 		lblTipoSolucin.setSize("179px", "13px");
 		
 		lblAo = new Label("Del Año");
@@ -424,12 +424,12 @@ public class ReporteSolucionesHab extends Composite   {
 		
 		lblEstadoDeLa = new Label("Estado de la Solución");
 		lblEstadoDeLa.setStyleName("label");
-		absolutePanel.add(lblEstadoDeLa, 205, 0);
+		absolutePanel.add(lblEstadoDeLa, 205, 21);
 		lblEstadoDeLa.setSize("179px", "13px");
 		
 		listBox_4 = new ListBox();
 		listBox_4.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_4, 205, 19);
+		absolutePanel.add(listBox_4, 205, 35);
 		listBox_4.setSize("179px", "30px");
 		
 		listBox_4.addItem("[Seleccione Estado]", "0");

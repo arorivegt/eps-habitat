@@ -53,6 +53,8 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
 	
 	private String idCatalogoMaterial;
 	
+	private int cantidadMaterial;
+	
 	
 	public String getIdProducto() {
 		return idProducto;
@@ -117,6 +119,15 @@ public class AuxMaterialCostruccion implements Comparable<AuxMaterialCostruccion
 	public void setIdCatalogoMaterial(String idCatalogoMaterial) {
 		this.idCatalogoMaterial = idCatalogoMaterial;
 	}
+
+	public int getCantidadMaterial() {
+		return cantidadMaterial;
+	}
+
+	public void setCantidadMaterial(int cantidadMaterial) {
+		this.cantidadMaterial = cantidadMaterial;
+	}
+	
 	
 	
 	

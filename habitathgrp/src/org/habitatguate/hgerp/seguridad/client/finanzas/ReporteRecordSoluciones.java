@@ -71,6 +71,7 @@ public class ReporteRecordSoluciones extends Composite   {
 	private BeneNameSuggestOracle bene;
     private final RecursosHumanosServiceAsync recursosHumanosService = GWT.create(RecursosHumanosService.class);
     private final SqlServiceAsync loginService = GWT.create(SqlService.class);
+    private Label lblReporteparaGenerarRecord;
     
     /**
      * constructor
@@ -87,7 +88,7 @@ public class ReporteRecordSoluciones extends Composite   {
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "50px");
+		absolutePanel.setSize("100%", "70px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		bene = new BeneNameSuggestOracle();
@@ -142,7 +143,7 @@ public class ReporteRecordSoluciones extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 74);
 		listBox.setSize("179px", "39px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -167,24 +168,24 @@ public class ReporteRecordSoluciones extends Composite   {
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDato1, 205, 19);
+		absolutePanel.add(txtDato1, 205, 77);
 		txtDato1.setSize("250px", "34px");
 		
 		listEstado = new TextBox();
 		listEstado.setStyleName("gwt-TextBox2");
 		listEstado.setVisible(false);
-		absolutePanel.add(listEstado, 205, 16);
+		absolutePanel.add(listEstado, 205, 74);
 		listEstado.setSize("179px", "39px");
 		
 		lbDato1 = new Label("Nombre del Beneficiario");
 		lbDato1.setStyleName("label");
 		lbDato1.setSize("368px", "19px");
-		absolutePanel.add(lbDato1, 205, 0);
+		absolutePanel.add(lbDato1, 205, 58);
 		
 		Label lblBusquedaPor = new Label("Busqueda Por");
 		lblBusquedaPor.setStyleName("label");
 		lblBusquedaPor.setSize("179px", "13px");
-		absolutePanel.add(lblBusquedaPor, 10, 0);
+		absolutePanel.add(lblBusquedaPor, 10, 58);
 		
 		Busqueda = new Image("images/pdf.png");
 		absolutePanel.add(Busqueda, 600, 5);
@@ -210,6 +211,11 @@ public class ReporteRecordSoluciones extends Composite   {
 		lblSeleccioneLosEmpleados.setStyleName("label");
 		absolutePanel.add(lblSeleccioneLosEmpleados, 700, 5);
 		lblSeleccioneLosEmpleados.setSize("828px", "13px");
+		
+		lblReporteparaGenerarRecord = new Label("REPORTEPARA GENERAR RECORD SOLUCIÓN");
+		lblReporteparaGenerarRecord.setStyleName("label");
+		absolutePanel.add(lblReporteparaGenerarRecord, 10, 10);
+		lblReporteparaGenerarRecord.setSize("368px", "19px");
 		
 		
 

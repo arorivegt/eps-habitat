@@ -244,7 +244,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
 
             
             
-           dataGrid.addColumn(columnProduct,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Ejecutado "+namesColumns.get(contador))), sumatoria);
+           dataGrid.addColumn(columnProduct,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Ejecutado "+namesColumns.get(contador)+ "(Q)")), sumatoria);
            // dataGrid.addColumn(columnProduct, sumatoria);
             dataGrid.setColumnWidth(columnProduct, 20, Unit.PCT);
             
@@ -277,7 +277,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                     }
                 };
                 System.out.println("Nombre Column:"+namesColumns.get(contador));
-                dataGrid.addColumn(columnProductPlani,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Planificado " +namesColumns.get(contador))), sumatoriaPlani);
+                dataGrid.addColumn(columnProductPlani,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Planificado " +namesColumns.get(contador)+" (Q)")), sumatoriaPlani);
                 dataGrid.setColumnWidth(columnProductPlani, 20, Unit.PCT);
             }
         }
@@ -352,7 +352,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoDirecto());
             }
         };
-        dataGrid.addColumn(costodirecto,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Ejecutado Costo Directo")), costoDirecto);
+        dataGrid.addColumn(costodirecto,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Ejecutado Costo Directo (Q)")), costoDirecto);
         
         dataGrid.setColumnWidth(costodirecto, 20, Unit.PCT);
        
@@ -386,7 +386,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                     return String.valueOf(((AuxSolucion) object).getCostoDirectoPlani());
                 }
             };
-            dataGrid.addColumn(costodirectopla,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Planificado Costo Directo")), costoDirectoPlani);
+            dataGrid.addColumn(costodirectopla,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Planificado Costo Directo (Q)")), costoDirectoPlani);
             
             dataGrid.setColumnWidth(costodirectopla, 20, Unit.PCT);
         }
@@ -417,7 +417,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoAdministrativo());
             }
         };
-        dataGrid.addColumn(costoAdmin,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Administrativo ")), costoAdminHeader);
+        dataGrid.addColumn(costoAdmin,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Administrativo (Q)")), costoAdminHeader);
         dataGrid.setColumnWidth(costoAdmin, 20, Unit.PCT);
         
         
@@ -446,7 +446,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                 return String.valueOf(((AuxSolucion) object).getCostoTotal());
             }
         };
-        dataGrid.addColumn(costoTotal,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Ejecutado")), costoTotalHeader);
+        dataGrid.addColumn(costoTotal,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Ejecutado (Q)")), costoTotalHeader);
         dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
         
         if (showplani){
@@ -476,7 +476,7 @@ public class MyPaginationDataGrid_SolucionGeneral<T> extends PagingDataGrid_Solu
                     return String.valueOf(((AuxSolucion) object).getCostoTotalPlani());
                 }
             };
-            dataGrid.addColumn(costoTotalplani,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Planificado")), costoTotalPlaniHeader);
+            dataGrid.addColumn(costoTotalplani,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Planificado (Q)")), costoTotalPlaniHeader);
             dataGrid.setColumnWidth(costoTotalplani, 20, Unit.PCT);
         }
         

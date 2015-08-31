@@ -95,6 +95,8 @@ public class ReporteDeMateriales extends Composite   {
     private ListBox listBox_2;
     private Button button_1;
     private Label lblRangoDeFechas;
+    private Label lblHastaElCdigo;
+    private ListBox listBox_3;
     
     /**
      * constructor
@@ -111,7 +113,7 @@ public class ReporteDeMateriales extends Composite   {
 					
 		absolutePanel = new AbsolutePanel();
 		grid.setWidget(0, 0, absolutePanel);
-		absolutePanel.setSize("100%", "50px");
+		absolutePanel.setSize("100%", "70px");
 		absolutePanel.setStyleName("gwt-Label-new");
 		
 		
@@ -169,7 +171,7 @@ public class ReporteDeMateriales extends Composite   {
 		});
 		
 		listBox.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox, 10, 16);
+		absolutePanel.add(listBox, 10, 38);
 		listBox.setSize("179px", "23px");
 		
 		txtDato1 =  new SuggestBox(bene);
@@ -194,12 +196,12 @@ public class ReporteDeMateriales extends Composite   {
 		});
 		txtDato1.setStylePrimaryName("gwt-TextBox2");
 		txtDato1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(txtDato1, 205, 0);
+		absolutePanel.add(txtDato1, 205, 39);
 		txtDato1.setSize("177px", "25px");
 		
 		listEstado = new ListBox();
 		listEstado.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listEstado, 205, 65);
+		absolutePanel.add(listEstado, 205, 85);
 		listEstado.setSize("179px", "30px");
 		
 		
@@ -235,7 +237,7 @@ public class ReporteDeMateriales extends Composite   {
         dateBox.setVisible(false);
 		
         
-		absolutePanel.add(dateBox, 575, 68);
+		absolutePanel.add(dateBox, 735, 68);
 		dateBox.setSize("83px", "25px");
 		
 		
@@ -253,9 +255,9 @@ public class ReporteDeMateriales extends Composite   {
 		
 
 		
-		Label lblBusquedaPor = new Label("Busqueda Por");
+		Label lblBusquedaPor = new Label("REPORTE DE MATERIALES DE CONSTRUCCION");
 		lblBusquedaPor.setStyleName("label");
-		lblBusquedaPor.setSize("179px", "13px");
+		lblBusquedaPor.setSize("362px", "32px");
 		absolutePanel.add(lblBusquedaPor, 10, 0);
 		
 		Busqueda = new Image("images/pdf.png");
@@ -296,22 +298,22 @@ public class ReporteDeMateriales extends Composite   {
 		
 		lblAfiliado = new Label("Afiliado");
 		lblAfiliado.setStyleName("label");
-		absolutePanel.add(lblAfiliado, 10, 53);
+		absolutePanel.add(lblAfiliado, 10, 73);
 		lblAfiliado.setSize("179px", "13px");
 		
 		listBox_1 = new ListBox();
 		listBox_1.setStyleName("gwt-TextBox2");
-		absolutePanel.add(listBox_1, 10, 72);
+		absolutePanel.add(listBox_1, 10, 92);
 		listBox_1.setSize("179px", "23px");
 		
-		lblTipoSolucin = new Label("Catálogo de Materiales");
+		lblTipoSolucin = new Label("Desde el código");
 		lblTipoSolucin.setStyleName("label");
-		absolutePanel.add(lblTipoSolucin, 205, 46);
+		absolutePanel.add(lblTipoSolucin, 205, 72);
 		lblTipoSolucin.setSize("179px", "13px");
 		
 		lblAo = new Label("Desde");
 		lblAo.setStyleName("label");
-		absolutePanel.add(lblAo, 582, 51);
+		absolutePanel.add(lblAo, 742, 51);
 		lblAo.setSize("121px", "14px");
 		
 		dateBox_1 = new DateBox();
@@ -326,12 +328,12 @@ public class ReporteDeMateriales extends Composite   {
         dateBox_1.getDatePicker().setVisibleYearCount(100);
         dateBox_1.getDatePicker().setYearArrowsVisible(true);
         dateBox_1.getDatePicker().setYearAndMonthDropdownVisible(true);
-		absolutePanel.add(dateBox_1, 666, 67);
+		absolutePanel.add(dateBox_1, 826, 67);
 		dateBox_1.setSize("83px", "25px");
 		
 		lblAlAo = new Label("Hasta");
 		lblAlAo.setStyleName("label");
-		absolutePanel.add(lblAlAo, 666, 52);
+		absolutePanel.add(lblAlAo, 826, 52);
 		lblAlAo.setSize("59px", "13px");
 		
 		lblSeleccioneDepartamento = new Label("Proveedor");
@@ -366,11 +368,21 @@ public class ReporteDeMateriales extends Composite   {
 		
 		lblRangoDeFechas = new Label("Rango de Fechas");
 		lblRangoDeFechas.setStyleName("label");
-		absolutePanel.add(lblRangoDeFechas, 401, 51);
-		lblRangoDeFechas.setSize("168px", "19px");
+		absolutePanel.add(lblRangoDeFechas, 581, 51);
+		lblRangoDeFechas.setSize("148px", "19px");
 		
 		simpleCheckBox = new SimpleCheckBox();
-		absolutePanel.add(simpleCheckBox, 471, 72);
+		absolutePanel.add(simpleCheckBox, 631, 72);
+		
+		lblHastaElCdigo = new Label("Hasta el código");
+		lblHastaElCdigo.setStyleName("label");
+		absolutePanel.add(lblHastaElCdigo, 390, 68);
+		lblHastaElCdigo.setSize("179px", "13px");
+		
+		listBox_3 = new ListBox();
+		listBox_3.setStyleName("gwt-TextBox2");
+		absolutePanel.add(listBox_3, 390, 87);
+		listBox_3.setSize("179px", "30px");
 		
 		
 		simpleCheckBox.addValueChangeHandler(new ValueChangeHandler<Boolean>() {
@@ -401,6 +413,7 @@ public class ReporteDeMateriales extends Composite   {
 				
 				String idAfiliado = listBox_1.getValue(listBox_1.getSelectedIndex());
 				String idMaterialConstruccion = listEstado.getValue(listEstado.getSelectedIndex());
+				String idMaterialCostruccion2 = listBox_3.getValue(listBox_3.getSelectedIndex());
 				String trimestre = listaTrimestre.getValue(listaTrimestre.getSelectedIndex());
 				String fechaInicio = dateBox.getTextBox().getText();
 				String fechaFIn = dateBox_1.getTextBox().getText();
@@ -410,7 +423,7 @@ public class ReporteDeMateriales extends Composite   {
 				
 				System.out.println("fecha ini"+fechaInicio+" fin: "+fechaFIn+" check"+checkRange+" estado"+idMaterialConstruccion+ " los valores de la siguiente: "+ idAfiliado + " "+ trimestre + " "+anio + " "+idProveedor);
 				
-				formPanel.setAction("/ExportReporteDeMateriales?idAfiliado="+idAfiliado+"&idMaterialConstruccion="+idMaterialConstruccion+"&trimestre="+trimestre+"&fechaInicio="
+				formPanel.setAction("/ExportReporteDeMateriales?idAfiliado="+idAfiliado+"&idMaterialConstruccion="+idMaterialConstruccion+"&idMaterialConstruccion2="+idMaterialCostruccion2+"&trimestre="+trimestre+"&fechaInicio="
 				+fechaInicio+"&fechaFIn="+fechaFIn+"&anioFin="+anio+"&idProveedor="+idProveedor+"&checkRange="+checkRange+"&filter="+filter);
 				formPanel.submit();
 			}
@@ -462,6 +475,7 @@ public class ReporteDeMateriales extends Composite   {
 				
 				for (AuxCatalogoMaterial aux : result){
 					listEstado.addItem(aux.getIdCatalogoMaterial()+ " "+ aux.getNombreMaterial(), aux.getIdCatalogoMaterial());
+					listBox_3.addItem(aux.getIdCatalogoMaterial()+ " "+ aux.getNombreMaterial(), aux.getIdCatalogoMaterial());
 				}
 				
     			
@@ -501,6 +515,7 @@ public class ReporteDeMateriales extends Composite   {
 		
 		String idAfiliado = listBox_1.getValue(listBox_1.getSelectedIndex());
 		String idMaterialConstruccion = listEstado.getValue(listEstado.getSelectedIndex());
+		String idMaterialCostruccion2 = listBox_3.getValue(listBox_3.getSelectedIndex());
 		String trimestre = listaTrimestre.getValue(listaTrimestre.getSelectedIndex());
 		String fechaInicio = dateBox.getTextBox().getText();
 		String fechaFIn = dateBox_1.getTextBox().getText();
@@ -510,7 +525,7 @@ public class ReporteDeMateriales extends Composite   {
 		
 		System.out.println("fecha ini"+fechaInicio+" fin: "+fechaFIn+" check"+checkRange+" material"+idMaterialConstruccion+ " los valores de la siguiente: "+ idAfiliado + " "+ trimestre + " "+anio + " "+idProveedor);
 		
-		loginService.Consulta_MaterialCostruccionGenerica(idAfiliado, filter, idProveedor, anio, trimestre,fechaInicio,fechaFIn,idMaterialConstruccion,checkRange, new AsyncCallback<List<AuxValeBeneficiario> >() {
+		loginService.Consulta_MaterialCostruccionGenerica(idAfiliado, filter, idProveedor, anio, trimestre,fechaInicio,fechaFIn,idMaterialConstruccion,idMaterialCostruccion2,checkRange, new AsyncCallback<List<AuxValeBeneficiario> >() {
 			
 			@Override
 			public void onSuccess(List<AuxValeBeneficiario>  result) {

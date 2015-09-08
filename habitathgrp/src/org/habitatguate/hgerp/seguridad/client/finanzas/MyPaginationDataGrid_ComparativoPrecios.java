@@ -103,27 +103,39 @@ public class MyPaginationDataGrid_ComparativoPrecios<T> extends PagingDataGrid_C
         dataGrid.setColumnWidth(afiColumn, 20, Unit.PCT);
         nomParamColumn.setSortable(true);
         
-        Header<String> totalAPagar = new Header<String>(new TextCell()) {
-            @Override
-            public String getValue() {
-              List<AuxMaterialCostruccion> items = (List<AuxMaterialCostruccion>) dataGrid.getVisibleItems();
-              
-              if (items.size() == 0) {
-                return "";
-              } else {
-            	  double totalAge = 0.0;
-            	  int totalCantidad = 0;
-                  
-                  for (AuxMaterialCostruccion item : items) {  	
-                    totalAge += item.getPrecioUnit();
-                    totalCantidad += item.getCantidadMaterial();
-                  }
-                             
-                return "AVG: " + totalAge/totalCantidad;
-              }
-            }
-          };
         
+        
+        //Unidad Metrica
+          Column<T, String> unidadMetrica = new Column<T, String>(new EditTextCell()) {
+              @Override
+              public String getValue(T object) {
+                  return String.valueOf(((AuxMaterialCostruccion) object).getUnidadMetrica());
+              }
+          };
+          dataGrid.addColumn(unidadMetrica, "Unidad de Medida");
+          dataGrid.setColumnWidth(unidadMetrica, 20, Unit.PCT);
+
+
+          Header<String> totalAPagar = new Header<String>(new TextCell()) {
+              @Override
+              public String getValue() {
+                List<AuxMaterialCostruccion> items = (List<AuxMaterialCostruccion>) dataGrid.getVisibleItems();
+                
+                if (items.size() == 0) {
+                  return "";
+                } else {
+              	  double totalAge = 0.0;
+              	  int totalCantidad = 0;
+                    
+                    for (AuxMaterialCostruccion item : items) {  	
+                      totalAge += item.getPrecioUnit();
+                      totalCantidad += item.getCantidadMaterial();
+                    }
+                               
+                  return "AVG: " + totalAge/totalCantidad;
+                }
+              }
+            };
  
         // Precio Unitario.
         Column<T, String> codUnoColumn = new Column<T, String>(new EditTextCell()) {
@@ -135,18 +147,67 @@ public class MyPaginationDataGrid_ComparativoPrecios<T> extends PagingDataGrid_C
         dataGrid.addColumn(codUnoColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Precio Unitario (Q)")), totalAPagar);
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
 
-        
-        //Unidad Metrica
-        Column<T, String> unidadMetrica = new Column<T, String>(new EditTextCell()) {
+        Header<String> CantidadAPagar = new Header<String>(new TextCell()) {
             @Override
-            public String getValue(T object) {
-                return String.valueOf(((AuxMaterialCostruccion) object).getUnidadMetrica());
+            public String getValue() {
+              List<AuxMaterialCostruccion> items = (List<AuxMaterialCostruccion>) dataGrid.getVisibleItems();
+              
+              if (items.size() == 0) {
+                return "";
+              } else {
+            	  
+            	  int totalCantidad = 0;
+                  
+                  for (AuxMaterialCostruccion item : items) {  	
+                    totalCantidad += item.getCantidadMaterial();
+                  }
+                             
+                return "Tot: " + totalCantidad;
+              }
             }
-        };
-        dataGrid.addColumn(unidadMetrica, "Unidad de Medida");
-        dataGrid.setColumnWidth(unidadMetrica, 20, Unit.PCT);
+          };
 
+      // Precio Unitario.
+      Column<T, String> cantidadColumn = new Column<T, String>(new EditTextCell()) {
+          @Override
+          public String getValue(T object) {
+              return String.valueOf(((AuxMaterialCostruccion) object).getCantidadMaterial());
+          }
+      };
+      dataGrid.addColumn(cantidadColumn, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Cantidad")), CantidadAPagar);
+      dataGrid.setColumnWidth(cantidadColumn, 20, Unit.PCT);
         
+      Header<String> costoTotalHeader = new Header<String>(new TextCell()) {
+          @Override
+          public String getValue() {
+            List<AuxMaterialCostruccion> items = (List<AuxMaterialCostruccion>) dataGrid.getVisibleItems();
+            
+            if (items.size() == 0) {
+                return "";
+              } else {
+            	  double totalAge = 0.0;
+            	  int totalCantidad = 0;
+                  
+                  for (AuxMaterialCostruccion item : items) {  	
+                    totalAge += item.getPrecioUnit();
+                    totalCantidad += item.getCantidadMaterial();
+                  }
+                             
+                return "Prom: " + (totalAge/totalCantidad)*totalCantidad;
+              }
+          }
+        };
+
+    // Precio Unitario.
+    Column<T, String> costoTotal = new Column<T, String>(new EditTextCell()) {
+        @Override
+        public String getValue(T object) {
+            return String.valueOf((((AuxMaterialCostruccion) object).getPrecioUnit()/((AuxMaterialCostruccion) object).getCantidadMaterial())*((AuxMaterialCostruccion) object).getCantidadMaterial() );
+        }
+    };
+    dataGrid.addColumn(costoTotal, new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Prom.")), costoTotalHeader);
+    dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
+                
 
         
        

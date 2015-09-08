@@ -994,6 +994,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setKeyFileRTU(p.getKeyFileRTU());
 				AuxAfiliado auxAfi = new AuxAfiliado();
 				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				auxAfi.setNomAfiliado(p.getAfiliado().getNomAfiliado());
 				aux.setAuxAfiliado(auxAfi);
 				valor.add(aux);
 			}
@@ -1065,6 +1066,31 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				AuxAfiliado auxAfi = new AuxAfiliado();
 				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
 				aux.setAuxAfiliado(auxAfi);
+				
+				for(Long tempContacto : p.getContactoProveedor()){
+					final SegContactoProv query2 = gestorPersistencia.getObjectById(SegContactoProv.class,tempContacto);
+					AuxContactoProv auxContact = new AuxContactoProv();
+					auxContact.setCellphoneContacto(query2.getCellphoneContacto());
+					auxContact.setCorreoContacto(query2.getCorreoContacto());
+					auxContact.setIdContactoProv(query2.getIdContactoProv());
+					auxContact.setNomContacto(query2.getNomContacto());
+					auxContact.setPuestoContacto(query2.getPuestoContacto());
+					auxContact.setTelContacto(query2.getTelContacto());
+					aux.getListaContacto().add(auxContact);
+				}
+				
+				for(Long tempCuenta : p.getCuentaBancaria()){
+					final SegCuentaBancariaProv query2 = gestorPersistencia.getObjectById(SegCuentaBancariaProv.class,tempCuenta);
+					AuxCuentaBancariaProv auxCuenta = new AuxCuentaBancariaProv();
+					auxCuenta.setBancoCuentaBancaria(query2.getBancoCuentaBancaria());
+					auxCuenta.setIdCuentaBancariaProv(query2.getIdCuentaBancariaProv());
+					auxCuenta.setNombrePropietario(query2.getNombrePropietario());
+					auxCuenta.setNumeroCuentaBancaria(query2.getNumeroCuentaBancaria());
+					auxCuenta.setTipoCuentaBancaria(query2.getTipoCuentaBancaria());
+					auxCuenta.setTipoPago(query2.getTipoPago());
+					aux.getLista().add(auxCuenta);
+				}
+				
 				valor.add(aux);
 				}
 			}
@@ -1122,6 +1148,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				aux.setTelProveedor(p.getTelProveedor());
 				AuxAfiliado auxAfi = new AuxAfiliado();
 				auxAfi.setIdAfiliado(p.getAfiliado().getIdAfiliado());
+				auxAfi.setNomAfiliado(p.getAfiliado().getNomAfiliado());
 				aux.setAuxAfiliado(auxAfi);
 				valor.add(aux);
 			}
@@ -2004,6 +2031,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				auxSolucion.setTrimestre(p.getTrimestre());
 				auxSolucion.setDepartamentoSolucion(p.getDepartamentoSolucion());
 				auxSolucion.setMunicipioSolucion(p.getMunicipioSolucion());
+				auxSolucion.setCantidadSoluciones(1);
 				
 				AuxBeneficiario n= new AuxBeneficiario();
 				n.setIdBeneficiario(p.getBeneficiario().getIdBeneficiario().getId());
@@ -2045,7 +2073,22 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 				auxSolucion.setCostoDirecto(costoTotalCategorias);
 				auxSolucion.setCostoTotal(auxSolucion.getCostoAdministrativo()+auxSolucion.getCostoDirecto());
 				if (maximos-minimo == 0.0 || (auxSolucion.getCostoTotal() >= minimo && auxSolucion.getCostoTotal() <= maximos)){
-					valor.add(auxSolucion);
+					
+					boolean flagSolucion = false;
+					
+					for(AuxSolucion exist : valor){
+						if (exist.getMunicipioSolucion().equals(auxSolucion.getMunicipioSolucion())){
+							exist.setCantidadSoluciones(exist.getCantidadSoluciones()+1);
+							exist.setCostoTotal(exist.getCostoTotal()+auxSolucion.getCostoTotal());
+							flagSolucion = true;
+							break;
+							
+						}
+					}
+					if (!flagSolucion){
+						valor.add(auxSolucion);
+					}
+					
 				}
 			}
 			}
@@ -2659,6 +2702,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 									AuxMaterialCostruccion mat = new AuxMaterialCostruccion();
 									mat.setPrecioUnit(detalleCompra.getPrecioEjecucion());
 									mat.setIdCatalogoMaterial(detalleCompra.getMaterialCostruccion().getIdCatalogoMaterial());
+									mat.setNomMaterialCostruccion(detalleCompra.getMaterialCostruccion().getNomMaterialCostruccion());
 									
 									nuevo.setMaterialCostruccion(mat);
 									System.out.println(nuevo.getMaterialCostruccion().getIdCatalogoMaterial());

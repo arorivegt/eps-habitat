@@ -49,7 +49,7 @@ public class MyPaginationDataGrid_Proveedor<T> extends PagingDataGrid_Proveedor<
                     return selectionModel.isSelected(object);
                   }
                 };
-        dataGrid.addColumn(checkColumn,"Aprobar");
+        dataGrid.addColumn(checkColumn,"Select");
         dataGrid.setColumnWidth(checkColumn, 70, Unit.PX);
  
         Column<T, String> codContableColumn = new Column<T, String>(new TextCell()) {
@@ -59,7 +59,16 @@ public class MyPaginationDataGrid_Proveedor<T> extends PagingDataGrid_Proveedor<
             }
         };
         dataGrid.addColumn(codContableColumn, "Codigo Proveedor");
-        dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT); 
+        dataGrid.setColumnWidth(codContableColumn, 20, Unit.PCT);
+        
+        Column<T, String> codAfiliado = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf(((AuxProveedor) object).getAuxAfiliado().getNomAfiliado());
+            }
+        };
+        dataGrid.addColumn(codAfiliado, "Afiliado");
+        dataGrid.setColumnWidth(codAfiliado, 20, Unit.PCT);
         
         
         Column<T, String> nomParamColumn = new Column<T, String>(

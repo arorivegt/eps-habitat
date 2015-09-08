@@ -132,6 +132,18 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         });*/
         dataGrid.addColumn(codUnoColumn, "Tipo de Solución Hab.");
         dataGrid.setColumnWidth(codUnoColumn, 20, Unit.PCT);
+
+        Column<T, String> codEstado = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+            	String estado = ((AuxSolucion) object).getEstadoSolucion() == 1 ? "En Proceso" : "Terminado";
+                return estado;
+            }
+        };
+        dataGrid.addColumn(codEstado, "Estado Solución Hab.");
+        dataGrid.setColumnWidth(codEstado, 20, Unit.PCT);
+ 
+        
         
         
         Column<T, String> codDep = new Column<T, String>(new TextCell()) {
@@ -163,12 +175,7 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         dataGrid.setColumnWidth(codMun, 20, Unit.PCT);
         
         
-        
-        
-
-          
-       
-        Header<String> costoTotalHeader = new Header<String>(new TextCell()) {
+        Header<String> cantidadTotalHeader = new Header<String>(new TextCell()) {
             @Override
             public String getValue() {
               List<AuxSolucion> items = (List<AuxSolucion>) dataGrid.getVisibleItems();
@@ -179,24 +186,23 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                 double totalAge = 0.0;
                 
                 for (AuxSolucion item : items) {  	
-                  totalAge += item.getCostoTotal();
+                  totalAge += item.getCantidadSoluciones();
                 }
                 
-                return "Total: " + totalAge;
+                return "Cantidad: " + totalAge;
               }
             }
           };
         
-        Column<T, String> costoTotal = new Column<T, String>(new TextCell()) {
+        Column<T, String> cantidadTotal1 = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getCostoTotal());
+                return String.valueOf(((AuxSolucion) object).getCantidadSoluciones());
             }
         };
-        dataGrid.addColumn(costoTotal,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total ")), costoTotalHeader);
-        dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
-        
-        
+        dataGrid.addColumn(cantidadTotal1,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Cantidad")), cantidadTotalHeader);
+        dataGrid.setColumnWidth(cantidadTotal1, 20, Unit.PCT);        
+
         Header<String> costoTotalHeader2 = new Header<String>(new TextCell()) {
             @Override
             public String getValue() {
@@ -206,12 +212,13 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
                 return "";
               } else {
                 double totalAge = 0.0;
-                
+                int cantidadHab = 0;
                 for (AuxSolucion item : items) {  	
                   totalAge += item.getCostoTotal();
+                  cantidadHab += item.getCantidadSoluciones();
                 }
                 
-                return "Avg: " + totalAge/items.size();
+                return "Avg Costo: " + totalAge/cantidadHab;
               }
             }
           };
@@ -219,11 +226,45 @@ public class MyPaginationDataGrid_SolucionesHab<T> extends PagingDataGrid_Soluci
         Column<T, String> costoTotal2 = new Column<T, String>(new TextCell()) {
             @Override
             public String getValue(T object) {
-                return String.valueOf(((AuxSolucion) object).getCostoTotal());
+                return String.valueOf(((AuxSolucion) object).getCostoTotal()/ ((AuxSolucion) object).getCantidadSoluciones());
             }
         };
-        dataGrid.addColumn(costoTotal2,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Promedio ")), costoTotalHeader2);
+        dataGrid.addColumn(costoTotal2,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total Promedio (Q)")), costoTotalHeader2);
         dataGrid.setColumnWidth(costoTotal2, 20, Unit.PCT);
+
+          
+       
+        Header<String> costoTotalHeader = new Header<String>(new TextCell()) {
+            @Override
+            public String getValue() {
+              List<AuxSolucion> items = (List<AuxSolucion>) dataGrid.getVisibleItems();
+              
+              if (items.size() == 0) {
+                  return "";
+                } else {
+                  double totalAge = 0.0;
+                  int cantidadHab = 0;
+                  for (AuxSolucion item : items) {  	
+                    totalAge += item.getCostoTotal();
+                    cantidadHab += item.getCantidadSoluciones();
+                  }
+                  
+                  return "Costo Tot: " + (totalAge/cantidadHab)*cantidadHab;
+                }
+            }
+          };
+        
+        Column<T, String> costoTotal = new Column<T, String>(new TextCell()) {
+            @Override
+            public String getValue(T object) {
+                return String.valueOf((((AuxSolucion) object).getCostoTotal()/ ((AuxSolucion) object).getCantidadSoluciones())*((AuxSolucion) object).getCantidadSoluciones());
+            }
+        };
+        dataGrid.addColumn(costoTotal,new SafeHtmlHeader(SafeHtmlUtils.fromSafeConstant("Costo Total (Q) ")), costoTotalHeader);
+        dataGrid.setColumnWidth(costoTotal, 20, Unit.PCT);
+        
+        
+
         
        
         

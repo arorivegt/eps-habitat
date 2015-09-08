@@ -75,7 +75,7 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 	
 	private AuxProveedor proveedor;
 	
-	
+	private int cantidadSoluciones;
 	
 	
 	public AuxProveedor getProveedor() {
@@ -294,6 +294,14 @@ public class AuxSolucion implements Comparable<AuxSolucion>,IsSerializable {
 
 	public void setMunicipioSolucion(String municipioSolucion) {
 		this.municipioSolucion = municipioSolucion;
+	}
+
+	public int getCantidadSoluciones() {
+		return cantidadSoluciones;
+	}
+
+	public void setCantidadSoluciones(int cantidadSoluciones) {
+		this.cantidadSoluciones = cantidadSoluciones;
 	}
 	
 	

@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxAfiliado;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxContactoProv;
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxCuentaBancariaProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxEmpleado;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxHistorialPagoProv;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxMaterialCostruccion;
@@ -550,8 +552,7 @@ public class InfoComparativoPreciosXml {
 	 		//Tabla
 	 		
 	 		int correlativo = 1;
-	 		for(AuxProveedor e:result2)
-	 		{
+	 		for(AuxProveedor e:result2){
 	 			
 	 			CuerpoTabla += "<tr>"
 	 							+ "<td>"+correlativo+"</td>"
@@ -593,8 +594,34 @@ public class InfoComparativoPreciosXml {
 	 							+ "<td>"+e.getURLFileRTU()+"</td>"
 	 							+ "<td>"+e.getURLFileConvenio()+"</td>"
 	 							+ "<td>"+e.getObservacionDistribucion()+"</td>"
-	 							+ "<td>"+e.getTipoProveedorGeneral()+"</td>"
-			 					+ "</tr>";
+	 							+ "<td>"+e.getTipoProveedorGeneral()+"</td>";
+	 			
+	 			
+	 			for (AuxContactoProv auxContact : e.getListaContacto()){
+	 				CuerpoTabla += "<td>"+"Nombre Contacto"+"</td>"
+	 						+ "<td>"+auxContact.getNomContacto() +"</td>"
+	 						+ "<td>"+"Puesto"+"</td>"
+	 						+ "<td>"+auxContact.getPuestoContacto()+"</td>"
+	 						+ "<td>"+"Telefono y Ext."+"</td>"
+	 						+ "<td>"+auxContact.getTelContacto()+"</td>"
+	 						+ "<td>"+"Celular"+"</td>"
+	 						+ "<td>"+auxContact.getCellphoneContacto()+"</td>"
+	 						+ "<td>"+"Corre Electronico"+"</td>"
+	 						+ "<td>"+auxContact.getCorreoContacto()+"</td>";
+	 			}
+	 			for (AuxCuentaBancariaProv auxCuenta : e.getLista()){
+	 				CuerpoTabla += "<td>"+"Tipo de Transaccion"+"</td>"
+	 						+ "<td>"+ auxCuenta.getTipoPago()+"</td>"
+	 						+ "<td>"+"Banco Emisor"+"</td>"
+	 						+ "<td>"+ auxCuenta.getBancoCuentaBancaria() + "</td>"
+	 						+ "<td>"+"Nombre del Propietario"+"</td>"
+	 						+ "<td>"+ auxCuenta.getNombrePropietario() + "</td>"
+	 						+ "<td>"+"Número de Cuenta"+"</td>"
+	 						+ "<td>"+ auxCuenta.getNumeroCuentaBancaria() + "</td>"
+	 						+ "<td>"+"Tipo de Cuenta"+"</td>"
+	 						+ "<td>"+ auxCuenta.getTipoCuentaBancaria() + "</td>";
+	 			}
+			 	CuerpoTabla			+= "</tr>";
 	 			correlativo++;
 	 		}
 	 		

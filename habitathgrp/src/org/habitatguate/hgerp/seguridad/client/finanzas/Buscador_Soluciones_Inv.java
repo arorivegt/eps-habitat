@@ -180,12 +180,24 @@ public class Buscador_Soluciones_Inv extends Composite {
 	absolutePanel_1.add(lblDepartamento, 425, 0);
 	lblDepartamento.setSize("157px", "13px");
 	
+	Label lblDpi = new Label("DPI");
+	lblDpi.setStyleName("label");
+	absolutePanel.add(lblDpi, 725, 10);
+	lblDpi.setSize("157px", "19px");
+	
+	final TextBox textBox_5 = new TextBox();
+	textBox_5.setStylePrimaryName("gwt-TextBox2");
+	textBox_5.setStyleName("gwt-TextBox2");
+	textBox_5.setMaxLength(100);
+	absolutePanel.add(textBox_5, 725, 29);
+	textBox_5.setSize("219px", "17px");
+	
 	button.addClickHandler(new ClickHandler() {
 		public void onClick(ClickEvent event) {
 			if (!textBox.getText().equals("") && selectNuevo != null){
 
 			loginService.Insertar_Bene(textBox.getText(),textBox_1.getText(), Integer.parseInt(textBox_2.getText()),selectNuevo.getIdAfiliado(),
-					"DPI",
+					textBox_5.getText(),
 					new AsyncCallback<Long>(){
 				@Override		
                 public void onFailure(Throwable caught) 

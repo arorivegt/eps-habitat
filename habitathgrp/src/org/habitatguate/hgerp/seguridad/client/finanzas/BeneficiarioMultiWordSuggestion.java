@@ -2,6 +2,7 @@ package org.habitatguate.hgerp.seguridad.client.finanzas;
 
 
 
+import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxBeneficiario;
 import org.habitatguate.hgerp.seguridad.client.auxjdo.AuxSolicitudGeneral;
 
 import com.google.gwt.user.client.ui.MultiWordSuggestOracle.MultiWordSuggestion;
@@ -9,20 +10,20 @@ import com.google.gwt.user.client.ui.MultiWordSuggestOracle.MultiWordSuggestion;
 public class BeneficiarioMultiWordSuggestion extends MultiWordSuggestion{
 
 	
-	private AuxSolicitudGeneral afiliado = null;
+	private AuxBeneficiario afiliado = null;
 
 	
 	
-	public BeneficiarioMultiWordSuggestion(AuxSolicitudGeneral afiliado){
-		super(afiliado.getNombreSolicitante() ,
-				afiliado.getNombreSolicitante());
+	public BeneficiarioMultiWordSuggestion(AuxBeneficiario afiliado){
+		super(afiliado.getNomBeneficiario(),
+				afiliado.getNomBeneficiario());
 		this.afiliado = afiliado;
 	}
 	
 
 
 
-	public AuxSolicitudGeneral getAfiliado() {
+	public AuxBeneficiario getAfiliado() {
 		return this.afiliado;
 	}
 	

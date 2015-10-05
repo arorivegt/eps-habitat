@@ -6058,6 +6058,7 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 		valor.setAceptaExencion(prov.getAceptaExencion());
 		valor.setPorcentDonacion(prov.getPorcentDonacion());
 		valor.setFormaDonacion(prov.getFormaDonacion());
+		valor.setTipoProveedorGeneral(prov.getTipoProveedorGeneral());
 		for (SegCuentaBancariaProv cuenta : execute){
 			AuxCuentaBancariaProv aux = new AuxCuentaBancariaProv();
 			aux.setIdCuentaBancariaProv(cuenta.getIdCuentaBancariaProv());
@@ -6067,7 +6068,9 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 			aux.setTipoCuentaBancaria(cuenta.getTipoCuentaBancaria());
 			aux.setTipoPago(cuenta.getTipoPago());
 			valor.getLista().add(aux);
+			
 		}
+		
 		
 		
 		return valor;
@@ -6651,14 +6654,14 @@ public String Insertar_CatalogoProducto(String idProducto, String descripcionPro
 			long idAfi =  Long.parseLong(session.getAttribute("idAfiliadoHabitat").toString());
 		final PersistenceManager gestorPersistencia = PMF.get().getPersistenceManager();
 		SegAfiliado selectB = gestorPersistencia.getObjectById(SegAfiliado.class,idAfi);
-		SegSolicitudGeneral solicitud = gestorPersistencia.getObjectById(SegSolicitudGeneral.class,idAfiliado);
+		//SegSolicitudGeneral solicitud = gestorPersistencia.getObjectById(SegSolicitudGeneral.class,idAfiliado);
 		SegBeneficiario nuevo = new SegBeneficiario();
 		nuevo.setNomBeneficiario(nomBeneficiario);
 		nuevo.setDirBeneficiario(dirBeneficiario);
 		nuevo.setTelBeneficiario(telBeneficiario);
 		nuevo.setDPI(numDPI);
 		nuevo.setAfiliado(selectB);
-		nuevo.setSolicitud(solicitud);
+		//nuevo.setSolicitud(solicitud);
 		selectB.getSolucion().add(nuevo);
 		try{
 			gestorPersistencia.makePersistent(nuevo);

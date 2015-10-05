@@ -51,7 +51,8 @@ public class Formulario_AsignarSolucion extends Composite{
     TablaGWT_PlantillaSolucion e = null;
     
     public AuxMaterialCostruccion selectNuevo = null;
-    public AuxSolicitudGeneral selectNuevoBene = null;
+    //public AuxSolicitudGeneral selectNuevoBene = null;
+    public AuxBeneficiario selectNuevoBene = null;
     public AuxPlantillaSolucion selectPlant = null;
     public double costoAcumulado = 0;
     public Long idSolucionAlmacenado = 0L;
@@ -219,7 +220,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			}
 		});
 		
-	/*	loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
+		loginService.ConsultaTodosBene(new AsyncCallback<List<AuxBeneficiario>>() {
 			
 			@Override
 			public void onSuccess(List<AuxBeneficiario> result) {
@@ -236,9 +237,9 @@ public class Formulario_AsignarSolucion extends Composite{
 				System.out.println(caught);
 				
 			}
-		});*/
+		});
 		
-		solucionesService.buscarFormulario('7', 0L, 0l, "FINANZAS", "", 
+	/*	solucionesService.buscarFormulario('7', 0L, 0l, "FINANZAS", "", 
 		new AsyncCallback<List<AuxSolicitudGeneral>>() {
 
 			@Override
@@ -257,7 +258,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				}
 			}
 		}
-				);
+				);*/
 
 		//------------------------------primera fila
 		
@@ -398,7 +399,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			AbsolutePanel absolutePanel_2 = new AbsolutePanel();
 			absolutePanel_2.setStyleName("panelMenu");
 			absolutePanel.add(absolutePanel_2, 643, 0);
-			absolutePanel_2.setSize("259px", "129px");
+			absolutePanel_2.setSize("259px", "150px");
 			
 			Label lblNombreBeneficiario = new Label("Nombre Beneficiario");
 			absolutePanel_2.add(lblNombreBeneficiario);
@@ -411,27 +412,80 @@ public class Formulario_AsignarSolucion extends Composite{
 			
 
 			
-			Label lblDireccion = new Label("Direccion");
+			Label lblDireccion = new Label("Departamento de Solución");
 			lblDireccion.setStyleName("label");
 			absolutePanel_2.add(lblDireccion, 0, 45);
 			lblDireccion.setSize("157px", "13px");
 			
-			final TextBox textBox = new TextBox();
+			/*final TextBox textBox = new TextBox();
 			textBox.setStyleName("gwt-TextBox2");
 			textBox.setMaxLength(100);
 			absolutePanel_2.add(textBox, 19, 64);
-			textBox.setSize("227px", "19px");
+			textBox.setSize("227px", "19px");*/
 			
-			Label lblAfiliado = new Label("Dirección Solución");
+			final ListBox listBox_2 = new ListBox();
+			listBox_2.setStyleName("gwt-TextBox2");
+			absolutePanel_2.add(listBox_2, 19, 75);
+			listBox_2.setSize("227px", "23px");
+			
+			listBox_2.addItem("[Select Departamento]","0");
+			listBox_2.addItem("Guatemala","01");
+			listBox_2.addItem("Baja Verapaz","15");
+			listBox_2.addItem("Alta Verapaz","16");
+			listBox_2.addItem("El Progreso","02");
+			listBox_2.addItem("Izabal","18");
+			listBox_2.addItem("Zacapa","19");
+			listBox_2.addItem("Chiquimula","20");
+			listBox_2.addItem("Santa Rosa","06");
+			listBox_2.addItem("Jalapa","21");
+			listBox_2.addItem("Jutiapa","22");
+			listBox_2.addItem("Sacatepequez","03");
+			listBox_2.addItem("Chimaltenango","04");
+			listBox_2.addItem("Escuintla","05");
+			listBox_2.addItem("Solola","07");
+			listBox_2.addItem("Totonicapan","08");
+			listBox_2.addItem("Quezaltenango","09");
+			listBox_2.addItem("Suchitepequez","10");
+			listBox_2.addItem("Retalhuleu","11");
+			listBox_2.addItem("San Marcos","12");
+			listBox_2.addItem("Huehuetenango","13");
+			listBox_2.addItem("Quiche","14");
+			listBox_2.addItem("Peten","17");
+			
+			
+			
+			Label lblAfiliado = new Label("Municipio de Solución");
 			lblAfiliado.setStyleName("label");
-			absolutePanel_2.add(lblAfiliado, 0, 90);
+			absolutePanel_2.add(lblAfiliado, 0, 100);
 			lblAfiliado.setSize("157px", "13px");
 			
-			final TextBox textBox_2 = new TextBox();
+			/*final TextBox textBox_2 = new TextBox();
 			textBox_2.setStyleName("gwt-TextBox2");
 			textBox_2.setMaxLength(100);
 			absolutePanel_2.add(textBox_2, 19, 109);
-			textBox_2.setSize("227px", "19px");
+			textBox_2.setSize("227px", "19px");*/
+			
+			final ListBox listBox_3 = new ListBox();
+			listBox_3.setStyleName("gwt-TextBox2");
+			absolutePanel_2.add(listBox_3, 19, 118);
+			listBox_3.setSize("227px", "23px");
+			listBox_3.addItem("[Select Municipio]","0");
+			
+			
+			listBox_2.addChangeHandler(new ChangeHandler() {
+				public void onChange(ChangeEvent event) {
+					listBox_3.clear();
+					listBox_3.addItem("[Select Municipio]","0");
+			        String[] numerosComoArray = Depto_Municipio(listBox_2.getItemText(listBox_2.getSelectedIndex())).split(",");
+			        int correlativo = Integer.parseInt(listBox_2.getValue(listBox_2.getSelectedIndex())+"01");
+			        for (int i = 1; i < numerosComoArray.length; i++) {
+			        	listBox_3.addItem(numerosComoArray[i],String.valueOf(correlativo));
+			        	correlativo++;
+			        }
+
+				}
+			});
+			
 			
 			AbsolutePanel absolutePanel_3 = new AbsolutePanel();
 			absolutePanel.add(absolutePanel_3, 914, 0);
@@ -461,7 +515,7 @@ public class Formulario_AsignarSolucion extends Composite{
 			textBox_3.setMaxLength(100);
 			absolutePanel_3.add(textBox_3, 173, 40);
 			textBox_3.setSize("176px", "19px");
-			textBox_3.setEnabled(false);
+			//textBox_3.setEnabled(false);
 			
 			
 			final TextBox textBox_4 = new TextBox();
@@ -550,11 +604,11 @@ public class Formulario_AsignarSolucion extends Composite{
 					// TODO Auto-generated method stub
 					BeneficiarioMultiWordSuggestion select = (BeneficiarioMultiWordSuggestion)event.getSelectedItem();
 					selectNuevoBene = select.getAfiliado();
-					textBox.setText(selectNuevoBene.getDireccionActual());
-					textBox_2.setText(selectNuevoBene.getDireccionSolucion());
-					textBox_3.setText(""+selectNuevoBene.getMontoAprobado());
-					double dif = Double.valueOf(textBox_3.getText()) - costoAcumulado; 
-					textBox_4.setText(" " +dif);
+					//textBox.setText(selectNuevoBene.getDireccionActual());
+					//textBox_2.setText(selectNuevoBene.getDireccionSolucion());
+					//textBox_3.setText(""+selectNuevoBene.getMontoAprobado());
+					//double dif = Double.valueOf(textBox_3.getText()) - costoAcumulado; 
+					//textBox_4.setText(" " +dif);
 				}
 			});
 			
@@ -590,7 +644,7 @@ public class Formulario_AsignarSolucion extends Composite{
 				
 				@Override
 				public void onClick(ClickEvent event) {
-					loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),selectNuevoBene.getDireccionSolucion(), selectNuevoBene.getTelefonoCasaSolicitante(),selectNuevoBene.getIdFormulario(),
+					/*loginService.Insertar_Bene(selectNuevoBene.getNombreSolicitante(),selectNuevoBene.getDireccionSolucion(), selectNuevoBene.getTelefonoCasaSolicitante(),selectNuevoBene.getIdFormulario(),
 							selectNuevoBene.getNumDpi(),
 							new AsyncCallback<Long>(){
 						@Override		
@@ -601,8 +655,8 @@ public class Formulario_AsignarSolucion extends Composite{
 
 						@Override
 		                public void onSuccess(Long result)
-		                {			
-							System.out.println("Solicitud que se va inclur" + result);
+		                {	*/		
+							System.out.println("Solicitud que se va inclur" + selectNuevoBene.getIdBeneficiario());
 							Date fecha = new Date();
 							String formatted = DateTimeFormat.getFormat("yyyy").format(fecha);
 							AuxSolucion auxS = new AuxSolucion();
@@ -616,12 +670,15 @@ public class Formulario_AsignarSolucion extends Composite{
 							auxS.setValorContrato(Double.valueOf(textBox_3.getText()));
 							auxS.setTrimestre(Integer.valueOf(listTrimestre.getValue(listTrimestre.getSelectedIndex())));
 							auxS.setAnio(Integer.valueOf(formatted));
-							String ubicacion = selectNuevoBene.getDepartamentoMunicipioDireccionSolucion();
-							String[] ubicaciones = ubicacion.split(",");
+							/*String ubicacion = selectNuevoBene.getDirBeneficiario();
+							String[] ubicaciones = ubicacion.split(",");*/
 							AuxBeneficiario auxBene = new AuxBeneficiario();
-							auxS.setDepartamentoSolucion(ubicaciones[0]);
-							auxS.setMunicipioSolucion(ubicaciones[1]);
-							auxBene.setIdBeneficiario(result);
+							/*auxS.setDepartamentoSolucion(ubicaciones[0]);
+							auxS.setMunicipioSolucion(ubicaciones[1]);*/
+							//auxBene.setIdBeneficiario(result);
+							auxS.setDepartamentoSolucion(listBox_2.getValue(listBox_2.getSelectedIndex()));
+							auxS.setMunicipioSolucion(listBox_3.getValue(listBox_3.getSelectedIndex()));
+							auxBene.setIdBeneficiario(selectNuevoBene.getIdBeneficiario());
 							auxS.setBeneficiario(auxBene);
 							loginService.Insertar_Solucion(auxS, costoAcumulado, new AsyncCallback<Long>() {
 								
@@ -638,9 +695,9 @@ public class Formulario_AsignarSolucion extends Composite{
 									
 								}
 							});
-		                }
+		      /*          }
 
-		         });
+		         });*/
 					
 					
 					
@@ -649,4 +706,402 @@ public class Formulario_AsignarSolucion extends Composite{
 				}
 			});
 	}
+	
+	
+	 /**
+		 * metodo para obtener los municipios del departamento entrante
+		 * @param Departamento
+		 * @return
+		 */
+		private String Depto_Municipio(String Departamento){
+			
+			String valor = "";
+			if(Departamento.equals("Guatemala")){	
+				
+				valor = valor + "," + "Guatemala";
+				valor = valor + "," + "Santa Catarina Pinula";
+				valor = valor + "," + "San Jose Pinula";
+				valor = valor + "," + "San Jose del Golfo";
+				valor = valor + "," + "Palencia";
+				valor = valor + "," + "Chinautla";
+				valor = valor + "," + "San Pedro Ayampuc";
+				valor = valor + "," + "Mixco";
+				valor = valor + "," + "San Pedro Sacatepequez";
+				valor = valor + "," + "San Juan Sacatepequez";
+				valor = valor + "," + "San Raymundo";
+				valor = valor + "," + "Chuarrancho";
+				valor = valor + "," + "Fraijanes";
+				valor = valor + "," + "Amatitlan";
+				valor = valor + "," + "Villa Nueva";
+				valor = valor + "," + "Villa Canales";
+				valor = valor + "," + "Petapa";
+				
+			}else if(Departamento.equals("Baja Verapaz")){
+				valor = valor + "," + "Salama";
+				valor = valor + "," + "San Miguel Chicaj";
+				valor = valor + "," + "Rabinal";
+				valor = valor + "," + "Cubulco";
+				valor = valor + "," + "Granados";
+				valor = valor + "," + "Santa Cruz el Chol";
+				valor = valor + "," + "San Jeronimo";
+				valor = valor + "," + "Purulha";
+				
+			}else if(Departamento.equals("Alta Verapaz")){
+				valor = valor + "," + "Coban";
+				valor = valor + "," + "Santa Cruz Verapaz";
+				valor = valor + "," + "San Cristobal Verapaz";
+				valor = valor + "," + "Tactic";
+				valor = valor + "," + "Tamahu";
+				valor = valor + "," + "Tucuru";
+				valor = valor + "," + "Panzos";
+				valor = valor + "," + "Senahu";
+				valor = valor + "," + "San Pedro Carcha";
+				valor = valor + "," + "San Juan Chamelco";
+				valor = valor + "," + "Lanquin";
+				valor = valor + "," + "Santa Maria Cahabon";
+				valor = valor + "," + "Chisec";
+				valor = valor + "," + "Chahal";
+				valor = valor + "," + "Fray Bartolome de las Casas";
+				valor = valor + "," + "La Tinta";
+				valor = valor + "," + "Raxruha";
+				
+			}else if(Departamento.equals("El Progreso")){
+				valor = valor + "," + "Guastatoya";
+				valor = valor + "," + "Morazan";
+				valor = valor + "," + "San Agustin Acasaguastlan";
+				valor = valor + "," + "San Cristobal Acasaguastlan";
+				valor = valor + "," + "El Jicaro";
+				valor = valor + "," + "Sansare";
+				valor = valor + "," + "Sanarate";
+				valor = valor + "," + "San Antonio La Paz";
+				
+			}else if(Departamento.equals("Izabal")){
+				valor = valor + "," + "Puerto Barrios";
+				valor = valor + "," + "Livingston";
+				valor = valor + "," + "El Estor";
+				valor = valor + "," + "Morales";
+				valor = valor + "," + "Los Amates";
+				
+			}else if(Departamento.equals("Zacapa")){
+				valor = valor + "," + "Zacapa";
+				valor = valor + "," + "Estanzuela";
+				valor = valor + "," + "Rio Hondo";
+				valor = valor + "," + "Gualan";
+				valor = valor + "," + "Teculutan";
+				valor = valor + "," + "Usumatlan";
+				valor = valor + "," + "Cabañas";
+				valor = valor + "," + "Huite";
+				valor = valor + "," + "San Diego";
+				valor = valor + "," + "La Union";
+				valor = valor + "," + "Huite";
+				
+			}else if(Departamento.equals("Chiquimula")){
+
+				valor = valor + "," + "Chiquimula";
+				valor = valor + "," + "San Jose la Arada";
+				valor = valor + "," + "San Juan Ermita";
+				valor = valor + "," + "Jocotan";
+				valor = valor + "," + "Camotan";
+				valor = valor + "," + "Olopa";
+				valor = valor + "," + "Esquipulas";
+				valor = valor + "," + "Concepcion Las Minas";
+				valor = valor + "," + "Quezaltepeque";
+				valor = valor + "," + "San Jacinto";
+				valor = valor + "," + "Ipala";
+				
+			}else if(Departamento.equals("Santa Rosa")){
+				valor = valor + "," + "Cuilapa";
+				valor = valor + "," + "Barberena";
+				valor = valor + "," + "Santa Rosa de Lima";
+				valor = valor + "," + "Casillas";
+				valor = valor + "," + "San Rafael las Flores";
+				valor = valor + "," + "Oratorio";
+				valor = valor + "," + "San Juan Tecuaco";
+				valor = valor + "," + "Chiquimulilla";
+				valor = valor + "," + "Taxisco";
+				valor = valor + "," + "Santa Maria Ixhuatan";
+				valor = valor + "," + "Guazacapan";
+				valor = valor + "," + "Santa Cruz Naranjo";
+				valor = valor + "," + "Pueblo Nuevo Viñas";
+				valor = valor + "," + "Nueva Santa Rosa";
+				
+			}else if(Departamento.equals("Jalapa")){
+				valor = valor + "," + "Jalapa";
+				valor = valor + "," + "San Pedro Pinula";
+				valor = valor + "," + "San Luis Jilotepeque";
+				valor = valor + "," + "San Manuel Chaparron";
+				valor = valor + "," + "San Carlos Alzatate";
+				valor = valor + "," + "Monjas";
+				valor = valor + "," + "Mataquescuintla";
+				
+			}else if(Departamento.equals("Jutiapa")){
+				valor = valor + "," + "Jutiapa";
+				valor = valor + "," + "El Progreso";
+				valor = valor + "," + "Santa Catarina Mita";
+				valor = valor + "," + "Agua Blanca";
+				valor = valor + "," + "Asuncion Mita";
+				valor = valor + "," + "Yupiltepeque";
+				valor = valor + "," + "Atescatempa";
+				valor = valor + "," + "Jerez";
+				valor = valor + "," + "El Adelanto";
+				valor = valor + "," + "Zapotitlan";
+				valor = valor + "," + "Comapa";
+				valor = valor + "," + "Jalpatagua";
+				valor = valor + "," + "Conguaco";
+				valor = valor + "," + "Moyuta";
+				valor = valor + "," + "Pasaco";
+				valor = valor + "," + "San Jose Acatempa";
+				valor = valor + "," + "Quesada";
+				
+			}else if(Departamento.equals("Sacatepequez")){
+				valor = valor + "," + "La Antigua Guatemala";
+				valor = valor + "," + "Jocotenango";
+				valor = valor + "," + "Pastores";
+				valor = valor + "," + "Sumpango";
+				valor = valor + "," + "Santo Domingo Xenacoj";
+				valor = valor + "," + "Santiago Sacatepequez";
+				valor = valor + "," + "San Bartolome Milpas Altas";
+				valor = valor + "," + "San Lucas Sacatepequez";
+				valor = valor + "," + "Santa Lucia Milpas Altas";
+				valor = valor + "," + "Magdalena Milpas Altas";
+				valor = valor + "," + "Santa Maria de Jesus";
+				valor = valor + "," + "Ciudad Vieja";
+				valor = valor + "," + "San Miguel Dueñas";
+				valor = valor + "," + "Alotenango";
+				valor = valor + "," + "San Antonio Aguas Calientes";
+				valor = valor + "," + "Santa Catarina Barahona";
+				
+			}else if(Departamento.equals("Chimaltenango")){
+				valor = valor + "," + "Chimaltenango";
+				valor = valor + "," + "San Jose Poaquil";
+				valor = valor + "," + "San Martin Jilotepeque";
+				valor = valor + "," + "San Juan Comalapa";
+				valor = valor + "," + "Santa Apolonia";
+				valor = valor + "," + "Tecpan";
+				valor = valor + "," + "Patzun";
+				valor = valor + "," + "Pochuta";
+				valor = valor + "," + "Patzicia";
+				valor = valor + "," + "Santa Cruz Balanya";
+				valor = valor + "," + "Acatenango";
+				valor = valor + "," + "Yepocapa";
+				valor = valor + "," + "San Andres Itzapa";
+				valor = valor + "," + "Parramos";
+				valor = valor + "," + "Zaragoza";
+				valor = valor + "," + "El Tejar";
+				
+			}else if(Departamento.equals("Escuintla")){			
+				valor = valor + "," + "Escuintla";
+				valor = valor + "," + "Santa Lucia Cotzumalguapa";
+				valor = valor + "," + "La Democracia";
+				valor = valor + "," + "Siquinala";
+				valor = valor + "," + "Masagua";
+				valor = valor + "," + "Tiquisate";
+				valor = valor + "," + "La Gomera";
+				valor = valor + "," + "Guanagazapa";
+				valor = valor + "," + "San Jose";
+				valor = valor + "," + "Iztapa";
+				valor = valor + "," + "Palin";
+				valor = valor + "," + "San Vicente Pacaya";
+				valor = valor + "," + "Nueva Concepcion";
+				
+			}else if(Departamento.equals("Solola")){
+				valor = valor + "," + "Solola";
+				valor = valor + "," + "San Jose Chacaya";
+				valor = valor + "," + "Santa Maria Visitacion";
+				valor = valor + "," + "Santa Lucia Utatlan";
+				valor = valor + "," + "Nahuala";
+				valor = valor + "," + "Santa Catarina Ixtahuacan";
+				valor = valor + "," + "Santa Clara La Laguna";
+				valor = valor + "," + "Concepcion";
+				valor = valor + "," + "San Andres Semetabaj";
+				valor = valor + "," + "Panajachel";
+				valor = valor + "," + "Santa Catarina Palopo";
+				valor = valor + "," + "San Antonio Palopo";
+				valor = valor + "," + "San Lucas Toliman";
+				valor = valor + "," + "Santa Cruz La Laguna";
+				valor = valor + "," + "San Pablo La Laguna";
+				valor = valor + "," + "San Juan La Laguna";
+				valor = valor + "," + "San Marcos La Laguna";
+				valor = valor + "," + "San Pedro La Laguna";
+				valor = valor + "," + "Santiago Atitlan";
+				
+			}else if(Departamento.equals("Totonicapan")){
+				valor = valor + "," + "Totonicapan";
+				valor = valor + "," + "San Cristobal Totonicapan";
+				valor = valor + "," + "San Francisco El Alto";
+				valor = valor + "," + "San Andres Xecul";
+				valor = valor + "," + "Momostenango";
+				valor = valor + "," + "Santa Maria Chiquimula";
+				valor = valor + "," + "Santa Lucia La Reforma";
+				valor = valor + "," + "San Bartolo";
+				
+			}else if(Departamento.equals("Quezaltenango")){
+				valor = valor + "," + "Quetzaltenango";
+				valor = valor + "," + "Salcaja";
+				valor = valor + "," + "Olintepeque";
+				valor = valor + "," + "San Carlos Sija";
+				valor = valor + "," + "Sibilia";
+				valor = valor + "," + "Cabrican";
+				valor = valor + "," + "Cajola";
+				valor = valor + "," + "San Miguel Sigüila";
+				valor = valor + "," + "San Juan Ostuncalco";
+				valor = valor + "," + "San Mateo";
+				valor = valor + "," + "Concepcion Chiquirichapa";
+				valor = valor + "," + "San Martin Sacatepequez";
+				valor = valor + "," + "Almolonga";
+				valor = valor + "," + "Cantel";
+				valor = valor + "," + "Huitan";
+				valor = valor + "," + "Zunil";
+				valor = valor + "," + "Colomba Costa Cuca";
+				valor = valor + "," + "San Francisco La Union";
+				valor = valor + "," + "El Palmar";
+				valor = valor + "," + "Coatepeque";
+				valor = valor + "," + "Genova";
+				valor = valor + "," + "Flores Costa Cuca";
+				valor = valor + "," + "La Esperanza";
+				valor = valor + "," + "Palestina de Los Altos";
+				
+			}else if(Departamento.equals("Suchitepequez")){
+				valor = valor + "," + "Mazatenango";
+				valor = valor + "," + "Cuyotenango";
+				valor = valor + "," + "San Francisco Zapotitlan";
+				valor = valor + "," + "San Bernardino";
+				valor = valor + "," + "San Jose El Idolo";
+				valor = valor + "," + "Santo Domingo Suchitepequez";
+				valor = valor + "," + "San Lorenzo";
+				valor = valor + "," + "Samayac";
+				valor = valor + "," + "San Pablo Jocopilas";
+				valor = valor + "," + "San Antonio Suchitepequez";
+				valor = valor + "," + "San Miguel Panan";
+				valor = valor + "," + "San Gabriel";
+				valor = valor + "," + "Chicacao";
+				valor = valor + "," + "Patulul";
+				valor = valor + "," + "Santa Barbara";
+				valor = valor + "," + "San Juan Bautista";
+				valor = valor + "," + "Santo Tomas La Union";
+				valor = valor + "," + "Zunilito";
+				valor = valor + "," + "Pueblo Nuevo";
+				valor = valor + "," + "Rio Bravo";
+				
+			}else if(Departamento.equals("Retalhuleu")){
+				valor = valor + "," + "Retalhuleu";
+				valor = valor + "," + "San Sebastian";
+				valor = valor + "," + "Santa Cruz Mulua";
+				valor = valor + "," + "San Martin Zapotitlan";
+				valor = valor + "," + "San Felipe";
+				valor = valor + "," + "San Andres Villa Seca";
+				valor = valor + "," + "Champerico";
+				valor = valor + "," + "Nuevo San Carlos";
+				valor = valor + "," + "El Asintal";
+				
+			}else if(Departamento.equals("San Marcos")){
+				valor = valor + "," + "San Marcos";
+				valor = valor + "," + "San Pedro Sacatepequez";
+				valor = valor + "," + "San Antonio Sacatepequez";
+				valor = valor + "," + "Comitancillo";
+				valor = valor + "," + "San Miguel Ixtahuacan";
+				valor = valor + "," + "Concepcion Tutuapa";
+				valor = valor + "," + "Tacana";
+				valor = valor + "," + "Sibinal";
+				valor = valor + "," + "Tajumulco";
+				valor = valor + "," + "Tejutla";
+				valor = valor + "," + "San Rafael Pie de la Cuesta";
+				valor = valor + "," + "Nuevo Progreso";
+				valor = valor + "," + "El Tumbador";
+				valor = valor + "," + "San Jose El Rodeo";
+				valor = valor + "," + "Malacatan";
+				valor = valor + "," + "Catarina";
+				valor = valor + "," + "Ayutla";
+				valor = valor + "," + "Ocos";
+				valor = valor + "," + "San Pablo";
+				valor = valor + "," + "El Quetzal";
+				valor = valor + "," + "La Reforma";
+				valor = valor + "," + "Pajapita";
+				valor = valor + "," + "Ixchiguan";
+				valor = valor + "," + "San Jose Ojetenam";
+				valor = valor + "," + "San Cristobal Cucho";
+				valor = valor + "," + "Sipacapa";
+				valor = valor + "," + "Esquipulas Palo Gordo";
+				valor = valor + "," + "Rio Blanco";
+				valor = valor + "," + "San Lorenzo";
+				
+			}else if(Departamento.equals("Huehuetenango")){
+				valor = valor + "," + "Huehuetenango";
+				valor = valor + "," + "Chiantla";
+				valor = valor + "," + "Malacatancito";
+				valor = valor + "," + "Cuilco";
+				valor = valor + "," + "Nenton";
+				valor = valor + "," + "San Pedro Necta";
+				valor = valor + "," + "Jacaltenango";
+				valor = valor + "," + "San Pedro Soloma";
+				valor = valor + "," + "San Ildefonso Ixtahuacan";
+				valor = valor + "," + "Santa Barbara";
+				valor = valor + "," + "La Libertad";
+				valor = valor + "," + "La Democracia";
+				valor = valor + "," + "San Miguel Acatan";
+				valor = valor + "," + "San Rafael La Independencia";
+				valor = valor + "," + "Santos Cuchumatan";
+				valor = valor + "," + "San Juan Atitan";
+				valor = valor + "," + "Santa Eulalia";
+				valor = valor + "," + "San Mateo Ixtatan";
+				valor = valor + "," + "Colotenango";
+				valor = valor + "," + "San Sebastian Huehuetenango";
+				valor = valor + "," + "Tectitan";
+				valor = valor + "," + "Concepcion Huista";
+				valor = valor + "," + "San Juan Ixcoy";
+				valor = valor + "," + "San Antonio Huista";
+				valor = valor + "," + "San Sebastian Coatan";
+				valor = valor + "," + "Santa Cruz Barillas";
+				valor = valor + "," + "Aguacatan";
+				valor = valor + "," + "San Rafael Petzal";
+				valor = valor + "," + "San Gaspar Ixchil";
+				valor = valor + "," + "Santiago Chimaltenango";
+				valor = valor + "," + "Santa Ana Huista";
+				valor = valor + "," + "Union Cantinil";
+				
+			}else if(Departamento.equals("Quiche")){
+				valor = valor + "," + "Santa Cruz del Quiche";
+				valor = valor + "," + "Chiche";
+				valor = valor + "," + "Chinique";
+				valor = valor + "," + "Zacualpa";
+				valor = valor + "," + "Chajul";
+				valor = valor + "," + "Chichicastenango";
+				valor = valor + "," + "Patzite";
+				valor = valor + "," + "San Antonio Ilotenango";
+				valor = valor + "," + "San Pedro Jocopilas";
+				valor = valor + "," + "Cunen";
+				valor = valor + "," + "San Juan Cotzal";
+				valor = valor + "," + "Joyabaj";
+				valor = valor + "," + "Nebaj";
+				valor = valor + "," + "San Andres Sajcabaja";
+				valor = valor + "," + "Uspantan";
+				valor = valor + "," + "Sacapulas";
+				valor = valor + "," + "San Bartolome Jocotenango";
+				valor = valor + "," + "Canilla";
+				valor = valor + "," + "Chicaman";
+				valor = valor + "," + "Ixcan";
+				valor = valor + "," + "Pachalum";
+				
+			}else if(Departamento.equals("Peten")){
+				valor = valor + "," + "Flores";
+				valor = valor + "," + "San Jose";
+				valor = valor + "," + "San Benito";
+				valor = valor + "," + "San Andres";
+				valor = valor + "," + "La Libertad";
+				valor = valor + "," + "San Francisco";
+				valor = valor + "," + "Santa Ana";
+				valor = valor + "," + "Dolores";
+				valor = valor + "," + "San Luis";
+				valor = valor + "," + "Sayaxche";
+				valor = valor + "," + "Melchor de Mencos";
+				valor = valor + "," + "Poptun";
+				
+			}else if(Departamento.equals("-")){
+				valor = valor + "," + "-";
+			}
+		
+			return valor;
+		}
+	
+	
 }

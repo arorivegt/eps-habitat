@@ -99,13 +99,20 @@ public class Formulario_PagoVale extends Composite{
         
         txtUser.addItem("Selec. Forma de Pago", "-1");
         
-        int x = 0;
+        int x = 1;
         for(AuxCuentaBancariaProv cuenta : proveedorSelect.getLista()){
         	if (cuenta.getTipoPago().equals("1"))
         		txtUser.addItem("Transferencia", ""+x);
         	else
         		txtUser.addItem("Cheque", ""+x);
         	x++;
+        }
+        
+        if (proveedorSelect.getTipoProveedorGeneral() != null){
+        if(proveedorSelect.getTipoProveedorGeneral().equals("2")){
+        	txtUser.addItem("Ingresar nombre de cheque","0");
+        	
+        }
         }
         
         double donacionFinal = 0.0;
@@ -277,12 +284,16 @@ public class Formulario_PagoVale extends Composite{
 					txtBanco.setText("");
 					txtNombre.setText("");
 					txtNumero.setText("");
+					tipoOperacion = "2";
+				}else if (select == 0){
+					txtBanco.setText("");
+					txtNombre.setText("");
+					txtNumero.setText("");
 					tipoOperacion = "";
 				}else{
-					
-				txtBanco.setText(proveedorSelect.getLista().get(select).getBancoCuentaBancaria());
-				txtNombre.setText(proveedorSelect.getLista().get(select).getNombrePropietario());
-				txtNumero.setText(proveedorSelect.getLista().get(select).getNumeroCuentaBancaria());
+				txtBanco.setText(proveedorSelect.getLista().get(select-1).getBancoCuentaBancaria());
+				txtNombre.setText(proveedorSelect.getLista().get(select-1).getNombrePropietario());
+				txtNumero.setText(proveedorSelect.getLista().get(select-1).getNumeroCuentaBancaria());
 				}
 			}
         });
